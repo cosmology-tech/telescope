@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Logging configuration of the service.
@@ -124,7 +124,7 @@ export const Logging = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Logging>): Logging {
+  fromPartial(object: DeepPartial<Logging>): Logging {
     const message = createBaseLogging();
     message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
@@ -183,7 +183,7 @@ export const Logging_LoggingDestination = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Logging_LoggingDestination>): Logging_LoggingDestination {
+  fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {
     const message = createBaseLogging_LoggingDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.logs = object.logs?.map(e => e) || [];

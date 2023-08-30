@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /** Plan specifies information about a planned upgrade and when it should occur. */
@@ -145,7 +145,7 @@ export const Plan = {
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Plan>): Plan {
+  fromPartial(object: DeepPartial<Plan>): Plan {
     const message = createBasePlan();
     message.name = object.name ?? "";
     message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : undefined;
@@ -212,7 +212,7 @@ export const SoftwareUpgradeProposal = {
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal {
+  fromPartial(object: DeepPartial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal {
     const message = createBaseSoftwareUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -268,7 +268,7 @@ export const CancelSoftwareUpgradeProposal = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: Partial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal {
+  fromPartial(object: DeepPartial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal {
     const message = createBaseCancelSoftwareUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -323,7 +323,7 @@ export const ModuleVersion = {
     message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<ModuleVersion>): ModuleVersion {
+  fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;

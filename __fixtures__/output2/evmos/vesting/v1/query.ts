@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
@@ -60,7 +60,7 @@ export const QueryBalancesRequest = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<QueryBalancesRequest>): QueryBalancesRequest {
+  fromPartial(object: DeepPartial<QueryBalancesRequest>): QueryBalancesRequest {
     const message = createBaseQueryBalancesRequest();
     message.address = object.address ?? "";
     return message;
@@ -135,7 +135,7 @@ export const QueryBalancesResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryBalancesResponse>): QueryBalancesResponse {
+  fromPartial(object: DeepPartial<QueryBalancesResponse>): QueryBalancesResponse {
     const message = createBaseQueryBalancesResponse();
     message.locked = object.locked?.map(e => Coin.fromPartial(e)) || [];
     message.unvested = object.unvested?.map(e => Coin.fromPartial(e)) || [];

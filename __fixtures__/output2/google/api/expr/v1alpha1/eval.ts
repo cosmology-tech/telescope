@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Value } from "./value";
 import { Status } from "../../../rpc/status";
-import { Long, isSet } from "../../../../helpers";
+import { Long, DeepPartial, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
@@ -153,7 +153,7 @@ export const EvalState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<EvalState>): EvalState {
+  fromPartial(object: DeepPartial<EvalState>): EvalState {
     const message = createBaseEvalState();
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
     message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
@@ -208,7 +208,7 @@ export const EvalState_Result = {
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EvalState_Result>): EvalState_Result {
+  fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
     message.expr = object.expr !== undefined && object.expr !== null ? Long.fromValue(object.expr) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
@@ -272,7 +272,7 @@ export const ExprValue = {
     message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toJSON(message.unknown) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ExprValue>): ExprValue {
+  fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
@@ -323,7 +323,7 @@ export const ErrorSet = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ErrorSet>): ErrorSet {
+  fromPartial(object: DeepPartial<ErrorSet>): ErrorSet {
     const message = createBaseErrorSet();
     message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
     return message;
@@ -381,7 +381,7 @@ export const UnknownSet = {
     }
     return obj;
   },
-  fromPartial(object: Partial<UnknownSet>): UnknownSet {
+  fromPartial(object: DeepPartial<UnknownSet>): UnknownSet {
     const message = createBaseUnknownSet();
     message.exprs = object.exprs?.map(e => Long.fromValue(e)) || [];
     return message;

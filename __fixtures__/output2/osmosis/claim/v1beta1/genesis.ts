@@ -4,7 +4,7 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import { ClaimRecord } from "./claim";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {
@@ -76,7 +76,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.moduleAccountBalance = object.moduleAccountBalance !== undefined && object.moduleAccountBalance !== null ? Coin.fromPartial(object.moduleAccountBalance) : undefined;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;

@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
@@ -77,7 +77,7 @@ export const QuerySpotPriceRequest = {
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
   },
-  fromPartial(object: Partial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
+  fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.baseAssetDenom = object.baseAssetDenom ?? "";
@@ -124,7 +124,7 @@ export const QuerySpotPriceResponse = {
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;
   },
-  fromPartial(object: Partial<QuerySpotPriceResponse>): QuerySpotPriceResponse {
+  fromPartial(object: DeepPartial<QuerySpotPriceResponse>): QuerySpotPriceResponse {
     const message = createBaseQuerySpotPriceResponse();
     message.spotPrice = object.spotPrice ?? "";
     return message;

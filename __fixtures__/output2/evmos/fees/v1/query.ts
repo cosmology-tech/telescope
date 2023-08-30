@@ -4,7 +4,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { DevFeeInfo } from "./fees";
 import { Params } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -105,7 +105,7 @@ export const QueryDevFeeInfosRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryDevFeeInfosRequest>): QueryDevFeeInfosRequest {
+  fromPartial(object: DeepPartial<QueryDevFeeInfosRequest>): QueryDevFeeInfosRequest {
     const message = createBaseQueryDevFeeInfosRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -163,7 +163,7 @@ export const QueryDevFeeInfosResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryDevFeeInfosResponse>): QueryDevFeeInfosResponse {
+  fromPartial(object: DeepPartial<QueryDevFeeInfosResponse>): QueryDevFeeInfosResponse {
     const message = createBaseQueryDevFeeInfosResponse();
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -209,7 +209,7 @@ export const QueryDevFeeInfoRequest = {
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     return obj;
   },
-  fromPartial(object: Partial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
+  fromPartial(object: DeepPartial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
     const message = createBaseQueryDevFeeInfoRequest();
     message.contractAddress = object.contractAddress ?? "";
     return message;
@@ -254,7 +254,7 @@ export const QueryDevFeeInfoResponse = {
     message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toJSON(message.fee) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryDevFeeInfoResponse>): QueryDevFeeInfoResponse {
+  fromPartial(object: DeepPartial<QueryDevFeeInfoResponse>): QueryDevFeeInfoResponse {
     const message = createBaseQueryDevFeeInfoResponse();
     message.fee = object.fee !== undefined && object.fee !== null ? DevFeeInfo.fromPartial(object.fee) : undefined;
     return message;
@@ -288,7 +288,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -332,7 +332,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -386,7 +386,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
+  fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
     const message = createBaseQueryDevFeeInfosPerDeployerRequest();
     message.deployerAddress = object.deployerAddress ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
@@ -445,7 +445,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryDevFeeInfosPerDeployerResponse>): QueryDevFeeInfosPerDeployerResponse {
+  fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerResponse>): QueryDevFeeInfosPerDeployerResponse {
     const message = createBaseQueryDevFeeInfosPerDeployerResponse();
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;

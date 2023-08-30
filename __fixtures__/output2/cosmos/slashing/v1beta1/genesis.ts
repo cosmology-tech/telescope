@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Params, ValidatorSigningInfo } from "./slashing";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
@@ -108,7 +108,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
@@ -164,7 +164,7 @@ export const SigningInfo = {
     message.validatorSigningInfo !== undefined && (obj.validatorSigningInfo = message.validatorSigningInfo ? ValidatorSigningInfo.toJSON(message.validatorSigningInfo) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<SigningInfo>): SigningInfo {
+  fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
     message.address = object.address ?? "";
     message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : undefined;
@@ -223,7 +223,7 @@ export const ValidatorMissedBlocks = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
+  fromPartial(object: DeepPartial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
     const message = createBaseValidatorMissedBlocks();
     message.address = object.address ?? "";
     message.missedBlocks = object.missedBlocks?.map(e => MissedBlock.fromPartial(e)) || [];
@@ -278,7 +278,7 @@ export const MissedBlock = {
     message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
-  fromPartial(object: Partial<MissedBlock>): MissedBlock {
+  fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
     message.missed = object.missed ?? false;

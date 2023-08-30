@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
@@ -109,7 +109,7 @@ export const LogDescriptor = {
     message.displayName !== undefined && (obj.displayName = message.displayName);
     return obj;
   },
-  fromPartial(object: Partial<LogDescriptor>): LogDescriptor {
+  fromPartial(object: DeepPartial<LogDescriptor>): LogDescriptor {
     const message = createBaseLogDescriptor();
     message.name = object.name ?? "";
     message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];

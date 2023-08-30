@@ -7,14 +7,13 @@ import { StakeAuthorization } from "../../staking/v1beta1/authz";
 import { DepositDeploymentAuthorization as DepositDeploymentAuthorization1 } from "../../../akash/deployment/v1beta1/authz";
 import { DepositDeploymentAuthorization as DepositDeploymentAuthorization2 } from "../../../akash/deployment/v1beta2/authz";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
  * the provided method on behalf of the granter's account.
  */
 export interface GenericAuthorization {
-  $typeUrl?: string;
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
@@ -40,7 +39,6 @@ export interface GrantAuthorization {
 }
 function createBaseGenericAuthorization(): GenericAuthorization {
   return {
-    $typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
     msg: ""
   };
 }
@@ -78,7 +76,7 @@ export const GenericAuthorization = {
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;
   },
-  fromPartial(object: Partial<GenericAuthorization>): GenericAuthorization {
+  fromPartial(object: DeepPartial<GenericAuthorization>): GenericAuthorization {
     const message = createBaseGenericAuthorization();
     message.msg = object.msg ?? "";
     return message;
@@ -132,7 +130,7 @@ export const Grant = {
     message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<Grant>): Grant {
+  fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
@@ -205,7 +203,7 @@ export const GrantAuthorization = {
     message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<GrantAuthorization>): GrantAuthorization {
+  fromPartial(object: DeepPartial<GrantAuthorization>): GrantAuthorization {
     const message = createBaseGrantAuthorization();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";

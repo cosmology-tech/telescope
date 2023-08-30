@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
@@ -66,7 +66,7 @@ export const GroupID = {
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
-  fromPartial(object: Partial<GroupID>): GroupID {
+  fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

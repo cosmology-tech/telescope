@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -380,7 +380,7 @@ export const ResourceDescriptor = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ResourceDescriptor>): ResourceDescriptor {
+  fromPartial(object: DeepPartial<ResourceDescriptor>): ResourceDescriptor {
     const message = createBaseResourceDescriptor();
     message.type = object.type ?? "";
     message.pattern = object.pattern?.map(e => e) || [];
@@ -440,7 +440,7 @@ export const ResourceReference = {
     message.childType !== undefined && (obj.childType = message.childType);
     return obj;
   },
-  fromPartial(object: Partial<ResourceReference>): ResourceReference {
+  fromPartial(object: DeepPartial<ResourceReference>): ResourceReference {
     const message = createBaseResourceReference();
     message.type = object.type ?? "";
     message.childType = object.childType ?? "";

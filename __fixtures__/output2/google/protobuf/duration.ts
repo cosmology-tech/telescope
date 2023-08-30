@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
 /**
@@ -128,7 +128,7 @@ export const Duration = {
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
-  fromPartial(object: Partial<Duration>): Duration {
+  fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
     message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
     message.nanos = object.nanos ?? 0;

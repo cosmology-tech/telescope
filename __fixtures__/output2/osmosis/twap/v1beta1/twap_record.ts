@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
@@ -161,7 +161,7 @@ export const TwapRecord = {
     message.lastErrorTime !== undefined && (obj.lastErrorTime = fromTimestamp(message.lastErrorTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<TwapRecord>): TwapRecord {
+  fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.asset0Denom = object.asset0Denom ?? "";

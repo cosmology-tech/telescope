@@ -3,7 +3,7 @@
 import { Params } from "./params";
 import { DenomAuthorityMetadata } from "./authorityMetadata";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisState {
@@ -72,7 +72,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.factoryDenoms = object.factoryDenoms?.map(e => GenesisDenom.fromPartial(e)) || [];
@@ -127,7 +127,7 @@ export const GenesisDenom = {
     message.authorityMetadata !== undefined && (obj.authorityMetadata = message.authorityMetadata ? DenomAuthorityMetadata.toJSON(message.authorityMetadata) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisDenom>): GenesisDenom {
+  fromPartial(object: DeepPartial<GenesisDenom>): GenesisDenom {
     const message = createBaseGenesisDenom();
     message.denom = object.denom ?? "";
     message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;

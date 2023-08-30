@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Minter, Params } from "./mint";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** GenesisState defines the mint module's genesis state. */
@@ -73,7 +73,7 @@ export const GenesisState = {
     message.reductionStartedEpoch !== undefined && (obj.reductionStartedEpoch = (message.reductionStartedEpoch || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.minter = object.minter !== undefined && object.minter !== null ? Minter.fromPartial(object.minter) : undefined;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;

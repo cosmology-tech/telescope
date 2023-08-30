@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisState {
@@ -55,7 +55,7 @@ export const GenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -109,7 +109,7 @@ export const Params = {
     message.packetTimeoutDuration !== undefined && (obj.packetTimeoutDuration = message.packetTimeoutDuration ? Duration.toJSON(message.packetTimeoutDuration) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableRecovery = object.enableRecovery ?? false;
     message.packetTimeoutDuration = object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null ? Duration.fromPartial(object.packetTimeoutDuration) : undefined;

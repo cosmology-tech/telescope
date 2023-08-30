@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -167,7 +167,7 @@ export const ModuleSchemaDescriptor = {
     message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
+  fromPartial(object: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
     const message = createBaseModuleSchemaDescriptor();
     message.schemaFile = object.schemaFile?.map(e => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
     message.prefix = object.prefix ?? new Uint8Array();
@@ -231,7 +231,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     message.storageType !== undefined && (obj.storageType = storageTypeToJSON(message.storageType));
     return obj;
   },
-  fromPartial(object: Partial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {
+  fromPartial(object: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {
     const message = createBaseModuleSchemaDescriptor_FileEntry();
     message.id = object.id ?? 0;
     message.protoFileName = object.protoFileName ?? "";

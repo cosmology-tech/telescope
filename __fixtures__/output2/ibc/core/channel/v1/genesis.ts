@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { IdentifiedChannel, PacketState } from "./channel";
-import { Long, isSet } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.channel.v1";
 /** GenesisState defines the ibc channel submodule's genesis state. */
@@ -155,7 +155,7 @@ export const GenesisState = {
     message.nextChannelSequence !== undefined && (obj.nextChannelSequence = (message.nextChannelSequence || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.channels = object.channels?.map(e => IdentifiedChannel.fromPartial(e)) || [];
     message.acknowledgements = object.acknowledgements?.map(e => PacketState.fromPartial(e)) || [];
@@ -225,7 +225,7 @@ export const PacketSequence = {
     message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<PacketSequence>): PacketSequence {
+  fromPartial(object: DeepPartial<PacketSequence>): PacketSequence {
     const message = createBasePacketSequence();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";

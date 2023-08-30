@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Duration } from "../../../protobuf/duration";
-import { Long, isSet } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
@@ -246,7 +246,7 @@ export const HttpRequest = {
     message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
   },
-  fromPartial(object: Partial<HttpRequest>): HttpRequest {
+  fromPartial(object: DeepPartial<HttpRequest>): HttpRequest {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";

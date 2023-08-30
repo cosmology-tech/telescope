@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { GroupID } from "./groupid";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
@@ -61,7 +61,7 @@ export const MsgCloseGroup = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCloseGroup>): MsgCloseGroup {
+  fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -95,7 +95,7 @@ export const MsgCloseGroupResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
+  fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
   }
@@ -139,7 +139,7 @@ export const MsgPauseGroup = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgPauseGroup>): MsgPauseGroup {
+  fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -173,7 +173,7 @@ export const MsgPauseGroupResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
+  fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
   }
@@ -217,7 +217,7 @@ export const MsgStartGroup = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgStartGroup>): MsgStartGroup {
+  fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -251,7 +251,7 @@ export const MsgStartGroupResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgStartGroupResponse>): MsgStartGroupResponse {
+  fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
   }

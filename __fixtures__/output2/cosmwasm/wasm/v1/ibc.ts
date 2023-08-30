@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgIBCSend */
@@ -93,7 +93,7 @@ export const MsgIBCSend = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<MsgIBCSend>): MsgIBCSend {
+  fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Long.fromValue(object.timeoutHeight) : Long.UZERO;
@@ -141,7 +141,7 @@ export const MsgIBCCloseChannel = {
     message.channel !== undefined && (obj.channel = message.channel);
     return obj;
   },
-  fromPartial(object: Partial<MsgIBCCloseChannel>): MsgIBCCloseChannel {
+  fromPartial(object: DeepPartial<MsgIBCCloseChannel>): MsgIBCCloseChannel {
     const message = createBaseMsgIBCCloseChannel();
     message.channel = object.channel ?? "";
     return message;

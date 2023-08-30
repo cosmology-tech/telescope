@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
@@ -150,7 +150,7 @@ export const ModuleDescriptor = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ModuleDescriptor>): ModuleDescriptor {
+  fromPartial(object: DeepPartial<ModuleDescriptor>): ModuleDescriptor {
     const message = createBaseModuleDescriptor();
     message.goImport = object.goImport ?? "";
     message.usePackage = object.usePackage?.map(e => PackageReference.fromPartial(e)) || [];
@@ -206,7 +206,7 @@ export const PackageReference = {
     message.revision !== undefined && (obj.revision = Math.round(message.revision));
     return obj;
   },
-  fromPartial(object: Partial<PackageReference>): PackageReference {
+  fromPartial(object: DeepPartial<PackageReference>): PackageReference {
     const message = createBasePackageReference();
     message.name = object.name ?? "";
     message.revision = object.revision ?? 0;
@@ -252,7 +252,7 @@ export const MigrateFromInfo = {
     message.module !== undefined && (obj.module = message.module);
     return obj;
   },
-  fromPartial(object: Partial<MigrateFromInfo>): MigrateFromInfo {
+  fromPartial(object: DeepPartial<MigrateFromInfo>): MigrateFromInfo {
     const message = createBaseMigrateFromInfo();
     message.module = object.module ?? "";
     return message;

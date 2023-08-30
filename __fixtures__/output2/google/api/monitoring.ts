@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Monitoring configuration of the service.
@@ -149,7 +149,7 @@ export const Monitoring = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Monitoring>): Monitoring {
+  fromPartial(object: DeepPartial<Monitoring>): Monitoring {
     const message = createBaseMonitoring();
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
@@ -208,7 +208,7 @@ export const Monitoring_MonitoringDestination = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
+  fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
     const message = createBaseMonitoring_MonitoringDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];

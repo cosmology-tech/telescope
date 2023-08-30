@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.incentives.v1";
 /**
@@ -32,7 +32,6 @@ export interface GasMeter {
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposal {
-  $typeUrl?: string;
   /** title of the proposal */
   title: string;
   /** proposal description */
@@ -132,7 +131,7 @@ export const Incentive = {
     message.totalGas !== undefined && (obj.totalGas = (message.totalGas || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Incentive>): Incentive {
+  fromPartial(object: DeepPartial<Incentive>): Incentive {
     const message = createBaseIncentive();
     message.contract = object.contract ?? "";
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
@@ -199,7 +198,7 @@ export const GasMeter = {
     message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<GasMeter>): GasMeter {
+  fromPartial(object: DeepPartial<GasMeter>): GasMeter {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
@@ -209,7 +208,6 @@ export const GasMeter = {
 };
 function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
   return {
-    $typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
     title: "",
     description: "",
     contract: "",
@@ -287,7 +285,7 @@ export const RegisterIncentiveProposal = {
     message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
     return obj;
   },
-  fromPartial(object: Partial<RegisterIncentiveProposal>): RegisterIncentiveProposal {
+  fromPartial(object: DeepPartial<RegisterIncentiveProposal>): RegisterIncentiveProposal {
     const message = createBaseRegisterIncentiveProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -354,7 +352,7 @@ export const CancelIncentiveProposal = {
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
-  fromPartial(object: Partial<CancelIncentiveProposal>): CancelIncentiveProposal {
+  fromPartial(object: DeepPartial<CancelIncentiveProposal>): CancelIncentiveProposal {
     const message = createBaseCancelIncentiveProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -12,14 +12,12 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   feetoken: FeeToken;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
-    $typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
     title: "",
     description: "",
     feetoken: FeeToken.fromPartial({})
@@ -75,7 +73,7 @@ export const UpdateFeeTokenProposal = {
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toJSON(message.feetoken) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
+  fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

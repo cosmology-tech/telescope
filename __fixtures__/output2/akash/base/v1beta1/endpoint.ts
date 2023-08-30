@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -79,7 +79,7 @@ export const Endpoint = {
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
     return obj;
   },
-  fromPartial(object: Partial<Endpoint>): Endpoint {
+  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     return message;

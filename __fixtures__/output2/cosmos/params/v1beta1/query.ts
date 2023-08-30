@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { ParamChange } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -64,7 +64,7 @@ export const QueryParamsRequest = {
     message.key !== undefined && (obj.key = message.key);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     message.subspace = object.subspace ?? "";
     message.key = object.key ?? "";
@@ -110,7 +110,7 @@ export const QueryParamsResponse = {
     message.param !== undefined && (obj.param = message.param ? ParamChange.toJSON(message.param) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
     return message;

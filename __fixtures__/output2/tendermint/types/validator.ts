@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { PublicKey } from "../crypto/keys";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
@@ -80,7 +80,7 @@ export const ValidatorSet = {
     message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<ValidatorSet>): ValidatorSet {
+  fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
     const message = createBaseValidatorSet();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : undefined;
@@ -154,7 +154,7 @@ export const Validator = {
     message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Validator>): Validator {
+  fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
@@ -211,7 +211,7 @@ export const SimpleValidator = {
     message.votingPower !== undefined && (obj.votingPower = (message.votingPower || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<SimpleValidator>): SimpleValidator {
+  fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
     const message = createBaseSimpleValidator();
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
     message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;

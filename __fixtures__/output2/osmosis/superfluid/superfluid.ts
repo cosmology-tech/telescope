@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { Long, isSet } from "../../helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.superfluid";
 /**
@@ -144,7 +144,7 @@ export const SuperfluidAsset = {
     message.assetType !== undefined && (obj.assetType = superfluidAssetTypeToJSON(message.assetType));
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidAsset>): SuperfluidAsset {
+  fromPartial(object: DeepPartial<SuperfluidAsset>): SuperfluidAsset {
     const message = createBaseSuperfluidAsset();
     message.denom = object.denom ?? "";
     message.assetType = object.assetType ?? 0;
@@ -208,7 +208,7 @@ export const SuperfluidIntermediaryAccount = {
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidIntermediaryAccount>): SuperfluidIntermediaryAccount {
+  fromPartial(object: DeepPartial<SuperfluidIntermediaryAccount>): SuperfluidIntermediaryAccount {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
@@ -273,7 +273,7 @@ export const OsmoEquivalentMultiplierRecord = {
     message.multiplier !== undefined && (obj.multiplier = message.multiplier);
     return obj;
   },
-  fromPartial(object: Partial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
+  fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
     message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? Long.fromValue(object.epochNumber) : Long.ZERO;
     message.denom = object.denom ?? "";
@@ -347,7 +347,7 @@ export const SuperfluidDelegationRecord = {
     message.equivalentStakedAmount !== undefined && (obj.equivalentStakedAmount = message.equivalentStakedAmount ? Coin.toJSON(message.equivalentStakedAmount) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationRecord>): SuperfluidDelegationRecord {
+  fromPartial(object: DeepPartial<SuperfluidDelegationRecord>): SuperfluidDelegationRecord {
     const message = createBaseSuperfluidDelegationRecord();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
@@ -404,7 +404,7 @@ export const LockIdIntermediaryAccountConnection = {
     message.intermediaryAccount !== undefined && (obj.intermediaryAccount = message.intermediaryAccount);
     return obj;
   },
-  fromPartial(object: Partial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
+  fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.intermediaryAccount = object.intermediaryAccount ?? "";
@@ -463,7 +463,7 @@ export const UnpoolWhitelistedPools = {
     }
     return obj;
   },
-  fromPartial(object: Partial<UnpoolWhitelistedPools>): UnpoolWhitelistedPools {
+  fromPartial(object: DeepPartial<UnpoolWhitelistedPools>): UnpoolWhitelistedPools {
     const message = createBaseUnpoolWhitelistedPools();
     message.ids = object.ids?.map(e => Long.fromValue(e)) || [];
     return message;

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
@@ -46,7 +46,7 @@ export const ResourceValue = {
     message.val !== undefined && (obj.val = base64FromBytes(message.val !== undefined ? message.val : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<ResourceValue>): ResourceValue {
+  fromPartial(object: DeepPartial<ResourceValue>): ResourceValue {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;

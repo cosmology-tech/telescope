@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { PoolParams, PoolAsset } from "../balancerPool";
-import { Long, isSet, Rpc } from "../../../../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
@@ -85,7 +85,7 @@ export const MsgCreateBalancerPool = {
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
+  fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
@@ -133,7 +133,7 @@ export const MsgCreateBalancerPoolResponse = {
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
+  fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { DistrRecord } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -14,7 +14,6 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   records: DistrRecord[];
@@ -29,14 +28,12 @@ export interface ReplacePoolIncentivesProposal {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   records: DistrRecord[];
 }
 function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposal {
   return {
-    $typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
     title: "",
     description: "",
     records: []
@@ -96,7 +93,7 @@ export const ReplacePoolIncentivesProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
+  fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
     const message = createBaseReplacePoolIncentivesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -106,7 +103,6 @@ export const ReplacePoolIncentivesProposal = {
 };
 function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal {
   return {
-    $typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
     title: "",
     description: "",
     records: []
@@ -166,7 +162,7 @@ export const UpdatePoolIncentivesProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
+  fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
     const message = createBaseUpdatePoolIncentivesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

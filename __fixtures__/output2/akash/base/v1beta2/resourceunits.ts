@@ -3,7 +3,7 @@
 import { CPU, Memory, Storage } from "./resource";
 import { Endpoint } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -89,7 +89,7 @@ export const ResourceUnits = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ResourceUnits>): ResourceUnits {
+  fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
     const message = createBaseResourceUnits();
     message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
     message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;

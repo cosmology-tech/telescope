@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
-import { Long, isSet } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
@@ -16,7 +16,6 @@ export interface PoolParams {
 }
 /** Pool is the stableswap Pool struct */
 export interface Pool {
-  $typeUrl?: string;
   address: string;
   id: Long;
   poolParams: PoolParams;
@@ -88,7 +87,7 @@ export const PoolParams = {
     message.exitFee !== undefined && (obj.exitFee = message.exitFee);
     return obj;
   },
-  fromPartial(object: Partial<PoolParams>): PoolParams {
+  fromPartial(object: DeepPartial<PoolParams>): PoolParams {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
     message.exitFee = object.exitFee ?? "";
@@ -97,7 +96,6 @@ export const PoolParams = {
 };
 function createBasePool(): Pool {
   return {
-    $typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
     address: "",
     id: Long.UZERO,
     poolParams: PoolParams.fromPartial({}),
@@ -215,7 +213,7 @@ export const Pool = {
     message.scalingFactorController !== undefined && (obj.scalingFactorController = message.scalingFactorController);
     return obj;
   },
-  fromPartial(object: Partial<Pool>): Pool {
+  fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;

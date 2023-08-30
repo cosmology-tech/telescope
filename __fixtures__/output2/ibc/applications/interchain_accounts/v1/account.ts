@@ -2,17 +2,15 @@
 /* eslint-disable */
 import { BaseAccount } from "../../../../cosmos/auth/v1beta1/auth";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccount {
-  $typeUrl?: string;
   baseAccount: BaseAccount;
   accountOwner: string;
 }
 function createBaseInterchainAccount(): InterchainAccount {
   return {
-    $typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccount",
     baseAccount: BaseAccount.fromPartial({}),
     accountOwner: ""
   };
@@ -59,7 +57,7 @@ export const InterchainAccount = {
     message.accountOwner !== undefined && (obj.accountOwner = message.accountOwner);
     return obj;
   },
-  fromPartial(object: Partial<InterchainAccount>): InterchainAccount {
+  fromPartial(object: DeepPartial<InterchainAccount>): InterchainAccount {
     const message = createBaseInterchainAccount();
     message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.accountOwner = object.accountOwner ?? "";

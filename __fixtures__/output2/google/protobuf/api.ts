@@ -3,7 +3,7 @@
 import { Option, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -269,7 +269,7 @@ export const Api = {
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
   },
-  fromPartial(object: Partial<Api>): Api {
+  fromPartial(object: DeepPartial<Api>): Api {
     const message = createBaseApi();
     message.name = object.name ?? "";
     message.methods = object.methods?.map(e => Method.fromPartial(e)) || [];
@@ -378,7 +378,7 @@ export const Method = {
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
   },
-  fromPartial(object: Partial<Method>): Method {
+  fromPartial(object: DeepPartial<Method>): Method {
     const message = createBaseMethod();
     message.name = object.name ?? "";
     message.requestTypeUrl = object.requestTypeUrl ?? "";
@@ -438,7 +438,7 @@ export const Mixin = {
     message.root !== undefined && (obj.root = message.root);
     return obj;
   },
-  fromPartial(object: Partial<Mixin>): Mixin {
+  fromPartial(object: DeepPartial<Mixin>): Mixin {
     const message = createBaseMixin();
     message.name = object.name ?? "";
     message.root = object.root ?? "";

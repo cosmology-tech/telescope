@@ -7,7 +7,7 @@ import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { MerkleRoot } from "../../../core/commitment/v1/commitment";
 import { SignedHeader } from "../../../../tendermint/types/types";
 import { ValidatorSet } from "../../../../tendermint/types/validator";
-import { Long, isSet, fromJsonTimestamp, bytesFromBase64, fromTimestamp, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, fromJsonTimestamp, bytesFromBase64, fromTimestamp, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
 /**
@@ -238,7 +238,7 @@ export const ClientState = {
     message.allowUpdateAfterMisbehaviour !== undefined && (obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour);
     return obj;
   },
-  fromPartial(object: Partial<ClientState>): ClientState {
+  fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
     message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : undefined;
@@ -311,7 +311,7 @@ export const ConsensusState = {
     message.nextValidatorsHash !== undefined && (obj.nextValidatorsHash = base64FromBytes(message.nextValidatorsHash !== undefined ? message.nextValidatorsHash : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<ConsensusState>): ConsensusState {
+  fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     message.root = object.root !== undefined && object.root !== null ? MerkleRoot.fromPartial(object.root) : undefined;
@@ -376,7 +376,7 @@ export const Misbehaviour = {
     message.header2 !== undefined && (obj.header2 = message.header2 ? Header.toJSON(message.header2) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Misbehaviour>): Misbehaviour {
+  fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
     message.header1 = object.header1 !== undefined && object.header1 !== null ? Header.fromPartial(object.header1) : undefined;
@@ -450,7 +450,7 @@ export const Header = {
     message.trustedValidators !== undefined && (obj.trustedValidators = message.trustedValidators ? ValidatorSet.toJSON(message.trustedValidators) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Header>): Header {
+  fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : undefined;
     message.validatorSet = object.validatorSet !== undefined && object.validatorSet !== null ? ValidatorSet.fromPartial(object.validatorSet) : undefined;
@@ -507,7 +507,7 @@ export const Fraction = {
     message.denominator !== undefined && (obj.denominator = (message.denominator || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Fraction>): Fraction {
+  fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
     message.numerator = object.numerator !== undefined && object.numerator !== null ? Long.fromValue(object.numerator) : Long.UZERO;
     message.denominator = object.denominator !== undefined && object.denominator !== null ? Long.fromValue(object.denominator) : Long.UZERO;

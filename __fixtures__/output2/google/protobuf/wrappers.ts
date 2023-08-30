@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
 /**
@@ -123,7 +123,7 @@ export const DoubleValue = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<DoubleValue>): DoubleValue {
+  fromPartial(object: DeepPartial<DoubleValue>): DoubleValue {
     const message = createBaseDoubleValue();
     message.value = object.value ?? 0;
     return message;
@@ -168,7 +168,7 @@ export const FloatValue = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<FloatValue>): FloatValue {
+  fromPartial(object: DeepPartial<FloatValue>): FloatValue {
     const message = createBaseFloatValue();
     message.value = object.value ?? 0;
     return message;
@@ -213,7 +213,7 @@ export const Int64Value = {
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Int64Value>): Int64Value {
+  fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
@@ -258,7 +258,7 @@ export const UInt64Value = {
     message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<UInt64Value>): UInt64Value {
+  fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
     return message;
@@ -303,7 +303,7 @@ export const Int32Value = {
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
-  fromPartial(object: Partial<Int32Value>): Int32Value {
+  fromPartial(object: DeepPartial<Int32Value>): Int32Value {
     const message = createBaseInt32Value();
     message.value = object.value ?? 0;
     return message;
@@ -348,7 +348,7 @@ export const UInt32Value = {
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
-  fromPartial(object: Partial<UInt32Value>): UInt32Value {
+  fromPartial(object: DeepPartial<UInt32Value>): UInt32Value {
     const message = createBaseUInt32Value();
     message.value = object.value ?? 0;
     return message;
@@ -393,7 +393,7 @@ export const BoolValue = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<BoolValue>): BoolValue {
+  fromPartial(object: DeepPartial<BoolValue>): BoolValue {
     const message = createBaseBoolValue();
     message.value = object.value ?? false;
     return message;
@@ -438,7 +438,7 @@ export const StringValue = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<StringValue>): StringValue {
+  fromPartial(object: DeepPartial<StringValue>): StringValue {
     const message = createBaseStringValue();
     message.value = object.value ?? "";
     return message;
@@ -483,7 +483,7 @@ export const BytesValue = {
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<BytesValue>): BytesValue {
+  fromPartial(object: DeepPartial<BytesValue>): BytesValue {
     const message = createBaseBytesValue();
     message.value = object.value ?? new Uint8Array();
     return message;

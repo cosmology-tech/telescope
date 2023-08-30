@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Class, NFT } from "./nft";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
@@ -73,7 +73,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
     message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
@@ -132,7 +132,7 @@ export const Entry = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Entry>): Entry {
+  fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
     message.owner = object.owner ?? "";
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];

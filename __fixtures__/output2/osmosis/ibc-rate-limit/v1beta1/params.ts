@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
@@ -46,7 +46,7 @@ export const Params = {
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.contractAddress = object.contractAddress ?? "";
     return message;

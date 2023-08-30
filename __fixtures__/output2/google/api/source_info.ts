@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
@@ -51,7 +52,7 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SourceInfo>): SourceInfo {
+  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;

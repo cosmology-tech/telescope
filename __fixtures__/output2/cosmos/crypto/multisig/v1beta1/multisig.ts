@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { bytesFromBase64, base64FromBytes, isSet } from "../../../../helpers";
+import { bytesFromBase64, base64FromBytes, DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -64,7 +64,7 @@ export const MultiSignature = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MultiSignature>): MultiSignature {
+  fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map(e => e) || [];
     return message;
@@ -118,7 +118,7 @@ export const CompactBitArray = {
     message.elems !== undefined && (obj.elems = base64FromBytes(message.elems !== undefined ? message.elems : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<CompactBitArray>): CompactBitArray {
+  fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {
     const message = createBaseCompactBitArray();
     message.extraBitsStored = object.extraBitsStored ?? 0;
     message.elems = object.elems ?? new Uint8Array();

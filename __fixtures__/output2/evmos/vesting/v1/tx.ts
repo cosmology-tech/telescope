@@ -3,7 +3,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Period } from "../../../cosmos/vesting/v1beta1/vesting";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp, Rpc } from "../../../helpers";
+import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -144,7 +144,7 @@ export const MsgCreateClawbackVestingAccount = {
     message.merge !== undefined && (obj.merge = message.merge);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateClawbackVestingAccount>): MsgCreateClawbackVestingAccount {
+  fromPartial(object: DeepPartial<MsgCreateClawbackVestingAccount>): MsgCreateClawbackVestingAccount {
     const message = createBaseMsgCreateClawbackVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
@@ -183,7 +183,7 @@ export const MsgCreateClawbackVestingAccountResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateClawbackVestingAccountResponse>): MsgCreateClawbackVestingAccountResponse {
+  fromPartial(_: DeepPartial<MsgCreateClawbackVestingAccountResponse>): MsgCreateClawbackVestingAccountResponse {
     const message = createBaseMsgCreateClawbackVestingAccountResponse();
     return message;
   }
@@ -245,7 +245,7 @@ export const MsgClawback = {
     message.destAddress !== undefined && (obj.destAddress = message.destAddress);
     return obj;
   },
-  fromPartial(object: Partial<MsgClawback>): MsgClawback {
+  fromPartial(object: DeepPartial<MsgClawback>): MsgClawback {
     const message = createBaseMsgClawback();
     message.funderAddress = object.funderAddress ?? "";
     message.accountAddress = object.accountAddress ?? "";
@@ -281,7 +281,7 @@ export const MsgClawbackResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgClawbackResponse>): MsgClawbackResponse {
+  fromPartial(_: DeepPartial<MsgClawbackResponse>): MsgClawbackResponse {
     const message = createBaseMsgClawbackResponse();
     return message;
   }

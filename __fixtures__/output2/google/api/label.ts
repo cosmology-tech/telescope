@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -109,7 +109,7 @@ export const LabelDescriptor = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: Partial<LabelDescriptor>): LabelDescriptor {
+  fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {
     const message = createBaseLabelDescriptor();
     message.key = object.key ?? "";
     message.valueType = object.valueType ?? 0;

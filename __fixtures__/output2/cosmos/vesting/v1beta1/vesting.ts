@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { BaseAccount } from "../../auth/v1beta1/auth";
 import { Coin } from "../../base/v1beta1/coin";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
@@ -143,7 +143,7 @@ export const BaseVestingAccount = {
     message.endTime !== undefined && (obj.endTime = (message.endTime || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<BaseVestingAccount>): BaseVestingAccount {
+  fromPartial(object: DeepPartial<BaseVestingAccount>): BaseVestingAccount {
     const message = createBaseBaseVestingAccount();
     message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.originalVesting = object.originalVesting?.map(e => Coin.fromPartial(e)) || [];
@@ -201,7 +201,7 @@ export const ContinuousVestingAccount = {
     message.startTime !== undefined && (obj.startTime = (message.startTime || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<ContinuousVestingAccount>): ContinuousVestingAccount {
+  fromPartial(object: DeepPartial<ContinuousVestingAccount>): ContinuousVestingAccount {
     const message = createBaseContinuousVestingAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
@@ -247,7 +247,7 @@ export const DelayedVestingAccount = {
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<DelayedVestingAccount>): DelayedVestingAccount {
+  fromPartial(object: DeepPartial<DelayedVestingAccount>): DelayedVestingAccount {
     const message = createBaseDelayedVestingAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     return message;
@@ -305,7 +305,7 @@ export const Period = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Period>): Period {
+  fromPartial(object: DeepPartial<Period>): Period {
     const message = createBasePeriod();
     message.length = object.length !== undefined && object.length !== null ? Long.fromValue(object.length) : Long.ZERO;
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
@@ -373,7 +373,7 @@ export const PeriodicVestingAccount = {
     }
     return obj;
   },
-  fromPartial(object: Partial<PeriodicVestingAccount>): PeriodicVestingAccount {
+  fromPartial(object: DeepPartial<PeriodicVestingAccount>): PeriodicVestingAccount {
     const message = createBasePeriodicVestingAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
@@ -420,7 +420,7 @@ export const PermanentLockedAccount = {
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<PermanentLockedAccount>): PermanentLockedAccount {
+  fromPartial(object: DeepPartial<PermanentLockedAccount>): PermanentLockedAccount {
     const message = createBasePermanentLockedAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     return message;

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
@@ -80,7 +80,7 @@ export const Equivocation = {
     message.consensusAddress !== undefined && (obj.consensusAddress = message.consensusAddress);
     return obj;
   },
-  fromPartial(object: Partial<Equivocation>): Equivocation {
+  fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : undefined;

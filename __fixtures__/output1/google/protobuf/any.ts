@@ -83,7 +83,6 @@ export const protobufPackage = "google.protobuf";
  *     }
  */
 export interface Any {
-  $typeUrl?: string;
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
    * protocol buffer message. This string must contain at least
@@ -199,13 +198,11 @@ export interface Any {
  *     }
  */
 export interface AnySDKType {
-  $typeUrl?: string;
   type_url: string;
   value: Uint8Array;
 }
 function createBaseAny(): Any {
   return {
-    $typeUrl: "/google.protobuf.Any",
     typeUrl: "",
     value: new Uint8Array()
   };

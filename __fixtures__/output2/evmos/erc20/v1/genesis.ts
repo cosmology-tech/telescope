@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { TokenPair } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -74,7 +74,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
@@ -129,7 +129,7 @@ export const Params = {
     message.enableEvmHook !== undefined && (obj.enableEvmHook = message.enableEvmHook);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableErc20 = object.enableErc20 ?? false;
     message.enableEvmHook = object.enableEvmHook ?? false;

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -85,7 +85,6 @@ export const protobufPackage = "google.protobuf";
  *     }
  */
 export interface Any {
-  $typeUrl?: string;
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
    * protocol buffer message. This string must contain at least
@@ -121,7 +120,6 @@ export interface Any {
 }
 function createBaseAny(): Any {
   return {
-    $typeUrl: "/google.protobuf.Any",
     typeUrl: "",
     value: new Uint8Array()
   };
@@ -168,7 +166,7 @@ export const Any = {
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<Any>): Any {
+  fromPartial(object: DeepPartial<Any>): Any {
     const message = createBaseAny();
     message.typeUrl = object.typeUrl ?? "";
     message.value = object.value ?? new Uint8Array();

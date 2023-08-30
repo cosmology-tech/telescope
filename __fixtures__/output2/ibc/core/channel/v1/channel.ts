@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Height } from "../../client/v1/client";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
@@ -291,7 +291,7 @@ export const Channel = {
     message.version !== undefined && (obj.version = message.version);
     return obj;
   },
-  fromPartial(object: Partial<Channel>): Channel {
+  fromPartial(object: DeepPartial<Channel>): Channel {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
@@ -398,7 +398,7 @@ export const IdentifiedChannel = {
     message.channelId !== undefined && (obj.channelId = message.channelId);
     return obj;
   },
-  fromPartial(object: Partial<IdentifiedChannel>): IdentifiedChannel {
+  fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
@@ -458,7 +458,7 @@ export const Counterparty = {
     message.channelId !== undefined && (obj.channelId = message.channelId);
     return obj;
   },
-  fromPartial(object: Partial<Counterparty>): Counterparty {
+  fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
@@ -567,7 +567,7 @@ export const Packet = {
     message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Packet>): Packet {
+  fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.sourcePort = object.sourcePort ?? "";
@@ -646,7 +646,7 @@ export const PacketState = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<PacketState>): PacketState {
+  fromPartial(object: DeepPartial<PacketState>): PacketState {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
@@ -703,7 +703,7 @@ export const Acknowledgement = {
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },
-  fromPartial(object: Partial<Acknowledgement>): Acknowledgement {
+  fromPartial(object: DeepPartial<Acknowledgement>): Acknowledgement {
     const message = createBaseAcknowledgement();
     message.result = object.result ?? undefined;
     message.error = object.error ?? undefined;

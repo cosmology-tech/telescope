@@ -3,7 +3,7 @@
 import { Operation } from "./operation";
 import { CheckError } from "./check_error";
 import { Status } from "../../../rpc/status";
-import { Long, isSet } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
@@ -277,7 +277,7 @@ export const CheckRequest = {
     message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
     return obj;
   },
-  fromPartial(object: Partial<CheckRequest>): CheckRequest {
+  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : undefined;
@@ -364,7 +364,7 @@ export const CheckResponse = {
     message.checkInfo !== undefined && (obj.checkInfo = message.checkInfo ? CheckResponse_CheckInfo.toJSON(message.checkInfo) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CheckResponse>): CheckResponse {
+  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     message.operationId = object.operationId ?? "";
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
@@ -426,7 +426,7 @@ export const CheckResponse_CheckInfo = {
     message.consumerInfo !== undefined && (obj.consumerInfo = message.consumerInfo ? CheckResponse_ConsumerInfo.toJSON(message.consumerInfo) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
+  fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
     message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
@@ -490,7 +490,7 @@ export const CheckResponse_ConsumerInfo = {
     message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
+  fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
     message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
     message.type = object.type ?? 0;
@@ -559,7 +559,7 @@ export const ReportRequest = {
     message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
     return obj;
   },
-  fromPartial(object: Partial<ReportRequest>): ReportRequest {
+  fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
     message.serviceName = object.serviceName ?? "";
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
@@ -628,7 +628,7 @@ export const ReportResponse = {
     message.serviceRolloutId !== undefined && (obj.serviceRolloutId = message.serviceRolloutId);
     return obj;
   },
-  fromPartial(object: Partial<ReportResponse>): ReportResponse {
+  fromPartial(object: DeepPartial<ReportResponse>): ReportResponse {
     const message = createBaseReportResponse();
     message.reportErrors = object.reportErrors?.map(e => ReportResponse_ReportError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
@@ -684,7 +684,7 @@ export const ReportResponse_ReportError = {
     message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ReportResponse_ReportError>): ReportResponse_ReportError {
+  fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
     message.operationId = object.operationId ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;

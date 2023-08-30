@@ -1,6 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
@@ -48,7 +49,7 @@ export const Params = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.forceUnlockAllowedAddresses = object.forceUnlockAllowedAddresses?.map(e => e) || [];
     return message;

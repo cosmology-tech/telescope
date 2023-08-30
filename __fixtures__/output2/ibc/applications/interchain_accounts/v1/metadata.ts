@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Metadata defines a set of protocol specific data encoded into the ICS27 channel version bytestring
@@ -108,7 +108,7 @@ export const Metadata = {
     message.txType !== undefined && (obj.txType = message.txType);
     return obj;
   },
-  fromPartial(object: Partial<Metadata>): Metadata {
+  fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
     message.version = object.version ?? "";
     message.controllerConnectionId = object.controllerConnectionId ?? "";

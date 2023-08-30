@@ -4,7 +4,7 @@ import { Action, ClaimRecord, actionFromJSON, actionToJSON } from "./claim";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { DeepPartial, isSet, Rpc } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
@@ -67,7 +67,7 @@ export const QueryModuleAccountBalanceRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
+  fromPartial(_: DeepPartial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
   }
@@ -115,7 +115,7 @@ export const QueryModuleAccountBalanceResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryModuleAccountBalanceResponse>): QueryModuleAccountBalanceResponse {
+  fromPartial(object: DeepPartial<QueryModuleAccountBalanceResponse>): QueryModuleAccountBalanceResponse {
     const message = createBaseQueryModuleAccountBalanceResponse();
     message.moduleAccountBalance = object.moduleAccountBalance?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -149,7 +149,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -193,7 +193,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -238,7 +238,7 @@ export const QueryClaimRecordRequest = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<QueryClaimRecordRequest>): QueryClaimRecordRequest {
+  fromPartial(object: DeepPartial<QueryClaimRecordRequest>): QueryClaimRecordRequest {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
     return message;
@@ -283,7 +283,7 @@ export const QueryClaimRecordResponse = {
     message.claimRecord !== undefined && (obj.claimRecord = message.claimRecord ? ClaimRecord.toJSON(message.claimRecord) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryClaimRecordResponse>): QueryClaimRecordResponse {
+  fromPartial(object: DeepPartial<QueryClaimRecordResponse>): QueryClaimRecordResponse {
     const message = createBaseQueryClaimRecordResponse();
     message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
@@ -337,7 +337,7 @@ export const QueryClaimableForActionRequest = {
     message.action !== undefined && (obj.action = actionToJSON(message.action));
     return obj;
   },
-  fromPartial(object: Partial<QueryClaimableForActionRequest>): QueryClaimableForActionRequest {
+  fromPartial(object: DeepPartial<QueryClaimableForActionRequest>): QueryClaimableForActionRequest {
     const message = createBaseQueryClaimableForActionRequest();
     message.address = object.address ?? "";
     message.action = object.action ?? 0;
@@ -387,7 +387,7 @@ export const QueryClaimableForActionResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryClaimableForActionResponse>): QueryClaimableForActionResponse {
+  fromPartial(object: DeepPartial<QueryClaimableForActionResponse>): QueryClaimableForActionResponse {
     const message = createBaseQueryClaimableForActionResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -432,7 +432,7 @@ export const QueryTotalClaimableRequest = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<QueryTotalClaimableRequest>): QueryTotalClaimableRequest {
+  fromPartial(object: DeepPartial<QueryTotalClaimableRequest>): QueryTotalClaimableRequest {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
     return message;
@@ -481,7 +481,7 @@ export const QueryTotalClaimableResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryTotalClaimableResponse>): QueryTotalClaimableResponse {
+  fromPartial(object: DeepPartial<QueryTotalClaimableResponse>): QueryTotalClaimableResponse {
     const message = createBaseQueryTotalClaimableResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;

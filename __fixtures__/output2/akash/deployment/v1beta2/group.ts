@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { GroupID } from "./groupid";
 import { GroupSpec } from "./groupspec";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
@@ -132,7 +132,7 @@ export const Group = {
     message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Group>): Group {
+  fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;

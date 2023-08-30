@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { ExponentialCalculation, InflationDistribution } from "./inflation";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
@@ -103,7 +103,7 @@ export const GenesisState = {
     message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
@@ -179,7 +179,7 @@ export const Params = {
     message.enableInflation !== undefined && (obj.enableInflation = message.enableInflation);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";
     message.exponentialCalculation = object.exponentialCalculation !== undefined && object.exponentialCalculation !== null ? ExponentialCalculation.fromPartial(object.exponentialCalculation) : undefined;

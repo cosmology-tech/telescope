@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Certificate } from "./cert";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
@@ -61,7 +61,7 @@ export const GenesisCertificate = {
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toJSON(message.certificate) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisCertificate>): GenesisCertificate {
+  fromPartial(object: DeepPartial<GenesisCertificate>): GenesisCertificate {
     const message = createBaseGenesisCertificate();
     message.owner = object.owner ?? "";
     message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
@@ -111,7 +111,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.certificates = object.certificates?.map(e => GenesisCertificate.fromPartial(e)) || [];
     return message;

@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
@@ -120,7 +120,7 @@ export const Minter = {
     message.epochProvisions !== undefined && (obj.epochProvisions = message.epochProvisions);
     return obj;
   },
-  fromPartial(object: Partial<Minter>): Minter {
+  fromPartial(object: DeepPartial<Minter>): Minter {
     const message = createBaseMinter();
     message.epochProvisions = object.epochProvisions ?? "";
     return message;
@@ -174,7 +174,7 @@ export const WeightedAddress = {
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
-  fromPartial(object: Partial<WeightedAddress>): WeightedAddress {
+  fromPartial(object: DeepPartial<WeightedAddress>): WeightedAddress {
     const message = createBaseWeightedAddress();
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
@@ -247,7 +247,7 @@ export const DistributionProportions = {
     message.communityPool !== undefined && (obj.communityPool = message.communityPool);
     return obj;
   },
-  fromPartial(object: Partial<DistributionProportions>): DistributionProportions {
+  fromPartial(object: DeepPartial<DistributionProportions>): DistributionProportions {
     const message = createBaseDistributionProportions();
     message.staking = object.staking ?? "";
     message.poolIncentives = object.poolIncentives ?? "";
@@ -362,7 +362,7 @@ export const Params = {
     message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";

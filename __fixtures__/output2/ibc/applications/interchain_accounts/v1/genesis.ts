@@ -3,7 +3,7 @@
 import { Params as Params1 } from "../controller/v1/controller";
 import { Params as Params2 } from "../host/v1/host";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /** GenesisState defines the interchain accounts genesis state */
 export interface GenesisState {
@@ -84,7 +84,7 @@ export const GenesisState = {
     message.hostGenesisState !== undefined && (obj.hostGenesisState = message.hostGenesisState ? HostGenesisState.toJSON(message.hostGenesisState) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : undefined;
     message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : undefined;
@@ -169,7 +169,7 @@ export const ControllerGenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params1.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ControllerGenesisState>): ControllerGenesisState {
+  fromPartial(object: DeepPartial<ControllerGenesisState>): ControllerGenesisState {
     const message = createBaseControllerGenesisState();
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
@@ -252,7 +252,7 @@ export const HostGenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params2.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<HostGenesisState>): HostGenesisState {
+  fromPartial(object: DeepPartial<HostGenesisState>): HostGenesisState {
     const message = createBaseHostGenesisState();
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
@@ -318,7 +318,7 @@ export const ActiveChannel = {
     message.channelId !== undefined && (obj.channelId = message.channelId);
     return obj;
   },
-  fromPartial(object: Partial<ActiveChannel>): ActiveChannel {
+  fromPartial(object: DeepPartial<ActiveChannel>): ActiveChannel {
     const message = createBaseActiveChannel();
     message.connectionId = object.connectionId ?? "";
     message.portId = object.portId ?? "";
@@ -383,7 +383,7 @@ export const RegisteredInterchainAccount = {
     message.accountAddress !== undefined && (obj.accountAddress = message.accountAddress);
     return obj;
   },
-  fromPartial(object: Partial<RegisteredInterchainAccount>): RegisteredInterchainAccount {
+  fromPartial(object: DeepPartial<RegisteredInterchainAccount>): RegisteredInterchainAccount {
     const message = createBaseRegisteredInterchainAccount();
     message.connectionId = object.connectionId ?? "";
     message.portId = object.portId ?? "";

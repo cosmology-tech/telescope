@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -75,7 +75,7 @@ export const Params = {
     message.variance !== undefined && (obj.variance = message.variance);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.inflationDecayFactor = object.inflationDecayFactor ?? "";
     message.initialInflation = object.initialInflation ?? "";

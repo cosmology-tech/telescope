@@ -3,7 +3,7 @@
 import { Params } from "./params";
 import { DenomAuthorityMetadata } from "./authorityMetadata";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { DeepPartial, isSet, Rpc } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -68,7 +68,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -112,7 +112,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -157,7 +157,7 @@ export const QueryDenomAuthorityMetadataRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomAuthorityMetadataRequest>): QueryDenomAuthorityMetadataRequest {
+  fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataRequest>): QueryDenomAuthorityMetadataRequest {
     const message = createBaseQueryDenomAuthorityMetadataRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -202,7 +202,7 @@ export const QueryDenomAuthorityMetadataResponse = {
     message.authorityMetadata !== undefined && (obj.authorityMetadata = message.authorityMetadata ? DenomAuthorityMetadata.toJSON(message.authorityMetadata) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomAuthorityMetadataResponse>): QueryDenomAuthorityMetadataResponse {
+  fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataResponse>): QueryDenomAuthorityMetadataResponse {
     const message = createBaseQueryDenomAuthorityMetadataResponse();
     message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
@@ -247,7 +247,7 @@ export const QueryDenomsFromCreatorRequest = {
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomsFromCreatorRequest>): QueryDenomsFromCreatorRequest {
+  fromPartial(object: DeepPartial<QueryDenomsFromCreatorRequest>): QueryDenomsFromCreatorRequest {
     const message = createBaseQueryDenomsFromCreatorRequest();
     message.creator = object.creator ?? "";
     return message;
@@ -296,7 +296,7 @@ export const QueryDenomsFromCreatorResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomsFromCreatorResponse>): QueryDenomsFromCreatorResponse {
+  fromPartial(object: DeepPartial<QueryDenomsFromCreatorResponse>): QueryDenomsFromCreatorResponse {
     const message = createBaseQueryDenomsFromCreatorResponse();
     message.denoms = object.denoms?.map(e => e) || [];
     return message;

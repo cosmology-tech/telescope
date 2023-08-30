@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { BidID } from "./bid";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of lease */
@@ -170,7 +170,7 @@ export const LeaseID = {
     message.provider !== undefined && (obj.provider = message.provider);
     return obj;
   },
-  fromPartial(object: Partial<LeaseID>): LeaseID {
+  fromPartial(object: DeepPartial<LeaseID>): LeaseID {
     const message = createBaseLeaseID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -255,7 +255,7 @@ export const Lease = {
     message.closedOn !== undefined && (obj.closedOn = (message.closedOn || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Lease>): Lease {
+  fromPartial(object: DeepPartial<Lease>): Lease {
     const message = createBaseLease();
     message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     message.state = object.state ?? 0;
@@ -349,7 +349,7 @@ export const LeaseFilters = {
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
-  fromPartial(object: Partial<LeaseFilters>): LeaseFilters {
+  fromPartial(object: DeepPartial<LeaseFilters>): LeaseFilters {
     const message = createBaseLeaseFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -399,7 +399,7 @@ export const MsgCreateLease = {
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateLease>): MsgCreateLease {
+  fromPartial(object: DeepPartial<MsgCreateLease>): MsgCreateLease {
     const message = createBaseMsgCreateLease();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
@@ -433,7 +433,7 @@ export const MsgCreateLeaseResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateLeaseResponse>): MsgCreateLeaseResponse {
+  fromPartial(_: DeepPartial<MsgCreateLeaseResponse>): MsgCreateLeaseResponse {
     const message = createBaseMsgCreateLeaseResponse();
     return message;
   }
@@ -477,7 +477,7 @@ export const MsgWithdrawLease = {
     message.bidId !== undefined && (obj.bidId = message.bidId ? LeaseID.toJSON(message.bidId) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgWithdrawLease>): MsgWithdrawLease {
+  fromPartial(object: DeepPartial<MsgWithdrawLease>): MsgWithdrawLease {
     const message = createBaseMsgWithdrawLease();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : undefined;
     return message;
@@ -511,7 +511,7 @@ export const MsgWithdrawLeaseResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgWithdrawLeaseResponse>): MsgWithdrawLeaseResponse {
+  fromPartial(_: DeepPartial<MsgWithdrawLeaseResponse>): MsgWithdrawLeaseResponse {
     const message = createBaseMsgWithdrawLeaseResponse();
     return message;
   }
@@ -555,7 +555,7 @@ export const MsgCloseLease = {
     message.leaseId !== undefined && (obj.leaseId = message.leaseId ? LeaseID.toJSON(message.leaseId) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCloseLease>): MsgCloseLease {
+  fromPartial(object: DeepPartial<MsgCloseLease>): MsgCloseLease {
     const message = createBaseMsgCloseLease();
     message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     return message;
@@ -589,7 +589,7 @@ export const MsgCloseLeaseResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCloseLeaseResponse>): MsgCloseLeaseResponse {
+  fromPartial(_: DeepPartial<MsgCloseLeaseResponse>): MsgCloseLeaseResponse {
     const message = createBaseMsgCloseLeaseResponse();
     return message;
   }

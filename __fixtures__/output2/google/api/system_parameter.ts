@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * ### System parameter configuration
@@ -128,7 +128,7 @@ export const SystemParameters = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SystemParameters>): SystemParameters {
+  fromPartial(object: DeepPartial<SystemParameters>): SystemParameters {
     const message = createBaseSystemParameters();
     message.rules = object.rules?.map(e => SystemParameterRule.fromPartial(e)) || [];
     return message;
@@ -186,7 +186,7 @@ export const SystemParameterRule = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SystemParameterRule>): SystemParameterRule {
+  fromPartial(object: DeepPartial<SystemParameterRule>): SystemParameterRule {
     const message = createBaseSystemParameterRule();
     message.selector = object.selector ?? "";
     message.parameters = object.parameters?.map(e => SystemParameter.fromPartial(e)) || [];
@@ -250,7 +250,7 @@ export const SystemParameter = {
     message.urlQueryParameter !== undefined && (obj.urlQueryParameter = message.urlQueryParameter);
     return obj;
   },
-  fromPartial(object: Partial<SystemParameter>): SystemParameter {
+  fromPartial(object: DeepPartial<SystemParameter>): SystemParameter {
     const message = createBaseSystemParameter();
     message.name = object.name ?? "";
     message.httpHeader = object.httpHeader ?? "";

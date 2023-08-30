@@ -3,7 +3,7 @@
 import { BaseVestingAccount, Period } from "../../../cosmos/vesting/v1beta1/vesting";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -109,7 +109,7 @@ export const ClawbackVestingAccount = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ClawbackVestingAccount>): ClawbackVestingAccount {
+  fromPartial(object: DeepPartial<ClawbackVestingAccount>): ClawbackVestingAccount {
     const message = createBaseClawbackVestingAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     message.funderAddress = object.funderAddress ?? "";

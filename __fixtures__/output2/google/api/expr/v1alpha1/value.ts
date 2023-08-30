@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any } from "../../../protobuf/any";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
@@ -219,7 +219,7 @@ export const Value = {
     message.typeValue !== undefined && (obj.typeValue = message.typeValue);
     return obj;
   },
-  fromPartial(object: Partial<Value>): Value {
+  fromPartial(object: DeepPartial<Value>): Value {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
@@ -284,7 +284,7 @@ export const EnumValue = {
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
-  fromPartial(object: Partial<EnumValue>): EnumValue {
+  fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.type = object.type ?? "";
     message.value = object.value ?? 0;
@@ -334,7 +334,7 @@ export const ListValue = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ListValue>): ListValue {
+  fromPartial(object: DeepPartial<ListValue>): ListValue {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     return message;
@@ -383,7 +383,7 @@ export const MapValue = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MapValue>): MapValue {
+  fromPartial(object: DeepPartial<MapValue>): MapValue {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
@@ -437,7 +437,7 @@ export const MapValue_Entry = {
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MapValue_Entry>): MapValue_Entry {
+  fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;

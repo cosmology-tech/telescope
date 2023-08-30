@@ -3,7 +3,7 @@
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -71,7 +71,6 @@ export interface PoolAsset {
   weight: string;
 }
 export interface Pool {
-  $typeUrl?: string;
   address: string;
   id: Long;
   poolParams: PoolParams;
@@ -171,7 +170,7 @@ export const SmoothWeightChangeParams = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
+  fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
@@ -237,7 +236,7 @@ export const PoolParams = {
     message.smoothWeightChangeParams !== undefined && (obj.smoothWeightChangeParams = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toJSON(message.smoothWeightChangeParams) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<PoolParams>): PoolParams {
+  fromPartial(object: DeepPartial<PoolParams>): PoolParams {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
     message.exitFee = object.exitFee ?? "";
@@ -293,7 +292,7 @@ export const PoolAsset = {
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
-  fromPartial(object: Partial<PoolAsset>): PoolAsset {
+  fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
     const message = createBasePoolAsset();
     message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
@@ -302,7 +301,6 @@ export const PoolAsset = {
 };
 function createBasePool(): Pool {
   return {
-    $typeUrl: "/osmosis.gamm.v1beta1.Pool",
     address: "",
     id: Long.UZERO,
     poolParams: PoolParams.fromPartial({}),
@@ -398,7 +396,7 @@ export const Pool = {
     message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
     return obj;
   },
-  fromPartial(object: Partial<Pool>): Pool {
+  fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;

@@ -3,7 +3,7 @@
 import { QueryCondition } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp, Rpc } from "../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
@@ -132,7 +132,7 @@ export const MsgCreateGauge = {
     message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateGauge>): MsgCreateGauge {
+  fromPartial(object: DeepPartial<MsgCreateGauge>): MsgCreateGauge {
     const message = createBaseMsgCreateGauge();
     message.isPerpetual = object.isPerpetual ?? false;
     message.owner = object.owner ?? "";
@@ -171,7 +171,7 @@ export const MsgCreateGaugeResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateGaugeResponse>): MsgCreateGaugeResponse {
+  fromPartial(_: DeepPartial<MsgCreateGaugeResponse>): MsgCreateGaugeResponse {
     const message = createBaseMsgCreateGaugeResponse();
     return message;
   }
@@ -237,7 +237,7 @@ export const MsgAddToGauge = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgAddToGauge>): MsgAddToGauge {
+  fromPartial(object: DeepPartial<MsgAddToGauge>): MsgAddToGauge {
     const message = createBaseMsgAddToGauge();
     message.owner = object.owner ?? "";
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
@@ -273,7 +273,7 @@ export const MsgAddToGaugeResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgAddToGaugeResponse>): MsgAddToGaugeResponse {
+  fromPartial(_: DeepPartial<MsgAddToGaugeResponse>): MsgAddToGaugeResponse {
     const message = createBaseMsgAddToGaugeResponse();
     return message;
   }

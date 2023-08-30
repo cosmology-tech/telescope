@@ -3,7 +3,7 @@
 import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -102,7 +102,7 @@ export const MsgGrant = {
     message.grant !== undefined && (obj.grant = message.grant ? Grant.toJSON(message.grant) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgGrant>): MsgGrant {
+  fromPartial(object: DeepPartial<MsgGrant>): MsgGrant {
     const message = createBaseMsgGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
@@ -153,7 +153,7 @@ export const MsgExecResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgExecResponse>): MsgExecResponse {
+  fromPartial(object: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     message.results = object.results?.map(e => e) || [];
     return message;
@@ -211,7 +211,7 @@ export const MsgExec = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgExec>): MsgExec {
+  fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
     message.grantee = object.grantee ?? "";
     message.msgs = object.msgs?.map(e => Any.fromPartial(e)) || [];
@@ -246,7 +246,7 @@ export const MsgGrantResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgGrantResponse>): MsgGrantResponse {
+  fromPartial(_: DeepPartial<MsgGrantResponse>): MsgGrantResponse {
     const message = createBaseMsgGrantResponse();
     return message;
   }
@@ -308,7 +308,7 @@ export const MsgRevoke = {
     message.msgTypeUrl !== undefined && (obj.msgTypeUrl = message.msgTypeUrl);
     return obj;
   },
-  fromPartial(object: Partial<MsgRevoke>): MsgRevoke {
+  fromPartial(object: DeepPartial<MsgRevoke>): MsgRevoke {
     const message = createBaseMsgRevoke();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
@@ -344,7 +344,7 @@ export const MsgRevokeResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgRevokeResponse>): MsgRevokeResponse {
+  fromPartial(_: DeepPartial<MsgRevokeResponse>): MsgRevokeResponse {
     const message = createBaseMsgRevokeResponse();
     return message;
   }

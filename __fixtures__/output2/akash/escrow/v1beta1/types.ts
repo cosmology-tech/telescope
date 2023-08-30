@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
@@ -176,7 +176,7 @@ export const AccountID = {
     message.xid !== undefined && (obj.xid = message.xid);
     return obj;
   },
-  fromPartial(object: Partial<AccountID>): AccountID {
+  fromPartial(object: DeepPartial<AccountID>): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -267,7 +267,7 @@ export const Account = {
     message.settledAt !== undefined && (obj.settledAt = (message.settledAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Account>): Account {
+  fromPartial(object: DeepPartial<Account>): Account {
     const message = createBaseAccount();
     message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
     message.owner = object.owner ?? "";
@@ -371,7 +371,7 @@ export const Payment = {
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toJSON(message.withdrawn) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Payment>): Payment {
+  fromPartial(object: DeepPartial<Payment>): Payment {
     const message = createBasePayment();
     message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
     message.paymentId = object.paymentId ?? "";

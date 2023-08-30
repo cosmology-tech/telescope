@@ -4,7 +4,7 @@ import { QueryCondition } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
 /**
@@ -162,7 +162,7 @@ export const Gauge = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Gauge>): Gauge {
+  fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.isPerpetual = object.isPerpetual ?? false;
@@ -218,7 +218,7 @@ export const LockableDurationsInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<LockableDurationsInfo>): LockableDurationsInfo {
+  fromPartial(object: DeepPartial<LockableDurationsInfo>): LockableDurationsInfo {
     const message = createBaseLockableDurationsInfo();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;

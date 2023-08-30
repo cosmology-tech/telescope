@@ -3,7 +3,7 @@
 import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
-import { Long, isSet, Rpc } from "../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
@@ -119,7 +119,7 @@ export const MsgLockTokens = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgLockTokens>): MsgLockTokens {
+  fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
@@ -166,7 +166,7 @@ export const MsgLockTokensResponse = {
     message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<MsgLockTokensResponse>): MsgLockTokensResponse {
+  fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
     const message = createBaseMsgLockTokensResponse();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
@@ -211,7 +211,7 @@ export const MsgBeginUnlockingAll = {
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
-  fromPartial(object: Partial<MsgBeginUnlockingAll>): MsgBeginUnlockingAll {
+  fromPartial(object: DeepPartial<MsgBeginUnlockingAll>): MsgBeginUnlockingAll {
     const message = createBaseMsgBeginUnlockingAll();
     message.owner = object.owner ?? "";
     return message;
@@ -260,7 +260,7 @@ export const MsgBeginUnlockingAllResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgBeginUnlockingAllResponse>): MsgBeginUnlockingAllResponse {
+  fromPartial(object: DeepPartial<MsgBeginUnlockingAllResponse>): MsgBeginUnlockingAllResponse {
     const message = createBaseMsgBeginUnlockingAllResponse();
     message.unlocks = object.unlocks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -327,7 +327,7 @@ export const MsgBeginUnlocking = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgBeginUnlocking>): MsgBeginUnlocking {
+  fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
     message.owner = object.owner ?? "";
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
@@ -374,7 +374,7 @@ export const MsgBeginUnlockingResponse = {
     message.success !== undefined && (obj.success = message.success);
     return obj;
   },
-  fromPartial(object: Partial<MsgBeginUnlockingResponse>): MsgBeginUnlockingResponse {
+  fromPartial(object: DeepPartial<MsgBeginUnlockingResponse>): MsgBeginUnlockingResponse {
     const message = createBaseMsgBeginUnlockingResponse();
     message.success = object.success ?? false;
     return message;
@@ -437,7 +437,7 @@ export const MsgExtendLockup = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgExtendLockup>): MsgExtendLockup {
+  fromPartial(object: DeepPartial<MsgExtendLockup>): MsgExtendLockup {
     const message = createBaseMsgExtendLockup();
     message.owner = object.owner ?? "";
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
@@ -484,7 +484,7 @@ export const MsgExtendLockupResponse = {
     message.success !== undefined && (obj.success = message.success);
     return obj;
   },
-  fromPartial(object: Partial<MsgExtendLockupResponse>): MsgExtendLockupResponse {
+  fromPartial(object: DeepPartial<MsgExtendLockupResponse>): MsgExtendLockupResponse {
     const message = createBaseMsgExtendLockupResponse();
     message.success = object.success ?? false;
     return message;
@@ -551,7 +551,7 @@ export const MsgForceUnlock = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgForceUnlock>): MsgForceUnlock {
+  fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
     const message = createBaseMsgForceUnlock();
     message.owner = object.owner ?? "";
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
@@ -598,7 +598,7 @@ export const MsgForceUnlockResponse = {
     message.success !== undefined && (obj.success = message.success);
     return obj;
   },
-  fromPartial(object: Partial<MsgForceUnlockResponse>): MsgForceUnlockResponse {
+  fromPartial(object: DeepPartial<MsgForceUnlockResponse>): MsgForceUnlockResponse {
     const message = createBaseMsgForceUnlockResponse();
     message.success = object.success ?? false;
     return message;

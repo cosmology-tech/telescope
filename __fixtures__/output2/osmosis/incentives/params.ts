@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -50,7 +50,7 @@ export const Params = {
     message.distrEpochIdentifier !== undefined && (obj.distrEpochIdentifier = message.distrEpochIdentifier);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
     return message;

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { PeriodLock, SyntheticLock } from "./lock";
-import { Long, isSet } from "../../helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
@@ -75,7 +75,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.lastLockId = object.lastLockId !== undefined && object.lastLockId !== null ? Long.fromValue(object.lastLockId) : Long.UZERO;
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];

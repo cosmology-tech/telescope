@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
@@ -131,7 +131,7 @@ export const MsgRegisterDevFeeInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
+  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
     const message = createBaseMsgRegisterDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
@@ -168,7 +168,7 @@ export const MsgRegisterDevFeeInfoResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
+  fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
   }
@@ -221,7 +221,7 @@ export const MsgCancelDevFeeInfo = {
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     return obj;
   },
-  fromPartial(object: Partial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
+  fromPartial(object: DeepPartial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
     const message = createBaseMsgCancelDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
@@ -256,7 +256,7 @@ export const MsgCancelDevFeeInfoResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
+  fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
     const message = createBaseMsgCancelDevFeeInfoResponse();
     return message;
   }
@@ -318,7 +318,7 @@ export const MsgUpdateDevFeeInfo = {
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     return obj;
   },
-  fromPartial(object: Partial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
+  fromPartial(object: DeepPartial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
     const message = createBaseMsgUpdateDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
@@ -354,7 +354,7 @@ export const MsgUpdateDevFeeInfoResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
+  fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     return message;
   }

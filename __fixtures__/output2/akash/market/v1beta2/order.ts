@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { GroupSpec } from "../../deployment/v1beta2/groupspec";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
@@ -139,7 +139,7 @@ export const OrderID = {
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     return obj;
   },
-  fromPartial(object: Partial<OrderID>): OrderID {
+  fromPartial(object: DeepPartial<OrderID>): OrderID {
     const message = createBaseOrderID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -214,7 +214,7 @@ export const Order = {
     message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Order>): Order {
+  fromPartial(object: DeepPartial<Order>): Order {
     const message = createBaseOrder();
     message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : undefined;
     message.state = object.state ?? 0;
@@ -298,7 +298,7 @@ export const OrderFilters = {
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
-  fromPartial(object: Partial<OrderFilters>): OrderFilters {
+  fromPartial(object: DeepPartial<OrderFilters>): OrderFilters {
     const message = createBaseOrderFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

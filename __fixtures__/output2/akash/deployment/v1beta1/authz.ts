@@ -2,14 +2,13 @@
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorization {
-  $typeUrl?: string;
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
@@ -18,7 +17,6 @@ export interface DepositDeploymentAuthorization {
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {
-    $typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
     spendLimit: Coin.fromPartial({})
   };
 }
@@ -56,7 +54,7 @@ export const DepositDeploymentAuthorization = {
     message.spendLimit !== undefined && (obj.spendLimit = message.spendLimit ? Coin.toJSON(message.spendLimit) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<DepositDeploymentAuthorization>): DepositDeploymentAuthorization {
+  fromPartial(object: DeepPartial<DepositDeploymentAuthorization>): DepositDeploymentAuthorization {
     const message = createBaseDepositDeploymentAuthorization();
     message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : undefined;
     return message;

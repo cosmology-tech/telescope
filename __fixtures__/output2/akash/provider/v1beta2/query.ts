@@ -3,7 +3,7 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider } from "./provider";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
@@ -61,7 +61,7 @@ export const QueryProvidersRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryProvidersRequest>): QueryProvidersRequest {
+  fromPartial(object: DeepPartial<QueryProvidersRequest>): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -119,7 +119,7 @@ export const QueryProvidersResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryProvidersResponse>): QueryProvidersResponse {
+  fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -165,7 +165,7 @@ export const QueryProviderRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
-  fromPartial(object: Partial<QueryProviderRequest>): QueryProviderRequest {
+  fromPartial(object: DeepPartial<QueryProviderRequest>): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
     message.owner = object.owner ?? "";
     return message;
@@ -210,7 +210,7 @@ export const QueryProviderResponse = {
     message.provider !== undefined && (obj.provider = message.provider ? Provider.toJSON(message.provider) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryProviderResponse>): QueryProviderResponse {
+  fromPartial(object: DeepPartial<QueryProviderResponse>): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
     message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
     return message;

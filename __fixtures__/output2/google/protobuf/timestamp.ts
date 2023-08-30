@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
 /**
@@ -150,7 +150,7 @@ export const Timestamp = {
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
-  fromPartial(object: Partial<Timestamp>): Timestamp {
+  fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
     message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
     message.nanos = object.nanos ?? 0;

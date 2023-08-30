@@ -4,7 +4,7 @@ import { Order } from "./order";
 import { Lease } from "./lease";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {
@@ -77,7 +77,7 @@ export const GenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.leases = object.leases?.map(e => Lease.fromPartial(e)) || [];

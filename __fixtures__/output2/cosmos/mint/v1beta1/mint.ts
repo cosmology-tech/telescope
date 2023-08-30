@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** Minter represents the minting state. */
@@ -73,7 +73,7 @@ export const Minter = {
     message.annualProvisions !== undefined && (obj.annualProvisions = message.annualProvisions);
     return obj;
   },
-  fromPartial(object: Partial<Minter>): Minter {
+  fromPartial(object: DeepPartial<Minter>): Minter {
     const message = createBaseMinter();
     message.inflation = object.inflation ?? "";
     message.annualProvisions = object.annualProvisions ?? "";
@@ -164,7 +164,7 @@ export const Params = {
     message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";
     message.inflationRateChange = object.inflationRateChange ?? "";

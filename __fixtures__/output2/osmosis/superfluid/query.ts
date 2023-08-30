@@ -6,7 +6,7 @@ import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, S
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock } from "../lockup/lock";
 import { DelegationResponse } from "../../cosmos/staking/v1beta1/staking";
-import { Long, isSet, Rpc } from "../../helpers";
+import { Long, DeepPartial, isSet, Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
@@ -144,7 +144,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -188,7 +188,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -233,7 +233,7 @@ export const AssetTypeRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<AssetTypeRequest>): AssetTypeRequest {
+  fromPartial(object: DeepPartial<AssetTypeRequest>): AssetTypeRequest {
     const message = createBaseAssetTypeRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -278,7 +278,7 @@ export const AssetTypeResponse = {
     message.assetType !== undefined && (obj.assetType = superfluidAssetTypeToJSON(message.assetType));
     return obj;
   },
-  fromPartial(object: Partial<AssetTypeResponse>): AssetTypeResponse {
+  fromPartial(object: DeepPartial<AssetTypeResponse>): AssetTypeResponse {
     const message = createBaseAssetTypeResponse();
     message.assetType = object.assetType ?? 0;
     return message;
@@ -312,7 +312,7 @@ export const AllAssetsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<AllAssetsRequest>): AllAssetsRequest {
+  fromPartial(_: DeepPartial<AllAssetsRequest>): AllAssetsRequest {
     const message = createBaseAllAssetsRequest();
     return message;
   }
@@ -360,7 +360,7 @@ export const AllAssetsResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<AllAssetsResponse>): AllAssetsResponse {
+  fromPartial(object: DeepPartial<AllAssetsResponse>): AllAssetsResponse {
     const message = createBaseAllAssetsResponse();
     message.assets = object.assets?.map(e => SuperfluidAsset.fromPartial(e)) || [];
     return message;
@@ -405,7 +405,7 @@ export const AssetMultiplierRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<AssetMultiplierRequest>): AssetMultiplierRequest {
+  fromPartial(object: DeepPartial<AssetMultiplierRequest>): AssetMultiplierRequest {
     const message = createBaseAssetMultiplierRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -450,7 +450,7 @@ export const AssetMultiplierResponse = {
     message.osmoEquivalentMultiplier !== undefined && (obj.osmoEquivalentMultiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toJSON(message.osmoEquivalentMultiplier) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<AssetMultiplierResponse>): AssetMultiplierResponse {
+  fromPartial(object: DeepPartial<AssetMultiplierResponse>): AssetMultiplierResponse {
     const message = createBaseAssetMultiplierResponse();
     message.osmoEquivalentMultiplier = object.osmoEquivalentMultiplier !== undefined && object.osmoEquivalentMultiplier !== null ? OsmoEquivalentMultiplierRecord.fromPartial(object.osmoEquivalentMultiplier) : undefined;
     return message;
@@ -522,7 +522,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidIntermediaryAccountInfo>): SuperfluidIntermediaryAccountInfo {
+  fromPartial(object: DeepPartial<SuperfluidIntermediaryAccountInfo>): SuperfluidIntermediaryAccountInfo {
     const message = createBaseSuperfluidIntermediaryAccountInfo();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
@@ -570,7 +570,7 @@ export const AllIntermediaryAccountsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<AllIntermediaryAccountsRequest>): AllIntermediaryAccountsRequest {
+  fromPartial(object: DeepPartial<AllIntermediaryAccountsRequest>): AllIntermediaryAccountsRequest {
     const message = createBaseAllIntermediaryAccountsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -628,7 +628,7 @@ export const AllIntermediaryAccountsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<AllIntermediaryAccountsResponse>): AllIntermediaryAccountsResponse {
+  fromPartial(object: DeepPartial<AllIntermediaryAccountsResponse>): AllIntermediaryAccountsResponse {
     const message = createBaseAllIntermediaryAccountsResponse();
     message.accounts = object.accounts?.map(e => SuperfluidIntermediaryAccountInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -674,7 +674,7 @@ export const ConnectedIntermediaryAccountRequest = {
     message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<ConnectedIntermediaryAccountRequest>): ConnectedIntermediaryAccountRequest {
+  fromPartial(object: DeepPartial<ConnectedIntermediaryAccountRequest>): ConnectedIntermediaryAccountRequest {
     const message = createBaseConnectedIntermediaryAccountRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
@@ -719,7 +719,7 @@ export const ConnectedIntermediaryAccountResponse = {
     message.account !== undefined && (obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toJSON(message.account) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ConnectedIntermediaryAccountResponse>): ConnectedIntermediaryAccountResponse {
+  fromPartial(object: DeepPartial<ConnectedIntermediaryAccountResponse>): ConnectedIntermediaryAccountResponse {
     const message = createBaseConnectedIntermediaryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? SuperfluidIntermediaryAccountInfo.fromPartial(object.account) : undefined;
     return message;
@@ -764,7 +764,7 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<QueryTotalDelegationByValidatorForDenomRequest>): QueryTotalDelegationByValidatorForDenomRequest {
+  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>): QueryTotalDelegationByValidatorForDenomRequest {
     const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -813,7 +813,7 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryTotalDelegationByValidatorForDenomResponse>): QueryTotalDelegationByValidatorForDenomResponse {
+  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomResponse>): QueryTotalDelegationByValidatorForDenomResponse {
     const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
     message.assets = object.assets?.map(e => Delegations.fromPartial(e)) || [];
     return message;
@@ -876,7 +876,7 @@ export const Delegations = {
     message.osmoEquivalent !== undefined && (obj.osmoEquivalent = message.osmoEquivalent);
     return obj;
   },
-  fromPartial(object: Partial<Delegations>): Delegations {
+  fromPartial(object: DeepPartial<Delegations>): Delegations {
     const message = createBaseDelegations();
     message.valAddr = object.valAddr ?? "";
     message.amountSfsd = object.amountSfsd ?? "";
@@ -912,7 +912,7 @@ export const TotalSuperfluidDelegationsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<TotalSuperfluidDelegationsRequest>): TotalSuperfluidDelegationsRequest {
+  fromPartial(_: DeepPartial<TotalSuperfluidDelegationsRequest>): TotalSuperfluidDelegationsRequest {
     const message = createBaseTotalSuperfluidDelegationsRequest();
     return message;
   }
@@ -956,7 +956,7 @@ export const TotalSuperfluidDelegationsResponse = {
     message.totalDelegations !== undefined && (obj.totalDelegations = message.totalDelegations);
     return obj;
   },
-  fromPartial(object: Partial<TotalSuperfluidDelegationsResponse>): TotalSuperfluidDelegationsResponse {
+  fromPartial(object: DeepPartial<TotalSuperfluidDelegationsResponse>): TotalSuperfluidDelegationsResponse {
     const message = createBaseTotalSuperfluidDelegationsResponse();
     message.totalDelegations = object.totalDelegations ?? "";
     return message;
@@ -1019,7 +1019,7 @@ export const SuperfluidDelegationAmountRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationAmountRequest>): SuperfluidDelegationAmountRequest {
+  fromPartial(object: DeepPartial<SuperfluidDelegationAmountRequest>): SuperfluidDelegationAmountRequest {
     const message = createBaseSuperfluidDelegationAmountRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
@@ -1070,7 +1070,7 @@ export const SuperfluidDelegationAmountResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationAmountResponse>): SuperfluidDelegationAmountResponse {
+  fromPartial(object: DeepPartial<SuperfluidDelegationAmountResponse>): SuperfluidDelegationAmountResponse {
     const message = createBaseSuperfluidDelegationAmountResponse();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -1115,7 +1115,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationsByDelegatorRequest>): SuperfluidDelegationsByDelegatorRequest {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByDelegatorRequest>): SuperfluidDelegationsByDelegatorRequest {
     const message = createBaseSuperfluidDelegationsByDelegatorRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     return message;
@@ -1186,7 +1186,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     message.totalEquivalentStakedAmount !== undefined && (obj.totalEquivalentStakedAmount = message.totalEquivalentStakedAmount ? Coin.toJSON(message.totalEquivalentStakedAmount) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationsByDelegatorResponse>): SuperfluidDelegationsByDelegatorResponse {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByDelegatorResponse>): SuperfluidDelegationsByDelegatorResponse {
     const message = createBaseSuperfluidDelegationsByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
@@ -1242,7 +1242,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidUndelegationsByDelegatorRequest>): SuperfluidUndelegationsByDelegatorRequest {
+  fromPartial(object: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>): SuperfluidUndelegationsByDelegatorRequest {
     const message = createBaseSuperfluidUndelegationsByDelegatorRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.denom = object.denom ?? "";
@@ -1318,7 +1318,7 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidUndelegationsByDelegatorResponse>): SuperfluidUndelegationsByDelegatorResponse {
+  fromPartial(object: DeepPartial<SuperfluidUndelegationsByDelegatorResponse>): SuperfluidUndelegationsByDelegatorResponse {
     const message = createBaseSuperfluidUndelegationsByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.totalUndelegatedCoins = object.totalUndelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
@@ -1374,7 +1374,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationsByValidatorDenomRequest>): SuperfluidDelegationsByValidatorDenomRequest {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>): SuperfluidDelegationsByValidatorDenomRequest {
     const message = createBaseSuperfluidDelegationsByValidatorDenomRequest();
     message.validatorAddress = object.validatorAddress ?? "";
     message.denom = object.denom ?? "";
@@ -1424,7 +1424,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SuperfluidDelegationsByValidatorDenomResponse>): SuperfluidDelegationsByValidatorDenomResponse {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByValidatorDenomResponse>): SuperfluidDelegationsByValidatorDenomResponse {
     const message = createBaseSuperfluidDelegationsByValidatorDenomResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     return message;
@@ -1478,7 +1478,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+  fromPartial(object: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest();
     message.validatorAddress = object.validatorAddress ?? "";
     message.denom = object.denom ?? "";
@@ -1528,7 +1528,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+  fromPartial(object: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -1573,7 +1573,7 @@ export const QueryTotalDelegationByDelegatorRequest = {
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     return obj;
   },
-  fromPartial(object: Partial<QueryTotalDelegationByDelegatorRequest>): QueryTotalDelegationByDelegatorRequest {
+  fromPartial(object: DeepPartial<QueryTotalDelegationByDelegatorRequest>): QueryTotalDelegationByDelegatorRequest {
     const message = createBaseQueryTotalDelegationByDelegatorRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     return message;
@@ -1657,7 +1657,7 @@ export const QueryTotalDelegationByDelegatorResponse = {
     message.totalEquivalentStakedAmount !== undefined && (obj.totalEquivalentStakedAmount = message.totalEquivalentStakedAmount ? Coin.toJSON(message.totalEquivalentStakedAmount) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryTotalDelegationByDelegatorResponse>): QueryTotalDelegationByDelegatorResponse {
+  fromPartial(object: DeepPartial<QueryTotalDelegationByDelegatorResponse>): QueryTotalDelegationByDelegatorResponse {
     const message = createBaseQueryTotalDelegationByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.delegationResponse = object.delegationResponse?.map(e => DelegationResponse.fromPartial(e)) || [];
@@ -1694,7 +1694,7 @@ export const QueryUnpoolWhitelistRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryUnpoolWhitelistRequest>): QueryUnpoolWhitelistRequest {
+  fromPartial(_: DeepPartial<QueryUnpoolWhitelistRequest>): QueryUnpoolWhitelistRequest {
     const message = createBaseQueryUnpoolWhitelistRequest();
     return message;
   }
@@ -1751,7 +1751,7 @@ export const QueryUnpoolWhitelistResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryUnpoolWhitelistResponse>): QueryUnpoolWhitelistResponse {
+  fromPartial(object: DeepPartial<QueryUnpoolWhitelistResponse>): QueryUnpoolWhitelistResponse {
     const message = createBaseQueryUnpoolWhitelistResponse();
     message.poolIds = object.poolIds?.map(e => Long.fromValue(e)) || [];
     return message;

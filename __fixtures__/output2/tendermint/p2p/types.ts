@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.p2p";
 export interface NetAddress {
@@ -84,7 +84,7 @@ export const NetAddress = {
     message.port !== undefined && (obj.port = Math.round(message.port));
     return obj;
   },
-  fromPartial(object: Partial<NetAddress>): NetAddress {
+  fromPartial(object: DeepPartial<NetAddress>): NetAddress {
     const message = createBaseNetAddress();
     message.id = object.id ?? "";
     message.ip = object.ip ?? "";
@@ -149,7 +149,7 @@ export const ProtocolVersion = {
     message.app !== undefined && (obj.app = (message.app || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<ProtocolVersion>): ProtocolVersion {
+  fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
     message.p2p = object.p2p !== undefined && object.p2p !== null ? Long.fromValue(object.p2p) : Long.UZERO;
     message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
@@ -259,7 +259,7 @@ export const DefaultNodeInfo = {
     message.other !== undefined && (obj.other = message.other ? DefaultNodeInfoOther.toJSON(message.other) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<DefaultNodeInfo>): DefaultNodeInfo {
+  fromPartial(object: DeepPartial<DefaultNodeInfo>): DefaultNodeInfo {
     const message = createBaseDefaultNodeInfo();
     message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : undefined;
     message.defaultNodeId = object.defaultNodeId ?? "";
@@ -320,7 +320,7 @@ export const DefaultNodeInfoOther = {
     message.rpcAddress !== undefined && (obj.rpcAddress = message.rpcAddress);
     return obj;
   },
-  fromPartial(object: Partial<DefaultNodeInfoOther>): DefaultNodeInfoOther {
+  fromPartial(object: DeepPartial<DefaultNodeInfoOther>): DefaultNodeInfoOther {
     const message = createBaseDefaultNodeInfoOther();
     message.txIndex = object.txIndex ?? "";
     message.rpcAddress = object.rpcAddress ?? "";

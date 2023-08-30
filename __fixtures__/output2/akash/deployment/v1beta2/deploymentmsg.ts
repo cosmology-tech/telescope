@@ -4,7 +4,7 @@ import { DeploymentID } from "./deployment";
 import { GroupSpec } from "./groupspec";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
@@ -118,7 +118,7 @@ export const MsgCreateDeployment = {
     message.depositor !== undefined && (obj.depositor = message.depositor);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateDeployment>): MsgCreateDeployment {
+  fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
@@ -156,7 +156,7 @@ export const MsgCreateDeploymentResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateDeploymentResponse>): MsgCreateDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgCreateDeploymentResponse>): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
   }
@@ -218,7 +218,7 @@ export const MsgDepositDeployment = {
     message.depositor !== undefined && (obj.depositor = message.depositor);
     return obj;
   },
-  fromPartial(object: Partial<MsgDepositDeployment>): MsgDepositDeployment {
+  fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
@@ -254,7 +254,7 @@ export const MsgDepositDeploymentResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgDepositDeploymentResponse>): MsgDepositDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgDepositDeploymentResponse>): MsgDepositDeploymentResponse {
     const message = createBaseMsgDepositDeploymentResponse();
     return message;
   }
@@ -307,7 +307,7 @@ export const MsgUpdateDeployment = {
     message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<MsgUpdateDeployment>): MsgUpdateDeployment {
+  fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.version = object.version ?? new Uint8Array();
@@ -342,7 +342,7 @@ export const MsgUpdateDeploymentResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgUpdateDeploymentResponse>): MsgUpdateDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgUpdateDeploymentResponse>): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
   }
@@ -386,7 +386,7 @@ export const MsgCloseDeployment = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCloseDeployment>): MsgCloseDeployment {
+  fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
@@ -420,7 +420,7 @@ export const MsgCloseDeploymentResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCloseDeploymentResponse>): MsgCloseDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgCloseDeploymentResponse>): MsgCloseDeploymentResponse {
     const message = createBaseMsgCloseDeploymentResponse();
     return message;
   }

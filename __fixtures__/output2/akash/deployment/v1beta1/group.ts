@@ -3,7 +3,7 @@
 import { PlacementRequirements } from "../../base/v1beta1/attribute";
 import { ResourceUnits } from "../../base/v1beta1/resource";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of group */
@@ -142,7 +142,7 @@ export const MsgCloseGroup = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCloseGroup>): MsgCloseGroup {
+  fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -176,7 +176,7 @@ export const MsgCloseGroupResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
+  fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
   }
@@ -220,7 +220,7 @@ export const MsgPauseGroup = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgPauseGroup>): MsgPauseGroup {
+  fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -254,7 +254,7 @@ export const MsgPauseGroupResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
+  fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
   }
@@ -298,7 +298,7 @@ export const MsgStartGroup = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgStartGroup>): MsgStartGroup {
+  fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -332,7 +332,7 @@ export const MsgStartGroupResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgStartGroupResponse>): MsgStartGroupResponse {
+  fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
   }
@@ -394,7 +394,7 @@ export const GroupID = {
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
-  fromPartial(object: Partial<GroupID>): GroupID {
+  fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -463,7 +463,7 @@ export const GroupSpec = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GroupSpec>): GroupSpec {
+  fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
@@ -537,7 +537,7 @@ export const Group = {
     message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Group>): Group {
+  fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
@@ -603,7 +603,7 @@ export const Resource = {
     message.price !== undefined && (obj.price = message.price ? Coin.toJSON(message.price) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Resource>): Resource {
+  fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
     message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
     message.count = object.count ?? 0;

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoin {
@@ -91,7 +91,7 @@ export const MsgConvertCoin = {
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
   },
-  fromPartial(object: Partial<MsgConvertCoin>): MsgConvertCoin {
+  fromPartial(object: DeepPartial<MsgConvertCoin>): MsgConvertCoin {
     const message = createBaseMsgConvertCoin();
     message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : undefined;
     message.receiver = object.receiver ?? "";
@@ -127,7 +127,7 @@ export const MsgConvertCoinResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgConvertCoinResponse>): MsgConvertCoinResponse {
+  fromPartial(_: DeepPartial<MsgConvertCoinResponse>): MsgConvertCoinResponse {
     const message = createBaseMsgConvertCoinResponse();
     return message;
   }
@@ -198,7 +198,7 @@ export const MsgConvertERC20 = {
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
   },
-  fromPartial(object: Partial<MsgConvertERC20>): MsgConvertERC20 {
+  fromPartial(object: DeepPartial<MsgConvertERC20>): MsgConvertERC20 {
     const message = createBaseMsgConvertERC20();
     message.contractAddress = object.contractAddress ?? "";
     message.amount = object.amount ?? "";
@@ -235,7 +235,7 @@ export const MsgConvertERC20Response = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgConvertERC20Response>): MsgConvertERC20Response {
+  fromPartial(_: DeepPartial<MsgConvertERC20Response>): MsgConvertERC20Response {
     const message = createBaseMsgConvertERC20Response();
     return message;
   }

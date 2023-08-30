@@ -4,7 +4,7 @@ import { MetricDescriptor } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, isObject, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, isObject, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -309,7 +309,7 @@ export const LogMetric_LabelExtractorsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<LogMetric_LabelExtractorsEntry>): LogMetric_LabelExtractorsEntry {
+  fromPartial(object: DeepPartial<LogMetric_LabelExtractorsEntry>): LogMetric_LabelExtractorsEntry {
     const message = createBaseLogMetric_LabelExtractorsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -461,7 +461,7 @@ export const LogMetric = {
     message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
     return obj;
   },
-  fromPartial(object: Partial<LogMetric>): LogMetric {
+  fromPartial(object: DeepPartial<LogMetric>): LogMetric {
     const message = createBaseLogMetric();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -541,7 +541,7 @@ export const ListLogMetricsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-  fromPartial(object: Partial<ListLogMetricsRequest>): ListLogMetricsRequest {
+  fromPartial(object: DeepPartial<ListLogMetricsRequest>): ListLogMetricsRequest {
     const message = createBaseListLogMetricsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -601,7 +601,7 @@ export const ListLogMetricsResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: Partial<ListLogMetricsResponse>): ListLogMetricsResponse {
+  fromPartial(object: DeepPartial<ListLogMetricsResponse>): ListLogMetricsResponse {
     const message = createBaseListLogMetricsResponse();
     message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -647,7 +647,7 @@ export const GetLogMetricRequest = {
     message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;
   },
-  fromPartial(object: Partial<GetLogMetricRequest>): GetLogMetricRequest {
+  fromPartial(object: DeepPartial<GetLogMetricRequest>): GetLogMetricRequest {
     const message = createBaseGetLogMetricRequest();
     message.metricName = object.metricName ?? "";
     return message;
@@ -701,7 +701,7 @@ export const CreateLogMetricRequest = {
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CreateLogMetricRequest>): CreateLogMetricRequest {
+  fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
     const message = createBaseCreateLogMetricRequest();
     message.parent = object.parent ?? "";
     message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
@@ -756,7 +756,7 @@ export const UpdateLogMetricRequest = {
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
+  fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
     message.metricName = object.metricName ?? "";
     message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
@@ -802,7 +802,7 @@ export const DeleteLogMetricRequest = {
     message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;
   },
-  fromPartial(object: Partial<DeleteLogMetricRequest>): DeleteLogMetricRequest {
+  fromPartial(object: DeepPartial<DeleteLogMetricRequest>): DeleteLogMetricRequest {
     const message = createBaseDeleteLogMetricRequest();
     message.metricName = object.metricName ?? "";
     return message;

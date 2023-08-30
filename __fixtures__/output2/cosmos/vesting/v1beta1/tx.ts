@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Coin } from "../../base/v1beta1/coin";
-import { Long, isSet, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
@@ -96,7 +96,7 @@ export const MsgCreateVestingAccount = {
     message.delayed !== undefined && (obj.delayed = message.delayed);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
+  fromPartial(object: DeepPartial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
     const message = createBaseMsgCreateVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
@@ -134,7 +134,7 @@ export const MsgCreateVestingAccountResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
+  fromPartial(_: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
   }

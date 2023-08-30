@@ -3,7 +3,7 @@
 import { Any } from "../../../../google/protobuf/any";
 import { ConnectionEnd } from "../../../core/connection/v1/connection";
 import { Channel } from "../../../core/channel/v1/channel";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.solomachine.v1";
 /**
@@ -310,7 +310,7 @@ export const ClientState = {
     message.allowUpdateAfterProposal !== undefined && (obj.allowUpdateAfterProposal = message.allowUpdateAfterProposal);
     return obj;
   },
-  fromPartial(object: Partial<ClientState>): ClientState {
+  fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.frozenSequence = object.frozenSequence !== undefined && object.frozenSequence !== null ? Long.fromValue(object.frozenSequence) : Long.UZERO;
@@ -376,7 +376,7 @@ export const ConsensusState = {
     message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<ConsensusState>): ConsensusState {
+  fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.diversifier = object.diversifier ?? "";
@@ -459,7 +459,7 @@ export const Header = {
     message.newDiversifier !== undefined && (obj.newDiversifier = message.newDiversifier);
     return obj;
   },
-  fromPartial(object: Partial<Header>): Header {
+  fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
@@ -535,7 +535,7 @@ export const Misbehaviour = {
     message.signatureTwo !== undefined && (obj.signatureTwo = message.signatureTwo ? SignatureAndData.toJSON(message.signatureTwo) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Misbehaviour>): Misbehaviour {
+  fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
@@ -610,7 +610,7 @@ export const SignatureAndData = {
     message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<SignatureAndData>): SignatureAndData {
+  fromPartial(object: DeepPartial<SignatureAndData>): SignatureAndData {
     const message = createBaseSignatureAndData();
     message.signature = object.signature ?? new Uint8Array();
     message.dataType = object.dataType ?? 0;
@@ -667,7 +667,7 @@ export const TimestampedSignatureData = {
     message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<TimestampedSignatureData>): TimestampedSignatureData {
+  fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     message.signatureData = object.signatureData ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
@@ -749,7 +749,7 @@ export const SignBytes = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<SignBytes>): SignBytes {
+  fromPartial(object: DeepPartial<SignBytes>): SignBytes {
     const message = createBaseSignBytes();
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
@@ -807,7 +807,7 @@ export const HeaderData = {
     message.newDiversifier !== undefined && (obj.newDiversifier = message.newDiversifier);
     return obj;
   },
-  fromPartial(object: Partial<HeaderData>): HeaderData {
+  fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
     message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
@@ -862,7 +862,7 @@ export const ClientStateData = {
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ClientStateData>): ClientStateData {
+  fromPartial(object: DeepPartial<ClientStateData>): ClientStateData {
     const message = createBaseClientStateData();
     message.path = object.path ?? new Uint8Array();
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
@@ -917,7 +917,7 @@ export const ConsensusStateData = {
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ConsensusStateData>): ConsensusStateData {
+  fromPartial(object: DeepPartial<ConsensusStateData>): ConsensusStateData {
     const message = createBaseConsensusStateData();
     message.path = object.path ?? new Uint8Array();
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
@@ -972,7 +972,7 @@ export const ConnectionStateData = {
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toJSON(message.connection) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ConnectionStateData>): ConnectionStateData {
+  fromPartial(object: DeepPartial<ConnectionStateData>): ConnectionStateData {
     const message = createBaseConnectionStateData();
     message.path = object.path ?? new Uint8Array();
     message.connection = object.connection !== undefined && object.connection !== null ? ConnectionEnd.fromPartial(object.connection) : undefined;
@@ -1027,7 +1027,7 @@ export const ChannelStateData = {
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toJSON(message.channel) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ChannelStateData>): ChannelStateData {
+  fromPartial(object: DeepPartial<ChannelStateData>): ChannelStateData {
     const message = createBaseChannelStateData();
     message.path = object.path ?? new Uint8Array();
     message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : undefined;
@@ -1082,7 +1082,7 @@ export const PacketCommitmentData = {
     message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment !== undefined ? message.commitment : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<PacketCommitmentData>): PacketCommitmentData {
+  fromPartial(object: DeepPartial<PacketCommitmentData>): PacketCommitmentData {
     const message = createBasePacketCommitmentData();
     message.path = object.path ?? new Uint8Array();
     message.commitment = object.commitment ?? new Uint8Array();
@@ -1137,7 +1137,7 @@ export const PacketAcknowledgementData = {
     message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement !== undefined ? message.acknowledgement : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<PacketAcknowledgementData>): PacketAcknowledgementData {
+  fromPartial(object: DeepPartial<PacketAcknowledgementData>): PacketAcknowledgementData {
     const message = createBasePacketAcknowledgementData();
     message.path = object.path ?? new Uint8Array();
     message.acknowledgement = object.acknowledgement ?? new Uint8Array();
@@ -1183,7 +1183,7 @@ export const PacketReceiptAbsenceData = {
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<PacketReceiptAbsenceData>): PacketReceiptAbsenceData {
+  fromPartial(object: DeepPartial<PacketReceiptAbsenceData>): PacketReceiptAbsenceData {
     const message = createBasePacketReceiptAbsenceData();
     message.path = object.path ?? new Uint8Array();
     return message;
@@ -1237,7 +1237,7 @@ export const NextSequenceRecvData = {
     message.nextSeqRecv !== undefined && (obj.nextSeqRecv = (message.nextSeqRecv || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<NextSequenceRecvData>): NextSequenceRecvData {
+  fromPartial(object: DeepPartial<NextSequenceRecvData>): NextSequenceRecvData {
     const message = createBaseNextSequenceRecvData();
     message.path = object.path ?? new Uint8Array();
     message.nextSeqRecv = object.nextSeqRecv !== undefined && object.nextSeqRecv !== null ? Long.fromValue(object.nextSeqRecv) : Long.UZERO;

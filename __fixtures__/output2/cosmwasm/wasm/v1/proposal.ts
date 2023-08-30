@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -229,7 +229,7 @@ export const StoreCodeProposal = {
     message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<StoreCodeProposal>): StoreCodeProposal {
+  fromPartial(object: DeepPartial<StoreCodeProposal>): StoreCodeProposal {
     const message = createBaseStoreCodeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -345,7 +345,7 @@ export const InstantiateContractProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<InstantiateContractProposal>): InstantiateContractProposal {
+  fromPartial(object: DeepPartial<InstantiateContractProposal>): InstantiateContractProposal {
     const message = createBaseInstantiateContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -433,7 +433,7 @@ export const MigrateContractProposal = {
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<MigrateContractProposal>): MigrateContractProposal {
+  fromPartial(object: DeepPartial<MigrateContractProposal>): MigrateContractProposal {
     const message = createBaseMigrateContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -509,7 +509,7 @@ export const SudoContractProposal = {
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<SudoContractProposal>): SudoContractProposal {
+  fromPartial(object: DeepPartial<SudoContractProposal>): SudoContractProposal {
     const message = createBaseSudoContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -606,7 +606,7 @@ export const ExecuteContractProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ExecuteContractProposal>): ExecuteContractProposal {
+  fromPartial(object: DeepPartial<ExecuteContractProposal>): ExecuteContractProposal {
     const message = createBaseExecuteContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -683,7 +683,7 @@ export const UpdateAdminProposal = {
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
-  fromPartial(object: Partial<UpdateAdminProposal>): UpdateAdminProposal {
+  fromPartial(object: DeepPartial<UpdateAdminProposal>): UpdateAdminProposal {
     const message = createBaseUpdateAdminProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -749,7 +749,7 @@ export const ClearAdminProposal = {
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
-  fromPartial(object: Partial<ClearAdminProposal>): ClearAdminProposal {
+  fromPartial(object: DeepPartial<ClearAdminProposal>): ClearAdminProposal {
     const message = createBaseClearAdminProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -827,7 +827,7 @@ export const PinCodesProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<PinCodesProposal>): PinCodesProposal {
+  fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -905,7 +905,7 @@ export const UnpinCodesProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<UnpinCodesProposal>): UnpinCodesProposal {
+  fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -961,7 +961,7 @@ export const AccessConfigUpdate = {
     message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<AccessConfigUpdate>): AccessConfigUpdate {
+  fromPartial(object: DeepPartial<AccessConfigUpdate>): AccessConfigUpdate {
     const message = createBaseAccessConfigUpdate();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
@@ -1029,7 +1029,7 @@ export const UpdateInstantiateConfigProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<UpdateInstantiateConfigProposal>): UpdateInstantiateConfigProposal {
+  fromPartial(object: DeepPartial<UpdateInstantiateConfigProposal>): UpdateInstantiateConfigProposal {
     const message = createBaseUpdateInstantiateConfigProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

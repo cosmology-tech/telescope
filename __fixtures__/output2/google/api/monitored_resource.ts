@@ -4,7 +4,7 @@ import { LabelDescriptor } from "./label";
 import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, isObject } from "../../helpers";
+import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -207,7 +207,7 @@ export const MonitoredResourceDescriptor = {
     message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
     return obj;
   },
-  fromPartial(object: Partial<MonitoredResourceDescriptor>): MonitoredResourceDescriptor {
+  fromPartial(object: DeepPartial<MonitoredResourceDescriptor>): MonitoredResourceDescriptor {
     const message = createBaseMonitoredResourceDescriptor();
     message.name = object.name ?? "";
     message.type = object.type ?? "";
@@ -266,7 +266,7 @@ export const MonitoredResource_LabelsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<MonitoredResource_LabelsEntry>): MonitoredResource_LabelsEntry {
+  fromPartial(object: DeepPartial<MonitoredResource_LabelsEntry>): MonitoredResource_LabelsEntry {
     const message = createBaseMonitoredResource_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -337,7 +337,7 @@ export const MonitoredResource = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MonitoredResource>): MonitoredResource {
+  fromPartial(object: DeepPartial<MonitoredResource>): MonitoredResource {
     const message = createBaseMonitoredResource();
     message.type = object.type ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -399,7 +399,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<MonitoredResourceMetadata_UserLabelsEntry>): MonitoredResourceMetadata_UserLabelsEntry {
+  fromPartial(object: DeepPartial<MonitoredResourceMetadata_UserLabelsEntry>): MonitoredResourceMetadata_UserLabelsEntry {
     const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -470,7 +470,7 @@ export const MonitoredResourceMetadata = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
+  fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
     const message = createBaseMonitoredResourceMetadata();
     message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : undefined;
     message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -75,7 +75,7 @@ export const Attribute = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<Attribute>): Attribute {
+  fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -138,7 +138,7 @@ export const SignedBy = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SignedBy>): SignedBy {
+  fromPartial(object: DeepPartial<SignedBy>): SignedBy {
     const message = createBaseSignedBy();
     message.allOf = object.allOf?.map(e => e) || [];
     message.anyOf = object.anyOf?.map(e => e) || [];
@@ -197,7 +197,7 @@ export const PlacementRequirements = {
     }
     return obj;
   },
-  fromPartial(object: Partial<PlacementRequirements>): PlacementRequirements {
+  fromPartial(object: DeepPartial<PlacementRequirements>): PlacementRequirements {
     const message = createBasePlacementRequirements();
     message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];

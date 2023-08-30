@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -282,7 +282,7 @@ export const CheckError = {
     message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CheckError>): CheckError {
+  fromPartial(object: DeepPartial<CheckError>): CheckError {
     const message = createBaseCheckError();
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";

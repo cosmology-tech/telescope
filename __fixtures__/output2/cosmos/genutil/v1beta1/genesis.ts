@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.genutil.v1beta1";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
@@ -51,7 +51,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.genTxs = object.genTxs?.map(e => e) || [];
     return message;

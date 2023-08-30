@@ -3,7 +3,7 @@
 import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.lockup";
 /**
@@ -203,7 +203,7 @@ export const PeriodLock = {
     }
     return obj;
   },
-  fromPartial(object: Partial<PeriodLock>): PeriodLock {
+  fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.owner = object.owner ?? "";
@@ -279,7 +279,7 @@ export const QueryCondition = {
     message.timestamp !== undefined && (obj.timestamp = fromTimestamp(message.timestamp).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<QueryCondition>): QueryCondition {
+  fromPartial(object: DeepPartial<QueryCondition>): QueryCondition {
     const message = createBaseQueryCondition();
     message.lockQueryType = object.lockQueryType ?? 0;
     message.denom = object.denom ?? "";
@@ -354,7 +354,7 @@ export const SyntheticLock = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<SyntheticLock>): SyntheticLock {
+  fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {
     const message = createBaseSyntheticLock();
     message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? Long.fromValue(object.underlyingLockId) : Long.UZERO;
     message.synthDenom = object.synthDenom ?? "";

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -108,7 +108,7 @@ export const Visibility = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Visibility>): Visibility {
+  fromPartial(object: DeepPartial<Visibility>): Visibility {
     const message = createBaseVisibility();
     message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
     return message;
@@ -162,7 +162,7 @@ export const VisibilityRule = {
     message.restriction !== undefined && (obj.restriction = message.restriction);
     return obj;
   },
-  fromPartial(object: Partial<VisibilityRule>): VisibilityRule {
+  fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
     const message = createBaseVisibilityRule();
     message.selector = object.selector ?? "";
     message.restriction = object.restriction ?? "";

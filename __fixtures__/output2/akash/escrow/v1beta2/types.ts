@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** State stores state for an escrow account */
@@ -187,7 +187,7 @@ export const AccountID = {
     message.xid !== undefined && (obj.xid = message.xid);
     return obj;
   },
-  fromPartial(object: Partial<AccountID>): AccountID {
+  fromPartial(object: DeepPartial<AccountID>): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -296,7 +296,7 @@ export const Account = {
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toJSON(message.funds) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Account>): Account {
+  fromPartial(object: DeepPartial<Account>): Account {
     const message = createBaseAccount();
     message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
     message.owner = object.owner ?? "";
@@ -402,7 +402,7 @@ export const FractionalPayment = {
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toJSON(message.withdrawn) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<FractionalPayment>): FractionalPayment {
+  fromPartial(object: DeepPartial<FractionalPayment>): FractionalPayment {
     const message = createBaseFractionalPayment();
     message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
     message.paymentId = object.paymentId ?? "";

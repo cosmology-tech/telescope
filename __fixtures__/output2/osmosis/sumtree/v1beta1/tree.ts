@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -56,7 +56,7 @@ export const Node = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Node>): Node {
+  fromPartial(object: DeepPartial<Node>): Node {
     const message = createBaseNode();
     message.children = object.children?.map(e => Child.fromPartial(e)) || [];
     return message;
@@ -110,7 +110,7 @@ export const Child = {
     message.accumulation !== undefined && (obj.accumulation = message.accumulation);
     return obj;
   },
-  fromPartial(object: Partial<Child>): Child {
+  fromPartial(object: DeepPartial<Child>): Child {
     const message = createBaseChild();
     message.index = object.index ?? new Uint8Array();
     message.accumulation = object.accumulation ?? "";
@@ -156,7 +156,7 @@ export const Leaf = {
     message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toJSON(message.leaf) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Leaf>): Leaf {
+  fromPartial(object: DeepPartial<Leaf>): Leaf {
     const message = createBaseLeaf();
     message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : undefined;
     return message;

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { ProposalExecutorResult, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.group.v1";
 /** EventCreateGroup is an event emitted when a group is created. */
@@ -92,7 +92,7 @@ export const EventCreateGroup = {
     message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EventCreateGroup>): EventCreateGroup {
+  fromPartial(object: DeepPartial<EventCreateGroup>): EventCreateGroup {
     const message = createBaseEventCreateGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
@@ -137,7 +137,7 @@ export const EventUpdateGroup = {
     message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EventUpdateGroup>): EventUpdateGroup {
+  fromPartial(object: DeepPartial<EventUpdateGroup>): EventUpdateGroup {
     const message = createBaseEventUpdateGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
@@ -182,7 +182,7 @@ export const EventCreateGroupPolicy = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<EventCreateGroupPolicy>): EventCreateGroupPolicy {
+  fromPartial(object: DeepPartial<EventCreateGroupPolicy>): EventCreateGroupPolicy {
     const message = createBaseEventCreateGroupPolicy();
     message.address = object.address ?? "";
     return message;
@@ -227,7 +227,7 @@ export const EventUpdateGroupPolicy = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy {
+  fromPartial(object: DeepPartial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy {
     const message = createBaseEventUpdateGroupPolicy();
     message.address = object.address ?? "";
     return message;
@@ -272,7 +272,7 @@ export const EventSubmitProposal = {
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EventSubmitProposal>): EventSubmitProposal {
+  fromPartial(object: DeepPartial<EventSubmitProposal>): EventSubmitProposal {
     const message = createBaseEventSubmitProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
@@ -317,7 +317,7 @@ export const EventWithdrawProposal = {
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EventWithdrawProposal>): EventWithdrawProposal {
+  fromPartial(object: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal {
     const message = createBaseEventWithdrawProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
@@ -362,7 +362,7 @@ export const EventVote = {
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EventVote>): EventVote {
+  fromPartial(object: DeepPartial<EventVote>): EventVote {
     const message = createBaseEventVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
@@ -416,7 +416,7 @@ export const EventExec = {
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
   },
-  fromPartial(object: Partial<EventExec>): EventExec {
+  fromPartial(object: DeepPartial<EventExec>): EventExec {
     const message = createBaseEventExec();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.result = object.result ?? 0;
@@ -471,7 +471,7 @@ export const EventLeaveGroup = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<EventLeaveGroup>): EventLeaveGroup {
+  fromPartial(object: DeepPartial<EventLeaveGroup>): EventLeaveGroup {
     const message = createBaseEventLeaveGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.address = object.address ?? "";

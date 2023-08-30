@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.logging.v2";
 /** Deprecated. This is unused. */
@@ -1413,7 +1413,7 @@ export const LogBucket = {
     message.cmekSettings !== undefined && (obj.cmekSettings = message.cmekSettings ? CmekSettings.toJSON(message.cmekSettings) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<LogBucket>): LogBucket {
+  fromPartial(object: DeepPartial<LogBucket>): LogBucket {
     const message = createBaseLogBucket();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -1502,7 +1502,7 @@ export const LogView = {
     message.filter !== undefined && (obj.filter = message.filter);
     return obj;
   },
-  fromPartial(object: Partial<LogView>): LogView {
+  fromPartial(object: DeepPartial<LogView>): LogView {
     const message = createBaseLogView();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -1654,7 +1654,7 @@ export const LogSink = {
     message.updateTime !== undefined && (obj.updateTime = fromTimestamp(message.updateTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<LogSink>): LogSink {
+  fromPartial(object: DeepPartial<LogSink>): LogSink {
     const message = createBaseLogSink();
     message.name = object.name ?? "";
     message.destination = object.destination ?? "";
@@ -1719,7 +1719,7 @@ export const BigQueryOptions = {
     message.usesTimestampColumnPartitioning !== undefined && (obj.usesTimestampColumnPartitioning = message.usesTimestampColumnPartitioning);
     return obj;
   },
-  fromPartial(object: Partial<BigQueryOptions>): BigQueryOptions {
+  fromPartial(object: DeepPartial<BigQueryOptions>): BigQueryOptions {
     const message = createBaseBigQueryOptions();
     message.usePartitionedTables = object.usePartitionedTables ?? false;
     message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? false;
@@ -1783,7 +1783,7 @@ export const ListBucketsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-  fromPartial(object: Partial<ListBucketsRequest>): ListBucketsRequest {
+  fromPartial(object: DeepPartial<ListBucketsRequest>): ListBucketsRequest {
     const message = createBaseListBucketsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -1843,7 +1843,7 @@ export const ListBucketsResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: Partial<ListBucketsResponse>): ListBucketsResponse {
+  fromPartial(object: DeepPartial<ListBucketsResponse>): ListBucketsResponse {
     const message = createBaseListBucketsResponse();
     message.buckets = object.buckets?.map(e => LogBucket.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -1907,7 +1907,7 @@ export const CreateBucketRequest = {
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toJSON(message.bucket) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CreateBucketRequest>): CreateBucketRequest {
+  fromPartial(object: DeepPartial<CreateBucketRequest>): CreateBucketRequest {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
     message.bucketId = object.bucketId ?? "";
@@ -1972,7 +1972,7 @@ export const UpdateBucketRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateBucketRequest>): UpdateBucketRequest {
+  fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
@@ -2019,7 +2019,7 @@ export const GetBucketRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<GetBucketRequest>): GetBucketRequest {
+  fromPartial(object: DeepPartial<GetBucketRequest>): GetBucketRequest {
     const message = createBaseGetBucketRequest();
     message.name = object.name ?? "";
     return message;
@@ -2064,7 +2064,7 @@ export const DeleteBucketRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<DeleteBucketRequest>): DeleteBucketRequest {
+  fromPartial(object: DeepPartial<DeleteBucketRequest>): DeleteBucketRequest {
     const message = createBaseDeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
@@ -2109,7 +2109,7 @@ export const UndeleteBucketRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<UndeleteBucketRequest>): UndeleteBucketRequest {
+  fromPartial(object: DeepPartial<UndeleteBucketRequest>): UndeleteBucketRequest {
     const message = createBaseUndeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
@@ -2172,7 +2172,7 @@ export const ListViewsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-  fromPartial(object: Partial<ListViewsRequest>): ListViewsRequest {
+  fromPartial(object: DeepPartial<ListViewsRequest>): ListViewsRequest {
     const message = createBaseListViewsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -2232,7 +2232,7 @@ export const ListViewsResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: Partial<ListViewsResponse>): ListViewsResponse {
+  fromPartial(object: DeepPartial<ListViewsResponse>): ListViewsResponse {
     const message = createBaseListViewsResponse();
     message.views = object.views?.map(e => LogView.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -2296,7 +2296,7 @@ export const CreateViewRequest = {
     message.view !== undefined && (obj.view = message.view ? LogView.toJSON(message.view) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CreateViewRequest>): CreateViewRequest {
+  fromPartial(object: DeepPartial<CreateViewRequest>): CreateViewRequest {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
     message.viewId = object.viewId ?? "";
@@ -2361,7 +2361,7 @@ export const UpdateViewRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateViewRequest>): UpdateViewRequest {
+  fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
@@ -2408,7 +2408,7 @@ export const GetViewRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<GetViewRequest>): GetViewRequest {
+  fromPartial(object: DeepPartial<GetViewRequest>): GetViewRequest {
     const message = createBaseGetViewRequest();
     message.name = object.name ?? "";
     return message;
@@ -2453,7 +2453,7 @@ export const DeleteViewRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<DeleteViewRequest>): DeleteViewRequest {
+  fromPartial(object: DeepPartial<DeleteViewRequest>): DeleteViewRequest {
     const message = createBaseDeleteViewRequest();
     message.name = object.name ?? "";
     return message;
@@ -2516,7 +2516,7 @@ export const ListSinksRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-  fromPartial(object: Partial<ListSinksRequest>): ListSinksRequest {
+  fromPartial(object: DeepPartial<ListSinksRequest>): ListSinksRequest {
     const message = createBaseListSinksRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -2576,7 +2576,7 @@ export const ListSinksResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: Partial<ListSinksResponse>): ListSinksResponse {
+  fromPartial(object: DeepPartial<ListSinksResponse>): ListSinksResponse {
     const message = createBaseListSinksResponse();
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -2622,7 +2622,7 @@ export const GetSinkRequest = {
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
   },
-  fromPartial(object: Partial<GetSinkRequest>): GetSinkRequest {
+  fromPartial(object: DeepPartial<GetSinkRequest>): GetSinkRequest {
     const message = createBaseGetSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
@@ -2685,7 +2685,7 @@ export const CreateSinkRequest = {
     message.uniqueWriterIdentity !== undefined && (obj.uniqueWriterIdentity = message.uniqueWriterIdentity);
     return obj;
   },
-  fromPartial(object: Partial<CreateSinkRequest>): CreateSinkRequest {
+  fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
@@ -2759,7 +2759,7 @@ export const UpdateSinkRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateSinkRequest>): UpdateSinkRequest {
+  fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
@@ -2807,7 +2807,7 @@ export const DeleteSinkRequest = {
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
   },
-  fromPartial(object: Partial<DeleteSinkRequest>): DeleteSinkRequest {
+  fromPartial(object: DeepPartial<DeleteSinkRequest>): DeleteSinkRequest {
     const message = createBaseDeleteSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
@@ -2897,7 +2897,7 @@ export const LogExclusion = {
     message.updateTime !== undefined && (obj.updateTime = fromTimestamp(message.updateTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<LogExclusion>): LogExclusion {
+  fromPartial(object: DeepPartial<LogExclusion>): LogExclusion {
     const message = createBaseLogExclusion();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -2965,7 +2965,7 @@ export const ListExclusionsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-  fromPartial(object: Partial<ListExclusionsRequest>): ListExclusionsRequest {
+  fromPartial(object: DeepPartial<ListExclusionsRequest>): ListExclusionsRequest {
     const message = createBaseListExclusionsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -3025,7 +3025,7 @@ export const ListExclusionsResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: Partial<ListExclusionsResponse>): ListExclusionsResponse {
+  fromPartial(object: DeepPartial<ListExclusionsResponse>): ListExclusionsResponse {
     const message = createBaseListExclusionsResponse();
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -3071,7 +3071,7 @@ export const GetExclusionRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<GetExclusionRequest>): GetExclusionRequest {
+  fromPartial(object: DeepPartial<GetExclusionRequest>): GetExclusionRequest {
     const message = createBaseGetExclusionRequest();
     message.name = object.name ?? "";
     return message;
@@ -3125,7 +3125,7 @@ export const CreateExclusionRequest = {
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<CreateExclusionRequest>): CreateExclusionRequest {
+  fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
@@ -3189,7 +3189,7 @@ export const UpdateExclusionRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateExclusionRequest>): UpdateExclusionRequest {
+  fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
@@ -3236,7 +3236,7 @@ export const DeleteExclusionRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<DeleteExclusionRequest>): DeleteExclusionRequest {
+  fromPartial(object: DeepPartial<DeleteExclusionRequest>): DeleteExclusionRequest {
     const message = createBaseDeleteExclusionRequest();
     message.name = object.name ?? "";
     return message;
@@ -3281,7 +3281,7 @@ export const GetCmekSettingsRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<GetCmekSettingsRequest>): GetCmekSettingsRequest {
+  fromPartial(object: DeepPartial<GetCmekSettingsRequest>): GetCmekSettingsRequest {
     const message = createBaseGetCmekSettingsRequest();
     message.name = object.name ?? "";
     return message;
@@ -3344,7 +3344,7 @@ export const UpdateCmekSettingsRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
+  fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
@@ -3409,7 +3409,7 @@ export const CmekSettings = {
     message.serviceAccountId !== undefined && (obj.serviceAccountId = message.serviceAccountId);
     return obj;
   },
-  fromPartial(object: Partial<CmekSettings>): CmekSettings {
+  fromPartial(object: DeepPartial<CmekSettings>): CmekSettings {
     const message = createBaseCmekSettings();
     message.name = object.name ?? "";
     message.kmsKeyName = object.kmsKeyName ?? "";
@@ -3456,7 +3456,7 @@ export const GetSettingsRequest = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<GetSettingsRequest>): GetSettingsRequest {
+  fromPartial(object: DeepPartial<GetSettingsRequest>): GetSettingsRequest {
     const message = createBaseGetSettingsRequest();
     message.name = object.name ?? "";
     return message;
@@ -3519,7 +3519,7 @@ export const UpdateSettingsRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<UpdateSettingsRequest>): UpdateSettingsRequest {
+  fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
     message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : undefined;
@@ -3602,7 +3602,7 @@ export const Settings = {
     message.disableDefaultSink !== undefined && (obj.disableDefaultSink = message.disableDefaultSink);
     return obj;
   },
-  fromPartial(object: Partial<Settings>): Settings {
+  fromPartial(object: DeepPartial<Settings>): Settings {
     const message = createBaseSettings();
     message.name = object.name ?? "";
     message.kmsKeyName = object.kmsKeyName ?? "";
@@ -3669,7 +3669,7 @@ export const CopyLogEntriesRequest = {
     message.destination !== undefined && (obj.destination = message.destination);
     return obj;
   },
-  fromPartial(object: Partial<CopyLogEntriesRequest>): CopyLogEntriesRequest {
+  fromPartial(object: DeepPartial<CopyLogEntriesRequest>): CopyLogEntriesRequest {
     const message = createBaseCopyLogEntriesRequest();
     message.name = object.name ?? "";
     message.filter = object.filter ?? "";
@@ -3770,7 +3770,7 @@ export const CopyLogEntriesMetadata = {
     message.writerIdentity !== undefined && (obj.writerIdentity = message.writerIdentity);
     return obj;
   },
-  fromPartial(object: Partial<CopyLogEntriesMetadata>): CopyLogEntriesMetadata {
+  fromPartial(object: DeepPartial<CopyLogEntriesMetadata>): CopyLogEntriesMetadata {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : undefined;
@@ -3821,7 +3821,7 @@ export const CopyLogEntriesResponse = {
     message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
+  fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
     message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
     return message;

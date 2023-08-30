@@ -61,6 +61,7 @@ const options: TelescopeOptions = {
       fromProto: false,
     },
     addTypeUrlToObjects: false,
+    addTypeUrlToDecoders: false,
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,

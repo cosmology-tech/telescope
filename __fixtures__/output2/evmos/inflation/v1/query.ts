@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
-import { Long, isSet, Rpc } from "../../../helpers";
+import { Long, DeepPartial, isSet, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.inflation.v1";
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
@@ -99,7 +99,7 @@ export const QueryPeriodRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryPeriodRequest>): QueryPeriodRequest {
+  fromPartial(_: DeepPartial<QueryPeriodRequest>): QueryPeriodRequest {
     const message = createBaseQueryPeriodRequest();
     return message;
   }
@@ -143,7 +143,7 @@ export const QueryPeriodResponse = {
     message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<QueryPeriodResponse>): QueryPeriodResponse {
+  fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
     message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     return message;
@@ -177,7 +177,7 @@ export const QueryEpochMintProvisionRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryEpochMintProvisionRequest>): QueryEpochMintProvisionRequest {
+  fromPartial(_: DeepPartial<QueryEpochMintProvisionRequest>): QueryEpochMintProvisionRequest {
     const message = createBaseQueryEpochMintProvisionRequest();
     return message;
   }
@@ -221,7 +221,7 @@ export const QueryEpochMintProvisionResponse = {
     message.epochMintProvision !== undefined && (obj.epochMintProvision = message.epochMintProvision ? DecCoin.toJSON(message.epochMintProvision) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryEpochMintProvisionResponse>): QueryEpochMintProvisionResponse {
+  fromPartial(object: DeepPartial<QueryEpochMintProvisionResponse>): QueryEpochMintProvisionResponse {
     const message = createBaseQueryEpochMintProvisionResponse();
     message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
     return message;
@@ -255,7 +255,7 @@ export const QuerySkippedEpochsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QuerySkippedEpochsRequest>): QuerySkippedEpochsRequest {
+  fromPartial(_: DeepPartial<QuerySkippedEpochsRequest>): QuerySkippedEpochsRequest {
     const message = createBaseQuerySkippedEpochsRequest();
     return message;
   }
@@ -299,7 +299,7 @@ export const QuerySkippedEpochsResponse = {
     message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
+  fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
     message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
@@ -333,7 +333,7 @@ export const QueryCirculatingSupplyRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryCirculatingSupplyRequest>): QueryCirculatingSupplyRequest {
+  fromPartial(_: DeepPartial<QueryCirculatingSupplyRequest>): QueryCirculatingSupplyRequest {
     const message = createBaseQueryCirculatingSupplyRequest();
     return message;
   }
@@ -377,7 +377,7 @@ export const QueryCirculatingSupplyResponse = {
     message.circulatingSupply !== undefined && (obj.circulatingSupply = message.circulatingSupply ? DecCoin.toJSON(message.circulatingSupply) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryCirculatingSupplyResponse>): QueryCirculatingSupplyResponse {
+  fromPartial(object: DeepPartial<QueryCirculatingSupplyResponse>): QueryCirculatingSupplyResponse {
     const message = createBaseQueryCirculatingSupplyResponse();
     message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
     return message;
@@ -411,7 +411,7 @@ export const QueryInflationRateRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryInflationRateRequest>): QueryInflationRateRequest {
+  fromPartial(_: DeepPartial<QueryInflationRateRequest>): QueryInflationRateRequest {
     const message = createBaseQueryInflationRateRequest();
     return message;
   }
@@ -455,7 +455,7 @@ export const QueryInflationRateResponse = {
     message.inflationRate !== undefined && (obj.inflationRate = message.inflationRate);
     return obj;
   },
-  fromPartial(object: Partial<QueryInflationRateResponse>): QueryInflationRateResponse {
+  fromPartial(object: DeepPartial<QueryInflationRateResponse>): QueryInflationRateResponse {
     const message = createBaseQueryInflationRateResponse();
     message.inflationRate = object.inflationRate ?? "";
     return message;
@@ -489,7 +489,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -533,7 +533,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;

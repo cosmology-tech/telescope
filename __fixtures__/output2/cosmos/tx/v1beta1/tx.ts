@@ -4,7 +4,7 @@ import { Any } from "../../../google/protobuf/any";
 import { SignMode, signModeFromJSON, signModeToJSON } from "../signing/v1beta1/signing";
 import { CompactBitArray } from "../../crypto/multisig/v1beta1/multisig";
 import { Coin } from "../../base/v1beta1/coin";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
@@ -261,7 +261,7 @@ export const Tx = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Tx>): Tx {
+  fromPartial(object: DeepPartial<Tx>): Tx {
     const message = createBaseTx();
     message.body = object.body !== undefined && object.body !== null ? TxBody.fromPartial(object.body) : undefined;
     message.authInfo = object.authInfo !== undefined && object.authInfo !== null ? AuthInfo.fromPartial(object.authInfo) : undefined;
@@ -330,7 +330,7 @@ export const TxRaw = {
     }
     return obj;
   },
-  fromPartial(object: Partial<TxRaw>): TxRaw {
+  fromPartial(object: DeepPartial<TxRaw>): TxRaw {
     const message = createBaseTxRaw();
     message.bodyBytes = object.bodyBytes ?? new Uint8Array();
     message.authInfoBytes = object.authInfoBytes ?? new Uint8Array();
@@ -404,7 +404,7 @@ export const SignDoc = {
     message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<SignDoc>): SignDoc {
+  fromPartial(object: DeepPartial<SignDoc>): SignDoc {
     const message = createBaseSignDoc();
     message.bodyBytes = object.bodyBytes ?? new Uint8Array();
     message.authInfoBytes = object.authInfoBytes ?? new Uint8Array();
@@ -500,7 +500,7 @@ export const TxBody = {
     }
     return obj;
   },
-  fromPartial(object: Partial<TxBody>): TxBody {
+  fromPartial(object: DeepPartial<TxBody>): TxBody {
     const message = createBaseTxBody();
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.memo = object.memo ?? "";
@@ -562,7 +562,7 @@ export const AuthInfo = {
     message.fee !== undefined && (obj.fee = message.fee ? Fee.toJSON(message.fee) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<AuthInfo>): AuthInfo {
+  fromPartial(object: DeepPartial<AuthInfo>): AuthInfo {
     const message = createBaseAuthInfo();
     message.signerInfos = object.signerInfos?.map(e => SignerInfo.fromPartial(e)) || [];
     message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : undefined;
@@ -626,7 +626,7 @@ export const SignerInfo = {
     message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<SignerInfo>): SignerInfo {
+  fromPartial(object: DeepPartial<SignerInfo>): SignerInfo {
     const message = createBaseSignerInfo();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.modeInfo = object.modeInfo !== undefined && object.modeInfo !== null ? ModeInfo.fromPartial(object.modeInfo) : undefined;
@@ -682,7 +682,7 @@ export const ModeInfo = {
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toJSON(message.multi) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ModeInfo>): ModeInfo {
+  fromPartial(object: DeepPartial<ModeInfo>): ModeInfo {
     const message = createBaseModeInfo();
     message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
@@ -728,7 +728,7 @@ export const ModeInfo_Single = {
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     return obj;
   },
-  fromPartial(object: Partial<ModeInfo_Single>): ModeInfo_Single {
+  fromPartial(object: DeepPartial<ModeInfo_Single>): ModeInfo_Single {
     const message = createBaseModeInfo_Single();
     message.mode = object.mode ?? 0;
     return message;
@@ -786,7 +786,7 @@ export const ModeInfo_Multi = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ModeInfo_Multi>): ModeInfo_Multi {
+  fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
     message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
     message.modeInfos = object.modeInfos?.map(e => ModeInfo.fromPartial(e)) || [];
@@ -863,7 +863,7 @@ export const Fee = {
     message.granter !== undefined && (obj.granter = message.granter);
     return obj;
   },
-  fromPartial(object: Partial<Fee>): Fee {
+  fromPartial(object: DeepPartial<Fee>): Fee {
     const message = createBaseFee();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     message.gasLimit = object.gasLimit !== undefined && object.gasLimit !== null ? Long.fromValue(object.gasLimit) : Long.UZERO;

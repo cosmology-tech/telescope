@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { FeeToken } from "./feetoken";
-import { Long, isSet, Rpc } from "../../../helpers";
+import { Long, DeepPartial, isSet, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
@@ -61,7 +61,7 @@ export const QueryFeeTokensRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
+  fromPartial(_: DeepPartial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
   }
@@ -109,7 +109,7 @@ export const QueryFeeTokensResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryFeeTokensResponse>): QueryFeeTokensResponse {
+  fromPartial(object: DeepPartial<QueryFeeTokensResponse>): QueryFeeTokensResponse {
     const message = createBaseQueryFeeTokensResponse();
     message.feeTokens = object.feeTokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
@@ -154,7 +154,7 @@ export const QueryDenomSpotPriceRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomSpotPriceRequest>): QueryDenomSpotPriceRequest {
+  fromPartial(object: DeepPartial<QueryDenomSpotPriceRequest>): QueryDenomSpotPriceRequest {
     const message = createBaseQueryDenomSpotPriceRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -208,7 +208,7 @@ export const QueryDenomSpotPriceResponse = {
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
+  fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     message.spotPrice = object.spotPrice ?? "";
@@ -254,7 +254,7 @@ export const QueryDenomPoolIdRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomPoolIdRequest>): QueryDenomPoolIdRequest {
+  fromPartial(object: DeepPartial<QueryDenomPoolIdRequest>): QueryDenomPoolIdRequest {
     const message = createBaseQueryDenomPoolIdRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -299,7 +299,7 @@ export const QueryDenomPoolIdResponse = {
     message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
+  fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
@@ -333,7 +333,7 @@ export const QueryBaseDenomRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
+  fromPartial(_: DeepPartial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
   }
@@ -377,7 +377,7 @@ export const QueryBaseDenomResponse = {
     message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
     return obj;
   },
-  fromPartial(object: Partial<QueryBaseDenomResponse>): QueryBaseDenomResponse {
+  fromPartial(object: DeepPartial<QueryBaseDenomResponse>): QueryBaseDenomResponse {
     const message = createBaseQueryBaseDenomResponse();
     message.baseDenom = object.baseDenom ?? "";
     return message;

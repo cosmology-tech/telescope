@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Metadata } from "../../../cosmos/bank/v1beta1/bank";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -163,7 +163,7 @@ export const TokenPair = {
     message.contractOwner !== undefined && (obj.contractOwner = ownerToJSON(message.contractOwner));
     return obj;
   },
-  fromPartial(object: Partial<TokenPair>): TokenPair {
+  fromPartial(object: DeepPartial<TokenPair>): TokenPair {
     const message = createBaseTokenPair();
     message.erc20Address = object.erc20Address ?? "";
     message.denom = object.denom ?? "";
@@ -229,7 +229,7 @@ export const RegisterCoinProposal = {
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<RegisterCoinProposal>): RegisterCoinProposal {
+  fromPartial(object: DeepPartial<RegisterCoinProposal>): RegisterCoinProposal {
     const message = createBaseRegisterCoinProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -294,7 +294,7 @@ export const RegisterERC20Proposal = {
     message.erc20address !== undefined && (obj.erc20address = message.erc20address);
     return obj;
   },
-  fromPartial(object: Partial<RegisterERC20Proposal>): RegisterERC20Proposal {
+  fromPartial(object: DeepPartial<RegisterERC20Proposal>): RegisterERC20Proposal {
     const message = createBaseRegisterERC20Proposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -359,7 +359,7 @@ export const ToggleTokenConversionProposal = {
     message.token !== undefined && (obj.token = message.token);
     return obj;
   },
-  fromPartial(object: Partial<ToggleTokenConversionProposal>): ToggleTokenConversionProposal {
+  fromPartial(object: DeepPartial<ToggleTokenConversionProposal>): ToggleTokenConversionProposal {
     const message = createBaseToggleTokenConversionProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

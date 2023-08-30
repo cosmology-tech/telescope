@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Distribution_Exemplar } from "../../distribution";
-import { Long, isSet } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
@@ -259,7 +259,7 @@ export const Distribution = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Distribution>): Distribution {
+  fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
     message.mean = object.mean ?? 0;
@@ -331,7 +331,7 @@ export const Distribution_LinearBuckets = {
     message.offset !== undefined && (obj.offset = message.offset);
     return obj;
   },
-  fromPartial(object: Partial<Distribution_LinearBuckets>): Distribution_LinearBuckets {
+  fromPartial(object: DeepPartial<Distribution_LinearBuckets>): Distribution_LinearBuckets {
     const message = createBaseDistribution_LinearBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.width = object.width ?? 0;
@@ -396,7 +396,7 @@ export const Distribution_ExponentialBuckets = {
     message.scale !== undefined && (obj.scale = message.scale);
     return obj;
   },
-  fromPartial(object: Partial<Distribution_ExponentialBuckets>): Distribution_ExponentialBuckets {
+  fromPartial(object: DeepPartial<Distribution_ExponentialBuckets>): Distribution_ExponentialBuckets {
     const message = createBaseDistribution_ExponentialBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.growthFactor = object.growthFactor ?? 0;
@@ -456,7 +456,7 @@ export const Distribution_ExplicitBuckets = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Distribution_ExplicitBuckets>): Distribution_ExplicitBuckets {
+  fromPartial(object: DeepPartial<Distribution_ExplicitBuckets>): Distribution_ExplicitBuckets {
     const message = createBaseDistribution_ExplicitBuckets();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;

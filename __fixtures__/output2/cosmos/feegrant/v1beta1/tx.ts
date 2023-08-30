@@ -3,7 +3,7 @@
 import { Any } from "../../../google/protobuf/any";
 import { BasicAllowance, PeriodicAllowance, AllowedMsgAllowance } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -85,7 +85,7 @@ export const MsgGrantAllowance = {
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toJSON(message.allowance) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgGrantAllowance>): MsgGrantAllowance {
+  fromPartial(object: DeepPartial<MsgGrantAllowance>): MsgGrantAllowance {
     const message = createBaseMsgGrantAllowance();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
@@ -121,7 +121,7 @@ export const MsgGrantAllowanceResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
+  fromPartial(_: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
   }
@@ -174,7 +174,7 @@ export const MsgRevokeAllowance = {
     message.grantee !== undefined && (obj.grantee = message.grantee);
     return obj;
   },
-  fromPartial(object: Partial<MsgRevokeAllowance>): MsgRevokeAllowance {
+  fromPartial(object: DeepPartial<MsgRevokeAllowance>): MsgRevokeAllowance {
     const message = createBaseMsgRevokeAllowance();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
@@ -209,7 +209,7 @@ export const MsgRevokeAllowanceResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {
+  fromPartial(_: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {
     const message = createBaseMsgRevokeAllowanceResponse();
     return message;
   }

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Params } from "./mint";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -62,7 +62,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -106,7 +106,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -140,7 +140,7 @@ export const QueryInflationRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryInflationRequest>): QueryInflationRequest {
+  fromPartial(_: DeepPartial<QueryInflationRequest>): QueryInflationRequest {
     const message = createBaseQueryInflationRequest();
     return message;
   }
@@ -184,7 +184,7 @@ export const QueryInflationResponse = {
     message.inflation !== undefined && (obj.inflation = base64FromBytes(message.inflation !== undefined ? message.inflation : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<QueryInflationResponse>): QueryInflationResponse {
+  fromPartial(object: DeepPartial<QueryInflationResponse>): QueryInflationResponse {
     const message = createBaseQueryInflationResponse();
     message.inflation = object.inflation ?? new Uint8Array();
     return message;
@@ -218,7 +218,7 @@ export const QueryAnnualProvisionsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
+  fromPartial(_: DeepPartial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
     const message = createBaseQueryAnnualProvisionsRequest();
     return message;
   }
@@ -262,7 +262,7 @@ export const QueryAnnualProvisionsResponse = {
     message.annualProvisions !== undefined && (obj.annualProvisions = base64FromBytes(message.annualProvisions !== undefined ? message.annualProvisions : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<QueryAnnualProvisionsResponse>): QueryAnnualProvisionsResponse {
+  fromPartial(object: DeepPartial<QueryAnnualProvisionsResponse>): QueryAnnualProvisionsResponse {
     const message = createBaseQueryAnnualProvisionsResponse();
     message.annualProvisions = object.annualProvisions ?? new Uint8Array();
     return message;

@@ -3,7 +3,7 @@
 import { CertificateFilter, Certificate } from "./cert";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
@@ -68,7 +68,7 @@ export const CertificateResponse = {
     message.serial !== undefined && (obj.serial = message.serial);
     return obj;
   },
-  fromPartial(object: Partial<CertificateResponse>): CertificateResponse {
+  fromPartial(object: DeepPartial<CertificateResponse>): CertificateResponse {
     const message = createBaseCertificateResponse();
     message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
     message.serial = object.serial ?? "";
@@ -123,7 +123,7 @@ export const QueryCertificatesRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryCertificatesRequest>): QueryCertificatesRequest {
+  fromPartial(object: DeepPartial<QueryCertificatesRequest>): QueryCertificatesRequest {
     const message = createBaseQueryCertificatesRequest();
     message.filter = object.filter !== undefined && object.filter !== null ? CertificateFilter.fromPartial(object.filter) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
@@ -182,7 +182,7 @@ export const QueryCertificatesResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryCertificatesResponse>): QueryCertificatesResponse {
+  fromPartial(object: DeepPartial<QueryCertificatesResponse>): QueryCertificatesResponse {
     const message = createBaseQueryCertificatesResponse();
     message.certificates = object.certificates?.map(e => CertificateResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;

@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
@@ -79,7 +79,7 @@ export const CommitInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<CommitInfo>): CommitInfo {
+  fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
@@ -134,7 +134,7 @@ export const StoreInfo = {
     message.commitId !== undefined && (obj.commitId = message.commitId ? CommitID.toJSON(message.commitId) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<StoreInfo>): StoreInfo {
+  fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
     message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : undefined;
@@ -189,7 +189,7 @@ export const CommitID = {
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<CommitID>): CommitID {
+  fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = createBaseCommitID();
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.hash = object.hash ?? new Uint8Array();

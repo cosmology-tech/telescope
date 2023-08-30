@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Specifies the routing information that should be sent along with the request
@@ -480,7 +480,7 @@ export const RoutingRule = {
     }
     return obj;
   },
-  fromPartial(object: Partial<RoutingRule>): RoutingRule {
+  fromPartial(object: DeepPartial<RoutingRule>): RoutingRule {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
     return message;
@@ -534,7 +534,7 @@ export const RoutingParameter = {
     message.pathTemplate !== undefined && (obj.pathTemplate = message.pathTemplate);
     return obj;
   },
-  fromPartial(object: Partial<RoutingParameter>): RoutingParameter {
+  fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {
     const message = createBaseRoutingParameter();
     message.field = object.field ?? "";
     message.pathTemplate = object.pathTemplate ?? "";

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Any } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Type defines a classification of message issued from a controller chain to its associated interchain accounts
@@ -107,7 +107,7 @@ export const InterchainAccountPacketData = {
     message.memo !== undefined && (obj.memo = message.memo);
     return obj;
   },
-  fromPartial(object: Partial<InterchainAccountPacketData>): InterchainAccountPacketData {
+  fromPartial(object: DeepPartial<InterchainAccountPacketData>): InterchainAccountPacketData {
     const message = createBaseInterchainAccountPacketData();
     message.type = object.type ?? 0;
     message.data = object.data ?? new Uint8Array();
@@ -158,7 +158,7 @@ export const CosmosTx = {
     }
     return obj;
   },
-  fromPartial(object: Partial<CosmosTx>): CosmosTx {
+  fromPartial(object: DeepPartial<CosmosTx>): CosmosTx {
     const message = createBaseCosmosTx();
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;

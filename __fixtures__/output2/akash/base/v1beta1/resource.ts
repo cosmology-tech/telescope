@@ -4,7 +4,7 @@ import { ResourceValue } from "./resourcevalue";
 import { Attribute } from "./attribute";
 import { Endpoint } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
@@ -83,7 +83,7 @@ export const CPU = {
     }
     return obj;
   },
-  fromPartial(object: Partial<CPU>): CPU {
+  fromPartial(object: DeepPartial<CPU>): CPU {
     const message = createBaseCPU();
     message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -142,7 +142,7 @@ export const Memory = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Memory>): Memory {
+  fromPartial(object: DeepPartial<Memory>): Memory {
     const message = createBaseMemory();
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -201,7 +201,7 @@ export const Storage = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Storage>): Storage {
+  fromPartial(object: DeepPartial<Storage>): Storage {
     const message = createBaseStorage();
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -278,7 +278,7 @@ export const ResourceUnits = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ResourceUnits>): ResourceUnits {
+  fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
     const message = createBaseResourceUnits();
     message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
     message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -145,7 +145,7 @@ export const Claim = {
     message.claimableAmount !== undefined && (obj.claimableAmount = message.claimableAmount);
     return obj;
   },
-  fromPartial(object: Partial<Claim>): Claim {
+  fromPartial(object: DeepPartial<Claim>): Claim {
     const message = createBaseClaim();
     message.action = object.action ?? 0;
     message.completed = object.completed ?? false;
@@ -223,7 +223,7 @@ export const ClaimsRecordAddress = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ClaimsRecordAddress>): ClaimsRecordAddress {
+  fromPartial(object: DeepPartial<ClaimsRecordAddress>): ClaimsRecordAddress {
     const message = createBaseClaimsRecordAddress();
     message.address = object.address ?? "";
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
@@ -292,7 +292,7 @@ export const ClaimsRecord = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ClaimsRecord>): ClaimsRecord {
+  fromPartial(object: DeepPartial<ClaimsRecord>): ClaimsRecord {
     const message = createBaseClaimsRecord();
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];

@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.version";
 /**
@@ -69,7 +69,7 @@ export const App = {
     message.software !== undefined && (obj.software = message.software);
     return obj;
   },
-  fromPartial(object: Partial<App>): App {
+  fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
     message.protocol = object.protocol !== undefined && object.protocol !== null ? Long.fromValue(object.protocol) : Long.UZERO;
     message.software = object.software ?? "";
@@ -124,7 +124,7 @@ export const Consensus = {
     message.app !== undefined && (obj.app = (message.app || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Consensus>): Consensus {
+  fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
     message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
     message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;

@@ -23,6 +23,7 @@ const options: TelescopeOptions = {
     prototypes: {
         includePackageVar: true,
         addTypeUrlToObjects: false,
+        addTypeUrlToDecoders: false,
         excluded: {
             protos: [
                 'cosmos/authz/v1beta1/event.proto',
@@ -59,6 +60,7 @@ const options: TelescopeOptions = {
             customTypes: {
               useCosmosSDKDec: false
             },
+            useDeepPartial: true,
             num64: 'long',
             timestamp: 'timestamp',
             duration: 'duration'

@@ -3,7 +3,7 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider } from "./audit";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
@@ -86,7 +86,7 @@ export const QueryProvidersResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryProvidersResponse>): QueryProvidersResponse {
+  fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -141,7 +141,7 @@ export const QueryProviderRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
-  fromPartial(object: Partial<QueryProviderRequest>): QueryProviderRequest {
+  fromPartial(object: DeepPartial<QueryProviderRequest>): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
@@ -187,7 +187,7 @@ export const QueryAllProvidersAttributesRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAllProvidersAttributesRequest>): QueryAllProvidersAttributesRequest {
+  fromPartial(object: DeepPartial<QueryAllProvidersAttributesRequest>): QueryAllProvidersAttributesRequest {
     const message = createBaseQueryAllProvidersAttributesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -241,7 +241,7 @@ export const QueryProviderAttributesRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryProviderAttributesRequest>): QueryProviderAttributesRequest {
+  fromPartial(object: DeepPartial<QueryProviderAttributesRequest>): QueryProviderAttributesRequest {
     const message = createBaseQueryProviderAttributesRequest();
     message.owner = object.owner ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
@@ -296,7 +296,7 @@ export const QueryProviderAuditorRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
-  fromPartial(object: Partial<QueryProviderAuditorRequest>): QueryProviderAuditorRequest {
+  fromPartial(object: DeepPartial<QueryProviderAuditorRequest>): QueryProviderAuditorRequest {
     const message = createBaseQueryProviderAuditorRequest();
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
@@ -351,7 +351,7 @@ export const QueryAuditorAttributesRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAuditorAttributesRequest>): QueryAuditorAttributesRequest {
+  fromPartial(object: DeepPartial<QueryAuditorAttributesRequest>): QueryAuditorAttributesRequest {
     const message = createBaseQueryAuditorAttributesRequest();
     message.auditor = object.auditor ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;

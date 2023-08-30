@@ -3,7 +3,7 @@
 import { Params } from "./params";
 import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
-import { Long, isSet } from "../../helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
 /**
@@ -100,7 +100,7 @@ export const GenesisState = {
     message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];

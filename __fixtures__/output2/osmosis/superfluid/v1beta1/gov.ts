@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { SuperfluidAsset } from "../superfluid";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
@@ -9,7 +9,6 @@ export const protobufPackage = "osmosis.superfluid.v1beta1";
  * assets
  */
 export interface SetSuperfluidAssetsProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   assets: SuperfluidAsset[];
@@ -19,7 +18,6 @@ export interface SetSuperfluidAssetsProposal {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
@@ -29,7 +27,6 @@ export interface RemoveSuperfluidAssetsProposal {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   ids: Long[];
@@ -37,7 +34,6 @@ export interface UpdateUnpoolWhiteListProposal {
 }
 function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
   return {
-    $typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
     title: "",
     description: "",
     assets: []
@@ -97,7 +93,7 @@ export const SetSuperfluidAssetsProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SetSuperfluidAssetsProposal>): SetSuperfluidAssetsProposal {
+  fromPartial(object: DeepPartial<SetSuperfluidAssetsProposal>): SetSuperfluidAssetsProposal {
     const message = createBaseSetSuperfluidAssetsProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -107,7 +103,6 @@ export const SetSuperfluidAssetsProposal = {
 };
 function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsProposal {
   return {
-    $typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
     title: "",
     description: "",
     superfluidAssetDenoms: []
@@ -167,7 +162,7 @@ export const RemoveSuperfluidAssetsProposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<RemoveSuperfluidAssetsProposal>): RemoveSuperfluidAssetsProposal {
+  fromPartial(object: DeepPartial<RemoveSuperfluidAssetsProposal>): RemoveSuperfluidAssetsProposal {
     const message = createBaseRemoveSuperfluidAssetsProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -177,7 +172,6 @@ export const RemoveSuperfluidAssetsProposal = {
 };
 function createBaseUpdateUnpoolWhiteListProposal(): UpdateUnpoolWhiteListProposal {
   return {
-    $typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal",
     title: "",
     description: "",
     ids: [],
@@ -255,7 +249,7 @@ export const UpdateUnpoolWhiteListProposal = {
     message.isOverwrite !== undefined && (obj.isOverwrite = message.isOverwrite);
     return obj;
   },
-  fromPartial(object: Partial<UpdateUnpoolWhiteListProposal>): UpdateUnpoolWhiteListProposal {
+  fromPartial(object: DeepPartial<UpdateUnpoolWhiteListProposal>): UpdateUnpoolWhiteListProposal {
     const message = createBaseUpdateUnpoolWhiteListProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

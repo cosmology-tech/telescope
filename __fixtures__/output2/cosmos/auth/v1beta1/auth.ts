@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Any } from "../../../google/protobuf/any";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
@@ -10,7 +10,6 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
-  $typeUrl?: string;
   address: string;
   pubKey: Any;
   accountNumber: Long;
@@ -18,7 +17,6 @@ export interface BaseAccount {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  $typeUrl?: string;
   baseAccount: BaseAccount;
   name: string;
   permissions: string[];
@@ -33,7 +31,6 @@ export interface Params {
 }
 function createBaseBaseAccount(): BaseAccount {
   return {
-    $typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
     address: "",
     pubKey: Any.fromPartial({}),
     accountNumber: Long.UZERO,
@@ -98,7 +95,7 @@ export const BaseAccount = {
     message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<BaseAccount>): BaseAccount {
+  fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
@@ -109,7 +106,6 @@ export const BaseAccount = {
 };
 function createBaseModuleAccount(): ModuleAccount {
   return {
-    $typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
     baseAccount: BaseAccount.fromPartial({}),
     name: "",
     permissions: []
@@ -169,7 +165,7 @@ export const ModuleAccount = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ModuleAccount>): ModuleAccount {
+  fromPartial(object: DeepPartial<ModuleAccount>): ModuleAccount {
     const message = createBaseModuleAccount();
     message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.name = object.name ?? "";
@@ -252,7 +248,7 @@ export const Params = {
     message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? Long.fromValue(object.maxMemoCharacters) : Long.UZERO;
     message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? Long.fromValue(object.txSigLimit) : Long.UZERO;

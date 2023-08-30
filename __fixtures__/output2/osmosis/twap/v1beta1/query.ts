@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Params } from "./genesis";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp, Rpc } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -103,7 +103,7 @@ export const ArithmeticTwapRequest = {
     message.endTime !== undefined && (obj.endTime = fromTimestamp(message.endTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
+  fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.baseAsset = object.baseAsset ?? "";
@@ -152,7 +152,7 @@ export const ArithmeticTwapResponse = {
     message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
     return obj;
   },
-  fromPartial(object: Partial<ArithmeticTwapResponse>): ArithmeticTwapResponse {
+  fromPartial(object: DeepPartial<ArithmeticTwapResponse>): ArithmeticTwapResponse {
     const message = createBaseArithmeticTwapResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
     return message;
@@ -224,7 +224,7 @@ export const ArithmeticTwapToNowRequest = {
     message.startTime !== undefined && (obj.startTime = fromTimestamp(message.startTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
+  fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
     const message = createBaseArithmeticTwapToNowRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.baseAsset = object.baseAsset ?? "";
@@ -272,7 +272,7 @@ export const ArithmeticTwapToNowResponse = {
     message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
     return obj;
   },
-  fromPartial(object: Partial<ArithmeticTwapToNowResponse>): ArithmeticTwapToNowResponse {
+  fromPartial(object: DeepPartial<ArithmeticTwapToNowResponse>): ArithmeticTwapToNowResponse {
     const message = createBaseArithmeticTwapToNowResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
     return message;
@@ -306,7 +306,7 @@ export const ParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<ParamsRequest>): ParamsRequest {
+  fromPartial(_: DeepPartial<ParamsRequest>): ParamsRequest {
     const message = createBaseParamsRequest();
     return message;
   }
@@ -350,7 +350,7 @@ export const ParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ParamsResponse>): ParamsResponse {
+  fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;

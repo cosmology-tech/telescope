@@ -4,7 +4,7 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
 import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
 import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
-import { Long, isSet } from "../../../helpers";
+import { Long, DeepPartial, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
@@ -61,7 +61,7 @@ export const Params = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.poolCreationFee = object.poolCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -128,7 +128,7 @@ export const GenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? Long.fromValue(object.nextPoolNumber) : Long.UZERO;

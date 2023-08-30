@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
@@ -109,7 +109,7 @@ export const DeploymentID = {
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<DeploymentID>): DeploymentID {
+  fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -182,7 +182,7 @@ export const Deployment = {
     message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Deployment>): Deployment {
+  fromPartial(object: DeepPartial<Deployment>): Deployment {
     const message = createBaseDeployment();
     message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
     message.state = object.state ?? 0;
@@ -248,7 +248,7 @@ export const DeploymentFilters = {
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
-  fromPartial(object: Partial<DeploymentFilters>): DeploymentFilters {
+  fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Attribute } from "../../base/v1beta1/attribute";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta1";
 /** ProviderInfo */
 export interface ProviderInfo {
@@ -88,7 +88,7 @@ export const ProviderInfo = {
     message.website !== undefined && (obj.website = message.website);
     return obj;
   },
-  fromPartial(object: Partial<ProviderInfo>): ProviderInfo {
+  fromPartial(object: DeepPartial<ProviderInfo>): ProviderInfo {
     const message = createBaseProviderInfo();
     message.email = object.email ?? "";
     message.website = object.website ?? "";
@@ -165,7 +165,7 @@ export const MsgCreateProvider = {
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateProvider>): MsgCreateProvider {
+  fromPartial(object: DeepPartial<MsgCreateProvider>): MsgCreateProvider {
     const message = createBaseMsgCreateProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
@@ -202,7 +202,7 @@ export const MsgCreateProviderResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
+  fromPartial(_: DeepPartial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
   }
@@ -277,7 +277,7 @@ export const MsgUpdateProvider = {
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgUpdateProvider>): MsgUpdateProvider {
+  fromPartial(object: DeepPartial<MsgUpdateProvider>): MsgUpdateProvider {
     const message = createBaseMsgUpdateProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
@@ -314,7 +314,7 @@ export const MsgUpdateProviderResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
+  fromPartial(_: DeepPartial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
   }
@@ -358,7 +358,7 @@ export const MsgDeleteProvider = {
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
-  fromPartial(object: Partial<MsgDeleteProvider>): MsgDeleteProvider {
+  fromPartial(object: DeepPartial<MsgDeleteProvider>): MsgDeleteProvider {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
     return message;
@@ -392,7 +392,7 @@ export const MsgDeleteProviderResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
+  fromPartial(_: DeepPartial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
     const message = createBaseMsgDeleteProviderResponse();
     return message;
   }
@@ -467,7 +467,7 @@ export const Provider = {
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Provider>): Provider {
+  fromPartial(object: DeepPartial<Provider>): Provider {
     const message = createBaseProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";

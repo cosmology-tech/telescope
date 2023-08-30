@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -82,7 +82,7 @@ export const MsgSend = {
     message.receiver !== undefined && (obj.receiver = message.receiver);
     return obj;
   },
-  fromPartial(object: Partial<MsgSend>): MsgSend {
+  fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";
@@ -119,7 +119,7 @@ export const MsgSendResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgSendResponse>): MsgSendResponse {
+  fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
   }

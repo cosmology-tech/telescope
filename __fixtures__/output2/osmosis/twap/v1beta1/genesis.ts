@@ -3,7 +3,7 @@
 import { Duration } from "../../../google/protobuf/duration";
 import { TwapRecord } from "./twap_record";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {
@@ -65,7 +65,7 @@ export const Params = {
     message.recordHistoryKeepPeriod !== undefined && (obj.recordHistoryKeepPeriod = message.recordHistoryKeepPeriod ? Duration.toJSON(message.recordHistoryKeepPeriod) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.pruneEpochIdentifier = object.pruneEpochIdentifier ?? "";
     message.recordHistoryKeepPeriod = object.recordHistoryKeepPeriod !== undefined && object.recordHistoryKeepPeriod !== null ? Duration.fromPartial(object.recordHistoryKeepPeriod) : undefined;
@@ -124,7 +124,7 @@ export const GenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.twaps = object.twaps?.map(e => TwapRecord.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;

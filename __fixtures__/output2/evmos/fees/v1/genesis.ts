@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { DevFeeInfo } from "./fees";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
@@ -85,7 +85,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
@@ -167,7 +167,7 @@ export const Params = {
     message.minGasPrice !== undefined && (obj.minGasPrice = message.minGasPrice);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /**
  * AuthorizationType defines the type of staking module authorization type
@@ -61,7 +61,6 @@ export function authorizationTypeToJSON(object: AuthorizationType): string {
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorization {
-  $typeUrl?: string;
   /**
    * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
    * empty, there is no spend limit and any amount of coins can be delegated.
@@ -83,7 +82,6 @@ export interface StakeAuthorization_Validators {
 }
 function createBaseStakeAuthorization(): StakeAuthorization {
   return {
-    $typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization",
     maxTokens: Coin.fromPartial({}),
     allowList: undefined,
     denyList: undefined,
@@ -148,7 +146,7 @@ export const StakeAuthorization = {
     message.authorizationType !== undefined && (obj.authorizationType = authorizationTypeToJSON(message.authorizationType));
     return obj;
   },
-  fromPartial(object: Partial<StakeAuthorization>): StakeAuthorization {
+  fromPartial(object: DeepPartial<StakeAuthorization>): StakeAuthorization {
     const message = createBaseStakeAuthorization();
     message.maxTokens = object.maxTokens !== undefined && object.maxTokens !== null ? Coin.fromPartial(object.maxTokens) : undefined;
     message.allowList = object.allowList !== undefined && object.allowList !== null ? StakeAuthorization_Validators.fromPartial(object.allowList) : undefined;
@@ -200,7 +198,7 @@ export const StakeAuthorization_Validators = {
     }
     return obj;
   },
-  fromPartial(object: Partial<StakeAuthorization_Validators>): StakeAuthorization_Validators {
+  fromPartial(object: DeepPartial<StakeAuthorization_Validators>): StakeAuthorization_Validators {
     const message = createBaseStakeAuthorization_Validators();
     message.address = object.address?.map(e => e) || [];
     return message;

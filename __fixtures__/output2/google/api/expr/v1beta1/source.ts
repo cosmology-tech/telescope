@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
@@ -98,7 +98,7 @@ export const SourceInfo_PositionsEntry = {
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
-  fromPartial(object: Partial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
+  fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
     const message = createBaseSourceInfo_PositionsEntry();
     message.key = object.key ?? 0;
     message.value = object.value ?? 0;
@@ -191,7 +191,7 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SourceInfo>): SourceInfo {
+  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.location = object.location ?? "";
     message.lineOffsets = object.lineOffsets?.map(e => e) || [];
@@ -272,7 +272,7 @@ export const SourcePosition = {
     message.column !== undefined && (obj.column = Math.round(message.column));
     return obj;
   },
-  fromPartial(object: Partial<SourcePosition>): SourcePosition {
+  fromPartial(object: DeepPartial<SourcePosition>): SourcePosition {
     const message = createBaseSourcePosition();
     message.location = object.location ?? "";
     message.offset = object.offset ?? 0;

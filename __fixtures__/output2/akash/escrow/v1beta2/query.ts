@@ -3,7 +3,7 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, FractionalPayment } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -107,7 +107,7 @@ export const QueryAccountsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAccountsRequest>): QueryAccountsRequest {
+  fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -169,7 +169,7 @@ export const QueryAccountsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAccountsResponse>): QueryAccountsResponse {
+  fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -260,7 +260,7 @@ export const QueryPaymentsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryPaymentsRequest>): QueryPaymentsRequest {
+  fromPartial(object: DeepPartial<QueryPaymentsRequest>): QueryPaymentsRequest {
     const message = createBaseQueryPaymentsRequest();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -323,7 +323,7 @@ export const QueryPaymentsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryPaymentsResponse>): QueryPaymentsResponse {
+  fromPartial(object: DeepPartial<QueryPaymentsResponse>): QueryPaymentsResponse {
     const message = createBaseQueryPaymentsResponse();
     message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;

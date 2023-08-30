@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Attribute } from "../../base/v1beta1/attribute";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta1";
 /** Provider stores owner auditor and attributes details */
 export interface Provider {
@@ -102,7 +102,7 @@ export const Provider = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Provider>): Provider {
+  fromPartial(object: DeepPartial<Provider>): Provider {
     const message = createBaseProvider();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -171,7 +171,7 @@ export const AuditedAttributes = {
     }
     return obj;
   },
-  fromPartial(object: Partial<AuditedAttributes>): AuditedAttributes {
+  fromPartial(object: DeepPartial<AuditedAttributes>): AuditedAttributes {
     const message = createBaseAuditedAttributes();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -222,7 +222,7 @@ export const AttributesResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<AttributesResponse>): AttributesResponse {
+  fromPartial(object: DeepPartial<AttributesResponse>): AttributesResponse {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
@@ -284,7 +284,7 @@ export const AttributesFilters = {
     }
     return obj;
   },
-  fromPartial(object: Partial<AttributesFilters>): AttributesFilters {
+  fromPartial(object: DeepPartial<AttributesFilters>): AttributesFilters {
     const message = createBaseAttributesFilters();
     message.auditors = object.auditors?.map(e => e) || [];
     message.owners = object.owners?.map(e => e) || [];
@@ -352,7 +352,7 @@ export const MsgSignProviderAttributes = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgSignProviderAttributes>): MsgSignProviderAttributes {
+  fromPartial(object: DeepPartial<MsgSignProviderAttributes>): MsgSignProviderAttributes {
     const message = createBaseMsgSignProviderAttributes();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -388,7 +388,7 @@ export const MsgSignProviderAttributesResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
+  fromPartial(_: DeepPartial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
   }
@@ -454,7 +454,7 @@ export const MsgDeleteProviderAttributes = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgDeleteProviderAttributes>): MsgDeleteProviderAttributes {
+  fromPartial(object: DeepPartial<MsgDeleteProviderAttributes>): MsgDeleteProviderAttributes {
     const message = createBaseMsgDeleteProviderAttributes();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -490,7 +490,7 @@ export const MsgDeleteProviderAttributesResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {
+  fromPartial(_: DeepPartial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {
     const message = createBaseMsgDeleteProviderAttributesResponse();
     return message;
   }

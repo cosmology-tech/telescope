@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
@@ -140,7 +140,7 @@ export const PageRequest = {
     message.reverse !== undefined && (obj.reverse = message.reverse);
     return obj;
   },
-  fromPartial(object: Partial<PageRequest>): PageRequest {
+  fromPartial(object: DeepPartial<PageRequest>): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array();
     message.offset = object.offset !== undefined && object.offset !== null ? Long.fromValue(object.offset) : Long.UZERO;
@@ -198,7 +198,7 @@ export const PageResponse = {
     message.total !== undefined && (obj.total = (message.total || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<PageResponse>): PageResponse {
+  fromPartial(object: DeepPartial<PageResponse>): PageResponse {
     const message = createBasePageResponse();
     message.nextKey = object.nextKey ?? new Uint8Array();
     message.total = object.total !== undefined && object.total !== null ? Long.fromValue(object.total) : Long.UZERO;

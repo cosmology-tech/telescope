@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, isObject } from "../../helpers";
+import { Long, DeepPartial, isSet, isObject } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
 /**
@@ -247,7 +247,7 @@ export const Quota = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Quota>): Quota {
+  fromPartial(object: DeepPartial<Quota>): Quota {
     const message = createBaseQuota();
     message.limits = object.limits?.map(e => QuotaLimit.fromPartial(e)) || [];
     message.metricRules = object.metricRules?.map(e => MetricRule.fromPartial(e)) || [];
@@ -302,7 +302,7 @@ export const MetricRule_MetricCostsEntry = {
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
+  fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
@@ -373,7 +373,7 @@ export const MetricRule = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MetricRule>): MetricRule {
+  fromPartial(object: DeepPartial<MetricRule>): MetricRule {
     const message = createBaseMetricRule();
     message.selector = object.selector ?? "";
     message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
@@ -435,7 +435,7 @@ export const QuotaLimit_ValuesEntry = {
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
+  fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
@@ -578,7 +578,7 @@ export const QuotaLimit = {
     message.displayName !== undefined && (obj.displayName = message.displayName);
     return obj;
   },
-  fromPartial(object: Partial<QuotaLimit>): QuotaLimit {
+  fromPartial(object: DeepPartial<QuotaLimit>): QuotaLimit {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";

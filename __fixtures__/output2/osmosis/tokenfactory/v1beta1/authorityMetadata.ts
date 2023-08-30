@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -51,7 +51,7 @@ export const DenomAuthorityMetadata = {
     message.admin !== undefined && (obj.admin = message.admin);
     return obj;
   },
-  fromPartial(object: Partial<DenomAuthorityMetadata>): DenomAuthorityMetadata {
+  fromPartial(object: DeepPartial<DenomAuthorityMetadata>): DenomAuthorityMetadata {
     const message = createBaseDenomAuthorityMetadata();
     message.admin = object.admin ?? "";
     return message;

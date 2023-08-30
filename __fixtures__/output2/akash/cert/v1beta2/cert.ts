@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Certificate_State {
@@ -122,7 +122,7 @@ export const CertificateID = {
     message.serial !== undefined && (obj.serial = message.serial);
     return obj;
   },
-  fromPartial(object: Partial<CertificateID>): CertificateID {
+  fromPartial(object: DeepPartial<CertificateID>): CertificateID {
     const message = createBaseCertificateID();
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
@@ -186,7 +186,7 @@ export const Certificate = {
     message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey !== undefined ? message.pubkey : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<Certificate>): Certificate {
+  fromPartial(object: DeepPartial<Certificate>): Certificate {
     const message = createBaseCertificate();
     message.state = object.state ?? 0;
     message.cert = object.cert ?? new Uint8Array();
@@ -251,7 +251,7 @@ export const CertificateFilter = {
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
-  fromPartial(object: Partial<CertificateFilter>): CertificateFilter {
+  fromPartial(object: DeepPartial<CertificateFilter>): CertificateFilter {
     const message = createBaseCertificateFilter();
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
@@ -316,7 +316,7 @@ export const MsgCreateCertificate = {
     message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey !== undefined ? message.pubkey : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateCertificate>): MsgCreateCertificate {
+  fromPartial(object: DeepPartial<MsgCreateCertificate>): MsgCreateCertificate {
     const message = createBaseMsgCreateCertificate();
     message.owner = object.owner ?? "";
     message.cert = object.cert ?? new Uint8Array();
@@ -352,7 +352,7 @@ export const MsgCreateCertificateResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateCertificateResponse>): MsgCreateCertificateResponse {
+  fromPartial(_: DeepPartial<MsgCreateCertificateResponse>): MsgCreateCertificateResponse {
     const message = createBaseMsgCreateCertificateResponse();
     return message;
   }
@@ -396,7 +396,7 @@ export const MsgRevokeCertificate = {
     message.id !== undefined && (obj.id = message.id ? CertificateID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgRevokeCertificate>): MsgRevokeCertificate {
+  fromPartial(object: DeepPartial<MsgRevokeCertificate>): MsgRevokeCertificate {
     const message = createBaseMsgRevokeCertificate();
     message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
@@ -430,7 +430,7 @@ export const MsgRevokeCertificateResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgRevokeCertificateResponse>): MsgRevokeCertificateResponse {
+  fromPartial(_: DeepPartial<MsgRevokeCertificateResponse>): MsgRevokeCertificateResponse {
     const message = createBaseMsgRevokeCertificateResponse();
     return message;
   }

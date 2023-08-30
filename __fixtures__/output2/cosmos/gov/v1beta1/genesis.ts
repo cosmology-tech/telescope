@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from "./gov";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** GenesisState defines the gov module's genesis state. */
@@ -126,7 +126,7 @@ export const GenesisState = {
     message.tallyParams !== undefined && (obj.tallyParams = message.tallyParams ? TallyParams.toJSON(message.tallyParams) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.startingProposalId = object.startingProposalId !== undefined && object.startingProposalId !== null ? Long.fromValue(object.startingProposalId) : Long.UZERO;
     message.deposits = object.deposits?.map(e => Deposit.fromPartial(e)) || [];

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { PoolParams } from "./stableswap_pool";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, Rpc } from "../../../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /** ===================== MsgCreatePool */
@@ -129,7 +129,7 @@ export const MsgCreateStableswapPool = {
     message.scalingFactorController !== undefined && (obj.scalingFactorController = message.scalingFactorController);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateStableswapPool>): MsgCreateStableswapPool {
+  fromPartial(object: DeepPartial<MsgCreateStableswapPool>): MsgCreateStableswapPool {
     const message = createBaseMsgCreateStableswapPool();
     message.sender = object.sender ?? "";
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
@@ -179,7 +179,7 @@ export const MsgCreateStableswapPoolResponse = {
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateStableswapPoolResponse>): MsgCreateStableswapPoolResponse {
+  fromPartial(object: DeepPartial<MsgCreateStableswapPoolResponse>): MsgCreateStableswapPoolResponse {
     const message = createBaseMsgCreateStableswapPoolResponse();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
@@ -255,7 +255,7 @@ export const MsgStableSwapAdjustScalingFactors = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MsgStableSwapAdjustScalingFactors>): MsgStableSwapAdjustScalingFactors {
+  fromPartial(object: DeepPartial<MsgStableSwapAdjustScalingFactors>): MsgStableSwapAdjustScalingFactors {
     const message = createBaseMsgStableSwapAdjustScalingFactors();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -291,7 +291,7 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgStableSwapAdjustScalingFactorsResponse>): MsgStableSwapAdjustScalingFactorsResponse {
+  fromPartial(_: DeepPartial<MsgStableSwapAdjustScalingFactorsResponse>): MsgStableSwapAdjustScalingFactorsResponse {
     const message = createBaseMsgStableSwapAdjustScalingFactorsResponse();
     return message;
   }

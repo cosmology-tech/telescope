@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -75,7 +75,7 @@ export const DevFeeInfo = {
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     return obj;
   },
-  fromPartial(object: Partial<DevFeeInfo>): DevFeeInfo {
+  fromPartial(object: DeepPartial<DevFeeInfo>): DevFeeInfo {
     const message = createBaseDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";

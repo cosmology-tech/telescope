@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
-import { Long, isSet, Rpc } from "../../../../helpers";
+import { Long, isSet, DeepPartial, Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
@@ -127,7 +127,7 @@ export const MsgTransfer = {
     message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<MsgTransfer>): MsgTransfer {
+  fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
@@ -167,7 +167,7 @@ export const MsgTransferResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgTransferResponse>): MsgTransferResponse {
+  fromPartial(_: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
     const message = createBaseMsgTransferResponse();
     return message;
   }

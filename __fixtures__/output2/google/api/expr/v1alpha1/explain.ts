@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Value } from "./value";
-import { Long, isSet } from "../../../../helpers";
+import { Long, DeepPartial, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
@@ -89,7 +89,7 @@ export const Explain = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Explain>): Explain {
+  fromPartial(object: DeepPartial<Explain>): Explain {
     const message = createBaseExplain();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
@@ -144,7 +144,7 @@ export const Explain_ExprStep = {
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));
     return obj;
   },
-  fromPartial(object: Partial<Explain_ExprStep>): Explain_ExprStep {
+  fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.valueIndex = object.valueIndex ?? 0;

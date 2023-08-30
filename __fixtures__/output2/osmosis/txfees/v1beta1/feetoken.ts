@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
@@ -61,7 +61,7 @@ export const FeeToken = {
     message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<FeeToken>): FeeToken {
+  fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;

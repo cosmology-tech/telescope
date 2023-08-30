@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
@@ -48,7 +48,7 @@ export const MsgUnjail = {
     message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
     return obj;
   },
-  fromPartial(object: Partial<MsgUnjail>): MsgUnjail {
+  fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
@@ -82,7 +82,7 @@ export const MsgUnjailResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgUnjailResponse>): MsgUnjailResponse {
+  fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
   }

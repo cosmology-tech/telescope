@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -132,7 +132,7 @@ export const ClaimRecord = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ClaimRecord>): ClaimRecord {
+  fromPartial(object: DeepPartial<ClaimRecord>): ClaimRecord {
     const message = createBaseClaimRecord();
     message.address = object.address ?? "";
     message.initialClaimableAmount = object.initialClaimableAmount?.map(e => Coin.fromPartial(e)) || [];

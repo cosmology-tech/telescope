@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { OrderID } from "./order";
 import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
@@ -167,7 +167,7 @@ export const MsgCreateBid = {
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toJSON(message.deposit) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCreateBid>): MsgCreateBid {
+  fromPartial(object: DeepPartial<MsgCreateBid>): MsgCreateBid {
     const message = createBaseMsgCreateBid();
     message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : undefined;
     message.provider = object.provider ?? "";
@@ -204,7 +204,7 @@ export const MsgCreateBidResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCreateBidResponse>): MsgCreateBidResponse {
+  fromPartial(_: DeepPartial<MsgCreateBidResponse>): MsgCreateBidResponse {
     const message = createBaseMsgCreateBidResponse();
     return message;
   }
@@ -248,7 +248,7 @@ export const MsgCloseBid = {
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MsgCloseBid>): MsgCloseBid {
+  fromPartial(object: DeepPartial<MsgCloseBid>): MsgCloseBid {
     const message = createBaseMsgCloseBid();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
@@ -282,7 +282,7 @@ export const MsgCloseBidResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<MsgCloseBidResponse>): MsgCloseBidResponse {
+  fromPartial(_: DeepPartial<MsgCloseBidResponse>): MsgCloseBidResponse {
     const message = createBaseMsgCloseBidResponse();
     return message;
   }
@@ -362,7 +362,7 @@ export const BidID = {
     message.provider !== undefined && (obj.provider = message.provider);
     return obj;
   },
-  fromPartial(object: Partial<BidID>): BidID {
+  fromPartial(object: DeepPartial<BidID>): BidID {
     const message = createBaseBidID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -438,7 +438,7 @@ export const Bid = {
     message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<Bid>): Bid {
+  fromPartial(object: DeepPartial<Bid>): Bid {
     const message = createBaseBid();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     message.state = object.state ?? 0;
@@ -531,7 +531,7 @@ export const BidFilters = {
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
-  fromPartial(object: Partial<BidFilters>): BidFilters {
+  fromPartial(object: DeepPartial<BidFilters>): BidFilters {
     const message = createBaseBidFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

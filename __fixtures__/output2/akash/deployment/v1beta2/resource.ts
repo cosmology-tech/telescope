@@ -3,7 +3,7 @@
 import { ResourceUnits } from "../../base/v1beta2/resourceunits";
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
@@ -68,7 +68,7 @@ export const Resource = {
     message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Resource>): Resource {
+  fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
     message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
     message.count = object.count ?? 0;

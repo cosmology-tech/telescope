@@ -3,7 +3,7 @@
 import { Params, DistrInfo, PoolToGauges } from "./incentives";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
@@ -83,7 +83,7 @@ export const GenesisState = {
     message.poolToGauges !== undefined && (obj.poolToGauges = message.poolToGauges ? PoolToGauges.toJSON(message.poolToGauges) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];

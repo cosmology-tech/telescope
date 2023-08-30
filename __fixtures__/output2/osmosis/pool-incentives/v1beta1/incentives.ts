@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Duration } from "../../../google/protobuf/duration";
-import { Long, isSet } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
@@ -71,7 +71,7 @@ export const Params = {
     message.mintedDenom !== undefined && (obj.mintedDenom = message.mintedDenom);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintedDenom = object.mintedDenom ?? "";
     return message;
@@ -120,7 +120,7 @@ export const LockableDurationsInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<LockableDurationsInfo>): LockableDurationsInfo {
+  fromPartial(object: DeepPartial<LockableDurationsInfo>): LockableDurationsInfo {
     const message = createBaseLockableDurationsInfo();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
@@ -178,7 +178,7 @@ export const DistrInfo = {
     }
     return obj;
   },
-  fromPartial(object: Partial<DistrInfo>): DistrInfo {
+  fromPartial(object: DeepPartial<DistrInfo>): DistrInfo {
     const message = createBaseDistrInfo();
     message.totalWeight = object.totalWeight ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
@@ -233,7 +233,7 @@ export const DistrRecord = {
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
-  fromPartial(object: Partial<DistrRecord>): DistrRecord {
+  fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.weight = object.weight ?? "";
@@ -297,7 +297,7 @@ export const PoolToGauge = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<PoolToGauge>): PoolToGauge {
+  fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
@@ -348,7 +348,7 @@ export const PoolToGauges = {
     }
     return obj;
   },
-  fromPartial(object: Partial<PoolToGauges>): PoolToGauges {
+  fromPartial(object: DeepPartial<PoolToGauges>): PoolToGauges {
     const message = createBasePoolToGauges();
     message.poolToGauge = object.poolToGauge?.map(e => PoolToGauge.fromPartial(e)) || [];
     return message;

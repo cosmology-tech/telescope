@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
-import { Long, isSet, isObject, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
+import { Long, isSet, DeepPartial, isObject, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
@@ -104,7 +104,7 @@ export const MetricValue_LabelsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<MetricValue_LabelsEntry>): MetricValue_LabelsEntry {
+  fromPartial(object: DeepPartial<MetricValue_LabelsEntry>): MetricValue_LabelsEntry {
     const message = createBaseMetricValue_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -229,7 +229,7 @@ export const MetricValue = {
     message.distributionValue !== undefined && (obj.distributionValue = message.distributionValue ? Distribution.toJSON(message.distributionValue) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<MetricValue>): MetricValue {
+  fromPartial(object: DeepPartial<MetricValue>): MetricValue {
     const message = createBaseMetricValue();
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
@@ -301,7 +301,7 @@ export const MetricValueSet = {
     }
     return obj;
   },
-  fromPartial(object: Partial<MetricValueSet>): MetricValueSet {
+  fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {
     const message = createBaseMetricValueSet();
     message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];

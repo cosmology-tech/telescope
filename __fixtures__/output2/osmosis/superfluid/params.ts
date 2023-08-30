@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
@@ -52,7 +52,7 @@ export const Params = {
     message.minimumRiskFactor !== undefined && (obj.minimumRiskFactor = message.minimumRiskFactor);
     return obj;
   },
-  fromPartial(object: Partial<Params>): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.minimumRiskFactor = object.minimumRiskFactor ?? "";
     return message;

@@ -4,7 +4,7 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
 import { Params, BaseAccount } from "./auth";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -82,7 +82,7 @@ export const QueryAccountsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAccountsRequest>): QueryAccountsRequest {
+  fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -140,7 +140,7 @@ export const QueryAccountsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAccountsResponse>): QueryAccountsResponse {
+  fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -186,7 +186,7 @@ export const QueryAccountRequest = {
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
-  fromPartial(object: Partial<QueryAccountRequest>): QueryAccountRequest {
+  fromPartial(object: DeepPartial<QueryAccountRequest>): QueryAccountRequest {
     const message = createBaseQueryAccountRequest();
     message.address = object.address ?? "";
     return message;
@@ -231,7 +231,7 @@ export const QueryAccountResponse = {
     message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryAccountResponse>): QueryAccountResponse {
+  fromPartial(object: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
     const message = createBaseQueryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? Any.fromPartial(object.account) : undefined;
     return message;
@@ -265,7 +265,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -309,7 +309,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;

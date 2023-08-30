@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -105,7 +105,7 @@ export const InflationDistribution = {
     message.communityPool !== undefined && (obj.communityPool = message.communityPool);
     return obj;
   },
-  fromPartial(object: Partial<InflationDistribution>): InflationDistribution {
+  fromPartial(object: DeepPartial<InflationDistribution>): InflationDistribution {
     const message = createBaseInflationDistribution();
     message.stakingRewards = object.stakingRewards ?? "";
     message.usageIncentives = object.usageIncentives ?? "";
@@ -188,7 +188,7 @@ export const ExponentialCalculation = {
     message.maxVariance !== undefined && (obj.maxVariance = message.maxVariance);
     return obj;
   },
-  fromPartial(object: Partial<ExponentialCalculation>): ExponentialCalculation {
+  fromPartial(object: DeepPartial<ExponentialCalculation>): ExponentialCalculation {
     const message = createBaseExponentialCalculation();
     message.a = object.a ?? "";
     message.r = object.r ?? "";

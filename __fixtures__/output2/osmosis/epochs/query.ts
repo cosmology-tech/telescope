@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { EpochInfo } from "./genesis";
-import { Long, isSet, Rpc } from "../../helpers";
+import { Long, DeepPartial, isSet, Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
@@ -42,7 +42,7 @@ export const QueryEpochsInfoRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
+  fromPartial(_: DeepPartial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
     const message = createBaseQueryEpochsInfoRequest();
     return message;
   }
@@ -90,7 +90,7 @@ export const QueryEpochsInfoResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<QueryEpochsInfoResponse>): QueryEpochsInfoResponse {
+  fromPartial(object: DeepPartial<QueryEpochsInfoResponse>): QueryEpochsInfoResponse {
     const message = createBaseQueryEpochsInfoResponse();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     return message;
@@ -135,7 +135,7 @@ export const QueryCurrentEpochRequest = {
     message.identifier !== undefined && (obj.identifier = message.identifier);
     return obj;
   },
-  fromPartial(object: Partial<QueryCurrentEpochRequest>): QueryCurrentEpochRequest {
+  fromPartial(object: DeepPartial<QueryCurrentEpochRequest>): QueryCurrentEpochRequest {
     const message = createBaseQueryCurrentEpochRequest();
     message.identifier = object.identifier ?? "";
     return message;
@@ -180,7 +180,7 @@ export const QueryCurrentEpochResponse = {
     message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
+  fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;

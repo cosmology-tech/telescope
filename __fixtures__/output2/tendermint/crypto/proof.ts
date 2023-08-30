@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
@@ -104,7 +104,7 @@ export const Proof = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Proof>): Proof {
+  fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
     message.total = object.total !== undefined && object.total !== null ? Long.fromValue(object.total) : Long.ZERO;
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
@@ -161,7 +161,7 @@ export const ValueOp = {
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ValueOp>): ValueOp {
+  fromPartial(object: DeepPartial<ValueOp>): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? new Uint8Array();
     message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
@@ -225,7 +225,7 @@ export const DominoOp = {
     message.output !== undefined && (obj.output = message.output);
     return obj;
   },
-  fromPartial(object: Partial<DominoOp>): DominoOp {
+  fromPartial(object: DeepPartial<DominoOp>): DominoOp {
     const message = createBaseDominoOp();
     message.key = object.key ?? "";
     message.input = object.input ?? "";
@@ -290,7 +290,7 @@ export const ProofOp = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<ProofOp>): ProofOp {
+  fromPartial(object: DeepPartial<ProofOp>): ProofOp {
     const message = createBaseProofOp();
     message.type = object.type ?? "";
     message.key = object.key ?? new Uint8Array();
@@ -341,7 +341,7 @@ export const ProofOps = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ProofOps>): ProofOps {
+  fromPartial(object: DeepPartial<ProofOps>): ProofOps {
     const message = createBaseProofOps();
     message.ops = object.ops?.map(e => ProofOp.fromPartial(e)) || [];
     return message;

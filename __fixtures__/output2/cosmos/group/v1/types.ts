@@ -3,7 +3,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.group.v1";
 /** VoteOption enumerates the valid vote options for a given proposal. */
@@ -232,7 +232,6 @@ export interface Members {
 }
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicy {
-  $typeUrl?: string;
   /** threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed. */
   threshold: string;
   /** windows defines the different windows for voting and execution. */
@@ -240,7 +239,6 @@ export interface ThresholdDecisionPolicy {
 }
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicy {
-  $typeUrl?: string;
   /** percentage is the minimum percentage the weighted sum of yes votes must meet for a proposal to succeed. */
   percentage: string;
   /** windows defines the different windows for voting and execution. */
@@ -459,7 +457,7 @@ export const Member = {
     message.addedAt !== undefined && (obj.addedAt = fromTimestamp(message.addedAt).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<Member>): Member {
+  fromPartial(object: DeepPartial<Member>): Member {
     const message = createBaseMember();
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
@@ -511,7 +509,7 @@ export const Members = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Members>): Members {
+  fromPartial(object: DeepPartial<Members>): Members {
     const message = createBaseMembers();
     message.members = object.members?.map(e => Member.fromPartial(e)) || [];
     return message;
@@ -519,7 +517,6 @@ export const Members = {
 };
 function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
   return {
-    $typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy",
     threshold: "",
     windows: DecisionPolicyWindows.fromPartial({})
   };
@@ -566,7 +563,7 @@ export const ThresholdDecisionPolicy = {
     message.windows !== undefined && (obj.windows = message.windows ? DecisionPolicyWindows.toJSON(message.windows) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
+  fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
@@ -575,7 +572,6 @@ export const ThresholdDecisionPolicy = {
 };
 function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
   return {
-    $typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy",
     percentage: "",
     windows: DecisionPolicyWindows.fromPartial({})
   };
@@ -622,7 +618,7 @@ export const PercentageDecisionPolicy = {
     message.windows !== undefined && (obj.windows = message.windows ? DecisionPolicyWindows.toJSON(message.windows) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
+  fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
@@ -677,7 +673,7 @@ export const DecisionPolicyWindows = {
     message.minExecutionPeriod !== undefined && (obj.minExecutionPeriod = message.minExecutionPeriod ? Duration.toJSON(message.minExecutionPeriod) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<DecisionPolicyWindows>): DecisionPolicyWindows {
+  fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
     message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
     message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : undefined;
@@ -768,7 +764,7 @@ export const GroupInfo = {
     message.createdAt !== undefined && (obj.createdAt = fromTimestamp(message.createdAt).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<GroupInfo>): GroupInfo {
+  fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.admin = object.admin ?? "";
@@ -827,7 +823,7 @@ export const GroupMember = {
     message.member !== undefined && (obj.member = message.member ? Member.toJSON(message.member) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<GroupMember>): GroupMember {
+  fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
@@ -927,7 +923,7 @@ export const GroupPolicyInfo = {
     message.createdAt !== undefined && (obj.createdAt = fromTimestamp(message.createdAt).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<GroupPolicyInfo>): GroupPolicyInfo {
+  fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
@@ -1094,7 +1090,7 @@ export const Proposal = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Proposal>): Proposal {
+  fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.address = object.address ?? "";
@@ -1178,7 +1174,7 @@ export const TallyResult = {
     message.noWithVetoCount !== undefined && (obj.noWithVetoCount = message.noWithVetoCount);
     return obj;
   },
-  fromPartial(object: Partial<TallyResult>): TallyResult {
+  fromPartial(object: DeepPartial<TallyResult>): TallyResult {
     const message = createBaseTallyResult();
     message.yesCount = object.yesCount ?? "";
     message.abstainCount = object.abstainCount ?? "";
@@ -1262,7 +1258,7 @@ export const Vote = {
     message.submitTime !== undefined && (obj.submitTime = fromTimestamp(message.submitTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<Vote>): Vote {
+  fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";

@@ -4,7 +4,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { TokenPair } from "./erc20";
 import { Params } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Rpc } from "../../../helpers";
+import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -86,7 +86,7 @@ export const QueryTokenPairsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
+  fromPartial(object: DeepPartial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
     const message = createBaseQueryTokenPairsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -144,7 +144,7 @@ export const QueryTokenPairsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
+  fromPartial(object: DeepPartial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
     const message = createBaseQueryTokenPairsResponse();
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -190,7 +190,7 @@ export const QueryTokenPairRequest = {
     message.token !== undefined && (obj.token = message.token);
     return obj;
   },
-  fromPartial(object: Partial<QueryTokenPairRequest>): QueryTokenPairRequest {
+  fromPartial(object: DeepPartial<QueryTokenPairRequest>): QueryTokenPairRequest {
     const message = createBaseQueryTokenPairRequest();
     message.token = object.token ?? "";
     return message;
@@ -235,7 +235,7 @@ export const QueryTokenPairResponse = {
     message.tokenPair !== undefined && (obj.tokenPair = message.tokenPair ? TokenPair.toJSON(message.tokenPair) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryTokenPairResponse>): QueryTokenPairResponse {
+  fromPartial(object: DeepPartial<QueryTokenPairResponse>): QueryTokenPairResponse {
     const message = createBaseQueryTokenPairResponse();
     message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : undefined;
     return message;
@@ -269,7 +269,7 @@ export const QueryParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -313,7 +313,7 @@ export const QueryParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;

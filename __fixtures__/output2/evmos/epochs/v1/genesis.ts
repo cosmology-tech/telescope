@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
@@ -111,7 +111,7 @@ export const EpochInfo = {
     message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<EpochInfo>): EpochInfo {
+  fromPartial(object: DeepPartial<EpochInfo>): EpochInfo {
     const message = createBaseEpochInfo();
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
@@ -166,7 +166,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromPartial(object: Partial<GenesisState>): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     return message;

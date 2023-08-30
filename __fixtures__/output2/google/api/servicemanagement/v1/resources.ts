@@ -3,7 +3,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -482,7 +482,7 @@ export const ManagedService = {
     message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
     return obj;
   },
-  fromPartial(object: Partial<ManagedService>): ManagedService {
+  fromPartial(object: DeepPartial<ManagedService>): ManagedService {
     const message = createBaseManagedService();
     message.serviceName = object.serviceName ?? "";
     message.producerProjectId = object.producerProjectId ?? "";
@@ -563,7 +563,7 @@ export const OperationMetadata = {
     message.startTime !== undefined && (obj.startTime = fromTimestamp(message.startTime).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<OperationMetadata>): OperationMetadata {
+  fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
@@ -620,7 +620,7 @@ export const OperationMetadata_Step = {
     message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
     return obj;
   },
-  fromPartial(object: Partial<OperationMetadata_Step>): OperationMetadata_Step {
+  fromPartial(object: DeepPartial<OperationMetadata_Step>): OperationMetadata_Step {
     const message = createBaseOperationMetadata_Step();
     message.description = object.description ?? "";
     message.status = object.status ?? 0;
@@ -684,7 +684,7 @@ export const Diagnostic = {
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
-  fromPartial(object: Partial<Diagnostic>): Diagnostic {
+  fromPartial(object: DeepPartial<Diagnostic>): Diagnostic {
     const message = createBaseDiagnostic();
     message.location = object.location ?? "";
     message.kind = object.kind ?? 0;
@@ -744,7 +744,7 @@ export const ConfigSource = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ConfigSource>): ConfigSource {
+  fromPartial(object: DeepPartial<ConfigSource>): ConfigSource {
     const message = createBaseConfigSource();
     message.id = object.id ?? "";
     message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
@@ -808,7 +808,7 @@ export const ConfigFile = {
     message.fileType !== undefined && (obj.fileType = configFile_FileTypeToJSON(message.fileType));
     return obj;
   },
-  fromPartial(object: Partial<ConfigFile>): ConfigFile {
+  fromPartial(object: DeepPartial<ConfigFile>): ConfigFile {
     const message = createBaseConfigFile();
     message.filePath = object.filePath ?? "";
     message.fileContents = object.fileContents ?? new Uint8Array();
@@ -855,7 +855,7 @@ export const ConfigRef = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: Partial<ConfigRef>): ConfigRef {
+  fromPartial(object: DeepPartial<ConfigRef>): ConfigRef {
     const message = createBaseConfigRef();
     message.name = object.name ?? "";
     return message;
@@ -904,7 +904,7 @@ export const ChangeReport = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ChangeReport>): ChangeReport {
+  fromPartial(object: DeepPartial<ChangeReport>): ChangeReport {
     const message = createBaseChangeReport();
     message.configChanges = object.configChanges?.map(e => ConfigChange.fromPartial(e)) || [];
     return message;
@@ -1003,7 +1003,7 @@ export const Rollout = {
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     return obj;
   },
-  fromPartial(object: Partial<Rollout>): Rollout {
+  fromPartial(object: DeepPartial<Rollout>): Rollout {
     const message = createBaseRollout();
     message.rolloutId = object.rolloutId ?? "";
     message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : undefined;
@@ -1063,7 +1063,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<Rollout_TrafficPercentStrategy_PercentagesEntry>): Rollout_TrafficPercentStrategy_PercentagesEntry {
+  fromPartial(object: DeepPartial<Rollout_TrafficPercentStrategy_PercentagesEntry>): Rollout_TrafficPercentStrategy_PercentagesEntry {
     const message = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
@@ -1125,7 +1125,7 @@ export const Rollout_TrafficPercentStrategy = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Rollout_TrafficPercentStrategy>): Rollout_TrafficPercentStrategy {
+  fromPartial(object: DeepPartial<Rollout_TrafficPercentStrategy>): Rollout_TrafficPercentStrategy {
     const message = createBaseRollout_TrafficPercentStrategy();
     message.percentages = Object.entries(object.percentages ?? {}).reduce<{
       [key: string]: double;
@@ -1166,7 +1166,7 @@ export const Rollout_DeleteServiceStrategy = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: Partial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {
+  fromPartial(_: DeepPartial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {
     const message = createBaseRollout_DeleteServiceStrategy();
     return message;
   }

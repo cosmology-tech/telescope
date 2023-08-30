@@ -5,14 +5,13 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
  */
 export interface BasicAllowance {
-  $typeUrl?: string;
   /**
    * spend_limit specifies the maximum amount of tokens that can be spent
    * by this allowance and will be updated as tokens are spent. If it is
@@ -27,7 +26,6 @@ export interface BasicAllowance {
  * as well as a limit per time period.
  */
 export interface PeriodicAllowance {
-  $typeUrl?: string;
   /** basic specifies a struct of `BasicAllowance` */
   basic: BasicAllowance;
   /**
@@ -51,7 +49,6 @@ export interface PeriodicAllowance {
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
-  $typeUrl?: string;
   /** allowance can be any of basic and filtered fee allowance. */
   allowance: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
   /** allowed_messages are the messages for which the grantee has the access. */
@@ -68,7 +65,6 @@ export interface Grant {
 }
 function createBaseBasicAllowance(): BasicAllowance {
   return {
-    $typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance",
     spendLimit: [],
     expiration: Timestamp.fromPartial({})
   };
@@ -119,7 +115,7 @@ export const BasicAllowance = {
     message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<BasicAllowance>): BasicAllowance {
+  fromPartial(object: DeepPartial<BasicAllowance>): BasicAllowance {
     const message = createBaseBasicAllowance();
     message.spendLimit = object.spendLimit?.map(e => Coin.fromPartial(e)) || [];
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
@@ -128,7 +124,6 @@ export const BasicAllowance = {
 };
 function createBasePeriodicAllowance(): PeriodicAllowance {
   return {
-    $typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance",
     basic: BasicAllowance.fromPartial({}),
     period: Duration.fromPartial({}),
     periodSpendLimit: [],
@@ -210,7 +205,7 @@ export const PeriodicAllowance = {
     message.periodReset !== undefined && (obj.periodReset = fromTimestamp(message.periodReset).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<PeriodicAllowance>): PeriodicAllowance {
+  fromPartial(object: DeepPartial<PeriodicAllowance>): PeriodicAllowance {
     const message = createBasePeriodicAllowance();
     message.basic = object.basic !== undefined && object.basic !== null ? BasicAllowance.fromPartial(object.basic) : undefined;
     message.period = object.period !== undefined && object.period !== null ? Duration.fromPartial(object.period) : undefined;
@@ -222,7 +217,6 @@ export const PeriodicAllowance = {
 };
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
-    $typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance",
     allowance: Any.fromPartial({}),
     allowedMessages: []
   };
@@ -273,7 +267,7 @@ export const AllowedMsgAllowance = {
     }
     return obj;
   },
-  fromPartial(object: Partial<AllowedMsgAllowance>): AllowedMsgAllowance {
+  fromPartial(object: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance {
     const message = createBaseAllowedMsgAllowance();
     message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     message.allowedMessages = object.allowedMessages?.map(e => e) || [];
@@ -337,7 +331,7 @@ export const Grant = {
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toJSON(message.allowance) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<Grant>): Grant {
+  fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";

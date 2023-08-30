@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Any } from "../../../../google/protobuf/any";
 import { Event } from "../../../../tendermint/abci/types";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
 /**
@@ -292,7 +292,7 @@ export const TxResponse = {
     }
     return obj;
   },
-  fromPartial(object: Partial<TxResponse>): TxResponse {
+  fromPartial(object: DeepPartial<TxResponse>): TxResponse {
     const message = createBaseTxResponse();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.txhash = object.txhash ?? "";
@@ -371,7 +371,7 @@ export const ABCIMessageLog = {
     }
     return obj;
   },
-  fromPartial(object: Partial<ABCIMessageLog>): ABCIMessageLog {
+  fromPartial(object: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
     message.msgIndex = object.msgIndex ?? 0;
     message.log = object.log ?? "";
@@ -431,7 +431,7 @@ export const StringEvent = {
     }
     return obj;
   },
-  fromPartial(object: Partial<StringEvent>): StringEvent {
+  fromPartial(object: DeepPartial<StringEvent>): StringEvent {
     const message = createBaseStringEvent();
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -486,7 +486,7 @@ export const Attribute = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: Partial<Attribute>): Attribute {
+  fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -541,7 +541,7 @@ export const GasInfo = {
     message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: Partial<GasInfo>): GasInfo {
+  fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = createBaseGasInfo();
     message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.UZERO;
     message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.UZERO;
@@ -609,7 +609,7 @@ export const Result = {
     }
     return obj;
   },
-  fromPartial(object: Partial<Result>): Result {
+  fromPartial(object: DeepPartial<Result>): Result {
     const message = createBaseResult();
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
@@ -665,7 +665,7 @@ export const SimulationResponse = {
     message.result !== undefined && (obj.result = message.result ? Result.toJSON(message.result) : undefined);
     return obj;
   },
-  fromPartial(object: Partial<SimulationResponse>): SimulationResponse {
+  fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
     message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : undefined;
@@ -720,7 +720,7 @@ export const MsgData = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: Partial<MsgData>): MsgData {
+  fromPartial(object: DeepPartial<MsgData>): MsgData {
     const message = createBaseMsgData();
     message.msgType = object.msgType ?? "";
     message.data = object.data ?? new Uint8Array();
@@ -770,7 +770,7 @@ export const TxMsgData = {
     }
     return obj;
   },
-  fromPartial(object: Partial<TxMsgData>): TxMsgData {
+  fromPartial(object: DeepPartial<TxMsgData>): TxMsgData {
     const message = createBaseTxMsgData();
     message.data = object.data?.map(e => MsgData.fromPartial(e)) || [];
     return message;
@@ -864,7 +864,7 @@ export const SearchTxsResult = {
     }
     return obj;
   },
-  fromPartial(object: Partial<SearchTxsResult>): SearchTxsResult {
+  fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {
     const message = createBaseSearchTxsResult();
     message.totalCount = object.totalCount !== undefined && object.totalCount !== null ? Long.fromValue(object.totalCount) : Long.UZERO;
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.UZERO;
