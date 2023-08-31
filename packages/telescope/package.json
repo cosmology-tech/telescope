@@ -29,9 +29,9 @@
     "buidl:clean": "npm run clean && npm run buidl",
     "clean": "rimraf ./types",
     "prepare": "npm run build",
-    "dev": "cross-env NODE_ENV=development babel-node src/telescope --extensions \".tsx,.ts,.js\"",
-    "watch": "cross-env NODE_ENV=development babel-watch src/telescope --extensions \".tsx,.ts,.js\"",
-    "file": "cross-env NODE_ENV=development babel-watch src/file --extensions \".tsx,.ts,.js\"",
+    "dev": "cross-env NODE_ENV=development ts-node src/telescope",
+    "watch": "cross-env NODE_ENV=development ts-node-dev src/telescope",
+    "file": "cross-env NODE_ENV=development ts-node-dev src/file",
     "lint": "eslint .",
     "format": "eslint . --fix",
     "test": "jest",
@@ -40,11 +40,13 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment":"node",
+    "testEnvironment": "node",
     "transform": {
-      "^.+\\.ts?$":"ts-jest"
+      "^.+\\.ts?$": "ts-jest"
     },
-    "transformIgnorePatterns": ["<rootDir>/node_modules/"],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
     "testPathIgnorePatterns": [
       "main/",
       "module/",
@@ -74,6 +76,8 @@
     "prettier": "^2.8.7",
     "regenerator-runtime": "^0.13.11",
     "ts-jest": "^29.1.0",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {
