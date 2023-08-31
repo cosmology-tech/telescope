@@ -67,6 +67,7 @@
     "regenerator-runtime": "^0.13.11",
     "rimraf": "5.0.0",
     "ts-jest": "^29.1.0",
+    "esprima": "4.0.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
