@@ -43,7 +43,6 @@
     "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.21.3",
     "cross-env": "^7.0.2",
     "eslint": "8.38.0",
     "eslint-config-prettier": "^8.8.0",
@@ -54,6 +53,7 @@
     "regenerator-runtime": "^0.13.11",
     "rimraf": "5.0.0",
     "ts-jest": "^29.1.0",
+    "esprima": "4.0.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
