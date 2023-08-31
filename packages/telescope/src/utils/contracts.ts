@@ -27,7 +27,7 @@ export const getContractSchemata = async (schemata: any[], out: string, argv) =>
         const name = basename(path);
         const folder = basename(dirname(path));
         const contractName = pascal(pkg.contract) || pascal(name);
-        const schemas = await readSchemas({ schemaDir: path, schemaOptions: argv });
+        const schemas = await readSchemas({ schemaDir: path });
         const outPath = join(out, folder);
         s.push({
             contractName, schemas, outPath
