@@ -134,6 +134,41 @@ telescope transpile
 
 You should now seem some `.ts` files generated in `./src`. These are the real source files used in your application.
 
+Examples:
+
+```sh
+# Telescope takes chain1 folder as input,
+# and generate files in 'gen/src' folder.
+telescope transpile --protoDirs ../../__fixtures__/chain1 --outPath gen/src
+```
+
+```sh
+# Telescope takes chain1 folder as input,
+# and generate files in 'gen/src' folder using default telescope options.
+telescope transpile --protoDirs ../../__fixtures__/chain1 --outPath gen/src --useDefaults
+```
+
+```sh
+# Telescope takes chain1 folder(from args) and chain2 folder(from config) as input,
+# and generate files in 'gen/src'(defined in the config file, will override outPath in args) folder using a config file.
+# Note: --config will override --useDefaults.
+telescope transpile --protoDirs ../../__fixtures__/chain1 --config .telescope.json
+```
+
+```json
+//.telescope.json
+{
+  "protoDirs": [
+    "../../fixtures/chain2"
+  ],
+  "outPath": "gen/src",
+  "options": {
+    // telescope options
+    ...
+  }
+}
+```
+
 ### Build
 
 Finally, run `install` and `buidl` to generate the JS and types for publishing your module to npm.
@@ -223,6 +258,13 @@ telescope({
 | `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
+
+### Implemented Interface Options
+
+| option                                    | description                                                     | defaults   |
+| ----------------------------------------- | --------------------------------------------------------------  | ---------- |
+| `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `false`     |
+| `interfaces.useUnionTypes`                      | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
 
 ### Prototypes Options
 

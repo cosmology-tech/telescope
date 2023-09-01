@@ -72,7 +72,7 @@ export function utf8Read(
   const len = end - start;
   if (len < 1) return "";
   const chunk = [];
-  let parts = null,
+  let parts: string[] = [],
     i = 0, // char offset
     t; // temporary
   while (start < end) {
