@@ -30,6 +30,19 @@
     "e2e:stop": "make stop",
     "e2e:clean": "make stop clean"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment":"node",
+    "transform": {
+      "^.+\\.ts?$":"ts-jest"
+    },
+    "transformIgnorePatterns": ["<rootDir>/node_modules/"],
+    "testPathIgnorePatterns": [
+      "main/",
+      "module/",
+      "types/"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/osmosis-labs/telescope"
