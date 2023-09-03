@@ -147,15 +147,15 @@ describe('Token transfers', () => {
     const ibcBalance = balances.find((balance) => {
       return balance.denom.startsWith('ibc/');
     });
-    expect(ibcBalance.amount).toEqual(token.amount);
-    expect(ibcBalance.denom).toContain('ibc/');
+    expect(ibcBalance!.amount).toEqual(token.amount);
+    expect(ibcBalance!.denom).toContain('ibc/');
 
     // check ibc denom trace of the same
     const queryClient = await ibc.ClientFactory.createRPCQueryClient({
       rpcEndpoint: cosmosRpcEndpoint()
     });
     const trace = await queryClient.ibc.applications.transfer.v1.denomTrace({
-      hash: ibcBalance.denom.replace('ibc/', '')
+      hash: ibcBalance!.denom.replace('ibc/', '')
     });
     expect(trace.denomTrace.baseDenom).toEqual(denom);
   }, 10000);

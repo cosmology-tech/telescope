@@ -2,6 +2,7 @@ import { generateMnemonic } from '@confio/relayer/build/lib/helpers';
 import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 import Long from 'long';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
+import BigNumber from 'bignumber.js';
 
 import { cosmos, getSigningOsmosisClient } from '../src/codegen';
 import { useChain, waitUntil } from '../src';
@@ -17,12 +18,8 @@ describe('Governance tests for osmosis', () => {
   let validatorAddress;
 
   beforeAll(async () => {
-    ({
-      chainInfo,
-      getCoin,
-      getRpcEndpoint,
-      creditFromFaucet
-    } = useChain('osmosis'));
+    ({ chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } =
+      useChain('osmosis'));
     denom = getCoin().base;
 
     // Initialize wallet
@@ -151,9 +148,9 @@ describe('Governance tests for osmosis', () => {
     const proposalIdEvent = result.events.find(
       (event) => event.type === 'submit_proposal'
     );
-    proposalId = proposalIdEvent.attributes.find(
+    proposalId = proposalIdEvent!.attributes.find(
       (attr) => attr.key === 'proposal_id'
-    ).value;
+    )!.value;
 
     // eslint-disable-next-line no-undef
     expect(BigInt(proposalId)).toBeGreaterThan(BigInt(0));
@@ -191,11 +188,7 @@ describe('Governance tests for osmosis', () => {
       gas: '550000'
     };
 
-    const result = await signingClient.signAndBroadcast(
-      address,
-      [msg],
-      fee
-    );
+    const result = await signingClient.signAndBroadcast(address, [msg], fee);
     assertIsDeliverTxSuccess(result);
   }, 10000);
 
