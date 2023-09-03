@@ -2,7 +2,7 @@
 
 # Packages and workspace
 
-We use lerna/yarn workspaces. You'll see we have in our `./packages` folder numerous packages: 
+We use lerna/yarn workspaces. You'll see we have in our `./packages` folder numerous packages:
 
 ```
 ├── ast
@@ -15,14 +15,13 @@ We use lerna/yarn workspaces. You'll see we have in our `./packages` folder nume
 └── utils
 ```
 
-| folder    | purpose                                                                        | 
+| folder    | purpose                                                                        |
 | --------- | -----------------------------------------------------------------------------  |
 | ast       | for creating new AST functions                                                 |
-| babel     | (not currently used)                                                           |
 | lcd       | for giving LCD clients to generated code that uses the LCD client              |
 | parser    | protobuf parser, and protobuf traversal                                        |
 | telescope | the CLI, as well as the main `telescope` builder                               |
-| test      | for testing things locally                                                     |
+| starship      | using starship for testing things locally or in CI workflow                                                     |
 | types     | types and `TelescopeOptions` objects                                           |
 | utils     | other utilities                                                                |
 

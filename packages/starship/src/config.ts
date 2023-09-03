@@ -4,6 +4,7 @@ import yaml from 'js-yaml';
 import fetch from 'node-fetch';
 import { StargateClient } from '@cosmjs/stargate';
 
+//@ts-ignore
 import { getSigningCosmosClientOptions } from './codegen';
 
 export const Config = {

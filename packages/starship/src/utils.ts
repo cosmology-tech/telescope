@@ -3,6 +3,7 @@ import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 import BigNumber from 'bignumber.js';
 
+//@ts-ignore
 import { getSigningIbcClient } from './codegen';
 import { useChain, Config } from './config';
 
