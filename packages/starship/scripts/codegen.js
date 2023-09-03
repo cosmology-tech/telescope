@@ -12,19 +12,7 @@ telescope({
   options: {
     removeUnusedImports: true,
     tsDisable: {
-      patterns: ['**/tx.registry.ts'],
-      files: [
-        'cosmos/auth/v1beta1/query.ts',
-        'cosmos/gov/v1/tx.ts',
-        'cosmos/gov/v1beta1/gov.ts',
-        'cosmos/gov/v1beta1/tx.ts',
-
-        'cosmos/authz/v1beta1/authz.ts',
-        'cosmos/authz/v1beta1/tx.ts',
-        'cosmos/bundle.ts',
-        'cosmos/staking/v1beta1/staking.ts',
-        'cosmos/staking/v1beta1/tx.ts'
-      ]
+      patterns: ['**/tx.registry.ts']
     },
     interfaces: {
       enabled: false,
@@ -37,7 +25,6 @@ telescope({
           'ibc.applications.fee.v1', // issue with parsing protos (LCD routes with nested objects in params)
 
           'akash.**',
-          'cosmos.authz.**',
 
           'cosmos.app.v1alpha1',
           'cosmos.app.v1beta1',
