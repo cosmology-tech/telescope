@@ -27,8 +27,8 @@ telescope({
       ]
     },
     interfaces: {
-      enabled: true,
-      useUnionTypes: true
+      enabled: false,
+      useUnionTypes: false
     },
     prototypes: {
       addTypeUrlToDecoders: true,
@@ -99,14 +99,6 @@ telescope({
     packages: {
       osmosis: {
         classesUseArrowFunctions: true
-      },
-      cosmos: {
-        staking: {
-          interfaces: {
-            enabled: false,
-            useUnionTypes: false
-          }
-        }
       }
     }
   }
