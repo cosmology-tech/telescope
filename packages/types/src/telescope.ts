@@ -122,6 +122,9 @@ interface TelescopeOpts {
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
         // temporary field for backwards compat
 
+        /**
+        * @deprecated The logic of useLegacyInlineEncoding will be deprecated.
+        */
         useLegacyInlineEncoding?: boolean;
 
     };
