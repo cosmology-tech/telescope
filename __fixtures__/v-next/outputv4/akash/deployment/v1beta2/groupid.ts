@@ -21,6 +21,7 @@ function createBaseGroupID(): GroupID {
   };
 }
 export const GroupID = {
+  typeUrl: "/akash.deployment.v1beta2.GroupID",
   encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -97,5 +98,40 @@ export const GroupID = {
     obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     return obj;
+  },
+  fromAmino(object: GroupIDAmino): GroupID {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq
+    };
+  },
+  toAmino(message: GroupID): GroupIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    return obj;
+  },
+  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
+    return GroupID.fromAmino(object.value);
+  },
+  toAminoMsg(message: GroupID): GroupIDAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/group-i-d",
+      value: GroupID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
+    return GroupID.decode(message.value);
+  },
+  toProto(message: GroupID): Uint8Array {
+    return GroupID.encode(message).finish();
+  },
+  toProtoMsg(message: GroupID): GroupIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupID",
+      value: GroupID.encode(message).finish()
+    };
   }
 };

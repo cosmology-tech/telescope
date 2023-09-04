@@ -86,6 +86,7 @@ function createBaseQueryGrantsRequest(): QueryGrantsRequest {
   };
 }
 export const QueryGrantsRequest = {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest",
   encode(message: QueryGrantsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -174,6 +175,43 @@ export const QueryGrantsRequest = {
     obj.msg_type_url = message.msgTypeUrl;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGrantsRequestAmino): QueryGrantsRequest {
+    return {
+      granter: object.granter,
+      grantee: object.grantee,
+      msgTypeUrl: object.msg_type_url,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGrantsRequest): QueryGrantsRequestAmino {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGrantsRequestAminoMsg): QueryGrantsRequest {
+    return QueryGrantsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGrantsRequest): QueryGrantsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryGrantsRequest",
+      value: QueryGrantsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGrantsRequestProtoMsg): QueryGrantsRequest {
+    return QueryGrantsRequest.decode(message.value);
+  },
+  toProto(message: QueryGrantsRequest): Uint8Array {
+    return QueryGrantsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGrantsRequest): QueryGrantsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest",
+      value: QueryGrantsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGrantsResponse(): QueryGrantsResponse {
@@ -183,6 +221,7 @@ function createBaseQueryGrantsResponse(): QueryGrantsResponse {
   };
 }
 export const QueryGrantsResponse = {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse",
   encode(message: QueryGrantsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.grants) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -255,6 +294,43 @@ export const QueryGrantsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGrantsResponseAmino): QueryGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGrantsResponse): QueryGrantsResponseAmino {
+    const obj: any = {};
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? Grant.toAmino(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGrantsResponseAminoMsg): QueryGrantsResponse {
+    return QueryGrantsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGrantsResponse): QueryGrantsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryGrantsResponse",
+      value: QueryGrantsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGrantsResponseProtoMsg): QueryGrantsResponse {
+    return QueryGrantsResponse.decode(message.value);
+  },
+  toProto(message: QueryGrantsResponse): Uint8Array {
+    return QueryGrantsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGrantsResponse): QueryGrantsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse",
+      value: QueryGrantsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
@@ -264,6 +340,7 @@ function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
   };
 }
 export const QueryGranterGrantsRequest = {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest",
   encode(message: QueryGranterGrantsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -328,6 +405,39 @@ export const QueryGranterGrantsRequest = {
     obj.granter = message.granter;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGranterGrantsRequestAmino): QueryGranterGrantsRequest {
+    return {
+      granter: object.granter,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAmino {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGranterGrantsRequestAminoMsg): QueryGranterGrantsRequest {
+    return QueryGranterGrantsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryGranterGrantsRequest",
+      value: QueryGranterGrantsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGranterGrantsRequestProtoMsg): QueryGranterGrantsRequest {
+    return QueryGranterGrantsRequest.decode(message.value);
+  },
+  toProto(message: QueryGranterGrantsRequest): Uint8Array {
+    return QueryGranterGrantsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest",
+      value: QueryGranterGrantsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
@@ -337,6 +447,7 @@ function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
   };
 }
 export const QueryGranterGrantsResponse = {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse",
   encode(message: QueryGranterGrantsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -409,6 +520,43 @@ export const QueryGranterGrantsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGranterGrantsResponseAmino): QueryGranterGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseAmino {
+    const obj: any = {};
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGranterGrantsResponseAminoMsg): QueryGranterGrantsResponse {
+    return QueryGranterGrantsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryGranterGrantsResponse",
+      value: QueryGranterGrantsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGranterGrantsResponseProtoMsg): QueryGranterGrantsResponse {
+    return QueryGranterGrantsResponse.decode(message.value);
+  },
+  toProto(message: QueryGranterGrantsResponse): Uint8Array {
+    return QueryGranterGrantsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse",
+      value: QueryGranterGrantsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
@@ -418,6 +566,7 @@ function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
   };
 }
 export const QueryGranteeGrantsRequest = {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest",
   encode(message: QueryGranteeGrantsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
@@ -482,6 +631,39 @@ export const QueryGranteeGrantsRequest = {
     obj.grantee = message.grantee;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGranteeGrantsRequestAmino): QueryGranteeGrantsRequest {
+    return {
+      grantee: object.grantee,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAmino {
+    const obj: any = {};
+    obj.grantee = message.grantee;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGranteeGrantsRequestAminoMsg): QueryGranteeGrantsRequest {
+    return QueryGranteeGrantsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryGranteeGrantsRequest",
+      value: QueryGranteeGrantsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGranteeGrantsRequestProtoMsg): QueryGranteeGrantsRequest {
+    return QueryGranteeGrantsRequest.decode(message.value);
+  },
+  toProto(message: QueryGranteeGrantsRequest): Uint8Array {
+    return QueryGranteeGrantsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest",
+      value: QueryGranteeGrantsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
@@ -491,6 +673,7 @@ function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
   };
 }
 export const QueryGranteeGrantsResponse = {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse",
   encode(message: QueryGranteeGrantsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -563,5 +746,42 @@ export const QueryGranteeGrantsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGranteeGrantsResponseAmino): QueryGranteeGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseAmino {
+    const obj: any = {};
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGranteeGrantsResponseAminoMsg): QueryGranteeGrantsResponse {
+    return QueryGranteeGrantsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryGranteeGrantsResponse",
+      value: QueryGranteeGrantsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGranteeGrantsResponseProtoMsg): QueryGranteeGrantsResponse {
+    return QueryGranteeGrantsResponse.decode(message.value);
+  },
+  toProto(message: QueryGranteeGrantsResponse): Uint8Array {
+    return QueryGranteeGrantsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse",
+      value: QueryGranteeGrantsResponse.encode(message).finish()
+    };
   }
 };

@@ -1,5 +1,5 @@
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -46,7 +46,7 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
 }
 export interface DeploymentIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DeploymentID";
@@ -64,14 +64,14 @@ export interface DeploymentIDAminoMsg {
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
   deploymentId: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
-  createdAt: Long;
+  createdAt: bigint;
 }
 export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Deployment";
@@ -93,12 +93,12 @@ export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
-  created_at: Long;
+  created_at: bigint;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFilters {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   state: string;
 }
 export interface DeploymentFiltersProtoMsg {
@@ -118,28 +118,28 @@ export interface DeploymentFiltersAminoMsg {
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   state: string;
 }
 function createBaseDeploymentID(): DeploymentID {
   return {
     owner: "",
-    dseq: Long.UZERO
+    dseq: BigInt(0)
   };
 }
 export const DeploymentID = {
   typeUrl: "/akash.deployment.v1beta2.DeploymentID",
-  encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentID();
     while (reader.pos < end) {
@@ -149,7 +149,7 @@ export const DeploymentID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -159,21 +159,28 @@ export const DeploymentID = {
     return message;
   },
   fromJSON(object: any): DeploymentID {
+<<<<<<< HEAD
     const obj = createBaseDeploymentID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
     return obj;
+=======
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0)
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
@@ -191,7 +198,7 @@ export const DeploymentID = {
   fromAmino(object: DeploymentIDAmino): DeploymentID {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq)
+      dseq: BigInt(object.dseq)
     };
   },
   toAmino(message: DeploymentID): DeploymentIDAmino {
@@ -221,12 +228,12 @@ function createBaseDeployment(): Deployment {
     deploymentId: DeploymentID.fromPartial({}),
     state: 0,
     version: new Uint8Array(),
-    createdAt: Long.ZERO
+    createdAt: BigInt(0)
   };
 }
 export const Deployment = {
   typeUrl: "/akash.deployment.v1beta2.Deployment",
-  encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Deployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
     }
@@ -236,13 +243,13 @@ export const Deployment = {
     if (message.version.length !== 0) {
       writer.uint32(26).bytes(message.version);
     }
-    if (!message.createdAt.isZero()) {
+    if (message.createdAt !== BigInt(0)) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Deployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Deployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeployment();
     while (reader.pos < end) {
@@ -258,7 +265,7 @@ export const Deployment = {
           message.version = reader.bytes();
           break;
         case 4:
-          message.createdAt = (reader.int64() as Long);
+          message.createdAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -268,19 +275,28 @@ export const Deployment = {
     return message;
   },
   fromJSON(object: any): Deployment {
+<<<<<<< HEAD
     const obj = createBaseDeployment();
     if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
     if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
     return obj;
+=======
+    return {
+      deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: Deployment): unknown {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
     message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Deployment>): Deployment {
@@ -288,7 +304,7 @@ export const Deployment = {
     message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: DeploymentSDKType): Deployment {
@@ -312,7 +328,7 @@ export const Deployment = {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object.version,
-      createdAt: Long.fromString(object.created_at)
+      createdAt: BigInt(object.created_at)
     };
   },
   toAmino(message: Deployment): DeploymentAmino {
@@ -342,17 +358,17 @@ export const Deployment = {
 function createBaseDeploymentFilters(): DeploymentFilters {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     state: ""
   };
 }
 export const DeploymentFilters = {
   typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
-  encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.state !== "") {
@@ -360,8 +376,8 @@ export const DeploymentFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentFilters();
     while (reader.pos < end) {
@@ -371,7 +387,7 @@ export const DeploymentFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.state = reader.string();
@@ -384,23 +400,31 @@ export const DeploymentFilters = {
     return message;
   },
   fromJSON(object: any): DeploymentFilters {
+<<<<<<< HEAD
     const obj = createBaseDeploymentFilters();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
+=======
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
+      state: isSet(object.state) ? String(object.state) : ""
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
   fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.state = object.state ?? "";
     return message;
   },
@@ -421,7 +445,7 @@ export const DeploymentFilters = {
   fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       state: object.state
     };
   },

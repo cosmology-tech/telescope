@@ -31,6 +31,7 @@ function createBaseGenesisDeployment(): GenesisDeployment {
   };
 }
 export const GenesisDeployment = {
+  typeUrl: "/akash.deployment.v1beta2.GenesisDeployment",
   encode(message: GenesisDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -103,6 +104,43 @@ export const GenesisDeployment = {
       obj.groups = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisDeploymentAmino): GenesisDeployment {
+    return {
+      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
+    const obj: any = {};
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
+    return GenesisDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisDeployment): GenesisDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/genesis-deployment",
+      value: GenesisDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
+    return GenesisDeployment.decode(message.value);
+  },
+  toProto(message: GenesisDeployment): Uint8Array {
+    return GenesisDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisDeployment): GenesisDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GenesisDeployment",
+      value: GenesisDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -112,6 +150,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
+  typeUrl: "/akash.deployment.v1beta2.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.deployments) {
       GenesisDeployment.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -184,5 +223,42 @@ export const GenesisState = {
     }
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

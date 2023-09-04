@@ -86,6 +86,7 @@ function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   };
 }
 export const QueryTokenPairsRequest = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest",
   encode(message: QueryTokenPairsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -138,6 +139,31 @@ export const QueryTokenPairsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryTokenPairsRequestAmino): QueryTokenPairsRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryTokenPairsRequest): QueryTokenPairsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairsRequestAminoMsg): QueryTokenPairsRequest {
+    return QueryTokenPairsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTokenPairsRequestProtoMsg): QueryTokenPairsRequest {
+    return QueryTokenPairsRequest.decode(message.value);
+  },
+  toProto(message: QueryTokenPairsRequest): Uint8Array {
+    return QueryTokenPairsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTokenPairsRequest): QueryTokenPairsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest",
+      value: QueryTokenPairsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
@@ -147,6 +173,7 @@ function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
   };
 }
 export const QueryTokenPairsResponse = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse",
   encode(message: QueryTokenPairsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokenPairs) {
       TokenPair.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -219,6 +246,37 @@ export const QueryTokenPairsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryTokenPairsResponseAmino): QueryTokenPairsResponse {
+    return {
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryTokenPairsResponse): QueryTokenPairsResponseAmino {
+    const obj: any = {};
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairsResponseAminoMsg): QueryTokenPairsResponse {
+    return QueryTokenPairsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTokenPairsResponseProtoMsg): QueryTokenPairsResponse {
+    return QueryTokenPairsResponse.decode(message.value);
+  },
+  toProto(message: QueryTokenPairsResponse): Uint8Array {
+    return QueryTokenPairsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTokenPairsResponse): QueryTokenPairsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse",
+      value: QueryTokenPairsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
@@ -227,6 +285,7 @@ function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
   };
 }
 export const QueryTokenPairRequest = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
   encode(message: QueryTokenPairRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.token !== "") {
       writer.uint32(10).string(message.token);
@@ -279,6 +338,31 @@ export const QueryTokenPairRequest = {
     const obj: any = {};
     obj.token = message.token;
     return obj;
+  },
+  fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
+    return {
+      token: object.token
+    };
+  },
+  toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {
+    const obj: any = {};
+    obj.token = message.token;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairRequestAminoMsg): QueryTokenPairRequest {
+    return QueryTokenPairRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTokenPairRequestProtoMsg): QueryTokenPairRequest {
+    return QueryTokenPairRequest.decode(message.value);
+  },
+  toProto(message: QueryTokenPairRequest): Uint8Array {
+    return QueryTokenPairRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTokenPairRequest): QueryTokenPairRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
+      value: QueryTokenPairRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
@@ -287,6 +371,7 @@ function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
   };
 }
 export const QueryTokenPairResponse = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse",
   encode(message: QueryTokenPairResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenPair !== undefined) {
       TokenPair.encode(message.tokenPair, writer.uint32(10).fork()).ldelim();
@@ -339,12 +424,38 @@ export const QueryTokenPairResponse = {
     const obj: any = {};
     message.tokenPair !== undefined && (obj.token_pair = message.tokenPair ? TokenPair.toSDK(message.tokenPair) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryTokenPairResponseAmino): QueryTokenPairResponse {
+    return {
+      tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : undefined
+    };
+  },
+  toAmino(message: QueryTokenPairResponse): QueryTokenPairResponseAmino {
+    const obj: any = {};
+    obj.token_pair = message.tokenPair ? TokenPair.toAmino(message.tokenPair) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairResponseAminoMsg): QueryTokenPairResponse {
+    return QueryTokenPairResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTokenPairResponseProtoMsg): QueryTokenPairResponse {
+    return QueryTokenPairResponse.decode(message.value);
+  },
+  toProto(message: QueryTokenPairResponse): Uint8Array {
+    return QueryTokenPairResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTokenPairResponse): QueryTokenPairResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse",
+      value: QueryTokenPairResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.erc20.v1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -383,6 +494,28 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -391,6 +524,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.erc20.v1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -443,5 +577,30 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 };

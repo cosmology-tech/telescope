@@ -1,6 +1,6 @@
 import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -54,7 +54,7 @@ export function order_StateToJSON(object: Order_State): string {
 /** OrderID stores owner and all other seq numbers */
 export interface OrderID {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
 }
@@ -76,7 +76,7 @@ export interface OrderIDAminoMsg {
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
 }
@@ -85,7 +85,7 @@ export interface Order {
   orderId: OrderID;
   state: Order_State;
   spec: GroupSpec;
-  createdAt: Long;
+  createdAt: bigint;
 }
 export interface OrderProtoMsg {
   typeUrl: "/akash.market.v1beta2.Order";
@@ -107,12 +107,12 @@ export interface OrderSDKType {
   order_id: OrderIDSDKType;
   state: Order_State;
   spec: GroupSpecSDKType;
-  created_at: Long;
+  created_at: bigint;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFilters {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   state: string;
@@ -136,7 +136,7 @@ export interface OrderFiltersAminoMsg {
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   state: string;
@@ -144,18 +144,18 @@ export interface OrderFiltersSDKType {
 function createBaseOrderID(): OrderID {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0
   };
 }
 export const OrderID = {
   typeUrl: "/akash.market.v1beta2.OrderID",
-  encode(message: OrderID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OrderID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -166,8 +166,8 @@ export const OrderID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OrderID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OrderID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderID();
     while (reader.pos < end) {
@@ -177,7 +177,7 @@ export const OrderID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -193,17 +193,26 @@ export const OrderID = {
     return message;
   },
   fromJSON(object: any): OrderID {
+<<<<<<< HEAD
     const obj = createBaseOrderID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
     if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
     return obj;
+=======
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: OrderID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     return obj;
@@ -211,7 +220,7 @@ export const OrderID = {
   fromPartial(object: DeepPartial<OrderID>): OrderID {
     const message = createBaseOrderID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     return message;
@@ -235,7 +244,7 @@ export const OrderID = {
   fromAmino(object: OrderIDAmino): OrderID {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       gseq: object.gseq,
       oseq: object.oseq
     };
@@ -269,12 +278,12 @@ function createBaseOrder(): Order {
     orderId: OrderID.fromPartial({}),
     state: 0,
     spec: GroupSpec.fromPartial({}),
-    createdAt: Long.ZERO
+    createdAt: BigInt(0)
   };
 }
 export const Order = {
   typeUrl: "/akash.market.v1beta2.Order",
-  encode(message: Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Order, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.orderId !== undefined) {
       OrderID.encode(message.orderId, writer.uint32(10).fork()).ldelim();
     }
@@ -284,13 +293,13 @@ export const Order = {
     if (message.spec !== undefined) {
       GroupSpec.encode(message.spec, writer.uint32(26).fork()).ldelim();
     }
-    if (!message.createdAt.isZero()) {
+    if (message.createdAt !== BigInt(0)) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Order {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Order {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrder();
     while (reader.pos < end) {
@@ -306,7 +315,7 @@ export const Order = {
           message.spec = GroupSpec.decode(reader, reader.uint32());
           break;
         case 4:
-          message.createdAt = (reader.int64() as Long);
+          message.createdAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -316,27 +325,41 @@ export const Order = {
     return message;
   },
   fromJSON(object: any): Order {
+<<<<<<< HEAD
     const obj = createBaseOrder();
     if (isSet(object.orderId)) obj.orderId = OrderID.fromJSON(object.orderId);
     if (isSet(object.state)) obj.state = order_StateFromJSON(object.state);
     if (isSet(object.spec)) obj.spec = GroupSpec.fromJSON(object.spec);
     if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
     return obj;
+=======
+    return {
+      orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
+      spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: Order): unknown {
     const obj: any = {};
     message.orderId !== undefined && (obj.orderId = message.orderId ? OrderID.toJSON(message.orderId) : undefined);
     message.state !== undefined && (obj.state = order_StateToJSON(message.state));
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toJSON(message.spec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Order>): Order {
     const message = createBaseOrder();
     message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : OrderID.fromPartial({});
     message.state = object.state ?? 0;
+<<<<<<< HEAD
     message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : GroupSpec.fromPartial({});
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+=======
+    message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : undefined;
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
+>>>>>>> changes-v1
     return message;
   },
   fromSDK(object: OrderSDKType): Order {
@@ -360,7 +383,7 @@ export const Order = {
       orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
-      createdAt: Long.fromString(object.created_at)
+      createdAt: BigInt(object.created_at)
     };
   },
   toAmino(message: Order): OrderAmino {
@@ -390,7 +413,7 @@ export const Order = {
 function createBaseOrderFilters(): OrderFilters {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     state: ""
@@ -398,11 +421,11 @@ function createBaseOrderFilters(): OrderFilters {
 }
 export const OrderFilters = {
   typeUrl: "/akash.market.v1beta2.OrderFilters",
-  encode(message: OrderFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OrderFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -416,8 +439,8 @@ export const OrderFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OrderFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OrderFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderFilters();
     while (reader.pos < end) {
@@ -427,7 +450,7 @@ export const OrderFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -446,6 +469,7 @@ export const OrderFilters = {
     return message;
   },
   fromJSON(object: any): OrderFilters {
+<<<<<<< HEAD
     const obj = createBaseOrderFilters();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
@@ -453,11 +477,20 @@ export const OrderFilters = {
     if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
+=======
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      state: isSet(object.state) ? String(object.state) : ""
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: OrderFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.state !== undefined && (obj.state = message.state);
@@ -466,7 +499,7 @@ export const OrderFilters = {
   fromPartial(object: DeepPartial<OrderFilters>): OrderFilters {
     const message = createBaseOrderFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.state = object.state ?? "";
@@ -493,7 +526,7 @@ export const OrderFilters = {
   fromAmino(object: OrderFiltersAmino): OrderFilters {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       gseq: object.gseq,
       oseq: object.oseq,
       state: object.state

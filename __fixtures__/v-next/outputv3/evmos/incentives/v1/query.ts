@@ -2,8 +2,8 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
@@ -227,7 +227,7 @@ export interface QueryGasMeterResponse {
    * QueryGasMeterResponse is the response type for the Query/Incentive RPC
    * method.
    */
-  gasMeter: Long;
+  gasMeter: bigint;
 }
 export interface QueryGasMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse";
@@ -253,7 +253,7 @@ export interface QueryGasMeterResponseAminoMsg {
  * method.
  */
 export interface QueryGasMeterResponseSDKType {
-  gas_meter: Long;
+  gas_meter: bigint;
 }
 /**
  * QueryAllocationMetersRequest is the request type for the
@@ -430,14 +430,14 @@ function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
 }
 export const QueryIncentivesRequest = {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest",
-  encode(message: QueryIncentivesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentivesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentivesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesRequest();
     while (reader.pos < end) {
@@ -512,7 +512,7 @@ function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
 }
 export const QueryIncentivesResponse = {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse",
-  encode(message: QueryIncentivesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentivesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.incentives) {
       Incentive.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -521,8 +521,8 @@ export const QueryIncentivesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentivesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesResponse();
     while (reader.pos < end) {
@@ -618,14 +618,14 @@ function createBaseQueryIncentiveRequest(): QueryIncentiveRequest {
 }
 export const QueryIncentiveRequest = {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
-  encode(message: QueryIncentiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentiveRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentiveRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentiveRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveRequest();
     while (reader.pos < end) {
@@ -699,14 +699,14 @@ function createBaseQueryIncentiveResponse(): QueryIncentiveResponse {
 }
 export const QueryIncentiveResponse = {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse",
-  encode(message: QueryIncentiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentiveResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.incentive !== undefined) {
       Incentive.encode(message.incentive, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentiveResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentiveResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveResponse();
     while (reader.pos < end) {
@@ -781,7 +781,7 @@ function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
 }
 export const QueryGasMetersRequest = {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
-  encode(message: QueryGasMetersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGasMetersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
@@ -790,8 +790,8 @@ export const QueryGasMetersRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMetersRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMetersRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersRequest();
     while (reader.pos < end) {
@@ -876,7 +876,7 @@ function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
 }
 export const QueryGasMetersResponse = {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse",
-  encode(message: QueryGasMetersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGasMetersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.gasMeters) {
       GasMeter.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -885,8 +885,8 @@ export const QueryGasMetersResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMetersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMetersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersResponse();
     while (reader.pos < end) {
@@ -983,7 +983,7 @@ function createBaseQueryGasMeterRequest(): QueryGasMeterRequest {
 }
 export const QueryGasMeterRequest = {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
-  encode(message: QueryGasMeterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGasMeterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
@@ -992,8 +992,8 @@ export const QueryGasMeterRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMeterRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMeterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterRequest();
     while (reader.pos < end) {
@@ -1072,26 +1072,26 @@ export const QueryGasMeterRequest = {
 };
 function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
   return {
-    gasMeter: Long.UZERO
+    gasMeter: BigInt(0)
   };
 }
 export const QueryGasMeterResponse = {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
-  encode(message: QueryGasMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.gasMeter.isZero()) {
+  encode(message: QueryGasMeterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.gasMeter !== BigInt(0)) {
       writer.uint32(8).uint64(message.gasMeter);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMeterResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMeterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gasMeter = (reader.uint64() as Long);
+          message.gasMeter = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1101,18 +1101,24 @@ export const QueryGasMeterResponse = {
     return message;
   },
   fromJSON(object: any): QueryGasMeterResponse {
+<<<<<<< HEAD
     const obj = createBaseQueryGasMeterResponse();
     if (isSet(object.gasMeter)) obj.gasMeter = Long.fromValue(object.gasMeter);
     return obj;
+=======
+    return {
+      gasMeter: isSet(object.gasMeter) ? BigInt(object.gasMeter.toString()) : BigInt(0)
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: QueryGasMeterResponse): unknown {
     const obj: any = {};
-    message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || Long.UZERO).toString());
+    message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGasMeterResponse>): QueryGasMeterResponse {
     const message = createBaseQueryGasMeterResponse();
-    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? Long.fromValue(object.gasMeter) : Long.UZERO;
+    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? BigInt(object.gasMeter.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryGasMeterResponseSDKType): QueryGasMeterResponse {
@@ -1127,7 +1133,7 @@ export const QueryGasMeterResponse = {
   },
   fromAmino(object: QueryGasMeterResponseAmino): QueryGasMeterResponse {
     return {
-      gasMeter: Long.fromString(object.gas_meter)
+      gasMeter: BigInt(object.gas_meter)
     };
   },
   toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
@@ -1158,14 +1164,14 @@ function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest 
 }
 export const QueryAllocationMetersRequest = {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest",
-  encode(message: QueryAllocationMetersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllocationMetersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMetersRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMetersRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersRequest();
     while (reader.pos < end) {
@@ -1240,7 +1246,7 @@ function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersRespons
 }
 export const QueryAllocationMetersResponse = {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse",
-  encode(message: QueryAllocationMetersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllocationMetersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allocationMeters) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1249,8 +1255,8 @@ export const QueryAllocationMetersResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMetersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMetersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersResponse();
     while (reader.pos < end) {
@@ -1346,14 +1352,14 @@ function createBaseQueryAllocationMeterRequest(): QueryAllocationMeterRequest {
 }
 export const QueryAllocationMeterRequest = {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
-  encode(message: QueryAllocationMeterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllocationMeterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMeterRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMeterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterRequest();
     while (reader.pos < end) {
@@ -1427,14 +1433,14 @@ function createBaseQueryAllocationMeterResponse(): QueryAllocationMeterResponse 
 }
 export const QueryAllocationMeterResponse = {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse",
-  encode(message: QueryAllocationMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllocationMeterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.allocationMeter !== undefined) {
       DecCoin.encode(message.allocationMeter, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMeterResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMeterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterResponse();
     while (reader.pos < end) {
@@ -1506,11 +1512,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/evmos.incentives.v1.QueryParamsRequest",
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -1572,14 +1578,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/evmos.incentives.v1.QueryParamsResponse",
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {

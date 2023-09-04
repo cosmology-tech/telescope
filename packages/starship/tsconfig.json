@@ -1,18 +1,21 @@
 {
-    "compilerOptions": {
-        "declaration": true,
-        "declarationDir": "./types",
-        "emitDeclarationOnly": true,
-        "isolatedModules": true,
-        "allowJs": true,
-        "lib": [
-            "es2015"
-        ]
-    },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": false,
+    "isolatedModules": true,
+    "allowJs": true,
+
+    "esModuleInterop": true,
+    "target": "es2022",
+    "lib": ["es2022", "DOM"],
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

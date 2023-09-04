@@ -1,6 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -12,13 +13,13 @@ export const protobufPackage = "osmosis.twap.v1beta1";
  * now.
  */
 export interface TwapRecord {
-  poolId: Long;
+  poolId: bigint;
   /** Lexicographically smaller denom of the pair */
   asset0Denom: string;
   /** Lexicographically larger denom of the pair */
   asset1Denom: string;
   /** height this record corresponds to, for debugging purposes */
-  height: Long;
+  height: bigint;
   /**
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
@@ -94,10 +95,10 @@ export interface TwapRecordAminoMsg {
  * now.
  */
 export interface TwapRecordSDKType {
-  pool_id: Long;
+  pool_id: bigint;
   asset0_denom: string;
   asset1_denom: string;
-  height: Long;
+  height: bigint;
   time: Date;
   p0_last_spot_price: string;
   p1_last_spot_price: string;
@@ -107,10 +108,10 @@ export interface TwapRecordSDKType {
 }
 function createBaseTwapRecord(): TwapRecord {
   return {
-    poolId: Long.UZERO,
+    poolId: BigInt(0),
     asset0Denom: "",
     asset1Denom: "",
-    height: Long.ZERO,
+    height: BigInt(0),
     time: new Date(),
     p0LastSpotPrice: "",
     p1LastSpotPrice: "",
@@ -122,8 +123,8 @@ function createBaseTwapRecord(): TwapRecord {
 export const TwapRecord = {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
   aminoType: "osmosis/twap/twap-record",
-  encode(message: TwapRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
+  encode(message: TwapRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.asset0Denom !== "") {
@@ -132,38 +133,38 @@ export const TwapRecord = {
     if (message.asset1Denom !== "") {
       writer.uint32(26).string(message.asset1Denom);
     }
-    if (!message.height.isZero()) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(32).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(42).fork()).ldelim();
     }
     if (message.p0LastSpotPrice !== "") {
-      writer.uint32(50).string(message.p0LastSpotPrice);
+      writer.uint32(50).string(Decimal.fromUserInput(message.p0LastSpotPrice, 18).atomics);
     }
     if (message.p1LastSpotPrice !== "") {
-      writer.uint32(58).string(message.p1LastSpotPrice);
+      writer.uint32(58).string(Decimal.fromUserInput(message.p1LastSpotPrice, 18).atomics);
     }
     if (message.p0ArithmeticTwapAccumulator !== "") {
-      writer.uint32(66).string(message.p0ArithmeticTwapAccumulator);
+      writer.uint32(66).string(Decimal.fromUserInput(message.p0ArithmeticTwapAccumulator, 18).atomics);
     }
     if (message.p1ArithmeticTwapAccumulator !== "") {
-      writer.uint32(74).string(message.p1ArithmeticTwapAccumulator);
+      writer.uint32(74).string(Decimal.fromUserInput(message.p1ArithmeticTwapAccumulator, 18).atomics);
     }
     if (message.lastErrorTime !== undefined) {
       Timestamp.encode(toTimestamp(message.lastErrorTime), writer.uint32(90).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TwapRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TwapRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTwapRecord();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.asset0Denom = reader.string();
@@ -172,22 +173,22 @@ export const TwapRecord = {
           message.asset1Denom = reader.string();
           break;
         case 4:
-          message.height = (reader.int64() as Long);
+          message.height = reader.int64();
           break;
         case 5:
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.p0LastSpotPrice = reader.string();
+          message.p0LastSpotPrice = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 7:
-          message.p1LastSpotPrice = reader.string();
+          message.p1LastSpotPrice = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 8:
-          message.p0ArithmeticTwapAccumulator = reader.string();
+          message.p0ArithmeticTwapAccumulator = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 9:
-          message.p1ArithmeticTwapAccumulator = reader.string();
+          message.p1ArithmeticTwapAccumulator = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 11:
           message.lastErrorTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -200,6 +201,7 @@ export const TwapRecord = {
     return message;
   },
   fromJSON(object: any): TwapRecord {
+<<<<<<< HEAD
     const obj = createBaseTwapRecord();
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.asset0Denom)) obj.asset0Denom = String(object.asset0Denom);
@@ -212,13 +214,27 @@ export const TwapRecord = {
     if (isSet(object.p1ArithmeticTwapAccumulator)) obj.p1ArithmeticTwapAccumulator = String(object.p1ArithmeticTwapAccumulator);
     if (isSet(object.lastErrorTime)) obj.lastErrorTime = new Date(object.lastErrorTime);
     return obj;
+=======
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
+      asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
+      p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
+      p0ArithmeticTwapAccumulator: isSet(object.p0ArithmeticTwapAccumulator) ? String(object.p0ArithmeticTwapAccumulator) : "",
+      p1ArithmeticTwapAccumulator: isSet(object.p1ArithmeticTwapAccumulator) ? String(object.p1ArithmeticTwapAccumulator) : "",
+      lastErrorTime: isSet(object.lastErrorTime) ? new Date(object.lastErrorTime) : undefined
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: TwapRecord): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.asset0Denom !== undefined && (obj.asset0Denom = message.asset0Denom);
     message.asset1Denom !== undefined && (obj.asset1Denom = message.asset1Denom);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
     message.p0LastSpotPrice !== undefined && (obj.p0LastSpotPrice = message.p0LastSpotPrice);
     message.p1LastSpotPrice !== undefined && (obj.p1LastSpotPrice = message.p1LastSpotPrice);
@@ -229,10 +245,10 @@ export const TwapRecord = {
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.time = object.time ?? undefined;
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";
@@ -271,10 +287,10 @@ export const TwapRecord = {
   },
   fromAmino(object: TwapRecordAmino): TwapRecord {
     return {
-      poolId: Long.fromString(object.pool_id),
+      poolId: BigInt(object.pool_id),
       asset0Denom: object.asset0_denom,
       asset1Denom: object.asset1_denom,
-      height: Long.fromString(object.height),
+      height: BigInt(object.height),
       time: object.time,
       p0LastSpotPrice: object.p0_last_spot_price,
       p1LastSpotPrice: object.p1_last_spot_price,

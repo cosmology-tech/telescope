@@ -13,6 +13,7 @@ describe('cosmos/gov/v1beta1/tx', () => {
 
     it('AminoConverter', () => {
         context.options.aminoEncoding.casingFn = snake;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createAminoConverter({
             context,
             root,

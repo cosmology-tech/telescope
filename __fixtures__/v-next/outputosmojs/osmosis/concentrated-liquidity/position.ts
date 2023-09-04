@@ -52,6 +52,7 @@ function createBasePosition(): Position {
   };
 }
 export const Position = {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.Position",
   encode(message: Position, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.positionId !== BigInt(0)) {
       writer.uint32(8).uint64(message.positionId);
@@ -176,6 +177,49 @@ export const Position = {
     message.joinTime !== undefined && (obj.join_time = message.joinTime ?? undefined);
     obj.liquidity = message.liquidity;
     return obj;
+  },
+  fromAmino(object: PositionAmino): Position {
+    return {
+      positionId: BigInt(object.position_id),
+      address: object.address,
+      poolId: BigInt(object.pool_id),
+      lowerTick: BigInt(object.lower_tick),
+      upperTick: BigInt(object.upper_tick),
+      joinTime: object.join_time,
+      liquidity: object.liquidity
+    };
+  },
+  toAmino(message: Position): PositionAmino {
+    const obj: any = {};
+    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
+    obj.address = message.address;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.lower_tick = message.lowerTick ? message.lowerTick.toString() : undefined;
+    obj.upper_tick = message.upperTick ? message.upperTick.toString() : undefined;
+    obj.join_time = message.joinTime;
+    obj.liquidity = message.liquidity;
+    return obj;
+  },
+  fromAminoMsg(object: PositionAminoMsg): Position {
+    return Position.fromAmino(object.value);
+  },
+  toAminoMsg(message: Position): PositionAminoMsg {
+    return {
+      type: "osmosis/concentratedliquidity/position",
+      value: Position.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PositionProtoMsg): Position {
+    return Position.decode(message.value);
+  },
+  toProto(message: Position): Uint8Array {
+    return Position.encode(message).finish();
+  },
+  toProtoMsg(message: Position): PositionProtoMsg {
+    return {
+      typeUrl: "/osmosis.concentratedliquidity.v1beta1.Position",
+      value: Position.encode(message).finish()
+    };
   }
 };
 function createBasePositionWithUnderlyingAssetBreakdown(): PositionWithUnderlyingAssetBreakdown {
@@ -186,6 +230,7 @@ function createBasePositionWithUnderlyingAssetBreakdown(): PositionWithUnderlyin
   };
 }
 export const PositionWithUnderlyingAssetBreakdown = {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.PositionWithUnderlyingAssetBreakdown",
   encode(message: PositionWithUnderlyingAssetBreakdown, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.position !== undefined) {
       Position.encode(message.position, writer.uint32(10).fork()).ldelim();
@@ -262,5 +307,40 @@ export const PositionWithUnderlyingAssetBreakdown = {
     message.asset0 !== undefined && (obj.asset0 = message.asset0 ? Coin.toSDK(message.asset0) : undefined);
     message.asset1 !== undefined && (obj.asset1 = message.asset1 ? Coin.toSDK(message.asset1) : undefined);
     return obj;
+  },
+  fromAmino(object: PositionWithUnderlyingAssetBreakdownAmino): PositionWithUnderlyingAssetBreakdown {
+    return {
+      position: object?.position ? Position.fromAmino(object.position) : undefined,
+      asset0: object?.asset0 ? Coin.fromAmino(object.asset0) : undefined,
+      asset1: object?.asset1 ? Coin.fromAmino(object.asset1) : undefined
+    };
+  },
+  toAmino(message: PositionWithUnderlyingAssetBreakdown): PositionWithUnderlyingAssetBreakdownAmino {
+    const obj: any = {};
+    obj.position = message.position ? Position.toAmino(message.position) : undefined;
+    obj.asset0 = message.asset0 ? Coin.toAmino(message.asset0) : undefined;
+    obj.asset1 = message.asset1 ? Coin.toAmino(message.asset1) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PositionWithUnderlyingAssetBreakdownAminoMsg): PositionWithUnderlyingAssetBreakdown {
+    return PositionWithUnderlyingAssetBreakdown.fromAmino(object.value);
+  },
+  toAminoMsg(message: PositionWithUnderlyingAssetBreakdown): PositionWithUnderlyingAssetBreakdownAminoMsg {
+    return {
+      type: "osmosis/concentratedliquidity/position-with-underlying-asset-breakdown",
+      value: PositionWithUnderlyingAssetBreakdown.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PositionWithUnderlyingAssetBreakdownProtoMsg): PositionWithUnderlyingAssetBreakdown {
+    return PositionWithUnderlyingAssetBreakdown.decode(message.value);
+  },
+  toProto(message: PositionWithUnderlyingAssetBreakdown): Uint8Array {
+    return PositionWithUnderlyingAssetBreakdown.encode(message).finish();
+  },
+  toProtoMsg(message: PositionWithUnderlyingAssetBreakdown): PositionWithUnderlyingAssetBreakdownProtoMsg {
+    return {
+      typeUrl: "/osmosis.concentratedliquidity.v1beta1.PositionWithUnderlyingAssetBreakdown",
+      value: PositionWithUnderlyingAssetBreakdown.encode(message).finish()
+    };
   }
 };

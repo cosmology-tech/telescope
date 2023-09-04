@@ -132,6 +132,7 @@ function createBaseTokenPairArbRoutes(): TokenPairArbRoutes {
   };
 }
 export const TokenPairArbRoutes = {
+  typeUrl: "/osmosis.protorev.v1beta1.TokenPairArbRoutes",
   encode(message: TokenPairArbRoutes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.arbRoutes) {
       Route.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -216,6 +217,45 @@ export const TokenPairArbRoutes = {
     obj.token_in = message.tokenIn;
     obj.token_out = message.tokenOut;
     return obj;
+  },
+  fromAmino(object: TokenPairArbRoutesAmino): TokenPairArbRoutes {
+    return {
+      arbRoutes: Array.isArray(object?.arb_routes) ? object.arb_routes.map((e: any) => Route.fromAmino(e)) : [],
+      tokenIn: object.token_in,
+      tokenOut: object.token_out
+    };
+  },
+  toAmino(message: TokenPairArbRoutes): TokenPairArbRoutesAmino {
+    const obj: any = {};
+    if (message.arbRoutes) {
+      obj.arb_routes = message.arbRoutes.map(e => e ? Route.toAmino(e) : undefined);
+    } else {
+      obj.arb_routes = [];
+    }
+    obj.token_in = message.tokenIn;
+    obj.token_out = message.tokenOut;
+    return obj;
+  },
+  fromAminoMsg(object: TokenPairArbRoutesAminoMsg): TokenPairArbRoutes {
+    return TokenPairArbRoutes.fromAmino(object.value);
+  },
+  toAminoMsg(message: TokenPairArbRoutes): TokenPairArbRoutesAminoMsg {
+    return {
+      type: "osmosis/protorev/token-pair-arb-routes",
+      value: TokenPairArbRoutes.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: TokenPairArbRoutesProtoMsg): TokenPairArbRoutes {
+    return TokenPairArbRoutes.decode(message.value);
+  },
+  toProto(message: TokenPairArbRoutes): Uint8Array {
+    return TokenPairArbRoutes.encode(message).finish();
+  },
+  toProtoMsg(message: TokenPairArbRoutes): TokenPairArbRoutesProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.TokenPairArbRoutes",
+      value: TokenPairArbRoutes.encode(message).finish()
+    };
   }
 };
 function createBaseRoute(): Route {
@@ -225,6 +265,7 @@ function createBaseRoute(): Route {
   };
 }
 export const Route = {
+  typeUrl: "/osmosis.protorev.v1beta1.Route",
   encode(message: Route, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.trades) {
       Trade.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -297,6 +338,43 @@ export const Route = {
     }
     obj.step_size = message.stepSize;
     return obj;
+  },
+  fromAmino(object: RouteAmino): Route {
+    return {
+      trades: Array.isArray(object?.trades) ? object.trades.map((e: any) => Trade.fromAmino(e)) : [],
+      stepSize: object.step_size
+    };
+  },
+  toAmino(message: Route): RouteAmino {
+    const obj: any = {};
+    if (message.trades) {
+      obj.trades = message.trades.map(e => e ? Trade.toAmino(e) : undefined);
+    } else {
+      obj.trades = [];
+    }
+    obj.step_size = message.stepSize;
+    return obj;
+  },
+  fromAminoMsg(object: RouteAminoMsg): Route {
+    return Route.fromAmino(object.value);
+  },
+  toAminoMsg(message: Route): RouteAminoMsg {
+    return {
+      type: "osmosis/protorev/route",
+      value: Route.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: RouteProtoMsg): Route {
+    return Route.decode(message.value);
+  },
+  toProto(message: Route): Uint8Array {
+    return Route.encode(message).finish();
+  },
+  toProtoMsg(message: Route): RouteProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.Route",
+      value: Route.encode(message).finish()
+    };
   }
 };
 function createBaseTrade(): Trade {
@@ -307,6 +385,7 @@ function createBaseTrade(): Trade {
   };
 }
 export const Trade = {
+  typeUrl: "/osmosis.protorev.v1beta1.Trade",
   encode(message: Trade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== BigInt(0)) {
       writer.uint32(8).uint64(message.pool);
@@ -383,6 +462,41 @@ export const Trade = {
     obj.token_in = message.tokenIn;
     obj.token_out = message.tokenOut;
     return obj;
+  },
+  fromAmino(object: TradeAmino): Trade {
+    return {
+      pool: BigInt(object.pool),
+      tokenIn: object.token_in,
+      tokenOut: object.token_out
+    };
+  },
+  toAmino(message: Trade): TradeAmino {
+    const obj: any = {};
+    obj.pool = message.pool ? message.pool.toString() : undefined;
+    obj.token_in = message.tokenIn;
+    obj.token_out = message.tokenOut;
+    return obj;
+  },
+  fromAminoMsg(object: TradeAminoMsg): Trade {
+    return Trade.fromAmino(object.value);
+  },
+  toAminoMsg(message: Trade): TradeAminoMsg {
+    return {
+      type: "osmosis/protorev/trade",
+      value: Trade.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: TradeProtoMsg): Trade {
+    return Trade.decode(message.value);
+  },
+  toProto(message: Trade): Uint8Array {
+    return Trade.encode(message).finish();
+  },
+  toProtoMsg(message: Trade): TradeProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.Trade",
+      value: Trade.encode(message).finish()
+    };
   }
 };
 function createBaseRouteStatistics(): RouteStatistics {
@@ -393,6 +507,7 @@ function createBaseRouteStatistics(): RouteStatistics {
   };
 }
 export const RouteStatistics = {
+  typeUrl: "/osmosis.protorev.v1beta1.RouteStatistics",
   encode(message: RouteStatistics, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.profits) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -494,6 +609,49 @@ export const RouteStatistics = {
       obj.route = [];
     }
     return obj;
+  },
+  fromAmino(object: RouteStatisticsAmino): RouteStatistics {
+    return {
+      profits: Array.isArray(object?.profits) ? object.profits.map((e: any) => Coin.fromAmino(e)) : [],
+      numberOfTrades: object.number_of_trades,
+      route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e)) : []
+    };
+  },
+  toAmino(message: RouteStatistics): RouteStatisticsAmino {
+    const obj: any = {};
+    if (message.profits) {
+      obj.profits = message.profits.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.profits = [];
+    }
+    obj.number_of_trades = message.numberOfTrades;
+    if (message.route) {
+      obj.route = message.route.map(e => e.toString());
+    } else {
+      obj.route = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: RouteStatisticsAminoMsg): RouteStatistics {
+    return RouteStatistics.fromAmino(object.value);
+  },
+  toAminoMsg(message: RouteStatistics): RouteStatisticsAminoMsg {
+    return {
+      type: "osmosis/protorev/route-statistics",
+      value: RouteStatistics.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: RouteStatisticsProtoMsg): RouteStatistics {
+    return RouteStatistics.decode(message.value);
+  },
+  toProto(message: RouteStatistics): Uint8Array {
+    return RouteStatistics.encode(message).finish();
+  },
+  toProtoMsg(message: RouteStatistics): RouteStatisticsProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.RouteStatistics",
+      value: RouteStatistics.encode(message).finish()
+    };
   }
 };
 function createBasePoolWeights(): PoolWeights {
@@ -504,6 +662,7 @@ function createBasePoolWeights(): PoolWeights {
   };
 }
 export const PoolWeights = {
+  typeUrl: "/osmosis.protorev.v1beta1.PoolWeights",
   encode(message: PoolWeights, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.stableWeight !== BigInt(0)) {
       writer.uint32(8).uint64(message.stableWeight);
@@ -580,6 +739,41 @@ export const PoolWeights = {
     obj.balancer_weight = message.balancerWeight;
     obj.concentrated_weight = message.concentratedWeight;
     return obj;
+  },
+  fromAmino(object: PoolWeightsAmino): PoolWeights {
+    return {
+      stableWeight: BigInt(object.stable_weight),
+      balancerWeight: BigInt(object.balancer_weight),
+      concentratedWeight: BigInt(object.concentrated_weight)
+    };
+  },
+  toAmino(message: PoolWeights): PoolWeightsAmino {
+    const obj: any = {};
+    obj.stable_weight = message.stableWeight ? message.stableWeight.toString() : undefined;
+    obj.balancer_weight = message.balancerWeight ? message.balancerWeight.toString() : undefined;
+    obj.concentrated_weight = message.concentratedWeight ? message.concentratedWeight.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PoolWeightsAminoMsg): PoolWeights {
+    return PoolWeights.fromAmino(object.value);
+  },
+  toAminoMsg(message: PoolWeights): PoolWeightsAminoMsg {
+    return {
+      type: "osmosis/protorev/pool-weights",
+      value: PoolWeights.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PoolWeightsProtoMsg): PoolWeights {
+    return PoolWeights.decode(message.value);
+  },
+  toProto(message: PoolWeights): Uint8Array {
+    return PoolWeights.encode(message).finish();
+  },
+  toProtoMsg(message: PoolWeights): PoolWeightsProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.PoolWeights",
+      value: PoolWeights.encode(message).finish()
+    };
   }
 };
 function createBaseBaseDenom(): BaseDenom {
@@ -589,6 +783,7 @@ function createBaseBaseDenom(): BaseDenom {
   };
 }
 export const BaseDenom = {
+  typeUrl: "/osmosis.protorev.v1beta1.BaseDenom",
   encode(message: BaseDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -653,5 +848,38 @@ export const BaseDenom = {
     obj.denom = message.denom;
     obj.step_size = message.stepSize;
     return obj;
+  },
+  fromAmino(object: BaseDenomAmino): BaseDenom {
+    return {
+      denom: object.denom,
+      stepSize: object.step_size
+    };
+  },
+  toAmino(message: BaseDenom): BaseDenomAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.step_size = message.stepSize;
+    return obj;
+  },
+  fromAminoMsg(object: BaseDenomAminoMsg): BaseDenom {
+    return BaseDenom.fromAmino(object.value);
+  },
+  toAminoMsg(message: BaseDenom): BaseDenomAminoMsg {
+    return {
+      type: "osmosis/protorev/base-denom",
+      value: BaseDenom.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: BaseDenomProtoMsg): BaseDenom {
+    return BaseDenom.decode(message.value);
+  },
+  toProto(message: BaseDenom): Uint8Array {
+    return BaseDenom.encode(message).finish();
+  },
+  toProtoMsg(message: BaseDenom): BaseDenomProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.BaseDenom",
+      value: BaseDenom.encode(message).finish()
+    };
   }
 };

@@ -1,5 +1,5 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /**
@@ -7,6 +7,7 @@ export const protobufPackage = "akash.deployment.v1beta1";
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorization {
+  $typeUrl?: string;
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
@@ -37,23 +38,25 @@ export interface DepositDeploymentAuthorizationAminoMsg {
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
+  $typeUrl?: string;
   spend_limit: CoinSDKType;
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {
+    $typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
     spendLimit: Coin.fromPartial({})
   };
 }
 export const DepositDeploymentAuthorization = {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-  encode(message: DepositDeploymentAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DepositDeploymentAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spendLimit !== undefined) {
       Coin.encode(message.spendLimit, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DepositDeploymentAuthorization {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DepositDeploymentAuthorization {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositDeploymentAuthorization();
     while (reader.pos < end) {

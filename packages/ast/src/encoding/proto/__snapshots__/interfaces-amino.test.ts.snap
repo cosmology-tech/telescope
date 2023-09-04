@@ -2,8 +2,9 @@
 
 exports[`Duration 1`] = `
 "export const Duration = {
-  encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.seconds.isZero()) {
+  typeUrl: "/google.protobuf.Duration",
+  encode(message: Duration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.seconds !== BigInt(0)) {
       writer.uint32(8).int64(message.seconds);
     }
     if (message.nanos !== 0) {
@@ -11,15 +12,15 @@ exports[`Duration 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Duration {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Duration {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuration();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.seconds = (reader.int64() as Long);
+          message.seconds = reader.int64();
           break;
         case 2:
           message.nanos = reader.int32();
@@ -32,22 +33,20 @@ exports[`Duration 1`] = `
     return message;
   },
   fromJSON(object: any): Duration {
-    const obj = createBaseDuration();
-    if (isSet(object.seconds)) obj.seconds = Long.fromValue(object.seconds);
-    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
-    return obj;
+    return {
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
-  fromPartial(object: DeepPartial<Duration>): Duration {
+  fromPartial(object: Partial<Duration>): Duration {
     const message = createBaseDuration();
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = Long.fromValue(object.seconds);
-    }
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -64,14 +63,14 @@ exports[`Duration 1`] = `
     return obj;
   },
   fromAmino(object: DurationAmino): Duration {
-    const value = parseInt(object);
+    const value = BigInt(object);
     return {
-      seconds: Long.fromNumber(Math.floor(value / 1_000_000_000)),
-      nanos: value % 1_000_000_000
+      seconds: value / BigInt("1000000000"),
+      nanos: Number(value % BigInt("1000000000"))
     };
   },
   toAmino(message: Duration): DurationAmino {
-    return (message.seconds.toInt() * 1_000_000_000 + message.nanos).toString();
+    return (message.seconds * BigInt("1000000000") + BigInt(message.nanos)).toString();
   },
   fromAminoMsg(object: DurationAminoMsg): Duration {
     return Duration.fromAmino(object.value);
@@ -93,27 +92,28 @@ exports[`Duration 1`] = `
 
 exports[`Height 1`] = `
 "export const Height = {
-  encode(message: Height, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.revisionNumber.isZero()) {
+  typeUrl: "/ibc.core.client.v1.Height",
+  encode(message: Height, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.revisionNumber !== BigInt(0)) {
       writer.uint32(8).uint64(message.revisionNumber);
     }
-    if (!message.revisionHeight.isZero()) {
+    if (message.revisionHeight !== BigInt(0)) {
       writer.uint32(16).uint64(message.revisionHeight);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Height {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Height {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeight();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.revisionNumber = (reader.uint64() as Long);
+          message.revisionNumber = reader.uint64();
           break;
         case 2:
-          message.revisionHeight = (reader.uint64() as Long);
+          message.revisionHeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -123,25 +123,21 @@ exports[`Height 1`] = `
     return message;
   },
   fromJSON(object: any): Height {
-    const obj = createBaseHeight();
-    if (isSet(object.revisionNumber)) obj.revisionNumber = Long.fromValue(object.revisionNumber);
-    if (isSet(object.revisionHeight)) obj.revisionHeight = Long.fromValue(object.revisionHeight);
-    return obj;
+    return {
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt(0),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<Height>): Height {
+  fromPartial(object: Partial<Height>): Height {
     const message = createBaseHeight();
-    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
-      message.revisionNumber = Long.fromValue(object.revisionNumber);
-    }
-    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
-      message.revisionHeight = Long.fromValue(object.revisionHeight);
-    }
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: HeightSDKType): Height {
@@ -158,8 +154,8 @@ exports[`Height 1`] = `
   },
   fromAmino(object: HeightAmino): Height {
     return {
-      revisionNumber: Long.fromString(object.revision_number || "0", true),
-      revisionHeight: Long.fromString(object.revision_height || "0", true)
+      revisionNumber: BigInt(object.revision_number || "0"),
+      revisionHeight: BigInt(object.revision_height || "0")
     };
   },
   toAmino(message: Height): HeightAmino {
@@ -194,7 +190,8 @@ exports[`Height 1`] = `
 
 exports[`MsgCreateValidator 1`] = `
 "export const MsgCreateValidator = {
-  encode(message: MsgCreateValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator",
+  encode(message: MsgCreateValidator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(10).fork()).ldelim();
     }
@@ -218,8 +215,8 @@ exports[`MsgCreateValidator 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateValidator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateValidator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateValidator();
     while (reader.pos < end) {
@@ -275,7 +272,7 @@ exports[`MsgCreateValidator 1`] = `
     message.value !== undefined && (obj.value = message.value ? Coin.toJSON(message.value) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
+  fromPartial(object: Partial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
     if (object.description !== undefined && object.description !== null) {
       message.description = Description.fromPartial(object.description);
@@ -364,7 +361,8 @@ exports[`MsgCreateValidator 1`] = `
 
 exports[`MsgStoreCode 1`] = `
 "export const MsgStoreCode = {
-  encode(message: MsgStoreCode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode",
+  encode(message: MsgStoreCode, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -376,8 +374,8 @@ exports[`MsgStoreCode 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCode {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgStoreCode {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCode();
     while (reader.pos < end) {
@@ -413,7 +411,7 @@ exports[`MsgStoreCode 1`] = `
     message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
+  fromPartial(object: Partial<MsgStoreCode>): MsgStoreCode {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
@@ -476,7 +474,8 @@ exports[`MsgStoreCode 1`] = `
 
 exports[`MsgSubmitProposal 1`] = `
 "export const MsgSubmitProposal = {
-  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
+  encode(message: MsgSubmitProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.content !== undefined) {
       Any.encode((message.content as Any), writer.uint32(10).fork()).ldelim();
     }
@@ -488,8 +487,8 @@ exports[`MsgSubmitProposal 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposal();
     while (reader.pos < end) {
@@ -529,7 +528,7 @@ exports[`MsgSubmitProposal 1`] = `
     message.proposer !== undefined && (obj.proposer = message.proposer);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
+  fromPartial(object: Partial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
     if (object.content !== undefined && object.content !== null) {
       message.content = Any.fromPartial(object.content);
@@ -600,7 +599,8 @@ exports[`MsgSubmitProposal 1`] = `
 
 exports[`MsgTransfer 1`] = `
 "export const MsgTransfer = {
-  encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
+  encode(message: MsgTransfer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
     }
@@ -619,13 +619,13 @@ exports[`MsgTransfer 1`] = `
     if (message.timeoutHeight !== undefined) {
       Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
     }
-    if (!message.timeoutTimestamp.isZero()) {
+    if (message.timeoutTimestamp !== BigInt(0)) {
       writer.uint32(56).uint64(message.timeoutTimestamp);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransfer {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransfer {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransfer();
     while (reader.pos < end) {
@@ -650,7 +650,7 @@ exports[`MsgTransfer 1`] = `
           message.timeoutHeight = Height.decode(reader, reader.uint32());
           break;
         case 7:
-          message.timeoutTimestamp = (reader.uint64() as Long);
+          message.timeoutTimestamp = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -660,15 +660,15 @@ exports[`MsgTransfer 1`] = `
     return message;
   },
   fromJSON(object: any): MsgTransfer {
-    const obj = createBaseMsgTransfer();
-    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
-    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
-    if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
-    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
-    return obj;
+    return {
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
+      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
@@ -678,10 +678,10 @@ exports[`MsgTransfer 1`] = `
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
+  fromPartial(object: Partial<MsgTransfer>): MsgTransfer {
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
@@ -690,12 +690,8 @@ exports[`MsgTransfer 1`] = `
     }
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
-    }
-    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
-      message.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
-    }
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgTransferSDKType): MsgTransfer {
@@ -728,7 +724,7 @@ exports[`MsgTransfer 1`] = `
       sender: object.sender,
       receiver: object.receiver,
       timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: Long.fromString(object.timeout_timestamp)
+      timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },
   toAmino(message: MsgTransfer): MsgTransferAmino {

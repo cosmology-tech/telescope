@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType, Claim, ClaimAmino, ClaimSDKType } from "./claims";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
@@ -234,11 +234,11 @@ function createBaseQueryTotalUnclaimedRequest(): QueryTotalUnclaimedRequest {
 }
 export const QueryTotalUnclaimedRequest = {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
-  encode(_: QueryTotalUnclaimedRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryTotalUnclaimedRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalUnclaimedRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalUnclaimedRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalUnclaimedRequest();
     while (reader.pos < end) {
@@ -300,14 +300,14 @@ function createBaseQueryTotalUnclaimedResponse(): QueryTotalUnclaimedResponse {
 }
 export const QueryTotalUnclaimedResponse = {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
-  encode(message: QueryTotalUnclaimedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalUnclaimedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalUnclaimedResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalUnclaimedResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalUnclaimedResponse();
     while (reader.pos < end) {
@@ -391,11 +391,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/evmos.claims.v1.QueryParamsRequest",
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -457,14 +457,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/evmos.claims.v1.QueryParamsResponse",
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -538,14 +538,14 @@ function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
 }
 export const QueryClaimsRecordsRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
-  encode(message: QueryClaimsRecordsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimsRecordsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimsRecordsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimsRecordsRequest();
     while (reader.pos < end) {
@@ -620,7 +620,7 @@ function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
 }
 export const QueryClaimsRecordsResponse = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
-  encode(message: QueryClaimsRecordsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimsRecordsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.claims) {
       ClaimsRecordAddress.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -629,8 +629,8 @@ export const QueryClaimsRecordsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimsRecordsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimsRecordsResponse();
     while (reader.pos < end) {
@@ -726,14 +726,14 @@ function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
 }
 export const QueryClaimsRecordRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
-  encode(message: QueryClaimsRecordRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimsRecordRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimsRecordRequest();
     while (reader.pos < end) {
@@ -808,7 +808,7 @@ function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
 }
 export const QueryClaimsRecordResponse = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
-  encode(message: QueryClaimsRecordResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimsRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
@@ -817,8 +817,8 @@ export const QueryClaimsRecordResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimsRecordResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimsRecordResponse();
     while (reader.pos < end) {

@@ -12,7 +12,9 @@ describe('cosmwasm/wasm/v1/tx', () => {
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
     context.options.prototypes.typingsFormat.timestamp = 'date';
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     aminoCtx.options.prototypes.typingsFormat.timestamp = 'date';
+    aminoCtx.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     it('MsgExecuteContract', () => {
         expectCode(createAminoConverter({

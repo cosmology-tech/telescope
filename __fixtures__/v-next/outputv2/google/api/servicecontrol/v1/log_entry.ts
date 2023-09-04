@@ -3,8 +3,8 @@ import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../../../lo
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
 import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -255,7 +255,7 @@ export interface LogEntrySourceLocation {
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: Long;
+  line: bigint;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -305,7 +305,7 @@ export interface LogEntrySourceLocationAminoMsg {
  */
 export interface LogEntrySourceLocationSDKType {
   file: string;
-  line: Long;
+  line: bigint;
   function: string;
 }
 function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
@@ -315,7 +315,7 @@ function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
   };
 }
 export const LogEntry_LabelsEntry = {
-  encode(message: LogEntry_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntry_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -324,8 +324,8 @@ export const LogEntry_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogEntry_LabelsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry_LabelsEntry();
     while (reader.pos < end) {
@@ -414,7 +414,7 @@ function createBaseLogEntry(): LogEntry {
 }
 export const LogEntry = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry",
-  encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
     }
@@ -456,8 +456,8 @@ export const LogEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
     while (reader.pos < end) {
@@ -684,7 +684,7 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 }
 export const LogEntryOperation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
-  encode(message: LogEntryOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -699,8 +699,8 @@ export const LogEntryOperation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntryOperation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogEntryOperation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntryOperation();
     while (reader.pos < end) {
@@ -800,17 +800,17 @@ export const LogEntryOperation = {
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
     file: "",
-    line: Long.ZERO,
+    line: BigInt(0),
     function: ""
   };
 }
 export const LogEntrySourceLocation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
-  encode(message: LogEntrySourceLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
     }
-    if (!message.line.isZero()) {
+    if (message.line !== BigInt(0)) {
       writer.uint32(16).int64(message.line);
     }
     if (message.function !== "") {
@@ -818,8 +818,8 @@ export const LogEntrySourceLocation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntrySourceLocation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogEntrySourceLocation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntrySourceLocation();
     while (reader.pos < end) {
@@ -829,7 +829,7 @@ export const LogEntrySourceLocation = {
           message.file = reader.string();
           break;
         case 2:
-          message.line = (reader.int64() as Long);
+          message.line = reader.int64();
           break;
         case 3:
           message.function = reader.string();
@@ -842,23 +842,31 @@ export const LogEntrySourceLocation = {
     return message;
   },
   fromJSON(object: any): LogEntrySourceLocation {
+<<<<<<< HEAD
     const obj = createBaseLogEntrySourceLocation();
     if (isSet(object.file)) obj.file = String(object.file);
     if (isSet(object.line)) obj.line = Long.fromValue(object.line);
     if (isSet(object.function)) obj.function = String(object.function);
     return obj;
+=======
+    return {
+      file: isSet(object.file) ? String(object.file) : "",
+      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
+      function: isSet(object.function) ? String(object.function) : ""
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = (message.line || Long.ZERO).toString());
+    message.line !== undefined && (obj.line = (message.line || BigInt(0)).toString());
     message.function !== undefined && (obj.function = message.function);
     return obj;
   },
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
+    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt(0);
     message.function = object.function ?? "";
     return message;
   },
@@ -879,7 +887,7 @@ export const LogEntrySourceLocation = {
   fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
     return {
       file: object.file,
-      line: Long.fromString(object.line),
+      line: BigInt(object.line),
       function: object.function
     };
   },

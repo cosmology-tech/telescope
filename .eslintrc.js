@@ -1,7 +1,7 @@
 module.exports = {
   plugins: ['prettier'],
   extends: ['eslint:recommended', 'prettier'],
-  parser: '@babel/eslint-parser',
+  parser: 'esprima',
   settings: {
     next: {
       rootDir: 'packages/next/'

@@ -134,6 +134,7 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   };
 }
 export const QueryAccountsRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountsRequest",
   encode(message: QueryAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -186,6 +187,37 @@ export const QueryAccountsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
+    return QueryAccountsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAccountsRequest): QueryAccountsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAccountsRequest",
+      value: QueryAccountsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAccountsRequestProtoMsg): QueryAccountsRequest {
+    return QueryAccountsRequest.decode(message.value);
+  },
+  toProto(message: QueryAccountsRequest): Uint8Array {
+    return QueryAccountsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAccountsRequest): QueryAccountsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryAccountsRequest",
+      value: QueryAccountsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
@@ -195,6 +227,7 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   };
 }
 export const QueryAccountsResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse",
   encode(message: QueryAccountsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -267,6 +300,43 @@ export const QueryAccountsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
+    const obj: any = {};
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
+    return QueryAccountsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAccountsResponse): QueryAccountsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAccountsResponse",
+      value: QueryAccountsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAccountsResponseProtoMsg): QueryAccountsResponse {
+    return QueryAccountsResponse.decode(message.value);
+  },
+  toProto(message: QueryAccountsResponse): Uint8Array {
+    return QueryAccountsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAccountsResponse): QueryAccountsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse",
+      value: QueryAccountsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAccountRequest(): QueryAccountRequest {
@@ -275,6 +345,7 @@ function createBaseQueryAccountRequest(): QueryAccountRequest {
   };
 }
 export const QueryAccountRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountRequest",
   encode(message: QueryAccountRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -327,12 +398,44 @@ export const QueryAccountRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: QueryAccountRequestAmino): QueryAccountRequest {
+    return {
+      address: object.address
+    };
+  },
+  toAmino(message: QueryAccountRequest): QueryAccountRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAccountRequestAminoMsg): QueryAccountRequest {
+    return QueryAccountRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAccountRequest): QueryAccountRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAccountRequest",
+      value: QueryAccountRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAccountRequestProtoMsg): QueryAccountRequest {
+    return QueryAccountRequest.decode(message.value);
+  },
+  toProto(message: QueryAccountRequest): Uint8Array {
+    return QueryAccountRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAccountRequest): QueryAccountRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryAccountRequest",
+      value: QueryAccountRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
   return {};
 }
 export const QueryModuleAccountsRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsRequest",
   encode(_: QueryModuleAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -371,6 +474,34 @@ export const QueryModuleAccountsRequest = {
   toSDK(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryModuleAccountsRequestAmino): QueryModuleAccountsRequest {
+    return {};
+  },
+  toAmino(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryModuleAccountsRequestAminoMsg): QueryModuleAccountsRequest {
+    return QueryModuleAccountsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryModuleAccountsRequest): QueryModuleAccountsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryModuleAccountsRequest",
+      value: QueryModuleAccountsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryModuleAccountsRequestProtoMsg): QueryModuleAccountsRequest {
+    return QueryModuleAccountsRequest.decode(message.value);
+  },
+  toProto(message: QueryModuleAccountsRequest): Uint8Array {
+    return QueryModuleAccountsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryModuleAccountsRequest): QueryModuleAccountsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsRequest",
+      value: QueryModuleAccountsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -379,6 +510,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -431,6 +563,37 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryParamsResponse",
+      value: QueryParamsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAccountResponse(): QueryAccountResponse {
@@ -439,6 +602,7 @@ function createBaseQueryAccountResponse(): QueryAccountResponse {
   };
 }
 export const QueryAccountResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse",
   encode(message: QueryAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
@@ -491,12 +655,44 @@ export const QueryAccountResponse = {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? Any.toSDK(message.account) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAccountResponseAmino): QueryAccountResponse {
+    return {
+      account: object?.account ? Any.fromAmino(object.account) : undefined
+    };
+  },
+  toAmino(message: QueryAccountResponse): QueryAccountResponseAmino {
+    const obj: any = {};
+    obj.account = message.account ? Any.toAmino(message.account) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAccountResponseAminoMsg): QueryAccountResponse {
+    return QueryAccountResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAccountResponse): QueryAccountResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAccountResponse",
+      value: QueryAccountResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAccountResponseProtoMsg): QueryAccountResponse {
+    return QueryAccountResponse.decode(message.value);
+  },
+  toProto(message: QueryAccountResponse): Uint8Array {
+    return QueryAccountResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAccountResponse): QueryAccountResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse",
+      value: QueryAccountResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -535,6 +731,34 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryParamsRequest",
+      value: QueryParamsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
@@ -543,6 +767,7 @@ function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
   };
 }
 export const QueryModuleAccountsResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsResponse",
   encode(message: QueryModuleAccountsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -603,12 +828,48 @@ export const QueryModuleAccountsResponse = {
       obj.accounts = [];
     }
     return obj;
+  },
+  fromAmino(object: QueryModuleAccountsResponseAmino): QueryModuleAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseAmino {
+    const obj: any = {};
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryModuleAccountsResponseAminoMsg): QueryModuleAccountsResponse {
+    return QueryModuleAccountsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryModuleAccountsResponse",
+      value: QueryModuleAccountsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryModuleAccountsResponseProtoMsg): QueryModuleAccountsResponse {
+    return QueryModuleAccountsResponse.decode(message.value);
+  },
+  toProto(message: QueryModuleAccountsResponse): Uint8Array {
+    return QueryModuleAccountsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsResponse",
+      value: QueryModuleAccountsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
   return {};
 }
 export const Bech32PrefixRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixRequest",
   encode(_: Bech32PrefixRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -647,6 +908,34 @@ export const Bech32PrefixRequest = {
   toSDK(_: Bech32PrefixRequest): Bech32PrefixRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: Bech32PrefixRequestAmino): Bech32PrefixRequest {
+    return {};
+  },
+  toAmino(_: Bech32PrefixRequest): Bech32PrefixRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: Bech32PrefixRequestAminoMsg): Bech32PrefixRequest {
+    return Bech32PrefixRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: Bech32PrefixRequest): Bech32PrefixRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/Bech32PrefixRequest",
+      value: Bech32PrefixRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: Bech32PrefixRequestProtoMsg): Bech32PrefixRequest {
+    return Bech32PrefixRequest.decode(message.value);
+  },
+  toProto(message: Bech32PrefixRequest): Uint8Array {
+    return Bech32PrefixRequest.encode(message).finish();
+  },
+  toProtoMsg(message: Bech32PrefixRequest): Bech32PrefixRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixRequest",
+      value: Bech32PrefixRequest.encode(message).finish()
+    };
   }
 };
 function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
@@ -655,6 +944,7 @@ function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
   };
 }
 export const Bech32PrefixResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixResponse",
   encode(message: Bech32PrefixResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bech32Prefix !== "") {
       writer.uint32(10).string(message.bech32Prefix);
@@ -707,6 +997,37 @@ export const Bech32PrefixResponse = {
     const obj: any = {};
     obj.bech32_prefix = message.bech32Prefix;
     return obj;
+  },
+  fromAmino(object: Bech32PrefixResponseAmino): Bech32PrefixResponse {
+    return {
+      bech32Prefix: object.bech32_prefix
+    };
+  },
+  toAmino(message: Bech32PrefixResponse): Bech32PrefixResponseAmino {
+    const obj: any = {};
+    obj.bech32_prefix = message.bech32Prefix;
+    return obj;
+  },
+  fromAminoMsg(object: Bech32PrefixResponseAminoMsg): Bech32PrefixResponse {
+    return Bech32PrefixResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: Bech32PrefixResponse): Bech32PrefixResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/Bech32PrefixResponse",
+      value: Bech32PrefixResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: Bech32PrefixResponseProtoMsg): Bech32PrefixResponse {
+    return Bech32PrefixResponse.decode(message.value);
+  },
+  toProto(message: Bech32PrefixResponse): Uint8Array {
+    return Bech32PrefixResponse.encode(message).finish();
+  },
+  toProtoMsg(message: Bech32PrefixResponse): Bech32PrefixResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixResponse",
+      value: Bech32PrefixResponse.encode(message).finish()
+    };
   }
 };
 function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
@@ -715,6 +1036,7 @@ function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
   };
 }
 export const AddressBytesToStringRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringRequest",
   encode(message: AddressBytesToStringRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
@@ -767,6 +1089,37 @@ export const AddressBytesToStringRequest = {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
+  },
+  fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
+    return {
+      addressBytes: object.address_bytes
+    };
+  },
+  toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestAmino {
+    const obj: any = {};
+    obj.address_bytes = message.addressBytes;
+    return obj;
+  },
+  fromAminoMsg(object: AddressBytesToStringRequestAminoMsg): AddressBytesToStringRequest {
+    return AddressBytesToStringRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: AddressBytesToStringRequest): AddressBytesToStringRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/AddressBytesToStringRequest",
+      value: AddressBytesToStringRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AddressBytesToStringRequestProtoMsg): AddressBytesToStringRequest {
+    return AddressBytesToStringRequest.decode(message.value);
+  },
+  toProto(message: AddressBytesToStringRequest): Uint8Array {
+    return AddressBytesToStringRequest.encode(message).finish();
+  },
+  toProtoMsg(message: AddressBytesToStringRequest): AddressBytesToStringRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringRequest",
+      value: AddressBytesToStringRequest.encode(message).finish()
+    };
   }
 };
 function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse {
@@ -775,6 +1128,7 @@ function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse 
   };
 }
 export const AddressBytesToStringResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringResponse",
   encode(message: AddressBytesToStringResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
@@ -827,6 +1181,37 @@ export const AddressBytesToStringResponse = {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
+  },
+  fromAmino(object: AddressBytesToStringResponseAmino): AddressBytesToStringResponse {
+    return {
+      addressString: object.address_string
+    };
+  },
+  toAmino(message: AddressBytesToStringResponse): AddressBytesToStringResponseAmino {
+    const obj: any = {};
+    obj.address_string = message.addressString;
+    return obj;
+  },
+  fromAminoMsg(object: AddressBytesToStringResponseAminoMsg): AddressBytesToStringResponse {
+    return AddressBytesToStringResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: AddressBytesToStringResponse): AddressBytesToStringResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/AddressBytesToStringResponse",
+      value: AddressBytesToStringResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AddressBytesToStringResponseProtoMsg): AddressBytesToStringResponse {
+    return AddressBytesToStringResponse.decode(message.value);
+  },
+  toProto(message: AddressBytesToStringResponse): Uint8Array {
+    return AddressBytesToStringResponse.encode(message).finish();
+  },
+  toProtoMsg(message: AddressBytesToStringResponse): AddressBytesToStringResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringResponse",
+      value: AddressBytesToStringResponse.encode(message).finish()
+    };
   }
 };
 function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
@@ -835,6 +1220,7 @@ function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
   };
 }
 export const AddressStringToBytesRequest = {
+  typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesRequest",
   encode(message: AddressStringToBytesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
@@ -887,6 +1273,37 @@ export const AddressStringToBytesRequest = {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
+  },
+  fromAmino(object: AddressStringToBytesRequestAmino): AddressStringToBytesRequest {
+    return {
+      addressString: object.address_string
+    };
+  },
+  toAmino(message: AddressStringToBytesRequest): AddressStringToBytesRequestAmino {
+    const obj: any = {};
+    obj.address_string = message.addressString;
+    return obj;
+  },
+  fromAminoMsg(object: AddressStringToBytesRequestAminoMsg): AddressStringToBytesRequest {
+    return AddressStringToBytesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: AddressStringToBytesRequest): AddressStringToBytesRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/AddressStringToBytesRequest",
+      value: AddressStringToBytesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AddressStringToBytesRequestProtoMsg): AddressStringToBytesRequest {
+    return AddressStringToBytesRequest.decode(message.value);
+  },
+  toProto(message: AddressStringToBytesRequest): Uint8Array {
+    return AddressStringToBytesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: AddressStringToBytesRequest): AddressStringToBytesRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesRequest",
+      value: AddressStringToBytesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse {
@@ -895,6 +1312,7 @@ function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse 
   };
 }
 export const AddressStringToBytesResponse = {
+  typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesResponse",
   encode(message: AddressStringToBytesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
@@ -947,5 +1365,36 @@ export const AddressStringToBytesResponse = {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
+  },
+  fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {
+    return {
+      addressBytes: object.address_bytes
+    };
+  },
+  toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseAmino {
+    const obj: any = {};
+    obj.address_bytes = message.addressBytes;
+    return obj;
+  },
+  fromAminoMsg(object: AddressStringToBytesResponseAminoMsg): AddressStringToBytesResponse {
+    return AddressStringToBytesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: AddressStringToBytesResponse): AddressStringToBytesResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/AddressStringToBytesResponse",
+      value: AddressStringToBytesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AddressStringToBytesResponseProtoMsg): AddressStringToBytesResponse {
+    return AddressStringToBytesResponse.decode(message.value);
+  },
+  toProto(message: AddressStringToBytesResponse): Uint8Array {
+    return AddressStringToBytesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: AddressStringToBytesResponse): AddressStringToBytesResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesResponse",
+      value: AddressStringToBytesResponse.encode(message).finish()
+    };
   }
 };

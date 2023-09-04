@@ -95,6 +95,7 @@ function createBaseEventCreateGroup(): EventCreateGroup {
   };
 }
 export const EventCreateGroup = {
+  typeUrl: "/cosmos.group.v1.EventCreateGroup",
   encode(message: EventCreateGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupId);
@@ -147,6 +148,37 @@ export const EventCreateGroup = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+  fromAmino(object: EventCreateGroupAmino): EventCreateGroup {
+    return {
+      groupId: BigInt(object.group_id)
+    };
+  },
+  toAmino(message: EventCreateGroup): EventCreateGroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventCreateGroupAminoMsg): EventCreateGroup {
+    return EventCreateGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventCreateGroup): EventCreateGroupAminoMsg {
+    return {
+      type: "cosmos-sdk/EventCreateGroup",
+      value: EventCreateGroup.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventCreateGroupProtoMsg): EventCreateGroup {
+    return EventCreateGroup.decode(message.value);
+  },
+  toProto(message: EventCreateGroup): Uint8Array {
+    return EventCreateGroup.encode(message).finish();
+  },
+  toProtoMsg(message: EventCreateGroup): EventCreateGroupProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventCreateGroup",
+      value: EventCreateGroup.encode(message).finish()
+    };
   }
 };
 function createBaseEventUpdateGroup(): EventUpdateGroup {
@@ -155,6 +187,7 @@ function createBaseEventUpdateGroup(): EventUpdateGroup {
   };
 }
 export const EventUpdateGroup = {
+  typeUrl: "/cosmos.group.v1.EventUpdateGroup",
   encode(message: EventUpdateGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupId);
@@ -207,6 +240,37 @@ export const EventUpdateGroup = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+  fromAmino(object: EventUpdateGroupAmino): EventUpdateGroup {
+    return {
+      groupId: BigInt(object.group_id)
+    };
+  },
+  toAmino(message: EventUpdateGroup): EventUpdateGroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventUpdateGroupAminoMsg): EventUpdateGroup {
+    return EventUpdateGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventUpdateGroup): EventUpdateGroupAminoMsg {
+    return {
+      type: "cosmos-sdk/EventUpdateGroup",
+      value: EventUpdateGroup.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventUpdateGroupProtoMsg): EventUpdateGroup {
+    return EventUpdateGroup.decode(message.value);
+  },
+  toProto(message: EventUpdateGroup): Uint8Array {
+    return EventUpdateGroup.encode(message).finish();
+  },
+  toProtoMsg(message: EventUpdateGroup): EventUpdateGroupProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventUpdateGroup",
+      value: EventUpdateGroup.encode(message).finish()
+    };
   }
 };
 function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
@@ -215,6 +279,7 @@ function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
   };
 }
 export const EventCreateGroupPolicy = {
+  typeUrl: "/cosmos.group.v1.EventCreateGroupPolicy",
   encode(message: EventCreateGroupPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -267,6 +332,37 @@ export const EventCreateGroupPolicy = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: EventCreateGroupPolicyAmino): EventCreateGroupPolicy {
+    return {
+      address: object.address
+    };
+  },
+  toAmino(message: EventCreateGroupPolicy): EventCreateGroupPolicyAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: EventCreateGroupPolicyAminoMsg): EventCreateGroupPolicy {
+    return EventCreateGroupPolicy.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventCreateGroupPolicy): EventCreateGroupPolicyAminoMsg {
+    return {
+      type: "cosmos-sdk/EventCreateGroupPolicy",
+      value: EventCreateGroupPolicy.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventCreateGroupPolicyProtoMsg): EventCreateGroupPolicy {
+    return EventCreateGroupPolicy.decode(message.value);
+  },
+  toProto(message: EventCreateGroupPolicy): Uint8Array {
+    return EventCreateGroupPolicy.encode(message).finish();
+  },
+  toProtoMsg(message: EventCreateGroupPolicy): EventCreateGroupPolicyProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventCreateGroupPolicy",
+      value: EventCreateGroupPolicy.encode(message).finish()
+    };
   }
 };
 function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
@@ -275,6 +371,7 @@ function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
   };
 }
 export const EventUpdateGroupPolicy = {
+  typeUrl: "/cosmos.group.v1.EventUpdateGroupPolicy",
   encode(message: EventUpdateGroupPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -327,6 +424,37 @@ export const EventUpdateGroupPolicy = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: EventUpdateGroupPolicyAmino): EventUpdateGroupPolicy {
+    return {
+      address: object.address
+    };
+  },
+  toAmino(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: EventUpdateGroupPolicyAminoMsg): EventUpdateGroupPolicy {
+    return EventUpdateGroupPolicy.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyAminoMsg {
+    return {
+      type: "cosmos-sdk/EventUpdateGroupPolicy",
+      value: EventUpdateGroupPolicy.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventUpdateGroupPolicyProtoMsg): EventUpdateGroupPolicy {
+    return EventUpdateGroupPolicy.decode(message.value);
+  },
+  toProto(message: EventUpdateGroupPolicy): Uint8Array {
+    return EventUpdateGroupPolicy.encode(message).finish();
+  },
+  toProtoMsg(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventUpdateGroupPolicy",
+      value: EventUpdateGroupPolicy.encode(message).finish()
+    };
   }
 };
 function createBaseEventSubmitProposal(): EventSubmitProposal {
@@ -335,6 +463,7 @@ function createBaseEventSubmitProposal(): EventSubmitProposal {
   };
 }
 export const EventSubmitProposal = {
+  typeUrl: "/cosmos.group.v1.EventSubmitProposal",
   encode(message: EventSubmitProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -387,6 +516,37 @@ export const EventSubmitProposal = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+  fromAmino(object: EventSubmitProposalAmino): EventSubmitProposal {
+    return {
+      proposalId: BigInt(object.proposal_id)
+    };
+  },
+  toAmino(message: EventSubmitProposal): EventSubmitProposalAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventSubmitProposalAminoMsg): EventSubmitProposal {
+    return EventSubmitProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventSubmitProposal): EventSubmitProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/EventSubmitProposal",
+      value: EventSubmitProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventSubmitProposalProtoMsg): EventSubmitProposal {
+    return EventSubmitProposal.decode(message.value);
+  },
+  toProto(message: EventSubmitProposal): Uint8Array {
+    return EventSubmitProposal.encode(message).finish();
+  },
+  toProtoMsg(message: EventSubmitProposal): EventSubmitProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventSubmitProposal",
+      value: EventSubmitProposal.encode(message).finish()
+    };
   }
 };
 function createBaseEventWithdrawProposal(): EventWithdrawProposal {
@@ -395,6 +555,7 @@ function createBaseEventWithdrawProposal(): EventWithdrawProposal {
   };
 }
 export const EventWithdrawProposal = {
+  typeUrl: "/cosmos.group.v1.EventWithdrawProposal",
   encode(message: EventWithdrawProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -447,6 +608,37 @@ export const EventWithdrawProposal = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+  fromAmino(object: EventWithdrawProposalAmino): EventWithdrawProposal {
+    return {
+      proposalId: BigInt(object.proposal_id)
+    };
+  },
+  toAmino(message: EventWithdrawProposal): EventWithdrawProposalAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventWithdrawProposalAminoMsg): EventWithdrawProposal {
+    return EventWithdrawProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventWithdrawProposal): EventWithdrawProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/EventWithdrawProposal",
+      value: EventWithdrawProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventWithdrawProposalProtoMsg): EventWithdrawProposal {
+    return EventWithdrawProposal.decode(message.value);
+  },
+  toProto(message: EventWithdrawProposal): Uint8Array {
+    return EventWithdrawProposal.encode(message).finish();
+  },
+  toProtoMsg(message: EventWithdrawProposal): EventWithdrawProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventWithdrawProposal",
+      value: EventWithdrawProposal.encode(message).finish()
+    };
   }
 };
 function createBaseEventVote(): EventVote {
@@ -455,6 +647,7 @@ function createBaseEventVote(): EventVote {
   };
 }
 export const EventVote = {
+  typeUrl: "/cosmos.group.v1.EventVote",
   encode(message: EventVote, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -507,6 +700,37 @@ export const EventVote = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+  fromAmino(object: EventVoteAmino): EventVote {
+    return {
+      proposalId: BigInt(object.proposal_id)
+    };
+  },
+  toAmino(message: EventVote): EventVoteAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventVoteAminoMsg): EventVote {
+    return EventVote.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventVote): EventVoteAminoMsg {
+    return {
+      type: "cosmos-sdk/EventVote",
+      value: EventVote.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventVoteProtoMsg): EventVote {
+    return EventVote.decode(message.value);
+  },
+  toProto(message: EventVote): Uint8Array {
+    return EventVote.encode(message).finish();
+  },
+  toProtoMsg(message: EventVote): EventVoteProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventVote",
+      value: EventVote.encode(message).finish()
+    };
   }
 };
 function createBaseEventExec(): EventExec {
@@ -516,6 +740,7 @@ function createBaseEventExec(): EventExec {
   };
 }
 export const EventExec = {
+  typeUrl: "/cosmos.group.v1.EventExec",
   encode(message: EventExec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -580,6 +805,39 @@ export const EventExec = {
     obj.proposal_id = message.proposalId;
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
+  },
+  fromAmino(object: EventExecAmino): EventExec {
+    return {
+      proposalId: BigInt(object.proposal_id),
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
+    };
+  },
+  toAmino(message: EventExec): EventExecAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.result = message.result;
+    return obj;
+  },
+  fromAminoMsg(object: EventExecAminoMsg): EventExec {
+    return EventExec.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventExec): EventExecAminoMsg {
+    return {
+      type: "cosmos-sdk/EventExec",
+      value: EventExec.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventExecProtoMsg): EventExec {
+    return EventExec.decode(message.value);
+  },
+  toProto(message: EventExec): Uint8Array {
+    return EventExec.encode(message).finish();
+  },
+  toProtoMsg(message: EventExec): EventExecProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventExec",
+      value: EventExec.encode(message).finish()
+    };
   }
 };
 function createBaseEventLeaveGroup(): EventLeaveGroup {
@@ -589,6 +847,7 @@ function createBaseEventLeaveGroup(): EventLeaveGroup {
   };
 }
 export const EventLeaveGroup = {
+  typeUrl: "/cosmos.group.v1.EventLeaveGroup",
   encode(message: EventLeaveGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupId);
@@ -653,5 +912,38 @@ export const EventLeaveGroup = {
     obj.group_id = message.groupId;
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: EventLeaveGroupAmino): EventLeaveGroup {
+    return {
+      groupId: BigInt(object.group_id),
+      address: object.address
+    };
+  },
+  toAmino(message: EventLeaveGroup): EventLeaveGroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: EventLeaveGroupAminoMsg): EventLeaveGroup {
+    return EventLeaveGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventLeaveGroup): EventLeaveGroupAminoMsg {
+    return {
+      type: "cosmos-sdk/EventLeaveGroup",
+      value: EventLeaveGroup.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventLeaveGroupProtoMsg): EventLeaveGroup {
+    return EventLeaveGroup.decode(message.value);
+  },
+  toProto(message: EventLeaveGroup): Uint8Array {
+    return EventLeaveGroup.encode(message).finish();
+  },
+  toProtoMsg(message: EventLeaveGroup): EventLeaveGroupProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventLeaveGroup",
+      value: EventLeaveGroup.encode(message).finish()
+    };
   }
 };

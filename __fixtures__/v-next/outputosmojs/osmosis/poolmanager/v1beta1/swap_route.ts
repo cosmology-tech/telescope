@@ -24,6 +24,7 @@ function createBaseSwapAmountInRoute(): SwapAmountInRoute {
   };
 }
 export const SwapAmountInRoute = {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SwapAmountInRoute",
   encode(message: SwapAmountInRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -88,6 +89,39 @@ export const SwapAmountInRoute = {
     obj.pool_id = message.poolId;
     obj.token_out_denom = message.tokenOutDenom;
     return obj;
+  },
+  fromAmino(object: SwapAmountInRouteAmino): SwapAmountInRoute {
+    return {
+      poolId: BigInt(object.pool_id),
+      tokenOutDenom: object.token_out_denom
+    };
+  },
+  toAmino(message: SwapAmountInRoute): SwapAmountInRouteAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.token_out_denom = message.tokenOutDenom;
+    return obj;
+  },
+  fromAminoMsg(object: SwapAmountInRouteAminoMsg): SwapAmountInRoute {
+    return SwapAmountInRoute.fromAmino(object.value);
+  },
+  toAminoMsg(message: SwapAmountInRoute): SwapAmountInRouteAminoMsg {
+    return {
+      type: "osmosis/poolmanager/swap-amount-in-route",
+      value: SwapAmountInRoute.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SwapAmountInRouteProtoMsg): SwapAmountInRoute {
+    return SwapAmountInRoute.decode(message.value);
+  },
+  toProto(message: SwapAmountInRoute): Uint8Array {
+    return SwapAmountInRoute.encode(message).finish();
+  },
+  toProtoMsg(message: SwapAmountInRoute): SwapAmountInRouteProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolmanager.v1beta1.SwapAmountInRoute",
+      value: SwapAmountInRoute.encode(message).finish()
+    };
   }
 };
 function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
@@ -97,6 +131,7 @@ function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
   };
 }
 export const SwapAmountOutRoute = {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SwapAmountOutRoute",
   encode(message: SwapAmountOutRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -161,5 +196,38 @@ export const SwapAmountOutRoute = {
     obj.pool_id = message.poolId;
     obj.token_in_denom = message.tokenInDenom;
     return obj;
+  },
+  fromAmino(object: SwapAmountOutRouteAmino): SwapAmountOutRoute {
+    return {
+      poolId: BigInt(object.pool_id),
+      tokenInDenom: object.token_in_denom
+    };
+  },
+  toAmino(message: SwapAmountOutRoute): SwapAmountOutRouteAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.token_in_denom = message.tokenInDenom;
+    return obj;
+  },
+  fromAminoMsg(object: SwapAmountOutRouteAminoMsg): SwapAmountOutRoute {
+    return SwapAmountOutRoute.fromAmino(object.value);
+  },
+  toAminoMsg(message: SwapAmountOutRoute): SwapAmountOutRouteAminoMsg {
+    return {
+      type: "osmosis/poolmanager/swap-amount-out-route",
+      value: SwapAmountOutRoute.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SwapAmountOutRouteProtoMsg): SwapAmountOutRoute {
+    return SwapAmountOutRoute.decode(message.value);
+  },
+  toProto(message: SwapAmountOutRoute): Uint8Array {
+    return SwapAmountOutRoute.encode(message).finish();
+  },
+  toProtoMsg(message: SwapAmountOutRoute): SwapAmountOutRouteProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolmanager.v1beta1.SwapAmountOutRoute",
+      value: SwapAmountOutRoute.encode(message).finish()
+    };
   }
 };

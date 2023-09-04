@@ -61,7 +61,7 @@ exports[`createCreateProtoType Header 1`] = `
   return {
     version: Consensus.fromPartial({}),
     chainId: "",
-    height: Long.ZERO,
+    height: BigInt(0),
     time: new Date(),
     lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
@@ -81,7 +81,7 @@ exports[`createCreateProtoType MsgJoinPool 1`] = `
 "function createBaseMsgJoinPool(): MsgJoinPool {
   return {
     sender: "",
-    poolId: Long.UZERO,
+    poolId: BigInt(0),
     shareOutAmount: "",
     tokenInMaxs: []
   };
@@ -92,7 +92,7 @@ exports[`createCreateProtoType ValidatorUpdate 1`] = `
 "function createBaseValidatorUpdate(): ValidatorUpdate {
   return {
     pubKey: PublicKey.fromPartial({}),
-    power: Long.ZERO
+    power: BigInt(0)
   };
 }"
 `;
@@ -102,7 +102,7 @@ exports[`createCreateProtoType orginal logic Header 1`] = `
   return {
     version: Consensus.fromPartial({}),
     chainId: "",
-    height: Long.ZERO,
+    height: BigInt(0),
     time: undefined,
     lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
@@ -204,7 +204,7 @@ export interface CheckedExpr {
    *   the message.
    */
   referenceMap: {
-    [key: Long]: Reference;
+    [key: bigint]: Reference;
   };
   /**
    * A map from expression ids to types.
@@ -214,7 +214,7 @@ export interface CheckedExpr {
    * space.
    */
   typeMap: {
-    [key: Long]: Type;
+    [key: bigint]: Type;
   };
   /**
    * The source info derived from input that generated the parsed \`expr\` and

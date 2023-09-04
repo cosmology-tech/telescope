@@ -2,7 +2,7 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
 import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
 import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Defines the importance of the data contained in the operation. */
@@ -261,7 +261,7 @@ function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   };
 }
 export const Operation_LabelsEntry = {
-  encode(message: Operation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Operation_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -270,8 +270,8 @@ export const Operation_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Operation_LabelsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_LabelsEntry();
     while (reader.pos < end) {
@@ -358,7 +358,7 @@ function createBaseOperation(): Operation {
 }
 export const Operation = {
   typeUrl: "/google.api.servicecontrol.v1.Operation",
-  encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }
@@ -394,8 +394,8 @@ export const Operation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Operation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
     while (reader.pos < end) {

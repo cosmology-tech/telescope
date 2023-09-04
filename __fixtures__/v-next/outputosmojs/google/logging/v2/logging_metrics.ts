@@ -389,6 +389,27 @@ export const LogMetric_LabelExtractorsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: LogMetric_LabelExtractorsEntryAmino): LogMetric_LabelExtractorsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
+    return LogMetric_LabelExtractorsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg): LogMetric_LabelExtractorsEntry {
+    return LogMetric_LabelExtractorsEntry.decode(message.value);
+  },
+  toProto(message: LogMetric_LabelExtractorsEntry): Uint8Array {
+    return LogMetric_LabelExtractorsEntry.encode(message).finish();
   }
 };
 function createBaseLogMetric(): LogMetric {
@@ -407,6 +428,7 @@ function createBaseLogMetric(): LogMetric {
   };
 }
 export const LogMetric = {
+  typeUrl: "/google.logging.v2.LogMetric",
   encode(message: LogMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -617,6 +639,61 @@ export const LogMetric = {
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
     return obj;
+  },
+  fromAmino(object: LogMetricAmino): LogMetric {
+    return {
+      name: object.name,
+      description: object.description,
+      filter: object.filter,
+      disabled: object.disabled,
+      metricDescriptor: object?.metric_descriptor ? MetricDescriptor.fromAmino(object.metric_descriptor) : undefined,
+      valueExtractor: object.value_extractor,
+      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
+      createTime: object.create_time,
+      updateTime: object.update_time,
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+    };
+  },
+  toAmino(message: LogMetric): LogMetricAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.filter = message.filter;
+    obj.disabled = message.disabled;
+    obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor) : undefined;
+    obj.value_extractor = message.valueExtractor;
+    obj.label_extractors = {};
+    if (message.labelExtractors) {
+      Object.entries(message.labelExtractors).forEach(([k, v]) => {
+        obj.label_extractors[k] = v;
+      });
+    }
+    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
+    obj.version = message.version;
+    return obj;
+  },
+  fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
+    return LogMetric.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogMetricProtoMsg): LogMetric {
+    return LogMetric.decode(message.value);
+  },
+  toProto(message: LogMetric): Uint8Array {
+    return LogMetric.encode(message).finish();
+  },
+  toProtoMsg(message: LogMetric): LogMetricProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogMetric",
+      value: LogMetric.encode(message).finish()
+    };
   }
 };
 function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
@@ -627,6 +704,7 @@ function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
   };
 }
 export const ListLogMetricsRequest = {
+  typeUrl: "/google.logging.v2.ListLogMetricsRequest",
   encode(message: ListLogMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -703,6 +781,35 @@ export const ListLogMetricsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+  fromAmino(object: ListLogMetricsRequestAmino): ListLogMetricsRequest {
+    return {
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
+    return ListLogMetricsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogMetricsRequestProtoMsg): ListLogMetricsRequest {
+    return ListLogMetricsRequest.decode(message.value);
+  },
+  toProto(message: ListLogMetricsRequest): Uint8Array {
+    return ListLogMetricsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogMetricsRequest): ListLogMetricsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogMetricsRequest",
+      value: ListLogMetricsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
@@ -712,6 +819,7 @@ function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
   };
 }
 export const ListLogMetricsResponse = {
+  typeUrl: "/google.logging.v2.ListLogMetricsResponse",
   encode(message: ListLogMetricsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -784,6 +892,37 @@ export const ListLogMetricsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListLogMetricsResponseAmino): ListLogMetricsResponse {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListLogMetricsResponse): ListLogMetricsResponseAmino {
+    const obj: any = {};
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
+    return ListLogMetricsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogMetricsResponseProtoMsg): ListLogMetricsResponse {
+    return ListLogMetricsResponse.decode(message.value);
+  },
+  toProto(message: ListLogMetricsResponse): Uint8Array {
+    return ListLogMetricsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogMetricsResponse): ListLogMetricsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogMetricsResponse",
+      value: ListLogMetricsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseGetLogMetricRequest(): GetLogMetricRequest {
@@ -792,6 +931,7 @@ function createBaseGetLogMetricRequest(): GetLogMetricRequest {
   };
 }
 export const GetLogMetricRequest = {
+  typeUrl: "/google.logging.v2.GetLogMetricRequest",
   encode(message: GetLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -844,6 +984,31 @@ export const GetLogMetricRequest = {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
+  },
+  fromAmino(object: GetLogMetricRequestAmino): GetLogMetricRequest {
+    return {
+      metricName: object.metric_name
+    };
+  },
+  toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    return obj;
+  },
+  fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
+    return GetLogMetricRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetLogMetricRequestProtoMsg): GetLogMetricRequest {
+    return GetLogMetricRequest.decode(message.value);
+  },
+  toProto(message: GetLogMetricRequest): Uint8Array {
+    return GetLogMetricRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetLogMetricRequest): GetLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetLogMetricRequest",
+      value: GetLogMetricRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
@@ -853,6 +1018,7 @@ function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   };
 }
 export const CreateLogMetricRequest = {
+  typeUrl: "/google.logging.v2.CreateLogMetricRequest",
   encode(message: CreateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -917,6 +1083,33 @@ export const CreateLogMetricRequest = {
     obj.parent = message.parent;
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toSDK(message.metric) : undefined);
     return obj;
+  },
+  fromAmino(object: CreateLogMetricRequestAmino): CreateLogMetricRequest {
+    return {
+      parent: object.parent,
+      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
+    };
+  },
+  toAmino(message: CreateLogMetricRequest): CreateLogMetricRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateLogMetricRequestAminoMsg): CreateLogMetricRequest {
+    return CreateLogMetricRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CreateLogMetricRequestProtoMsg): CreateLogMetricRequest {
+    return CreateLogMetricRequest.decode(message.value);
+  },
+  toProto(message: CreateLogMetricRequest): Uint8Array {
+    return CreateLogMetricRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CreateLogMetricRequest): CreateLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateLogMetricRequest",
+      value: CreateLogMetricRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
@@ -926,6 +1119,7 @@ function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   };
 }
 export const UpdateLogMetricRequest = {
+  typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
   encode(message: UpdateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -990,6 +1184,33 @@ export const UpdateLogMetricRequest = {
     obj.metric_name = message.metricName;
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toSDK(message.metric) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateLogMetricRequestAmino): UpdateLogMetricRequest {
+    return {
+      metricName: object.metric_name,
+      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
+    };
+  },
+  toAmino(message: UpdateLogMetricRequest): UpdateLogMetricRequestAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateLogMetricRequestAminoMsg): UpdateLogMetricRequest {
+    return UpdateLogMetricRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateLogMetricRequestProtoMsg): UpdateLogMetricRequest {
+    return UpdateLogMetricRequest.decode(message.value);
+  },
+  toProto(message: UpdateLogMetricRequest): Uint8Array {
+    return UpdateLogMetricRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateLogMetricRequest): UpdateLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
+      value: UpdateLogMetricRequest.encode(message).finish()
+    };
   }
 };
 function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
@@ -998,6 +1219,7 @@ function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
   };
 }
 export const DeleteLogMetricRequest = {
+  typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
   encode(message: DeleteLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -1050,5 +1272,30 @@ export const DeleteLogMetricRequest = {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
+  },
+  fromAmino(object: DeleteLogMetricRequestAmino): DeleteLogMetricRequest {
+    return {
+      metricName: object.metric_name
+    };
+  },
+  toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {
+    return DeleteLogMetricRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteLogMetricRequestProtoMsg): DeleteLogMetricRequest {
+    return DeleteLogMetricRequest.decode(message.value);
+  },
+  toProto(message: DeleteLogMetricRequest): Uint8Array {
+    return DeleteLogMetricRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteLogMetricRequest): DeleteLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
+      value: DeleteLogMetricRequest.encode(message).finish()
+    };
   }
 };

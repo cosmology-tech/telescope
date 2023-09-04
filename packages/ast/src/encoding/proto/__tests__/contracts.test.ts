@@ -10,6 +10,7 @@ store.traverseAll();
 describe('MsgExecuteContract', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     it('interface', () => {
         expectCode(createProtoType(context, 'MsgExecuteContract',
             getNestedProto(ref.traversed).MsgExecuteContract

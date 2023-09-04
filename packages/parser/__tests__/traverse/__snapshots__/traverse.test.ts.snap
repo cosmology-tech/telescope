@@ -2,8 +2,17 @@
 
 exports[`cosmos/authz/v1beta1/authz 1`] = `
 {
-  "acceptsInterface": {},
-  "implementsInterface": {},
+  "acceptsInterface": {
+    "Authorization": [
+      "Grant",
+      "GrantAuthorization",
+    ],
+  },
+  "implementsInterface": {
+    "Authorization": [
+      "GenericAuthorization",
+    ],
+  },
   "importNames": {},
   "imports": [
     "cosmos_proto/cosmos.proto",

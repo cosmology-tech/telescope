@@ -19,6 +19,7 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
+  typeUrl: "/akash.market.v1beta2.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidMinDeposit !== undefined) {
       Coin.encode(message.bidMinDeposit, writer.uint32(10).fork()).ldelim();
@@ -83,5 +84,38 @@ export const Params = {
     message.bidMinDeposit !== undefined && (obj.bid_min_deposit = message.bidMinDeposit ? Coin.toSDK(message.bidMinDeposit) : undefined);
     obj.order_max_bids = message.orderMaxBids;
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
+      orderMaxBids: object.order_max_bids
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined;
+    obj.order_max_bids = message.orderMaxBids;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "akash/market/v1beta2/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

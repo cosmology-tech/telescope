@@ -85,6 +85,7 @@ function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
   };
 }
 export const QueryDenomTraceRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
   encode(message: QueryDenomTraceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
@@ -137,6 +138,37 @@ export const QueryDenomTraceRequest = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+  fromAmino(object: QueryDenomTraceRequestAmino): QueryDenomTraceRequest {
+    return {
+      hash: object.hash
+    };
+  },
+  toAmino(message: QueryDenomTraceRequest): QueryDenomTraceRequestAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDenomTraceRequestAminoMsg): QueryDenomTraceRequest {
+    return QueryDenomTraceRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDenomTraceRequest): QueryDenomTraceRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryDenomTraceRequest",
+      value: QueryDenomTraceRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryDenomTraceRequestProtoMsg): QueryDenomTraceRequest {
+    return QueryDenomTraceRequest.decode(message.value);
+  },
+  toProto(message: QueryDenomTraceRequest): Uint8Array {
+    return QueryDenomTraceRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDenomTraceRequest): QueryDenomTraceRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
+      value: QueryDenomTraceRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
@@ -145,6 +177,7 @@ function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
   };
 }
 export const QueryDenomTraceResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse",
   encode(message: QueryDenomTraceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denomTrace !== undefined) {
       DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
@@ -197,6 +230,37 @@ export const QueryDenomTraceResponse = {
     const obj: any = {};
     message.denomTrace !== undefined && (obj.denom_trace = message.denomTrace ? DenomTrace.toSDK(message.denomTrace) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryDenomTraceResponseAmino): QueryDenomTraceResponse {
+    return {
+      denomTrace: object?.denom_trace ? DenomTrace.fromAmino(object.denom_trace) : undefined
+    };
+  },
+  toAmino(message: QueryDenomTraceResponse): QueryDenomTraceResponseAmino {
+    const obj: any = {};
+    obj.denom_trace = message.denomTrace ? DenomTrace.toAmino(message.denomTrace) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDenomTraceResponseAminoMsg): QueryDenomTraceResponse {
+    return QueryDenomTraceResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDenomTraceResponse): QueryDenomTraceResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryDenomTraceResponse",
+      value: QueryDenomTraceResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryDenomTraceResponseProtoMsg): QueryDenomTraceResponse {
+    return QueryDenomTraceResponse.decode(message.value);
+  },
+  toProto(message: QueryDenomTraceResponse): Uint8Array {
+    return QueryDenomTraceResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDenomTraceResponse): QueryDenomTraceResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse",
+      value: QueryDenomTraceResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
@@ -205,6 +269,7 @@ function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
   };
 }
 export const QueryDenomTracesRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest",
   encode(message: QueryDenomTracesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -257,6 +322,37 @@ export const QueryDenomTracesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryDenomTracesRequestAmino): QueryDenomTracesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDenomTracesRequest): QueryDenomTracesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDenomTracesRequestAminoMsg): QueryDenomTracesRequest {
+    return QueryDenomTracesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDenomTracesRequest): QueryDenomTracesRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryDenomTracesRequest",
+      value: QueryDenomTracesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryDenomTracesRequestProtoMsg): QueryDenomTracesRequest {
+    return QueryDenomTracesRequest.decode(message.value);
+  },
+  toProto(message: QueryDenomTracesRequest): Uint8Array {
+    return QueryDenomTracesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDenomTracesRequest): QueryDenomTracesRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest",
+      value: QueryDenomTracesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
@@ -266,6 +362,7 @@ function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
   };
 }
 export const QueryDenomTracesResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse",
   encode(message: QueryDenomTracesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.denomTraces) {
       DenomTrace.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -338,12 +435,50 @@ export const QueryDenomTracesResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryDenomTracesResponseAmino): QueryDenomTracesResponse {
+    return {
+      denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDenomTracesResponse): QueryDenomTracesResponseAmino {
+    const obj: any = {};
+    if (message.denomTraces) {
+      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e) : undefined);
+    } else {
+      obj.denom_traces = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDenomTracesResponseAminoMsg): QueryDenomTracesResponse {
+    return QueryDenomTracesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDenomTracesResponse): QueryDenomTracesResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryDenomTracesResponse",
+      value: QueryDenomTracesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryDenomTracesResponseProtoMsg): QueryDenomTracesResponse {
+    return QueryDenomTracesResponse.decode(message.value);
+  },
+  toProto(message: QueryDenomTracesResponse): Uint8Array {
+    return QueryDenomTracesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDenomTracesResponse): QueryDenomTracesResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse",
+      value: QueryDenomTracesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -382,6 +517,34 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryParamsRequest",
+      value: QueryParamsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -390,6 +553,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -442,5 +606,36 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryParamsResponse",
+      value: QueryParamsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 };

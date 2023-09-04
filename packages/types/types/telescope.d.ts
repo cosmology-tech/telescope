@@ -100,7 +100,7 @@ interface TelescopeOpts {
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
-        useRecursiveV2encoding?: boolean;
+        useLegacyInlineEncoding?: boolean;
     };
     lcdClients?: {
         enabled: boolean;

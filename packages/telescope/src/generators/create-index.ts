@@ -4,6 +4,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
+//@ts-ignore
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
 

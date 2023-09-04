@@ -14,7 +14,9 @@ describe('Duraation: duration', () => {
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
     context.options.prototypes.typingsFormat.duration = 'duration'
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     aminoCtx.options.prototypes.typingsFormat.duration = 'duration';
+    aminoCtx.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     it('DepositParams', () => {
         expectCode(createObjectWithMethods(context, 'DepositParams',
@@ -28,7 +30,9 @@ describe('Duration: string', () => {
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
     context.options.prototypes.typingsFormat.duration = 'string';
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     aminoCtx.options.prototypes.typingsFormat.duration = 'string';
+    aminoCtx.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     it('DepositParams', () => {
         expectCode(createObjectWithMethods(context, 'DepositParams',

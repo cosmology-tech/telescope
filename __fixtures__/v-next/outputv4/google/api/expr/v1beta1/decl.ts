@@ -88,6 +88,7 @@ function createBaseDecl(): Decl {
   };
 }
 export const Decl = {
+  typeUrl: "/google.api.expr.v1beta1.Decl",
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -188,6 +189,39 @@ export const Decl = {
     message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toSDK(message.ident) : undefined);
     message.function !== undefined && (obj.function = message.function ? FunctionDecl.toSDK(message.function) : undefined);
     return obj;
+  },
+  fromAmino(object: DeclAmino): Decl {
+    return {
+      id: object.id,
+      name: object.name,
+      doc: object.doc,
+      ident: object?.ident ? IdentDecl.fromAmino(object.ident) : undefined,
+      function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
+    };
+  },
+  toAmino(message: Decl): DeclAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.doc = message.doc;
+    obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
+    obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeclAminoMsg): Decl {
+    return Decl.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeclProtoMsg): Decl {
+    return Decl.decode(message.value);
+  },
+  toProto(message: Decl): Uint8Array {
+    return Decl.encode(message).finish();
+  },
+  toProtoMsg(message: Decl): DeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.Decl",
+      value: Decl.encode(message).finish()
+    };
   }
 };
 function createBaseDeclType(): DeclType {
@@ -198,6 +232,7 @@ function createBaseDeclType(): DeclType {
   };
 }
 export const DeclType = {
+  typeUrl: "/google.api.expr.v1beta1.DeclType",
   encode(message: DeclType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -282,6 +317,39 @@ export const DeclType = {
       obj.type_params = [];
     }
     return obj;
+  },
+  fromAmino(object: DeclTypeAmino): DeclType {
+    return {
+      id: object.id,
+      type: object.type,
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: DeclType): DeclTypeAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.type = message.type;
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
+    } else {
+      obj.type_params = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: DeclTypeAminoMsg): DeclType {
+    return DeclType.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeclTypeProtoMsg): DeclType {
+    return DeclType.decode(message.value);
+  },
+  toProto(message: DeclType): Uint8Array {
+    return DeclType.encode(message).finish();
+  },
+  toProtoMsg(message: DeclType): DeclTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.DeclType",
+      value: DeclType.encode(message).finish()
+    };
   }
 };
 function createBaseIdentDecl(): IdentDecl {
@@ -291,6 +359,7 @@ function createBaseIdentDecl(): IdentDecl {
   };
 }
 export const IdentDecl = {
+  typeUrl: "/google.api.expr.v1beta1.IdentDecl",
   encode(message: IdentDecl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== undefined) {
       DeclType.encode(message.type, writer.uint32(26).fork()).ldelim();
@@ -355,6 +424,33 @@ export const IdentDecl = {
     message.type !== undefined && (obj.type = message.type ? DeclType.toSDK(message.type) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: IdentDeclAmino): IdentDecl {
+    return {
+      type: object?.type ? DeclType.fromAmino(object.type) : undefined,
+      value: object?.value ? Expr.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: IdentDecl): IdentDeclAmino {
+    const obj: any = {};
+    obj.type = message.type ? DeclType.toAmino(message.type) : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IdentDeclAminoMsg): IdentDecl {
+    return IdentDecl.fromAmino(object.value);
+  },
+  fromProtoMsg(message: IdentDeclProtoMsg): IdentDecl {
+    return IdentDecl.decode(message.value);
+  },
+  toProto(message: IdentDecl): Uint8Array {
+    return IdentDecl.encode(message).finish();
+  },
+  toProtoMsg(message: IdentDecl): IdentDeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.IdentDecl",
+      value: IdentDecl.encode(message).finish()
+    };
   }
 };
 function createBaseFunctionDecl(): FunctionDecl {
@@ -365,6 +461,7 @@ function createBaseFunctionDecl(): FunctionDecl {
   };
 }
 export const FunctionDecl = {
+  typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
   encode(message: FunctionDecl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.args) {
       IdentDecl.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -449,5 +546,38 @@ export const FunctionDecl = {
     message.returnType !== undefined && (obj.return_type = message.returnType ? DeclType.toSDK(message.returnType) : undefined);
     obj.receiver_function = message.receiverFunction;
     return obj;
+  },
+  fromAmino(object: FunctionDeclAmino): FunctionDecl {
+    return {
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
+      returnType: object?.return_type ? DeclType.fromAmino(object.return_type) : undefined,
+      receiverFunction: object.receiver_function
+    };
+  },
+  toAmino(message: FunctionDecl): FunctionDeclAmino {
+    const obj: any = {};
+    if (message.args) {
+      obj.args = message.args.map(e => e ? IdentDecl.toAmino(e) : undefined);
+    } else {
+      obj.args = [];
+    }
+    obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
+    obj.receiver_function = message.receiverFunction;
+    return obj;
+  },
+  fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {
+    return FunctionDecl.fromAmino(object.value);
+  },
+  fromProtoMsg(message: FunctionDeclProtoMsg): FunctionDecl {
+    return FunctionDecl.decode(message.value);
+  },
+  toProto(message: FunctionDecl): Uint8Array {
+    return FunctionDecl.encode(message).finish();
+  },
+  toProtoMsg(message: FunctionDecl): FunctionDeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
+      value: FunctionDecl.encode(message).finish()
+    };
   }
 };

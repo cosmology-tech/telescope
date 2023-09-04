@@ -74,6 +74,7 @@ function createBaseMerkleRoot(): MerkleRoot {
   };
 }
 export const MerkleRoot = {
+  typeUrl: "/ibc.core.commitment.v1.MerkleRoot",
   encode(message: MerkleRoot, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -126,6 +127,37 @@ export const MerkleRoot = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+  fromAmino(object: MerkleRootAmino): MerkleRoot {
+    return {
+      hash: object.hash
+    };
+  },
+  toAmino(message: MerkleRoot): MerkleRootAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    return obj;
+  },
+  fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
+    return MerkleRoot.fromAmino(object.value);
+  },
+  toAminoMsg(message: MerkleRoot): MerkleRootAminoMsg {
+    return {
+      type: "cosmos-sdk/MerkleRoot",
+      value: MerkleRoot.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MerkleRootProtoMsg): MerkleRoot {
+    return MerkleRoot.decode(message.value);
+  },
+  toProto(message: MerkleRoot): Uint8Array {
+    return MerkleRoot.encode(message).finish();
+  },
+  toProtoMsg(message: MerkleRoot): MerkleRootProtoMsg {
+    return {
+      typeUrl: "/ibc.core.commitment.v1.MerkleRoot",
+      value: MerkleRoot.encode(message).finish()
+    };
   }
 };
 function createBaseMerklePrefix(): MerklePrefix {
@@ -134,6 +166,7 @@ function createBaseMerklePrefix(): MerklePrefix {
   };
 }
 export const MerklePrefix = {
+  typeUrl: "/ibc.core.commitment.v1.MerklePrefix",
   encode(message: MerklePrefix, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.keyPrefix.length !== 0) {
       writer.uint32(10).bytes(message.keyPrefix);
@@ -186,6 +219,37 @@ export const MerklePrefix = {
     const obj: any = {};
     obj.key_prefix = message.keyPrefix;
     return obj;
+  },
+  fromAmino(object: MerklePrefixAmino): MerklePrefix {
+    return {
+      keyPrefix: object.key_prefix
+    };
+  },
+  toAmino(message: MerklePrefix): MerklePrefixAmino {
+    const obj: any = {};
+    obj.key_prefix = message.keyPrefix;
+    return obj;
+  },
+  fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {
+    return MerklePrefix.fromAmino(object.value);
+  },
+  toAminoMsg(message: MerklePrefix): MerklePrefixAminoMsg {
+    return {
+      type: "cosmos-sdk/MerklePrefix",
+      value: MerklePrefix.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MerklePrefixProtoMsg): MerklePrefix {
+    return MerklePrefix.decode(message.value);
+  },
+  toProto(message: MerklePrefix): Uint8Array {
+    return MerklePrefix.encode(message).finish();
+  },
+  toProtoMsg(message: MerklePrefix): MerklePrefixProtoMsg {
+    return {
+      typeUrl: "/ibc.core.commitment.v1.MerklePrefix",
+      value: MerklePrefix.encode(message).finish()
+    };
   }
 };
 function createBaseMerklePath(): MerklePath {
@@ -194,6 +258,7 @@ function createBaseMerklePath(): MerklePath {
   };
 }
 export const MerklePath = {
+  typeUrl: "/ibc.core.commitment.v1.MerklePath",
   encode(message: MerklePath, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.keyPath) {
       writer.uint32(10).string(v!);
@@ -254,6 +319,41 @@ export const MerklePath = {
       obj.key_path = [];
     }
     return obj;
+  },
+  fromAmino(object: MerklePathAmino): MerklePath {
+    return {
+      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: MerklePath): MerklePathAmino {
+    const obj: any = {};
+    if (message.keyPath) {
+      obj.key_path = message.keyPath.map(e => e);
+    } else {
+      obj.key_path = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MerklePathAminoMsg): MerklePath {
+    return MerklePath.fromAmino(object.value);
+  },
+  toAminoMsg(message: MerklePath): MerklePathAminoMsg {
+    return {
+      type: "cosmos-sdk/MerklePath",
+      value: MerklePath.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MerklePathProtoMsg): MerklePath {
+    return MerklePath.decode(message.value);
+  },
+  toProto(message: MerklePath): Uint8Array {
+    return MerklePath.encode(message).finish();
+  },
+  toProtoMsg(message: MerklePath): MerklePathProtoMsg {
+    return {
+      typeUrl: "/ibc.core.commitment.v1.MerklePath",
+      value: MerklePath.encode(message).finish()
+    };
   }
 };
 function createBaseMerkleProof(): MerkleProof {
@@ -262,6 +362,7 @@ function createBaseMerkleProof(): MerkleProof {
   };
 }
 export const MerkleProof = {
+  typeUrl: "/ibc.core.commitment.v1.MerkleProof",
   encode(message: MerkleProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.proofs) {
       CommitmentProof.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -322,5 +423,40 @@ export const MerkleProof = {
       obj.proofs = [];
     }
     return obj;
+  },
+  fromAmino(object: MerkleProofAmino): MerkleProof {
+    return {
+      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MerkleProof): MerkleProofAmino {
+    const obj: any = {};
+    if (message.proofs) {
+      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e) : undefined);
+    } else {
+      obj.proofs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MerkleProofAminoMsg): MerkleProof {
+    return MerkleProof.fromAmino(object.value);
+  },
+  toAminoMsg(message: MerkleProof): MerkleProofAminoMsg {
+    return {
+      type: "cosmos-sdk/MerkleProof",
+      value: MerkleProof.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MerkleProofProtoMsg): MerkleProof {
+    return MerkleProof.decode(message.value);
+  },
+  toProto(message: MerkleProof): Uint8Array {
+    return MerkleProof.encode(message).finish();
+  },
+  toProtoMsg(message: MerkleProof): MerkleProofProtoMsg {
+    return {
+      typeUrl: "/ibc.core.commitment.v1.MerkleProof",
+      value: MerkleProof.encode(message).finish()
+    };
   }
 };

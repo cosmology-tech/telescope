@@ -58,6 +58,7 @@ function createBaseMsgRegisterInterchainAccount(): MsgRegisterInterchainAccount 
   };
 }
 export const MsgRegisterInterchainAccount = {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount",
   encode(message: MsgRegisterInterchainAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -134,6 +135,41 @@ export const MsgRegisterInterchainAccount = {
     obj.connection_id = message.connectionId;
     obj.version = message.version;
     return obj;
+  },
+  fromAmino(object: MsgRegisterInterchainAccountAmino): MsgRegisterInterchainAccount {
+    return {
+      owner: object.owner,
+      connectionId: object.connection_id,
+      version: object.version
+    };
+  },
+  toAmino(message: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.connection_id = message.connectionId;
+    obj.version = message.version;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterInterchainAccountAminoMsg): MsgRegisterInterchainAccount {
+    return MsgRegisterInterchainAccount.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgRegisterInterchainAccount",
+      value: MsgRegisterInterchainAccount.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgRegisterInterchainAccountProtoMsg): MsgRegisterInterchainAccount {
+    return MsgRegisterInterchainAccount.decode(message.value);
+  },
+  toProto(message: MsgRegisterInterchainAccount): Uint8Array {
+    return MsgRegisterInterchainAccount.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount",
+      value: MsgRegisterInterchainAccount.encode(message).finish()
+    };
   }
 };
 function createBaseMsgRegisterInterchainAccountResponse(): MsgRegisterInterchainAccountResponse {
@@ -143,6 +179,7 @@ function createBaseMsgRegisterInterchainAccountResponse(): MsgRegisterInterchain
   };
 }
 export const MsgRegisterInterchainAccountResponse = {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse",
   encode(message: MsgRegisterInterchainAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -207,6 +244,39 @@ export const MsgRegisterInterchainAccountResponse = {
     obj.channel_id = message.channelId;
     obj.port_id = message.portId;
     return obj;
+  },
+  fromAmino(object: MsgRegisterInterchainAccountResponseAmino): MsgRegisterInterchainAccountResponse {
+    return {
+      channelId: object.channel_id,
+      portId: object.port_id
+    };
+  },
+  toAmino(message: MsgRegisterInterchainAccountResponse): MsgRegisterInterchainAccountResponseAmino {
+    const obj: any = {};
+    obj.channel_id = message.channelId;
+    obj.port_id = message.portId;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterInterchainAccountResponseAminoMsg): MsgRegisterInterchainAccountResponse {
+    return MsgRegisterInterchainAccountResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgRegisterInterchainAccountResponse): MsgRegisterInterchainAccountResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgRegisterInterchainAccountResponse",
+      value: MsgRegisterInterchainAccountResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgRegisterInterchainAccountResponseProtoMsg): MsgRegisterInterchainAccountResponse {
+    return MsgRegisterInterchainAccountResponse.decode(message.value);
+  },
+  toProto(message: MsgRegisterInterchainAccountResponse): Uint8Array {
+    return MsgRegisterInterchainAccountResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterInterchainAccountResponse): MsgRegisterInterchainAccountResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse",
+      value: MsgRegisterInterchainAccountResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSendTx(): MsgSendTx {
@@ -218,6 +288,7 @@ function createBaseMsgSendTx(): MsgSendTx {
   };
 }
 export const MsgSendTx = {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgSendTx",
   encode(message: MsgSendTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -306,6 +377,43 @@ export const MsgSendTx = {
     message.packetData !== undefined && (obj.packet_data = message.packetData ? InterchainAccountPacketData.toSDK(message.packetData) : undefined);
     obj.relative_timeout = message.relativeTimeout;
     return obj;
+  },
+  fromAmino(object: MsgSendTxAmino): MsgSendTx {
+    return {
+      owner: object.owner,
+      connectionId: object.connection_id,
+      packetData: object?.packet_data ? InterchainAccountPacketData.fromAmino(object.packet_data) : undefined,
+      relativeTimeout: BigInt(object.relative_timeout)
+    };
+  },
+  toAmino(message: MsgSendTx): MsgSendTxAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.connection_id = message.connectionId;
+    obj.packet_data = message.packetData ? InterchainAccountPacketData.toAmino(message.packetData) : undefined;
+    obj.relative_timeout = message.relativeTimeout ? message.relativeTimeout.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSendTxAminoMsg): MsgSendTx {
+    return MsgSendTx.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSendTx): MsgSendTxAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSendTx",
+      value: MsgSendTx.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSendTxProtoMsg): MsgSendTx {
+    return MsgSendTx.decode(message.value);
+  },
+  toProto(message: MsgSendTx): Uint8Array {
+    return MsgSendTx.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSendTx): MsgSendTxProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgSendTx",
+      value: MsgSendTx.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSendTxResponse(): MsgSendTxResponse {
@@ -314,6 +422,7 @@ function createBaseMsgSendTxResponse(): MsgSendTxResponse {
   };
 }
 export const MsgSendTxResponse = {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgSendTxResponse",
   encode(message: MsgSendTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sequence !== BigInt(0)) {
       writer.uint32(8).uint64(message.sequence);
@@ -366,5 +475,36 @@ export const MsgSendTxResponse = {
     const obj: any = {};
     obj.sequence = message.sequence;
     return obj;
+  },
+  fromAmino(object: MsgSendTxResponseAmino): MsgSendTxResponse {
+    return {
+      sequence: BigInt(object.sequence)
+    };
+  },
+  toAmino(message: MsgSendTxResponse): MsgSendTxResponseAmino {
+    const obj: any = {};
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSendTxResponseAminoMsg): MsgSendTxResponse {
+    return MsgSendTxResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSendTxResponse): MsgSendTxResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSendTxResponse",
+      value: MsgSendTxResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSendTxResponseProtoMsg): MsgSendTxResponse {
+    return MsgSendTxResponse.decode(message.value);
+  },
+  toProto(message: MsgSendTxResponse): Uint8Array {
+    return MsgSendTxResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSendTxResponse): MsgSendTxResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgSendTxResponse",
+      value: MsgSendTxResponse.encode(message).finish()
+    };
   }
 };

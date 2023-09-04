@@ -1,7 +1,7 @@
 import { Action, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -187,11 +187,11 @@ function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalance
 export const QueryModuleAccountBalanceRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
   aminoType: "osmosis/claim/query-module-account-balance-request",
-  encode(_: QueryModuleAccountBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryModuleAccountBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountBalanceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountBalanceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceRequest();
     while (reader.pos < end) {
@@ -260,14 +260,14 @@ function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanc
 export const QueryModuleAccountBalanceResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
   aminoType: "osmosis/claim/query-module-account-balance-response",
-  encode(message: QueryModuleAccountBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryModuleAccountBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.moduleAccountBalance) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountBalanceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountBalanceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceResponse();
     while (reader.pos < end) {
@@ -358,11 +358,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 export const QueryParamsRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
   aminoType: "osmosis/claim/query-params-request",
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -431,14 +431,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 export const QueryParamsResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
   aminoType: "osmosis/claim/query-params-response",
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -519,14 +519,14 @@ function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
 export const QueryClaimRecordRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
   aminoType: "osmosis/claim/query-claim-record-request",
-  encode(message: QueryClaimRecordRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimRecordRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimRecordRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordRequest();
     while (reader.pos < end) {
@@ -607,14 +607,14 @@ function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
 export const QueryClaimRecordResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
   aminoType: "osmosis/claim/query-claim-record-response",
-  encode(message: QueryClaimRecordResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.claimRecord !== undefined) {
       ClaimRecord.encode(message.claimRecord, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimRecordResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimRecordResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordResponse();
     while (reader.pos < end) {
@@ -696,7 +696,7 @@ function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequ
 export const QueryClaimableForActionRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
   aminoType: "osmosis/claim/query-claimable-for-action-request",
-  encode(message: QueryClaimableForActionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimableForActionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -705,8 +705,8 @@ export const QueryClaimableForActionRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableForActionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableForActionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionRequest();
     while (reader.pos < end) {
@@ -797,14 +797,14 @@ function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionRes
 export const QueryClaimableForActionResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
   aminoType: "osmosis/claim/query-claimable-for-action-response",
-  encode(message: QueryClaimableForActionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimableForActionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableForActionResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableForActionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionResponse();
     while (reader.pos < end) {
@@ -897,14 +897,14 @@ function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
 export const QueryTotalClaimableRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
   aminoType: "osmosis/claim/query-total-claimable-request",
-  encode(message: QueryTotalClaimableRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalClaimableRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalClaimableRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalClaimableRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableRequest();
     while (reader.pos < end) {
@@ -985,14 +985,14 @@ function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
 export const QueryTotalClaimableResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
   aminoType: "osmosis/claim/query-total-claimable-response",
-  encode(message: QueryTotalClaimableResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalClaimableResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalClaimableResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalClaimableResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableResponse();
     while (reader.pos < end) {

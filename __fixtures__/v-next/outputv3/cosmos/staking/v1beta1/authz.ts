@@ -1,5 +1,5 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /**
@@ -61,6 +61,7 @@ export function authorizationTypeToJSON(object: AuthorizationType): string {
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorization {
+  $typeUrl?: string;
   /**
    * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
    * empty, there is no spend limit and any amount of coins can be delegated.
@@ -111,6 +112,7 @@ export interface StakeAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorizationSDKType {
+  $typeUrl?: string;
   max_tokens: CoinSDKType;
   allow_list?: StakeAuthorization_ValidatorsSDKType;
   deny_list?: StakeAuthorization_ValidatorsSDKType;
@@ -138,6 +140,7 @@ export interface StakeAuthorization_ValidatorsSDKType {
 }
 function createBaseStakeAuthorization(): StakeAuthorization {
   return {
+    $typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization",
     maxTokens: Coin.fromPartial({}),
     allowList: undefined,
     denyList: undefined,
@@ -147,7 +150,7 @@ function createBaseStakeAuthorization(): StakeAuthorization {
 export const StakeAuthorization = {
   typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization",
   aminoType: "cosmos-sdk/StakeAuthorization",
-  encode(message: StakeAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StakeAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.maxTokens !== undefined) {
       Coin.encode(message.maxTokens, writer.uint32(10).fork()).ldelim();
     }
@@ -162,8 +165,8 @@ export const StakeAuthorization = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): StakeAuthorization {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): StakeAuthorization {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization();
     while (reader.pos < end) {
@@ -274,14 +277,14 @@ function createBaseStakeAuthorization_Validators(): StakeAuthorization_Validator
 export const StakeAuthorization_Validators = {
   typeUrl: "/cosmos.staking.v1beta1.Validators",
   aminoType: "cosmos-sdk/Validators",
-  encode(message: StakeAuthorization_Validators, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StakeAuthorization_Validators, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.address) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): StakeAuthorization_Validators {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): StakeAuthorization_Validators {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization_Validators();
     while (reader.pos < end) {

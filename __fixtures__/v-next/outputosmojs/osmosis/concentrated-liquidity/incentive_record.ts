@@ -76,6 +76,7 @@ function createBaseIncentiveRecord(): IncentiveRecord {
   };
 }
 export const IncentiveRecord = {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecord",
   encode(message: IncentiveRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -176,6 +177,45 @@ export const IncentiveRecord = {
     message.incentiveRecordBody !== undefined && (obj.incentive_record_body = message.incentiveRecordBody ? IncentiveRecordBody.toSDK(message.incentiveRecordBody) : undefined);
     message.minUptime !== undefined && (obj.min_uptime = message.minUptime ? Duration.toSDK(message.minUptime) : undefined);
     return obj;
+  },
+  fromAmino(object: IncentiveRecordAmino): IncentiveRecord {
+    return {
+      poolId: BigInt(object.pool_id),
+      incentiveDenom: object.incentive_denom,
+      incentiveCreatorAddr: object.incentive_creator_addr,
+      incentiveRecordBody: object?.incentive_record_body ? IncentiveRecordBody.fromAmino(object.incentive_record_body) : undefined,
+      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
+    };
+  },
+  toAmino(message: IncentiveRecord): IncentiveRecordAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.incentive_denom = message.incentiveDenom;
+    obj.incentive_creator_addr = message.incentiveCreatorAddr;
+    obj.incentive_record_body = message.incentiveRecordBody ? IncentiveRecordBody.toAmino(message.incentiveRecordBody) : undefined;
+    obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IncentiveRecordAminoMsg): IncentiveRecord {
+    return IncentiveRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: IncentiveRecord): IncentiveRecordAminoMsg {
+    return {
+      type: "osmosis/concentratedliquidity/incentive-record",
+      value: IncentiveRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: IncentiveRecordProtoMsg): IncentiveRecord {
+    return IncentiveRecord.decode(message.value);
+  },
+  toProto(message: IncentiveRecord): Uint8Array {
+    return IncentiveRecord.encode(message).finish();
+  },
+  toProtoMsg(message: IncentiveRecord): IncentiveRecordProtoMsg {
+    return {
+      typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecord",
+      value: IncentiveRecord.encode(message).finish()
+    };
   }
 };
 function createBaseIncentiveRecordBody(): IncentiveRecordBody {
@@ -186,6 +226,7 @@ function createBaseIncentiveRecordBody(): IncentiveRecordBody {
   };
 }
 export const IncentiveRecordBody = {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecordBody",
   encode(message: IncentiveRecordBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.remainingAmount !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.remainingAmount, 18).atomics);
@@ -262,5 +303,40 @@ export const IncentiveRecordBody = {
     obj.emission_rate = message.emissionRate;
     message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     return obj;
+  },
+  fromAmino(object: IncentiveRecordBodyAmino): IncentiveRecordBody {
+    return {
+      remainingAmount: object.remaining_amount,
+      emissionRate: object.emission_rate,
+      startTime: object.start_time
+    };
+  },
+  toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {
+    const obj: any = {};
+    obj.remaining_amount = message.remainingAmount;
+    obj.emission_rate = message.emissionRate;
+    obj.start_time = message.startTime;
+    return obj;
+  },
+  fromAminoMsg(object: IncentiveRecordBodyAminoMsg): IncentiveRecordBody {
+    return IncentiveRecordBody.fromAmino(object.value);
+  },
+  toAminoMsg(message: IncentiveRecordBody): IncentiveRecordBodyAminoMsg {
+    return {
+      type: "osmosis/concentratedliquidity/incentive-record-body",
+      value: IncentiveRecordBody.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: IncentiveRecordBodyProtoMsg): IncentiveRecordBody {
+    return IncentiveRecordBody.decode(message.value);
+  },
+  toProto(message: IncentiveRecordBody): Uint8Array {
+    return IncentiveRecordBody.encode(message).finish();
+  },
+  toProtoMsg(message: IncentiveRecordBody): IncentiveRecordBodyProtoMsg {
+    return {
+      typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecordBody",
+      value: IncentiveRecordBody.encode(message).finish()
+    };
   }
 };

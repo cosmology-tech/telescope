@@ -20,6 +20,7 @@ describe('MsgDelegate', () => {
 describe('MsgSend', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/tx.proto');
     const context = new ProtoParseContext(ref, store, store.options);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     it('interface', () => {
         expectCode(createProtoType(context, 'MsgSend',
             getNestedProto(ref.traversed).MsgSend

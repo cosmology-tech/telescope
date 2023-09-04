@@ -62,6 +62,7 @@ function createBaseClass(): Class {
   };
 }
 export const Class = {
+  typeUrl: "/cosmos.nft.v1beta1.Class",
   encode(message: Class, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -186,6 +187,49 @@ export const Class = {
     obj.uri_hash = message.uriHash;
     message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
     return obj;
+  },
+  fromAmino(object: ClassAmino): Class {
+    return {
+      id: object.id,
+      name: object.name,
+      symbol: object.symbol,
+      description: object.description,
+      uri: object.uri,
+      uriHash: object.uri_hash,
+      data: object?.data ? Any.fromAmino(object.data) : undefined
+    };
+  },
+  toAmino(message: Class): ClassAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.symbol = message.symbol;
+    obj.description = message.description;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
+    obj.data = message.data ? Any.toAmino(message.data) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ClassAminoMsg): Class {
+    return Class.fromAmino(object.value);
+  },
+  toAminoMsg(message: Class): ClassAminoMsg {
+    return {
+      type: "cosmos-sdk/Class",
+      value: Class.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ClassProtoMsg): Class {
+    return Class.decode(message.value);
+  },
+  toProto(message: Class): Uint8Array {
+    return Class.encode(message).finish();
+  },
+  toProtoMsg(message: Class): ClassProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.Class",
+      value: Class.encode(message).finish()
+    };
   }
 };
 function createBaseNFT(): NFT {
@@ -198,6 +242,7 @@ function createBaseNFT(): NFT {
   };
 }
 export const NFT = {
+  typeUrl: "/cosmos.nft.v1beta1.NFT",
   encode(message: NFT, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -298,5 +343,44 @@ export const NFT = {
     obj.uri_hash = message.uriHash;
     message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
     return obj;
+  },
+  fromAmino(object: NFTAmino): NFT {
+    return {
+      classId: object.class_id,
+      id: object.id,
+      uri: object.uri,
+      uriHash: object.uri_hash,
+      data: object?.data ? Any.fromAmino(object.data) : undefined
+    };
+  },
+  toAmino(message: NFT): NFTAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
+    obj.data = message.data ? Any.toAmino(message.data) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: NFTAminoMsg): NFT {
+    return NFT.fromAmino(object.value);
+  },
+  toAminoMsg(message: NFT): NFTAminoMsg {
+    return {
+      type: "cosmos-sdk/NFT",
+      value: NFT.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: NFTProtoMsg): NFT {
+    return NFT.decode(message.value);
+  },
+  toProto(message: NFT): Uint8Array {
+    return NFT.encode(message).finish();
+  },
+  toProtoMsg(message: NFT): NFTProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.NFT",
+      value: NFT.encode(message).finish()
+    };
   }
 };

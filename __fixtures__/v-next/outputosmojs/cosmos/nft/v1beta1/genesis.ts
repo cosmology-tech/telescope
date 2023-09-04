@@ -32,6 +32,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
+  typeUrl: "/cosmos.nft.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -112,6 +113,47 @@ export const GenesisState = {
       obj.entries = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromAmino(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.classes) {
+      obj.classes = message.classes.map(e => e ? Class.toAmino(e) : undefined);
+    } else {
+      obj.classes = [];
+    }
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? Entry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };
 function createBaseEntry(): Entry {
@@ -121,6 +163,7 @@ function createBaseEntry(): Entry {
   };
 }
 export const Entry = {
+  typeUrl: "/cosmos.nft.v1beta1.Entry",
   encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -193,5 +236,42 @@ export const Entry = {
       obj.nfts = [];
     }
     return obj;
+  },
+  fromAmino(object: EntryAmino): Entry {
+    return {
+      owner: object.owner,
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Entry): EntryAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    if (message.nfts) {
+      obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e) : undefined);
+    } else {
+      obj.nfts = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EntryAminoMsg): Entry {
+    return Entry.fromAmino(object.value);
+  },
+  toAminoMsg(message: Entry): EntryAminoMsg {
+    return {
+      type: "cosmos-sdk/Entry",
+      value: Entry.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EntryProtoMsg): Entry {
+    return Entry.decode(message.value);
+  },
+  toProto(message: Entry): Uint8Array {
+    return Entry.encode(message).finish();
+  },
+  toProtoMsg(message: Entry): EntryProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.Entry",
+      value: Entry.encode(message).finish()
+    };
   }
 };

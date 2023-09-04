@@ -24,6 +24,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
+  typeUrl: "/akash.market.v1beta2.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.orders) {
       Order.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -116,5 +117,48 @@ export const GenesisState = {
     }
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromAmino(e)) : [],
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? Lease.toAmino(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/market/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

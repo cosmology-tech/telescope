@@ -17,6 +17,7 @@ function createBaseConfigRequest(): ConfigRequest {
   return {};
 }
 export const ConfigRequest = {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigRequest",
   encode(_: ConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -55,6 +56,34 @@ export const ConfigRequest = {
   toSDK(_: ConfigRequest): ConfigRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: ConfigRequestAmino): ConfigRequest {
+    return {};
+  },
+  toAmino(_: ConfigRequest): ConfigRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: ConfigRequestAminoMsg): ConfigRequest {
+    return ConfigRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ConfigRequest): ConfigRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/ConfigRequest",
+      value: ConfigRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ConfigRequestProtoMsg): ConfigRequest {
+    return ConfigRequest.decode(message.value);
+  },
+  toProto(message: ConfigRequest): Uint8Array {
+    return ConfigRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ConfigRequest): ConfigRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.node.v1beta1.ConfigRequest",
+      value: ConfigRequest.encode(message).finish()
+    };
   }
 };
 function createBaseConfigResponse(): ConfigResponse {
@@ -63,6 +92,7 @@ function createBaseConfigResponse(): ConfigResponse {
   };
 }
 export const ConfigResponse = {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigResponse",
   encode(message: ConfigResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minimumGasPrice !== "") {
       writer.uint32(10).string(message.minimumGasPrice);
@@ -115,5 +145,36 @@ export const ConfigResponse = {
     const obj: any = {};
     obj.minimum_gas_price = message.minimumGasPrice;
     return obj;
+  },
+  fromAmino(object: ConfigResponseAmino): ConfigResponse {
+    return {
+      minimumGasPrice: object.minimum_gas_price
+    };
+  },
+  toAmino(message: ConfigResponse): ConfigResponseAmino {
+    const obj: any = {};
+    obj.minimum_gas_price = message.minimumGasPrice;
+    return obj;
+  },
+  fromAminoMsg(object: ConfigResponseAminoMsg): ConfigResponse {
+    return ConfigResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ConfigResponse): ConfigResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/ConfigResponse",
+      value: ConfigResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ConfigResponseProtoMsg): ConfigResponse {
+    return ConfigResponse.decode(message.value);
+  },
+  toProto(message: ConfigResponse): Uint8Array {
+    return ConfigResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ConfigResponse): ConfigResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.node.v1beta1.ConfigResponse",
+      value: ConfigResponse.encode(message).finish()
+    };
   }
 };

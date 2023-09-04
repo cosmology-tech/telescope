@@ -20,17 +20,12 @@
     "test": "lerna run test --stream"
   },
   "devDependencies": {
-    "@babel/cli": "7.21.0",
-    "@babel/core": "7.21.4",
-    "@babel/eslint-parser": "^7.21.3",
-    "@pyramation/babel-preset-env": "0.2.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^29.5.0",
     "eslint": "8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "29.5.0",
     "lerna": "7.0.2",
+    "esprima": "4.0.1",
     "prettier": "2.8.7"
   },
   "workspaces": [

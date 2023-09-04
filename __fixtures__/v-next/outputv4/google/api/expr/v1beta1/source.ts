@@ -138,6 +138,27 @@ export const SourceInfo_PositionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.decode(message.value);
+  },
+  toProto(message: SourceInfo_PositionsEntry): Uint8Array {
+    return SourceInfo_PositionsEntry.encode(message).finish();
   }
 };
 function createBaseSourceInfo(): SourceInfo {
@@ -148,6 +169,7 @@ function createBaseSourceInfo(): SourceInfo {
   };
 }
 export const SourceInfo = {
+  typeUrl: "/google.api.expr.v1beta1.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== "") {
       writer.uint32(18).string(message.location);
@@ -279,6 +301,49 @@ export const SourceInfo = {
       });
     }
     return obj;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      location: object.location,
+      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    if (message.lineOffsets) {
+      obj.line_offsets = message.lineOffsets.map(e => e);
+    } else {
+      obj.line_offsets = [];
+    }
+    obj.positions = {};
+    if (message.positions) {
+      Object.entries(message.positions).forEach(([k, v]) => {
+        obj.positions[k] = Math.round(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 };
 function createBaseSourcePosition(): SourcePosition {
@@ -290,6 +355,7 @@ function createBaseSourcePosition(): SourcePosition {
   };
 }
 export const SourcePosition = {
+  typeUrl: "/google.api.expr.v1beta1.SourcePosition",
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
@@ -378,5 +444,36 @@ export const SourcePosition = {
     obj.line = message.line;
     obj.column = message.column;
     return obj;
+  },
+  fromAmino(object: SourcePositionAmino): SourcePosition {
+    return {
+      location: object.location,
+      offset: object.offset,
+      line: object.line,
+      column: object.column
+    };
+  },
+  toAmino(message: SourcePosition): SourcePositionAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    obj.offset = message.offset;
+    obj.line = message.line;
+    obj.column = message.column;
+    return obj;
+  },
+  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
+    return SourcePosition.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
+    return SourcePosition.decode(message.value);
+  },
+  toProto(message: SourcePosition): Uint8Array {
+    return SourcePosition.encode(message).finish();
+  },
+  toProtoMsg(message: SourcePosition): SourcePositionProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.SourcePosition",
+      value: SourcePosition.encode(message).finish()
+    };
   }
 };

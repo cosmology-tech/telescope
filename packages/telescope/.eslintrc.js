@@ -1,7 +1,7 @@
 module.exports = {
   plugins: ['prettier'],
   extends: ['eslint:recommended', 'prettier'],
-  parser: '@babel/eslint-parser',
+  parser: 'esprima',
   parserOptions: {
     ecmaVersion: 11,
     requireConfigFile: false,
@@ -47,7 +47,7 @@ module.exports = {
         allowTaggedTemplates: true
       }
     ],
-    'no-console': 1,
+    'no-console': 0,
     'comma-dangle': 2,
     'jsx-quotes': [2, 'prefer-double'],
     'linebreak-style': ['error', 'unix'],

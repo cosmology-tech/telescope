@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -136,7 +136,7 @@ export interface Account {
   /** total coins spent by this account */
   transferred: Coin;
   /** block height at which this account was last settled */
-  settledAt: Long;
+  settledAt: bigint;
 }
 export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Account";
@@ -168,7 +168,7 @@ export interface AccountSDKType {
   state: Account_State;
   balance: CoinSDKType;
   transferred: CoinSDKType;
-  settled_at: Long;
+  settled_at: bigint;
 }
 /** Payment stores state for a payment */
 export interface Payment {
@@ -216,7 +216,7 @@ function createBaseAccountID(): AccountID {
 }
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta1.AccountID",
-  encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
@@ -225,8 +225,8 @@ export const AccountID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountID();
     while (reader.pos < end) {
@@ -310,12 +310,12 @@ function createBaseAccount(): Account {
     state: 0,
     balance: Coin.fromPartial({}),
     transferred: Coin.fromPartial({}),
-    settledAt: Long.ZERO
+    settledAt: BigInt(0)
   };
 }
 export const Account = {
   typeUrl: "/akash.escrow.v1beta1.Account",
-  encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Account, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -331,13 +331,13 @@ export const Account = {
     if (message.transferred !== undefined) {
       Coin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
-    if (!message.settledAt.isZero()) {
+    if (message.settledAt !== BigInt(0)) {
       writer.uint32(48).int64(message.settledAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Account {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Account {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccount();
     while (reader.pos < end) {
@@ -359,7 +359,7 @@ export const Account = {
           message.transferred = Coin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.settledAt = (reader.int64() as Long);
+          message.settledAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -369,6 +369,7 @@ export const Account = {
     return message;
   },
   fromJSON(object: any): Account {
+<<<<<<< HEAD
     const obj = createBaseAccount();
     if (isSet(object.id)) obj.id = AccountID.fromJSON(object.id);
     if (isSet(object.owner)) obj.owner = String(object.owner);
@@ -377,6 +378,16 @@ export const Account = {
     if (isSet(object.transferred)) obj.transferred = Coin.fromJSON(object.transferred);
     if (isSet(object.settledAt)) obj.settledAt = Long.fromValue(object.settledAt);
     return obj;
+=======
+    return {
+      id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
+      transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
+      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt(0)
+    };
+>>>>>>> changes-v1
   },
   toJSON(message: Account): unknown {
     const obj: any = {};
@@ -385,7 +396,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || Long.ZERO).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Account>): Account {
@@ -393,9 +404,15 @@ export const Account = {
     message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : AccountID.fromPartial({});
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
+<<<<<<< HEAD
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : Coin.fromPartial({});
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : Coin.fromPartial({});
     message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
+=======
+    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
+    message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
+>>>>>>> changes-v1
     return message;
   },
   fromSDK(object: AccountSDKType): Account {
@@ -425,7 +442,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
       transferred: object?.transferred ? Coin.fromAmino(object.transferred) : undefined,
-      settledAt: Long.fromString(object.settled_at)
+      settledAt: BigInt(object.settled_at)
     };
   },
   toAmino(message: Account): AccountAmino {
@@ -467,7 +484,7 @@ function createBasePayment(): Payment {
 }
 export const Payment = {
   typeUrl: "/akash.escrow.v1beta1.Payment",
-  encode(message: Payment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Payment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
@@ -491,8 +508,8 @@ export const Payment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Payment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Payment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePayment();
     while (reader.pos < end) {

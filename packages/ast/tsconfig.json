@@ -1,18 +1,27 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "moduleResolution": "node",
-    "allowJs": true,
-    "esModuleInterop": true,
+    "baseUrl": ".",
+    "rootDir": "src",
+    "skipLibCheck": true,
     "declaration": true,
     "declarationDir": "./types",
-    "emitDeclarationOnly": true,
-    "isolatedModules": true
+    "emitDeclarationOnly": false,
+    "isolatedModules": true,
+    "allowJs": true,
+
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "lib": ["es2022", "DOM"],
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"],
   "exclude": [
     "node_modules",
+    "test-utils",
     "src/**/*.spec.ts",
+    "src/**/*.test.ts",
     "src/__fixtures__/**/*",
     "types"
   ]

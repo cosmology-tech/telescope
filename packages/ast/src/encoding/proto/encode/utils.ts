@@ -257,8 +257,8 @@ export const encode = {
 
         let isAnyType = false;
         if (
-            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
-            args.context.options.interfaces.enabled == true &&
+            !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+            args.context.options.interfaces.enabled &&
             args.field.type === 'google.protobuf.Any' &&
             args.field.options['(cosmos_proto.accepts_interface)']
 
@@ -327,8 +327,8 @@ export const encode = {
 
         let isAnyType = false;
         if (
-            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
-            args.context.options.interfaces.enabled == true &&
+            !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+            args.context.options.interfaces.enabled &&
             args.field.type === 'google.protobuf.Any' &&
             args.field.options['(cosmos_proto.accepts_interface)']
 
