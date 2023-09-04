@@ -130,7 +130,9 @@ export const Duration = {
   },
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
+    if (object.seconds !== undefined && object.seconds !== null) {
+      message.seconds = Long.fromValue(object.seconds);
+    }
     message.nanos = object.nanos ?? 0;
     return message;
   }

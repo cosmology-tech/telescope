@@ -195,9 +195,13 @@ export const Plan = {
     const message = createBasePlan();
     message.name = object.name ?? "";
     message.time = object.time ?? undefined;
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.info = object.info ?? "";
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : Any.fromPartial({});
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
   },
   fromSDK(object: PlanSDKType): Plan {
@@ -280,7 +284,9 @@ export const SoftwareUpgradeProposal = {
     const message = createBaseSoftwareUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
     return message;
   },
   fromSDK(object: SoftwareUpgradeProposalSDKType): SoftwareUpgradeProposal {
@@ -416,7 +422,9 @@ export const ModuleVersion = {
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
+    if (object.version !== undefined && object.version !== null) {
+      message.version = Long.fromValue(object.version);
+    }
     return message;
   },
   fromSDK(object: ModuleVersionSDKType): ModuleVersion {

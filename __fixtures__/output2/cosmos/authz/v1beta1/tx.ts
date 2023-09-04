@@ -106,7 +106,9 @@ export const MsgGrant = {
     const message = createBaseMsgGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.grant = object.grant !== undefined && object.grant !== null ? Grant.fromPartial(object.grant) : Grant.fromPartial({});
+    if (object.grant !== undefined && object.grant !== null) {
+      message.grant = Grant.fromPartial(object.grant);
+    }
     return message;
   }
 };

@@ -416,9 +416,13 @@ export const QueryChannelResponse = {
   },
   fromPartial(object: DeepPartial<QueryChannelResponse>): QueryChannelResponse {
     const message = createBaseQueryChannelResponse();
-    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : Channel.fromPartial({});
+    if (object.channel !== undefined && object.channel !== null) {
+      message.channel = Channel.fromPartial(object.channel);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };
@@ -463,7 +467,9 @@ export const QueryChannelsRequest = {
   },
   fromPartial(object: DeepPartial<QueryChannelsRequest>): QueryChannelsRequest {
     const message = createBaseQueryChannelsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -531,8 +537,12 @@ export const QueryChannelsResponse = {
   fromPartial(object: DeepPartial<QueryChannelsResponse>): QueryChannelsResponse {
     const message = createBaseQueryChannelsResponse();
     message.channels = object.channels?.map(e => IdentifiedChannel.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
   }
 };
@@ -587,7 +597,9 @@ export const QueryConnectionChannelsRequest = {
   fromPartial(object: DeepPartial<QueryConnectionChannelsRequest>): QueryConnectionChannelsRequest {
     const message = createBaseQueryConnectionChannelsRequest();
     message.connection = object.connection ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -655,8 +667,12 @@ export const QueryConnectionChannelsResponse = {
   fromPartial(object: DeepPartial<QueryConnectionChannelsResponse>): QueryConnectionChannelsResponse {
     const message = createBaseQueryConnectionChannelsResponse();
     message.channels = object.channels?.map(e => IdentifiedChannel.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
   }
 };
@@ -774,9 +790,13 @@ export const QueryChannelClientStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryChannelClientStateResponse>): QueryChannelClientStateResponse {
     const message = createBaseQueryChannelClientStateResponse();
-    message.identifiedClientState = object.identifiedClientState !== undefined && object.identifiedClientState !== null ? IdentifiedClientState.fromPartial(object.identifiedClientState) : IdentifiedClientState.fromPartial({});
+    if (object.identifiedClientState !== undefined && object.identifiedClientState !== null) {
+      message.identifiedClientState = IdentifiedClientState.fromPartial(object.identifiedClientState);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };
@@ -850,8 +870,12 @@ export const QueryChannelConsensusStateRequest = {
     const message = createBaseQueryChannelConsensusStateRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = Long.fromValue(object.revisionNumber);
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = Long.fromValue(object.revisionHeight);
+    }
     return message;
   }
 };
@@ -923,10 +947,14 @@ export const QueryChannelConsensusStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryChannelConsensusStateResponse>): QueryChannelConsensusStateResponse {
     const message = createBaseQueryChannelConsensusStateResponse();
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.clientId = object.clientId ?? "";
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };
@@ -991,7 +1019,9 @@ export const QueryPacketCommitmentRequest = {
     const message = createBaseQueryPacketCommitmentRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     return message;
   }
 };
@@ -1056,7 +1086,9 @@ export const QueryPacketCommitmentResponse = {
     const message = createBaseQueryPacketCommitmentResponse();
     message.commitment = object.commitment ?? new Uint8Array();
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };
@@ -1121,7 +1153,9 @@ export const QueryPacketCommitmentsRequest = {
     const message = createBaseQueryPacketCommitmentsRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1189,8 +1223,12 @@ export const QueryPacketCommitmentsResponse = {
   fromPartial(object: DeepPartial<QueryPacketCommitmentsResponse>): QueryPacketCommitmentsResponse {
     const message = createBaseQueryPacketCommitmentsResponse();
     message.commitments = object.commitments?.map(e => PacketState.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
   }
 };
@@ -1255,7 +1293,9 @@ export const QueryPacketReceiptRequest = {
     const message = createBaseQueryPacketReceiptRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     return message;
   }
 };
@@ -1320,7 +1360,9 @@ export const QueryPacketReceiptResponse = {
     const message = createBaseQueryPacketReceiptResponse();
     message.received = object.received ?? false;
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };
@@ -1385,7 +1427,9 @@ export const QueryPacketAcknowledgementRequest = {
     const message = createBaseQueryPacketAcknowledgementRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     return message;
   }
 };
@@ -1450,7 +1494,9 @@ export const QueryPacketAcknowledgementResponse = {
     const message = createBaseQueryPacketAcknowledgementResponse();
     message.acknowledgement = object.acknowledgement ?? new Uint8Array();
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };
@@ -1537,7 +1583,9 @@ export const QueryPacketAcknowledgementsRequest = {
     const message = createBaseQueryPacketAcknowledgementsRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => Long.fromValue(e)) || [];
     return message;
   }
@@ -1606,8 +1654,12 @@ export const QueryPacketAcknowledgementsResponse = {
   fromPartial(object: DeepPartial<QueryPacketAcknowledgementsResponse>): QueryPacketAcknowledgementsResponse {
     const message = createBaseQueryPacketAcknowledgementsResponse();
     message.acknowledgements = object.acknowledgements?.map(e => PacketState.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
   }
 };
@@ -1753,7 +1805,9 @@ export const QueryUnreceivedPacketsResponse = {
   fromPartial(object: DeepPartial<QueryUnreceivedPacketsResponse>): QueryUnreceivedPacketsResponse {
     const message = createBaseQueryUnreceivedPacketsResponse();
     message.sequences = object.sequences?.map(e => Long.fromValue(e)) || [];
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
   }
 };
@@ -1899,7 +1953,9 @@ export const QueryUnreceivedAcksResponse = {
   fromPartial(object: DeepPartial<QueryUnreceivedAcksResponse>): QueryUnreceivedAcksResponse {
     const message = createBaseQueryUnreceivedAcksResponse();
     message.sequences = object.sequences?.map(e => Long.fromValue(e)) || [];
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
   }
 };
@@ -2017,9 +2073,13 @@ export const QueryNextSequenceReceiveResponse = {
   },
   fromPartial(object: DeepPartial<QueryNextSequenceReceiveResponse>): QueryNextSequenceReceiveResponse {
     const message = createBaseQueryNextSequenceReceiveResponse();
-    message.nextSequenceReceive = object.nextSequenceReceive !== undefined && object.nextSequenceReceive !== null ? Long.fromValue(object.nextSequenceReceive) : Long.UZERO;
+    if (object.nextSequenceReceive !== undefined && object.nextSequenceReceive !== null) {
+      message.nextSequenceReceive = Long.fromValue(object.nextSequenceReceive);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   }
 };

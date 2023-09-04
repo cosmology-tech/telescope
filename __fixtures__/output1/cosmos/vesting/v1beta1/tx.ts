@@ -165,7 +165,9 @@ export const MsgCreateVestingAccount = {
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
+    if (object.endTime !== undefined && object.endTime !== null) {
+      message.endTime = Long.fromValue(object.endTime);
+    }
     message.delayed = object.delayed ?? false;
     return message;
   },
@@ -435,7 +437,9 @@ export const MsgCreatePeriodicVestingAccount = {
     const message = createBaseMsgCreatePeriodicVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Long.fromValue(object.startTime);
+    }
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
   },

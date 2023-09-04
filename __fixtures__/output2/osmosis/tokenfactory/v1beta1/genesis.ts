@@ -74,7 +74,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.factoryDenoms = object.factoryDenoms?.map(e => GenesisDenom.fromPartial(e)) || [];
     return message;
   }
@@ -130,7 +132,9 @@ export const GenesisDenom = {
   fromPartial(object: DeepPartial<GenesisDenom>): GenesisDenom {
     const message = createBaseGenesisDenom();
     message.denom = object.denom ?? "";
-    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : DenomAuthorityMetadata.fromPartial({});
+    if (object.authorityMetadata !== undefined && object.authorityMetadata !== null) {
+      message.authorityMetadata = DenomAuthorityMetadata.fromPartial(object.authorityMetadata);
+    }
     return message;
   }
 };

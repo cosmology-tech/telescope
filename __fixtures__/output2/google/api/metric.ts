@@ -490,7 +490,9 @@ export const MetricDescriptor = {
     message.unit = object.unit ?? "";
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata) : MetricDescriptor_MetricDescriptorMetadata.fromPartial({});
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata);
+    }
     message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
@@ -556,8 +558,12 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
-    message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : Duration.fromPartial({});
-    message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : Duration.fromPartial({});
+    if (object.samplePeriod !== undefined && object.samplePeriod !== null) {
+      message.samplePeriod = Duration.fromPartial(object.samplePeriod);
+    }
+    if (object.ingestDelay !== undefined && object.ingestDelay !== null) {
+      message.ingestDelay = Duration.fromPartial(object.ingestDelay);
+    }
     return message;
   }
 };

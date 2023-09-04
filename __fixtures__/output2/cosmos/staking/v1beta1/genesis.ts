@@ -159,7 +159,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.lastTotalPower = object.lastTotalPower ?? new Uint8Array();
     message.lastValidatorPowers = object.lastValidatorPowers?.map(e => LastValidatorPower.fromPartial(e)) || [];
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
@@ -221,7 +223,9 @@ export const LastValidatorPower = {
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    if (object.power !== undefined && object.power !== null) {
+      message.power = Long.fromValue(object.power);
+    }
     return message;
   }
 };

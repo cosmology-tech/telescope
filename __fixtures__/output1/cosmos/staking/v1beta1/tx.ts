@@ -224,13 +224,21 @@ export const MsgCreateValidator = {
   },
   fromPartial(object: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
-    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : Description.fromPartial({});
-    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : CommissionRates.fromPartial({});
+    if (object.description !== undefined && object.description !== null) {
+      message.description = Description.fromPartial(object.description);
+    }
+    if (object.commission !== undefined && object.commission !== null) {
+      message.commission = CommissionRates.fromPartial(object.commission);
+    }
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : Any.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : Coin.fromPartial({});
+    if (object.pubkey !== undefined && object.pubkey !== null) {
+      message.pubkey = Any.fromPartial(object.pubkey);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Coin.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
@@ -365,7 +373,9 @@ export const MsgEditValidator = {
   },
   fromPartial(object: DeepPartial<MsgEditValidator>): MsgEditValidator {
     const message = createBaseMsgEditValidator();
-    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : Description.fromPartial({});
+    if (object.description !== undefined && object.description !== null) {
+      message.description = Description.fromPartial(object.description);
+    }
     message.validatorAddress = object.validatorAddress ?? "";
     message.commissionRate = object.commissionRate ?? "";
     message.minSelfDelegation = object.minSelfDelegation ?? "";
@@ -490,7 +500,9 @@ export const MsgDelegate = {
     const message = createBaseMsgDelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgDelegateSDKType): MsgDelegate {
@@ -620,7 +632,9 @@ export const MsgBeginRedelegate = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorSrcAddress = object.validatorSrcAddress ?? "";
     message.validatorDstAddress = object.validatorDstAddress ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgBeginRedelegateSDKType): MsgBeginRedelegate {
@@ -756,7 +770,9 @@ export const MsgUndelegate = {
     const message = createBaseMsgUndelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgUndelegateSDKType): MsgUndelegate {

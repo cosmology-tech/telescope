@@ -155,7 +155,9 @@ export const QueryIncentivesRequest = {
   },
   fromPartial(object: DeepPartial<QueryIncentivesRequest>): QueryIncentivesRequest {
     const message = createBaseQueryIncentivesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -214,7 +216,9 @@ export const QueryIncentivesResponse = {
   fromPartial(object: DeepPartial<QueryIncentivesResponse>): QueryIncentivesResponse {
     const message = createBaseQueryIncentivesResponse();
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -304,7 +308,9 @@ export const QueryIncentiveResponse = {
   },
   fromPartial(object: DeepPartial<QueryIncentiveResponse>): QueryIncentiveResponse {
     const message = createBaseQueryIncentiveResponse();
-    message.incentive = object.incentive !== undefined && object.incentive !== null ? Incentive.fromPartial(object.incentive) : Incentive.fromPartial({});
+    if (object.incentive !== undefined && object.incentive !== null) {
+      message.incentive = Incentive.fromPartial(object.incentive);
+    }
     return message;
   }
 };
@@ -359,7 +365,9 @@ export const QueryGasMetersRequest = {
   fromPartial(object: DeepPartial<QueryGasMetersRequest>): QueryGasMetersRequest {
     const message = createBaseQueryGasMetersRequest();
     message.contract = object.contract ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -418,7 +426,9 @@ export const QueryGasMetersResponse = {
   fromPartial(object: DeepPartial<QueryGasMetersResponse>): QueryGasMetersResponse {
     const message = createBaseQueryGasMetersResponse();
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -518,7 +528,9 @@ export const QueryGasMeterResponse = {
   },
   fromPartial(object: DeepPartial<QueryGasMeterResponse>): QueryGasMeterResponse {
     const message = createBaseQueryGasMeterResponse();
-    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? Long.fromValue(object.gasMeter) : Long.UZERO;
+    if (object.gasMeter !== undefined && object.gasMeter !== null) {
+      message.gasMeter = Long.fromValue(object.gasMeter);
+    }
     return message;
   }
 };
@@ -563,7 +575,9 @@ export const QueryAllocationMetersRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllocationMetersRequest>): QueryAllocationMetersRequest {
     const message = createBaseQueryAllocationMetersRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -622,7 +636,9 @@ export const QueryAllocationMetersResponse = {
   fromPartial(object: DeepPartial<QueryAllocationMetersResponse>): QueryAllocationMetersResponse {
     const message = createBaseQueryAllocationMetersResponse();
     message.allocationMeters = object.allocationMeters?.map(e => DecCoin.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -712,7 +728,9 @@ export const QueryAllocationMeterResponse = {
   },
   fromPartial(object: DeepPartial<QueryAllocationMeterResponse>): QueryAllocationMeterResponse {
     const message = createBaseQueryAllocationMeterResponse();
-    message.allocationMeter = object.allocationMeter !== undefined && object.allocationMeter !== null ? DecCoin.fromPartial(object.allocationMeter) : DecCoin.fromPartial({});
+    if (object.allocationMeter !== undefined && object.allocationMeter !== null) {
+      message.allocationMeter = DecCoin.fromPartial(object.allocationMeter);
+    }
     return message;
   }
 };
@@ -791,7 +809,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   }
 };

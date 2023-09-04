@@ -136,7 +136,9 @@ export const Struct_FieldsEntry = {
   fromPartial(object: DeepPartial<Struct_FieldsEntry>): Struct_FieldsEntry {
     const message = createBaseStruct_FieldsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
   }
 };
@@ -298,8 +300,12 @@ export const Value = {
     message.numberValue = object.numberValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.structValue = object.structValue !== undefined && object.structValue !== null ? Struct.fromPartial(object.structValue) : Struct.fromPartial({});
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : ListValue.fromPartial({});
+    if (object.structValue !== undefined && object.structValue !== null) {
+      message.structValue = Struct.fromPartial(object.structValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
     return message;
   }
 };

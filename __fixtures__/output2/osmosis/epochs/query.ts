@@ -183,7 +183,9 @@ export const QueryCurrentEpochResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
+    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
+      message.currentEpoch = Long.fromValue(object.currentEpoch);
+    }
     return message;
   }
 };

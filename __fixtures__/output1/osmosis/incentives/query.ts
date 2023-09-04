@@ -299,7 +299,9 @@ export const GaugeByIDRequest = {
   },
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Long.fromValue(object.id);
+    }
     return message;
   },
   fromSDK(object: GaugeByIDRequestSDKType): GaugeByIDRequest {
@@ -354,7 +356,9 @@ export const GaugeByIDResponse = {
   },
   fromPartial(object: DeepPartial<GaugeByIDResponse>): GaugeByIDResponse {
     const message = createBaseGaugeByIDResponse();
-    message.gauge = object.gauge !== undefined && object.gauge !== null ? Gauge.fromPartial(object.gauge) : Gauge.fromPartial({});
+    if (object.gauge !== undefined && object.gauge !== null) {
+      message.gauge = Gauge.fromPartial(object.gauge);
+    }
     return message;
   },
   fromSDK(object: GaugeByIDResponseSDKType): GaugeByIDResponse {
@@ -409,7 +413,9 @@ export const GaugesRequest = {
   },
   fromPartial(object: DeepPartial<GaugesRequest>): GaugesRequest {
     const message = createBaseGaugesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GaugesRequestSDKType): GaugesRequest {
@@ -478,7 +484,9 @@ export const GaugesResponse = {
   fromPartial(object: DeepPartial<GaugesResponse>): GaugesResponse {
     const message = createBaseGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GaugesResponseSDKType): GaugesResponse {
@@ -539,7 +547,9 @@ export const ActiveGaugesRequest = {
   },
   fromPartial(object: DeepPartial<ActiveGaugesRequest>): ActiveGaugesRequest {
     const message = createBaseActiveGaugesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: ActiveGaugesRequestSDKType): ActiveGaugesRequest {
@@ -608,7 +618,9 @@ export const ActiveGaugesResponse = {
   fromPartial(object: DeepPartial<ActiveGaugesResponse>): ActiveGaugesResponse {
     const message = createBaseActiveGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: ActiveGaugesResponseSDKType): ActiveGaugesResponse {
@@ -679,7 +691,9 @@ export const ActiveGaugesPerDenomRequest = {
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomRequest>): ActiveGaugesPerDenomRequest {
     const message = createBaseActiveGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: ActiveGaugesPerDenomRequestSDKType): ActiveGaugesPerDenomRequest {
@@ -750,7 +764,9 @@ export const ActiveGaugesPerDenomResponse = {
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomResponse>): ActiveGaugesPerDenomResponse {
     const message = createBaseActiveGaugesPerDenomResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: ActiveGaugesPerDenomResponseSDKType): ActiveGaugesPerDenomResponse {
@@ -811,7 +827,9 @@ export const UpcomingGaugesRequest = {
   },
   fromPartial(object: DeepPartial<UpcomingGaugesRequest>): UpcomingGaugesRequest {
     const message = createBaseUpcomingGaugesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: UpcomingGaugesRequestSDKType): UpcomingGaugesRequest {
@@ -880,7 +898,9 @@ export const UpcomingGaugesResponse = {
   fromPartial(object: DeepPartial<UpcomingGaugesResponse>): UpcomingGaugesResponse {
     const message = createBaseUpcomingGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: UpcomingGaugesResponseSDKType): UpcomingGaugesResponse {
@@ -951,7 +971,9 @@ export const UpcomingGaugesPerDenomRequest = {
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomRequest>): UpcomingGaugesPerDenomRequest {
     const message = createBaseUpcomingGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: UpcomingGaugesPerDenomRequestSDKType): UpcomingGaugesPerDenomRequest {
@@ -1022,7 +1044,9 @@ export const UpcomingGaugesPerDenomResponse = {
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomResponse>): UpcomingGaugesPerDenomResponse {
     const message = createBaseUpcomingGaugesPerDenomResponse();
     message.upcomingGauges = object.upcomingGauges?.map(e => Gauge.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: UpcomingGaugesPerDenomResponseSDKType): UpcomingGaugesPerDenomResponse {
@@ -1116,7 +1140,9 @@ export const RewardsEstRequest = {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
     message.lockIds = object.lockIds?.map(e => Long.fromValue(e)) || [];
-    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? Long.fromValue(object.endEpoch) : Long.ZERO;
+    if (object.endEpoch !== undefined && object.endEpoch !== null) {
+      message.endEpoch = Long.fromValue(object.endEpoch);
+    }
     return message;
   },
   fromSDK(object: RewardsEstRequestSDKType): RewardsEstRequest {

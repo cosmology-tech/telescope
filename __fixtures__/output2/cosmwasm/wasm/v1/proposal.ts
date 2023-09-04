@@ -235,7 +235,9 @@ export const StoreCodeProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
+      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
+    }
     return message;
   }
 };
@@ -351,7 +353,9 @@ export const InstantiateContractProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = Long.fromValue(object.codeId);
+    }
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -438,7 +442,9 @@ export const MigrateContractProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = Long.fromValue(object.codeId);
+    }
     message.msg = object.msg ?? new Uint8Array();
     return message;
   }
@@ -963,8 +969,12 @@ export const AccessConfigUpdate = {
   },
   fromPartial(object: DeepPartial<AccessConfigUpdate>): AccessConfigUpdate {
     const message = createBaseAccessConfigUpdate();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = Long.fromValue(object.codeId);
+    }
+    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
+      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
+    }
     return message;
   }
 };

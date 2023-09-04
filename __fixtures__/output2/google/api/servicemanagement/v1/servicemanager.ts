@@ -491,7 +491,9 @@ export const CreateServiceRequest = {
   },
   fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
     const message = createBaseCreateServiceRequest();
-    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : ManagedService.fromPartial({});
+    if (object.service !== undefined && object.service !== null) {
+      message.service = ManagedService.fromPartial(object.service);
+    }
     return message;
   }
 };
@@ -626,7 +628,9 @@ export const UndeleteServiceResponse = {
   },
   fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
     const message = createBaseUndeleteServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : ManagedService.fromPartial({});
+    if (object.service !== undefined && object.service !== null) {
+      message.service = ManagedService.fromPartial(object.service);
+    }
     return message;
   }
 };
@@ -870,7 +874,9 @@ export const CreateServiceConfigRequest = {
   fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
     const message = createBaseCreateServiceConfigRequest();
     message.serviceName = object.serviceName ?? "";
-    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : Service.fromPartial({});
+    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
+      message.serviceConfig = Service.fromPartial(object.serviceConfig);
+    }
     return message;
   }
 };
@@ -934,7 +940,9 @@ export const SubmitConfigSourceRequest = {
   fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
     const message = createBaseSubmitConfigSourceRequest();
     message.serviceName = object.serviceName ?? "";
-    message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : ConfigSource.fromPartial({});
+    if (object.configSource !== undefined && object.configSource !== null) {
+      message.configSource = ConfigSource.fromPartial(object.configSource);
+    }
     message.validateOnly = object.validateOnly ?? false;
     return message;
   }
@@ -980,7 +988,9 @@ export const SubmitConfigSourceResponse = {
   },
   fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
     const message = createBaseSubmitConfigSourceResponse();
-    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : Service.fromPartial({});
+    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
+      message.serviceConfig = Service.fromPartial(object.serviceConfig);
+    }
     return message;
   }
 };
@@ -1035,7 +1045,9 @@ export const CreateServiceRolloutRequest = {
   fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
     const message = createBaseCreateServiceRolloutRequest();
     message.serviceName = object.serviceName ?? "";
-    message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : Rollout.fromPartial({});
+    if (object.rollout !== undefined && object.rollout !== null) {
+      message.rollout = Rollout.fromPartial(object.rollout);
+    }
     return message;
   }
 };
@@ -1278,8 +1290,12 @@ export const GenerateConfigReportRequest = {
   },
   fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
     const message = createBaseGenerateConfigReportRequest();
-    message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : Any.fromPartial({});
-    message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : Any.fromPartial({});
+    if (object.newConfig !== undefined && object.newConfig !== null) {
+      message.newConfig = Any.fromPartial(object.newConfig);
+    }
+    if (object.oldConfig !== undefined && object.oldConfig !== null) {
+      message.oldConfig = Any.fromPartial(object.oldConfig);
+    }
     return message;
   }
 };

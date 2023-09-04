@@ -140,8 +140,12 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -208,9 +212,13 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.ZERO;
+    if (object.blockHeight !== undefined && object.blockHeight !== null) {
+      message.blockHeight = Long.fromValue(object.blockHeight);
+    }
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -255,7 +263,9 @@ export const GetLatestValidatorSetRequest = {
   },
   fromPartial(object: DeepPartial<GetLatestValidatorSetRequest>): GetLatestValidatorSetRequest {
     const message = createBaseGetLatestValidatorSetRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -322,9 +332,13 @@ export const GetLatestValidatorSetResponse = {
   },
   fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.ZERO;
+    if (object.blockHeight !== undefined && object.blockHeight !== null) {
+      message.blockHeight = Long.fromValue(object.blockHeight);
+    }
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -397,9 +411,15 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : Any.fromPartial({});
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? Long.fromValue(object.proposerPriority) : Long.ZERO;
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = Any.fromPartial(object.pubKey);
+    }
+    if (object.votingPower !== undefined && object.votingPower !== null) {
+      message.votingPower = Long.fromValue(object.votingPower);
+    }
+    if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
+      message.proposerPriority = Long.fromValue(object.proposerPriority);
+    }
     return message;
   }
 };
@@ -444,7 +464,9 @@ export const GetBlockByHeightRequest = {
   },
   fromPartial(object: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     return message;
   }
 };
@@ -498,8 +520,12 @@ export const GetBlockByHeightResponse = {
   },
   fromPartial(object: DeepPartial<GetBlockByHeightResponse>): GetBlockByHeightResponse {
     const message = createBaseGetBlockByHeightResponse();
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
-    message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : Block.fromPartial({});
+    if (object.blockId !== undefined && object.blockId !== null) {
+      message.blockId = BlockID.fromPartial(object.blockId);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromPartial(object.block);
+    }
     return message;
   }
 };
@@ -587,8 +613,12 @@ export const GetLatestBlockResponse = {
   },
   fromPartial(object: DeepPartial<GetLatestBlockResponse>): GetLatestBlockResponse {
     const message = createBaseGetLatestBlockResponse();
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
-    message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : Block.fromPartial({});
+    if (object.blockId !== undefined && object.blockId !== null) {
+      message.blockId = BlockID.fromPartial(object.blockId);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromPartial(object.block);
+    }
     return message;
   }
 };
@@ -755,8 +785,12 @@ export const GetNodeInfoResponse = {
   },
   fromPartial(object: DeepPartial<GetNodeInfoResponse>): GetNodeInfoResponse {
     const message = createBaseGetNodeInfoResponse();
-    message.defaultNodeInfo = object.defaultNodeInfo !== undefined && object.defaultNodeInfo !== null ? DefaultNodeInfo.fromPartial(object.defaultNodeInfo) : DefaultNodeInfo.fromPartial({});
-    message.applicationVersion = object.applicationVersion !== undefined && object.applicationVersion !== null ? VersionInfo.fromPartial(object.applicationVersion) : VersionInfo.fromPartial({});
+    if (object.defaultNodeInfo !== undefined && object.defaultNodeInfo !== null) {
+      message.defaultNodeInfo = DefaultNodeInfo.fromPartial(object.defaultNodeInfo);
+    }
+    if (object.applicationVersion !== undefined && object.applicationVersion !== null) {
+      message.applicationVersion = VersionInfo.fromPartial(object.applicationVersion);
+    }
     return message;
   }
 };

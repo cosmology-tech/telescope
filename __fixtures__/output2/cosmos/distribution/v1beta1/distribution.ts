@@ -302,7 +302,9 @@ export const ValidatorCurrentRewards = {
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
+    if (object.period !== undefined && object.period !== null) {
+      message.period = Long.fromValue(object.period);
+    }
     return message;
   }
 };
@@ -454,7 +456,9 @@ export const ValidatorSlashEvent = {
   },
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
-    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? Long.fromValue(object.validatorPeriod) : Long.UZERO;
+    if (object.validatorPeriod !== undefined && object.validatorPeriod !== null) {
+      message.validatorPeriod = Long.fromValue(object.validatorPeriod);
+    }
     message.fraction = object.fraction ?? "";
     return message;
   }
@@ -695,9 +699,13 @@ export const DelegatorStartingInfo = {
   },
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
-    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? Long.fromValue(object.previousPeriod) : Long.UZERO;
+    if (object.previousPeriod !== undefined && object.previousPeriod !== null) {
+      message.previousPeriod = Long.fromValue(object.previousPeriod);
+    }
     message.stake = object.stake ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     return message;
   }
 };

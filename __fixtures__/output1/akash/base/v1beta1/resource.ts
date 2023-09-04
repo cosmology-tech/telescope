@@ -108,7 +108,9 @@ export const CPU = {
   },
   fromPartial<I extends Exact<DeepPartial<CPU>, I>>(object: I): CPU {
     const message = createBaseCPU();
-    message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : ResourceValue.fromPartial({});
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromPartial(object.units);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -183,7 +185,9 @@ export const Memory = {
   },
   fromPartial<I extends Exact<DeepPartial<Memory>, I>>(object: I): Memory {
     const message = createBaseMemory();
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : ResourceValue.fromPartial({});
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromPartial(object.quantity);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -258,7 +262,9 @@ export const Storage = {
   },
   fromPartial<I extends Exact<DeepPartial<Storage>, I>>(object: I): Storage {
     const message = createBaseStorage();
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : ResourceValue.fromPartial({});
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromPartial(object.quantity);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -351,9 +357,15 @@ export const ResourceUnits = {
   },
   fromPartial<I extends Exact<DeepPartial<ResourceUnits>, I>>(object: I): ResourceUnits {
     const message = createBaseResourceUnits();
-    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : CPU.fromPartial({});
-    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : Memory.fromPartial({});
-    message.storage = object.storage !== undefined && object.storage !== null ? Storage.fromPartial(object.storage) : Storage.fromPartial({});
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromPartial(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromPartial(object.memory);
+    }
+    if (object.storage !== undefined && object.storage !== null) {
+      message.storage = Storage.fromPartial(object.storage);
+    }
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;
   },

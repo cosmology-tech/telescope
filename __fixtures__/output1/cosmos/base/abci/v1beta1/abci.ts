@@ -399,7 +399,9 @@ export const TxResponse = {
   },
   fromPartial(object: DeepPartial<TxResponse>): TxResponse {
     const message = createBaseTxResponse();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.txhash = object.txhash ?? "";
     message.codespace = object.codespace ?? "";
     message.code = object.code ?? 0;
@@ -407,9 +409,15 @@ export const TxResponse = {
     message.rawLog = object.rawLog ?? "";
     message.logs = object.logs?.map(e => ABCIMessageLog.fromPartial(e)) || [];
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.ZERO;
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.ZERO;
-    message.tx = object.tx !== undefined && object.tx !== null ? Any.fromPartial(object.tx) : Any.fromPartial({});
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = Long.fromValue(object.gasWanted);
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = Long.fromValue(object.gasUsed);
+    }
+    if (object.tx !== undefined && object.tx !== null) {
+      message.tx = Any.fromPartial(object.tx);
+    }
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
@@ -736,8 +744,12 @@ export const GasInfo = {
   },
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = createBaseGasInfo();
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.UZERO;
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.UZERO;
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = Long.fromValue(object.gasWanted);
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = Long.fromValue(object.gasUsed);
+    }
     return message;
   },
   fromSDK(object: GasInfoSDKType): GasInfo {
@@ -910,8 +922,12 @@ export const SimulationResponse = {
   },
   fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
-    message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : GasInfo.fromPartial({});
-    message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : Result.fromPartial({});
+    if (object.gasInfo !== undefined && object.gasInfo !== null) {
+      message.gasInfo = GasInfo.fromPartial(object.gasInfo);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = Result.fromPartial(object.result);
+    }
     return message;
   },
   fromSDK(object: SimulationResponseSDKType): SimulationResponse {
@@ -1167,11 +1183,21 @@ export const SearchTxsResult = {
   },
   fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {
     const message = createBaseSearchTxsResult();
-    message.totalCount = object.totalCount !== undefined && object.totalCount !== null ? Long.fromValue(object.totalCount) : Long.UZERO;
-    message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.UZERO;
-    message.pageNumber = object.pageNumber !== undefined && object.pageNumber !== null ? Long.fromValue(object.pageNumber) : Long.UZERO;
-    message.pageTotal = object.pageTotal !== undefined && object.pageTotal !== null ? Long.fromValue(object.pageTotal) : Long.UZERO;
-    message.limit = object.limit !== undefined && object.limit !== null ? Long.fromValue(object.limit) : Long.UZERO;
+    if (object.totalCount !== undefined && object.totalCount !== null) {
+      message.totalCount = Long.fromValue(object.totalCount);
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = Long.fromValue(object.count);
+    }
+    if (object.pageNumber !== undefined && object.pageNumber !== null) {
+      message.pageNumber = Long.fromValue(object.pageNumber);
+    }
+    if (object.pageTotal !== undefined && object.pageTotal !== null) {
+      message.pageTotal = Long.fromValue(object.pageTotal);
+    }
+    if (object.limit !== undefined && object.limit !== null) {
+      message.limit = Long.fromValue(object.limit);
+    }
     message.txs = object.txs?.map(e => TxResponse.fromPartial(e)) || [];
     return message;
   },

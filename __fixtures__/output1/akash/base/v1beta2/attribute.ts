@@ -249,7 +249,9 @@ export const PlacementRequirements = {
   },
   fromPartial<I extends Exact<DeepPartial<PlacementRequirements>, I>>(object: I): PlacementRequirements {
     const message = createBasePlacementRequirements();
-    message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : SignedBy.fromPartial({});
+    if (object.signedBy !== undefined && object.signedBy !== null) {
+      message.signedBy = SignedBy.fromPartial(object.signedBy);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },

@@ -81,9 +81,15 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : GenesisState1.fromPartial({});
-    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : GenesisState2.fromPartial({});
-    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : GenesisState3.fromPartial({});
+    if (object.clientGenesis !== undefined && object.clientGenesis !== null) {
+      message.clientGenesis = GenesisState1.fromPartial(object.clientGenesis);
+    }
+    if (object.connectionGenesis !== undefined && object.connectionGenesis !== null) {
+      message.connectionGenesis = GenesisState2.fromPartial(object.connectionGenesis);
+    }
+    if (object.channelGenesis !== undefined && object.channelGenesis !== null) {
+      message.channelGenesis = GenesisState3.fromPartial(object.channelGenesis);
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

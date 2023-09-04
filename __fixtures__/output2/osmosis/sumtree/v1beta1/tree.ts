@@ -158,7 +158,9 @@ export const Leaf = {
   },
   fromPartial(object: DeepPartial<Leaf>): Leaf {
     const message = createBaseLeaf();
-    message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : Child.fromPartial({});
+    if (object.leaf !== undefined && object.leaf !== null) {
+      message.leaf = Child.fromPartial(object.leaf);
+    }
     return message;
   }
 };

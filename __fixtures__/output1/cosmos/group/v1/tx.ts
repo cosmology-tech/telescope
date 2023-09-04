@@ -490,7 +490,9 @@ export const MsgCreateGroupResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     return message;
   },
   fromSDK(object: MsgCreateGroupResponseSDKType): MsgCreateGroupResponse {
@@ -568,7 +570,9 @@ export const MsgUpdateGroupMembers = {
   fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.memberUpdates = object.memberUpdates?.map(e => Member.fromPartial(e)) || [];
     return message;
   },
@@ -692,7 +696,9 @@ export const MsgUpdateGroupAdmin = {
   fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.newAdmin = object.newAdmin ?? "";
     return message;
   },
@@ -812,7 +818,9 @@ export const MsgUpdateGroupMetadata = {
   fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.metadata = object.metadata ?? "";
     return message;
   },
@@ -941,9 +949,13 @@ export const MsgCreateGroupPolicy = {
   fromPartial(object: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
     const message = createBaseMsgCreateGroupPolicy();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.metadata = object.metadata ?? "";
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
+      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
+    }
     return message;
   },
   fromSDK(object: MsgCreateGroupPolicySDKType): MsgCreateGroupPolicy {
@@ -1192,7 +1204,9 @@ export const MsgCreateGroupWithPolicy = {
     message.groupMetadata = object.groupMetadata ?? "";
     message.groupPolicyMetadata = object.groupPolicyMetadata ?? "";
     message.groupPolicyAsAdmin = object.groupPolicyAsAdmin ?? false;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
+      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
+    }
     return message;
   },
   fromSDK(object: MsgCreateGroupWithPolicySDKType): MsgCreateGroupWithPolicy {
@@ -1270,7 +1284,9 @@ export const MsgCreateGroupWithPolicyResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
     return message;
   },
@@ -1389,7 +1405,9 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
     message.admin = object.admin ?? "";
     message.address = object.address ?? "";
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
+      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
+    }
     return message;
   },
   fromSDK(object: MsgUpdateGroupPolicyDecisionPolicySDKType): MsgUpdateGroupPolicyDecisionPolicy {
@@ -1728,7 +1746,9 @@ export const MsgSubmitProposalResponse = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   },
   fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
@@ -1792,7 +1812,9 @@ export const MsgWithdrawProposal = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.address = object.address ?? "";
     return message;
   },
@@ -1927,7 +1949,9 @@ export const MsgVote = {
   },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -2044,7 +2068,9 @@ export const MsgExec = {
   },
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.signer = object.signer ?? "";
     return message;
   },
@@ -2153,7 +2179,9 @@ export const MsgLeaveGroup = {
   fromPartial(object: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     return message;
   },
   fromSDK(object: MsgLeaveGroupSDKType): MsgLeaveGroup {

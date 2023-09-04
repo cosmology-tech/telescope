@@ -295,7 +295,9 @@ export const Channel = {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
@@ -402,7 +404,9 @@ export const IdentifiedChannel = {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     message.portId = object.portId ?? "";
@@ -569,14 +573,20 @@ export const Packet = {
   },
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
+    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
+      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
+    }
+    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
+      message.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
+    }
     return message;
   }
 };
@@ -650,7 +660,9 @@ export const PacketState = {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     message.data = object.data ?? new Uint8Array();
     return message;
   }

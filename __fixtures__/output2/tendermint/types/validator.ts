@@ -83,8 +83,12 @@ export const ValidatorSet = {
   fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
     const message = createBaseValidatorSet();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : Validator.fromPartial({});
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
+    if (object.proposer !== undefined && object.proposer !== null) {
+      message.proposer = Validator.fromPartial(object.proposer);
+    }
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = Long.fromValue(object.totalVotingPower);
+    }
     return message;
   }
 };
@@ -157,9 +161,15 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? Long.fromValue(object.proposerPriority) : Long.ZERO;
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.votingPower !== undefined && object.votingPower !== null) {
+      message.votingPower = Long.fromValue(object.votingPower);
+    }
+    if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
+      message.proposerPriority = Long.fromValue(object.proposerPriority);
+    }
     return message;
   }
 };
@@ -213,8 +223,12 @@ export const SimpleValidator = {
   },
   fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
     const message = createBaseSimpleValidator();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.votingPower !== undefined && object.votingPower !== null) {
+      message.votingPower = Long.fromValue(object.votingPower);
+    }
     return message;
   }
 };

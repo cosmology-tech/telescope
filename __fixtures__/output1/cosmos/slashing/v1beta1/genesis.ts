@@ -132,7 +132,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
     message.missedBlocks = object.missedBlocks?.map(e => ValidatorMissedBlocks.fromPartial(e)) || [];
     return message;
@@ -211,7 +213,9 @@ export const SigningInfo = {
   fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
     message.address = object.address ?? "";
-    message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : ValidatorSigningInfo.fromPartial({});
+    if (object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null) {
+      message.validatorSigningInfo = ValidatorSigningInfo.fromPartial(object.validatorSigningInfo);
+    }
     return message;
   },
   fromSDK(object: SigningInfoSDKType): SigningInfo {
@@ -352,7 +356,9 @@ export const MissedBlock = {
   },
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = Long.fromValue(object.index);
+    }
     message.missed = object.missed ?? false;
     return message;
   },

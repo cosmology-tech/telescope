@@ -568,7 +568,9 @@ export const OperationMetadata = {
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
     message.progressPercentage = object.progressPercentage ?? 0;
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Timestamp.fromPartial(object.startTime);
+    }
     return message;
   }
 };
@@ -1006,11 +1008,17 @@ export const Rollout = {
   fromPartial(object: DeepPartial<Rollout>): Rollout {
     const message = createBaseRollout();
     message.rolloutId = object.rolloutId ?? "";
-    message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : Timestamp.fromPartial({});
+    if (object.createTime !== undefined && object.createTime !== null) {
+      message.createTime = Timestamp.fromPartial(object.createTime);
+    }
     message.createdBy = object.createdBy ?? "";
     message.status = object.status ?? 0;
-    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : Rollout_TrafficPercentStrategy.fromPartial({});
-    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : Rollout_DeleteServiceStrategy.fromPartial({});
+    if (object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null) {
+      message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy);
+    }
+    if (object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null) {
+      message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy);
+    }
     message.serviceName = object.serviceName ?? "";
     return message;
   }

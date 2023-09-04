@@ -166,7 +166,9 @@ export const MsgLockTokens = {
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -230,7 +232,9 @@ export const MsgLockTokensResponse = {
   },
   fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
     const message = createBaseMsgLockTokensResponse();
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = Long.fromValue(object.ID);
+    }
     return message;
   },
   fromSDK(object: MsgLockTokensResponseSDKType): MsgLockTokensResponse {
@@ -426,7 +430,9 @@ export const MsgBeginUnlocking = {
   fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
     message.owner = object.owner ?? "";
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = Long.fromValue(object.ID);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -564,8 +570,12 @@ export const MsgExtendLockup = {
   fromPartial(object: DeepPartial<MsgExtendLockup>): MsgExtendLockup {
     const message = createBaseMsgExtendLockup();
     message.owner = object.owner ?? "";
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = Long.fromValue(object.ID);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: MsgExtendLockupSDKType): MsgExtendLockup {
@@ -702,7 +712,9 @@ export const MsgForceUnlock = {
   fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
     const message = createBaseMsgForceUnlock();
     message.owner = object.owner ?? "";
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = Long.fromValue(object.ID);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },

@@ -215,7 +215,9 @@ export const LeaseID = {
   fromPartial<I extends Exact<DeepPartial<LeaseID>, I>>(object: I): LeaseID {
     const message = createBaseLeaseID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -317,11 +319,19 @@ export const Lease = {
   },
   fromPartial<I extends Exact<DeepPartial<Lease>, I>>(object: I): Lease {
     const message = createBaseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : LeaseID.fromPartial({});
+    if (object.leaseId !== undefined && object.leaseId !== null) {
+      message.leaseId = LeaseID.fromPartial(object.leaseId);
+    }
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
-    message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? Long.fromValue(object.closedOn) : Long.ZERO;
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromPartial(object.price);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Long.fromValue(object.createdAt);
+    }
+    if (object.closedOn !== undefined && object.closedOn !== null) {
+      message.closedOn = Long.fromValue(object.closedOn);
+    }
     return message;
   },
   fromSDK(object: LeaseSDKType): Lease {
@@ -430,7 +440,9 @@ export const LeaseFilters = {
   fromPartial<I extends Exact<DeepPartial<LeaseFilters>, I>>(object: I): LeaseFilters {
     const message = createBaseLeaseFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -499,7 +511,9 @@ export const MsgCreateLease = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateLease>, I>>(object: I): MsgCreateLease {
     const message = createBaseMsgCreateLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    if (object.bidId !== undefined && object.bidId !== null) {
+      message.bidId = BidID.fromPartial(object.bidId);
+    }
     return message;
   },
   fromSDK(object: MsgCreateLeaseSDKType): MsgCreateLease {
@@ -595,7 +609,9 @@ export const MsgWithdrawLease = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgWithdrawLease>, I>>(object: I): MsgWithdrawLease {
     const message = createBaseMsgWithdrawLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : LeaseID.fromPartial({});
+    if (object.bidId !== undefined && object.bidId !== null) {
+      message.bidId = LeaseID.fromPartial(object.bidId);
+    }
     return message;
   },
   fromSDK(object: MsgWithdrawLeaseSDKType): MsgWithdrawLease {
@@ -691,7 +707,9 @@ export const MsgCloseLease = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCloseLease>, I>>(object: I): MsgCloseLease {
     const message = createBaseMsgCloseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : LeaseID.fromPartial({});
+    if (object.leaseId !== undefined && object.leaseId !== null) {
+      message.leaseId = LeaseID.fromPartial(object.leaseId);
+    }
     return message;
   },
   fromSDK(object: MsgCloseLeaseSDKType): MsgCloseLease {

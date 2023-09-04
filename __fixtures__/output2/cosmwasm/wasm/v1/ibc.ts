@@ -96,8 +96,12 @@ export const MsgIBCSend = {
   fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Long.fromValue(object.timeoutHeight) : Long.UZERO;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
+    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
+      message.timeoutHeight = Long.fromValue(object.timeoutHeight);
+    }
+    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
+      message.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
+    }
     message.data = object.data ?? new Uint8Array();
     return message;
   }

@@ -305,7 +305,9 @@ export const MetricRule_MetricCostsEntry = {
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Long.fromValue(object.value);
+    }
     return message;
   }
 };
@@ -438,7 +440,9 @@ export const QuotaLimit_ValuesEntry = {
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Long.fromValue(object.value);
+    }
     return message;
   }
 };
@@ -582,9 +586,15 @@ export const QuotaLimit = {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? Long.fromValue(object.defaultLimit) : Long.ZERO;
-    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? Long.fromValue(object.maxLimit) : Long.ZERO;
-    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? Long.fromValue(object.freeTier) : Long.ZERO;
+    if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
+      message.defaultLimit = Long.fromValue(object.defaultLimit);
+    }
+    if (object.maxLimit !== undefined && object.maxLimit !== null) {
+      message.maxLimit = Long.fromValue(object.maxLimit);
+    }
+    if (object.freeTier !== undefined && object.freeTier !== null) {
+      message.freeTier = Long.fromValue(object.freeTier);
+    }
     message.duration = object.duration ?? "";
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";

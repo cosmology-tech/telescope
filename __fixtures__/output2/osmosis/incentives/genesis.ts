@@ -102,10 +102,14 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? Long.fromValue(object.lastGaugeId) : Long.UZERO;
+    if (object.lastGaugeId !== undefined && object.lastGaugeId !== null) {
+      message.lastGaugeId = Long.fromValue(object.lastGaugeId);
+    }
     return message;
   }
 };

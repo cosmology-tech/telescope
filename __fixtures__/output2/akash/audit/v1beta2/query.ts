@@ -89,7 +89,9 @@ export const QueryProvidersResponse = {
   fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -189,7 +191,9 @@ export const QueryAllProvidersAttributesRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllProvidersAttributesRequest>): QueryAllProvidersAttributesRequest {
     const message = createBaseQueryAllProvidersAttributesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -244,7 +248,9 @@ export const QueryProviderAttributesRequest = {
   fromPartial(object: DeepPartial<QueryProviderAttributesRequest>): QueryProviderAttributesRequest {
     const message = createBaseQueryProviderAttributesRequest();
     message.owner = object.owner ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -354,7 +360,9 @@ export const QueryAuditorAttributesRequest = {
   fromPartial(object: DeepPartial<QueryAuditorAttributesRequest>): QueryAuditorAttributesRequest {
     const message = createBaseQueryAuditorAttributesRequest();
     message.auditor = object.auditor ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };

@@ -73,7 +73,9 @@ export const GroupID = {
   fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.gseq = object.gseq ?? 0;
     return message;
   },

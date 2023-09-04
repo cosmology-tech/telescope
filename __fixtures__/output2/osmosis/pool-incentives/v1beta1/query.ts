@@ -83,7 +83,9 @@ export const QueryGaugeIdsRequest = {
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsRequest>): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     return message;
   }
 };
@@ -195,8 +197,12 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = Long.fromValue(object.gaugeId);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
   }
@@ -276,7 +282,9 @@ export const QueryDistrInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryDistrInfoResponse>): QueryDistrInfoResponse {
     const message = createBaseQueryDistrInfoResponse();
-    message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : DistrInfo.fromPartial({});
+    if (object.distrInfo !== undefined && object.distrInfo !== null) {
+      message.distrInfo = DistrInfo.fromPartial(object.distrInfo);
+    }
     return message;
   }
 };
@@ -355,7 +363,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   }
 };
@@ -535,9 +545,15 @@ export const IncentivizedPool = {
   },
   fromPartial(object: DeepPartial<IncentivizedPool>): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : Duration.fromPartial({});
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
+    if (object.lockableDuration !== undefined && object.lockableDuration !== null) {
+      message.lockableDuration = Duration.fromPartial(object.lockableDuration);
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = Long.fromValue(object.gaugeId);
+    }
     return message;
   }
 };

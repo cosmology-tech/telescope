@@ -223,15 +223,27 @@ export const Value = {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = Long.fromValue(object.int64Value);
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = Long.fromValue(object.uint64Value);
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : EnumValue.fromPartial({});
-    message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : Any.fromPartial({});
-    message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : MapValue.fromPartial({});
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : ListValue.fromPartial({});
+    if (object.enumValue !== undefined && object.enumValue !== null) {
+      message.enumValue = EnumValue.fromPartial(object.enumValue);
+    }
+    if (object.objectValue !== undefined && object.objectValue !== null) {
+      message.objectValue = Any.fromPartial(object.objectValue);
+    }
+    if (object.mapValue !== undefined && object.mapValue !== null) {
+      message.mapValue = MapValue.fromPartial(object.mapValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
     message.typeValue = object.typeValue ?? undefined;
     return message;
   }
@@ -439,8 +451,12 @@ export const MapValue_Entry = {
   },
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
-    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : Value.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromPartial(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
   }
 };

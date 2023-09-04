@@ -216,7 +216,9 @@ export const MsgCreateProvider = {
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : ProviderInfo.fromPartial({});
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromPartial(object.info);
+    }
     return message;
   },
   fromSDK(object: MsgCreateProviderSDKType): MsgCreateProvider {
@@ -356,7 +358,9 @@ export const MsgUpdateProvider = {
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : ProviderInfo.fromPartial({});
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromPartial(object.info);
+    }
     return message;
   },
   fromSDK(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
@@ -592,7 +596,9 @@ export const Provider = {
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : ProviderInfo.fromPartial({});
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromPartial(object.info);
+    }
     return message;
   },
   fromSDK(object: ProviderSDKType): Provider {

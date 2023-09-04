@@ -136,8 +136,12 @@ export const Incentive = {
     message.contract = object.contract ?? "";
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
-    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? Long.fromValue(object.totalGas) : Long.UZERO;
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Timestamp.fromPartial(object.startTime);
+    }
+    if (object.totalGas !== undefined && object.totalGas !== null) {
+      message.totalGas = Long.fromValue(object.totalGas);
+    }
     return message;
   }
 };
@@ -202,7 +206,9 @@ export const GasMeter = {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
-    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? Long.fromValue(object.cumulativeGas) : Long.UZERO;
+    if (object.cumulativeGas !== undefined && object.cumulativeGas !== null) {
+      message.cumulativeGas = Long.fromValue(object.cumulativeGas);
+    }
     return message;
   }
 };

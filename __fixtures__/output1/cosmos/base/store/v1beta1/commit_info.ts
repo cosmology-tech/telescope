@@ -103,7 +103,9 @@ export const CommitInfo = {
   },
   fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
+    if (object.version !== undefined && object.version !== null) {
+      message.version = Long.fromValue(object.version);
+    }
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
   },
@@ -175,7 +177,9 @@ export const StoreInfo = {
   fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
-    message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : CommitID.fromPartial({});
+    if (object.commitId !== undefined && object.commitId !== null) {
+      message.commitId = CommitID.fromPartial(object.commitId);
+    }
     return message;
   },
   fromSDK(object: StoreInfoSDKType): StoreInfo {
@@ -241,7 +245,9 @@ export const CommitID = {
   },
   fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = createBaseCommitID();
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
+    if (object.version !== undefined && object.version !== null) {
+      message.version = Long.fromValue(object.version);
+    }
     message.hash = object.hash ?? new Uint8Array();
     return message;
   },

@@ -295,7 +295,9 @@ export const DistrRecord = {
   },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = Long.fromValue(object.gaugeId);
+    }
     message.weight = object.weight ?? "";
     return message;
   },
@@ -371,9 +373,15 @@ export const PoolToGauge = {
   },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = Long.fromValue(object.gaugeId);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {

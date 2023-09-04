@@ -93,7 +93,9 @@ export const QuerySpotPriceRequest = {
   },
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;

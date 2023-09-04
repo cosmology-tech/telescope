@@ -90,8 +90,12 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
     message.clientConnectionPaths = object.clientConnectionPaths?.map(e => ConnectionPaths.fromPartial(e)) || [];
-    message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO;
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null) {
+      message.nextConnectionSequence = Long.fromValue(object.nextConnectionSequence);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   }
 };

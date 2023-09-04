@@ -186,7 +186,9 @@ export const MsgCloseGroup = {
   },
   fromPartial<I extends Exact<Partial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
@@ -282,7 +284,9 @@ export const MsgPauseGroup = {
   },
   fromPartial<I extends Exact<Partial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
@@ -378,7 +382,9 @@ export const MsgStartGroup = {
   },
   fromPartial<I extends Exact<Partial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
@@ -493,7 +499,9 @@ export const GroupID = {
   fromPartial<I extends Exact<Partial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.gseq = object.gseq ?? 0;
     return message;
   },
@@ -576,7 +584,9 @@ export const GroupSpec = {
   fromPartial<I extends Exact<Partial<GroupSpec>, I>>(object: I): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : PlacementRequirements.fromPartial({});
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromPartial(object.requirements);
+    }
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   },
@@ -667,10 +677,16 @@ export const Group = {
   },
   fromPartial<I extends Exact<Partial<Group>, I>>(object: I): Group {
     const message = createBaseGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : GroupID.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = GroupID.fromPartial(object.groupId);
+    }
     message.state = object.state ?? 0;
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : GroupSpec.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    if (object.groupSpec !== undefined && object.groupSpec !== null) {
+      message.groupSpec = GroupSpec.fromPartial(object.groupSpec);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Long.fromValue(object.createdAt);
+    }
     return message;
   },
   fromSDK(object: GroupSDKType): Group {
@@ -749,9 +765,13 @@ export const Resource = {
   },
   fromPartial<I extends Exact<Partial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
-    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : ResourceUnits.fromPartial({});
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromPartial(object.resources);
+    }
     message.count = object.count ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : Coin.fromPartial({});
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Coin.fromPartial(object.price);
+    }
     return message;
   },
   fromSDK(object: ResourceSDKType): Resource {

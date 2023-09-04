@@ -210,7 +210,9 @@ export const QueryGroupInfoRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     return message;
   }
 };
@@ -255,7 +257,9 @@ export const QueryGroupInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
     const message = createBaseQueryGroupInfoResponse();
-    message.info = object.info !== undefined && object.info !== null ? GroupInfo.fromPartial(object.info) : GroupInfo.fromPartial({});
+    if (object.info !== undefined && object.info !== null) {
+      message.info = GroupInfo.fromPartial(object.info);
+    }
     return message;
   }
 };
@@ -345,7 +349,9 @@ export const QueryGroupPolicyInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupPolicyInfoResponse>): QueryGroupPolicyInfoResponse {
     const message = createBaseQueryGroupPolicyInfoResponse();
-    message.info = object.info !== undefined && object.info !== null ? GroupPolicyInfo.fromPartial(object.info) : GroupPolicyInfo.fromPartial({});
+    if (object.info !== undefined && object.info !== null) {
+      message.info = GroupPolicyInfo.fromPartial(object.info);
+    }
     return message;
   }
 };
@@ -399,8 +405,12 @@ export const QueryGroupMembersRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -459,7 +469,9 @@ export const QueryGroupMembersResponse = {
   fromPartial(object: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
     const message = createBaseQueryGroupMembersResponse();
     message.members = object.members?.map(e => GroupMember.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -514,7 +526,9 @@ export const QueryGroupsByAdminRequest = {
   fromPartial(object: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
     const message = createBaseQueryGroupsByAdminRequest();
     message.admin = object.admin ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -573,7 +587,9 @@ export const QueryGroupsByAdminResponse = {
   fromPartial(object: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
     const message = createBaseQueryGroupsByAdminResponse();
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -627,8 +643,12 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -687,7 +707,9 @@ export const QueryGroupPoliciesByGroupResponse = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupResponse>): QueryGroupPoliciesByGroupResponse {
     const message = createBaseQueryGroupPoliciesByGroupResponse();
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -742,7 +764,9 @@ export const QueryGroupPoliciesByAdminRequest = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminRequest>): QueryGroupPoliciesByAdminRequest {
     const message = createBaseQueryGroupPoliciesByAdminRequest();
     message.admin = object.admin ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -801,7 +825,9 @@ export const QueryGroupPoliciesByAdminResponse = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminResponse>): QueryGroupPoliciesByAdminResponse {
     const message = createBaseQueryGroupPoliciesByAdminResponse();
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -846,7 +872,9 @@ export const QueryProposalRequest = {
   },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   }
 };
@@ -891,7 +919,9 @@ export const QueryProposalResponse = {
   },
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
-    message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : Proposal.fromPartial({});
+    if (object.proposal !== undefined && object.proposal !== null) {
+      message.proposal = Proposal.fromPartial(object.proposal);
+    }
     return message;
   }
 };
@@ -946,7 +976,9 @@ export const QueryProposalsByGroupPolicyRequest = {
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyRequest>): QueryProposalsByGroupPolicyRequest {
     const message = createBaseQueryProposalsByGroupPolicyRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1005,7 +1037,9 @@ export const QueryProposalsByGroupPolicyResponse = {
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyResponse>): QueryProposalsByGroupPolicyResponse {
     const message = createBaseQueryProposalsByGroupPolicyResponse();
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1059,7 +1093,9 @@ export const QueryVoteByProposalVoterRequest = {
   },
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.voter = object.voter ?? "";
     return message;
   }
@@ -1105,7 +1141,9 @@ export const QueryVoteByProposalVoterResponse = {
   },
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
     const message = createBaseQueryVoteByProposalVoterResponse();
-    message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : Vote.fromPartial({});
+    if (object.vote !== undefined && object.vote !== null) {
+      message.vote = Vote.fromPartial(object.vote);
+    }
     return message;
   }
 };
@@ -1159,8 +1197,12 @@ export const QueryVotesByProposalRequest = {
   },
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1219,7 +1261,9 @@ export const QueryVotesByProposalResponse = {
   fromPartial(object: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
     const message = createBaseQueryVotesByProposalResponse();
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1274,7 +1318,9 @@ export const QueryVotesByVoterRequest = {
   fromPartial(object: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
     const message = createBaseQueryVotesByVoterRequest();
     message.voter = object.voter ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1333,7 +1379,9 @@ export const QueryVotesByVoterResponse = {
   fromPartial(object: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
     const message = createBaseQueryVotesByVoterResponse();
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1388,7 +1436,9 @@ export const QueryGroupsByMemberRequest = {
   fromPartial(object: DeepPartial<QueryGroupsByMemberRequest>): QueryGroupsByMemberRequest {
     const message = createBaseQueryGroupsByMemberRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1447,7 +1497,9 @@ export const QueryGroupsByMemberResponse = {
   fromPartial(object: DeepPartial<QueryGroupsByMemberResponse>): QueryGroupsByMemberResponse {
     const message = createBaseQueryGroupsByMemberResponse();
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -1492,7 +1544,9 @@ export const QueryTallyResultRequest = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   }
 };
@@ -1537,7 +1591,9 @@ export const QueryTallyResultResponse = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     const message = createBaseQueryTallyResultResponse();
-    message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : TallyResult.fromPartial({});
+    if (object.tally !== undefined && object.tally !== null) {
+      message.tally = TallyResult.fromPartial(object.tally);
+    }
     return message;
   }
 };

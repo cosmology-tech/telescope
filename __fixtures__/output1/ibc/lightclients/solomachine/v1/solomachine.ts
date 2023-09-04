@@ -440,9 +440,15 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
-    message.frozenSequence = object.frozenSequence !== undefined && object.frozenSequence !== null ? Long.fromValue(object.frozenSequence) : Long.UZERO;
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : ConsensusState.fromPartial({});
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
+    if (object.frozenSequence !== undefined && object.frozenSequence !== null) {
+      message.frozenSequence = Long.fromValue(object.frozenSequence);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = ConsensusState.fromPartial(object.consensusState);
+    }
     message.allowUpdateAfterProposal = object.allowUpdateAfterProposal ?? false;
     return message;
   },
@@ -522,9 +528,13 @@ export const ConsensusState = {
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
+    if (object.publicKey !== undefined && object.publicKey !== null) {
+      message.publicKey = Any.fromPartial(object.publicKey);
+    }
     message.diversifier = object.diversifier ?? "";
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Long.fromValue(object.timestamp);
+    }
     return message;
   },
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
@@ -619,10 +629,16 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Long.fromValue(object.timestamp);
+    }
     message.signature = object.signature ?? new Uint8Array();
-    message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : Any.fromPartial({});
+    if (object.newPublicKey !== undefined && object.newPublicKey !== null) {
+      message.newPublicKey = Any.fromPartial(object.newPublicKey);
+    }
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },
@@ -714,9 +730,15 @@ export const Misbehaviour = {
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
-    message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : SignatureAndData.fromPartial({});
-    message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : SignatureAndData.fromPartial({});
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
+    if (object.signatureOne !== undefined && object.signatureOne !== null) {
+      message.signatureOne = SignatureAndData.fromPartial(object.signatureOne);
+    }
+    if (object.signatureTwo !== undefined && object.signatureTwo !== null) {
+      message.signatureTwo = SignatureAndData.fromPartial(object.signatureTwo);
+    }
     return message;
   },
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
@@ -807,7 +829,9 @@ export const SignatureAndData = {
     message.signature = object.signature ?? new Uint8Array();
     message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Long.fromValue(object.timestamp);
+    }
     return message;
   },
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
@@ -878,7 +902,9 @@ export const TimestampedSignatureData = {
   fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     message.signatureData = object.signatureData ?? new Uint8Array();
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Long.fromValue(object.timestamp);
+    }
     return message;
   },
   fromSDK(object: TimestampedSignatureDataSDKType): TimestampedSignatureData {
@@ -971,8 +997,12 @@ export const SignBytes = {
   },
   fromPartial(object: DeepPartial<SignBytes>): SignBytes {
     const message = createBaseSignBytes();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Long.fromValue(object.timestamp);
+    }
     message.diversifier = object.diversifier ?? "";
     message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
@@ -1047,7 +1077,9 @@ export const HeaderData = {
   },
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
-    message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : Any.fromPartial({});
+    if (object.newPubKey !== undefined && object.newPubKey !== null) {
+      message.newPubKey = Any.fromPartial(object.newPubKey);
+    }
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },
@@ -1115,7 +1147,9 @@ export const ClientStateData = {
   fromPartial(object: DeepPartial<ClientStateData>): ClientStateData {
     const message = createBaseClientStateData();
     message.path = object.path ?? new Uint8Array();
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
     return message;
   },
   fromSDK(object: ClientStateDataSDKType): ClientStateData {
@@ -1182,7 +1216,9 @@ export const ConsensusStateData = {
   fromPartial(object: DeepPartial<ConsensusStateData>): ConsensusStateData {
     const message = createBaseConsensusStateData();
     message.path = object.path ?? new Uint8Array();
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     return message;
   },
   fromSDK(object: ConsensusStateDataSDKType): ConsensusStateData {
@@ -1249,7 +1285,9 @@ export const ConnectionStateData = {
   fromPartial(object: DeepPartial<ConnectionStateData>): ConnectionStateData {
     const message = createBaseConnectionStateData();
     message.path = object.path ?? new Uint8Array();
-    message.connection = object.connection !== undefined && object.connection !== null ? ConnectionEnd.fromPartial(object.connection) : ConnectionEnd.fromPartial({});
+    if (object.connection !== undefined && object.connection !== null) {
+      message.connection = ConnectionEnd.fromPartial(object.connection);
+    }
     return message;
   },
   fromSDK(object: ConnectionStateDataSDKType): ConnectionStateData {
@@ -1316,7 +1354,9 @@ export const ChannelStateData = {
   fromPartial(object: DeepPartial<ChannelStateData>): ChannelStateData {
     const message = createBaseChannelStateData();
     message.path = object.path ?? new Uint8Array();
-    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : Channel.fromPartial({});
+    if (object.channel !== undefined && object.channel !== null) {
+      message.channel = Channel.fromPartial(object.channel);
+    }
     return message;
   },
   fromSDK(object: ChannelStateDataSDKType): ChannelStateData {
@@ -1572,7 +1612,9 @@ export const NextSequenceRecvData = {
   fromPartial(object: DeepPartial<NextSequenceRecvData>): NextSequenceRecvData {
     const message = createBaseNextSequenceRecvData();
     message.path = object.path ?? new Uint8Array();
-    message.nextSeqRecv = object.nextSeqRecv !== undefined && object.nextSeqRecv !== null ? Long.fromValue(object.nextSeqRecv) : Long.UZERO;
+    if (object.nextSeqRecv !== undefined && object.nextSeqRecv !== null) {
+      message.nextSeqRecv = Long.fromValue(object.nextSeqRecv);
+    }
     return message;
   },
   fromSDK(object: NextSequenceRecvDataSDKType): NextSequenceRecvData {

@@ -182,7 +182,9 @@ export const GenesisState = {
     message.sendSequences = object.sendSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.recvSequences = object.recvSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.ackSequences = object.ackSequences?.map(e => PacketSequence.fromPartial(e)) || [];
-    message.nextChannelSequence = object.nextChannelSequence !== undefined && object.nextChannelSequence !== null ? Long.fromValue(object.nextChannelSequence) : Long.UZERO;
+    if (object.nextChannelSequence !== undefined && object.nextChannelSequence !== null) {
+      message.nextChannelSequence = Long.fromValue(object.nextChannelSequence);
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -299,7 +301,9 @@ export const PacketSequence = {
     const message = createBasePacketSequence();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     return message;
   },
   fromSDK(object: PacketSequenceSDKType): PacketSequence {

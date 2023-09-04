@@ -64,7 +64,9 @@ export const GenesisCertificate = {
   fromPartial(object: DeepPartial<GenesisCertificate>): GenesisCertificate {
     const message = createBaseGenesisCertificate();
     message.owner = object.owner ?? "";
-    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : Certificate.fromPartial({});
+    if (object.certificate !== undefined && object.certificate !== null) {
+      message.certificate = Certificate.fromPartial(object.certificate);
+    }
     return message;
   }
 };

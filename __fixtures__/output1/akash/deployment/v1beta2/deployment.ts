@@ -129,7 +129,9 @@ export const DeploymentID = {
   fromPartial<I extends Exact<DeepPartial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     return message;
   },
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
@@ -213,10 +215,14 @@ export const Deployment = {
   },
   fromPartial<I extends Exact<DeepPartial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
+    if (object.deploymentId !== undefined && object.deploymentId !== null) {
+      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
+    }
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Long.fromValue(object.createdAt);
+    }
     return message;
   },
   fromSDK(object: DeploymentSDKType): Deployment {
@@ -296,7 +302,9 @@ export const DeploymentFilters = {
   fromPartial<I extends Exact<DeepPartial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.state = object.state ?? "";
     return message;
   },

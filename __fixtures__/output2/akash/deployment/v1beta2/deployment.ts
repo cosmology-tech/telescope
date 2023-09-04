@@ -112,7 +112,9 @@ export const DeploymentID = {
   fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     return message;
   }
 };
@@ -184,10 +186,14 @@ export const Deployment = {
   },
   fromPartial(object: DeepPartial<Deployment>): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
+    if (object.deploymentId !== undefined && object.deploymentId !== null) {
+      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
+    }
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Long.fromValue(object.createdAt);
+    }
     return message;
   }
 };
@@ -251,7 +257,9 @@ export const DeploymentFilters = {
   fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.state = object.state ?? "";
     return message;
   }

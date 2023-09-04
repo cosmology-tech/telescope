@@ -176,8 +176,12 @@ export const MsgCreateClient = {
   },
   fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
     const message = createBaseMsgCreateClient();
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.signer = object.signer ?? "";
     return message;
   },
@@ -297,7 +301,9 @@ export const MsgUpdateClient = {
   fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
     const message = createBaseMsgUpdateClient();
     message.clientId = object.clientId ?? "";
-    message.header = object.header !== undefined && object.header !== null ? Any.fromPartial(object.header) : Any.fromPartial({});
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Any.fromPartial(object.header);
+    }
     message.signer = object.signer ?? "";
     return message;
   },
@@ -444,8 +450,12 @@ export const MsgUpgradeClient = {
   fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
     const message = createBaseMsgUpgradeClient();
     message.clientId = object.clientId ?? "";
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.proofUpgradeClient = object.proofUpgradeClient ?? new Uint8Array();
     message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
     message.signer = object.signer ?? "";
@@ -573,7 +583,9 @@ export const MsgSubmitMisbehaviour = {
   fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
     const message = createBaseMsgSubmitMisbehaviour();
     message.clientId = object.clientId ?? "";
-    message.misbehaviour = object.misbehaviour !== undefined && object.misbehaviour !== null ? Any.fromPartial(object.misbehaviour) : Any.fromPartial({});
+    if (object.misbehaviour !== undefined && object.misbehaviour !== null) {
+      message.misbehaviour = Any.fromPartial(object.misbehaviour);
+    }
     message.signer = object.signer ?? "";
     return message;
   },

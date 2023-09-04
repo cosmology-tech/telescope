@@ -302,7 +302,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -626,7 +628,9 @@ export const AssetMultiplierResponse = {
   },
   fromPartial(object: DeepPartial<AssetMultiplierResponse>): AssetMultiplierResponse {
     const message = createBaseAssetMultiplierResponse();
-    message.osmoEquivalentMultiplier = object.osmoEquivalentMultiplier !== undefined && object.osmoEquivalentMultiplier !== null ? OsmoEquivalentMultiplierRecord.fromPartial(object.osmoEquivalentMultiplier) : OsmoEquivalentMultiplierRecord.fromPartial({});
+    if (object.osmoEquivalentMultiplier !== undefined && object.osmoEquivalentMultiplier !== null) {
+      message.osmoEquivalentMultiplier = OsmoEquivalentMultiplierRecord.fromPartial(object.osmoEquivalentMultiplier);
+    }
     return message;
   },
   fromSDK(object: AssetMultiplierResponseSDKType): AssetMultiplierResponse {
@@ -710,7 +714,9 @@ export const SuperfluidIntermediaryAccountInfo = {
     const message = createBaseSuperfluidIntermediaryAccountInfo();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = Long.fromValue(object.gaugeId);
+    }
     message.address = object.address ?? "";
     return message;
   },
@@ -772,7 +778,9 @@ export const AllIntermediaryAccountsRequest = {
   },
   fromPartial(object: DeepPartial<AllIntermediaryAccountsRequest>): AllIntermediaryAccountsRequest {
     const message = createBaseAllIntermediaryAccountsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: AllIntermediaryAccountsRequestSDKType): AllIntermediaryAccountsRequest {
@@ -841,7 +849,9 @@ export const AllIntermediaryAccountsResponse = {
   fromPartial(object: DeepPartial<AllIntermediaryAccountsResponse>): AllIntermediaryAccountsResponse {
     const message = createBaseAllIntermediaryAccountsResponse();
     message.accounts = object.accounts?.map(e => SuperfluidIntermediaryAccountInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: AllIntermediaryAccountsResponseSDKType): AllIntermediaryAccountsResponse {
@@ -902,7 +912,9 @@ export const ConnectedIntermediaryAccountRequest = {
   },
   fromPartial(object: DeepPartial<ConnectedIntermediaryAccountRequest>): ConnectedIntermediaryAccountRequest {
     const message = createBaseConnectedIntermediaryAccountRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = Long.fromValue(object.lockId);
+    }
     return message;
   },
   fromSDK(object: ConnectedIntermediaryAccountRequestSDKType): ConnectedIntermediaryAccountRequest {
@@ -957,7 +969,9 @@ export const ConnectedIntermediaryAccountResponse = {
   },
   fromPartial(object: DeepPartial<ConnectedIntermediaryAccountResponse>): ConnectedIntermediaryAccountResponse {
     const message = createBaseConnectedIntermediaryAccountResponse();
-    message.account = object.account !== undefined && object.account !== null ? SuperfluidIntermediaryAccountInfo.fromPartial(object.account) : SuperfluidIntermediaryAccountInfo.fromPartial({});
+    if (object.account !== undefined && object.account !== null) {
+      message.account = SuperfluidIntermediaryAccountInfo.fromPartial(object.account);
+    }
     return message;
   },
   fromSDK(object: ConnectedIntermediaryAccountResponseSDKType): ConnectedIntermediaryAccountResponse {
@@ -1530,7 +1544,9 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     const message = createBaseSuperfluidDelegationsByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
-    message.totalEquivalentStakedAmount = object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null ? Coin.fromPartial(object.totalEquivalentStakedAmount) : Coin.fromPartial({});
+    if (object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null) {
+      message.totalEquivalentStakedAmount = Coin.fromPartial(object.totalEquivalentStakedAmount);
+    }
     return message;
   },
   fromSDK(object: SuperfluidDelegationsByDelegatorResponseSDKType): SuperfluidDelegationsByDelegatorResponse {
@@ -2124,7 +2140,9 @@ export const QueryTotalDelegationByDelegatorResponse = {
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.delegationResponse = object.delegationResponse?.map(e => DelegationResponse.fromPartial(e)) || [];
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
-    message.totalEquivalentStakedAmount = object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null ? Coin.fromPartial(object.totalEquivalentStakedAmount) : Coin.fromPartial({});
+    if (object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null) {
+      message.totalEquivalentStakedAmount = Coin.fromPartial(object.totalEquivalentStakedAmount);
+    }
     return message;
   },
   fromSDK(object: QueryTotalDelegationByDelegatorResponseSDKType): QueryTotalDelegationByDelegatorResponse {

@@ -57,7 +57,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   }
 };
@@ -112,7 +114,9 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableRecovery = object.enableRecovery ?? false;
-    message.packetTimeoutDuration = object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null ? Duration.fromPartial(object.packetTimeoutDuration) : Duration.fromPartial({});
+    if (object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null) {
+      message.packetTimeoutDuration = Duration.fromPartial(object.packetTimeoutDuration);
+    }
     return message;
   }
 };

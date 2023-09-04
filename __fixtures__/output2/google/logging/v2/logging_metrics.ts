@@ -467,7 +467,9 @@ export const LogMetric = {
     message.description = object.description ?? "";
     message.filter = object.filter ?? "";
     message.disabled = object.disabled ?? false;
-    message.metricDescriptor = object.metricDescriptor !== undefined && object.metricDescriptor !== null ? MetricDescriptor.fromPartial(object.metricDescriptor) : MetricDescriptor.fromPartial({});
+    if (object.metricDescriptor !== undefined && object.metricDescriptor !== null) {
+      message.metricDescriptor = MetricDescriptor.fromPartial(object.metricDescriptor);
+    }
     message.valueExtractor = object.valueExtractor ?? "";
     message.labelExtractors = Object.entries(object.labelExtractors ?? {}).reduce<{
       [key: string]: string;
@@ -477,9 +479,15 @@ export const LogMetric = {
       }
       return acc;
     }, {});
-    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : Distribution_BucketOptions.fromPartial({});
-    message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : Timestamp.fromPartial({});
-    message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : Timestamp.fromPartial({});
+    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
+    }
+    if (object.createTime !== undefined && object.createTime !== null) {
+      message.createTime = Timestamp.fromPartial(object.createTime);
+    }
+    if (object.updateTime !== undefined && object.updateTime !== null) {
+      message.updateTime = Timestamp.fromPartial(object.updateTime);
+    }
     message.version = object.version ?? 0;
     return message;
   }
@@ -704,7 +712,9 @@ export const CreateLogMetricRequest = {
   fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
     const message = createBaseCreateLogMetricRequest();
     message.parent = object.parent ?? "";
-    message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : LogMetric.fromPartial({});
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromPartial(object.metric);
+    }
     return message;
   }
 };
@@ -759,7 +769,9 @@ export const UpdateLogMetricRequest = {
   fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
     message.metricName = object.metricName ?? "";
-    message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : LogMetric.fromPartial({});
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromPartial(object.metric);
+    }
     return message;
   }
 };

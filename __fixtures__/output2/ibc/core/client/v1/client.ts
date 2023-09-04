@@ -146,7 +146,9 @@ export const IdentifiedClientState = {
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
     message.clientId = object.clientId ?? "";
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
     return message;
   }
 };
@@ -200,8 +202,12 @@ export const ConsensusStateWithHeight = {
   },
   fromPartial(object: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     return message;
   }
 };
@@ -409,8 +415,12 @@ export const UpgradeProposal = {
     const message = createBaseUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : Any.fromPartial({});
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
   }
 };
@@ -464,8 +474,12 @@ export const Height = {
   },
   fromPartial(object: DeepPartial<Height>): Height {
     const message = createBaseHeight();
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = Long.fromValue(object.revisionNumber);
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = Long.fromValue(object.revisionHeight);
+    }
     return message;
   }
 };

@@ -104,7 +104,9 @@ export const MsgGrantAllowance = {
     const message = createBaseMsgGrantAllowance();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : Any.fromPartial({});
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = Any.fromPartial(object.allowance);
+    }
     return message;
   },
   fromSDK(object: MsgGrantAllowanceSDKType): MsgGrantAllowance {

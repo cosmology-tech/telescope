@@ -114,7 +114,9 @@ export const MsgSubmitProposal = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
-    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
+    if (object.content !== undefined && object.content !== null) {
+      message.content = Any.fromPartial(object.content);
+    }
     message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     return message;
@@ -161,7 +163,9 @@ export const MsgSubmitProposalResponse = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   }
 };
@@ -224,7 +228,9 @@ export const MsgVote = {
   },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     return message;
@@ -327,7 +333,9 @@ export const MsgVoteWeighted = {
   },
   fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
     const message = createBaseMsgVoteWeighted();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.voter = object.voter ?? "";
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
@@ -430,7 +438,9 @@ export const MsgDeposit = {
   },
   fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
     const message = createBaseMsgDeposit();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;

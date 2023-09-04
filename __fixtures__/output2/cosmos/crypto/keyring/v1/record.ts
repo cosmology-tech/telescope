@@ -123,11 +123,21 @@ export const Record = {
   fromPartial(object: DeepPartial<Record>): Record {
     const message = createBaseRecord();
     message.name = object.name ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : Any.fromPartial({});
-    message.local = object.local !== undefined && object.local !== null ? Record_Local.fromPartial(object.local) : Record_Local.fromPartial({});
-    message.ledger = object.ledger !== undefined && object.ledger !== null ? Record_Ledger.fromPartial(object.ledger) : Record_Ledger.fromPartial({});
-    message.multi = object.multi !== undefined && object.multi !== null ? Record_Multi.fromPartial(object.multi) : Record_Multi.fromPartial({});
-    message.offline = object.offline !== undefined && object.offline !== null ? Record_Offline.fromPartial(object.offline) : Record_Offline.fromPartial({});
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = Any.fromPartial(object.pubKey);
+    }
+    if (object.local !== undefined && object.local !== null) {
+      message.local = Record_Local.fromPartial(object.local);
+    }
+    if (object.ledger !== undefined && object.ledger !== null) {
+      message.ledger = Record_Ledger.fromPartial(object.ledger);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = Record_Multi.fromPartial(object.multi);
+    }
+    if (object.offline !== undefined && object.offline !== null) {
+      message.offline = Record_Offline.fromPartial(object.offline);
+    }
     return message;
   }
 };
@@ -181,7 +191,9 @@ export const Record_Local = {
   },
   fromPartial(object: DeepPartial<Record_Local>): Record_Local {
     const message = createBaseRecord_Local();
-    message.privKey = object.privKey !== undefined && object.privKey !== null ? Any.fromPartial(object.privKey) : Any.fromPartial({});
+    if (object.privKey !== undefined && object.privKey !== null) {
+      message.privKey = Any.fromPartial(object.privKey);
+    }
     message.privKeyType = object.privKeyType ?? "";
     return message;
   }
@@ -227,7 +239,9 @@ export const Record_Ledger = {
   },
   fromPartial(object: DeepPartial<Record_Ledger>): Record_Ledger {
     const message = createBaseRecord_Ledger();
-    message.path = object.path !== undefined && object.path !== null ? BIP44Params.fromPartial(object.path) : BIP44Params.fromPartial({});
+    if (object.path !== undefined && object.path !== null) {
+      message.path = BIP44Params.fromPartial(object.path);
+    }
     return message;
   }
 };

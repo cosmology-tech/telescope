@@ -182,10 +182,14 @@ export const TwapRecord = {
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.time = object.time ?? undefined;
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package misc;
+
+import "google/api/expr/v1alpha1/eval.proto";
+
+message EvalRequest {
+  // Bindings for the external variables.  The types SHOULD be compatible
+  // with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+  map<string, google.api.expr.v1alpha1.ExprValue> bindings = 1;
+
+  map<string, google.api.expr.v1alpha1.IdRef> refs = 2;
+}

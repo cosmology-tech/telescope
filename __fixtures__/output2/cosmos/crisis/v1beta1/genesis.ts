@@ -53,7 +53,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.constantFee = object.constantFee !== undefined && object.constantFee !== null ? Coin.fromPartial(object.constantFee) : Coin.fromPartial({});
+    if (object.constantFee !== undefined && object.constantFee !== null) {
+      message.constantFee = Coin.fromPartial(object.constantFee);
+    }
     return message;
   }
 };

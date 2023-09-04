@@ -130,8 +130,12 @@ export const Decl = {
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
     message.doc = object.doc ?? "";
-    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : IdentDecl.fromPartial({});
-    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : FunctionDecl.fromPartial({});
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = IdentDecl.fromPartial(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = FunctionDecl.fromPartial(object.function);
+    }
     return message;
   }
 };
@@ -254,8 +258,12 @@ export const IdentDecl = {
   },
   fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
     const message = createBaseIdentDecl();
-    message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : DeclType.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : Expr.fromPartial({});
+    if (object.type !== undefined && object.type !== null) {
+      message.type = DeclType.fromPartial(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromPartial(object.value);
+    }
     return message;
   }
 };
@@ -323,7 +331,9 @@ export const FunctionDecl = {
   fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
     const message = createBaseFunctionDecl();
     message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
-    message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : DeclType.fromPartial({});
+    if (object.returnType !== undefined && object.returnType !== null) {
+      message.returnType = DeclType.fromPartial(object.returnType);
+    }
     message.receiverFunction = object.receiverFunction ?? false;
     return message;
   }

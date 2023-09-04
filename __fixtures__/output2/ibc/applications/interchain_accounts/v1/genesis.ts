@@ -86,8 +86,12 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : ControllerGenesisState.fromPartial({});
-    message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : HostGenesisState.fromPartial({});
+    if (object.controllerGenesisState !== undefined && object.controllerGenesisState !== null) {
+      message.controllerGenesisState = ControllerGenesisState.fromPartial(object.controllerGenesisState);
+    }
+    if (object.hostGenesisState !== undefined && object.hostGenesisState !== null) {
+      message.hostGenesisState = HostGenesisState.fromPartial(object.hostGenesisState);
+    }
     return message;
   }
 };
@@ -174,7 +178,9 @@ export const ControllerGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.ports = object.ports?.map(e => e) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : Params1.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params1.fromPartial(object.params);
+    }
     return message;
   }
 };
@@ -257,7 +263,9 @@ export const HostGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.port = object.port ?? "";
-    message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : Params2.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params2.fromPartial(object.params);
+    }
     return message;
   }
 };

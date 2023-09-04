@@ -148,7 +148,9 @@ export const MsgCreateClawbackVestingAccount = {
     const message = createBaseMsgCreateClawbackVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Timestamp.fromPartial(object.startTime);
+    }
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     message.merge = object.merge ?? false;

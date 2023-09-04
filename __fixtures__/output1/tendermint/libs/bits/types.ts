@@ -72,7 +72,9 @@ export const BitArray = {
   },
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    message.bits = object.bits !== undefined && object.bits !== null ? Long.fromValue(object.bits) : Long.ZERO;
+    if (object.bits !== undefined && object.bits !== null) {
+      message.bits = Long.fromValue(object.bits);
+    }
     message.elems = object.elems?.map(e => Long.fromValue(e)) || [];
     return message;
   },

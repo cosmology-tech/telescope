@@ -87,7 +87,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
   }
@@ -172,7 +174,9 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO;
+    if (object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null) {
+      message.addrDerivationCostCreate = Long.fromValue(object.addrDerivationCostCreate);
+    }
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   }

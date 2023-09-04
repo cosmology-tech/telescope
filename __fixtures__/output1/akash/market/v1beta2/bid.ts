@@ -210,10 +210,16 @@ export const MsgCreateBid = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateBid>, I>>(object: I): MsgCreateBid {
     const message = createBaseMsgCreateBid();
-    message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : OrderID.fromPartial({});
+    if (object.order !== undefined && object.order !== null) {
+      message.order = OrderID.fromPartial(object.order);
+    }
     message.provider = object.provider ?? "";
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromPartial(object.price);
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromPartial(object.deposit);
+    }
     return message;
   },
   fromSDK(object: MsgCreateBidSDKType): MsgCreateBid {
@@ -315,7 +321,9 @@ export const MsgCloseBid = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCloseBid>, I>>(object: I): MsgCloseBid {
     const message = createBaseMsgCloseBid();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    if (object.bidId !== undefined && object.bidId !== null) {
+      message.bidId = BidID.fromPartial(object.bidId);
+    }
     return message;
   },
   fromSDK(object: MsgCloseBidSDKType): MsgCloseBid {
@@ -448,7 +456,9 @@ export const BidID = {
   fromPartial<I extends Exact<DeepPartial<BidID>, I>>(object: I): BidID {
     const message = createBaseBidID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -541,10 +551,16 @@ export const Bid = {
   },
   fromPartial<I extends Exact<DeepPartial<Bid>, I>>(object: I): Bid {
     const message = createBaseBid();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    if (object.bidId !== undefined && object.bidId !== null) {
+      message.bidId = BidID.fromPartial(object.bidId);
+    }
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromPartial(object.price);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Long.fromValue(object.createdAt);
+    }
     return message;
   },
   fromSDK(object: BidSDKType): Bid {
@@ -651,7 +667,9 @@ export const BidFilters = {
   fromPartial<I extends Exact<DeepPartial<BidFilters>, I>>(object: I): BidFilters {
     const message = createBaseBidFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";

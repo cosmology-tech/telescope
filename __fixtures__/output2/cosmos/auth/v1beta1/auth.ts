@@ -98,9 +98,15 @@ export const BaseAccount = {
   fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : Any.fromPartial({});
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? Long.fromValue(object.accountNumber) : Long.UZERO;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = Any.fromPartial(object.pubKey);
+    }
+    if (object.accountNumber !== undefined && object.accountNumber !== null) {
+      message.accountNumber = Long.fromValue(object.accountNumber);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     return message;
   }
 };
@@ -167,7 +173,9 @@ export const ModuleAccount = {
   },
   fromPartial(object: DeepPartial<ModuleAccount>): ModuleAccount {
     const message = createBaseModuleAccount();
-    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : BaseAccount.fromPartial({});
+    if (object.baseAccount !== undefined && object.baseAccount !== null) {
+      message.baseAccount = BaseAccount.fromPartial(object.baseAccount);
+    }
     message.name = object.name ?? "";
     message.permissions = object.permissions?.map(e => e) || [];
     return message;
@@ -250,11 +258,21 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? Long.fromValue(object.maxMemoCharacters) : Long.UZERO;
-    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? Long.fromValue(object.txSigLimit) : Long.UZERO;
-    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? Long.fromValue(object.txSizeCostPerByte) : Long.UZERO;
-    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? Long.fromValue(object.sigVerifyCostEd25519) : Long.UZERO;
-    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO;
+    if (object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null) {
+      message.maxMemoCharacters = Long.fromValue(object.maxMemoCharacters);
+    }
+    if (object.txSigLimit !== undefined && object.txSigLimit !== null) {
+      message.txSigLimit = Long.fromValue(object.txSigLimit);
+    }
+    if (object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null) {
+      message.txSizeCostPerByte = Long.fromValue(object.txSizeCostPerByte);
+    }
+    if (object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null) {
+      message.sigVerifyCostEd25519 = Long.fromValue(object.sigVerifyCostEd25519);
+    }
+    if (object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null) {
+      message.sigVerifyCostSecp256k1 = Long.fromValue(object.sigVerifyCostSecp256k1);
+    }
     return message;
   }
 };

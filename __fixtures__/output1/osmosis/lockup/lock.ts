@@ -241,9 +241,13 @@ export const PeriodLock = {
   },
   fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = Long.fromValue(object.ID);
+    }
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.endTime = object.endTime ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -341,7 +345,9 @@ export const QueryCondition = {
     const message = createBaseQueryCondition();
     message.lockQueryType = object.lockQueryType ?? 0;
     message.denom = object.denom ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.timestamp = object.timestamp ?? undefined;
     return message;
   },
@@ -430,10 +436,14 @@ export const SyntheticLock = {
   },
   fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {
     const message = createBaseSyntheticLock();
-    message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? Long.fromValue(object.underlyingLockId) : Long.UZERO;
+    if (object.underlyingLockId !== undefined && object.underlyingLockId !== null) {
+      message.underlyingLockId = Long.fromValue(object.underlyingLockId);
+    }
     message.synthDenom = object.synthDenom ?? "";
     message.endTime = object.endTime ?? undefined;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: SyntheticLockSDKType): SyntheticLock {

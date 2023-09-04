@@ -1417,13 +1417,19 @@ export const LogBucket = {
     const message = createBaseLogBucket();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : Timestamp.fromPartial({});
-    message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : Timestamp.fromPartial({});
+    if (object.createTime !== undefined && object.createTime !== null) {
+      message.createTime = Timestamp.fromPartial(object.createTime);
+    }
+    if (object.updateTime !== undefined && object.updateTime !== null) {
+      message.updateTime = Timestamp.fromPartial(object.updateTime);
+    }
     message.retentionDays = object.retentionDays ?? 0;
     message.locked = object.locked ?? false;
     message.lifecycleState = object.lifecycleState ?? 0;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
-    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : CmekSettings.fromPartial({});
+    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
+      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
+    }
     return message;
   }
 };
@@ -1506,8 +1512,12 @@ export const LogView = {
     const message = createBaseLogView();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : Timestamp.fromPartial({});
-    message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : Timestamp.fromPartial({});
+    if (object.createTime !== undefined && object.createTime !== null) {
+      message.createTime = Timestamp.fromPartial(object.createTime);
+    }
+    if (object.updateTime !== undefined && object.updateTime !== null) {
+      message.updateTime = Timestamp.fromPartial(object.updateTime);
+    }
     message.filter = object.filter ?? "";
     return message;
   }
@@ -1665,9 +1675,15 @@ export const LogSink = {
     message.outputVersionFormat = object.outputVersionFormat ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     message.includeChildren = object.includeChildren ?? false;
-    message.bigqueryOptions = object.bigqueryOptions !== undefined && object.bigqueryOptions !== null ? BigQueryOptions.fromPartial(object.bigqueryOptions) : BigQueryOptions.fromPartial({});
-    message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : Timestamp.fromPartial({});
-    message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : Timestamp.fromPartial({});
+    if (object.bigqueryOptions !== undefined && object.bigqueryOptions !== null) {
+      message.bigqueryOptions = BigQueryOptions.fromPartial(object.bigqueryOptions);
+    }
+    if (object.createTime !== undefined && object.createTime !== null) {
+      message.createTime = Timestamp.fromPartial(object.createTime);
+    }
+    if (object.updateTime !== undefined && object.updateTime !== null) {
+      message.updateTime = Timestamp.fromPartial(object.updateTime);
+    }
     return message;
   }
 };
@@ -1911,7 +1927,9 @@ export const CreateBucketRequest = {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
     message.bucketId = object.bucketId ?? "";
-    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : LogBucket.fromPartial({});
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromPartial(object.bucket);
+    }
     return message;
   }
 };
@@ -1975,8 +1993,12 @@ export const UpdateBucketRequest = {
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
-    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : LogBucket.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromPartial(object.bucket);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   }
 };
@@ -2300,7 +2322,9 @@ export const CreateViewRequest = {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
     message.viewId = object.viewId ?? "";
-    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : LogView.fromPartial({});
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromPartial(object.view);
+    }
     return message;
   }
 };
@@ -2364,8 +2388,12 @@ export const UpdateViewRequest = {
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
-    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : LogView.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromPartial(object.view);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   }
 };
@@ -2688,7 +2716,9 @@ export const CreateSinkRequest = {
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
-    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : LogSink.fromPartial({});
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromPartial(object.sink);
+    }
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
   }
@@ -2762,9 +2792,13 @@ export const UpdateSinkRequest = {
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
-    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : LogSink.fromPartial({});
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromPartial(object.sink);
+    }
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   }
 };
@@ -2903,8 +2937,12 @@ export const LogExclusion = {
     message.description = object.description ?? "";
     message.filter = object.filter ?? "";
     message.disabled = object.disabled ?? false;
-    message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : Timestamp.fromPartial({});
-    message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : Timestamp.fromPartial({});
+    if (object.createTime !== undefined && object.createTime !== null) {
+      message.createTime = Timestamp.fromPartial(object.createTime);
+    }
+    if (object.updateTime !== undefined && object.updateTime !== null) {
+      message.updateTime = Timestamp.fromPartial(object.updateTime);
+    }
     return message;
   }
 };
@@ -3128,7 +3166,9 @@ export const CreateExclusionRequest = {
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
-    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : LogExclusion.fromPartial({});
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromPartial(object.exclusion);
+    }
     return message;
   }
 };
@@ -3192,8 +3232,12 @@ export const UpdateExclusionRequest = {
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
-    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : LogExclusion.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromPartial(object.exclusion);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   }
 };
@@ -3347,8 +3391,12 @@ export const UpdateCmekSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
-    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : CmekSettings.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
+      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   }
 };
@@ -3522,8 +3570,12 @@ export const UpdateSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
-    message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : Settings.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.settings !== undefined && object.settings !== null) {
+      message.settings = Settings.fromPartial(object.settings);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   }
 };
@@ -3772,11 +3824,17 @@ export const CopyLogEntriesMetadata = {
   },
   fromPartial(object: DeepPartial<CopyLogEntriesMetadata>): CopyLogEntriesMetadata {
     const message = createBaseCopyLogEntriesMetadata();
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
-    message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : Timestamp.fromPartial({});
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Timestamp.fromPartial(object.startTime);
+    }
+    if (object.endTime !== undefined && object.endTime !== null) {
+      message.endTime = Timestamp.fromPartial(object.endTime);
+    }
     message.state = object.state ?? 0;
     message.cancellationRequested = object.cancellationRequested ?? false;
-    message.request = object.request !== undefined && object.request !== null ? CopyLogEntriesRequest.fromPartial(object.request) : CopyLogEntriesRequest.fromPartial({});
+    if (object.request !== undefined && object.request !== null) {
+      message.request = CopyLogEntriesRequest.fromPartial(object.request);
+    }
     message.progress = object.progress ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
@@ -3823,7 +3881,9 @@ export const CopyLogEntriesResponse = {
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
+    if (object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null) {
+      message.logEntriesCopiedCount = Long.fromValue(object.logEntriesCopiedCount);
+    }
     return message;
   }
 };

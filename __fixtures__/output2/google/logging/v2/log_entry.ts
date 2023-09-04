@@ -485,15 +485,27 @@ export const LogEntry = {
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.logName = object.logName ?? "";
-    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : MonitoredResource.fromPartial({});
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : Any.fromPartial({});
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromPartial(object.resource);
+    }
+    if (object.protoPayload !== undefined && object.protoPayload !== null) {
+      message.protoPayload = Any.fromPartial(object.protoPayload);
+    }
     message.textPayload = object.textPayload ?? undefined;
-    message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : Struct.fromPartial({});
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : Timestamp.fromPartial({});
-    message.receiveTimestamp = object.receiveTimestamp !== undefined && object.receiveTimestamp !== null ? Timestamp.fromPartial(object.receiveTimestamp) : Timestamp.fromPartial({});
+    if (object.jsonPayload !== undefined && object.jsonPayload !== null) {
+      message.jsonPayload = Struct.fromPartial(object.jsonPayload);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromPartial(object.timestamp);
+    }
+    if (object.receiveTimestamp !== undefined && object.receiveTimestamp !== null) {
+      message.receiveTimestamp = Timestamp.fromPartial(object.receiveTimestamp);
+    }
     message.severity = object.severity ?? 0;
     message.insertId = object.insertId ?? "";
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : HttpRequest.fromPartial({});
+    if (object.httpRequest !== undefined && object.httpRequest !== null) {
+      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
+    }
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -502,12 +514,18 @@ export const LogEntry = {
       }
       return acc;
     }, {});
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : LogEntryOperation.fromPartial({});
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromPartial(object.operation);
+    }
     message.trace = object.trace ?? "";
     message.spanId = object.spanId ?? "";
     message.traceSampled = object.traceSampled ?? false;
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : LogEntrySourceLocation.fromPartial({});
-    message.split = object.split !== undefined && object.split !== null ? LogSplit.fromPartial(object.split) : LogSplit.fromPartial({});
+    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
+    }
+    if (object.split !== undefined && object.split !== null) {
+      message.split = LogSplit.fromPartial(object.split);
+    }
     return message;
   }
 };
@@ -646,7 +664,9 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
+    if (object.line !== undefined && object.line !== null) {
+      message.line = Long.fromValue(object.line);
+    }
     message.function = object.function ?? "";
     return message;
   }

@@ -637,13 +637,27 @@ export const AttributeContext = {
   },
   fromPartial(object: DeepPartial<AttributeContext>): AttributeContext {
     const message = createBaseAttributeContext();
-    message.origin = object.origin !== undefined && object.origin !== null ? AttributeContext_Peer.fromPartial(object.origin) : AttributeContext_Peer.fromPartial({});
-    message.source = object.source !== undefined && object.source !== null ? AttributeContext_Peer.fromPartial(object.source) : AttributeContext_Peer.fromPartial({});
-    message.destination = object.destination !== undefined && object.destination !== null ? AttributeContext_Peer.fromPartial(object.destination) : AttributeContext_Peer.fromPartial({});
-    message.request = object.request !== undefined && object.request !== null ? AttributeContext_Request.fromPartial(object.request) : AttributeContext_Request.fromPartial({});
-    message.response = object.response !== undefined && object.response !== null ? AttributeContext_Response.fromPartial(object.response) : AttributeContext_Response.fromPartial({});
-    message.resource = object.resource !== undefined && object.resource !== null ? AttributeContext_Resource.fromPartial(object.resource) : AttributeContext_Resource.fromPartial({});
-    message.api = object.api !== undefined && object.api !== null ? AttributeContext_Api.fromPartial(object.api) : AttributeContext_Api.fromPartial({});
+    if (object.origin !== undefined && object.origin !== null) {
+      message.origin = AttributeContext_Peer.fromPartial(object.origin);
+    }
+    if (object.source !== undefined && object.source !== null) {
+      message.source = AttributeContext_Peer.fromPartial(object.source);
+    }
+    if (object.destination !== undefined && object.destination !== null) {
+      message.destination = AttributeContext_Peer.fromPartial(object.destination);
+    }
+    if (object.request !== undefined && object.request !== null) {
+      message.request = AttributeContext_Request.fromPartial(object.request);
+    }
+    if (object.response !== undefined && object.response !== null) {
+      message.response = AttributeContext_Response.fromPartial(object.response);
+    }
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = AttributeContext_Resource.fromPartial(object.resource);
+    }
+    if (object.api !== undefined && object.api !== null) {
+      message.api = AttributeContext_Api.fromPartial(object.api);
+    }
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -837,7 +851,9 @@ export const AttributeContext_Peer = {
   fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
     const message = createBaseAttributeContext_Peer();
     message.ip = object.ip ?? "";
-    message.port = object.port !== undefined && object.port !== null ? Long.fromValue(object.port) : Long.ZERO;
+    if (object.port !== undefined && object.port !== null) {
+      message.port = Long.fromValue(object.port);
+    }
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1058,7 +1074,9 @@ export const AttributeContext_Auth = {
     message.principal = object.principal ?? "";
     message.audiences = object.audiences?.map(e => e) || [];
     message.presenter = object.presenter ?? "";
-    message.claims = object.claims !== undefined && object.claims !== null ? Struct.fromPartial(object.claims) : Struct.fromPartial({});
+    if (object.claims !== undefined && object.claims !== null) {
+      message.claims = Struct.fromPartial(object.claims);
+    }
     message.accessLevels = object.accessLevels?.map(e => e) || [];
     return message;
   },
@@ -1327,10 +1345,14 @@ export const AttributeContext_Request = {
     message.scheme = object.scheme ?? "";
     message.query = object.query ?? "";
     message.time = object.time ?? undefined;
-    message.size = object.size !== undefined && object.size !== null ? Long.fromValue(object.size) : Long.ZERO;
+    if (object.size !== undefined && object.size !== null) {
+      message.size = Long.fromValue(object.size);
+    }
     message.protocol = object.protocol ?? "";
     message.reason = object.reason ?? "";
-    message.auth = object.auth !== undefined && object.auth !== null ? AttributeContext_Auth.fromPartial(object.auth) : AttributeContext_Auth.fromPartial({});
+    if (object.auth !== undefined && object.auth !== null) {
+      message.auth = AttributeContext_Auth.fromPartial(object.auth);
+    }
     return message;
   },
   fromSDK(object: AttributeContext_RequestSDKType): AttributeContext_Request {
@@ -1536,8 +1558,12 @@ export const AttributeContext_Response = {
   },
   fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
     const message = createBaseAttributeContext_Response();
-    message.code = object.code !== undefined && object.code !== null ? Long.fromValue(object.code) : Long.ZERO;
-    message.size = object.size !== undefined && object.size !== null ? Long.fromValue(object.size) : Long.ZERO;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = Long.fromValue(object.code);
+    }
+    if (object.size !== undefined && object.size !== null) {
+      message.size = Long.fromValue(object.size);
+    }
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1547,7 +1573,9 @@ export const AttributeContext_Response = {
       return acc;
     }, {});
     message.time = object.time ?? undefined;
-    message.backendLatency = object.backendLatency !== undefined && object.backendLatency !== null ? Duration.fromPartial(object.backendLatency) : Duration.fromPartial({});
+    if (object.backendLatency !== undefined && object.backendLatency !== null) {
+      message.backendLatency = Duration.fromPartial(object.backendLatency);
+    }
     return message;
   },
   fromSDK(object: AttributeContext_ResponseSDKType): AttributeContext_Response {

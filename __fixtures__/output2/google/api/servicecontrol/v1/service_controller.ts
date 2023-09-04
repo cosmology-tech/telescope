@@ -280,7 +280,9 @@ export const CheckRequest = {
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
-    message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : Operation.fromPartial({});
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = Operation.fromPartial(object.operation);
+    }
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   }
@@ -370,7 +372,9 @@ export const CheckResponse = {
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
-    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : CheckResponse_CheckInfo.fromPartial({});
+    if (object.checkInfo !== undefined && object.checkInfo !== null) {
+      message.checkInfo = CheckResponse_CheckInfo.fromPartial(object.checkInfo);
+    }
     return message;
   }
 };
@@ -429,7 +433,9 @@ export const CheckResponse_CheckInfo = {
   fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
-    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : CheckResponse_ConsumerInfo.fromPartial({});
+    if (object.consumerInfo !== undefined && object.consumerInfo !== null) {
+      message.consumerInfo = CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo);
+    }
     return message;
   }
 };
@@ -492,9 +498,13 @@ export const CheckResponse_ConsumerInfo = {
   },
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
+    if (object.projectNumber !== undefined && object.projectNumber !== null) {
+      message.projectNumber = Long.fromValue(object.projectNumber);
+    }
     message.type = object.type ?? 0;
-    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
+    if (object.consumerNumber !== undefined && object.consumerNumber !== null) {
+      message.consumerNumber = Long.fromValue(object.consumerNumber);
+    }
     return message;
   }
 };
@@ -687,7 +697,9 @@ export const ReportResponse_ReportError = {
   fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
     message.operationId = object.operationId ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromPartial(object.status);
+    }
     return message;
   }
 };

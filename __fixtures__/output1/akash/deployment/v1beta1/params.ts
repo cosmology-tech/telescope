@@ -51,7 +51,9 @@ export const Params = {
   },
   fromPartial<I extends Exact<Partial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : Coin.fromPartial({});
+    if (object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null) {
+      message.deploymentMinDeposit = Coin.fromPartial(object.deploymentMinDeposit);
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

@@ -165,7 +165,9 @@ export const QueryBalanceResponse = {
   },
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Long.fromValue(object.amount);
+    }
     return message;
   }
 };
@@ -355,7 +357,9 @@ export const QuerySupplyResponse = {
   },
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Long.fromValue(object.amount);
+    }
     return message;
   }
 };
@@ -420,7 +424,9 @@ export const QueryNFTsRequest = {
     const message = createBaseQueryNFTsRequest();
     message.classId = object.classId ?? "";
     message.owner = object.owner ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -479,7 +485,9 @@ export const QueryNFTsResponse = {
   fromPartial(object: DeepPartial<QueryNFTsResponse>): QueryNFTsResponse {
     const message = createBaseQueryNFTsResponse();
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -579,7 +587,9 @@ export const QueryNFTResponse = {
   },
   fromPartial(object: DeepPartial<QueryNFTResponse>): QueryNFTResponse {
     const message = createBaseQueryNFTResponse();
-    message.nft = object.nft !== undefined && object.nft !== null ? NFT.fromPartial(object.nft) : NFT.fromPartial({});
+    if (object.nft !== undefined && object.nft !== null) {
+      message.nft = NFT.fromPartial(object.nft);
+    }
     return message;
   }
 };
@@ -669,7 +679,9 @@ export const QueryClassResponse = {
   },
   fromPartial(object: DeepPartial<QueryClassResponse>): QueryClassResponse {
     const message = createBaseQueryClassResponse();
-    message.class = object.class !== undefined && object.class !== null ? Class.fromPartial(object.class) : Class.fromPartial({});
+    if (object.class !== undefined && object.class !== null) {
+      message.class = Class.fromPartial(object.class);
+    }
     return message;
   }
 };
@@ -714,7 +726,9 @@ export const QueryClassesRequest = {
   },
   fromPartial(object: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
     const message = createBaseQueryClassesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -773,7 +787,9 @@ export const QueryClassesResponse = {
   fromPartial(object: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
     const message = createBaseQueryClassesResponse();
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };

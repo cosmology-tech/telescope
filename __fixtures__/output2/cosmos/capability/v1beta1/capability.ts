@@ -66,7 +66,9 @@ export const Capability = {
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = Long.fromValue(object.index);
+    }
     return message;
   }
 };

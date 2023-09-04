@@ -165,10 +165,14 @@ export const MsgCreateDeployment = {
   },
   fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromPartial(object.deposit);
+    }
     return message;
   }
 };
@@ -256,8 +260,12 @@ export const MsgDepositDeployment = {
   },
   fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   }
 };
@@ -358,7 +366,9 @@ export const MsgUpdateDeployment = {
   },
   fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
     return message;
@@ -439,7 +449,9 @@ export const MsgCloseDeployment = {
   },
   fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     return message;
   }
 };
@@ -528,7 +540,9 @@ export const DeploymentID = {
   fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     return message;
   }
 };
@@ -600,10 +614,14 @@ export const Deployment = {
   },
   fromPartial(object: DeepPartial<Deployment>): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
+    if (object.deploymentId !== undefined && object.deploymentId !== null) {
+      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
+    }
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Long.fromValue(object.createdAt);
+    }
     return message;
   }
 };
@@ -667,7 +685,9 @@ export const DeploymentFilters = {
   fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = Long.fromValue(object.dseq);
+    }
     message.state = object.state ?? "";
     return message;
   }

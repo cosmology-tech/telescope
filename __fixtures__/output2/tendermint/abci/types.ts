@@ -650,21 +650,51 @@ export const Request = {
   },
   fromPartial(object: DeepPartial<Request>): Request {
     const message = createBaseRequest();
-    message.echo = object.echo !== undefined && object.echo !== null ? RequestEcho.fromPartial(object.echo) : RequestEcho.fromPartial({});
-    message.flush = object.flush !== undefined && object.flush !== null ? RequestFlush.fromPartial(object.flush) : RequestFlush.fromPartial({});
-    message.info = object.info !== undefined && object.info !== null ? RequestInfo.fromPartial(object.info) : RequestInfo.fromPartial({});
-    message.setOption = object.setOption !== undefined && object.setOption !== null ? RequestSetOption.fromPartial(object.setOption) : RequestSetOption.fromPartial({});
-    message.initChain = object.initChain !== undefined && object.initChain !== null ? RequestInitChain.fromPartial(object.initChain) : RequestInitChain.fromPartial({});
-    message.query = object.query !== undefined && object.query !== null ? RequestQuery.fromPartial(object.query) : RequestQuery.fromPartial({});
-    message.beginBlock = object.beginBlock !== undefined && object.beginBlock !== null ? RequestBeginBlock.fromPartial(object.beginBlock) : RequestBeginBlock.fromPartial({});
-    message.checkTx = object.checkTx !== undefined && object.checkTx !== null ? RequestCheckTx.fromPartial(object.checkTx) : RequestCheckTx.fromPartial({});
-    message.deliverTx = object.deliverTx !== undefined && object.deliverTx !== null ? RequestDeliverTx.fromPartial(object.deliverTx) : RequestDeliverTx.fromPartial({});
-    message.endBlock = object.endBlock !== undefined && object.endBlock !== null ? RequestEndBlock.fromPartial(object.endBlock) : RequestEndBlock.fromPartial({});
-    message.commit = object.commit !== undefined && object.commit !== null ? RequestCommit.fromPartial(object.commit) : RequestCommit.fromPartial({});
-    message.listSnapshots = object.listSnapshots !== undefined && object.listSnapshots !== null ? RequestListSnapshots.fromPartial(object.listSnapshots) : RequestListSnapshots.fromPartial({});
-    message.offerSnapshot = object.offerSnapshot !== undefined && object.offerSnapshot !== null ? RequestOfferSnapshot.fromPartial(object.offerSnapshot) : RequestOfferSnapshot.fromPartial({});
-    message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : RequestLoadSnapshotChunk.fromPartial({});
-    message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : RequestApplySnapshotChunk.fromPartial({});
+    if (object.echo !== undefined && object.echo !== null) {
+      message.echo = RequestEcho.fromPartial(object.echo);
+    }
+    if (object.flush !== undefined && object.flush !== null) {
+      message.flush = RequestFlush.fromPartial(object.flush);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = RequestInfo.fromPartial(object.info);
+    }
+    if (object.setOption !== undefined && object.setOption !== null) {
+      message.setOption = RequestSetOption.fromPartial(object.setOption);
+    }
+    if (object.initChain !== undefined && object.initChain !== null) {
+      message.initChain = RequestInitChain.fromPartial(object.initChain);
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = RequestQuery.fromPartial(object.query);
+    }
+    if (object.beginBlock !== undefined && object.beginBlock !== null) {
+      message.beginBlock = RequestBeginBlock.fromPartial(object.beginBlock);
+    }
+    if (object.checkTx !== undefined && object.checkTx !== null) {
+      message.checkTx = RequestCheckTx.fromPartial(object.checkTx);
+    }
+    if (object.deliverTx !== undefined && object.deliverTx !== null) {
+      message.deliverTx = RequestDeliverTx.fromPartial(object.deliverTx);
+    }
+    if (object.endBlock !== undefined && object.endBlock !== null) {
+      message.endBlock = RequestEndBlock.fromPartial(object.endBlock);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = RequestCommit.fromPartial(object.commit);
+    }
+    if (object.listSnapshots !== undefined && object.listSnapshots !== null) {
+      message.listSnapshots = RequestListSnapshots.fromPartial(object.listSnapshots);
+    }
+    if (object.offerSnapshot !== undefined && object.offerSnapshot !== null) {
+      message.offerSnapshot = RequestOfferSnapshot.fromPartial(object.offerSnapshot);
+    }
+    if (object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null) {
+      message.loadSnapshotChunk = RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk);
+    }
+    if (object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null) {
+      message.applySnapshotChunk = RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk);
+    }
     return message;
   }
 };
@@ -807,8 +837,12 @@ export const RequestInfo = {
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.version = object.version ?? "";
-    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? Long.fromValue(object.blockVersion) : Long.UZERO;
-    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? Long.fromValue(object.p2pVersion) : Long.UZERO;
+    if (object.blockVersion !== undefined && object.blockVersion !== null) {
+      message.blockVersion = Long.fromValue(object.blockVersion);
+    }
+    if (object.p2pVersion !== undefined && object.p2pVersion !== null) {
+      message.p2pVersion = Long.fromValue(object.p2pVersion);
+    }
     return message;
   }
 };
@@ -957,12 +991,18 @@ export const RequestInitChain = {
   },
   fromPartial(object: DeepPartial<RequestInitChain>): RequestInitChain {
     const message = createBaseRequestInitChain();
-    message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : Timestamp.fromPartial({});
+    if (object.time !== undefined && object.time !== null) {
+      message.time = Timestamp.fromPartial(object.time);
+    }
     message.chainId = object.chainId ?? "";
-    message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : ConsensusParams.fromPartial({});
+    if (object.consensusParams !== undefined && object.consensusParams !== null) {
+      message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
+    }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appStateBytes = object.appStateBytes ?? new Uint8Array();
-    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? Long.fromValue(object.initialHeight) : Long.ZERO;
+    if (object.initialHeight !== undefined && object.initialHeight !== null) {
+      message.initialHeight = Long.fromValue(object.initialHeight);
+    }
     return message;
   }
 };
@@ -1036,7 +1076,9 @@ export const RequestQuery = {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array();
     message.path = object.path ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.prove = object.prove ?? false;
     return message;
   }
@@ -1114,8 +1156,12 @@ export const RequestBeginBlock = {
   fromPartial(object: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
     message.hash = object.hash ?? new Uint8Array();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
-    message.lastCommitInfo = object.lastCommitInfo !== undefined && object.lastCommitInfo !== null ? LastCommitInfo.fromPartial(object.lastCommitInfo) : LastCommitInfo.fromPartial({});
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromPartial(object.header);
+    }
+    if (object.lastCommitInfo !== undefined && object.lastCommitInfo !== null) {
+      message.lastCommitInfo = LastCommitInfo.fromPartial(object.lastCommitInfo);
+    }
     message.byzantineValidators = object.byzantineValidators?.map(e => Evidence.fromPartial(e)) || [];
     return message;
   }
@@ -1261,7 +1307,9 @@ export const RequestEndBlock = {
   },
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     return message;
   }
 };
@@ -1383,7 +1431,9 @@ export const RequestOfferSnapshot = {
   },
   fromPartial(object: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
     const message = createBaseRequestOfferSnapshot();
-    message.snapshot = object.snapshot !== undefined && object.snapshot !== null ? Snapshot.fromPartial(object.snapshot) : Snapshot.fromPartial({});
+    if (object.snapshot !== undefined && object.snapshot !== null) {
+      message.snapshot = Snapshot.fromPartial(object.snapshot);
+    }
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
   }
@@ -1447,7 +1497,9 @@ export const RequestLoadSnapshotChunk = {
   },
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.format = object.format ?? 0;
     message.chunk = object.chunk ?? 0;
     return message;
@@ -1694,22 +1746,54 @@ export const Response = {
   },
   fromPartial(object: DeepPartial<Response>): Response {
     const message = createBaseResponse();
-    message.exception = object.exception !== undefined && object.exception !== null ? ResponseException.fromPartial(object.exception) : ResponseException.fromPartial({});
-    message.echo = object.echo !== undefined && object.echo !== null ? ResponseEcho.fromPartial(object.echo) : ResponseEcho.fromPartial({});
-    message.flush = object.flush !== undefined && object.flush !== null ? ResponseFlush.fromPartial(object.flush) : ResponseFlush.fromPartial({});
-    message.info = object.info !== undefined && object.info !== null ? ResponseInfo.fromPartial(object.info) : ResponseInfo.fromPartial({});
-    message.setOption = object.setOption !== undefined && object.setOption !== null ? ResponseSetOption.fromPartial(object.setOption) : ResponseSetOption.fromPartial({});
-    message.initChain = object.initChain !== undefined && object.initChain !== null ? ResponseInitChain.fromPartial(object.initChain) : ResponseInitChain.fromPartial({});
-    message.query = object.query !== undefined && object.query !== null ? ResponseQuery.fromPartial(object.query) : ResponseQuery.fromPartial({});
-    message.beginBlock = object.beginBlock !== undefined && object.beginBlock !== null ? ResponseBeginBlock.fromPartial(object.beginBlock) : ResponseBeginBlock.fromPartial({});
-    message.checkTx = object.checkTx !== undefined && object.checkTx !== null ? ResponseCheckTx.fromPartial(object.checkTx) : ResponseCheckTx.fromPartial({});
-    message.deliverTx = object.deliverTx !== undefined && object.deliverTx !== null ? ResponseDeliverTx.fromPartial(object.deliverTx) : ResponseDeliverTx.fromPartial({});
-    message.endBlock = object.endBlock !== undefined && object.endBlock !== null ? ResponseEndBlock.fromPartial(object.endBlock) : ResponseEndBlock.fromPartial({});
-    message.commit = object.commit !== undefined && object.commit !== null ? ResponseCommit.fromPartial(object.commit) : ResponseCommit.fromPartial({});
-    message.listSnapshots = object.listSnapshots !== undefined && object.listSnapshots !== null ? ResponseListSnapshots.fromPartial(object.listSnapshots) : ResponseListSnapshots.fromPartial({});
-    message.offerSnapshot = object.offerSnapshot !== undefined && object.offerSnapshot !== null ? ResponseOfferSnapshot.fromPartial(object.offerSnapshot) : ResponseOfferSnapshot.fromPartial({});
-    message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : ResponseLoadSnapshotChunk.fromPartial({});
-    message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : ResponseApplySnapshotChunk.fromPartial({});
+    if (object.exception !== undefined && object.exception !== null) {
+      message.exception = ResponseException.fromPartial(object.exception);
+    }
+    if (object.echo !== undefined && object.echo !== null) {
+      message.echo = ResponseEcho.fromPartial(object.echo);
+    }
+    if (object.flush !== undefined && object.flush !== null) {
+      message.flush = ResponseFlush.fromPartial(object.flush);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ResponseInfo.fromPartial(object.info);
+    }
+    if (object.setOption !== undefined && object.setOption !== null) {
+      message.setOption = ResponseSetOption.fromPartial(object.setOption);
+    }
+    if (object.initChain !== undefined && object.initChain !== null) {
+      message.initChain = ResponseInitChain.fromPartial(object.initChain);
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = ResponseQuery.fromPartial(object.query);
+    }
+    if (object.beginBlock !== undefined && object.beginBlock !== null) {
+      message.beginBlock = ResponseBeginBlock.fromPartial(object.beginBlock);
+    }
+    if (object.checkTx !== undefined && object.checkTx !== null) {
+      message.checkTx = ResponseCheckTx.fromPartial(object.checkTx);
+    }
+    if (object.deliverTx !== undefined && object.deliverTx !== null) {
+      message.deliverTx = ResponseDeliverTx.fromPartial(object.deliverTx);
+    }
+    if (object.endBlock !== undefined && object.endBlock !== null) {
+      message.endBlock = ResponseEndBlock.fromPartial(object.endBlock);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = ResponseCommit.fromPartial(object.commit);
+    }
+    if (object.listSnapshots !== undefined && object.listSnapshots !== null) {
+      message.listSnapshots = ResponseListSnapshots.fromPartial(object.listSnapshots);
+    }
+    if (object.offerSnapshot !== undefined && object.offerSnapshot !== null) {
+      message.offerSnapshot = ResponseOfferSnapshot.fromPartial(object.offerSnapshot);
+    }
+    if (object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null) {
+      message.loadSnapshotChunk = ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk);
+    }
+    if (object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null) {
+      message.applySnapshotChunk = ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk);
+    }
     return message;
   }
 };
@@ -1916,8 +2000,12 @@ export const ResponseInfo = {
     const message = createBaseResponseInfo();
     message.data = object.data ?? "";
     message.version = object.version ?? "";
-    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? Long.fromValue(object.appVersion) : Long.UZERO;
-    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? Long.fromValue(object.lastBlockHeight) : Long.ZERO;
+    if (object.appVersion !== undefined && object.appVersion !== null) {
+      message.appVersion = Long.fromValue(object.appVersion);
+    }
+    if (object.lastBlockHeight !== undefined && object.lastBlockHeight !== null) {
+      message.lastBlockHeight = Long.fromValue(object.lastBlockHeight);
+    }
     message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
     return message;
   }
@@ -2050,7 +2138,9 @@ export const ResponseInitChain = {
   },
   fromPartial(object: DeepPartial<ResponseInitChain>): ResponseInitChain {
     const message = createBaseResponseInitChain();
-    message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : ConsensusParams.fromPartial({});
+    if (object.consensusParams !== undefined && object.consensusParams !== null) {
+      message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
+    }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
@@ -2172,11 +2262,17 @@ export const ResponseQuery = {
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = Long.fromValue(object.index);
+    }
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : ProofOps.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.proofOps !== undefined && object.proofOps !== null) {
+      message.proofOps = ProofOps.fromPartial(object.proofOps);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.codespace = object.codespace ?? "";
     return message;
   }
@@ -2342,8 +2438,12 @@ export const ResponseCheckTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.ZERO;
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.ZERO;
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = Long.fromValue(object.gasWanted);
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = Long.fromValue(object.gasUsed);
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -2461,8 +2561,12 @@ export const ResponseDeliverTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.ZERO;
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.ZERO;
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = Long.fromValue(object.gasWanted);
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = Long.fromValue(object.gasUsed);
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -2536,7 +2640,9 @@ export const ResponseEndBlock = {
   fromPartial(object: DeepPartial<ResponseEndBlock>): ResponseEndBlock {
     const message = createBaseResponseEndBlock();
     message.validatorUpdates = object.validatorUpdates?.map(e => ValidatorUpdate.fromPartial(e)) || [];
-    message.consensusParamUpdates = object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null ? ConsensusParams.fromPartial(object.consensusParamUpdates) : ConsensusParams.fromPartial({});
+    if (object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null) {
+      message.consensusParamUpdates = ConsensusParams.fromPartial(object.consensusParamUpdates);
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
   }
@@ -2592,7 +2698,9 @@ export const ResponseCommit = {
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array();
-    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? Long.fromValue(object.retainHeight) : Long.ZERO;
+    if (object.retainHeight !== undefined && object.retainHeight !== null) {
+      message.retainHeight = Long.fromValue(object.retainHeight);
+    }
     return message;
   }
 };
@@ -2885,10 +2993,18 @@ export const ConsensusParams = {
   },
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
-    message.block = object.block !== undefined && object.block !== null ? BlockParams.fromPartial(object.block) : BlockParams.fromPartial({});
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceParams.fromPartial(object.evidence) : EvidenceParams.fromPartial({});
-    message.validator = object.validator !== undefined && object.validator !== null ? ValidatorParams.fromPartial(object.validator) : ValidatorParams.fromPartial({});
-    message.version = object.version !== undefined && object.version !== null ? VersionParams.fromPartial(object.version) : VersionParams.fromPartial({});
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BlockParams.fromPartial(object.block);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceParams.fromPartial(object.evidence);
+    }
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = ValidatorParams.fromPartial(object.validator);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = VersionParams.fromPartial(object.version);
+    }
     return message;
   }
 };
@@ -2942,8 +3058,12 @@ export const BlockParams = {
   },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
-    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? Long.fromValue(object.maxGas) : Long.ZERO;
+    if (object.maxBytes !== undefined && object.maxBytes !== null) {
+      message.maxBytes = Long.fromValue(object.maxBytes);
+    }
+    if (object.maxGas !== undefined && object.maxGas !== null) {
+      message.maxGas = Long.fromValue(object.maxGas);
+    }
     return message;
   }
 };
@@ -3198,10 +3318,14 @@ export const TxResult = {
   },
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.index = object.index ?? 0;
     message.tx = object.tx ?? new Uint8Array();
-    message.result = object.result !== undefined && object.result !== null ? ResponseDeliverTx.fromPartial(object.result) : ResponseDeliverTx.fromPartial({});
+    if (object.result !== undefined && object.result !== null) {
+      message.result = ResponseDeliverTx.fromPartial(object.result);
+    }
     return message;
   }
 };
@@ -3256,7 +3380,9 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    if (object.power !== undefined && object.power !== null) {
+      message.power = Long.fromValue(object.power);
+    }
     return message;
   }
 };
@@ -3310,8 +3436,12 @@ export const ValidatorUpdate = {
   },
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.power !== undefined && object.power !== null) {
+      message.power = Long.fromValue(object.power);
+    }
     return message;
   }
 };
@@ -3365,7 +3495,9 @@ export const VoteInfo = {
   },
   fromPartial(object: DeepPartial<VoteInfo>): VoteInfo {
     const message = createBaseVoteInfo();
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : Validator.fromPartial({});
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = Validator.fromPartial(object.validator);
+    }
     message.signedLastBlock = object.signedLastBlock ?? false;
     return message;
   }
@@ -3448,10 +3580,18 @@ export const Evidence = {
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
     message.type = object.type ?? 0;
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : Validator.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
-    message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : Timestamp.fromPartial({});
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = Validator.fromPartial(object.validator);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = Timestamp.fromPartial(object.time);
+    }
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = Long.fromValue(object.totalVotingPower);
+    }
     return message;
   }
 };
@@ -3532,7 +3672,9 @@ export const Snapshot = {
   },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();

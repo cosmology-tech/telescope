@@ -132,7 +132,9 @@ export const MsgCreateStableswapPool = {
   fromPartial(object: DeepPartial<MsgCreateStableswapPool>): MsgCreateStableswapPool {
     const message = createBaseMsgCreateStableswapPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
@@ -181,7 +183,9 @@ export const MsgCreateStableswapPoolResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateStableswapPoolResponse>): MsgCreateStableswapPoolResponse {
     const message = createBaseMsgCreateStableswapPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     return message;
   }
 };
@@ -258,7 +262,9 @@ export const MsgStableSwapAdjustScalingFactors = {
   fromPartial(object: DeepPartial<MsgStableSwapAdjustScalingFactors>): MsgStableSwapAdjustScalingFactors {
     const message = createBaseMsgStableSwapAdjustScalingFactors();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     return message;
   }

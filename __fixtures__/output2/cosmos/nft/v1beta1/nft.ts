@@ -135,7 +135,9 @@ export const Class = {
     message.description = object.description ?? "";
     message.uri = object.uri ?? "";
     message.uriHash = object.uriHash ?? "";
-    message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : Any.fromPartial({});
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromPartial(object.data);
+    }
     return message;
   }
 };
@@ -220,7 +222,9 @@ export const NFT = {
     message.id = object.id ?? "";
     message.uri = object.uri ?? "";
     message.uriHash = object.uriHash ?? "";
-    message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : Any.fromPartial({});
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromPartial(object.data);
+    }
     return message;
   }
 };

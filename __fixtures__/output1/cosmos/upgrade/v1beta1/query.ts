@@ -246,7 +246,9 @@ export const QueryCurrentPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
     const message = createBaseQueryCurrentPlanResponse();
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
     return message;
   },
   fromSDK(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
@@ -356,7 +358,9 @@ export const QueryAppliedPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     return message;
   },
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
@@ -411,7 +415,9 @@ export const QueryUpgradedConsensusStateRequest = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
-    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? Long.fromValue(object.lastHeight) : Long.ZERO;
+    if (object.lastHeight !== undefined && object.lastHeight !== null) {
+      message.lastHeight = Long.fromValue(object.lastHeight);
+    }
     return message;
   },
   fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {

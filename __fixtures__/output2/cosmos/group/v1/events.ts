@@ -94,7 +94,9 @@ export const EventCreateGroup = {
   },
   fromPartial(object: DeepPartial<EventCreateGroup>): EventCreateGroup {
     const message = createBaseEventCreateGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     return message;
   }
 };
@@ -139,7 +141,9 @@ export const EventUpdateGroup = {
   },
   fromPartial(object: DeepPartial<EventUpdateGroup>): EventUpdateGroup {
     const message = createBaseEventUpdateGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     return message;
   }
 };
@@ -274,7 +278,9 @@ export const EventSubmitProposal = {
   },
   fromPartial(object: DeepPartial<EventSubmitProposal>): EventSubmitProposal {
     const message = createBaseEventSubmitProposal();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   }
 };
@@ -319,7 +325,9 @@ export const EventWithdrawProposal = {
   },
   fromPartial(object: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal {
     const message = createBaseEventWithdrawProposal();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   }
 };
@@ -364,7 +372,9 @@ export const EventVote = {
   },
   fromPartial(object: DeepPartial<EventVote>): EventVote {
     const message = createBaseEventVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     return message;
   }
 };
@@ -418,7 +428,9 @@ export const EventExec = {
   },
   fromPartial(object: DeepPartial<EventExec>): EventExec {
     const message = createBaseEventExec();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.result = object.result ?? 0;
     return message;
   }
@@ -473,7 +485,9 @@ export const EventLeaveGroup = {
   },
   fromPartial(object: DeepPartial<EventLeaveGroup>): EventLeaveGroup {
     const message = createBaseEventLeaveGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.address = object.address ?? "";
     return message;
   }

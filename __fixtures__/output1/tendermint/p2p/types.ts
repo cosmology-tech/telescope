@@ -121,9 +121,15 @@ export const ProtocolVersion = {
   },
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
-    message.p2p = object.p2p !== undefined && object.p2p !== null ? Long.fromValue(object.p2p) : Long.UZERO;
-    message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
-    message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
+    if (object.p2p !== undefined && object.p2p !== null) {
+      message.p2p = Long.fromValue(object.p2p);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Long.fromValue(object.block);
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = Long.fromValue(object.app);
+    }
     return message;
   },
   fromSDK(object: ProtocolVersionSDKType): ProtocolVersion {
@@ -245,14 +251,18 @@ export const NodeInfo = {
   },
   fromPartial(object: DeepPartial<NodeInfo>): NodeInfo {
     const message = createBaseNodeInfo();
-    message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : ProtocolVersion.fromPartial({});
+    if (object.protocolVersion !== undefined && object.protocolVersion !== null) {
+      message.protocolVersion = ProtocolVersion.fromPartial(object.protocolVersion);
+    }
     message.nodeId = object.nodeId ?? "";
     message.listenAddr = object.listenAddr ?? "";
     message.network = object.network ?? "";
     message.version = object.version ?? "";
     message.channels = object.channels ?? new Uint8Array();
     message.moniker = object.moniker ?? "";
-    message.other = object.other !== undefined && object.other !== null ? NodeInfoOther.fromPartial(object.other) : NodeInfoOther.fromPartial({});
+    if (object.other !== undefined && object.other !== null) {
+      message.other = NodeInfoOther.fromPartial(object.other);
+    }
     return message;
   },
   fromSDK(object: NodeInfoSDKType): NodeInfo {

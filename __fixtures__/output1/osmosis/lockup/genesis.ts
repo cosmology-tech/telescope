@@ -81,7 +81,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.lastLockId = object.lastLockId !== undefined && object.lastLockId !== null ? Long.fromValue(object.lastLockId) : Long.UZERO;
+    if (object.lastLockId !== undefined && object.lastLockId !== null) {
+      message.lastLockId = Long.fromValue(object.lastLockId);
+    }
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;

@@ -156,12 +156,18 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.groupSeq = object.groupSeq !== undefined && object.groupSeq !== null ? Long.fromValue(object.groupSeq) : Long.UZERO;
+    if (object.groupSeq !== undefined && object.groupSeq !== null) {
+      message.groupSeq = Long.fromValue(object.groupSeq);
+    }
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
     message.groupMembers = object.groupMembers?.map(e => GroupMember.fromPartial(e)) || [];
-    message.groupPolicySeq = object.groupPolicySeq !== undefined && object.groupPolicySeq !== null ? Long.fromValue(object.groupPolicySeq) : Long.UZERO;
+    if (object.groupPolicySeq !== undefined && object.groupPolicySeq !== null) {
+      message.groupPolicySeq = Long.fromValue(object.groupPolicySeq);
+    }
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.proposalSeq = object.proposalSeq !== undefined && object.proposalSeq !== null ? Long.fromValue(object.proposalSeq) : Long.UZERO;
+    if (object.proposalSeq !== undefined && object.proposalSeq !== null) {
+      message.proposalSeq = Long.fromValue(object.proposalSeq);
+    }
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     return message;

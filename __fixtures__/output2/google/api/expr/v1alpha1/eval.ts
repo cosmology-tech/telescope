@@ -210,8 +210,12 @@ export const EvalState_Result = {
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr !== undefined && object.expr !== null ? Long.fromValue(object.expr) : Long.ZERO;
-    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Long.fromValue(object.expr);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Long.fromValue(object.value);
+    }
     return message;
   }
 };
@@ -274,9 +278,15 @@ export const ExprValue = {
   },
   fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
-    message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : ErrorSet.fromPartial({});
-    message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : UnknownSet.fromPartial({});
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = ErrorSet.fromPartial(object.error);
+    }
+    if (object.unknown !== undefined && object.unknown !== null) {
+      message.unknown = UnknownSet.fromPartial(object.unknown);
+    }
     return message;
   }
 };

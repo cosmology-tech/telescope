@@ -178,7 +178,9 @@ export const Explain_ExprStep = {
   },
   fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Long.fromValue(object.id);
+    }
     message.valueIndex = object.valueIndex ?? 0;
     return message;
   },

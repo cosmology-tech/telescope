@@ -77,7 +77,9 @@ export const UpdateFeeTokenProposal = {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.feetoken = object.feetoken !== undefined && object.feetoken !== null ? FeeToken.fromPartial(object.feetoken) : FeeToken.fromPartial({});
+    if (object.feetoken !== undefined && object.feetoken !== null) {
+      message.feetoken = FeeToken.fromPartial(object.feetoken);
+    }
     return message;
   }
 };

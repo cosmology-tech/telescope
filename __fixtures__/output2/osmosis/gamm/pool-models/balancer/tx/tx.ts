@@ -88,7 +88,9 @@ export const MsgCreateBalancerPool = {
   fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
@@ -135,7 +137,9 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     return message;
   }
 };

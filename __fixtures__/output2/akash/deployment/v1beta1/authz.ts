@@ -56,7 +56,9 @@ export const DepositDeploymentAuthorization = {
   },
   fromPartial(object: DeepPartial<DepositDeploymentAuthorization>): DepositDeploymentAuthorization {
     const message = createBaseDepositDeploymentAuthorization();
-    message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : Coin.fromPartial({});
+    if (object.spendLimit !== undefined && object.spendLimit !== null) {
+      message.spendLimit = Coin.fromPartial(object.spendLimit);
+    }
     return message;
   }
 };

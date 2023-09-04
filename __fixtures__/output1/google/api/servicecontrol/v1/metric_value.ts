@@ -278,10 +278,14 @@ export const MetricValue = {
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = Long.fromValue(object.int64Value);
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
-    message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : Distribution.fromPartial({});
+    if (object.distributionValue !== undefined && object.distributionValue !== null) {
+      message.distributionValue = Distribution.fromPartial(object.distributionValue);
+    }
     return message;
   },
   fromSDK(object: MetricValueSDKType): MetricValue {

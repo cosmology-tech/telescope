@@ -269,12 +269,20 @@ export const Account = {
   },
   fromPartial(object: DeepPartial<Account>): Account {
     const message = createBaseAccount();
-    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : AccountID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromPartial(object.id);
+    }
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : Coin.fromPartial({});
-    message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : Coin.fromPartial({});
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = Coin.fromPartial(object.transferred);
+    }
+    if (object.settledAt !== undefined && object.settledAt !== null) {
+      message.settledAt = Long.fromValue(object.settledAt);
+    }
     return message;
   }
 };
@@ -373,13 +381,21 @@ export const Payment = {
   },
   fromPartial(object: DeepPartial<Payment>): Payment {
     const message = createBasePayment();
-    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : AccountID.fromPartial({});
+    if (object.accountId !== undefined && object.accountId !== null) {
+      message.accountId = AccountID.fromPartial(object.accountId);
+    }
     message.paymentId = object.paymentId ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.rate = object.rate !== undefined && object.rate !== null ? Coin.fromPartial(object.rate) : Coin.fromPartial({});
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : Coin.fromPartial({});
-    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : Coin.fromPartial({});
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = Coin.fromPartial(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromPartial(object.withdrawn);
+    }
     return message;
   }
 };

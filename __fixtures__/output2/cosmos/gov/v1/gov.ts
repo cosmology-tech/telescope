@@ -336,7 +336,9 @@ export const Deposit = {
   },
   fromPartial(object: DeepPartial<Deposit>): Deposit {
     const message = createBaseDeposit();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -472,15 +474,27 @@ export const Proposal = {
   },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Long.fromValue(object.id);
+    }
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.status = object.status ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
-    message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : Timestamp.fromPartial({});
-    message.depositEndTime = object.depositEndTime !== undefined && object.depositEndTime !== null ? Timestamp.fromPartial(object.depositEndTime) : Timestamp.fromPartial({});
+    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
+      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
+    }
+    if (object.submitTime !== undefined && object.submitTime !== null) {
+      message.submitTime = Timestamp.fromPartial(object.submitTime);
+    }
+    if (object.depositEndTime !== undefined && object.depositEndTime !== null) {
+      message.depositEndTime = Timestamp.fromPartial(object.depositEndTime);
+    }
     message.totalDeposit = object.totalDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.votingStartTime = object.votingStartTime !== undefined && object.votingStartTime !== null ? Timestamp.fromPartial(object.votingStartTime) : Timestamp.fromPartial({});
-    message.votingEndTime = object.votingEndTime !== undefined && object.votingEndTime !== null ? Timestamp.fromPartial(object.votingEndTime) : Timestamp.fromPartial({});
+    if (object.votingStartTime !== undefined && object.votingStartTime !== null) {
+      message.votingStartTime = Timestamp.fromPartial(object.votingStartTime);
+    }
+    if (object.votingEndTime !== undefined && object.votingEndTime !== null) {
+      message.votingEndTime = Timestamp.fromPartial(object.votingEndTime);
+    }
     message.metadata = object.metadata ?? "";
     return message;
   }
@@ -632,7 +646,9 @@ export const Vote = {
   },
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.voter = object.voter ?? "";
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
@@ -694,7 +710,9 @@ export const DepositParams = {
   fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.maxDepositPeriod = object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null ? Duration.fromPartial(object.maxDepositPeriod) : Duration.fromPartial({});
+    if (object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null) {
+      message.maxDepositPeriod = Duration.fromPartial(object.maxDepositPeriod);
+    }
     return message;
   }
 };
@@ -739,7 +757,9 @@ export const VotingParams = {
   },
   fromPartial(object: DeepPartial<VotingParams>): VotingParams {
     const message = createBaseVotingParams();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
+    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
+      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
+    }
     return message;
   }
 };

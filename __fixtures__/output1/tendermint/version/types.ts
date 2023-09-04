@@ -87,7 +87,9 @@ export const App = {
   },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    message.protocol = object.protocol !== undefined && object.protocol !== null ? Long.fromValue(object.protocol) : Long.UZERO;
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = Long.fromValue(object.protocol);
+    }
     message.software = object.software ?? "";
     return message;
   },
@@ -154,8 +156,12 @@ export const Consensus = {
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
-    message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Long.fromValue(object.block);
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = Long.fromValue(object.app);
+    }
     return message;
   },
   fromSDK(object: ConsensusSDKType): Consensus {

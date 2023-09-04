@@ -224,7 +224,9 @@ export const MsgMint = {
   fromPartial(object: DeepPartial<MsgMint>): MsgMint {
     const message = createBaseMsgMint();
     message.sender = object.sender ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   }
 };
@@ -313,7 +315,9 @@ export const MsgBurn = {
   fromPartial(object: DeepPartial<MsgBurn>): MsgBurn {
     const message = createBaseMsgBurn();
     message.sender = object.sender ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   }
 };
@@ -501,7 +505,9 @@ export const MsgSetDenomMetadata = {
   fromPartial(object: DeepPartial<MsgSetDenomMetadata>): MsgSetDenomMetadata {
     const message = createBaseMsgSetDenomMetadata();
     message.sender = object.sender ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromPartial(object.metadata);
+    }
     return message;
   }
 };

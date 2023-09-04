@@ -79,8 +79,12 @@ export const GenesisOwners = {
   },
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
-    message.indexOwners = object.indexOwners !== undefined && object.indexOwners !== null ? CapabilityOwners.fromPartial(object.indexOwners) : CapabilityOwners.fromPartial({});
+    if (object.index !== undefined && object.index !== null) {
+      message.index = Long.fromValue(object.index);
+    }
+    if (object.indexOwners !== undefined && object.indexOwners !== null) {
+      message.indexOwners = CapabilityOwners.fromPartial(object.indexOwners);
+    }
     return message;
   },
   fromSDK(object: GenesisOwnersSDKType): GenesisOwners {
@@ -150,7 +154,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = Long.fromValue(object.index);
+    }
     message.owners = object.owners?.map(e => GenesisOwners.fromPartial(e)) || [];
     return message;
   },

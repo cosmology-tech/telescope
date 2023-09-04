@@ -1240,8 +1240,12 @@ export const Rollout = {
     message.createTime = object.createTime ?? undefined;
     message.createdBy = object.createdBy ?? "";
     message.status = object.status ?? 0;
-    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : Rollout_TrafficPercentStrategy.fromPartial({});
-    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : Rollout_DeleteServiceStrategy.fromPartial({});
+    if (object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null) {
+      message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy);
+    }
+    if (object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null) {
+      message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy);
+    }
     message.serviceName = object.serviceName ?? "";
     return message;
   },

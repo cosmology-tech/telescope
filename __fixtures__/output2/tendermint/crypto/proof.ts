@@ -106,8 +106,12 @@ export const Proof = {
   },
   fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
-    message.total = object.total !== undefined && object.total !== null ? Long.fromValue(object.total) : Long.ZERO;
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    if (object.total !== undefined && object.total !== null) {
+      message.total = Long.fromValue(object.total);
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = Long.fromValue(object.index);
+    }
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
@@ -164,7 +168,9 @@ export const ValueOp = {
   fromPartial(object: DeepPartial<ValueOp>): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? new Uint8Array();
-    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromPartial(object.proof);
+    }
     return message;
   }
 };

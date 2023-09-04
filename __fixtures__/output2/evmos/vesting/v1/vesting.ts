@@ -111,9 +111,13 @@ export const ClawbackVestingAccount = {
   },
   fromPartial(object: DeepPartial<ClawbackVestingAccount>): ClawbackVestingAccount {
     const message = createBaseClawbackVestingAccount();
-    message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : BaseVestingAccount.fromPartial({});
+    if (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null) {
+      message.baseVestingAccount = BaseVestingAccount.fromPartial(object.baseVestingAccount);
+    }
     message.funderAddress = object.funderAddress ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Timestamp.fromPartial(object.startTime);
+    }
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;

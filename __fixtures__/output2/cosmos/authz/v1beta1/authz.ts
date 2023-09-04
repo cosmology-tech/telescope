@@ -128,8 +128,12 @@ export const Grant = {
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
-    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
-    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : Timestamp.fromPartial({});
+    if (object.authorization !== undefined && object.authorization !== null) {
+      message.authorization = Any.fromPartial(object.authorization);
+    }
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = Timestamp.fromPartial(object.expiration);
+    }
     return message;
   }
 };
@@ -203,8 +207,12 @@ export const GrantAuthorization = {
     const message = createBaseGrantAuthorization();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
-    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : Timestamp.fromPartial({});
+    if (object.authorization !== undefined && object.authorization !== null) {
+      message.authorization = Any.fromPartial(object.authorization);
+    }
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = Timestamp.fromPartial(object.expiration);
+    }
     return message;
   }
 };

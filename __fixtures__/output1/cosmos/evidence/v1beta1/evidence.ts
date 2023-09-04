@@ -90,9 +90,13 @@ export const Equivocation = {
   },
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Long.fromValue(object.height);
+    }
     message.time = object.time ?? undefined;
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    if (object.power !== undefined && object.power !== null) {
+      message.power = Long.fromValue(object.power);
+    }
     message.consensusAddress = object.consensusAddress ?? "";
     return message;
   },

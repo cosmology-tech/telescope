@@ -163,7 +163,9 @@ export const MsgStoreCode = {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
+      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
+    }
     return message;
   }
 };
@@ -208,7 +210,9 @@ export const MsgStoreCodeResponse = {
   },
   fromPartial(object: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
     const message = createBaseMsgStoreCodeResponse();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = Long.fromValue(object.codeId);
+    }
     return message;
   }
 };
@@ -304,7 +308,9 @@ export const MsgInstantiateContract = {
     const message = createBaseMsgInstantiateContract();
     message.sender = object.sender ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = Long.fromValue(object.codeId);
+    }
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -560,7 +566,9 @@ export const MsgMigrateContract = {
     const message = createBaseMsgMigrateContract();
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = Long.fromValue(object.codeId);
+    }
     message.msg = object.msg ?? new Uint8Array();
     return message;
   }

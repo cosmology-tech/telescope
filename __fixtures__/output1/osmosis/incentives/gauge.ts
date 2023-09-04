@@ -180,13 +180,21 @@ export const Gauge = {
   },
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Long.fromValue(object.id);
+    }
     message.isPerpetual = object.isPerpetual ?? false;
-    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : QueryCondition.fromPartial({});
+    if (object.distributeTo !== undefined && object.distributeTo !== null) {
+      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO;
-    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? Long.fromValue(object.filledEpochs) : Long.UZERO;
+    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
+      message.numEpochsPaidOver = Long.fromValue(object.numEpochsPaidOver);
+    }
+    if (object.filledEpochs !== undefined && object.filledEpochs !== null) {
+      message.filledEpochs = Long.fromValue(object.filledEpochs);
+    }
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },

@@ -239,13 +239,21 @@ export const MetricValue = {
       }
       return acc;
     }, {});
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
-    message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : Timestamp.fromPartial({});
+    if (object.startTime !== undefined && object.startTime !== null) {
+      message.startTime = Timestamp.fromPartial(object.startTime);
+    }
+    if (object.endTime !== undefined && object.endTime !== null) {
+      message.endTime = Timestamp.fromPartial(object.endTime);
+    }
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = Long.fromValue(object.int64Value);
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
-    message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : Distribution.fromPartial({});
+    if (object.distributionValue !== undefined && object.distributionValue !== null) {
+      message.distributionValue = Distribution.fromPartial(object.distributionValue);
+    }
     return message;
   }
 };

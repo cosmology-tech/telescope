@@ -145,11 +145,17 @@ export const ValidatorSigningInfo = {
   fromPartial(object: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     const message = createBaseValidatorSigningInfo();
     message.address = object.address ?? "";
-    message.startHeight = object.startHeight !== undefined && object.startHeight !== null ? Long.fromValue(object.startHeight) : Long.ZERO;
-    message.indexOffset = object.indexOffset !== undefined && object.indexOffset !== null ? Long.fromValue(object.indexOffset) : Long.ZERO;
+    if (object.startHeight !== undefined && object.startHeight !== null) {
+      message.startHeight = Long.fromValue(object.startHeight);
+    }
+    if (object.indexOffset !== undefined && object.indexOffset !== null) {
+      message.indexOffset = Long.fromValue(object.indexOffset);
+    }
     message.jailedUntil = object.jailedUntil ?? undefined;
     message.tombstoned = object.tombstoned ?? false;
-    message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO;
+    if (object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null) {
+      message.missedBlocksCounter = Long.fromValue(object.missedBlocksCounter);
+    }
     return message;
   },
   fromSDK(object: ValidatorSigningInfoSDKType): ValidatorSigningInfo {
@@ -250,9 +256,13 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.signedBlocksWindow = object.signedBlocksWindow !== undefined && object.signedBlocksWindow !== null ? Long.fromValue(object.signedBlocksWindow) : Long.ZERO;
+    if (object.signedBlocksWindow !== undefined && object.signedBlocksWindow !== null) {
+      message.signedBlocksWindow = Long.fromValue(object.signedBlocksWindow);
+    }
     message.minSignedPerWindow = object.minSignedPerWindow ?? new Uint8Array();
-    message.downtimeJailDuration = object.downtimeJailDuration !== undefined && object.downtimeJailDuration !== null ? Duration.fromPartial(object.downtimeJailDuration) : Duration.fromPartial({});
+    if (object.downtimeJailDuration !== undefined && object.downtimeJailDuration !== null) {
+      message.downtimeJailDuration = Duration.fromPartial(object.downtimeJailDuration);
+    }
     message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
     message.slashFractionDowntime = object.slashFractionDowntime ?? new Uint8Array();
     return message;

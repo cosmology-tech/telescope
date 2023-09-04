@@ -287,7 +287,9 @@ export const CheckError = {
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromPartial(object.status);
+    }
     return message;
   }
 };

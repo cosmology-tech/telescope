@@ -110,7 +110,9 @@ export const MsgSuperfluidDelegate = {
   fromPartial(object: DeepPartial<MsgSuperfluidDelegate>): MsgSuperfluidDelegate {
     const message = createBaseMsgSuperfluidDelegate();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = Long.fromValue(object.lockId);
+    }
     message.valAddr = object.valAddr ?? "";
     return message;
   }
@@ -200,7 +202,9 @@ export const MsgSuperfluidUndelegate = {
   fromPartial(object: DeepPartial<MsgSuperfluidUndelegate>): MsgSuperfluidUndelegate {
     const message = createBaseMsgSuperfluidUndelegate();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = Long.fromValue(object.lockId);
+    }
     return message;
   }
 };
@@ -289,7 +293,9 @@ export const MsgSuperfluidUnbondLock = {
   fromPartial(object: DeepPartial<MsgSuperfluidUnbondLock>): MsgSuperfluidUnbondLock {
     const message = createBaseMsgSuperfluidUnbondLock();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = Long.fromValue(object.lockId);
+    }
     return message;
   }
 };
@@ -437,7 +443,9 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegateResponse>): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = Long.fromValue(object.ID);
+    }
     return message;
   }
 };
@@ -492,7 +500,9 @@ export const MsgUnPoolWhitelistedPool = {
   fromPartial(object: DeepPartial<MsgUnPoolWhitelistedPool>): MsgUnPoolWhitelistedPool {
     const message = createBaseMsgUnPoolWhitelistedPool();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     return message;
   }
 };

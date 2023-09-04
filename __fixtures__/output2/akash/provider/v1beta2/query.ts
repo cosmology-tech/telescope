@@ -63,7 +63,9 @@ export const QueryProvidersRequest = {
   },
   fromPartial(object: DeepPartial<QueryProvidersRequest>): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -122,7 +124,9 @@ export const QueryProvidersResponse = {
   fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   }
 };
@@ -212,7 +216,9 @@ export const QueryProviderResponse = {
   },
   fromPartial(object: DeepPartial<QueryProviderResponse>): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
-    message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : Provider.fromPartial({});
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = Provider.fromPartial(object.provider);
+    }
     return message;
   }
 };

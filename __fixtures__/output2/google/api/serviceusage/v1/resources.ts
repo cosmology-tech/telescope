@@ -205,7 +205,9 @@ export const Service = {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
-    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : ServiceConfig.fromPartial({});
+    if (object.config !== undefined && object.config !== null) {
+      message.config = ServiceConfig.fromPartial(object.config);
+    }
     message.state = object.state ?? 0;
     return message;
   }
@@ -347,13 +349,23 @@ export const ServiceConfig = {
     message.name = object.name ?? "";
     message.title = object.title ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : Documentation.fromPartial({});
-    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : Quota.fromPartial({});
-    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : Authentication.fromPartial({});
-    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : Usage.fromPartial({});
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromPartial(object.documentation);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromPartial(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromPartial(object.authentication);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromPartial(object.usage);
+    }
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : Monitoring.fromPartial({});
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromPartial(object.monitoring);
+    }
     return message;
   }
 };

@@ -270,18 +270,26 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? Long.fromValue(object.requestSize) : Long.ZERO;
+    if (object.requestSize !== undefined && object.requestSize !== null) {
+      message.requestSize = Long.fromValue(object.requestSize);
+    }
     message.status = object.status ?? 0;
-    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? Long.fromValue(object.responseSize) : Long.ZERO;
+    if (object.responseSize !== undefined && object.responseSize !== null) {
+      message.responseSize = Long.fromValue(object.responseSize);
+    }
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : Duration.fromPartial({});
+    if (object.latency !== undefined && object.latency !== null) {
+      message.latency = Duration.fromPartial(object.latency);
+    }
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? Long.fromValue(object.cacheFillBytes) : Long.ZERO;
+    if (object.cacheFillBytes !== undefined && object.cacheFillBytes !== null) {
+      message.cacheFillBytes = Long.fromValue(object.cacheFillBytes);
+    }
     message.protocol = object.protocol ?? "";
     return message;
   },

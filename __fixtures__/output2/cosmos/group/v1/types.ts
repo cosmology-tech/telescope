@@ -462,7 +462,9 @@ export const Member = {
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
     message.metadata = object.metadata ?? "";
-    message.addedAt = object.addedAt !== undefined && object.addedAt !== null ? Timestamp.fromPartial(object.addedAt) : Timestamp.fromPartial({});
+    if (object.addedAt !== undefined && object.addedAt !== null) {
+      message.addedAt = Timestamp.fromPartial(object.addedAt);
+    }
     return message;
   }
 };
@@ -566,7 +568,9 @@ export const ThresholdDecisionPolicy = {
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    if (object.windows !== undefined && object.windows !== null) {
+      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
+    }
     return message;
   }
 };
@@ -621,7 +625,9 @@ export const PercentageDecisionPolicy = {
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    if (object.windows !== undefined && object.windows !== null) {
+      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
+    }
     return message;
   }
 };
@@ -675,8 +681,12 @@ export const DecisionPolicyWindows = {
   },
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
-    message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : Duration.fromPartial({});
+    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
+      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
+    }
+    if (object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null) {
+      message.minExecutionPeriod = Duration.fromPartial(object.minExecutionPeriod);
+    }
     return message;
   }
 };
@@ -766,12 +776,18 @@ export const GroupInfo = {
   },
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Long.fromValue(object.id);
+    }
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
+    if (object.version !== undefined && object.version !== null) {
+      message.version = Long.fromValue(object.version);
+    }
     message.totalWeight = object.totalWeight ?? "";
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : Timestamp.fromPartial({});
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Timestamp.fromPartial(object.createdAt);
+    }
     return message;
   }
 };
@@ -825,8 +841,12 @@ export const GroupMember = {
   },
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
-    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : Member.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
+    if (object.member !== undefined && object.member !== null) {
+      message.member = Member.fromPartial(object.member);
+    }
     return message;
   }
 };
@@ -926,12 +946,20 @@ export const GroupPolicyInfo = {
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = Long.fromValue(object.groupId);
+    }
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : Timestamp.fromPartial({});
+    if (object.version !== undefined && object.version !== null) {
+      message.version = Long.fromValue(object.version);
+    }
+    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
+      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = Timestamp.fromPartial(object.createdAt);
+    }
     return message;
   }
 };
@@ -1092,17 +1120,29 @@ export const Proposal = {
   },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Long.fromValue(object.id);
+    }
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     message.proposers = object.proposers?.map(e => e) || [];
-    message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : Timestamp.fromPartial({});
-    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? Long.fromValue(object.groupVersion) : Long.UZERO;
-    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO;
+    if (object.submitTime !== undefined && object.submitTime !== null) {
+      message.submitTime = Timestamp.fromPartial(object.submitTime);
+    }
+    if (object.groupVersion !== undefined && object.groupVersion !== null) {
+      message.groupVersion = Long.fromValue(object.groupVersion);
+    }
+    if (object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null) {
+      message.groupPolicyVersion = Long.fromValue(object.groupPolicyVersion);
+    }
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
-    message.votingPeriodEnd = object.votingPeriodEnd !== undefined && object.votingPeriodEnd !== null ? Timestamp.fromPartial(object.votingPeriodEnd) : Timestamp.fromPartial({});
+    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
+      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
+    }
+    if (object.votingPeriodEnd !== undefined && object.votingPeriodEnd !== null) {
+      message.votingPeriodEnd = Timestamp.fromPartial(object.votingPeriodEnd);
+    }
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
@@ -1260,11 +1300,15 @@ export const Vote = {
   },
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = Long.fromValue(object.proposalId);
+    }
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
-    message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : Timestamp.fromPartial({});
+    if (object.submitTime !== undefined && object.submitTime !== null) {
+      message.submitTime = Timestamp.fromPartial(object.submitTime);
+    }
     return message;
   }
 };
