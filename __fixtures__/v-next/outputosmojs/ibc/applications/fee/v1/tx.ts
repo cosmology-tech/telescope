@@ -600,7 +600,9 @@ export const MsgPayPacketFee = {
   },
   fromPartial(object: DeepPartial<MsgPayPacketFee>): MsgPayPacketFee {
     const message = createBaseMsgPayPacketFee();
-    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : Fee.fromPartial({});
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Fee.fromPartial(object.fee);
+    }
     message.sourcePortId = object.sourcePortId ?? "";
     message.sourceChannelId = object.sourceChannelId ?? "";
     message.signer = object.signer ?? "";
@@ -797,7 +799,9 @@ export const MsgPayPacketFeeAsync = {
   },
   fromPartial(object: DeepPartial<MsgPayPacketFeeAsync>): MsgPayPacketFeeAsync {
     const message = createBaseMsgPayPacketFeeAsync();
-    message.packetFee = object.packetFee !== undefined && object.packetFee !== null ? PacketFee.fromPartial(object.packetFee) : PacketFee.fromPartial({});
+    if (object.packetFee !== undefined && object.packetFee !== null) {
+      message.packetFee = PacketFee.fromPartial(object.packetFee);
+    }
     return message;
   },
   fromSDK(object: MsgPayPacketFeeAsyncSDKType): MsgPayPacketFeeAsync {

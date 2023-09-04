@@ -387,15 +387,9 @@ export const QueryPeriodResponse = {
     return message;
   },
   fromJSON(object: any): QueryPeriodResponse {
-<<<<<<< HEAD
     const obj = createBaseQueryPeriodResponse();
-    if (isSet(object.period)) obj.period = Long.fromValue(object.period);
+    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
     return obj;
-=======
-    return {
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: QueryPeriodResponse): unknown {
     const obj: any = {};
@@ -404,7 +398,9 @@ export const QueryPeriodResponse = {
   },
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period.toString());
+    }
     return message;
   },
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
@@ -549,7 +545,9 @@ export const QueryEpochMintProvisionResponse = {
   },
   fromPartial(object: DeepPartial<QueryEpochMintProvisionResponse>): QueryEpochMintProvisionResponse {
     const message = createBaseQueryEpochMintProvisionResponse();
-    message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : DecCoin.fromPartial({});
+    if (object.epochMintProvision !== undefined && object.epochMintProvision !== null) {
+      message.epochMintProvision = DecCoin.fromPartial(object.epochMintProvision);
+    }
     return message;
   },
   fromSDK(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
@@ -683,15 +681,9 @@ export const QuerySkippedEpochsResponse = {
     return message;
   },
   fromJSON(object: any): QuerySkippedEpochsResponse {
-<<<<<<< HEAD
     const obj = createBaseQuerySkippedEpochsResponse();
-    if (isSet(object.skippedEpochs)) obj.skippedEpochs = Long.fromValue(object.skippedEpochs);
+    if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
     return obj;
-=======
-    return {
-      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: QuerySkippedEpochsResponse): unknown {
     const obj: any = {};
@@ -700,7 +692,9 @@ export const QuerySkippedEpochsResponse = {
   },
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt(0);
+    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
+      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
+    }
     return message;
   },
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
@@ -845,7 +839,9 @@ export const QueryCirculatingSupplyResponse = {
   },
   fromPartial(object: DeepPartial<QueryCirculatingSupplyResponse>): QueryCirculatingSupplyResponse {
     const message = createBaseQueryCirculatingSupplyResponse();
-    message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : DecCoin.fromPartial({});
+    if (object.circulatingSupply !== undefined && object.circulatingSupply !== null) {
+      message.circulatingSupply = DecCoin.fromPartial(object.circulatingSupply);
+    }
     return message;
   },
   fromSDK(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
@@ -1135,7 +1131,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

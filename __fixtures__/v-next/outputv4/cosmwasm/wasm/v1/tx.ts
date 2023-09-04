@@ -227,7 +227,9 @@ export const MsgStoreCode = {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
+      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
+    }
     return message;
   },
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
@@ -329,7 +331,9 @@ export const MsgStoreCodeResponse = {
   },
   fromPartial(object: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
     const message = createBaseMsgStoreCodeResponse();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgStoreCodeResponseSDKType): MsgStoreCodeResponse {
@@ -472,7 +476,9 @@ export const MsgInstantiateContract = {
     const message = createBaseMsgInstantiateContract();
     message.sender = object.sender ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -977,7 +983,9 @@ export const MsgMigrateContract = {
     const message = createBaseMsgMigrateContract();
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },

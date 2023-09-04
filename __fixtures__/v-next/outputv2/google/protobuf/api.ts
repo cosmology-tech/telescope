@@ -571,7 +571,9 @@ export const Api = {
     message.methods = object.methods?.map(e => Method.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.version = object.version ?? "";
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : SourceContext.fromPartial({});
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;

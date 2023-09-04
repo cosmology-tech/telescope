@@ -426,8 +426,12 @@ export const ContractGrant = {
   fromPartial(object: DeepPartial<ContractGrant>): ContractGrant {
     const message = createBaseContractGrant();
     message.contract = object.contract ?? "";
-    message.limit = object.limit !== undefined && object.limit !== null ? Any.fromPartial(object.limit) : Any.fromPartial({});
-    message.filter = object.filter !== undefined && object.filter !== null ? Any.fromPartial(object.filter) : Any.fromPartial({});
+    if (object.limit !== undefined && object.limit !== null) {
+      message.limit = Any.fromPartial(object.limit);
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = Any.fromPartial(object.filter);
+    }
     return message;
   },
   fromSDK(object: ContractGrantSDKType): ContractGrant {
@@ -529,7 +533,9 @@ export const MaxCallsLimit = {
   },
   fromPartial(object: DeepPartial<MaxCallsLimit>): MaxCallsLimit {
     const message = createBaseMaxCallsLimit();
-    message.remaining = object.remaining !== undefined && object.remaining !== null ? BigInt(object.remaining.toString()) : BigInt(0);
+    if (object.remaining !== undefined && object.remaining !== null) {
+      message.remaining = BigInt(object.remaining.toString());
+    }
     return message;
   },
   fromSDK(object: MaxCallsLimitSDKType): MaxCallsLimit {
@@ -738,7 +744,9 @@ export const CombinedLimit = {
   },
   fromPartial(object: DeepPartial<CombinedLimit>): CombinedLimit {
     const message = createBaseCombinedLimit();
-    message.callsRemaining = object.callsRemaining !== undefined && object.callsRemaining !== null ? BigInt(object.callsRemaining.toString()) : BigInt(0);
+    if (object.callsRemaining !== undefined && object.callsRemaining !== null) {
+      message.callsRemaining = BigInt(object.callsRemaining.toString());
+    }
     message.amounts = object.amounts?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },

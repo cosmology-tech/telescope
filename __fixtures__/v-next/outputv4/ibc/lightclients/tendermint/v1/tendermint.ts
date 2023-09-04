@@ -300,12 +300,24 @@ export const ClientState = {
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
-    message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : Fraction.fromPartial({});
-    message.trustingPeriod = object.trustingPeriod !== undefined && object.trustingPeriod !== null ? Duration.fromPartial(object.trustingPeriod) : Duration.fromPartial({});
-    message.unbondingPeriod = object.unbondingPeriod !== undefined && object.unbondingPeriod !== null ? Duration.fromPartial(object.unbondingPeriod) : Duration.fromPartial({});
-    message.maxClockDrift = object.maxClockDrift !== undefined && object.maxClockDrift !== null ? Duration.fromPartial(object.maxClockDrift) : Duration.fromPartial({});
-    message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : Height.fromPartial({});
-    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : Height.fromPartial({});
+    if (object.trustLevel !== undefined && object.trustLevel !== null) {
+      message.trustLevel = Fraction.fromPartial(object.trustLevel);
+    }
+    if (object.trustingPeriod !== undefined && object.trustingPeriod !== null) {
+      message.trustingPeriod = Duration.fromPartial(object.trustingPeriod);
+    }
+    if (object.unbondingPeriod !== undefined && object.unbondingPeriod !== null) {
+      message.unbondingPeriod = Duration.fromPartial(object.unbondingPeriod);
+    }
+    if (object.maxClockDrift !== undefined && object.maxClockDrift !== null) {
+      message.maxClockDrift = Duration.fromPartial(object.maxClockDrift);
+    }
+    if (object.frozenHeight !== undefined && object.frozenHeight !== null) {
+      message.frozenHeight = Height.fromPartial(object.frozenHeight);
+    }
+    if (object.latestHeight !== undefined && object.latestHeight !== null) {
+      message.latestHeight = Height.fromPartial(object.latestHeight);
+    }
     message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
     message.upgradePath = object.upgradePath?.map(e => e) || [];
     message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
@@ -486,7 +498,9 @@ export const ConsensusState = {
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
     message.timestamp = object.timestamp ?? undefined;
-    message.root = object.root !== undefined && object.root !== null ? MerkleRoot.fromPartial(object.root) : MerkleRoot.fromPartial({});
+    if (object.root !== undefined && object.root !== null) {
+      message.root = MerkleRoot.fromPartial(object.root);
+    }
     message.nextValidatorsHash = object.nextValidatorsHash ?? new Uint8Array();
     return message;
   },
@@ -608,8 +622,12 @@ export const Misbehaviour = {
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
-    message.header1 = object.header1 !== undefined && object.header1 !== null ? Header.fromPartial(object.header1) : Header.fromPartial({});
-    message.header2 = object.header2 !== undefined && object.header2 !== null ? Header.fromPartial(object.header2) : Header.fromPartial({});
+    if (object.header1 !== undefined && object.header1 !== null) {
+      message.header1 = Header.fromPartial(object.header1);
+    }
+    if (object.header2 !== undefined && object.header2 !== null) {
+      message.header2 = Header.fromPartial(object.header2);
+    }
     return message;
   },
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
@@ -738,10 +756,18 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : SignedHeader.fromPartial({});
-    message.validatorSet = object.validatorSet !== undefined && object.validatorSet !== null ? ValidatorSet.fromPartial(object.validatorSet) : ValidatorSet.fromPartial({});
-    message.trustedHeight = object.trustedHeight !== undefined && object.trustedHeight !== null ? Height.fromPartial(object.trustedHeight) : Height.fromPartial({});
-    message.trustedValidators = object.trustedValidators !== undefined && object.trustedValidators !== null ? ValidatorSet.fromPartial(object.trustedValidators) : ValidatorSet.fromPartial({});
+    if (object.signedHeader !== undefined && object.signedHeader !== null) {
+      message.signedHeader = SignedHeader.fromPartial(object.signedHeader);
+    }
+    if (object.validatorSet !== undefined && object.validatorSet !== null) {
+      message.validatorSet = ValidatorSet.fromPartial(object.validatorSet);
+    }
+    if (object.trustedHeight !== undefined && object.trustedHeight !== null) {
+      message.trustedHeight = Height.fromPartial(object.trustedHeight);
+    }
+    if (object.trustedValidators !== undefined && object.trustedValidators !== null) {
+      message.trustedValidators = ValidatorSet.fromPartial(object.trustedValidators);
+    }
     return message;
   },
   fromSDK(object: HeaderSDKType): Header {
@@ -857,8 +883,12 @@ export const Fraction = {
   },
   fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
-    message.numerator = object.numerator !== undefined && object.numerator !== null ? BigInt(object.numerator.toString()) : BigInt(0);
-    message.denominator = object.denominator !== undefined && object.denominator !== null ? BigInt(object.denominator.toString()) : BigInt(0);
+    if (object.numerator !== undefined && object.numerator !== null) {
+      message.numerator = BigInt(object.numerator.toString());
+    }
+    if (object.denominator !== undefined && object.denominator !== null) {
+      message.denominator = BigInt(object.denominator.toString());
+    }
     return message;
   },
   fromSDK(object: FractionSDKType): Fraction {

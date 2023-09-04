@@ -502,7 +502,9 @@ export const HistoricalInfo = {
   },
   fromPartial(object: DeepPartial<HistoricalInfo>): HistoricalInfo {
     const message = createBaseHistoricalInfo();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromPartial(object.header);
+    }
     message.valset = object.valset?.map(e => Validator.fromPartial(e)) || [];
     return message;
   },
@@ -739,7 +741,9 @@ export const Commission = {
   },
   fromPartial(object: DeepPartial<Commission>): Commission {
     const message = createBaseCommission();
-    message.commissionRates = object.commissionRates !== undefined && object.commissionRates !== null ? CommissionRates.fromPartial(object.commissionRates) : CommissionRates.fromPartial({});
+    if (object.commissionRates !== undefined && object.commissionRates !== null) {
+      message.commissionRates = CommissionRates.fromPartial(object.commissionRates);
+    }
     message.updateTime = object.updateTime ?? undefined;
     return message;
   },
@@ -1080,15 +1084,23 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.operatorAddress = object.operatorAddress ?? "";
-    message.consensusPubkey = object.consensusPubkey !== undefined && object.consensusPubkey !== null ? Any.fromPartial(object.consensusPubkey) : Any.fromPartial({});
+    if (object.consensusPubkey !== undefined && object.consensusPubkey !== null) {
+      message.consensusPubkey = Any.fromPartial(object.consensusPubkey);
+    }
     message.jailed = object.jailed ?? false;
     message.status = object.status ?? 0;
     message.tokens = object.tokens ?? "";
     message.delegatorShares = object.delegatorShares ?? "";
-    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : Description.fromPartial({});
-    message.unbondingHeight = object.unbondingHeight !== undefined && object.unbondingHeight !== null ? BigInt(object.unbondingHeight.toString()) : BigInt(0);
+    if (object.description !== undefined && object.description !== null) {
+      message.description = Description.fromPartial(object.description);
+    }
+    if (object.unbondingHeight !== undefined && object.unbondingHeight !== null) {
+      message.unbondingHeight = BigInt(object.unbondingHeight.toString());
+    }
     message.unbondingTime = object.unbondingTime ?? undefined;
-    message.commission = object.commission !== undefined && object.commission !== null ? Commission.fromPartial(object.commission) : Commission.fromPartial({});
+    if (object.commission !== undefined && object.commission !== null) {
+      message.commission = Commission.fromPartial(object.commission);
+    }
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     return message;
   },
@@ -2055,7 +2067,9 @@ export const UnbondingDelegationEntry = {
   },
   fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
     const message = createBaseUnbondingDelegationEntry();
-    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? BigInt(object.creationHeight.toString()) : BigInt(0);
+    if (object.creationHeight !== undefined && object.creationHeight !== null) {
+      message.creationHeight = BigInt(object.creationHeight.toString());
+    }
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.balance = object.balance ?? "";
@@ -2192,7 +2206,9 @@ export const RedelegationEntry = {
   },
   fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
     const message = createBaseRedelegationEntry();
-    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? BigInt(object.creationHeight.toString()) : BigInt(0);
+    if (object.creationHeight !== undefined && object.creationHeight !== null) {
+      message.creationHeight = BigInt(object.creationHeight.toString());
+    }
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.sharesDst = object.sharesDst ?? "";
@@ -2496,7 +2512,9 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.unbondingTime = object.unbondingTime !== undefined && object.unbondingTime !== null ? Duration.fromPartial(object.unbondingTime) : Duration.fromPartial({});
+    if (object.unbondingTime !== undefined && object.unbondingTime !== null) {
+      message.unbondingTime = Duration.fromPartial(object.unbondingTime);
+    }
     message.maxValidators = object.maxValidators ?? 0;
     message.maxEntries = object.maxEntries ?? 0;
     message.historicalEntries = object.historicalEntries ?? 0;
@@ -2627,8 +2645,12 @@ export const DelegationResponse = {
   },
   fromPartial(object: DeepPartial<DelegationResponse>): DelegationResponse {
     const message = createBaseDelegationResponse();
-    message.delegation = object.delegation !== undefined && object.delegation !== null ? Delegation.fromPartial(object.delegation) : Delegation.fromPartial({});
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : Coin.fromPartial({});
+    if (object.delegation !== undefined && object.delegation !== null) {
+      message.delegation = Delegation.fromPartial(object.delegation);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
     return message;
   },
   fromSDK(object: DelegationResponseSDKType): DelegationResponse {
@@ -2734,7 +2756,9 @@ export const RedelegationEntryResponse = {
   },
   fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
     const message = createBaseRedelegationEntryResponse();
-    message.redelegationEntry = object.redelegationEntry !== undefined && object.redelegationEntry !== null ? RedelegationEntry.fromPartial(object.redelegationEntry) : RedelegationEntry.fromPartial({});
+    if (object.redelegationEntry !== undefined && object.redelegationEntry !== null) {
+      message.redelegationEntry = RedelegationEntry.fromPartial(object.redelegationEntry);
+    }
     message.balance = object.balance ?? "";
     return message;
   },
@@ -2845,7 +2869,9 @@ export const RedelegationResponse = {
   },
   fromPartial(object: DeepPartial<RedelegationResponse>): RedelegationResponse {
     const message = createBaseRedelegationResponse();
-    message.redelegation = object.redelegation !== undefined && object.redelegation !== null ? Redelegation.fromPartial(object.redelegation) : Redelegation.fromPartial({});
+    if (object.redelegation !== undefined && object.redelegation !== null) {
+      message.redelegation = Redelegation.fromPartial(object.redelegation);
+    }
     message.entries = object.entries?.map(e => RedelegationEntryResponse.fromPartial(e)) || [];
     return message;
   },

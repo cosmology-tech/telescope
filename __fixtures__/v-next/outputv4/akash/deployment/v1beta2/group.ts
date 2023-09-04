@@ -141,10 +141,16 @@ export const Group = {
   },
   fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
     const message = createBaseGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : GroupID.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = GroupID.fromPartial(object.groupId);
+    }
     message.state = object.state ?? 0;
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : GroupSpec.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
+    if (object.groupSpec !== undefined && object.groupSpec !== null) {
+      message.groupSpec = GroupSpec.fromPartial(object.groupSpec);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
     return message;
   },
   fromSDK(object: GroupSDKType): Group {

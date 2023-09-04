@@ -128,7 +128,9 @@ export const ArithmeticTwapRequest = {
   },
   fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime ?? undefined;
@@ -363,7 +365,9 @@ export const ArithmeticTwapToNowRequest = {
   },
   fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
     const message = createBaseArithmeticTwapToNowRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime ?? undefined;
@@ -638,7 +642,9 @@ export const ParamsResponse = {
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {

@@ -626,29 +626,16 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-<<<<<<< HEAD
     const obj = createBaseParams();
     if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
     if (isSet(object.genesisEpochProvisions)) obj.genesisEpochProvisions = String(object.genesisEpochProvisions);
     if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
-    if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = Long.fromValue(object.reductionPeriodInEpochs);
+    if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
     if (isSet(object.reductionFactor)) obj.reductionFactor = String(object.reductionFactor);
     if (isSet(object.distributionProportions)) obj.distributionProportions = DistributionProportions.fromJSON(object.distributionProportions);
     if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
-    if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = Long.fromValue(object.mintingRewardsDistributionStartEpoch);
+    if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
     return obj;
-=======
-    return {
-      mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
-      genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
-      epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0),
-      reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
-      distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
-      weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -671,11 +658,17 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0);
+    if (object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null) {
+      message.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
+    }
     message.reductionFactor = object.reductionFactor ?? "";
-    message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : DistributionProportions.fromPartial({});
+    if (object.distributionProportions !== undefined && object.distributionProportions !== null) {
+      message.distributionProportions = DistributionProportions.fromPartial(object.distributionProportions);
+    }
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0);
+    if (object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null) {
+      message.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

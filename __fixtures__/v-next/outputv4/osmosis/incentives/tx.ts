@@ -152,10 +152,14 @@ export const MsgCreateGauge = {
     const message = createBaseMsgCreateGauge();
     message.isPerpetual = object.isPerpetual ?? false;
     message.owner = object.owner ?? "";
-    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : QueryCondition.fromPartial({});
+    if (object.distributeTo !== undefined && object.distributeTo !== null) {
+      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
+    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
+      message.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
+    }
     return message;
   },
   fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
@@ -376,7 +380,9 @@ export const MsgAddToGauge = {
   fromPartial(object: DeepPartial<MsgAddToGauge>): MsgAddToGauge {
     const message = createBaseMsgAddToGauge();
     message.owner = object.owner ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     message.rewards = object.rewards?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },

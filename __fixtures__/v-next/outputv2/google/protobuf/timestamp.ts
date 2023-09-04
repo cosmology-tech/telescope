@@ -319,17 +319,10 @@ export const Timestamp = {
     return message;
   },
   fromJSON(object: any): Timestamp {
-<<<<<<< HEAD
     const obj = createBaseTimestamp();
-    if (isSet(object.seconds)) obj.seconds = Long.fromValue(object.seconds);
+    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
     if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
     return obj;
-=======
-    return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
@@ -339,7 +332,9 @@ export const Timestamp = {
   },
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
+    if (object.seconds !== undefined && object.seconds !== null) {
+      message.seconds = BigInt(object.seconds.toString());
+    }
     message.nanos = object.nanos ?? 0;
     return message;
   },

@@ -98,10 +98,18 @@ export const Block = {
   },
   fromPartial(object: DeepPartial<Block>): Block {
     const message = createBaseBlock();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
-    message.data = object.data !== undefined && object.data !== null ? Data.fromPartial(object.data) : Data.fromPartial({});
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : EvidenceList.fromPartial({});
-    message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : Commit.fromPartial({});
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromPartial(object.header);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Data.fromPartial(object.data);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceList.fromPartial(object.evidence);
+    }
+    if (object.lastCommit !== undefined && object.lastCommit !== null) {
+      message.lastCommit = Commit.fromPartial(object.lastCommit);
+    }
     return message;
   },
   fromSDK(object: BlockSDKType): Block {

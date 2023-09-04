@@ -284,7 +284,9 @@ export const QueryDevFeeInfosRequest = {
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfosRequest>): QueryDevFeeInfosRequest {
     const message = createBaseQueryDevFeeInfosRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
@@ -379,7 +381,9 @@ export const QueryDevFeeInfosResponse = {
   fromPartial(object: DeepPartial<QueryDevFeeInfosResponse>): QueryDevFeeInfosResponse {
     const message = createBaseQueryDevFeeInfosResponse();
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
@@ -553,7 +557,9 @@ export const QueryDevFeeInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfoResponse>): QueryDevFeeInfoResponse {
     const message = createBaseQueryDevFeeInfoResponse();
-    message.fee = object.fee !== undefined && object.fee !== null ? DevFeeInfo.fromPartial(object.fee) : DevFeeInfo.fromPartial({});
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = DevFeeInfo.fromPartial(object.fee);
+    }
     return message;
   },
   fromSDK(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
@@ -698,7 +704,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -789,7 +797,9 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
     const message = createBaseQueryDevFeeInfosPerDeployerRequest();
     message.deployerAddress = object.deployerAddress ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
@@ -888,7 +898,9 @@ export const QueryDevFeeInfosPerDeployerResponse = {
   fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerResponse>): QueryDevFeeInfosPerDeployerResponse {
     const message = createBaseQueryDevFeeInfosPerDeployerResponse();
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {

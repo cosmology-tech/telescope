@@ -316,7 +316,9 @@ export const SuperfluidIntermediaryAccount = {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     return message;
   },
   fromSDK(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
@@ -436,7 +438,9 @@ export const OsmoEquivalentMultiplierRecord = {
   },
   fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
-    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? BigInt(object.epochNumber.toString()) : BigInt(0);
+    if (object.epochNumber !== undefined && object.epochNumber !== null) {
+      message.epochNumber = BigInt(object.epochNumber.toString());
+    }
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
@@ -569,8 +573,12 @@ export const SuperfluidDelegationRecord = {
     const message = createBaseSuperfluidDelegationRecord();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.delegationAmount = object.delegationAmount !== undefined && object.delegationAmount !== null ? Coin.fromPartial(object.delegationAmount) : Coin.fromPartial({});
-    message.equivalentStakedAmount = object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null ? Coin.fromPartial(object.equivalentStakedAmount) : Coin.fromPartial({});
+    if (object.delegationAmount !== undefined && object.delegationAmount !== null) {
+      message.delegationAmount = Coin.fromPartial(object.delegationAmount);
+    }
+    if (object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null) {
+      message.equivalentStakedAmount = Coin.fromPartial(object.equivalentStakedAmount);
+    }
     return message;
   },
   fromSDK(object: SuperfluidDelegationRecordSDKType): SuperfluidDelegationRecord {
@@ -686,7 +694,9 @@ export const LockIdIntermediaryAccountConnection = {
   },
   fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = BigInt(object.lockId.toString());
+    }
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
   },

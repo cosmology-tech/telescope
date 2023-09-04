@@ -100,8 +100,12 @@ export const ResourceUnits = {
   },
   fromPartial<I extends Exact<DeepPartial<ResourceUnits>, I>>(object: I): ResourceUnits {
     const message = createBaseResourceUnits();
-    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : CPU.fromPartial({});
-    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : Memory.fromPartial({});
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromPartial(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromPartial(object.memory);
+    }
     message.storage = object.storage?.map(e => Storage.fromPartial(e)) || [];
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;

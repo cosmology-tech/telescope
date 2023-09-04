@@ -360,7 +360,9 @@ export const GetTxsEventRequest = {
   fromPartial(object: DeepPartial<GetTxsEventRequest>): GetTxsEventRequest {
     const message = createBaseGetTxsEventRequest();
     message.events = object.events?.map(e => e) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     message.orderBy = object.orderBy ?? 0;
     return message;
   },
@@ -499,7 +501,9 @@ export const GetTxsEventResponse = {
     const message = createBaseGetTxsEventResponse();
     message.txs = object.txs?.map(e => Tx.fromPartial(e)) || [];
     message.txResponses = object.txResponses?.map(e => TxResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetTxsEventResponseSDKType): GetTxsEventResponse {
@@ -724,7 +728,9 @@ export const BroadcastTxResponse = {
   },
   fromPartial(object: DeepPartial<BroadcastTxResponse>): BroadcastTxResponse {
     const message = createBaseBroadcastTxResponse();
-    message.txResponse = object.txResponse !== undefined && object.txResponse !== null ? TxResponse.fromPartial(object.txResponse) : TxResponse.fromPartial({});
+    if (object.txResponse !== undefined && object.txResponse !== null) {
+      message.txResponse = TxResponse.fromPartial(object.txResponse);
+    }
     return message;
   },
   fromSDK(object: BroadcastTxResponseSDKType): BroadcastTxResponse {
@@ -825,7 +831,9 @@ export const SimulateRequest = {
   },
   fromPartial(object: DeepPartial<SimulateRequest>): SimulateRequest {
     const message = createBaseSimulateRequest();
-    message.tx = object.tx !== undefined && object.tx !== null ? Tx.fromPartial(object.tx) : Tx.fromPartial({});
+    if (object.tx !== undefined && object.tx !== null) {
+      message.tx = Tx.fromPartial(object.tx);
+    }
     message.txBytes = object.txBytes ?? new Uint8Array();
     return message;
   },
@@ -932,8 +940,12 @@ export const SimulateResponse = {
   },
   fromPartial(object: DeepPartial<SimulateResponse>): SimulateResponse {
     const message = createBaseSimulateResponse();
-    message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : GasInfo.fromPartial({});
-    message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : Result.fromPartial({});
+    if (object.gasInfo !== undefined && object.gasInfo !== null) {
+      message.gasInfo = GasInfo.fromPartial(object.gasInfo);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = Result.fromPartial(object.result);
+    }
     return message;
   },
   fromSDK(object: SimulateResponseSDKType): SimulateResponse {
@@ -1131,8 +1143,12 @@ export const GetTxResponse = {
   },
   fromPartial(object: DeepPartial<GetTxResponse>): GetTxResponse {
     const message = createBaseGetTxResponse();
-    message.tx = object.tx !== undefined && object.tx !== null ? Tx.fromPartial(object.tx) : Tx.fromPartial({});
-    message.txResponse = object.txResponse !== undefined && object.txResponse !== null ? TxResponse.fromPartial(object.txResponse) : TxResponse.fromPartial({});
+    if (object.tx !== undefined && object.tx !== null) {
+      message.tx = Tx.fromPartial(object.tx);
+    }
+    if (object.txResponse !== undefined && object.txResponse !== null) {
+      message.txResponse = TxResponse.fromPartial(object.txResponse);
+    }
     return message;
   },
   fromSDK(object: GetTxResponseSDKType): GetTxResponse {
@@ -1238,8 +1254,12 @@ export const GetBlockWithTxsRequest = {
   },
   fromPartial(object: DeepPartial<GetBlockWithTxsRequest>): GetBlockWithTxsRequest {
     const message = createBaseGetBlockWithTxsRequest();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetBlockWithTxsRequestSDKType): GetBlockWithTxsRequest {
@@ -1368,9 +1388,15 @@ export const GetBlockWithTxsResponse = {
   fromPartial(object: DeepPartial<GetBlockWithTxsResponse>): GetBlockWithTxsResponse {
     const message = createBaseGetBlockWithTxsResponse();
     message.txs = object.txs?.map(e => Tx.fromPartial(e)) || [];
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
-    message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : Block.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.blockId !== undefined && object.blockId !== null) {
+      message.blockId = BlockID.fromPartial(object.blockId);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromPartial(object.block);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetBlockWithTxsResponseSDKType): GetBlockWithTxsResponse {

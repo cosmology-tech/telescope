@@ -87,7 +87,9 @@ export const Capability = {
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     return message;
   },
   fromSDK(object: CapabilitySDKType): Capability {

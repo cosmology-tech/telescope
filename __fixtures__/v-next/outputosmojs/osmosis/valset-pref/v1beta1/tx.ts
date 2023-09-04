@@ -355,7 +355,9 @@ export const MsgDelegateToValidatorSet = {
   fromPartial(object: DeepPartial<MsgDelegateToValidatorSet>): MsgDelegateToValidatorSet {
     const message = createBaseMsgDelegateToValidatorSet();
     message.delegator = object.delegator ?? "";
-    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
+    if (object.coin !== undefined && object.coin !== null) {
+      message.coin = Coin.fromPartial(object.coin);
+    }
     return message;
   },
   fromSDK(object: MsgDelegateToValidatorSetSDKType): MsgDelegateToValidatorSet {
@@ -535,7 +537,9 @@ export const MsgUndelegateFromValidatorSet = {
   fromPartial(object: DeepPartial<MsgUndelegateFromValidatorSet>): MsgUndelegateFromValidatorSet {
     const message = createBaseMsgUndelegateFromValidatorSet();
     message.delegator = object.delegator ?? "";
-    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
+    if (object.coin !== undefined && object.coin !== null) {
+      message.coin = Coin.fromPartial(object.coin);
+    }
     return message;
   },
   fromSDK(object: MsgUndelegateFromValidatorSetSDKType): MsgUndelegateFromValidatorSet {
@@ -1072,7 +1076,9 @@ export const MsgDelegateBondedTokens = {
   fromPartial(object: DeepPartial<MsgDelegateBondedTokens>): MsgDelegateBondedTokens {
     const message = createBaseMsgDelegateBondedTokens();
     message.delegator = object.delegator ?? "";
-    message.lockID = object.lockID !== undefined && object.lockID !== null ? BigInt(object.lockID.toString()) : BigInt(0);
+    if (object.lockID !== undefined && object.lockID !== null) {
+      message.lockID = BigInt(object.lockID.toString());
+    }
     return message;
   },
   fromSDK(object: MsgDelegateBondedTokensSDKType): MsgDelegateBondedTokens {

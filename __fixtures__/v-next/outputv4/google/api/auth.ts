@@ -517,7 +517,9 @@ export const AuthenticationRule = {
   fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
     const message = createBaseAuthenticationRule();
     message.selector = object.selector ?? "";
-    message.oauth = object.oauth !== undefined && object.oauth !== null ? OAuthRequirements.fromPartial(object.oauth) : OAuthRequirements.fromPartial({});
+    if (object.oauth !== undefined && object.oauth !== null) {
+      message.oauth = OAuthRequirements.fromPartial(object.oauth);
+    }
     message.allowWithoutCredential = object.allowWithoutCredential ?? false;
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;

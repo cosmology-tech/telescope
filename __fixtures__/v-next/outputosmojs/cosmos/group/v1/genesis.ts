@@ -166,12 +166,18 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.groupSeq = object.groupSeq !== undefined && object.groupSeq !== null ? BigInt(object.groupSeq.toString()) : BigInt(0);
+    if (object.groupSeq !== undefined && object.groupSeq !== null) {
+      message.groupSeq = BigInt(object.groupSeq.toString());
+    }
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
     message.groupMembers = object.groupMembers?.map(e => GroupMember.fromPartial(e)) || [];
-    message.groupPolicySeq = object.groupPolicySeq !== undefined && object.groupPolicySeq !== null ? BigInt(object.groupPolicySeq.toString()) : BigInt(0);
+    if (object.groupPolicySeq !== undefined && object.groupPolicySeq !== null) {
+      message.groupPolicySeq = BigInt(object.groupPolicySeq.toString());
+    }
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.proposalSeq = object.proposalSeq !== undefined && object.proposalSeq !== null ? BigInt(object.proposalSeq.toString()) : BigInt(0);
+    if (object.proposalSeq !== undefined && object.proposalSeq !== null) {
+      message.proposalSeq = BigInt(object.proposalSeq.toString());
+    }
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     return message;

@@ -694,7 +694,9 @@ export const EnableServiceResponse = {
   },
   fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : Service.fromPartial({});
+    if (object.service !== undefined && object.service !== null) {
+      message.service = Service.fromPartial(object.service);
+    }
     return message;
   },
   fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
@@ -884,7 +886,9 @@ export const DisableServiceResponse = {
   },
   fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : Service.fromPartial({});
+    if (object.service !== undefined && object.service !== null) {
+      message.service = Service.fromPartial(object.service);
+    }
     return message;
   },
   fromSDK(object: DisableServiceResponseSDKType): DisableServiceResponse {

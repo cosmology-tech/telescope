@@ -161,9 +161,13 @@ export const GenesisState = {
     message.clients = object.clients?.map(e => IdentifiedClientState.fromPartial(e)) || [];
     message.clientsConsensus = object.clientsConsensus?.map(e => ClientConsensusStates.fromPartial(e)) || [];
     message.clientsMetadata = object.clientsMetadata?.map(e => IdentifiedGenesisMetadata.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.createLocalhost = object.createLocalhost ?? false;
-    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? BigInt(object.nextClientSequence.toString()) : BigInt(0);
+    if (object.nextClientSequence !== undefined && object.nextClientSequence !== null) {
+      message.nextClientSequence = BigInt(object.nextClientSequence.toString());
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

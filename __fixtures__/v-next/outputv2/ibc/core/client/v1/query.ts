@@ -685,9 +685,13 @@ export const QueryClientStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryClientStateResponse>): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   },
   fromSDK(object: QueryClientStateResponseSDKType): QueryClientStateResponse {
@@ -783,7 +787,9 @@ export const QueryClientStatesRequest = {
   },
   fromPartial(object: DeepPartial<QueryClientStatesRequest>): QueryClientStatesRequest {
     const message = createBaseQueryClientStatesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryClientStatesRequestSDKType): QueryClientStatesRequest {
@@ -885,7 +891,9 @@ export const QueryClientStatesResponse = {
   fromPartial(object: DeepPartial<QueryClientStatesResponse>): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
     message.clientStates = object.clientStates?.map(e => IdentifiedClientState.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryClientStatesResponseSDKType): QueryClientStatesResponse {
@@ -995,21 +1003,12 @@ export const QueryConsensusStateRequest = {
     return message;
   },
   fromJSON(object: any): QueryConsensusStateRequest {
-<<<<<<< HEAD
     const obj = createBaseQueryConsensusStateRequest();
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (isSet(object.revisionNumber)) obj.revisionNumber = Long.fromValue(object.revisionNumber);
-    if (isSet(object.revisionHeight)) obj.revisionHeight = Long.fromValue(object.revisionHeight);
+    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
+    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
     if (isSet(object.latestHeight)) obj.latestHeight = Boolean(object.latestHeight);
     return obj;
-=======
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt(0),
-      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0),
-      latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false
-    };
->>>>>>> changes-v1
   },
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
@@ -1022,8 +1021,12 @@ export const QueryConsensusStateRequest = {
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = BigInt(object.revisionNumber.toString());
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = BigInt(object.revisionHeight.toString());
+    }
     message.latestHeight = object.latestHeight ?? false;
     return message;
   },
@@ -1142,9 +1145,13 @@ export const QueryConsensusStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
   },
   fromSDK(object: QueryConsensusStateResponseSDKType): QueryConsensusStateResponse {
@@ -1250,7 +1257,9 @@ export const QueryConsensusStatesRequest = {
   fromPartial(object: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
     message.clientId = object.clientId ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryConsensusStatesRequestSDKType): QueryConsensusStatesRequest {
@@ -1356,7 +1365,9 @@ export const QueryConsensusStatesResponse = {
   fromPartial(object: DeepPartial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryConsensusStatesResponseSDKType): QueryConsensusStatesResponse {
@@ -1703,7 +1714,9 @@ export const QueryClientParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryClientParamsResponse>): QueryClientParamsResponse {
     const message = createBaseQueryClientParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryClientParamsResponseSDKType): QueryClientParamsResponse {
@@ -1862,7 +1875,9 @@ export const QueryUpgradedClientStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : Any.fromPartial({});
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
   },
   fromSDK(object: QueryUpgradedClientStateResponseSDKType): QueryUpgradedClientStateResponse {
@@ -2021,7 +2036,9 @@ export const QueryUpgradedConsensusStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
-    message.upgradedConsensusState = object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null ? Any.fromPartial(object.upgradedConsensusState) : Any.fromPartial({});
+    if (object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null) {
+      message.upgradedConsensusState = Any.fromPartial(object.upgradedConsensusState);
+    }
     return message;
   },
   fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {

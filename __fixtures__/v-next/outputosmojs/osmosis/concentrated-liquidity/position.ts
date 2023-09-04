@@ -136,11 +136,19 @@ export const Position = {
   },
   fromPartial(object: DeepPartial<Position>): Position {
     const message = createBasePosition();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
+    if (object.positionId !== undefined && object.positionId !== null) {
+      message.positionId = BigInt(object.positionId.toString());
+    }
     message.address = object.address ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt(0);
-    message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.lowerTick !== undefined && object.lowerTick !== null) {
+      message.lowerTick = BigInt(object.lowerTick.toString());
+    }
+    if (object.upperTick !== undefined && object.upperTick !== null) {
+      message.upperTick = BigInt(object.upperTick.toString());
+    }
     message.joinTime = object.joinTime ?? undefined;
     message.liquidity = object.liquidity ?? "";
     return message;
@@ -282,9 +290,15 @@ export const PositionWithUnderlyingAssetBreakdown = {
   },
   fromPartial(object: DeepPartial<PositionWithUnderlyingAssetBreakdown>): PositionWithUnderlyingAssetBreakdown {
     const message = createBasePositionWithUnderlyingAssetBreakdown();
-    message.position = object.position !== undefined && object.position !== null ? Position.fromPartial(object.position) : Position.fromPartial({});
-    message.asset0 = object.asset0 !== undefined && object.asset0 !== null ? Coin.fromPartial(object.asset0) : Coin.fromPartial({});
-    message.asset1 = object.asset1 !== undefined && object.asset1 !== null ? Coin.fromPartial(object.asset1) : Coin.fromPartial({});
+    if (object.position !== undefined && object.position !== null) {
+      message.position = Position.fromPartial(object.position);
+    }
+    if (object.asset0 !== undefined && object.asset0 !== null) {
+      message.asset0 = Coin.fromPartial(object.asset0);
+    }
+    if (object.asset1 !== undefined && object.asset1 !== null) {
+      message.asset1 = Coin.fromPartial(object.asset1);
+    }
     return message;
   },
   fromSDK(object: PositionWithUnderlyingAssetBreakdownSDKType): PositionWithUnderlyingAssetBreakdown {

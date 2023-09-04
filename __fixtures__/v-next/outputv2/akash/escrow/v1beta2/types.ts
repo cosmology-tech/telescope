@@ -407,29 +407,16 @@ export const Account = {
     return message;
   },
   fromJSON(object: any): Account {
-<<<<<<< HEAD
     const obj = createBaseAccount();
     if (isSet(object.id)) obj.id = AccountID.fromJSON(object.id);
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.state)) obj.state = account_StateFromJSON(object.state);
     if (isSet(object.balance)) obj.balance = DecCoin.fromJSON(object.balance);
     if (isSet(object.transferred)) obj.transferred = DecCoin.fromJSON(object.transferred);
-    if (isSet(object.settledAt)) obj.settledAt = Long.fromValue(object.settledAt);
+    if (isSet(object.settledAt)) obj.settledAt = BigInt(object.settledAt.toString());
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     if (isSet(object.funds)) obj.funds = DecCoin.fromJSON(object.funds);
     return obj;
-=======
-    return {
-      id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
-      balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt(0),
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      funds: isSet(object.funds) ? DecCoin.fromJSON(object.funds) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Account): unknown {
     const obj: any = {};
@@ -445,20 +432,24 @@ export const Account = {
   },
   fromPartial(object: DeepPartial<Account>): Account {
     const message = createBaseAccount();
-    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : AccountID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromPartial(object.id);
+    }
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-<<<<<<< HEAD
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : DecCoin.fromPartial({});
-    message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : DecCoin.fromPartial({});
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
-=======
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
-    message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = DecCoin.fromPartial(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = DecCoin.fromPartial(object.transferred);
+    }
+    if (object.settledAt !== undefined && object.settledAt !== null) {
+      message.settledAt = BigInt(object.settledAt.toString());
+    }
     message.depositor = object.depositor ?? "";
-    message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : DecCoin.fromPartial({});
+    if (object.funds !== undefined && object.funds !== null) {
+      message.funds = DecCoin.fromPartial(object.funds);
+    }
     return message;
   },
   fromSDK(object: AccountSDKType): Account {
@@ -621,13 +612,21 @@ export const FractionalPayment = {
   },
   fromPartial(object: DeepPartial<FractionalPayment>): FractionalPayment {
     const message = createBaseFractionalPayment();
-    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : AccountID.fromPartial({});
+    if (object.accountId !== undefined && object.accountId !== null) {
+      message.accountId = AccountID.fromPartial(object.accountId);
+    }
     message.paymentId = object.paymentId ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.rate = object.rate !== undefined && object.rate !== null ? DecCoin.fromPartial(object.rate) : DecCoin.fromPartial({});
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : DecCoin.fromPartial({});
-    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : Coin.fromPartial({});
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = DecCoin.fromPartial(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = DecCoin.fromPartial(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromPartial(object.withdrawn);
+    }
     return message;
   },
   fromSDK(object: FractionalPaymentSDKType): FractionalPayment {

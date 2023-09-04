@@ -415,7 +415,9 @@ export const LogEntry = {
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
     message.severity = object.severity ?? 0;
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : HttpRequest.fromPartial({});
+    if (object.httpRequest !== undefined && object.httpRequest !== null) {
+      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
+    }
     message.trace = object.trace ?? "";
     message.insertId = object.insertId ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -426,11 +428,19 @@ export const LogEntry = {
       }
       return acc;
     }, {});
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : Any.fromPartial({});
+    if (object.protoPayload !== undefined && object.protoPayload !== null) {
+      message.protoPayload = Any.fromPartial(object.protoPayload);
+    }
     message.textPayload = object.textPayload ?? undefined;
-    message.structPayload = object.structPayload !== undefined && object.structPayload !== null ? Struct.fromPartial(object.structPayload) : Struct.fromPartial({});
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : LogEntryOperation.fromPartial({});
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : LogEntrySourceLocation.fromPartial({});
+    if (object.structPayload !== undefined && object.structPayload !== null) {
+      message.structPayload = Struct.fromPartial(object.structPayload);
+    }
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromPartial(object.operation);
+    }
+    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
+    }
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {
@@ -746,7 +756,9 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt(0);
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line.toString());
+    }
     message.function = object.function ?? "";
     return message;
   },

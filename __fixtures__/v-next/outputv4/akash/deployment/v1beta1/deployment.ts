@@ -215,10 +215,14 @@ export const MsgCreateDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromPartial(object.deposit);
+    }
     return message;
   },
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
@@ -415,8 +419,12 @@ export const MsgDepositDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
@@ -608,7 +616,9 @@ export const MsgUpdateDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
     return message;
@@ -793,7 +803,9 @@ export const MsgCloseDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
@@ -968,7 +980,9 @@ export const DeploymentID = {
   fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     return message;
   },
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
@@ -1092,10 +1106,14 @@ export const Deployment = {
   },
   fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
+    if (object.deploymentId !== undefined && object.deploymentId !== null) {
+      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
+    }
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
     return message;
   },
   fromSDK(object: DeploymentSDKType): Deployment {
@@ -1221,7 +1239,9 @@ export const DeploymentFilters = {
   fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.state = object.state ?? "";
     return message;
   },

@@ -115,7 +115,9 @@ export const MsgSoftwareUpgrade = {
   fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
     return message;
   },
   fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {

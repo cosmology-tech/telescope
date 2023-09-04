@@ -437,7 +437,9 @@ export const Trade = {
   },
   fromPartial(object: DeepPartial<Trade>): Trade {
     const message = createBaseTrade();
-    message.pool = object.pool !== undefined && object.pool !== null ? BigInt(object.pool.toString()) : BigInt(0);
+    if (object.pool !== undefined && object.pool !== null) {
+      message.pool = BigInt(object.pool.toString());
+    }
     message.tokenIn = object.tokenIn ?? "";
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -714,9 +716,15 @@ export const PoolWeights = {
   },
   fromPartial(object: DeepPartial<PoolWeights>): PoolWeights {
     const message = createBasePoolWeights();
-    message.stableWeight = object.stableWeight !== undefined && object.stableWeight !== null ? BigInt(object.stableWeight.toString()) : BigInt(0);
-    message.balancerWeight = object.balancerWeight !== undefined && object.balancerWeight !== null ? BigInt(object.balancerWeight.toString()) : BigInt(0);
-    message.concentratedWeight = object.concentratedWeight !== undefined && object.concentratedWeight !== null ? BigInt(object.concentratedWeight.toString()) : BigInt(0);
+    if (object.stableWeight !== undefined && object.stableWeight !== null) {
+      message.stableWeight = BigInt(object.stableWeight.toString());
+    }
+    if (object.balancerWeight !== undefined && object.balancerWeight !== null) {
+      message.balancerWeight = BigInt(object.balancerWeight.toString());
+    }
+    if (object.concentratedWeight !== undefined && object.concentratedWeight !== null) {
+      message.concentratedWeight = BigInt(object.concentratedWeight.toString());
+    }
     return message;
   },
   fromSDK(object: PoolWeightsSDKType): PoolWeights {

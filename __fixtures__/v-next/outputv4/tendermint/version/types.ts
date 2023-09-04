@@ -88,7 +88,9 @@ export const App = {
   },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt(0);
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = BigInt(object.protocol.toString());
+    }
     message.software = object.software ?? "";
     return message;
   },
@@ -189,8 +191,12 @@ export const Consensus = {
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
-    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block.toString());
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app.toString());
+    }
     return message;
   },
   fromSDK(object: ConsensusSDKType): Consensus {

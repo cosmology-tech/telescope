@@ -68,17 +68,10 @@ export const BitArray = {
     return message;
   },
   fromJSON(object: any): BitArray {
-<<<<<<< HEAD
     const obj = createBaseBitArray();
-    if (isSet(object.bits)) obj.bits = Long.fromValue(object.bits);
-    if (Array.isArray(object?.elems)) object.elems.map((e: any) => Long.fromValue(e));
+    if (isSet(object.bits)) obj.bits = BigInt(object.bits.toString());
+    if (Array.isArray(object?.elems)) object.elems.map((e: any) => BigInt(e.toString()));
     return obj;
-=======
-    return {
-      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt(0),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: BitArray): unknown {
     const obj: any = {};
@@ -92,7 +85,9 @@ export const BitArray = {
   },
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    message.bits = object.bits !== undefined && object.bits !== null ? BigInt(object.bits.toString()) : BigInt(0);
+    if (object.bits !== undefined && object.bits !== null) {
+      message.bits = BigInt(object.bits.toString());
+    }
     message.elems = object.elems?.map(e => BigInt(e.toString())) || [];
     return message;
   },

@@ -241,21 +241,12 @@ export const MsgRegisterDevFeeInfo = {
     return message;
   },
   fromJSON(object: any): MsgRegisterDevFeeInfo {
-<<<<<<< HEAD
     const obj = createBaseMsgRegisterDevFeeInfo();
     if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
     if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    if (Array.isArray(object?.nonces)) object.nonces.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.nonces)) object.nonces.map((e: any) => BigInt(e.toString()));
     return obj;
-=======
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
-      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
-      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
     const obj: any = {};

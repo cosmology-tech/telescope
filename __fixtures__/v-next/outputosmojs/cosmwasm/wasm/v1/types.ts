@@ -485,9 +485,13 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : AccessConfig.fromPartial({});
+    if (object.codeUploadAccess !== undefined && object.codeUploadAccess !== null) {
+      message.codeUploadAccess = AccessConfig.fromPartial(object.codeUploadAccess);
+    }
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
-    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0);
+    if (object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null) {
+      message.maxWasmCodeSize = BigInt(object.maxWasmCodeSize.toString());
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -609,7 +613,9 @@ export const CodeInfo = {
     const message = createBaseCodeInfo();
     message.codeHash = object.codeHash ?? new Uint8Array();
     message.creator = object.creator ?? "";
-    message.instantiateConfig = object.instantiateConfig !== undefined && object.instantiateConfig !== null ? AccessConfig.fromPartial(object.instantiateConfig) : AccessConfig.fromPartial({});
+    if (object.instantiateConfig !== undefined && object.instantiateConfig !== null) {
+      message.instantiateConfig = AccessConfig.fromPartial(object.instantiateConfig);
+    }
     return message;
   },
   fromSDK(object: CodeInfoSDKType): CodeInfo {
@@ -765,13 +771,19 @@ export const ContractInfo = {
   },
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
-    message.created = object.created !== undefined && object.created !== null ? AbsoluteTxPosition.fromPartial(object.created) : AbsoluteTxPosition.fromPartial({});
+    if (object.created !== undefined && object.created !== null) {
+      message.created = AbsoluteTxPosition.fromPartial(object.created);
+    }
     message.ibcPortId = object.ibcPortId ?? "";
-    message.extension = object.extension !== undefined && object.extension !== null ? Any.fromPartial(object.extension) : Any.fromPartial({});
+    if (object.extension !== undefined && object.extension !== null) {
+      message.extension = Any.fromPartial(object.extension);
+    }
     return message;
   },
   fromSDK(object: ContractInfoSDKType): ContractInfo {
@@ -921,8 +933,12 @@ export const ContractCodeHistoryEntry = {
   fromPartial(object: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
-    message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : AbsoluteTxPosition.fromPartial({});
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
+    if (object.updated !== undefined && object.updated !== null) {
+      message.updated = AbsoluteTxPosition.fromPartial(object.updated);
+    }
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },
@@ -1039,8 +1055,12 @@ export const AbsoluteTxPosition = {
   },
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
-    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? BigInt(object.txIndex.toString()) : BigInt(0);
+    if (object.blockHeight !== undefined && object.blockHeight !== null) {
+      message.blockHeight = BigInt(object.blockHeight.toString());
+    }
+    if (object.txIndex !== undefined && object.txIndex !== null) {
+      message.txIndex = BigInt(object.txIndex.toString());
+    }
     return message;
   },
   fromSDK(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {

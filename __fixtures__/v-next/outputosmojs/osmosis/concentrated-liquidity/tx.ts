@@ -248,12 +248,22 @@ export const MsgCreatePosition = {
   },
   fromPartial(object: DeepPartial<MsgCreatePosition>): MsgCreatePosition {
     const message = createBaseMsgCreatePosition();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.sender = object.sender ?? "";
-    message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt(0);
-    message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt(0);
-    message.tokenDesired0 = object.tokenDesired0 !== undefined && object.tokenDesired0 !== null ? Coin.fromPartial(object.tokenDesired0) : Coin.fromPartial({});
-    message.tokenDesired1 = object.tokenDesired1 !== undefined && object.tokenDesired1 !== null ? Coin.fromPartial(object.tokenDesired1) : Coin.fromPartial({});
+    if (object.lowerTick !== undefined && object.lowerTick !== null) {
+      message.lowerTick = BigInt(object.lowerTick.toString());
+    }
+    if (object.upperTick !== undefined && object.upperTick !== null) {
+      message.upperTick = BigInt(object.upperTick.toString());
+    }
+    if (object.tokenDesired0 !== undefined && object.tokenDesired0 !== null) {
+      message.tokenDesired0 = Coin.fromPartial(object.tokenDesired0);
+    }
+    if (object.tokenDesired1 !== undefined && object.tokenDesired1 !== null) {
+      message.tokenDesired1 = Coin.fromPartial(object.tokenDesired1);
+    }
     message.tokenMinAmount0 = object.tokenMinAmount0 ?? "";
     message.tokenMinAmount1 = object.tokenMinAmount1 ?? "";
     return message;
@@ -418,7 +428,9 @@ export const MsgCreatePositionResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreatePositionResponse>): MsgCreatePositionResponse {
     const message = createBaseMsgCreatePositionResponse();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
+    if (object.positionId !== undefined && object.positionId !== null) {
+      message.positionId = BigInt(object.positionId.toString());
+    }
     message.amount0 = object.amount0 ?? "";
     message.amount1 = object.amount1 ?? "";
     message.joinTime = object.joinTime ?? undefined;
@@ -552,7 +564,9 @@ export const MsgWithdrawPosition = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawPosition>): MsgWithdrawPosition {
     const message = createBaseMsgWithdrawPosition();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
+    if (object.positionId !== undefined && object.positionId !== null) {
+      message.positionId = BigInt(object.positionId.toString());
+    }
     message.sender = object.sender ?? "";
     message.liquidityAmount = object.liquidityAmount ?? "";
     return message;
@@ -1281,13 +1295,17 @@ export const MsgCreateIncentive = {
   },
   fromPartial(object: DeepPartial<MsgCreateIncentive>): MsgCreateIncentive {
     const message = createBaseMsgCreateIncentive();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.sender = object.sender ?? "";
     message.incentiveDenom = object.incentiveDenom ?? "";
     message.incentiveAmount = object.incentiveAmount ?? "";
     message.emissionRate = object.emissionRate ?? "";
     message.startTime = object.startTime ?? undefined;
-    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
+    if (object.minUptime !== undefined && object.minUptime !== null) {
+      message.minUptime = Duration.fromPartial(object.minUptime);
+    }
     return message;
   },
   fromSDK(object: MsgCreateIncentiveSDKType): MsgCreateIncentive {
@@ -1449,7 +1467,9 @@ export const MsgCreateIncentiveResponse = {
     message.incentiveAmount = object.incentiveAmount ?? "";
     message.emissionRate = object.emissionRate ?? "";
     message.startTime = object.startTime ?? undefined;
-    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
+    if (object.minUptime !== undefined && object.minUptime !== null) {
+      message.minUptime = Duration.fromPartial(object.minUptime);
+    }
     return message;
   },
   fromSDK(object: MsgCreateIncentiveResponseSDKType): MsgCreateIncentiveResponse {
@@ -1689,7 +1709,9 @@ export const MsgFungifyChargedPositionsResponse = {
   },
   fromPartial(object: DeepPartial<MsgFungifyChargedPositionsResponse>): MsgFungifyChargedPositionsResponse {
     const message = createBaseMsgFungifyChargedPositionsResponse();
-    message.newPositionId = object.newPositionId !== undefined && object.newPositionId !== null ? BigInt(object.newPositionId.toString()) : BigInt(0);
+    if (object.newPositionId !== undefined && object.newPositionId !== null) {
+      message.newPositionId = BigInt(object.newPositionId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgFungifyChargedPositionsResponseSDKType): MsgFungifyChargedPositionsResponse {

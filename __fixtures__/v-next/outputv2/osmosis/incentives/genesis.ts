@@ -115,21 +115,12 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-<<<<<<< HEAD
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     if (Array.isArray(object?.gauges)) object.gauges.map((e: any) => Gauge.fromJSON(e));
     if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    if (isSet(object.lastGaugeId)) obj.lastGaugeId = Long.fromValue(object.lastGaugeId);
+    if (isSet(object.lastGaugeId)) obj.lastGaugeId = BigInt(object.lastGaugeId.toString());
     return obj;
-=======
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromJSON(e)) : [],
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
-      lastGaugeId: isSet(object.lastGaugeId) ? BigInt(object.lastGaugeId.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -149,10 +140,14 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? BigInt(object.lastGaugeId.toString()) : BigInt(0);
+    if (object.lastGaugeId !== undefined && object.lastGaugeId !== null) {
+      message.lastGaugeId = BigInt(object.lastGaugeId.toString());
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

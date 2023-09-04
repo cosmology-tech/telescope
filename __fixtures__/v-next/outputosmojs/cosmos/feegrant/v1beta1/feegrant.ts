@@ -296,8 +296,12 @@ export const PeriodicAllowance = {
   },
   fromPartial(object: DeepPartial<PeriodicAllowance>): PeriodicAllowance {
     const message = createBasePeriodicAllowance();
-    message.basic = object.basic !== undefined && object.basic !== null ? BasicAllowance.fromPartial(object.basic) : BasicAllowance.fromPartial({});
-    message.period = object.period !== undefined && object.period !== null ? Duration.fromPartial(object.period) : Duration.fromPartial({});
+    if (object.basic !== undefined && object.basic !== null) {
+      message.basic = BasicAllowance.fromPartial(object.basic);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = Duration.fromPartial(object.period);
+    }
     message.periodSpendLimit = object.periodSpendLimit?.map(e => Coin.fromPartial(e)) || [];
     message.periodCanSpend = object.periodCanSpend?.map(e => Coin.fromPartial(e)) || [];
     message.periodReset = object.periodReset ?? undefined;
@@ -441,7 +445,9 @@ export const AllowedMsgAllowance = {
   },
   fromPartial(object: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance {
     const message = createBaseAllowedMsgAllowance();
-    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : Any.fromPartial({});
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = Any.fromPartial(object.allowance);
+    }
     message.allowedMessages = object.allowedMessages?.map(e => e) || [];
     return message;
   },
@@ -567,7 +573,9 @@ export const Grant = {
     const message = createBaseGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : Any.fromPartial({});
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = Any.fromPartial(object.allowance);
+    }
     return message;
   },
   fromSDK(object: GrantSDKType): Grant {

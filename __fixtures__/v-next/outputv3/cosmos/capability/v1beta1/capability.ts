@@ -123,15 +123,9 @@ export const Capability = {
     return message;
   },
   fromJSON(object: any): Capability {
-<<<<<<< HEAD
     const obj = createBaseCapability();
-    if (isSet(object.index)) obj.index = Long.fromValue(object.index);
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
     return obj;
-=======
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Capability): unknown {
     const obj: any = {};
@@ -140,7 +134,9 @@ export const Capability = {
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     return message;
   },
   fromSDK(object: CapabilitySDKType): Capability {

@@ -500,15 +500,9 @@ export const Int64Value = {
     return message;
   },
   fromJSON(object: any): Int64Value {
-<<<<<<< HEAD
     const obj = createBaseInt64Value();
-    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
-=======
-    return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
@@ -517,7 +511,9 @@ export const Int64Value = {
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: Int64ValueSDKType): Int64Value {
@@ -587,15 +583,9 @@ export const UInt64Value = {
     return message;
   },
   fromJSON(object: any): UInt64Value {
-<<<<<<< HEAD
     const obj = createBaseUInt64Value();
-    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
-=======
-    return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
@@ -604,7 +594,9 @@ export const UInt64Value = {
   },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: UInt64ValueSDKType): UInt64Value {

@@ -390,19 +390,11 @@ export const SignatureDescriptor = {
     return message;
   },
   fromJSON(object: any): SignatureDescriptor {
-<<<<<<< HEAD
     const obj = createBaseSignatureDescriptor();
     if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
     if (isSet(object.data)) obj.data = SignatureDescriptor_Data.fromJSON(object.data);
-    if (isSet(object.sequence)) obj.sequence = Long.fromValue(object.sequence);
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
     return obj;
-=======
-    return {
-      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
-      data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: SignatureDescriptor): unknown {
     const obj: any = {};
@@ -413,15 +405,15 @@ export const SignatureDescriptor = {
   },
   fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
-<<<<<<< HEAD
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
-    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : SignatureDescriptor_Data.fromPartial({});
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
-=======
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
-    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.publicKey !== undefined && object.publicKey !== null) {
+      message.publicKey = Any.fromPartial(object.publicKey);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = SignatureDescriptor_Data.fromPartial(object.data);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     return message;
   },
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
@@ -526,8 +518,12 @@ export const SignatureDescriptor_Data = {
   },
   fromPartial(object: DeepPartial<SignatureDescriptor_Data>): SignatureDescriptor_Data {
     const message = createBaseSignatureDescriptor_Data();
-    message.single = object.single !== undefined && object.single !== null ? SignatureDescriptor_Data_Single.fromPartial(object.single) : SignatureDescriptor_Data_Single.fromPartial({});
-    message.multi = object.multi !== undefined && object.multi !== null ? SignatureDescriptor_Data_Multi.fromPartial(object.multi) : SignatureDescriptor_Data_Multi.fromPartial({});
+    if (object.single !== undefined && object.single !== null) {
+      message.single = SignatureDescriptor_Data_Single.fromPartial(object.single);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = SignatureDescriptor_Data_Multi.fromPartial(object.multi);
+    }
     return message;
   },
   fromSDK(object: SignatureDescriptor_DataSDKType): SignatureDescriptor_Data {
@@ -734,7 +730,9 @@ export const SignatureDescriptor_Data_Multi = {
   },
   fromPartial(object: DeepPartial<SignatureDescriptor_Data_Multi>): SignatureDescriptor_Data_Multi {
     const message = createBaseSignatureDescriptor_Data_Multi();
-    message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : CompactBitArray.fromPartial({});
+    if (object.bitarray !== undefined && object.bitarray !== null) {
+      message.bitarray = CompactBitArray.fromPartial(object.bitarray);
+    }
     message.signatures = object.signatures?.map(e => SignatureDescriptor_Data.fromPartial(e)) || [];
     return message;
   },

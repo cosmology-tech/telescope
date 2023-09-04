@@ -771,7 +771,9 @@ export const WriteLogEntriesRequest = {
   fromPartial(object: DeepPartial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
     const message = createBaseWriteLogEntriesRequest();
     message.logName = object.logName ?? "";
-    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : MonitoredResource.fromPartial({});
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromPartial(object.resource);
+    }
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1002,7 +1004,9 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
-    message.value = object.value !== undefined && object.value !== null ? Status.fromPartial(object.value) : Status.fromPartial({});
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Status.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -1986,7 +1990,9 @@ export const TailLogEntriesRequest = {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
-    message.bufferWindow = object.bufferWindow !== undefined && object.bufferWindow !== null ? Duration.fromPartial(object.bufferWindow) : Duration.fromPartial({});
+    if (object.bufferWindow !== undefined && object.bufferWindow !== null) {
+      message.bufferWindow = Duration.fromPartial(object.bufferWindow);
+    }
     return message;
   },
   fromSDK(object: TailLogEntriesRequestSDKType): TailLogEntriesRequest {

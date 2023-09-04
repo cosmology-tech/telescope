@@ -457,7 +457,9 @@ export const MetricRule_MetricCostsEntry = {
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
@@ -700,7 +702,9 @@ export const QuotaLimit_ValuesEntry = {
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
@@ -884,9 +888,15 @@ export const QuotaLimit = {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt(0);
-    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? BigInt(object.maxLimit.toString()) : BigInt(0);
-    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? BigInt(object.freeTier.toString()) : BigInt(0);
+    if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
+      message.defaultLimit = BigInt(object.defaultLimit.toString());
+    }
+    if (object.maxLimit !== undefined && object.maxLimit !== null) {
+      message.maxLimit = BigInt(object.maxLimit.toString());
+    }
+    if (object.freeTier !== undefined && object.freeTier !== null) {
+      message.freeTier = BigInt(object.freeTier.toString());
+    }
     message.duration = object.duration ?? "";
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";

@@ -558,7 +558,9 @@ export const MsgSetPoolWeights = {
   fromPartial(object: DeepPartial<MsgSetPoolWeights>): MsgSetPoolWeights {
     const message = createBaseMsgSetPoolWeights();
     message.admin = object.admin ?? "";
-    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : PoolWeights.fromPartial({});
+    if (object.poolWeights !== undefined && object.poolWeights !== null) {
+      message.poolWeights = PoolWeights.fromPartial(object.poolWeights);
+    }
     return message;
   },
   fromSDK(object: MsgSetPoolWeightsSDKType): MsgSetPoolWeights {
@@ -738,7 +740,9 @@ export const MsgSetMaxPoolPointsPerTx = {
   fromPartial(object: DeepPartial<MsgSetMaxPoolPointsPerTx>): MsgSetMaxPoolPointsPerTx {
     const message = createBaseMsgSetMaxPoolPointsPerTx();
     message.admin = object.admin ?? "";
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
+    if (object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null) {
+      message.maxPoolPointsPerTx = BigInt(object.maxPoolPointsPerTx.toString());
+    }
     return message;
   },
   fromSDK(object: MsgSetMaxPoolPointsPerTxSDKType): MsgSetMaxPoolPointsPerTx {
@@ -918,7 +922,9 @@ export const MsgSetMaxPoolPointsPerBlock = {
   fromPartial(object: DeepPartial<MsgSetMaxPoolPointsPerBlock>): MsgSetMaxPoolPointsPerBlock {
     const message = createBaseMsgSetMaxPoolPointsPerBlock();
     message.admin = object.admin ?? "";
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
+    if (object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null) {
+      message.maxPoolPointsPerBlock = BigInt(object.maxPoolPointsPerBlock.toString());
+    }
     return message;
   },
   fromSDK(object: MsgSetMaxPoolPointsPerBlockSDKType): MsgSetMaxPoolPointsPerBlock {

@@ -469,17 +469,10 @@ export const DistrRecord = {
     return message;
   },
   fromJSON(object: any): DistrRecord {
-<<<<<<< HEAD
     const obj = createBaseDistrRecord();
-    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
     if (isSet(object.weight)) obj.weight = String(object.weight);
     return obj;
-=======
-    return {
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
@@ -489,7 +482,9 @@ export const DistrRecord = {
   },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     message.weight = object.weight ?? "";
     return message;
   },
@@ -585,19 +580,11 @@ export const PoolToGauge = {
     return message;
   },
   fromJSON(object: any): PoolToGauge {
-<<<<<<< HEAD
     const obj = createBasePoolToGauge();
-    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     return obj;
-=======
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: PoolToGauge): unknown {
     const obj: any = {};
@@ -608,15 +595,15 @@ export const PoolToGauge = {
   },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-<<<<<<< HEAD
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
-=======
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
->>>>>>> changes-v1
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {

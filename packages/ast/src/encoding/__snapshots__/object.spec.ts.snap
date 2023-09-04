@@ -150,11 +150,11 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return message;
   },
   fromJSON(object: any): SignatureDescriptor {
-    return {
-      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
-      data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
-    };
+    const obj = createBaseSignatureDescriptor();
+    if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
+    if (isSet(object.data)) obj.data = SignatureDescriptor_Data.fromJSON(object.data);
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
+    return obj;
   },
   toJSON(message: SignatureDescriptor): unknown {
     const obj: any = {};
@@ -165,9 +165,15 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
   },
   fromPartial(object: Partial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
-    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    if (object.publicKey !== undefined && object.publicKey !== null) {
+      message.publicKey = Any.fromPartial(object.publicKey);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = SignatureDescriptor_Data.fromPartial(object.data);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     return message;
   },
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
@@ -595,11 +601,11 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     return message;
   },
   fromJSON(object: any): PinCodesProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBasePinCodesProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: PinCodesProposal): unknown {
     const obj: any = {};
@@ -727,11 +733,11 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     return message;
   },
   fromJSON(object: any): UnpinCodesProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBaseUnpinCodesProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: UnpinCodesProposal): unknown {
     const obj: any = {};
@@ -963,12 +969,12 @@ exports[`evmos/fees/v1/tx 1`] = `
     return message;
   },
   fromJSON(object: any): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
-      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
-      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBaseMsgRegisterDevFeeInfo();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
+    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
+    if (Array.isArray(object?.nonces)) object.nonces.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
     const obj: any = {};
@@ -1744,23 +1750,23 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     return message;
   },
   fromJSON(object: any): CheckedExpr {
-    return {
-      referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
-        [key: bigint]: Reference;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Reference.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
-        [key: bigint]: Type;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Type.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
-      exprVersion: isSet(object.exprVersion) ? String(object.exprVersion) : "",
-      expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
-    };
+    const obj = createBaseCheckedExpr();
+    if (isObject(object.referenceMap)) obj.referenceMap = Object.entries(object.referenceMap).reduce<{
+      [key: bigint]: Reference;
+    }>((acc, [key, value]) => {
+      acc[Number(key)] = Reference.fromJSON(value);
+      return acc;
+    }, {});
+    if (isObject(object.typeMap)) obj.typeMap = Object.entries(object.typeMap).reduce<{
+      [key: bigint]: Type;
+    }>((acc, [key, value]) => {
+      acc[Number(key)] = Type.fromJSON(value);
+      return acc;
+    }, {});
+    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
+    if (isSet(object.exprVersion)) obj.exprVersion = String(object.exprVersion);
+    if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
+    return obj;
   },
   toJSON(message: CheckedExpr): unknown {
     const obj: any = {};
@@ -1977,17 +1983,17 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return message;
   },
   fromJSON(object: any): Constant {
-    return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
-      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
-      durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
-      timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
-    };
+    const obj = createBaseConstant();
+    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
+    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
+    if (isSet(object.durationValue)) obj.durationValue = Duration.fromJSON(object.durationValue);
+    if (isSet(object.timestampValue)) obj.timestampValue = fromJsonTimestamp(object.timestampValue);
+    return obj;
   },
   toJSON(message: Constant): unknown {
     const obj: any = {};
@@ -2006,8 +2012,12 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
@@ -2486,15 +2496,15 @@ exports[`google/api/quota keyType 1`] = `
     return message;
   },
   fromJSON(object: any): MetricRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseMetricRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isObject(object.metricCosts)) obj.metricCosts = Object.entries(object.metricCosts).reduce<{
+      [key: string]: bigint;
+    }>((acc, [key, value]) => {
+      acc[key] = BigInt((value as bigint | string).toString());
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: MetricRule): unknown {
     const obj: any = {};
@@ -2862,7 +2872,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 exports[`google/rpc/error_details name collisions 1`] = `
 "/**
  * Describes what preconditions have failed.
- *
+ * 
  * For example, if an RPC failed because it required the Terms of Service to be
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
@@ -3658,12 +3668,12 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     return message;
   },
   fromJSON(object: any): MsgJoinPool {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseMsgJoinPool();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.shareOutAmount)) obj.shareOutAmount = String(object.shareOutAmount);
+    if (Array.isArray(object?.tokenInMaxs)) object.tokenInMaxs.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: MsgJoinPool): unknown {
     const obj: any = {};
@@ -3680,7 +3690,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromPartial(object: Partial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.shareOutAmount = object.shareOutAmount ?? "";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;

@@ -311,7 +311,9 @@ export const MsgCloseGroup = {
   },
   fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
@@ -456,7 +458,9 @@ export const MsgPauseGroup = {
   },
   fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
@@ -601,7 +605,9 @@ export const MsgStartGroup = {
   },
   fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
@@ -749,19 +755,11 @@ export const GroupID = {
     return message;
   },
   fromJSON(object: any): GroupID {
-<<<<<<< HEAD
     const obj = createBaseGroupID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
     return obj;
-=======
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GroupID): unknown {
     const obj: any = {};
@@ -773,7 +771,9 @@ export const GroupID = {
   fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.gseq = object.gseq ?? 0;
     return message;
   },
@@ -886,7 +886,9 @@ export const GroupSpec = {
   fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : PlacementRequirements.fromPartial({});
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromPartial(object.requirements);
+    }
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   },
@@ -994,21 +996,12 @@ export const Group = {
     return message;
   },
   fromJSON(object: any): Group {
-<<<<<<< HEAD
     const obj = createBaseGroup();
     if (isSet(object.groupId)) obj.groupId = GroupID.fromJSON(object.groupId);
     if (isSet(object.state)) obj.state = group_StateFromJSON(object.state);
     if (isSet(object.groupSpec)) obj.groupSpec = GroupSpec.fromJSON(object.groupSpec);
-    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
+    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
     return obj;
-=======
-    return {
-      groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Group): unknown {
     const obj: any = {};
@@ -1020,15 +1013,16 @@ export const Group = {
   },
   fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : GroupID.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = GroupID.fromPartial(object.groupId);
+    }
     message.state = object.state ?? 0;
-<<<<<<< HEAD
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : GroupSpec.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
-=======
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.groupSpec !== undefined && object.groupSpec !== null) {
+      message.groupSpec = GroupSpec.fromPartial(object.groupSpec);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
     return message;
   },
   fromSDK(object: GroupSDKType): Group {
@@ -1139,9 +1133,13 @@ export const Resource = {
   },
   fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
-    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : ResourceUnits.fromPartial({});
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromPartial(object.resources);
+    }
     message.count = object.count ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : Coin.fromPartial({});
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Coin.fromPartial(object.price);
+    }
     return message;
   },
   fromSDK(object: ResourceSDKType): Resource {

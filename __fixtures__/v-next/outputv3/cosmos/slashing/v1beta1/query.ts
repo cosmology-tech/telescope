@@ -276,7 +276,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -452,7 +454,9 @@ export const QuerySigningInfoResponse = {
   },
   fromPartial(object: DeepPartial<QuerySigningInfoResponse>): QuerySigningInfoResponse {
     const message = createBaseQuerySigningInfoResponse();
-    message.valSigningInfo = object.valSigningInfo !== undefined && object.valSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.valSigningInfo) : ValidatorSigningInfo.fromPartial({});
+    if (object.valSigningInfo !== undefined && object.valSigningInfo !== null) {
+      message.valSigningInfo = ValidatorSigningInfo.fromPartial(object.valSigningInfo);
+    }
     return message;
   },
   fromSDK(object: QuerySigningInfoResponseSDKType): QuerySigningInfoResponse {
@@ -540,7 +544,9 @@ export const QuerySigningInfosRequest = {
   },
   fromPartial(object: DeepPartial<QuerySigningInfosRequest>): QuerySigningInfosRequest {
     const message = createBaseQuerySigningInfosRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QuerySigningInfosRequestSDKType): QuerySigningInfosRequest {
@@ -642,7 +648,9 @@ export const QuerySigningInfosResponse = {
   fromPartial(object: DeepPartial<QuerySigningInfosResponse>): QuerySigningInfosResponse {
     const message = createBaseQuerySigningInfosResponse();
     message.info = object.info?.map(e => ValidatorSigningInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QuerySigningInfosResponseSDKType): QuerySigningInfosResponse {

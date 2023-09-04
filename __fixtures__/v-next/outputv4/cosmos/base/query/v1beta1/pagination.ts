@@ -172,8 +172,12 @@ export const PageRequest = {
   fromPartial(object: DeepPartial<PageRequest>): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array();
-    message.offset = object.offset !== undefined && object.offset !== null ? BigInt(object.offset.toString()) : BigInt(0);
-    message.limit = object.limit !== undefined && object.limit !== null ? BigInt(object.limit.toString()) : BigInt(0);
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = BigInt(object.offset.toString());
+    }
+    if (object.limit !== undefined && object.limit !== null) {
+      message.limit = BigInt(object.limit.toString());
+    }
     message.countTotal = object.countTotal ?? false;
     message.reverse = object.reverse ?? false;
     return message;
@@ -297,7 +301,9 @@ export const PageResponse = {
   fromPartial(object: DeepPartial<PageResponse>): PageResponse {
     const message = createBasePageResponse();
     message.nextKey = object.nextKey ?? new Uint8Array();
-    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt(0);
+    if (object.total !== undefined && object.total !== null) {
+      message.total = BigInt(object.total.toString());
+    }
     return message;
   },
   fromSDK(object: PageResponseSDKType): PageResponse {

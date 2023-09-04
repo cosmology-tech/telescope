@@ -488,24 +488,52 @@ export const Service = {
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     message.types = object.types?.map(e => Type.fromPartial(e)) || [];
     message.enums = object.enums?.map(e => Enum.fromPartial(e)) || [];
-    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : Documentation.fromPartial({});
-    message.backend = object.backend !== undefined && object.backend !== null ? Backend.fromPartial(object.backend) : Backend.fromPartial({});
-    message.http = object.http !== undefined && object.http !== null ? Http.fromPartial(object.http) : Http.fromPartial({});
-    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : Quota.fromPartial({});
-    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : Authentication.fromPartial({});
-    message.context = object.context !== undefined && object.context !== null ? Context.fromPartial(object.context) : Context.fromPartial({});
-    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : Usage.fromPartial({});
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromPartial(object.documentation);
+    }
+    if (object.backend !== undefined && object.backend !== null) {
+      message.backend = Backend.fromPartial(object.backend);
+    }
+    if (object.http !== undefined && object.http !== null) {
+      message.http = Http.fromPartial(object.http);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromPartial(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromPartial(object.authentication);
+    }
+    if (object.context !== undefined && object.context !== null) {
+      message.context = Context.fromPartial(object.context);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromPartial(object.usage);
+    }
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
-    message.control = object.control !== undefined && object.control !== null ? Control.fromPartial(object.control) : Control.fromPartial({});
+    if (object.control !== undefined && object.control !== null) {
+      message.control = Control.fromPartial(object.control);
+    }
     message.logs = object.logs?.map(e => LogDescriptor.fromPartial(e)) || [];
     message.metrics = object.metrics?.map(e => MetricDescriptor.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    message.billing = object.billing !== undefined && object.billing !== null ? Billing.fromPartial(object.billing) : Billing.fromPartial({});
-    message.logging = object.logging !== undefined && object.logging !== null ? Logging.fromPartial(object.logging) : Logging.fromPartial({});
-    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : Monitoring.fromPartial({});
-    message.systemParameters = object.systemParameters !== undefined && object.systemParameters !== null ? SystemParameters.fromPartial(object.systemParameters) : SystemParameters.fromPartial({});
-    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
-    message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : UInt32Value.fromPartial({});
+    if (object.billing !== undefined && object.billing !== null) {
+      message.billing = Billing.fromPartial(object.billing);
+    }
+    if (object.logging !== undefined && object.logging !== null) {
+      message.logging = Logging.fromPartial(object.logging);
+    }
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromPartial(object.monitoring);
+    }
+    if (object.systemParameters !== undefined && object.systemParameters !== null) {
+      message.systemParameters = SystemParameters.fromPartial(object.systemParameters);
+    }
+    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
+      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
+    }
+    if (object.configVersion !== undefined && object.configVersion !== null) {
+      message.configVersion = UInt32Value.fromPartial(object.configVersion);
+    }
     return message;
   },
   fromSDK(object: ServiceSDKType): Service {

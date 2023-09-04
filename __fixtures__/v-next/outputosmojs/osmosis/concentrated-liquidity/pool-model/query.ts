@@ -187,7 +187,9 @@ export const QueryUserPositionsRequest = {
   fromPartial(object: DeepPartial<QueryUserPositionsRequest>): QueryUserPositionsRequest {
     const message = createBaseQueryUserPositionsRequest();
     message.address = object.address ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryUserPositionsRequestSDKType): QueryUserPositionsRequest {
@@ -388,7 +390,9 @@ export const QueryPositionByIdRequest = {
   },
   fromPartial(object: DeepPartial<QueryPositionByIdRequest>): QueryPositionByIdRequest {
     const message = createBaseQueryPositionByIdRequest();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
+    if (object.positionId !== undefined && object.positionId !== null) {
+      message.positionId = BigInt(object.positionId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryPositionByIdRequestSDKType): QueryPositionByIdRequest {
@@ -480,7 +484,9 @@ export const QueryPositionByIdResponse = {
   },
   fromPartial(object: DeepPartial<QueryPositionByIdResponse>): QueryPositionByIdResponse {
     const message = createBaseQueryPositionByIdResponse();
-    message.position = object.position !== undefined && object.position !== null ? PositionWithUnderlyingAssetBreakdown.fromPartial(object.position) : PositionWithUnderlyingAssetBreakdown.fromPartial({});
+    if (object.position !== undefined && object.position !== null) {
+      message.position = PositionWithUnderlyingAssetBreakdown.fromPartial(object.position);
+    }
     return message;
   },
   fromSDK(object: QueryPositionByIdResponseSDKType): QueryPositionByIdResponse {
@@ -572,7 +578,9 @@ export const QueryPoolsRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolsRequest>): QueryPoolsRequest {
     const message = createBaseQueryPoolsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsRequestSDKType): QueryPoolsRequest {
@@ -678,7 +686,9 @@ export const QueryPoolsResponse = {
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
@@ -856,7 +866,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -1204,7 +1216,9 @@ export const QueryLiquidityNetInDirectionRequest = {
   },
   fromPartial(object: DeepPartial<QueryLiquidityNetInDirectionRequest>): QueryLiquidityNetInDirectionRequest {
     const message = createBaseQueryLiquidityNetInDirectionRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokenIn = object.tokenIn ?? "";
     message.startTick = object.startTick ?? undefined;
     message.boundTick = object.boundTick ?? undefined;
@@ -1337,7 +1351,9 @@ export const QueryLiquidityNetInDirectionResponse = {
   fromPartial(object: DeepPartial<QueryLiquidityNetInDirectionResponse>): QueryLiquidityNetInDirectionResponse {
     const message = createBaseQueryLiquidityNetInDirectionResponse();
     message.liquidityDepths = object.liquidityDepths?.map(e => TickLiquidityNet.fromPartial(e)) || [];
-    message.currentTick = object.currentTick !== undefined && object.currentTick !== null ? BigInt(object.currentTick.toString()) : BigInt(0);
+    if (object.currentTick !== undefined && object.currentTick !== null) {
+      message.currentTick = BigInt(object.currentTick.toString());
+    }
     message.currentLiquidity = object.currentLiquidity ?? "";
     return message;
   },
@@ -1448,7 +1464,9 @@ export const QueryTotalLiquidityForRangeRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalLiquidityForRangeRequest>): QueryTotalLiquidityForRangeRequest {
     const message = createBaseQueryTotalLiquidityForRangeRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryTotalLiquidityForRangeRequestSDKType): QueryTotalLiquidityForRangeRequest {
@@ -1644,7 +1662,9 @@ export const QueryClaimableFeesRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimableFeesRequest>): QueryClaimableFeesRequest {
     const message = createBaseQueryClaimableFeesRequest();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
+    if (object.positionId !== undefined && object.positionId !== null) {
+      message.positionId = BigInt(object.positionId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryClaimableFeesRequestSDKType): QueryClaimableFeesRequest {

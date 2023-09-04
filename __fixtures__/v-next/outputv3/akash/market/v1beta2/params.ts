@@ -76,7 +76,9 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.bidMinDeposit = object.bidMinDeposit !== undefined && object.bidMinDeposit !== null ? Coin.fromPartial(object.bidMinDeposit) : Coin.fromPartial({});
+    if (object.bidMinDeposit !== undefined && object.bidMinDeposit !== null) {
+      message.bidMinDeposit = Coin.fromPartial(object.bidMinDeposit);
+    }
     message.orderMaxBids = object.orderMaxBids ?? 0;
     return message;
   },

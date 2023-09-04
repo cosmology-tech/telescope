@@ -88,8 +88,12 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : Duration.fromPartial({});
-    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : Duration.fromPartial({});
+    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
+      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
+    }
+    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
+      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
+    }
     message.claimDenom = object.claimDenom ?? "";
     return message;
   },

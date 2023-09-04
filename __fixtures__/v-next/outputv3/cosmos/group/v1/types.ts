@@ -1045,7 +1045,9 @@ export const ThresholdDecisionPolicy = {
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    if (object.windows !== undefined && object.windows !== null) {
+      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
+    }
     return message;
   },
   fromSDK(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
@@ -1148,7 +1150,9 @@ export const PercentageDecisionPolicy = {
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    if (object.windows !== undefined && object.windows !== null) {
+      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
+    }
     return message;
   },
   fromSDK(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
@@ -1249,8 +1253,12 @@ export const DecisionPolicyWindows = {
   },
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
-    message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : Duration.fromPartial({});
+    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
+      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
+    }
+    if (object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null) {
+      message.minExecutionPeriod = Duration.fromPartial(object.minExecutionPeriod);
+    }
     return message;
   },
   fromSDK(object: DecisionPolicyWindowsSDKType): DecisionPolicyWindows {
@@ -1366,25 +1374,14 @@ export const GroupInfo = {
     return message;
   },
   fromJSON(object: any): GroupInfo {
-<<<<<<< HEAD
     const obj = createBaseGroupInfo();
-    if (isSet(object.id)) obj.id = Long.fromValue(object.id);
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
     if (isSet(object.admin)) obj.admin = String(object.admin);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
+    if (isSet(object.version)) obj.version = BigInt(object.version.toString());
     if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
     if (isSet(object.createdAt)) obj.createdAt = new Date(object.createdAt);
     return obj;
-=======
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0),
-      totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
-      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GroupInfo): unknown {
     const obj: any = {};
@@ -1398,10 +1395,14 @@ export const GroupInfo = {
   },
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version.toString());
+    }
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1507,17 +1508,10 @@ export const GroupMember = {
     return message;
   },
   fromJSON(object: any): GroupMember {
-<<<<<<< HEAD
     const obj = createBaseGroupMember();
-    if (isSet(object.groupId)) obj.groupId = Long.fromValue(object.groupId);
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     if (isSet(object.member)) obj.member = Member.fromJSON(object.member);
     return obj;
-=======
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
-      member: isSet(object.member) ? Member.fromJSON(object.member) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GroupMember): unknown {
     const obj: any = {};
@@ -1527,13 +1521,12 @@ export const GroupMember = {
   },
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
-<<<<<<< HEAD
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
-    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : Member.fromPartial({});
-=======
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
-    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
->>>>>>> changes-v1
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = BigInt(object.groupId.toString());
+    }
+    if (object.member !== undefined && object.member !== null) {
+      message.member = Member.fromPartial(object.member);
+    }
     return message;
   },
   fromSDK(object: GroupMemberSDKType): GroupMember {
@@ -1656,27 +1649,15 @@ export const GroupPolicyInfo = {
     return message;
   },
   fromJSON(object: any): GroupPolicyInfo {
-<<<<<<< HEAD
     const obj = createBaseGroupPolicyInfo();
     if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.groupId)) obj.groupId = Long.fromValue(object.groupId);
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     if (isSet(object.admin)) obj.admin = String(object.admin);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
+    if (isSet(object.version)) obj.version = BigInt(object.version.toString());
     if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
     if (isSet(object.createdAt)) obj.createdAt = new Date(object.createdAt);
     return obj;
-=======
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0),
-      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
-      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GroupPolicyInfo): unknown {
     const obj: any = {};
@@ -1692,16 +1673,17 @@ export const GroupPolicyInfo = {
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = BigInt(object.groupId.toString());
+    }
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-<<<<<<< HEAD
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
-=======
-    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
->>>>>>> changes-v1
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version.toString());
+    }
+    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
+      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
+    }
     message.createdAt = object.createdAt ?? undefined;
     return message;
   },
@@ -1887,15 +1869,14 @@ export const Proposal = {
     return message;
   },
   fromJSON(object: any): Proposal {
-<<<<<<< HEAD
     const obj = createBaseProposal();
-    if (isSet(object.id)) obj.id = Long.fromValue(object.id);
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     if (Array.isArray(object?.proposers)) object.proposers.map((e: any) => String(e));
     if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
-    if (isSet(object.groupVersion)) obj.groupVersion = Long.fromValue(object.groupVersion);
-    if (isSet(object.groupPolicyVersion)) obj.groupPolicyVersion = Long.fromValue(object.groupPolicyVersion);
+    if (isSet(object.groupVersion)) obj.groupVersion = BigInt(object.groupVersion.toString());
+    if (isSet(object.groupPolicyVersion)) obj.groupPolicyVersion = BigInt(object.groupPolicyVersion.toString());
     if (isSet(object.status)) obj.status = proposalStatusFromJSON(object.status);
     if (isSet(object.result)) obj.result = proposalResultFromJSON(object.result);
     if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
@@ -1903,23 +1884,6 @@ export const Proposal = {
     if (isSet(object.executorResult)) obj.executorResult = proposalExecutorResultFromJSON(object.executorResult);
     if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
     return obj;
-=======
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      address: isSet(object.address) ? String(object.address) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
-      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
-      groupVersion: isSet(object.groupVersion) ? BigInt(object.groupVersion.toString()) : BigInt(0),
-      groupPolicyVersion: isSet(object.groupPolicyVersion) ? BigInt(object.groupPolicyVersion.toString()) : BigInt(0),
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
-      finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
-      votingPeriodEnd: isSet(object.votingPeriodEnd) ? new Date(object.votingPeriodEnd) : undefined,
-      executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : -1,
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Proposal): unknown {
     const obj: any = {};
@@ -1948,16 +1912,24 @@ export const Proposal = {
   },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     message.proposers = object.proposers?.map(e => e) || [];
     message.submitTime = object.submitTime ?? undefined;
-    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? BigInt(object.groupVersion.toString()) : BigInt(0);
-    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? BigInt(object.groupPolicyVersion.toString()) : BigInt(0);
+    if (object.groupVersion !== undefined && object.groupVersion !== null) {
+      message.groupVersion = BigInt(object.groupVersion.toString());
+    }
+    if (object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null) {
+      message.groupPolicyVersion = BigInt(object.groupPolicyVersion.toString());
+    }
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
+    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
+      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
+    }
     message.votingPeriodEnd = object.votingPeriodEnd ?? undefined;
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
@@ -2259,23 +2231,13 @@ export const Vote = {
     return message;
   },
   fromJSON(object: any): Vote {
-<<<<<<< HEAD
     const obj = createBaseVote();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.voter)) obj.voter = String(object.voter);
     if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
     return obj;
-=======
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Vote): unknown {
     const obj: any = {};
@@ -2288,7 +2250,9 @@ export const Vote = {
   },
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = BigInt(object.proposalId.toString());
+    }
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";

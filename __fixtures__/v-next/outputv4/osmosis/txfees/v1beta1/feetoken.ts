@@ -73,7 +73,9 @@ export const FeeToken = {
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     return message;
   },
   fromSDK(object: FeeTokenSDKType): FeeToken {

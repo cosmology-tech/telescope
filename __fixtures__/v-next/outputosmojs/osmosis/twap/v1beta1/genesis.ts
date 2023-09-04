@@ -77,7 +77,9 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.pruneEpochIdentifier = object.pruneEpochIdentifier ?? "";
-    message.recordHistoryKeepPeriod = object.recordHistoryKeepPeriod !== undefined && object.recordHistoryKeepPeriod !== null ? Duration.fromPartial(object.recordHistoryKeepPeriod) : Duration.fromPartial({});
+    if (object.recordHistoryKeepPeriod !== undefined && object.recordHistoryKeepPeriod !== null) {
+      message.recordHistoryKeepPeriod = Duration.fromPartial(object.recordHistoryKeepPeriod);
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -188,7 +190,9 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.twaps = object.twaps?.map(e => TwapRecord.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

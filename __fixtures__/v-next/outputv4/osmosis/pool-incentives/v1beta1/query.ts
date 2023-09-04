@@ -118,7 +118,9 @@ export const QueryGaugeIdsRequest = {
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsRequest>): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryGaugeIdsRequestSDKType): QueryGaugeIdsRequest {
@@ -332,8 +334,12 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
   },
@@ -509,7 +515,9 @@ export const QueryDistrInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryDistrInfoResponse>): QueryDistrInfoResponse {
     const message = createBaseQueryDistrInfoResponse();
-    message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : DistrInfo.fromPartial({});
+    if (object.distrInfo !== undefined && object.distrInfo !== null) {
+      message.distrInfo = DistrInfo.fromPartial(object.distrInfo);
+    }
     return message;
   },
   fromSDK(object: QueryDistrInfoResponseSDKType): QueryDistrInfoResponse {
@@ -674,7 +682,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -1034,9 +1044,15 @@ export const IncentivizedPool = {
   },
   fromPartial(object: DeepPartial<IncentivizedPool>): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : Duration.fromPartial({});
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.lockableDuration !== undefined && object.lockableDuration !== null) {
+      message.lockableDuration = Duration.fromPartial(object.lockableDuration);
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     return message;
   },
   fromSDK(object: IncentivizedPoolSDKType): IncentivizedPool {

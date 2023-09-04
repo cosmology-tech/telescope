@@ -492,7 +492,9 @@ export const CodeGeneratorRequest = {
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
     message.parameter = object.parameter ?? "";
     message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
-    message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : Version.fromPartial({});
+    if (object.compilerVersion !== undefined && object.compilerVersion !== null) {
+      message.compilerVersion = Version.fromPartial(object.compilerVersion);
+    }
     return message;
   },
   fromSDK(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {

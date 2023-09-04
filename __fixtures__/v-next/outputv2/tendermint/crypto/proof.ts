@@ -184,21 +184,12 @@ export const Proof = {
     return message;
   },
   fromJSON(object: any): Proof {
-<<<<<<< HEAD
     const obj = createBaseProof();
-    if (isSet(object.total)) obj.total = Long.fromValue(object.total);
-    if (isSet(object.index)) obj.index = Long.fromValue(object.index);
+    if (isSet(object.total)) obj.total = BigInt(object.total.toString());
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
     if (isSet(object.leafHash)) obj.leafHash = bytesFromBase64(object.leafHash);
     if (Array.isArray(object?.aunts)) object.aunts.map((e: any) => bytesFromBase64(e));
     return obj;
-=======
-    return {
-      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt(0),
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      leafHash: isSet(object.leafHash) ? bytesFromBase64(object.leafHash) : new Uint8Array(),
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Proof): unknown {
     const obj: any = {};
@@ -214,8 +205,12 @@ export const Proof = {
   },
   fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
-    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt(0);
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.total !== undefined && object.total !== null) {
+      message.total = BigInt(object.total.toString());
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
@@ -328,7 +323,9 @@ export const ValueOp = {
   fromPartial(object: DeepPartial<ValueOp>): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? new Uint8Array();
-    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromPartial(object.proof);
+    }
     return message;
   },
   fromSDK(object: ValueOpSDKType): ValueOp {

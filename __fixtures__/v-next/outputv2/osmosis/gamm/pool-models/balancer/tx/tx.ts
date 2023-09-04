@@ -126,7 +126,9 @@ export const MsgCreateBalancerPool = {
   fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
@@ -225,15 +227,9 @@ export const MsgCreateBalancerPoolResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
-<<<<<<< HEAD
     const obj = createBaseMsgCreateBalancerPoolResponse();
-    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
     return obj;
-=======
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: MsgCreateBalancerPoolResponse): unknown {
     const obj: any = {};
@@ -242,7 +238,9 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgCreateBalancerPoolResponseSDKType): MsgCreateBalancerPoolResponse {

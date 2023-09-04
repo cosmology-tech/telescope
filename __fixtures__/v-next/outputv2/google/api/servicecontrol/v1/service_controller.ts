@@ -535,7 +535,9 @@ export const CheckRequest = {
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
-    message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : Operation.fromPartial({});
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = Operation.fromPartial(object.operation);
+    }
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   },
@@ -669,7 +671,9 @@ export const CheckResponse = {
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
-    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : CheckResponse_CheckInfo.fromPartial({});
+    if (object.checkInfo !== undefined && object.checkInfo !== null) {
+      message.checkInfo = CheckResponse_CheckInfo.fromPartial(object.checkInfo);
+    }
     return message;
   },
   fromSDK(object: CheckResponseSDKType): CheckResponse {
@@ -788,7 +792,9 @@ export const CheckResponse_CheckInfo = {
   fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
-    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : CheckResponse_ConsumerInfo.fromPartial({});
+    if (object.consumerInfo !== undefined && object.consumerInfo !== null) {
+      message.consumerInfo = CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo);
+    }
     return message;
   },
   fromSDK(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
@@ -884,19 +890,11 @@ export const CheckResponse_ConsumerInfo = {
     return message;
   },
   fromJSON(object: any): CheckResponse_ConsumerInfo {
-<<<<<<< HEAD
     const obj = createBaseCheckResponse_ConsumerInfo();
-    if (isSet(object.projectNumber)) obj.projectNumber = Long.fromValue(object.projectNumber);
+    if (isSet(object.projectNumber)) obj.projectNumber = BigInt(object.projectNumber.toString());
     if (isSet(object.type)) obj.type = checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type);
-    if (isSet(object.consumerNumber)) obj.consumerNumber = Long.fromValue(object.consumerNumber);
+    if (isSet(object.consumerNumber)) obj.consumerNumber = BigInt(object.consumerNumber.toString());
     return obj;
-=======
-    return {
-      projectNumber: isSet(object.projectNumber) ? BigInt(object.projectNumber.toString()) : BigInt(0),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
-      consumerNumber: isSet(object.consumerNumber) ? BigInt(object.consumerNumber.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
@@ -907,9 +905,13 @@ export const CheckResponse_ConsumerInfo = {
   },
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? BigInt(object.projectNumber.toString()) : BigInt(0);
+    if (object.projectNumber !== undefined && object.projectNumber !== null) {
+      message.projectNumber = BigInt(object.projectNumber.toString());
+    }
     message.type = object.type ?? 0;
-    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? BigInt(object.consumerNumber.toString()) : BigInt(0);
+    if (object.consumerNumber !== undefined && object.consumerNumber !== null) {
+      message.consumerNumber = BigInt(object.consumerNumber.toString());
+    }
     return message;
   },
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
@@ -1250,7 +1252,9 @@ export const ReportResponse_ReportError = {
   fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
     message.operationId = object.operationId ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromPartial(object.status);
+    }
     return message;
   },
   fromSDK(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {

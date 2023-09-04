@@ -482,7 +482,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -831,7 +833,9 @@ export const QueryGetProtoRevProfitsByDenomResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevProfitsByDenomResponse>): QueryGetProtoRevProfitsByDenomResponse {
     const message = createBaseQueryGetProtoRevProfitsByDenomResponse();
-    message.profit = object.profit !== undefined && object.profit !== null ? Coin.fromPartial(object.profit) : Coin.fromPartial({});
+    if (object.profit !== undefined && object.profit !== null) {
+      message.profit = Coin.fromPartial(object.profit);
+    }
     return message;
   },
   fromSDK(object: QueryGetProtoRevProfitsByDenomResponseSDKType): QueryGetProtoRevProfitsByDenomResponse {
@@ -1213,7 +1217,9 @@ export const QueryGetProtoRevStatisticsByRouteResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevStatisticsByRouteResponse>): QueryGetProtoRevStatisticsByRouteResponse {
     const message = createBaseQueryGetProtoRevStatisticsByRouteResponse();
-    message.statistics = object.statistics !== undefined && object.statistics !== null ? RouteStatistics.fromPartial(object.statistics) : RouteStatistics.fromPartial({});
+    if (object.statistics !== undefined && object.statistics !== null) {
+      message.statistics = RouteStatistics.fromPartial(object.statistics);
+    }
     return message;
   },
   fromSDK(object: QueryGetProtoRevStatisticsByRouteResponseSDKType): QueryGetProtoRevStatisticsByRouteResponse {
@@ -2062,7 +2068,9 @@ export const QueryGetProtoRevPoolWeightsResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevPoolWeightsResponse>): QueryGetProtoRevPoolWeightsResponse {
     const message = createBaseQueryGetProtoRevPoolWeightsResponse();
-    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : PoolWeights.fromPartial({});
+    if (object.poolWeights !== undefined && object.poolWeights !== null) {
+      message.poolWeights = PoolWeights.fromPartial(object.poolWeights);
+    }
     return message;
   },
   fromSDK(object: QueryGetProtoRevPoolWeightsResponseSDKType): QueryGetProtoRevPoolWeightsResponse {
@@ -2227,7 +2235,9 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevMaxPoolPointsPerBlockResponse>): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
     const message = createBaseQueryGetProtoRevMaxPoolPointsPerBlockResponse();
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
+    if (object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null) {
+      message.maxPoolPointsPerBlock = BigInt(object.maxPoolPointsPerBlock.toString());
+    }
     return message;
   },
   fromSDK(object: QueryGetProtoRevMaxPoolPointsPerBlockResponseSDKType): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
@@ -2392,7 +2402,9 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevMaxPoolPointsPerTxResponse>): QueryGetProtoRevMaxPoolPointsPerTxResponse {
     const message = createBaseQueryGetProtoRevMaxPoolPointsPerTxResponse();
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
+    if (object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null) {
+      message.maxPoolPointsPerTx = BigInt(object.maxPoolPointsPerTx.toString());
+    }
     return message;
   },
   fromSDK(object: QueryGetProtoRevMaxPoolPointsPerTxResponseSDKType): QueryGetProtoRevMaxPoolPointsPerTxResponse {

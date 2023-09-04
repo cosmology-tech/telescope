@@ -298,15 +298,23 @@ export const Distribution = {
   },
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    message.count = object.count !== undefined && object.count !== null ? BigInt(object.count.toString()) : BigInt(0);
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count.toString());
+    }
     message.mean = object.mean ?? 0;
     message.minimum = object.minimum ?? 0;
     message.maximum = object.maximum ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
     message.bucketCounts = object.bucketCounts?.map(e => BigInt(e.toString())) || [];
-    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_LinearBuckets.fromPartial(object.linearBuckets) : Distribution_LinearBuckets.fromPartial({});
-    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets) : Distribution_ExponentialBuckets.fromPartial({});
-    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : Distribution_ExplicitBuckets.fromPartial({});
+    if (object.linearBuckets !== undefined && object.linearBuckets !== null) {
+      message.linearBuckets = Distribution_LinearBuckets.fromPartial(object.linearBuckets);
+    }
+    if (object.exponentialBuckets !== undefined && object.exponentialBuckets !== null) {
+      message.exponentialBuckets = Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets);
+    }
+    if (object.explicitBuckets !== undefined && object.explicitBuckets !== null) {
+      message.explicitBuckets = Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets);
+    }
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   },

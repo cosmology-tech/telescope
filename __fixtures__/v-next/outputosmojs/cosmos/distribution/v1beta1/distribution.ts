@@ -533,7 +533,9 @@ export const ValidatorCurrentRewards = {
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period.toString());
+    }
     return message;
   },
   fromSDK(object: ValidatorCurrentRewardsSDKType): ValidatorCurrentRewards {
@@ -855,7 +857,9 @@ export const ValidatorSlashEvent = {
   },
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
-    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? BigInt(object.validatorPeriod.toString()) : BigInt(0);
+    if (object.validatorPeriod !== undefined && object.validatorPeriod !== null) {
+      message.validatorPeriod = BigInt(object.validatorPeriod.toString());
+    }
     message.fraction = object.fraction ?? "";
     return message;
   },
@@ -1328,9 +1332,13 @@ export const DelegatorStartingInfo = {
   },
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
-    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? BigInt(object.previousPeriod.toString()) : BigInt(0);
+    if (object.previousPeriod !== undefined && object.previousPeriod !== null) {
+      message.previousPeriod = BigInt(object.previousPeriod.toString());
+    }
     message.stake = object.stake ?? "";
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     return message;
   },
   fromSDK(object: DelegatorStartingInfoSDKType): DelegatorStartingInfo {

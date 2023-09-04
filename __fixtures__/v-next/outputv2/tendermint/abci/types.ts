@@ -1554,21 +1554,51 @@ export const Request = {
   },
   fromPartial(object: DeepPartial<Request>): Request {
     const message = createBaseRequest();
-    message.echo = object.echo !== undefined && object.echo !== null ? RequestEcho.fromPartial(object.echo) : RequestEcho.fromPartial({});
-    message.flush = object.flush !== undefined && object.flush !== null ? RequestFlush.fromPartial(object.flush) : RequestFlush.fromPartial({});
-    message.info = object.info !== undefined && object.info !== null ? RequestInfo.fromPartial(object.info) : RequestInfo.fromPartial({});
-    message.setOption = object.setOption !== undefined && object.setOption !== null ? RequestSetOption.fromPartial(object.setOption) : RequestSetOption.fromPartial({});
-    message.initChain = object.initChain !== undefined && object.initChain !== null ? RequestInitChain.fromPartial(object.initChain) : RequestInitChain.fromPartial({});
-    message.query = object.query !== undefined && object.query !== null ? RequestQuery.fromPartial(object.query) : RequestQuery.fromPartial({});
-    message.beginBlock = object.beginBlock !== undefined && object.beginBlock !== null ? RequestBeginBlock.fromPartial(object.beginBlock) : RequestBeginBlock.fromPartial({});
-    message.checkTx = object.checkTx !== undefined && object.checkTx !== null ? RequestCheckTx.fromPartial(object.checkTx) : RequestCheckTx.fromPartial({});
-    message.deliverTx = object.deliverTx !== undefined && object.deliverTx !== null ? RequestDeliverTx.fromPartial(object.deliverTx) : RequestDeliverTx.fromPartial({});
-    message.endBlock = object.endBlock !== undefined && object.endBlock !== null ? RequestEndBlock.fromPartial(object.endBlock) : RequestEndBlock.fromPartial({});
-    message.commit = object.commit !== undefined && object.commit !== null ? RequestCommit.fromPartial(object.commit) : RequestCommit.fromPartial({});
-    message.listSnapshots = object.listSnapshots !== undefined && object.listSnapshots !== null ? RequestListSnapshots.fromPartial(object.listSnapshots) : RequestListSnapshots.fromPartial({});
-    message.offerSnapshot = object.offerSnapshot !== undefined && object.offerSnapshot !== null ? RequestOfferSnapshot.fromPartial(object.offerSnapshot) : RequestOfferSnapshot.fromPartial({});
-    message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : RequestLoadSnapshotChunk.fromPartial({});
-    message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : RequestApplySnapshotChunk.fromPartial({});
+    if (object.echo !== undefined && object.echo !== null) {
+      message.echo = RequestEcho.fromPartial(object.echo);
+    }
+    if (object.flush !== undefined && object.flush !== null) {
+      message.flush = RequestFlush.fromPartial(object.flush);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = RequestInfo.fromPartial(object.info);
+    }
+    if (object.setOption !== undefined && object.setOption !== null) {
+      message.setOption = RequestSetOption.fromPartial(object.setOption);
+    }
+    if (object.initChain !== undefined && object.initChain !== null) {
+      message.initChain = RequestInitChain.fromPartial(object.initChain);
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = RequestQuery.fromPartial(object.query);
+    }
+    if (object.beginBlock !== undefined && object.beginBlock !== null) {
+      message.beginBlock = RequestBeginBlock.fromPartial(object.beginBlock);
+    }
+    if (object.checkTx !== undefined && object.checkTx !== null) {
+      message.checkTx = RequestCheckTx.fromPartial(object.checkTx);
+    }
+    if (object.deliverTx !== undefined && object.deliverTx !== null) {
+      message.deliverTx = RequestDeliverTx.fromPartial(object.deliverTx);
+    }
+    if (object.endBlock !== undefined && object.endBlock !== null) {
+      message.endBlock = RequestEndBlock.fromPartial(object.endBlock);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = RequestCommit.fromPartial(object.commit);
+    }
+    if (object.listSnapshots !== undefined && object.listSnapshots !== null) {
+      message.listSnapshots = RequestListSnapshots.fromPartial(object.listSnapshots);
+    }
+    if (object.offerSnapshot !== undefined && object.offerSnapshot !== null) {
+      message.offerSnapshot = RequestOfferSnapshot.fromPartial(object.offerSnapshot);
+    }
+    if (object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null) {
+      message.loadSnapshotChunk = RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk);
+    }
+    if (object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null) {
+      message.applySnapshotChunk = RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk);
+    }
     return message;
   },
   fromSDK(object: RequestSDKType): Request {
@@ -1853,19 +1883,11 @@ export const RequestInfo = {
     return message;
   },
   fromJSON(object: any): RequestInfo {
-<<<<<<< HEAD
     const obj = createBaseRequestInfo();
     if (isSet(object.version)) obj.version = String(object.version);
-    if (isSet(object.blockVersion)) obj.blockVersion = Long.fromValue(object.blockVersion);
-    if (isSet(object.p2pVersion)) obj.p2pVersion = Long.fromValue(object.p2pVersion);
+    if (isSet(object.blockVersion)) obj.blockVersion = BigInt(object.blockVersion.toString());
+    if (isSet(object.p2pVersion)) obj.p2pVersion = BigInt(object.p2pVersion.toString());
     return obj;
-=======
-    return {
-      version: isSet(object.version) ? String(object.version) : "",
-      blockVersion: isSet(object.blockVersion) ? BigInt(object.blockVersion.toString()) : BigInt(0),
-      p2pVersion: isSet(object.p2pVersion) ? BigInt(object.p2pVersion.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: RequestInfo): unknown {
     const obj: any = {};
@@ -1877,8 +1899,12 @@ export const RequestInfo = {
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.version = object.version ?? "";
-    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? BigInt(object.blockVersion.toString()) : BigInt(0);
-    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? BigInt(object.p2pVersion.toString()) : BigInt(0);
+    if (object.blockVersion !== undefined && object.blockVersion !== null) {
+      message.blockVersion = BigInt(object.blockVersion.toString());
+    }
+    if (object.p2pVersion !== undefined && object.p2pVersion !== null) {
+      message.p2pVersion = BigInt(object.p2pVersion.toString());
+    }
     return message;
   },
   fromSDK(object: RequestInfoSDKType): RequestInfo {
@@ -2086,25 +2112,14 @@ export const RequestInitChain = {
     return message;
   },
   fromJSON(object: any): RequestInitChain {
-<<<<<<< HEAD
     const obj = createBaseRequestInitChain();
     if (isSet(object.time)) obj.time = new Date(object.time);
     if (isSet(object.chainId)) obj.chainId = String(object.chainId);
     if (isSet(object.consensusParams)) obj.consensusParams = ConsensusParams.fromJSON(object.consensusParams);
     if (Array.isArray(object?.validators)) object.validators.map((e: any) => ValidatorUpdate.fromJSON(e));
     if (isSet(object.appStateBytes)) obj.appStateBytes = bytesFromBase64(object.appStateBytes);
-    if (isSet(object.initialHeight)) obj.initialHeight = Long.fromValue(object.initialHeight);
+    if (isSet(object.initialHeight)) obj.initialHeight = BigInt(object.initialHeight.toString());
     return obj;
-=======
-    return {
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      consensusParams: isSet(object.consensusParams) ? ConsensusParams.fromJSON(object.consensusParams) : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromJSON(e)) : [],
-      appStateBytes: isSet(object.appStateBytes) ? bytesFromBase64(object.appStateBytes) : new Uint8Array(),
-      initialHeight: isSet(object.initialHeight) ? BigInt(object.initialHeight.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: RequestInitChain): unknown {
     const obj: any = {};
@@ -2124,10 +2139,14 @@ export const RequestInitChain = {
     const message = createBaseRequestInitChain();
     message.time = object.time ?? undefined;
     message.chainId = object.chainId ?? "";
-    message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : ConsensusParams.fromPartial({});
+    if (object.consensusParams !== undefined && object.consensusParams !== null) {
+      message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
+    }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appStateBytes = object.appStateBytes ?? new Uint8Array();
-    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? BigInt(object.initialHeight.toString()) : BigInt(0);
+    if (object.initialHeight !== undefined && object.initialHeight !== null) {
+      message.initialHeight = BigInt(object.initialHeight.toString());
+    }
     return message;
   },
   fromSDK(object: RequestInitChainSDKType): RequestInitChain {
@@ -2246,21 +2265,12 @@ export const RequestQuery = {
     return message;
   },
   fromJSON(object: any): RequestQuery {
-<<<<<<< HEAD
     const obj = createBaseRequestQuery();
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     if (isSet(object.path)) obj.path = String(object.path);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.prove)) obj.prove = Boolean(object.prove);
     return obj;
-=======
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      prove: isSet(object.prove) ? Boolean(object.prove) : false
-    };
->>>>>>> changes-v1
   },
   toJSON(message: RequestQuery): unknown {
     const obj: any = {};
@@ -2274,7 +2284,9 @@ export const RequestQuery = {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array();
     message.path = object.path ?? "";
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.prove = object.prove ?? false;
     return message;
   },
@@ -2400,8 +2412,12 @@ export const RequestBeginBlock = {
   fromPartial(object: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
     message.hash = object.hash ?? new Uint8Array();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
-    message.lastCommitInfo = object.lastCommitInfo !== undefined && object.lastCommitInfo !== null ? LastCommitInfo.fromPartial(object.lastCommitInfo) : LastCommitInfo.fromPartial({});
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromPartial(object.header);
+    }
+    if (object.lastCommitInfo !== undefined && object.lastCommitInfo !== null) {
+      message.lastCommitInfo = LastCommitInfo.fromPartial(object.lastCommitInfo);
+    }
     message.byzantineValidators = object.byzantineValidators?.map(e => Evidence.fromPartial(e)) || [];
     return message;
   },
@@ -2668,15 +2684,9 @@ export const RequestEndBlock = {
     return message;
   },
   fromJSON(object: any): RequestEndBlock {
-<<<<<<< HEAD
     const obj = createBaseRequestEndBlock();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     return obj;
-=======
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: RequestEndBlock): unknown {
     const obj: any = {};
@@ -2685,7 +2695,9 @@ export const RequestEndBlock = {
   },
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     return message;
   },
   fromSDK(object: RequestEndBlockSDKType): RequestEndBlock {
@@ -2903,7 +2915,9 @@ export const RequestOfferSnapshot = {
   },
   fromPartial(object: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
     const message = createBaseRequestOfferSnapshot();
-    message.snapshot = object.snapshot !== undefined && object.snapshot !== null ? Snapshot.fromPartial(object.snapshot) : Snapshot.fromPartial({});
+    if (object.snapshot !== undefined && object.snapshot !== null) {
+      message.snapshot = Snapshot.fromPartial(object.snapshot);
+    }
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
   },
@@ -2992,19 +3006,11 @@ export const RequestLoadSnapshotChunk = {
     return message;
   },
   fromJSON(object: any): RequestLoadSnapshotChunk {
-<<<<<<< HEAD
     const obj = createBaseRequestLoadSnapshotChunk();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.format)) obj.format = Number(object.format);
     if (isSet(object.chunk)) obj.chunk = Number(object.chunk);
     return obj;
-=======
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunk: isSet(object.chunk) ? Number(object.chunk) : 0
-    };
->>>>>>> changes-v1
   },
   toJSON(message: RequestLoadSnapshotChunk): unknown {
     const obj: any = {};
@@ -3015,7 +3021,9 @@ export const RequestLoadSnapshotChunk = {
   },
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.format = object.format ?? 0;
     message.chunk = object.chunk ?? 0;
     return message;
@@ -3350,22 +3358,54 @@ export const Response = {
   },
   fromPartial(object: DeepPartial<Response>): Response {
     const message = createBaseResponse();
-    message.exception = object.exception !== undefined && object.exception !== null ? ResponseException.fromPartial(object.exception) : ResponseException.fromPartial({});
-    message.echo = object.echo !== undefined && object.echo !== null ? ResponseEcho.fromPartial(object.echo) : ResponseEcho.fromPartial({});
-    message.flush = object.flush !== undefined && object.flush !== null ? ResponseFlush.fromPartial(object.flush) : ResponseFlush.fromPartial({});
-    message.info = object.info !== undefined && object.info !== null ? ResponseInfo.fromPartial(object.info) : ResponseInfo.fromPartial({});
-    message.setOption = object.setOption !== undefined && object.setOption !== null ? ResponseSetOption.fromPartial(object.setOption) : ResponseSetOption.fromPartial({});
-    message.initChain = object.initChain !== undefined && object.initChain !== null ? ResponseInitChain.fromPartial(object.initChain) : ResponseInitChain.fromPartial({});
-    message.query = object.query !== undefined && object.query !== null ? ResponseQuery.fromPartial(object.query) : ResponseQuery.fromPartial({});
-    message.beginBlock = object.beginBlock !== undefined && object.beginBlock !== null ? ResponseBeginBlock.fromPartial(object.beginBlock) : ResponseBeginBlock.fromPartial({});
-    message.checkTx = object.checkTx !== undefined && object.checkTx !== null ? ResponseCheckTx.fromPartial(object.checkTx) : ResponseCheckTx.fromPartial({});
-    message.deliverTx = object.deliverTx !== undefined && object.deliverTx !== null ? ResponseDeliverTx.fromPartial(object.deliverTx) : ResponseDeliverTx.fromPartial({});
-    message.endBlock = object.endBlock !== undefined && object.endBlock !== null ? ResponseEndBlock.fromPartial(object.endBlock) : ResponseEndBlock.fromPartial({});
-    message.commit = object.commit !== undefined && object.commit !== null ? ResponseCommit.fromPartial(object.commit) : ResponseCommit.fromPartial({});
-    message.listSnapshots = object.listSnapshots !== undefined && object.listSnapshots !== null ? ResponseListSnapshots.fromPartial(object.listSnapshots) : ResponseListSnapshots.fromPartial({});
-    message.offerSnapshot = object.offerSnapshot !== undefined && object.offerSnapshot !== null ? ResponseOfferSnapshot.fromPartial(object.offerSnapshot) : ResponseOfferSnapshot.fromPartial({});
-    message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : ResponseLoadSnapshotChunk.fromPartial({});
-    message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : ResponseApplySnapshotChunk.fromPartial({});
+    if (object.exception !== undefined && object.exception !== null) {
+      message.exception = ResponseException.fromPartial(object.exception);
+    }
+    if (object.echo !== undefined && object.echo !== null) {
+      message.echo = ResponseEcho.fromPartial(object.echo);
+    }
+    if (object.flush !== undefined && object.flush !== null) {
+      message.flush = ResponseFlush.fromPartial(object.flush);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ResponseInfo.fromPartial(object.info);
+    }
+    if (object.setOption !== undefined && object.setOption !== null) {
+      message.setOption = ResponseSetOption.fromPartial(object.setOption);
+    }
+    if (object.initChain !== undefined && object.initChain !== null) {
+      message.initChain = ResponseInitChain.fromPartial(object.initChain);
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = ResponseQuery.fromPartial(object.query);
+    }
+    if (object.beginBlock !== undefined && object.beginBlock !== null) {
+      message.beginBlock = ResponseBeginBlock.fromPartial(object.beginBlock);
+    }
+    if (object.checkTx !== undefined && object.checkTx !== null) {
+      message.checkTx = ResponseCheckTx.fromPartial(object.checkTx);
+    }
+    if (object.deliverTx !== undefined && object.deliverTx !== null) {
+      message.deliverTx = ResponseDeliverTx.fromPartial(object.deliverTx);
+    }
+    if (object.endBlock !== undefined && object.endBlock !== null) {
+      message.endBlock = ResponseEndBlock.fromPartial(object.endBlock);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = ResponseCommit.fromPartial(object.commit);
+    }
+    if (object.listSnapshots !== undefined && object.listSnapshots !== null) {
+      message.listSnapshots = ResponseListSnapshots.fromPartial(object.listSnapshots);
+    }
+    if (object.offerSnapshot !== undefined && object.offerSnapshot !== null) {
+      message.offerSnapshot = ResponseOfferSnapshot.fromPartial(object.offerSnapshot);
+    }
+    if (object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null) {
+      message.loadSnapshotChunk = ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk);
+    }
+    if (object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null) {
+      message.applySnapshotChunk = ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk);
+    }
     return message;
   },
   fromSDK(object: ResponseSDKType): Response {
@@ -3749,23 +3789,13 @@ export const ResponseInfo = {
     return message;
   },
   fromJSON(object: any): ResponseInfo {
-<<<<<<< HEAD
     const obj = createBaseResponseInfo();
     if (isSet(object.data)) obj.data = String(object.data);
     if (isSet(object.version)) obj.version = String(object.version);
-    if (isSet(object.appVersion)) obj.appVersion = Long.fromValue(object.appVersion);
-    if (isSet(object.lastBlockHeight)) obj.lastBlockHeight = Long.fromValue(object.lastBlockHeight);
+    if (isSet(object.appVersion)) obj.appVersion = BigInt(object.appVersion.toString());
+    if (isSet(object.lastBlockHeight)) obj.lastBlockHeight = BigInt(object.lastBlockHeight.toString());
     if (isSet(object.lastBlockAppHash)) obj.lastBlockAppHash = bytesFromBase64(object.lastBlockAppHash);
     return obj;
-=======
-    return {
-      data: isSet(object.data) ? String(object.data) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      appVersion: isSet(object.appVersion) ? BigInt(object.appVersion.toString()) : BigInt(0),
-      lastBlockHeight: isSet(object.lastBlockHeight) ? BigInt(object.lastBlockHeight.toString()) : BigInt(0),
-      lastBlockAppHash: isSet(object.lastBlockAppHash) ? bytesFromBase64(object.lastBlockAppHash) : new Uint8Array()
-    };
->>>>>>> changes-v1
   },
   toJSON(message: ResponseInfo): unknown {
     const obj: any = {};
@@ -3780,8 +3810,12 @@ export const ResponseInfo = {
     const message = createBaseResponseInfo();
     message.data = object.data ?? "";
     message.version = object.version ?? "";
-    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? BigInt(object.appVersion.toString()) : BigInt(0);
-    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? BigInt(object.lastBlockHeight.toString()) : BigInt(0);
+    if (object.appVersion !== undefined && object.appVersion !== null) {
+      message.appVersion = BigInt(object.appVersion.toString());
+    }
+    if (object.lastBlockHeight !== undefined && object.lastBlockHeight !== null) {
+      message.lastBlockHeight = BigInt(object.lastBlockHeight.toString());
+    }
     message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
     return message;
   },
@@ -4010,7 +4044,9 @@ export const ResponseInitChain = {
   },
   fromPartial(object: DeepPartial<ResponseInitChain>): ResponseInitChain {
     const message = createBaseResponseInitChain();
-    message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : ConsensusParams.fromPartial({});
+    if (object.consensusParams !== undefined && object.consensusParams !== null) {
+      message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
+    }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
@@ -4154,31 +4190,17 @@ export const ResponseQuery = {
     return message;
   },
   fromJSON(object: any): ResponseQuery {
-<<<<<<< HEAD
     const obj = createBaseResponseQuery();
     if (isSet(object.code)) obj.code = Number(object.code);
     if (isSet(object.log)) obj.log = String(object.log);
     if (isSet(object.info)) obj.info = String(object.info);
-    if (isSet(object.index)) obj.index = Long.fromValue(object.index);
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     if (isSet(object.proofOps)) obj.proofOps = ProofOps.fromJSON(object.proofOps);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
-=======
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      proofOps: isSet(object.proofOps) ? ProofOps.fromJSON(object.proofOps) : undefined,
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: ResponseQuery): unknown {
     const obj: any = {};
@@ -4198,16 +4220,17 @@ export const ResponseQuery = {
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-<<<<<<< HEAD
-    message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : ProofOps.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
-=======
-    message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.proofOps !== undefined && object.proofOps !== null) {
+      message.proofOps = ProofOps.fromPartial(object.proofOps);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.codespace = object.codespace ?? "";
     return message;
   },
@@ -4452,29 +4475,16 @@ export const ResponseCheckTx = {
     return message;
   },
   fromJSON(object: any): ResponseCheckTx {
-<<<<<<< HEAD
     const obj = createBaseResponseCheckTx();
     if (isSet(object.code)) obj.code = Number(object.code);
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     if (isSet(object.log)) obj.log = String(object.log);
     if (isSet(object.info)) obj.info = String(object.info);
-    if (isSet(object.gas_wanted)) obj.gasWanted = Long.fromValue(object.gas_wanted);
-    if (isSet(object.gas_used)) obj.gasUsed = Long.fromValue(object.gas_used);
+    if (isSet(object.gas_wanted)) obj.gasWanted = BigInt(object.gas_wanted.toString());
+    if (isSet(object.gas_used)) obj.gasUsed = BigInt(object.gas_used.toString());
     if (Array.isArray(object?.events)) object.events.map((e: any) => Event.fromJSON(e));
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
-=======
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
-      gasUsed: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: ResponseCheckTx): unknown {
     const obj: any = {};
@@ -4498,8 +4508,12 @@ export const ResponseCheckTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt(0);
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt(0);
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = BigInt(object.gasWanted.toString());
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = BigInt(object.gasUsed.toString());
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -4656,29 +4670,16 @@ export const ResponseDeliverTx = {
     return message;
   },
   fromJSON(object: any): ResponseDeliverTx {
-<<<<<<< HEAD
     const obj = createBaseResponseDeliverTx();
     if (isSet(object.code)) obj.code = Number(object.code);
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     if (isSet(object.log)) obj.log = String(object.log);
     if (isSet(object.info)) obj.info = String(object.info);
-    if (isSet(object.gas_wanted)) obj.gasWanted = Long.fromValue(object.gas_wanted);
-    if (isSet(object.gas_used)) obj.gasUsed = Long.fromValue(object.gas_used);
+    if (isSet(object.gas_wanted)) obj.gasWanted = BigInt(object.gas_wanted.toString());
+    if (isSet(object.gas_used)) obj.gasUsed = BigInt(object.gas_used.toString());
     if (Array.isArray(object?.events)) object.events.map((e: any) => Event.fromJSON(e));
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
-=======
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
-      gasUsed: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: ResponseDeliverTx): unknown {
     const obj: any = {};
@@ -4702,8 +4703,12 @@ export const ResponseDeliverTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt(0);
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt(0);
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = BigInt(object.gasWanted.toString());
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = BigInt(object.gasUsed.toString());
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -4849,7 +4854,9 @@ export const ResponseEndBlock = {
   fromPartial(object: DeepPartial<ResponseEndBlock>): ResponseEndBlock {
     const message = createBaseResponseEndBlock();
     message.validatorUpdates = object.validatorUpdates?.map(e => ValidatorUpdate.fromPartial(e)) || [];
-    message.consensusParamUpdates = object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null ? ConsensusParams.fromPartial(object.consensusParamUpdates) : ConsensusParams.fromPartial({});
+    if (object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null) {
+      message.consensusParamUpdates = ConsensusParams.fromPartial(object.consensusParamUpdates);
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
   },
@@ -4951,17 +4958,10 @@ export const ResponseCommit = {
     return message;
   },
   fromJSON(object: any): ResponseCommit {
-<<<<<<< HEAD
     const obj = createBaseResponseCommit();
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (isSet(object.retainHeight)) obj.retainHeight = Long.fromValue(object.retainHeight);
+    if (isSet(object.retainHeight)) obj.retainHeight = BigInt(object.retainHeight.toString());
     return obj;
-=======
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retainHeight: isSet(object.retainHeight) ? BigInt(object.retainHeight.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: ResponseCommit): unknown {
     const obj: any = {};
@@ -4972,7 +4972,9 @@ export const ResponseCommit = {
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array();
-    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? BigInt(object.retainHeight.toString()) : BigInt(0);
+    if (object.retainHeight !== undefined && object.retainHeight !== null) {
+      message.retainHeight = BigInt(object.retainHeight.toString());
+    }
     return message;
   },
   fromSDK(object: ResponseCommitSDKType): ResponseCommit {
@@ -5481,10 +5483,18 @@ export const ConsensusParams = {
   },
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
-    message.block = object.block !== undefined && object.block !== null ? BlockParams.fromPartial(object.block) : BlockParams.fromPartial({});
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceParams.fromPartial(object.evidence) : EvidenceParams.fromPartial({});
-    message.validator = object.validator !== undefined && object.validator !== null ? ValidatorParams.fromPartial(object.validator) : ValidatorParams.fromPartial({});
-    message.version = object.version !== undefined && object.version !== null ? VersionParams.fromPartial(object.version) : VersionParams.fromPartial({});
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BlockParams.fromPartial(object.block);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceParams.fromPartial(object.evidence);
+    }
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = ValidatorParams.fromPartial(object.validator);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = VersionParams.fromPartial(object.version);
+    }
     return message;
   },
   fromSDK(object: ConsensusParamsSDKType): ConsensusParams {
@@ -5573,17 +5583,10 @@ export const BlockParams = {
     return message;
   },
   fromJSON(object: any): BlockParams {
-<<<<<<< HEAD
     const obj = createBaseBlockParams();
-    if (isSet(object.maxBytes)) obj.maxBytes = Long.fromValue(object.maxBytes);
-    if (isSet(object.maxGas)) obj.maxGas = Long.fromValue(object.maxGas);
+    if (isSet(object.maxBytes)) obj.maxBytes = BigInt(object.maxBytes.toString());
+    if (isSet(object.maxGas)) obj.maxGas = BigInt(object.maxGas.toString());
     return obj;
-=======
-    return {
-      maxBytes: isSet(object.maxBytes) ? BigInt(object.maxBytes.toString()) : BigInt(0),
-      maxGas: isSet(object.maxGas) ? BigInt(object.maxGas.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
@@ -5593,8 +5596,12 @@ export const BlockParams = {
   },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? BigInt(object.maxBytes.toString()) : BigInt(0);
-    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? BigInt(object.maxGas.toString()) : BigInt(0);
+    if (object.maxBytes !== undefined && object.maxBytes !== null) {
+      message.maxBytes = BigInt(object.maxBytes.toString());
+    }
+    if (object.maxGas !== undefined && object.maxGas !== null) {
+      message.maxGas = BigInt(object.maxGas.toString());
+    }
     return message;
   },
   fromSDK(object: BlockParamsSDKType): BlockParams {
@@ -6012,21 +6019,12 @@ export const TxResult = {
     return message;
   },
   fromJSON(object: any): TxResult {
-<<<<<<< HEAD
     const obj = createBaseTxResult();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.index)) obj.index = Number(object.index);
     if (isSet(object.tx)) obj.tx = bytesFromBase64(object.tx);
     if (isSet(object.result)) obj.result = ResponseDeliverTx.fromJSON(object.result);
     return obj;
-=======
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      index: isSet(object.index) ? Number(object.index) : 0,
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      result: isSet(object.result) ? ResponseDeliverTx.fromJSON(object.result) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: TxResult): unknown {
     const obj: any = {};
@@ -6038,10 +6036,14 @@ export const TxResult = {
   },
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.index = object.index ?? 0;
     message.tx = object.tx ?? new Uint8Array();
-    message.result = object.result !== undefined && object.result !== null ? ResponseDeliverTx.fromPartial(object.result) : ResponseDeliverTx.fromPartial({});
+    if (object.result !== undefined && object.result !== null) {
+      message.result = ResponseDeliverTx.fromPartial(object.result);
+    }
     return message;
   },
   fromSDK(object: TxResultSDKType): TxResult {
@@ -6130,17 +6132,10 @@ export const Validator = {
     return message;
   },
   fromJSON(object: any): Validator {
-<<<<<<< HEAD
     const obj = createBaseValidator();
     if (isSet(object.address)) obj.address = bytesFromBase64(object.address);
-    if (isSet(object.power)) obj.power = Long.fromValue(object.power);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     return obj;
-=======
-    return {
-      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Validator): unknown {
     const obj: any = {};
@@ -6151,7 +6146,9 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power.toString());
+    }
     return message;
   },
   fromSDK(object: ValidatorSDKType): Validator {
@@ -6232,17 +6229,10 @@ export const ValidatorUpdate = {
     return message;
   },
   fromJSON(object: any): ValidatorUpdate {
-<<<<<<< HEAD
     const obj = createBaseValidatorUpdate();
     if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
-    if (isSet(object.power)) obj.power = Long.fromValue(object.power);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     return obj;
-=======
-    return {
-      pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: ValidatorUpdate): unknown {
     const obj: any = {};
@@ -6252,13 +6242,12 @@ export const ValidatorUpdate = {
   },
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
-<<<<<<< HEAD
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
-=======
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power.toString());
+    }
     return message;
   },
   fromSDK(object: ValidatorUpdateSDKType): ValidatorUpdate {
@@ -6352,7 +6341,9 @@ export const VoteInfo = {
   },
   fromPartial(object: DeepPartial<VoteInfo>): VoteInfo {
     const message = createBaseVoteInfo();
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : Validator.fromPartial({});
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = Validator.fromPartial(object.validator);
+    }
     message.signedLastBlock = object.signedLastBlock ?? false;
     return message;
   },
@@ -6455,23 +6446,13 @@ export const Evidence = {
     return message;
   },
   fromJSON(object: any): Evidence {
-<<<<<<< HEAD
     const obj = createBaseEvidence();
     if (isSet(object.type)) obj.type = evidenceTypeFromJSON(object.type);
     if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.totalVotingPower)) obj.totalVotingPower = Long.fromValue(object.totalVotingPower);
+    if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
     return obj;
-=======
-    return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
-      validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined,
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? BigInt(object.totalVotingPower.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Evidence): unknown {
     const obj: any = {};
@@ -6485,15 +6466,16 @@ export const Evidence = {
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
     message.type = object.type ?? 0;
-<<<<<<< HEAD
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : Validator.fromPartial({});
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
-=======
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = Validator.fromPartial(object.validator);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.time = object.time ?? undefined;
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
     return message;
   },
   fromSDK(object: EvidenceSDKType): Evidence {
@@ -6607,23 +6589,13 @@ export const Snapshot = {
     return message;
   },
   fromJSON(object: any): Snapshot {
-<<<<<<< HEAD
     const obj = createBaseSnapshot();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.format)) obj.format = Number(object.format);
     if (isSet(object.chunks)) obj.chunks = Number(object.chunks);
     if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
     if (isSet(object.metadata)) obj.metadata = bytesFromBase64(object.metadata);
     return obj;
-=======
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array()
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
@@ -6636,7 +6608,9 @@ export const Snapshot = {
   },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();

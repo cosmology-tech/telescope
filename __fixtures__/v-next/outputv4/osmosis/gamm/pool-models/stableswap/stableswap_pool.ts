@@ -289,10 +289,16 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : Coin.fromPartial({});
+    if (object.totalShares !== undefined && object.totalShares !== null) {
+      message.totalShares = Coin.fromPartial(object.totalShares);
+    }
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
     message.scalingFactorController = object.scalingFactorController ?? "";

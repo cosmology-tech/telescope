@@ -131,7 +131,9 @@ export const ModuleRoute = {
   fromPartial(object: DeepPartial<ModuleRoute>): ModuleRoute {
     const message = createBaseModuleRoute();
     message.poolType = object.poolType ?? 0;
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : undefined;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: ModuleRouteSDKType): ModuleRoute {

@@ -81,7 +81,9 @@ export const MsgCreateCosmWasmPool = {
   },
   fromPartial(object: DeepPartial<MsgCreateCosmWasmPool>): MsgCreateCosmWasmPool {
     const message = createBaseMsgCreateCosmWasmPool();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.instantiateMsg = object.instantiateMsg ?? new Uint8Array();
     message.sender = object.sender ?? "";
     return message;
@@ -185,7 +187,9 @@ export const MsgCreateCosmWasmPoolResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateCosmWasmPoolResponse>): MsgCreateCosmWasmPoolResponse {
     const message = createBaseMsgCreateCosmWasmPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgCreateCosmWasmPoolResponseSDKType): MsgCreateCosmWasmPoolResponse {

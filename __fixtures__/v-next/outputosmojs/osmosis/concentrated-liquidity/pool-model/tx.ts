@@ -118,7 +118,9 @@ export const MsgCreateConcentratedPool = {
     message.sender = object.sender ?? "";
     message.denom0 = object.denom0 ?? "";
     message.denom1 = object.denom1 ?? "";
-    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt(0);
+    if (object.tickSpacing !== undefined && object.tickSpacing !== null) {
+      message.tickSpacing = BigInt(object.tickSpacing.toString());
+    }
     message.exponentAtPriceOne = object.exponentAtPriceOne ?? "";
     message.swapFee = object.swapFee ?? "";
     return message;
@@ -237,7 +239,9 @@ export const MsgCreateConcentratedPoolResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateConcentratedPoolResponse>): MsgCreateConcentratedPoolResponse {
     const message = createBaseMsgCreateConcentratedPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgCreateConcentratedPoolResponseSDKType): MsgCreateConcentratedPoolResponse {

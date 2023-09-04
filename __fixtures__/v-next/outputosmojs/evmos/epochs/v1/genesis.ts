@@ -127,11 +127,17 @@ export const EpochInfo = {
     const message = createBaseEpochInfo();
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
+    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
+      message.currentEpoch = BigInt(object.currentEpoch.toString());
+    }
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;
-    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? BigInt(object.currentEpochStartHeight.toString()) : BigInt(0);
+    if (object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null) {
+      message.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
+    }
     return message;
   },
   fromSDK(object: EpochInfoSDKType): EpochInfo {

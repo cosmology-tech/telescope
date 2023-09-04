@@ -670,7 +670,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -846,7 +848,9 @@ export const QueryValidatorOutstandingRewardsResponse = {
   },
   fromPartial(object: DeepPartial<QueryValidatorOutstandingRewardsResponse>): QueryValidatorOutstandingRewardsResponse {
     const message = createBaseQueryValidatorOutstandingRewardsResponse();
-    message.rewards = object.rewards !== undefined && object.rewards !== null ? ValidatorOutstandingRewards.fromPartial(object.rewards) : ValidatorOutstandingRewards.fromPartial({});
+    if (object.rewards !== undefined && object.rewards !== null) {
+      message.rewards = ValidatorOutstandingRewards.fromPartial(object.rewards);
+    }
     return message;
   },
   fromSDK(object: QueryValidatorOutstandingRewardsResponseSDKType): QueryValidatorOutstandingRewardsResponse {
@@ -1022,7 +1026,9 @@ export const QueryValidatorCommissionResponse = {
   },
   fromPartial(object: DeepPartial<QueryValidatorCommissionResponse>): QueryValidatorCommissionResponse {
     const message = createBaseQueryValidatorCommissionResponse();
-    message.commission = object.commission !== undefined && object.commission !== null ? ValidatorAccumulatedCommission.fromPartial(object.commission) : ValidatorAccumulatedCommission.fromPartial({});
+    if (object.commission !== undefined && object.commission !== null) {
+      message.commission = ValidatorAccumulatedCommission.fromPartial(object.commission);
+    }
     return message;
   },
   fromSDK(object: QueryValidatorCommissionResponseSDKType): QueryValidatorCommissionResponse {
@@ -1120,21 +1126,12 @@ export const QueryValidatorSlashesRequest = {
     return message;
   },
   fromJSON(object: any): QueryValidatorSlashesRequest {
-<<<<<<< HEAD
     const obj = createBaseQueryValidatorSlashesRequest();
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.startingHeight)) obj.startingHeight = Long.fromValue(object.startingHeight);
-    if (isSet(object.endingHeight)) obj.endingHeight = Long.fromValue(object.endingHeight);
+    if (isSet(object.startingHeight)) obj.startingHeight = BigInt(object.startingHeight.toString());
+    if (isSet(object.endingHeight)) obj.endingHeight = BigInt(object.endingHeight.toString());
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
-=======
-    return {
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      startingHeight: isSet(object.startingHeight) ? BigInt(object.startingHeight.toString()) : BigInt(0),
-      endingHeight: isSet(object.endingHeight) ? BigInt(object.endingHeight.toString()) : BigInt(0),
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: QueryValidatorSlashesRequest): unknown {
     const obj: any = {};
@@ -1147,15 +1144,15 @@ export const QueryValidatorSlashesRequest = {
   fromPartial(object: DeepPartial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest {
     const message = createBaseQueryValidatorSlashesRequest();
     message.validatorAddress = object.validatorAddress ?? "";
-<<<<<<< HEAD
-    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? Long.fromValue(object.startingHeight) : Long.UZERO;
-    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? Long.fromValue(object.endingHeight) : Long.UZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
-=======
-    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? BigInt(object.startingHeight.toString()) : BigInt(0);
-    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? BigInt(object.endingHeight.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
->>>>>>> changes-v1
+    if (object.startingHeight !== undefined && object.startingHeight !== null) {
+      message.startingHeight = BigInt(object.startingHeight.toString());
+    }
+    if (object.endingHeight !== undefined && object.endingHeight !== null) {
+      message.endingHeight = BigInt(object.endingHeight.toString());
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryValidatorSlashesRequestSDKType): QueryValidatorSlashesRequest {
@@ -1269,7 +1266,9 @@ export const QueryValidatorSlashesResponse = {
   fromPartial(object: DeepPartial<QueryValidatorSlashesResponse>): QueryValidatorSlashesResponse {
     const message = createBaseQueryValidatorSlashesResponse();
     message.slashes = object.slashes?.map(e => ValidatorSlashEvent.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryValidatorSlashesResponseSDKType): QueryValidatorSlashesResponse {

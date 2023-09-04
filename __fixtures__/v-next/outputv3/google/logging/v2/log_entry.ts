@@ -831,15 +831,23 @@ export const LogEntry = {
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.logName = object.logName ?? "";
-    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : MonitoredResource.fromPartial({});
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : Any.fromPartial({});
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromPartial(object.resource);
+    }
+    if (object.protoPayload !== undefined && object.protoPayload !== null) {
+      message.protoPayload = Any.fromPartial(object.protoPayload);
+    }
     message.textPayload = object.textPayload ?? undefined;
-    message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : Struct.fromPartial({});
+    if (object.jsonPayload !== undefined && object.jsonPayload !== null) {
+      message.jsonPayload = Struct.fromPartial(object.jsonPayload);
+    }
     message.timestamp = object.timestamp ?? undefined;
     message.receiveTimestamp = object.receiveTimestamp ?? undefined;
     message.severity = object.severity ?? 0;
     message.insertId = object.insertId ?? "";
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : HttpRequest.fromPartial({});
+    if (object.httpRequest !== undefined && object.httpRequest !== null) {
+      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
+    }
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -848,12 +856,18 @@ export const LogEntry = {
       }
       return acc;
     }, {});
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : LogEntryOperation.fromPartial({});
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromPartial(object.operation);
+    }
     message.trace = object.trace ?? "";
     message.spanId = object.spanId ?? "";
     message.traceSampled = object.traceSampled ?? false;
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : LogEntrySourceLocation.fromPartial({});
-    message.split = object.split !== undefined && object.split !== null ? LogSplit.fromPartial(object.split) : LogSplit.fromPartial({});
+    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
+    }
+    if (object.split !== undefined && object.split !== null) {
+      message.split = LogSplit.fromPartial(object.split);
+    }
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {
@@ -1144,19 +1158,11 @@ export const LogEntrySourceLocation = {
     return message;
   },
   fromJSON(object: any): LogEntrySourceLocation {
-<<<<<<< HEAD
     const obj = createBaseLogEntrySourceLocation();
     if (isSet(object.file)) obj.file = String(object.file);
-    if (isSet(object.line)) obj.line = Long.fromValue(object.line);
+    if (isSet(object.line)) obj.line = BigInt(object.line.toString());
     if (isSet(object.function)) obj.function = String(object.function);
     return obj;
-=======
-    return {
-      file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
-      function: isSet(object.function) ? String(object.function) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
@@ -1168,7 +1174,9 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt(0);
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line.toString());
+    }
     message.function = object.function ?? "";
     return message;
   },

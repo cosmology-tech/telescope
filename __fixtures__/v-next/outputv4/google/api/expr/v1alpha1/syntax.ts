@@ -531,8 +531,12 @@ export const ParsedExpr = {
   },
   fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
     const message = createBaseParsedExpr();
-    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : Expr.fromPartial({});
-    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Expr.fromPartial(object.expr);
+    }
+    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
+      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
+    }
     return message;
   },
   fromSDK(object: ParsedExprSDKType): ParsedExpr {
@@ -686,14 +690,30 @@ export const Expr = {
   },
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
-    message.constExpr = object.constExpr !== undefined && object.constExpr !== null ? Constant.fromPartial(object.constExpr) : Constant.fromPartial({});
-    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : Expr_Ident.fromPartial({});
-    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : Expr_Select.fromPartial({});
-    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Expr_Call.fromPartial(object.callExpr) : Expr_Call.fromPartial({});
-    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? Expr_CreateList.fromPartial(object.listExpr) : Expr_CreateList.fromPartial({});
-    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : Expr_CreateStruct.fromPartial({});
-    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : Expr_Comprehension.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
+    if (object.constExpr !== undefined && object.constExpr !== null) {
+      message.constExpr = Constant.fromPartial(object.constExpr);
+    }
+    if (object.identExpr !== undefined && object.identExpr !== null) {
+      message.identExpr = Expr_Ident.fromPartial(object.identExpr);
+    }
+    if (object.selectExpr !== undefined && object.selectExpr !== null) {
+      message.selectExpr = Expr_Select.fromPartial(object.selectExpr);
+    }
+    if (object.callExpr !== undefined && object.callExpr !== null) {
+      message.callExpr = Expr_Call.fromPartial(object.callExpr);
+    }
+    if (object.listExpr !== undefined && object.listExpr !== null) {
+      message.listExpr = Expr_CreateList.fromPartial(object.listExpr);
+    }
+    if (object.structExpr !== undefined && object.structExpr !== null) {
+      message.structExpr = Expr_CreateStruct.fromPartial(object.structExpr);
+    }
+    if (object.comprehensionExpr !== undefined && object.comprehensionExpr !== null) {
+      message.comprehensionExpr = Expr_Comprehension.fromPartial(object.comprehensionExpr);
+    }
     return message;
   },
   fromSDK(object: ExprSDKType): Expr {
@@ -918,7 +938,9 @@ export const Expr_Select = {
   },
   fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
     const message = createBaseExpr_Select();
-    message.operand = object.operand !== undefined && object.operand !== null ? Expr.fromPartial(object.operand) : Expr.fromPartial({});
+    if (object.operand !== undefined && object.operand !== null) {
+      message.operand = Expr.fromPartial(object.operand);
+    }
     message.field = object.field ?? "";
     message.testOnly = object.testOnly ?? false;
     return message;
@@ -1038,7 +1060,9 @@ export const Expr_Call = {
   },
   fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
     const message = createBaseExpr_Call();
-    message.target = object.target !== undefined && object.target !== null ? Expr.fromPartial(object.target) : Expr.fromPartial({});
+    if (object.target !== undefined && object.target !== null) {
+      message.target = Expr.fromPartial(object.target);
+    }
     message.function = object.function ?? "";
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
@@ -1382,10 +1406,16 @@ export const Expr_CreateStruct_Entry = {
   },
   fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.fieldKey = object.fieldKey ?? undefined;
-    message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : Expr.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : Expr.fromPartial({});
+    if (object.mapKey !== undefined && object.mapKey !== null) {
+      message.mapKey = Expr.fromPartial(object.mapKey);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
@@ -1541,12 +1571,22 @@ export const Expr_Comprehension = {
   fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
     const message = createBaseExpr_Comprehension();
     message.iterVar = object.iterVar ?? "";
-    message.iterRange = object.iterRange !== undefined && object.iterRange !== null ? Expr.fromPartial(object.iterRange) : Expr.fromPartial({});
+    if (object.iterRange !== undefined && object.iterRange !== null) {
+      message.iterRange = Expr.fromPartial(object.iterRange);
+    }
     message.accuVar = object.accuVar ?? "";
-    message.accuInit = object.accuInit !== undefined && object.accuInit !== null ? Expr.fromPartial(object.accuInit) : Expr.fromPartial({});
-    message.loopCondition = object.loopCondition !== undefined && object.loopCondition !== null ? Expr.fromPartial(object.loopCondition) : Expr.fromPartial({});
-    message.loopStep = object.loopStep !== undefined && object.loopStep !== null ? Expr.fromPartial(object.loopStep) : Expr.fromPartial({});
-    message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : Expr.fromPartial({});
+    if (object.accuInit !== undefined && object.accuInit !== null) {
+      message.accuInit = Expr.fromPartial(object.accuInit);
+    }
+    if (object.loopCondition !== undefined && object.loopCondition !== null) {
+      message.loopCondition = Expr.fromPartial(object.loopCondition);
+    }
+    if (object.loopStep !== undefined && object.loopStep !== null) {
+      message.loopStep = Expr.fromPartial(object.loopStep);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = Expr.fromPartial(object.result);
+    }
     return message;
   },
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
@@ -1736,12 +1776,18 @@ export const Constant = {
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : Duration.fromPartial({});
+    if (object.durationValue !== undefined && object.durationValue !== null) {
+      message.durationValue = Duration.fromPartial(object.durationValue);
+    }
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   },
@@ -1876,7 +1922,9 @@ export const SourceInfo_PositionsEntry = {
   },
   fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
     const message = createBaseSourceInfo_PositionsEntry();
-    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key.toString());
+    }
     message.value = object.value ?? 0;
     return message;
   },
@@ -1970,8 +2018,12 @@ export const SourceInfo_MacroCallsEntry = {
   },
   fromPartial(object: DeepPartial<SourceInfo_MacroCallsEntry>): SourceInfo_MacroCallsEntry {
     const message = createBaseSourceInfo_MacroCallsEntry();
-    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : Expr.fromPartial({});
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key.toString());
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: SourceInfo_MacroCallsEntrySDKType): SourceInfo_MacroCallsEntry {

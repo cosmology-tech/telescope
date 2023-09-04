@@ -182,11 +182,15 @@ export const Snapshot = {
   },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromPartial(object.metadata);
+    }
     return message;
   },
   fromSDK(object: SnapshotSDKType): Snapshot {
@@ -447,12 +451,24 @@ export const SnapshotItem = {
   },
   fromPartial(object: DeepPartial<SnapshotItem>): SnapshotItem {
     const message = createBaseSnapshotItem();
-    message.store = object.store !== undefined && object.store !== null ? SnapshotStoreItem.fromPartial(object.store) : SnapshotStoreItem.fromPartial({});
-    message.iavl = object.iavl !== undefined && object.iavl !== null ? SnapshotIAVLItem.fromPartial(object.iavl) : SnapshotIAVLItem.fromPartial({});
-    message.extension = object.extension !== undefined && object.extension !== null ? SnapshotExtensionMeta.fromPartial(object.extension) : SnapshotExtensionMeta.fromPartial({});
-    message.extensionPayload = object.extensionPayload !== undefined && object.extensionPayload !== null ? SnapshotExtensionPayload.fromPartial(object.extensionPayload) : SnapshotExtensionPayload.fromPartial({});
-    message.kv = object.kv !== undefined && object.kv !== null ? SnapshotKVItem.fromPartial(object.kv) : SnapshotKVItem.fromPartial({});
-    message.schema = object.schema !== undefined && object.schema !== null ? SnapshotSchema.fromPartial(object.schema) : SnapshotSchema.fromPartial({});
+    if (object.store !== undefined && object.store !== null) {
+      message.store = SnapshotStoreItem.fromPartial(object.store);
+    }
+    if (object.iavl !== undefined && object.iavl !== null) {
+      message.iavl = SnapshotIAVLItem.fromPartial(object.iavl);
+    }
+    if (object.extension !== undefined && object.extension !== null) {
+      message.extension = SnapshotExtensionMeta.fromPartial(object.extension);
+    }
+    if (object.extensionPayload !== undefined && object.extensionPayload !== null) {
+      message.extensionPayload = SnapshotExtensionPayload.fromPartial(object.extensionPayload);
+    }
+    if (object.kv !== undefined && object.kv !== null) {
+      message.kv = SnapshotKVItem.fromPartial(object.kv);
+    }
+    if (object.schema !== undefined && object.schema !== null) {
+      message.schema = SnapshotSchema.fromPartial(object.schema);
+    }
     return message;
   },
   fromSDK(object: SnapshotItemSDKType): SnapshotItem {
@@ -690,7 +706,9 @@ export const SnapshotIAVLItem = {
     const message = createBaseSnapshotIAVLItem();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version.toString());
+    }
     message.height = object.height ?? 0;
     return message;
   },

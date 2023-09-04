@@ -256,7 +256,9 @@ export const ParamsResponse = {
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {
@@ -370,7 +372,9 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSwapExactAmountInRequest>): EstimateSwapExactAmountInRequest {
     const message = createBaseEstimateSwapExactAmountInRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -500,7 +504,9 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSinglePoolSwapExactAmountInRequest>): EstimateSinglePoolSwapExactAmountInRequest {
     const message = createBaseEstimateSinglePoolSwapExactAmountInRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokenIn = object.tokenIn ?? "";
     message.tokenOutDenom = object.tokenOutDenom ?? "";
     return message;
@@ -718,7 +724,9 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSwapExactAmountOutRequest>): EstimateSwapExactAmountOutRequest {
     const message = createBaseEstimateSwapExactAmountOutRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -848,7 +856,9 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSinglePoolSwapExactAmountOutRequest>): EstimateSinglePoolSwapExactAmountOutRequest {
     const message = createBaseEstimateSinglePoolSwapExactAmountOutRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokenInDenom = object.tokenInDenom ?? "";
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -1117,7 +1127,9 @@ export const NumPoolsResponse = {
   },
   fromPartial(object: DeepPartial<NumPoolsResponse>): NumPoolsResponse {
     const message = createBaseNumPoolsResponse();
-    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt(0);
+    if (object.numPools !== undefined && object.numPools !== null) {
+      message.numPools = BigInt(object.numPools.toString());
+    }
     return message;
   },
   fromSDK(object: NumPoolsResponseSDKType): NumPoolsResponse {
@@ -1209,7 +1221,9 @@ export const PoolRequest = {
   },
   fromPartial(object: DeepPartial<PoolRequest>): PoolRequest {
     const message = createBasePoolRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: PoolRequestSDKType): PoolRequest {
@@ -1301,7 +1315,9 @@ export const PoolResponse = {
   },
   fromPartial(object: DeepPartial<PoolResponse>): PoolResponse {
     const message = createBasePoolResponse();
-    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : Any.fromPartial({});
+    if (object.pool !== undefined && object.pool !== null) {
+      message.pool = Any.fromPartial(object.pool);
+    }
     return message;
   },
   fromSDK(object: PoolResponseSDKType): PoolResponse {
@@ -1393,7 +1409,9 @@ export const AllPoolsRequest = {
   },
   fromPartial(object: DeepPartial<AllPoolsRequest>): AllPoolsRequest {
     const message = createBaseAllPoolsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: AllPoolsRequestSDKType): AllPoolsRequest {
@@ -1607,7 +1625,9 @@ export const SpotPriceRequest = {
   },
   fromPartial(object: DeepPartial<SpotPriceRequest>): SpotPriceRequest {
     const message = createBaseSpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;

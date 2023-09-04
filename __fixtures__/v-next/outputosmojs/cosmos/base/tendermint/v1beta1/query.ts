@@ -213,8 +213,12 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetValidatorSetByHeightRequestSDKType): GetValidatorSetByHeightRequest {
@@ -333,9 +337,13 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
+    if (object.blockHeight !== undefined && object.blockHeight !== null) {
+      message.blockHeight = BigInt(object.blockHeight.toString());
+    }
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetValidatorSetByHeightResponseSDKType): GetValidatorSetByHeightResponse {
@@ -445,7 +453,9 @@ export const GetLatestValidatorSetRequest = {
   },
   fromPartial(object: DeepPartial<GetLatestValidatorSetRequest>): GetLatestValidatorSetRequest {
     const message = createBaseGetLatestValidatorSetRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetLatestValidatorSetRequestSDKType): GetLatestValidatorSetRequest {
@@ -559,9 +569,13 @@ export const GetLatestValidatorSetResponse = {
   },
   fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
+    if (object.blockHeight !== undefined && object.blockHeight !== null) {
+      message.blockHeight = BigInt(object.blockHeight.toString());
+    }
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: GetLatestValidatorSetResponseSDKType): GetLatestValidatorSetResponse {
@@ -699,9 +713,15 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : Any.fromPartial({});
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt(0);
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = Any.fromPartial(object.pubKey);
+    }
+    if (object.votingPower !== undefined && object.votingPower !== null) {
+      message.votingPower = BigInt(object.votingPower.toString());
+    }
+    if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
+      message.proposerPriority = BigInt(object.proposerPriority.toString());
+    }
     return message;
   },
   fromSDK(object: ValidatorSDKType): Validator {
@@ -808,7 +828,9 @@ export const GetBlockByHeightRequest = {
   },
   fromPartial(object: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     return message;
   },
   fromSDK(object: GetBlockByHeightRequestSDKType): GetBlockByHeightRequest {
@@ -909,8 +931,12 @@ export const GetBlockByHeightResponse = {
   },
   fromPartial(object: DeepPartial<GetBlockByHeightResponse>): GetBlockByHeightResponse {
     const message = createBaseGetBlockByHeightResponse();
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
-    message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : Block.fromPartial({});
+    if (object.blockId !== undefined && object.blockId !== null) {
+      message.blockId = BlockID.fromPartial(object.blockId);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromPartial(object.block);
+    }
     return message;
   },
   fromSDK(object: GetBlockByHeightResponseSDKType): GetBlockByHeightResponse {
@@ -1089,8 +1115,12 @@ export const GetLatestBlockResponse = {
   },
   fromPartial(object: DeepPartial<GetLatestBlockResponse>): GetLatestBlockResponse {
     const message = createBaseGetLatestBlockResponse();
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
-    message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : Block.fromPartial({});
+    if (object.blockId !== undefined && object.blockId !== null) {
+      message.blockId = BlockID.fromPartial(object.blockId);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromPartial(object.block);
+    }
     return message;
   },
   fromSDK(object: GetLatestBlockResponseSDKType): GetLatestBlockResponse {
@@ -1434,8 +1464,12 @@ export const GetNodeInfoResponse = {
   },
   fromPartial(object: DeepPartial<GetNodeInfoResponse>): GetNodeInfoResponse {
     const message = createBaseGetNodeInfoResponse();
-    message.nodeInfo = object.nodeInfo !== undefined && object.nodeInfo !== null ? NodeInfo.fromPartial(object.nodeInfo) : NodeInfo.fromPartial({});
-    message.applicationVersion = object.applicationVersion !== undefined && object.applicationVersion !== null ? VersionInfo.fromPartial(object.applicationVersion) : VersionInfo.fromPartial({});
+    if (object.nodeInfo !== undefined && object.nodeInfo !== null) {
+      message.nodeInfo = NodeInfo.fromPartial(object.nodeInfo);
+    }
+    if (object.applicationVersion !== undefined && object.applicationVersion !== null) {
+      message.applicationVersion = VersionInfo.fromPartial(object.applicationVersion);
+    }
     return message;
   },
   fromSDK(object: GetNodeInfoResponseSDKType): GetNodeInfoResponse {

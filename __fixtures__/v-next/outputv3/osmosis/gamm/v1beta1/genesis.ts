@@ -206,19 +206,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-<<<<<<< HEAD
     const obj = createBaseGenesisState();
     if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
-    if (isSet(object.nextPoolNumber)) obj.nextPoolNumber = Long.fromValue(object.nextPoolNumber);
+    if (isSet(object.nextPoolNumber)) obj.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
-=======
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? BigInt(object.nextPoolNumber.toString()) : BigInt(0),
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -234,13 +226,12 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-<<<<<<< HEAD
-    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? Long.fromValue(object.nextPoolNumber) : Long.UZERO;
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
-=======
-    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? BigInt(object.nextPoolNumber.toString()) : BigInt(0);
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
->>>>>>> changes-v1
+    if (object.nextPoolNumber !== undefined && object.nextPoolNumber !== null) {
+      message.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

@@ -97,8 +97,12 @@ export const ValidatorSet = {
   fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
     const message = createBaseValidatorSet();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : Validator.fromPartial({});
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
+    if (object.proposer !== undefined && object.proposer !== null) {
+      message.proposer = Validator.fromPartial(object.proposer);
+    }
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
     return message;
   },
   fromSDK(object: ValidatorSetSDKType): ValidatorSet {
@@ -230,9 +234,15 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt(0);
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.votingPower !== undefined && object.votingPower !== null) {
+      message.votingPower = BigInt(object.votingPower.toString());
+    }
+    if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
+      message.proposerPriority = BigInt(object.proposerPriority.toString());
+    }
     return message;
   },
   fromSDK(object: ValidatorSDKType): Validator {
@@ -342,8 +352,12 @@ export const SimpleValidator = {
   },
   fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
     const message = createBaseSimpleValidator();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.votingPower !== undefined && object.votingPower !== null) {
+      message.votingPower = BigInt(object.votingPower.toString());
+    }
     return message;
   },
   fromSDK(object: SimpleValidatorSDKType): SimpleValidator {

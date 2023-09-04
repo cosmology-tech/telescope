@@ -437,21 +437,12 @@ export const UpdateUnpoolWhiteListProposal = {
     return message;
   },
   fromJSON(object: any): UpdateUnpoolWhiteListProposal {
-<<<<<<< HEAD
     const obj = createBaseUpdateUnpoolWhiteListProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.ids)) object.ids.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.ids)) object.ids.map((e: any) => BigInt(e.toString()));
     if (isSet(object.isOverwrite)) obj.isOverwrite = Boolean(object.isOverwrite);
     return obj;
-=======
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : [],
-      isOverwrite: isSet(object.isOverwrite) ? Boolean(object.isOverwrite) : false
-    };
->>>>>>> changes-v1
   },
   toJSON(message: UpdateUnpoolWhiteListProposal): unknown {
     const obj: any = {};

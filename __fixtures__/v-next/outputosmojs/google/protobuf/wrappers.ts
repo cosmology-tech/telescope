@@ -368,7 +368,9 @@ export const Int64Value = {
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: Int64ValueSDKType): Int64Value {
@@ -454,7 +456,9 @@ export const UInt64Value = {
   },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: UInt64ValueSDKType): UInt64Value {

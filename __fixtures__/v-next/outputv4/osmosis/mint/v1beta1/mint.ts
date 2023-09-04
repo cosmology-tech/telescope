@@ -563,11 +563,17 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0);
+    if (object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null) {
+      message.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
+    }
     message.reductionFactor = object.reductionFactor ?? "";
-    message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : DistributionProportions.fromPartial({});
+    if (object.distributionProportions !== undefined && object.distributionProportions !== null) {
+      message.distributionProportions = DistributionProportions.fromPartial(object.distributionProportions);
+    }
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0);
+    if (object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null) {
+      message.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

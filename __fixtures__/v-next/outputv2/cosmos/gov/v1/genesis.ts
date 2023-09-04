@@ -128,9 +128,8 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-<<<<<<< HEAD
     const obj = createBaseGenesisState();
-    if (isSet(object.startingProposalId)) obj.startingProposalId = Long.fromValue(object.startingProposalId);
+    if (isSet(object.startingProposalId)) obj.startingProposalId = BigInt(object.startingProposalId.toString());
     if (Array.isArray(object?.deposits)) object.deposits.map((e: any) => Deposit.fromJSON(e));
     if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
     if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
@@ -138,17 +137,6 @@ export const GenesisState = {
     if (isSet(object.votingParams)) obj.votingParams = VotingParams.fromJSON(object.votingParams);
     if (isSet(object.tallyParams)) obj.tallyParams = TallyParams.fromJSON(object.tallyParams);
     return obj;
-=======
-    return {
-      startingProposalId: isSet(object.startingProposalId) ? BigInt(object.startingProposalId.toString()) : BigInt(0),
-      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromJSON(e)) : [],
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
-      depositParams: isSet(object.depositParams) ? DepositParams.fromJSON(object.depositParams) : undefined,
-      votingParams: isSet(object.votingParams) ? VotingParams.fromJSON(object.votingParams) : undefined,
-      tallyParams: isSet(object.tallyParams) ? TallyParams.fromJSON(object.tallyParams) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -175,13 +163,21 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.startingProposalId = object.startingProposalId !== undefined && object.startingProposalId !== null ? BigInt(object.startingProposalId.toString()) : BigInt(0);
+    if (object.startingProposalId !== undefined && object.startingProposalId !== null) {
+      message.startingProposalId = BigInt(object.startingProposalId.toString());
+    }
     message.deposits = object.deposits?.map(e => Deposit.fromPartial(e)) || [];
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    message.depositParams = object.depositParams !== undefined && object.depositParams !== null ? DepositParams.fromPartial(object.depositParams) : DepositParams.fromPartial({});
-    message.votingParams = object.votingParams !== undefined && object.votingParams !== null ? VotingParams.fromPartial(object.votingParams) : VotingParams.fromPartial({});
-    message.tallyParams = object.tallyParams !== undefined && object.tallyParams !== null ? TallyParams.fromPartial(object.tallyParams) : TallyParams.fromPartial({});
+    if (object.depositParams !== undefined && object.depositParams !== null) {
+      message.depositParams = DepositParams.fromPartial(object.depositParams);
+    }
+    if (object.votingParams !== undefined && object.votingParams !== null) {
+      message.votingParams = VotingParams.fromPartial(object.votingParams);
+    }
+    if (object.tallyParams !== undefined && object.tallyParams !== null) {
+      message.tallyParams = TallyParams.fromPartial(object.tallyParams);
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

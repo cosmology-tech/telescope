@@ -101,8 +101,12 @@ export const Evidence = {
   },
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
-    message.duplicateVoteEvidence = object.duplicateVoteEvidence !== undefined && object.duplicateVoteEvidence !== null ? DuplicateVoteEvidence.fromPartial(object.duplicateVoteEvidence) : DuplicateVoteEvidence.fromPartial({});
-    message.lightClientAttackEvidence = object.lightClientAttackEvidence !== undefined && object.lightClientAttackEvidence !== null ? LightClientAttackEvidence.fromPartial(object.lightClientAttackEvidence) : LightClientAttackEvidence.fromPartial({});
+    if (object.duplicateVoteEvidence !== undefined && object.duplicateVoteEvidence !== null) {
+      message.duplicateVoteEvidence = DuplicateVoteEvidence.fromPartial(object.duplicateVoteEvidence);
+    }
+    if (object.lightClientAttackEvidence !== undefined && object.lightClientAttackEvidence !== null) {
+      message.lightClientAttackEvidence = LightClientAttackEvidence.fromPartial(object.lightClientAttackEvidence);
+    }
     return message;
   },
   fromSDK(object: EvidenceSDKType): Evidence {
@@ -229,10 +233,18 @@ export const DuplicateVoteEvidence = {
   },
   fromPartial(object: DeepPartial<DuplicateVoteEvidence>): DuplicateVoteEvidence {
     const message = createBaseDuplicateVoteEvidence();
-    message.voteA = object.voteA !== undefined && object.voteA !== null ? Vote.fromPartial(object.voteA) : Vote.fromPartial({});
-    message.voteB = object.voteB !== undefined && object.voteB !== null ? Vote.fromPartial(object.voteB) : Vote.fromPartial({});
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
-    message.validatorPower = object.validatorPower !== undefined && object.validatorPower !== null ? BigInt(object.validatorPower.toString()) : BigInt(0);
+    if (object.voteA !== undefined && object.voteA !== null) {
+      message.voteA = Vote.fromPartial(object.voteA);
+    }
+    if (object.voteB !== undefined && object.voteB !== null) {
+      message.voteB = Vote.fromPartial(object.voteB);
+    }
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
+    if (object.validatorPower !== undefined && object.validatorPower !== null) {
+      message.validatorPower = BigInt(object.validatorPower.toString());
+    }
     message.timestamp = object.timestamp ?? undefined;
     return message;
   },
@@ -379,10 +391,16 @@ export const LightClientAttackEvidence = {
   },
   fromPartial(object: DeepPartial<LightClientAttackEvidence>): LightClientAttackEvidence {
     const message = createBaseLightClientAttackEvidence();
-    message.conflictingBlock = object.conflictingBlock !== undefined && object.conflictingBlock !== null ? LightBlock.fromPartial(object.conflictingBlock) : LightBlock.fromPartial({});
-    message.commonHeight = object.commonHeight !== undefined && object.commonHeight !== null ? BigInt(object.commonHeight.toString()) : BigInt(0);
+    if (object.conflictingBlock !== undefined && object.conflictingBlock !== null) {
+      message.conflictingBlock = LightBlock.fromPartial(object.conflictingBlock);
+    }
+    if (object.commonHeight !== undefined && object.commonHeight !== null) {
+      message.commonHeight = BigInt(object.commonHeight.toString());
+    }
     message.byzantineValidators = object.byzantineValidators?.map(e => Validator.fromPartial(e)) || [];
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
     message.timestamp = object.timestamp ?? undefined;
     return message;
   },

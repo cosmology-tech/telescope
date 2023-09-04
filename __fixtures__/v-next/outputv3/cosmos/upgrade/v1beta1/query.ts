@@ -446,7 +446,9 @@ export const QueryCurrentPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
     const message = createBaseQueryCurrentPlanResponse();
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
     return message;
   },
   fromSDK(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
@@ -611,15 +613,9 @@ export const QueryAppliedPlanResponse = {
     return message;
   },
   fromJSON(object: any): QueryAppliedPlanResponse {
-<<<<<<< HEAD
     const obj = createBaseQueryAppliedPlanResponse();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     return obj;
-=======
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
@@ -628,7 +624,9 @@ export const QueryAppliedPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     return message;
   },
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
@@ -705,15 +703,9 @@ export const QueryUpgradedConsensusStateRequest = {
     return message;
   },
   fromJSON(object: any): QueryUpgradedConsensusStateRequest {
-<<<<<<< HEAD
     const obj = createBaseQueryUpgradedConsensusStateRequest();
-    if (isSet(object.lastHeight)) obj.lastHeight = Long.fromValue(object.lastHeight);
+    if (isSet(object.lastHeight)) obj.lastHeight = BigInt(object.lastHeight.toString());
     return obj;
-=======
-    return {
-      lastHeight: isSet(object.lastHeight) ? BigInt(object.lastHeight.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
     const obj: any = {};
@@ -722,7 +714,9 @@ export const QueryUpgradedConsensusStateRequest = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
-    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? BigInt(object.lastHeight.toString()) : BigInt(0);
+    if (object.lastHeight !== undefined && object.lastHeight !== null) {
+      message.lastHeight = BigInt(object.lastHeight.toString());
+    }
     return message;
   },
   fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {

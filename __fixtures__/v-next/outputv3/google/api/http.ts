@@ -1266,7 +1266,9 @@ export const HttpRule = {
     message.post = object.post ?? undefined;
     message.delete = object.delete ?? undefined;
     message.patch = object.patch ?? undefined;
-    message.custom = object.custom !== undefined && object.custom !== null ? CustomHttpPattern.fromPartial(object.custom) : CustomHttpPattern.fromPartial({});
+    if (object.custom !== undefined && object.custom !== null) {
+      message.custom = CustomHttpPattern.fromPartial(object.custom);
+    }
     message.body = object.body ?? "";
     message.responseBody = object.responseBody ?? "";
     message.additionalBindings = object.additionalBindings?.map(e => HttpRule.fromPartial(e)) || [];

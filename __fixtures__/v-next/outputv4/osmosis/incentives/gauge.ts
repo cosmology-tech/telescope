@@ -181,13 +181,21 @@ export const Gauge = {
   },
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.isPerpetual = object.isPerpetual ?? false;
-    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : QueryCondition.fromPartial({});
+    if (object.distributeTo !== undefined && object.distributeTo !== null) {
+      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
-    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? BigInt(object.filledEpochs.toString()) : BigInt(0);
+    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
+      message.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
+    }
+    if (object.filledEpochs !== undefined && object.filledEpochs !== null) {
+      message.filledEpochs = BigInt(object.filledEpochs.toString());
+    }
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },

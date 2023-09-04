@@ -935,17 +935,10 @@ export const CheckedExpr_ReferenceMapEntry = {
     return message;
   },
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
-<<<<<<< HEAD
     const obj = createBaseCheckedExpr_ReferenceMapEntry();
-    if (isSet(object.key)) obj.key = Long.fromValue(object.key);
+    if (isSet(object.key)) obj.key = BigInt(object.key.toString());
     if (isSet(object.value)) obj.value = Reference.fromJSON(object.value);
     return obj;
-=======
-    return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
-      value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
@@ -955,13 +948,12 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
   fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
-<<<<<<< HEAD
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
-    message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : Reference.fromPartial({});
-=======
-    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
-    message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
->>>>>>> changes-v1
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key.toString());
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Reference.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
@@ -1035,17 +1027,10 @@ export const CheckedExpr_TypeMapEntry = {
     return message;
   },
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
-<<<<<<< HEAD
     const obj = createBaseCheckedExpr_TypeMapEntry();
-    if (isSet(object.key)) obj.key = Long.fromValue(object.key);
+    if (isSet(object.key)) obj.key = BigInt(object.key.toString());
     if (isSet(object.value)) obj.value = Type.fromJSON(object.value);
     return obj;
-=======
-    return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
-      value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
@@ -1055,13 +1040,12 @@ export const CheckedExpr_TypeMapEntry = {
   },
   fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
     const message = createBaseCheckedExpr_TypeMapEntry();
-<<<<<<< HEAD
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
-    message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : Type.fromPartial({});
-=======
-    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
-    message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
->>>>>>> changes-v1
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key.toString());
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Type.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
@@ -1169,16 +1153,15 @@ export const CheckedExpr = {
     return message;
   },
   fromJSON(object: any): CheckedExpr {
-<<<<<<< HEAD
     const obj = createBaseCheckedExpr();
     if (isObject(object.referenceMap)) obj.referenceMap = Object.entries(object.referenceMap).reduce<{
-      [key: Long]: Reference;
+      [key: bigint]: Reference;
     }>((acc, [key, value]) => {
       acc[Number(key)] = Reference.fromJSON(value);
       return acc;
     }, {});
     if (isObject(object.typeMap)) obj.typeMap = Object.entries(object.typeMap).reduce<{
-      [key: Long]: Type;
+      [key: bigint]: Type;
     }>((acc, [key, value]) => {
       acc[Number(key)] = Type.fromJSON(value);
       return acc;
@@ -1187,25 +1170,6 @@ export const CheckedExpr = {
     if (isSet(object.exprVersion)) obj.exprVersion = String(object.exprVersion);
     if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
     return obj;
-=======
-    return {
-      referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
-        [key: bigint]: Reference;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Reference.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
-        [key: bigint]: Type;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Type.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
-      exprVersion: isSet(object.exprVersion) ? String(object.exprVersion) : "",
-      expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: CheckedExpr): unknown {
     const obj: any = {};
@@ -1244,9 +1208,13 @@ export const CheckedExpr = {
       }
       return acc;
     }, {});
-    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
+    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
+      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
+    }
     message.exprVersion = object.exprVersion ?? "";
-    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : Expr.fromPartial({});
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Expr.fromPartial(object.expr);
+    }
     return message;
   },
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
@@ -1491,19 +1459,33 @@ export const Type = {
   },
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
-    message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : Empty.fromPartial({});
+    if (object.dyn !== undefined && object.dyn !== null) {
+      message.dyn = Empty.fromPartial(object.dyn);
+    }
     message.null = object.null ?? undefined;
     message.primitive = object.primitive ?? undefined;
     message.wrapper = object.wrapper ?? undefined;
     message.wellKnown = object.wellKnown ?? undefined;
-    message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : Type_ListType.fromPartial({});
-    message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : Type_MapType.fromPartial({});
-    message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : Type_FunctionType.fromPartial({});
+    if (object.listType !== undefined && object.listType !== null) {
+      message.listType = Type_ListType.fromPartial(object.listType);
+    }
+    if (object.mapType !== undefined && object.mapType !== null) {
+      message.mapType = Type_MapType.fromPartial(object.mapType);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = Type_FunctionType.fromPartial(object.function);
+    }
     message.messageType = object.messageType ?? undefined;
     message.typeParam = object.typeParam ?? undefined;
-    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : Type.fromPartial({});
-    message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : Empty.fromPartial({});
-    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : Type_AbstractType.fromPartial({});
+    if (object.type !== undefined && object.type !== null) {
+      message.type = Type.fromPartial(object.type);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = Empty.fromPartial(object.error);
+    }
+    if (object.abstractType !== undefined && object.abstractType !== null) {
+      message.abstractType = Type_AbstractType.fromPartial(object.abstractType);
+    }
     return message;
   },
   fromSDK(object: TypeSDKType): Type {
@@ -1632,7 +1614,9 @@ export const Type_ListType = {
   },
   fromPartial(object: DeepPartial<Type_ListType>): Type_ListType {
     const message = createBaseType_ListType();
-    message.elemType = object.elemType !== undefined && object.elemType !== null ? Type.fromPartial(object.elemType) : Type.fromPartial({});
+    if (object.elemType !== undefined && object.elemType !== null) {
+      message.elemType = Type.fromPartial(object.elemType);
+    }
     return message;
   },
   fromSDK(object: Type_ListTypeSDKType): Type_ListType {
@@ -1722,8 +1706,12 @@ export const Type_MapType = {
   },
   fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
-    message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : Type.fromPartial({});
-    message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : Type.fromPartial({});
+    if (object.keyType !== undefined && object.keyType !== null) {
+      message.keyType = Type.fromPartial(object.keyType);
+    }
+    if (object.valueType !== undefined && object.valueType !== null) {
+      message.valueType = Type.fromPartial(object.valueType);
+    }
     return message;
   },
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
@@ -1821,7 +1809,9 @@ export const Type_FunctionType = {
   },
   fromPartial(object: DeepPartial<Type_FunctionType>): Type_FunctionType {
     const message = createBaseType_FunctionType();
-    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : Type.fromPartial({});
+    if (object.resultType !== undefined && object.resultType !== null) {
+      message.resultType = Type.fromPartial(object.resultType);
+    }
     message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
   },
@@ -2041,8 +2031,12 @@ export const Decl = {
   fromPartial(object: DeepPartial<Decl>): Decl {
     const message = createBaseDecl();
     message.name = object.name ?? "";
-    message.ident = object.ident !== undefined && object.ident !== null ? Decl_IdentDecl.fromPartial(object.ident) : Decl_IdentDecl.fromPartial({});
-    message.function = object.function !== undefined && object.function !== null ? Decl_FunctionDecl.fromPartial(object.function) : Decl_FunctionDecl.fromPartial({});
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = Decl_IdentDecl.fromPartial(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = Decl_FunctionDecl.fromPartial(object.function);
+    }
     return message;
   },
   fromSDK(object: DeclSDKType): Decl {
@@ -2149,8 +2143,12 @@ export const Decl_IdentDecl = {
   },
   fromPartial(object: DeepPartial<Decl_IdentDecl>): Decl_IdentDecl {
     const message = createBaseDecl_IdentDecl();
-    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : Type.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : Constant.fromPartial({});
+    if (object.type !== undefined && object.type !== null) {
+      message.type = Type.fromPartial(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Constant.fromPartial(object.value);
+    }
     message.doc = object.doc ?? "";
     return message;
   },
@@ -2389,7 +2387,9 @@ export const Decl_FunctionDecl_Overload = {
     message.overloadId = object.overloadId ?? "";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
     message.typeParams = object.typeParams?.map(e => e) || [];
-    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : Type.fromPartial({});
+    if (object.resultType !== undefined && object.resultType !== null) {
+      message.resultType = Type.fromPartial(object.resultType);
+    }
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? "";
     return message;
@@ -2532,7 +2532,9 @@ export const Reference = {
     const message = createBaseReference();
     message.name = object.name ?? "";
     message.overloadId = object.overloadId?.map(e => e) || [];
-    message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : Constant.fromPartial({});
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Constant.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: ReferenceSDKType): Reference {

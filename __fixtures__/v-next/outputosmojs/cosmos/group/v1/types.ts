@@ -775,7 +775,9 @@ export const ThresholdDecisionPolicy = {
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    if (object.windows !== undefined && object.windows !== null) {
+      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
+    }
     return message;
   },
   fromSDK(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
@@ -882,7 +884,9 @@ export const PercentageDecisionPolicy = {
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    if (object.windows !== undefined && object.windows !== null) {
+      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
+    }
     return message;
   },
   fromSDK(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
@@ -988,8 +992,12 @@ export const DecisionPolicyWindows = {
   },
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
-    message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : Duration.fromPartial({});
+    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
+      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
+    }
+    if (object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null) {
+      message.minExecutionPeriod = Duration.fromPartial(object.minExecutionPeriod);
+    }
     return message;
   },
   fromSDK(object: DecisionPolicyWindowsSDKType): DecisionPolicyWindows {
@@ -1131,10 +1139,14 @@ export const GroupInfo = {
   },
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version.toString());
+    }
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1262,8 +1274,12 @@ export const GroupMember = {
   },
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
-    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : Member.fromPartial({});
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = BigInt(object.groupId.toString());
+    }
+    if (object.member !== undefined && object.member !== null) {
+      message.member = Member.fromPartial(object.member);
+    }
     return message;
   },
   fromSDK(object: GroupMemberSDKType): GroupMember {
@@ -1415,11 +1431,17 @@ export const GroupPolicyInfo = {
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = BigInt(object.groupId.toString());
+    }
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version.toString());
+    }
+    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
+      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
+    }
     message.createdAt = object.createdAt ?? undefined;
     return message;
   },
@@ -1658,16 +1680,24 @@ export const Proposal = {
   },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     message.proposers = object.proposers?.map(e => e) || [];
     message.submitTime = object.submitTime ?? undefined;
-    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? BigInt(object.groupVersion.toString()) : BigInt(0);
-    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? BigInt(object.groupPolicyVersion.toString()) : BigInt(0);
+    if (object.groupVersion !== undefined && object.groupVersion !== null) {
+      message.groupVersion = BigInt(object.groupVersion.toString());
+    }
+    if (object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null) {
+      message.groupPolicyVersion = BigInt(object.groupPolicyVersion.toString());
+    }
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
+    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
+      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
+    }
     message.votingPeriodEnd = object.votingPeriodEnd ?? undefined;
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
@@ -2011,7 +2041,9 @@ export const Vote = {
   },
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = BigInt(object.proposalId.toString());
+    }
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";

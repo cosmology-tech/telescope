@@ -146,11 +146,17 @@ export const MsgTransfer = {
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
-    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : Coin.fromPartial({});
+    if (object.token !== undefined && object.token !== null) {
+      message.token = Coin.fromPartial(object.token);
+    }
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
+    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
+      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
+    }
+    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    }
     return message;
   },
   fromSDK(object: MsgTransferSDKType): MsgTransfer {

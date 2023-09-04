@@ -130,7 +130,9 @@ export const QueryConfigResponse = {
   },
   fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();
-    message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : Config.fromPartial({});
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Config.fromPartial(object.config);
+    }
     return message;
   },
   fromSDK(object: QueryConfigResponseSDKType): QueryConfigResponse {

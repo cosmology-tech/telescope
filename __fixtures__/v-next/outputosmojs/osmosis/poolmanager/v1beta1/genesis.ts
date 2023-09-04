@@ -194,8 +194,12 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.nextPoolId = object.nextPoolId !== undefined && object.nextPoolId !== null ? BigInt(object.nextPoolId.toString()) : BigInt(0);
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.nextPoolId !== undefined && object.nextPoolId !== null) {
+      message.nextPoolId = BigInt(object.nextPoolId.toString());
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.poolRoutes = object.poolRoutes?.map(e => ModuleRoute.fromPartial(e)) || [];
     return message;
   },

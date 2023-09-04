@@ -271,18 +271,26 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? BigInt(object.requestSize.toString()) : BigInt(0);
+    if (object.requestSize !== undefined && object.requestSize !== null) {
+      message.requestSize = BigInt(object.requestSize.toString());
+    }
     message.status = object.status ?? 0;
-    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? BigInt(object.responseSize.toString()) : BigInt(0);
+    if (object.responseSize !== undefined && object.responseSize !== null) {
+      message.responseSize = BigInt(object.responseSize.toString());
+    }
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : Duration.fromPartial({});
+    if (object.latency !== undefined && object.latency !== null) {
+      message.latency = Duration.fromPartial(object.latency);
+    }
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? BigInt(object.cacheFillBytes.toString()) : BigInt(0);
+    if (object.cacheFillBytes !== undefined && object.cacheFillBytes !== null) {
+      message.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
+    }
     message.protocol = object.protocol ?? "";
     return message;
   },

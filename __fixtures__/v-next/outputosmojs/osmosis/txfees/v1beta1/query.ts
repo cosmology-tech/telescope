@@ -381,7 +381,9 @@ export const QueryDenomSpotPriceResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     message.spotPrice = object.spotPrice ?? "";
     return message;
   },
@@ -571,7 +573,9 @@ export const QueryDenomPoolIdResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     return message;
   },
   fromSDK(object: QueryDenomPoolIdResponseSDKType): QueryDenomPoolIdResponse {

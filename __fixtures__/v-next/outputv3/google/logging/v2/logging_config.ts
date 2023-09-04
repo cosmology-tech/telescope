@@ -3159,7 +3159,9 @@ export const LogBucket = {
     message.locked = object.locked ?? false;
     message.lifecycleState = object.lifecycleState ?? 0;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
-    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : CmekSettings.fromPartial({});
+    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
+      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
+    }
     return message;
   },
   fromSDK(object: LogBucketSDKType): LogBucket {
@@ -3529,7 +3531,9 @@ export const LogSink = {
     message.outputVersionFormat = object.outputVersionFormat ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     message.includeChildren = object.includeChildren ?? false;
-    message.bigqueryOptions = object.bigqueryOptions !== undefined && object.bigqueryOptions !== null ? BigQueryOptions.fromPartial(object.bigqueryOptions) : BigQueryOptions.fromPartial({});
+    if (object.bigqueryOptions !== undefined && object.bigqueryOptions !== null) {
+      message.bigqueryOptions = BigQueryOptions.fromPartial(object.bigqueryOptions);
+    }
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
@@ -3995,7 +3999,9 @@ export const CreateBucketRequest = {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
     message.bucketId = object.bucketId ?? "";
-    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : LogBucket.fromPartial({});
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromPartial(object.bucket);
+    }
     return message;
   },
   fromSDK(object: CreateBucketRequestSDKType): CreateBucketRequest {
@@ -4103,8 +4109,12 @@ export const UpdateBucketRequest = {
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
-    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : LogBucket.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromPartial(object.bucket);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
@@ -4672,7 +4682,9 @@ export const CreateViewRequest = {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
     message.viewId = object.viewId ?? "";
-    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : LogView.fromPartial({});
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromPartial(object.view);
+    }
     return message;
   },
   fromSDK(object: CreateViewRequestSDKType): CreateViewRequest {
@@ -4780,8 +4792,12 @@ export const UpdateViewRequest = {
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
-    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : LogView.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromPartial(object.view);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateViewRequestSDKType): UpdateViewRequest {
@@ -5348,7 +5364,9 @@ export const CreateSinkRequest = {
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
-    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : LogSink.fromPartial({});
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromPartial(object.sink);
+    }
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
   },
@@ -5466,9 +5484,13 @@ export const UpdateSinkRequest = {
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
-    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : LogSink.fromPartial({});
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromPartial(object.sink);
+    }
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
@@ -6100,7 +6122,9 @@ export const CreateExclusionRequest = {
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
-    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : LogExclusion.fromPartial({});
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromPartial(object.exclusion);
+    }
     return message;
   },
   fromSDK(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
@@ -6204,8 +6228,12 @@ export const UpdateExclusionRequest = {
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
-    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : LogExclusion.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromPartial(object.exclusion);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
@@ -6475,8 +6503,12 @@ export const UpdateCmekSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
-    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : CmekSettings.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
+      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
@@ -6774,8 +6806,12 @@ export const UpdateSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
-    message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : Settings.fromPartial({});
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    if (object.settings !== undefined && object.settings !== null) {
+      message.settings = Settings.fromPartial(object.settings);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
@@ -7168,7 +7204,9 @@ export const CopyLogEntriesMetadata = {
     message.endTime = object.endTime ?? undefined;
     message.state = object.state ?? 0;
     message.cancellationRequested = object.cancellationRequested ?? false;
-    message.request = object.request !== undefined && object.request !== null ? CopyLogEntriesRequest.fromPartial(object.request) : CopyLogEntriesRequest.fromPartial({});
+    if (object.request !== undefined && object.request !== null) {
+      message.request = CopyLogEntriesRequest.fromPartial(object.request);
+    }
     message.progress = object.progress ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
@@ -7264,15 +7302,9 @@ export const CopyLogEntriesResponse = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesResponse {
-<<<<<<< HEAD
     const obj = createBaseCopyLogEntriesResponse();
-    if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = Long.fromValue(object.logEntriesCopiedCount);
+    if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
     return obj;
-=======
-    return {
-      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
@@ -7281,7 +7313,9 @@ export const CopyLogEntriesResponse = {
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt(0);
+    if (object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null) {
+      message.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
+    }
     return message;
   },
   fromSDK(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {

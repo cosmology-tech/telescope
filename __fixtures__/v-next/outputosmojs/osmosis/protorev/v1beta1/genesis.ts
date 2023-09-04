@@ -199,17 +199,31 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.tokenPairArbRoutes = object.tokenPairArbRoutes?.map(e => TokenPairArbRoutes.fromPartial(e)) || [];
     message.baseDenoms = object.baseDenoms?.map(e => BaseDenom.fromPartial(e)) || [];
-    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : PoolWeights.fromPartial({});
-    message.daysSinceModuleGenesis = object.daysSinceModuleGenesis !== undefined && object.daysSinceModuleGenesis !== null ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt(0);
+    if (object.poolWeights !== undefined && object.poolWeights !== null) {
+      message.poolWeights = PoolWeights.fromPartial(object.poolWeights);
+    }
+    if (object.daysSinceModuleGenesis !== undefined && object.daysSinceModuleGenesis !== null) {
+      message.daysSinceModuleGenesis = BigInt(object.daysSinceModuleGenesis.toString());
+    }
     message.developerFees = object.developerFees?.map(e => Coin.fromPartial(e)) || [];
-    message.latestBlockHeight = object.latestBlockHeight !== undefined && object.latestBlockHeight !== null ? BigInt(object.latestBlockHeight.toString()) : BigInt(0);
+    if (object.latestBlockHeight !== undefined && object.latestBlockHeight !== null) {
+      message.latestBlockHeight = BigInt(object.latestBlockHeight.toString());
+    }
     message.developerAddress = object.developerAddress ?? "";
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
-    message.pointCountForBlock = object.pointCountForBlock !== undefined && object.pointCountForBlock !== null ? BigInt(object.pointCountForBlock.toString()) : BigInt(0);
+    if (object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null) {
+      message.maxPoolPointsPerBlock = BigInt(object.maxPoolPointsPerBlock.toString());
+    }
+    if (object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null) {
+      message.maxPoolPointsPerTx = BigInt(object.maxPoolPointsPerTx.toString());
+    }
+    if (object.pointCountForBlock !== undefined && object.pointCountForBlock !== null) {
+      message.pointCountForBlock = BigInt(object.pointCountForBlock.toString());
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

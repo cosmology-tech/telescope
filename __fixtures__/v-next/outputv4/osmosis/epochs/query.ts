@@ -333,7 +333,9 @@ export const QueryCurrentEpochResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
+    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
+      message.currentEpoch = BigInt(object.currentEpoch.toString());
+    }
     return message;
   },
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {

@@ -350,8 +350,12 @@ export const MsgSendTx = {
     const message = createBaseMsgSendTx();
     message.owner = object.owner ?? "";
     message.connectionId = object.connectionId ?? "";
-    message.packetData = object.packetData !== undefined && object.packetData !== null ? InterchainAccountPacketData.fromPartial(object.packetData) : InterchainAccountPacketData.fromPartial({});
-    message.relativeTimeout = object.relativeTimeout !== undefined && object.relativeTimeout !== null ? BigInt(object.relativeTimeout.toString()) : BigInt(0);
+    if (object.packetData !== undefined && object.packetData !== null) {
+      message.packetData = InterchainAccountPacketData.fromPartial(object.packetData);
+    }
+    if (object.relativeTimeout !== undefined && object.relativeTimeout !== null) {
+      message.relativeTimeout = BigInt(object.relativeTimeout.toString());
+    }
     return message;
   },
   fromSDK(object: MsgSendTxSDKType): MsgSendTx {
@@ -458,7 +462,9 @@ export const MsgSendTxResponse = {
   },
   fromPartial(object: DeepPartial<MsgSendTxResponse>): MsgSendTxResponse {
     const message = createBaseMsgSendTxResponse();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     return message;
   },
   fromSDK(object: MsgSendTxResponseSDKType): MsgSendTxResponse {

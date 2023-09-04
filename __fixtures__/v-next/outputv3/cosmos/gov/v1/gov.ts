@@ -572,19 +572,11 @@ export const Deposit = {
     return message;
   },
   fromJSON(object: any): Deposit {
-<<<<<<< HEAD
     const obj = createBaseDeposit();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
-=======
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Deposit): unknown {
     const obj: any = {};
@@ -599,7 +591,9 @@ export const Deposit = {
   },
   fromPartial(object: DeepPartial<Deposit>): Deposit {
     const message = createBaseDeposit();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = BigInt(object.proposalId.toString());
+    }
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -757,9 +751,8 @@ export const Proposal = {
     return message;
   },
   fromJSON(object: any): Proposal {
-<<<<<<< HEAD
     const obj = createBaseProposal();
-    if (isSet(object.id)) obj.id = Long.fromValue(object.id);
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
     if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
     if (isSet(object.status)) obj.status = proposalStatusFromJSON(object.status);
     if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
@@ -770,20 +763,6 @@ export const Proposal = {
     if (isSet(object.votingEndTime)) obj.votingEndTime = new Date(object.votingEndTime);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
-=======
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
-      finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
-      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
-      depositEndTime: isSet(object.depositEndTime) ? new Date(object.depositEndTime) : undefined,
-      totalDeposit: Array.isArray(object?.totalDeposit) ? object.totalDeposit.map((e: any) => Coin.fromJSON(e)) : [],
-      votingStartTime: isSet(object.votingStartTime) ? new Date(object.votingStartTime) : undefined,
-      votingEndTime: isSet(object.votingEndTime) ? new Date(object.votingEndTime) : undefined,
-      metadata: isSet(object.metadata) ? String(object.metadata) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Proposal): unknown {
     const obj: any = {};
@@ -809,10 +788,14 @@ export const Proposal = {
   },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.status = object.status ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
+    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
+      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
+    }
     message.submitTime = object.submitTime ?? undefined;
     message.depositEndTime = object.depositEndTime ?? undefined;
     message.totalDeposit = object.totalDeposit?.map(e => Coin.fromPartial(e)) || [];
@@ -1098,21 +1081,12 @@ export const Vote = {
     return message;
   },
   fromJSON(object: any): Vote {
-<<<<<<< HEAD
     const obj = createBaseVote();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.voter)) obj.voter = String(object.voter);
     if (Array.isArray(object?.options)) object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
-=======
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Vote): unknown {
     const obj: any = {};
@@ -1128,7 +1102,9 @@ export const Vote = {
   },
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
+    if (object.proposalId !== undefined && object.proposalId !== null) {
+      message.proposalId = BigInt(object.proposalId.toString());
+    }
     message.voter = object.voter ?? "";
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
@@ -1253,7 +1229,9 @@ export const DepositParams = {
   fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.maxDepositPeriod = object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null ? Duration.fromPartial(object.maxDepositPeriod) : Duration.fromPartial({});
+    if (object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null) {
+      message.maxDepositPeriod = Duration.fromPartial(object.maxDepositPeriod);
+    }
     return message;
   },
   fromSDK(object: DepositParamsSDKType): DepositParams {
@@ -1353,7 +1331,9 @@ export const VotingParams = {
   },
   fromPartial(object: DeepPartial<VotingParams>): VotingParams {
     const message = createBaseVotingParams();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
+    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
+      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
+    }
     return message;
   },
   fromSDK(object: VotingParamsSDKType): VotingParams {

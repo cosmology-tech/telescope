@@ -351,12 +351,11 @@ export const Value = {
     return message;
   },
   fromJSON(object: any): Value {
-<<<<<<< HEAD
     const obj = createBaseValue();
     if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
     if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
-    if (isSet(object.int64Value)) obj.int64Value = Long.fromValue(object.int64Value);
-    if (isSet(object.uint64Value)) obj.uint64Value = Long.fromValue(object.uint64Value);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
     if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
     if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
     if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
@@ -366,22 +365,6 @@ export const Value = {
     if (isSet(object.listValue)) obj.listValue = ListValue.fromJSON(object.listValue);
     if (isSet(object.typeValue)) obj.typeValue = String(object.typeValue);
     return obj;
-=======
-    return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
-      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
-      enumValue: isSet(object.enumValue) ? EnumValue.fromJSON(object.enumValue) : undefined,
-      objectValue: isSet(object.objectValue) ? Any.fromJSON(object.objectValue) : undefined,
-      mapValue: isSet(object.mapValue) ? MapValue.fromJSON(object.mapValue) : undefined,
-      listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined,
-      typeValue: isSet(object.typeValue) ? String(object.typeValue) : undefined
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Value): unknown {
     const obj: any = {};
@@ -403,15 +386,27 @@ export const Value = {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : EnumValue.fromPartial({});
-    message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : Any.fromPartial({});
-    message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : MapValue.fromPartial({});
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : ListValue.fromPartial({});
+    if (object.enumValue !== undefined && object.enumValue !== null) {
+      message.enumValue = EnumValue.fromPartial(object.enumValue);
+    }
+    if (object.objectValue !== undefined && object.objectValue !== null) {
+      message.objectValue = Any.fromPartial(object.objectValue);
+    }
+    if (object.mapValue !== undefined && object.mapValue !== null) {
+      message.mapValue = MapValue.fromPartial(object.mapValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
     message.typeValue = object.typeValue ?? undefined;
     return message;
   },
@@ -827,8 +822,12 @@ export const MapValue_Entry = {
   },
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
-    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : Value.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromPartial(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {

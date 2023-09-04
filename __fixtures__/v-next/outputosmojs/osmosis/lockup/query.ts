@@ -2073,7 +2073,9 @@ export const LockedDenomRequest = {
   fromPartial(object: DeepPartial<LockedDenomRequest>): LockedDenomRequest {
     const message = createBaseLockedDenomRequest();
     message.denom = object.denom ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: LockedDenomRequestSDKType): LockedDenomRequest {
@@ -2262,7 +2264,9 @@ export const LockedRequest = {
   },
   fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
     const message = createBaseLockedRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = BigInt(object.lockId.toString());
+    }
     return message;
   },
   fromSDK(object: LockedRequestSDKType): LockedRequest {
@@ -2354,7 +2358,9 @@ export const LockedResponse = {
   },
   fromPartial(object: DeepPartial<LockedResponse>): LockedResponse {
     const message = createBaseLockedResponse();
-    message.lock = object.lock !== undefined && object.lock !== null ? PeriodLock.fromPartial(object.lock) : PeriodLock.fromPartial({});
+    if (object.lock !== undefined && object.lock !== null) {
+      message.lock = PeriodLock.fromPartial(object.lock);
+    }
     return message;
   },
   fromSDK(object: LockedResponseSDKType): LockedResponse {
@@ -2446,7 +2452,9 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = BigInt(object.lockId.toString());
+    }
     return message;
   },
   fromSDK(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
@@ -2652,7 +2660,9 @@ export const AccountLockedLongerDurationRequest = {
   fromPartial(object: DeepPartial<AccountLockedLongerDurationRequest>): AccountLockedLongerDurationRequest {
     const message = createBaseAccountLockedLongerDurationRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
@@ -2863,7 +2873,9 @@ export const AccountLockedDurationRequest = {
   fromPartial(object: DeepPartial<AccountLockedDurationRequest>): AccountLockedDurationRequest {
     const message = createBaseAccountLockedDurationRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
@@ -3074,7 +3086,9 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
@@ -3294,7 +3308,9 @@ export const AccountLockedLongerDurationDenomRequest = {
   fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomRequest>): AccountLockedLongerDurationDenomRequest {
     const message = createBaseAccountLockedLongerDurationDenomRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.denom = object.denom ?? "";
     return message;
   },
@@ -3574,7 +3590,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

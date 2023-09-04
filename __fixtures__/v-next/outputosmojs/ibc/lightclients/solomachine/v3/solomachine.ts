@@ -209,9 +209,13 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     message.isFrozen = object.isFrozen ?? false;
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : ConsensusState.fromPartial({});
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = ConsensusState.fromPartial(object.consensusState);
+    }
     return message;
   },
   fromSDK(object: ClientStateSDKType): ClientState {
@@ -331,9 +335,13 @@ export const ConsensusState = {
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
+    if (object.publicKey !== undefined && object.publicKey !== null) {
+      message.publicKey = Any.fromPartial(object.publicKey);
+    }
     message.diversifier = object.diversifier ?? "";
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp.toString());
+    }
     return message;
   },
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
@@ -462,9 +470,13 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp.toString());
+    }
     message.signature = object.signature ?? new Uint8Array();
-    message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : Any.fromPartial({});
+    if (object.newPublicKey !== undefined && object.newPublicKey !== null) {
+      message.newPublicKey = Any.fromPartial(object.newPublicKey);
+    }
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },
@@ -590,9 +602,15 @@ export const Misbehaviour = {
   },
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
-    message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : SignatureAndData.fromPartial({});
-    message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : SignatureAndData.fromPartial({});
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
+    if (object.signatureOne !== undefined && object.signatureOne !== null) {
+      message.signatureOne = SignatureAndData.fromPartial(object.signatureOne);
+    }
+    if (object.signatureTwo !== undefined && object.signatureTwo !== null) {
+      message.signatureTwo = SignatureAndData.fromPartial(object.signatureTwo);
+    }
     return message;
   },
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
@@ -724,7 +742,9 @@ export const SignatureAndData = {
     message.signature = object.signature ?? new Uint8Array();
     message.path = object.path ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp.toString());
+    }
     return message;
   },
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
@@ -841,7 +861,9 @@ export const TimestampedSignatureData = {
   fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     message.signatureData = object.signatureData ?? new Uint8Array();
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp.toString());
+    }
     return message;
   },
   fromSDK(object: TimestampedSignatureDataSDKType): TimestampedSignatureData {
@@ -974,8 +996,12 @@ export const SignBytes = {
   },
   fromPartial(object: DeepPartial<SignBytes>): SignBytes {
     const message = createBaseSignBytes();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
-    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp.toString());
+    }
     message.diversifier = object.diversifier ?? "";
     message.path = object.path ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
@@ -1099,7 +1125,9 @@ export const HeaderData = {
   },
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
-    message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : Any.fromPartial({});
+    if (object.newPubKey !== undefined && object.newPubKey !== null) {
+      message.newPubKey = Any.fromPartial(object.newPubKey);
+    }
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },

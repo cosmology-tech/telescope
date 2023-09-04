@@ -33,10 +33,10 @@ exports[`Duration 1`] = `
     return message;
   },
   fromJSON(object: any): Duration {
-    return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
+    const obj = createBaseDuration();
+    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
+    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
+    return obj;
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
@@ -46,7 +46,9 @@ exports[`Duration 1`] = `
   },
   fromPartial(object: Partial<Duration>): Duration {
     const message = createBaseDuration();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
+    if (object.seconds !== undefined && object.seconds !== null) {
+      message.seconds = BigInt(object.seconds.toString());
+    }
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -123,10 +125,10 @@ exports[`Height 1`] = `
     return message;
   },
   fromJSON(object: any): Height {
-    return {
-      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt(0),
-      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0)
-    };
+    const obj = createBaseHeight();
+    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
+    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
+    return obj;
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
@@ -136,8 +138,12 @@ exports[`Height 1`] = `
   },
   fromPartial(object: Partial<Height>): Height {
     const message = createBaseHeight();
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = BigInt(object.revisionNumber.toString());
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = BigInt(object.revisionHeight.toString());
+    }
     return message;
   },
   fromSDK(object: HeightSDKType): Height {
@@ -660,15 +666,15 @@ exports[`MsgTransfer 1`] = `
     return message;
   },
   fromJSON(object: any): MsgTransfer {
-    return {
-      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
-      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
-      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
-    };
+    const obj = createBaseMsgTransfer();
+    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
+    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
+    if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
+    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    return obj;
   },
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
@@ -690,8 +696,12 @@ exports[`MsgTransfer 1`] = `
     }
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
+    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
+      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
+    }
+    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    }
     return message;
   },
   fromSDK(object: MsgTransferSDKType): MsgTransfer {

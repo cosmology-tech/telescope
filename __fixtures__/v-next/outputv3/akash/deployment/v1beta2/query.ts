@@ -189,8 +189,12 @@ export const QueryDeploymentsRequest = {
   },
   fromPartial(object: DeepPartial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : DeploymentFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = DeploymentFilters.fromPartial(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDeploymentsRequestSDKType): QueryDeploymentsRequest {
@@ -289,7 +293,9 @@ export const QueryDeploymentsResponse = {
   fromPartial(object: DeepPartial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDeploymentsResponseSDKType): QueryDeploymentsResponse {
@@ -382,7 +388,9 @@ export const QueryDeploymentRequest = {
   },
   fromPartial(object: DeepPartial<QueryDeploymentRequest>): QueryDeploymentRequest {
     const message = createBaseQueryDeploymentRequest();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: QueryDeploymentRequestSDKType): QueryDeploymentRequest {
@@ -485,9 +493,13 @@ export const QueryDeploymentResponse = {
   },
   fromPartial(object: DeepPartial<QueryDeploymentResponse>): QueryDeploymentResponse {
     const message = createBaseQueryDeploymentResponse();
-    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : Deployment.fromPartial({});
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromPartial(object.deployment);
+    }
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
-    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : Account.fromPartial({});
+    if (object.escrowAccount !== undefined && object.escrowAccount !== null) {
+      message.escrowAccount = Account.fromPartial(object.escrowAccount);
+    }
     return message;
   },
   fromSDK(object: QueryDeploymentResponseSDKType): QueryDeploymentResponse {
@@ -584,7 +596,9 @@ export const QueryGroupRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupRequest>): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
   },
   fromSDK(object: QueryGroupRequestSDKType): QueryGroupRequest {
@@ -665,7 +679,9 @@ export const QueryGroupResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupResponse>): QueryGroupResponse {
     const message = createBaseQueryGroupResponse();
-    message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : Group.fromPartial({});
+    if (object.group !== undefined && object.group !== null) {
+      message.group = Group.fromPartial(object.group);
+    }
     return message;
   },
   fromSDK(object: QueryGroupResponseSDKType): QueryGroupResponse {

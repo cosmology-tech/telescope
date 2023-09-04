@@ -140,23 +140,13 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-<<<<<<< HEAD
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (isSet(object.period)) obj.period = Long.fromValue(object.period);
+    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
     if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
-    if (isSet(object.epochsPerPeriod)) obj.epochsPerPeriod = Long.fromValue(object.epochsPerPeriod);
-    if (isSet(object.skippedEpochs)) obj.skippedEpochs = Long.fromValue(object.skippedEpochs);
+    if (isSet(object.epochsPerPeriod)) obj.epochsPerPeriod = BigInt(object.epochsPerPeriod.toString());
+    if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
     return obj;
-=======
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
-      epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      epochsPerPeriod: isSet(object.epochsPerPeriod) ? BigInt(object.epochsPerPeriod.toString()) : BigInt(0),
-      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -169,16 +159,19 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-<<<<<<< HEAD
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
-    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
-=======
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
->>>>>>> changes-v1
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period.toString());
+    }
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? BigInt(object.epochsPerPeriod.toString()) : BigInt(0);
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt(0);
+    if (object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null) {
+      message.epochsPerPeriod = BigInt(object.epochsPerPeriod.toString());
+    }
+    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
+      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -303,8 +296,12 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";
-    message.exponentialCalculation = object.exponentialCalculation !== undefined && object.exponentialCalculation !== null ? ExponentialCalculation.fromPartial(object.exponentialCalculation) : ExponentialCalculation.fromPartial({});
-    message.inflationDistribution = object.inflationDistribution !== undefined && object.inflationDistribution !== null ? InflationDistribution.fromPartial(object.inflationDistribution) : InflationDistribution.fromPartial({});
+    if (object.exponentialCalculation !== undefined && object.exponentialCalculation !== null) {
+      message.exponentialCalculation = ExponentialCalculation.fromPartial(object.exponentialCalculation);
+    }
+    if (object.inflationDistribution !== undefined && object.inflationDistribution !== null) {
+      message.inflationDistribution = InflationDistribution.fromPartial(object.inflationDistribution);
+    }
     message.enableInflation = object.enableInflation ?? false;
     return message;
   },

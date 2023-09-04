@@ -402,19 +402,11 @@ export const SuperfluidIntermediaryAccount = {
     return message;
   },
   fromJSON(object: any): SuperfluidIntermediaryAccount {
-<<<<<<< HEAD
     const obj = createBaseSuperfluidIntermediaryAccount();
     if (isSet(object.denom)) obj.denom = String(object.denom);
     if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
-    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
     return obj;
-=======
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: SuperfluidIntermediaryAccount): unknown {
     const obj: any = {};
@@ -427,7 +419,9 @@ export const SuperfluidIntermediaryAccount = {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     return message;
   },
   fromSDK(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
@@ -526,19 +520,11 @@ export const OsmoEquivalentMultiplierRecord = {
     return message;
   },
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
-<<<<<<< HEAD
     const obj = createBaseOsmoEquivalentMultiplierRecord();
-    if (isSet(object.epochNumber)) obj.epochNumber = Long.fromValue(object.epochNumber);
+    if (isSet(object.epochNumber)) obj.epochNumber = BigInt(object.epochNumber.toString());
     if (isSet(object.denom)) obj.denom = String(object.denom);
     if (isSet(object.multiplier)) obj.multiplier = String(object.multiplier);
     return obj;
-=======
-    return {
-      epochNumber: isSet(object.epochNumber) ? BigInt(object.epochNumber.toString()) : BigInt(0),
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: OsmoEquivalentMultiplierRecord): unknown {
     const obj: any = {};
@@ -549,7 +535,9 @@ export const OsmoEquivalentMultiplierRecord = {
   },
   fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
-    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? BigInt(object.epochNumber.toString()) : BigInt(0);
+    if (object.epochNumber !== undefined && object.epochNumber !== null) {
+      message.epochNumber = BigInt(object.epochNumber.toString());
+    }
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
@@ -676,8 +664,12 @@ export const SuperfluidDelegationRecord = {
     const message = createBaseSuperfluidDelegationRecord();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.delegationAmount = object.delegationAmount !== undefined && object.delegationAmount !== null ? Coin.fromPartial(object.delegationAmount) : Coin.fromPartial({});
-    message.equivalentStakedAmount = object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null ? Coin.fromPartial(object.equivalentStakedAmount) : Coin.fromPartial({});
+    if (object.delegationAmount !== undefined && object.delegationAmount !== null) {
+      message.delegationAmount = Coin.fromPartial(object.delegationAmount);
+    }
+    if (object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null) {
+      message.equivalentStakedAmount = Coin.fromPartial(object.equivalentStakedAmount);
+    }
     return message;
   },
   fromSDK(object: SuperfluidDelegationRecordSDKType): SuperfluidDelegationRecord {
@@ -773,17 +765,10 @@ export const LockIdIntermediaryAccountConnection = {
     return message;
   },
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
-<<<<<<< HEAD
     const obj = createBaseLockIdIntermediaryAccountConnection();
-    if (isSet(object.lockId)) obj.lockId = Long.fromValue(object.lockId);
+    if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
     if (isSet(object.intermediaryAccount)) obj.intermediaryAccount = String(object.intermediaryAccount);
     return obj;
-=======
-    return {
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0),
-      intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: LockIdIntermediaryAccountConnection): unknown {
     const obj: any = {};
@@ -793,7 +778,9 @@ export const LockIdIntermediaryAccountConnection = {
   },
   fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = BigInt(object.lockId.toString());
+    }
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
   },
@@ -884,15 +871,9 @@ export const UnpoolWhitelistedPools = {
     return message;
   },
   fromJSON(object: any): UnpoolWhitelistedPools {
-<<<<<<< HEAD
     const obj = createBaseUnpoolWhitelistedPools();
-    if (Array.isArray(object?.ids)) object.ids.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.ids)) object.ids.map((e: any) => BigInt(e.toString()));
     return obj;
-=======
-    return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: UnpoolWhitelistedPools): unknown {
     const obj: any = {};

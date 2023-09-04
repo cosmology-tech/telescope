@@ -600,7 +600,9 @@ export const Type = {
     message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
     message.oneofs = object.oneofs?.map(e => e) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : SourceContext.fromPartial({});
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.syntax = object.syntax ?? 0;
     return message;
   },
@@ -992,7 +994,9 @@ export const Enum = {
     message.name = object.name ?? "";
     message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : SourceContext.fromPartial({});
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.syntax = object.syntax ?? 0;
     return message;
   },
@@ -1237,7 +1241,9 @@ export const Option = {
   fromPartial(object: DeepPartial<Option>): Option {
     const message = createBaseOption();
     message.name = object.name ?? "";
-    message.value = object.value !== undefined && object.value !== null ? Any.fromPartial(object.value) : Any.fromPartial({});
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Any.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: OptionSDKType): Option {

@@ -84,8 +84,12 @@ export const CosmWasmPool = {
     const message = createBaseCosmWasmPool();
     message.poolAddress = object.poolAddress ?? "";
     message.contractAddress = object.contractAddress ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     return message;
   },
   fromSDK(object: CosmWasmPoolSDKType): CosmWasmPool {

@@ -222,7 +222,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.lastTotalPower = object.lastTotalPower ?? new Uint8Array();
     message.lastValidatorPowers = object.lastValidatorPowers?.map(e => LastValidatorPower.fromPartial(e)) || [];
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
@@ -381,17 +383,10 @@ export const LastValidatorPower = {
     return message;
   },
   fromJSON(object: any): LastValidatorPower {
-<<<<<<< HEAD
     const obj = createBaseLastValidatorPower();
     if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.power)) obj.power = Long.fromValue(object.power);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     return obj;
-=======
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
@@ -402,7 +397,9 @@ export const LastValidatorPower = {
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power.toString());
+    }
     return message;
   },
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {

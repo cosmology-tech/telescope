@@ -145,7 +145,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
   },
@@ -256,23 +258,13 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-<<<<<<< HEAD
     const obj = createBaseParams();
     if (isSet(object.enableFees)) obj.enableFees = Boolean(object.enableFees);
     if (isSet(object.developerShares)) obj.developerShares = String(object.developerShares);
     if (isSet(object.validatorShares)) obj.validatorShares = String(object.validatorShares);
-    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = Long.fromValue(object.addrDerivationCostCreate);
+    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
     if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
     return obj;
-=======
-    return {
-      enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
-      developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
-      validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
-      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0),
-      minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -288,7 +280,9 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0);
+    if (object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null) {
+      message.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
+    }
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   },

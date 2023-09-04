@@ -629,27 +629,15 @@ export const Distribution = {
     return message;
   },
   fromJSON(object: any): Distribution {
-<<<<<<< HEAD
     const obj = createBaseDistribution();
-    if (isSet(object.count)) obj.count = Long.fromValue(object.count);
+    if (isSet(object.count)) obj.count = BigInt(object.count.toString());
     if (isSet(object.mean)) obj.mean = Number(object.mean);
     if (isSet(object.sumOfSquaredDeviation)) obj.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
     if (isSet(object.range)) obj.range = Distribution_Range.fromJSON(object.range);
     if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (Array.isArray(object?.bucketCounts)) object.bucketCounts.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.bucketCounts)) object.bucketCounts.map((e: any) => BigInt(e.toString()));
     if (Array.isArray(object?.exemplars)) object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
     return obj;
-=======
-    return {
-      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt(0),
-      mean: isSet(object.mean) ? Number(object.mean) : 0,
-      sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
-      range: isSet(object.range) ? Distribution_Range.fromJSON(object.range) : undefined,
-      bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
-      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => BigInt(e.toString())) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Distribution): unknown {
     const obj: any = {};
@@ -672,18 +660,18 @@ export const Distribution = {
   },
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    message.count = object.count !== undefined && object.count !== null ? BigInt(object.count.toString()) : BigInt(0);
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count.toString());
+    }
     message.mean = object.mean ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
-<<<<<<< HEAD
-    message.range = object.range !== undefined && object.range !== null ? Distribution_Range.fromPartial(object.range) : Distribution_Range.fromPartial({});
-    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : Distribution_BucketOptions.fromPartial({});
-    message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
-=======
-    message.range = object.range !== undefined && object.range !== null ? Distribution_Range.fromPartial(object.range) : undefined;
-    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
+    if (object.range !== undefined && object.range !== null) {
+      message.range = Distribution_Range.fromPartial(object.range);
+    }
+    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
+    }
     message.bucketCounts = object.bucketCounts?.map(e => BigInt(e.toString())) || [];
->>>>>>> changes-v1
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   },
@@ -918,9 +906,15 @@ export const Distribution_BucketOptions = {
   },
   fromPartial(object: DeepPartial<Distribution_BucketOptions>): Distribution_BucketOptions {
     const message = createBaseDistribution_BucketOptions();
-    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets) : Distribution_BucketOptions_Linear.fromPartial({});
-    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets) : Distribution_BucketOptions_Exponential.fromPartial({});
-    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_BucketOptions_Explicit.fromPartial(object.explicitBuckets) : Distribution_BucketOptions_Explicit.fromPartial({});
+    if (object.linearBuckets !== undefined && object.linearBuckets !== null) {
+      message.linearBuckets = Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets);
+    }
+    if (object.exponentialBuckets !== undefined && object.exponentialBuckets !== null) {
+      message.exponentialBuckets = Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets);
+    }
+    if (object.explicitBuckets !== undefined && object.explicitBuckets !== null) {
+      message.explicitBuckets = Distribution_BucketOptions_Explicit.fromPartial(object.explicitBuckets);
+    }
     return message;
   },
   fromSDK(object: Distribution_BucketOptionsSDKType): Distribution_BucketOptions {

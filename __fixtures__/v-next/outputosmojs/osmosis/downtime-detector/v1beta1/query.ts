@@ -77,7 +77,9 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   fromPartial(object: DeepPartial<RecoveredSinceDowntimeOfLengthRequest>): RecoveredSinceDowntimeOfLengthRequest {
     const message = createBaseRecoveredSinceDowntimeOfLengthRequest();
     message.downtime = object.downtime ?? 0;
-    message.recovery = object.recovery !== undefined && object.recovery !== null ? Duration.fromPartial(object.recovery) : Duration.fromPartial({});
+    if (object.recovery !== undefined && object.recovery !== null) {
+      message.recovery = Duration.fromPartial(object.recovery);
+    }
     return message;
   },
   fromSDK(object: RecoveredSinceDowntimeOfLengthRequestSDKType): RecoveredSinceDowntimeOfLengthRequest {

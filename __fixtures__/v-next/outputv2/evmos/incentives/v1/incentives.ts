@@ -221,23 +221,13 @@ export const Incentive = {
     return message;
   },
   fromJSON(object: any): Incentive {
-<<<<<<< HEAD
     const obj = createBaseIncentive();
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (Array.isArray(object?.allocations)) object.allocations.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.totalGas)) obj.totalGas = Long.fromValue(object.totalGas);
+    if (isSet(object.totalGas)) obj.totalGas = BigInt(object.totalGas.toString());
     return obj;
-=======
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
-      epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      totalGas: isSet(object.totalGas) ? BigInt(object.totalGas.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Incentive): unknown {
     const obj: any = {};
@@ -258,7 +248,9 @@ export const Incentive = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     message.startTime = object.startTime ?? undefined;
-    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? BigInt(object.totalGas.toString()) : BigInt(0);
+    if (object.totalGas !== undefined && object.totalGas !== null) {
+      message.totalGas = BigInt(object.totalGas.toString());
+    }
     return message;
   },
   fromSDK(object: IncentiveSDKType): Incentive {
@@ -366,19 +358,11 @@ export const GasMeter = {
     return message;
   },
   fromJSON(object: any): GasMeter {
-<<<<<<< HEAD
     const obj = createBaseGasMeter();
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.participant)) obj.participant = String(object.participant);
-    if (isSet(object.cumulativeGas)) obj.cumulativeGas = Long.fromValue(object.cumulativeGas);
+    if (isSet(object.cumulativeGas)) obj.cumulativeGas = BigInt(object.cumulativeGas.toString());
     return obj;
-=======
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulativeGas: isSet(object.cumulativeGas) ? BigInt(object.cumulativeGas.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: GasMeter): unknown {
     const obj: any = {};
@@ -391,7 +375,9 @@ export const GasMeter = {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
-    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? BigInt(object.cumulativeGas.toString()) : BigInt(0);
+    if (object.cumulativeGas !== undefined && object.cumulativeGas !== null) {
+      message.cumulativeGas = BigInt(object.cumulativeGas.toString());
+    }
     return message;
   },
   fromSDK(object: GasMeterSDKType): GasMeter {

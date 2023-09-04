@@ -144,7 +144,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.claimsRecords = object.claimsRecords?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     return message;
   },
@@ -302,8 +304,12 @@ export const Params = {
     const message = createBaseParams();
     message.enableClaims = object.enableClaims ?? false;
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : Duration.fromPartial({});
-    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : Duration.fromPartial({});
+    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
+      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
+    }
+    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
+      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
+    }
     message.claimsDenom = object.claimsDenom ?? "";
     message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
     message.evmChannels = object.evmChannels?.map(e => e) || [];

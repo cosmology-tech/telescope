@@ -164,7 +164,9 @@ export const OrderID = {
   fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
     const message = createBaseOrderID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     return message;
@@ -300,10 +302,16 @@ export const Order = {
   },
   fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
     const message = createBaseOrder();
-    message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : OrderID.fromPartial({});
+    if (object.orderId !== undefined && object.orderId !== null) {
+      message.orderId = OrderID.fromPartial(object.orderId);
+    }
     message.state = object.state ?? 0;
-    message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : GroupSpec.fromPartial({});
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
+    if (object.spec !== undefined && object.spec !== null) {
+      message.spec = GroupSpec.fromPartial(object.spec);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
     return message;
   },
   fromSDK(object: OrderSDKType): Order {
@@ -447,7 +455,9 @@ export const OrderFilters = {
   fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
     const message = createBaseOrderFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.state = object.state ?? "";

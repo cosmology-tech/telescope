@@ -237,7 +237,9 @@ export const Params = {
     message.inflationMax = object.inflationMax ?? "";
     message.inflationMin = object.inflationMin ?? "";
     message.goalBonded = object.goalBonded ?? "";
-    message.blocksPerYear = object.blocksPerYear !== undefined && object.blocksPerYear !== null ? BigInt(object.blocksPerYear.toString()) : BigInt(0);
+    if (object.blocksPerYear !== undefined && object.blocksPerYear !== null) {
+      message.blocksPerYear = BigInt(object.blocksPerYear.toString());
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

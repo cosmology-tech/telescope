@@ -400,7 +400,9 @@ export const TxResponse = {
   },
   fromPartial(object: DeepPartial<TxResponse>): TxResponse {
     const message = createBaseTxResponse();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.txhash = object.txhash ?? "";
     message.codespace = object.codespace ?? "";
     message.code = object.code ?? 0;
@@ -408,9 +410,15 @@ export const TxResponse = {
     message.rawLog = object.rawLog ?? "";
     message.logs = object.logs?.map(e => ABCIMessageLog.fromPartial(e)) || [];
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt(0);
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt(0);
-    message.tx = object.tx !== undefined && object.tx !== null ? Any.fromPartial(object.tx) : Any.fromPartial({});
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = BigInt(object.gasWanted.toString());
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = BigInt(object.gasUsed.toString());
+    }
+    if (object.tx !== undefined && object.tx !== null) {
+      message.tx = Any.fromPartial(object.tx);
+    }
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
@@ -949,8 +957,12 @@ export const GasInfo = {
   },
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = createBaseGasInfo();
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt(0);
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt(0);
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = BigInt(object.gasWanted.toString());
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = BigInt(object.gasUsed.toString());
+    }
     return message;
   },
   fromSDK(object: GasInfoSDKType): GasInfo {
@@ -1217,8 +1229,12 @@ export const SimulationResponse = {
   },
   fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
-    message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : GasInfo.fromPartial({});
-    message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : Result.fromPartial({});
+    if (object.gasInfo !== undefined && object.gasInfo !== null) {
+      message.gasInfo = GasInfo.fromPartial(object.gasInfo);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = Result.fromPartial(object.result);
+    }
     return message;
   },
   fromSDK(object: SimulationResponseSDKType): SimulationResponse {
@@ -1602,11 +1618,21 @@ export const SearchTxsResult = {
   },
   fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {
     const message = createBaseSearchTxsResult();
-    message.totalCount = object.totalCount !== undefined && object.totalCount !== null ? BigInt(object.totalCount.toString()) : BigInt(0);
-    message.count = object.count !== undefined && object.count !== null ? BigInt(object.count.toString()) : BigInt(0);
-    message.pageNumber = object.pageNumber !== undefined && object.pageNumber !== null ? BigInt(object.pageNumber.toString()) : BigInt(0);
-    message.pageTotal = object.pageTotal !== undefined && object.pageTotal !== null ? BigInt(object.pageTotal.toString()) : BigInt(0);
-    message.limit = object.limit !== undefined && object.limit !== null ? BigInt(object.limit.toString()) : BigInt(0);
+    if (object.totalCount !== undefined && object.totalCount !== null) {
+      message.totalCount = BigInt(object.totalCount.toString());
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count.toString());
+    }
+    if (object.pageNumber !== undefined && object.pageNumber !== null) {
+      message.pageNumber = BigInt(object.pageNumber.toString());
+    }
+    if (object.pageTotal !== undefined && object.pageTotal !== null) {
+      message.pageTotal = BigInt(object.pageTotal.toString());
+    }
+    if (object.limit !== undefined && object.limit !== null) {
+      message.limit = BigInt(object.limit.toString());
+    }
     message.txs = object.txs?.map(e => TxResponse.fromPartial(e)) || [];
     return message;
   },

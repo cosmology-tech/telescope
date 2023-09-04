@@ -1572,8 +1572,12 @@ export const FileDescriptorProto = {
     message.enumType = object.enumType?.map(e => EnumDescriptorProto.fromPartial(e)) || [];
     message.service = object.service?.map(e => ServiceDescriptorProto.fromPartial(e)) || [];
     message.extension = object.extension?.map(e => FieldDescriptorProto.fromPartial(e)) || [];
-    message.options = object.options !== undefined && object.options !== null ? FileOptions.fromPartial(object.options) : FileOptions.fromPartial({});
-    message.sourceCodeInfo = object.sourceCodeInfo !== undefined && object.sourceCodeInfo !== null ? SourceCodeInfo.fromPartial(object.sourceCodeInfo) : SourceCodeInfo.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = FileOptions.fromPartial(object.options);
+    }
+    if (object.sourceCodeInfo !== undefined && object.sourceCodeInfo !== null) {
+      message.sourceCodeInfo = SourceCodeInfo.fromPartial(object.sourceCodeInfo);
+    }
     message.syntax = object.syntax ?? "";
     return message;
   },
@@ -1891,7 +1895,9 @@ export const DescriptorProto = {
     message.enumType = object.enumType?.map(e => EnumDescriptorProto.fromPartial(e)) || [];
     message.extensionRange = object.extensionRange?.map(e => DescriptorProto_ExtensionRange.fromPartial(e)) || [];
     message.oneofDecl = object.oneofDecl?.map(e => OneofDescriptorProto.fromPartial(e)) || [];
-    message.options = object.options !== undefined && object.options !== null ? MessageOptions.fromPartial(object.options) : MessageOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = MessageOptions.fromPartial(object.options);
+    }
     message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
@@ -2108,7 +2114,9 @@ export const DescriptorProto_ExtensionRange = {
     const message = createBaseDescriptorProto_ExtensionRange();
     message.start = object.start ?? 0;
     message.end = object.end ?? 0;
-    message.options = object.options !== undefined && object.options !== null ? ExtensionRangeOptions.fromPartial(object.options) : ExtensionRangeOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = ExtensionRangeOptions.fromPartial(object.options);
+    }
     return message;
   },
   fromSDK(object: DescriptorProto_ExtensionRangeSDKType): DescriptorProto_ExtensionRange {
@@ -2493,7 +2501,9 @@ export const FieldDescriptorProto = {
     message.defaultValue = object.defaultValue ?? "";
     message.oneofIndex = object.oneofIndex ?? 0;
     message.jsonName = object.jsonName ?? "";
-    message.options = object.options !== undefined && object.options !== null ? FieldOptions.fromPartial(object.options) : FieldOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = FieldOptions.fromPartial(object.options);
+    }
     return message;
   },
   fromSDK(object: FieldDescriptorProtoSDKType): FieldDescriptorProto {
@@ -2634,7 +2644,9 @@ export const OneofDescriptorProto = {
   fromPartial(object: DeepPartial<OneofDescriptorProto>): OneofDescriptorProto {
     const message = createBaseOneofDescriptorProto();
     message.name = object.name ?? "";
-    message.options = object.options !== undefined && object.options !== null ? OneofOptions.fromPartial(object.options) : OneofOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = OneofOptions.fromPartial(object.options);
+    }
     return message;
   },
   fromSDK(object: OneofDescriptorProtoSDKType): OneofDescriptorProto {
@@ -2775,7 +2787,9 @@ export const EnumDescriptorProto = {
     const message = createBaseEnumDescriptorProto();
     message.name = object.name ?? "";
     message.value = object.value?.map(e => EnumValueDescriptorProto.fromPartial(e)) || [];
-    message.options = object.options !== undefined && object.options !== null ? EnumOptions.fromPartial(object.options) : EnumOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = EnumOptions.fromPartial(object.options);
+    }
     message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
@@ -3028,7 +3042,9 @@ export const EnumValueDescriptorProto = {
     const message = createBaseEnumValueDescriptorProto();
     message.name = object.name ?? "";
     message.number = object.number ?? 0;
-    message.options = object.options !== undefined && object.options !== null ? EnumValueOptions.fromPartial(object.options) : EnumValueOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = EnumValueOptions.fromPartial(object.options);
+    }
     return message;
   },
   fromSDK(object: EnumValueDescriptorProtoSDKType): EnumValueDescriptorProto {
@@ -3148,7 +3164,9 @@ export const ServiceDescriptorProto = {
     const message = createBaseServiceDescriptorProto();
     message.name = object.name ?? "";
     message.method = object.method?.map(e => MethodDescriptorProto.fromPartial(e)) || [];
-    message.options = object.options !== undefined && object.options !== null ? ServiceOptions.fromPartial(object.options) : ServiceOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = ServiceOptions.fromPartial(object.options);
+    }
     return message;
   },
   fromSDK(object: ServiceDescriptorProtoSDKType): ServiceDescriptorProto {
@@ -3300,7 +3318,9 @@ export const MethodDescriptorProto = {
     message.name = object.name ?? "";
     message.inputType = object.inputType ?? "";
     message.outputType = object.outputType ?? "";
-    message.options = object.options !== undefined && object.options !== null ? MethodOptions.fromPartial(object.options) : MethodOptions.fromPartial({});
+    if (object.options !== undefined && object.options !== null) {
+      message.options = MethodOptions.fromPartial(object.options);
+    }
     message.clientStreaming = object.clientStreaming ?? false;
     message.serverStreaming = object.serverStreaming ?? false;
     return message;
@@ -4797,8 +4817,12 @@ export const UninterpretedOption = {
     const message = createBaseUninterpretedOption();
     message.name = object.name?.map(e => UninterpretedOption_NamePart.fromPartial(e)) || [];
     message.identifierValue = object.identifierValue ?? "";
-    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? BigInt(object.positiveIntValue.toString()) : BigInt(0);
-    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? BigInt(object.negativeIntValue.toString()) : BigInt(0);
+    if (object.positiveIntValue !== undefined && object.positiveIntValue !== null) {
+      message.positiveIntValue = BigInt(object.positiveIntValue.toString());
+    }
+    if (object.negativeIntValue !== undefined && object.negativeIntValue !== null) {
+      message.negativeIntValue = BigInt(object.negativeIntValue.toString());
+    }
     message.doubleValue = object.doubleValue ?? 0;
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";

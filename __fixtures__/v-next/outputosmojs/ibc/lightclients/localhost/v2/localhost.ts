@@ -53,7 +53,9 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : Height.fromPartial({});
+    if (object.latestHeight !== undefined && object.latestHeight !== null) {
+      message.latestHeight = Height.fromPartial(object.latestHeight);
+    }
     return message;
   },
   fromSDK(object: ClientStateSDKType): ClientState {

@@ -247,17 +247,10 @@ export const Explain_ExprStep = {
     return message;
   },
   fromJSON(object: any): Explain_ExprStep {
-<<<<<<< HEAD
     const obj = createBaseExplain_ExprStep();
-    if (isSet(object.id)) obj.id = Long.fromValue(object.id);
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
     if (isSet(object.valueIndex)) obj.valueIndex = Number(object.valueIndex);
     return obj;
-=======
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Explain_ExprStep): unknown {
     const obj: any = {};
@@ -267,7 +260,9 @@ export const Explain_ExprStep = {
   },
   fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.valueIndex = object.valueIndex ?? 0;
     return message;
   },

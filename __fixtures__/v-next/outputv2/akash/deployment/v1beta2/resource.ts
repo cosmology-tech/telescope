@@ -89,9 +89,13 @@ export const Resource = {
   },
   fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
-    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : ResourceUnits.fromPartial({});
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromPartial(object.resources);
+    }
     message.count = object.count ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromPartial(object.price);
+    }
     return message;
   },
   fromSDK(object: ResourceSDKType): Resource {

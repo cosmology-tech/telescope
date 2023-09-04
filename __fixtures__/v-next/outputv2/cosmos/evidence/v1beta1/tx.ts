@@ -112,7 +112,9 @@ export const MsgSubmitEvidence = {
   fromPartial(object: DeepPartial<MsgSubmitEvidence>): MsgSubmitEvidence {
     const message = createBaseMsgSubmitEvidence();
     message.submitter = object.submitter ?? "";
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : Any.fromPartial({});
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Any.fromPartial(object.evidence);
+    }
     return message;
   },
   fromSDK(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {

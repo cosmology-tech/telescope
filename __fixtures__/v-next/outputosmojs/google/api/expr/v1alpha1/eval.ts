@@ -307,8 +307,12 @@ export const EvalState_Result = {
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr !== undefined && object.expr !== null ? BigInt(object.expr.toString()) : BigInt(0);
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = BigInt(object.expr.toString());
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
@@ -417,9 +421,15 @@ export const ExprValue = {
   },
   fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
-    message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : ErrorSet.fromPartial({});
-    message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : UnknownSet.fromPartial({});
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = ErrorSet.fromPartial(object.error);
+    }
+    if (object.unknown !== undefined && object.unknown !== null) {
+      message.unknown = UnknownSet.fromPartial(object.unknown);
+    }
     return message;
   },
   fromSDK(object: ExprValueSDKType): ExprValue {

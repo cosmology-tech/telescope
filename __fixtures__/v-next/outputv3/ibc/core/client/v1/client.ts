@@ -362,7 +362,9 @@ export const IdentifiedClientState = {
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
     message.clientId = object.clientId ?? "";
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
     return message;
   },
   fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
@@ -463,8 +465,12 @@ export const ConsensusStateWithHeight = {
   },
   fromPartial(object: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     return message;
   },
   fromSDK(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
@@ -831,8 +837,12 @@ export const UpgradeProposal = {
     const message = createBaseUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : Any.fromPartial({});
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
   },
   fromSDK(object: UpgradeProposalSDKType): UpgradeProposal {
@@ -928,17 +938,10 @@ export const Height = {
     return message;
   },
   fromJSON(object: any): Height {
-<<<<<<< HEAD
     const obj = createBaseHeight();
-    if (isSet(object.revisionNumber)) obj.revisionNumber = Long.fromValue(object.revisionNumber);
-    if (isSet(object.revisionHeight)) obj.revisionHeight = Long.fromValue(object.revisionHeight);
+    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
+    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
     return obj;
-=======
-    return {
-      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt(0),
-      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0)
-    };
->>>>>>> changes-v1
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
@@ -948,8 +951,12 @@ export const Height = {
   },
   fromPartial(object: DeepPartial<Height>): Height {
     const message = createBaseHeight();
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = BigInt(object.revisionNumber.toString());
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = BigInt(object.revisionHeight.toString());
+    }
     return message;
   },
   fromSDK(object: HeightSDKType): Height {

@@ -186,13 +186,17 @@ export const Pool = {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.incentivesAddress = object.incentivesAddress ?? "";
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.currentTickLiquidity = object.currentTickLiquidity ?? "";
     message.token0 = object.token0 ?? "";
     message.token1 = object.token1 ?? "";
     message.currentSqrtPrice = object.currentSqrtPrice ?? "";
     message.currentTick = object.currentTick ?? "";
-    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt(0);
+    if (object.tickSpacing !== undefined && object.tickSpacing !== null) {
+      message.tickSpacing = BigInt(object.tickSpacing.toString());
+    }
     message.exponentAtPriceOne = object.exponentAtPriceOne ?? "";
     message.swapFee = object.swapFee ?? "";
     message.lastLiquidityUpdate = object.lastLiquidityUpdate ?? undefined;
