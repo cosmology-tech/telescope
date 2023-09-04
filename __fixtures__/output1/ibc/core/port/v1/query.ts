@@ -115,7 +115,7 @@ export const QueryAppVersionRequest = {
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
   },

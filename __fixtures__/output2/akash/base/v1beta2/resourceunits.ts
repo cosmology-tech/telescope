@@ -91,8 +91,8 @@ export const ResourceUnits = {
   },
   fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
     const message = createBaseResourceUnits();
-    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : CPU.fromPartial({});
-    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : Memory.fromPartial({});
+    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
+    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;
     message.storage = object.storage?.map(e => Storage.fromPartial(e)) || [];
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;

@@ -317,9 +317,9 @@ export const Lease = {
   },
   fromPartial<I extends Exact<DeepPartial<Lease>, I>>(object: I): Lease {
     const message = createBaseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : LeaseID.fromPartial({});
+    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? Long.fromValue(object.closedOn) : Long.ZERO;
     return message;
@@ -499,7 +499,7 @@ export const MsgCreateLease = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateLease>, I>>(object: I): MsgCreateLease {
     const message = createBaseMsgCreateLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateLeaseSDKType): MsgCreateLease {
@@ -594,7 +594,7 @@ export const MsgWithdrawLease = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgWithdrawLease>, I>>(object: I): MsgWithdrawLease {
     const message = createBaseMsgWithdrawLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : LeaseID.fromPartial({});
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : undefined;
     return message;
   },
   fromSDK(object: MsgWithdrawLeaseSDKType): MsgWithdrawLease {
@@ -689,7 +689,7 @@ export const MsgCloseLease = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCloseLease>, I>>(object: I): MsgCloseLease {
     const message = createBaseMsgCloseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : LeaseID.fromPartial({});
+    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     return message;
   },
   fromSDK(object: MsgCloseLeaseSDKType): MsgCloseLease {

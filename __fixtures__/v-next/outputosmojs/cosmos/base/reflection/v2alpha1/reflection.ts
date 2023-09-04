@@ -395,12 +395,12 @@ export const AppDescriptor = {
   },
   fromPartial(object: DeepPartial<AppDescriptor>): AppDescriptor {
     const message = createBaseAppDescriptor();
-    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : AuthnDescriptor.fromPartial({});
-    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : ChainDescriptor.fromPartial({});
-    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : CodecDescriptor.fromPartial({});
-    message.configuration = object.configuration !== undefined && object.configuration !== null ? ConfigurationDescriptor.fromPartial(object.configuration) : ConfigurationDescriptor.fromPartial({});
-    message.queryServices = object.queryServices !== undefined && object.queryServices !== null ? QueryServicesDescriptor.fromPartial(object.queryServices) : QueryServicesDescriptor.fromPartial({});
-    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : TxDescriptor.fromPartial({});
+    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : undefined;
+    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : undefined;
+    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : undefined;
+    message.configuration = object.configuration !== undefined && object.configuration !== null ? ConfigurationDescriptor.fromPartial(object.configuration) : undefined;
+    message.queryServices = object.queryServices !== undefined && object.queryServices !== null ? QueryServicesDescriptor.fromPartial(object.queryServices) : undefined;
+    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : undefined;
     return message;
   },
   fromSDK(object: AppDescriptorSDKType): AppDescriptor {
@@ -1686,7 +1686,7 @@ export const GetAuthnDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetAuthnDescriptorResponse>): GetAuthnDescriptorResponse {
     const message = createBaseGetAuthnDescriptorResponse();
-    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : AuthnDescriptor.fromPartial({});
+    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : undefined;
     return message;
   },
   fromSDK(object: GetAuthnDescriptorResponseSDKType): GetAuthnDescriptorResponse {
@@ -1850,7 +1850,7 @@ export const GetChainDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetChainDescriptorResponse>): GetChainDescriptorResponse {
     const message = createBaseGetChainDescriptorResponse();
-    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : ChainDescriptor.fromPartial({});
+    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : undefined;
     return message;
   },
   fromSDK(object: GetChainDescriptorResponseSDKType): GetChainDescriptorResponse {
@@ -2014,7 +2014,7 @@ export const GetCodecDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetCodecDescriptorResponse>): GetCodecDescriptorResponse {
     const message = createBaseGetCodecDescriptorResponse();
-    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : CodecDescriptor.fromPartial({});
+    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : undefined;
     return message;
   },
   fromSDK(object: GetCodecDescriptorResponseSDKType): GetCodecDescriptorResponse {
@@ -2178,7 +2178,7 @@ export const GetConfigurationDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetConfigurationDescriptorResponse>): GetConfigurationDescriptorResponse {
     const message = createBaseGetConfigurationDescriptorResponse();
-    message.config = object.config !== undefined && object.config !== null ? ConfigurationDescriptor.fromPartial(object.config) : ConfigurationDescriptor.fromPartial({});
+    message.config = object.config !== undefined && object.config !== null ? ConfigurationDescriptor.fromPartial(object.config) : undefined;
     return message;
   },
   fromSDK(object: GetConfigurationDescriptorResponseSDKType): GetConfigurationDescriptorResponse {
@@ -2342,7 +2342,7 @@ export const GetQueryServicesDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetQueryServicesDescriptorResponse>): GetQueryServicesDescriptorResponse {
     const message = createBaseGetQueryServicesDescriptorResponse();
-    message.queries = object.queries !== undefined && object.queries !== null ? QueryServicesDescriptor.fromPartial(object.queries) : QueryServicesDescriptor.fromPartial({});
+    message.queries = object.queries !== undefined && object.queries !== null ? QueryServicesDescriptor.fromPartial(object.queries) : undefined;
     return message;
   },
   fromSDK(object: GetQueryServicesDescriptorResponseSDKType): GetQueryServicesDescriptorResponse {
@@ -2506,7 +2506,7 @@ export const GetTxDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetTxDescriptorResponse>): GetTxDescriptorResponse {
     const message = createBaseGetTxDescriptorResponse();
-    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : TxDescriptor.fromPartial({});
+    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : undefined;
     return message;
   },
   fromSDK(object: GetTxDescriptorResponseSDKType): GetTxDescriptorResponse {

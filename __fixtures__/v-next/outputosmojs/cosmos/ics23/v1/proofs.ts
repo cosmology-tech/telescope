@@ -555,7 +555,7 @@ export const ExistenceProof = {
     const message = createBaseExistenceProof();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : LeafOp.fromPartial({});
+    message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : undefined;
     message.path = object.path?.map(e => InnerOp.fromPartial(e)) || [];
     return message;
   },
@@ -690,8 +690,8 @@ export const NonExistenceProof = {
   fromPartial(object: DeepPartial<NonExistenceProof>): NonExistenceProof {
     const message = createBaseNonExistenceProof();
     message.key = object.key ?? new Uint8Array();
-    message.left = object.left !== undefined && object.left !== null ? ExistenceProof.fromPartial(object.left) : ExistenceProof.fromPartial({});
-    message.right = object.right !== undefined && object.right !== null ? ExistenceProof.fromPartial(object.right) : ExistenceProof.fromPartial({});
+    message.left = object.left !== undefined && object.left !== null ? ExistenceProof.fromPartial(object.left) : undefined;
+    message.right = object.right !== undefined && object.right !== null ? ExistenceProof.fromPartial(object.right) : undefined;
     return message;
   },
   fromSDK(object: NonExistenceProofSDKType): NonExistenceProof {
@@ -820,10 +820,10 @@ export const CommitmentProof = {
   },
   fromPartial(object: DeepPartial<CommitmentProof>): CommitmentProof {
     const message = createBaseCommitmentProof();
-    message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : ExistenceProof.fromPartial({});
-    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : NonExistenceProof.fromPartial({});
-    message.batch = object.batch !== undefined && object.batch !== null ? BatchProof.fromPartial(object.batch) : BatchProof.fromPartial({});
-    message.compressed = object.compressed !== undefined && object.compressed !== null ? CompressedBatchProof.fromPartial(object.compressed) : CompressedBatchProof.fromPartial({});
+    message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : undefined;
+    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : undefined;
+    message.batch = object.batch !== undefined && object.batch !== null ? BatchProof.fromPartial(object.batch) : undefined;
+    message.compressed = object.compressed !== undefined && object.compressed !== null ? CompressedBatchProof.fromPartial(object.compressed) : undefined;
     return message;
   },
   fromSDK(object: CommitmentProofSDKType): CommitmentProof {
@@ -1231,8 +1231,8 @@ export const ProofSpec = {
   },
   fromPartial(object: DeepPartial<ProofSpec>): ProofSpec {
     const message = createBaseProofSpec();
-    message.leafSpec = object.leafSpec !== undefined && object.leafSpec !== null ? LeafOp.fromPartial(object.leafSpec) : LeafOp.fromPartial({});
-    message.innerSpec = object.innerSpec !== undefined && object.innerSpec !== null ? InnerSpec.fromPartial(object.innerSpec) : InnerSpec.fromPartial({});
+    message.leafSpec = object.leafSpec !== undefined && object.leafSpec !== null ? LeafOp.fromPartial(object.leafSpec) : undefined;
+    message.innerSpec = object.innerSpec !== undefined && object.innerSpec !== null ? InnerSpec.fromPartial(object.innerSpec) : undefined;
     message.maxDepth = object.maxDepth ?? 0;
     message.minDepth = object.minDepth ?? 0;
     return message;
@@ -1642,8 +1642,8 @@ export const BatchEntry = {
   },
   fromPartial(object: DeepPartial<BatchEntry>): BatchEntry {
     const message = createBaseBatchEntry();
-    message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : ExistenceProof.fromPartial({});
-    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : NonExistenceProof.fromPartial({});
+    message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : undefined;
+    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : undefined;
     return message;
   },
   fromSDK(object: BatchEntrySDKType): BatchEntry {
@@ -1880,8 +1880,8 @@ export const CompressedBatchEntry = {
   },
   fromPartial(object: DeepPartial<CompressedBatchEntry>): CompressedBatchEntry {
     const message = createBaseCompressedBatchEntry();
-    message.exist = object.exist !== undefined && object.exist !== null ? CompressedExistenceProof.fromPartial(object.exist) : CompressedExistenceProof.fromPartial({});
-    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? CompressedNonExistenceProof.fromPartial(object.nonexist) : CompressedNonExistenceProof.fromPartial({});
+    message.exist = object.exist !== undefined && object.exist !== null ? CompressedExistenceProof.fromPartial(object.exist) : undefined;
+    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? CompressedNonExistenceProof.fromPartial(object.nonexist) : undefined;
     return message;
   },
   fromSDK(object: CompressedBatchEntrySDKType): CompressedBatchEntry {
@@ -2020,7 +2020,7 @@ export const CompressedExistenceProof = {
     const message = createBaseCompressedExistenceProof();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : LeafOp.fromPartial({});
+    message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : undefined;
     message.path = object.path?.map(e => e) || [];
     return message;
   },
@@ -2155,8 +2155,8 @@ export const CompressedNonExistenceProof = {
   fromPartial(object: DeepPartial<CompressedNonExistenceProof>): CompressedNonExistenceProof {
     const message = createBaseCompressedNonExistenceProof();
     message.key = object.key ?? new Uint8Array();
-    message.left = object.left !== undefined && object.left !== null ? CompressedExistenceProof.fromPartial(object.left) : CompressedExistenceProof.fromPartial({});
-    message.right = object.right !== undefined && object.right !== null ? CompressedExistenceProof.fromPartial(object.right) : CompressedExistenceProof.fromPartial({});
+    message.left = object.left !== undefined && object.left !== null ? CompressedExistenceProof.fromPartial(object.left) : undefined;
+    message.right = object.right !== undefined && object.right !== null ? CompressedExistenceProof.fromPartial(object.right) : undefined;
     return message;
   },
   fromSDK(object: CompressedNonExistenceProofSDKType): CompressedNonExistenceProof {

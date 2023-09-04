@@ -296,7 +296,7 @@ export const Record = {
     message.numShares = object.numShares ?? "";
     message.initAccumValue = object.initAccumValue?.map(e => DecCoin.fromPartial(e)) || [];
     message.unclaimedRewards = object.unclaimedRewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.options = object.options !== undefined && object.options !== null ? Options.fromPartial(object.options) : Options.fromPartial({});
+    message.options = object.options !== undefined && object.options !== null ? Options.fromPartial(object.options) : undefined;
     return message;
   },
   fromSDK(object: RecordSDKType): Record {

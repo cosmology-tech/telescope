@@ -285,7 +285,7 @@ export const QueryProposalResponse = {
   },
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
-    message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : Proposal.fromPartial({});
+    message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : undefined;
     return message;
   },
   fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
@@ -370,7 +370,7 @@ export const QueryProposalsRequest = {
     message.proposalStatus = object.proposalStatus ?? 0;
     message.voter = object.voter ?? "";
     message.depositor = object.depositor ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
@@ -445,7 +445,7 @@ export const QueryProposalsResponse = {
   fromPartial(object: DeepPartial<QueryProposalsResponse>): QueryProposalsResponse {
     const message = createBaseQueryProposalsResponse();
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryProposalsResponseSDKType): QueryProposalsResponse {
@@ -573,7 +573,7 @@ export const QueryVoteResponse = {
   },
   fromPartial(object: DeepPartial<QueryVoteResponse>): QueryVoteResponse {
     const message = createBaseQueryVoteResponse();
-    message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : Vote.fromPartial({});
+    message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : undefined;
     return message;
   },
   fromSDK(object: QueryVoteResponseSDKType): QueryVoteResponse {
@@ -638,7 +638,7 @@ export const QueryVotesRequest = {
   fromPartial(object: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     const message = createBaseQueryVotesRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryVotesRequestSDKType): QueryVotesRequest {
@@ -709,7 +709,7 @@ export const QueryVotesResponse = {
   fromPartial(object: DeepPartial<QueryVotesResponse>): QueryVotesResponse {
     const message = createBaseQueryVotesResponse();
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryVotesResponseSDKType): QueryVotesResponse {
@@ -843,9 +843,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.votingParams = object.votingParams !== undefined && object.votingParams !== null ? VotingParams.fromPartial(object.votingParams) : VotingParams.fromPartial({});
-    message.depositParams = object.depositParams !== undefined && object.depositParams !== null ? DepositParams.fromPartial(object.depositParams) : DepositParams.fromPartial({});
-    message.tallyParams = object.tallyParams !== undefined && object.tallyParams !== null ? TallyParams.fromPartial(object.tallyParams) : TallyParams.fromPartial({});
+    message.votingParams = object.votingParams !== undefined && object.votingParams !== null ? VotingParams.fromPartial(object.votingParams) : undefined;
+    message.depositParams = object.depositParams !== undefined && object.depositParams !== null ? DepositParams.fromPartial(object.depositParams) : undefined;
+    message.tallyParams = object.tallyParams !== undefined && object.tallyParams !== null ? TallyParams.fromPartial(object.tallyParams) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -971,7 +971,7 @@ export const QueryDepositResponse = {
   },
   fromPartial(object: DeepPartial<QueryDepositResponse>): QueryDepositResponse {
     const message = createBaseQueryDepositResponse();
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Deposit.fromPartial(object.deposit) : Deposit.fromPartial({});
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Deposit.fromPartial(object.deposit) : undefined;
     return message;
   },
   fromSDK(object: QueryDepositResponseSDKType): QueryDepositResponse {
@@ -1036,7 +1036,7 @@ export const QueryDepositsRequest = {
   fromPartial(object: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     const message = createBaseQueryDepositsRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryDepositsRequestSDKType): QueryDepositsRequest {
@@ -1107,7 +1107,7 @@ export const QueryDepositsResponse = {
   fromPartial(object: DeepPartial<QueryDepositsResponse>): QueryDepositsResponse {
     const message = createBaseQueryDepositsResponse();
     message.deposits = object.deposits?.map(e => Deposit.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryDepositsResponseSDKType): QueryDepositsResponse {
@@ -1223,7 +1223,7 @@ export const QueryTallyResultResponse = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     const message = createBaseQueryTallyResultResponse();
-    message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : TallyResult.fromPartial({});
+    message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : undefined;
     return message;
   },
   fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {

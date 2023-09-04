@@ -91,7 +91,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     return message;

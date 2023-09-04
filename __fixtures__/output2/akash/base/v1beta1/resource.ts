@@ -85,7 +85,7 @@ export const CPU = {
   },
   fromPartial(object: DeepPartial<CPU>): CPU {
     const message = createBaseCPU();
-    message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : ResourceValue.fromPartial({});
+    message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   }
@@ -144,7 +144,7 @@ export const Memory = {
   },
   fromPartial(object: DeepPartial<Memory>): Memory {
     const message = createBaseMemory();
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : ResourceValue.fromPartial({});
+    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   }
@@ -203,7 +203,7 @@ export const Storage = {
   },
   fromPartial(object: DeepPartial<Storage>): Storage {
     const message = createBaseStorage();
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : ResourceValue.fromPartial({});
+    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   }
@@ -280,9 +280,9 @@ export const ResourceUnits = {
   },
   fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
     const message = createBaseResourceUnits();
-    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : CPU.fromPartial({});
-    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : Memory.fromPartial({});
-    message.storage = object.storage !== undefined && object.storage !== null ? Storage.fromPartial(object.storage) : Storage.fromPartial({});
+    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
+    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;
+    message.storage = object.storage !== undefined && object.storage !== null ? Storage.fromPartial(object.storage) : undefined;
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;
   }

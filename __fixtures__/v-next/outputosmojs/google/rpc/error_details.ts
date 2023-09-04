@@ -447,7 +447,7 @@ export const RetryInfo = {
   },
   fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
-    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : Duration.fromPartial({});
+    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
   },
   fromSDK(object: RetryInfoSDKType): RetryInfo {

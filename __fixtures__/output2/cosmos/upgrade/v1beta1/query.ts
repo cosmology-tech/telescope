@@ -152,7 +152,7 @@ export const QueryCurrentPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
     const message = createBaseQueryCurrentPlanResponse();
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
+    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
   }
 };

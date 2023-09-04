@@ -225,7 +225,7 @@ export const MsgStoreCode = {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
   },
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {

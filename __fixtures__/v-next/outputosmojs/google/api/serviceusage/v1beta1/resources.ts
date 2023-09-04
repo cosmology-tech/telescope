@@ -683,7 +683,7 @@ export const Service = {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
-    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : ServiceConfig.fromPartial({});
+    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : undefined;
     message.state = object.state ?? 0;
     return message;
   },
@@ -881,13 +881,13 @@ export const ServiceConfig = {
     message.name = object.name ?? "";
     message.title = object.title ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : Documentation.fromPartial({});
-    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : Quota.fromPartial({});
-    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : Authentication.fromPartial({});
-    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : Usage.fromPartial({});
+    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : undefined;
+    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : undefined;
+    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : undefined;
+    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : undefined;
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : Monitoring.fromPartial({});
+    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : undefined;
     return message;
   },
   fromSDK(object: ServiceConfigSDKType): ServiceConfig {
@@ -1655,9 +1655,9 @@ export const QuotaBucket = {
     const message = createBaseQuotaBucket();
     message.effectiveLimit = object.effectiveLimit !== undefined && object.effectiveLimit !== null ? BigInt(object.effectiveLimit.toString()) : BigInt(0);
     message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt(0);
-    message.producerOverride = object.producerOverride !== undefined && object.producerOverride !== null ? QuotaOverride.fromPartial(object.producerOverride) : QuotaOverride.fromPartial({});
-    message.consumerOverride = object.consumerOverride !== undefined && object.consumerOverride !== null ? QuotaOverride.fromPartial(object.consumerOverride) : QuotaOverride.fromPartial({});
-    message.adminOverride = object.adminOverride !== undefined && object.adminOverride !== null ? QuotaOverride.fromPartial(object.adminOverride) : QuotaOverride.fromPartial({});
+    message.producerOverride = object.producerOverride !== undefined && object.producerOverride !== null ? QuotaOverride.fromPartial(object.producerOverride) : undefined;
+    message.consumerOverride = object.consumerOverride !== undefined && object.consumerOverride !== null ? QuotaOverride.fromPartial(object.consumerOverride) : undefined;
+    message.adminOverride = object.adminOverride !== undefined && object.adminOverride !== null ? QuotaOverride.fromPartial(object.adminOverride) : undefined;
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {

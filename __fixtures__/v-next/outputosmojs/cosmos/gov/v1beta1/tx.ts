@@ -158,7 +158,7 @@ export const MsgSubmitProposal = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
-    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
     message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     return message;

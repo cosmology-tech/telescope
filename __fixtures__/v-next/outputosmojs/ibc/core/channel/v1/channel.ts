@@ -362,7 +362,7 @@ export const Channel = {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
@@ -544,7 +544,7 @@ export const IdentifiedChannel = {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     message.portId = object.portId ?? "";
@@ -854,7 +854,7 @@ export const Packet = {
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },

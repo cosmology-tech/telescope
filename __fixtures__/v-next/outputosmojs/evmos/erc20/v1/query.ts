@@ -122,7 +122,7 @@ export const QueryTokenPairsRequest = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
     const message = createBaseQueryTokenPairsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryTokenPairsRequestSDKType): QueryTokenPairsRequest {
@@ -222,7 +222,7 @@ export const QueryTokenPairsResponse = {
   fromPartial(object: DeepPartial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
     const message = createBaseQueryTokenPairsResponse();
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryTokenPairsResponseSDKType): QueryTokenPairsResponse {
@@ -407,7 +407,7 @@ export const QueryTokenPairResponse = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairResponse>): QueryTokenPairResponse {
     const message = createBaseQueryTokenPairResponse();
-    message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : TokenPair.fromPartial({});
+    message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : undefined;
     return message;
   },
   fromSDK(object: QueryTokenPairResponseSDKType): QueryTokenPairResponse {
@@ -559,7 +559,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

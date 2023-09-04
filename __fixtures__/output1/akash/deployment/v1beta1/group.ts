@@ -186,7 +186,7 @@ export const MsgCloseGroup = {
   },
   fromPartial<I extends Exact<Partial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
@@ -281,7 +281,7 @@ export const MsgPauseGroup = {
   },
   fromPartial<I extends Exact<Partial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
@@ -376,7 +376,7 @@ export const MsgStartGroup = {
   },
   fromPartial<I extends Exact<Partial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
@@ -573,7 +573,7 @@ export const GroupSpec = {
   fromPartial<I extends Exact<Partial<GroupSpec>, I>>(object: I): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : PlacementRequirements.fromPartial({});
+    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   },
@@ -664,9 +664,9 @@ export const Group = {
   },
   fromPartial<I extends Exact<Partial<Group>, I>>(object: I): Group {
     const message = createBaseGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : GroupID.fromPartial({});
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : GroupSpec.fromPartial({});
+    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   },
@@ -746,9 +746,9 @@ export const Resource = {
   },
   fromPartial<I extends Exact<Partial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
-    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : ResourceUnits.fromPartial({});
+    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
     message.count = object.count ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : Coin.fromPartial({});
+    message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : undefined;
     return message;
   },
   fromSDK(object: ResourceSDKType): Resource {

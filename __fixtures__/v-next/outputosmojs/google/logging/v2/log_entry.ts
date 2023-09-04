@@ -578,15 +578,15 @@ export const LogEntry = {
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.logName = object.logName ?? "";
-    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : MonitoredResource.fromPartial({});
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : Any.fromPartial({});
+    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
+    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
     message.textPayload = object.textPayload ?? undefined;
-    message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : Struct.fromPartial({});
+    message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.receiveTimestamp = object.receiveTimestamp ?? undefined;
     message.severity = object.severity ?? 0;
     message.insertId = object.insertId ?? "";
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : HttpRequest.fromPartial({});
+    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -595,12 +595,12 @@ export const LogEntry = {
       }
       return acc;
     }, {});
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : LogEntryOperation.fromPartial({});
+    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
     message.trace = object.trace ?? "";
     message.spanId = object.spanId ?? "";
     message.traceSampled = object.traceSampled ?? false;
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : LogEntrySourceLocation.fromPartial({});
-    message.split = object.split !== undefined && object.split !== null ? LogSplit.fromPartial(object.split) : LogSplit.fromPartial({});
+    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
+    message.split = object.split !== undefined && object.split !== null ? LogSplit.fromPartial(object.split) : undefined;
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {

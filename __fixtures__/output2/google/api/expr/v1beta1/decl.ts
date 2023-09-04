@@ -130,8 +130,8 @@ export const Decl = {
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
     message.doc = object.doc ?? "";
-    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : IdentDecl.fromPartial({});
-    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : FunctionDecl.fromPartial({});
+    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
     return message;
   }
 };
@@ -254,8 +254,8 @@ export const IdentDecl = {
   },
   fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
     const message = createBaseIdentDecl();
-    message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : DeclType.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : Expr.fromPartial({});
+    message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   }
 };
@@ -323,7 +323,7 @@ export const FunctionDecl = {
   fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
     const message = createBaseFunctionDecl();
     message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
-    message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : DeclType.fromPartial({});
+    message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : undefined;
     message.receiverFunction = object.receiverFunction ?? false;
     return message;
   }

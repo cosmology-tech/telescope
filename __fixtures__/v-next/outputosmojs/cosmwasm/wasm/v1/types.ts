@@ -485,7 +485,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : AccessConfig.fromPartial({});
+    message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
     message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0);
     return message;
@@ -609,7 +609,7 @@ export const CodeInfo = {
     const message = createBaseCodeInfo();
     message.codeHash = object.codeHash ?? new Uint8Array();
     message.creator = object.creator ?? "";
-    message.instantiateConfig = object.instantiateConfig !== undefined && object.instantiateConfig !== null ? AccessConfig.fromPartial(object.instantiateConfig) : AccessConfig.fromPartial({});
+    message.instantiateConfig = object.instantiateConfig !== undefined && object.instantiateConfig !== null ? AccessConfig.fromPartial(object.instantiateConfig) : undefined;
     return message;
   },
   fromSDK(object: CodeInfoSDKType): CodeInfo {
@@ -769,9 +769,9 @@ export const ContractInfo = {
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
-    message.created = object.created !== undefined && object.created !== null ? AbsoluteTxPosition.fromPartial(object.created) : AbsoluteTxPosition.fromPartial({});
+    message.created = object.created !== undefined && object.created !== null ? AbsoluteTxPosition.fromPartial(object.created) : undefined;
     message.ibcPortId = object.ibcPortId ?? "";
-    message.extension = object.extension !== undefined && object.extension !== null ? Any.fromPartial(object.extension) : Any.fromPartial({});
+    message.extension = object.extension !== undefined && object.extension !== null ? Any.fromPartial(object.extension) : undefined;
     return message;
   },
   fromSDK(object: ContractInfoSDKType): ContractInfo {
@@ -922,7 +922,7 @@ export const ContractCodeHistoryEntry = {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
     message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
-    message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : AbsoluteTxPosition.fromPartial({});
+    message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },

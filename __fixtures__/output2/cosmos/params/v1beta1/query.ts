@@ -112,7 +112,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : ParamChange.fromPartial({});
+    message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
     return message;
   }
 };

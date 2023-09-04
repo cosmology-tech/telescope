@@ -602,7 +602,7 @@ export const MonitoredResourceMetadata = {
   },
   fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
     const message = createBaseMonitoredResourceMetadata();
-    message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : Struct.fromPartial({});
+    message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : undefined;
     message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {

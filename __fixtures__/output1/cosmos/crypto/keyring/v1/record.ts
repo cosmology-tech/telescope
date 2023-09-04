@@ -146,11 +146,11 @@ export const Record = {
   fromPartial(object: DeepPartial<Record>): Record {
     const message = createBaseRecord();
     message.name = object.name ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : Any.fromPartial({});
-    message.local = object.local !== undefined && object.local !== null ? Record_Local.fromPartial(object.local) : Record_Local.fromPartial({});
-    message.ledger = object.ledger !== undefined && object.ledger !== null ? Record_Ledger.fromPartial(object.ledger) : Record_Ledger.fromPartial({});
-    message.multi = object.multi !== undefined && object.multi !== null ? Record_Multi.fromPartial(object.multi) : Record_Multi.fromPartial({});
-    message.offline = object.offline !== undefined && object.offline !== null ? Record_Offline.fromPartial(object.offline) : Record_Offline.fromPartial({});
+    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
+    message.local = object.local !== undefined && object.local !== null ? Record_Local.fromPartial(object.local) : undefined;
+    message.ledger = object.ledger !== undefined && object.ledger !== null ? Record_Ledger.fromPartial(object.ledger) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? Record_Multi.fromPartial(object.multi) : undefined;
+    message.offline = object.offline !== undefined && object.offline !== null ? Record_Offline.fromPartial(object.offline) : undefined;
     return message;
   },
   fromSDK(object: RecordSDKType): Record {
@@ -224,7 +224,7 @@ export const Record_Local = {
   },
   fromPartial(object: DeepPartial<Record_Local>): Record_Local {
     const message = createBaseRecord_Local();
-    message.privKey = object.privKey !== undefined && object.privKey !== null ? Any.fromPartial(object.privKey) : Any.fromPartial({});
+    message.privKey = object.privKey !== undefined && object.privKey !== null ? Any.fromPartial(object.privKey) : undefined;
     message.privKeyType = object.privKeyType ?? "";
     return message;
   },
@@ -282,7 +282,7 @@ export const Record_Ledger = {
   },
   fromPartial(object: DeepPartial<Record_Ledger>): Record_Ledger {
     const message = createBaseRecord_Ledger();
-    message.path = object.path !== undefined && object.path !== null ? BIP44Params.fromPartial(object.path) : BIP44Params.fromPartial({});
+    message.path = object.path !== undefined && object.path !== null ? BIP44Params.fromPartial(object.path) : undefined;
     return message;
   },
   fromSDK(object: Record_LedgerSDKType): Record_Ledger {

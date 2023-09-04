@@ -133,7 +133,7 @@ export const EvalRequest_BindingsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : ExprValue.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
@@ -227,7 +227,7 @@ export const EvalRequest_RefsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_RefsEntry>): EvalRequest_RefsEntry {
     const message = createBaseEvalRequest_RefsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? IdRef.fromPartial(object.value) : IdRef.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? IdRef.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: EvalRequest_RefsEntrySDKType): EvalRequest_RefsEntry {

@@ -771,7 +771,7 @@ export const WriteLogEntriesRequest = {
   fromPartial(object: DeepPartial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
     const message = createBaseWriteLogEntriesRequest();
     message.logName = object.logName ?? "";
-    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : MonitoredResource.fromPartial({});
+    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1001,7 +1001,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
-    message.value = object.value !== undefined && object.value !== null ? Status.fromPartial(object.value) : Status.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? Status.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -1985,7 +1985,7 @@ export const TailLogEntriesRequest = {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
-    message.bufferWindow = object.bufferWindow !== undefined && object.bufferWindow !== null ? Duration.fromPartial(object.bufferWindow) : Duration.fromPartial({});
+    message.bufferWindow = object.bufferWindow !== undefined && object.bufferWindow !== null ? Duration.fromPartial(object.bufferWindow) : undefined;
     return message;
   },
   fromSDK(object: TailLogEntriesRequestSDKType): TailLogEntriesRequest {

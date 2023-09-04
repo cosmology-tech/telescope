@@ -136,7 +136,7 @@ export const Incentive = {
     message.contract = object.contract ?? "";
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? Long.fromValue(object.totalGas) : Long.UZERO;
     return message;
   }

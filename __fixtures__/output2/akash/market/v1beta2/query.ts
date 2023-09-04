@@ -114,8 +114,8 @@ export const QueryOrdersRequest = {
   },
   fromPartial(object: DeepPartial<QueryOrdersRequest>): QueryOrdersRequest {
     const message = createBaseQueryOrdersRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : OrderFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -174,7 +174,7 @@ export const QueryOrdersResponse = {
   fromPartial(object: DeepPartial<QueryOrdersResponse>): QueryOrdersResponse {
     const message = createBaseQueryOrdersResponse();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -219,7 +219,7 @@ export const QueryOrderRequest = {
   },
   fromPartial(object: DeepPartial<QueryOrderRequest>): QueryOrderRequest {
     const message = createBaseQueryOrderRequest();
-    message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : OrderID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : undefined;
     return message;
   }
 };
@@ -264,7 +264,7 @@ export const QueryOrderResponse = {
   },
   fromPartial(object: DeepPartial<QueryOrderResponse>): QueryOrderResponse {
     const message = createBaseQueryOrderResponse();
-    message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : Order.fromPartial({});
+    message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : undefined;
     return message;
   }
 };
@@ -318,8 +318,8 @@ export const QueryBidsRequest = {
   },
   fromPartial(object: DeepPartial<QueryBidsRequest>): QueryBidsRequest {
     const message = createBaseQueryBidsRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : BidFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -378,7 +378,7 @@ export const QueryBidsResponse = {
   fromPartial(object: DeepPartial<QueryBidsResponse>): QueryBidsResponse {
     const message = createBaseQueryBidsResponse();
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -423,7 +423,7 @@ export const QueryBidRequest = {
   },
   fromPartial(object: DeepPartial<QueryBidRequest>): QueryBidRequest {
     const message = createBaseQueryBidRequest();
-    message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : BidID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : undefined;
     return message;
   }
 };
@@ -477,8 +477,8 @@ export const QueryBidResponse = {
   },
   fromPartial(object: DeepPartial<QueryBidResponse>): QueryBidResponse {
     const message = createBaseQueryBidResponse();
-    message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : Bid.fromPartial({});
-    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : Account.fromPartial({});
+    message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : undefined;
+    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
   }
 };
@@ -532,8 +532,8 @@ export const QueryLeasesRequest = {
   },
   fromPartial(object: DeepPartial<QueryLeasesRequest>): QueryLeasesRequest {
     const message = createBaseQueryLeasesRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : LeaseFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -592,7 +592,7 @@ export const QueryLeasesResponse = {
   fromPartial(object: DeepPartial<QueryLeasesResponse>): QueryLeasesResponse {
     const message = createBaseQueryLeasesResponse();
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -637,7 +637,7 @@ export const QueryLeaseRequest = {
   },
   fromPartial(object: DeepPartial<QueryLeaseRequest>): QueryLeaseRequest {
     const message = createBaseQueryLeaseRequest();
-    message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : LeaseID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : undefined;
     return message;
   }
 };
@@ -691,8 +691,8 @@ export const QueryLeaseResponse = {
   },
   fromPartial(object: DeepPartial<QueryLeaseResponse>): QueryLeaseResponse {
     const message = createBaseQueryLeaseResponse();
-    message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : Lease.fromPartial({});
-    message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : FractionalPayment.fromPartial({});
+    message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : undefined;
+    message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : undefined;
     return message;
   }
 };

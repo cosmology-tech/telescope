@@ -140,7 +140,7 @@ export const MsgGrant = {
     const message = createBaseMsgGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.grant = object.grant !== undefined && object.grant !== null ? Grant.fromPartial(object.grant) : Grant.fromPartial({});
+    message.grant = object.grant !== undefined && object.grant !== null ? Grant.fromPartial(object.grant) : undefined;
     return message;
   },
   fromSDK(object: MsgGrantSDKType): MsgGrant {

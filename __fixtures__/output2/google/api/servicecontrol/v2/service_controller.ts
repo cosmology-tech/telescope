@@ -187,7 +187,7 @@ export const CheckRequest = {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
-    message.attributes = object.attributes !== undefined && object.attributes !== null ? AttributeContext.fromPartial(object.attributes) : AttributeContext.fromPartial({});
+    message.attributes = object.attributes !== undefined && object.attributes !== null ? AttributeContext.fromPartial(object.attributes) : undefined;
     message.resources = object.resources?.map(e => ResourceInfo.fromPartial(e)) || [];
     message.flags = object.flags ?? "";
     return message;
@@ -399,7 +399,7 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {

@@ -345,7 +345,7 @@ export const ParseResponse = {
   },
   fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
     const message = createBaseParseResponse();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : ParsedExpr.fromPartial({});
+    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   },
@@ -438,7 +438,7 @@ export const CheckRequest = {
   },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : ParsedExpr.fromPartial({});
+    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
     message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
     message.container = object.container ?? "";
     message.noStdEnv = object.noStdEnv ?? false;
@@ -519,7 +519,7 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : CheckedExpr.fromPartial({});
+    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   },
@@ -591,7 +591,7 @@ export const EvalRequest_BindingsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : ExprValue.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
@@ -691,8 +691,8 @@ export const EvalRequest = {
   },
   fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
     const message = createBaseEvalRequest();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : ParsedExpr.fromPartial({});
-    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : CheckedExpr.fromPartial({});
+    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
+    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
     message.bindings = Object.entries(object.bindings ?? {}).reduce<{
       [key: string]: ExprValue;
     }>((acc, [key, value]) => {
@@ -785,7 +785,7 @@ export const EvalResponse = {
   },
   fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
     const message = createBaseEvalResponse();
-    message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : ExprValue.fromPartial({});
+    message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   },
@@ -866,7 +866,7 @@ export const IssueDetails = {
   fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
-    message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : SourcePosition.fromPartial({});
+    message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     return message;
   },

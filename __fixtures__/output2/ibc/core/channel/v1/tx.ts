@@ -245,7 +245,7 @@ export const MsgChannelOpenInit = {
   fromPartial(object: DeepPartial<MsgChannelOpenInit>): MsgChannelOpenInit {
     const message = createBaseMsgChannelOpenInit();
     message.portId = object.portId ?? "";
-    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : Channel.fromPartial({});
+    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -392,10 +392,10 @@ export const MsgChannelOpenTry = {
     const message = createBaseMsgChannelOpenTry();
     message.portId = object.portId ?? "";
     message.previousChannelId = object.previousChannelId ?? "";
-    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : Channel.fromPartial({});
+    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : undefined;
     message.counterpartyVersion = object.counterpartyVersion ?? "";
     message.proofInit = object.proofInit ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -533,7 +533,7 @@ export const MsgChannelOpenAck = {
     message.counterpartyChannelId = object.counterpartyChannelId ?? "";
     message.counterpartyVersion = object.counterpartyVersion ?? "";
     message.proofTry = object.proofTry ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -651,7 +651,7 @@ export const MsgChannelOpenConfirm = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     message.proofAck = object.proofAck ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -867,7 +867,7 @@ export const MsgChannelCloseConfirm = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     message.proofInit = object.proofInit ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -973,9 +973,9 @@ export const MsgRecvPacket = {
   },
   fromPartial(object: DeepPartial<MsgRecvPacket>): MsgRecvPacket {
     const message = createBaseMsgRecvPacket();
-    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : Packet.fromPartial({});
+    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
     message.proofCommitment = object.proofCommitment ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -1102,9 +1102,9 @@ export const MsgTimeout = {
   },
   fromPartial(object: DeepPartial<MsgTimeout>): MsgTimeout {
     const message = createBaseMsgTimeout();
-    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : Packet.fromPartial({});
+    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
     message.proofUnreceived = object.proofUnreceived ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? Long.fromValue(object.nextSequenceRecv) : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
@@ -1241,10 +1241,10 @@ export const MsgTimeoutOnClose = {
   },
   fromPartial(object: DeepPartial<MsgTimeoutOnClose>): MsgTimeoutOnClose {
     const message = createBaseMsgTimeoutOnClose();
-    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : Packet.fromPartial({});
+    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
     message.proofUnreceived = object.proofUnreceived ?? new Uint8Array();
     message.proofClose = object.proofClose ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? Long.fromValue(object.nextSequenceRecv) : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
@@ -1372,10 +1372,10 @@ export const MsgAcknowledgement = {
   },
   fromPartial(object: DeepPartial<MsgAcknowledgement>): MsgAcknowledgement {
     const message = createBaseMsgAcknowledgement();
-    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : Packet.fromPartial({});
+    message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
     message.acknowledgement = object.acknowledgement ?? new Uint8Array();
     message.proofAcked = object.proofAcked ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : Height.fromPartial({});
+    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
   }

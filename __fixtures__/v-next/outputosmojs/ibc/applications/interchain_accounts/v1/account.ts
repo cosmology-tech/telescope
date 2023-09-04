@@ -63,7 +63,7 @@ export const InterchainAccount = {
   },
   fromPartial(object: DeepPartial<InterchainAccount>): InterchainAccount {
     const message = createBaseInterchainAccount();
-    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : BaseAccount.fromPartial({});
+    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.accountOwner = object.accountOwner ?? "";
     return message;
   },

@@ -93,7 +93,7 @@ export const MsgConvertCoin = {
   },
   fromPartial(object: DeepPartial<MsgConvertCoin>): MsgConvertCoin {
     const message = createBaseMsgConvertCoin();
-    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
+    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : undefined;
     message.receiver = object.receiver ?? "";
     message.sender = object.sender ?? "";
     return message;

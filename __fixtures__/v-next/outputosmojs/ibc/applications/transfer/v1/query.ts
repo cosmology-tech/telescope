@@ -213,7 +213,7 @@ export const QueryDenomTraceResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomTraceResponse>): QueryDenomTraceResponse {
     const message = createBaseQueryDenomTraceResponse();
-    message.denomTrace = object.denomTrace !== undefined && object.denomTrace !== null ? DenomTrace.fromPartial(object.denomTrace) : DenomTrace.fromPartial({});
+    message.denomTrace = object.denomTrace !== undefined && object.denomTrace !== null ? DenomTrace.fromPartial(object.denomTrace) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomTraceResponseSDKType): QueryDenomTraceResponse {
@@ -305,7 +305,7 @@ export const QueryDenomTracesRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomTracesRequest>): QueryDenomTracesRequest {
     const message = createBaseQueryDenomTracesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomTracesRequestSDKType): QueryDenomTracesRequest {
@@ -411,7 +411,7 @@ export const QueryDenomTracesResponse = {
   fromPartial(object: DeepPartial<QueryDenomTracesResponse>): QueryDenomTracesResponse {
     const message = createBaseQueryDenomTracesResponse();
     message.denomTraces = object.denomTraces?.map(e => DenomTrace.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomTracesResponseSDKType): QueryDenomTracesResponse {
@@ -588,7 +588,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

@@ -126,8 +126,8 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : ControllerGenesisState.fromPartial({});
-    message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : HostGenesisState.fromPartial({});
+    message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : undefined;
+    message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : undefined;
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -266,7 +266,7 @@ export const ControllerGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.ports = object.ports?.map(e => e) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : Params1.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: ControllerGenesisStateSDKType): ControllerGenesisState {
@@ -435,7 +435,7 @@ export const HostGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.port = object.port ?? "";
-    message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : Params2.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: HostGenesisStateSDKType): HostGenesisState {

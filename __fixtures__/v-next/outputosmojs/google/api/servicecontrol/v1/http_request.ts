@@ -278,7 +278,7 @@ export const HttpRequest = {
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : Duration.fromPartial({});
+    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : undefined;
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;

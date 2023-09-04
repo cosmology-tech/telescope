@@ -252,8 +252,8 @@ export const MsgCreatePosition = {
     message.sender = object.sender ?? "";
     message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt(0);
     message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt(0);
-    message.tokenDesired0 = object.tokenDesired0 !== undefined && object.tokenDesired0 !== null ? Coin.fromPartial(object.tokenDesired0) : Coin.fromPartial({});
-    message.tokenDesired1 = object.tokenDesired1 !== undefined && object.tokenDesired1 !== null ? Coin.fromPartial(object.tokenDesired1) : Coin.fromPartial({});
+    message.tokenDesired0 = object.tokenDesired0 !== undefined && object.tokenDesired0 !== null ? Coin.fromPartial(object.tokenDesired0) : undefined;
+    message.tokenDesired1 = object.tokenDesired1 !== undefined && object.tokenDesired1 !== null ? Coin.fromPartial(object.tokenDesired1) : undefined;
     message.tokenMinAmount0 = object.tokenMinAmount0 ?? "";
     message.tokenMinAmount1 = object.tokenMinAmount1 ?? "";
     return message;
@@ -1287,7 +1287,7 @@ export const MsgCreateIncentive = {
     message.incentiveAmount = object.incentiveAmount ?? "";
     message.emissionRate = object.emissionRate ?? "";
     message.startTime = object.startTime ?? undefined;
-    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
+    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateIncentiveSDKType): MsgCreateIncentive {
@@ -1449,7 +1449,7 @@ export const MsgCreateIncentiveResponse = {
     message.incentiveAmount = object.incentiveAmount ?? "";
     message.emissionRate = object.emissionRate ?? "";
     message.startTime = object.startTime ?? undefined;
-    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
+    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateIncentiveResponseSDKType): MsgCreateIncentiveResponse {

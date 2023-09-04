@@ -172,8 +172,8 @@ export const SmoothWeightChangeParams = {
   },
   fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
@@ -240,7 +240,7 @@ export const PoolParams = {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
     message.exitFee = object.exitFee ?? "";
-    message.smoothWeightChangeParams = object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null ? SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams) : SmoothWeightChangeParams.fromPartial({});
+    message.smoothWeightChangeParams = object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null ? SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams) : undefined;
     return message;
   }
 };
@@ -294,7 +294,7 @@ export const PoolAsset = {
   },
   fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
     const message = createBasePoolAsset();
-    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : Coin.fromPartial({});
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
     return message;
   }
@@ -400,9 +400,9 @@ export const Pool = {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : Coin.fromPartial({});
+    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.totalWeight = object.totalWeight ?? "";
     return message;

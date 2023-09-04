@@ -1535,8 +1535,8 @@ export const Rollout = {
     message.createTime = object.createTime ?? undefined;
     message.createdBy = object.createdBy ?? "";
     message.status = object.status ?? 0;
-    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : Rollout_TrafficPercentStrategy.fromPartial({});
-    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : Rollout_DeleteServiceStrategy.fromPartial({});
+    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : undefined;
+    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
     message.serviceName = object.serviceName ?? "";
     return message;
   },

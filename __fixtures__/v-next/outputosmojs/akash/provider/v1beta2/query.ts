@@ -79,7 +79,7 @@ export const QueryProvidersRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryProvidersRequest>, I>>(object: I): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
@@ -185,7 +185,7 @@ export const QueryProvidersResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryProvidersResponse>, I>>(object: I): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
@@ -382,7 +382,7 @@ export const QueryProviderResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryProviderResponse>, I>>(object: I): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
-    message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : Provider.fromPartial({});
+    message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
     return message;
   },
   fromSDK(object: QueryProviderResponseSDKType): QueryProviderResponse {

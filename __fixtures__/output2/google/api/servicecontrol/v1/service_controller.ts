@@ -280,7 +280,7 @@ export const CheckRequest = {
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
-    message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : Operation.fromPartial({});
+    message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : undefined;
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   }
@@ -370,7 +370,7 @@ export const CheckResponse = {
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
-    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : CheckResponse_CheckInfo.fromPartial({});
+    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : undefined;
     return message;
   }
 };
@@ -429,7 +429,7 @@ export const CheckResponse_CheckInfo = {
   fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
-    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : CheckResponse_ConsumerInfo.fromPartial({});
+    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
     return message;
   }
 };
@@ -687,7 +687,7 @@ export const ReportResponse_ReportError = {
   fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
     message.operationId = object.operationId ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
   }
 };

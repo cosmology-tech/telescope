@@ -480,7 +480,7 @@ export const QueryPositionByIdResponse = {
   },
   fromPartial(object: DeepPartial<QueryPositionByIdResponse>): QueryPositionByIdResponse {
     const message = createBaseQueryPositionByIdResponse();
-    message.position = object.position !== undefined && object.position !== null ? PositionWithUnderlyingAssetBreakdown.fromPartial(object.position) : PositionWithUnderlyingAssetBreakdown.fromPartial({});
+    message.position = object.position !== undefined && object.position !== null ? PositionWithUnderlyingAssetBreakdown.fromPartial(object.position) : undefined;
     return message;
   },
   fromSDK(object: QueryPositionByIdResponseSDKType): QueryPositionByIdResponse {
@@ -572,7 +572,7 @@ export const QueryPoolsRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolsRequest>): QueryPoolsRequest {
     const message = createBaseQueryPoolsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryPoolsRequestSDKType): QueryPoolsRequest {
@@ -678,7 +678,7 @@ export const QueryPoolsResponse = {
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
@@ -855,7 +855,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

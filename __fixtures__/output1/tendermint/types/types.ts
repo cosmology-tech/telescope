@@ -424,7 +424,7 @@ export const Part = {
     const message = createBasePart();
     message.index = object.index ?? 0;
     message.bytes = object.bytes ?? new Uint8Array();
-    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
+    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
     return message;
   },
   fromSDK(object: PartSDKType): Part {
@@ -493,7 +493,7 @@ export const BlockID = {
   fromPartial(object: DeepPartial<BlockID>): BlockID {
     const message = createBaseBlockID();
     message.hash = object.hash ?? new Uint8Array();
-    message.partSetHeader = object.partSetHeader !== undefined && object.partSetHeader !== null ? PartSetHeader.fromPartial(object.partSetHeader) : PartSetHeader.fromPartial({});
+    message.partSetHeader = object.partSetHeader !== undefined && object.partSetHeader !== null ? PartSetHeader.fromPartial(object.partSetHeader) : undefined;
     return message;
   },
   fromSDK(object: BlockIDSDKType): BlockID {
@@ -667,11 +667,11 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    message.version = object.version !== undefined && object.version !== null ? Consensus.fromPartial(object.version) : Consensus.fromPartial({});
+    message.version = object.version !== undefined && object.version !== null ? Consensus.fromPartial(object.version) : undefined;
     message.chainId = object.chainId ?? "";
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.time = object.time ?? undefined;
-    message.lastBlockId = object.lastBlockId !== undefined && object.lastBlockId !== null ? BlockID.fromPartial(object.lastBlockId) : BlockID.fromPartial({});
+    message.lastBlockId = object.lastBlockId !== undefined && object.lastBlockId !== null ? BlockID.fromPartial(object.lastBlockId) : undefined;
     message.lastCommitHash = object.lastCommitHash ?? new Uint8Array();
     message.dataHash = object.dataHash ?? new Uint8Array();
     message.validatorsHash = object.validatorsHash ?? new Uint8Array();
@@ -890,7 +890,7 @@ export const Vote = {
     message.type = object.type ?? 0;
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.validatorAddress = object.validatorAddress ?? new Uint8Array();
     message.validatorIndex = object.validatorIndex ?? 0;
@@ -996,7 +996,7 @@ export const Commit = {
     const message = createBaseCommit();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.signatures = object.signatures?.map(e => CommitSig.fromPartial(e)) || [];
     return message;
   },
@@ -1211,7 +1211,7 @@ export const Proposal = {
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.signature = object.signature ?? new Uint8Array();
     return message;
@@ -1289,8 +1289,8 @@ export const SignedHeader = {
   },
   fromPartial(object: DeepPartial<SignedHeader>): SignedHeader {
     const message = createBaseSignedHeader();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
-    message.commit = object.commit !== undefined && object.commit !== null ? Commit.fromPartial(object.commit) : Commit.fromPartial({});
+    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
+    message.commit = object.commit !== undefined && object.commit !== null ? Commit.fromPartial(object.commit) : undefined;
     return message;
   },
   fromSDK(object: SignedHeaderSDKType): SignedHeader {
@@ -1356,8 +1356,8 @@ export const LightBlock = {
   },
   fromPartial(object: DeepPartial<LightBlock>): LightBlock {
     const message = createBaseLightBlock();
-    message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : SignedHeader.fromPartial({});
-    message.validatorSet = object.validatorSet !== undefined && object.validatorSet !== null ? ValidatorSet.fromPartial(object.validatorSet) : ValidatorSet.fromPartial({});
+    message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : undefined;
+    message.validatorSet = object.validatorSet !== undefined && object.validatorSet !== null ? ValidatorSet.fromPartial(object.validatorSet) : undefined;
     return message;
   },
   fromSDK(object: LightBlockSDKType): LightBlock {
@@ -1441,9 +1441,9 @@ export const BlockMeta = {
   },
   fromPartial(object: DeepPartial<BlockMeta>): BlockMeta {
     const message = createBaseBlockMeta();
-    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.blockSize = object.blockSize !== undefined && object.blockSize !== null ? Long.fromValue(object.blockSize) : Long.ZERO;
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
+    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
     message.numTxs = object.numTxs !== undefined && object.numTxs !== null ? Long.fromValue(object.numTxs) : Long.ZERO;
     return message;
   },
@@ -1525,7 +1525,7 @@ export const TxProof = {
     const message = createBaseTxProof();
     message.rootHash = object.rootHash ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
-    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
+    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
     return message;
   },
   fromSDK(object: TxProofSDKType): TxProof {

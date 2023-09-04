@@ -273,7 +273,7 @@ export const CodeGeneratorRequest = {
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
     message.parameter = object.parameter ?? "";
     message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
-    message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : Version.fromPartial({});
+    message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : undefined;
     return message;
   }
 };

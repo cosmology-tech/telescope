@@ -691,7 +691,7 @@ export const MsgRevokeCertificate = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgRevokeCertificate>, I>>(object: I): MsgRevokeCertificate {
     const message = createBaseMsgRevokeCertificate();
-    message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : CertificateID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgRevokeCertificateSDKType): MsgRevokeCertificate {

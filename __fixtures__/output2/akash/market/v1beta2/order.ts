@@ -216,9 +216,9 @@ export const Order = {
   },
   fromPartial(object: DeepPartial<Order>): Order {
     const message = createBaseOrder();
-    message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : OrderID.fromPartial({});
+    message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : undefined;
     message.state = object.state ?? 0;
-    message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : GroupSpec.fromPartial({});
+    message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   }

@@ -443,7 +443,7 @@ export const ClientState = {
     const message = createBaseClientState();
     message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.frozenSequence = object.frozenSequence !== undefined && object.frozenSequence !== null ? BigInt(object.frozenSequence.toString()) : BigInt(0);
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : ConsensusState.fromPartial({});
+    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : undefined;
     message.allowUpdateAfterProposal = object.allowUpdateAfterProposal ?? false;
     return message;
   },
@@ -569,7 +569,7 @@ export const ConsensusState = {
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
+    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.diversifier = object.diversifier ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     return message;
@@ -712,7 +712,7 @@ export const Header = {
     message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     message.signature = object.signature ?? new Uint8Array();
-    message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : Any.fromPartial({});
+    message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },
@@ -854,8 +854,8 @@ export const Misbehaviour = {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
     message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
-    message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : SignatureAndData.fromPartial({});
-    message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : SignatureAndData.fromPartial({});
+    message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : undefined;
+    message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : undefined;
     return message;
   },
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
@@ -1367,7 +1367,7 @@ export const HeaderData = {
   },
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
-    message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : Any.fromPartial({});
+    message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },
@@ -1475,7 +1475,7 @@ export const ClientStateData = {
   fromPartial(object: DeepPartial<ClientStateData>): ClientStateData {
     const message = createBaseClientStateData();
     message.path = object.path ?? new Uint8Array();
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
+    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     return message;
   },
   fromSDK(object: ClientStateDataSDKType): ClientStateData {
@@ -1582,7 +1582,7 @@ export const ConsensusStateData = {
   fromPartial(object: DeepPartial<ConsensusStateData>): ConsensusStateData {
     const message = createBaseConsensusStateData();
     message.path = object.path ?? new Uint8Array();
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
+    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     return message;
   },
   fromSDK(object: ConsensusStateDataSDKType): ConsensusStateData {
@@ -1689,7 +1689,7 @@ export const ConnectionStateData = {
   fromPartial(object: DeepPartial<ConnectionStateData>): ConnectionStateData {
     const message = createBaseConnectionStateData();
     message.path = object.path ?? new Uint8Array();
-    message.connection = object.connection !== undefined && object.connection !== null ? ConnectionEnd.fromPartial(object.connection) : ConnectionEnd.fromPartial({});
+    message.connection = object.connection !== undefined && object.connection !== null ? ConnectionEnd.fromPartial(object.connection) : undefined;
     return message;
   },
   fromSDK(object: ConnectionStateDataSDKType): ConnectionStateData {
@@ -1796,7 +1796,7 @@ export const ChannelStateData = {
   fromPartial(object: DeepPartial<ChannelStateData>): ChannelStateData {
     const message = createBaseChannelStateData();
     message.path = object.path ?? new Uint8Array();
-    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : Channel.fromPartial({});
+    message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : undefined;
     return message;
   },
   fromSDK(object: ChannelStateDataSDKType): ChannelStateData {

@@ -71,7 +71,7 @@ export const GenesisCertificate = {
   fromPartial<I extends Exact<DeepPartial<GenesisCertificate>, I>>(object: I): GenesisCertificate {
     const message = createBaseGenesisCertificate();
     message.owner = object.owner ?? "";
-    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : Certificate.fromPartial({});
+    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
     return message;
   },
   fromSDK(object: GenesisCertificateSDKType): GenesisCertificate {

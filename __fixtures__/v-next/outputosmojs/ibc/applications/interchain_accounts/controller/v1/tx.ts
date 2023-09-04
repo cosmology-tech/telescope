@@ -350,7 +350,7 @@ export const MsgSendTx = {
     const message = createBaseMsgSendTx();
     message.owner = object.owner ?? "";
     message.connectionId = object.connectionId ?? "";
-    message.packetData = object.packetData !== undefined && object.packetData !== null ? InterchainAccountPacketData.fromPartial(object.packetData) : InterchainAccountPacketData.fromPartial({});
+    message.packetData = object.packetData !== undefined && object.packetData !== null ? InterchainAccountPacketData.fromPartial(object.packetData) : undefined;
     message.relativeTimeout = object.relativeTimeout !== undefined && object.relativeTimeout !== null ? BigInt(object.relativeTimeout.toString()) : BigInt(0);
     return message;
   },

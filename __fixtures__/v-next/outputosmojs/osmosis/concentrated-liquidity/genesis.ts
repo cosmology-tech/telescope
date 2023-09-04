@@ -140,7 +140,7 @@ export const FullTick = {
     const message = createBaseFullTick();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tickIndex = object.tickIndex !== undefined && object.tickIndex !== null ? BigInt(object.tickIndex.toString()) : BigInt(0);
-    message.info = object.info !== undefined && object.info !== null ? TickInfo.fromPartial(object.info) : TickInfo.fromPartial({});
+    message.info = object.info !== undefined && object.info !== null ? TickInfo.fromPartial(object.info) : undefined;
     return message;
   },
   fromSDK(object: FullTickSDKType): FullTick {
@@ -290,9 +290,9 @@ export const PoolData = {
   },
   fromPartial(object: DeepPartial<PoolData>): PoolData {
     const message = createBasePoolData();
-    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : Any.fromPartial({});
+    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
     message.ticks = object.ticks?.map(e => FullTick.fromPartial(e)) || [];
-    message.feeAccumulator = object.feeAccumulator !== undefined && object.feeAccumulator !== null ? AccumObject.fromPartial(object.feeAccumulator) : AccumObject.fromPartial({});
+    message.feeAccumulator = object.feeAccumulator !== undefined && object.feeAccumulator !== null ? AccumObject.fromPartial(object.feeAccumulator) : undefined;
     message.incentivesAccumulators = object.incentivesAccumulators?.map(e => AccumObject.fromPartial(e)) || [];
     message.incentiveRecords = object.incentiveRecords?.map(e => IncentiveRecord.fromPartial(e)) || [];
     return message;
@@ -465,7 +465,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.poolData = object.poolData?.map(e => PoolData.fromPartial(e)) || [];
     message.positions = object.positions?.map(e => Position.fromPartial(e)) || [];
     message.nextPositionId = object.nextPositionId !== undefined && object.nextPositionId !== null ? BigInt(object.nextPositionId.toString()) : BigInt(0);
@@ -601,7 +601,7 @@ export const AccumObject = {
   fromPartial(object: DeepPartial<AccumObject>): AccumObject {
     const message = createBaseAccumObject();
     message.name = object.name ?? "";
-    message.accumContent = object.accumContent !== undefined && object.accumContent !== null ? AccumulatorContent.fromPartial(object.accumContent) : AccumulatorContent.fromPartial({});
+    message.accumContent = object.accumContent !== undefined && object.accumContent !== null ? AccumulatorContent.fromPartial(object.accumContent) : undefined;
     return message;
   },
   fromSDK(object: AccumObjectSDKType): AccumObject {

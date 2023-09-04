@@ -285,7 +285,7 @@ export const RegisterCoinProposal = {
     const message = createBaseRegisterCoinProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
   },
   fromSDK(object: RegisterCoinProposalSDKType): RegisterCoinProposal {

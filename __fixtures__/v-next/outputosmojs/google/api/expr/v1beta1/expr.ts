@@ -426,8 +426,8 @@ export const ParsedExpr = {
   },
   fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
     const message = createBaseParsedExpr();
-    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : Expr.fromPartial({});
-    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
+    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
+    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     message.syntaxVersion = object.syntaxVersion ?? "";
     return message;
   },
@@ -588,13 +588,13 @@ export const Expr = {
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
     message.id = object.id ?? 0;
-    message.literalExpr = object.literalExpr !== undefined && object.literalExpr !== null ? Literal.fromPartial(object.literalExpr) : Literal.fromPartial({});
-    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : Expr_Ident.fromPartial({});
-    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : Expr_Select.fromPartial({});
-    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Expr_Call.fromPartial(object.callExpr) : Expr_Call.fromPartial({});
-    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? Expr_CreateList.fromPartial(object.listExpr) : Expr_CreateList.fromPartial({});
-    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : Expr_CreateStruct.fromPartial({});
-    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : Expr_Comprehension.fromPartial({});
+    message.literalExpr = object.literalExpr !== undefined && object.literalExpr !== null ? Literal.fromPartial(object.literalExpr) : undefined;
+    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
+    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
+    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Expr_Call.fromPartial(object.callExpr) : undefined;
+    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? Expr_CreateList.fromPartial(object.listExpr) : undefined;
+    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : undefined;
+    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
     return message;
   },
   fromSDK(object: ExprSDKType): Expr {
@@ -819,7 +819,7 @@ export const Expr_Select = {
   },
   fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
     const message = createBaseExpr_Select();
-    message.operand = object.operand !== undefined && object.operand !== null ? Expr.fromPartial(object.operand) : Expr.fromPartial({});
+    message.operand = object.operand !== undefined && object.operand !== null ? Expr.fromPartial(object.operand) : undefined;
     message.field = object.field ?? "";
     message.testOnly = object.testOnly ?? false;
     return message;
@@ -939,7 +939,7 @@ export const Expr_Call = {
   },
   fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
     const message = createBaseExpr_Call();
-    message.target = object.target !== undefined && object.target !== null ? Expr.fromPartial(object.target) : Expr.fromPartial({});
+    message.target = object.target !== undefined && object.target !== null ? Expr.fromPartial(object.target) : undefined;
     message.function = object.function ?? "";
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
@@ -1285,8 +1285,8 @@ export const Expr_CreateStruct_Entry = {
     const message = createBaseExpr_CreateStruct_Entry();
     message.id = object.id ?? 0;
     message.fieldKey = object.fieldKey ?? undefined;
-    message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : Expr.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : Expr.fromPartial({});
+    message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
@@ -1442,12 +1442,12 @@ export const Expr_Comprehension = {
   fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
     const message = createBaseExpr_Comprehension();
     message.iterVar = object.iterVar ?? "";
-    message.iterRange = object.iterRange !== undefined && object.iterRange !== null ? Expr.fromPartial(object.iterRange) : Expr.fromPartial({});
+    message.iterRange = object.iterRange !== undefined && object.iterRange !== null ? Expr.fromPartial(object.iterRange) : undefined;
     message.accuVar = object.accuVar ?? "";
-    message.accuInit = object.accuInit !== undefined && object.accuInit !== null ? Expr.fromPartial(object.accuInit) : Expr.fromPartial({});
-    message.loopCondition = object.loopCondition !== undefined && object.loopCondition !== null ? Expr.fromPartial(object.loopCondition) : Expr.fromPartial({});
-    message.loopStep = object.loopStep !== undefined && object.loopStep !== null ? Expr.fromPartial(object.loopStep) : Expr.fromPartial({});
-    message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : Expr.fromPartial({});
+    message.accuInit = object.accuInit !== undefined && object.accuInit !== null ? Expr.fromPartial(object.accuInit) : undefined;
+    message.loopCondition = object.loopCondition !== undefined && object.loopCondition !== null ? Expr.fromPartial(object.loopCondition) : undefined;
+    message.loopStep = object.loopStep !== undefined && object.loopStep !== null ? Expr.fromPartial(object.loopStep) : undefined;
+    message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : undefined;
     return message;
   },
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {

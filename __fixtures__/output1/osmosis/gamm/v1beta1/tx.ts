@@ -673,7 +673,7 @@ export const MsgSwapExactAmountIn = {
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
-    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : Coin.fromPartial({});
+    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : undefined;
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? "";
     return message;
   },
@@ -895,7 +895,7 @@ export const MsgSwapExactAmountOut = {
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? "";
-    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : Coin.fromPartial({});
+    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
     return message;
   },
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
@@ -1044,7 +1044,7 @@ export const MsgJoinSwapExternAmountIn = {
     const message = createBaseMsgJoinSwapExternAmountIn();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : Coin.fromPartial({});
+    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : undefined;
     message.shareOutMinAmount = object.shareOutMinAmount ?? "";
     return message;
   },
@@ -1506,7 +1506,7 @@ export const MsgExitSwapExternAmountOut = {
     const message = createBaseMsgExitSwapExternAmountOut();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : Coin.fromPartial({});
+    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
     message.shareInMaxAmount = object.shareInMaxAmount ?? "";
     return message;
   },

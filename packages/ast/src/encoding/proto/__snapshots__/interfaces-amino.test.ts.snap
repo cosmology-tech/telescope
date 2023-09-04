@@ -274,13 +274,13 @@ exports[`MsgCreateValidator 1`] = `
   },
   fromPartial(object: Partial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
-    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : Description.fromPartial({});
-    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : CommissionRates.fromPartial({});
+    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
+    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : undefined;
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : Any.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : Coin.fromPartial({});
+    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
@@ -407,7 +407,7 @@ exports[`MsgStoreCode 1`] = `
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
   },
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
@@ -520,7 +520,7 @@ exports[`MsgSubmitProposal 1`] = `
   },
   fromPartial(object: Partial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
-    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
     message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     return message;
@@ -673,10 +673,10 @@ exports[`MsgTransfer 1`] = `
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
-    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : Coin.fromPartial({});
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },

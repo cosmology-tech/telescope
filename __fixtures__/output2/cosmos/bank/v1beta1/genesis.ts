@@ -109,7 +109,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.balances = object.balances?.map(e => Balance.fromPartial(e)) || [];
     message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
     message.denomMetadata = object.denomMetadata?.map(e => Metadata.fromPartial(e)) || [];

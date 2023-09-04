@@ -188,7 +188,7 @@ export const QueryEvidenceResponse = {
   },
   fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
     const message = createBaseQueryEvidenceResponse();
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : Any.fromPartial({});
+    message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
     return message;
   },
   fromSDK(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
@@ -280,7 +280,7 @@ export const QueryAllEvidenceRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
     const message = createBaseQueryAllEvidenceRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
@@ -386,7 +386,7 @@ export const QueryAllEvidenceResponse = {
   fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {
     const message = createBaseQueryAllEvidenceResponse();
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {

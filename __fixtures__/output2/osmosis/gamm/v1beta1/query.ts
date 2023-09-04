@@ -224,7 +224,7 @@ export const QueryPoolResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
     const message = createBaseQueryPoolResponse();
-    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : Any.fromPartial({});
+    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
     return message;
   }
 };
@@ -269,7 +269,7 @@ export const QueryPoolsRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolsRequest>): QueryPoolsRequest {
     const message = createBaseQueryPoolsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -328,7 +328,7 @@ export const QueryPoolsResponse = {
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -808,7 +808,7 @@ export const QueryPoolParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolParamsResponse>): QueryPoolParamsResponse {
     const message = createBaseQueryPoolParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Any.fromPartial(object.params) : Any.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Any.fromPartial(object.params) : undefined;
     return message;
   }
 };
@@ -992,7 +992,7 @@ export const QueryTotalSharesResponse = {
   },
   fromPartial(object: DeepPartial<QueryTotalSharesResponse>): QueryTotalSharesResponse {
     const message = createBaseQueryTotalSharesResponse();
-    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : Coin.fromPartial({});
+    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     return message;
   }
 };
@@ -1244,7 +1244,7 @@ export const QueryPoolsWithFilterRequest = {
     const message = createBaseQueryPoolsWithFilterRequest();
     message.minLiquidity = object.minLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.poolType = object.poolType ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -1303,7 +1303,7 @@ export const QueryPoolsWithFilterResponse = {
   fromPartial(object: DeepPartial<QueryPoolsWithFilterResponse>): QueryPoolsWithFilterResponse {
     const message = createBaseQueryPoolsWithFilterResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };

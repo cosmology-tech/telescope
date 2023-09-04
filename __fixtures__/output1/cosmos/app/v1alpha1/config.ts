@@ -167,7 +167,7 @@ export const ModuleConfig = {
   fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
     message.name = object.name ?? "";
-    message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : Any.fromPartial({});
+    message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : undefined;
     return message;
   },
   fromSDK(object: ModuleConfigSDKType): ModuleConfig {

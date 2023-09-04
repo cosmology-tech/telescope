@@ -83,7 +83,7 @@ export const CertificateResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<CertificateResponse>, I>>(object: I): CertificateResponse {
     const message = createBaseCertificateResponse();
-    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : Certificate.fromPartial({});
+    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
     message.serial = object.serial ?? "";
     return message;
   },
@@ -150,8 +150,8 @@ export const QueryCertificatesRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryCertificatesRequest>, I>>(object: I): QueryCertificatesRequest {
     const message = createBaseQueryCertificatesRequest();
-    message.filter = object.filter !== undefined && object.filter !== null ? CertificateFilter.fromPartial(object.filter) : CertificateFilter.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filter = object.filter !== undefined && object.filter !== null ? CertificateFilter.fromPartial(object.filter) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryCertificatesRequestSDKType): QueryCertificatesRequest {
@@ -222,7 +222,7 @@ export const QueryCertificatesResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryCertificatesResponse>, I>>(object: I): QueryCertificatesResponse {
     const message = createBaseQueryCertificatesResponse();
     message.certificates = object.certificates?.map(e => CertificateResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryCertificatesResponseSDKType): QueryCertificatesResponse {

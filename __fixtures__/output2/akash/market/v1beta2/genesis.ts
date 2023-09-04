@@ -81,7 +81,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.leases = object.leases?.map(e => Lease.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   }
 };

@@ -169,8 +169,8 @@ export const QueryOrdersRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryOrdersRequest>, I>>(object: I): QueryOrdersRequest {
     const message = createBaseQueryOrdersRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : OrderFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryOrdersRequestSDKType): QueryOrdersRequest {
@@ -281,7 +281,7 @@ export const QueryOrdersResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryOrdersResponse>, I>>(object: I): QueryOrdersResponse {
     const message = createBaseQueryOrdersResponse();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryOrdersResponseSDKType): QueryOrdersResponse {
@@ -386,7 +386,7 @@ export const QueryOrderRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryOrderRequest>, I>>(object: I): QueryOrderRequest {
     const message = createBaseQueryOrderRequest();
-    message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : OrderID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: QueryOrderRequestSDKType): QueryOrderRequest {
@@ -478,7 +478,7 @@ export const QueryOrderResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryOrderResponse>, I>>(object: I): QueryOrderResponse {
     const message = createBaseQueryOrderResponse();
-    message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : Order.fromPartial({});
+    message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : undefined;
     return message;
   },
   fromSDK(object: QueryOrderResponseSDKType): QueryOrderResponse {
@@ -579,8 +579,8 @@ export const QueryBidsRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryBidsRequest>, I>>(object: I): QueryBidsRequest {
     const message = createBaseQueryBidsRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : BidFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryBidsRequestSDKType): QueryBidsRequest {
@@ -691,7 +691,7 @@ export const QueryBidsResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryBidsResponse>, I>>(object: I): QueryBidsResponse {
     const message = createBaseQueryBidsResponse();
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryBidsResponseSDKType): QueryBidsResponse {
@@ -796,7 +796,7 @@ export const QueryBidRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryBidRequest>, I>>(object: I): QueryBidRequest {
     const message = createBaseQueryBidRequest();
-    message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : BidID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: QueryBidRequestSDKType): QueryBidRequest {
@@ -897,8 +897,8 @@ export const QueryBidResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryBidResponse>, I>>(object: I): QueryBidResponse {
     const message = createBaseQueryBidResponse();
-    message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : Bid.fromPartial({});
-    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : Account.fromPartial({});
+    message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : undefined;
+    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
   },
   fromSDK(object: QueryBidResponseSDKType): QueryBidResponse {
@@ -1004,8 +1004,8 @@ export const QueryLeasesRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryLeasesRequest>, I>>(object: I): QueryLeasesRequest {
     const message = createBaseQueryLeasesRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : LeaseFilters.fromPartial({});
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryLeasesRequestSDKType): QueryLeasesRequest {
@@ -1116,7 +1116,7 @@ export const QueryLeasesResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryLeasesResponse>, I>>(object: I): QueryLeasesResponse {
     const message = createBaseQueryLeasesResponse();
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryLeasesResponseSDKType): QueryLeasesResponse {
@@ -1221,7 +1221,7 @@ export const QueryLeaseRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryLeaseRequest>, I>>(object: I): QueryLeaseRequest {
     const message = createBaseQueryLeaseRequest();
-    message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : LeaseID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: QueryLeaseRequestSDKType): QueryLeaseRequest {
@@ -1322,8 +1322,8 @@ export const QueryLeaseResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryLeaseResponse>, I>>(object: I): QueryLeaseResponse {
     const message = createBaseQueryLeaseResponse();
-    message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : Lease.fromPartial({});
-    message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : FractionalPayment.fromPartial({});
+    message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : undefined;
+    message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : undefined;
     return message;
   },
   fromSDK(object: QueryLeaseResponseSDKType): QueryLeaseResponse {

@@ -89,7 +89,7 @@ export const CPU = {
   },
   fromPartial<I extends Exact<DeepPartial<CPU>, I>>(object: I): CPU {
     const message = createBaseCPU();
-    message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : ResourceValue.fromPartial({});
+    message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -164,7 +164,7 @@ export const Memory = {
   },
   fromPartial<I extends Exact<DeepPartial<Memory>, I>>(object: I): Memory {
     const message = createBaseMemory();
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : ResourceValue.fromPartial({});
+    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -249,7 +249,7 @@ export const Storage = {
   fromPartial<I extends Exact<DeepPartial<Storage>, I>>(object: I): Storage {
     const message = createBaseStorage();
     message.name = object.name ?? "";
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : ResourceValue.fromPartial({});
+    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },

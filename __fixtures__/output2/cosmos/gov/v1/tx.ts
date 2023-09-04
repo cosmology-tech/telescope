@@ -237,7 +237,7 @@ export const MsgExecLegacyContent = {
   },
   fromPartial(object: DeepPartial<MsgExecLegacyContent>): MsgExecLegacyContent {
     const message = createBaseMsgExecLegacyContent();
-    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
     message.authority = object.authority ?? "";
     return message;
   }

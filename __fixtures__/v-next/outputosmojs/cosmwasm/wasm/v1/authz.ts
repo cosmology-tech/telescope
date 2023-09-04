@@ -426,8 +426,8 @@ export const ContractGrant = {
   fromPartial(object: DeepPartial<ContractGrant>): ContractGrant {
     const message = createBaseContractGrant();
     message.contract = object.contract ?? "";
-    message.limit = object.limit !== undefined && object.limit !== null ? Any.fromPartial(object.limit) : Any.fromPartial({});
-    message.filter = object.filter !== undefined && object.filter !== null ? Any.fromPartial(object.filter) : Any.fromPartial({});
+    message.limit = object.limit !== undefined && object.limit !== null ? Any.fromPartial(object.limit) : undefined;
+    message.filter = object.filter !== undefined && object.filter !== null ? Any.fromPartial(object.filter) : undefined;
     return message;
   },
   fromSDK(object: ContractGrantSDKType): ContractGrant {

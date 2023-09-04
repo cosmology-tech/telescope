@@ -255,7 +255,7 @@ export const ParamsResponse = {
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {
@@ -1299,7 +1299,7 @@ export const PoolResponse = {
   },
   fromPartial(object: DeepPartial<PoolResponse>): PoolResponse {
     const message = createBasePoolResponse();
-    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : Any.fromPartial({});
+    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
     return message;
   },
   fromSDK(object: PoolResponseSDKType): PoolResponse {

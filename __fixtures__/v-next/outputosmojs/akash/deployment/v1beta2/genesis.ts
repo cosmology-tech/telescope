@@ -79,7 +79,7 @@ export const GenesisDeployment = {
   },
   fromPartial<I extends Exact<DeepPartial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
     const message = createBaseGenesisDeployment();
-    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : Deployment.fromPartial({});
+    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
   },
@@ -199,7 +199,7 @@ export const GenesisState = {
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

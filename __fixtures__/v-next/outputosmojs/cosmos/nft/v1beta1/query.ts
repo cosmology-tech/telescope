@@ -774,7 +774,7 @@ export const QueryNFTsRequest = {
     const message = createBaseQueryNFTsRequest();
     message.classId = object.classId ?? "";
     message.owner = object.owner ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryNFTsRequestSDKType): QueryNFTsRequest {
@@ -890,7 +890,7 @@ export const QueryNFTsResponse = {
   fromPartial(object: DeepPartial<QueryNFTsResponse>): QueryNFTsResponse {
     const message = createBaseQueryNFTsResponse();
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryNFTsResponseSDKType): QueryNFTsResponse {
@@ -1102,7 +1102,7 @@ export const QueryNFTResponse = {
   },
   fromPartial(object: DeepPartial<QueryNFTResponse>): QueryNFTResponse {
     const message = createBaseQueryNFTResponse();
-    message.nft = object.nft !== undefined && object.nft !== null ? NFT.fromPartial(object.nft) : NFT.fromPartial({});
+    message.nft = object.nft !== undefined && object.nft !== null ? NFT.fromPartial(object.nft) : undefined;
     return message;
   },
   fromSDK(object: QueryNFTResponseSDKType): QueryNFTResponse {
@@ -1286,7 +1286,7 @@ export const QueryClassResponse = {
   },
   fromPartial(object: DeepPartial<QueryClassResponse>): QueryClassResponse {
     const message = createBaseQueryClassResponse();
-    message.class = object.class !== undefined && object.class !== null ? Class.fromPartial(object.class) : Class.fromPartial({});
+    message.class = object.class !== undefined && object.class !== null ? Class.fromPartial(object.class) : undefined;
     return message;
   },
   fromSDK(object: QueryClassResponseSDKType): QueryClassResponse {
@@ -1378,7 +1378,7 @@ export const QueryClassesRequest = {
   },
   fromPartial(object: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
     const message = createBaseQueryClassesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryClassesRequestSDKType): QueryClassesRequest {
@@ -1484,7 +1484,7 @@ export const QueryClassesResponse = {
   fromPartial(object: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
     const message = createBaseQueryClassesResponse();
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryClassesResponseSDKType): QueryClassesResponse {

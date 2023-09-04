@@ -354,7 +354,7 @@ export const MsgDelegateToValidatorSet = {
   fromPartial(object: DeepPartial<MsgDelegateToValidatorSet>): MsgDelegateToValidatorSet {
     const message = createBaseMsgDelegateToValidatorSet();
     message.delegator = object.delegator ?? "";
-    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
+    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : undefined;
     return message;
   },
   fromSDK(object: MsgDelegateToValidatorSetSDKType): MsgDelegateToValidatorSet {
@@ -533,7 +533,7 @@ export const MsgUndelegateFromValidatorSet = {
   fromPartial(object: DeepPartial<MsgUndelegateFromValidatorSet>): MsgUndelegateFromValidatorSet {
     const message = createBaseMsgUndelegateFromValidatorSet();
     message.delegator = object.delegator ?? "";
-    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
+    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : undefined;
     return message;
   },
   fromSDK(object: MsgUndelegateFromValidatorSetSDKType): MsgUndelegateFromValidatorSet {

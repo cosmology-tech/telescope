@@ -409,7 +409,7 @@ export const TxResponse = {
     message.info = object.info ?? "";
     message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.ZERO;
     message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.ZERO;
-    message.tx = object.tx !== undefined && object.tx !== null ? Any.fromPartial(object.tx) : Any.fromPartial({});
+    message.tx = object.tx !== undefined && object.tx !== null ? Any.fromPartial(object.tx) : undefined;
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
@@ -910,8 +910,8 @@ export const SimulationResponse = {
   },
   fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
-    message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : GasInfo.fromPartial({});
-    message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : Result.fromPartial({});
+    message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : undefined;
+    message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : undefined;
     return message;
   },
   fromSDK(object: SimulationResponseSDKType): SimulationResponse {

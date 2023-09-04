@@ -118,7 +118,7 @@ export const BasicAllowance = {
   fromPartial(object: DeepPartial<BasicAllowance>): BasicAllowance {
     const message = createBaseBasicAllowance();
     message.spendLimit = object.spendLimit?.map(e => Coin.fromPartial(e)) || [];
-    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : Timestamp.fromPartial({});
+    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     return message;
   }
 };
@@ -207,11 +207,11 @@ export const PeriodicAllowance = {
   },
   fromPartial(object: DeepPartial<PeriodicAllowance>): PeriodicAllowance {
     const message = createBasePeriodicAllowance();
-    message.basic = object.basic !== undefined && object.basic !== null ? BasicAllowance.fromPartial(object.basic) : BasicAllowance.fromPartial({});
-    message.period = object.period !== undefined && object.period !== null ? Duration.fromPartial(object.period) : Duration.fromPartial({});
+    message.basic = object.basic !== undefined && object.basic !== null ? BasicAllowance.fromPartial(object.basic) : undefined;
+    message.period = object.period !== undefined && object.period !== null ? Duration.fromPartial(object.period) : undefined;
     message.periodSpendLimit = object.periodSpendLimit?.map(e => Coin.fromPartial(e)) || [];
     message.periodCanSpend = object.periodCanSpend?.map(e => Coin.fromPartial(e)) || [];
-    message.periodReset = object.periodReset !== undefined && object.periodReset !== null ? Timestamp.fromPartial(object.periodReset) : Timestamp.fromPartial({});
+    message.periodReset = object.periodReset !== undefined && object.periodReset !== null ? Timestamp.fromPartial(object.periodReset) : undefined;
     return message;
   }
 };
@@ -269,7 +269,7 @@ export const AllowedMsgAllowance = {
   },
   fromPartial(object: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance {
     const message = createBaseAllowedMsgAllowance();
-    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : Any.fromPartial({});
+    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     message.allowedMessages = object.allowedMessages?.map(e => e) || [];
     return message;
   }
@@ -335,7 +335,7 @@ export const Grant = {
     const message = createBaseGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : Any.fromPartial({});
+    message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     return message;
   }
 };

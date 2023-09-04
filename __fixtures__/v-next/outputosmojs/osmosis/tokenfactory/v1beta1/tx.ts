@@ -389,7 +389,7 @@ export const MsgMint = {
   fromPartial(object: DeepPartial<MsgMint>): MsgMint {
     const message = createBaseMsgMint();
     message.sender = object.sender ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
   },
   fromSDK(object: MsgMintSDKType): MsgMint {
@@ -568,7 +568,7 @@ export const MsgBurn = {
   fromPartial(object: DeepPartial<MsgBurn>): MsgBurn {
     const message = createBaseMsgBurn();
     message.sender = object.sender ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
   },
   fromSDK(object: MsgBurnSDKType): MsgBurn {
@@ -941,7 +941,7 @@ export const MsgSetDenomMetadata = {
   fromPartial(object: DeepPartial<MsgSetDenomMetadata>): MsgSetDenomMetadata {
     const message = createBaseMsgSetDenomMetadata();
     message.sender = object.sender ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
   },
   fromSDK(object: MsgSetDenomMetadataSDKType): MsgSetDenomMetadata {

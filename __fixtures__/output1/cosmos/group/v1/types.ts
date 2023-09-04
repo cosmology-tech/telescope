@@ -687,7 +687,7 @@ export const ThresholdDecisionPolicy = {
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
   },
   fromSDK(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
@@ -754,7 +754,7 @@ export const PercentageDecisionPolicy = {
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
-    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : DecisionPolicyWindows.fromPartial({});
+    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
   },
   fromSDK(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
@@ -820,8 +820,8 @@ export const DecisionPolicyWindows = {
   },
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
-    message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : Duration.fromPartial({});
+    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
+    message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : undefined;
     return message;
   },
   fromSDK(object: DecisionPolicyWindowsSDKType): DecisionPolicyWindows {
@@ -1003,7 +1003,7 @@ export const GroupMember = {
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
-    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : Member.fromPartial({});
+    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
     return message;
   },
   fromSDK(object: GroupMemberSDKType): GroupMember {
@@ -1119,7 +1119,7 @@ export const GroupPolicyInfo = {
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     message.createdAt = object.createdAt ?? undefined;
     return message;
   },
@@ -1312,7 +1312,7 @@ export const Proposal = {
     message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO;
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
+    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
     message.votingPeriodEnd = object.votingPeriodEnd ?? undefined;
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];

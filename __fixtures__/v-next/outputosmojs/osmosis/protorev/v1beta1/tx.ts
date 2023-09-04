@@ -556,7 +556,7 @@ export const MsgSetPoolWeights = {
   fromPartial(object: DeepPartial<MsgSetPoolWeights>): MsgSetPoolWeights {
     const message = createBaseMsgSetPoolWeights();
     message.admin = object.admin ?? "";
-    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : PoolWeights.fromPartial({});
+    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : undefined;
     return message;
   },
   fromSDK(object: MsgSetPoolWeightsSDKType): MsgSetPoolWeights {

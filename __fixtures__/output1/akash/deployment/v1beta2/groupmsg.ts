@@ -79,7 +79,7 @@ export const MsgCloseGroup = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
@@ -174,7 +174,7 @@ export const MsgPauseGroup = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
@@ -269,7 +269,7 @@ export const MsgStartGroup = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {

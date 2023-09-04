@@ -1254,7 +1254,7 @@ export const MsgCreateGroupPolicy = {
     message.admin = object.admin ?? "";
     message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.metadata = object.metadata ?? "";
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateGroupPolicySDKType): MsgCreateGroupPolicy {
@@ -1629,7 +1629,7 @@ export const MsgCreateGroupWithPolicy = {
     message.groupMetadata = object.groupMetadata ?? "";
     message.groupPolicyMetadata = object.groupPolicyMetadata ?? "";
     message.groupPolicyAsAdmin = object.groupPolicyAsAdmin ?? false;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateGroupWithPolicySDKType): MsgCreateGroupWithPolicy {
@@ -1953,7 +1953,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
     message.admin = object.admin ?? "";
     message.address = object.address ?? "";
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : Any.fromPartial({});
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
   },
   fromSDK(object: MsgUpdateGroupPolicyDecisionPolicySDKType): MsgUpdateGroupPolicyDecisionPolicy {

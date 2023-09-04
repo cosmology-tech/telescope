@@ -214,10 +214,10 @@ export const MsgCreateDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
@@ -331,8 +331,8 @@ export const MsgDepositDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
   },
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
@@ -451,7 +451,7 @@ export const MsgUpdateDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
     return message;
@@ -556,7 +556,7 @@ export const MsgCloseDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
   },
   fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
@@ -745,7 +745,7 @@ export const Deployment = {
   },
   fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
+    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;

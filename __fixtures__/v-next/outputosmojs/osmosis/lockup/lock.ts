@@ -244,7 +244,7 @@ export const PeriodLock = {
     const message = createBasePeriodLock();
     message.ID = object.ID !== undefined && object.ID !== null ? BigInt(object.ID.toString()) : BigInt(0);
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.endTime = object.endTime ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -395,7 +395,7 @@ export const QueryCondition = {
     const message = createBaseQueryCondition();
     message.lockQueryType = object.lockQueryType ?? 0;
     message.denom = object.denom ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.timestamp = object.timestamp ?? undefined;
     return message;
   },
@@ -533,7 +533,7 @@ export const SyntheticLock = {
     message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? BigInt(object.underlyingLockId.toString()) : BigInt(0);
     message.synthDenom = object.synthDenom ?? "";
     message.endTime = object.endTime ?? undefined;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
   },
   fromSDK(object: SyntheticLockSDKType): SyntheticLock {

@@ -168,7 +168,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.codes = object.codes?.map(e => Code.fromPartial(e)) || [];
     message.contracts = object.contracts?.map(e => Contract.fromPartial(e)) || [];
     message.sequences = object.sequences?.map(e => Sequence.fromPartial(e)) || [];
@@ -334,9 +334,9 @@ export const GenesisState_GenMsgs = {
   },
   fromPartial(object: DeepPartial<GenesisState_GenMsgs>): GenesisState_GenMsgs {
     const message = createBaseGenesisState_GenMsgs();
-    message.storeCode = object.storeCode !== undefined && object.storeCode !== null ? MsgStoreCode.fromPartial(object.storeCode) : MsgStoreCode.fromPartial({});
-    message.instantiateContract = object.instantiateContract !== undefined && object.instantiateContract !== null ? MsgInstantiateContract.fromPartial(object.instantiateContract) : MsgInstantiateContract.fromPartial({});
-    message.executeContract = object.executeContract !== undefined && object.executeContract !== null ? MsgExecuteContract.fromPartial(object.executeContract) : MsgExecuteContract.fromPartial({});
+    message.storeCode = object.storeCode !== undefined && object.storeCode !== null ? MsgStoreCode.fromPartial(object.storeCode) : undefined;
+    message.instantiateContract = object.instantiateContract !== undefined && object.instantiateContract !== null ? MsgInstantiateContract.fromPartial(object.instantiateContract) : undefined;
+    message.executeContract = object.executeContract !== undefined && object.executeContract !== null ? MsgExecuteContract.fromPartial(object.executeContract) : undefined;
     return message;
   },
   fromSDK(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
@@ -466,7 +466,7 @@ export const Code = {
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
-    message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : CodeInfo.fromPartial({});
+    message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
     return message;
@@ -598,7 +598,7 @@ export const Contract = {
   fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
     message.contractAddress = object.contractAddress ?? "";
-    message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : ContractInfo.fromPartial({});
+    message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
     message.contractState = object.contractState?.map(e => Model.fromPartial(e)) || [];
     return message;
   },

@@ -120,10 +120,10 @@ export const MsgCreateDeployment = {
   },
   fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     message.depositor = object.depositor ?? "";
     return message;
   }
@@ -220,8 +220,8 @@ export const MsgDepositDeployment = {
   },
   fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     message.depositor = object.depositor ?? "";
     return message;
   }
@@ -309,7 +309,7 @@ export const MsgUpdateDeployment = {
   },
   fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.version = object.version ?? new Uint8Array();
     return message;
   }
@@ -388,7 +388,7 @@ export const MsgCloseDeployment = {
   },
   fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
   }
 };

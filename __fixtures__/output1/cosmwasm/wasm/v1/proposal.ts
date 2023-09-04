@@ -291,7 +291,7 @@ export const StoreCodeProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
   },
   fromSDK(object: StoreCodeProposalSDKType): StoreCodeProposal {

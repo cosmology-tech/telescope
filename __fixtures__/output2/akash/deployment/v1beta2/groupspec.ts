@@ -75,7 +75,7 @@ export const GroupSpec = {
   fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : PlacementRequirements.fromPartial({});
+    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   }

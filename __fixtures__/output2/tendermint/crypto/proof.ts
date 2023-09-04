@@ -164,7 +164,7 @@ export const ValueOp = {
   fromPartial(object: DeepPartial<ValueOp>): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? new Uint8Array();
-    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
+    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
     return message;
   }
 };

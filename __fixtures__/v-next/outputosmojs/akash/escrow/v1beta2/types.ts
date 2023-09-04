@@ -377,14 +377,14 @@ export const Account = {
   },
   fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
     const message = createBaseAccount();
-    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : AccountID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : DecCoin.fromPartial({});
-    message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : DecCoin.fromPartial({});
+    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
+    message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : undefined;
     message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
     message.depositor = object.depositor ?? "";
-    message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : DecCoin.fromPartial({});
+    message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : undefined;
     return message;
   },
   fromSDK(object: AccountSDKType): Account {
@@ -565,13 +565,13 @@ export const FractionalPayment = {
   },
   fromPartial<I extends Exact<DeepPartial<FractionalPayment>, I>>(object: I): FractionalPayment {
     const message = createBaseFractionalPayment();
-    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : AccountID.fromPartial({});
+    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
     message.paymentId = object.paymentId ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.rate = object.rate !== undefined && object.rate !== null ? DecCoin.fromPartial(object.rate) : DecCoin.fromPartial({});
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : DecCoin.fromPartial({});
-    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : Coin.fromPartial({});
+    message.rate = object.rate !== undefined && object.rate !== null ? DecCoin.fromPartial(object.rate) : undefined;
+    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
+    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
     return message;
   },
   fromSDK(object: FractionalPaymentSDKType): FractionalPayment {

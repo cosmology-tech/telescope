@@ -98,7 +98,7 @@ export const MsgCreateBalancerPool = {
   fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;

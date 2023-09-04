@@ -272,7 +272,7 @@ export const PacketFee = {
   },
   fromPartial(object: DeepPartial<PacketFee>): PacketFee {
     const message = createBasePacketFee();
-    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : Fee.fromPartial({});
+    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : undefined;
     message.refundAddress = object.refundAddress ?? "";
     message.relayers = object.relayers?.map(e => e) || [];
     return message;

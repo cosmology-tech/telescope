@@ -741,7 +741,7 @@ export const CreateServiceRequest = {
   },
   fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
     const message = createBaseCreateServiceRequest();
-    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : ManagedService.fromPartial({});
+    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
   },
   fromSDK(object: CreateServiceRequestSDKType): CreateServiceRequest {
@@ -999,7 +999,7 @@ export const UndeleteServiceResponse = {
   },
   fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
     const message = createBaseUndeleteServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : ManagedService.fromPartial({});
+    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
   },
   fromSDK(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
@@ -1440,7 +1440,7 @@ export const CreateServiceConfigRequest = {
   fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
     const message = createBaseCreateServiceConfigRequest();
     message.serviceName = object.serviceName ?? "";
-    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : Service.fromPartial({});
+    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
   },
   fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
@@ -1550,7 +1550,7 @@ export const SubmitConfigSourceRequest = {
   fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
     const message = createBaseSubmitConfigSourceRequest();
     message.serviceName = object.serviceName ?? "";
-    message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : ConfigSource.fromPartial({});
+    message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : undefined;
     message.validateOnly = object.validateOnly ?? false;
     return message;
   },
@@ -1647,7 +1647,7 @@ export const SubmitConfigSourceResponse = {
   },
   fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
     const message = createBaseSubmitConfigSourceResponse();
-    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : Service.fromPartial({});
+    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
   },
   fromSDK(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
@@ -1743,7 +1743,7 @@ export const CreateServiceRolloutRequest = {
   fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
     const message = createBaseCreateServiceRolloutRequest();
     message.serviceName = object.serviceName ?? "";
-    message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : Rollout.fromPartial({});
+    message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : undefined;
     return message;
   },
   fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
@@ -2188,8 +2188,8 @@ export const GenerateConfigReportRequest = {
   },
   fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
     const message = createBaseGenerateConfigReportRequest();
-    message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : Any.fromPartial({});
-    message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : Any.fromPartial({});
+    message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : undefined;
+    message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : undefined;
     return message;
   },
   fromSDK(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {

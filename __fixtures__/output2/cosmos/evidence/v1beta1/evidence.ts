@@ -83,7 +83,7 @@ export const Equivocation = {
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
-    message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : Timestamp.fromPartial({});
+    message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : undefined;
     message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     message.consensusAddress = object.consensusAddress ?? "";
     return message;

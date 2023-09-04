@@ -257,10 +257,10 @@ export const Operation = {
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.name = object.name ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Any.fromPartial(object.metadata) : Any.fromPartial({});
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Any.fromPartial(object.metadata) : undefined;
     message.done = object.done ?? false;
-    message.error = object.error !== undefined && object.error !== null ? Status.fromPartial(object.error) : Status.fromPartial({});
-    message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : Any.fromPartial({});
+    message.error = object.error !== undefined && object.error !== null ? Status.fromPartial(object.error) : undefined;
+    message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : undefined;
     return message;
   },
   fromSDK(object: OperationSDKType): Operation {
@@ -664,7 +664,7 @@ export const WaitOperationRequest = {
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
-    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : Duration.fromPartial({});
+    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
     return message;
   },
   fromSDK(object: WaitOperationRequestSDKType): WaitOperationRequest {

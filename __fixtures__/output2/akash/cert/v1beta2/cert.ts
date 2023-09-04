@@ -398,7 +398,7 @@ export const MsgRevokeCertificate = {
   },
   fromPartial(object: DeepPartial<MsgRevokeCertificate>): MsgRevokeCertificate {
     const message = createBaseMsgRevokeCertificate();
-    message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : CertificateID.fromPartial({});
+    message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
   }
 };

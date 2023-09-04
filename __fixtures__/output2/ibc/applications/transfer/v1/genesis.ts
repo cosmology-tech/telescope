@@ -75,7 +75,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.portId = object.portId ?? "";
     message.denomTraces = object.denomTraces?.map(e => DenomTrace.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   }
 };

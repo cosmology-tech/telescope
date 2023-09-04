@@ -314,7 +314,7 @@ export const EnableServiceResponse = {
   },
   fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : Service.fromPartial({});
+    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
     return message;
   }
 };
@@ -424,7 +424,7 @@ export const DisableServiceResponse = {
   },
   fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : Service.fromPartial({});
+    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
     return message;
   }
 };

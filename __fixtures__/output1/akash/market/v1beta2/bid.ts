@@ -210,10 +210,10 @@ export const MsgCreateBid = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateBid>, I>>(object: I): MsgCreateBid {
     const message = createBaseMsgCreateBid();
-    message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : OrderID.fromPartial({});
+    message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : undefined;
     message.provider = object.provider ?? "";
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateBidSDKType): MsgCreateBid {
@@ -314,7 +314,7 @@ export const MsgCloseBid = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCloseBid>, I>>(object: I): MsgCloseBid {
     const message = createBaseMsgCloseBid();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
   },
   fromSDK(object: MsgCloseBidSDKType): MsgCloseBid {
@@ -539,9 +539,9 @@ export const Bid = {
   },
   fromPartial<I extends Exact<DeepPartial<Bid>, I>>(object: I): Bid {
     const message = createBaseBid();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   },

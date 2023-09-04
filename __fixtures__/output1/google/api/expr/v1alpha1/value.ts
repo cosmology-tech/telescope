@@ -274,10 +274,10 @@ export const Value = {
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : EnumValue.fromPartial({});
-    message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : Any.fromPartial({});
-    message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : MapValue.fromPartial({});
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : ListValue.fromPartial({});
+    message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : undefined;
+    message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : undefined;
+    message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : undefined;
+    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
     message.typeValue = object.typeValue ?? undefined;
     return message;
   },
@@ -557,8 +557,8 @@ export const MapValue_Entry = {
   },
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
-    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : Value.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
+    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {

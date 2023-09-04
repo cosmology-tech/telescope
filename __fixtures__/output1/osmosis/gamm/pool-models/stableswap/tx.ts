@@ -153,7 +153,7 @@ export const MsgCreateStableswapPool = {
   fromPartial(object: DeepPartial<MsgCreateStableswapPool>): MsgCreateStableswapPool {
     const message = createBaseMsgCreateStableswapPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";

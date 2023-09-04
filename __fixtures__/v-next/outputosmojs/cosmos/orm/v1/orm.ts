@@ -173,7 +173,7 @@ export const TableDescriptor = {
   },
   fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor {
     const message = createBaseTableDescriptor();
-    message.primaryKey = object.primaryKey !== undefined && object.primaryKey !== null ? PrimaryKeyDescriptor.fromPartial(object.primaryKey) : PrimaryKeyDescriptor.fromPartial({});
+    message.primaryKey = object.primaryKey !== undefined && object.primaryKey !== null ? PrimaryKeyDescriptor.fromPartial(object.primaryKey) : undefined;
     message.index = object.index?.map(e => SecondaryIndexDescriptor.fromPartial(e)) || [];
     message.id = object.id ?? 0;
     return message;

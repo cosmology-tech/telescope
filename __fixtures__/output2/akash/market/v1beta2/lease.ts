@@ -257,9 +257,9 @@ export const Lease = {
   },
   fromPartial(object: DeepPartial<Lease>): Lease {
     const message = createBaseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : LeaseID.fromPartial({});
+    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? Long.fromValue(object.closedOn) : Long.ZERO;
     return message;
@@ -401,7 +401,7 @@ export const MsgCreateLease = {
   },
   fromPartial(object: DeepPartial<MsgCreateLease>): MsgCreateLease {
     const message = createBaseMsgCreateLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
   }
 };
@@ -479,7 +479,7 @@ export const MsgWithdrawLease = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawLease>): MsgWithdrawLease {
     const message = createBaseMsgWithdrawLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : LeaseID.fromPartial({});
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : undefined;
     return message;
   }
 };
@@ -557,7 +557,7 @@ export const MsgCloseLease = {
   },
   fromPartial(object: DeepPartial<MsgCloseLease>): MsgCloseLease {
     const message = createBaseMsgCloseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : LeaseID.fromPartial({});
+    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     return message;
   }
 };

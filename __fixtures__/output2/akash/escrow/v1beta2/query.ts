@@ -113,7 +113,7 @@ export const QueryAccountsRequest = {
     message.xid = object.xid ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -172,7 +172,7 @@ export const QueryAccountsResponse = {
   fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -267,7 +267,7 @@ export const QueryPaymentsRequest = {
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
 };
@@ -326,7 +326,7 @@ export const QueryPaymentsResponse = {
   fromPartial(object: DeepPartial<QueryPaymentsResponse>): QueryPaymentsResponse {
     const message = createBaseQueryPaymentsResponse();
     message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   }
 };

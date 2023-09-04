@@ -217,9 +217,9 @@ export const Pool = {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
+    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : Coin.fromPartial({});
+    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     message.scalingFactorController = object.scalingFactorController ?? "";

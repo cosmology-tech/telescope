@@ -245,14 +245,14 @@ export const NodeInfo = {
   },
   fromPartial(object: DeepPartial<NodeInfo>): NodeInfo {
     const message = createBaseNodeInfo();
-    message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : ProtocolVersion.fromPartial({});
+    message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : undefined;
     message.nodeId = object.nodeId ?? "";
     message.listenAddr = object.listenAddr ?? "";
     message.network = object.network ?? "";
     message.version = object.version ?? "";
     message.channels = object.channels ?? new Uint8Array();
     message.moniker = object.moniker ?? "";
-    message.other = object.other !== undefined && object.other !== null ? NodeInfoOther.fromPartial(object.other) : NodeInfoOther.fromPartial({});
+    message.other = object.other !== undefined && object.other !== null ? NodeInfoOther.fromPartial(object.other) : undefined;
     return message;
   },
   fromSDK(object: NodeInfoSDKType): NodeInfo {

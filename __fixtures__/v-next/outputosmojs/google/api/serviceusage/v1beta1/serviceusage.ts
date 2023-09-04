@@ -1900,7 +1900,7 @@ export const CreateAdminOverrideRequest = {
   fromPartial(object: DeepPartial<CreateAdminOverrideRequest>): CreateAdminOverrideRequest {
     const message = createBaseCreateAdminOverrideRequest();
     message.parent = object.parent ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : QuotaOverride.fromPartial({});
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -2061,9 +2061,9 @@ export const UpdateAdminOverrideRequest = {
   fromPartial(object: DeepPartial<UpdateAdminOverrideRequest>): UpdateAdminOverrideRequest {
     const message = createBaseUpdateAdminOverrideRequest();
     message.name = object.name ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : QuotaOverride.fromPartial({});
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
   },
@@ -2683,7 +2683,7 @@ export const ImportAdminOverridesRequest = {
   fromPartial(object: DeepPartial<ImportAdminOverridesRequest>): ImportAdminOverridesRequest {
     const message = createBaseImportAdminOverridesRequest();
     message.parent = object.parent ?? "";
-    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : OverrideInlineSource.fromPartial({});
+    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -2999,7 +2999,7 @@ export const CreateConsumerOverrideRequest = {
   fromPartial(object: DeepPartial<CreateConsumerOverrideRequest>): CreateConsumerOverrideRequest {
     const message = createBaseCreateConsumerOverrideRequest();
     message.parent = object.parent ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : QuotaOverride.fromPartial({});
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -3160,9 +3160,9 @@ export const UpdateConsumerOverrideRequest = {
   fromPartial(object: DeepPartial<UpdateConsumerOverrideRequest>): UpdateConsumerOverrideRequest {
     const message = createBaseUpdateConsumerOverrideRequest();
     message.name = object.name ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : QuotaOverride.fromPartial({});
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
   },
@@ -3782,7 +3782,7 @@ export const ImportConsumerOverridesRequest = {
   fromPartial(object: DeepPartial<ImportConsumerOverridesRequest>): ImportConsumerOverridesRequest {
     const message = createBaseImportConsumerOverridesRequest();
     message.parent = object.parent ?? "";
-    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : OverrideInlineSource.fromPartial({});
+    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -4514,7 +4514,7 @@ export const GetServiceIdentityResponse = {
   },
   fromPartial(object: DeepPartial<GetServiceIdentityResponse>): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
-    message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : ServiceIdentity.fromPartial({});
+    message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
     message.state = object.state ?? 0;
     return message;
   },

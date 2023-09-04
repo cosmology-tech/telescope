@@ -355,7 +355,7 @@ export const AllocateQuotaRequest = {
   fromPartial(object: DeepPartial<AllocateQuotaRequest>): AllocateQuotaRequest {
     const message = createBaseAllocateQuotaRequest();
     message.serviceName = object.serviceName ?? "";
-    message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : QuotaOperation.fromPartial({});
+    message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : undefined;
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   }
@@ -691,7 +691,7 @@ export const QuotaError = {
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
   }
 };

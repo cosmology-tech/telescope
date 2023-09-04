@@ -147,8 +147,8 @@ export const IncentiveRecord = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.incentiveDenom = object.incentiveDenom ?? "";
     message.incentiveCreatorAddr = object.incentiveCreatorAddr ?? "";
-    message.incentiveRecordBody = object.incentiveRecordBody !== undefined && object.incentiveRecordBody !== null ? IncentiveRecordBody.fromPartial(object.incentiveRecordBody) : IncentiveRecordBody.fromPartial({});
-    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
+    message.incentiveRecordBody = object.incentiveRecordBody !== undefined && object.incentiveRecordBody !== null ? IncentiveRecordBody.fromPartial(object.incentiveRecordBody) : undefined;
+    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : undefined;
     return message;
   },
   fromSDK(object: IncentiveRecordSDKType): IncentiveRecord {

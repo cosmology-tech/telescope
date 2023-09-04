@@ -390,7 +390,7 @@ export const QueryEpochMintProvisionResponse = {
   },
   fromPartial(object: DeepPartial<QueryEpochMintProvisionResponse>): QueryEpochMintProvisionResponse {
     const message = createBaseQueryEpochMintProvisionResponse();
-    message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : DecCoin.fromPartial({});
+    message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
     return message;
   },
   fromSDK(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
@@ -694,7 +694,7 @@ export const QueryCirculatingSupplyResponse = {
   },
   fromPartial(object: DeepPartial<QueryCirculatingSupplyResponse>): QueryCirculatingSupplyResponse {
     const message = createBaseQueryCirculatingSupplyResponse();
-    message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : DecCoin.fromPartial({});
+    message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
     return message;
   },
   fromSDK(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
@@ -998,7 +998,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

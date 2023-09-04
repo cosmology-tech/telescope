@@ -282,9 +282,9 @@ export const PositionWithUnderlyingAssetBreakdown = {
   },
   fromPartial(object: DeepPartial<PositionWithUnderlyingAssetBreakdown>): PositionWithUnderlyingAssetBreakdown {
     const message = createBasePositionWithUnderlyingAssetBreakdown();
-    message.position = object.position !== undefined && object.position !== null ? Position.fromPartial(object.position) : Position.fromPartial({});
-    message.asset0 = object.asset0 !== undefined && object.asset0 !== null ? Coin.fromPartial(object.asset0) : Coin.fromPartial({});
-    message.asset1 = object.asset1 !== undefined && object.asset1 !== null ? Coin.fromPartial(object.asset1) : Coin.fromPartial({});
+    message.position = object.position !== undefined && object.position !== null ? Position.fromPartial(object.position) : undefined;
+    message.asset0 = object.asset0 !== undefined && object.asset0 !== null ? Coin.fromPartial(object.asset0) : undefined;
+    message.asset1 = object.asset1 !== undefined && object.asset1 !== null ? Coin.fromPartial(object.asset1) : undefined;
     return message;
   },
   fromSDK(object: PositionWithUnderlyingAssetBreakdownSDKType): PositionWithUnderlyingAssetBreakdown {
