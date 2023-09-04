@@ -95,11 +95,11 @@ export const MsgRegisterInterchainAccount = {
     return message;
   },
   fromJSON(object: any): MsgRegisterInterchainAccount {
-    const obj = createBaseMsgRegisterInterchainAccount();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.version)) obj.version = String(object.version);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      version: isSet(object.version) ? String(object.version) : ""
+    };
   },
   toJSON(message: MsgRegisterInterchainAccount): unknown {
     const obj: any = {};
@@ -210,10 +210,10 @@ export const MsgRegisterInterchainAccountResponse = {
     return message;
   },
   fromJSON(object: any): MsgRegisterInterchainAccountResponse {
-    const obj = createBaseMsgRegisterInterchainAccountResponse();
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    return obj;
+    return {
+      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      portId: isSet(object.portId) ? String(object.portId) : ""
+    };
   },
   toJSON(message: MsgRegisterInterchainAccountResponse): unknown {
     const obj: any = {};
@@ -331,12 +331,12 @@ export const MsgSendTx = {
     return message;
   },
   fromJSON(object: any): MsgSendTx {
-    const obj = createBaseMsgSendTx();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.packetData)) obj.packetData = InterchainAccountPacketData.fromJSON(object.packetData);
-    if (isSet(object.relativeTimeout)) obj.relativeTimeout = BigInt(object.relativeTimeout.toString());
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      packetData: isSet(object.packetData) ? InterchainAccountPacketData.fromJSON(object.packetData) : undefined,
+      relativeTimeout: isSet(object.relativeTimeout) ? BigInt(object.relativeTimeout.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgSendTx): unknown {
     const obj: any = {};
@@ -350,12 +350,8 @@ export const MsgSendTx = {
     const message = createBaseMsgSendTx();
     message.owner = object.owner ?? "";
     message.connectionId = object.connectionId ?? "";
-    if (object.packetData !== undefined && object.packetData !== null) {
-      message.packetData = InterchainAccountPacketData.fromPartial(object.packetData);
-    }
-    if (object.relativeTimeout !== undefined && object.relativeTimeout !== null) {
-      message.relativeTimeout = BigInt(object.relativeTimeout.toString());
-    }
+    message.packetData = object.packetData !== undefined && object.packetData !== null ? InterchainAccountPacketData.fromPartial(object.packetData) : InterchainAccountPacketData.fromPartial({});
+    message.relativeTimeout = object.relativeTimeout !== undefined && object.relativeTimeout !== null ? BigInt(object.relativeTimeout.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSendTxSDKType): MsgSendTx {
@@ -451,9 +447,9 @@ export const MsgSendTxResponse = {
     return message;
   },
   fromJSON(object: any): MsgSendTxResponse {
-    const obj = createBaseMsgSendTxResponse();
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    return obj;
+    return {
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgSendTxResponse): unknown {
     const obj: any = {};
@@ -462,9 +458,7 @@ export const MsgSendTxResponse = {
   },
   fromPartial(object: DeepPartial<MsgSendTxResponse>): MsgSendTxResponse {
     const message = createBaseMsgSendTxResponse();
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSendTxResponseSDKType): MsgSendTxResponse {

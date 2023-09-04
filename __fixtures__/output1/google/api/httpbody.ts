@@ -152,11 +152,11 @@ export const HttpBody = {
     return message;
   },
   fromJSON(object: any): HttpBody {
-    const obj = createBaseHttpBody();
-    if (isSet(object.contentType)) obj.contentType = String(object.contentType);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (Array.isArray(object?.extensions)) object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      contentType: isSet(object.contentType) ? String(object.contentType) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: HttpBody): unknown {
     const obj: any = {};

@@ -333,10 +333,10 @@ export const PartSetHeader = {
     return message;
   },
   fromJSON(object: any): PartSetHeader {
-    const obj = createBasePartSetHeader();
-    if (isSet(object.total)) obj.total = Number(object.total);
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
+    return {
+      total: isSet(object.total) ? Number(object.total) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   },
   toJSON(message: PartSetHeader): unknown {
     const obj: any = {};
@@ -407,11 +407,11 @@ export const Part = {
     return message;
   },
   fromJSON(object: any): Part {
-    const obj = createBasePart();
-    if (isSet(object.index)) obj.index = Number(object.index);
-    if (isSet(object.bytes)) obj.bytes = bytesFromBase64(object.bytes);
-    if (isSet(object.proof)) obj.proof = Proof.fromJSON(object.proof);
-    return obj;
+    return {
+      index: isSet(object.index) ? Number(object.index) : 0,
+      bytes: isSet(object.bytes) ? bytesFromBase64(object.bytes) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined
+    };
   },
   toJSON(message: Part): unknown {
     const obj: any = {};
@@ -424,9 +424,7 @@ export const Part = {
     const message = createBasePart();
     message.index = object.index ?? 0;
     message.bytes = object.bytes ?? new Uint8Array();
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromPartial(object.proof);
-    }
+    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
     return message;
   },
   fromSDK(object: PartSDKType): Part {
@@ -481,10 +479,10 @@ export const BlockID = {
     return message;
   },
   fromJSON(object: any): BlockID {
-    const obj = createBaseBlockID();
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    if (isSet(object.partSetHeader)) obj.partSetHeader = PartSetHeader.fromJSON(object.partSetHeader);
-    return obj;
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      partSetHeader: isSet(object.partSetHeader) ? PartSetHeader.fromJSON(object.partSetHeader) : undefined
+    };
   },
   toJSON(message: BlockID): unknown {
     const obj: any = {};
@@ -495,9 +493,7 @@ export const BlockID = {
   fromPartial(object: DeepPartial<BlockID>): BlockID {
     const message = createBaseBlockID();
     message.hash = object.hash ?? new Uint8Array();
-    if (object.partSetHeader !== undefined && object.partSetHeader !== null) {
-      message.partSetHeader = PartSetHeader.fromPartial(object.partSetHeader);
-    }
+    message.partSetHeader = object.partSetHeader !== undefined && object.partSetHeader !== null ? PartSetHeader.fromPartial(object.partSetHeader) : PartSetHeader.fromPartial({});
     return message;
   },
   fromSDK(object: BlockIDSDKType): BlockID {
@@ -634,22 +630,22 @@ export const Header = {
     return message;
   },
   fromJSON(object: any): Header {
-    const obj = createBaseHeader();
-    if (isSet(object.version)) obj.version = Consensus.fromJSON(object.version);
-    if (isSet(object.chainId)) obj.chainId = String(object.chainId);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
-    if (isSet(object.time)) obj.time = fromJsonTimestamp(object.time);
-    if (isSet(object.lastBlockId)) obj.lastBlockId = BlockID.fromJSON(object.lastBlockId);
-    if (isSet(object.lastCommitHash)) obj.lastCommitHash = bytesFromBase64(object.lastCommitHash);
-    if (isSet(object.dataHash)) obj.dataHash = bytesFromBase64(object.dataHash);
-    if (isSet(object.validatorsHash)) obj.validatorsHash = bytesFromBase64(object.validatorsHash);
-    if (isSet(object.nextValidatorsHash)) obj.nextValidatorsHash = bytesFromBase64(object.nextValidatorsHash);
-    if (isSet(object.consensusHash)) obj.consensusHash = bytesFromBase64(object.consensusHash);
-    if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
-    if (isSet(object.lastResultsHash)) obj.lastResultsHash = bytesFromBase64(object.lastResultsHash);
-    if (isSet(object.evidenceHash)) obj.evidenceHash = bytesFromBase64(object.evidenceHash);
-    if (isSet(object.proposerAddress)) obj.proposerAddress = bytesFromBase64(object.proposerAddress);
-    return obj;
+    return {
+      version: isSet(object.version) ? Consensus.fromJSON(object.version) : undefined,
+      chainId: isSet(object.chainId) ? String(object.chainId) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      lastBlockId: isSet(object.lastBlockId) ? BlockID.fromJSON(object.lastBlockId) : undefined,
+      lastCommitHash: isSet(object.lastCommitHash) ? bytesFromBase64(object.lastCommitHash) : new Uint8Array(),
+      dataHash: isSet(object.dataHash) ? bytesFromBase64(object.dataHash) : new Uint8Array(),
+      validatorsHash: isSet(object.validatorsHash) ? bytesFromBase64(object.validatorsHash) : new Uint8Array(),
+      nextValidatorsHash: isSet(object.nextValidatorsHash) ? bytesFromBase64(object.nextValidatorsHash) : new Uint8Array(),
+      consensusHash: isSet(object.consensusHash) ? bytesFromBase64(object.consensusHash) : new Uint8Array(),
+      appHash: isSet(object.appHash) ? bytesFromBase64(object.appHash) : new Uint8Array(),
+      lastResultsHash: isSet(object.lastResultsHash) ? bytesFromBase64(object.lastResultsHash) : new Uint8Array(),
+      evidenceHash: isSet(object.evidenceHash) ? bytesFromBase64(object.evidenceHash) : new Uint8Array(),
+      proposerAddress: isSet(object.proposerAddress) ? bytesFromBase64(object.proposerAddress) : new Uint8Array()
+    };
   },
   toJSON(message: Header): unknown {
     const obj: any = {};
@@ -671,17 +667,11 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    if (object.version !== undefined && object.version !== null) {
-      message.version = Consensus.fromPartial(object.version);
-    }
+    message.version = object.version !== undefined && object.version !== null ? Consensus.fromPartial(object.version) : Consensus.fromPartial({});
     message.chainId = object.chainId ?? "";
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Long.fromValue(object.height);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.time = object.time ?? undefined;
-    if (object.lastBlockId !== undefined && object.lastBlockId !== null) {
-      message.lastBlockId = BlockID.fromPartial(object.lastBlockId);
-    }
+    message.lastBlockId = object.lastBlockId !== undefined && object.lastBlockId !== null ? BlockID.fromPartial(object.lastBlockId) : BlockID.fromPartial({});
     message.lastCommitHash = object.lastCommitHash ?? new Uint8Array();
     message.dataHash = object.dataHash ?? new Uint8Array();
     message.validatorsHash = object.validatorsHash ?? new Uint8Array();
@@ -760,9 +750,9 @@ export const Data = {
     return message;
   },
   fromJSON(object: any): Data {
-    const obj = createBaseData();
-    if (Array.isArray(object?.txs)) object.txs.map((e: any) => bytesFromBase64(e));
-    return obj;
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
   toJSON(message: Data): unknown {
     const obj: any = {};
@@ -872,16 +862,16 @@ export const Vote = {
     return message;
   },
   fromJSON(object: any): Vote {
-    const obj = createBaseVote();
-    if (isSet(object.type)) obj.type = signedMsgTypeFromJSON(object.type);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
-    if (isSet(object.round)) obj.round = Number(object.round);
-    if (isSet(object.blockId)) obj.blockId = BlockID.fromJSON(object.blockId);
-    if (isSet(object.timestamp)) obj.timestamp = fromJsonTimestamp(object.timestamp);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = bytesFromBase64(object.validatorAddress);
-    if (isSet(object.validatorIndex)) obj.validatorIndex = Number(object.validatorIndex);
-    if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
-    return obj;
+    return {
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      round: isSet(object.round) ? Number(object.round) : 0,
+      blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      validatorAddress: isSet(object.validatorAddress) ? bytesFromBase64(object.validatorAddress) : new Uint8Array(),
+      validatorIndex: isSet(object.validatorIndex) ? Number(object.validatorIndex) : 0,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
+    };
   },
   toJSON(message: Vote): unknown {
     const obj: any = {};
@@ -898,13 +888,9 @@ export const Vote = {
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.type = object.type ?? 0;
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Long.fromValue(object.height);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
-    if (object.blockId !== undefined && object.blockId !== null) {
-      message.blockId = BlockID.fromPartial(object.blockId);
-    }
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
     message.timestamp = object.timestamp ?? undefined;
     message.validatorAddress = object.validatorAddress ?? new Uint8Array();
     message.validatorIndex = object.validatorIndex ?? 0;
@@ -987,12 +973,12 @@ export const Commit = {
     return message;
   },
   fromJSON(object: any): Commit {
-    const obj = createBaseCommit();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
-    if (isSet(object.round)) obj.round = Number(object.round);
-    if (isSet(object.blockId)) obj.blockId = BlockID.fromJSON(object.blockId);
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => CommitSig.fromJSON(e));
-    return obj;
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      round: isSet(object.round) ? Number(object.round) : 0,
+      blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromJSON(e)) : []
+    };
   },
   toJSON(message: Commit): unknown {
     const obj: any = {};
@@ -1008,13 +994,9 @@ export const Commit = {
   },
   fromPartial(object: DeepPartial<Commit>): Commit {
     const message = createBaseCommit();
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Long.fromValue(object.height);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
-    if (object.blockId !== undefined && object.blockId !== null) {
-      message.blockId = BlockID.fromPartial(object.blockId);
-    }
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
     message.signatures = object.signatures?.map(e => CommitSig.fromPartial(e)) || [];
     return message;
   },
@@ -1090,12 +1072,12 @@ export const CommitSig = {
     return message;
   },
   fromJSON(object: any): CommitSig {
-    const obj = createBaseCommitSig();
-    if (isSet(object.blockIdFlag)) obj.blockIdFlag = blockIDFlagFromJSON(object.blockIdFlag);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = bytesFromBase64(object.validatorAddress);
-    if (isSet(object.timestamp)) obj.timestamp = fromJsonTimestamp(object.timestamp);
-    if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
-    return obj;
+    return {
+      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : -1,
+      validatorAddress: isSet(object.validatorAddress) ? bytesFromBase64(object.validatorAddress) : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
+    };
   },
   toJSON(message: CommitSig): unknown {
     const obj: any = {};
@@ -1202,15 +1184,15 @@ export const Proposal = {
     return message;
   },
   fromJSON(object: any): Proposal {
-    const obj = createBaseProposal();
-    if (isSet(object.type)) obj.type = signedMsgTypeFromJSON(object.type);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
-    if (isSet(object.round)) obj.round = Number(object.round);
-    if (isSet(object.polRound)) obj.polRound = Number(object.polRound);
-    if (isSet(object.blockId)) obj.blockId = BlockID.fromJSON(object.blockId);
-    if (isSet(object.timestamp)) obj.timestamp = fromJsonTimestamp(object.timestamp);
-    if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
-    return obj;
+    return {
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      round: isSet(object.round) ? Number(object.round) : 0,
+      polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
+      blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
+    };
   },
   toJSON(message: Proposal): unknown {
     const obj: any = {};
@@ -1226,14 +1208,10 @@ export const Proposal = {
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.type = object.type ?? 0;
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Long.fromValue(object.height);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;
-    if (object.blockId !== undefined && object.blockId !== null) {
-      message.blockId = BlockID.fromPartial(object.blockId);
-    }
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
     message.timestamp = object.timestamp ?? undefined;
     message.signature = object.signature ?? new Uint8Array();
     return message;
@@ -1298,10 +1276,10 @@ export const SignedHeader = {
     return message;
   },
   fromJSON(object: any): SignedHeader {
-    const obj = createBaseSignedHeader();
-    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
-    if (isSet(object.commit)) obj.commit = Commit.fromJSON(object.commit);
-    return obj;
+    return {
+      header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
+      commit: isSet(object.commit) ? Commit.fromJSON(object.commit) : undefined
+    };
   },
   toJSON(message: SignedHeader): unknown {
     const obj: any = {};
@@ -1311,12 +1289,8 @@ export const SignedHeader = {
   },
   fromPartial(object: DeepPartial<SignedHeader>): SignedHeader {
     const message = createBaseSignedHeader();
-    if (object.header !== undefined && object.header !== null) {
-      message.header = Header.fromPartial(object.header);
-    }
-    if (object.commit !== undefined && object.commit !== null) {
-      message.commit = Commit.fromPartial(object.commit);
-    }
+    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
+    message.commit = object.commit !== undefined && object.commit !== null ? Commit.fromPartial(object.commit) : Commit.fromPartial({});
     return message;
   },
   fromSDK(object: SignedHeaderSDKType): SignedHeader {
@@ -1369,10 +1343,10 @@ export const LightBlock = {
     return message;
   },
   fromJSON(object: any): LightBlock {
-    const obj = createBaseLightBlock();
-    if (isSet(object.signedHeader)) obj.signedHeader = SignedHeader.fromJSON(object.signedHeader);
-    if (isSet(object.validatorSet)) obj.validatorSet = ValidatorSet.fromJSON(object.validatorSet);
-    return obj;
+    return {
+      signedHeader: isSet(object.signedHeader) ? SignedHeader.fromJSON(object.signedHeader) : undefined,
+      validatorSet: isSet(object.validatorSet) ? ValidatorSet.fromJSON(object.validatorSet) : undefined
+    };
   },
   toJSON(message: LightBlock): unknown {
     const obj: any = {};
@@ -1382,12 +1356,8 @@ export const LightBlock = {
   },
   fromPartial(object: DeepPartial<LightBlock>): LightBlock {
     const message = createBaseLightBlock();
-    if (object.signedHeader !== undefined && object.signedHeader !== null) {
-      message.signedHeader = SignedHeader.fromPartial(object.signedHeader);
-    }
-    if (object.validatorSet !== undefined && object.validatorSet !== null) {
-      message.validatorSet = ValidatorSet.fromPartial(object.validatorSet);
-    }
+    message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : SignedHeader.fromPartial({});
+    message.validatorSet = object.validatorSet !== undefined && object.validatorSet !== null ? ValidatorSet.fromPartial(object.validatorSet) : ValidatorSet.fromPartial({});
     return message;
   },
   fromSDK(object: LightBlockSDKType): LightBlock {
@@ -1454,12 +1424,12 @@ export const BlockMeta = {
     return message;
   },
   fromJSON(object: any): BlockMeta {
-    const obj = createBaseBlockMeta();
-    if (isSet(object.blockId)) obj.blockId = BlockID.fromJSON(object.blockId);
-    if (isSet(object.blockSize)) obj.blockSize = Long.fromValue(object.blockSize);
-    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
-    if (isSet(object.numTxs)) obj.numTxs = Long.fromValue(object.numTxs);
-    return obj;
+    return {
+      blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
+      blockSize: isSet(object.blockSize) ? Long.fromValue(object.blockSize) : Long.ZERO,
+      header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
+      numTxs: isSet(object.numTxs) ? Long.fromValue(object.numTxs) : Long.ZERO
+    };
   },
   toJSON(message: BlockMeta): unknown {
     const obj: any = {};
@@ -1471,18 +1441,10 @@ export const BlockMeta = {
   },
   fromPartial(object: DeepPartial<BlockMeta>): BlockMeta {
     const message = createBaseBlockMeta();
-    if (object.blockId !== undefined && object.blockId !== null) {
-      message.blockId = BlockID.fromPartial(object.blockId);
-    }
-    if (object.blockSize !== undefined && object.blockSize !== null) {
-      message.blockSize = Long.fromValue(object.blockSize);
-    }
-    if (object.header !== undefined && object.header !== null) {
-      message.header = Header.fromPartial(object.header);
-    }
-    if (object.numTxs !== undefined && object.numTxs !== null) {
-      message.numTxs = Long.fromValue(object.numTxs);
-    }
+    message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : BlockID.fromPartial({});
+    message.blockSize = object.blockSize !== undefined && object.blockSize !== null ? Long.fromValue(object.blockSize) : Long.ZERO;
+    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : Header.fromPartial({});
+    message.numTxs = object.numTxs !== undefined && object.numTxs !== null ? Long.fromValue(object.numTxs) : Long.ZERO;
     return message;
   },
   fromSDK(object: BlockMetaSDKType): BlockMeta {
@@ -1546,11 +1508,11 @@ export const TxProof = {
     return message;
   },
   fromJSON(object: any): TxProof {
-    const obj = createBaseTxProof();
-    if (isSet(object.rootHash)) obj.rootHash = bytesFromBase64(object.rootHash);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (isSet(object.proof)) obj.proof = Proof.fromJSON(object.proof);
-    return obj;
+    return {
+      rootHash: isSet(object.rootHash) ? bytesFromBase64(object.rootHash) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined
+    };
   },
   toJSON(message: TxProof): unknown {
     const obj: any = {};
@@ -1563,9 +1525,7 @@ export const TxProof = {
     const message = createBaseTxProof();
     message.rootHash = object.rootHash ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromPartial(object.proof);
-    }
+    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
     return message;
   },
   fromSDK(object: TxProofSDKType): TxProof {

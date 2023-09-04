@@ -371,12 +371,12 @@ export const ExistenceProof = {
     return message;
   },
   fromJSON(object: any): ExistenceProof {
-    const obj = createBaseExistenceProof();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    if (isSet(object.leaf)) obj.leaf = LeafOp.fromJSON(object.leaf);
-    if (Array.isArray(object?.path)) object.path.map((e: any) => InnerOp.fromJSON(e));
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      leaf: isSet(object.leaf) ? LeafOp.fromJSON(object.leaf) : undefined,
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromJSON(e)) : []
+    };
   },
   toJSON(message: ExistenceProof): unknown {
     const obj: any = {};
@@ -394,9 +394,7 @@ export const ExistenceProof = {
     const message = createBaseExistenceProof();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    if (object.leaf !== undefined && object.leaf !== null) {
-      message.leaf = LeafOp.fromPartial(object.leaf);
-    }
+    message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : LeafOp.fromPartial({});
     message.path = object.path?.map(e => InnerOp.fromPartial(e)) || [];
     return message;
   }
@@ -445,11 +443,11 @@ export const NonExistenceProof = {
     return message;
   },
   fromJSON(object: any): NonExistenceProof {
-    const obj = createBaseNonExistenceProof();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.left)) obj.left = ExistenceProof.fromJSON(object.left);
-    if (isSet(object.right)) obj.right = ExistenceProof.fromJSON(object.right);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      left: isSet(object.left) ? ExistenceProof.fromJSON(object.left) : undefined,
+      right: isSet(object.right) ? ExistenceProof.fromJSON(object.right) : undefined
+    };
   },
   toJSON(message: NonExistenceProof): unknown {
     const obj: any = {};
@@ -461,12 +459,8 @@ export const NonExistenceProof = {
   fromPartial(object: DeepPartial<NonExistenceProof>): NonExistenceProof {
     const message = createBaseNonExistenceProof();
     message.key = object.key ?? new Uint8Array();
-    if (object.left !== undefined && object.left !== null) {
-      message.left = ExistenceProof.fromPartial(object.left);
-    }
-    if (object.right !== undefined && object.right !== null) {
-      message.right = ExistenceProof.fromPartial(object.right);
-    }
+    message.left = object.left !== undefined && object.left !== null ? ExistenceProof.fromPartial(object.left) : ExistenceProof.fromPartial({});
+    message.right = object.right !== undefined && object.right !== null ? ExistenceProof.fromPartial(object.right) : ExistenceProof.fromPartial({});
     return message;
   }
 };
@@ -521,12 +515,12 @@ export const CommitmentProof = {
     return message;
   },
   fromJSON(object: any): CommitmentProof {
-    const obj = createBaseCommitmentProof();
-    if (isSet(object.exist)) obj.exist = ExistenceProof.fromJSON(object.exist);
-    if (isSet(object.nonexist)) obj.nonexist = NonExistenceProof.fromJSON(object.nonexist);
-    if (isSet(object.batch)) obj.batch = BatchProof.fromJSON(object.batch);
-    if (isSet(object.compressed)) obj.compressed = CompressedBatchProof.fromJSON(object.compressed);
-    return obj;
+    return {
+      exist: isSet(object.exist) ? ExistenceProof.fromJSON(object.exist) : undefined,
+      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromJSON(object.nonexist) : undefined,
+      batch: isSet(object.batch) ? BatchProof.fromJSON(object.batch) : undefined,
+      compressed: isSet(object.compressed) ? CompressedBatchProof.fromJSON(object.compressed) : undefined
+    };
   },
   toJSON(message: CommitmentProof): unknown {
     const obj: any = {};
@@ -538,18 +532,10 @@ export const CommitmentProof = {
   },
   fromPartial(object: DeepPartial<CommitmentProof>): CommitmentProof {
     const message = createBaseCommitmentProof();
-    if (object.exist !== undefined && object.exist !== null) {
-      message.exist = ExistenceProof.fromPartial(object.exist);
-    }
-    if (object.nonexist !== undefined && object.nonexist !== null) {
-      message.nonexist = NonExistenceProof.fromPartial(object.nonexist);
-    }
-    if (object.batch !== undefined && object.batch !== null) {
-      message.batch = BatchProof.fromPartial(object.batch);
-    }
-    if (object.compressed !== undefined && object.compressed !== null) {
-      message.compressed = CompressedBatchProof.fromPartial(object.compressed);
-    }
+    message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : ExistenceProof.fromPartial({});
+    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : NonExistenceProof.fromPartial({});
+    message.batch = object.batch !== undefined && object.batch !== null ? BatchProof.fromPartial(object.batch) : BatchProof.fromPartial({});
+    message.compressed = object.compressed !== undefined && object.compressed !== null ? CompressedBatchProof.fromPartial(object.compressed) : CompressedBatchProof.fromPartial({});
     return message;
   }
 };
@@ -611,13 +597,13 @@ export const LeafOp = {
     return message;
   },
   fromJSON(object: any): LeafOp {
-    const obj = createBaseLeafOp();
-    if (isSet(object.hash)) obj.hash = hashOpFromJSON(object.hash);
-    if (isSet(object.prehashKey)) obj.prehashKey = hashOpFromJSON(object.prehashKey);
-    if (isSet(object.prehashValue)) obj.prehashValue = hashOpFromJSON(object.prehashValue);
-    if (isSet(object.length)) obj.length = lengthOpFromJSON(object.length);
-    if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
-    return obj;
+    return {
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehashKey) ? hashOpFromJSON(object.prehashKey) : -1,
+      prehashValue: isSet(object.prehashValue) ? hashOpFromJSON(object.prehashValue) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
+    };
   },
   toJSON(message: LeafOp): unknown {
     const obj: any = {};
@@ -682,11 +668,11 @@ export const InnerOp = {
     return message;
   },
   fromJSON(object: any): InnerOp {
-    const obj = createBaseInnerOp();
-    if (isSet(object.hash)) obj.hash = hashOpFromJSON(object.hash);
-    if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
-    if (isSet(object.suffix)) obj.suffix = bytesFromBase64(object.suffix);
-    return obj;
+    return {
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(),
+      suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : new Uint8Array()
+    };
   },
   toJSON(message: InnerOp): unknown {
     const obj: any = {};
@@ -754,12 +740,12 @@ export const ProofSpec = {
     return message;
   },
   fromJSON(object: any): ProofSpec {
-    const obj = createBaseProofSpec();
-    if (isSet(object.leafSpec)) obj.leafSpec = LeafOp.fromJSON(object.leafSpec);
-    if (isSet(object.innerSpec)) obj.innerSpec = InnerSpec.fromJSON(object.innerSpec);
-    if (isSet(object.maxDepth)) obj.maxDepth = Number(object.maxDepth);
-    if (isSet(object.minDepth)) obj.minDepth = Number(object.minDepth);
-    return obj;
+    return {
+      leafSpec: isSet(object.leafSpec) ? LeafOp.fromJSON(object.leafSpec) : undefined,
+      innerSpec: isSet(object.innerSpec) ? InnerSpec.fromJSON(object.innerSpec) : undefined,
+      maxDepth: isSet(object.maxDepth) ? Number(object.maxDepth) : 0,
+      minDepth: isSet(object.minDepth) ? Number(object.minDepth) : 0
+    };
   },
   toJSON(message: ProofSpec): unknown {
     const obj: any = {};
@@ -771,12 +757,8 @@ export const ProofSpec = {
   },
   fromPartial(object: DeepPartial<ProofSpec>): ProofSpec {
     const message = createBaseProofSpec();
-    if (object.leafSpec !== undefined && object.leafSpec !== null) {
-      message.leafSpec = LeafOp.fromPartial(object.leafSpec);
-    }
-    if (object.innerSpec !== undefined && object.innerSpec !== null) {
-      message.innerSpec = InnerSpec.fromPartial(object.innerSpec);
-    }
+    message.leafSpec = object.leafSpec !== undefined && object.leafSpec !== null ? LeafOp.fromPartial(object.leafSpec) : LeafOp.fromPartial({});
+    message.innerSpec = object.innerSpec !== undefined && object.innerSpec !== null ? InnerSpec.fromPartial(object.innerSpec) : InnerSpec.fromPartial({});
     message.maxDepth = object.maxDepth ?? 0;
     message.minDepth = object.minDepth ?? 0;
     return message;
@@ -856,14 +838,14 @@ export const InnerSpec = {
     return message;
   },
   fromJSON(object: any): InnerSpec {
-    const obj = createBaseInnerSpec();
-    if (Array.isArray(object?.childOrder)) object.childOrder.map((e: any) => Number(e));
-    if (isSet(object.childSize)) obj.childSize = Number(object.childSize);
-    if (isSet(object.minPrefixLength)) obj.minPrefixLength = Number(object.minPrefixLength);
-    if (isSet(object.maxPrefixLength)) obj.maxPrefixLength = Number(object.maxPrefixLength);
-    if (isSet(object.emptyChild)) obj.emptyChild = bytesFromBase64(object.emptyChild);
-    if (isSet(object.hash)) obj.hash = hashOpFromJSON(object.hash);
-    return obj;
+    return {
+      childOrder: Array.isArray(object?.childOrder) ? object.childOrder.map((e: any) => Number(e)) : [],
+      childSize: isSet(object.childSize) ? Number(object.childSize) : 0,
+      minPrefixLength: isSet(object.minPrefixLength) ? Number(object.minPrefixLength) : 0,
+      maxPrefixLength: isSet(object.maxPrefixLength) ? Number(object.maxPrefixLength) : 0,
+      emptyChild: isSet(object.emptyChild) ? bytesFromBase64(object.emptyChild) : new Uint8Array(),
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
+    };
   },
   toJSON(message: InnerSpec): unknown {
     const obj: any = {};
@@ -920,9 +902,9 @@ export const BatchProof = {
     return message;
   },
   fromJSON(object: any): BatchProof {
-    const obj = createBaseBatchProof();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => BatchEntry.fromJSON(e));
-    return obj;
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => BatchEntry.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchProof): unknown {
     const obj: any = {};
@@ -976,10 +958,10 @@ export const BatchEntry = {
     return message;
   },
   fromJSON(object: any): BatchEntry {
-    const obj = createBaseBatchEntry();
-    if (isSet(object.exist)) obj.exist = ExistenceProof.fromJSON(object.exist);
-    if (isSet(object.nonexist)) obj.nonexist = NonExistenceProof.fromJSON(object.nonexist);
-    return obj;
+    return {
+      exist: isSet(object.exist) ? ExistenceProof.fromJSON(object.exist) : undefined,
+      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromJSON(object.nonexist) : undefined
+    };
   },
   toJSON(message: BatchEntry): unknown {
     const obj: any = {};
@@ -989,12 +971,8 @@ export const BatchEntry = {
   },
   fromPartial(object: DeepPartial<BatchEntry>): BatchEntry {
     const message = createBaseBatchEntry();
-    if (object.exist !== undefined && object.exist !== null) {
-      message.exist = ExistenceProof.fromPartial(object.exist);
-    }
-    if (object.nonexist !== undefined && object.nonexist !== null) {
-      message.nonexist = NonExistenceProof.fromPartial(object.nonexist);
-    }
+    message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : ExistenceProof.fromPartial({});
+    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : NonExistenceProof.fromPartial({});
     return message;
   }
 };
@@ -1035,10 +1013,10 @@ export const CompressedBatchProof = {
     return message;
   },
   fromJSON(object: any): CompressedBatchProof {
-    const obj = createBaseCompressedBatchProof();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => CompressedBatchEntry.fromJSON(e));
-    if (Array.isArray(object?.lookupInners)) object.lookupInners.map((e: any) => InnerOp.fromJSON(e));
-    return obj;
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => CompressedBatchEntry.fromJSON(e)) : [],
+      lookupInners: Array.isArray(object?.lookupInners) ? object.lookupInners.map((e: any) => InnerOp.fromJSON(e)) : []
+    };
   },
   toJSON(message: CompressedBatchProof): unknown {
     const obj: any = {};
@@ -1098,10 +1076,10 @@ export const CompressedBatchEntry = {
     return message;
   },
   fromJSON(object: any): CompressedBatchEntry {
-    const obj = createBaseCompressedBatchEntry();
-    if (isSet(object.exist)) obj.exist = CompressedExistenceProof.fromJSON(object.exist);
-    if (isSet(object.nonexist)) obj.nonexist = CompressedNonExistenceProof.fromJSON(object.nonexist);
-    return obj;
+    return {
+      exist: isSet(object.exist) ? CompressedExistenceProof.fromJSON(object.exist) : undefined,
+      nonexist: isSet(object.nonexist) ? CompressedNonExistenceProof.fromJSON(object.nonexist) : undefined
+    };
   },
   toJSON(message: CompressedBatchEntry): unknown {
     const obj: any = {};
@@ -1111,12 +1089,8 @@ export const CompressedBatchEntry = {
   },
   fromPartial(object: DeepPartial<CompressedBatchEntry>): CompressedBatchEntry {
     const message = createBaseCompressedBatchEntry();
-    if (object.exist !== undefined && object.exist !== null) {
-      message.exist = CompressedExistenceProof.fromPartial(object.exist);
-    }
-    if (object.nonexist !== undefined && object.nonexist !== null) {
-      message.nonexist = CompressedNonExistenceProof.fromPartial(object.nonexist);
-    }
+    message.exist = object.exist !== undefined && object.exist !== null ? CompressedExistenceProof.fromPartial(object.exist) : CompressedExistenceProof.fromPartial({});
+    message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? CompressedNonExistenceProof.fromPartial(object.nonexist) : CompressedNonExistenceProof.fromPartial({});
     return message;
   }
 };
@@ -1180,12 +1154,12 @@ export const CompressedExistenceProof = {
     return message;
   },
   fromJSON(object: any): CompressedExistenceProof {
-    const obj = createBaseCompressedExistenceProof();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    if (isSet(object.leaf)) obj.leaf = LeafOp.fromJSON(object.leaf);
-    if (Array.isArray(object?.path)) object.path.map((e: any) => Number(e));
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      leaf: isSet(object.leaf) ? LeafOp.fromJSON(object.leaf) : undefined,
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : []
+    };
   },
   toJSON(message: CompressedExistenceProof): unknown {
     const obj: any = {};
@@ -1203,9 +1177,7 @@ export const CompressedExistenceProof = {
     const message = createBaseCompressedExistenceProof();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    if (object.leaf !== undefined && object.leaf !== null) {
-      message.leaf = LeafOp.fromPartial(object.leaf);
-    }
+    message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : LeafOp.fromPartial({});
     message.path = object.path?.map(e => e) || [];
     return message;
   }
@@ -1254,11 +1226,11 @@ export const CompressedNonExistenceProof = {
     return message;
   },
   fromJSON(object: any): CompressedNonExistenceProof {
-    const obj = createBaseCompressedNonExistenceProof();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.left)) obj.left = CompressedExistenceProof.fromJSON(object.left);
-    if (isSet(object.right)) obj.right = CompressedExistenceProof.fromJSON(object.right);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      left: isSet(object.left) ? CompressedExistenceProof.fromJSON(object.left) : undefined,
+      right: isSet(object.right) ? CompressedExistenceProof.fromJSON(object.right) : undefined
+    };
   },
   toJSON(message: CompressedNonExistenceProof): unknown {
     const obj: any = {};
@@ -1270,12 +1242,8 @@ export const CompressedNonExistenceProof = {
   fromPartial(object: DeepPartial<CompressedNonExistenceProof>): CompressedNonExistenceProof {
     const message = createBaseCompressedNonExistenceProof();
     message.key = object.key ?? new Uint8Array();
-    if (object.left !== undefined && object.left !== null) {
-      message.left = CompressedExistenceProof.fromPartial(object.left);
-    }
-    if (object.right !== undefined && object.right !== null) {
-      message.right = CompressedExistenceProof.fromPartial(object.right);
-    }
+    message.left = object.left !== undefined && object.left !== null ? CompressedExistenceProof.fromPartial(object.left) : CompressedExistenceProof.fromPartial({});
+    message.right = object.right !== undefined && object.right !== null ? CompressedExistenceProof.fromPartial(object.right) : CompressedExistenceProof.fromPartial({});
     return message;
   }
 };

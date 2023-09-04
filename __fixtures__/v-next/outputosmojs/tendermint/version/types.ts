@@ -75,10 +75,10 @@ export const App = {
     return message;
   },
   fromJSON(object: any): App {
-    const obj = createBaseApp();
-    if (isSet(object.protocol)) obj.protocol = BigInt(object.protocol.toString());
-    if (isSet(object.software)) obj.software = String(object.software);
-    return obj;
+    return {
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
+      software: isSet(object.software) ? String(object.software) : ""
+    };
   },
   toJSON(message: App): unknown {
     const obj: any = {};
@@ -88,9 +88,7 @@ export const App = {
   },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    if (object.protocol !== undefined && object.protocol !== null) {
-      message.protocol = BigInt(object.protocol.toString());
-    }
+    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt(0);
     message.software = object.software ?? "";
     return message;
   },
@@ -178,10 +176,10 @@ export const Consensus = {
     return message;
   },
   fromJSON(object: any): Consensus {
-    const obj = createBaseConsensus();
-    if (isSet(object.block)) obj.block = BigInt(object.block.toString());
-    if (isSet(object.app)) obj.app = BigInt(object.app.toString());
-    return obj;
+    return {
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};
@@ -191,12 +189,8 @@ export const Consensus = {
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    if (object.block !== undefined && object.block !== null) {
-      message.block = BigInt(object.block.toString());
-    }
-    if (object.app !== undefined && object.app !== null) {
-      message.app = BigInt(object.app.toString());
-    }
+    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
+    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ConsensusSDKType): Consensus {

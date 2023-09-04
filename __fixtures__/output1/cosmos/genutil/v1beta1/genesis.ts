@@ -40,9 +40,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.genTxs)) object.genTxs.map((e: any) => bytesFromBase64(e));
-    return obj;
+    return {
+      genTxs: Array.isArray(object?.genTxs) ? object.genTxs.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

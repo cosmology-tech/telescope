@@ -267,12 +267,12 @@ export const CheckError = {
     return message;
   },
   fromJSON(object: any): CheckError {
-    const obj = createBaseCheckError();
-    if (isSet(object.code)) obj.code = checkError_CodeFromJSON(object.code);
-    if (isSet(object.subject)) obj.subject = String(object.subject);
-    if (isSet(object.detail)) obj.detail = String(object.detail);
-    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      detail: isSet(object.detail) ? String(object.detail) : "",
+      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
+    };
   },
   toJSON(message: CheckError): unknown {
     const obj: any = {};
@@ -287,9 +287,7 @@ export const CheckError = {
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
-    if (object.status !== undefined && object.status !== null) {
-      message.status = Status.fromPartial(object.status);
-    }
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
     return message;
   }
 };

@@ -103,11 +103,11 @@ export const ReplacePoolIncentivesProposal = {
     return message;
   },
   fromJSON(object: any): ReplacePoolIncentivesProposal {
-    const obj = createBaseReplacePoolIncentivesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
+    };
   },
   toJSON(message: ReplacePoolIncentivesProposal): unknown {
     const obj: any = {};
@@ -237,11 +237,11 @@ export const UpdatePoolIncentivesProposal = {
     return message;
   },
   fromJSON(object: any): UpdatePoolIncentivesProposal {
-    const obj = createBaseUpdatePoolIncentivesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
+    };
   },
   toJSON(message: UpdatePoolIncentivesProposal): unknown {
     const obj: any = {};

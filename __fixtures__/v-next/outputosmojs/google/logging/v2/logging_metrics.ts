@@ -355,10 +355,10 @@ export const LogMetric_LabelExtractorsEntry = {
     return message;
   },
   fromJSON(object: any): LogMetric_LabelExtractorsEntry {
-    const obj = createBaseLogMetric_LabelExtractorsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
     const obj: any = {};
@@ -519,24 +519,24 @@ export const LogMetric = {
     return message;
   },
   fromJSON(object: any): LogMetric {
-    const obj = createBaseLogMetric();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
-    if (isSet(object.metricDescriptor)) obj.metricDescriptor = MetricDescriptor.fromJSON(object.metricDescriptor);
-    if (isSet(object.valueExtractor)) obj.valueExtractor = String(object.valueExtractor);
-    if (isObject(object.labelExtractors)) obj.labelExtractors = Object.entries(object.labelExtractors).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.version)) obj.version = logMetric_ApiVersionFromJSON(object.version);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      metricDescriptor: isSet(object.metricDescriptor) ? MetricDescriptor.fromJSON(object.metricDescriptor) : undefined,
+      valueExtractor: isSet(object.valueExtractor) ? String(object.valueExtractor) : "",
+      labelExtractors: isObject(object.labelExtractors) ? Object.entries(object.labelExtractors).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+    };
   },
   toJSON(message: LogMetric): unknown {
     const obj: any = {};
@@ -564,9 +564,7 @@ export const LogMetric = {
     message.description = object.description ?? "";
     message.filter = object.filter ?? "";
     message.disabled = object.disabled ?? false;
-    if (object.metricDescriptor !== undefined && object.metricDescriptor !== null) {
-      message.metricDescriptor = MetricDescriptor.fromPartial(object.metricDescriptor);
-    }
+    message.metricDescriptor = object.metricDescriptor !== undefined && object.metricDescriptor !== null ? MetricDescriptor.fromPartial(object.metricDescriptor) : MetricDescriptor.fromPartial({});
     message.valueExtractor = object.valueExtractor ?? "";
     message.labelExtractors = Object.entries(object.labelExtractors ?? {}).reduce<{
       [key: string]: string;
@@ -576,9 +574,7 @@ export const LogMetric = {
       }
       return acc;
     }, {});
-    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
-      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
-    }
+    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : Distribution_BucketOptions.fromPartial({});
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     message.version = object.version ?? 0;
@@ -745,11 +741,11 @@ export const ListLogMetricsRequest = {
     return message;
   },
   fromJSON(object: any): ListLogMetricsRequest {
-    const obj = createBaseListLogMetricsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListLogMetricsRequest): unknown {
     const obj: any = {};
@@ -854,10 +850,10 @@ export const ListLogMetricsResponse = {
     return message;
   },
   fromJSON(object: any): ListLogMetricsResponse {
-    const obj = createBaseListLogMetricsResponse();
-    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => LogMetric.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListLogMetricsResponse): unknown {
     const obj: any = {};
@@ -960,9 +956,9 @@ export const GetLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): GetLogMetricRequest {
-    const obj = createBaseGetLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : ""
+    };
   },
   toJSON(message: GetLogMetricRequest): unknown {
     const obj: any = {};
@@ -1053,10 +1049,10 @@ export const CreateLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): CreateLogMetricRequest {
-    const obj = createBaseCreateLogMetricRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      metric: isSet(object.metric) ? LogMetric.fromJSON(object.metric) : undefined
+    };
   },
   toJSON(message: CreateLogMetricRequest): unknown {
     const obj: any = {};
@@ -1067,9 +1063,7 @@ export const CreateLogMetricRequest = {
   fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
     const message = createBaseCreateLogMetricRequest();
     message.parent = object.parent ?? "";
-    if (object.metric !== undefined && object.metric !== null) {
-      message.metric = LogMetric.fromPartial(object.metric);
-    }
+    message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : LogMetric.fromPartial({});
     return message;
   },
   fromSDK(object: CreateLogMetricRequestSDKType): CreateLogMetricRequest {
@@ -1156,10 +1150,10 @@ export const UpdateLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): UpdateLogMetricRequest {
-    const obj = createBaseUpdateLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : "",
+      metric: isSet(object.metric) ? LogMetric.fromJSON(object.metric) : undefined
+    };
   },
   toJSON(message: UpdateLogMetricRequest): unknown {
     const obj: any = {};
@@ -1170,9 +1164,7 @@ export const UpdateLogMetricRequest = {
   fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
     message.metricName = object.metricName ?? "";
-    if (object.metric !== undefined && object.metric !== null) {
-      message.metric = LogMetric.fromPartial(object.metric);
-    }
+    message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : LogMetric.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateLogMetricRequestSDKType): UpdateLogMetricRequest {
@@ -1252,9 +1244,9 @@ export const DeleteLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): DeleteLogMetricRequest {
-    const obj = createBaseDeleteLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : ""
+    };
   },
   toJSON(message: DeleteLogMetricRequest): unknown {
     const obj: any = {};

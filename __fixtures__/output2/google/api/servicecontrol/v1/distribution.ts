@@ -224,18 +224,18 @@ export const Distribution = {
     return message;
   },
   fromJSON(object: any): Distribution {
-    const obj = createBaseDistribution();
-    if (isSet(object.count)) obj.count = Long.fromValue(object.count);
-    if (isSet(object.mean)) obj.mean = Number(object.mean);
-    if (isSet(object.minimum)) obj.minimum = Number(object.minimum);
-    if (isSet(object.maximum)) obj.maximum = Number(object.maximum);
-    if (isSet(object.sumOfSquaredDeviation)) obj.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
-    if (Array.isArray(object?.bucketCounts)) object.bucketCounts.map((e: any) => Long.fromValue(e));
-    if (isSet(object.linearBuckets)) obj.linearBuckets = Distribution_LinearBuckets.fromJSON(object.linearBuckets);
-    if (isSet(object.exponentialBuckets)) obj.exponentialBuckets = Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets);
-    if (isSet(object.explicitBuckets)) obj.explicitBuckets = Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets);
-    if (Array.isArray(object?.exemplars)) object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
-    return obj;
+    return {
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      mean: isSet(object.mean) ? Number(object.mean) : 0,
+      minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
+      maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
+      sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromValue(e)) : [],
+      linearBuckets: isSet(object.linearBuckets) ? Distribution_LinearBuckets.fromJSON(object.linearBuckets) : undefined,
+      exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets) : undefined,
+      explicitBuckets: isSet(object.explicitBuckets) ? Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
+    };
   },
   toJSON(message: Distribution): unknown {
     const obj: any = {};
@@ -261,23 +261,15 @@ export const Distribution = {
   },
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    if (object.count !== undefined && object.count !== null) {
-      message.count = Long.fromValue(object.count);
-    }
+    message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
     message.mean = object.mean ?? 0;
     message.minimum = object.minimum ?? 0;
     message.maximum = object.maximum ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
     message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
-    if (object.linearBuckets !== undefined && object.linearBuckets !== null) {
-      message.linearBuckets = Distribution_LinearBuckets.fromPartial(object.linearBuckets);
-    }
-    if (object.exponentialBuckets !== undefined && object.exponentialBuckets !== null) {
-      message.exponentialBuckets = Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets);
-    }
-    if (object.explicitBuckets !== undefined && object.explicitBuckets !== null) {
-      message.explicitBuckets = Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets);
-    }
+    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_LinearBuckets.fromPartial(object.linearBuckets) : Distribution_LinearBuckets.fromPartial({});
+    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets) : Distribution_ExponentialBuckets.fromPartial({});
+    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : Distribution_ExplicitBuckets.fromPartial({});
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   }
@@ -326,11 +318,11 @@ export const Distribution_LinearBuckets = {
     return message;
   },
   fromJSON(object: any): Distribution_LinearBuckets {
-    const obj = createBaseDistribution_LinearBuckets();
-    if (isSet(object.numFiniteBuckets)) obj.numFiniteBuckets = Number(object.numFiniteBuckets);
-    if (isSet(object.width)) obj.width = Number(object.width);
-    if (isSet(object.offset)) obj.offset = Number(object.offset);
-    return obj;
+    return {
+      numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
+      width: isSet(object.width) ? Number(object.width) : 0,
+      offset: isSet(object.offset) ? Number(object.offset) : 0
+    };
   },
   toJSON(message: Distribution_LinearBuckets): unknown {
     const obj: any = {};
@@ -391,11 +383,11 @@ export const Distribution_ExponentialBuckets = {
     return message;
   },
   fromJSON(object: any): Distribution_ExponentialBuckets {
-    const obj = createBaseDistribution_ExponentialBuckets();
-    if (isSet(object.numFiniteBuckets)) obj.numFiniteBuckets = Number(object.numFiniteBuckets);
-    if (isSet(object.growthFactor)) obj.growthFactor = Number(object.growthFactor);
-    if (isSet(object.scale)) obj.scale = Number(object.scale);
-    return obj;
+    return {
+      numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
+      growthFactor: isSet(object.growthFactor) ? Number(object.growthFactor) : 0,
+      scale: isSet(object.scale) ? Number(object.scale) : 0
+    };
   },
   toJSON(message: Distribution_ExponentialBuckets): unknown {
     const obj: any = {};
@@ -451,9 +443,9 @@ export const Distribution_ExplicitBuckets = {
     return message;
   },
   fromJSON(object: any): Distribution_ExplicitBuckets {
-    const obj = createBaseDistribution_ExplicitBuckets();
-    if (Array.isArray(object?.bounds)) object.bounds.map((e: any) => Number(e));
-    return obj;
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
+    };
   },
   toJSON(message: Distribution_ExplicitBuckets): unknown {
     const obj: any = {};

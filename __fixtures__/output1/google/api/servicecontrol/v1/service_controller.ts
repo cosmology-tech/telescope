@@ -308,11 +308,11 @@ export const CheckRequest = {
     return message;
   },
   fromJSON(object: any): CheckRequest {
-    const obj = createBaseCheckRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.operation)) obj.operation = Operation.fromJSON(object.operation);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      operation: isSet(object.operation) ? Operation.fromJSON(object.operation) : undefined,
+      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : ""
+    };
   },
   toJSON(message: CheckRequest): unknown {
     const obj: any = {};
@@ -324,9 +324,7 @@ export const CheckRequest = {
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.operation !== undefined && object.operation !== null) {
-      message.operation = Operation.fromPartial(object.operation);
-    }
+    message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : Operation.fromPartial({});
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   },
@@ -403,13 +401,13 @@ export const CheckResponse = {
     return message;
   },
   fromJSON(object: any): CheckResponse {
-    const obj = createBaseCheckResponse();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (Array.isArray(object?.checkErrors)) object.checkErrors.map((e: any) => CheckError.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
-    if (isSet(object.checkInfo)) obj.checkInfo = CheckResponse_CheckInfo.fromJSON(object.checkInfo);
-    return obj;
+    return {
+      operationId: isSet(object.operationId) ? String(object.operationId) : "",
+      checkErrors: Array.isArray(object?.checkErrors) ? object.checkErrors.map((e: any) => CheckError.fromJSON(e)) : [],
+      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : "",
+      serviceRolloutId: isSet(object.serviceRolloutId) ? String(object.serviceRolloutId) : "",
+      checkInfo: isSet(object.checkInfo) ? CheckResponse_CheckInfo.fromJSON(object.checkInfo) : undefined
+    };
   },
   toJSON(message: CheckResponse): unknown {
     const obj: any = {};
@@ -430,9 +428,7 @@ export const CheckResponse = {
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
-    if (object.checkInfo !== undefined && object.checkInfo !== null) {
-      message.checkInfo = CheckResponse_CheckInfo.fromPartial(object.checkInfo);
-    }
+    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : CheckResponse_CheckInfo.fromPartial({});
     return message;
   },
   fromSDK(object: CheckResponseSDKType): CheckResponse {
@@ -495,10 +491,10 @@ export const CheckResponse_CheckInfo = {
     return message;
   },
   fromJSON(object: any): CheckResponse_CheckInfo {
-    const obj = createBaseCheckResponse_CheckInfo();
-    if (Array.isArray(object?.unusedArguments)) object.unusedArguments.map((e: any) => String(e));
-    if (isSet(object.consumerInfo)) obj.consumerInfo = CheckResponse_ConsumerInfo.fromJSON(object.consumerInfo);
-    return obj;
+    return {
+      unusedArguments: Array.isArray(object?.unusedArguments) ? object.unusedArguments.map((e: any) => String(e)) : [],
+      consumerInfo: isSet(object.consumerInfo) ? CheckResponse_ConsumerInfo.fromJSON(object.consumerInfo) : undefined
+    };
   },
   toJSON(message: CheckResponse_CheckInfo): unknown {
     const obj: any = {};
@@ -513,9 +509,7 @@ export const CheckResponse_CheckInfo = {
   fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
-    if (object.consumerInfo !== undefined && object.consumerInfo !== null) {
-      message.consumerInfo = CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo);
-    }
+    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : CheckResponse_ConsumerInfo.fromPartial({});
     return message;
   },
   fromSDK(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
@@ -579,11 +573,11 @@ export const CheckResponse_ConsumerInfo = {
     return message;
   },
   fromJSON(object: any): CheckResponse_ConsumerInfo {
-    const obj = createBaseCheckResponse_ConsumerInfo();
-    if (isSet(object.projectNumber)) obj.projectNumber = Long.fromValue(object.projectNumber);
-    if (isSet(object.type)) obj.type = checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type);
-    if (isSet(object.consumerNumber)) obj.consumerNumber = Long.fromValue(object.consumerNumber);
-    return obj;
+    return {
+      projectNumber: isSet(object.projectNumber) ? Long.fromValue(object.projectNumber) : Long.ZERO,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
+      consumerNumber: isSet(object.consumerNumber) ? Long.fromValue(object.consumerNumber) : Long.ZERO
+    };
   },
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
@@ -594,13 +588,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    if (object.projectNumber !== undefined && object.projectNumber !== null) {
-      message.projectNumber = Long.fromValue(object.projectNumber);
-    }
+    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
     message.type = object.type ?? 0;
-    if (object.consumerNumber !== undefined && object.consumerNumber !== null) {
-      message.consumerNumber = Long.fromValue(object.consumerNumber);
-    }
+    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
     return message;
   },
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
@@ -662,11 +652,11 @@ export const ReportRequest = {
     return message;
   },
   fromJSON(object: any): ReportRequest {
-    const obj = createBaseReportRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (Array.isArray(object?.operations)) object.operations.map((e: any) => Operation.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromJSON(e)) : [],
+      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : ""
+    };
   },
   toJSON(message: ReportRequest): unknown {
     const obj: any = {};
@@ -749,11 +739,11 @@ export const ReportResponse = {
     return message;
   },
   fromJSON(object: any): ReportResponse {
-    const obj = createBaseReportResponse();
-    if (Array.isArray(object?.reportErrors)) object.reportErrors.map((e: any) => ReportResponse_ReportError.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
-    return obj;
+    return {
+      reportErrors: Array.isArray(object?.reportErrors) ? object.reportErrors.map((e: any) => ReportResponse_ReportError.fromJSON(e)) : [],
+      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : "",
+      serviceRolloutId: isSet(object.serviceRolloutId) ? String(object.serviceRolloutId) : ""
+    };
   },
   toJSON(message: ReportResponse): unknown {
     const obj: any = {};
@@ -829,10 +819,10 @@ export const ReportResponse_ReportError = {
     return message;
   },
   fromJSON(object: any): ReportResponse_ReportError {
-    const obj = createBaseReportResponse_ReportError();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
+    return {
+      operationId: isSet(object.operationId) ? String(object.operationId) : "",
+      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
+    };
   },
   toJSON(message: ReportResponse_ReportError): unknown {
     const obj: any = {};
@@ -843,9 +833,7 @@ export const ReportResponse_ReportError = {
   fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
     message.operationId = object.operationId ?? "";
-    if (object.status !== undefined && object.status !== null) {
-      message.status = Status.fromPartial(object.status);
-    }
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
     return message;
   },
   fromSDK(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {

@@ -94,13 +94,13 @@ export const QueryAppVersionRequest = {
     return message;
   },
   fromJSON(object: any): QueryAppVersionRequest {
-    const obj = createBaseQueryAppVersionRequest();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
-    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
-    if (isSet(object.proposedVersion)) obj.proposedVersion = String(object.proposedVersion);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
+      proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
+    };
   },
   toJSON(message: QueryAppVersionRequest): unknown {
     const obj: any = {};
@@ -116,9 +116,7 @@ export const QueryAppVersionRequest = {
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
     message.ordering = object.ordering ?? 0;
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = Counterparty.fromPartial(object.counterparty);
-    }
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
   },
@@ -227,10 +225,10 @@ export const QueryAppVersionResponse = {
     return message;
   },
   fromJSON(object: any): QueryAppVersionResponse {
-    const obj = createBaseQueryAppVersionResponse();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.version)) obj.version = String(object.version);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      version: isSet(object.version) ? String(object.version) : ""
+    };
   },
   toJSON(message: QueryAppVersionResponse): unknown {
     const obj: any = {};

@@ -155,10 +155,10 @@ export const QueryOrdersRequest = {
     return message;
   },
   fromJSON(object: any): QueryOrdersRequest {
-    const obj = createBaseQueryOrdersRequest();
-    if (isSet(object.filters)) obj.filters = OrderFilters.fromJSON(object.filters);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      filters: isSet(object.filters) ? OrderFilters.fromJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryOrdersRequest): unknown {
     const obj: any = {};
@@ -168,12 +168,8 @@ export const QueryOrdersRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryOrdersRequest>, I>>(object: I): QueryOrdersRequest {
     const message = createBaseQueryOrdersRequest();
-    if (object.filters !== undefined && object.filters !== null) {
-      message.filters = OrderFilters.fromPartial(object.filters);
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : OrderFilters.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryOrdersRequestSDKType): QueryOrdersRequest {
@@ -226,10 +222,10 @@ export const QueryOrdersResponse = {
     return message;
   },
   fromJSON(object: any): QueryOrdersResponse {
-    const obj = createBaseQueryOrdersResponse();
-    if (Array.isArray(object?.orders)) object.orders.map((e: any) => Order.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryOrdersResponse): unknown {
     const obj: any = {};
@@ -244,9 +240,7 @@ export const QueryOrdersResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryOrdersResponse>, I>>(object: I): QueryOrdersResponse {
     const message = createBaseQueryOrdersResponse();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryOrdersResponseSDKType): QueryOrdersResponse {
@@ -296,9 +290,9 @@ export const QueryOrderRequest = {
     return message;
   },
   fromJSON(object: any): QueryOrderRequest {
-    const obj = createBaseQueryOrderRequest();
-    if (isSet(object.id)) obj.id = OrderID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? OrderID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: QueryOrderRequest): unknown {
     const obj: any = {};
@@ -307,9 +301,7 @@ export const QueryOrderRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryOrderRequest>, I>>(object: I): QueryOrderRequest {
     const message = createBaseQueryOrderRequest();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = OrderID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : OrderID.fromPartial({});
     return message;
   },
   fromSDK(object: QueryOrderRequestSDKType): QueryOrderRequest {
@@ -353,9 +345,9 @@ export const QueryOrderResponse = {
     return message;
   },
   fromJSON(object: any): QueryOrderResponse {
-    const obj = createBaseQueryOrderResponse();
-    if (isSet(object.order)) obj.order = Order.fromJSON(object.order);
-    return obj;
+    return {
+      order: isSet(object.order) ? Order.fromJSON(object.order) : undefined
+    };
   },
   toJSON(message: QueryOrderResponse): unknown {
     const obj: any = {};
@@ -364,9 +356,7 @@ export const QueryOrderResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryOrderResponse>, I>>(object: I): QueryOrderResponse {
     const message = createBaseQueryOrderResponse();
-    if (object.order !== undefined && object.order !== null) {
-      message.order = Order.fromPartial(object.order);
-    }
+    message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : Order.fromPartial({});
     return message;
   },
   fromSDK(object: QueryOrderResponseSDKType): QueryOrderResponse {
@@ -417,10 +407,10 @@ export const QueryBidsRequest = {
     return message;
   },
   fromJSON(object: any): QueryBidsRequest {
-    const obj = createBaseQueryBidsRequest();
-    if (isSet(object.filters)) obj.filters = BidFilters.fromJSON(object.filters);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      filters: isSet(object.filters) ? BidFilters.fromJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryBidsRequest): unknown {
     const obj: any = {};
@@ -430,12 +420,8 @@ export const QueryBidsRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryBidsRequest>, I>>(object: I): QueryBidsRequest {
     const message = createBaseQueryBidsRequest();
-    if (object.filters !== undefined && object.filters !== null) {
-      message.filters = BidFilters.fromPartial(object.filters);
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : BidFilters.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryBidsRequestSDKType): QueryBidsRequest {
@@ -488,10 +474,10 @@ export const QueryBidsResponse = {
     return message;
   },
   fromJSON(object: any): QueryBidsResponse {
-    const obj = createBaseQueryBidsResponse();
-    if (Array.isArray(object?.bids)) object.bids.map((e: any) => QueryBidResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryBidsResponse): unknown {
     const obj: any = {};
@@ -506,9 +492,7 @@ export const QueryBidsResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryBidsResponse>, I>>(object: I): QueryBidsResponse {
     const message = createBaseQueryBidsResponse();
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryBidsResponseSDKType): QueryBidsResponse {
@@ -558,9 +542,9 @@ export const QueryBidRequest = {
     return message;
   },
   fromJSON(object: any): QueryBidRequest {
-    const obj = createBaseQueryBidRequest();
-    if (isSet(object.id)) obj.id = BidID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? BidID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: QueryBidRequest): unknown {
     const obj: any = {};
@@ -569,9 +553,7 @@ export const QueryBidRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryBidRequest>, I>>(object: I): QueryBidRequest {
     const message = createBaseQueryBidRequest();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BidID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : BidID.fromPartial({});
     return message;
   },
   fromSDK(object: QueryBidRequestSDKType): QueryBidRequest {
@@ -622,10 +604,10 @@ export const QueryBidResponse = {
     return message;
   },
   fromJSON(object: any): QueryBidResponse {
-    const obj = createBaseQueryBidResponse();
-    if (isSet(object.bid)) obj.bid = Bid.fromJSON(object.bid);
-    if (isSet(object.escrowAccount)) obj.escrowAccount = Account.fromJSON(object.escrowAccount);
-    return obj;
+    return {
+      bid: isSet(object.bid) ? Bid.fromJSON(object.bid) : undefined,
+      escrowAccount: isSet(object.escrowAccount) ? Account.fromJSON(object.escrowAccount) : undefined
+    };
   },
   toJSON(message: QueryBidResponse): unknown {
     const obj: any = {};
@@ -635,12 +617,8 @@ export const QueryBidResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryBidResponse>, I>>(object: I): QueryBidResponse {
     const message = createBaseQueryBidResponse();
-    if (object.bid !== undefined && object.bid !== null) {
-      message.bid = Bid.fromPartial(object.bid);
-    }
-    if (object.escrowAccount !== undefined && object.escrowAccount !== null) {
-      message.escrowAccount = Account.fromPartial(object.escrowAccount);
-    }
+    message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : Bid.fromPartial({});
+    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : Account.fromPartial({});
     return message;
   },
   fromSDK(object: QueryBidResponseSDKType): QueryBidResponse {
@@ -693,10 +671,10 @@ export const QueryLeasesRequest = {
     return message;
   },
   fromJSON(object: any): QueryLeasesRequest {
-    const obj = createBaseQueryLeasesRequest();
-    if (isSet(object.filters)) obj.filters = LeaseFilters.fromJSON(object.filters);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      filters: isSet(object.filters) ? LeaseFilters.fromJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryLeasesRequest): unknown {
     const obj: any = {};
@@ -706,12 +684,8 @@ export const QueryLeasesRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryLeasesRequest>, I>>(object: I): QueryLeasesRequest {
     const message = createBaseQueryLeasesRequest();
-    if (object.filters !== undefined && object.filters !== null) {
-      message.filters = LeaseFilters.fromPartial(object.filters);
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : LeaseFilters.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryLeasesRequestSDKType): QueryLeasesRequest {
@@ -764,10 +738,10 @@ export const QueryLeasesResponse = {
     return message;
   },
   fromJSON(object: any): QueryLeasesResponse {
-    const obj = createBaseQueryLeasesResponse();
-    if (Array.isArray(object?.leases)) object.leases.map((e: any) => QueryLeaseResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryLeasesResponse): unknown {
     const obj: any = {};
@@ -782,9 +756,7 @@ export const QueryLeasesResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryLeasesResponse>, I>>(object: I): QueryLeasesResponse {
     const message = createBaseQueryLeasesResponse();
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryLeasesResponseSDKType): QueryLeasesResponse {
@@ -834,9 +806,9 @@ export const QueryLeaseRequest = {
     return message;
   },
   fromJSON(object: any): QueryLeaseRequest {
-    const obj = createBaseQueryLeaseRequest();
-    if (isSet(object.id)) obj.id = LeaseID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? LeaseID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: QueryLeaseRequest): unknown {
     const obj: any = {};
@@ -845,9 +817,7 @@ export const QueryLeaseRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryLeaseRequest>, I>>(object: I): QueryLeaseRequest {
     const message = createBaseQueryLeaseRequest();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = LeaseID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : LeaseID.fromPartial({});
     return message;
   },
   fromSDK(object: QueryLeaseRequestSDKType): QueryLeaseRequest {
@@ -898,10 +868,10 @@ export const QueryLeaseResponse = {
     return message;
   },
   fromJSON(object: any): QueryLeaseResponse {
-    const obj = createBaseQueryLeaseResponse();
-    if (isSet(object.lease)) obj.lease = Lease.fromJSON(object.lease);
-    if (isSet(object.escrowPayment)) obj.escrowPayment = FractionalPayment.fromJSON(object.escrowPayment);
-    return obj;
+    return {
+      lease: isSet(object.lease) ? Lease.fromJSON(object.lease) : undefined,
+      escrowPayment: isSet(object.escrowPayment) ? FractionalPayment.fromJSON(object.escrowPayment) : undefined
+    };
   },
   toJSON(message: QueryLeaseResponse): unknown {
     const obj: any = {};
@@ -911,12 +881,8 @@ export const QueryLeaseResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryLeaseResponse>, I>>(object: I): QueryLeaseResponse {
     const message = createBaseQueryLeaseResponse();
-    if (object.lease !== undefined && object.lease !== null) {
-      message.lease = Lease.fromPartial(object.lease);
-    }
-    if (object.escrowPayment !== undefined && object.escrowPayment !== null) {
-      message.escrowPayment = FractionalPayment.fromPartial(object.escrowPayment);
-    }
+    message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : Lease.fromPartial({});
+    message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : FractionalPayment.fromPartial({});
     return message;
   },
   fromSDK(object: QueryLeaseResponseSDKType): QueryLeaseResponse {

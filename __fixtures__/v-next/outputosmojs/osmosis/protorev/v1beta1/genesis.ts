@@ -156,19 +156,19 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.tokenPairArbRoutes)) object.tokenPairArbRoutes.map((e: any) => TokenPairArbRoutes.fromJSON(e));
-    if (Array.isArray(object?.baseDenoms)) object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e));
-    if (isSet(object.poolWeights)) obj.poolWeights = PoolWeights.fromJSON(object.poolWeights);
-    if (isSet(object.daysSinceModuleGenesis)) obj.daysSinceModuleGenesis = BigInt(object.daysSinceModuleGenesis.toString());
-    if (Array.isArray(object?.developerFees)) object.developerFees.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.latestBlockHeight)) obj.latestBlockHeight = BigInt(object.latestBlockHeight.toString());
-    if (isSet(object.developerAddress)) obj.developerAddress = String(object.developerAddress);
-    if (isSet(object.maxPoolPointsPerBlock)) obj.maxPoolPointsPerBlock = BigInt(object.maxPoolPointsPerBlock.toString());
-    if (isSet(object.maxPoolPointsPerTx)) obj.maxPoolPointsPerTx = BigInt(object.maxPoolPointsPerTx.toString());
-    if (isSet(object.pointCountForBlock)) obj.pointCountForBlock = BigInt(object.pointCountForBlock.toString());
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      tokenPairArbRoutes: Array.isArray(object?.tokenPairArbRoutes) ? object.tokenPairArbRoutes.map((e: any) => TokenPairArbRoutes.fromJSON(e)) : [],
+      baseDenoms: Array.isArray(object?.baseDenoms) ? object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e)) : [],
+      poolWeights: isSet(object.poolWeights) ? PoolWeights.fromJSON(object.poolWeights) : undefined,
+      daysSinceModuleGenesis: isSet(object.daysSinceModuleGenesis) ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt(0),
+      developerFees: Array.isArray(object?.developerFees) ? object.developerFees.map((e: any) => Coin.fromJSON(e)) : [],
+      latestBlockHeight: isSet(object.latestBlockHeight) ? BigInt(object.latestBlockHeight.toString()) : BigInt(0),
+      developerAddress: isSet(object.developerAddress) ? String(object.developerAddress) : "",
+      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0),
+      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0),
+      pointCountForBlock: isSet(object.pointCountForBlock) ? BigInt(object.pointCountForBlock.toString()) : BigInt(0)
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -199,31 +199,17 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.tokenPairArbRoutes = object.tokenPairArbRoutes?.map(e => TokenPairArbRoutes.fromPartial(e)) || [];
     message.baseDenoms = object.baseDenoms?.map(e => BaseDenom.fromPartial(e)) || [];
-    if (object.poolWeights !== undefined && object.poolWeights !== null) {
-      message.poolWeights = PoolWeights.fromPartial(object.poolWeights);
-    }
-    if (object.daysSinceModuleGenesis !== undefined && object.daysSinceModuleGenesis !== null) {
-      message.daysSinceModuleGenesis = BigInt(object.daysSinceModuleGenesis.toString());
-    }
+    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : PoolWeights.fromPartial({});
+    message.daysSinceModuleGenesis = object.daysSinceModuleGenesis !== undefined && object.daysSinceModuleGenesis !== null ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt(0);
     message.developerFees = object.developerFees?.map(e => Coin.fromPartial(e)) || [];
-    if (object.latestBlockHeight !== undefined && object.latestBlockHeight !== null) {
-      message.latestBlockHeight = BigInt(object.latestBlockHeight.toString());
-    }
+    message.latestBlockHeight = object.latestBlockHeight !== undefined && object.latestBlockHeight !== null ? BigInt(object.latestBlockHeight.toString()) : BigInt(0);
     message.developerAddress = object.developerAddress ?? "";
-    if (object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null) {
-      message.maxPoolPointsPerBlock = BigInt(object.maxPoolPointsPerBlock.toString());
-    }
-    if (object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null) {
-      message.maxPoolPointsPerTx = BigInt(object.maxPoolPointsPerTx.toString());
-    }
-    if (object.pointCountForBlock !== undefined && object.pointCountForBlock !== null) {
-      message.pointCountForBlock = BigInt(object.pointCountForBlock.toString());
-    }
+    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
+    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
+    message.pointCountForBlock = object.pointCountForBlock !== undefined && object.pointCountForBlock !== null ? BigInt(object.pointCountForBlock.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

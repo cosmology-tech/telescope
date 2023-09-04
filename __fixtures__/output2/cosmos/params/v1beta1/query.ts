@@ -53,10 +53,10 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(object: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
-    if (isSet(object.key)) obj.key = String(object.key);
-    return obj;
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : ""
+    };
   },
   toJSON(message: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -101,9 +101,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.param)) obj.param = ParamChange.fromJSON(object.param);
-    return obj;
+    return {
+      param: isSet(object.param) ? ParamChange.fromJSON(object.param) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -112,9 +112,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.param !== undefined && object.param !== null) {
-      message.param = ParamChange.fromPartial(object.param);
-    }
+    message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : ParamChange.fromPartial({});
     return message;
   }
 };

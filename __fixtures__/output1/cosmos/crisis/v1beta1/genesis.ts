@@ -44,9 +44,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.constantFee)) obj.constantFee = Coin.fromJSON(object.constantFee);
-    return obj;
+    return {
+      constantFee: isSet(object.constantFee) ? Coin.fromJSON(object.constantFee) : undefined
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -55,9 +55,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.constantFee !== undefined && object.constantFee !== null) {
-      message.constantFee = Coin.fromPartial(object.constantFee);
-    }
+    message.constantFee = object.constantFee !== undefined && object.constantFee !== null ? Coin.fromPartial(object.constantFee) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

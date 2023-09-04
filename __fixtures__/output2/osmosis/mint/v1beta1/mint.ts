@@ -111,9 +111,9 @@ export const Minter = {
     return message;
   },
   fromJSON(object: any): Minter {
-    const obj = createBaseMinter();
-    if (isSet(object.epochProvisions)) obj.epochProvisions = String(object.epochProvisions);
-    return obj;
+    return {
+      epochProvisions: isSet(object.epochProvisions) ? String(object.epochProvisions) : ""
+    };
   },
   toJSON(message: Minter): unknown {
     const obj: any = {};
@@ -163,10 +163,10 @@ export const WeightedAddress = {
     return message;
   },
   fromJSON(object: any): WeightedAddress {
-    const obj = createBaseWeightedAddress();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   },
   toJSON(message: WeightedAddress): unknown {
     const obj: any = {};
@@ -232,12 +232,12 @@ export const DistributionProportions = {
     return message;
   },
   fromJSON(object: any): DistributionProportions {
-    const obj = createBaseDistributionProportions();
-    if (isSet(object.staking)) obj.staking = String(object.staking);
-    if (isSet(object.poolIncentives)) obj.poolIncentives = String(object.poolIncentives);
-    if (isSet(object.developerRewards)) obj.developerRewards = String(object.developerRewards);
-    if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
-    return obj;
+    return {
+      staking: isSet(object.staking) ? String(object.staking) : "",
+      poolIncentives: isSet(object.poolIncentives) ? String(object.poolIncentives) : "",
+      developerRewards: isSet(object.developerRewards) ? String(object.developerRewards) : "",
+      communityPool: isSet(object.communityPool) ? String(object.communityPool) : ""
+    };
   },
   toJSON(message: DistributionProportions): unknown {
     const obj: any = {};
@@ -335,16 +335,16 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
-    if (isSet(object.genesisEpochProvisions)) obj.genesisEpochProvisions = String(object.genesisEpochProvisions);
-    if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
-    if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = Long.fromValue(object.reductionPeriodInEpochs);
-    if (isSet(object.reductionFactor)) obj.reductionFactor = String(object.reductionFactor);
-    if (isSet(object.distributionProportions)) obj.distributionProportions = DistributionProportions.fromJSON(object.distributionProportions);
-    if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
-    if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = Long.fromValue(object.mintingRewardsDistributionStartEpoch);
-    return obj;
+    return {
+      mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
+      genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
+      epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
+      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? Long.fromValue(object.reductionPeriodInEpochs) : Long.ZERO,
+      reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
+      distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
+      weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
+      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -367,17 +367,11 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    if (object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null) {
-      message.reductionPeriodInEpochs = Long.fromValue(object.reductionPeriodInEpochs);
-    }
+    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? Long.fromValue(object.reductionPeriodInEpochs) : Long.ZERO;
     message.reductionFactor = object.reductionFactor ?? "";
-    if (object.distributionProportions !== undefined && object.distributionProportions !== null) {
-      message.distributionProportions = DistributionProportions.fromPartial(object.distributionProportions);
-    }
+    message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : DistributionProportions.fromPartial({});
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    if (object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null) {
-      message.mintingRewardsDistributionStartEpoch = Long.fromValue(object.mintingRewardsDistributionStartEpoch);
-    }
+    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO;
     return message;
   }
 };

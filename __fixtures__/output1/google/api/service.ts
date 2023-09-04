@@ -393,33 +393,33 @@ export const Service = {
     return message;
   },
   fromJSON(object: any): Service {
-    const obj = createBaseService();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.apis)) object.apis.map((e: any) => Api.fromJSON(e));
-    if (Array.isArray(object?.types)) object.types.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.enums)) object.enums.map((e: any) => Enum.fromJSON(e));
-    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
-    if (isSet(object.backend)) obj.backend = Backend.fromJSON(object.backend);
-    if (isSet(object.http)) obj.http = Http.fromJSON(object.http);
-    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
-    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
-    if (isSet(object.context)) obj.context = Context.fromJSON(object.context);
-    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    if (isSet(object.control)) obj.control = Control.fromJSON(object.control);
-    if (Array.isArray(object?.logs)) object.logs.map((e: any) => LogDescriptor.fromJSON(e));
-    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => MetricDescriptor.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
-    if (isSet(object.billing)) obj.billing = Billing.fromJSON(object.billing);
-    if (isSet(object.logging)) obj.logging = Logging.fromJSON(object.logging);
-    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
-    if (isSet(object.systemParameters)) obj.systemParameters = SystemParameters.fromJSON(object.systemParameters);
-    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
-    if (isSet(object.configVersion)) obj.configVersion = UInt32Value.fromJSON(object.configVersion);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromJSON(e)) : [],
+      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromJSON(e)) : [],
+      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromJSON(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromJSON(object.documentation) : undefined,
+      backend: isSet(object.backend) ? Backend.fromJSON(object.backend) : undefined,
+      http: isSet(object.http) ? Http.fromJSON(object.http) : undefined,
+      quota: isSet(object.quota) ? Quota.fromJSON(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromJSON(object.authentication) : undefined,
+      context: isSet(object.context) ? Context.fromJSON(object.context) : undefined,
+      usage: isSet(object.usage) ? Usage.fromJSON(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : [],
+      control: isSet(object.control) ? Control.fromJSON(object.control) : undefined,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromJSON(e)) : [],
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromJSON(e)) : [],
+      monitoredResources: Array.isArray(object?.monitoredResources) ? object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e)) : [],
+      billing: isSet(object.billing) ? Billing.fromJSON(object.billing) : undefined,
+      logging: isSet(object.logging) ? Logging.fromJSON(object.logging) : undefined,
+      monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined,
+      systemParameters: isSet(object.systemParameters) ? SystemParameters.fromJSON(object.systemParameters) : undefined,
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
+      configVersion: isSet(object.configVersion) ? UInt32Value.fromJSON(object.configVersion) : undefined
+    };
   },
   toJSON(message: Service): unknown {
     const obj: any = {};
@@ -487,52 +487,24 @@ export const Service = {
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     message.types = object.types?.map(e => Type.fromPartial(e)) || [];
     message.enums = object.enums?.map(e => Enum.fromPartial(e)) || [];
-    if (object.documentation !== undefined && object.documentation !== null) {
-      message.documentation = Documentation.fromPartial(object.documentation);
-    }
-    if (object.backend !== undefined && object.backend !== null) {
-      message.backend = Backend.fromPartial(object.backend);
-    }
-    if (object.http !== undefined && object.http !== null) {
-      message.http = Http.fromPartial(object.http);
-    }
-    if (object.quota !== undefined && object.quota !== null) {
-      message.quota = Quota.fromPartial(object.quota);
-    }
-    if (object.authentication !== undefined && object.authentication !== null) {
-      message.authentication = Authentication.fromPartial(object.authentication);
-    }
-    if (object.context !== undefined && object.context !== null) {
-      message.context = Context.fromPartial(object.context);
-    }
-    if (object.usage !== undefined && object.usage !== null) {
-      message.usage = Usage.fromPartial(object.usage);
-    }
+    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : Documentation.fromPartial({});
+    message.backend = object.backend !== undefined && object.backend !== null ? Backend.fromPartial(object.backend) : Backend.fromPartial({});
+    message.http = object.http !== undefined && object.http !== null ? Http.fromPartial(object.http) : Http.fromPartial({});
+    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : Quota.fromPartial({});
+    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : Authentication.fromPartial({});
+    message.context = object.context !== undefined && object.context !== null ? Context.fromPartial(object.context) : Context.fromPartial({});
+    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : Usage.fromPartial({});
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
-    if (object.control !== undefined && object.control !== null) {
-      message.control = Control.fromPartial(object.control);
-    }
+    message.control = object.control !== undefined && object.control !== null ? Control.fromPartial(object.control) : Control.fromPartial({});
     message.logs = object.logs?.map(e => LogDescriptor.fromPartial(e)) || [];
     message.metrics = object.metrics?.map(e => MetricDescriptor.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    if (object.billing !== undefined && object.billing !== null) {
-      message.billing = Billing.fromPartial(object.billing);
-    }
-    if (object.logging !== undefined && object.logging !== null) {
-      message.logging = Logging.fromPartial(object.logging);
-    }
-    if (object.monitoring !== undefined && object.monitoring !== null) {
-      message.monitoring = Monitoring.fromPartial(object.monitoring);
-    }
-    if (object.systemParameters !== undefined && object.systemParameters !== null) {
-      message.systemParameters = SystemParameters.fromPartial(object.systemParameters);
-    }
-    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
-      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
-    }
-    if (object.configVersion !== undefined && object.configVersion !== null) {
-      message.configVersion = UInt32Value.fromPartial(object.configVersion);
-    }
+    message.billing = object.billing !== undefined && object.billing !== null ? Billing.fromPartial(object.billing) : Billing.fromPartial({});
+    message.logging = object.logging !== undefined && object.logging !== null ? Logging.fromPartial(object.logging) : Logging.fromPartial({});
+    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : Monitoring.fromPartial({});
+    message.systemParameters = object.systemParameters !== undefined && object.systemParameters !== null ? SystemParameters.fromPartial(object.systemParameters) : SystemParameters.fromPartial({});
+    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
+    message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : UInt32Value.fromPartial({});
     return message;
   },
   fromSDK(object: ServiceSDKType): Service {

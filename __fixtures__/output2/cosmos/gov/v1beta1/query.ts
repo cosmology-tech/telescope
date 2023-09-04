@@ -142,9 +142,9 @@ export const QueryProposalRequest = {
     return message;
   },
   fromJSON(object: any): QueryProposalRequest {
-    const obj = createBaseQueryProposalRequest();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+    };
   },
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
@@ -153,9 +153,7 @@ export const QueryProposalRequest = {
   },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 };
@@ -189,9 +187,9 @@ export const QueryProposalResponse = {
     return message;
   },
   fromJSON(object: any): QueryProposalResponse {
-    const obj = createBaseQueryProposalResponse();
-    if (isSet(object.proposal)) obj.proposal = Proposal.fromJSON(object.proposal);
-    return obj;
+    return {
+      proposal: isSet(object.proposal) ? Proposal.fromJSON(object.proposal) : undefined
+    };
   },
   toJSON(message: QueryProposalResponse): unknown {
     const obj: any = {};
@@ -200,9 +198,7 @@ export const QueryProposalResponse = {
   },
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
-    if (object.proposal !== undefined && object.proposal !== null) {
-      message.proposal = Proposal.fromPartial(object.proposal);
-    }
+    message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : Proposal.fromPartial({});
     return message;
   }
 };
@@ -257,12 +253,12 @@ export const QueryProposalsRequest = {
     return message;
   },
   fromJSON(object: any): QueryProposalsRequest {
-    const obj = createBaseQueryProposalsRequest();
-    if (isSet(object.proposalStatus)) obj.proposalStatus = proposalStatusFromJSON(object.proposalStatus);
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      proposalStatus: isSet(object.proposalStatus) ? proposalStatusFromJSON(object.proposalStatus) : -1,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryProposalsRequest): unknown {
     const obj: any = {};
@@ -277,9 +273,7 @@ export const QueryProposalsRequest = {
     message.proposalStatus = object.proposalStatus ?? 0;
     message.voter = object.voter ?? "";
     message.depositor = object.depositor ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -320,10 +314,10 @@ export const QueryProposalsResponse = {
     return message;
   },
   fromJSON(object: any): QueryProposalsResponse {
-    const obj = createBaseQueryProposalsResponse();
-    if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryProposalsResponse): unknown {
     const obj: any = {};
@@ -338,9 +332,7 @@ export const QueryProposalsResponse = {
   fromPartial(object: DeepPartial<QueryProposalsResponse>): QueryProposalsResponse {
     const message = createBaseQueryProposalsResponse();
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -381,10 +373,10 @@ export const QueryVoteRequest = {
     return message;
   },
   fromJSON(object: any): QueryVoteRequest {
-    const obj = createBaseQueryVoteRequest();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : ""
+    };
   },
   toJSON(message: QueryVoteRequest): unknown {
     const obj: any = {};
@@ -394,9 +386,7 @@ export const QueryVoteRequest = {
   },
   fromPartial(object: DeepPartial<QueryVoteRequest>): QueryVoteRequest {
     const message = createBaseQueryVoteRequest();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
     return message;
   }
@@ -431,9 +421,9 @@ export const QueryVoteResponse = {
     return message;
   },
   fromJSON(object: any): QueryVoteResponse {
-    const obj = createBaseQueryVoteResponse();
-    if (isSet(object.vote)) obj.vote = Vote.fromJSON(object.vote);
-    return obj;
+    return {
+      vote: isSet(object.vote) ? Vote.fromJSON(object.vote) : undefined
+    };
   },
   toJSON(message: QueryVoteResponse): unknown {
     const obj: any = {};
@@ -442,9 +432,7 @@ export const QueryVoteResponse = {
   },
   fromPartial(object: DeepPartial<QueryVoteResponse>): QueryVoteResponse {
     const message = createBaseQueryVoteResponse();
-    if (object.vote !== undefined && object.vote !== null) {
-      message.vote = Vote.fromPartial(object.vote);
-    }
+    message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : Vote.fromPartial({});
     return message;
   }
 };
@@ -485,10 +473,10 @@ export const QueryVotesRequest = {
     return message;
   },
   fromJSON(object: any): QueryVotesRequest {
-    const obj = createBaseQueryVotesRequest();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryVotesRequest): unknown {
     const obj: any = {};
@@ -498,12 +486,8 @@ export const QueryVotesRequest = {
   },
   fromPartial(object: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     const message = createBaseQueryVotesRequest();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -544,10 +528,10 @@ export const QueryVotesResponse = {
     return message;
   },
   fromJSON(object: any): QueryVotesResponse {
-    const obj = createBaseQueryVotesResponse();
-    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryVotesResponse): unknown {
     const obj: any = {};
@@ -562,9 +546,7 @@ export const QueryVotesResponse = {
   fromPartial(object: DeepPartial<QueryVotesResponse>): QueryVotesResponse {
     const message = createBaseQueryVotesResponse();
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -598,9 +580,9 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(object: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    if (isSet(object.paramsType)) obj.paramsType = String(object.paramsType);
-    return obj;
+    return {
+      paramsType: isSet(object.paramsType) ? String(object.paramsType) : ""
+    };
   },
   toJSON(message: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -657,11 +639,11 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.votingParams)) obj.votingParams = VotingParams.fromJSON(object.votingParams);
-    if (isSet(object.depositParams)) obj.depositParams = DepositParams.fromJSON(object.depositParams);
-    if (isSet(object.tallyParams)) obj.tallyParams = TallyParams.fromJSON(object.tallyParams);
-    return obj;
+    return {
+      votingParams: isSet(object.votingParams) ? VotingParams.fromJSON(object.votingParams) : undefined,
+      depositParams: isSet(object.depositParams) ? DepositParams.fromJSON(object.depositParams) : undefined,
+      tallyParams: isSet(object.tallyParams) ? TallyParams.fromJSON(object.tallyParams) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -672,15 +654,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.votingParams !== undefined && object.votingParams !== null) {
-      message.votingParams = VotingParams.fromPartial(object.votingParams);
-    }
-    if (object.depositParams !== undefined && object.depositParams !== null) {
-      message.depositParams = DepositParams.fromPartial(object.depositParams);
-    }
-    if (object.tallyParams !== undefined && object.tallyParams !== null) {
-      message.tallyParams = TallyParams.fromPartial(object.tallyParams);
-    }
+    message.votingParams = object.votingParams !== undefined && object.votingParams !== null ? VotingParams.fromPartial(object.votingParams) : VotingParams.fromPartial({});
+    message.depositParams = object.depositParams !== undefined && object.depositParams !== null ? DepositParams.fromPartial(object.depositParams) : DepositParams.fromPartial({});
+    message.tallyParams = object.tallyParams !== undefined && object.tallyParams !== null ? TallyParams.fromPartial(object.tallyParams) : TallyParams.fromPartial({});
     return message;
   }
 };
@@ -721,10 +697,10 @@ export const QueryDepositRequest = {
     return message;
   },
   fromJSON(object: any): QueryDepositRequest {
-    const obj = createBaseQueryDepositRequest();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   },
   toJSON(message: QueryDepositRequest): unknown {
     const obj: any = {};
@@ -734,9 +710,7 @@ export const QueryDepositRequest = {
   },
   fromPartial(object: DeepPartial<QueryDepositRequest>): QueryDepositRequest {
     const message = createBaseQueryDepositRequest();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.depositor = object.depositor ?? "";
     return message;
   }
@@ -771,9 +745,9 @@ export const QueryDepositResponse = {
     return message;
   },
   fromJSON(object: any): QueryDepositResponse {
-    const obj = createBaseQueryDepositResponse();
-    if (isSet(object.deposit)) obj.deposit = Deposit.fromJSON(object.deposit);
-    return obj;
+    return {
+      deposit: isSet(object.deposit) ? Deposit.fromJSON(object.deposit) : undefined
+    };
   },
   toJSON(message: QueryDepositResponse): unknown {
     const obj: any = {};
@@ -782,9 +756,7 @@ export const QueryDepositResponse = {
   },
   fromPartial(object: DeepPartial<QueryDepositResponse>): QueryDepositResponse {
     const message = createBaseQueryDepositResponse();
-    if (object.deposit !== undefined && object.deposit !== null) {
-      message.deposit = Deposit.fromPartial(object.deposit);
-    }
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Deposit.fromPartial(object.deposit) : Deposit.fromPartial({});
     return message;
   }
 };
@@ -825,10 +797,10 @@ export const QueryDepositsRequest = {
     return message;
   },
   fromJSON(object: any): QueryDepositsRequest {
-    const obj = createBaseQueryDepositsRequest();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDepositsRequest): unknown {
     const obj: any = {};
@@ -838,12 +810,8 @@ export const QueryDepositsRequest = {
   },
   fromPartial(object: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     const message = createBaseQueryDepositsRequest();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -884,10 +852,10 @@ export const QueryDepositsResponse = {
     return message;
   },
   fromJSON(object: any): QueryDepositsResponse {
-    const obj = createBaseQueryDepositsResponse();
-    if (Array.isArray(object?.deposits)) object.deposits.map((e: any) => Deposit.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDepositsResponse): unknown {
     const obj: any = {};
@@ -902,9 +870,7 @@ export const QueryDepositsResponse = {
   fromPartial(object: DeepPartial<QueryDepositsResponse>): QueryDepositsResponse {
     const message = createBaseQueryDepositsResponse();
     message.deposits = object.deposits?.map(e => Deposit.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -938,9 +904,9 @@ export const QueryTallyResultRequest = {
     return message;
   },
   fromJSON(object: any): QueryTallyResultRequest {
-    const obj = createBaseQueryTallyResultRequest();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+    };
   },
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
@@ -949,9 +915,7 @@ export const QueryTallyResultRequest = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 };
@@ -985,9 +949,9 @@ export const QueryTallyResultResponse = {
     return message;
   },
   fromJSON(object: any): QueryTallyResultResponse {
-    const obj = createBaseQueryTallyResultResponse();
-    if (isSet(object.tally)) obj.tally = TallyResult.fromJSON(object.tally);
-    return obj;
+    return {
+      tally: isSet(object.tally) ? TallyResult.fromJSON(object.tally) : undefined
+    };
   },
   toJSON(message: QueryTallyResultResponse): unknown {
     const obj: any = {};
@@ -996,9 +960,7 @@ export const QueryTallyResultResponse = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     const message = createBaseQueryTallyResultResponse();
-    if (object.tally !== undefined && object.tally !== null) {
-      message.tally = TallyResult.fromPartial(object.tally);
-    }
+    message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : TallyResult.fromPartial({});
     return message;
   }
 };

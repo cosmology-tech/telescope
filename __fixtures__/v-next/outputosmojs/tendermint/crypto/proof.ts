@@ -113,12 +113,12 @@ export const Proof = {
     return message;
   },
   fromJSON(object: any): Proof {
-    const obj = createBaseProof();
-    if (isSet(object.total)) obj.total = BigInt(object.total.toString());
-    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    if (isSet(object.leafHash)) obj.leafHash = bytesFromBase64(object.leafHash);
-    if (Array.isArray(object?.aunts)) object.aunts.map((e: any) => bytesFromBase64(e));
-    return obj;
+    return {
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt(0),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
+      leafHash: isSet(object.leafHash) ? bytesFromBase64(object.leafHash) : new Uint8Array(),
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
   toJSON(message: Proof): unknown {
     const obj: any = {};
@@ -134,12 +134,8 @@ export const Proof = {
   },
   fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
-    if (object.total !== undefined && object.total !== null) {
-      message.total = BigInt(object.total.toString());
-    }
-    if (object.index !== undefined && object.index !== null) {
-      message.index = BigInt(object.index.toString());
-    }
+    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt(0);
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
@@ -246,10 +242,10 @@ export const ValueOp = {
     return message;
   },
   fromJSON(object: any): ValueOp {
-    const obj = createBaseValueOp();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.proof)) obj.proof = Proof.fromJSON(object.proof);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined
+    };
   },
   toJSON(message: ValueOp): unknown {
     const obj: any = {};
@@ -260,9 +256,7 @@ export const ValueOp = {
   fromPartial(object: DeepPartial<ValueOp>): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? new Uint8Array();
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromPartial(object.proof);
-    }
+    message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : Proof.fromPartial({});
     return message;
   },
   fromSDK(object: ValueOpSDKType): ValueOp {
@@ -356,11 +350,11 @@ export const DominoOp = {
     return message;
   },
   fromJSON(object: any): DominoOp {
-    const obj = createBaseDominoOp();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.input)) obj.input = String(object.input);
-    if (isSet(object.output)) obj.output = String(object.output);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      input: isSet(object.input) ? String(object.input) : "",
+      output: isSet(object.output) ? String(object.output) : ""
+    };
   },
   toJSON(message: DominoOp): unknown {
     const obj: any = {};
@@ -472,11 +466,11 @@ export const ProofOp = {
     return message;
   },
   fromJSON(object: any): ProofOp {
-    const obj = createBaseProofOp();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
   toJSON(message: ProofOp): unknown {
     const obj: any = {};
@@ -574,9 +568,9 @@ export const ProofOps = {
     return message;
   },
   fromJSON(object: any): ProofOps {
-    const obj = createBaseProofOps();
-    if (Array.isArray(object?.ops)) object.ops.map((e: any) => ProofOp.fromJSON(e));
-    return obj;
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromJSON(e)) : []
+    };
   },
   toJSON(message: ProofOps): unknown {
     const obj: any = {};

@@ -119,9 +119,9 @@ export const EventCreateGroup = {
     return message;
   },
   fromJSON(object: any): EventCreateGroup {
-    const obj = createBaseEventCreateGroup();
-    if (isSet(object.groupId)) obj.groupId = Long.fromValue(object.groupId);
-    return obj;
+    return {
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
+    };
   },
   toJSON(message: EventCreateGroup): unknown {
     const obj: any = {};
@@ -130,9 +130,7 @@ export const EventCreateGroup = {
   },
   fromPartial(object: DeepPartial<EventCreateGroup>): EventCreateGroup {
     const message = createBaseEventCreateGroup();
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = Long.fromValue(object.groupId);
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   },
   fromSDK(object: EventCreateGroupSDKType): EventCreateGroup {
@@ -176,9 +174,9 @@ export const EventUpdateGroup = {
     return message;
   },
   fromJSON(object: any): EventUpdateGroup {
-    const obj = createBaseEventUpdateGroup();
-    if (isSet(object.groupId)) obj.groupId = Long.fromValue(object.groupId);
-    return obj;
+    return {
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
+    };
   },
   toJSON(message: EventUpdateGroup): unknown {
     const obj: any = {};
@@ -187,9 +185,7 @@ export const EventUpdateGroup = {
   },
   fromPartial(object: DeepPartial<EventUpdateGroup>): EventUpdateGroup {
     const message = createBaseEventUpdateGroup();
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = Long.fromValue(object.groupId);
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   },
   fromSDK(object: EventUpdateGroupSDKType): EventUpdateGroup {
@@ -233,9 +229,9 @@ export const EventCreateGroupPolicy = {
     return message;
   },
   fromJSON(object: any): EventCreateGroupPolicy {
-    const obj = createBaseEventCreateGroupPolicy();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: EventCreateGroupPolicy): unknown {
     const obj: any = {};
@@ -288,9 +284,9 @@ export const EventUpdateGroupPolicy = {
     return message;
   },
   fromJSON(object: any): EventUpdateGroupPolicy {
-    const obj = createBaseEventUpdateGroupPolicy();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: EventUpdateGroupPolicy): unknown {
     const obj: any = {};
@@ -343,9 +339,9 @@ export const EventSubmitProposal = {
     return message;
   },
   fromJSON(object: any): EventSubmitProposal {
-    const obj = createBaseEventSubmitProposal();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+    };
   },
   toJSON(message: EventSubmitProposal): unknown {
     const obj: any = {};
@@ -354,9 +350,7 @@ export const EventSubmitProposal = {
   },
   fromPartial(object: DeepPartial<EventSubmitProposal>): EventSubmitProposal {
     const message = createBaseEventSubmitProposal();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   },
   fromSDK(object: EventSubmitProposalSDKType): EventSubmitProposal {
@@ -400,9 +394,9 @@ export const EventWithdrawProposal = {
     return message;
   },
   fromJSON(object: any): EventWithdrawProposal {
-    const obj = createBaseEventWithdrawProposal();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+    };
   },
   toJSON(message: EventWithdrawProposal): unknown {
     const obj: any = {};
@@ -411,9 +405,7 @@ export const EventWithdrawProposal = {
   },
   fromPartial(object: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal {
     const message = createBaseEventWithdrawProposal();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   },
   fromSDK(object: EventWithdrawProposalSDKType): EventWithdrawProposal {
@@ -457,9 +449,9 @@ export const EventVote = {
     return message;
   },
   fromJSON(object: any): EventVote {
-    const obj = createBaseEventVote();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+    };
   },
   toJSON(message: EventVote): unknown {
     const obj: any = {};
@@ -468,9 +460,7 @@ export const EventVote = {
   },
   fromPartial(object: DeepPartial<EventVote>): EventVote {
     const message = createBaseEventVote();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   },
   fromSDK(object: EventVoteSDKType): EventVote {
@@ -521,10 +511,10 @@ export const EventExec = {
     return message;
   },
   fromJSON(object: any): EventExec {
-    const obj = createBaseEventExec();
-    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
-    if (isSet(object.result)) obj.result = proposalExecutorResultFromJSON(object.result);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
+    };
   },
   toJSON(message: EventExec): unknown {
     const obj: any = {};
@@ -534,9 +524,7 @@ export const EventExec = {
   },
   fromPartial(object: DeepPartial<EventExec>): EventExec {
     const message = createBaseEventExec();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Long.fromValue(object.proposalId);
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.result = object.result ?? 0;
     return message;
   },
@@ -590,10 +578,10 @@ export const EventLeaveGroup = {
     return message;
   },
   fromJSON(object: any): EventLeaveGroup {
-    const obj = createBaseEventLeaveGroup();
-    if (isSet(object.groupId)) obj.groupId = Long.fromValue(object.groupId);
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: EventLeaveGroup): unknown {
     const obj: any = {};
@@ -603,9 +591,7 @@ export const EventLeaveGroup = {
   },
   fromPartial(object: DeepPartial<EventLeaveGroup>): EventLeaveGroup {
     const message = createBaseEventLeaveGroup();
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = Long.fromValue(object.groupId);
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.address = object.address ?? "";
     return message;
   },

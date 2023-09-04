@@ -173,10 +173,10 @@ export const QueryUserPositionsRequest = {
     return message;
   },
   fromJSON(object: any): QueryUserPositionsRequest {
-    const obj = createBaseQueryUserPositionsRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryUserPositionsRequest): unknown {
     const obj: any = {};
@@ -187,9 +187,7 @@ export const QueryUserPositionsRequest = {
   fromPartial(object: DeepPartial<QueryUserPositionsRequest>): QueryUserPositionsRequest {
     const message = createBaseQueryUserPositionsRequest();
     message.address = object.address ?? "";
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryUserPositionsRequestSDKType): QueryUserPositionsRequest {
@@ -275,9 +273,9 @@ export const QueryUserPositionsResponse = {
     return message;
   },
   fromJSON(object: any): QueryUserPositionsResponse {
-    const obj = createBaseQueryUserPositionsResponse();
-    if (Array.isArray(object?.positions)) object.positions.map((e: any) => PositionWithUnderlyingAssetBreakdown.fromJSON(e));
-    return obj;
+    return {
+      positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => PositionWithUnderlyingAssetBreakdown.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryUserPositionsResponse): unknown {
     const obj: any = {};
@@ -379,9 +377,9 @@ export const QueryPositionByIdRequest = {
     return message;
   },
   fromJSON(object: any): QueryPositionByIdRequest {
-    const obj = createBaseQueryPositionByIdRequest();
-    if (isSet(object.positionId)) obj.positionId = BigInt(object.positionId.toString());
-    return obj;
+    return {
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryPositionByIdRequest): unknown {
     const obj: any = {};
@@ -390,9 +388,7 @@ export const QueryPositionByIdRequest = {
   },
   fromPartial(object: DeepPartial<QueryPositionByIdRequest>): QueryPositionByIdRequest {
     const message = createBaseQueryPositionByIdRequest();
-    if (object.positionId !== undefined && object.positionId !== null) {
-      message.positionId = BigInt(object.positionId.toString());
-    }
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryPositionByIdRequestSDKType): QueryPositionByIdRequest {
@@ -473,9 +469,9 @@ export const QueryPositionByIdResponse = {
     return message;
   },
   fromJSON(object: any): QueryPositionByIdResponse {
-    const obj = createBaseQueryPositionByIdResponse();
-    if (isSet(object.position)) obj.position = PositionWithUnderlyingAssetBreakdown.fromJSON(object.position);
-    return obj;
+    return {
+      position: isSet(object.position) ? PositionWithUnderlyingAssetBreakdown.fromJSON(object.position) : undefined
+    };
   },
   toJSON(message: QueryPositionByIdResponse): unknown {
     const obj: any = {};
@@ -484,9 +480,7 @@ export const QueryPositionByIdResponse = {
   },
   fromPartial(object: DeepPartial<QueryPositionByIdResponse>): QueryPositionByIdResponse {
     const message = createBaseQueryPositionByIdResponse();
-    if (object.position !== undefined && object.position !== null) {
-      message.position = PositionWithUnderlyingAssetBreakdown.fromPartial(object.position);
-    }
+    message.position = object.position !== undefined && object.position !== null ? PositionWithUnderlyingAssetBreakdown.fromPartial(object.position) : PositionWithUnderlyingAssetBreakdown.fromPartial({});
     return message;
   },
   fromSDK(object: QueryPositionByIdResponseSDKType): QueryPositionByIdResponse {
@@ -567,9 +561,9 @@ export const QueryPoolsRequest = {
     return message;
   },
   fromJSON(object: any): QueryPoolsRequest {
-    const obj = createBaseQueryPoolsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryPoolsRequest): unknown {
     const obj: any = {};
@@ -578,9 +572,7 @@ export const QueryPoolsRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolsRequest>): QueryPoolsRequest {
     const message = createBaseQueryPoolsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryPoolsRequestSDKType): QueryPoolsRequest {
@@ -668,10 +660,10 @@ export const QueryPoolsResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolsResponse {
-    const obj = createBaseQueryPoolsResponse();
-    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryPoolsResponse): unknown {
     const obj: any = {};
@@ -686,9 +678,7 @@ export const QueryPoolsResponse = {
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
@@ -774,8 +764,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -855,9 +844,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -866,9 +855,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -956,10 +943,10 @@ export const TickLiquidityNet = {
     return message;
   },
   fromJSON(object: any): TickLiquidityNet {
-    const obj = createBaseTickLiquidityNet();
-    if (isSet(object.liquidityNet)) obj.liquidityNet = String(object.liquidityNet);
-    if (isSet(object.tickIndex)) obj.tickIndex = String(object.tickIndex);
-    return obj;
+    return {
+      liquidityNet: isSet(object.liquidityNet) ? String(object.liquidityNet) : "",
+      tickIndex: isSet(object.tickIndex) ? String(object.tickIndex) : ""
+    };
   },
   toJSON(message: TickLiquidityNet): unknown {
     const obj: any = {};
@@ -1070,11 +1057,11 @@ export const LiquidityDepthWithRange = {
     return message;
   },
   fromJSON(object: any): LiquidityDepthWithRange {
-    const obj = createBaseLiquidityDepthWithRange();
-    if (isSet(object.liquidityAmount)) obj.liquidityAmount = String(object.liquidityAmount);
-    if (isSet(object.lowerTick)) obj.lowerTick = String(object.lowerTick);
-    if (isSet(object.upperTick)) obj.upperTick = String(object.upperTick);
-    return obj;
+    return {
+      liquidityAmount: isSet(object.liquidityAmount) ? String(object.liquidityAmount) : "",
+      lowerTick: isSet(object.lowerTick) ? String(object.lowerTick) : "",
+      upperTick: isSet(object.upperTick) ? String(object.upperTick) : ""
+    };
   },
   toJSON(message: LiquidityDepthWithRange): unknown {
     const obj: any = {};
@@ -1199,12 +1186,12 @@ export const QueryLiquidityNetInDirectionRequest = {
     return message;
   },
   fromJSON(object: any): QueryLiquidityNetInDirectionRequest {
-    const obj = createBaseQueryLiquidityNetInDirectionRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
-    if (isSet(object.startTick)) obj.startTick = String(object.startTick);
-    if (isSet(object.boundTick)) obj.boundTick = String(object.boundTick);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
+      startTick: isSet(object.startTick) ? String(object.startTick) : undefined,
+      boundTick: isSet(object.boundTick) ? String(object.boundTick) : undefined
+    };
   },
   toJSON(message: QueryLiquidityNetInDirectionRequest): unknown {
     const obj: any = {};
@@ -1216,9 +1203,7 @@ export const QueryLiquidityNetInDirectionRequest = {
   },
   fromPartial(object: DeepPartial<QueryLiquidityNetInDirectionRequest>): QueryLiquidityNetInDirectionRequest {
     const message = createBaseQueryLiquidityNetInDirectionRequest();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.startTick = object.startTick ?? undefined;
     message.boundTick = object.boundTick ?? undefined;
@@ -1331,11 +1316,11 @@ export const QueryLiquidityNetInDirectionResponse = {
     return message;
   },
   fromJSON(object: any): QueryLiquidityNetInDirectionResponse {
-    const obj = createBaseQueryLiquidityNetInDirectionResponse();
-    if (Array.isArray(object?.liquidityDepths)) object.liquidityDepths.map((e: any) => TickLiquidityNet.fromJSON(e));
-    if (isSet(object.currentTick)) obj.currentTick = BigInt(object.currentTick.toString());
-    if (isSet(object.currentLiquidity)) obj.currentLiquidity = String(object.currentLiquidity);
-    return obj;
+    return {
+      liquidityDepths: Array.isArray(object?.liquidityDepths) ? object.liquidityDepths.map((e: any) => TickLiquidityNet.fromJSON(e)) : [],
+      currentTick: isSet(object.currentTick) ? BigInt(object.currentTick.toString()) : BigInt(0),
+      currentLiquidity: isSet(object.currentLiquidity) ? String(object.currentLiquidity) : ""
+    };
   },
   toJSON(message: QueryLiquidityNetInDirectionResponse): unknown {
     const obj: any = {};
@@ -1351,9 +1336,7 @@ export const QueryLiquidityNetInDirectionResponse = {
   fromPartial(object: DeepPartial<QueryLiquidityNetInDirectionResponse>): QueryLiquidityNetInDirectionResponse {
     const message = createBaseQueryLiquidityNetInDirectionResponse();
     message.liquidityDepths = object.liquidityDepths?.map(e => TickLiquidityNet.fromPartial(e)) || [];
-    if (object.currentTick !== undefined && object.currentTick !== null) {
-      message.currentTick = BigInt(object.currentTick.toString());
-    }
+    message.currentTick = object.currentTick !== undefined && object.currentTick !== null ? BigInt(object.currentTick.toString()) : BigInt(0);
     message.currentLiquidity = object.currentLiquidity ?? "";
     return message;
   },
@@ -1453,9 +1436,9 @@ export const QueryTotalLiquidityForRangeRequest = {
     return message;
   },
   fromJSON(object: any): QueryTotalLiquidityForRangeRequest {
-    const obj = createBaseQueryTotalLiquidityForRangeRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryTotalLiquidityForRangeRequest): unknown {
     const obj: any = {};
@@ -1464,9 +1447,7 @@ export const QueryTotalLiquidityForRangeRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalLiquidityForRangeRequest>): QueryTotalLiquidityForRangeRequest {
     const message = createBaseQueryTotalLiquidityForRangeRequest();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryTotalLiquidityForRangeRequestSDKType): QueryTotalLiquidityForRangeRequest {
@@ -1547,9 +1528,9 @@ export const QueryTotalLiquidityForRangeResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalLiquidityForRangeResponse {
-    const obj = createBaseQueryTotalLiquidityForRangeResponse();
-    if (Array.isArray(object?.liquidity)) object.liquidity.map((e: any) => LiquidityDepthWithRange.fromJSON(e));
-    return obj;
+    return {
+      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => LiquidityDepthWithRange.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryTotalLiquidityForRangeResponse): unknown {
     const obj: any = {};
@@ -1651,9 +1632,9 @@ export const QueryClaimableFeesRequest = {
     return message;
   },
   fromJSON(object: any): QueryClaimableFeesRequest {
-    const obj = createBaseQueryClaimableFeesRequest();
-    if (isSet(object.positionId)) obj.positionId = BigInt(object.positionId.toString());
-    return obj;
+    return {
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryClaimableFeesRequest): unknown {
     const obj: any = {};
@@ -1662,9 +1643,7 @@ export const QueryClaimableFeesRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimableFeesRequest>): QueryClaimableFeesRequest {
     const message = createBaseQueryClaimableFeesRequest();
-    if (object.positionId !== undefined && object.positionId !== null) {
-      message.positionId = BigInt(object.positionId.toString());
-    }
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryClaimableFeesRequestSDKType): QueryClaimableFeesRequest {
@@ -1745,9 +1724,9 @@ export const QueryClaimableFeesResponse = {
     return message;
   },
   fromJSON(object: any): QueryClaimableFeesResponse {
-    const obj = createBaseQueryClaimableFeesResponse();
-    if (Array.isArray(object?.claimableFees)) object.claimableFees.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      claimableFees: Array.isArray(object?.claimableFees) ? object.claimableFees.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryClaimableFeesResponse): unknown {
     const obj: any = {};

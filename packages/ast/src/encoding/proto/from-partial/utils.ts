@@ -34,72 +34,78 @@ const setNotUndefinedAndNotNull = (
     prop: string,
     value: t.Expression,
     defaultValue: t.Expression,
-): t.IfStatement => {
-    // return t.expressionStatement(
-    //     t.assignmentExpression(
-    //         '=',
-    //         t.memberExpression(
-    //             t.identifier('message'),
-    //             t.identifier(prop)
-    //         ),
-    //         t.conditionalExpression(
-    //             t.logicalExpression(
-    //                 '&&',
-    //                 t.binaryExpression(
-    //                     '!==',
-    //                     t.memberExpression(
-    //                         t.identifier('object'),
-    //                         t.identifier(prop)
-    //                     ),
-    //                     t.identifier('undefined')
-    //                 ),
-    //                 t.binaryExpression(
-    //                     '!==',
-    //                     t.memberExpression(
-    //                         t.identifier('object'),
-    //                         t.identifier(prop)
-    //                     ),
-    //                     t.nullLiteral()
-    //                 )
-    //             ),
-    //             value,
-    //             defaultValue
-    //         )
-    //     )
-    // );
+    args: FromPartialMethod
+): t.Statement => {
+    const strictNullCheckForPrototypeMethods = args.context.pluginValue('prototypes.strictNullCheckForPrototypeMethods');
 
-    return t.ifStatement(
-        t.logicalExpression(
-            '&&',
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('object'),
-                    t.identifier(prop)
-                ),
-                t.identifier('undefined')
-            ),
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('object'),
-                    t.identifier(prop)
-                ),
-                t.nullLiteral()
-            )
-        ),
-        t.blockStatement([
-            t.expressionStatement(
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    ),
-                    value
-                ))
-        ])
-    )
+    if(strictNullCheckForPrototypeMethods){
+      return t.ifStatement(
+          t.logicalExpression(
+              '&&',
+              t.binaryExpression(
+                  '!==',
+                  t.memberExpression(
+                      t.identifier('object'),
+                      t.identifier(prop)
+                  ),
+                  t.identifier('undefined')
+              ),
+              t.binaryExpression(
+                  '!==',
+                  t.memberExpression(
+                      t.identifier('object'),
+                      t.identifier(prop)
+                  ),
+                  t.nullLiteral()
+              )
+          ),
+          t.blockStatement([
+              t.expressionStatement(
+                  t.assignmentExpression(
+                      '=',
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(prop)
+                      ),
+                      value
+                  ))
+          ])
+      )
+    } else{
+      return t.expressionStatement(
+          t.assignmentExpression(
+              '=',
+              t.memberExpression(
+                  t.identifier('message'),
+                  t.identifier(prop)
+              ),
+              t.conditionalExpression(
+                  t.logicalExpression(
+                      '&&',
+                      t.binaryExpression(
+                          '!==',
+                          t.memberExpression(
+                              t.identifier('object'),
+                              t.identifier(prop)
+                          ),
+                          t.identifier('undefined')
+                      ),
+                      t.binaryExpression(
+                          '!==',
+                          t.memberExpression(
+                              t.identifier('object'),
+                              t.identifier(prop)
+                          ),
+                          t.nullLiteral()
+                      )
+                  ),
+                  value,
+                  defaultValue
+              )
+          )
+      );
+    }
+
 };
 
 export const fromPartial = {
@@ -170,7 +176,8 @@ export const fromPartial = {
                     t.identifier(prop)
                 )
             ),
-            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf),
+            args
         );
     },
 
@@ -215,6 +222,7 @@ export const fromPartial = {
                 ),
                 [t.objectExpression([])]
             ),
+            args
         );
     },
 

@@ -258,9 +258,9 @@ export const EnableServiceRequest = {
     return message;
   },
   fromJSON(object: any): EnableServiceRequest {
-    const obj = createBaseEnableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: EnableServiceRequest): unknown {
     const obj: any = {};
@@ -303,9 +303,9 @@ export const EnableServiceResponse = {
     return message;
   },
   fromJSON(object: any): EnableServiceResponse {
-    const obj = createBaseEnableServiceResponse();
-    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? Service.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: EnableServiceResponse): unknown {
     const obj: any = {};
@@ -314,9 +314,7 @@ export const EnableServiceResponse = {
   },
   fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = Service.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : Service.fromPartial({});
     return message;
   }
 };
@@ -364,11 +362,11 @@ export const DisableServiceRequest = {
     return message;
   },
   fromJSON(object: any): DisableServiceRequest {
-    const obj = createBaseDisableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.disableDependentServices)) obj.disableDependentServices = Boolean(object.disableDependentServices);
-    if (isSet(object.checkIfServiceHasUsage)) obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      disableDependentServices: isSet(object.disableDependentServices) ? Boolean(object.disableDependentServices) : false,
+      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : -1
+    };
   },
   toJSON(message: DisableServiceRequest): unknown {
     const obj: any = {};
@@ -415,9 +413,9 @@ export const DisableServiceResponse = {
     return message;
   },
   fromJSON(object: any): DisableServiceResponse {
-    const obj = createBaseDisableServiceResponse();
-    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? Service.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: DisableServiceResponse): unknown {
     const obj: any = {};
@@ -426,9 +424,7 @@ export const DisableServiceResponse = {
   },
   fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = Service.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : Service.fromPartial({});
     return message;
   }
 };
@@ -462,9 +458,9 @@ export const GetServiceRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetServiceRequest): unknown {
     const obj: any = {};
@@ -528,12 +524,12 @@ export const ListServicesRequest = {
     return message;
   },
   fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
   toJSON(message: ListServicesRequest): unknown {
     const obj: any = {};
@@ -589,10 +585,10 @@ export const ListServicesResponse = {
     return message;
   },
   fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServicesResponse): unknown {
     const obj: any = {};
@@ -648,10 +644,10 @@ export const BatchEnableServicesRequest = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesRequest {
-    const obj = createBaseBatchEnableServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.serviceIds)) object.serviceIds.map((e: any) => String(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      serviceIds: Array.isArray(object?.serviceIds) ? object.serviceIds.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: BatchEnableServicesRequest): unknown {
     const obj: any = {};
@@ -707,10 +703,10 @@ export const BatchEnableServicesResponse = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesResponse {
-    const obj = createBaseBatchEnableServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => Service.fromJSON(e));
-    if (Array.isArray(object?.failures)) object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : [],
+      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchEnableServicesResponse): unknown {
     const obj: any = {};
@@ -770,10 +766,10 @@ export const BatchEnableServicesResponse_EnableFailure = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesResponse_EnableFailure {
-    const obj = createBaseBatchEnableServicesResponse_EnableFailure();
-    if (isSet(object.serviceId)) obj.serviceId = String(object.serviceId);
-    if (isSet(object.errorMessage)) obj.errorMessage = String(object.errorMessage);
-    return obj;
+    return {
+      serviceId: isSet(object.serviceId) ? String(object.serviceId) : "",
+      errorMessage: isSet(object.errorMessage) ? String(object.errorMessage) : ""
+    };
   },
   toJSON(message: BatchEnableServicesResponse_EnableFailure): unknown {
     const obj: any = {};
@@ -825,10 +821,10 @@ export const BatchGetServicesRequest = {
     return message;
   },
   fromJSON(object: any): BatchGetServicesRequest {
-    const obj = createBaseBatchGetServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.names)) object.names.map((e: any) => String(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: BatchGetServicesRequest): unknown {
     const obj: any = {};
@@ -877,9 +873,9 @@ export const BatchGetServicesResponse = {
     return message;
   },
   fromJSON(object: any): BatchGetServicesResponse {
-    const obj = createBaseBatchGetServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => Service.fromJSON(e));
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchGetServicesResponse): unknown {
     const obj: any = {};

@@ -55,11 +55,11 @@ export const MsgVerifyInvariant = {
     return message;
   },
   fromJSON(object: any): MsgVerifyInvariant {
-    const obj = createBaseMsgVerifyInvariant();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.invariantModuleName)) obj.invariantModuleName = String(object.invariantModuleName);
-    if (isSet(object.invariantRoute)) obj.invariantRoute = String(object.invariantRoute);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      invariantModuleName: isSet(object.invariantModuleName) ? String(object.invariantModuleName) : "",
+      invariantRoute: isSet(object.invariantRoute) ? String(object.invariantRoute) : ""
+    };
   },
   toJSON(message: MsgVerifyInvariant): unknown {
     const obj: any = {};
@@ -98,8 +98,7 @@ export const MsgVerifyInvariantResponse = {
     return message;
   },
   fromJSON(_: any): MsgVerifyInvariantResponse {
-    const obj = createBaseMsgVerifyInvariantResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgVerifyInvariantResponse): unknown {
     const obj: any = {};

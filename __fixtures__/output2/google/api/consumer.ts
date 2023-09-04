@@ -129,9 +129,9 @@ export const ProjectProperties = {
     return message;
   },
   fromJSON(object: any): ProjectProperties {
-    const obj = createBaseProjectProperties();
-    if (Array.isArray(object?.properties)) object.properties.map((e: any) => Property.fromJSON(e));
-    return obj;
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromJSON(e)) : []
+    };
   },
   toJSON(message: ProjectProperties): unknown {
     const obj: any = {};
@@ -192,11 +192,11 @@ export const Property = {
     return message;
   },
   fromJSON(object: any): Property {
-    const obj = createBaseProperty();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = property_PropertyTypeFromJSON(object.type);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: Property): unknown {
     const obj: any = {};

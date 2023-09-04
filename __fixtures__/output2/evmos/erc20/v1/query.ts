@@ -77,9 +77,9 @@ export const QueryTokenPairsRequest = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairsRequest {
-    const obj = createBaseQueryTokenPairsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryTokenPairsRequest): unknown {
     const obj: any = {};
@@ -88,9 +88,7 @@ export const QueryTokenPairsRequest = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
     const message = createBaseQueryTokenPairsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -131,10 +129,10 @@ export const QueryTokenPairsResponse = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairsResponse {
-    const obj = createBaseQueryTokenPairsResponse();
-    if (Array.isArray(object?.tokenPairs)) object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      tokenPairs: Array.isArray(object?.tokenPairs) ? object.tokenPairs.map((e: any) => TokenPair.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryTokenPairsResponse): unknown {
     const obj: any = {};
@@ -149,9 +147,7 @@ export const QueryTokenPairsResponse = {
   fromPartial(object: DeepPartial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
     const message = createBaseQueryTokenPairsResponse();
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -185,9 +181,9 @@ export const QueryTokenPairRequest = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairRequest {
-    const obj = createBaseQueryTokenPairRequest();
-    if (isSet(object.token)) obj.token = String(object.token);
-    return obj;
+    return {
+      token: isSet(object.token) ? String(object.token) : ""
+    };
   },
   toJSON(message: QueryTokenPairRequest): unknown {
     const obj: any = {};
@@ -230,9 +226,9 @@ export const QueryTokenPairResponse = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairResponse {
-    const obj = createBaseQueryTokenPairResponse();
-    if (isSet(object.tokenPair)) obj.tokenPair = TokenPair.fromJSON(object.tokenPair);
-    return obj;
+    return {
+      tokenPair: isSet(object.tokenPair) ? TokenPair.fromJSON(object.tokenPair) : undefined
+    };
   },
   toJSON(message: QueryTokenPairResponse): unknown {
     const obj: any = {};
@@ -241,9 +237,7 @@ export const QueryTokenPairResponse = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairResponse>): QueryTokenPairResponse {
     const message = createBaseQueryTokenPairResponse();
-    if (object.tokenPair !== undefined && object.tokenPair !== null) {
-      message.tokenPair = TokenPair.fromPartial(object.tokenPair);
-    }
+    message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : TokenPair.fromPartial({});
     return message;
   }
 };
@@ -269,8 +263,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -311,9 +304,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -322,9 +315,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   }
 };

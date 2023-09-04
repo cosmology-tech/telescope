@@ -163,11 +163,11 @@ export const Usage = {
     return message;
   },
   fromJSON(object: any): Usage {
-    const obj = createBaseUsage();
-    if (Array.isArray(object?.requirements)) object.requirements.map((e: any) => String(e));
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => UsageRule.fromJSON(e));
-    if (isSet(object.producerNotificationChannel)) obj.producerNotificationChannel = String(object.producerNotificationChannel);
-    return obj;
+    return {
+      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => String(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromJSON(e)) : [],
+      producerNotificationChannel: isSet(object.producerNotificationChannel) ? String(object.producerNotificationChannel) : ""
+    };
   },
   toJSON(message: Usage): unknown {
     const obj: any = {};
@@ -258,11 +258,11 @@ export const UsageRule = {
     return message;
   },
   fromJSON(object: any): UsageRule {
-    const obj = createBaseUsageRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.allowUnregisteredCalls)) obj.allowUnregisteredCalls = Boolean(object.allowUnregisteredCalls);
-    if (isSet(object.skipServiceControl)) obj.skipServiceControl = Boolean(object.skipServiceControl);
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      allowUnregisteredCalls: isSet(object.allowUnregisteredCalls) ? Boolean(object.allowUnregisteredCalls) : false,
+      skipServiceControl: isSet(object.skipServiceControl) ? Boolean(object.skipServiceControl) : false
+    };
   },
   toJSON(message: UsageRule): unknown {
     const obj: any = {};

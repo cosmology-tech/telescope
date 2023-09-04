@@ -71,10 +71,10 @@ export const CertificateResponse = {
     return message;
   },
   fromJSON(object: any): CertificateResponse {
-    const obj = createBaseCertificateResponse();
-    if (isSet(object.certificate)) obj.certificate = Certificate.fromJSON(object.certificate);
-    if (isSet(object.serial)) obj.serial = String(object.serial);
-    return obj;
+    return {
+      certificate: isSet(object.certificate) ? Certificate.fromJSON(object.certificate) : undefined,
+      serial: isSet(object.serial) ? String(object.serial) : ""
+    };
   },
   toJSON(message: CertificateResponse): unknown {
     const obj: any = {};
@@ -84,9 +84,7 @@ export const CertificateResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<CertificateResponse>, I>>(object: I): CertificateResponse {
     const message = createBaseCertificateResponse();
-    if (object.certificate !== undefined && object.certificate !== null) {
-      message.certificate = Certificate.fromPartial(object.certificate);
-    }
+    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : Certificate.fromPartial({});
     message.serial = object.serial ?? "";
     return message;
   },
@@ -180,10 +178,10 @@ export const QueryCertificatesRequest = {
     return message;
   },
   fromJSON(object: any): QueryCertificatesRequest {
-    const obj = createBaseQueryCertificatesRequest();
-    if (isSet(object.filter)) obj.filter = CertificateFilter.fromJSON(object.filter);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      filter: isSet(object.filter) ? CertificateFilter.fromJSON(object.filter) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryCertificatesRequest): unknown {
     const obj: any = {};
@@ -193,12 +191,8 @@ export const QueryCertificatesRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryCertificatesRequest>, I>>(object: I): QueryCertificatesRequest {
     const message = createBaseQueryCertificatesRequest();
-    if (object.filter !== undefined && object.filter !== null) {
-      message.filter = CertificateFilter.fromPartial(object.filter);
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.filter = object.filter !== undefined && object.filter !== null ? CertificateFilter.fromPartial(object.filter) : CertificateFilter.fromPartial({});
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryCertificatesRequestSDKType): QueryCertificatesRequest {
@@ -291,10 +285,10 @@ export const QueryCertificatesResponse = {
     return message;
   },
   fromJSON(object: any): QueryCertificatesResponse {
-    const obj = createBaseQueryCertificatesResponse();
-    if (Array.isArray(object?.certificates)) object.certificates.map((e: any) => CertificateResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryCertificatesResponse): unknown {
     const obj: any = {};
@@ -309,9 +303,7 @@ export const QueryCertificatesResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryCertificatesResponse>, I>>(object: I): QueryCertificatesResponse {
     const message = createBaseQueryCertificatesResponse();
     message.certificates = object.certificates?.map(e => CertificateResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryCertificatesResponseSDKType): QueryCertificatesResponse {

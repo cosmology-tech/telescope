@@ -67,9 +67,9 @@ export const QueryProvidersRequest = {
     return message;
   },
   fromJSON(object: any): QueryProvidersRequest {
-    const obj = createBaseQueryProvidersRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryProvidersRequest): unknown {
     const obj: any = {};
@@ -78,9 +78,7 @@ export const QueryProvidersRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryProvidersRequest>, I>>(object: I): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
@@ -131,10 +129,10 @@ export const QueryProvidersResponse = {
     return message;
   },
   fromJSON(object: any): QueryProvidersResponse {
-    const obj = createBaseQueryProvidersResponse();
-    if (Array.isArray(object?.providers)) object.providers.map((e: any) => Provider.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryProvidersResponse): unknown {
     const obj: any = {};
@@ -149,9 +147,7 @@ export const QueryProvidersResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryProvidersResponse>, I>>(object: I): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
@@ -201,9 +197,9 @@ export const QueryProviderRequest = {
     return message;
   },
   fromJSON(object: any): QueryProviderRequest {
-    const obj = createBaseQueryProviderRequest();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   },
   toJSON(message: QueryProviderRequest): unknown {
     const obj: any = {};
@@ -256,9 +252,9 @@ export const QueryProviderResponse = {
     return message;
   },
   fromJSON(object: any): QueryProviderResponse {
-    const obj = createBaseQueryProviderResponse();
-    if (isSet(object.provider)) obj.provider = Provider.fromJSON(object.provider);
-    return obj;
+    return {
+      provider: isSet(object.provider) ? Provider.fromJSON(object.provider) : undefined
+    };
   },
   toJSON(message: QueryProviderResponse): unknown {
     const obj: any = {};
@@ -267,9 +263,7 @@ export const QueryProviderResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryProviderResponse>, I>>(object: I): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
-    if (object.provider !== undefined && object.provider !== null) {
-      message.provider = Provider.fromPartial(object.provider);
-    }
+    message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : Provider.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProviderResponseSDKType): QueryProviderResponse {

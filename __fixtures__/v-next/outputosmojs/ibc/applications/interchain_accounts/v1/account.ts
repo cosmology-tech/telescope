@@ -50,10 +50,10 @@ export const InterchainAccount = {
     return message;
   },
   fromJSON(object: any): InterchainAccount {
-    const obj = createBaseInterchainAccount();
-    if (isSet(object.baseAccount)) obj.baseAccount = BaseAccount.fromJSON(object.baseAccount);
-    if (isSet(object.accountOwner)) obj.accountOwner = String(object.accountOwner);
-    return obj;
+    return {
+      baseAccount: isSet(object.baseAccount) ? BaseAccount.fromJSON(object.baseAccount) : undefined,
+      accountOwner: isSet(object.accountOwner) ? String(object.accountOwner) : ""
+    };
   },
   toJSON(message: InterchainAccount): unknown {
     const obj: any = {};
@@ -63,9 +63,7 @@ export const InterchainAccount = {
   },
   fromPartial(object: DeepPartial<InterchainAccount>): InterchainAccount {
     const message = createBaseInterchainAccount();
-    if (object.baseAccount !== undefined && object.baseAccount !== null) {
-      message.baseAccount = BaseAccount.fromPartial(object.baseAccount);
-    }
+    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : BaseAccount.fromPartial({});
     message.accountOwner = object.accountOwner ?? "";
     return message;
   },

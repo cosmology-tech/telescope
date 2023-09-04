@@ -57,10 +57,10 @@ export const Metadata = {
     return message;
   },
   fromJSON(object: any): Metadata {
-    const obj = createBaseMetadata();
-    if (isSet(object.feeVersion)) obj.feeVersion = String(object.feeVersion);
-    if (isSet(object.appVersion)) obj.appVersion = String(object.appVersion);
-    return obj;
+    return {
+      feeVersion: isSet(object.feeVersion) ? String(object.feeVersion) : "",
+      appVersion: isSet(object.appVersion) ? String(object.appVersion) : ""
+    };
   },
   toJSON(message: Metadata): unknown {
     const obj: any = {};

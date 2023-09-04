@@ -39,6 +39,7 @@ interface TelescopeOpts {
             toProto?: boolean;
             fromProto?: boolean;
         };
+        strictNullCheckForPrototypeMethods?: boolean;
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;

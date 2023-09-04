@@ -149,10 +149,10 @@ export const MsgSetValidatorSetPreference = {
     return message;
   },
   fromJSON(object: any): MsgSetValidatorSetPreference {
-    const obj = createBaseMsgSetValidatorSetPreference();
-    if (isSet(object.delegator)) obj.delegator = String(object.delegator);
-    if (Array.isArray(object?.preferences)) object.preferences.map((e: any) => ValidatorPreference.fromJSON(e));
-    return obj;
+    return {
+      delegator: isSet(object.delegator) ? String(object.delegator) : "",
+      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgSetValidatorSetPreference): unknown {
     const obj: any = {};
@@ -253,8 +253,7 @@ export const MsgSetValidatorSetPreferenceResponse = {
     return message;
   },
   fromJSON(_: any): MsgSetValidatorSetPreferenceResponse {
-    const obj = createBaseMsgSetValidatorSetPreferenceResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSetValidatorSetPreferenceResponse): unknown {
     const obj: any = {};
@@ -341,10 +340,10 @@ export const MsgDelegateToValidatorSet = {
     return message;
   },
   fromJSON(object: any): MsgDelegateToValidatorSet {
-    const obj = createBaseMsgDelegateToValidatorSet();
-    if (isSet(object.delegator)) obj.delegator = String(object.delegator);
-    if (isSet(object.coin)) obj.coin = Coin.fromJSON(object.coin);
-    return obj;
+    return {
+      delegator: isSet(object.delegator) ? String(object.delegator) : "",
+      coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined
+    };
   },
   toJSON(message: MsgDelegateToValidatorSet): unknown {
     const obj: any = {};
@@ -355,9 +354,7 @@ export const MsgDelegateToValidatorSet = {
   fromPartial(object: DeepPartial<MsgDelegateToValidatorSet>): MsgDelegateToValidatorSet {
     const message = createBaseMsgDelegateToValidatorSet();
     message.delegator = object.delegator ?? "";
-    if (object.coin !== undefined && object.coin !== null) {
-      message.coin = Coin.fromPartial(object.coin);
-    }
+    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgDelegateToValidatorSetSDKType): MsgDelegateToValidatorSet {
@@ -435,8 +432,7 @@ export const MsgDelegateToValidatorSetResponse = {
     return message;
   },
   fromJSON(_: any): MsgDelegateToValidatorSetResponse {
-    const obj = createBaseMsgDelegateToValidatorSetResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgDelegateToValidatorSetResponse): unknown {
     const obj: any = {};
@@ -523,10 +519,10 @@ export const MsgUndelegateFromValidatorSet = {
     return message;
   },
   fromJSON(object: any): MsgUndelegateFromValidatorSet {
-    const obj = createBaseMsgUndelegateFromValidatorSet();
-    if (isSet(object.delegator)) obj.delegator = String(object.delegator);
-    if (isSet(object.coin)) obj.coin = Coin.fromJSON(object.coin);
-    return obj;
+    return {
+      delegator: isSet(object.delegator) ? String(object.delegator) : "",
+      coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined
+    };
   },
   toJSON(message: MsgUndelegateFromValidatorSet): unknown {
     const obj: any = {};
@@ -537,9 +533,7 @@ export const MsgUndelegateFromValidatorSet = {
   fromPartial(object: DeepPartial<MsgUndelegateFromValidatorSet>): MsgUndelegateFromValidatorSet {
     const message = createBaseMsgUndelegateFromValidatorSet();
     message.delegator = object.delegator ?? "";
-    if (object.coin !== undefined && object.coin !== null) {
-      message.coin = Coin.fromPartial(object.coin);
-    }
+    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgUndelegateFromValidatorSetSDKType): MsgUndelegateFromValidatorSet {
@@ -617,8 +611,7 @@ export const MsgUndelegateFromValidatorSetResponse = {
     return message;
   },
   fromJSON(_: any): MsgUndelegateFromValidatorSetResponse {
-    const obj = createBaseMsgUndelegateFromValidatorSetResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUndelegateFromValidatorSetResponse): unknown {
     const obj: any = {};
@@ -705,10 +698,10 @@ export const MsgRedelegateValidatorSet = {
     return message;
   },
   fromJSON(object: any): MsgRedelegateValidatorSet {
-    const obj = createBaseMsgRedelegateValidatorSet();
-    if (isSet(object.delegator)) obj.delegator = String(object.delegator);
-    if (Array.isArray(object?.preferences)) object.preferences.map((e: any) => ValidatorPreference.fromJSON(e));
-    return obj;
+    return {
+      delegator: isSet(object.delegator) ? String(object.delegator) : "",
+      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgRedelegateValidatorSet): unknown {
     const obj: any = {};
@@ -809,8 +802,7 @@ export const MsgRedelegateValidatorSetResponse = {
     return message;
   },
   fromJSON(_: any): MsgRedelegateValidatorSetResponse {
-    const obj = createBaseMsgRedelegateValidatorSetResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgRedelegateValidatorSetResponse): unknown {
     const obj: any = {};
@@ -890,9 +882,9 @@ export const MsgWithdrawDelegationRewards = {
     return message;
   },
   fromJSON(object: any): MsgWithdrawDelegationRewards {
-    const obj = createBaseMsgWithdrawDelegationRewards();
-    if (isSet(object.delegator)) obj.delegator = String(object.delegator);
-    return obj;
+    return {
+      delegator: isSet(object.delegator) ? String(object.delegator) : ""
+    };
   },
   toJSON(message: MsgWithdrawDelegationRewards): unknown {
     const obj: any = {};
@@ -974,8 +966,7 @@ export const MsgWithdrawDelegationRewardsResponse = {
     return message;
   },
   fromJSON(_: any): MsgWithdrawDelegationRewardsResponse {
-    const obj = createBaseMsgWithdrawDelegationRewardsResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgWithdrawDelegationRewardsResponse): unknown {
     const obj: any = {};
@@ -1062,10 +1053,10 @@ export const MsgDelegateBondedTokens = {
     return message;
   },
   fromJSON(object: any): MsgDelegateBondedTokens {
-    const obj = createBaseMsgDelegateBondedTokens();
-    if (isSet(object.delegator)) obj.delegator = String(object.delegator);
-    if (isSet(object.lockID)) obj.lockID = BigInt(object.lockID.toString());
-    return obj;
+    return {
+      delegator: isSet(object.delegator) ? String(object.delegator) : "",
+      lockID: isSet(object.lockID) ? BigInt(object.lockID.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgDelegateBondedTokens): unknown {
     const obj: any = {};
@@ -1076,9 +1067,7 @@ export const MsgDelegateBondedTokens = {
   fromPartial(object: DeepPartial<MsgDelegateBondedTokens>): MsgDelegateBondedTokens {
     const message = createBaseMsgDelegateBondedTokens();
     message.delegator = object.delegator ?? "";
-    if (object.lockID !== undefined && object.lockID !== null) {
-      message.lockID = BigInt(object.lockID.toString());
-    }
+    message.lockID = object.lockID !== undefined && object.lockID !== null ? BigInt(object.lockID.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgDelegateBondedTokensSDKType): MsgDelegateBondedTokens {
@@ -1156,8 +1145,7 @@ export const MsgDelegateBondedTokensResponse = {
     return message;
   },
   fromJSON(_: any): MsgDelegateBondedTokensResponse {
-    const obj = createBaseMsgDelegateBondedTokensResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgDelegateBondedTokensResponse): unknown {
     const obj: any = {};

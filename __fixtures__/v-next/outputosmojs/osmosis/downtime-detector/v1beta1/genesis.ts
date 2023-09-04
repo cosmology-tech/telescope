@@ -59,10 +59,10 @@ export const GenesisDowntimeEntry = {
     return message;
   },
   fromJSON(object: any): GenesisDowntimeEntry {
-    const obj = createBaseGenesisDowntimeEntry();
-    if (isSet(object.duration)) obj.duration = downtimeFromJSON(object.duration);
-    if (isSet(object.lastDowntime)) obj.lastDowntime = new Date(object.lastDowntime);
-    return obj;
+    return {
+      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
+      lastDowntime: isSet(object.lastDowntime) ? new Date(object.lastDowntime) : undefined
+    };
   },
   toJSON(message: GenesisDowntimeEntry): unknown {
     const obj: any = {};
@@ -166,10 +166,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.downtimes)) object.downtimes.map((e: any) => GenesisDowntimeEntry.fromJSON(e));
-    if (isSet(object.lastBlockTime)) obj.lastBlockTime = new Date(object.lastBlockTime);
-    return obj;
+    return {
+      downtimes: Array.isArray(object?.downtimes) ? object.downtimes.map((e: any) => GenesisDowntimeEntry.fromJSON(e)) : [],
+      lastBlockTime: isSet(object.lastBlockTime) ? new Date(object.lastBlockTime) : undefined
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

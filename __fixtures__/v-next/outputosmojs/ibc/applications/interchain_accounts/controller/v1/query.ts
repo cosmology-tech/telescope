@@ -71,10 +71,10 @@ export const QueryInterchainAccountRequest = {
     return message;
   },
   fromJSON(object: any): QueryInterchainAccountRequest {
-    const obj = createBaseQueryInterchainAccountRequest();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : ""
+    };
   },
   toJSON(message: QueryInterchainAccountRequest): unknown {
     const obj: any = {};
@@ -171,9 +171,9 @@ export const QueryInterchainAccountResponse = {
     return message;
   },
   fromJSON(object: any): QueryInterchainAccountResponse {
-    const obj = createBaseQueryInterchainAccountResponse();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryInterchainAccountResponse): unknown {
     const obj: any = {};
@@ -255,8 +255,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -336,9 +335,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -347,9 +346,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

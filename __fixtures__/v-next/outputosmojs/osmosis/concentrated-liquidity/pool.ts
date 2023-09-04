@@ -151,20 +151,20 @@ export const Pool = {
     return message;
   },
   fromJSON(object: any): Pool {
-    const obj = createBasePool();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.incentivesAddress)) obj.incentivesAddress = String(object.incentivesAddress);
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.currentTickLiquidity)) obj.currentTickLiquidity = String(object.currentTickLiquidity);
-    if (isSet(object.token0)) obj.token0 = String(object.token0);
-    if (isSet(object.token1)) obj.token1 = String(object.token1);
-    if (isSet(object.currentSqrtPrice)) obj.currentSqrtPrice = String(object.currentSqrtPrice);
-    if (isSet(object.currentTick)) obj.currentTick = String(object.currentTick);
-    if (isSet(object.tickSpacing)) obj.tickSpacing = BigInt(object.tickSpacing.toString());
-    if (isSet(object.exponentAtPriceOne)) obj.exponentAtPriceOne = String(object.exponentAtPriceOne);
-    if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
-    if (isSet(object.lastLiquidityUpdate)) obj.lastLiquidityUpdate = new Date(object.lastLiquidityUpdate);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      incentivesAddress: isSet(object.incentivesAddress) ? String(object.incentivesAddress) : "",
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      currentTickLiquidity: isSet(object.currentTickLiquidity) ? String(object.currentTickLiquidity) : "",
+      token0: isSet(object.token0) ? String(object.token0) : "",
+      token1: isSet(object.token1) ? String(object.token1) : "",
+      currentSqrtPrice: isSet(object.currentSqrtPrice) ? String(object.currentSqrtPrice) : "",
+      currentTick: isSet(object.currentTick) ? String(object.currentTick) : "",
+      tickSpacing: isSet(object.tickSpacing) ? BigInt(object.tickSpacing.toString()) : BigInt(0),
+      exponentAtPriceOne: isSet(object.exponentAtPriceOne) ? String(object.exponentAtPriceOne) : "",
+      swapFee: isSet(object.swapFee) ? String(object.swapFee) : "",
+      lastLiquidityUpdate: isSet(object.lastLiquidityUpdate) ? new Date(object.lastLiquidityUpdate) : undefined
+    };
   },
   toJSON(message: Pool): unknown {
     const obj: any = {};
@@ -186,17 +186,13 @@ export const Pool = {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.incentivesAddress = object.incentivesAddress ?? "";
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.currentTickLiquidity = object.currentTickLiquidity ?? "";
     message.token0 = object.token0 ?? "";
     message.token1 = object.token1 ?? "";
     message.currentSqrtPrice = object.currentSqrtPrice ?? "";
     message.currentTick = object.currentTick ?? "";
-    if (object.tickSpacing !== undefined && object.tickSpacing !== null) {
-      message.tickSpacing = BigInt(object.tickSpacing.toString());
-    }
+    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt(0);
     message.exponentAtPriceOne = object.exponentAtPriceOne ?? "";
     message.swapFee = object.swapFee ?? "";
     message.lastLiquidityUpdate = object.lastLiquidityUpdate ?? undefined;

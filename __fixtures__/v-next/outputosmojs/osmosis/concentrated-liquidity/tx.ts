@@ -223,16 +223,16 @@ export const MsgCreatePosition = {
     return message;
   },
   fromJSON(object: any): MsgCreatePosition {
-    const obj = createBaseMsgCreatePosition();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.lowerTick)) obj.lowerTick = BigInt(object.lowerTick.toString());
-    if (isSet(object.upperTick)) obj.upperTick = BigInt(object.upperTick.toString());
-    if (isSet(object.tokenDesired0)) obj.tokenDesired0 = Coin.fromJSON(object.tokenDesired0);
-    if (isSet(object.tokenDesired1)) obj.tokenDesired1 = Coin.fromJSON(object.tokenDesired1);
-    if (isSet(object.tokenMinAmount0)) obj.tokenMinAmount0 = String(object.tokenMinAmount0);
-    if (isSet(object.tokenMinAmount1)) obj.tokenMinAmount1 = String(object.tokenMinAmount1);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lowerTick: isSet(object.lowerTick) ? BigInt(object.lowerTick.toString()) : BigInt(0),
+      upperTick: isSet(object.upperTick) ? BigInt(object.upperTick.toString()) : BigInt(0),
+      tokenDesired0: isSet(object.tokenDesired0) ? Coin.fromJSON(object.tokenDesired0) : undefined,
+      tokenDesired1: isSet(object.tokenDesired1) ? Coin.fromJSON(object.tokenDesired1) : undefined,
+      tokenMinAmount0: isSet(object.tokenMinAmount0) ? String(object.tokenMinAmount0) : "",
+      tokenMinAmount1: isSet(object.tokenMinAmount1) ? String(object.tokenMinAmount1) : ""
+    };
   },
   toJSON(message: MsgCreatePosition): unknown {
     const obj: any = {};
@@ -248,22 +248,12 @@ export const MsgCreatePosition = {
   },
   fromPartial(object: DeepPartial<MsgCreatePosition>): MsgCreatePosition {
     const message = createBaseMsgCreatePosition();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.sender = object.sender ?? "";
-    if (object.lowerTick !== undefined && object.lowerTick !== null) {
-      message.lowerTick = BigInt(object.lowerTick.toString());
-    }
-    if (object.upperTick !== undefined && object.upperTick !== null) {
-      message.upperTick = BigInt(object.upperTick.toString());
-    }
-    if (object.tokenDesired0 !== undefined && object.tokenDesired0 !== null) {
-      message.tokenDesired0 = Coin.fromPartial(object.tokenDesired0);
-    }
-    if (object.tokenDesired1 !== undefined && object.tokenDesired1 !== null) {
-      message.tokenDesired1 = Coin.fromPartial(object.tokenDesired1);
-    }
+    message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt(0);
+    message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt(0);
+    message.tokenDesired0 = object.tokenDesired0 !== undefined && object.tokenDesired0 !== null ? Coin.fromPartial(object.tokenDesired0) : Coin.fromPartial({});
+    message.tokenDesired1 = object.tokenDesired1 !== undefined && object.tokenDesired1 !== null ? Coin.fromPartial(object.tokenDesired1) : Coin.fromPartial({});
     message.tokenMinAmount0 = object.tokenMinAmount0 ?? "";
     message.tokenMinAmount1 = object.tokenMinAmount1 ?? "";
     return message;
@@ -409,13 +399,13 @@ export const MsgCreatePositionResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreatePositionResponse {
-    const obj = createBaseMsgCreatePositionResponse();
-    if (isSet(object.positionId)) obj.positionId = BigInt(object.positionId.toString());
-    if (isSet(object.amount0)) obj.amount0 = String(object.amount0);
-    if (isSet(object.amount1)) obj.amount1 = String(object.amount1);
-    if (isSet(object.joinTime)) obj.joinTime = new Date(object.joinTime);
-    if (isSet(object.liquidityCreated)) obj.liquidityCreated = String(object.liquidityCreated);
-    return obj;
+    return {
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0),
+      amount0: isSet(object.amount0) ? String(object.amount0) : "",
+      amount1: isSet(object.amount1) ? String(object.amount1) : "",
+      joinTime: isSet(object.joinTime) ? new Date(object.joinTime) : undefined,
+      liquidityCreated: isSet(object.liquidityCreated) ? String(object.liquidityCreated) : ""
+    };
   },
   toJSON(message: MsgCreatePositionResponse): unknown {
     const obj: any = {};
@@ -428,9 +418,7 @@ export const MsgCreatePositionResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreatePositionResponse>): MsgCreatePositionResponse {
     const message = createBaseMsgCreatePositionResponse();
-    if (object.positionId !== undefined && object.positionId !== null) {
-      message.positionId = BigInt(object.positionId.toString());
-    }
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     message.amount0 = object.amount0 ?? "";
     message.amount1 = object.amount1 ?? "";
     message.joinTime = object.joinTime ?? undefined;
@@ -549,11 +537,11 @@ export const MsgWithdrawPosition = {
     return message;
   },
   fromJSON(object: any): MsgWithdrawPosition {
-    const obj = createBaseMsgWithdrawPosition();
-    if (isSet(object.positionId)) obj.positionId = BigInt(object.positionId.toString());
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.liquidityAmount)) obj.liquidityAmount = String(object.liquidityAmount);
-    return obj;
+    return {
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0),
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      liquidityAmount: isSet(object.liquidityAmount) ? String(object.liquidityAmount) : ""
+    };
   },
   toJSON(message: MsgWithdrawPosition): unknown {
     const obj: any = {};
@@ -564,9 +552,7 @@ export const MsgWithdrawPosition = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawPosition>): MsgWithdrawPosition {
     const message = createBaseMsgWithdrawPosition();
-    if (object.positionId !== undefined && object.positionId !== null) {
-      message.positionId = BigInt(object.positionId.toString());
-    }
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     message.sender = object.sender ?? "";
     message.liquidityAmount = object.liquidityAmount ?? "";
     return message;
@@ -666,10 +652,10 @@ export const MsgWithdrawPositionResponse = {
     return message;
   },
   fromJSON(object: any): MsgWithdrawPositionResponse {
-    const obj = createBaseMsgWithdrawPositionResponse();
-    if (isSet(object.amount0)) obj.amount0 = String(object.amount0);
-    if (isSet(object.amount1)) obj.amount1 = String(object.amount1);
-    return obj;
+    return {
+      amount0: isSet(object.amount0) ? String(object.amount0) : "",
+      amount1: isSet(object.amount1) ? String(object.amount1) : ""
+    };
   },
   toJSON(message: MsgWithdrawPositionResponse): unknown {
     const obj: any = {};
@@ -782,10 +768,10 @@ export const MsgCollectFees = {
     return message;
   },
   fromJSON(object: any): MsgCollectFees {
-    const obj = createBaseMsgCollectFees();
-    if (Array.isArray(object?.positionIds)) object.positionIds.map((e: any) => BigInt(e.toString()));
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    return obj;
+    return {
+      positionIds: Array.isArray(object?.positionIds) ? object.positionIds.map((e: any) => BigInt(e.toString())) : [],
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   },
   toJSON(message: MsgCollectFees): unknown {
     const obj: any = {};
@@ -894,9 +880,9 @@ export const MsgCollectFeesResponse = {
     return message;
   },
   fromJSON(object: any): MsgCollectFeesResponse {
-    const obj = createBaseMsgCollectFeesResponse();
-    if (Array.isArray(object?.collectedFees)) object.collectedFees.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      collectedFees: Array.isArray(object?.collectedFees) ? object.collectedFees.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgCollectFeesResponse): unknown {
     const obj: any = {};
@@ -1014,10 +1000,10 @@ export const MsgCollectIncentives = {
     return message;
   },
   fromJSON(object: any): MsgCollectIncentives {
-    const obj = createBaseMsgCollectIncentives();
-    if (Array.isArray(object?.positionIds)) object.positionIds.map((e: any) => BigInt(e.toString()));
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    return obj;
+    return {
+      positionIds: Array.isArray(object?.positionIds) ? object.positionIds.map((e: any) => BigInt(e.toString())) : [],
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   },
   toJSON(message: MsgCollectIncentives): unknown {
     const obj: any = {};
@@ -1126,9 +1112,9 @@ export const MsgCollectIncentivesResponse = {
     return message;
   },
   fromJSON(object: any): MsgCollectIncentivesResponse {
-    const obj = createBaseMsgCollectIncentivesResponse();
-    if (Array.isArray(object?.collectedIncentives)) object.collectedIncentives.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      collectedIncentives: Array.isArray(object?.collectedIncentives) ? object.collectedIncentives.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgCollectIncentivesResponse): unknown {
     const obj: any = {};
@@ -1272,15 +1258,15 @@ export const MsgCreateIncentive = {
     return message;
   },
   fromJSON(object: any): MsgCreateIncentive {
-    const obj = createBaseMsgCreateIncentive();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.incentiveDenom)) obj.incentiveDenom = String(object.incentiveDenom);
-    if (isSet(object.incentiveAmount)) obj.incentiveAmount = String(object.incentiveAmount);
-    if (isSet(object.emissionRate)) obj.emissionRate = String(object.emissionRate);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.minUptime)) obj.minUptime = Duration.fromJSON(object.minUptime);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      incentiveDenom: isSet(object.incentiveDenom) ? String(object.incentiveDenom) : "",
+      incentiveAmount: isSet(object.incentiveAmount) ? String(object.incentiveAmount) : "",
+      emissionRate: isSet(object.emissionRate) ? String(object.emissionRate) : "",
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      minUptime: isSet(object.minUptime) ? Duration.fromJSON(object.minUptime) : undefined
+    };
   },
   toJSON(message: MsgCreateIncentive): unknown {
     const obj: any = {};
@@ -1295,17 +1281,13 @@ export const MsgCreateIncentive = {
   },
   fromPartial(object: DeepPartial<MsgCreateIncentive>): MsgCreateIncentive {
     const message = createBaseMsgCreateIncentive();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.sender = object.sender ?? "";
     message.incentiveDenom = object.incentiveDenom ?? "";
     message.incentiveAmount = object.incentiveAmount ?? "";
     message.emissionRate = object.emissionRate ?? "";
     message.startTime = object.startTime ?? undefined;
-    if (object.minUptime !== undefined && object.minUptime !== null) {
-      message.minUptime = Duration.fromPartial(object.minUptime);
-    }
+    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: MsgCreateIncentiveSDKType): MsgCreateIncentive {
@@ -1444,13 +1426,13 @@ export const MsgCreateIncentiveResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateIncentiveResponse {
-    const obj = createBaseMsgCreateIncentiveResponse();
-    if (isSet(object.incentiveDenom)) obj.incentiveDenom = String(object.incentiveDenom);
-    if (isSet(object.incentiveAmount)) obj.incentiveAmount = String(object.incentiveAmount);
-    if (isSet(object.emissionRate)) obj.emissionRate = String(object.emissionRate);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.minUptime)) obj.minUptime = Duration.fromJSON(object.minUptime);
-    return obj;
+    return {
+      incentiveDenom: isSet(object.incentiveDenom) ? String(object.incentiveDenom) : "",
+      incentiveAmount: isSet(object.incentiveAmount) ? String(object.incentiveAmount) : "",
+      emissionRate: isSet(object.emissionRate) ? String(object.emissionRate) : "",
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      minUptime: isSet(object.minUptime) ? Duration.fromJSON(object.minUptime) : undefined
+    };
   },
   toJSON(message: MsgCreateIncentiveResponse): unknown {
     const obj: any = {};
@@ -1467,9 +1449,7 @@ export const MsgCreateIncentiveResponse = {
     message.incentiveAmount = object.incentiveAmount ?? "";
     message.emissionRate = object.emissionRate ?? "";
     message.startTime = object.startTime ?? undefined;
-    if (object.minUptime !== undefined && object.minUptime !== null) {
-      message.minUptime = Duration.fromPartial(object.minUptime);
-    }
+    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: MsgCreateIncentiveResponseSDKType): MsgCreateIncentiveResponse {
@@ -1586,10 +1566,10 @@ export const MsgFungifyChargedPositions = {
     return message;
   },
   fromJSON(object: any): MsgFungifyChargedPositions {
-    const obj = createBaseMsgFungifyChargedPositions();
-    if (Array.isArray(object?.positionIds)) object.positionIds.map((e: any) => BigInt(e.toString()));
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    return obj;
+    return {
+      positionIds: Array.isArray(object?.positionIds) ? object.positionIds.map((e: any) => BigInt(e.toString())) : [],
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   },
   toJSON(message: MsgFungifyChargedPositions): unknown {
     const obj: any = {};
@@ -1698,9 +1678,9 @@ export const MsgFungifyChargedPositionsResponse = {
     return message;
   },
   fromJSON(object: any): MsgFungifyChargedPositionsResponse {
-    const obj = createBaseMsgFungifyChargedPositionsResponse();
-    if (isSet(object.newPositionId)) obj.newPositionId = BigInt(object.newPositionId.toString());
-    return obj;
+    return {
+      newPositionId: isSet(object.newPositionId) ? BigInt(object.newPositionId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgFungifyChargedPositionsResponse): unknown {
     const obj: any = {};
@@ -1709,9 +1689,7 @@ export const MsgFungifyChargedPositionsResponse = {
   },
   fromPartial(object: DeepPartial<MsgFungifyChargedPositionsResponse>): MsgFungifyChargedPositionsResponse {
     const message = createBaseMsgFungifyChargedPositionsResponse();
-    if (object.newPositionId !== undefined && object.newPositionId !== null) {
-      message.newPositionId = BigInt(object.newPositionId.toString());
-    }
+    message.newPositionId = object.newPositionId !== undefined && object.newPositionId !== null ? BigInt(object.newPositionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgFungifyChargedPositionsResponseSDKType): MsgFungifyChargedPositionsResponse {

@@ -80,12 +80,12 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Balance.fromJSON(e));
-    if (Array.isArray(object?.supply)) object.supply.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.denomMetadata)) object.denomMetadata.map((e: any) => Metadata.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromJSON(e)) : [],
+      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
+      denomMetadata: Array.isArray(object?.denomMetadata) ? object.denomMetadata.map((e: any) => Metadata.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -109,9 +109,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.balances = object.balances?.map(e => Balance.fromPartial(e)) || [];
     message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
     message.denomMetadata = object.denomMetadata?.map(e => Metadata.fromPartial(e)) || [];
@@ -155,10 +153,10 @@ export const Balance = {
     return message;
   },
   fromJSON(object: any): Balance {
-    const obj = createBaseBalance();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Balance): unknown {
     const obj: any = {};

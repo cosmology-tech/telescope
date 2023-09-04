@@ -150,12 +150,12 @@ export const MsgRegisterPayee = {
     return message;
   },
   fromJSON(object: any): MsgRegisterPayee {
-    const obj = createBaseMsgRegisterPayee();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (isSet(object.relayer)) obj.relayer = String(object.relayer);
-    if (isSet(object.payee)) obj.payee = String(object.payee);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      relayer: isSet(object.relayer) ? String(object.relayer) : "",
+      payee: isSet(object.payee) ? String(object.payee) : ""
+    };
   },
   toJSON(message: MsgRegisterPayee): unknown {
     const obj: any = {};
@@ -258,8 +258,7 @@ export const MsgRegisterPayeeResponse = {
     return message;
   },
   fromJSON(_: any): MsgRegisterPayeeResponse {
-    const obj = createBaseMsgRegisterPayeeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgRegisterPayeeResponse): unknown {
     const obj: any = {};
@@ -360,12 +359,12 @@ export const MsgRegisterCounterpartyPayee = {
     return message;
   },
   fromJSON(object: any): MsgRegisterCounterpartyPayee {
-    const obj = createBaseMsgRegisterCounterpartyPayee();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (isSet(object.relayer)) obj.relayer = String(object.relayer);
-    if (isSet(object.counterpartyPayee)) obj.counterpartyPayee = String(object.counterpartyPayee);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      relayer: isSet(object.relayer) ? String(object.relayer) : "",
+      counterpartyPayee: isSet(object.counterpartyPayee) ? String(object.counterpartyPayee) : ""
+    };
   },
   toJSON(message: MsgRegisterCounterpartyPayee): unknown {
     const obj: any = {};
@@ -468,8 +467,7 @@ export const MsgRegisterCounterpartyPayeeResponse = {
     return message;
   },
   fromJSON(_: any): MsgRegisterCounterpartyPayeeResponse {
-    const obj = createBaseMsgRegisterCounterpartyPayeeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgRegisterCounterpartyPayeeResponse): unknown {
     const obj: any = {};
@@ -577,13 +575,13 @@ export const MsgPayPacketFee = {
     return message;
   },
   fromJSON(object: any): MsgPayPacketFee {
-    const obj = createBaseMsgPayPacketFee();
-    if (isSet(object.fee)) obj.fee = Fee.fromJSON(object.fee);
-    if (isSet(object.sourcePortId)) obj.sourcePortId = String(object.sourcePortId);
-    if (isSet(object.sourceChannelId)) obj.sourceChannelId = String(object.sourceChannelId);
-    if (isSet(object.signer)) obj.signer = String(object.signer);
-    if (Array.isArray(object?.relayers)) object.relayers.map((e: any) => String(e));
-    return obj;
+    return {
+      fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
+      sourcePortId: isSet(object.sourcePortId) ? String(object.sourcePortId) : "",
+      sourceChannelId: isSet(object.sourceChannelId) ? String(object.sourceChannelId) : "",
+      signer: isSet(object.signer) ? String(object.signer) : "",
+      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: MsgPayPacketFee): unknown {
     const obj: any = {};
@@ -600,9 +598,7 @@ export const MsgPayPacketFee = {
   },
   fromPartial(object: DeepPartial<MsgPayPacketFee>): MsgPayPacketFee {
     const message = createBaseMsgPayPacketFee();
-    if (object.fee !== undefined && object.fee !== null) {
-      message.fee = Fee.fromPartial(object.fee);
-    }
+    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : Fee.fromPartial({});
     message.sourcePortId = object.sourcePortId ?? "";
     message.sourceChannelId = object.sourceChannelId ?? "";
     message.signer = object.signer ?? "";
@@ -707,8 +703,7 @@ export const MsgPayPacketFeeResponse = {
     return message;
   },
   fromJSON(_: any): MsgPayPacketFeeResponse {
-    const obj = createBaseMsgPayPacketFeeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgPayPacketFeeResponse): unknown {
     const obj: any = {};
@@ -788,9 +783,9 @@ export const MsgPayPacketFeeAsync = {
     return message;
   },
   fromJSON(object: any): MsgPayPacketFeeAsync {
-    const obj = createBaseMsgPayPacketFeeAsync();
-    if (isSet(object.packetFee)) obj.packetFee = PacketFee.fromJSON(object.packetFee);
-    return obj;
+    return {
+      packetFee: isSet(object.packetFee) ? PacketFee.fromJSON(object.packetFee) : undefined
+    };
   },
   toJSON(message: MsgPayPacketFeeAsync): unknown {
     const obj: any = {};
@@ -799,9 +794,7 @@ export const MsgPayPacketFeeAsync = {
   },
   fromPartial(object: DeepPartial<MsgPayPacketFeeAsync>): MsgPayPacketFeeAsync {
     const message = createBaseMsgPayPacketFeeAsync();
-    if (object.packetFee !== undefined && object.packetFee !== null) {
-      message.packetFee = PacketFee.fromPartial(object.packetFee);
-    }
+    message.packetFee = object.packetFee !== undefined && object.packetFee !== null ? PacketFee.fromPartial(object.packetFee) : PacketFee.fromPartial({});
     return message;
   },
   fromSDK(object: MsgPayPacketFeeAsyncSDKType): MsgPayPacketFeeAsync {
@@ -874,8 +867,7 @@ export const MsgPayPacketFeeAsyncResponse = {
     return message;
   },
   fromJSON(_: any): MsgPayPacketFeeAsyncResponse {
-    const obj = createBaseMsgPayPacketFeeAsyncResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgPayPacketFeeAsyncResponse): unknown {
     const obj: any = {};

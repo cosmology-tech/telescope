@@ -64,10 +64,10 @@ export const CommitInfo = {
     return message;
   },
   fromJSON(object: any): CommitInfo {
-    const obj = createBaseCommitInfo();
-    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
-    if (Array.isArray(object?.storeInfos)) object.storeInfos.map((e: any) => StoreInfo.fromJSON(e));
-    return obj;
+    return {
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
+    };
   },
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
@@ -81,9 +81,7 @@ export const CommitInfo = {
   },
   fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
-    if (object.version !== undefined && object.version !== null) {
-      message.version = Long.fromValue(object.version);
-    }
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
   }
@@ -125,10 +123,10 @@ export const StoreInfo = {
     return message;
   },
   fromJSON(object: any): StoreInfo {
-    const obj = createBaseStoreInfo();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.commitId)) obj.commitId = CommitID.fromJSON(object.commitId);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      commitId: isSet(object.commitId) ? CommitID.fromJSON(object.commitId) : undefined
+    };
   },
   toJSON(message: StoreInfo): unknown {
     const obj: any = {};
@@ -139,9 +137,7 @@ export const StoreInfo = {
   fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
-    if (object.commitId !== undefined && object.commitId !== null) {
-      message.commitId = CommitID.fromPartial(object.commitId);
-    }
+    message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : CommitID.fromPartial({});
     return message;
   }
 };
@@ -182,10 +178,10 @@ export const CommitID = {
     return message;
   },
   fromJSON(object: any): CommitID {
-    const obj = createBaseCommitID();
-    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
+    return {
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   },
   toJSON(message: CommitID): unknown {
     const obj: any = {};
@@ -195,9 +191,7 @@ export const CommitID = {
   },
   fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = createBaseCommitID();
-    if (object.version !== undefined && object.version !== null) {
-      message.version = Long.fromValue(object.version);
-    }
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.hash = object.hash ?? new Uint8Array();
     return message;
   }

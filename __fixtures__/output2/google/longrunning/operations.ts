@@ -182,13 +182,13 @@ export const Operation = {
     return message;
   },
   fromJSON(object: any): Operation {
-    const obj = createBaseOperation();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.metadata)) obj.metadata = Any.fromJSON(object.metadata);
-    if (isSet(object.done)) obj.done = Boolean(object.done);
-    if (isSet(object.error)) obj.error = Status.fromJSON(object.error);
-    if (isSet(object.response)) obj.response = Any.fromJSON(object.response);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metadata: isSet(object.metadata) ? Any.fromJSON(object.metadata) : undefined,
+      done: isSet(object.done) ? Boolean(object.done) : false,
+      error: isSet(object.error) ? Status.fromJSON(object.error) : undefined,
+      response: isSet(object.response) ? Any.fromJSON(object.response) : undefined
+    };
   },
   toJSON(message: Operation): unknown {
     const obj: any = {};
@@ -202,16 +202,10 @@ export const Operation = {
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.name = object.name ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = Any.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Any.fromPartial(object.metadata) : Any.fromPartial({});
     message.done = object.done ?? false;
-    if (object.error !== undefined && object.error !== null) {
-      message.error = Status.fromPartial(object.error);
-    }
-    if (object.response !== undefined && object.response !== null) {
-      message.response = Any.fromPartial(object.response);
-    }
+    message.error = object.error !== undefined && object.error !== null ? Status.fromPartial(object.error) : Status.fromPartial({});
+    message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : Any.fromPartial({});
     return message;
   }
 };
@@ -245,9 +239,9 @@ export const GetOperationRequest = {
     return message;
   },
   fromJSON(object: any): GetOperationRequest {
-    const obj = createBaseGetOperationRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetOperationRequest): unknown {
     const obj: any = {};
@@ -311,12 +305,12 @@ export const ListOperationsRequest = {
     return message;
   },
   fromJSON(object: any): ListOperationsRequest {
-    const obj = createBaseListOperationsRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : ""
+    };
   },
   toJSON(message: ListOperationsRequest): unknown {
     const obj: any = {};
@@ -372,10 +366,10 @@ export const ListOperationsResponse = {
     return message;
   },
   fromJSON(object: any): ListOperationsResponse {
-    const obj = createBaseListOperationsResponse();
-    if (Array.isArray(object?.operations)) object.operations.map((e: any) => Operation.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListOperationsResponse): unknown {
     const obj: any = {};
@@ -424,9 +418,9 @@ export const CancelOperationRequest = {
     return message;
   },
   fromJSON(object: any): CancelOperationRequest {
-    const obj = createBaseCancelOperationRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: CancelOperationRequest): unknown {
     const obj: any = {};
@@ -469,9 +463,9 @@ export const DeleteOperationRequest = {
     return message;
   },
   fromJSON(object: any): DeleteOperationRequest {
-    const obj = createBaseDeleteOperationRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: DeleteOperationRequest): unknown {
     const obj: any = {};
@@ -521,10 +515,10 @@ export const WaitOperationRequest = {
     return message;
   },
   fromJSON(object: any): WaitOperationRequest {
-    const obj = createBaseWaitOperationRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.timeout)) obj.timeout = Duration.fromJSON(object.timeout);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
+    };
   },
   toJSON(message: WaitOperationRequest): unknown {
     const obj: any = {};
@@ -535,9 +529,7 @@ export const WaitOperationRequest = {
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
-    if (object.timeout !== undefined && object.timeout !== null) {
-      message.timeout = Duration.fromPartial(object.timeout);
-    }
+    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : Duration.fromPartial({});
     return message;
   }
 };
@@ -578,10 +570,10 @@ export const OperationInfo = {
     return message;
   },
   fromJSON(object: any): OperationInfo {
-    const obj = createBaseOperationInfo();
-    if (isSet(object.responseType)) obj.responseType = String(object.responseType);
-    if (isSet(object.metadataType)) obj.metadataType = String(object.metadataType);
-    return obj;
+    return {
+      responseType: isSet(object.responseType) ? String(object.responseType) : "",
+      metadataType: isSet(object.metadataType) ? String(object.metadataType) : ""
+    };
   },
   toJSON(message: OperationInfo): unknown {
     const obj: any = {};

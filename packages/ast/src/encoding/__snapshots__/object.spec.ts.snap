@@ -39,11 +39,11 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     return message;
   },
   fromJSON(object: any): Delegation {
-    const obj = createBaseDelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.shares)) obj.shares = String(object.shares);
-    return obj;
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      shares: isSet(object.shares) ? String(object.shares) : ""
+    };
   },
   toJSON(message: Delegation): unknown {
     const obj: any = {};
@@ -150,11 +150,11 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return message;
   },
   fromJSON(object: any): SignatureDescriptor {
-    const obj = createBaseSignatureDescriptor();
-    if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
-    if (isSet(object.data)) obj.data = SignatureDescriptor_Data.fromJSON(object.data);
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    return obj;
+    return {
+      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
+      data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
+    };
   },
   toJSON(message: SignatureDescriptor): unknown {
     const obj: any = {};
@@ -165,15 +165,9 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
   },
   fromPartial(object: Partial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
-    if (object.publicKey !== undefined && object.publicKey !== null) {
-      message.publicKey = Any.fromPartial(object.publicKey);
-    }
-    if (object.data !== undefined && object.data !== null) {
-      message.data = SignatureDescriptor_Data.fromPartial(object.data);
-    }
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
+    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
+    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : SignatureDescriptor_Data.fromPartial({});
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
@@ -255,9 +249,9 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     return message;
   },
   fromJSON(object: any): SignatureDescriptors {
-    const obj = createBaseSignatureDescriptors();
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e));
-    return obj;
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e)) : []
+    };
   },
   toJSON(message: SignatureDescriptors): unknown {
     const obj: any = {};
@@ -370,12 +364,12 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     return message;
   },
   fromJSON(object: any): AuxSignerData {
-    const obj = createBaseAuxSignerData();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.signDoc)) obj.signDoc = SignDocDirectAux.fromJSON(object.signDoc);
-    if (isSet(object.mode)) obj.mode = signModeFromJSON(object.mode);
-    if (isSet(object.sig)) obj.sig = bytesFromBase64(object.sig);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
+    };
   },
   toJSON(message: AuxSignerData): unknown {
     const obj: any = {};
@@ -388,9 +382,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
   fromPartial(object: Partial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";
-    if (object.signDoc !== undefined && object.signDoc !== null) {
-      message.signDoc = SignDocDirectAux.fromPartial(object.signDoc);
-    }
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : SignDocDirectAux.fromPartial({});
     message.mode = object.mode ?? 0;
     message.sig = object.sig ?? new Uint8Array();
     return message;
@@ -484,10 +476,10 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     return message;
   },
   fromJSON(object: any): ModeInfo_Multi {
-    const obj = createBaseModeInfo_Multi();
-    if (isSet(object.single)) obj.single = ModeInfo_Single.fromJSON(object.single);
-    if (isSet(object.multi)) obj.multi = ModeInfo_Multi.fromJSON(object.multi);
-    return obj;
+    return {
+      single: isSet(object.single) ? ModeInfo_Single.fromJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
+    };
   },
   toJSON(message: ModeInfo_Multi): unknown {
     const obj: any = {};
@@ -497,12 +489,8 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
   },
   fromPartial(object: Partial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
-    if (object.single !== undefined && object.single !== null) {
-      message.single = ModeInfo_Single.fromPartial(object.single);
-    }
-    if (object.multi !== undefined && object.multi !== null) {
-      message.multi = ModeInfo_Multi.fromPartial(object.multi);
-    }
+    message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : ModeInfo_Single.fromPartial({});
+    message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : ModeInfo_Multi.fromPartial({});
     return message;
   },
   fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
@@ -601,11 +589,11 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     return message;
   },
   fromJSON(object: any): PinCodesProposal {
-    const obj = createBasePinCodesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => BigInt(e.toString()));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
+    };
   },
   toJSON(message: PinCodesProposal): unknown {
     const obj: any = {};
@@ -733,11 +721,11 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     return message;
   },
   fromJSON(object: any): UnpinCodesProposal {
-    const obj = createBaseUnpinCodesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => BigInt(e.toString()));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
+    };
   },
   toJSON(message: UnpinCodesProposal): unknown {
     const obj: any = {};
@@ -850,10 +838,10 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     return message;
   },
   fromJSON(object: any): QueryRawContractStateRequest {
-    const obj = createBaseQueryRawContractStateRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.queryData)) obj.queryData = bytesFromBase64(object.queryData);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
+    };
   },
   toJSON(message: QueryRawContractStateRequest): unknown {
     const obj: any = {};
@@ -969,12 +957,12 @@ exports[`evmos/fees/v1/tx 1`] = `
     return message;
   },
   fromJSON(object: any): MsgRegisterDevFeeInfo {
-    const obj = createBaseMsgRegisterDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    if (Array.isArray(object?.nonces)) object.nonces.map((e: any) => BigInt(e.toString()));
-    return obj;
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
+      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
+    };
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
     const obj: any = {};
@@ -1099,12 +1087,12 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     return message;
   },
   fromJSON(object: any): ParseRequest {
-    const obj = createBaseParseRequest();
-    if (isSet(object.celSource)) obj.celSource = String(object.celSource);
-    if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
-    if (isSet(object.sourceLocation)) obj.sourceLocation = String(object.sourceLocation);
-    if (isSet(object.disableMacros)) obj.disableMacros = Boolean(object.disableMacros);
-    return obj;
+    return {
+      celSource: isSet(object.celSource) ? String(object.celSource) : "",
+      syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : "",
+      sourceLocation: isSet(object.sourceLocation) ? String(object.sourceLocation) : "",
+      disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
+    };
   },
   toJSON(message: ParseRequest): unknown {
     const obj: any = {};
@@ -1229,14 +1217,14 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     return message;
   },
   fromJSON(object: any): Decl_FunctionDecl_Overload {
-    const obj = createBaseDecl_FunctionDecl_Overload();
-    if (isSet(object.overloadId)) obj.overloadId = String(object.overloadId);
-    if (Array.isArray(object?.params)) object.params.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.typeParams)) object.typeParams.map((e: any) => String(e));
-    if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
-    if (isSet(object.isInstanceFunction)) obj.isInstanceFunction = Boolean(object.isInstanceFunction);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    return obj;
+    return {
+      overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromJSON(e)) : [],
+      typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => String(e)) : [],
+      resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
+      isInstanceFunction: isSet(object.isInstanceFunction) ? Boolean(object.isInstanceFunction) : false,
+      doc: isSet(object.doc) ? String(object.doc) : ""
+    };
   },
   toJSON(message: Decl_FunctionDecl_Overload): unknown {
     const obj: any = {};
@@ -1261,9 +1249,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     message.overloadId = object.overloadId ?? "";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
     message.typeParams = object.typeParams?.map(e => e) || [];
-    if (object.resultType !== undefined && object.resultType !== null) {
-      message.resultType = Type.fromPartial(object.resultType);
-    }
+    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : Type.fromPartial({});
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? "";
     return message;
@@ -1441,21 +1427,21 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     return message;
   },
   fromJSON(object: any): Type {
-    const obj = createBaseType();
-    if (isSet(object.dyn)) obj.dyn = Empty.fromJSON(object.dyn);
-    if (isSet(object.null)) obj.null = nullValueFromJSON(object.null);
-    if (isSet(object.primitive)) obj.primitive = type_PrimitiveTypeFromJSON(object.primitive);
-    if (isSet(object.wrapper)) obj.wrapper = type_PrimitiveTypeFromJSON(object.wrapper);
-    if (isSet(object.wellKnown)) obj.wellKnown = type_WellKnownTypeFromJSON(object.wellKnown);
-    if (isSet(object.listType)) obj.listType = Type_ListType.fromJSON(object.listType);
-    if (isSet(object.mapType)) obj.mapType = Type_MapType.fromJSON(object.mapType);
-    if (isSet(object.function)) obj.function = Type_FunctionType.fromJSON(object.function);
-    if (isSet(object.messageType)) obj.messageType = String(object.messageType);
-    if (isSet(object.typeParam)) obj.typeParam = String(object.typeParam);
-    if (isSet(object.type)) obj.type = Type.fromJSON(object.type);
-    if (isSet(object.error)) obj.error = Empty.fromJSON(object.error);
-    if (isSet(object.abstractType)) obj.abstractType = Type_AbstractType.fromJSON(object.abstractType);
-    return obj;
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : undefined,
+      listType: isSet(object.listType) ? Type_ListType.fromJSON(object.listType) : undefined,
+      mapType: isSet(object.mapType) ? Type_MapType.fromJSON(object.mapType) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromJSON(object.function) : undefined,
+      messageType: isSet(object.messageType) ? String(object.messageType) : undefined,
+      typeParam: isSet(object.typeParam) ? String(object.typeParam) : undefined,
+      type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromJSON(object.error) : undefined,
+      abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
+    };
   },
   toJSON(message: Type): unknown {
     const obj: any = {};
@@ -1476,33 +1462,19 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
   },
   fromPartial(object: Partial<Type>): Type {
     const message = createBaseType();
-    if (object.dyn !== undefined && object.dyn !== null) {
-      message.dyn = Empty.fromPartial(object.dyn);
-    }
+    message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : Empty.fromPartial({});
     message.null = object.null ?? undefined;
     message.primitive = object.primitive ?? undefined;
     message.wrapper = object.wrapper ?? undefined;
     message.wellKnown = object.wellKnown ?? undefined;
-    if (object.listType !== undefined && object.listType !== null) {
-      message.listType = Type_ListType.fromPartial(object.listType);
-    }
-    if (object.mapType !== undefined && object.mapType !== null) {
-      message.mapType = Type_MapType.fromPartial(object.mapType);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = Type_FunctionType.fromPartial(object.function);
-    }
+    message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : Type_ListType.fromPartial({});
+    message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : Type_MapType.fromPartial({});
+    message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : Type_FunctionType.fromPartial({});
     message.messageType = object.messageType ?? undefined;
     message.typeParam = object.typeParam ?? undefined;
-    if (object.type !== undefined && object.type !== null) {
-      message.type = Type.fromPartial(object.type);
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = Empty.fromPartial(object.error);
-    }
-    if (object.abstractType !== undefined && object.abstractType !== null) {
-      message.abstractType = Type_AbstractType.fromPartial(object.abstractType);
-    }
+    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : Type.fromPartial({});
+    message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : Empty.fromPartial({});
+    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : Type_AbstractType.fromPartial({});
     return message;
   },
   fromSDK(object: TypeSDKType): Type {
@@ -1624,10 +1596,10 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     return message;
   },
   fromJSON(object: any): Type_MapType {
-    const obj = createBaseType_MapType();
-    if (isSet(object.keyType)) obj.keyType = Type.fromJSON(object.keyType);
-    if (isSet(object.valueType)) obj.valueType = Type.fromJSON(object.valueType);
-    return obj;
+    return {
+      keyType: isSet(object.keyType) ? Type.fromJSON(object.keyType) : undefined,
+      valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
+    };
   },
   toJSON(message: Type_MapType): unknown {
     const obj: any = {};
@@ -1637,12 +1609,8 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
   },
   fromPartial(object: Partial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
-    if (object.keyType !== undefined && object.keyType !== null) {
-      message.keyType = Type.fromPartial(object.keyType);
-    }
-    if (object.valueType !== undefined && object.valueType !== null) {
-      message.valueType = Type.fromPartial(object.valueType);
-    }
+    message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : Type.fromPartial({});
+    message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : Type.fromPartial({});
     return message;
   },
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
@@ -1750,23 +1718,23 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     return message;
   },
   fromJSON(object: any): CheckedExpr {
-    const obj = createBaseCheckedExpr();
-    if (isObject(object.referenceMap)) obj.referenceMap = Object.entries(object.referenceMap).reduce<{
-      [key: bigint]: Reference;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Reference.fromJSON(value);
-      return acc;
-    }, {});
-    if (isObject(object.typeMap)) obj.typeMap = Object.entries(object.typeMap).reduce<{
-      [key: bigint]: Type;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Type.fromJSON(value);
-      return acc;
-    }, {});
-    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
-    if (isSet(object.exprVersion)) obj.exprVersion = String(object.exprVersion);
-    if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
-    return obj;
+    return {
+      referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
+        [key: bigint]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
+        [key: bigint]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
+      exprVersion: isSet(object.exprVersion) ? String(object.exprVersion) : "",
+      expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
+    };
   },
   toJSON(message: CheckedExpr): unknown {
     const obj: any = {};
@@ -1805,13 +1773,9 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       }
       return acc;
     }, {});
-    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
-      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
-    }
+    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
     message.exprVersion = object.exprVersion ?? "";
-    if (object.expr !== undefined && object.expr !== null) {
-      message.expr = Expr.fromPartial(object.expr);
-    }
+    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : Expr.fromPartial({});
     return message;
   },
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
@@ -1983,17 +1947,17 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return message;
   },
   fromJSON(object: any): Constant {
-    const obj = createBaseConstant();
-    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
-    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
-    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
-    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
-    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
-    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
-    if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
-    if (isSet(object.durationValue)) obj.durationValue = Duration.fromJSON(object.durationValue);
-    if (isSet(object.timestampValue)) obj.timestampValue = fromJsonTimestamp(object.timestampValue);
-    return obj;
+    return {
+      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
+      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
+      durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
+      timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
+    };
   },
   toJSON(message: Constant): unknown {
     const obj: any = {};
@@ -2012,18 +1976,12 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    if (object.int64Value !== undefined && object.int64Value !== null) {
-      message.int64Value = BigInt(object.int64Value.toString());
-    }
-    if (object.uint64Value !== undefined && object.uint64Value !== null) {
-      message.uint64Value = BigInt(object.uint64Value.toString());
-    }
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    if (object.durationValue !== undefined && object.durationValue !== null) {
-      message.durationValue = Duration.fromPartial(object.durationValue);
-    }
+    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : Duration.fromPartial({});
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   },
@@ -2130,10 +2088,10 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     return message;
   },
   fromJSON(object: any): Entry {
-    const obj = createBaseEntry();
-    if (isSet(object.key)) obj.key = Value.fromJSON(object.key);
-    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? Value.fromJSON(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: Entry): unknown {
     const obj: any = {};
@@ -2143,12 +2101,8 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
   },
   fromPartial(object: Partial<Entry>): Entry {
     const message = createBaseEntry();
-    if (object.key !== undefined && object.key !== null) {
-      message.key = Value.fromPartial(object.key);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Value.fromPartial(object.value);
-    }
+    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : Value.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
     return message;
   },
   fromSDK(object: EntrySDKType): Entry {
@@ -2222,9 +2176,9 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
     return message;
   },
   fromJSON(object: any): MapValue {
-    const obj = createBaseMapValue();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => MapValue_Entry.fromJSON(e));
-    return obj;
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
+    };
   },
   toJSON(message: MapValue): unknown {
     const obj: any = {};
@@ -2342,16 +2296,16 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     return message;
   },
   fromJSON(object: any): SourceInfo {
-    const obj = createBaseSourceInfo();
-    if (isSet(object.location)) obj.location = String(object.location);
-    if (Array.isArray(object?.lineOffsets)) object.lineOffsets.map((e: any) => Number(e));
-    if (isObject(object.positions)) obj.positions = Object.entries(object.positions).reduce<{
-      [key: number]: number;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Number(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      lineOffsets: Array.isArray(object?.lineOffsets) ? object.lineOffsets.map((e: any) => Number(e)) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: SourceInfo): unknown {
     const obj: any = {};
@@ -2496,15 +2450,15 @@ exports[`google/api/quota keyType 1`] = `
     return message;
   },
   fromJSON(object: any): MetricRule {
-    const obj = createBaseMetricRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isObject(object.metricCosts)) obj.metricCosts = Object.entries(object.metricCosts).reduce<{
-      [key: string]: bigint;
-    }>((acc, [key, value]) => {
-      acc[key] = BigInt((value as bigint | string).toString());
-      return acc;
-    }, {});
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
+        [key: string]: bigint;
+      }>((acc, [key, value]) => {
+        acc[key] = BigInt((value as bigint | string).toString());
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: MetricRule): unknown {
     const obj: any = {};
@@ -2693,25 +2647,25 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     return message;
   },
   fromJSON(object: any): LogEntry {
-    const obj = createBaseLogEntry();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.timestamp)) obj.timestamp = fromJsonTimestamp(object.timestamp);
-    if (isSet(object.severity)) obj.severity = logSeverityFromJSON(object.severity);
-    if (isSet(object.httpRequest)) obj.httpRequest = HttpRequest.fromJSON(object.httpRequest);
-    if (isSet(object.trace)) obj.trace = String(object.trace);
-    if (isSet(object.insertId)) obj.insertId = String(object.insertId);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.protoPayload)) obj.protoPayload = Any.fromJSON(object.protoPayload);
-    if (isSet(object.textPayload)) obj.textPayload = String(object.textPayload);
-    if (isSet(object.structPayload)) obj.structPayload = Struct.fromJSON(object.structPayload);
-    if (isSet(object.operation)) obj.operation = LogEntryOperation.fromJSON(object.operation);
-    if (isSet(object.sourceLocation)) obj.sourceLocation = LogEntrySourceLocation.fromJSON(object.sourceLocation);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
+      trace: isSet(object.trace) ? String(object.trace) : "",
+      insertId: isSet(object.insertId) ? String(object.insertId) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
+      textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
+      structPayload: isSet(object.structPayload) ? Struct.fromJSON(object.structPayload) : undefined,
+      operation: isSet(object.operation) ? LogEntryOperation.fromJSON(object.operation) : undefined,
+      sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined
+    };
   },
   toJSON(message: LogEntry): unknown {
     const obj: any = {};
@@ -2739,9 +2693,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
     message.severity = object.severity ?? 0;
-    if (object.httpRequest !== undefined && object.httpRequest !== null) {
-      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
-    }
+    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : HttpRequest.fromPartial({});
     message.trace = object.trace ?? "";
     message.insertId = object.insertId ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -2752,19 +2704,11 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       }
       return acc;
     }, {});
-    if (object.protoPayload !== undefined && object.protoPayload !== null) {
-      message.protoPayload = Any.fromPartial(object.protoPayload);
-    }
+    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : Any.fromPartial({});
     message.textPayload = object.textPayload ?? undefined;
-    if (object.structPayload !== undefined && object.structPayload !== null) {
-      message.structPayload = Struct.fromPartial(object.structPayload);
-    }
-    if (object.operation !== undefined && object.operation !== null) {
-      message.operation = LogEntryOperation.fromPartial(object.operation);
-    }
-    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
-      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
-    }
+    message.structPayload = object.structPayload !== undefined && object.structPayload !== null ? Struct.fromPartial(object.structPayload) : Struct.fromPartial({});
+    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : LogEntryOperation.fromPartial({});
+    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : LogEntrySourceLocation.fromPartial({});
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {
@@ -2910,9 +2854,9 @@ exports[`google/rpc/error_details name collisions 2`] = `
     return message;
   },
   fromJSON(object: any): PreconditionFailure {
-    const obj = createBasePreconditionFailure();
-    if (Array.isArray(object?.violations)) object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
-    return obj;
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
+    };
   },
   toJSON(message: PreconditionFailure): unknown {
     const obj: any = {};
@@ -3025,13 +2969,13 @@ exports[`ibc/core/port/v1/query 1`] = `
     return message;
   },
   fromJSON(object: any): QueryAppVersionRequest {
-    const obj = createBaseQueryAppVersionRequest();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
-    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
-    if (isSet(object.proposedVersion)) obj.proposedVersion = String(object.proposedVersion);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
+      proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
+    };
   },
   toJSON(message: QueryAppVersionRequest): unknown {
     const obj: any = {};
@@ -3047,9 +2991,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
     message.ordering = object.ordering ?? 0;
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = Counterparty.fromPartial(object.counterparty);
-    }
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
   },
@@ -3248,11 +3190,11 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.clientGenesis)) obj.clientGenesis = GenesisState1.fromJSON(object.clientGenesis);
-    if (isSet(object.connectionGenesis)) obj.connectionGenesis = GenesisState2.fromJSON(object.connectionGenesis);
-    if (isSet(object.channelGenesis)) obj.channelGenesis = GenesisState3.fromJSON(object.channelGenesis);
-    return obj;
+    return {
+      clientGenesis: isSet(object.clientGenesis) ? GenesisState1.fromJSON(object.clientGenesis) : undefined,
+      connectionGenesis: isSet(object.connectionGenesis) ? GenesisState2.fromJSON(object.connectionGenesis) : undefined,
+      channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -3263,15 +3205,9 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
   },
   fromPartial(object: Partial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.clientGenesis !== undefined && object.clientGenesis !== null) {
-      message.clientGenesis = GenesisState1.fromPartial(object.clientGenesis);
-    }
-    if (object.connectionGenesis !== undefined && object.connectionGenesis !== null) {
-      message.connectionGenesis = GenesisState2.fromPartial(object.connectionGenesis);
-    }
-    if (object.channelGenesis !== undefined && object.channelGenesis !== null) {
-      message.channelGenesis = GenesisState3.fromPartial(object.channelGenesis);
-    }
+    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : GenesisState1.fromPartial({});
+    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : GenesisState2.fromPartial({});
+    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : GenesisState3.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -3544,10 +3480,10 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
     return message;
   },
   fromJSON(object: any): QueryPoolsResponse {
-    const obj = createBaseQueryPoolsResponse();
-    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryPoolsResponse): unknown {
     const obj: any = {};
@@ -3562,9 +3498,7 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
   fromPartial(object: Partial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
@@ -3668,12 +3602,12 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     return message;
   },
   fromJSON(object: any): MsgJoinPool {
-    const obj = createBaseMsgJoinPool();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.shareOutAmount)) obj.shareOutAmount = String(object.shareOutAmount);
-    if (Array.isArray(object?.tokenInMaxs)) object.tokenInMaxs.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgJoinPool): unknown {
     const obj: any = {};
@@ -3690,9 +3624,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromPartial(object: Partial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? "";
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.shareOutAmount = object.shareOutAmount ?? "";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -3806,12 +3738,12 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     return message;
   },
   fromJSON(object: any): MsgSwapExactAmountIn {
-    const obj = createBaseMsgSwapExactAmountIn();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
-    if (isSet(object.tokenIn)) obj.tokenIn = Coin.fromJSON(object.tokenIn);
-    if (isSet(object.tokenOutMinAmount)) obj.tokenOutMinAmount = String(object.tokenOutMinAmount);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : [],
+      tokenIn: isSet(object.tokenIn) ? Coin.fromJSON(object.tokenIn) : undefined,
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
+    };
   },
   toJSON(message: MsgSwapExactAmountIn): unknown {
     const obj: any = {};
@@ -3829,9 +3761,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
-    if (object.tokenIn !== undefined && object.tokenIn !== null) {
-      message.tokenIn = Coin.fromPartial(object.tokenIn);
-    }
+    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : Coin.fromPartial({});
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? "";
     return message;
   },
@@ -3944,12 +3874,12 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     return message;
   },
   fromJSON(object: any): MsgSwapExactAmountOut {
-    const obj = createBaseMsgSwapExactAmountOut();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
-    if (isSet(object.tokenInMaxAmount)) obj.tokenInMaxAmount = String(object.tokenInMaxAmount);
-    if (isSet(object.tokenOut)) obj.tokenOut = Coin.fromJSON(object.tokenOut);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? String(object.tokenInMaxAmount) : "",
+      tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
+    };
   },
   toJSON(message: MsgSwapExactAmountOut): unknown {
     const obj: any = {};
@@ -3968,9 +3898,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? "";
-    if (object.tokenOut !== undefined && object.tokenOut !== null) {
-      message.tokenOut = Coin.fromPartial(object.tokenOut);
-    }
+    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {

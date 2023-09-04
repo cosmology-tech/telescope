@@ -110,13 +110,13 @@ export const Incentive = {
     return message;
   },
   fromJSON(object: any): Incentive {
-    const obj = createBaseIncentive();
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (Array.isArray(object?.allocations)) object.allocations.map((e: any) => DecCoin.fromJSON(e));
-    if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
-    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
-    if (isSet(object.totalGas)) obj.totalGas = Long.fromValue(object.totalGas);
-    return obj;
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      totalGas: isSet(object.totalGas) ? Long.fromValue(object.totalGas) : Long.UZERO
+    };
   },
   toJSON(message: Incentive): unknown {
     const obj: any = {};
@@ -136,12 +136,8 @@ export const Incentive = {
     message.contract = object.contract ?? "";
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
-    if (object.startTime !== undefined && object.startTime !== null) {
-      message.startTime = Timestamp.fromPartial(object.startTime);
-    }
-    if (object.totalGas !== undefined && object.totalGas !== null) {
-      message.totalGas = Long.fromValue(object.totalGas);
-    }
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? Long.fromValue(object.totalGas) : Long.UZERO;
     return message;
   }
 };
@@ -189,11 +185,11 @@ export const GasMeter = {
     return message;
   },
   fromJSON(object: any): GasMeter {
-    const obj = createBaseGasMeter();
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (isSet(object.participant)) obj.participant = String(object.participant);
-    if (isSet(object.cumulativeGas)) obj.cumulativeGas = Long.fromValue(object.cumulativeGas);
-    return obj;
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : "",
+      cumulativeGas: isSet(object.cumulativeGas) ? Long.fromValue(object.cumulativeGas) : Long.UZERO
+    };
   },
   toJSON(message: GasMeter): unknown {
     const obj: any = {};
@@ -206,9 +202,7 @@ export const GasMeter = {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
-    if (object.cumulativeGas !== undefined && object.cumulativeGas !== null) {
-      message.cumulativeGas = Long.fromValue(object.cumulativeGas);
-    }
+    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? Long.fromValue(object.cumulativeGas) : Long.UZERO;
     return message;
   }
 };
@@ -270,13 +264,13 @@ export const RegisterIncentiveProposal = {
     return message;
   },
   fromJSON(object: any): RegisterIncentiveProposal {
-    const obj = createBaseRegisterIncentiveProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (Array.isArray(object?.allocations)) object.allocations.map((e: any) => DecCoin.fromJSON(e));
-    if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0
+    };
   },
   toJSON(message: RegisterIncentiveProposal): unknown {
     const obj: any = {};
@@ -345,11 +339,11 @@ export const CancelIncentiveProposal = {
     return message;
   },
   fromJSON(object: any): CancelIncentiveProposal {
-    const obj = createBaseCancelIncentiveProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   },
   toJSON(message: CancelIncentiveProposal): unknown {
     const obj: any = {};

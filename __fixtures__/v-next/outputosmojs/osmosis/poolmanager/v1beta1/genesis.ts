@@ -57,9 +57,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (Array.isArray(object?.poolCreationFee)) object.poolCreationFee.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      poolCreationFee: Array.isArray(object?.poolCreationFee) ? object.poolCreationFee.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -175,11 +175,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.nextPoolId)) obj.nextPoolId = BigInt(object.nextPoolId.toString());
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.poolRoutes)) object.poolRoutes.map((e: any) => ModuleRoute.fromJSON(e));
-    return obj;
+    return {
+      nextPoolId: isSet(object.nextPoolId) ? BigInt(object.nextPoolId.toString()) : BigInt(0),
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      poolRoutes: Array.isArray(object?.poolRoutes) ? object.poolRoutes.map((e: any) => ModuleRoute.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -194,12 +194,8 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.nextPoolId !== undefined && object.nextPoolId !== null) {
-      message.nextPoolId = BigInt(object.nextPoolId.toString());
-    }
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.nextPoolId = object.nextPoolId !== undefined && object.nextPoolId !== null ? BigInt(object.nextPoolId.toString()) : BigInt(0);
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.poolRoutes = object.poolRoutes?.map(e => ModuleRoute.fromPartial(e)) || [];
     return message;
   },

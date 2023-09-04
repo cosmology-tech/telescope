@@ -127,12 +127,12 @@ export const Endpoint = {
     return message;
   },
   fromJSON(object: any): Endpoint {
-    const obj = createBaseEndpoint();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.aliases)) object.aliases.map((e: any) => String(e));
-    if (isSet(object.target)) obj.target = String(object.target);
-    if (isSet(object.allowCors)) obj.allowCors = Boolean(object.allowCors);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
+      target: isSet(object.target) ? String(object.target) : "",
+      allowCors: isSet(object.allowCors) ? Boolean(object.allowCors) : false
+    };
   },
   toJSON(message: Endpoint): unknown {
     const obj: any = {};

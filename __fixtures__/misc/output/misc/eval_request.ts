@@ -119,10 +119,10 @@ export const EvalRequest_BindingsEntry = {
     return message;
   },
   fromJSON(object: any): EvalRequest_BindingsEntry {
-    const obj = createBaseEvalRequest_BindingsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = ExprValue.fromJSON(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? ExprValue.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: EvalRequest_BindingsEntry): unknown {
     const obj: any = {};
@@ -133,9 +133,7 @@ export const EvalRequest_BindingsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = ExprValue.fromPartial(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : ExprValue.fromPartial({});
     return message;
   },
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
@@ -215,10 +213,10 @@ export const EvalRequest_RefsEntry = {
     return message;
   },
   fromJSON(object: any): EvalRequest_RefsEntry {
-    const obj = createBaseEvalRequest_RefsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = IdRef.fromJSON(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? IdRef.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: EvalRequest_RefsEntry): unknown {
     const obj: any = {};
@@ -229,9 +227,7 @@ export const EvalRequest_RefsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_RefsEntry>): EvalRequest_RefsEntry {
     const message = createBaseEvalRequest_RefsEntry();
     message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = IdRef.fromPartial(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? IdRef.fromPartial(object.value) : IdRef.fromPartial({});
     return message;
   },
   fromSDK(object: EvalRequest_RefsEntrySDKType): EvalRequest_RefsEntry {
@@ -324,20 +320,20 @@ export const EvalRequest = {
     return message;
   },
   fromJSON(object: any): EvalRequest {
-    const obj = createBaseEvalRequest();
-    if (isObject(object.bindings)) obj.bindings = Object.entries(object.bindings).reduce<{
-      [key: string]: ExprValue;
-    }>((acc, [key, value]) => {
-      acc[key] = ExprValue.fromJSON(value);
-      return acc;
-    }, {});
-    if (isObject(object.refs)) obj.refs = Object.entries(object.refs).reduce<{
-      [key: string]: IdRef;
-    }>((acc, [key, value]) => {
-      acc[key] = IdRef.fromJSON(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromJSON(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: EvalRequest): unknown {
     const obj: any = {};

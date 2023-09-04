@@ -83,13 +83,13 @@ export const BIP44Params = {
     return message;
   },
   fromJSON(object: any): BIP44Params {
-    const obj = createBaseBIP44Params();
-    if (isSet(object.purpose)) obj.purpose = Number(object.purpose);
-    if (isSet(object.coinType)) obj.coinType = Number(object.coinType);
-    if (isSet(object.account)) obj.account = Number(object.account);
-    if (isSet(object.change)) obj.change = Boolean(object.change);
-    if (isSet(object.addressIndex)) obj.addressIndex = Number(object.addressIndex);
-    return obj;
+    return {
+      purpose: isSet(object.purpose) ? Number(object.purpose) : 0,
+      coinType: isSet(object.coinType) ? Number(object.coinType) : 0,
+      account: isSet(object.account) ? Number(object.account) : 0,
+      change: isSet(object.change) ? Boolean(object.change) : false,
+      addressIndex: isSet(object.addressIndex) ? Number(object.addressIndex) : 0
+    };
   },
   toJSON(message: BIP44Params): unknown {
     const obj: any = {};

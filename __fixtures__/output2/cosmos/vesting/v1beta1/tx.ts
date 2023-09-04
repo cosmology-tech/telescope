@@ -75,13 +75,13 @@ export const MsgCreateVestingAccount = {
     return message;
   },
   fromJSON(object: any): MsgCreateVestingAccount {
-    const obj = createBaseMsgCreateVestingAccount();
-    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
-    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.endTime)) obj.endTime = Long.fromValue(object.endTime);
-    if (isSet(object.delayed)) obj.delayed = Boolean(object.delayed);
-    return obj;
+    return {
+      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
+      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      endTime: isSet(object.endTime) ? Long.fromValue(object.endTime) : Long.ZERO,
+      delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
+    };
   },
   toJSON(message: MsgCreateVestingAccount): unknown {
     const obj: any = {};
@@ -101,9 +101,7 @@ export const MsgCreateVestingAccount = {
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    if (object.endTime !== undefined && object.endTime !== null) {
-      message.endTime = Long.fromValue(object.endTime);
-    }
+    message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
     message.delayed = object.delayed ?? false;
     return message;
   }
@@ -130,8 +128,7 @@ export const MsgCreateVestingAccountResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateVestingAccountResponse {
-    const obj = createBaseMsgCreateVestingAccountResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCreateVestingAccountResponse): unknown {
     const obj: any = {};

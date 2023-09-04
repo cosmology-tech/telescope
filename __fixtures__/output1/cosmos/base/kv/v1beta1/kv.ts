@@ -49,9 +49,9 @@ export const Pairs = {
     return message;
   },
   fromJSON(object: any): Pairs {
-    const obj = createBasePairs();
-    if (Array.isArray(object?.pairs)) object.pairs.map((e: any) => Pair.fromJSON(e));
-    return obj;
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromJSON(e)) : []
+    };
   },
   toJSON(message: Pairs): unknown {
     const obj: any = {};
@@ -119,10 +119,10 @@ export const Pair = {
     return message;
   },
   fromJSON(object: any): Pair {
-    const obj = createBasePair();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
   toJSON(message: Pair): unknown {
     const obj: any = {};

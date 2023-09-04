@@ -162,10 +162,10 @@ export const QueryBalanceRequest = {
     return message;
   },
   fromJSON(object: any): QueryBalanceRequest {
-    const obj = createBaseQueryBalanceRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
@@ -210,9 +210,9 @@ export const QueryBalanceResponse = {
     return message;
   },
   fromJSON(object: any): QueryBalanceResponse {
-    const obj = createBaseQueryBalanceResponse();
-    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
-    return obj;
+    return {
+      balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined
+    };
   },
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
@@ -221,9 +221,7 @@ export const QueryBalanceResponse = {
   },
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    if (object.balance !== undefined && object.balance !== null) {
-      message.balance = Coin.fromPartial(object.balance);
-    }
+    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : Coin.fromPartial({});
     return message;
   }
 };
@@ -264,10 +262,10 @@ export const QueryAllBalancesRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllBalancesRequest {
-    const obj = createBaseQueryAllBalancesRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAllBalancesRequest): unknown {
     const obj: any = {};
@@ -278,9 +276,7 @@ export const QueryAllBalancesRequest = {
   fromPartial(object: DeepPartial<QueryAllBalancesRequest>): QueryAllBalancesRequest {
     const message = createBaseQueryAllBalancesRequest();
     message.address = object.address ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -321,10 +317,10 @@ export const QueryAllBalancesResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllBalancesResponse {
-    const obj = createBaseQueryAllBalancesResponse();
-    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAllBalancesResponse): unknown {
     const obj: any = {};
@@ -339,9 +335,7 @@ export const QueryAllBalancesResponse = {
   fromPartial(object: DeepPartial<QueryAllBalancesResponse>): QueryAllBalancesResponse {
     const message = createBaseQueryAllBalancesResponse();
     message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -382,10 +376,10 @@ export const QuerySpendableBalancesRequest = {
     return message;
   },
   fromJSON(object: any): QuerySpendableBalancesRequest {
-    const obj = createBaseQuerySpendableBalancesRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QuerySpendableBalancesRequest): unknown {
     const obj: any = {};
@@ -396,9 +390,7 @@ export const QuerySpendableBalancesRequest = {
   fromPartial(object: DeepPartial<QuerySpendableBalancesRequest>): QuerySpendableBalancesRequest {
     const message = createBaseQuerySpendableBalancesRequest();
     message.address = object.address ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -439,10 +431,10 @@ export const QuerySpendableBalancesResponse = {
     return message;
   },
   fromJSON(object: any): QuerySpendableBalancesResponse {
-    const obj = createBaseQuerySpendableBalancesResponse();
-    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QuerySpendableBalancesResponse): unknown {
     const obj: any = {};
@@ -457,9 +449,7 @@ export const QuerySpendableBalancesResponse = {
   fromPartial(object: DeepPartial<QuerySpendableBalancesResponse>): QuerySpendableBalancesResponse {
     const message = createBaseQuerySpendableBalancesResponse();
     message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -493,9 +483,9 @@ export const QueryTotalSupplyRequest = {
     return message;
   },
   fromJSON(object: any): QueryTotalSupplyRequest {
-    const obj = createBaseQueryTotalSupplyRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryTotalSupplyRequest): unknown {
     const obj: any = {};
@@ -504,9 +494,7 @@ export const QueryTotalSupplyRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalSupplyRequest>): QueryTotalSupplyRequest {
     const message = createBaseQueryTotalSupplyRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -547,10 +535,10 @@ export const QueryTotalSupplyResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalSupplyResponse {
-    const obj = createBaseQueryTotalSupplyResponse();
-    if (Array.isArray(object?.supply)) object.supply.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryTotalSupplyResponse): unknown {
     const obj: any = {};
@@ -565,9 +553,7 @@ export const QueryTotalSupplyResponse = {
   fromPartial(object: DeepPartial<QueryTotalSupplyResponse>): QueryTotalSupplyResponse {
     const message = createBaseQueryTotalSupplyResponse();
     message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -601,9 +587,9 @@ export const QuerySupplyOfRequest = {
     return message;
   },
   fromJSON(object: any): QuerySupplyOfRequest {
-    const obj = createBaseQuerySupplyOfRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
   toJSON(message: QuerySupplyOfRequest): unknown {
     const obj: any = {};
@@ -646,9 +632,9 @@ export const QuerySupplyOfResponse = {
     return message;
   },
   fromJSON(object: any): QuerySupplyOfResponse {
-    const obj = createBaseQuerySupplyOfResponse();
-    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    return obj;
+    return {
+      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
+    };
   },
   toJSON(message: QuerySupplyOfResponse): unknown {
     const obj: any = {};
@@ -657,9 +643,7 @@ export const QuerySupplyOfResponse = {
   },
   fromPartial(object: DeepPartial<QuerySupplyOfResponse>): QuerySupplyOfResponse {
     const message = createBaseQuerySupplyOfResponse();
-    if (object.amount !== undefined && object.amount !== null) {
-      message.amount = Coin.fromPartial(object.amount);
-    }
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
     return message;
   }
 };
@@ -685,8 +669,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -727,9 +710,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -738,9 +721,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   }
 };
@@ -774,9 +755,9 @@ export const QueryDenomsMetadataRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomsMetadataRequest {
-    const obj = createBaseQueryDenomsMetadataRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDenomsMetadataRequest): unknown {
     const obj: any = {};
@@ -785,9 +766,7 @@ export const QueryDenomsMetadataRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomsMetadataRequest>): QueryDenomsMetadataRequest {
     const message = createBaseQueryDenomsMetadataRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   }
 };
@@ -828,10 +807,10 @@ export const QueryDenomsMetadataResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomsMetadataResponse {
-    const obj = createBaseQueryDenomsMetadataResponse();
-    if (Array.isArray(object?.metadatas)) object.metadatas.map((e: any) => Metadata.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDenomsMetadataResponse): unknown {
     const obj: any = {};
@@ -846,9 +825,7 @@ export const QueryDenomsMetadataResponse = {
   fromPartial(object: DeepPartial<QueryDenomsMetadataResponse>): QueryDenomsMetadataResponse {
     const message = createBaseQueryDenomsMetadataResponse();
     message.metadatas = object.metadatas?.map(e => Metadata.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   }
 };
@@ -882,9 +859,9 @@ export const QueryDenomMetadataRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomMetadataRequest {
-    const obj = createBaseQueryDenomMetadataRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
   toJSON(message: QueryDenomMetadataRequest): unknown {
     const obj: any = {};
@@ -927,9 +904,9 @@ export const QueryDenomMetadataResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomMetadataResponse {
-    const obj = createBaseQueryDenomMetadataResponse();
-    if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
-    return obj;
+    return {
+      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
+    };
   },
   toJSON(message: QueryDenomMetadataResponse): unknown {
     const obj: any = {};
@@ -938,9 +915,7 @@ export const QueryDenomMetadataResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomMetadataResponse>): QueryDenomMetadataResponse {
     const message = createBaseQueryDenomMetadataResponse();
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = Metadata.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
     return message;
   }
 };

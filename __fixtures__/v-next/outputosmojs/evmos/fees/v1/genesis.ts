@@ -83,10 +83,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.devFeeInfos)) object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      devFeeInfos: Array.isArray(object?.devFeeInfos) ? object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -100,9 +100,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
   },
@@ -219,13 +217,13 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enableFees)) obj.enableFees = Boolean(object.enableFees);
-    if (isSet(object.developerShares)) obj.developerShares = String(object.developerShares);
-    if (isSet(object.validatorShares)) obj.validatorShares = String(object.validatorShares);
-    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
-    if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
-    return obj;
+    return {
+      enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
+      developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
+      validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
+      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0),
+      minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -241,9 +239,7 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    if (object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null) {
-      message.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
-    }
+    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0);
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   },

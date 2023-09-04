@@ -92,9 +92,9 @@ export const Billing = {
     return message;
   },
   fromJSON(object: any): Billing {
-    const obj = createBaseBilling();
-    if (Array.isArray(object?.consumerDestinations)) object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e));
-    return obj;
+    return {
+      consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e)) : []
+    };
   },
   toJSON(message: Billing): unknown {
     const obj: any = {};
@@ -148,10 +148,10 @@ export const Billing_BillingDestination = {
     return message;
   },
   fromJSON(object: any): Billing_BillingDestination {
-    const obj = createBaseBilling_BillingDestination();
-    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => String(e));
-    return obj;
+    return {
+      monitoredResource: isSet(object.monitoredResource) ? String(object.monitoredResource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: Billing_BillingDestination): unknown {
     const obj: any = {};

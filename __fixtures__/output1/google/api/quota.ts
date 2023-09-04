@@ -318,10 +318,10 @@ export const Quota = {
     return message;
   },
   fromJSON(object: any): Quota {
-    const obj = createBaseQuota();
-    if (Array.isArray(object?.limits)) object.limits.map((e: any) => QuotaLimit.fromJSON(e));
-    if (Array.isArray(object?.metricRules)) object.metricRules.map((e: any) => MetricRule.fromJSON(e));
-    return obj;
+    return {
+      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromJSON(e)) : [],
+      metricRules: Array.isArray(object?.metricRules) ? object.metricRules.map((e: any) => MetricRule.fromJSON(e)) : []
+    };
   },
   toJSON(message: Quota): unknown {
     const obj: any = {};
@@ -401,10 +401,10 @@ export const MetricRule_MetricCostsEntry = {
     return message;
   },
   fromJSON(object: any): MetricRule_MetricCostsEntry {
-    const obj = createBaseMetricRule_MetricCostsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   },
   toJSON(message: MetricRule_MetricCostsEntry): unknown {
     const obj: any = {};
@@ -415,9 +415,7 @@ export const MetricRule_MetricCostsEntry = {
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Long.fromValue(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
   },
   fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
@@ -476,15 +474,15 @@ export const MetricRule = {
     return message;
   },
   fromJSON(object: any): MetricRule {
-    const obj = createBaseMetricRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isObject(object.metricCosts)) obj.metricCosts = Object.entries(object.metricCosts).reduce<{
-      [key: string]: Long;
-    }>((acc, [key, value]) => {
-      acc[key] = Long.fromValue((value as Long | string));
-      return acc;
-    }, {});
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: MetricRule): unknown {
     const obj: any = {};
@@ -570,10 +568,10 @@ export const QuotaLimit_ValuesEntry = {
     return message;
   },
   fromJSON(object: any): QuotaLimit_ValuesEntry {
-    const obj = createBaseQuotaLimit_ValuesEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   },
   toJSON(message: QuotaLimit_ValuesEntry): unknown {
     const obj: any = {};
@@ -584,9 +582,7 @@ export const QuotaLimit_ValuesEntry = {
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Long.fromValue(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
   },
   fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
@@ -701,23 +697,23 @@ export const QuotaLimit = {
     return message;
   },
   fromJSON(object: any): QuotaLimit {
-    const obj = createBaseQuotaLimit();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.defaultLimit)) obj.defaultLimit = Long.fromValue(object.defaultLimit);
-    if (isSet(object.maxLimit)) obj.maxLimit = Long.fromValue(object.maxLimit);
-    if (isSet(object.freeTier)) obj.freeTier = Long.fromValue(object.freeTier);
-    if (isSet(object.duration)) obj.duration = String(object.duration);
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isObject(object.values)) obj.values = Object.entries(object.values).reduce<{
-      [key: string]: Long;
-    }>((acc, [key, value]) => {
-      acc[key] = Long.fromValue((value as Long | string));
-      return acc;
-    }, {});
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      defaultLimit: isSet(object.defaultLimit) ? Long.fromValue(object.defaultLimit) : Long.ZERO,
+      maxLimit: isSet(object.maxLimit) ? Long.fromValue(object.maxLimit) : Long.ZERO,
+      freeTier: isSet(object.freeTier) ? Long.fromValue(object.freeTier) : Long.ZERO,
+      duration: isSet(object.duration) ? String(object.duration) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      values: isObject(object.values) ? Object.entries(object.values).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {},
+      displayName: isSet(object.displayName) ? String(object.displayName) : ""
+    };
   },
   toJSON(message: QuotaLimit): unknown {
     const obj: any = {};
@@ -742,15 +738,9 @@ export const QuotaLimit = {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
-      message.defaultLimit = Long.fromValue(object.defaultLimit);
-    }
-    if (object.maxLimit !== undefined && object.maxLimit !== null) {
-      message.maxLimit = Long.fromValue(object.maxLimit);
-    }
-    if (object.freeTier !== undefined && object.freeTier !== null) {
-      message.freeTier = Long.fromValue(object.freeTier);
-    }
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? Long.fromValue(object.defaultLimit) : Long.ZERO;
+    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? Long.fromValue(object.maxLimit) : Long.ZERO;
+    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? Long.fromValue(object.freeTier) : Long.ZERO;
     message.duration = object.duration ?? "";
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";

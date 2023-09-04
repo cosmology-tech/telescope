@@ -46,10 +46,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.basedenom)) obj.basedenom = String(object.basedenom);
-    if (Array.isArray(object?.feetokens)) object.feetokens.map((e: any) => FeeToken.fromJSON(e));
-    return obj;
+    return {
+      basedenom: isSet(object.basedenom) ? String(object.basedenom) : "",
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

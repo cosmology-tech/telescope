@@ -129,16 +129,16 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (isSet(object.lastTotalPower)) obj.lastTotalPower = bytesFromBase64(object.lastTotalPower);
-    if (Array.isArray(object?.lastValidatorPowers)) object.lastValidatorPowers.map((e: any) => LastValidatorPower.fromJSON(e));
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
-    if (Array.isArray(object?.delegations)) object.delegations.map((e: any) => Delegation.fromJSON(e));
-    if (Array.isArray(object?.unbondingDelegations)) object.unbondingDelegations.map((e: any) => UnbondingDelegation.fromJSON(e));
-    if (Array.isArray(object?.redelegations)) object.redelegations.map((e: any) => Redelegation.fromJSON(e));
-    if (isSet(object.exported)) obj.exported = Boolean(object.exported);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      lastTotalPower: isSet(object.lastTotalPower) ? bytesFromBase64(object.lastTotalPower) : new Uint8Array(),
+      lastValidatorPowers: Array.isArray(object?.lastValidatorPowers) ? object.lastValidatorPowers.map((e: any) => LastValidatorPower.fromJSON(e)) : [],
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromJSON(e)) : [],
+      unbondingDelegations: Array.isArray(object?.unbondingDelegations) ? object.unbondingDelegations.map((e: any) => UnbondingDelegation.fromJSON(e)) : [],
+      redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromJSON(e)) : [],
+      exported: isSet(object.exported) ? Boolean(object.exported) : false
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -174,9 +174,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.lastTotalPower = object.lastTotalPower ?? new Uint8Array();
     message.lastValidatorPowers = object.lastValidatorPowers?.map(e => LastValidatorPower.fromPartial(e)) || [];
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
@@ -346,10 +344,10 @@ export const LastValidatorPower = {
     return message;
   },
   fromJSON(object: any): LastValidatorPower {
-    const obj = createBaseLastValidatorPower();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
+    };
   },
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
@@ -360,9 +358,7 @@ export const LastValidatorPower = {
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    if (object.power !== undefined && object.power !== null) {
-      message.power = BigInt(object.power.toString());
-    }
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {

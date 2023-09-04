@@ -121,11 +121,11 @@ export const Provider = {
     return message;
   },
   fromJSON(object: any): Provider {
-    const obj = createBaseProvider();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
+    };
   },
   toJSON(message: Provider): unknown {
     const obj: any = {};
@@ -255,11 +255,11 @@ export const AuditedAttributes = {
     return message;
   },
   fromJSON(object: any): AuditedAttributes {
-    const obj = createBaseAuditedAttributes();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
+    };
   },
   toJSON(message: AuditedAttributes): unknown {
     const obj: any = {};
@@ -375,9 +375,9 @@ export const AttributesResponse = {
     return message;
   },
   fromJSON(object: any): AttributesResponse {
-    const obj = createBaseAttributesResponse();
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
-    return obj;
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromJSON(e)) : []
+    };
   },
   toJSON(message: AttributesResponse): unknown {
     const obj: any = {};
@@ -486,10 +486,10 @@ export const AttributesFilters = {
     return message;
   },
   fromJSON(object: any): AttributesFilters {
-    const obj = createBaseAttributesFilters();
-    if (Array.isArray(object?.auditors)) object.auditors.map((e: any) => String(e));
-    if (Array.isArray(object?.owners)) object.owners.map((e: any) => String(e));
-    return obj;
+    return {
+      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => String(e)) : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: AttributesFilters): unknown {
     const obj: any = {};
@@ -624,11 +624,11 @@ export const MsgSignProviderAttributes = {
     return message;
   },
   fromJSON(object: any): MsgSignProviderAttributes {
-    const obj = createBaseMsgSignProviderAttributes();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgSignProviderAttributes): unknown {
     const obj: any = {};
@@ -736,8 +736,7 @@ export const MsgSignProviderAttributesResponse = {
     return message;
   },
   fromJSON(_: any): MsgSignProviderAttributesResponse {
-    const obj = createBaseMsgSignProviderAttributesResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSignProviderAttributesResponse): unknown {
     const obj: any = {};
@@ -831,11 +830,11 @@ export const MsgDeleteProviderAttributes = {
     return message;
   },
   fromJSON(object: any): MsgDeleteProviderAttributes {
-    const obj = createBaseMsgDeleteProviderAttributes();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.keys)) object.keys.map((e: any) => String(e));
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: MsgDeleteProviderAttributes): unknown {
     const obj: any = {};
@@ -943,8 +942,7 @@ export const MsgDeleteProviderAttributesResponse = {
     return message;
   },
   fromJSON(_: any): MsgDeleteProviderAttributesResponse {
-    const obj = createBaseMsgDeleteProviderAttributesResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgDeleteProviderAttributesResponse): unknown {
     const obj: any = {};

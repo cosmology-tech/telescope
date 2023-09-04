@@ -57,10 +57,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.hostEnabled)) obj.hostEnabled = Boolean(object.hostEnabled);
-    if (Array.isArray(object?.allowMessages)) object.allowMessages.map((e: any) => String(e));
-    return obj;
+    return {
+      hostEnabled: isSet(object.hostEnabled) ? Boolean(object.hostEnabled) : false,
+      allowMessages: Array.isArray(object?.allowMessages) ? object.allowMessages.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

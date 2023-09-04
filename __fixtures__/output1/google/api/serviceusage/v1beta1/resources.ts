@@ -663,12 +663,12 @@ export const Service = {
     return message;
   },
   fromJSON(object: any): Service {
-    const obj = createBaseService();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.config)) obj.config = ServiceConfig.fromJSON(object.config);
-    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      config: isSet(object.config) ? ServiceConfig.fromJSON(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
+    };
   },
   toJSON(message: Service): unknown {
     const obj: any = {};
@@ -682,9 +682,7 @@ export const Service = {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
-    if (object.config !== undefined && object.config !== null) {
-      message.config = ServiceConfig.fromPartial(object.config);
-    }
+    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : ServiceConfig.fromPartial({});
     message.state = object.state ?? 0;
     return message;
   },
@@ -798,18 +796,18 @@ export const ServiceConfig = {
     return message;
   },
   fromJSON(object: any): ServiceConfig {
-    const obj = createBaseServiceConfig();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (Array.isArray(object?.apis)) object.apis.map((e: any) => Api.fromJSON(e));
-    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
-    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
-    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
-    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
-    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromJSON(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromJSON(object.documentation) : undefined,
+      quota: isSet(object.quota) ? Quota.fromJSON(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromJSON(object.authentication) : undefined,
+      usage: isSet(object.usage) ? Usage.fromJSON(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : [],
+      monitoredResources: Array.isArray(object?.monitoredResources) ? object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e)) : [],
+      monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined
+    };
   },
   toJSON(message: ServiceConfig): unknown {
     const obj: any = {};
@@ -842,23 +840,13 @@ export const ServiceConfig = {
     message.name = object.name ?? "";
     message.title = object.title ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    if (object.documentation !== undefined && object.documentation !== null) {
-      message.documentation = Documentation.fromPartial(object.documentation);
-    }
-    if (object.quota !== undefined && object.quota !== null) {
-      message.quota = Quota.fromPartial(object.quota);
-    }
-    if (object.authentication !== undefined && object.authentication !== null) {
-      message.authentication = Authentication.fromPartial(object.authentication);
-    }
-    if (object.usage !== undefined && object.usage !== null) {
-      message.usage = Usage.fromPartial(object.usage);
-    }
+    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : Documentation.fromPartial({});
+    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : Quota.fromPartial({});
+    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : Authentication.fromPartial({});
+    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : Usage.fromPartial({});
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    if (object.monitoring !== undefined && object.monitoring !== null) {
-      message.monitoring = Monitoring.fromPartial(object.monitoring);
-    }
+    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : Monitoring.fromPartial({});
     return message;
   },
   fromSDK(object: ServiceConfigSDKType): ServiceConfig {
@@ -932,9 +920,9 @@ export const OperationMetadata = {
     return message;
   },
   fromJSON(object: any): OperationMetadata {
-    const obj = createBaseOperationMetadata();
-    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
-    return obj;
+    return {
+      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: OperationMetadata): unknown {
     const obj: any = {};
@@ -1030,14 +1018,14 @@ export const ConsumerQuotaMetric = {
     return message;
   },
   fromJSON(object: any): ConsumerQuotaMetric {
-    const obj = createBaseConsumerQuotaMetric();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (Array.isArray(object?.consumerQuotaLimits)) object.consumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e));
-    if (Array.isArray(object?.descendantConsumerQuotaLimits)) object.descendantConsumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e));
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      displayName: isSet(object.displayName) ? String(object.displayName) : "",
+      consumerQuotaLimits: Array.isArray(object?.consumerQuotaLimits) ? object.consumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e)) : [],
+      descendantConsumerQuotaLimits: Array.isArray(object?.descendantConsumerQuotaLimits) ? object.descendantConsumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e)) : [],
+      unit: isSet(object.unit) ? String(object.unit) : ""
+    };
   },
   toJSON(message: ConsumerQuotaMetric): unknown {
     const obj: any = {};
@@ -1161,14 +1149,14 @@ export const ConsumerQuotaLimit = {
     return message;
   },
   fromJSON(object: any): ConsumerQuotaLimit {
-    const obj = createBaseConsumerQuotaLimit();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.isPrecise)) obj.isPrecise = Boolean(object.isPrecise);
-    if (isSet(object.allowsAdminOverrides)) obj.allowsAdminOverrides = Boolean(object.allowsAdminOverrides);
-    if (Array.isArray(object?.quotaBuckets)) object.quotaBuckets.map((e: any) => QuotaBucket.fromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      isPrecise: isSet(object.isPrecise) ? Boolean(object.isPrecise) : false,
+      allowsAdminOverrides: isSet(object.allowsAdminOverrides) ? Boolean(object.allowsAdminOverrides) : false,
+      quotaBuckets: Array.isArray(object?.quotaBuckets) ? object.quotaBuckets.map((e: any) => QuotaBucket.fromJSON(e)) : []
+    };
   },
   toJSON(message: ConsumerQuotaLimit): unknown {
     const obj: any = {};
@@ -1256,10 +1244,10 @@ export const QuotaBucket_DimensionsEntry = {
     return message;
   },
   fromJSON(object: any): QuotaBucket_DimensionsEntry {
-    const obj = createBaseQuotaBucket_DimensionsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: QuotaBucket_DimensionsEntry): unknown {
     const obj: any = {};
@@ -1357,19 +1345,19 @@ export const QuotaBucket = {
     return message;
   },
   fromJSON(object: any): QuotaBucket {
-    const obj = createBaseQuotaBucket();
-    if (isSet(object.effectiveLimit)) obj.effectiveLimit = Long.fromValue(object.effectiveLimit);
-    if (isSet(object.defaultLimit)) obj.defaultLimit = Long.fromValue(object.defaultLimit);
-    if (isSet(object.producerOverride)) obj.producerOverride = QuotaOverride.fromJSON(object.producerOverride);
-    if (isSet(object.consumerOverride)) obj.consumerOverride = QuotaOverride.fromJSON(object.consumerOverride);
-    if (isSet(object.adminOverride)) obj.adminOverride = QuotaOverride.fromJSON(object.adminOverride);
-    if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      effectiveLimit: isSet(object.effectiveLimit) ? Long.fromValue(object.effectiveLimit) : Long.ZERO,
+      defaultLimit: isSet(object.defaultLimit) ? Long.fromValue(object.defaultLimit) : Long.ZERO,
+      producerOverride: isSet(object.producerOverride) ? QuotaOverride.fromJSON(object.producerOverride) : undefined,
+      consumerOverride: isSet(object.consumerOverride) ? QuotaOverride.fromJSON(object.consumerOverride) : undefined,
+      adminOverride: isSet(object.adminOverride) ? QuotaOverride.fromJSON(object.adminOverride) : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: QuotaBucket): unknown {
     const obj: any = {};
@@ -1388,21 +1376,11 @@ export const QuotaBucket = {
   },
   fromPartial(object: DeepPartial<QuotaBucket>): QuotaBucket {
     const message = createBaseQuotaBucket();
-    if (object.effectiveLimit !== undefined && object.effectiveLimit !== null) {
-      message.effectiveLimit = Long.fromValue(object.effectiveLimit);
-    }
-    if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
-      message.defaultLimit = Long.fromValue(object.defaultLimit);
-    }
-    if (object.producerOverride !== undefined && object.producerOverride !== null) {
-      message.producerOverride = QuotaOverride.fromPartial(object.producerOverride);
-    }
-    if (object.consumerOverride !== undefined && object.consumerOverride !== null) {
-      message.consumerOverride = QuotaOverride.fromPartial(object.consumerOverride);
-    }
-    if (object.adminOverride !== undefined && object.adminOverride !== null) {
-      message.adminOverride = QuotaOverride.fromPartial(object.adminOverride);
-    }
+    message.effectiveLimit = object.effectiveLimit !== undefined && object.effectiveLimit !== null ? Long.fromValue(object.effectiveLimit) : Long.ZERO;
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? Long.fromValue(object.defaultLimit) : Long.ZERO;
+    message.producerOverride = object.producerOverride !== undefined && object.producerOverride !== null ? QuotaOverride.fromPartial(object.producerOverride) : QuotaOverride.fromPartial({});
+    message.consumerOverride = object.consumerOverride !== undefined && object.consumerOverride !== null ? QuotaOverride.fromPartial(object.consumerOverride) : QuotaOverride.fromPartial({});
+    message.adminOverride = object.adminOverride !== undefined && object.adminOverride !== null ? QuotaOverride.fromPartial(object.adminOverride) : QuotaOverride.fromPartial({});
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1481,10 +1459,10 @@ export const QuotaOverride_DimensionsEntry = {
     return message;
   },
   fromJSON(object: any): QuotaOverride_DimensionsEntry {
-    const obj = createBaseQuotaOverride_DimensionsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: QuotaOverride_DimensionsEntry): unknown {
     const obj: any = {};
@@ -1582,19 +1560,19 @@ export const QuotaOverride = {
     return message;
   },
   fromJSON(object: any): QuotaOverride {
-    const obj = createBaseQuotaOverride();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.overrideValue)) obj.overrideValue = Long.fromValue(object.overrideValue);
-    if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.adminOverrideAncestor)) obj.adminOverrideAncestor = String(object.adminOverrideAncestor);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      overrideValue: isSet(object.overrideValue) ? Long.fromValue(object.overrideValue) : Long.ZERO,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      adminOverrideAncestor: isSet(object.adminOverrideAncestor) ? String(object.adminOverrideAncestor) : ""
+    };
   },
   toJSON(message: QuotaOverride): unknown {
     const obj: any = {};
@@ -1614,9 +1592,7 @@ export const QuotaOverride = {
   fromPartial(object: DeepPartial<QuotaOverride>): QuotaOverride {
     const message = createBaseQuotaOverride();
     message.name = object.name ?? "";
-    if (object.overrideValue !== undefined && object.overrideValue !== null) {
-      message.overrideValue = Long.fromValue(object.overrideValue);
-    }
+    message.overrideValue = object.overrideValue !== undefined && object.overrideValue !== null ? Long.fromValue(object.overrideValue) : Long.ZERO;
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1691,9 +1667,9 @@ export const OverrideInlineSource = {
     return message;
   },
   fromJSON(object: any): OverrideInlineSource {
-    const obj = createBaseOverrideInlineSource();
-    if (Array.isArray(object?.overrides)) object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : []
+    };
   },
   toJSON(message: OverrideInlineSource): unknown {
     const obj: any = {};
@@ -1761,10 +1737,10 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     return message;
   },
   fromJSON(object: any): AdminQuotaPolicy_DimensionsEntry {
-    const obj = createBaseAdminQuotaPolicy_DimensionsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: AdminQuotaPolicy_DimensionsEntry): unknown {
     const obj: any = {};
@@ -1862,19 +1838,19 @@ export const AdminQuotaPolicy = {
     return message;
   },
   fromJSON(object: any): AdminQuotaPolicy {
-    const obj = createBaseAdminQuotaPolicy();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.policyValue)) obj.policyValue = Long.fromValue(object.policyValue);
-    if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.container)) obj.container = String(object.container);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      policyValue: isSet(object.policyValue) ? Long.fromValue(object.policyValue) : Long.ZERO,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      container: isSet(object.container) ? String(object.container) : ""
+    };
   },
   toJSON(message: AdminQuotaPolicy): unknown {
     const obj: any = {};
@@ -1894,9 +1870,7 @@ export const AdminQuotaPolicy = {
   fromPartial(object: DeepPartial<AdminQuotaPolicy>): AdminQuotaPolicy {
     const message = createBaseAdminQuotaPolicy();
     message.name = object.name ?? "";
-    if (object.policyValue !== undefined && object.policyValue !== null) {
-      message.policyValue = Long.fromValue(object.policyValue);
-    }
+    message.policyValue = object.policyValue !== undefined && object.policyValue !== null ? Long.fromValue(object.policyValue) : Long.ZERO;
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1978,10 +1952,10 @@ export const ServiceIdentity = {
     return message;
   },
   fromJSON(object: any): ServiceIdentity {
-    const obj = createBaseServiceIdentity();
-    if (isSet(object.email)) obj.email = String(object.email);
-    if (isSet(object.uniqueId)) obj.uniqueId = String(object.uniqueId);
-    return obj;
+    return {
+      email: isSet(object.email) ? String(object.email) : "",
+      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : ""
+    };
   },
   toJSON(message: ServiceIdentity): unknown {
     const obj: any = {};

@@ -348,15 +348,15 @@ export const Api = {
     return message;
   },
   fromJSON(object: any): Api {
-    const obj = createBaseApi();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.methods)) object.methods.map((e: any) => Method.fromJSON(e));
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
-    if (isSet(object.version)) obj.version = String(object.version);
-    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
-    if (Array.isArray(object?.mixins)) object.mixins.map((e: any) => Mixin.fromJSON(e));
-    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromJSON(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
+      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromJSON(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
   },
   toJSON(message: Api): unknown {
     const obj: any = {};
@@ -387,9 +387,7 @@ export const Api = {
     message.methods = object.methods?.map(e => Method.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.version = object.version ?? "";
-    if (object.sourceContext !== undefined && object.sourceContext !== null) {
-      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
-    }
+    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : SourceContext.fromPartial({});
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;
@@ -501,15 +499,15 @@ export const Method = {
     return message;
   },
   fromJSON(object: any): Method {
-    const obj = createBaseMethod();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.requestTypeUrl)) obj.requestTypeUrl = String(object.requestTypeUrl);
-    if (isSet(object.requestStreaming)) obj.requestStreaming = Boolean(object.requestStreaming);
-    if (isSet(object.responseTypeUrl)) obj.responseTypeUrl = String(object.responseTypeUrl);
-    if (isSet(object.responseStreaming)) obj.responseStreaming = Boolean(object.responseStreaming);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
-    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      requestTypeUrl: isSet(object.requestTypeUrl) ? String(object.requestTypeUrl) : "",
+      requestStreaming: isSet(object.requestStreaming) ? Boolean(object.requestStreaming) : false,
+      responseTypeUrl: isSet(object.responseTypeUrl) ? String(object.responseTypeUrl) : "",
+      responseStreaming: isSet(object.responseStreaming) ? Boolean(object.responseStreaming) : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
   },
   toJSON(message: Method): unknown {
     const obj: any = {};
@@ -601,10 +599,10 @@ export const Mixin = {
     return message;
   },
   fromJSON(object: any): Mixin {
-    const obj = createBaseMixin();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.root)) obj.root = String(object.root);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      root: isSet(object.root) ? String(object.root) : ""
+    };
   },
   toJSON(message: Mixin): unknown {
     const obj: any = {};

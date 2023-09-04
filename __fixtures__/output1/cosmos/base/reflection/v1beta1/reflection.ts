@@ -65,8 +65,7 @@ export const ListAllInterfacesRequest = {
     return message;
   },
   fromJSON(_: any): ListAllInterfacesRequest {
-    const obj = createBaseListAllInterfacesRequest();
-    return obj;
+    return {};
   },
   toJSON(_: ListAllInterfacesRequest): unknown {
     const obj: any = {};
@@ -114,9 +113,9 @@ export const ListAllInterfacesResponse = {
     return message;
   },
   fromJSON(object: any): ListAllInterfacesResponse {
-    const obj = createBaseListAllInterfacesResponse();
-    if (Array.isArray(object?.interfaceNames)) object.interfaceNames.map((e: any) => String(e));
-    return obj;
+    return {
+      interfaceNames: Array.isArray(object?.interfaceNames) ? object.interfaceNames.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: ListAllInterfacesResponse): unknown {
     const obj: any = {};
@@ -177,9 +176,9 @@ export const ListImplementationsRequest = {
     return message;
   },
   fromJSON(object: any): ListImplementationsRequest {
-    const obj = createBaseListImplementationsRequest();
-    if (isSet(object.interfaceName)) obj.interfaceName = String(object.interfaceName);
-    return obj;
+    return {
+      interfaceName: isSet(object.interfaceName) ? String(object.interfaceName) : ""
+    };
   },
   toJSON(message: ListImplementationsRequest): unknown {
     const obj: any = {};
@@ -232,9 +231,9 @@ export const ListImplementationsResponse = {
     return message;
   },
   fromJSON(object: any): ListImplementationsResponse {
-    const obj = createBaseListImplementationsResponse();
-    if (Array.isArray(object?.implementationMessageNames)) object.implementationMessageNames.map((e: any) => String(e));
-    return obj;
+    return {
+      implementationMessageNames: Array.isArray(object?.implementationMessageNames) ? object.implementationMessageNames.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: ListImplementationsResponse): unknown {
     const obj: any = {};

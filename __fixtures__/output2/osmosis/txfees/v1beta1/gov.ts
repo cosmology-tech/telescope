@@ -60,11 +60,11 @@ export const UpdateFeeTokenProposal = {
     return message;
   },
   fromJSON(object: any): UpdateFeeTokenProposal {
-    const obj = createBaseUpdateFeeTokenProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.feetoken)) obj.feetoken = FeeToken.fromJSON(object.feetoken);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      feetoken: isSet(object.feetoken) ? FeeToken.fromJSON(object.feetoken) : undefined
+    };
   },
   toJSON(message: UpdateFeeTokenProposal): unknown {
     const obj: any = {};
@@ -77,9 +77,7 @@ export const UpdateFeeTokenProposal = {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    if (object.feetoken !== undefined && object.feetoken !== null) {
-      message.feetoken = FeeToken.fromPartial(object.feetoken);
-    }
+    message.feetoken = object.feetoken !== undefined && object.feetoken !== null ? FeeToken.fromPartial(object.feetoken) : FeeToken.fromPartial({});
     return message;
   }
 };

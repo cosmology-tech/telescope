@@ -89,10 +89,10 @@ export const ReplaceMigrationRecordsProposal = {
     return message;
   },
   fromJSON(object: any): ReplaceMigrationRecordsProposal {
-    const obj = createBaseReplaceMigrationRecordsProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: ReplaceMigrationRecordsProposal): unknown {
     const obj: any = {};
@@ -196,10 +196,10 @@ export const UpdateMigrationRecordsProposal = {
     return message;
   },
   fromJSON(object: any): UpdateMigrationRecordsProposal {
-    const obj = createBaseUpdateMigrationRecordsProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: UpdateMigrationRecordsProposal): unknown {
     const obj: any = {};

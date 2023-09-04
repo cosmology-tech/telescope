@@ -176,10 +176,10 @@ export const MsgCreateDenom = {
     return message;
   },
   fromJSON(object: any): MsgCreateDenom {
-    const obj = createBaseMsgCreateDenom();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.subdenom)) obj.subdenom = String(object.subdenom);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      subdenom: isSet(object.subdenom) ? String(object.subdenom) : ""
+    };
   },
   toJSON(message: MsgCreateDenom): unknown {
     const obj: any = {};
@@ -276,9 +276,9 @@ export const MsgCreateDenomResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateDenomResponse {
-    const obj = createBaseMsgCreateDenomResponse();
-    if (isSet(object.newTokenDenom)) obj.newTokenDenom = String(object.newTokenDenom);
-    return obj;
+    return {
+      newTokenDenom: isSet(object.newTokenDenom) ? String(object.newTokenDenom) : ""
+    };
   },
   toJSON(message: MsgCreateDenomResponse): unknown {
     const obj: any = {};
@@ -375,10 +375,10 @@ export const MsgMint = {
     return message;
   },
   fromJSON(object: any): MsgMint {
-    const obj = createBaseMsgMint();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
+    };
   },
   toJSON(message: MsgMint): unknown {
     const obj: any = {};
@@ -389,9 +389,7 @@ export const MsgMint = {
   fromPartial(object: DeepPartial<MsgMint>): MsgMint {
     const message = createBaseMsgMint();
     message.sender = object.sender ?? "";
-    if (object.amount !== undefined && object.amount !== null) {
-      message.amount = Coin.fromPartial(object.amount);
-    }
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgMintSDKType): MsgMint {
@@ -469,8 +467,7 @@ export const MsgMintResponse = {
     return message;
   },
   fromJSON(_: any): MsgMintResponse {
-    const obj = createBaseMsgMintResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgMintResponse): unknown {
     const obj: any = {};
@@ -557,10 +554,10 @@ export const MsgBurn = {
     return message;
   },
   fromJSON(object: any): MsgBurn {
-    const obj = createBaseMsgBurn();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
+    };
   },
   toJSON(message: MsgBurn): unknown {
     const obj: any = {};
@@ -571,9 +568,7 @@ export const MsgBurn = {
   fromPartial(object: DeepPartial<MsgBurn>): MsgBurn {
     const message = createBaseMsgBurn();
     message.sender = object.sender ?? "";
-    if (object.amount !== undefined && object.amount !== null) {
-      message.amount = Coin.fromPartial(object.amount);
-    }
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgBurnSDKType): MsgBurn {
@@ -651,8 +646,7 @@ export const MsgBurnResponse = {
     return message;
   },
   fromJSON(_: any): MsgBurnResponse {
-    const obj = createBaseMsgBurnResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgBurnResponse): unknown {
     const obj: any = {};
@@ -746,11 +740,11 @@ export const MsgChangeAdmin = {
     return message;
   },
   fromJSON(object: any): MsgChangeAdmin {
-    const obj = createBaseMsgChangeAdmin();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : ""
+    };
   },
   toJSON(message: MsgChangeAdmin): unknown {
     const obj: any = {};
@@ -846,8 +840,7 @@ export const MsgChangeAdminResponse = {
     return message;
   },
   fromJSON(_: any): MsgChangeAdminResponse {
-    const obj = createBaseMsgChangeAdminResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgChangeAdminResponse): unknown {
     const obj: any = {};
@@ -934,10 +927,10 @@ export const MsgSetDenomMetadata = {
     return message;
   },
   fromJSON(object: any): MsgSetDenomMetadata {
-    const obj = createBaseMsgSetDenomMetadata();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
+    };
   },
   toJSON(message: MsgSetDenomMetadata): unknown {
     const obj: any = {};
@@ -948,9 +941,7 @@ export const MsgSetDenomMetadata = {
   fromPartial(object: DeepPartial<MsgSetDenomMetadata>): MsgSetDenomMetadata {
     const message = createBaseMsgSetDenomMetadata();
     message.sender = object.sender ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = Metadata.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
     return message;
   },
   fromSDK(object: MsgSetDenomMetadataSDKType): MsgSetDenomMetadata {
@@ -1028,8 +1019,7 @@ export const MsgSetDenomMetadataResponse = {
     return message;
   },
   fromJSON(_: any): MsgSetDenomMetadataResponse {
-    const obj = createBaseMsgSetDenomMetadataResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSetDenomMetadataResponse): unknown {
     const obj: any = {};

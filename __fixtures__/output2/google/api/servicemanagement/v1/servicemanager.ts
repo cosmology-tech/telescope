@@ -322,12 +322,12 @@ export const ListServicesRequest = {
     return message;
   },
   fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
-    return obj;
+    return {
+      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      consumerId: isSet(object.consumerId) ? String(object.consumerId) : ""
+    };
   },
   toJSON(message: ListServicesRequest): unknown {
     const obj: any = {};
@@ -383,10 +383,10 @@ export const ListServicesResponse = {
     return message;
   },
   fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => ManagedService.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServicesResponse): unknown {
     const obj: any = {};
@@ -435,9 +435,9 @@ export const GetServiceRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
+    };
   },
   toJSON(message: GetServiceRequest): unknown {
     const obj: any = {};
@@ -480,9 +480,9 @@ export const CreateServiceRequest = {
     return message;
   },
   fromJSON(object: any): CreateServiceRequest {
-    const obj = createBaseCreateServiceRequest();
-    if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? ManagedService.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: CreateServiceRequest): unknown {
     const obj: any = {};
@@ -491,9 +491,7 @@ export const CreateServiceRequest = {
   },
   fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
     const message = createBaseCreateServiceRequest();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = ManagedService.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : ManagedService.fromPartial({});
     return message;
   }
 };
@@ -527,9 +525,9 @@ export const DeleteServiceRequest = {
     return message;
   },
   fromJSON(object: any): DeleteServiceRequest {
-    const obj = createBaseDeleteServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
+    };
   },
   toJSON(message: DeleteServiceRequest): unknown {
     const obj: any = {};
@@ -572,9 +570,9 @@ export const UndeleteServiceRequest = {
     return message;
   },
   fromJSON(object: any): UndeleteServiceRequest {
-    const obj = createBaseUndeleteServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
+    };
   },
   toJSON(message: UndeleteServiceRequest): unknown {
     const obj: any = {};
@@ -617,9 +615,9 @@ export const UndeleteServiceResponse = {
     return message;
   },
   fromJSON(object: any): UndeleteServiceResponse {
-    const obj = createBaseUndeleteServiceResponse();
-    if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? ManagedService.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: UndeleteServiceResponse): unknown {
     const obj: any = {};
@@ -628,9 +626,7 @@ export const UndeleteServiceResponse = {
   },
   fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
     const message = createBaseUndeleteServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = ManagedService.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : ManagedService.fromPartial({});
     return message;
   }
 };
@@ -678,11 +674,11 @@ export const GetServiceConfigRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceConfigRequest {
-    const obj = createBaseGetServiceConfigRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.configId)) obj.configId = String(object.configId);
-    if (isSet(object.view)) obj.view = getServiceConfigRequest_ConfigViewFromJSON(object.view);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      configId: isSet(object.configId) ? String(object.configId) : "",
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
+    };
   },
   toJSON(message: GetServiceConfigRequest): unknown {
     const obj: any = {};
@@ -743,11 +739,11 @@ export const ListServiceConfigsRequest = {
     return message;
   },
   fromJSON(object: any): ListServiceConfigsRequest {
-    const obj = createBaseListServiceConfigsRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListServiceConfigsRequest): unknown {
     const obj: any = {};
@@ -801,10 +797,10 @@ export const ListServiceConfigsResponse = {
     return message;
   },
   fromJSON(object: any): ListServiceConfigsResponse {
-    const obj = createBaseListServiceConfigsResponse();
-    if (Array.isArray(object?.serviceConfigs)) object.serviceConfigs.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      serviceConfigs: Array.isArray(object?.serviceConfigs) ? object.serviceConfigs.map((e: any) => Service.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServiceConfigsResponse): unknown {
     const obj: any = {};
@@ -860,10 +856,10 @@ export const CreateServiceConfigRequest = {
     return message;
   },
   fromJSON(object: any): CreateServiceConfigRequest {
-    const obj = createBaseCreateServiceConfigRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      serviceConfig: isSet(object.serviceConfig) ? Service.fromJSON(object.serviceConfig) : undefined
+    };
   },
   toJSON(message: CreateServiceConfigRequest): unknown {
     const obj: any = {};
@@ -874,9 +870,7 @@ export const CreateServiceConfigRequest = {
   fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
     const message = createBaseCreateServiceConfigRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
-      message.serviceConfig = Service.fromPartial(object.serviceConfig);
-    }
+    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : Service.fromPartial({});
     return message;
   }
 };
@@ -924,11 +918,11 @@ export const SubmitConfigSourceRequest = {
     return message;
   },
   fromJSON(object: any): SubmitConfigSourceRequest {
-    const obj = createBaseSubmitConfigSourceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.configSource)) obj.configSource = ConfigSource.fromJSON(object.configSource);
-    if (isSet(object.validateOnly)) obj.validateOnly = Boolean(object.validateOnly);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      configSource: isSet(object.configSource) ? ConfigSource.fromJSON(object.configSource) : undefined,
+      validateOnly: isSet(object.validateOnly) ? Boolean(object.validateOnly) : false
+    };
   },
   toJSON(message: SubmitConfigSourceRequest): unknown {
     const obj: any = {};
@@ -940,9 +934,7 @@ export const SubmitConfigSourceRequest = {
   fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
     const message = createBaseSubmitConfigSourceRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.configSource !== undefined && object.configSource !== null) {
-      message.configSource = ConfigSource.fromPartial(object.configSource);
-    }
+    message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : ConfigSource.fromPartial({});
     message.validateOnly = object.validateOnly ?? false;
     return message;
   }
@@ -977,9 +969,9 @@ export const SubmitConfigSourceResponse = {
     return message;
   },
   fromJSON(object: any): SubmitConfigSourceResponse {
-    const obj = createBaseSubmitConfigSourceResponse();
-    if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
+    return {
+      serviceConfig: isSet(object.serviceConfig) ? Service.fromJSON(object.serviceConfig) : undefined
+    };
   },
   toJSON(message: SubmitConfigSourceResponse): unknown {
     const obj: any = {};
@@ -988,9 +980,7 @@ export const SubmitConfigSourceResponse = {
   },
   fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
     const message = createBaseSubmitConfigSourceResponse();
-    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
-      message.serviceConfig = Service.fromPartial(object.serviceConfig);
-    }
+    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : Service.fromPartial({});
     return message;
   }
 };
@@ -1031,10 +1021,10 @@ export const CreateServiceRolloutRequest = {
     return message;
   },
   fromJSON(object: any): CreateServiceRolloutRequest {
-    const obj = createBaseCreateServiceRolloutRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.rollout)) obj.rollout = Rollout.fromJSON(object.rollout);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      rollout: isSet(object.rollout) ? Rollout.fromJSON(object.rollout) : undefined
+    };
   },
   toJSON(message: CreateServiceRolloutRequest): unknown {
     const obj: any = {};
@@ -1045,9 +1035,7 @@ export const CreateServiceRolloutRequest = {
   fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
     const message = createBaseCreateServiceRolloutRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.rollout !== undefined && object.rollout !== null) {
-      message.rollout = Rollout.fromPartial(object.rollout);
-    }
+    message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : Rollout.fromPartial({});
     return message;
   }
 };
@@ -1102,12 +1090,12 @@ export const ListServiceRolloutsRequest = {
     return message;
   },
   fromJSON(object: any): ListServiceRolloutsRequest {
-    const obj = createBaseListServiceRolloutsRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
   toJSON(message: ListServiceRolloutsRequest): unknown {
     const obj: any = {};
@@ -1163,10 +1151,10 @@ export const ListServiceRolloutsResponse = {
     return message;
   },
   fromJSON(object: any): ListServiceRolloutsResponse {
-    const obj = createBaseListServiceRolloutsResponse();
-    if (Array.isArray(object?.rollouts)) object.rollouts.map((e: any) => Rollout.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServiceRolloutsResponse): unknown {
     const obj: any = {};
@@ -1222,10 +1210,10 @@ export const GetServiceRolloutRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRolloutRequest {
-    const obj = createBaseGetServiceRolloutRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : ""
+    };
   },
   toJSON(message: GetServiceRolloutRequest): unknown {
     const obj: any = {};
@@ -1277,10 +1265,10 @@ export const GenerateConfigReportRequest = {
     return message;
   },
   fromJSON(object: any): GenerateConfigReportRequest {
-    const obj = createBaseGenerateConfigReportRequest();
-    if (isSet(object.newConfig)) obj.newConfig = Any.fromJSON(object.newConfig);
-    if (isSet(object.oldConfig)) obj.oldConfig = Any.fromJSON(object.oldConfig);
-    return obj;
+    return {
+      newConfig: isSet(object.newConfig) ? Any.fromJSON(object.newConfig) : undefined,
+      oldConfig: isSet(object.oldConfig) ? Any.fromJSON(object.oldConfig) : undefined
+    };
   },
   toJSON(message: GenerateConfigReportRequest): unknown {
     const obj: any = {};
@@ -1290,12 +1278,8 @@ export const GenerateConfigReportRequest = {
   },
   fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
     const message = createBaseGenerateConfigReportRequest();
-    if (object.newConfig !== undefined && object.newConfig !== null) {
-      message.newConfig = Any.fromPartial(object.newConfig);
-    }
-    if (object.oldConfig !== undefined && object.oldConfig !== null) {
-      message.oldConfig = Any.fromPartial(object.oldConfig);
-    }
+    message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : Any.fromPartial({});
+    message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : Any.fromPartial({});
     return message;
   }
 };
@@ -1350,12 +1334,12 @@ export const GenerateConfigReportResponse = {
     return message;
   },
   fromJSON(object: any): GenerateConfigReportResponse {
-    const obj = createBaseGenerateConfigReportResponse();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.changeReports)) object.changeReports.map((e: any) => ChangeReport.fromJSON(e));
-    if (Array.isArray(object?.diagnostics)) object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      changeReports: Array.isArray(object?.changeReports) ? object.changeReports.map((e: any) => ChangeReport.fromJSON(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenerateConfigReportResponse): unknown {
     const obj: any = {};

@@ -51,10 +51,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    return obj;
+    return {
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      admin: isSet(object.admin) ? String(object.admin) : ""
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

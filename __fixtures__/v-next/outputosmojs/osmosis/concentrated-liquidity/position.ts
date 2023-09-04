@@ -113,15 +113,15 @@ export const Position = {
     return message;
   },
   fromJSON(object: any): Position {
-    const obj = createBasePosition();
-    if (isSet(object.positionId)) obj.positionId = BigInt(object.positionId.toString());
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.lowerTick)) obj.lowerTick = BigInt(object.lowerTick.toString());
-    if (isSet(object.upperTick)) obj.upperTick = BigInt(object.upperTick.toString());
-    if (isSet(object.joinTime)) obj.joinTime = new Date(object.joinTime);
-    if (isSet(object.liquidity)) obj.liquidity = String(object.liquidity);
-    return obj;
+    return {
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0),
+      address: isSet(object.address) ? String(object.address) : "",
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      lowerTick: isSet(object.lowerTick) ? BigInt(object.lowerTick.toString()) : BigInt(0),
+      upperTick: isSet(object.upperTick) ? BigInt(object.upperTick.toString()) : BigInt(0),
+      joinTime: isSet(object.joinTime) ? new Date(object.joinTime) : undefined,
+      liquidity: isSet(object.liquidity) ? String(object.liquidity) : ""
+    };
   },
   toJSON(message: Position): unknown {
     const obj: any = {};
@@ -136,19 +136,11 @@ export const Position = {
   },
   fromPartial(object: DeepPartial<Position>): Position {
     const message = createBasePosition();
-    if (object.positionId !== undefined && object.positionId !== null) {
-      message.positionId = BigInt(object.positionId.toString());
-    }
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     message.address = object.address ?? "";
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
-    if (object.lowerTick !== undefined && object.lowerTick !== null) {
-      message.lowerTick = BigInt(object.lowerTick.toString());
-    }
-    if (object.upperTick !== undefined && object.upperTick !== null) {
-      message.upperTick = BigInt(object.upperTick.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt(0);
+    message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt(0);
     message.joinTime = object.joinTime ?? undefined;
     message.liquidity = object.liquidity ?? "";
     return message;
@@ -275,11 +267,11 @@ export const PositionWithUnderlyingAssetBreakdown = {
     return message;
   },
   fromJSON(object: any): PositionWithUnderlyingAssetBreakdown {
-    const obj = createBasePositionWithUnderlyingAssetBreakdown();
-    if (isSet(object.position)) obj.position = Position.fromJSON(object.position);
-    if (isSet(object.asset0)) obj.asset0 = Coin.fromJSON(object.asset0);
-    if (isSet(object.asset1)) obj.asset1 = Coin.fromJSON(object.asset1);
-    return obj;
+    return {
+      position: isSet(object.position) ? Position.fromJSON(object.position) : undefined,
+      asset0: isSet(object.asset0) ? Coin.fromJSON(object.asset0) : undefined,
+      asset1: isSet(object.asset1) ? Coin.fromJSON(object.asset1) : undefined
+    };
   },
   toJSON(message: PositionWithUnderlyingAssetBreakdown): unknown {
     const obj: any = {};
@@ -290,15 +282,9 @@ export const PositionWithUnderlyingAssetBreakdown = {
   },
   fromPartial(object: DeepPartial<PositionWithUnderlyingAssetBreakdown>): PositionWithUnderlyingAssetBreakdown {
     const message = createBasePositionWithUnderlyingAssetBreakdown();
-    if (object.position !== undefined && object.position !== null) {
-      message.position = Position.fromPartial(object.position);
-    }
-    if (object.asset0 !== undefined && object.asset0 !== null) {
-      message.asset0 = Coin.fromPartial(object.asset0);
-    }
-    if (object.asset1 !== undefined && object.asset1 !== null) {
-      message.asset1 = Coin.fromPartial(object.asset1);
-    }
+    message.position = object.position !== undefined && object.position !== null ? Position.fromPartial(object.position) : Position.fromPartial({});
+    message.asset0 = object.asset0 !== undefined && object.asset0 !== null ? Coin.fromPartial(object.asset0) : Coin.fromPartial({});
+    message.asset1 = object.asset1 !== undefined && object.asset1 !== null ? Coin.fromPartial(object.asset1) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: PositionWithUnderlyingAssetBreakdownSDKType): PositionWithUnderlyingAssetBreakdown {

@@ -1076,9 +1076,9 @@ export const FileDescriptorSet = {
     return message;
   },
   fromJSON(object: any): FileDescriptorSet {
-    const obj = createBaseFileDescriptorSet();
-    if (Array.isArray(object?.file)) object.file.map((e: any) => FileDescriptorProto.fromJSON(e));
-    return obj;
+    return {
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromJSON(e)) : []
+    };
   },
   toJSON(message: FileDescriptorSet): unknown {
     const obj: any = {};
@@ -1220,20 +1220,20 @@ export const FileDescriptorProto = {
     return message;
   },
   fromJSON(object: any): FileDescriptorProto {
-    const obj = createBaseFileDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.package)) obj.package = String(object.package);
-    if (Array.isArray(object?.dependency)) object.dependency.map((e: any) => String(e));
-    if (Array.isArray(object?.publicDependency)) object.publicDependency.map((e: any) => Number(e));
-    if (Array.isArray(object?.weakDependency)) object.weakDependency.map((e: any) => Number(e));
-    if (Array.isArray(object?.messageType)) object.messageType.map((e: any) => DescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.enumType)) object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.service)) object.service.map((e: any) => ServiceDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.extension)) object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e));
-    if (isSet(object.options)) obj.options = FileOptions.fromJSON(object.options);
-    if (isSet(object.sourceCodeInfo)) obj.sourceCodeInfo = SourceCodeInfo.fromJSON(object.sourceCodeInfo);
-    if (isSet(object.syntax)) obj.syntax = String(object.syntax);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      package: isSet(object.package) ? String(object.package) : "",
+      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => String(e)) : [],
+      publicDependency: Array.isArray(object?.publicDependency) ? object.publicDependency.map((e: any) => Number(e)) : [],
+      weakDependency: Array.isArray(object?.weakDependency) ? object.weakDependency.map((e: any) => Number(e)) : [],
+      messageType: Array.isArray(object?.messageType) ? object.messageType.map((e: any) => DescriptorProto.fromJSON(e)) : [],
+      enumType: Array.isArray(object?.enumType) ? object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e)) : [],
+      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromJSON(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e)) : [],
+      options: isSet(object.options) ? FileOptions.fromJSON(object.options) : undefined,
+      sourceCodeInfo: isSet(object.sourceCodeInfo) ? SourceCodeInfo.fromJSON(object.sourceCodeInfo) : undefined,
+      syntax: isSet(object.syntax) ? String(object.syntax) : ""
+    };
   },
   toJSON(message: FileDescriptorProto): unknown {
     const obj: any = {};
@@ -1290,12 +1290,8 @@ export const FileDescriptorProto = {
     message.enumType = object.enumType?.map(e => EnumDescriptorProto.fromPartial(e)) || [];
     message.service = object.service?.map(e => ServiceDescriptorProto.fromPartial(e)) || [];
     message.extension = object.extension?.map(e => FieldDescriptorProto.fromPartial(e)) || [];
-    if (object.options !== undefined && object.options !== null) {
-      message.options = FileOptions.fromPartial(object.options);
-    }
-    if (object.sourceCodeInfo !== undefined && object.sourceCodeInfo !== null) {
-      message.sourceCodeInfo = SourceCodeInfo.fromPartial(object.sourceCodeInfo);
-    }
+    message.options = object.options !== undefined && object.options !== null ? FileOptions.fromPartial(object.options) : FileOptions.fromPartial({});
+    message.sourceCodeInfo = object.sourceCodeInfo !== undefined && object.sourceCodeInfo !== null ? SourceCodeInfo.fromPartial(object.sourceCodeInfo) : SourceCodeInfo.fromPartial({});
     message.syntax = object.syntax ?? "";
     return message;
   }
@@ -1393,18 +1389,18 @@ export const DescriptorProto = {
     return message;
   },
   fromJSON(object: any): DescriptorProto {
-    const obj = createBaseDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.field)) object.field.map((e: any) => FieldDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.extension)) object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.nestedType)) object.nestedType.map((e: any) => DescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.enumType)) object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.extensionRange)) object.extensionRange.map((e: any) => DescriptorProto_ExtensionRange.fromJSON(e));
-    if (Array.isArray(object?.oneofDecl)) object.oneofDecl.map((e: any) => OneofDescriptorProto.fromJSON(e));
-    if (isSet(object.options)) obj.options = MessageOptions.fromJSON(object.options);
-    if (Array.isArray(object?.reservedRange)) object.reservedRange.map((e: any) => DescriptorProto_ReservedRange.fromJSON(e));
-    if (Array.isArray(object?.reservedName)) object.reservedName.map((e: any) => String(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromJSON(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e)) : [],
+      nestedType: Array.isArray(object?.nestedType) ? object.nestedType.map((e: any) => DescriptorProto.fromJSON(e)) : [],
+      enumType: Array.isArray(object?.enumType) ? object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e)) : [],
+      extensionRange: Array.isArray(object?.extensionRange) ? object.extensionRange.map((e: any) => DescriptorProto_ExtensionRange.fromJSON(e)) : [],
+      oneofDecl: Array.isArray(object?.oneofDecl) ? object.oneofDecl.map((e: any) => OneofDescriptorProto.fromJSON(e)) : [],
+      options: isSet(object.options) ? MessageOptions.fromJSON(object.options) : undefined,
+      reservedRange: Array.isArray(object?.reservedRange) ? object.reservedRange.map((e: any) => DescriptorProto_ReservedRange.fromJSON(e)) : [],
+      reservedName: Array.isArray(object?.reservedName) ? object.reservedName.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: DescriptorProto): unknown {
     const obj: any = {};
@@ -1461,9 +1457,7 @@ export const DescriptorProto = {
     message.enumType = object.enumType?.map(e => EnumDescriptorProto.fromPartial(e)) || [];
     message.extensionRange = object.extensionRange?.map(e => DescriptorProto_ExtensionRange.fromPartial(e)) || [];
     message.oneofDecl = object.oneofDecl?.map(e => OneofDescriptorProto.fromPartial(e)) || [];
-    if (object.options !== undefined && object.options !== null) {
-      message.options = MessageOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? MessageOptions.fromPartial(object.options) : MessageOptions.fromPartial({});
     message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
@@ -1513,11 +1507,11 @@ export const DescriptorProto_ExtensionRange = {
     return message;
   },
   fromJSON(object: any): DescriptorProto_ExtensionRange {
-    const obj = createBaseDescriptorProto_ExtensionRange();
-    if (isSet(object.start)) obj.start = Number(object.start);
-    if (isSet(object.end)) obj.end = Number(object.end);
-    if (isSet(object.options)) obj.options = ExtensionRangeOptions.fromJSON(object.options);
-    return obj;
+    return {
+      start: isSet(object.start) ? Number(object.start) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0,
+      options: isSet(object.options) ? ExtensionRangeOptions.fromJSON(object.options) : undefined
+    };
   },
   toJSON(message: DescriptorProto_ExtensionRange): unknown {
     const obj: any = {};
@@ -1530,9 +1524,7 @@ export const DescriptorProto_ExtensionRange = {
     const message = createBaseDescriptorProto_ExtensionRange();
     message.start = object.start ?? 0;
     message.end = object.end ?? 0;
-    if (object.options !== undefined && object.options !== null) {
-      message.options = ExtensionRangeOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? ExtensionRangeOptions.fromPartial(object.options) : ExtensionRangeOptions.fromPartial({});
     return message;
   }
 };
@@ -1573,10 +1565,10 @@ export const DescriptorProto_ReservedRange = {
     return message;
   },
   fromJSON(object: any): DescriptorProto_ReservedRange {
-    const obj = createBaseDescriptorProto_ReservedRange();
-    if (isSet(object.start)) obj.start = Number(object.start);
-    if (isSet(object.end)) obj.end = Number(object.end);
-    return obj;
+    return {
+      start: isSet(object.start) ? Number(object.start) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0
+    };
   },
   toJSON(message: DescriptorProto_ReservedRange): unknown {
     const obj: any = {};
@@ -1621,9 +1613,9 @@ export const ExtensionRangeOptions = {
     return message;
   },
   fromJSON(object: any): ExtensionRangeOptions {
-    const obj = createBaseExtensionRangeOptions();
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: ExtensionRangeOptions): unknown {
     const obj: any = {};
@@ -1733,18 +1725,18 @@ export const FieldDescriptorProto = {
     return message;
   },
   fromJSON(object: any): FieldDescriptorProto {
-    const obj = createBaseFieldDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.number)) obj.number = Number(object.number);
-    if (isSet(object.label)) obj.label = fieldDescriptorProto_LabelFromJSON(object.label);
-    if (isSet(object.type)) obj.type = fieldDescriptorProto_TypeFromJSON(object.type);
-    if (isSet(object.typeName)) obj.typeName = String(object.typeName);
-    if (isSet(object.extendee)) obj.extendee = String(object.extendee);
-    if (isSet(object.defaultValue)) obj.defaultValue = String(object.defaultValue);
-    if (isSet(object.oneofIndex)) obj.oneofIndex = Number(object.oneofIndex);
-    if (isSet(object.jsonName)) obj.jsonName = String(object.jsonName);
-    if (isSet(object.options)) obj.options = FieldOptions.fromJSON(object.options);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
+      typeName: isSet(object.typeName) ? String(object.typeName) : "",
+      extendee: isSet(object.extendee) ? String(object.extendee) : "",
+      defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : "",
+      oneofIndex: isSet(object.oneofIndex) ? Number(object.oneofIndex) : 0,
+      jsonName: isSet(object.jsonName) ? String(object.jsonName) : "",
+      options: isSet(object.options) ? FieldOptions.fromJSON(object.options) : undefined
+    };
   },
   toJSON(message: FieldDescriptorProto): unknown {
     const obj: any = {};
@@ -1771,9 +1763,7 @@ export const FieldDescriptorProto = {
     message.defaultValue = object.defaultValue ?? "";
     message.oneofIndex = object.oneofIndex ?? 0;
     message.jsonName = object.jsonName ?? "";
-    if (object.options !== undefined && object.options !== null) {
-      message.options = FieldOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? FieldOptions.fromPartial(object.options) : FieldOptions.fromPartial({});
     return message;
   }
 };
@@ -1814,10 +1804,10 @@ export const OneofDescriptorProto = {
     return message;
   },
   fromJSON(object: any): OneofDescriptorProto {
-    const obj = createBaseOneofDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.options)) obj.options = OneofOptions.fromJSON(object.options);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      options: isSet(object.options) ? OneofOptions.fromJSON(object.options) : undefined
+    };
   },
   toJSON(message: OneofDescriptorProto): unknown {
     const obj: any = {};
@@ -1828,9 +1818,7 @@ export const OneofDescriptorProto = {
   fromPartial(object: DeepPartial<OneofDescriptorProto>): OneofDescriptorProto {
     const message = createBaseOneofDescriptorProto();
     message.name = object.name ?? "";
-    if (object.options !== undefined && object.options !== null) {
-      message.options = OneofOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? OneofOptions.fromPartial(object.options) : OneofOptions.fromPartial({});
     return message;
   }
 };
@@ -1892,13 +1880,13 @@ export const EnumDescriptorProto = {
     return message;
   },
   fromJSON(object: any): EnumDescriptorProto {
-    const obj = createBaseEnumDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.value)) object.value.map((e: any) => EnumValueDescriptorProto.fromJSON(e));
-    if (isSet(object.options)) obj.options = EnumOptions.fromJSON(object.options);
-    if (Array.isArray(object?.reservedRange)) object.reservedRange.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromJSON(e));
-    if (Array.isArray(object?.reservedName)) object.reservedName.map((e: any) => String(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromJSON(e)) : [],
+      options: isSet(object.options) ? EnumOptions.fromJSON(object.options) : undefined,
+      reservedRange: Array.isArray(object?.reservedRange) ? object.reservedRange.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromJSON(e)) : [],
+      reservedName: Array.isArray(object?.reservedName) ? object.reservedName.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: EnumDescriptorProto): unknown {
     const obj: any = {};
@@ -1925,9 +1913,7 @@ export const EnumDescriptorProto = {
     const message = createBaseEnumDescriptorProto();
     message.name = object.name ?? "";
     message.value = object.value?.map(e => EnumValueDescriptorProto.fromPartial(e)) || [];
-    if (object.options !== undefined && object.options !== null) {
-      message.options = EnumOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? EnumOptions.fromPartial(object.options) : EnumOptions.fromPartial({});
     message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
@@ -1970,10 +1956,10 @@ export const EnumDescriptorProto_EnumReservedRange = {
     return message;
   },
   fromJSON(object: any): EnumDescriptorProto_EnumReservedRange {
-    const obj = createBaseEnumDescriptorProto_EnumReservedRange();
-    if (isSet(object.start)) obj.start = Number(object.start);
-    if (isSet(object.end)) obj.end = Number(object.end);
-    return obj;
+    return {
+      start: isSet(object.start) ? Number(object.start) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0
+    };
   },
   toJSON(message: EnumDescriptorProto_EnumReservedRange): unknown {
     const obj: any = {};
@@ -2032,11 +2018,11 @@ export const EnumValueDescriptorProto = {
     return message;
   },
   fromJSON(object: any): EnumValueDescriptorProto {
-    const obj = createBaseEnumValueDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.number)) obj.number = Number(object.number);
-    if (isSet(object.options)) obj.options = EnumValueOptions.fromJSON(object.options);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      options: isSet(object.options) ? EnumValueOptions.fromJSON(object.options) : undefined
+    };
   },
   toJSON(message: EnumValueDescriptorProto): unknown {
     const obj: any = {};
@@ -2049,9 +2035,7 @@ export const EnumValueDescriptorProto = {
     const message = createBaseEnumValueDescriptorProto();
     message.name = object.name ?? "";
     message.number = object.number ?? 0;
-    if (object.options !== undefined && object.options !== null) {
-      message.options = EnumValueOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? EnumValueOptions.fromPartial(object.options) : EnumValueOptions.fromPartial({});
     return message;
   }
 };
@@ -2099,11 +2083,11 @@ export const ServiceDescriptorProto = {
     return message;
   },
   fromJSON(object: any): ServiceDescriptorProto {
-    const obj = createBaseServiceDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.method)) object.method.map((e: any) => MethodDescriptorProto.fromJSON(e));
-    if (isSet(object.options)) obj.options = ServiceOptions.fromJSON(object.options);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromJSON(e)) : [],
+      options: isSet(object.options) ? ServiceOptions.fromJSON(object.options) : undefined
+    };
   },
   toJSON(message: ServiceDescriptorProto): unknown {
     const obj: any = {};
@@ -2120,9 +2104,7 @@ export const ServiceDescriptorProto = {
     const message = createBaseServiceDescriptorProto();
     message.name = object.name ?? "";
     message.method = object.method?.map(e => MethodDescriptorProto.fromPartial(e)) || [];
-    if (object.options !== undefined && object.options !== null) {
-      message.options = ServiceOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? ServiceOptions.fromPartial(object.options) : ServiceOptions.fromPartial({});
     return message;
   }
 };
@@ -2191,14 +2173,14 @@ export const MethodDescriptorProto = {
     return message;
   },
   fromJSON(object: any): MethodDescriptorProto {
-    const obj = createBaseMethodDescriptorProto();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.inputType)) obj.inputType = String(object.inputType);
-    if (isSet(object.outputType)) obj.outputType = String(object.outputType);
-    if (isSet(object.options)) obj.options = MethodOptions.fromJSON(object.options);
-    if (isSet(object.clientStreaming)) obj.clientStreaming = Boolean(object.clientStreaming);
-    if (isSet(object.serverStreaming)) obj.serverStreaming = Boolean(object.serverStreaming);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      inputType: isSet(object.inputType) ? String(object.inputType) : "",
+      outputType: isSet(object.outputType) ? String(object.outputType) : "",
+      options: isSet(object.options) ? MethodOptions.fromJSON(object.options) : undefined,
+      clientStreaming: isSet(object.clientStreaming) ? Boolean(object.clientStreaming) : false,
+      serverStreaming: isSet(object.serverStreaming) ? Boolean(object.serverStreaming) : false
+    };
   },
   toJSON(message: MethodDescriptorProto): unknown {
     const obj: any = {};
@@ -2215,9 +2197,7 @@ export const MethodDescriptorProto = {
     message.name = object.name ?? "";
     message.inputType = object.inputType ?? "";
     message.outputType = object.outputType ?? "";
-    if (object.options !== undefined && object.options !== null) {
-      message.options = MethodOptions.fromPartial(object.options);
-    }
+    message.options = object.options !== undefined && object.options !== null ? MethodOptions.fromPartial(object.options) : MethodOptions.fromPartial({});
     message.clientStreaming = object.clientStreaming ?? false;
     message.serverStreaming = object.serverStreaming ?? false;
     return message;
@@ -2393,29 +2373,29 @@ export const FileOptions = {
     return message;
   },
   fromJSON(object: any): FileOptions {
-    const obj = createBaseFileOptions();
-    if (isSet(object.javaPackage)) obj.javaPackage = String(object.javaPackage);
-    if (isSet(object.javaOuterClassname)) obj.javaOuterClassname = String(object.javaOuterClassname);
-    if (isSet(object.javaMultipleFiles)) obj.javaMultipleFiles = Boolean(object.javaMultipleFiles);
-    if (isSet(object.javaGenerateEqualsAndHash)) obj.javaGenerateEqualsAndHash = Boolean(object.javaGenerateEqualsAndHash);
-    if (isSet(object.javaStringCheckUtf8)) obj.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
-    if (isSet(object.optimizeFor)) obj.optimizeFor = fileOptions_OptimizeModeFromJSON(object.optimizeFor);
-    if (isSet(object.goPackage)) obj.goPackage = String(object.goPackage);
-    if (isSet(object.ccGenericServices)) obj.ccGenericServices = Boolean(object.ccGenericServices);
-    if (isSet(object.javaGenericServices)) obj.javaGenericServices = Boolean(object.javaGenericServices);
-    if (isSet(object.pyGenericServices)) obj.pyGenericServices = Boolean(object.pyGenericServices);
-    if (isSet(object.phpGenericServices)) obj.phpGenericServices = Boolean(object.phpGenericServices);
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (isSet(object.ccEnableArenas)) obj.ccEnableArenas = Boolean(object.ccEnableArenas);
-    if (isSet(object.objcClassPrefix)) obj.objcClassPrefix = String(object.objcClassPrefix);
-    if (isSet(object.csharpNamespace)) obj.csharpNamespace = String(object.csharpNamespace);
-    if (isSet(object.swiftPrefix)) obj.swiftPrefix = String(object.swiftPrefix);
-    if (isSet(object.phpClassPrefix)) obj.phpClassPrefix = String(object.phpClassPrefix);
-    if (isSet(object.phpNamespace)) obj.phpNamespace = String(object.phpNamespace);
-    if (isSet(object.phpMetadataNamespace)) obj.phpMetadataNamespace = String(object.phpMetadataNamespace);
-    if (isSet(object.rubyPackage)) obj.rubyPackage = String(object.rubyPackage);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      javaPackage: isSet(object.javaPackage) ? String(object.javaPackage) : "",
+      javaOuterClassname: isSet(object.javaOuterClassname) ? String(object.javaOuterClassname) : "",
+      javaMultipleFiles: isSet(object.javaMultipleFiles) ? Boolean(object.javaMultipleFiles) : false,
+      javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash) ? Boolean(object.javaGenerateEqualsAndHash) : false,
+      javaStringCheckUtf8: isSet(object.javaStringCheckUtf8) ? Boolean(object.javaStringCheckUtf8) : false,
+      optimizeFor: isSet(object.optimizeFor) ? fileOptions_OptimizeModeFromJSON(object.optimizeFor) : -1,
+      goPackage: isSet(object.goPackage) ? String(object.goPackage) : "",
+      ccGenericServices: isSet(object.ccGenericServices) ? Boolean(object.ccGenericServices) : false,
+      javaGenericServices: isSet(object.javaGenericServices) ? Boolean(object.javaGenericServices) : false,
+      pyGenericServices: isSet(object.pyGenericServices) ? Boolean(object.pyGenericServices) : false,
+      phpGenericServices: isSet(object.phpGenericServices) ? Boolean(object.phpGenericServices) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      ccEnableArenas: isSet(object.ccEnableArenas) ? Boolean(object.ccEnableArenas) : false,
+      objcClassPrefix: isSet(object.objcClassPrefix) ? String(object.objcClassPrefix) : "",
+      csharpNamespace: isSet(object.csharpNamespace) ? String(object.csharpNamespace) : "",
+      swiftPrefix: isSet(object.swiftPrefix) ? String(object.swiftPrefix) : "",
+      phpClassPrefix: isSet(object.phpClassPrefix) ? String(object.phpClassPrefix) : "",
+      phpNamespace: isSet(object.phpNamespace) ? String(object.phpNamespace) : "",
+      phpMetadataNamespace: isSet(object.phpMetadataNamespace) ? String(object.phpMetadataNamespace) : "",
+      rubyPackage: isSet(object.rubyPackage) ? String(object.rubyPackage) : "",
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: FileOptions): unknown {
     const obj: any = {};
@@ -2530,13 +2510,13 @@ export const MessageOptions = {
     return message;
   },
   fromJSON(object: any): MessageOptions {
-    const obj = createBaseMessageOptions();
-    if (isSet(object.messageSetWireFormat)) obj.messageSetWireFormat = Boolean(object.messageSetWireFormat);
-    if (isSet(object.noStandardDescriptorAccessor)) obj.noStandardDescriptorAccessor = Boolean(object.noStandardDescriptorAccessor);
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (isSet(object.mapEntry)) obj.mapEntry = Boolean(object.mapEntry);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      messageSetWireFormat: isSet(object.messageSetWireFormat) ? Boolean(object.messageSetWireFormat) : false,
+      noStandardDescriptorAccessor: isSet(object.noStandardDescriptorAccessor) ? Boolean(object.noStandardDescriptorAccessor) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      mapEntry: isSet(object.mapEntry) ? Boolean(object.mapEntry) : false,
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: MessageOptions): unknown {
     const obj: any = {};
@@ -2633,15 +2613,15 @@ export const FieldOptions = {
     return message;
   },
   fromJSON(object: any): FieldOptions {
-    const obj = createBaseFieldOptions();
-    if (isSet(object.ctype)) obj.ctype = fieldOptions_CTypeFromJSON(object.ctype);
-    if (isSet(object.packed)) obj.packed = Boolean(object.packed);
-    if (isSet(object.jstype)) obj.jstype = fieldOptions_JSTypeFromJSON(object.jstype);
-    if (isSet(object.lazy)) obj.lazy = Boolean(object.lazy);
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (isSet(object.weak)) obj.weak = Boolean(object.weak);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
+      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
+      lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      weak: isSet(object.weak) ? Boolean(object.weak) : false,
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: FieldOptions): unknown {
     const obj: any = {};
@@ -2700,9 +2680,9 @@ export const OneofOptions = {
     return message;
   },
   fromJSON(object: any): OneofOptions {
-    const obj = createBaseOneofOptions();
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: OneofOptions): unknown {
     const obj: any = {};
@@ -2763,11 +2743,11 @@ export const EnumOptions = {
     return message;
   },
   fromJSON(object: any): EnumOptions {
-    const obj = createBaseEnumOptions();
-    if (isSet(object.allowAlias)) obj.allowAlias = Boolean(object.allowAlias);
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      allowAlias: isSet(object.allowAlias) ? Boolean(object.allowAlias) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: EnumOptions): unknown {
     const obj: any = {};
@@ -2825,10 +2805,10 @@ export const EnumValueOptions = {
     return message;
   },
   fromJSON(object: any): EnumValueOptions {
-    const obj = createBaseEnumValueOptions();
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: EnumValueOptions): unknown {
     const obj: any = {};
@@ -2884,10 +2864,10 @@ export const ServiceOptions = {
     return message;
   },
   fromJSON(object: any): ServiceOptions {
-    const obj = createBaseServiceOptions();
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: ServiceOptions): unknown {
     const obj: any = {};
@@ -2950,11 +2930,11 @@ export const MethodOptions = {
     return message;
   },
   fromJSON(object: any): MethodOptions {
-    const obj = createBaseMethodOptions();
-    if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (isSet(object.idempotencyLevel)) obj.idempotencyLevel = methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
-    return obj;
+    return {
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      idempotencyLevel: isSet(object.idempotencyLevel) ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel) : -1,
+      uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
+    };
   },
   toJSON(message: MethodOptions): unknown {
     const obj: any = {};
@@ -3047,15 +3027,15 @@ export const UninterpretedOption = {
     return message;
   },
   fromJSON(object: any): UninterpretedOption {
-    const obj = createBaseUninterpretedOption();
-    if (Array.isArray(object?.name)) object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e));
-    if (isSet(object.identifierValue)) obj.identifierValue = String(object.identifierValue);
-    if (isSet(object.positiveIntValue)) obj.positiveIntValue = Long.fromValue(object.positiveIntValue);
-    if (isSet(object.negativeIntValue)) obj.negativeIntValue = Long.fromValue(object.negativeIntValue);
-    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
-    if (isSet(object.stringValue)) obj.stringValue = bytesFromBase64(object.stringValue);
-    if (isSet(object.aggregateValue)) obj.aggregateValue = String(object.aggregateValue);
-    return obj;
+    return {
+      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e)) : [],
+      identifierValue: isSet(object.identifierValue) ? String(object.identifierValue) : "",
+      positiveIntValue: isSet(object.positiveIntValue) ? Long.fromValue(object.positiveIntValue) : Long.UZERO,
+      negativeIntValue: isSet(object.negativeIntValue) ? Long.fromValue(object.negativeIntValue) : Long.ZERO,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
+      stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(),
+      aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : ""
+    };
   },
   toJSON(message: UninterpretedOption): unknown {
     const obj: any = {};
@@ -3076,12 +3056,8 @@ export const UninterpretedOption = {
     const message = createBaseUninterpretedOption();
     message.name = object.name?.map(e => UninterpretedOption_NamePart.fromPartial(e)) || [];
     message.identifierValue = object.identifierValue ?? "";
-    if (object.positiveIntValue !== undefined && object.positiveIntValue !== null) {
-      message.positiveIntValue = Long.fromValue(object.positiveIntValue);
-    }
-    if (object.negativeIntValue !== undefined && object.negativeIntValue !== null) {
-      message.negativeIntValue = Long.fromValue(object.negativeIntValue);
-    }
+    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? Long.fromValue(object.positiveIntValue) : Long.UZERO;
+    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? Long.fromValue(object.negativeIntValue) : Long.ZERO;
     message.doubleValue = object.doubleValue ?? 0;
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";
@@ -3125,10 +3101,10 @@ export const UninterpretedOption_NamePart = {
     return message;
   },
   fromJSON(object: any): UninterpretedOption_NamePart {
-    const obj = createBaseUninterpretedOption_NamePart();
-    if (isSet(object.namePart)) obj.namePart = String(object.namePart);
-    if (isSet(object.isExtension)) obj.isExtension = Boolean(object.isExtension);
-    return obj;
+    return {
+      namePart: isSet(object.namePart) ? String(object.namePart) : "",
+      isExtension: isSet(object.isExtension) ? Boolean(object.isExtension) : false
+    };
   },
   toJSON(message: UninterpretedOption_NamePart): unknown {
     const obj: any = {};
@@ -3173,9 +3149,9 @@ export const SourceCodeInfo = {
     return message;
   },
   fromJSON(object: any): SourceCodeInfo {
-    const obj = createBaseSourceCodeInfo();
-    if (Array.isArray(object?.location)) object.location.map((e: any) => SourceCodeInfo_Location.fromJSON(e));
-    return obj;
+    return {
+      location: Array.isArray(object?.location) ? object.location.map((e: any) => SourceCodeInfo_Location.fromJSON(e)) : []
+    };
   },
   toJSON(message: SourceCodeInfo): unknown {
     const obj: any = {};
@@ -3268,13 +3244,13 @@ export const SourceCodeInfo_Location = {
     return message;
   },
   fromJSON(object: any): SourceCodeInfo_Location {
-    const obj = createBaseSourceCodeInfo_Location();
-    if (Array.isArray(object?.path)) object.path.map((e: any) => Number(e));
-    if (Array.isArray(object?.span)) object.span.map((e: any) => Number(e));
-    if (isSet(object.leadingComments)) obj.leadingComments = String(object.leadingComments);
-    if (isSet(object.trailingComments)) obj.trailingComments = String(object.trailingComments);
-    if (Array.isArray(object?.leadingDetachedComments)) object.leadingDetachedComments.map((e: any) => String(e));
-    return obj;
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
+      span: Array.isArray(object?.span) ? object.span.map((e: any) => Number(e)) : [],
+      leadingComments: isSet(object.leadingComments) ? String(object.leadingComments) : "",
+      trailingComments: isSet(object.trailingComments) ? String(object.trailingComments) : "",
+      leadingDetachedComments: Array.isArray(object?.leadingDetachedComments) ? object.leadingDetachedComments.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: SourceCodeInfo_Location): unknown {
     const obj: any = {};
@@ -3337,9 +3313,9 @@ export const GeneratedCodeInfo = {
     return message;
   },
   fromJSON(object: any): GeneratedCodeInfo {
-    const obj = createBaseGeneratedCodeInfo();
-    if (Array.isArray(object?.annotation)) object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromJSON(e));
-    return obj;
+    return {
+      annotation: Array.isArray(object?.annotation) ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromJSON(e)) : []
+    };
   },
   toJSON(message: GeneratedCodeInfo): unknown {
     const obj: any = {};
@@ -3416,12 +3392,12 @@ export const GeneratedCodeInfo_Annotation = {
     return message;
   },
   fromJSON(object: any): GeneratedCodeInfo_Annotation {
-    const obj = createBaseGeneratedCodeInfo_Annotation();
-    if (Array.isArray(object?.path)) object.path.map((e: any) => Number(e));
-    if (isSet(object.sourceFile)) obj.sourceFile = String(object.sourceFile);
-    if (isSet(object.begin)) obj.begin = Number(object.begin);
-    if (isSet(object.end)) obj.end = Number(object.end);
-    return obj;
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
+      sourceFile: isSet(object.sourceFile) ? String(object.sourceFile) : "",
+      begin: isSet(object.begin) ? Number(object.begin) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0
+    };
   },
   toJSON(message: GeneratedCodeInfo_Annotation): unknown {
     const obj: any = {};

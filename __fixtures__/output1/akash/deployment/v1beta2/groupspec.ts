@@ -59,11 +59,11 @@ export const GroupSpec = {
     return message;
   },
   fromJSON(object: any): GroupSpec {
-    const obj = createBaseGroupSpec();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.requirements)) obj.requirements = PlacementRequirements.fromJSON(object.requirements);
-    if (Array.isArray(object?.resources)) object.resources.map((e: any) => Resource.fromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      requirements: isSet(object.requirements) ? PlacementRequirements.fromJSON(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromJSON(e)) : []
+    };
   },
   toJSON(message: GroupSpec): unknown {
     const obj: any = {};
@@ -79,9 +79,7 @@ export const GroupSpec = {
   fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    if (object.requirements !== undefined && object.requirements !== null) {
-      message.requirements = PlacementRequirements.fromPartial(object.requirements);
-    }
+    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : PlacementRequirements.fromPartial({});
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   },

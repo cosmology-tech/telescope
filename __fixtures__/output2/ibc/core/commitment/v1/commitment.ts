@@ -67,9 +67,9 @@ export const MerkleRoot = {
     return message;
   },
   fromJSON(object: any): MerkleRoot {
-    const obj = createBaseMerkleRoot();
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   },
   toJSON(message: MerkleRoot): unknown {
     const obj: any = {};
@@ -112,9 +112,9 @@ export const MerklePrefix = {
     return message;
   },
   fromJSON(object: any): MerklePrefix {
-    const obj = createBaseMerklePrefix();
-    if (isSet(object.keyPrefix)) obj.keyPrefix = bytesFromBase64(object.keyPrefix);
-    return obj;
+    return {
+      keyPrefix: isSet(object.keyPrefix) ? bytesFromBase64(object.keyPrefix) : new Uint8Array()
+    };
   },
   toJSON(message: MerklePrefix): unknown {
     const obj: any = {};
@@ -157,9 +157,9 @@ export const MerklePath = {
     return message;
   },
   fromJSON(object: any): MerklePath {
-    const obj = createBaseMerklePath();
-    if (Array.isArray(object?.keyPath)) object.keyPath.map((e: any) => String(e));
-    return obj;
+    return {
+      keyPath: Array.isArray(object?.keyPath) ? object.keyPath.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: MerklePath): unknown {
     const obj: any = {};
@@ -206,9 +206,9 @@ export const MerkleProof = {
     return message;
   },
   fromJSON(object: any): MerkleProof {
-    const obj = createBaseMerkleProof();
-    if (Array.isArray(object?.proofs)) object.proofs.map((e: any) => CommitmentProof.fromJSON(e));
-    return obj;
+    return {
+      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromJSON(e)) : []
+    };
   },
   toJSON(message: MerkleProof): unknown {
     const obj: any = {};

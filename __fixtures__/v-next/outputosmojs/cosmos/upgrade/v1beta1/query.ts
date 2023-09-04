@@ -187,8 +187,7 @@ export const QueryCurrentPlanRequest = {
     return message;
   },
   fromJSON(_: any): QueryCurrentPlanRequest {
-    const obj = createBaseQueryCurrentPlanRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryCurrentPlanRequest): unknown {
     const obj: any = {};
@@ -268,9 +267,9 @@ export const QueryCurrentPlanResponse = {
     return message;
   },
   fromJSON(object: any): QueryCurrentPlanResponse {
-    const obj = createBaseQueryCurrentPlanResponse();
-    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
-    return obj;
+    return {
+      plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined
+    };
   },
   toJSON(message: QueryCurrentPlanResponse): unknown {
     const obj: any = {};
@@ -279,9 +278,7 @@ export const QueryCurrentPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
     const message = createBaseQueryCurrentPlanResponse();
-    if (object.plan !== undefined && object.plan !== null) {
-      message.plan = Plan.fromPartial(object.plan);
-    }
+    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
     return message;
   },
   fromSDK(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
@@ -362,9 +359,9 @@ export const QueryAppliedPlanRequest = {
     return message;
   },
   fromJSON(object: any): QueryAppliedPlanRequest {
-    const obj = createBaseQueryAppliedPlanRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: QueryAppliedPlanRequest): unknown {
     const obj: any = {};
@@ -454,9 +451,9 @@ export const QueryAppliedPlanResponse = {
     return message;
   },
   fromJSON(object: any): QueryAppliedPlanResponse {
-    const obj = createBaseQueryAppliedPlanResponse();
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    return obj;
+    return {
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
@@ -465,9 +462,7 @@ export const QueryAppliedPlanResponse = {
   },
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
-    if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
-    }
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
@@ -548,9 +543,9 @@ export const QueryUpgradedConsensusStateRequest = {
     return message;
   },
   fromJSON(object: any): QueryUpgradedConsensusStateRequest {
-    const obj = createBaseQueryUpgradedConsensusStateRequest();
-    if (isSet(object.lastHeight)) obj.lastHeight = BigInt(object.lastHeight.toString());
-    return obj;
+    return {
+      lastHeight: isSet(object.lastHeight) ? BigInt(object.lastHeight.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
     const obj: any = {};
@@ -559,9 +554,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
-    if (object.lastHeight !== undefined && object.lastHeight !== null) {
-      message.lastHeight = BigInt(object.lastHeight.toString());
-    }
+    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? BigInt(object.lastHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
@@ -642,9 +635,9 @@ export const QueryUpgradedConsensusStateResponse = {
     return message;
   },
   fromJSON(object: any): QueryUpgradedConsensusStateResponse {
-    const obj = createBaseQueryUpgradedConsensusStateResponse();
-    if (isSet(object.upgradedConsensusState)) obj.upgradedConsensusState = bytesFromBase64(object.upgradedConsensusState);
-    return obj;
+    return {
+      upgradedConsensusState: isSet(object.upgradedConsensusState) ? bytesFromBase64(object.upgradedConsensusState) : new Uint8Array()
+    };
   },
   toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
     const obj: any = {};
@@ -734,9 +727,9 @@ export const QueryModuleVersionsRequest = {
     return message;
   },
   fromJSON(object: any): QueryModuleVersionsRequest {
-    const obj = createBaseQueryModuleVersionsRequest();
-    if (isSet(object.moduleName)) obj.moduleName = String(object.moduleName);
-    return obj;
+    return {
+      moduleName: isSet(object.moduleName) ? String(object.moduleName) : ""
+    };
   },
   toJSON(message: QueryModuleVersionsRequest): unknown {
     const obj: any = {};
@@ -826,9 +819,9 @@ export const QueryModuleVersionsResponse = {
     return message;
   },
   fromJSON(object: any): QueryModuleVersionsResponse {
-    const obj = createBaseQueryModuleVersionsResponse();
-    if (Array.isArray(object?.moduleVersions)) object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e));
-    return obj;
+    return {
+      moduleVersions: Array.isArray(object?.moduleVersions) ? object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryModuleVersionsResponse): unknown {
     const obj: any = {};
@@ -922,8 +915,7 @@ export const QueryAuthorityRequest = {
     return message;
   },
   fromJSON(_: any): QueryAuthorityRequest {
-    const obj = createBaseQueryAuthorityRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryAuthorityRequest): unknown {
     const obj: any = {};
@@ -1003,9 +995,9 @@ export const QueryAuthorityResponse = {
     return message;
   },
   fromJSON(object: any): QueryAuthorityResponse {
-    const obj = createBaseQueryAuthorityResponse();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryAuthorityResponse): unknown {
     const obj: any = {};

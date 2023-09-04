@@ -33,10 +33,10 @@ exports[`Duration 1`] = `
     return message;
   },
   fromJSON(object: any): Duration {
-    const obj = createBaseDuration();
-    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
-    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
-    return obj;
+    return {
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
@@ -46,9 +46,7 @@ exports[`Duration 1`] = `
   },
   fromPartial(object: Partial<Duration>): Duration {
     const message = createBaseDuration();
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = BigInt(object.seconds.toString());
-    }
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -125,10 +123,10 @@ exports[`Height 1`] = `
     return message;
   },
   fromJSON(object: any): Height {
-    const obj = createBaseHeight();
-    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
-    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
-    return obj;
+    return {
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt(0),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
@@ -138,12 +136,8 @@ exports[`Height 1`] = `
   },
   fromPartial(object: Partial<Height>): Height {
     const message = createBaseHeight();
-    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
-      message.revisionNumber = BigInt(object.revisionNumber.toString());
-    }
-    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
-      message.revisionHeight = BigInt(object.revisionHeight.toString());
-    }
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: HeightSDKType): Height {
@@ -257,15 +251,15 @@ exports[`MsgCreateValidator 1`] = `
     return message;
   },
   fromJSON(object: any): MsgCreateValidator {
-    const obj = createBaseMsgCreateValidator();
-    if (isSet(object.description)) obj.description = Description.fromJSON(object.description);
-    if (isSet(object.commission)) obj.commission = CommissionRates.fromJSON(object.commission);
-    if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.pubkey)) obj.pubkey = Any.fromJSON(object.pubkey);
-    if (isSet(object.value)) obj.value = Coin.fromJSON(object.value);
-    return obj;
+    return {
+      description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
+      commission: isSet(object.commission) ? CommissionRates.fromJSON(object.commission) : undefined,
+      minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : "",
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      pubkey: isSet(object.pubkey) ? Any.fromJSON(object.pubkey) : undefined,
+      value: isSet(object.value) ? Coin.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: MsgCreateValidator): unknown {
     const obj: any = {};
@@ -280,21 +274,13 @@ exports[`MsgCreateValidator 1`] = `
   },
   fromPartial(object: Partial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
-    if (object.description !== undefined && object.description !== null) {
-      message.description = Description.fromPartial(object.description);
-    }
-    if (object.commission !== undefined && object.commission !== null) {
-      message.commission = CommissionRates.fromPartial(object.commission);
-    }
+    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : Description.fromPartial({});
+    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : CommissionRates.fromPartial({});
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    if (object.pubkey !== undefined && object.pubkey !== null) {
-      message.pubkey = Any.fromPartial(object.pubkey);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Coin.fromPartial(object.value);
-    }
+    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : Any.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
@@ -404,11 +390,11 @@ exports[`MsgStoreCode 1`] = `
     return message;
   },
   fromJSON(object: any): MsgStoreCode {
-    const obj = createBaseMsgStoreCode();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.wasmByteCode)) obj.wasmByteCode = bytesFromBase64(object.wasmByteCode);
-    if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(),
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
+    };
   },
   toJSON(message: MsgStoreCode): unknown {
     const obj: any = {};
@@ -421,9 +407,7 @@ exports[`MsgStoreCode 1`] = `
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
-      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
-    }
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
     return message;
   },
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
@@ -517,11 +501,11 @@ exports[`MsgSubmitProposal 1`] = `
     return message;
   },
   fromJSON(object: any): MsgSubmitProposal {
-    const obj = createBaseMsgSubmitProposal();
-    if (isSet(object.content)) obj.content = Any.fromJSON(object.content);
-    if (Array.isArray(object?.initialDeposit)) object.initialDeposit.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.proposer)) obj.proposer = String(object.proposer);
-    return obj;
+    return {
+      content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initialDeposit) ? object.initialDeposit.map((e: any) => Coin.fromJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
   },
   toJSON(message: MsgSubmitProposal): unknown {
     const obj: any = {};
@@ -536,9 +520,7 @@ exports[`MsgSubmitProposal 1`] = `
   },
   fromPartial(object: Partial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
-    if (object.content !== undefined && object.content !== null) {
-      message.content = Any.fromPartial(object.content);
-    }
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
     message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     return message;
@@ -666,15 +648,15 @@ exports[`MsgTransfer 1`] = `
     return message;
   },
   fromJSON(object: any): MsgTransfer {
-    const obj = createBaseMsgTransfer();
-    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
-    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
-    if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
-    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
-    return obj;
+    return {
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
+      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
@@ -691,17 +673,11 @@ exports[`MsgTransfer 1`] = `
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
-    if (object.token !== undefined && object.token !== null) {
-      message.token = Coin.fromPartial(object.token);
-    }
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : Coin.fromPartial({});
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
-    }
-    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
-      message.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
-    }
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgTransferSDKType): MsgTransfer {

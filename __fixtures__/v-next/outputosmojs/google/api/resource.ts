@@ -418,15 +418,15 @@ export const ResourceDescriptor = {
     return message;
   },
   fromJSON(object: any): ResourceDescriptor {
-    const obj = createBaseResourceDescriptor();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.pattern)) object.pattern.map((e: any) => String(e));
-    if (isSet(object.nameField)) obj.nameField = String(object.nameField);
-    if (isSet(object.history)) obj.history = resourceDescriptor_HistoryFromJSON(object.history);
-    if (isSet(object.plural)) obj.plural = String(object.plural);
-    if (isSet(object.singular)) obj.singular = String(object.singular);
-    if (Array.isArray(object?.style)) object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => String(e)) : [],
+      nameField: isSet(object.nameField) ? String(object.nameField) : "",
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
+      plural: isSet(object.plural) ? String(object.plural) : "",
+      singular: isSet(object.singular) ? String(object.singular) : "",
+      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
+    };
   },
   toJSON(message: ResourceDescriptor): unknown {
     const obj: any = {};
@@ -583,10 +583,10 @@ export const ResourceReference = {
     return message;
   },
   fromJSON(object: any): ResourceReference {
-    const obj = createBaseResourceReference();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.childType)) obj.childType = String(object.childType);
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      childType: isSet(object.childType) ? String(object.childType) : ""
+    };
   },
   toJSON(message: ResourceReference): unknown {
     const obj: any = {};

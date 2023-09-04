@@ -71,11 +71,11 @@ export const NetAddress = {
     return message;
   },
   fromJSON(object: any): NetAddress {
-    const obj = createBaseNetAddress();
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.ip)) obj.ip = String(object.ip);
-    if (isSet(object.port)) obj.port = Number(object.port);
-    return obj;
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      ip: isSet(object.ip) ? String(object.ip) : "",
+      port: isSet(object.port) ? Number(object.port) : 0
+    };
   },
   toJSON(message: NetAddress): unknown {
     const obj: any = {};
@@ -136,11 +136,11 @@ export const ProtocolVersion = {
     return message;
   },
   fromJSON(object: any): ProtocolVersion {
-    const obj = createBaseProtocolVersion();
-    if (isSet(object.p2p)) obj.p2p = Long.fromValue(object.p2p);
-    if (isSet(object.block)) obj.block = Long.fromValue(object.block);
-    if (isSet(object.app)) obj.app = Long.fromValue(object.app);
-    return obj;
+    return {
+      p2p: isSet(object.p2p) ? Long.fromValue(object.p2p) : Long.UZERO,
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
+    };
   },
   toJSON(message: ProtocolVersion): unknown {
     const obj: any = {};
@@ -151,15 +151,9 @@ export const ProtocolVersion = {
   },
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
-    if (object.p2p !== undefined && object.p2p !== null) {
-      message.p2p = Long.fromValue(object.p2p);
-    }
-    if (object.block !== undefined && object.block !== null) {
-      message.block = Long.fromValue(object.block);
-    }
-    if (object.app !== undefined && object.app !== null) {
-      message.app = Long.fromValue(object.app);
-    }
+    message.p2p = object.p2p !== undefined && object.p2p !== null ? Long.fromValue(object.p2p) : Long.UZERO;
+    message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
+    message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
   }
 };
@@ -242,16 +236,16 @@ export const DefaultNodeInfo = {
     return message;
   },
   fromJSON(object: any): DefaultNodeInfo {
-    const obj = createBaseDefaultNodeInfo();
-    if (isSet(object.protocolVersion)) obj.protocolVersion = ProtocolVersion.fromJSON(object.protocolVersion);
-    if (isSet(object.defaultNodeId)) obj.defaultNodeId = String(object.defaultNodeId);
-    if (isSet(object.listenAddr)) obj.listenAddr = String(object.listenAddr);
-    if (isSet(object.network)) obj.network = String(object.network);
-    if (isSet(object.version)) obj.version = String(object.version);
-    if (isSet(object.channels)) obj.channels = bytesFromBase64(object.channels);
-    if (isSet(object.moniker)) obj.moniker = String(object.moniker);
-    if (isSet(object.other)) obj.other = DefaultNodeInfoOther.fromJSON(object.other);
-    return obj;
+    return {
+      protocolVersion: isSet(object.protocolVersion) ? ProtocolVersion.fromJSON(object.protocolVersion) : undefined,
+      defaultNodeId: isSet(object.defaultNodeId) ? String(object.defaultNodeId) : "",
+      listenAddr: isSet(object.listenAddr) ? String(object.listenAddr) : "",
+      network: isSet(object.network) ? String(object.network) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      channels: isSet(object.channels) ? bytesFromBase64(object.channels) : new Uint8Array(),
+      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      other: isSet(object.other) ? DefaultNodeInfoOther.fromJSON(object.other) : undefined
+    };
   },
   toJSON(message: DefaultNodeInfo): unknown {
     const obj: any = {};
@@ -267,18 +261,14 @@ export const DefaultNodeInfo = {
   },
   fromPartial(object: DeepPartial<DefaultNodeInfo>): DefaultNodeInfo {
     const message = createBaseDefaultNodeInfo();
-    if (object.protocolVersion !== undefined && object.protocolVersion !== null) {
-      message.protocolVersion = ProtocolVersion.fromPartial(object.protocolVersion);
-    }
+    message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : ProtocolVersion.fromPartial({});
     message.defaultNodeId = object.defaultNodeId ?? "";
     message.listenAddr = object.listenAddr ?? "";
     message.network = object.network ?? "";
     message.version = object.version ?? "";
     message.channels = object.channels ?? new Uint8Array();
     message.moniker = object.moniker ?? "";
-    if (object.other !== undefined && object.other !== null) {
-      message.other = DefaultNodeInfoOther.fromPartial(object.other);
-    }
+    message.other = object.other !== undefined && object.other !== null ? DefaultNodeInfoOther.fromPartial(object.other) : DefaultNodeInfoOther.fromPartial({});
     return message;
   }
 };
@@ -319,10 +309,10 @@ export const DefaultNodeInfoOther = {
     return message;
   },
   fromJSON(object: any): DefaultNodeInfoOther {
-    const obj = createBaseDefaultNodeInfoOther();
-    if (isSet(object.txIndex)) obj.txIndex = String(object.txIndex);
-    if (isSet(object.rpcAddress)) obj.rpcAddress = String(object.rpcAddress);
-    return obj;
+    return {
+      txIndex: isSet(object.txIndex) ? String(object.txIndex) : "",
+      rpcAddress: isSet(object.rpcAddress) ? String(object.rpcAddress) : ""
+    };
   },
   toJSON(message: DefaultNodeInfoOther): unknown {
     const obj: any = {};

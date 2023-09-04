@@ -185,12 +185,12 @@ export const TokenPair = {
     return message;
   },
   fromJSON(object: any): TokenPair {
-    const obj = createBaseTokenPair();
-    if (isSet(object.erc20Address)) obj.erc20Address = String(object.erc20Address);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
-    if (isSet(object.contractOwner)) obj.contractOwner = ownerFromJSON(object.contractOwner);
-    return obj;
+    return {
+      erc20Address: isSet(object.erc20Address) ? String(object.erc20Address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      contractOwner: isSet(object.contractOwner) ? ownerFromJSON(object.contractOwner) : -1
+    };
   },
   toJSON(message: TokenPair): unknown {
     const obj: any = {};
@@ -309,11 +309,11 @@ export const RegisterCoinProposal = {
     return message;
   },
   fromJSON(object: any): RegisterCoinProposal {
-    const obj = createBaseRegisterCoinProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
+    };
   },
   toJSON(message: RegisterCoinProposal): unknown {
     const obj: any = {};
@@ -326,9 +326,7 @@ export const RegisterCoinProposal = {
     const message = createBaseRegisterCoinProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = Metadata.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
     return message;
   },
   fromSDK(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
@@ -427,11 +425,11 @@ export const RegisterERC20Proposal = {
     return message;
   },
   fromJSON(object: any): RegisterERC20Proposal {
-    const obj = createBaseRegisterERC20Proposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.erc20address)) obj.erc20address = String(object.erc20address);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
+    };
   },
   toJSON(message: RegisterERC20Proposal): unknown {
     const obj: any = {};
@@ -543,11 +541,11 @@ export const ToggleTokenConversionProposal = {
     return message;
   },
   fromJSON(object: any): ToggleTokenConversionProposal {
-    const obj = createBaseToggleTokenConversionProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.token)) obj.token = String(object.token);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      token: isSet(object.token) ? String(object.token) : ""
+    };
   },
   toJSON(message: ToggleTokenConversionProposal): unknown {
     const obj: any = {};

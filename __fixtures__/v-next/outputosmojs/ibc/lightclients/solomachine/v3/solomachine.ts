@@ -194,11 +194,11 @@ export const ClientState = {
     return message;
   },
   fromJSON(object: any): ClientState {
-    const obj = createBaseClientState();
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    if (isSet(object.isFrozen)) obj.isFrozen = Boolean(object.isFrozen);
-    if (isSet(object.consensusState)) obj.consensusState = ConsensusState.fromJSON(object.consensusState);
-    return obj;
+    return {
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      isFrozen: isSet(object.isFrozen) ? Boolean(object.isFrozen) : false,
+      consensusState: isSet(object.consensusState) ? ConsensusState.fromJSON(object.consensusState) : undefined
+    };
   },
   toJSON(message: ClientState): unknown {
     const obj: any = {};
@@ -209,13 +209,9 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.isFrozen = object.isFrozen ?? false;
-    if (object.consensusState !== undefined && object.consensusState !== null) {
-      message.consensusState = ConsensusState.fromPartial(object.consensusState);
-    }
+    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : ConsensusState.fromPartial({});
     return message;
   },
   fromSDK(object: ClientStateSDKType): ClientState {
@@ -320,11 +316,11 @@ export const ConsensusState = {
     return message;
   },
   fromJSON(object: any): ConsensusState {
-    const obj = createBaseConsensusState();
-    if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
-    if (isSet(object.diversifier)) obj.diversifier = String(object.diversifier);
-    if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    return obj;
+    return {
+      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
+      diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
+      timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
+    };
   },
   toJSON(message: ConsensusState): unknown {
     const obj: any = {};
@@ -335,13 +331,9 @@ export const ConsensusState = {
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
-    if (object.publicKey !== undefined && object.publicKey !== null) {
-      message.publicKey = Any.fromPartial(object.publicKey);
-    }
+    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
     message.diversifier = object.diversifier ?? "";
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = BigInt(object.timestamp.toString());
-    }
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
@@ -453,12 +445,12 @@ export const Header = {
     return message;
   },
   fromJSON(object: any): Header {
-    const obj = createBaseHeader();
-    if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
-    if (isSet(object.newPublicKey)) obj.newPublicKey = Any.fromJSON(object.newPublicKey);
-    if (isSet(object.newDiversifier)) obj.newDiversifier = String(object.newDiversifier);
-    return obj;
+    return {
+      timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0),
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+      newPublicKey: isSet(object.newPublicKey) ? Any.fromJSON(object.newPublicKey) : undefined,
+      newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : ""
+    };
   },
   toJSON(message: Header): unknown {
     const obj: any = {};
@@ -470,13 +462,9 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = BigInt(object.timestamp.toString());
-    }
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     message.signature = object.signature ?? new Uint8Array();
-    if (object.newPublicKey !== undefined && object.newPublicKey !== null) {
-      message.newPublicKey = Any.fromPartial(object.newPublicKey);
-    }
+    message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : Any.fromPartial({});
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },
@@ -587,11 +575,11 @@ export const Misbehaviour = {
     return message;
   },
   fromJSON(object: any): Misbehaviour {
-    const obj = createBaseMisbehaviour();
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    if (isSet(object.signatureOne)) obj.signatureOne = SignatureAndData.fromJSON(object.signatureOne);
-    if (isSet(object.signatureTwo)) obj.signatureTwo = SignatureAndData.fromJSON(object.signatureTwo);
-    return obj;
+    return {
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      signatureOne: isSet(object.signatureOne) ? SignatureAndData.fromJSON(object.signatureOne) : undefined,
+      signatureTwo: isSet(object.signatureTwo) ? SignatureAndData.fromJSON(object.signatureTwo) : undefined
+    };
   },
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
@@ -602,15 +590,9 @@ export const Misbehaviour = {
   },
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
-    if (object.signatureOne !== undefined && object.signatureOne !== null) {
-      message.signatureOne = SignatureAndData.fromPartial(object.signatureOne);
-    }
-    if (object.signatureTwo !== undefined && object.signatureTwo !== null) {
-      message.signatureTwo = SignatureAndData.fromPartial(object.signatureTwo);
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : SignatureAndData.fromPartial({});
+    message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : SignatureAndData.fromPartial({});
     return message;
   },
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
@@ -722,12 +704,12 @@ export const SignatureAndData = {
     return message;
   },
   fromJSON(object: any): SignatureAndData {
-    const obj = createBaseSignatureAndData();
-    if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
-    if (isSet(object.path)) obj.path = bytesFromBase64(object.path);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    return obj;
+    return {
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
+    };
   },
   toJSON(message: SignatureAndData): unknown {
     const obj: any = {};
@@ -742,9 +724,7 @@ export const SignatureAndData = {
     message.signature = object.signature ?? new Uint8Array();
     message.path = object.path ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = BigInt(object.timestamp.toString());
-    }
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
@@ -847,10 +827,10 @@ export const TimestampedSignatureData = {
     return message;
   },
   fromJSON(object: any): TimestampedSignatureData {
-    const obj = createBaseTimestampedSignatureData();
-    if (isSet(object.signatureData)) obj.signatureData = bytesFromBase64(object.signatureData);
-    if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    return obj;
+    return {
+      signatureData: isSet(object.signatureData) ? bytesFromBase64(object.signatureData) : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
+    };
   },
   toJSON(message: TimestampedSignatureData): unknown {
     const obj: any = {};
@@ -861,9 +841,7 @@ export const TimestampedSignatureData = {
   fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     message.signatureData = object.signatureData ?? new Uint8Array();
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = BigInt(object.timestamp.toString());
-    }
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: TimestampedSignatureDataSDKType): TimestampedSignatureData {
@@ -977,13 +955,13 @@ export const SignBytes = {
     return message;
   },
   fromJSON(object: any): SignBytes {
-    const obj = createBaseSignBytes();
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    if (isSet(object.diversifier)) obj.diversifier = String(object.diversifier);
-    if (isSet(object.path)) obj.path = bytesFromBase64(object.path);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    return obj;
+    return {
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0),
+      diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
   toJSON(message: SignBytes): unknown {
     const obj: any = {};
@@ -996,12 +974,8 @@ export const SignBytes = {
   },
   fromPartial(object: DeepPartial<SignBytes>): SignBytes {
     const message = createBaseSignBytes();
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = BigInt(object.timestamp.toString());
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? BigInt(object.timestamp.toString()) : BigInt(0);
     message.diversifier = object.diversifier ?? "";
     message.path = object.path ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
@@ -1112,10 +1086,10 @@ export const HeaderData = {
     return message;
   },
   fromJSON(object: any): HeaderData {
-    const obj = createBaseHeaderData();
-    if (isSet(object.newPubKey)) obj.newPubKey = Any.fromJSON(object.newPubKey);
-    if (isSet(object.newDiversifier)) obj.newDiversifier = String(object.newDiversifier);
-    return obj;
+    return {
+      newPubKey: isSet(object.newPubKey) ? Any.fromJSON(object.newPubKey) : undefined,
+      newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : ""
+    };
   },
   toJSON(message: HeaderData): unknown {
     const obj: any = {};
@@ -1125,9 +1099,7 @@ export const HeaderData = {
   },
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
-    if (object.newPubKey !== undefined && object.newPubKey !== null) {
-      message.newPubKey = Any.fromPartial(object.newPubKey);
-    }
+    message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : Any.fromPartial({});
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
   },

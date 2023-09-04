@@ -35,8 +35,7 @@ export const ParamsRequest = {
     return message;
   },
   fromJSON(_: any): ParamsRequest {
-    const obj = createBaseParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: ParamsRequest): unknown {
     const obj: any = {};
@@ -116,9 +115,9 @@ export const ParamsResponse = {
     return message;
   },
   fromJSON(object: any): ParamsResponse {
-    const obj = createBaseParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: ParamsResponse): unknown {
     const obj: any = {};
@@ -127,9 +126,7 @@ export const ParamsResponse = {
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {

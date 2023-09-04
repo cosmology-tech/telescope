@@ -85,9 +85,9 @@ export const QueryEvidenceRequest = {
     return message;
   },
   fromJSON(object: any): QueryEvidenceRequest {
-    const obj = createBaseQueryEvidenceRequest();
-    if (isSet(object.evidenceHash)) obj.evidenceHash = bytesFromBase64(object.evidenceHash);
-    return obj;
+    return {
+      evidenceHash: isSet(object.evidenceHash) ? bytesFromBase64(object.evidenceHash) : new Uint8Array()
+    };
   },
   toJSON(message: QueryEvidenceRequest): unknown {
     const obj: any = {};
@@ -177,9 +177,9 @@ export const QueryEvidenceResponse = {
     return message;
   },
   fromJSON(object: any): QueryEvidenceResponse {
-    const obj = createBaseQueryEvidenceResponse();
-    if (isSet(object.evidence)) obj.evidence = Any.fromJSON(object.evidence);
-    return obj;
+    return {
+      evidence: isSet(object.evidence) ? Any.fromJSON(object.evidence) : undefined
+    };
   },
   toJSON(message: QueryEvidenceResponse): unknown {
     const obj: any = {};
@@ -188,9 +188,7 @@ export const QueryEvidenceResponse = {
   },
   fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
     const message = createBaseQueryEvidenceResponse();
-    if (object.evidence !== undefined && object.evidence !== null) {
-      message.evidence = Any.fromPartial(object.evidence);
-    }
+    message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
@@ -271,9 +269,9 @@ export const QueryAllEvidenceRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllEvidenceRequest {
-    const obj = createBaseQueryAllEvidenceRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAllEvidenceRequest): unknown {
     const obj: any = {};
@@ -282,9 +280,7 @@ export const QueryAllEvidenceRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
     const message = createBaseQueryAllEvidenceRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
@@ -372,10 +368,10 @@ export const QueryAllEvidenceResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllEvidenceResponse {
-    const obj = createBaseQueryAllEvidenceResponse();
-    if (Array.isArray(object?.evidence)) object.evidence.map((e: any) => Any.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAllEvidenceResponse): unknown {
     const obj: any = {};
@@ -390,9 +386,7 @@ export const QueryAllEvidenceResponse = {
   fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {
     const message = createBaseQueryAllEvidenceResponse();
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {

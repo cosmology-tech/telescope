@@ -187,10 +187,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (Array.isArray(object?.sendEnabled)) object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e));
-    if (isSet(object.defaultSendEnabled)) obj.defaultSendEnabled = Boolean(object.defaultSendEnabled);
-    return obj;
+    return {
+      sendEnabled: Array.isArray(object?.sendEnabled) ? object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e)) : [],
+      defaultSendEnabled: isSet(object.defaultSendEnabled) ? Boolean(object.defaultSendEnabled) : false
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -306,10 +306,10 @@ export const SendEnabled = {
     return message;
   },
   fromJSON(object: any): SendEnabled {
-    const obj = createBaseSendEnabled();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
+    };
   },
   toJSON(message: SendEnabled): unknown {
     const obj: any = {};
@@ -413,10 +413,10 @@ export const Input = {
     return message;
   },
   fromJSON(object: any): Input {
-    const obj = createBaseInput();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Input): unknown {
     const obj: any = {};
@@ -532,10 +532,10 @@ export const Output = {
     return message;
   },
   fromJSON(object: any): Output {
-    const obj = createBaseOutput();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Output): unknown {
     const obj: any = {};
@@ -644,9 +644,9 @@ export const Supply = {
     return message;
   },
   fromJSON(object: any): Supply {
-    const obj = createBaseSupply();
-    if (Array.isArray(object?.total)) object.total.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Supply): unknown {
     const obj: any = {};
@@ -762,11 +762,11 @@ export const DenomUnit = {
     return message;
   },
   fromJSON(object: any): DenomUnit {
-    const obj = createBaseDenomUnit();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.exponent)) obj.exponent = Number(object.exponent);
-    if (Array.isArray(object?.aliases)) object.aliases.map((e: any) => String(e));
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: DenomUnit): unknown {
     const obj: any = {};
@@ -931,16 +931,16 @@ export const Metadata = {
     return message;
   },
   fromJSON(object: any): Metadata {
-    const obj = createBaseMetadata();
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.denomUnits)) object.denomUnits.map((e: any) => DenomUnit.fromJSON(e));
-    if (isSet(object.base)) obj.base = String(object.base);
-    if (isSet(object.display)) obj.display = String(object.display);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.symbol)) obj.symbol = String(object.symbol);
-    if (isSet(object.uri)) obj.uri = String(object.uri);
-    if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
-    return obj;
+    return {
+      description: isSet(object.description) ? String(object.description) : "",
+      denomUnits: Array.isArray(object?.denomUnits) ? object.denomUnits.map((e: any) => DenomUnit.fromJSON(e)) : [],
+      base: isSet(object.base) ? String(object.base) : "",
+      display: isSet(object.display) ? String(object.display) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      symbol: isSet(object.symbol) ? String(object.symbol) : "",
+      uri: isSet(object.uri) ? String(object.uri) : "",
+      uriHash: isSet(object.uriHash) ? String(object.uriHash) : ""
+    };
   },
   toJSON(message: Metadata): unknown {
     const obj: any = {};

@@ -123,11 +123,11 @@ export const FullTick = {
     return message;
   },
   fromJSON(object: any): FullTick {
-    const obj = createBaseFullTick();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.tickIndex)) obj.tickIndex = BigInt(object.tickIndex.toString());
-    if (isSet(object.info)) obj.info = TickInfo.fromJSON(object.info);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      tickIndex: isSet(object.tickIndex) ? BigInt(object.tickIndex.toString()) : BigInt(0),
+      info: isSet(object.info) ? TickInfo.fromJSON(object.info) : undefined
+    };
   },
   toJSON(message: FullTick): unknown {
     const obj: any = {};
@@ -138,15 +138,9 @@ export const FullTick = {
   },
   fromPartial(object: DeepPartial<FullTick>): FullTick {
     const message = createBaseFullTick();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
-    if (object.tickIndex !== undefined && object.tickIndex !== null) {
-      message.tickIndex = BigInt(object.tickIndex.toString());
-    }
-    if (object.info !== undefined && object.info !== null) {
-      message.info = TickInfo.fromPartial(object.info);
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    message.tickIndex = object.tickIndex !== undefined && object.tickIndex !== null ? BigInt(object.tickIndex.toString()) : BigInt(0);
+    message.info = object.info !== undefined && object.info !== null ? TickInfo.fromPartial(object.info) : TickInfo.fromPartial({});
     return message;
   },
   fromSDK(object: FullTickSDKType): FullTick {
@@ -265,13 +259,13 @@ export const PoolData = {
     return message;
   },
   fromJSON(object: any): PoolData {
-    const obj = createBasePoolData();
-    if (isSet(object.pool)) obj.pool = Any.fromJSON(object.pool);
-    if (Array.isArray(object?.ticks)) object.ticks.map((e: any) => FullTick.fromJSON(e));
-    if (isSet(object.feeAccumulator)) obj.feeAccumulator = AccumObject.fromJSON(object.feeAccumulator);
-    if (Array.isArray(object?.incentivesAccumulators)) object.incentivesAccumulators.map((e: any) => AccumObject.fromJSON(e));
-    if (Array.isArray(object?.incentiveRecords)) object.incentiveRecords.map((e: any) => IncentiveRecord.fromJSON(e));
-    return obj;
+    return {
+      pool: isSet(object.pool) ? Any.fromJSON(object.pool) : undefined,
+      ticks: Array.isArray(object?.ticks) ? object.ticks.map((e: any) => FullTick.fromJSON(e)) : [],
+      feeAccumulator: isSet(object.feeAccumulator) ? AccumObject.fromJSON(object.feeAccumulator) : undefined,
+      incentivesAccumulators: Array.isArray(object?.incentivesAccumulators) ? object.incentivesAccumulators.map((e: any) => AccumObject.fromJSON(e)) : [],
+      incentiveRecords: Array.isArray(object?.incentiveRecords) ? object.incentiveRecords.map((e: any) => IncentiveRecord.fromJSON(e)) : []
+    };
   },
   toJSON(message: PoolData): unknown {
     const obj: any = {};
@@ -296,13 +290,9 @@ export const PoolData = {
   },
   fromPartial(object: DeepPartial<PoolData>): PoolData {
     const message = createBasePoolData();
-    if (object.pool !== undefined && object.pool !== null) {
-      message.pool = Any.fromPartial(object.pool);
-    }
+    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : Any.fromPartial({});
     message.ticks = object.ticks?.map(e => FullTick.fromPartial(e)) || [];
-    if (object.feeAccumulator !== undefined && object.feeAccumulator !== null) {
-      message.feeAccumulator = AccumObject.fromPartial(object.feeAccumulator);
-    }
+    message.feeAccumulator = object.feeAccumulator !== undefined && object.feeAccumulator !== null ? AccumObject.fromPartial(object.feeAccumulator) : AccumObject.fromPartial({});
     message.incentivesAccumulators = object.incentivesAccumulators?.map(e => AccumObject.fromPartial(e)) || [];
     message.incentiveRecords = object.incentiveRecords?.map(e => IncentiveRecord.fromPartial(e)) || [];
     return message;
@@ -450,12 +440,12 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.poolData)) object.poolData.map((e: any) => PoolData.fromJSON(e));
-    if (Array.isArray(object?.positions)) object.positions.map((e: any) => Position.fromJSON(e));
-    if (isSet(object.nextPositionId)) obj.nextPositionId = BigInt(object.nextPositionId.toString());
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      poolData: Array.isArray(object?.poolData) ? object.poolData.map((e: any) => PoolData.fromJSON(e)) : [],
+      positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromJSON(e)) : [],
+      nextPositionId: isSet(object.nextPositionId) ? BigInt(object.nextPositionId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -475,14 +465,10 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.poolData = object.poolData?.map(e => PoolData.fromPartial(e)) || [];
     message.positions = object.positions?.map(e => Position.fromPartial(e)) || [];
-    if (object.nextPositionId !== undefined && object.nextPositionId !== null) {
-      message.nextPositionId = BigInt(object.nextPositionId.toString());
-    }
+    message.nextPositionId = object.nextPositionId !== undefined && object.nextPositionId !== null ? BigInt(object.nextPositionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -601,10 +587,10 @@ export const AccumObject = {
     return message;
   },
   fromJSON(object: any): AccumObject {
-    const obj = createBaseAccumObject();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.accumContent)) obj.accumContent = AccumulatorContent.fromJSON(object.accumContent);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      accumContent: isSet(object.accumContent) ? AccumulatorContent.fromJSON(object.accumContent) : undefined
+    };
   },
   toJSON(message: AccumObject): unknown {
     const obj: any = {};
@@ -615,9 +601,7 @@ export const AccumObject = {
   fromPartial(object: DeepPartial<AccumObject>): AccumObject {
     const message = createBaseAccumObject();
     message.name = object.name ?? "";
-    if (object.accumContent !== undefined && object.accumContent !== null) {
-      message.accumContent = AccumulatorContent.fromPartial(object.accumContent);
-    }
+    message.accumContent = object.accumContent !== undefined && object.accumContent !== null ? AccumulatorContent.fromPartial(object.accumContent) : AccumulatorContent.fromPartial({});
     return message;
   },
   fromSDK(object: AccumObjectSDKType): AccumObject {

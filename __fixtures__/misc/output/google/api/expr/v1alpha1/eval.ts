@@ -70,9 +70,9 @@ export const ExprValue = {
     return message;
   },
   fromJSON(object: any): ExprValue {
-    const obj = createBaseExprValue();
-    if (Array.isArray(object?.exprs)) object.exprs.map((e: any) => IdRef.fromJSON(e));
-    return obj;
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromJSON(e)) : []
+    };
   },
   toJSON(message: ExprValue): unknown {
     const obj: any = {};
@@ -168,9 +168,9 @@ export const IdRef = {
     return message;
   },
   fromJSON(object: any): IdRef {
-    const obj = createBaseIdRef();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0
+    };
   },
   toJSON(message: IdRef): unknown {
     const obj: any = {};

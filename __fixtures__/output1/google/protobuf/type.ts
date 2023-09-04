@@ -433,14 +433,14 @@ export const Type = {
     return message;
   },
   fromJSON(object: any): Type {
-    const obj = createBaseType();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.fields)) object.fields.map((e: any) => Field.fromJSON(e));
-    if (Array.isArray(object?.oneofs)) object.oneofs.map((e: any) => String(e));
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
-    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
-    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromJSON(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
   },
   toJSON(message: Type): unknown {
     const obj: any = {};
@@ -470,9 +470,7 @@ export const Type = {
     message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
     message.oneofs = object.oneofs?.map(e => e) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    if (object.sourceContext !== undefined && object.sourceContext !== null) {
-      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
-    }
+    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : SourceContext.fromPartial({});
     message.syntax = object.syntax ?? 0;
     return message;
   },
@@ -602,18 +600,18 @@ export const Field = {
     return message;
   },
   fromJSON(object: any): Field {
-    const obj = createBaseField();
-    if (isSet(object.kind)) obj.kind = field_KindFromJSON(object.kind);
-    if (isSet(object.cardinality)) obj.cardinality = field_CardinalityFromJSON(object.cardinality);
-    if (isSet(object.number)) obj.number = Number(object.number);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
-    if (isSet(object.oneofIndex)) obj.oneofIndex = Number(object.oneofIndex);
-    if (isSet(object.packed)) obj.packed = Boolean(object.packed);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
-    if (isSet(object.jsonName)) obj.jsonName = String(object.jsonName);
-    if (isSet(object.defaultValue)) obj.defaultValue = String(object.defaultValue);
-    return obj;
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
+      number: isSet(object.number) ? Number(object.number) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
+      oneofIndex: isSet(object.oneofIndex) ? Number(object.oneofIndex) : 0,
+      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      jsonName: isSet(object.jsonName) ? String(object.jsonName) : "",
+      defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : ""
+    };
   },
   toJSON(message: Field): unknown {
     const obj: any = {};
@@ -738,13 +736,13 @@ export const Enum = {
     return message;
   },
   fromJSON(object: any): Enum {
-    const obj = createBaseEnum();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.enumvalue)) object.enumvalue.map((e: any) => EnumValue.fromJSON(e));
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
-    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
-    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromJSON(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
   },
   toJSON(message: Enum): unknown {
     const obj: any = {};
@@ -768,9 +766,7 @@ export const Enum = {
     message.name = object.name ?? "";
     message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    if (object.sourceContext !== undefined && object.sourceContext !== null) {
-      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
-    }
+    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : SourceContext.fromPartial({});
     message.syntax = object.syntax ?? 0;
     return message;
   },
@@ -845,11 +841,11 @@ export const EnumValue = {
     return message;
   },
   fromJSON(object: any): EnumValue {
-    const obj = createBaseEnumValue();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.number)) obj.number = Number(object.number);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : []
+    };
   },
   toJSON(message: EnumValue): unknown {
     const obj: any = {};
@@ -925,10 +921,10 @@ export const Option = {
     return message;
   },
   fromJSON(object: any): Option {
-    const obj = createBaseOption();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.value)) obj.value = Any.fromJSON(object.value);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      value: isSet(object.value) ? Any.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: Option): unknown {
     const obj: any = {};
@@ -939,9 +935,7 @@ export const Option = {
   fromPartial(object: DeepPartial<Option>): Option {
     const message = createBaseOption();
     message.name = object.name ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Any.fromPartial(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? Any.fromPartial(object.value) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: OptionSDKType): Option {

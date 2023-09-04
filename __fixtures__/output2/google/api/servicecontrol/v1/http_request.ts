@@ -209,23 +209,23 @@ export const HttpRequest = {
     return message;
   },
   fromJSON(object: any): HttpRequest {
-    const obj = createBaseHttpRequest();
-    if (isSet(object.requestMethod)) obj.requestMethod = String(object.requestMethod);
-    if (isSet(object.requestUrl)) obj.requestUrl = String(object.requestUrl);
-    if (isSet(object.requestSize)) obj.requestSize = Long.fromValue(object.requestSize);
-    if (isSet(object.status)) obj.status = Number(object.status);
-    if (isSet(object.responseSize)) obj.responseSize = Long.fromValue(object.responseSize);
-    if (isSet(object.userAgent)) obj.userAgent = String(object.userAgent);
-    if (isSet(object.remoteIp)) obj.remoteIp = String(object.remoteIp);
-    if (isSet(object.serverIp)) obj.serverIp = String(object.serverIp);
-    if (isSet(object.referer)) obj.referer = String(object.referer);
-    if (isSet(object.latency)) obj.latency = Duration.fromJSON(object.latency);
-    if (isSet(object.cacheLookup)) obj.cacheLookup = Boolean(object.cacheLookup);
-    if (isSet(object.cacheHit)) obj.cacheHit = Boolean(object.cacheHit);
-    if (isSet(object.cacheValidatedWithOriginServer)) obj.cacheValidatedWithOriginServer = Boolean(object.cacheValidatedWithOriginServer);
-    if (isSet(object.cacheFillBytes)) obj.cacheFillBytes = Long.fromValue(object.cacheFillBytes);
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    return obj;
+    return {
+      requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
+      requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
+      requestSize: isSet(object.requestSize) ? Long.fromValue(object.requestSize) : Long.ZERO,
+      status: isSet(object.status) ? Number(object.status) : 0,
+      responseSize: isSet(object.responseSize) ? Long.fromValue(object.responseSize) : Long.ZERO,
+      userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
+      remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
+      serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
+      referer: isSet(object.referer) ? String(object.referer) : "",
+      latency: isSet(object.latency) ? Duration.fromJSON(object.latency) : undefined,
+      cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
+      cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
+      cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
+      cacheFillBytes: isSet(object.cacheFillBytes) ? Long.fromValue(object.cacheFillBytes) : Long.ZERO,
+      protocol: isSet(object.protocol) ? String(object.protocol) : ""
+    };
   },
   toJSON(message: HttpRequest): unknown {
     const obj: any = {};
@@ -250,26 +250,18 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    if (object.requestSize !== undefined && object.requestSize !== null) {
-      message.requestSize = Long.fromValue(object.requestSize);
-    }
+    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? Long.fromValue(object.requestSize) : Long.ZERO;
     message.status = object.status ?? 0;
-    if (object.responseSize !== undefined && object.responseSize !== null) {
-      message.responseSize = Long.fromValue(object.responseSize);
-    }
+    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? Long.fromValue(object.responseSize) : Long.ZERO;
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    if (object.latency !== undefined && object.latency !== null) {
-      message.latency = Duration.fromPartial(object.latency);
-    }
+    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : Duration.fromPartial({});
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    if (object.cacheFillBytes !== undefined && object.cacheFillBytes !== null) {
-      message.cacheFillBytes = Long.fromValue(object.cacheFillBytes);
-    }
+    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? Long.fromValue(object.cacheFillBytes) : Long.ZERO;
     message.protocol = object.protocol ?? "";
     return message;
   }

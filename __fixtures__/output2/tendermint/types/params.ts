@@ -129,12 +129,12 @@ export const ConsensusParams = {
     return message;
   },
   fromJSON(object: any): ConsensusParams {
-    const obj = createBaseConsensusParams();
-    if (isSet(object.block)) obj.block = BlockParams.fromJSON(object.block);
-    if (isSet(object.evidence)) obj.evidence = EvidenceParams.fromJSON(object.evidence);
-    if (isSet(object.validator)) obj.validator = ValidatorParams.fromJSON(object.validator);
-    if (isSet(object.version)) obj.version = VersionParams.fromJSON(object.version);
-    return obj;
+    return {
+      block: isSet(object.block) ? BlockParams.fromJSON(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromJSON(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromJSON(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromJSON(object.version) : undefined
+    };
   },
   toJSON(message: ConsensusParams): unknown {
     const obj: any = {};
@@ -146,18 +146,10 @@ export const ConsensusParams = {
   },
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
-    if (object.block !== undefined && object.block !== null) {
-      message.block = BlockParams.fromPartial(object.block);
-    }
-    if (object.evidence !== undefined && object.evidence !== null) {
-      message.evidence = EvidenceParams.fromPartial(object.evidence);
-    }
-    if (object.validator !== undefined && object.validator !== null) {
-      message.validator = ValidatorParams.fromPartial(object.validator);
-    }
-    if (object.version !== undefined && object.version !== null) {
-      message.version = VersionParams.fromPartial(object.version);
-    }
+    message.block = object.block !== undefined && object.block !== null ? BlockParams.fromPartial(object.block) : BlockParams.fromPartial({});
+    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceParams.fromPartial(object.evidence) : EvidenceParams.fromPartial({});
+    message.validator = object.validator !== undefined && object.validator !== null ? ValidatorParams.fromPartial(object.validator) : ValidatorParams.fromPartial({});
+    message.version = object.version !== undefined && object.version !== null ? VersionParams.fromPartial(object.version) : VersionParams.fromPartial({});
     return message;
   }
 };
@@ -205,11 +197,11 @@ export const BlockParams = {
     return message;
   },
   fromJSON(object: any): BlockParams {
-    const obj = createBaseBlockParams();
-    if (isSet(object.maxBytes)) obj.maxBytes = Long.fromValue(object.maxBytes);
-    if (isSet(object.maxGas)) obj.maxGas = Long.fromValue(object.maxGas);
-    if (isSet(object.timeIotaMs)) obj.timeIotaMs = Long.fromValue(object.timeIotaMs);
-    return obj;
+    return {
+      maxBytes: isSet(object.maxBytes) ? Long.fromValue(object.maxBytes) : Long.ZERO,
+      maxGas: isSet(object.maxGas) ? Long.fromValue(object.maxGas) : Long.ZERO,
+      timeIotaMs: isSet(object.timeIotaMs) ? Long.fromValue(object.timeIotaMs) : Long.ZERO
+    };
   },
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
@@ -220,15 +212,9 @@ export const BlockParams = {
   },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    if (object.maxBytes !== undefined && object.maxBytes !== null) {
-      message.maxBytes = Long.fromValue(object.maxBytes);
-    }
-    if (object.maxGas !== undefined && object.maxGas !== null) {
-      message.maxGas = Long.fromValue(object.maxGas);
-    }
-    if (object.timeIotaMs !== undefined && object.timeIotaMs !== null) {
-      message.timeIotaMs = Long.fromValue(object.timeIotaMs);
-    }
+    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
+    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? Long.fromValue(object.maxGas) : Long.ZERO;
+    message.timeIotaMs = object.timeIotaMs !== undefined && object.timeIotaMs !== null ? Long.fromValue(object.timeIotaMs) : Long.ZERO;
     return message;
   }
 };
@@ -276,11 +262,11 @@ export const EvidenceParams = {
     return message;
   },
   fromJSON(object: any): EvidenceParams {
-    const obj = createBaseEvidenceParams();
-    if (isSet(object.maxAgeNumBlocks)) obj.maxAgeNumBlocks = Long.fromValue(object.maxAgeNumBlocks);
-    if (isSet(object.maxAgeDuration)) obj.maxAgeDuration = Duration.fromJSON(object.maxAgeDuration);
-    if (isSet(object.maxBytes)) obj.maxBytes = Long.fromValue(object.maxBytes);
-    return obj;
+    return {
+      maxAgeNumBlocks: isSet(object.maxAgeNumBlocks) ? Long.fromValue(object.maxAgeNumBlocks) : Long.ZERO,
+      maxAgeDuration: isSet(object.maxAgeDuration) ? Duration.fromJSON(object.maxAgeDuration) : undefined,
+      maxBytes: isSet(object.maxBytes) ? Long.fromValue(object.maxBytes) : Long.ZERO
+    };
   },
   toJSON(message: EvidenceParams): unknown {
     const obj: any = {};
@@ -291,15 +277,9 @@ export const EvidenceParams = {
   },
   fromPartial(object: DeepPartial<EvidenceParams>): EvidenceParams {
     const message = createBaseEvidenceParams();
-    if (object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null) {
-      message.maxAgeNumBlocks = Long.fromValue(object.maxAgeNumBlocks);
-    }
-    if (object.maxAgeDuration !== undefined && object.maxAgeDuration !== null) {
-      message.maxAgeDuration = Duration.fromPartial(object.maxAgeDuration);
-    }
-    if (object.maxBytes !== undefined && object.maxBytes !== null) {
-      message.maxBytes = Long.fromValue(object.maxBytes);
-    }
+    message.maxAgeNumBlocks = object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null ? Long.fromValue(object.maxAgeNumBlocks) : Long.ZERO;
+    message.maxAgeDuration = object.maxAgeDuration !== undefined && object.maxAgeDuration !== null ? Duration.fromPartial(object.maxAgeDuration) : Duration.fromPartial({});
+    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
     return message;
   }
 };
@@ -333,9 +313,9 @@ export const ValidatorParams = {
     return message;
   },
   fromJSON(object: any): ValidatorParams {
-    const obj = createBaseValidatorParams();
-    if (Array.isArray(object?.pubKeyTypes)) object.pubKeyTypes.map((e: any) => String(e));
-    return obj;
+    return {
+      pubKeyTypes: Array.isArray(object?.pubKeyTypes) ? object.pubKeyTypes.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: ValidatorParams): unknown {
     const obj: any = {};
@@ -382,9 +362,9 @@ export const VersionParams = {
     return message;
   },
   fromJSON(object: any): VersionParams {
-    const obj = createBaseVersionParams();
-    if (isSet(object.appVersion)) obj.appVersion = Long.fromValue(object.appVersion);
-    return obj;
+    return {
+      appVersion: isSet(object.appVersion) ? Long.fromValue(object.appVersion) : Long.UZERO
+    };
   },
   toJSON(message: VersionParams): unknown {
     const obj: any = {};
@@ -393,9 +373,7 @@ export const VersionParams = {
   },
   fromPartial(object: DeepPartial<VersionParams>): VersionParams {
     const message = createBaseVersionParams();
-    if (object.appVersion !== undefined && object.appVersion !== null) {
-      message.appVersion = Long.fromValue(object.appVersion);
-    }
+    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? Long.fromValue(object.appVersion) : Long.UZERO;
     return message;
   }
 };
@@ -436,10 +414,10 @@ export const HashedParams = {
     return message;
   },
   fromJSON(object: any): HashedParams {
-    const obj = createBaseHashedParams();
-    if (isSet(object.blockMaxBytes)) obj.blockMaxBytes = Long.fromValue(object.blockMaxBytes);
-    if (isSet(object.blockMaxGas)) obj.blockMaxGas = Long.fromValue(object.blockMaxGas);
-    return obj;
+    return {
+      blockMaxBytes: isSet(object.blockMaxBytes) ? Long.fromValue(object.blockMaxBytes) : Long.ZERO,
+      blockMaxGas: isSet(object.blockMaxGas) ? Long.fromValue(object.blockMaxGas) : Long.ZERO
+    };
   },
   toJSON(message: HashedParams): unknown {
     const obj: any = {};
@@ -449,12 +427,8 @@ export const HashedParams = {
   },
   fromPartial(object: DeepPartial<HashedParams>): HashedParams {
     const message = createBaseHashedParams();
-    if (object.blockMaxBytes !== undefined && object.blockMaxBytes !== null) {
-      message.blockMaxBytes = Long.fromValue(object.blockMaxBytes);
-    }
-    if (object.blockMaxGas !== undefined && object.blockMaxGas !== null) {
-      message.blockMaxGas = Long.fromValue(object.blockMaxGas);
-    }
+    message.blockMaxBytes = object.blockMaxBytes !== undefined && object.blockMaxBytes !== null ? Long.fromValue(object.blockMaxBytes) : Long.ZERO;
+    message.blockMaxGas = object.blockMaxGas !== undefined && object.blockMaxGas !== null ? Long.fromValue(object.blockMaxGas) : Long.ZERO;
     return message;
   }
 };

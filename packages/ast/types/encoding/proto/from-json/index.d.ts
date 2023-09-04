@@ -7,5 +7,5 @@ export interface FromJSONMethod {
     isOneOf: boolean;
     isOptional: boolean;
 }
-export declare const fromJSONMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => t.IfStatement[];
+export declare const fromJSONMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => (t.IfStatement | t.ObjectProperty)[];
 export declare const fromJSONMethod: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ObjectMethod;

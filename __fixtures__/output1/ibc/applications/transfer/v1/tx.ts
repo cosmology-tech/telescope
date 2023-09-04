@@ -120,15 +120,15 @@ export const MsgTransfer = {
     return message;
   },
   fromJSON(object: any): MsgTransfer {
-    const obj = createBaseMsgTransfer();
-    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
-    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
-    if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
-    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
-    return obj;
+    return {
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
+      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
+    };
   },
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
@@ -145,17 +145,11 @@ export const MsgTransfer = {
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
-    if (object.token !== undefined && object.token !== null) {
-      message.token = Coin.fromPartial(object.token);
-    }
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : Coin.fromPartial({});
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
-    }
-    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
-      message.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
-    }
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     return message;
   },
   fromSDK(object: MsgTransferSDKType): MsgTransfer {
@@ -203,8 +197,7 @@ export const MsgTransferResponse = {
     return message;
   },
   fromJSON(_: any): MsgTransferResponse {
-    const obj = createBaseMsgTransferResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgTransferResponse): unknown {
     const obj: any = {};

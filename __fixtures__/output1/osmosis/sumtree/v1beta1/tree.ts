@@ -51,9 +51,9 @@ export const Node = {
     return message;
   },
   fromJSON(object: any): Node {
-    const obj = createBaseNode();
-    if (Array.isArray(object?.children)) object.children.map((e: any) => Child.fromJSON(e));
-    return obj;
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromJSON(e)) : []
+    };
   },
   toJSON(message: Node): unknown {
     const obj: any = {};
@@ -121,10 +121,10 @@ export const Child = {
     return message;
   },
   fromJSON(object: any): Child {
-    const obj = createBaseChild();
-    if (isSet(object.index)) obj.index = bytesFromBase64(object.index);
-    if (isSet(object.accumulation)) obj.accumulation = String(object.accumulation);
-    return obj;
+    return {
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
+      accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
+    };
   },
   toJSON(message: Child): unknown {
     const obj: any = {};
@@ -181,9 +181,9 @@ export const Leaf = {
     return message;
   },
   fromJSON(object: any): Leaf {
-    const obj = createBaseLeaf();
-    if (isSet(object.leaf)) obj.leaf = Child.fromJSON(object.leaf);
-    return obj;
+    return {
+      leaf: isSet(object.leaf) ? Child.fromJSON(object.leaf) : undefined
+    };
   },
   toJSON(message: Leaf): unknown {
     const obj: any = {};
@@ -192,9 +192,7 @@ export const Leaf = {
   },
   fromPartial(object: DeepPartial<Leaf>): Leaf {
     const message = createBaseLeaf();
-    if (object.leaf !== undefined && object.leaf !== null) {
-      message.leaf = Child.fromPartial(object.leaf);
-    }
+    message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : Child.fromPartial({});
     return message;
   },
   fromSDK(object: LeafSDKType): Leaf {

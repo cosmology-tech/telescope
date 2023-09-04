@@ -95,12 +95,12 @@ export const MsgSwapExactAmountIn = {
     return message;
   },
   fromJSON(object: any): MsgSwapExactAmountIn {
-    const obj = createBaseMsgSwapExactAmountIn();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
-    if (isSet(object.tokenIn)) obj.tokenIn = Coin.fromJSON(object.tokenIn);
-    if (isSet(object.tokenOutMinAmount)) obj.tokenOutMinAmount = String(object.tokenOutMinAmount);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : [],
+      tokenIn: isSet(object.tokenIn) ? Coin.fromJSON(object.tokenIn) : undefined,
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
+    };
   },
   toJSON(message: MsgSwapExactAmountIn): unknown {
     const obj: any = {};
@@ -118,9 +118,7 @@ export const MsgSwapExactAmountIn = {
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
-    if (object.tokenIn !== undefined && object.tokenIn !== null) {
-      message.tokenIn = Coin.fromPartial(object.tokenIn);
-    }
+    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : Coin.fromPartial({});
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? "";
     return message;
   },
@@ -225,9 +223,9 @@ export const MsgSwapExactAmountInResponse = {
     return message;
   },
   fromJSON(object: any): MsgSwapExactAmountInResponse {
-    const obj = createBaseMsgSwapExactAmountInResponse();
-    if (isSet(object.tokenOutAmount)) obj.tokenOutAmount = String(object.tokenOutAmount);
-    return obj;
+    return {
+      tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
+    };
   },
   toJSON(message: MsgSwapExactAmountInResponse): unknown {
     const obj: any = {};
@@ -338,12 +336,12 @@ export const MsgSwapExactAmountOut = {
     return message;
   },
   fromJSON(object: any): MsgSwapExactAmountOut {
-    const obj = createBaseMsgSwapExactAmountOut();
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
-    if (isSet(object.tokenInMaxAmount)) obj.tokenInMaxAmount = String(object.tokenInMaxAmount);
-    if (isSet(object.tokenOut)) obj.tokenOut = Coin.fromJSON(object.tokenOut);
-    return obj;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? String(object.tokenInMaxAmount) : "",
+      tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
+    };
   },
   toJSON(message: MsgSwapExactAmountOut): unknown {
     const obj: any = {};
@@ -362,9 +360,7 @@ export const MsgSwapExactAmountOut = {
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? "";
-    if (object.tokenOut !== undefined && object.tokenOut !== null) {
-      message.tokenOut = Coin.fromPartial(object.tokenOut);
-    }
+    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
@@ -468,9 +464,9 @@ export const MsgSwapExactAmountOutResponse = {
     return message;
   },
   fromJSON(object: any): MsgSwapExactAmountOutResponse {
-    const obj = createBaseMsgSwapExactAmountOutResponse();
-    if (isSet(object.tokenInAmount)) obj.tokenInAmount = String(object.tokenInAmount);
-    return obj;
+    return {
+      tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
+    };
   },
   toJSON(message: MsgSwapExactAmountOutResponse): unknown {
     const obj: any = {};

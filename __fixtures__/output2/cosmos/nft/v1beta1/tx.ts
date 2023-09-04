@@ -67,12 +67,12 @@ export const MsgSend = {
     return message;
   },
   fromJSON(object: any): MsgSend {
-    const obj = createBaseMsgSend();
-    if (isSet(object.classId)) obj.classId = String(object.classId);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    return obj;
+    return {
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
   },
   toJSON(message: MsgSend): unknown {
     const obj: any = {};
@@ -113,8 +113,7 @@ export const MsgSendResponse = {
     return message;
   },
   fromJSON(_: any): MsgSendResponse {
-    const obj = createBaseMsgSendResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSendResponse): unknown {
     const obj: any = {};

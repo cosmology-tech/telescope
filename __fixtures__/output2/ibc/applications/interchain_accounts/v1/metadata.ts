@@ -89,14 +89,14 @@ export const Metadata = {
     return message;
   },
   fromJSON(object: any): Metadata {
-    const obj = createBaseMetadata();
-    if (isSet(object.version)) obj.version = String(object.version);
-    if (isSet(object.controllerConnectionId)) obj.controllerConnectionId = String(object.controllerConnectionId);
-    if (isSet(object.hostConnectionId)) obj.hostConnectionId = String(object.hostConnectionId);
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.encoding)) obj.encoding = String(object.encoding);
-    if (isSet(object.txType)) obj.txType = String(object.txType);
-    return obj;
+    return {
+      version: isSet(object.version) ? String(object.version) : "",
+      controllerConnectionId: isSet(object.controllerConnectionId) ? String(object.controllerConnectionId) : "",
+      hostConnectionId: isSet(object.hostConnectionId) ? String(object.hostConnectionId) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      encoding: isSet(object.encoding) ? String(object.encoding) : "",
+      txType: isSet(object.txType) ? String(object.txType) : ""
+    };
   },
   toJSON(message: Metadata): unknown {
     const obj: any = {};

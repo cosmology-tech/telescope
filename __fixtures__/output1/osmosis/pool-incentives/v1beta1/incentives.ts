@@ -82,9 +82,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.mintedDenom)) obj.mintedDenom = String(object.mintedDenom);
-    return obj;
+    return {
+      mintedDenom: isSet(object.mintedDenom) ? String(object.mintedDenom) : ""
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -137,9 +137,9 @@ export const LockableDurationsInfo = {
     return message;
   },
   fromJSON(object: any): LockableDurationsInfo {
-    const obj = createBaseLockableDurationsInfo();
-    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
+    return {
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
+    };
   },
   toJSON(message: LockableDurationsInfo): unknown {
     const obj: any = {};
@@ -207,10 +207,10 @@ export const DistrInfo = {
     return message;
   },
   fromJSON(object: any): DistrInfo {
-    const obj = createBaseDistrInfo();
-    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
+    return {
+      totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
+    };
   },
   toJSON(message: DistrInfo): unknown {
     const obj: any = {};
@@ -282,10 +282,10 @@ export const DistrRecord = {
     return message;
   },
   fromJSON(object: any): DistrRecord {
-    const obj = createBaseDistrRecord();
-    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
+    return {
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   },
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
@@ -295,9 +295,7 @@ export const DistrRecord = {
   },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = Long.fromValue(object.gaugeId);
-    }
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.weight = object.weight ?? "";
     return message;
   },
@@ -358,11 +356,11 @@ export const PoolToGauge = {
     return message;
   },
   fromJSON(object: any): PoolToGauge {
-    const obj = createBasePoolToGauge();
-    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
+    };
   },
   toJSON(message: PoolToGauge): unknown {
     const obj: any = {};
@@ -373,15 +371,9 @@ export const PoolToGauge = {
   },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = Long.fromValue(object.poolId);
-    }
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = Long.fromValue(object.gaugeId);
-    }
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
@@ -429,9 +421,9 @@ export const PoolToGauges = {
     return message;
   },
   fromJSON(object: any): PoolToGauges {
-    const obj = createBasePoolToGauges();
-    if (Array.isArray(object?.poolToGauge)) object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
-    return obj;
+    return {
+      poolToGauge: Array.isArray(object?.poolToGauge) ? object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e)) : []
+    };
   },
   toJSON(message: PoolToGauges): unknown {
     const obj: any = {};

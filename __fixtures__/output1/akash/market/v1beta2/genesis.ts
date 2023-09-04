@@ -60,11 +60,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.orders)) object.orders.map((e: any) => Order.fromJSON(e));
-    if (Array.isArray(object?.leases)) object.leases.map((e: any) => Lease.fromJSON(e));
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromJSON(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromJSON(e)) : [],
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -85,9 +85,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.leases = object.leases?.map(e => Lease.fromPartial(e)) || [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

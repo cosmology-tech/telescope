@@ -57,10 +57,10 @@ export const LegacyAminoPubKey = {
     return message;
   },
   fromJSON(object: any): LegacyAminoPubKey {
-    const obj = createBaseLegacyAminoPubKey();
-    if (isSet(object.threshold)) obj.threshold = Number(object.threshold);
-    if (Array.isArray(object?.publicKeys)) object.publicKeys.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      threshold: isSet(object.threshold) ? Number(object.threshold) : 0,
+      publicKeys: Array.isArray(object?.publicKeys) ? object.publicKeys.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: LegacyAminoPubKey): unknown {
     const obj: any = {};

@@ -37,9 +37,9 @@ export const ResourceValue = {
     return message;
   },
   fromJSON(object: any): ResourceValue {
-    const obj = createBaseResourceValue();
-    if (isSet(object.val)) obj.val = bytesFromBase64(object.val);
-    return obj;
+    return {
+      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
+    };
   },
   toJSON(message: ResourceValue): unknown {
     const obj: any = {};

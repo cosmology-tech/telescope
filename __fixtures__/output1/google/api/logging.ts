@@ -146,10 +146,10 @@ export const Logging = {
     return message;
   },
   fromJSON(object: any): Logging {
-    const obj = createBaseLogging();
-    if (Array.isArray(object?.producerDestinations)) object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
-    if (Array.isArray(object?.consumerDestinations)) object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
-    return obj;
+    return {
+      producerDestinations: Array.isArray(object?.producerDestinations) ? object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e)) : []
+    };
   },
   toJSON(message: Logging): unknown {
     const obj: any = {};
@@ -229,10 +229,10 @@ export const Logging_LoggingDestination = {
     return message;
   },
   fromJSON(object: any): Logging_LoggingDestination {
-    const obj = createBaseLogging_LoggingDestination();
-    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.logs)) object.logs.map((e: any) => String(e));
-    return obj;
+    return {
+      monitoredResource: isSet(object.monitoredResource) ? String(object.monitoredResource) : "",
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: Logging_LoggingDestination): unknown {
     const obj: any = {};

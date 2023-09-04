@@ -3,7 +3,8 @@ import { ProtoType, ProtoField } from '@cosmology/types';
 import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { fromJSON, arrayTypes } from './utils';
+import { fromJSON as fromJSONNonStrict, arrayTypes } from './utils';
+import { fromJSON as fromJSONStrict} from './strict-utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromJSON (${field.type} rules[${field.rule}] name[${name}])`);
@@ -16,6 +17,10 @@ export interface FromJSONMethod {
 }
 
 export const fromJSONMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const strictNullCheckForPrototypeMethods = context.pluginValue('prototypes.strictNullCheckForPrototypeMethods');
+
+    const fromJSON = strictNullCheckForPrototypeMethods ? fromJSONStrict : fromJSONNonStrict;
+
     const oneOfs = getOneOfs(proto);
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = {
@@ -147,6 +152,8 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
 
 
 export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const strictNullCheckForPrototypeMethods = context.pluginValue('prototypes.strictNullCheckForPrototypeMethods');
+
     const fields = fromJSONMethodFields(context, name, proto);
     let varName = 'object';
     if (!fields.length) {
@@ -190,7 +197,13 @@ export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: 
             )
         ],
         t.blockStatement(
-            statements
+            strictNullCheckForPrototypeMethods ?
+            statements :
+            [
+              t.returnStatement(
+                  t.objectExpression(fields as t.ObjectProperty[])
+              )
+            ]
         ),
         false,
         false,

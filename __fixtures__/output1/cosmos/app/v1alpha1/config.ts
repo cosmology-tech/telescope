@@ -83,9 +83,9 @@ export const Config = {
     return message;
   },
   fromJSON(object: any): Config {
-    const obj = createBaseConfig();
-    if (Array.isArray(object?.modules)) object.modules.map((e: any) => ModuleConfig.fromJSON(e));
-    return obj;
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromJSON(e)) : []
+    };
   },
   toJSON(message: Config): unknown {
     const obj: any = {};
@@ -153,10 +153,10 @@ export const ModuleConfig = {
     return message;
   },
   fromJSON(object: any): ModuleConfig {
-    const obj = createBaseModuleConfig();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.config)) obj.config = Any.fromJSON(object.config);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      config: isSet(object.config) ? Any.fromJSON(object.config) : undefined
+    };
   },
   toJSON(message: ModuleConfig): unknown {
     const obj: any = {};
@@ -167,9 +167,7 @@ export const ModuleConfig = {
   fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
     message.name = object.name ?? "";
-    if (object.config !== undefined && object.config !== null) {
-      message.config = Any.fromPartial(object.config);
-    }
+    message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: ModuleConfigSDKType): ModuleConfig {

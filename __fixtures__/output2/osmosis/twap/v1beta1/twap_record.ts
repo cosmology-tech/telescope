@@ -134,18 +134,18 @@ export const TwapRecord = {
     return message;
   },
   fromJSON(object: any): TwapRecord {
-    const obj = createBaseTwapRecord();
-    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (isSet(object.asset0Denom)) obj.asset0Denom = String(object.asset0Denom);
-    if (isSet(object.asset1Denom)) obj.asset1Denom = String(object.asset1Denom);
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
-    if (isSet(object.time)) obj.time = fromJsonTimestamp(object.time);
-    if (isSet(object.p0LastSpotPrice)) obj.p0LastSpotPrice = String(object.p0LastSpotPrice);
-    if (isSet(object.p1LastSpotPrice)) obj.p1LastSpotPrice = String(object.p1LastSpotPrice);
-    if (isSet(object.p0ArithmeticTwapAccumulator)) obj.p0ArithmeticTwapAccumulator = String(object.p0ArithmeticTwapAccumulator);
-    if (isSet(object.p1ArithmeticTwapAccumulator)) obj.p1ArithmeticTwapAccumulator = String(object.p1ArithmeticTwapAccumulator);
-    if (isSet(object.lastErrorTime)) obj.lastErrorTime = fromJsonTimestamp(object.lastErrorTime);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
+      asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
+      p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
+      p0ArithmeticTwapAccumulator: isSet(object.p0ArithmeticTwapAccumulator) ? String(object.p0ArithmeticTwapAccumulator) : "",
+      p1ArithmeticTwapAccumulator: isSet(object.p1ArithmeticTwapAccumulator) ? String(object.p1ArithmeticTwapAccumulator) : "",
+      lastErrorTime: isSet(object.lastErrorTime) ? fromJsonTimestamp(object.lastErrorTime) : undefined
+    };
   },
   toJSON(message: TwapRecord): unknown {
     const obj: any = {};
@@ -163,24 +163,16 @@ export const TwapRecord = {
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = Long.fromValue(object.poolId);
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Long.fromValue(object.height);
-    }
-    if (object.time !== undefined && object.time !== null) {
-      message.time = Timestamp.fromPartial(object.time);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : Timestamp.fromPartial({});
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";
     message.p0ArithmeticTwapAccumulator = object.p0ArithmeticTwapAccumulator ?? "";
     message.p1ArithmeticTwapAccumulator = object.p1ArithmeticTwapAccumulator ?? "";
-    if (object.lastErrorTime !== undefined && object.lastErrorTime !== null) {
-      message.lastErrorTime = Timestamp.fromPartial(object.lastErrorTime);
-    }
+    message.lastErrorTime = object.lastErrorTime !== undefined && object.lastErrorTime !== null ? Timestamp.fromPartial(object.lastErrorTime) : Timestamp.fromPartial({});
     return message;
   }
 };

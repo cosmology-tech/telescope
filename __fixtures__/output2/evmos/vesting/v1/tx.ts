@@ -117,14 +117,14 @@ export const MsgCreateClawbackVestingAccount = {
     return message;
   },
   fromJSON(object: any): MsgCreateClawbackVestingAccount {
-    const obj = createBaseMsgCreateClawbackVestingAccount();
-    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
-    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
-    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
-    if (Array.isArray(object?.lockupPeriods)) object.lockupPeriods.map((e: any) => Period.fromJSON(e));
-    if (Array.isArray(object?.vestingPeriods)) object.vestingPeriods.map((e: any) => Period.fromJSON(e));
-    if (isSet(object.merge)) obj.merge = Boolean(object.merge);
-    return obj;
+    return {
+      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
+      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
+      vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : [],
+      merge: isSet(object.merge) ? Boolean(object.merge) : false
+    };
   },
   toJSON(message: MsgCreateClawbackVestingAccount): unknown {
     const obj: any = {};
@@ -148,9 +148,7 @@ export const MsgCreateClawbackVestingAccount = {
     const message = createBaseMsgCreateClawbackVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
-    if (object.startTime !== undefined && object.startTime !== null) {
-      message.startTime = Timestamp.fromPartial(object.startTime);
-    }
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     message.merge = object.merge ?? false;
@@ -179,8 +177,7 @@ export const MsgCreateClawbackVestingAccountResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateClawbackVestingAccountResponse {
-    const obj = createBaseMsgCreateClawbackVestingAccountResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCreateClawbackVestingAccountResponse): unknown {
     const obj: any = {};
@@ -235,11 +232,11 @@ export const MsgClawback = {
     return message;
   },
   fromJSON(object: any): MsgClawback {
-    const obj = createBaseMsgClawback();
-    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
-    if (isSet(object.accountAddress)) obj.accountAddress = String(object.accountAddress);
-    if (isSet(object.destAddress)) obj.destAddress = String(object.destAddress);
-    return obj;
+    return {
+      funderAddress: isSet(object.funderAddress) ? String(object.funderAddress) : "",
+      accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : "",
+      destAddress: isSet(object.destAddress) ? String(object.destAddress) : ""
+    };
   },
   toJSON(message: MsgClawback): unknown {
     const obj: any = {};
@@ -278,8 +275,7 @@ export const MsgClawbackResponse = {
     return message;
   },
   fromJSON(_: any): MsgClawbackResponse {
-    const obj = createBaseMsgClawbackResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgClawbackResponse): unknown {
     const obj: any = {};

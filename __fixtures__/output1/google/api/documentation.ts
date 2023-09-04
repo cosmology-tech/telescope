@@ -295,14 +295,14 @@ export const Documentation = {
     return message;
   },
   fromJSON(object: any): Documentation {
-    const obj = createBaseDocumentation();
-    if (isSet(object.summary)) obj.summary = String(object.summary);
-    if (Array.isArray(object?.pages)) object.pages.map((e: any) => Page.fromJSON(e));
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => DocumentationRule.fromJSON(e));
-    if (isSet(object.documentationRootUrl)) obj.documentationRootUrl = String(object.documentationRootUrl);
-    if (isSet(object.serviceRootUrl)) obj.serviceRootUrl = String(object.serviceRootUrl);
-    if (isSet(object.overview)) obj.overview = String(object.overview);
-    return obj;
+    return {
+      summary: isSet(object.summary) ? String(object.summary) : "",
+      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromJSON(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromJSON(e)) : [],
+      documentationRootUrl: isSet(object.documentationRootUrl) ? String(object.documentationRootUrl) : "",
+      serviceRootUrl: isSet(object.serviceRootUrl) ? String(object.serviceRootUrl) : "",
+      overview: isSet(object.overview) ? String(object.overview) : ""
+    };
   },
   toJSON(message: Documentation): unknown {
     const obj: any = {};
@@ -405,11 +405,11 @@ export const DocumentationRule = {
     return message;
   },
   fromJSON(object: any): DocumentationRule {
-    const obj = createBaseDocumentationRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.deprecationDescription)) obj.deprecationDescription = String(object.deprecationDescription);
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      deprecationDescription: isSet(object.deprecationDescription) ? String(object.deprecationDescription) : ""
+    };
   },
   toJSON(message: DocumentationRule): unknown {
     const obj: any = {};
@@ -484,11 +484,11 @@ export const Page = {
     return message;
   },
   fromJSON(object: any): Page {
-    const obj = createBasePage();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.content)) obj.content = String(object.content);
-    if (Array.isArray(object?.subpages)) object.subpages.map((e: any) => Page.fromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      content: isSet(object.content) ? String(object.content) : "",
+      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromJSON(e)) : []
+    };
   },
   toJSON(message: Page): unknown {
     const obj: any = {};

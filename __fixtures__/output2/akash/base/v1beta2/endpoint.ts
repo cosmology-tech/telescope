@@ -85,10 +85,10 @@ export const Endpoint = {
     return message;
   },
   fromJSON(object: any): Endpoint {
-    const obj = createBaseEndpoint();
-    if (isSet(object.kind)) obj.kind = endpoint_KindFromJSON(object.kind);
-    if (isSet(object.sequenceNumber)) obj.sequenceNumber = Number(object.sequenceNumber);
-    return obj;
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      sequenceNumber: isSet(object.sequenceNumber) ? Number(object.sequenceNumber) : 0
+    };
   },
   toJSON(message: Endpoint): unknown {
     const obj: any = {};

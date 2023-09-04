@@ -55,10 +55,10 @@ export const SwapAmountInRoute = {
     return message;
   },
   fromJSON(object: any): SwapAmountInRoute {
-    const obj = createBaseSwapAmountInRoute();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.tokenOutDenom)) obj.tokenOutDenom = String(object.tokenOutDenom);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
+    };
   },
   toJSON(message: SwapAmountInRoute): unknown {
     const obj: any = {};
@@ -68,9 +68,7 @@ export const SwapAmountInRoute = {
   },
   fromPartial(object: DeepPartial<SwapAmountInRoute>): SwapAmountInRoute {
     const message = createBaseSwapAmountInRoute();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenOutDenom = object.tokenOutDenom ?? "";
     return message;
   },
@@ -164,10 +162,10 @@ export const SwapAmountOutRoute = {
     return message;
   },
   fromJSON(object: any): SwapAmountOutRoute {
-    const obj = createBaseSwapAmountOutRoute();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.tokenInDenom)) obj.tokenInDenom = String(object.tokenInDenom);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : ""
+    };
   },
   toJSON(message: SwapAmountOutRoute): unknown {
     const obj: any = {};
@@ -177,9 +175,7 @@ export const SwapAmountOutRoute = {
   },
   fromPartial(object: DeepPartial<SwapAmountOutRoute>): SwapAmountOutRoute {
     const message = createBaseSwapAmountOutRoute();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenInDenom = object.tokenInDenom ?? "";
     return message;
   },

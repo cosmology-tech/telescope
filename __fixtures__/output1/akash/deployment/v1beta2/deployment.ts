@@ -115,10 +115,10 @@ export const DeploymentID = {
     return message;
   },
   fromJSON(object: any): DeploymentID {
-    const obj = createBaseDeploymentID();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
+    };
   },
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
@@ -129,9 +129,7 @@ export const DeploymentID = {
   fromPartial<I extends Exact<DeepPartial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = Long.fromValue(object.dseq);
-    }
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     return message;
   },
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
@@ -198,12 +196,12 @@ export const Deployment = {
     return message;
   },
   fromJSON(object: any): Deployment {
-    const obj = createBaseDeployment();
-    if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
-    if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
-    return obj;
+    return {
+      deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
+    };
   },
   toJSON(message: Deployment): unknown {
     const obj: any = {};
@@ -215,14 +213,10 @@ export const Deployment = {
   },
   fromPartial<I extends Exact<DeepPartial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
-    if (object.deploymentId !== undefined && object.deploymentId !== null) {
-      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
-    }
+    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = Long.fromValue(object.createdAt);
-    }
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   },
   fromSDK(object: DeploymentSDKType): Deployment {
@@ -286,11 +280,11 @@ export const DeploymentFilters = {
     return message;
   },
   fromJSON(object: any): DeploymentFilters {
-    const obj = createBaseDeploymentFilters();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
-    if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   },
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};
@@ -302,9 +296,7 @@ export const DeploymentFilters = {
   fromPartial<I extends Exact<DeepPartial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = Long.fromValue(object.dseq);
-    }
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.state = object.state ?? "";
     return message;
   },

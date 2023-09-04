@@ -95,9 +95,9 @@ export const Visibility = {
     return message;
   },
   fromJSON(object: any): Visibility {
-    const obj = createBaseVisibility();
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => VisibilityRule.fromJSON(e));
-    return obj;
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromJSON(e)) : []
+    };
   },
   toJSON(message: Visibility): unknown {
     const obj: any = {};
@@ -151,10 +151,10 @@ export const VisibilityRule = {
     return message;
   },
   fromJSON(object: any): VisibilityRule {
-    const obj = createBaseVisibilityRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.restriction)) obj.restriction = String(object.restriction);
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      restriction: isSet(object.restriction) ? String(object.restriction) : ""
+    };
   },
   toJSON(message: VisibilityRule): unknown {
     const obj: any = {};

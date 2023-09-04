@@ -45,6 +45,7 @@ interface TelescopeOpts {
             toProto?: boolean;
             fromProto?: boolean;
         },
+        strictNullCheckForPrototypeMethods?: boolean;
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
@@ -255,6 +256,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toProto: true,
             fromProto: true,
         },
+        strictNullCheckForPrototypeMethods: false,
         includePackageVar: false,
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,

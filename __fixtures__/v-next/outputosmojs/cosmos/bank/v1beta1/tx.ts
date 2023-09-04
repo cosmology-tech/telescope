@@ -78,11 +78,11 @@ export const MsgSend = {
     return message;
   },
   fromJSON(object: any): MsgSend {
-    const obj = createBaseMsgSend();
-    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
-    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
+      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgSend): unknown {
     const obj: any = {};
@@ -190,8 +190,7 @@ export const MsgSendResponse = {
     return message;
   },
   fromJSON(_: any): MsgSendResponse {
-    const obj = createBaseMsgSendResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSendResponse): unknown {
     const obj: any = {};
@@ -278,10 +277,10 @@ export const MsgMultiSend = {
     return message;
   },
   fromJSON(object: any): MsgMultiSend {
-    const obj = createBaseMsgMultiSend();
-    if (Array.isArray(object?.inputs)) object.inputs.map((e: any) => Input.fromJSON(e));
-    if (Array.isArray(object?.outputs)) object.outputs.map((e: any) => Output.fromJSON(e));
-    return obj;
+    return {
+      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromJSON(e)) : [],
+      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgMultiSend): unknown {
     const obj: any = {};
@@ -394,8 +393,7 @@ export const MsgMultiSendResponse = {
     return message;
   },
   fromJSON(_: any): MsgMultiSendResponse {
-    const obj = createBaseMsgMultiSendResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgMultiSendResponse): unknown {
     const obj: any = {};

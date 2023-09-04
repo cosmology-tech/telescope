@@ -51,9 +51,9 @@ export const SendAuthorization = {
     return message;
   },
   fromJSON(object: any): SendAuthorization {
-    const obj = createBaseSendAuthorization();
-    if (Array.isArray(object?.spendLimit)) object.spendLimit.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: SendAuthorization): unknown {
     const obj: any = {};

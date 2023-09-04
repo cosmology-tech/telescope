@@ -73,12 +73,12 @@ export const TickInfo = {
     return message;
   },
   fromJSON(object: any): TickInfo {
-    const obj = createBaseTickInfo();
-    if (isSet(object.liquidityGross)) obj.liquidityGross = String(object.liquidityGross);
-    if (isSet(object.liquidityNet)) obj.liquidityNet = String(object.liquidityNet);
-    if (Array.isArray(object?.feeGrowthOutside)) object.feeGrowthOutside.map((e: any) => DecCoin.fromJSON(e));
-    if (Array.isArray(object?.uptimeTrackers)) object.uptimeTrackers.map((e: any) => UptimeTracker.fromJSON(e));
-    return obj;
+    return {
+      liquidityGross: isSet(object.liquidityGross) ? String(object.liquidityGross) : "",
+      liquidityNet: isSet(object.liquidityNet) ? String(object.liquidityNet) : "",
+      feeGrowthOutside: Array.isArray(object?.feeGrowthOutside) ? object.feeGrowthOutside.map((e: any) => DecCoin.fromJSON(e)) : [],
+      uptimeTrackers: Array.isArray(object?.uptimeTrackers) ? object.uptimeTrackers.map((e: any) => UptimeTracker.fromJSON(e)) : []
+    };
   },
   toJSON(message: TickInfo): unknown {
     const obj: any = {};
@@ -213,9 +213,9 @@ export const UptimeTracker = {
     return message;
   },
   fromJSON(object: any): UptimeTracker {
-    const obj = createBaseUptimeTracker();
-    if (Array.isArray(object?.uptimeGrowthOutside)) object.uptimeGrowthOutside.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
+    return {
+      uptimeGrowthOutside: Array.isArray(object?.uptimeGrowthOutside) ? object.uptimeGrowthOutside.map((e: any) => DecCoin.fromJSON(e)) : []
+    };
   },
   toJSON(message: UptimeTracker): unknown {
     const obj: any = {};

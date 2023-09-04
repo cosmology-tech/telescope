@@ -99,9 +99,9 @@ export const GenericAuthorization = {
     return message;
   },
   fromJSON(object: any): GenericAuthorization {
-    const obj = createBaseGenericAuthorization();
-    if (isSet(object.msg)) obj.msg = String(object.msg);
-    return obj;
+    return {
+      msg: isSet(object.msg) ? String(object.msg) : ""
+    };
   },
   toJSON(message: GenericAuthorization): unknown {
     const obj: any = {};
@@ -198,10 +198,10 @@ export const Grant = {
     return message;
   },
   fromJSON(object: any): Grant {
-    const obj = createBaseGrant();
-    if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
-    if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
-    return obj;
+    return {
+      authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
+    };
   },
   toJSON(message: Grant): unknown {
     const obj: any = {};
@@ -211,9 +211,7 @@ export const Grant = {
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
-    if (object.authorization !== undefined && object.authorization !== null) {
-      message.authorization = Any.fromPartial(object.authorization);
-    }
+    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
     message.expiration = object.expiration ?? undefined;
     return message;
   },
@@ -321,12 +319,12 @@ export const GrantAuthorization = {
     return message;
   },
   fromJSON(object: any): GrantAuthorization {
-    const obj = createBaseGrantAuthorization();
-    if (isSet(object.granter)) obj.granter = String(object.granter);
-    if (isSet(object.grantee)) obj.grantee = String(object.grantee);
-    if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
-    if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
-    return obj;
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
+    };
   },
   toJSON(message: GrantAuthorization): unknown {
     const obj: any = {};
@@ -340,9 +338,7 @@ export const GrantAuthorization = {
     const message = createBaseGrantAuthorization();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    if (object.authorization !== undefined && object.authorization !== null) {
-      message.authorization = Any.fromPartial(object.authorization);
-    }
+    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
     message.expiration = object.expiration ?? undefined;
     return message;
   },
@@ -439,9 +435,9 @@ export const GrantQueueItem = {
     return message;
   },
   fromJSON(object: any): GrantQueueItem {
-    const obj = createBaseGrantQueueItem();
-    if (Array.isArray(object?.msgTypeUrls)) object.msgTypeUrls.map((e: any) => String(e));
-    return obj;
+    return {
+      msgTypeUrls: Array.isArray(object?.msgTypeUrls) ? object.msgTypeUrls.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: GrantQueueItem): unknown {
     const obj: any = {};

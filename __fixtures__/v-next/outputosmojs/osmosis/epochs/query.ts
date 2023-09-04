@@ -45,8 +45,7 @@ export const QueryEpochsInfoRequest = {
     return message;
   },
   fromJSON(_: any): QueryEpochsInfoRequest {
-    const obj = createBaseQueryEpochsInfoRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryEpochsInfoRequest): unknown {
     const obj: any = {};
@@ -126,9 +125,9 @@ export const QueryEpochsInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryEpochsInfoResponse {
-    const obj = createBaseQueryEpochsInfoResponse();
-    if (Array.isArray(object?.epochs)) object.epochs.map((e: any) => EpochInfo.fromJSON(e));
-    return obj;
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryEpochsInfoResponse): unknown {
     const obj: any = {};
@@ -230,9 +229,9 @@ export const QueryCurrentEpochRequest = {
     return message;
   },
   fromJSON(object: any): QueryCurrentEpochRequest {
-    const obj = createBaseQueryCurrentEpochRequest();
-    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
-    return obj;
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : ""
+    };
   },
   toJSON(message: QueryCurrentEpochRequest): unknown {
     const obj: any = {};
@@ -322,9 +321,9 @@ export const QueryCurrentEpochResponse = {
     return message;
   },
   fromJSON(object: any): QueryCurrentEpochResponse {
-    const obj = createBaseQueryCurrentEpochResponse();
-    if (isSet(object.currentEpoch)) obj.currentEpoch = BigInt(object.currentEpoch.toString());
-    return obj;
+    return {
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryCurrentEpochResponse): unknown {
     const obj: any = {};
@@ -333,9 +332,7 @@ export const QueryCurrentEpochResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
-      message.currentEpoch = BigInt(object.currentEpoch.toString());
-    }
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {

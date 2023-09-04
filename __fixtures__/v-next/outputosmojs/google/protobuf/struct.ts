@@ -164,10 +164,10 @@ export const Struct_FieldsEntry = {
     return message;
   },
   fromJSON(object: any): Struct_FieldsEntry {
-    const obj = createBaseStruct_FieldsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: Struct_FieldsEntry): unknown {
     const obj: any = {};
@@ -178,9 +178,7 @@ export const Struct_FieldsEntry = {
   fromPartial(object: DeepPartial<Struct_FieldsEntry>): Struct_FieldsEntry {
     const message = createBaseStruct_FieldsEntry();
     message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Value.fromPartial(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
     return message;
   },
   fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
@@ -260,14 +258,14 @@ export const Struct = {
     return message;
   },
   fromJSON(object: any): Struct {
-    const obj = createBaseStruct();
-    if (isObject(object.fields)) obj.fields = Object.entries(object.fields).reduce<{
-      [key: string]: Value;
-    }>((acc, [key, value]) => {
-      acc[key] = Value.fromJSON(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromJSON(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: Struct): unknown {
     const obj: any = {};
@@ -423,14 +421,14 @@ export const Value = {
     return message;
   },
   fromJSON(object: any): Value {
-    const obj = createBaseValue();
-    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
-    if (isSet(object.numberValue)) obj.numberValue = Number(object.numberValue);
-    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
-    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
-    if (isSet(object.structValue)) obj.structValue = Struct.fromJSON(object.structValue);
-    if (isSet(object.listValue)) obj.listValue = ListValue.fromJSON(object.listValue);
-    return obj;
+    return {
+      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
+      numberValue: isSet(object.numberValue) ? Number(object.numberValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      structValue: isSet(object.structValue) ? Struct.fromJSON(object.structValue) : undefined,
+      listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined
+    };
   },
   toJSON(message: Value): unknown {
     const obj: any = {};
@@ -448,12 +446,8 @@ export const Value = {
     message.numberValue = object.numberValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    if (object.structValue !== undefined && object.structValue !== null) {
-      message.structValue = Struct.fromPartial(object.structValue);
-    }
-    if (object.listValue !== undefined && object.listValue !== null) {
-      message.listValue = ListValue.fromPartial(object.listValue);
-    }
+    message.structValue = object.structValue !== undefined && object.structValue !== null ? Struct.fromPartial(object.structValue) : Struct.fromPartial({});
+    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : ListValue.fromPartial({});
     return message;
   },
   fromSDK(object: ValueSDKType): Value {
@@ -553,9 +547,9 @@ export const ListValue = {
     return message;
   },
   fromJSON(object: any): ListValue {
-    const obj = createBaseListValue();
-    if (Array.isArray(object?.values)) object.values.map((e: any) => Value.fromJSON(e));
-    return obj;
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
+    };
   },
   toJSON(message: ListValue): unknown {
     const obj: any = {};

@@ -52,9 +52,9 @@ export const MsgCloseGroup = {
     return message;
   },
   fromJSON(object: any): MsgCloseGroup {
-    const obj = createBaseMsgCloseGroup();
-    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: MsgCloseGroup): unknown {
     const obj: any = {};
@@ -63,9 +63,7 @@ export const MsgCloseGroup = {
   },
   fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = GroupID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
     return message;
   }
 };
@@ -91,8 +89,7 @@ export const MsgCloseGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseGroupResponse {
-    const obj = createBaseMsgCloseGroupResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCloseGroupResponse): unknown {
     const obj: any = {};
@@ -133,9 +130,9 @@ export const MsgPauseGroup = {
     return message;
   },
   fromJSON(object: any): MsgPauseGroup {
-    const obj = createBaseMsgPauseGroup();
-    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: MsgPauseGroup): unknown {
     const obj: any = {};
@@ -144,9 +141,7 @@ export const MsgPauseGroup = {
   },
   fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = GroupID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
     return message;
   }
 };
@@ -172,8 +167,7 @@ export const MsgPauseGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgPauseGroupResponse {
-    const obj = createBaseMsgPauseGroupResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgPauseGroupResponse): unknown {
     const obj: any = {};
@@ -214,9 +208,9 @@ export const MsgStartGroup = {
     return message;
   },
   fromJSON(object: any): MsgStartGroup {
-    const obj = createBaseMsgStartGroup();
-    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: MsgStartGroup): unknown {
     const obj: any = {};
@@ -225,9 +219,7 @@ export const MsgStartGroup = {
   },
   fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = GroupID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
     return message;
   }
 };
@@ -253,8 +245,7 @@ export const MsgStartGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgStartGroupResponse {
-    const obj = createBaseMsgStartGroupResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgStartGroupResponse): unknown {
     const obj: any = {};

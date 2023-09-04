@@ -1672,17 +1672,17 @@ export const LogBucket = {
     return message;
   },
   fromJSON(object: any): LogBucket {
-    const obj = createBaseLogBucket();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.retentionDays)) obj.retentionDays = Number(object.retentionDays);
-    if (isSet(object.locked)) obj.locked = Boolean(object.locked);
-    if (isSet(object.lifecycleState)) obj.lifecycleState = lifecycleStateFromJSON(object.lifecycleState);
-    if (Array.isArray(object?.restrictedFields)) object.restrictedFields.map((e: any) => String(e));
-    if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
+      retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
+      locked: isSet(object.locked) ? Boolean(object.locked) : false,
+      lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : -1,
+      restrictedFields: Array.isArray(object?.restrictedFields) ? object.restrictedFields.map((e: any) => String(e)) : [],
+      cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined
+    };
   },
   toJSON(message: LogBucket): unknown {
     const obj: any = {};
@@ -1711,9 +1711,7 @@ export const LogBucket = {
     message.locked = object.locked ?? false;
     message.lifecycleState = object.lifecycleState ?? 0;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
-    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
-      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
-    }
+    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : CmekSettings.fromPartial({});
     return message;
   },
   fromSDK(object: LogBucketSDKType): LogBucket {
@@ -1864,13 +1862,13 @@ export const LogView = {
     return message;
   },
   fromJSON(object: any): LogView {
-    const obj = createBaseLogView();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
   toJSON(message: LogView): unknown {
     const obj: any = {};
@@ -2059,20 +2057,20 @@ export const LogSink = {
     return message;
   },
   fromJSON(object: any): LogSink {
-    const obj = createBaseLogSink();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.destination)) obj.destination = String(object.destination);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
-    if (Array.isArray(object?.exclusions)) object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
-    if (isSet(object.outputVersionFormat)) obj.outputVersionFormat = logSink_VersionFormatFromJSON(object.outputVersionFormat);
-    if (isSet(object.writerIdentity)) obj.writerIdentity = String(object.writerIdentity);
-    if (isSet(object.includeChildren)) obj.includeChildren = Boolean(object.includeChildren);
-    if (isSet(object.bigqueryOptions)) obj.bigqueryOptions = BigQueryOptions.fromJSON(object.bigqueryOptions);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      destination: isSet(object.destination) ? String(object.destination) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
+      outputVersionFormat: isSet(object.outputVersionFormat) ? logSink_VersionFormatFromJSON(object.outputVersionFormat) : -1,
+      writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
+      includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
+      bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
+    };
   },
   toJSON(message: LogSink): unknown {
     const obj: any = {};
@@ -2105,9 +2103,7 @@ export const LogSink = {
     message.outputVersionFormat = object.outputVersionFormat ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     message.includeChildren = object.includeChildren ?? false;
-    if (object.bigqueryOptions !== undefined && object.bigqueryOptions !== null) {
-      message.bigqueryOptions = BigQueryOptions.fromPartial(object.bigqueryOptions);
-    }
+    message.bigqueryOptions = object.bigqueryOptions !== undefined && object.bigqueryOptions !== null ? BigQueryOptions.fromPartial(object.bigqueryOptions) : BigQueryOptions.fromPartial({});
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
@@ -2254,10 +2250,10 @@ export const BigQueryOptions = {
     return message;
   },
   fromJSON(object: any): BigQueryOptions {
-    const obj = createBaseBigQueryOptions();
-    if (isSet(object.usePartitionedTables)) obj.usePartitionedTables = Boolean(object.usePartitionedTables);
-    if (isSet(object.usesTimestampColumnPartitioning)) obj.usesTimestampColumnPartitioning = Boolean(object.usesTimestampColumnPartitioning);
-    return obj;
+    return {
+      usePartitionedTables: isSet(object.usePartitionedTables) ? Boolean(object.usePartitionedTables) : false,
+      usesTimestampColumnPartitioning: isSet(object.usesTimestampColumnPartitioning) ? Boolean(object.usesTimestampColumnPartitioning) : false
+    };
   },
   toJSON(message: BigQueryOptions): unknown {
     const obj: any = {};
@@ -2362,11 +2358,11 @@ export const ListBucketsRequest = {
     return message;
   },
   fromJSON(object: any): ListBucketsRequest {
-    const obj = createBaseListBucketsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListBucketsRequest): unknown {
     const obj: any = {};
@@ -2471,10 +2467,10 @@ export const ListBucketsResponse = {
     return message;
   },
   fromJSON(object: any): ListBucketsResponse {
-    const obj = createBaseListBucketsResponse();
-    if (Array.isArray(object?.buckets)) object.buckets.map((e: any) => LogBucket.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListBucketsResponse): unknown {
     const obj: any = {};
@@ -2591,11 +2587,11 @@ export const CreateBucketRequest = {
     return message;
   },
   fromJSON(object: any): CreateBucketRequest {
-    const obj = createBaseCreateBucketRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.bucketId)) obj.bucketId = String(object.bucketId);
-    if (isSet(object.bucket)) obj.bucket = LogBucket.fromJSON(object.bucket);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      bucketId: isSet(object.bucketId) ? String(object.bucketId) : "",
+      bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined
+    };
   },
   toJSON(message: CreateBucketRequest): unknown {
     const obj: any = {};
@@ -2608,9 +2604,7 @@ export const CreateBucketRequest = {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
     message.bucketId = object.bucketId ?? "";
-    if (object.bucket !== undefined && object.bucket !== null) {
-      message.bucket = LogBucket.fromPartial(object.bucket);
-    }
+    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : LogBucket.fromPartial({});
     return message;
   },
   fromSDK(object: CreateBucketRequestSDKType): CreateBucketRequest {
@@ -2709,11 +2703,11 @@ export const UpdateBucketRequest = {
     return message;
   },
   fromJSON(object: any): UpdateBucketRequest {
-    const obj = createBaseUpdateBucketRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.bucket)) obj.bucket = LogBucket.fromJSON(object.bucket);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
+    };
   },
   toJSON(message: UpdateBucketRequest): unknown {
     const obj: any = {};
@@ -2725,12 +2719,8 @@ export const UpdateBucketRequest = {
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
-    if (object.bucket !== undefined && object.bucket !== null) {
-      message.bucket = LogBucket.fromPartial(object.bucket);
-    }
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : LogBucket.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
@@ -2815,9 +2805,9 @@ export const GetBucketRequest = {
     return message;
   },
   fromJSON(object: any): GetBucketRequest {
-    const obj = createBaseGetBucketRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetBucketRequest): unknown {
     const obj: any = {};
@@ -2901,9 +2891,9 @@ export const DeleteBucketRequest = {
     return message;
   },
   fromJSON(object: any): DeleteBucketRequest {
-    const obj = createBaseDeleteBucketRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: DeleteBucketRequest): unknown {
     const obj: any = {};
@@ -2987,9 +2977,9 @@ export const UndeleteBucketRequest = {
     return message;
   },
   fromJSON(object: any): UndeleteBucketRequest {
-    const obj = createBaseUndeleteBucketRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: UndeleteBucketRequest): unknown {
     const obj: any = {};
@@ -3087,11 +3077,11 @@ export const ListViewsRequest = {
     return message;
   },
   fromJSON(object: any): ListViewsRequest {
-    const obj = createBaseListViewsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListViewsRequest): unknown {
     const obj: any = {};
@@ -3196,10 +3186,10 @@ export const ListViewsResponse = {
     return message;
   },
   fromJSON(object: any): ListViewsResponse {
-    const obj = createBaseListViewsResponse();
-    if (Array.isArray(object?.views)) object.views.map((e: any) => LogView.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListViewsResponse): unknown {
     const obj: any = {};
@@ -3316,11 +3306,11 @@ export const CreateViewRequest = {
     return message;
   },
   fromJSON(object: any): CreateViewRequest {
-    const obj = createBaseCreateViewRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.viewId)) obj.viewId = String(object.viewId);
-    if (isSet(object.view)) obj.view = LogView.fromJSON(object.view);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      viewId: isSet(object.viewId) ? String(object.viewId) : "",
+      view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined
+    };
   },
   toJSON(message: CreateViewRequest): unknown {
     const obj: any = {};
@@ -3333,9 +3323,7 @@ export const CreateViewRequest = {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
     message.viewId = object.viewId ?? "";
-    if (object.view !== undefined && object.view !== null) {
-      message.view = LogView.fromPartial(object.view);
-    }
+    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : LogView.fromPartial({});
     return message;
   },
   fromSDK(object: CreateViewRequestSDKType): CreateViewRequest {
@@ -3434,11 +3422,11 @@ export const UpdateViewRequest = {
     return message;
   },
   fromJSON(object: any): UpdateViewRequest {
-    const obj = createBaseUpdateViewRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.view)) obj.view = LogView.fromJSON(object.view);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
+    };
   },
   toJSON(message: UpdateViewRequest): unknown {
     const obj: any = {};
@@ -3450,12 +3438,8 @@ export const UpdateViewRequest = {
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
-    if (object.view !== undefined && object.view !== null) {
-      message.view = LogView.fromPartial(object.view);
-    }
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : LogView.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateViewRequestSDKType): UpdateViewRequest {
@@ -3540,9 +3524,9 @@ export const GetViewRequest = {
     return message;
   },
   fromJSON(object: any): GetViewRequest {
-    const obj = createBaseGetViewRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetViewRequest): unknown {
     const obj: any = {};
@@ -3626,9 +3610,9 @@ export const DeleteViewRequest = {
     return message;
   },
   fromJSON(object: any): DeleteViewRequest {
-    const obj = createBaseDeleteViewRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: DeleteViewRequest): unknown {
     const obj: any = {};
@@ -3726,11 +3710,11 @@ export const ListSinksRequest = {
     return message;
   },
   fromJSON(object: any): ListSinksRequest {
-    const obj = createBaseListSinksRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListSinksRequest): unknown {
     const obj: any = {};
@@ -3835,10 +3819,10 @@ export const ListSinksResponse = {
     return message;
   },
   fromJSON(object: any): ListSinksResponse {
-    const obj = createBaseListSinksResponse();
-    if (Array.isArray(object?.sinks)) object.sinks.map((e: any) => LogSink.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListSinksResponse): unknown {
     const obj: any = {};
@@ -3941,9 +3925,9 @@ export const GetSinkRequest = {
     return message;
   },
   fromJSON(object: any): GetSinkRequest {
-    const obj = createBaseGetSinkRequest();
-    if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
-    return obj;
+    return {
+      sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
+    };
   },
   toJSON(message: GetSinkRequest): unknown {
     const obj: any = {};
@@ -4041,11 +4025,11 @@ export const CreateSinkRequest = {
     return message;
   },
   fromJSON(object: any): CreateSinkRequest {
-    const obj = createBaseCreateSinkRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.sink)) obj.sink = LogSink.fromJSON(object.sink);
-    if (isSet(object.uniqueWriterIdentity)) obj.uniqueWriterIdentity = Boolean(object.uniqueWriterIdentity);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      sink: isSet(object.sink) ? LogSink.fromJSON(object.sink) : undefined,
+      uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false
+    };
   },
   toJSON(message: CreateSinkRequest): unknown {
     const obj: any = {};
@@ -4057,9 +4041,7 @@ export const CreateSinkRequest = {
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
-    if (object.sink !== undefined && object.sink !== null) {
-      message.sink = LogSink.fromPartial(object.sink);
-    }
+    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : LogSink.fromPartial({});
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
   },
@@ -4166,12 +4148,12 @@ export const UpdateSinkRequest = {
     return message;
   },
   fromJSON(object: any): UpdateSinkRequest {
-    const obj = createBaseUpdateSinkRequest();
-    if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
-    if (isSet(object.sink)) obj.sink = LogSink.fromJSON(object.sink);
-    if (isSet(object.uniqueWriterIdentity)) obj.uniqueWriterIdentity = Boolean(object.uniqueWriterIdentity);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
+    return {
+      sinkName: isSet(object.sinkName) ? String(object.sinkName) : "",
+      sink: isSet(object.sink) ? LogSink.fromJSON(object.sink) : undefined,
+      uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
+    };
   },
   toJSON(message: UpdateSinkRequest): unknown {
     const obj: any = {};
@@ -4184,13 +4166,9 @@ export const UpdateSinkRequest = {
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
-    if (object.sink !== undefined && object.sink !== null) {
-      message.sink = LogSink.fromPartial(object.sink);
-    }
+    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : LogSink.fromPartial({});
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
@@ -4280,9 +4258,9 @@ export const DeleteSinkRequest = {
     return message;
   },
   fromJSON(object: any): DeleteSinkRequest {
-    const obj = createBaseDeleteSinkRequest();
-    if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
-    return obj;
+    return {
+      sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
+    };
   },
   toJSON(message: DeleteSinkRequest): unknown {
     const obj: any = {};
@@ -4401,14 +4379,14 @@ export const LogExclusion = {
     return message;
   },
   fromJSON(object: any): LogExclusion {
-    const obj = createBaseLogExclusion();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
+    };
   },
   toJSON(message: LogExclusion): unknown {
     const obj: any = {};
@@ -4541,11 +4519,11 @@ export const ListExclusionsRequest = {
     return message;
   },
   fromJSON(object: any): ListExclusionsRequest {
-    const obj = createBaseListExclusionsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListExclusionsRequest): unknown {
     const obj: any = {};
@@ -4650,10 +4628,10 @@ export const ListExclusionsResponse = {
     return message;
   },
   fromJSON(object: any): ListExclusionsResponse {
-    const obj = createBaseListExclusionsResponse();
-    if (Array.isArray(object?.exclusions)) object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListExclusionsResponse): unknown {
     const obj: any = {};
@@ -4756,9 +4734,9 @@ export const GetExclusionRequest = {
     return message;
   },
   fromJSON(object: any): GetExclusionRequest {
-    const obj = createBaseGetExclusionRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetExclusionRequest): unknown {
     const obj: any = {};
@@ -4849,10 +4827,10 @@ export const CreateExclusionRequest = {
     return message;
   },
   fromJSON(object: any): CreateExclusionRequest {
-    const obj = createBaseCreateExclusionRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.exclusion)) obj.exclusion = LogExclusion.fromJSON(object.exclusion);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined
+    };
   },
   toJSON(message: CreateExclusionRequest): unknown {
     const obj: any = {};
@@ -4863,9 +4841,7 @@ export const CreateExclusionRequest = {
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
-    if (object.exclusion !== undefined && object.exclusion !== null) {
-      message.exclusion = LogExclusion.fromPartial(object.exclusion);
-    }
+    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : LogExclusion.fromPartial({});
     return message;
   },
   fromSDK(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
@@ -4959,11 +4935,11 @@ export const UpdateExclusionRequest = {
     return message;
   },
   fromJSON(object: any): UpdateExclusionRequest {
-    const obj = createBaseUpdateExclusionRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.exclusion)) obj.exclusion = LogExclusion.fromJSON(object.exclusion);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
+    };
   },
   toJSON(message: UpdateExclusionRequest): unknown {
     const obj: any = {};
@@ -4975,12 +4951,8 @@ export const UpdateExclusionRequest = {
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
-    if (object.exclusion !== undefined && object.exclusion !== null) {
-      message.exclusion = LogExclusion.fromPartial(object.exclusion);
-    }
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : LogExclusion.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
@@ -5065,9 +5037,9 @@ export const DeleteExclusionRequest = {
     return message;
   },
   fromJSON(object: any): DeleteExclusionRequest {
-    const obj = createBaseDeleteExclusionRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: DeleteExclusionRequest): unknown {
     const obj: any = {};
@@ -5151,9 +5123,9 @@ export const GetCmekSettingsRequest = {
     return message;
   },
   fromJSON(object: any): GetCmekSettingsRequest {
-    const obj = createBaseGetCmekSettingsRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetCmekSettingsRequest): unknown {
     const obj: any = {};
@@ -5251,11 +5223,11 @@ export const UpdateCmekSettingsRequest = {
     return message;
   },
   fromJSON(object: any): UpdateCmekSettingsRequest {
-    const obj = createBaseUpdateCmekSettingsRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
+    };
   },
   toJSON(message: UpdateCmekSettingsRequest): unknown {
     const obj: any = {};
@@ -5267,12 +5239,8 @@ export const UpdateCmekSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
-    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
-      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
-    }
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : CmekSettings.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
@@ -5371,11 +5339,11 @@ export const CmekSettings = {
     return message;
   },
   fromJSON(object: any): CmekSettings {
-    const obj = createBaseCmekSettings();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.kmsKeyName)) obj.kmsKeyName = String(object.kmsKeyName);
-    if (isSet(object.serviceAccountId)) obj.serviceAccountId = String(object.serviceAccountId);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      kmsKeyName: isSet(object.kmsKeyName) ? String(object.kmsKeyName) : "",
+      serviceAccountId: isSet(object.serviceAccountId) ? String(object.serviceAccountId) : ""
+    };
   },
   toJSON(message: CmekSettings): unknown {
     const obj: any = {};
@@ -5473,9 +5441,9 @@ export const GetSettingsRequest = {
     return message;
   },
   fromJSON(object: any): GetSettingsRequest {
-    const obj = createBaseGetSettingsRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetSettingsRequest): unknown {
     const obj: any = {};
@@ -5573,11 +5541,11 @@ export const UpdateSettingsRequest = {
     return message;
   },
   fromJSON(object: any): UpdateSettingsRequest {
-    const obj = createBaseUpdateSettingsRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.settings)) obj.settings = Settings.fromJSON(object.settings);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      settings: isSet(object.settings) ? Settings.fromJSON(object.settings) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
+    };
   },
   toJSON(message: UpdateSettingsRequest): unknown {
     const obj: any = {};
@@ -5589,12 +5557,8 @@ export const UpdateSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
-    if (object.settings !== undefined && object.settings !== null) {
-      message.settings = Settings.fromPartial(object.settings);
-    }
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : Settings.fromPartial({});
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : FieldMask.fromPartial({});
     return message;
   },
   fromSDK(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
@@ -5707,13 +5671,13 @@ export const Settings = {
     return message;
   },
   fromJSON(object: any): Settings {
-    const obj = createBaseSettings();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.kmsKeyName)) obj.kmsKeyName = String(object.kmsKeyName);
-    if (isSet(object.kmsServiceAccountId)) obj.kmsServiceAccountId = String(object.kmsServiceAccountId);
-    if (isSet(object.storageLocation)) obj.storageLocation = String(object.storageLocation);
-    if (isSet(object.disableDefaultSink)) obj.disableDefaultSink = Boolean(object.disableDefaultSink);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      kmsKeyName: isSet(object.kmsKeyName) ? String(object.kmsKeyName) : "",
+      kmsServiceAccountId: isSet(object.kmsServiceAccountId) ? String(object.kmsServiceAccountId) : "",
+      storageLocation: isSet(object.storageLocation) ? String(object.storageLocation) : "",
+      disableDefaultSink: isSet(object.disableDefaultSink) ? Boolean(object.disableDefaultSink) : false
+    };
   },
   toJSON(message: Settings): unknown {
     const obj: any = {};
@@ -5839,11 +5803,11 @@ export const CopyLogEntriesRequest = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesRequest {
-    const obj = createBaseCopyLogEntriesRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.destination)) obj.destination = String(object.destination);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      destination: isSet(object.destination) ? String(object.destination) : ""
+    };
   },
   toJSON(message: CopyLogEntriesRequest): unknown {
     const obj: any = {};
@@ -5983,15 +5947,15 @@ export const CopyLogEntriesMetadata = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesMetadata {
-    const obj = createBaseCopyLogEntriesMetadata();
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
-    if (isSet(object.state)) obj.state = operationStateFromJSON(object.state);
-    if (isSet(object.cancellationRequested)) obj.cancellationRequested = Boolean(object.cancellationRequested);
-    if (isSet(object.request)) obj.request = CopyLogEntriesRequest.fromJSON(object.request);
-    if (isSet(object.progress)) obj.progress = Number(object.progress);
-    if (isSet(object.writerIdentity)) obj.writerIdentity = String(object.writerIdentity);
-    return obj;
+    return {
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
+      cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
+      request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,
+      progress: isSet(object.progress) ? Number(object.progress) : 0,
+      writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : ""
+    };
   },
   toJSON(message: CopyLogEntriesMetadata): unknown {
     const obj: any = {};
@@ -6010,9 +5974,7 @@ export const CopyLogEntriesMetadata = {
     message.endTime = object.endTime ?? undefined;
     message.state = object.state ?? 0;
     message.cancellationRequested = object.cancellationRequested ?? false;
-    if (object.request !== undefined && object.request !== null) {
-      message.request = CopyLogEntriesRequest.fromPartial(object.request);
-    }
+    message.request = object.request !== undefined && object.request !== null ? CopyLogEntriesRequest.fromPartial(object.request) : CopyLogEntriesRequest.fromPartial({});
     message.progress = object.progress ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
@@ -6119,9 +6081,9 @@ export const CopyLogEntriesResponse = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesResponse {
-    const obj = createBaseCopyLogEntriesResponse();
-    if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
-    return obj;
+    return {
+      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt(0)
+    };
   },
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
@@ -6130,9 +6092,7 @@ export const CopyLogEntriesResponse = {
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    if (object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null) {
-      message.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
-    }
+    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {

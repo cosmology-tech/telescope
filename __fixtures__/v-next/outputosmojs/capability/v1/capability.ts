@@ -76,9 +76,9 @@ export const Capability = {
     return message;
   },
   fromJSON(object: any): Capability {
-    const obj = createBaseCapability();
-    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    return obj;
+    return {
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Capability): unknown {
     const obj: any = {};
@@ -87,9 +87,7 @@ export const Capability = {
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    if (object.index !== undefined && object.index !== null) {
-      message.index = BigInt(object.index.toString());
-    }
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: CapabilitySDKType): Capability {
@@ -171,10 +169,10 @@ export const Owner = {
     return message;
   },
   fromJSON(object: any): Owner {
-    const obj = createBaseOwner();
-    if (isSet(object.module)) obj.module = String(object.module);
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      module: isSet(object.module) ? String(object.module) : "",
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: Owner): unknown {
     const obj: any = {};
@@ -265,9 +263,9 @@ export const CapabilityOwners = {
     return message;
   },
   fromJSON(object: any): CapabilityOwners {
-    const obj = createBaseCapabilityOwners();
-    if (Array.isArray(object?.owners)) object.owners.map((e: any) => Owner.fromJSON(e));
-    return obj;
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromJSON(e)) : []
+    };
   },
   toJSON(message: CapabilityOwners): unknown {
     const obj: any = {};

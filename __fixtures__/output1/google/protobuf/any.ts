@@ -238,10 +238,10 @@ export const Any = {
     return message;
   },
   fromJSON(object: any): Any {
-    const obj = createBaseAny();
-    if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
+    return {
+      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
   toJSON(message: Any): unknown {
     const obj: any = {};

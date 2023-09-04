@@ -117,10 +117,10 @@ export const ModuleRoute = {
     return message;
   },
   fromJSON(object: any): ModuleRoute {
-    const obj = createBaseModuleRoute();
-    if (isSet(object.poolType)) obj.poolType = poolTypeFromJSON(object.poolType);
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    return obj;
+    return {
+      poolType: isSet(object.poolType) ? poolTypeFromJSON(object.poolType) : -1,
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : undefined
+    };
   },
   toJSON(message: ModuleRoute): unknown {
     const obj: any = {};
@@ -131,9 +131,7 @@ export const ModuleRoute = {
   fromPartial(object: DeepPartial<ModuleRoute>): ModuleRoute {
     const message = createBaseModuleRoute();
     message.poolType = object.poolType ?? 0;
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : undefined;
     return message;
   },
   fromSDK(object: ModuleRouteSDKType): ModuleRoute {

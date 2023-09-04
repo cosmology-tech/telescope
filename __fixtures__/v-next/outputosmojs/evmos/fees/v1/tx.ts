@@ -144,12 +144,12 @@ export const MsgRegisterDevFeeInfo = {
     return message;
   },
   fromJSON(object: any): MsgRegisterDevFeeInfo {
-    const obj = createBaseMsgRegisterDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    if (Array.isArray(object?.nonces)) object.nonces.map((e: any) => BigInt(e.toString()));
-    return obj;
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
+      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
+    };
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
     const obj: any = {};
@@ -258,8 +258,7 @@ export const MsgRegisterDevFeeInfoResponse = {
     return message;
   },
   fromJSON(_: any): MsgRegisterDevFeeInfoResponse {
-    const obj = createBaseMsgRegisterDevFeeInfoResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgRegisterDevFeeInfoResponse): unknown {
     const obj: any = {};
@@ -340,10 +339,10 @@ export const MsgCancelDevFeeInfo = {
     return message;
   },
   fromJSON(object: any): MsgCancelDevFeeInfo {
-    const obj = createBaseMsgCancelDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    return obj;
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : ""
+    };
   },
   toJSON(message: MsgCancelDevFeeInfo): unknown {
     const obj: any = {};
@@ -426,8 +425,7 @@ export const MsgCancelDevFeeInfoResponse = {
     return message;
   },
   fromJSON(_: any): MsgCancelDevFeeInfoResponse {
-    const obj = createBaseMsgCancelDevFeeInfoResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCancelDevFeeInfoResponse): unknown {
     const obj: any = {};
@@ -515,11 +513,11 @@ export const MsgUpdateDevFeeInfo = {
     return message;
   },
   fromJSON(object: any): MsgUpdateDevFeeInfo {
-    const obj = createBaseMsgUpdateDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    return obj;
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
+      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : ""
+    };
   },
   toJSON(message: MsgUpdateDevFeeInfo): unknown {
     const obj: any = {};
@@ -609,8 +607,7 @@ export const MsgUpdateDevFeeInfoResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateDevFeeInfoResponse {
-    const obj = createBaseMsgUpdateDevFeeInfoResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateDevFeeInfoResponse): unknown {
     const obj: any = {};

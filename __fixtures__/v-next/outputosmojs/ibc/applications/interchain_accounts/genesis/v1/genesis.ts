@@ -113,10 +113,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.controllerGenesisState)) obj.controllerGenesisState = ControllerGenesisState.fromJSON(object.controllerGenesisState);
-    if (isSet(object.hostGenesisState)) obj.hostGenesisState = HostGenesisState.fromJSON(object.hostGenesisState);
-    return obj;
+    return {
+      controllerGenesisState: isSet(object.controllerGenesisState) ? ControllerGenesisState.fromJSON(object.controllerGenesisState) : undefined,
+      hostGenesisState: isSet(object.hostGenesisState) ? HostGenesisState.fromJSON(object.hostGenesisState) : undefined
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -126,12 +126,8 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.controllerGenesisState !== undefined && object.controllerGenesisState !== null) {
-      message.controllerGenesisState = ControllerGenesisState.fromPartial(object.controllerGenesisState);
-    }
-    if (object.hostGenesisState !== undefined && object.hostGenesisState !== null) {
-      message.hostGenesisState = HostGenesisState.fromPartial(object.hostGenesisState);
-    }
+    message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : ControllerGenesisState.fromPartial({});
+    message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : HostGenesisState.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -238,12 +234,12 @@ export const ControllerGenesisState = {
     return message;
   },
   fromJSON(object: any): ControllerGenesisState {
-    const obj = createBaseControllerGenesisState();
-    if (Array.isArray(object?.activeChannels)) object.activeChannels.map((e: any) => ActiveChannel.fromJSON(e));
-    if (Array.isArray(object?.interchainAccounts)) object.interchainAccounts.map((e: any) => RegisteredInterchainAccount.fromJSON(e));
-    if (Array.isArray(object?.ports)) object.ports.map((e: any) => String(e));
-    if (isSet(object.params)) obj.params = Params1.fromJSON(object.params);
-    return obj;
+    return {
+      activeChannels: Array.isArray(object?.activeChannels) ? object.activeChannels.map((e: any) => ActiveChannel.fromJSON(e)) : [],
+      interchainAccounts: Array.isArray(object?.interchainAccounts) ? object.interchainAccounts.map((e: any) => RegisteredInterchainAccount.fromJSON(e)) : [],
+      ports: Array.isArray(object?.ports) ? object.ports.map((e: any) => String(e)) : [],
+      params: isSet(object.params) ? Params1.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: ControllerGenesisState): unknown {
     const obj: any = {};
@@ -270,9 +266,7 @@ export const ControllerGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.ports = object.ports?.map(e => e) || [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params1.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : Params1.fromPartial({});
     return message;
   },
   fromSDK(object: ControllerGenesisStateSDKType): ControllerGenesisState {
@@ -413,12 +407,12 @@ export const HostGenesisState = {
     return message;
   },
   fromJSON(object: any): HostGenesisState {
-    const obj = createBaseHostGenesisState();
-    if (Array.isArray(object?.activeChannels)) object.activeChannels.map((e: any) => ActiveChannel.fromJSON(e));
-    if (Array.isArray(object?.interchainAccounts)) object.interchainAccounts.map((e: any) => RegisteredInterchainAccount.fromJSON(e));
-    if (isSet(object.port)) obj.port = String(object.port);
-    if (isSet(object.params)) obj.params = Params2.fromJSON(object.params);
-    return obj;
+    return {
+      activeChannels: Array.isArray(object?.activeChannels) ? object.activeChannels.map((e: any) => ActiveChannel.fromJSON(e)) : [],
+      interchainAccounts: Array.isArray(object?.interchainAccounts) ? object.interchainAccounts.map((e: any) => RegisteredInterchainAccount.fromJSON(e)) : [],
+      port: isSet(object.port) ? String(object.port) : "",
+      params: isSet(object.params) ? Params2.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: HostGenesisState): unknown {
     const obj: any = {};
@@ -441,9 +435,7 @@ export const HostGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.port = object.port ?? "";
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params2.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : Params2.fromPartial({});
     return message;
   },
   fromSDK(object: HostGenesisStateSDKType): HostGenesisState {
@@ -576,12 +568,12 @@ export const ActiveChannel = {
     return message;
   },
   fromJSON(object: any): ActiveChannel {
-    const obj = createBaseActiveChannel();
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (isSet(object.isMiddlewareEnabled)) obj.isMiddlewareEnabled = Boolean(object.isMiddlewareEnabled);
-    return obj;
+    return {
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      isMiddlewareEnabled: isSet(object.isMiddlewareEnabled) ? Boolean(object.isMiddlewareEnabled) : false
+    };
   },
   toJSON(message: ActiveChannel): unknown {
     const obj: any = {};
@@ -706,11 +698,11 @@ export const RegisteredInterchainAccount = {
     return message;
   },
   fromJSON(object: any): RegisteredInterchainAccount {
-    const obj = createBaseRegisteredInterchainAccount();
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.accountAddress)) obj.accountAddress = String(object.accountAddress);
-    return obj;
+    return {
+      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : ""
+    };
   },
   toJSON(message: RegisteredInterchainAccount): unknown {
     const obj: any = {};

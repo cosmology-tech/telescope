@@ -38,9 +38,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.deploymentMinDeposit)) obj.deploymentMinDeposit = Coin.fromJSON(object.deploymentMinDeposit);
-    return obj;
+    return {
+      deploymentMinDeposit: isSet(object.deploymentMinDeposit) ? Coin.fromJSON(object.deploymentMinDeposit) : undefined
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -49,9 +49,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    if (object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null) {
-      message.deploymentMinDeposit = Coin.fromPartial(object.deploymentMinDeposit);
-    }
+    message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : Coin.fromPartial({});
     return message;
   }
 };

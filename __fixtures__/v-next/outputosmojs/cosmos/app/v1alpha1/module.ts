@@ -146,11 +146,11 @@ export const ModuleDescriptor = {
     return message;
   },
   fromJSON(object: any): ModuleDescriptor {
-    const obj = createBaseModuleDescriptor();
-    if (isSet(object.goImport)) obj.goImport = String(object.goImport);
-    if (Array.isArray(object?.usePackage)) object.usePackage.map((e: any) => PackageReference.fromJSON(e));
-    if (Array.isArray(object?.canMigrateFrom)) object.canMigrateFrom.map((e: any) => MigrateFromInfo.fromJSON(e));
-    return obj;
+    return {
+      goImport: isSet(object.goImport) ? String(object.goImport) : "",
+      usePackage: Array.isArray(object?.usePackage) ? object.usePackage.map((e: any) => PackageReference.fromJSON(e)) : [],
+      canMigrateFrom: Array.isArray(object?.canMigrateFrom) ? object.canMigrateFrom.map((e: any) => MigrateFromInfo.fromJSON(e)) : []
+    };
   },
   toJSON(message: ModuleDescriptor): unknown {
     const obj: any = {};
@@ -285,10 +285,10 @@ export const PackageReference = {
     return message;
   },
   fromJSON(object: any): PackageReference {
-    const obj = createBasePackageReference();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.revision)) obj.revision = Number(object.revision);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      revision: isSet(object.revision) ? Number(object.revision) : 0
+    };
   },
   toJSON(message: PackageReference): unknown {
     const obj: any = {};
@@ -385,9 +385,9 @@ export const MigrateFromInfo = {
     return message;
   },
   fromJSON(object: any): MigrateFromInfo {
-    const obj = createBaseMigrateFromInfo();
-    if (isSet(object.module)) obj.module = String(object.module);
-    return obj;
+    return {
+      module: isSet(object.module) ? String(object.module) : ""
+    };
   },
   toJSON(message: MigrateFromInfo): unknown {
     const obj: any = {};

@@ -60,9 +60,9 @@ export const PubKey = {
     return message;
   },
   fromJSON(object: any): PubKey {
-    const obj = createBasePubKey();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+    };
   },
   toJSON(message: PubKey): unknown {
     const obj: any = {};
@@ -152,9 +152,9 @@ export const PrivKey = {
     return message;
   },
   fromJSON(object: any): PrivKey {
-    const obj = createBasePrivKey();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+    };
   },
   toJSON(message: PrivKey): unknown {
     const obj: any = {};

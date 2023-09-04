@@ -609,16 +609,16 @@ export const AttributeContext = {
     return message;
   },
   fromJSON(object: any): AttributeContext {
-    const obj = createBaseAttributeContext();
-    if (isSet(object.origin)) obj.origin = AttributeContext_Peer.fromJSON(object.origin);
-    if (isSet(object.source)) obj.source = AttributeContext_Peer.fromJSON(object.source);
-    if (isSet(object.destination)) obj.destination = AttributeContext_Peer.fromJSON(object.destination);
-    if (isSet(object.request)) obj.request = AttributeContext_Request.fromJSON(object.request);
-    if (isSet(object.response)) obj.response = AttributeContext_Response.fromJSON(object.response);
-    if (isSet(object.resource)) obj.resource = AttributeContext_Resource.fromJSON(object.resource);
-    if (isSet(object.api)) obj.api = AttributeContext_Api.fromJSON(object.api);
-    if (Array.isArray(object?.extensions)) object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      origin: isSet(object.origin) ? AttributeContext_Peer.fromJSON(object.origin) : undefined,
+      source: isSet(object.source) ? AttributeContext_Peer.fromJSON(object.source) : undefined,
+      destination: isSet(object.destination) ? AttributeContext_Peer.fromJSON(object.destination) : undefined,
+      request: isSet(object.request) ? AttributeContext_Request.fromJSON(object.request) : undefined,
+      response: isSet(object.response) ? AttributeContext_Response.fromJSON(object.response) : undefined,
+      resource: isSet(object.resource) ? AttributeContext_Resource.fromJSON(object.resource) : undefined,
+      api: isSet(object.api) ? AttributeContext_Api.fromJSON(object.api) : undefined,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: AttributeContext): unknown {
     const obj: any = {};
@@ -638,27 +638,13 @@ export const AttributeContext = {
   },
   fromPartial(object: DeepPartial<AttributeContext>): AttributeContext {
     const message = createBaseAttributeContext();
-    if (object.origin !== undefined && object.origin !== null) {
-      message.origin = AttributeContext_Peer.fromPartial(object.origin);
-    }
-    if (object.source !== undefined && object.source !== null) {
-      message.source = AttributeContext_Peer.fromPartial(object.source);
-    }
-    if (object.destination !== undefined && object.destination !== null) {
-      message.destination = AttributeContext_Peer.fromPartial(object.destination);
-    }
-    if (object.request !== undefined && object.request !== null) {
-      message.request = AttributeContext_Request.fromPartial(object.request);
-    }
-    if (object.response !== undefined && object.response !== null) {
-      message.response = AttributeContext_Response.fromPartial(object.response);
-    }
-    if (object.resource !== undefined && object.resource !== null) {
-      message.resource = AttributeContext_Resource.fromPartial(object.resource);
-    }
-    if (object.api !== undefined && object.api !== null) {
-      message.api = AttributeContext_Api.fromPartial(object.api);
-    }
+    message.origin = object.origin !== undefined && object.origin !== null ? AttributeContext_Peer.fromPartial(object.origin) : AttributeContext_Peer.fromPartial({});
+    message.source = object.source !== undefined && object.source !== null ? AttributeContext_Peer.fromPartial(object.source) : AttributeContext_Peer.fromPartial({});
+    message.destination = object.destination !== undefined && object.destination !== null ? AttributeContext_Peer.fromPartial(object.destination) : AttributeContext_Peer.fromPartial({});
+    message.request = object.request !== undefined && object.request !== null ? AttributeContext_Request.fromPartial(object.request) : AttributeContext_Request.fromPartial({});
+    message.response = object.response !== undefined && object.response !== null ? AttributeContext_Response.fromPartial(object.response) : AttributeContext_Response.fromPartial({});
+    message.resource = object.resource !== undefined && object.resource !== null ? AttributeContext_Resource.fromPartial(object.resource) : AttributeContext_Resource.fromPartial({});
+    message.api = object.api !== undefined && object.api !== null ? AttributeContext_Api.fromPartial(object.api) : AttributeContext_Api.fromPartial({});
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -783,10 +769,10 @@ export const AttributeContext_Peer_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Peer_LabelsEntry {
-    const obj = createBaseAttributeContext_Peer_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: AttributeContext_Peer_LabelsEntry): unknown {
     const obj: any = {};
@@ -905,18 +891,18 @@ export const AttributeContext_Peer = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Peer {
-    const obj = createBaseAttributeContext_Peer();
-    if (isSet(object.ip)) obj.ip = String(object.ip);
-    if (isSet(object.port)) obj.port = BigInt(object.port.toString());
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.principal)) obj.principal = String(object.principal);
-    if (isSet(object.regionCode)) obj.regionCode = String(object.regionCode);
-    return obj;
+    return {
+      ip: isSet(object.ip) ? String(object.ip) : "",
+      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt(0),
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      principal: isSet(object.principal) ? String(object.principal) : "",
+      regionCode: isSet(object.regionCode) ? String(object.regionCode) : ""
+    };
   },
   toJSON(message: AttributeContext_Peer): unknown {
     const obj: any = {};
@@ -935,9 +921,7 @@ export const AttributeContext_Peer = {
   fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
     const message = createBaseAttributeContext_Peer();
     message.ip = object.ip ?? "";
-    if (object.port !== undefined && object.port !== null) {
-      message.port = BigInt(object.port.toString());
-    }
+    message.port = object.port !== undefined && object.port !== null ? BigInt(object.port.toString()) : BigInt(0);
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1088,12 +1072,12 @@ export const AttributeContext_Api = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Api {
-    const obj = createBaseAttributeContext_Api();
-    if (isSet(object.service)) obj.service = String(object.service);
-    if (isSet(object.operation)) obj.operation = String(object.operation);
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    if (isSet(object.version)) obj.version = String(object.version);
-    return obj;
+    return {
+      service: isSet(object.service) ? String(object.service) : "",
+      operation: isSet(object.operation) ? String(object.operation) : "",
+      protocol: isSet(object.protocol) ? String(object.protocol) : "",
+      version: isSet(object.version) ? String(object.version) : ""
+    };
   },
   toJSON(message: AttributeContext_Api): unknown {
     const obj: any = {};
@@ -1226,13 +1210,13 @@ export const AttributeContext_Auth = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Auth {
-    const obj = createBaseAttributeContext_Auth();
-    if (isSet(object.principal)) obj.principal = String(object.principal);
-    if (Array.isArray(object?.audiences)) object.audiences.map((e: any) => String(e));
-    if (isSet(object.presenter)) obj.presenter = String(object.presenter);
-    if (isSet(object.claims)) obj.claims = Struct.fromJSON(object.claims);
-    if (Array.isArray(object?.accessLevels)) object.accessLevels.map((e: any) => String(e));
-    return obj;
+    return {
+      principal: isSet(object.principal) ? String(object.principal) : "",
+      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => String(e)) : [],
+      presenter: isSet(object.presenter) ? String(object.presenter) : "",
+      claims: isSet(object.claims) ? Struct.fromJSON(object.claims) : undefined,
+      accessLevels: Array.isArray(object?.accessLevels) ? object.accessLevels.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: AttributeContext_Auth): unknown {
     const obj: any = {};
@@ -1256,9 +1240,7 @@ export const AttributeContext_Auth = {
     message.principal = object.principal ?? "";
     message.audiences = object.audiences?.map(e => e) || [];
     message.presenter = object.presenter ?? "";
-    if (object.claims !== undefined && object.claims !== null) {
-      message.claims = Struct.fromPartial(object.claims);
-    }
+    message.claims = object.claims !== undefined && object.claims !== null ? Struct.fromPartial(object.claims) : Struct.fromPartial({});
     message.accessLevels = object.accessLevels?.map(e => e) || [];
     return message;
   },
@@ -1376,10 +1358,10 @@ export const AttributeContext_Request_HeadersEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Request_HeadersEntry {
-    const obj = createBaseAttributeContext_Request_HeadersEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: AttributeContext_Request_HeadersEntry): unknown {
     const obj: any = {};
@@ -1547,25 +1529,25 @@ export const AttributeContext_Request = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Request {
-    const obj = createBaseAttributeContext_Request();
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.method)) obj.method = String(object.method);
-    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.path)) obj.path = String(object.path);
-    if (isSet(object.host)) obj.host = String(object.host);
-    if (isSet(object.scheme)) obj.scheme = String(object.scheme);
-    if (isSet(object.query)) obj.query = String(object.query);
-    if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.size)) obj.size = BigInt(object.size.toString());
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    if (isSet(object.reason)) obj.reason = String(object.reason);
-    if (isSet(object.auth)) obj.auth = AttributeContext_Auth.fromJSON(object.auth);
-    return obj;
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      method: isSet(object.method) ? String(object.method) : "",
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      path: isSet(object.path) ? String(object.path) : "",
+      host: isSet(object.host) ? String(object.host) : "",
+      scheme: isSet(object.scheme) ? String(object.scheme) : "",
+      query: isSet(object.query) ? String(object.query) : "",
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
+      protocol: isSet(object.protocol) ? String(object.protocol) : "",
+      reason: isSet(object.reason) ? String(object.reason) : "",
+      auth: isSet(object.auth) ? AttributeContext_Auth.fromJSON(object.auth) : undefined
+    };
   },
   toJSON(message: AttributeContext_Request): unknown {
     const obj: any = {};
@@ -1605,14 +1587,10 @@ export const AttributeContext_Request = {
     message.scheme = object.scheme ?? "";
     message.query = object.query ?? "";
     message.time = object.time ?? undefined;
-    if (object.size !== undefined && object.size !== null) {
-      message.size = BigInt(object.size.toString());
-    }
+    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt(0);
     message.protocol = object.protocol ?? "";
     message.reason = object.reason ?? "";
-    if (object.auth !== undefined && object.auth !== null) {
-      message.auth = AttributeContext_Auth.fromPartial(object.auth);
-    }
+    message.auth = object.auth !== undefined && object.auth !== null ? AttributeContext_Auth.fromPartial(object.auth) : AttributeContext_Auth.fromPartial({});
     return message;
   },
   fromSDK(object: AttributeContext_RequestSDKType): AttributeContext_Request {
@@ -1773,10 +1751,10 @@ export const AttributeContext_Response_HeadersEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Response_HeadersEntry {
-    const obj = createBaseAttributeContext_Response_HeadersEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: AttributeContext_Response_HeadersEntry): unknown {
     const obj: any = {};
@@ -1895,18 +1873,18 @@ export const AttributeContext_Response = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Response {
-    const obj = createBaseAttributeContext_Response();
-    if (isSet(object.code)) obj.code = BigInt(object.code.toString());
-    if (isSet(object.size)) obj.size = BigInt(object.size.toString());
-    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.backendLatency)) obj.backendLatency = Duration.fromJSON(object.backendLatency);
-    return obj;
+    return {
+      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt(0),
+      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
+    };
   },
   toJSON(message: AttributeContext_Response): unknown {
     const obj: any = {};
@@ -1924,12 +1902,8 @@ export const AttributeContext_Response = {
   },
   fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
     const message = createBaseAttributeContext_Response();
-    if (object.code !== undefined && object.code !== null) {
-      message.code = BigInt(object.code.toString());
-    }
-    if (object.size !== undefined && object.size !== null) {
-      message.size = BigInt(object.size.toString());
-    }
+    message.code = object.code !== undefined && object.code !== null ? BigInt(object.code.toString()) : BigInt(0);
+    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt(0);
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1939,9 +1913,7 @@ export const AttributeContext_Response = {
       return acc;
     }, {});
     message.time = object.time ?? undefined;
-    if (object.backendLatency !== undefined && object.backendLatency !== null) {
-      message.backendLatency = Duration.fromPartial(object.backendLatency);
-    }
+    message.backendLatency = object.backendLatency !== undefined && object.backendLatency !== null ? Duration.fromPartial(object.backendLatency) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: AttributeContext_ResponseSDKType): AttributeContext_Response {
@@ -2067,10 +2039,10 @@ export const AttributeContext_Resource_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Resource_LabelsEntry {
-    const obj = createBaseAttributeContext_Resource_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: AttributeContext_Resource_LabelsEntry): unknown {
     const obj: any = {};
@@ -2161,10 +2133,10 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Resource_AnnotationsEntry {
-    const obj = createBaseAttributeContext_Resource_AnnotationsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: AttributeContext_Resource_AnnotationsEntry): unknown {
     const obj: any = {};
@@ -2338,30 +2310,30 @@ export const AttributeContext_Resource = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Resource {
-    const obj = createBaseAttributeContext_Resource();
-    if (isSet(object.service)) obj.service = String(object.service);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.uid)) obj.uid = String(object.uid);
-    if (isObject(object.annotations)) obj.annotations = Object.entries(object.annotations).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.deleteTime)) obj.deleteTime = new Date(object.deleteTime);
-    if (isSet(object.etag)) obj.etag = String(object.etag);
-    if (isSet(object.location)) obj.location = String(object.location);
-    return obj;
+    return {
+      service: isSet(object.service) ? String(object.service) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      uid: isSet(object.uid) ? String(object.uid) : "",
+      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      displayName: isSet(object.displayName) ? String(object.displayName) : "",
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
+      deleteTime: isSet(object.deleteTime) ? new Date(object.deleteTime) : undefined,
+      etag: isSet(object.etag) ? String(object.etag) : "",
+      location: isSet(object.location) ? String(object.location) : ""
+    };
   },
   toJSON(message: AttributeContext_Resource): unknown {
     const obj: any = {};

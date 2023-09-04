@@ -152,12 +152,12 @@ export const MsgCreateBid = {
     return message;
   },
   fromJSON(object: any): MsgCreateBid {
-    const obj = createBaseMsgCreateBid();
-    if (isSet(object.order)) obj.order = OrderID.fromJSON(object.order);
-    if (isSet(object.provider)) obj.provider = String(object.provider);
-    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
-    if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
-    return obj;
+    return {
+      order: isSet(object.order) ? OrderID.fromJSON(object.order) : undefined,
+      provider: isSet(object.provider) ? String(object.provider) : "",
+      price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
+      deposit: isSet(object.deposit) ? Coin.fromJSON(object.deposit) : undefined
+    };
   },
   toJSON(message: MsgCreateBid): unknown {
     const obj: any = {};
@@ -169,16 +169,10 @@ export const MsgCreateBid = {
   },
   fromPartial(object: DeepPartial<MsgCreateBid>): MsgCreateBid {
     const message = createBaseMsgCreateBid();
-    if (object.order !== undefined && object.order !== null) {
-      message.order = OrderID.fromPartial(object.order);
-    }
+    message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : OrderID.fromPartial({});
     message.provider = object.provider ?? "";
-    if (object.price !== undefined && object.price !== null) {
-      message.price = DecCoin.fromPartial(object.price);
-    }
-    if (object.deposit !== undefined && object.deposit !== null) {
-      message.deposit = Coin.fromPartial(object.deposit);
-    }
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
     return message;
   }
 };
@@ -204,8 +198,7 @@ export const MsgCreateBidResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateBidResponse {
-    const obj = createBaseMsgCreateBidResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCreateBidResponse): unknown {
     const obj: any = {};
@@ -246,9 +239,9 @@ export const MsgCloseBid = {
     return message;
   },
   fromJSON(object: any): MsgCloseBid {
-    const obj = createBaseMsgCloseBid();
-    if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
-    return obj;
+    return {
+      bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined
+    };
   },
   toJSON(message: MsgCloseBid): unknown {
     const obj: any = {};
@@ -257,9 +250,7 @@ export const MsgCloseBid = {
   },
   fromPartial(object: DeepPartial<MsgCloseBid>): MsgCloseBid {
     const message = createBaseMsgCloseBid();
-    if (object.bidId !== undefined && object.bidId !== null) {
-      message.bidId = BidID.fromPartial(object.bidId);
-    }
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
     return message;
   }
 };
@@ -285,8 +276,7 @@ export const MsgCloseBidResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseBidResponse {
-    const obj = createBaseMsgCloseBidResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCloseBidResponse): unknown {
     const obj: any = {};
@@ -355,13 +345,13 @@ export const BidID = {
     return message;
   },
   fromJSON(object: any): BidID {
-    const obj = createBaseBidID();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
-    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
-    if (isSet(object.provider)) obj.provider = String(object.provider);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : ""
+    };
   },
   toJSON(message: BidID): unknown {
     const obj: any = {};
@@ -375,9 +365,7 @@ export const BidID = {
   fromPartial(object: DeepPartial<BidID>): BidID {
     const message = createBaseBidID();
     message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = Long.fromValue(object.dseq);
-    }
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -435,12 +423,12 @@ export const Bid = {
     return message;
   },
   fromJSON(object: any): Bid {
-    const obj = createBaseBid();
-    if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
-    if (isSet(object.state)) obj.state = bid_StateFromJSON(object.state);
-    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
-    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
-    return obj;
+    return {
+      bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
+      price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
+    };
   },
   toJSON(message: Bid): unknown {
     const obj: any = {};
@@ -452,16 +440,10 @@ export const Bid = {
   },
   fromPartial(object: DeepPartial<Bid>): Bid {
     const message = createBaseBid();
-    if (object.bidId !== undefined && object.bidId !== null) {
-      message.bidId = BidID.fromPartial(object.bidId);
-    }
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
     message.state = object.state ?? 0;
-    if (object.price !== undefined && object.price !== null) {
-      message.price = DecCoin.fromPartial(object.price);
-    }
-    if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = Long.fromValue(object.createdAt);
-    }
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   }
 };
@@ -530,14 +512,14 @@ export const BidFilters = {
     return message;
   },
   fromJSON(object: any): BidFilters {
-    const obj = createBaseBidFilters();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
-    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
-    if (isSet(object.provider)) obj.provider = String(object.provider);
-    if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : "",
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   },
   toJSON(message: BidFilters): unknown {
     const obj: any = {};
@@ -552,9 +534,7 @@ export const BidFilters = {
   fromPartial(object: DeepPartial<BidFilters>): BidFilters {
     const message = createBaseBidFilters();
     message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = Long.fromValue(object.dseq);
-    }
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";

@@ -101,10 +101,10 @@ export const MsgSoftwareUpgrade = {
     return message;
   },
   fromJSON(object: any): MsgSoftwareUpgrade {
-    const obj = createBaseMsgSoftwareUpgrade();
-    if (isSet(object.authority)) obj.authority = String(object.authority);
-    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
-    return obj;
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined
+    };
   },
   toJSON(message: MsgSoftwareUpgrade): unknown {
     const obj: any = {};
@@ -115,9 +115,7 @@ export const MsgSoftwareUpgrade = {
   fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
-    if (object.plan !== undefined && object.plan !== null) {
-      message.plan = Plan.fromPartial(object.plan);
-    }
+    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
     return message;
   },
   fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
@@ -195,8 +193,7 @@ export const MsgSoftwareUpgradeResponse = {
     return message;
   },
   fromJSON(_: any): MsgSoftwareUpgradeResponse {
-    const obj = createBaseMsgSoftwareUpgradeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSoftwareUpgradeResponse): unknown {
     const obj: any = {};
@@ -276,9 +273,9 @@ export const MsgCancelUpgrade = {
     return message;
   },
   fromJSON(object: any): MsgCancelUpgrade {
-    const obj = createBaseMsgCancelUpgrade();
-    if (isSet(object.authority)) obj.authority = String(object.authority);
-    return obj;
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : ""
+    };
   },
   toJSON(message: MsgCancelUpgrade): unknown {
     const obj: any = {};
@@ -360,8 +357,7 @@ export const MsgCancelUpgradeResponse = {
     return message;
   },
   fromJSON(_: any): MsgCancelUpgradeResponse {
-    const obj = createBaseMsgCancelUpgradeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCancelUpgradeResponse): unknown {
     const obj: any = {};

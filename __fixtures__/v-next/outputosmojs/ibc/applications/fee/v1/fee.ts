@@ -95,11 +95,11 @@ export const Fee = {
     return message;
   },
   fromJSON(object: any): Fee {
-    const obj = createBaseFee();
-    if (Array.isArray(object?.recvFee)) object.recvFee.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.ackFee)) object.ackFee.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.timeoutFee)) object.timeoutFee.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      recvFee: Array.isArray(object?.recvFee) ? object.recvFee.map((e: any) => Coin.fromJSON(e)) : [],
+      ackFee: Array.isArray(object?.ackFee) ? object.ackFee.map((e: any) => Coin.fromJSON(e)) : [],
+      timeoutFee: Array.isArray(object?.timeoutFee) ? object.timeoutFee.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Fee): unknown {
     const obj: any = {};
@@ -253,11 +253,11 @@ export const PacketFee = {
     return message;
   },
   fromJSON(object: any): PacketFee {
-    const obj = createBasePacketFee();
-    if (isSet(object.fee)) obj.fee = Fee.fromJSON(object.fee);
-    if (isSet(object.refundAddress)) obj.refundAddress = String(object.refundAddress);
-    if (Array.isArray(object?.relayers)) object.relayers.map((e: any) => String(e));
-    return obj;
+    return {
+      fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
+      refundAddress: isSet(object.refundAddress) ? String(object.refundAddress) : "",
+      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: PacketFee): unknown {
     const obj: any = {};
@@ -272,9 +272,7 @@ export const PacketFee = {
   },
   fromPartial(object: DeepPartial<PacketFee>): PacketFee {
     const message = createBasePacketFee();
-    if (object.fee !== undefined && object.fee !== null) {
-      message.fee = Fee.fromPartial(object.fee);
-    }
+    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : Fee.fromPartial({});
     message.refundAddress = object.refundAddress ?? "";
     message.relayers = object.relayers?.map(e => e) || [];
     return message;
@@ -375,9 +373,9 @@ export const PacketFees = {
     return message;
   },
   fromJSON(object: any): PacketFees {
-    const obj = createBasePacketFees();
-    if (Array.isArray(object?.packetFees)) object.packetFees.map((e: any) => PacketFee.fromJSON(e));
-    return obj;
+    return {
+      packetFees: Array.isArray(object?.packetFees) ? object.packetFees.map((e: any) => PacketFee.fromJSON(e)) : []
+    };
   },
   toJSON(message: PacketFees): unknown {
     const obj: any = {};
@@ -479,9 +477,9 @@ export const IdentifiedPacketFees = {
     return message;
   },
   fromJSON(object: any): IdentifiedPacketFees {
-    const obj = createBaseIdentifiedPacketFees();
-    if (Array.isArray(object?.packetFees)) object.packetFees.map((e: any) => PacketFee.fromJSON(e));
-    return obj;
+    return {
+      packetFees: Array.isArray(object?.packetFees) ? object.packetFees.map((e: any) => PacketFee.fromJSON(e)) : []
+    };
   },
   toJSON(message: IdentifiedPacketFees): unknown {
     const obj: any = {};

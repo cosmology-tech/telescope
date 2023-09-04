@@ -78,12 +78,12 @@ export const MsgIBCSend = {
     return message;
   },
   fromJSON(object: any): MsgIBCSend {
-    const obj = createBaseMsgIBCSend();
-    if (isSet(object.channel)) obj.channel = String(object.channel);
-    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Long.fromValue(object.timeoutHeight);
-    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    return obj;
+    return {
+      channel: isSet(object.channel) ? String(object.channel) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromValue(object.timeoutHeight) : Long.UZERO,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
   toJSON(message: MsgIBCSend): unknown {
     const obj: any = {};
@@ -96,12 +96,8 @@ export const MsgIBCSend = {
   fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Long.fromValue(object.timeoutHeight);
-    }
-    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
-      message.timeoutTimestamp = Long.fromValue(object.timeoutTimestamp);
-    }
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Long.fromValue(object.timeoutHeight) : Long.UZERO;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
   }
@@ -136,9 +132,9 @@ export const MsgIBCCloseChannel = {
     return message;
   },
   fromJSON(object: any): MsgIBCCloseChannel {
-    const obj = createBaseMsgIBCCloseChannel();
-    if (isSet(object.channel)) obj.channel = String(object.channel);
-    return obj;
+    return {
+      channel: isSet(object.channel) ? String(object.channel) : ""
+    };
   },
   toJSON(message: MsgIBCCloseChannel): unknown {
     const obj: any = {};

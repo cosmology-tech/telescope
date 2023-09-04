@@ -83,10 +83,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.claimsRecords)) object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      claimsRecords: Array.isArray(object?.claimsRecords) ? object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -100,9 +100,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.claimsRecords = object.claimsRecords?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     return message;
   },
@@ -195,15 +193,15 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enableClaims)) obj.enableClaims = Boolean(object.enableClaims);
-    if (isSet(object.airdropStartTime)) obj.airdropStartTime = fromJsonTimestamp(object.airdropStartTime);
-    if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
-    if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
-    if (isSet(object.claimsDenom)) obj.claimsDenom = String(object.claimsDenom);
-    if (Array.isArray(object?.authorizedChannels)) object.authorizedChannels.map((e: any) => String(e));
-    if (Array.isArray(object?.evmChannels)) object.evmChannels.map((e: any) => String(e));
-    return obj;
+    return {
+      enableClaims: isSet(object.enableClaims) ? Boolean(object.enableClaims) : false,
+      airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
+      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
+      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
+      claimsDenom: isSet(object.claimsDenom) ? String(object.claimsDenom) : "",
+      authorizedChannels: Array.isArray(object?.authorizedChannels) ? object.authorizedChannels.map((e: any) => String(e)) : [],
+      evmChannels: Array.isArray(object?.evmChannels) ? object.evmChannels.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -228,12 +226,8 @@ export const Params = {
     const message = createBaseParams();
     message.enableClaims = object.enableClaims ?? false;
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
-      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
-    }
-    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
-      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
-    }
+    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : Duration.fromPartial({});
+    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : Duration.fromPartial({});
     message.claimsDenom = object.claimsDenom ?? "";
     message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
     message.evmChannels = object.evmChannels?.map(e => e) || [];

@@ -212,13 +212,13 @@ export const StoreCodeProposal = {
     return message;
   },
   fromJSON(object: any): StoreCodeProposal {
-    const obj = createBaseStoreCodeProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.runAs)) obj.runAs = String(object.runAs);
-    if (isSet(object.wasmByteCode)) obj.wasmByteCode = bytesFromBase64(object.wasmByteCode);
-    if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      runAs: isSet(object.runAs) ? String(object.runAs) : "",
+      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(),
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
+    };
   },
   toJSON(message: StoreCodeProposal): unknown {
     const obj: any = {};
@@ -235,9 +235,7 @@ export const StoreCodeProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
-      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
-    }
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
     return message;
   }
 };
@@ -320,16 +318,16 @@ export const InstantiateContractProposal = {
     return message;
   },
   fromJSON(object: any): InstantiateContractProposal {
-    const obj = createBaseInstantiateContractProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.runAs)) obj.runAs = String(object.runAs);
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
-    if (isSet(object.label)) obj.label = String(object.label);
-    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      runAs: isSet(object.runAs) ? String(object.runAs) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
+      label: isSet(object.label) ? String(object.label) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: InstantiateContractProposal): unknown {
     const obj: any = {};
@@ -353,9 +351,7 @@ export const InstantiateContractProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.admin = object.admin ?? "";
-    if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = Long.fromValue(object.codeId);
-    }
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -420,13 +416,13 @@ export const MigrateContractProposal = {
     return message;
   },
   fromJSON(object: any): MigrateContractProposal {
-    const obj = createBaseMigrateContractProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
-    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   },
   toJSON(message: MigrateContractProposal): unknown {
     const obj: any = {};
@@ -442,9 +438,7 @@ export const MigrateContractProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
-    if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = Long.fromValue(object.codeId);
-    }
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.msg = object.msg ?? new Uint8Array();
     return message;
   }
@@ -500,12 +494,12 @@ export const SudoContractProposal = {
     return message;
   },
   fromJSON(object: any): SudoContractProposal {
-    const obj = createBaseSudoContractProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   },
   toJSON(message: SudoContractProposal): unknown {
     const obj: any = {};
@@ -589,14 +583,14 @@ export const ExecuteContractProposal = {
     return message;
   },
   fromJSON(object: any): ExecuteContractProposal {
-    const obj = createBaseExecuteContractProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.runAs)) obj.runAs = String(object.runAs);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      runAs: isSet(object.runAs) ? String(object.runAs) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: ExecuteContractProposal): unknown {
     const obj: any = {};
@@ -674,12 +668,12 @@ export const UpdateAdminProposal = {
     return message;
   },
   fromJSON(object: any): UpdateAdminProposal {
-    const obj = createBaseUpdateAdminProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   },
   toJSON(message: UpdateAdminProposal): unknown {
     const obj: any = {};
@@ -742,11 +736,11 @@ export const ClearAdminProposal = {
     return message;
   },
   fromJSON(object: any): ClearAdminProposal {
-    const obj = createBaseClearAdminProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   },
   toJSON(message: ClearAdminProposal): unknown {
     const obj: any = {};
@@ -816,11 +810,11 @@ export const PinCodesProposal = {
     return message;
   },
   fromJSON(object: any): PinCodesProposal {
-    const obj = createBasePinCodesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => Long.fromValue(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
+    };
   },
   toJSON(message: PinCodesProposal): unknown {
     const obj: any = {};
@@ -894,11 +888,11 @@ export const UnpinCodesProposal = {
     return message;
   },
   fromJSON(object: any): UnpinCodesProposal {
-    const obj = createBaseUnpinCodesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => Long.fromValue(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
+    };
   },
   toJSON(message: UnpinCodesProposal): unknown {
     const obj: any = {};
@@ -956,10 +950,10 @@ export const AccessConfigUpdate = {
     return message;
   },
   fromJSON(object: any): AccessConfigUpdate {
-    const obj = createBaseAccessConfigUpdate();
-    if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
-    if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
-    return obj;
+    return {
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
+    };
   },
   toJSON(message: AccessConfigUpdate): unknown {
     const obj: any = {};
@@ -969,12 +963,8 @@ export const AccessConfigUpdate = {
   },
   fromPartial(object: DeepPartial<AccessConfigUpdate>): AccessConfigUpdate {
     const message = createBaseAccessConfigUpdate();
-    if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = Long.fromValue(object.codeId);
-    }
-    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
-      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
-    }
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : AccessConfig.fromPartial({});
     return message;
   }
 };
@@ -1022,11 +1012,11 @@ export const UpdateInstantiateConfigProposal = {
     return message;
   },
   fromJSON(object: any): UpdateInstantiateConfigProposal {
-    const obj = createBaseUpdateInstantiateConfigProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.accessConfigUpdates)) object.accessConfigUpdates.map((e: any) => AccessConfigUpdate.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      accessConfigUpdates: Array.isArray(object?.accessConfigUpdates) ? object.accessConfigUpdates.map((e: any) => AccessConfigUpdate.fromJSON(e)) : []
+    };
   },
   toJSON(message: UpdateInstantiateConfigProposal): unknown {
     const obj: any = {};

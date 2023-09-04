@@ -55,10 +55,10 @@ export const BitArray = {
     return message;
   },
   fromJSON(object: any): BitArray {
-    const obj = createBaseBitArray();
-    if (isSet(object.bits)) obj.bits = Long.fromValue(object.bits);
-    if (Array.isArray(object?.elems)) object.elems.map((e: any) => Long.fromValue(e));
-    return obj;
+    return {
+      bits: isSet(object.bits) ? Long.fromValue(object.bits) : Long.ZERO,
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
+    };
   },
   toJSON(message: BitArray): unknown {
     const obj: any = {};
@@ -72,9 +72,7 @@ export const BitArray = {
   },
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    if (object.bits !== undefined && object.bits !== null) {
-      message.bits = Long.fromValue(object.bits);
-    }
+    message.bits = object.bits !== undefined && object.bits !== null ? Long.fromValue(object.bits) : Long.ZERO;
     message.elems = object.elems?.map(e => Long.fromValue(e)) || [];
     return message;
   },

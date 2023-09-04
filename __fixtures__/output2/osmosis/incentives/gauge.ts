@@ -131,16 +131,16 @@ export const Gauge = {
     return message;
   },
   fromJSON(object: any): Gauge {
-    const obj = createBaseGauge();
-    if (isSet(object.id)) obj.id = Long.fromValue(object.id);
-    if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
-    if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
-    if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = Long.fromValue(object.numEpochsPaidOver);
-    if (isSet(object.filledEpochs)) obj.filledEpochs = Long.fromValue(object.filledEpochs);
-    if (Array.isArray(object?.distributedCoins)) object.distributedCoins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
+      distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO,
+      filledEpochs: isSet(object.filledEpochs) ? Long.fromValue(object.filledEpochs) : Long.UZERO,
+      distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Gauge): unknown {
     const obj: any = {};
@@ -164,23 +164,13 @@ export const Gauge = {
   },
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = Long.fromValue(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.isPerpetual = object.isPerpetual ?? false;
-    if (object.distributeTo !== undefined && object.distributeTo !== null) {
-      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
-    }
+    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : QueryCondition.fromPartial({});
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    if (object.startTime !== undefined && object.startTime !== null) {
-      message.startTime = Timestamp.fromPartial(object.startTime);
-    }
-    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
-      message.numEpochsPaidOver = Long.fromValue(object.numEpochsPaidOver);
-    }
-    if (object.filledEpochs !== undefined && object.filledEpochs !== null) {
-      message.filledEpochs = Long.fromValue(object.filledEpochs);
-    }
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO;
+    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? Long.fromValue(object.filledEpochs) : Long.UZERO;
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -215,9 +205,9 @@ export const LockableDurationsInfo = {
     return message;
   },
   fromJSON(object: any): LockableDurationsInfo {
-    const obj = createBaseLockableDurationsInfo();
-    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
+    return {
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
+    };
   },
   toJSON(message: LockableDurationsInfo): unknown {
     const obj: any = {};

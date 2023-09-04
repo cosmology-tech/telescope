@@ -65,12 +65,12 @@ export const Equivocation = {
     return message;
   },
   fromJSON(object: any): Equivocation {
-    const obj = createBaseEquivocation();
-    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
-    if (isSet(object.time)) obj.time = fromJsonTimestamp(object.time);
-    if (isSet(object.power)) obj.power = Long.fromValue(object.power);
-    if (isSet(object.consensusAddress)) obj.consensusAddress = String(object.consensusAddress);
-    return obj;
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
+      consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
+    };
   },
   toJSON(message: Equivocation): unknown {
     const obj: any = {};
@@ -82,15 +82,9 @@ export const Equivocation = {
   },
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Long.fromValue(object.height);
-    }
-    if (object.time !== undefined && object.time !== null) {
-      message.time = Timestamp.fromPartial(object.time);
-    }
-    if (object.power !== undefined && object.power !== null) {
-      message.power = Long.fromValue(object.power);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : Timestamp.fromPartial({});
+    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     message.consensusAddress = object.consensusAddress ?? "";
     return message;
   }

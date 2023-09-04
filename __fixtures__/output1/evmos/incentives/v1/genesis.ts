@@ -79,11 +79,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.incentives)) object.incentives.map((e: any) => Incentive.fromJSON(e));
-    if (Array.isArray(object?.gasMeters)) object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromJSON(e)) : [],
+      gasMeters: Array.isArray(object?.gasMeters) ? object.gasMeters.map((e: any) => GasMeter.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -102,9 +102,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     return message;
@@ -183,12 +181,12 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enableIncentives)) obj.enableIncentives = Boolean(object.enableIncentives);
-    if (isSet(object.allocationLimit)) obj.allocationLimit = String(object.allocationLimit);
-    if (isSet(object.incentivesEpochIdentifier)) obj.incentivesEpochIdentifier = String(object.incentivesEpochIdentifier);
-    if (isSet(object.rewardScaler)) obj.rewardScaler = String(object.rewardScaler);
-    return obj;
+    return {
+      enableIncentives: isSet(object.enableIncentives) ? Boolean(object.enableIncentives) : false,
+      allocationLimit: isSet(object.allocationLimit) ? String(object.allocationLimit) : "",
+      incentivesEpochIdentifier: isSet(object.incentivesEpochIdentifier) ? String(object.incentivesEpochIdentifier) : "",
+      rewardScaler: isSet(object.rewardScaler) ? String(object.rewardScaler) : ""
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

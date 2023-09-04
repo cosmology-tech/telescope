@@ -159,9 +159,9 @@ export const QueryAccountsRequest = {
     return message;
   },
   fromJSON(object: any): QueryAccountsRequest {
-    const obj = createBaseQueryAccountsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAccountsRequest): unknown {
     const obj: any = {};
@@ -170,9 +170,7 @@ export const QueryAccountsRequest = {
   },
   fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
@@ -260,10 +258,10 @@ export const QueryAccountsResponse = {
     return message;
   },
   fromJSON(object: any): QueryAccountsResponse {
-    const obj = createBaseQueryAccountsResponse();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Any.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAccountsResponse): unknown {
     const obj: any = {};
@@ -278,9 +276,7 @@ export const QueryAccountsResponse = {
   fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
@@ -374,9 +370,9 @@ export const QueryAccountRequest = {
     return message;
   },
   fromJSON(object: any): QueryAccountRequest {
-    const obj = createBaseQueryAccountRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryAccountRequest): unknown {
     const obj: any = {};
@@ -458,8 +454,7 @@ export const QueryModuleAccountsRequest = {
     return message;
   },
   fromJSON(_: any): QueryModuleAccountsRequest {
-    const obj = createBaseQueryModuleAccountsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryModuleAccountsRequest): unknown {
     const obj: any = {};
@@ -539,9 +534,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -550,9 +545,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -633,9 +626,9 @@ export const QueryAccountResponse = {
     return message;
   },
   fromJSON(object: any): QueryAccountResponse {
-    const obj = createBaseQueryAccountResponse();
-    if (isSet(object.account)) obj.account = Any.fromJSON(object.account);
-    return obj;
+    return {
+      account: isSet(object.account) ? Any.fromJSON(object.account) : undefined
+    };
   },
   toJSON(message: QueryAccountResponse): unknown {
     const obj: any = {};
@@ -644,9 +637,7 @@ export const QueryAccountResponse = {
   },
   fromPartial(object: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
     const message = createBaseQueryAccountResponse();
-    if (object.account !== undefined && object.account !== null) {
-      message.account = Any.fromPartial(object.account);
-    }
+    message.account = object.account !== undefined && object.account !== null ? Any.fromPartial(object.account) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAccountResponseSDKType): QueryAccountResponse {
@@ -719,8 +710,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -800,9 +790,9 @@ export const QueryModuleAccountsResponse = {
     return message;
   },
   fromJSON(object: any): QueryModuleAccountsResponse {
-    const obj = createBaseQueryModuleAccountsResponse();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryModuleAccountsResponse): unknown {
     const obj: any = {};
@@ -896,8 +886,7 @@ export const Bech32PrefixRequest = {
     return message;
   },
   fromJSON(_: any): Bech32PrefixRequest {
-    const obj = createBaseBech32PrefixRequest();
-    return obj;
+    return {};
   },
   toJSON(_: Bech32PrefixRequest): unknown {
     const obj: any = {};
@@ -977,9 +966,9 @@ export const Bech32PrefixResponse = {
     return message;
   },
   fromJSON(object: any): Bech32PrefixResponse {
-    const obj = createBaseBech32PrefixResponse();
-    if (isSet(object.bech32Prefix)) obj.bech32Prefix = String(object.bech32Prefix);
-    return obj;
+    return {
+      bech32Prefix: isSet(object.bech32Prefix) ? String(object.bech32Prefix) : ""
+    };
   },
   toJSON(message: Bech32PrefixResponse): unknown {
     const obj: any = {};
@@ -1069,9 +1058,9 @@ export const AddressBytesToStringRequest = {
     return message;
   },
   fromJSON(object: any): AddressBytesToStringRequest {
-    const obj = createBaseAddressBytesToStringRequest();
-    if (isSet(object.addressBytes)) obj.addressBytes = bytesFromBase64(object.addressBytes);
-    return obj;
+    return {
+      addressBytes: isSet(object.addressBytes) ? bytesFromBase64(object.addressBytes) : new Uint8Array()
+    };
   },
   toJSON(message: AddressBytesToStringRequest): unknown {
     const obj: any = {};
@@ -1161,9 +1150,9 @@ export const AddressBytesToStringResponse = {
     return message;
   },
   fromJSON(object: any): AddressBytesToStringResponse {
-    const obj = createBaseAddressBytesToStringResponse();
-    if (isSet(object.addressString)) obj.addressString = String(object.addressString);
-    return obj;
+    return {
+      addressString: isSet(object.addressString) ? String(object.addressString) : ""
+    };
   },
   toJSON(message: AddressBytesToStringResponse): unknown {
     const obj: any = {};
@@ -1253,9 +1242,9 @@ export const AddressStringToBytesRequest = {
     return message;
   },
   fromJSON(object: any): AddressStringToBytesRequest {
-    const obj = createBaseAddressStringToBytesRequest();
-    if (isSet(object.addressString)) obj.addressString = String(object.addressString);
-    return obj;
+    return {
+      addressString: isSet(object.addressString) ? String(object.addressString) : ""
+    };
   },
   toJSON(message: AddressStringToBytesRequest): unknown {
     const obj: any = {};
@@ -1345,9 +1334,9 @@ export const AddressStringToBytesResponse = {
     return message;
   },
   fromJSON(object: any): AddressStringToBytesResponse {
-    const obj = createBaseAddressStringToBytesResponse();
-    if (isSet(object.addressBytes)) obj.addressBytes = bytesFromBase64(object.addressBytes);
-    return obj;
+    return {
+      addressBytes: isSet(object.addressBytes) ? bytesFromBase64(object.addressBytes) : new Uint8Array()
+    };
   },
   toJSON(message: AddressStringToBytesResponse): unknown {
     const obj: any = {};

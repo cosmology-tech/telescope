@@ -180,10 +180,10 @@ export const Duration = {
     return message;
   },
   fromJSON(object: any): Duration {
-    const obj = createBaseDuration();
-    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
-    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
-    return obj;
+    return {
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
@@ -193,9 +193,7 @@ export const Duration = {
   },
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = BigInt(object.seconds.toString());
-    }
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
     message.nanos = object.nanos ?? 0;
     return message;
   },

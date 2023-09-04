@@ -53,6 +53,7 @@ const options: TelescopeOptions = {
       fromSDKJSON: true,
       fromSDK: true
     },
+    strictNullCheckForPrototypeMethods: true,
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,

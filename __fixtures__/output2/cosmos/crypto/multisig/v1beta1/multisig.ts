@@ -51,9 +51,9 @@ export const MultiSignature = {
     return message;
   },
   fromJSON(object: any): MultiSignature {
-    const obj = createBaseMultiSignature();
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => bytesFromBase64(e));
-    return obj;
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
   toJSON(message: MultiSignature): unknown {
     const obj: any = {};
@@ -107,10 +107,10 @@ export const CompactBitArray = {
     return message;
   },
   fromJSON(object: any): CompactBitArray {
-    const obj = createBaseCompactBitArray();
-    if (isSet(object.extraBitsStored)) obj.extraBitsStored = Number(object.extraBitsStored);
-    if (isSet(object.elems)) obj.elems = bytesFromBase64(object.elems);
-    return obj;
+    return {
+      extraBitsStored: isSet(object.extraBitsStored) ? Number(object.extraBitsStored) : 0,
+      elems: isSet(object.elems) ? bytesFromBase64(object.elems) : new Uint8Array()
+    };
   },
   toJSON(message: CompactBitArray): unknown {
     const obj: any = {};

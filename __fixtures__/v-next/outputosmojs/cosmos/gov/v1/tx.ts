@@ -159,12 +159,12 @@ export const MsgSubmitProposal = {
     return message;
   },
   fromJSON(object: any): MsgSubmitProposal {
-    const obj = createBaseMsgSubmitProposal();
-    if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
-    if (Array.isArray(object?.initialDeposit)) object.initialDeposit.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.proposer)) obj.proposer = String(object.proposer);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
+    return {
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
+      initialDeposit: Array.isArray(object?.initialDeposit) ? object.initialDeposit.map((e: any) => Coin.fromJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   },
   toJSON(message: MsgSubmitProposal): unknown {
     const obj: any = {};
@@ -299,9 +299,9 @@ export const MsgSubmitProposalResponse = {
     return message;
   },
   fromJSON(object: any): MsgSubmitProposalResponse {
-    const obj = createBaseMsgSubmitProposalResponse();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
@@ -310,9 +310,7 @@ export const MsgSubmitProposalResponse = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
@@ -400,10 +398,10 @@ export const MsgExecLegacyContent = {
     return message;
   },
   fromJSON(object: any): MsgExecLegacyContent {
-    const obj = createBaseMsgExecLegacyContent();
-    if (isSet(object.content)) obj.content = Any.fromJSON(object.content);
-    if (isSet(object.authority)) obj.authority = String(object.authority);
-    return obj;
+    return {
+      content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
+      authority: isSet(object.authority) ? String(object.authority) : ""
+    };
   },
   toJSON(message: MsgExecLegacyContent): unknown {
     const obj: any = {};
@@ -413,9 +411,7 @@ export const MsgExecLegacyContent = {
   },
   fromPartial(object: DeepPartial<MsgExecLegacyContent>): MsgExecLegacyContent {
     const message = createBaseMsgExecLegacyContent();
-    if (object.content !== undefined && object.content !== null) {
-      message.content = Any.fromPartial(object.content);
-    }
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
     message.authority = object.authority ?? "";
     return message;
   },
@@ -494,8 +490,7 @@ export const MsgExecLegacyContentResponse = {
     return message;
   },
   fromJSON(_: any): MsgExecLegacyContentResponse {
-    const obj = createBaseMsgExecLegacyContentResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgExecLegacyContentResponse): unknown {
     const obj: any = {};
@@ -596,12 +591,12 @@ export const MsgVote = {
     return message;
   },
   fromJSON(object: any): MsgVote {
-    const obj = createBaseMsgVote();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   },
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
@@ -613,9 +608,7 @@ export const MsgVote = {
   },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -706,8 +699,7 @@ export const MsgVoteResponse = {
     return message;
   },
   fromJSON(_: any): MsgVoteResponse {
-    const obj = createBaseMsgVoteResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgVoteResponse): unknown {
     const obj: any = {};
@@ -808,12 +800,12 @@ export const MsgVoteWeighted = {
     return message;
   },
   fromJSON(object: any): MsgVoteWeighted {
-    const obj = createBaseMsgVoteWeighted();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   },
   toJSON(message: MsgVoteWeighted): unknown {
     const obj: any = {};
@@ -829,9 +821,7 @@ export const MsgVoteWeighted = {
   },
   fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
     const message = createBaseMsgVoteWeighted();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.voter = object.voter ?? "";
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
@@ -930,8 +920,7 @@ export const MsgVoteWeightedResponse = {
     return message;
   },
   fromJSON(_: any): MsgVoteWeightedResponse {
-    const obj = createBaseMsgVoteWeightedResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgVoteWeightedResponse): unknown {
     const obj: any = {};
@@ -1025,11 +1014,11 @@ export const MsgDeposit = {
     return message;
   },
   fromJSON(object: any): MsgDeposit {
-    const obj = createBaseMsgDeposit();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
@@ -1044,9 +1033,7 @@ export const MsgDeposit = {
   },
   fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
     const message = createBaseMsgDeposit();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -1139,8 +1126,7 @@ export const MsgDepositResponse = {
     return message;
   },
   fromJSON(_: any): MsgDepositResponse {
-    const obj = createBaseMsgDepositResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgDepositResponse): unknown {
     const obj: any = {};

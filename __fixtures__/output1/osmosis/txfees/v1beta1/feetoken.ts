@@ -58,10 +58,10 @@ export const FeeToken = {
     return message;
   },
   fromJSON(object: any): FeeToken {
-    const obj = createBaseFeeToken();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.poolID)) obj.poolID = Long.fromValue(object.poolID);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+    };
   },
   toJSON(message: FeeToken): unknown {
     const obj: any = {};
@@ -72,9 +72,7 @@ export const FeeToken = {
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    if (object.poolID !== undefined && object.poolID !== null) {
-      message.poolID = Long.fromValue(object.poolID);
-    }
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
   },
   fromSDK(object: FeeTokenSDKType): FeeToken {

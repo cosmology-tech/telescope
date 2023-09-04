@@ -125,13 +125,13 @@ export const IncentiveRecord = {
     return message;
   },
   fromJSON(object: any): IncentiveRecord {
-    const obj = createBaseIncentiveRecord();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.incentiveDenom)) obj.incentiveDenom = String(object.incentiveDenom);
-    if (isSet(object.incentiveCreatorAddr)) obj.incentiveCreatorAddr = String(object.incentiveCreatorAddr);
-    if (isSet(object.incentiveRecordBody)) obj.incentiveRecordBody = IncentiveRecordBody.fromJSON(object.incentiveRecordBody);
-    if (isSet(object.minUptime)) obj.minUptime = Duration.fromJSON(object.minUptime);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      incentiveDenom: isSet(object.incentiveDenom) ? String(object.incentiveDenom) : "",
+      incentiveCreatorAddr: isSet(object.incentiveCreatorAddr) ? String(object.incentiveCreatorAddr) : "",
+      incentiveRecordBody: isSet(object.incentiveRecordBody) ? IncentiveRecordBody.fromJSON(object.incentiveRecordBody) : undefined,
+      minUptime: isSet(object.minUptime) ? Duration.fromJSON(object.minUptime) : undefined
+    };
   },
   toJSON(message: IncentiveRecord): unknown {
     const obj: any = {};
@@ -144,17 +144,11 @@ export const IncentiveRecord = {
   },
   fromPartial(object: DeepPartial<IncentiveRecord>): IncentiveRecord {
     const message = createBaseIncentiveRecord();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.incentiveDenom = object.incentiveDenom ?? "";
     message.incentiveCreatorAddr = object.incentiveCreatorAddr ?? "";
-    if (object.incentiveRecordBody !== undefined && object.incentiveRecordBody !== null) {
-      message.incentiveRecordBody = IncentiveRecordBody.fromPartial(object.incentiveRecordBody);
-    }
-    if (object.minUptime !== undefined && object.minUptime !== null) {
-      message.minUptime = Duration.fromPartial(object.minUptime);
-    }
+    message.incentiveRecordBody = object.incentiveRecordBody !== undefined && object.incentiveRecordBody !== null ? IncentiveRecordBody.fromPartial(object.incentiveRecordBody) : IncentiveRecordBody.fromPartial({});
+    message.minUptime = object.minUptime !== undefined && object.minUptime !== null ? Duration.fromPartial(object.minUptime) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: IncentiveRecordSDKType): IncentiveRecord {
@@ -269,11 +263,11 @@ export const IncentiveRecordBody = {
     return message;
   },
   fromJSON(object: any): IncentiveRecordBody {
-    const obj = createBaseIncentiveRecordBody();
-    if (isSet(object.remainingAmount)) obj.remainingAmount = String(object.remainingAmount);
-    if (isSet(object.emissionRate)) obj.emissionRate = String(object.emissionRate);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    return obj;
+    return {
+      remainingAmount: isSet(object.remainingAmount) ? String(object.remainingAmount) : "",
+      emissionRate: isSet(object.emissionRate) ? String(object.emissionRate) : "",
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined
+    };
   },
   toJSON(message: IncentiveRecordBody): unknown {
     const obj: any = {};

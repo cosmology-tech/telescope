@@ -49,10 +49,10 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     return message;
   },
   fromJSON(object: any): Grant {
-    const obj = createBaseGrant();
-    if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
-    if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
-    return obj;
+    return {
+      authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
+    };
   },
   toJSON(message: Grant): unknown {
     const obj: any = {};
@@ -62,9 +62,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   },
   fromPartial(object: Partial<Grant>): Grant {
     const message = createBaseGrant();
-    if (object.authorization !== undefined && object.authorization !== null) {
-      message.authorization = Any.fromPartial(object.authorization);
-    }
+    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
     message.expiration = object.expiration ?? undefined;
     return message;
   },
@@ -213,10 +211,10 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     return message;
   },
   fromJSON(object: any): Grant {
-    const obj = createBaseGrant();
-    if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
-    if (isSet(object.expiration)) obj.expiration = fromJsonTimestamp(object.expiration);
-    return obj;
+    return {
+      authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+    };
   },
   toJSON(message: Grant): unknown {
     const obj: any = {};
@@ -226,12 +224,8 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
   },
   fromPartial(object: Partial<Grant>): Grant {
     const message = createBaseGrant();
-    if (object.authorization !== undefined && object.authorization !== null) {
-      message.authorization = Any.fromPartial(object.authorization);
-    }
-    if (object.expiration !== undefined && object.expiration !== null) {
-      message.expiration = Timestamp.fromPartial(object.expiration);
-    }
+    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
+    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : Timestamp.fromPartial({});
     return message;
   },
   fromSDK(object: GrantSDKType): Grant {

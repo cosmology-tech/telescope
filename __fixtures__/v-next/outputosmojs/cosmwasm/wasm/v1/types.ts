@@ -257,9 +257,9 @@ export const AccessTypeParam = {
     return message;
   },
   fromJSON(object: any): AccessTypeParam {
-    const obj = createBaseAccessTypeParam();
-    if (isSet(object.value)) obj.value = accessTypeFromJSON(object.value);
-    return obj;
+    return {
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
+    };
   },
   toJSON(message: AccessTypeParam): unknown {
     const obj: any = {};
@@ -356,10 +356,10 @@ export const AccessConfig = {
     return message;
   },
   fromJSON(object: any): AccessConfig {
-    const obj = createBaseAccessConfig();
-    if (isSet(object.permission)) obj.permission = accessTypeFromJSON(object.permission);
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: AccessConfig): unknown {
     const obj: any = {};
@@ -470,11 +470,11 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.codeUploadAccess)) obj.codeUploadAccess = AccessConfig.fromJSON(object.codeUploadAccess);
-    if (isSet(object.instantiateDefaultPermission)) obj.instantiateDefaultPermission = accessTypeFromJSON(object.instantiateDefaultPermission);
-    if (isSet(object.maxWasmCodeSize)) obj.maxWasmCodeSize = BigInt(object.maxWasmCodeSize.toString());
-    return obj;
+    return {
+      codeUploadAccess: isSet(object.codeUploadAccess) ? AccessConfig.fromJSON(object.codeUploadAccess) : undefined,
+      instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : -1,
+      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -485,13 +485,9 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    if (object.codeUploadAccess !== undefined && object.codeUploadAccess !== null) {
-      message.codeUploadAccess = AccessConfig.fromPartial(object.codeUploadAccess);
-    }
+    message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : AccessConfig.fromPartial({});
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
-    if (object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null) {
-      message.maxWasmCodeSize = BigInt(object.maxWasmCodeSize.toString());
-    }
+    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -596,11 +592,11 @@ export const CodeInfo = {
     return message;
   },
   fromJSON(object: any): CodeInfo {
-    const obj = createBaseCodeInfo();
-    if (isSet(object.codeHash)) obj.codeHash = bytesFromBase64(object.codeHash);
-    if (isSet(object.creator)) obj.creator = String(object.creator);
-    if (isSet(object.instantiateConfig)) obj.instantiateConfig = AccessConfig.fromJSON(object.instantiateConfig);
-    return obj;
+    return {
+      codeHash: isSet(object.codeHash) ? bytesFromBase64(object.codeHash) : new Uint8Array(),
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      instantiateConfig: isSet(object.instantiateConfig) ? AccessConfig.fromJSON(object.instantiateConfig) : undefined
+    };
   },
   toJSON(message: CodeInfo): unknown {
     const obj: any = {};
@@ -613,9 +609,7 @@ export const CodeInfo = {
     const message = createBaseCodeInfo();
     message.codeHash = object.codeHash ?? new Uint8Array();
     message.creator = object.creator ?? "";
-    if (object.instantiateConfig !== undefined && object.instantiateConfig !== null) {
-      message.instantiateConfig = AccessConfig.fromPartial(object.instantiateConfig);
-    }
+    message.instantiateConfig = object.instantiateConfig !== undefined && object.instantiateConfig !== null ? AccessConfig.fromPartial(object.instantiateConfig) : AccessConfig.fromPartial({});
     return message;
   },
   fromSDK(object: CodeInfoSDKType): CodeInfo {
@@ -748,15 +742,15 @@ export const ContractInfo = {
     return message;
   },
   fromJSON(object: any): ContractInfo {
-    const obj = createBaseContractInfo();
-    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
-    if (isSet(object.creator)) obj.creator = String(object.creator);
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.label)) obj.label = String(object.label);
-    if (isSet(object.created)) obj.created = AbsoluteTxPosition.fromJSON(object.created);
-    if (isSet(object.ibcPortId)) obj.ibcPortId = String(object.ibcPortId);
-    if (isSet(object.extension)) obj.extension = Any.fromJSON(object.extension);
-    return obj;
+    return {
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      label: isSet(object.label) ? String(object.label) : "",
+      created: isSet(object.created) ? AbsoluteTxPosition.fromJSON(object.created) : undefined,
+      ibcPortId: isSet(object.ibcPortId) ? String(object.ibcPortId) : "",
+      extension: isSet(object.extension) ? Any.fromJSON(object.extension) : undefined
+    };
   },
   toJSON(message: ContractInfo): unknown {
     const obj: any = {};
@@ -771,19 +765,13 @@ export const ContractInfo = {
   },
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
-    if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = BigInt(object.codeId.toString());
-    }
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
-    if (object.created !== undefined && object.created !== null) {
-      message.created = AbsoluteTxPosition.fromPartial(object.created);
-    }
+    message.created = object.created !== undefined && object.created !== null ? AbsoluteTxPosition.fromPartial(object.created) : AbsoluteTxPosition.fromPartial({});
     message.ibcPortId = object.ibcPortId ?? "";
-    if (object.extension !== undefined && object.extension !== null) {
-      message.extension = Any.fromPartial(object.extension);
-    }
+    message.extension = object.extension !== undefined && object.extension !== null ? Any.fromPartial(object.extension) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: ContractInfoSDKType): ContractInfo {
@@ -915,12 +903,12 @@ export const ContractCodeHistoryEntry = {
     return message;
   },
   fromJSON(object: any): ContractCodeHistoryEntry {
-    const obj = createBaseContractCodeHistoryEntry();
-    if (isSet(object.operation)) obj.operation = contractCodeHistoryOperationTypeFromJSON(object.operation);
-    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
-    if (isSet(object.updated)) obj.updated = AbsoluteTxPosition.fromJSON(object.updated);
-    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    return obj;
+    return {
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
+      updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   },
   toJSON(message: ContractCodeHistoryEntry): unknown {
     const obj: any = {};
@@ -933,12 +921,8 @@ export const ContractCodeHistoryEntry = {
   fromPartial(object: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
-    if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = BigInt(object.codeId.toString());
-    }
-    if (object.updated !== undefined && object.updated !== null) {
-      message.updated = AbsoluteTxPosition.fromPartial(object.updated);
-    }
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : AbsoluteTxPosition.fromPartial({});
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },
@@ -1042,10 +1026,10 @@ export const AbsoluteTxPosition = {
     return message;
   },
   fromJSON(object: any): AbsoluteTxPosition {
-    const obj = createBaseAbsoluteTxPosition();
-    if (isSet(object.blockHeight)) obj.blockHeight = BigInt(object.blockHeight.toString());
-    if (isSet(object.txIndex)) obj.txIndex = BigInt(object.txIndex.toString());
-    return obj;
+    return {
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt(0),
+      txIndex: isSet(object.txIndex) ? BigInt(object.txIndex.toString()) : BigInt(0)
+    };
   },
   toJSON(message: AbsoluteTxPosition): unknown {
     const obj: any = {};
@@ -1055,12 +1039,8 @@ export const AbsoluteTxPosition = {
   },
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
-    if (object.blockHeight !== undefined && object.blockHeight !== null) {
-      message.blockHeight = BigInt(object.blockHeight.toString());
-    }
-    if (object.txIndex !== undefined && object.txIndex !== null) {
-      message.txIndex = BigInt(object.txIndex.toString());
-    }
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
+    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? BigInt(object.txIndex.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {
@@ -1153,10 +1133,10 @@ export const Model = {
     return message;
   },
   fromJSON(object: any): Model {
-    const obj = createBaseModel();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
   toJSON(message: Model): unknown {
     const obj: any = {};

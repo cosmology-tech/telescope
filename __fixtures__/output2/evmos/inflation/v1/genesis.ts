@@ -86,13 +86,13 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (isSet(object.period)) obj.period = Long.fromValue(object.period);
-    if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
-    if (isSet(object.epochsPerPeriod)) obj.epochsPerPeriod = Long.fromValue(object.epochsPerPeriod);
-    if (isSet(object.skippedEpochs)) obj.skippedEpochs = Long.fromValue(object.skippedEpochs);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
+      epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
+      epochsPerPeriod: isSet(object.epochsPerPeriod) ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO,
+      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromValue(object.skippedEpochs) : Long.UZERO
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -105,19 +105,11 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    if (object.period !== undefined && object.period !== null) {
-      message.period = Long.fromValue(object.period);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
+    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     message.epochIdentifier = object.epochIdentifier ?? "";
-    if (object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null) {
-      message.epochsPerPeriod = Long.fromValue(object.epochsPerPeriod);
-    }
-    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
-      message.skippedEpochs = Long.fromValue(object.skippedEpochs);
-    }
+    message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO;
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
   }
 };
@@ -172,12 +164,12 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
-    if (isSet(object.exponentialCalculation)) obj.exponentialCalculation = ExponentialCalculation.fromJSON(object.exponentialCalculation);
-    if (isSet(object.inflationDistribution)) obj.inflationDistribution = InflationDistribution.fromJSON(object.inflationDistribution);
-    if (isSet(object.enableInflation)) obj.enableInflation = Boolean(object.enableInflation);
-    return obj;
+    return {
+      mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
+      exponentialCalculation: isSet(object.exponentialCalculation) ? ExponentialCalculation.fromJSON(object.exponentialCalculation) : undefined,
+      inflationDistribution: isSet(object.inflationDistribution) ? InflationDistribution.fromJSON(object.inflationDistribution) : undefined,
+      enableInflation: isSet(object.enableInflation) ? Boolean(object.enableInflation) : false
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -190,12 +182,8 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";
-    if (object.exponentialCalculation !== undefined && object.exponentialCalculation !== null) {
-      message.exponentialCalculation = ExponentialCalculation.fromPartial(object.exponentialCalculation);
-    }
-    if (object.inflationDistribution !== undefined && object.inflationDistribution !== null) {
-      message.inflationDistribution = InflationDistribution.fromPartial(object.inflationDistribution);
-    }
+    message.exponentialCalculation = object.exponentialCalculation !== undefined && object.exponentialCalculation !== null ? ExponentialCalculation.fromPartial(object.exponentialCalculation) : ExponentialCalculation.fromPartial({});
+    message.inflationDistribution = object.inflationDistribution !== undefined && object.inflationDistribution !== null ? InflationDistribution.fromPartial(object.inflationDistribution) : InflationDistribution.fromPartial({});
     message.enableInflation = object.enableInflation ?? false;
     return message;
   }

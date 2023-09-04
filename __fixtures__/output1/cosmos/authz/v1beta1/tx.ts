@@ -122,11 +122,11 @@ export const MsgGrant = {
     return message;
   },
   fromJSON(object: any): MsgGrant {
-    const obj = createBaseMsgGrant();
-    if (isSet(object.granter)) obj.granter = String(object.granter);
-    if (isSet(object.grantee)) obj.grantee = String(object.grantee);
-    if (isSet(object.grant)) obj.grant = Grant.fromJSON(object.grant);
-    return obj;
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grant: isSet(object.grant) ? Grant.fromJSON(object.grant) : undefined
+    };
   },
   toJSON(message: MsgGrant): unknown {
     const obj: any = {};
@@ -139,9 +139,7 @@ export const MsgGrant = {
     const message = createBaseMsgGrant();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    if (object.grant !== undefined && object.grant !== null) {
-      message.grant = Grant.fromPartial(object.grant);
-    }
+    message.grant = object.grant !== undefined && object.grant !== null ? Grant.fromPartial(object.grant) : Grant.fromPartial({});
     return message;
   },
   fromSDK(object: MsgGrantSDKType): MsgGrant {
@@ -189,9 +187,9 @@ export const MsgExecResponse = {
     return message;
   },
   fromJSON(object: any): MsgExecResponse {
-    const obj = createBaseMsgExecResponse();
-    if (Array.isArray(object?.results)) object.results.map((e: any) => bytesFromBase64(e));
-    return obj;
+    return {
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
   toJSON(message: MsgExecResponse): unknown {
     const obj: any = {};
@@ -259,10 +257,10 @@ export const MsgExec = {
     return message;
   },
   fromJSON(object: any): MsgExec {
-    const obj = createBaseMsgExec();
-    if (isSet(object.grantee)) obj.grantee = String(object.grantee);
-    if (Array.isArray(object?.msgs)) object.msgs.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgExec): unknown {
     const obj: any = {};
@@ -319,8 +317,7 @@ export const MsgGrantResponse = {
     return message;
   },
   fromJSON(_: any): MsgGrantResponse {
-    const obj = createBaseMsgGrantResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgGrantResponse): unknown {
     const obj: any = {};
@@ -382,11 +379,11 @@ export const MsgRevoke = {
     return message;
   },
   fromJSON(object: any): MsgRevoke {
-    const obj = createBaseMsgRevoke();
-    if (isSet(object.granter)) obj.granter = String(object.granter);
-    if (isSet(object.grantee)) obj.grantee = String(object.grantee);
-    if (isSet(object.msgTypeUrl)) obj.msgTypeUrl = String(object.msgTypeUrl);
-    return obj;
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : ""
+    };
   },
   toJSON(message: MsgRevoke): unknown {
     const obj: any = {};
@@ -439,8 +436,7 @@ export const MsgRevokeResponse = {
     return message;
   },
   fromJSON(_: any): MsgRevokeResponse {
-    const obj = createBaseMsgRevokeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgRevokeResponse): unknown {
     const obj: any = {};

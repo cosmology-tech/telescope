@@ -68,11 +68,11 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.inflationDecayFactor)) obj.inflationDecayFactor = String(object.inflationDecayFactor);
-    if (isSet(object.initialInflation)) obj.initialInflation = String(object.initialInflation);
-    if (isSet(object.variance)) obj.variance = String(object.variance);
-    return obj;
+    return {
+      inflationDecayFactor: isSet(object.inflationDecayFactor) ? String(object.inflationDecayFactor) : "",
+      initialInflation: isSet(object.initialInflation) ? String(object.initialInflation) : "",
+      variance: isSet(object.variance) ? String(object.variance) : ""
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

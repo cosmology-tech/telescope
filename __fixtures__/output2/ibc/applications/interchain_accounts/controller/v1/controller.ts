@@ -41,9 +41,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.controllerEnabled)) obj.controllerEnabled = Boolean(object.controllerEnabled);
-    return obj;
+    return {
+      controllerEnabled: isSet(object.controllerEnabled) ? Boolean(object.controllerEnabled) : false
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

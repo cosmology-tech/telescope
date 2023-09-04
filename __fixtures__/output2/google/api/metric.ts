@@ -443,19 +443,19 @@ export const MetricDescriptor = {
     return message;
   },
   fromJSON(object: any): MetricDescriptor {
-    const obj = createBaseMetricDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.labels)) object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
-    if (isSet(object.metricKind)) obj.metricKind = metricDescriptor_MetricKindFromJSON(object.metricKind);
-    if (isSet(object.valueType)) obj.valueType = metricDescriptor_ValueTypeFromJSON(object.valueType);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.metadata)) obj.metadata = MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata);
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (Array.isArray(object?.monitoredResourceTypes)) object.monitoredResourceTypes.map((e: any) => String(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
+      metricKind: isSet(object.metricKind) ? metricDescriptor_MetricKindFromJSON(object.metricKind) : -1,
+      valueType: isSet(object.valueType) ? metricDescriptor_ValueTypeFromJSON(object.valueType) : -1,
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      displayName: isSet(object.displayName) ? String(object.displayName) : "",
+      metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata) : undefined,
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
+      monitoredResourceTypes: Array.isArray(object?.monitoredResourceTypes) ? object.monitoredResourceTypes.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: MetricDescriptor): unknown {
     const obj: any = {};
@@ -490,9 +490,7 @@ export const MetricDescriptor = {
     message.unit = object.unit ?? "";
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata) : MetricDescriptor_MetricDescriptorMetadata.fromPartial({});
     message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
@@ -542,11 +540,11 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     return message;
   },
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
-    const obj = createBaseMetricDescriptor_MetricDescriptorMetadata();
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (isSet(object.samplePeriod)) obj.samplePeriod = Duration.fromJSON(object.samplePeriod);
-    if (isSet(object.ingestDelay)) obj.ingestDelay = Duration.fromJSON(object.ingestDelay);
-    return obj;
+    return {
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
+      samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
+      ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
+    };
   },
   toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown {
     const obj: any = {};
@@ -558,12 +556,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
-    if (object.samplePeriod !== undefined && object.samplePeriod !== null) {
-      message.samplePeriod = Duration.fromPartial(object.samplePeriod);
-    }
-    if (object.ingestDelay !== undefined && object.ingestDelay !== null) {
-      message.ingestDelay = Duration.fromPartial(object.ingestDelay);
-    }
+    message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : Duration.fromPartial({});
+    message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : Duration.fromPartial({});
     return message;
   }
 };
@@ -604,10 +598,10 @@ export const Metric_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): Metric_LabelsEntry {
-    const obj = createBaseMetric_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: Metric_LabelsEntry): unknown {
     const obj: any = {};
@@ -665,15 +659,15 @@ export const Metric = {
     return message;
   },
   fromJSON(object: any): Metric {
-    const obj = createBaseMetric();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: Metric): unknown {
     const obj: any = {};

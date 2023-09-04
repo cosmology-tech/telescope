@@ -44,9 +44,9 @@ export const SourceContext = {
     return message;
   },
   fromJSON(object: any): SourceContext {
-    const obj = createBaseSourceContext();
-    if (isSet(object.fileName)) obj.fileName = String(object.fileName);
-    return obj;
+    return {
+      fileName: isSet(object.fileName) ? String(object.fileName) : ""
+    };
   },
   toJSON(message: SourceContext): unknown {
     const obj: any = {};

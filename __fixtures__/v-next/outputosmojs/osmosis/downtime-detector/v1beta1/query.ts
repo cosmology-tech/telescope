@@ -63,10 +63,10 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
     return message;
   },
   fromJSON(object: any): RecoveredSinceDowntimeOfLengthRequest {
-    const obj = createBaseRecoveredSinceDowntimeOfLengthRequest();
-    if (isSet(object.downtime)) obj.downtime = downtimeFromJSON(object.downtime);
-    if (isSet(object.recovery)) obj.recovery = Duration.fromJSON(object.recovery);
-    return obj;
+    return {
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
+      recovery: isSet(object.recovery) ? Duration.fromJSON(object.recovery) : undefined
+    };
   },
   toJSON(message: RecoveredSinceDowntimeOfLengthRequest): unknown {
     const obj: any = {};
@@ -77,9 +77,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   fromPartial(object: DeepPartial<RecoveredSinceDowntimeOfLengthRequest>): RecoveredSinceDowntimeOfLengthRequest {
     const message = createBaseRecoveredSinceDowntimeOfLengthRequest();
     message.downtime = object.downtime ?? 0;
-    if (object.recovery !== undefined && object.recovery !== null) {
-      message.recovery = Duration.fromPartial(object.recovery);
-    }
+    message.recovery = object.recovery !== undefined && object.recovery !== null ? Duration.fromPartial(object.recovery) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: RecoveredSinceDowntimeOfLengthRequestSDKType): RecoveredSinceDowntimeOfLengthRequest {
@@ -165,9 +163,9 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
     return message;
   },
   fromJSON(object: any): RecoveredSinceDowntimeOfLengthResponse {
-    const obj = createBaseRecoveredSinceDowntimeOfLengthResponse();
-    if (isSet(object.succesfullyRecovered)) obj.succesfullyRecovered = Boolean(object.succesfullyRecovered);
-    return obj;
+    return {
+      succesfullyRecovered: isSet(object.succesfullyRecovered) ? Boolean(object.succesfullyRecovered) : false
+    };
   },
   toJSON(message: RecoveredSinceDowntimeOfLengthResponse): unknown {
     const obj: any = {};

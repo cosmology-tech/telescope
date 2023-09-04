@@ -74,10 +74,10 @@ export const App = {
     return message;
   },
   fromJSON(object: any): App {
-    const obj = createBaseApp();
-    if (isSet(object.protocol)) obj.protocol = Long.fromValue(object.protocol);
-    if (isSet(object.software)) obj.software = String(object.software);
-    return obj;
+    return {
+      protocol: isSet(object.protocol) ? Long.fromValue(object.protocol) : Long.UZERO,
+      software: isSet(object.software) ? String(object.software) : ""
+    };
   },
   toJSON(message: App): unknown {
     const obj: any = {};
@@ -87,9 +87,7 @@ export const App = {
   },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    if (object.protocol !== undefined && object.protocol !== null) {
-      message.protocol = Long.fromValue(object.protocol);
-    }
+    message.protocol = object.protocol !== undefined && object.protocol !== null ? Long.fromValue(object.protocol) : Long.UZERO;
     message.software = object.software ?? "";
     return message;
   },
@@ -143,10 +141,10 @@ export const Consensus = {
     return message;
   },
   fromJSON(object: any): Consensus {
-    const obj = createBaseConsensus();
-    if (isSet(object.block)) obj.block = Long.fromValue(object.block);
-    if (isSet(object.app)) obj.app = Long.fromValue(object.app);
-    return obj;
+    return {
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
+    };
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};
@@ -156,12 +154,8 @@ export const Consensus = {
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    if (object.block !== undefined && object.block !== null) {
-      message.block = Long.fromValue(object.block);
-    }
-    if (object.app !== undefined && object.app !== null) {
-      message.app = Long.fromValue(object.app);
-    }
+    message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
+    message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
   },
   fromSDK(object: ConsensusSDKType): Consensus {

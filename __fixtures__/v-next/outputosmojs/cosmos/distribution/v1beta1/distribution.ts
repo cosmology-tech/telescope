@@ -273,12 +273,12 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.communityTax)) obj.communityTax = String(object.communityTax);
-    if (isSet(object.baseProposerReward)) obj.baseProposerReward = String(object.baseProposerReward);
-    if (isSet(object.bonusProposerReward)) obj.bonusProposerReward = String(object.bonusProposerReward);
-    if (isSet(object.withdrawAddrEnabled)) obj.withdrawAddrEnabled = Boolean(object.withdrawAddrEnabled);
-    return obj;
+    return {
+      communityTax: isSet(object.communityTax) ? String(object.communityTax) : "",
+      baseProposerReward: isSet(object.baseProposerReward) ? String(object.baseProposerReward) : "",
+      bonusProposerReward: isSet(object.bonusProposerReward) ? String(object.bonusProposerReward) : "",
+      withdrawAddrEnabled: isSet(object.withdrawAddrEnabled) ? Boolean(object.withdrawAddrEnabled) : false
+    };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -396,10 +396,10 @@ export const ValidatorHistoricalRewards = {
     return message;
   },
   fromJSON(object: any): ValidatorHistoricalRewards {
-    const obj = createBaseValidatorHistoricalRewards();
-    if (Array.isArray(object?.cumulativeRewardRatio)) object.cumulativeRewardRatio.map((e: any) => DecCoin.fromJSON(e));
-    if (isSet(object.referenceCount)) obj.referenceCount = Number(object.referenceCount);
-    return obj;
+    return {
+      cumulativeRewardRatio: Array.isArray(object?.cumulativeRewardRatio) ? object.cumulativeRewardRatio.map((e: any) => DecCoin.fromJSON(e)) : [],
+      referenceCount: isSet(object.referenceCount) ? Number(object.referenceCount) : 0
+    };
   },
   toJSON(message: ValidatorHistoricalRewards): unknown {
     const obj: any = {};
@@ -515,10 +515,10 @@ export const ValidatorCurrentRewards = {
     return message;
   },
   fromJSON(object: any): ValidatorCurrentRewards {
-    const obj = createBaseValidatorCurrentRewards();
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => DecCoin.fromJSON(e));
-    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
-    return obj;
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
+    };
   },
   toJSON(message: ValidatorCurrentRewards): unknown {
     const obj: any = {};
@@ -533,9 +533,7 @@ export const ValidatorCurrentRewards = {
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
-    if (object.period !== undefined && object.period !== null) {
-      message.period = BigInt(object.period.toString());
-    }
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ValidatorCurrentRewardsSDKType): ValidatorCurrentRewards {
@@ -629,9 +627,9 @@ export const ValidatorAccumulatedCommission = {
     return message;
   },
   fromJSON(object: any): ValidatorAccumulatedCommission {
-    const obj = createBaseValidatorAccumulatedCommission();
-    if (Array.isArray(object?.commission)) object.commission.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
+    return {
+      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromJSON(e)) : []
+    };
   },
   toJSON(message: ValidatorAccumulatedCommission): unknown {
     const obj: any = {};
@@ -733,9 +731,9 @@ export const ValidatorOutstandingRewards = {
     return message;
   },
   fromJSON(object: any): ValidatorOutstandingRewards {
-    const obj = createBaseValidatorOutstandingRewards();
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : []
+    };
   },
   toJSON(message: ValidatorOutstandingRewards): unknown {
     const obj: any = {};
@@ -844,10 +842,10 @@ export const ValidatorSlashEvent = {
     return message;
   },
   fromJSON(object: any): ValidatorSlashEvent {
-    const obj = createBaseValidatorSlashEvent();
-    if (isSet(object.validatorPeriod)) obj.validatorPeriod = BigInt(object.validatorPeriod.toString());
-    if (isSet(object.fraction)) obj.fraction = String(object.fraction);
-    return obj;
+    return {
+      validatorPeriod: isSet(object.validatorPeriod) ? BigInt(object.validatorPeriod.toString()) : BigInt(0),
+      fraction: isSet(object.fraction) ? String(object.fraction) : ""
+    };
   },
   toJSON(message: ValidatorSlashEvent): unknown {
     const obj: any = {};
@@ -857,9 +855,7 @@ export const ValidatorSlashEvent = {
   },
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
-    if (object.validatorPeriod !== undefined && object.validatorPeriod !== null) {
-      message.validatorPeriod = BigInt(object.validatorPeriod.toString());
-    }
+    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? BigInt(object.validatorPeriod.toString()) : BigInt(0);
     message.fraction = object.fraction ?? "";
     return message;
   },
@@ -946,9 +942,9 @@ export const ValidatorSlashEvents = {
     return message;
   },
   fromJSON(object: any): ValidatorSlashEvents {
-    const obj = createBaseValidatorSlashEvents();
-    if (Array.isArray(object?.validatorSlashEvents)) object.validatorSlashEvents.map((e: any) => ValidatorSlashEvent.fromJSON(e));
-    return obj;
+    return {
+      validatorSlashEvents: Array.isArray(object?.validatorSlashEvents) ? object.validatorSlashEvents.map((e: any) => ValidatorSlashEvent.fromJSON(e)) : []
+    };
   },
   toJSON(message: ValidatorSlashEvents): unknown {
     const obj: any = {};
@@ -1050,9 +1046,9 @@ export const FeePool = {
     return message;
   },
   fromJSON(object: any): FeePool {
-    const obj = createBaseFeePool();
-    if (Array.isArray(object?.communityPool)) object.communityPool.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
+    return {
+      communityPool: Array.isArray(object?.communityPool) ? object.communityPool.map((e: any) => DecCoin.fromJSON(e)) : []
+    };
   },
   toJSON(message: FeePool): unknown {
     const obj: any = {};
@@ -1175,12 +1171,12 @@ export const CommunityPoolSpendProposal = {
     return message;
   },
   fromJSON(object: any): CommunityPoolSpendProposal {
-    const obj = createBaseCommunityPoolSpendProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.recipient)) obj.recipient = String(object.recipient);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: CommunityPoolSpendProposal): unknown {
     const obj: any = {};
@@ -1317,11 +1313,11 @@ export const DelegatorStartingInfo = {
     return message;
   },
   fromJSON(object: any): DelegatorStartingInfo {
-    const obj = createBaseDelegatorStartingInfo();
-    if (isSet(object.previousPeriod)) obj.previousPeriod = BigInt(object.previousPeriod.toString());
-    if (isSet(object.stake)) obj.stake = String(object.stake);
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    return obj;
+    return {
+      previousPeriod: isSet(object.previousPeriod) ? BigInt(object.previousPeriod.toString()) : BigInt(0),
+      stake: isSet(object.stake) ? String(object.stake) : "",
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
+    };
   },
   toJSON(message: DelegatorStartingInfo): unknown {
     const obj: any = {};
@@ -1332,13 +1328,9 @@ export const DelegatorStartingInfo = {
   },
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
-    if (object.previousPeriod !== undefined && object.previousPeriod !== null) {
-      message.previousPeriod = BigInt(object.previousPeriod.toString());
-    }
+    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? BigInt(object.previousPeriod.toString()) : BigInt(0);
     message.stake = object.stake ?? "";
-    if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
-    }
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: DelegatorStartingInfoSDKType): DelegatorStartingInfo {
@@ -1436,10 +1428,10 @@ export const DelegationDelegatorReward = {
     return message;
   },
   fromJSON(object: any): DelegationDelegatorReward {
-    const obj = createBaseDelegationDelegatorReward();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (Array.isArray(object?.reward)) object.reward.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
+    return {
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromJSON(e)) : []
+    };
   },
   toJSON(message: DelegationDelegatorReward): unknown {
     const obj: any = {};
@@ -1576,13 +1568,13 @@ export const CommunityPoolSpendProposalWithDeposit = {
     return message;
   },
   fromJSON(object: any): CommunityPoolSpendProposalWithDeposit {
-    const obj = createBaseCommunityPoolSpendProposalWithDeposit();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.recipient)) obj.recipient = String(object.recipient);
-    if (isSet(object.amount)) obj.amount = String(object.amount);
-    if (isSet(object.deposit)) obj.deposit = String(object.deposit);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      deposit: isSet(object.deposit) ? String(object.deposit) : ""
+    };
   },
   toJSON(message: CommunityPoolSpendProposalWithDeposit): unknown {
     const obj: any = {};

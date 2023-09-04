@@ -61,11 +61,11 @@ export const IncentivizedAcknowledgement = {
     return message;
   },
   fromJSON(object: any): IncentivizedAcknowledgement {
-    const obj = createBaseIncentivizedAcknowledgement();
-    if (isSet(object.appAcknowledgement)) obj.appAcknowledgement = bytesFromBase64(object.appAcknowledgement);
-    if (isSet(object.forwardRelayerAddress)) obj.forwardRelayerAddress = String(object.forwardRelayerAddress);
-    if (isSet(object.underlyingAppSuccess)) obj.underlyingAppSuccess = Boolean(object.underlyingAppSuccess);
-    return obj;
+    return {
+      appAcknowledgement: isSet(object.appAcknowledgement) ? bytesFromBase64(object.appAcknowledgement) : new Uint8Array(),
+      forwardRelayerAddress: isSet(object.forwardRelayerAddress) ? String(object.forwardRelayerAddress) : "",
+      underlyingAppSuccess: isSet(object.underlyingAppSuccess) ? Boolean(object.underlyingAppSuccess) : false
+    };
   },
   toJSON(message: IncentivizedAcknowledgement): unknown {
     const obj: any = {};

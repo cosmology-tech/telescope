@@ -123,16 +123,16 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.channels)) object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
-    if (Array.isArray(object?.acknowledgements)) object.acknowledgements.map((e: any) => PacketState.fromJSON(e));
-    if (Array.isArray(object?.commitments)) object.commitments.map((e: any) => PacketState.fromJSON(e));
-    if (Array.isArray(object?.receipts)) object.receipts.map((e: any) => PacketState.fromJSON(e));
-    if (Array.isArray(object?.sendSequences)) object.sendSequences.map((e: any) => PacketSequence.fromJSON(e));
-    if (Array.isArray(object?.recvSequences)) object.recvSequences.map((e: any) => PacketSequence.fromJSON(e));
-    if (Array.isArray(object?.ackSequences)) object.ackSequences.map((e: any) => PacketSequence.fromJSON(e));
-    if (isSet(object.nextChannelSequence)) obj.nextChannelSequence = BigInt(object.nextChannelSequence.toString());
-    return obj;
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromJSON(e)) : [],
+      acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromJSON(e)) : [],
+      commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromJSON(e)) : [],
+      receipts: Array.isArray(object?.receipts) ? object.receipts.map((e: any) => PacketState.fromJSON(e)) : [],
+      sendSequences: Array.isArray(object?.sendSequences) ? object.sendSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
+      recvSequences: Array.isArray(object?.recvSequences) ? object.recvSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
+      ackSequences: Array.isArray(object?.ackSequences) ? object.ackSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
+      nextChannelSequence: isSet(object.nextChannelSequence) ? BigInt(object.nextChannelSequence.toString()) : BigInt(0)
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -183,9 +183,7 @@ export const GenesisState = {
     message.sendSequences = object.sendSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.recvSequences = object.recvSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.ackSequences = object.ackSequences?.map(e => PacketSequence.fromPartial(e)) || [];
-    if (object.nextChannelSequence !== undefined && object.nextChannelSequence !== null) {
-      message.nextChannelSequence = BigInt(object.nextChannelSequence.toString());
-    }
+    message.nextChannelSequence = object.nextChannelSequence !== undefined && object.nextChannelSequence !== null ? BigInt(object.nextChannelSequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -371,11 +369,11 @@ export const PacketSequence = {
     return message;
   },
   fromJSON(object: any): PacketSequence {
-    const obj = createBasePacketSequence();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
+    };
   },
   toJSON(message: PacketSequence): unknown {
     const obj: any = {};
@@ -388,9 +386,7 @@ export const PacketSequence = {
     const message = createBasePacketSequence();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PacketSequenceSDKType): PacketSequence {

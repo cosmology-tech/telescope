@@ -97,13 +97,13 @@ export const MsgCreateDeployment = {
     return message;
   },
   fromJSON(object: any): MsgCreateDeployment {
-    const obj = createBaseMsgCreateDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupSpec.fromJSON(e));
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    return obj;
+    return {
+      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromJSON(e)) : [],
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      deposit: isSet(object.deposit) ? Coin.fromJSON(object.deposit) : undefined,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   },
   toJSON(message: MsgCreateDeployment): unknown {
     const obj: any = {};
@@ -120,14 +120,10 @@ export const MsgCreateDeployment = {
   },
   fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
-    if (object.deposit !== undefined && object.deposit !== null) {
-      message.deposit = Coin.fromPartial(object.deposit);
-    }
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
     message.depositor = object.depositor ?? "";
     return message;
   }
@@ -154,8 +150,7 @@ export const MsgCreateDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateDeploymentResponse {
-    const obj = createBaseMsgCreateDeploymentResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCreateDeploymentResponse): unknown {
     const obj: any = {};
@@ -210,11 +205,11 @@ export const MsgDepositDeployment = {
     return message;
   },
   fromJSON(object: any): MsgDepositDeployment {
-    const obj = createBaseMsgDepositDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    return obj;
+    return {
+      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined,
+      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   },
   toJSON(message: MsgDepositDeployment): unknown {
     const obj: any = {};
@@ -225,12 +220,8 @@ export const MsgDepositDeployment = {
   },
   fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
-    if (object.amount !== undefined && object.amount !== null) {
-      message.amount = Coin.fromPartial(object.amount);
-    }
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
     message.depositor = object.depositor ?? "";
     return message;
   }
@@ -257,8 +248,7 @@ export const MsgDepositDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgDepositDeploymentResponse {
-    const obj = createBaseMsgDepositDeploymentResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgDepositDeploymentResponse): unknown {
     const obj: any = {};
@@ -306,10 +296,10 @@ export const MsgUpdateDeployment = {
     return message;
   },
   fromJSON(object: any): MsgUpdateDeployment {
-    const obj = createBaseMsgUpdateDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    return obj;
+    return {
+      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
+    };
   },
   toJSON(message: MsgUpdateDeployment): unknown {
     const obj: any = {};
@@ -319,9 +309,7 @@ export const MsgUpdateDeployment = {
   },
   fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
     message.version = object.version ?? new Uint8Array();
     return message;
   }
@@ -348,8 +336,7 @@ export const MsgUpdateDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateDeploymentResponse {
-    const obj = createBaseMsgUpdateDeploymentResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateDeploymentResponse): unknown {
     const obj: any = {};
@@ -390,9 +377,9 @@ export const MsgCloseDeployment = {
     return message;
   },
   fromJSON(object: any): MsgCloseDeployment {
-    const obj = createBaseMsgCloseDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined
+    };
   },
   toJSON(message: MsgCloseDeployment): unknown {
     const obj: any = {};
@@ -401,9 +388,7 @@ export const MsgCloseDeployment = {
   },
   fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
     return message;
   }
 };
@@ -429,8 +414,7 @@ export const MsgCloseDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseDeploymentResponse {
-    const obj = createBaseMsgCloseDeploymentResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCloseDeploymentResponse): unknown {
     const obj: any = {};

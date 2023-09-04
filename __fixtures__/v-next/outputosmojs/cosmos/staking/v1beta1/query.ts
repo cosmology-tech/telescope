@@ -444,10 +444,10 @@ export const QueryValidatorsRequest = {
     return message;
   },
   fromJSON(object: any): QueryValidatorsRequest {
-    const obj = createBaseQueryValidatorsRequest();
-    if (isSet(object.status)) obj.status = String(object.status);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      status: isSet(object.status) ? String(object.status) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryValidatorsRequest): unknown {
     const obj: any = {};
@@ -458,9 +458,7 @@ export const QueryValidatorsRequest = {
   fromPartial(object: DeepPartial<QueryValidatorsRequest>): QueryValidatorsRequest {
     const message = createBaseQueryValidatorsRequest();
     message.status = object.status ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorsRequestSDKType): QueryValidatorsRequest {
@@ -553,10 +551,10 @@ export const QueryValidatorsResponse = {
     return message;
   },
   fromJSON(object: any): QueryValidatorsResponse {
-    const obj = createBaseQueryValidatorsResponse();
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryValidatorsResponse): unknown {
     const obj: any = {};
@@ -571,9 +569,7 @@ export const QueryValidatorsResponse = {
   fromPartial(object: DeepPartial<QueryValidatorsResponse>): QueryValidatorsResponse {
     const message = createBaseQueryValidatorsResponse();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorsResponseSDKType): QueryValidatorsResponse {
@@ -667,9 +663,9 @@ export const QueryValidatorRequest = {
     return message;
   },
   fromJSON(object: any): QueryValidatorRequest {
-    const obj = createBaseQueryValidatorRequest();
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
+    return {
+      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
+    };
   },
   toJSON(message: QueryValidatorRequest): unknown {
     const obj: any = {};
@@ -759,9 +755,9 @@ export const QueryValidatorResponse = {
     return message;
   },
   fromJSON(object: any): QueryValidatorResponse {
-    const obj = createBaseQueryValidatorResponse();
-    if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
-    return obj;
+    return {
+      validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined
+    };
   },
   toJSON(message: QueryValidatorResponse): unknown {
     const obj: any = {};
@@ -770,9 +766,7 @@ export const QueryValidatorResponse = {
   },
   fromPartial(object: DeepPartial<QueryValidatorResponse>): QueryValidatorResponse {
     const message = createBaseQueryValidatorResponse();
-    if (object.validator !== undefined && object.validator !== null) {
-      message.validator = Validator.fromPartial(object.validator);
-    }
+    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : Validator.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorResponseSDKType): QueryValidatorResponse {
@@ -860,10 +854,10 @@ export const QueryValidatorDelegationsRequest = {
     return message;
   },
   fromJSON(object: any): QueryValidatorDelegationsRequest {
-    const obj = createBaseQueryValidatorDelegationsRequest();
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryValidatorDelegationsRequest): unknown {
     const obj: any = {};
@@ -874,9 +868,7 @@ export const QueryValidatorDelegationsRequest = {
   fromPartial(object: DeepPartial<QueryValidatorDelegationsRequest>): QueryValidatorDelegationsRequest {
     const message = createBaseQueryValidatorDelegationsRequest();
     message.validatorAddr = object.validatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorDelegationsRequestSDKType): QueryValidatorDelegationsRequest {
@@ -969,10 +961,10 @@ export const QueryValidatorDelegationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryValidatorDelegationsResponse {
-    const obj = createBaseQueryValidatorDelegationsResponse();
-    if (Array.isArray(object?.delegationResponses)) object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      delegationResponses: Array.isArray(object?.delegationResponses) ? object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryValidatorDelegationsResponse): unknown {
     const obj: any = {};
@@ -987,9 +979,7 @@ export const QueryValidatorDelegationsResponse = {
   fromPartial(object: DeepPartial<QueryValidatorDelegationsResponse>): QueryValidatorDelegationsResponse {
     const message = createBaseQueryValidatorDelegationsResponse();
     message.delegationResponses = object.delegationResponses?.map(e => DelegationResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorDelegationsResponseSDKType): QueryValidatorDelegationsResponse {
@@ -1090,10 +1080,10 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     return message;
   },
   fromJSON(object: any): QueryValidatorUnbondingDelegationsRequest {
-    const obj = createBaseQueryValidatorUnbondingDelegationsRequest();
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryValidatorUnbondingDelegationsRequest): unknown {
     const obj: any = {};
@@ -1104,9 +1094,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   fromPartial(object: DeepPartial<QueryValidatorUnbondingDelegationsRequest>): QueryValidatorUnbondingDelegationsRequest {
     const message = createBaseQueryValidatorUnbondingDelegationsRequest();
     message.validatorAddr = object.validatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorUnbondingDelegationsRequestSDKType): QueryValidatorUnbondingDelegationsRequest {
@@ -1199,10 +1187,10 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryValidatorUnbondingDelegationsResponse {
-    const obj = createBaseQueryValidatorUnbondingDelegationsResponse();
-    if (Array.isArray(object?.unbondingResponses)) object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      unbondingResponses: Array.isArray(object?.unbondingResponses) ? object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryValidatorUnbondingDelegationsResponse): unknown {
     const obj: any = {};
@@ -1217,9 +1205,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   fromPartial(object: DeepPartial<QueryValidatorUnbondingDelegationsResponse>): QueryValidatorUnbondingDelegationsResponse {
     const message = createBaseQueryValidatorUnbondingDelegationsResponse();
     message.unbondingResponses = object.unbondingResponses?.map(e => UnbondingDelegation.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryValidatorUnbondingDelegationsResponseSDKType): QueryValidatorUnbondingDelegationsResponse {
@@ -1320,10 +1306,10 @@ export const QueryDelegationRequest = {
     return message;
   },
   fromJSON(object: any): QueryDelegationRequest {
-    const obj = createBaseQueryDelegationRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
+    };
   },
   toJSON(message: QueryDelegationRequest): unknown {
     const obj: any = {};
@@ -1420,9 +1406,9 @@ export const QueryDelegationResponse = {
     return message;
   },
   fromJSON(object: any): QueryDelegationResponse {
-    const obj = createBaseQueryDelegationResponse();
-    if (isSet(object.delegationResponse)) obj.delegationResponse = DelegationResponse.fromJSON(object.delegationResponse);
-    return obj;
+    return {
+      delegationResponse: isSet(object.delegationResponse) ? DelegationResponse.fromJSON(object.delegationResponse) : undefined
+    };
   },
   toJSON(message: QueryDelegationResponse): unknown {
     const obj: any = {};
@@ -1431,9 +1417,7 @@ export const QueryDelegationResponse = {
   },
   fromPartial(object: DeepPartial<QueryDelegationResponse>): QueryDelegationResponse {
     const message = createBaseQueryDelegationResponse();
-    if (object.delegationResponse !== undefined && object.delegationResponse !== null) {
-      message.delegationResponse = DelegationResponse.fromPartial(object.delegationResponse);
-    }
+    message.delegationResponse = object.delegationResponse !== undefined && object.delegationResponse !== null ? DelegationResponse.fromPartial(object.delegationResponse) : DelegationResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegationResponseSDKType): QueryDelegationResponse {
@@ -1521,10 +1505,10 @@ export const QueryUnbondingDelegationRequest = {
     return message;
   },
   fromJSON(object: any): QueryUnbondingDelegationRequest {
-    const obj = createBaseQueryUnbondingDelegationRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
+    };
   },
   toJSON(message: QueryUnbondingDelegationRequest): unknown {
     const obj: any = {};
@@ -1621,9 +1605,9 @@ export const QueryUnbondingDelegationResponse = {
     return message;
   },
   fromJSON(object: any): QueryUnbondingDelegationResponse {
-    const obj = createBaseQueryUnbondingDelegationResponse();
-    if (isSet(object.unbond)) obj.unbond = UnbondingDelegation.fromJSON(object.unbond);
-    return obj;
+    return {
+      unbond: isSet(object.unbond) ? UnbondingDelegation.fromJSON(object.unbond) : undefined
+    };
   },
   toJSON(message: QueryUnbondingDelegationResponse): unknown {
     const obj: any = {};
@@ -1632,9 +1616,7 @@ export const QueryUnbondingDelegationResponse = {
   },
   fromPartial(object: DeepPartial<QueryUnbondingDelegationResponse>): QueryUnbondingDelegationResponse {
     const message = createBaseQueryUnbondingDelegationResponse();
-    if (object.unbond !== undefined && object.unbond !== null) {
-      message.unbond = UnbondingDelegation.fromPartial(object.unbond);
-    }
+    message.unbond = object.unbond !== undefined && object.unbond !== null ? UnbondingDelegation.fromPartial(object.unbond) : UnbondingDelegation.fromPartial({});
     return message;
   },
   fromSDK(object: QueryUnbondingDelegationResponseSDKType): QueryUnbondingDelegationResponse {
@@ -1722,10 +1704,10 @@ export const QueryDelegatorDelegationsRequest = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorDelegationsRequest {
-    const obj = createBaseQueryDelegatorDelegationsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDelegatorDelegationsRequest): unknown {
     const obj: any = {};
@@ -1736,9 +1718,7 @@ export const QueryDelegatorDelegationsRequest = {
   fromPartial(object: DeepPartial<QueryDelegatorDelegationsRequest>): QueryDelegatorDelegationsRequest {
     const message = createBaseQueryDelegatorDelegationsRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorDelegationsRequestSDKType): QueryDelegatorDelegationsRequest {
@@ -1831,10 +1811,10 @@ export const QueryDelegatorDelegationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorDelegationsResponse {
-    const obj = createBaseQueryDelegatorDelegationsResponse();
-    if (Array.isArray(object?.delegationResponses)) object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      delegationResponses: Array.isArray(object?.delegationResponses) ? object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDelegatorDelegationsResponse): unknown {
     const obj: any = {};
@@ -1849,9 +1829,7 @@ export const QueryDelegatorDelegationsResponse = {
   fromPartial(object: DeepPartial<QueryDelegatorDelegationsResponse>): QueryDelegatorDelegationsResponse {
     const message = createBaseQueryDelegatorDelegationsResponse();
     message.delegationResponses = object.delegationResponses?.map(e => DelegationResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorDelegationsResponseSDKType): QueryDelegatorDelegationsResponse {
@@ -1952,10 +1930,10 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorUnbondingDelegationsRequest {
-    const obj = createBaseQueryDelegatorUnbondingDelegationsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDelegatorUnbondingDelegationsRequest): unknown {
     const obj: any = {};
@@ -1966,9 +1944,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   fromPartial(object: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>): QueryDelegatorUnbondingDelegationsRequest {
     const message = createBaseQueryDelegatorUnbondingDelegationsRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorUnbondingDelegationsRequestSDKType): QueryDelegatorUnbondingDelegationsRequest {
@@ -2061,10 +2037,10 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorUnbondingDelegationsResponse {
-    const obj = createBaseQueryDelegatorUnbondingDelegationsResponse();
-    if (Array.isArray(object?.unbondingResponses)) object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      unbondingResponses: Array.isArray(object?.unbondingResponses) ? object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDelegatorUnbondingDelegationsResponse): unknown {
     const obj: any = {};
@@ -2079,9 +2055,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   fromPartial(object: DeepPartial<QueryDelegatorUnbondingDelegationsResponse>): QueryDelegatorUnbondingDelegationsResponse {
     const message = createBaseQueryDelegatorUnbondingDelegationsResponse();
     message.unbondingResponses = object.unbondingResponses?.map(e => UnbondingDelegation.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorUnbondingDelegationsResponseSDKType): QueryDelegatorUnbondingDelegationsResponse {
@@ -2196,12 +2170,12 @@ export const QueryRedelegationsRequest = {
     return message;
   },
   fromJSON(object: any): QueryRedelegationsRequest {
-    const obj = createBaseQueryRedelegationsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.srcValidatorAddr)) obj.srcValidatorAddr = String(object.srcValidatorAddr);
-    if (isSet(object.dstValidatorAddr)) obj.dstValidatorAddr = String(object.dstValidatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      srcValidatorAddr: isSet(object.srcValidatorAddr) ? String(object.srcValidatorAddr) : "",
+      dstValidatorAddr: isSet(object.dstValidatorAddr) ? String(object.dstValidatorAddr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryRedelegationsRequest): unknown {
     const obj: any = {};
@@ -2216,9 +2190,7 @@ export const QueryRedelegationsRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.srcValidatorAddr = object.srcValidatorAddr ?? "";
     message.dstValidatorAddr = object.dstValidatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryRedelegationsRequestSDKType): QueryRedelegationsRequest {
@@ -2321,10 +2293,10 @@ export const QueryRedelegationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryRedelegationsResponse {
-    const obj = createBaseQueryRedelegationsResponse();
-    if (Array.isArray(object?.redelegationResponses)) object.redelegationResponses.map((e: any) => RedelegationResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      redelegationResponses: Array.isArray(object?.redelegationResponses) ? object.redelegationResponses.map((e: any) => RedelegationResponse.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryRedelegationsResponse): unknown {
     const obj: any = {};
@@ -2339,9 +2311,7 @@ export const QueryRedelegationsResponse = {
   fromPartial(object: DeepPartial<QueryRedelegationsResponse>): QueryRedelegationsResponse {
     const message = createBaseQueryRedelegationsResponse();
     message.redelegationResponses = object.redelegationResponses?.map(e => RedelegationResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryRedelegationsResponseSDKType): QueryRedelegationsResponse {
@@ -2442,10 +2412,10 @@ export const QueryDelegatorValidatorsRequest = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorValidatorsRequest {
-    const obj = createBaseQueryDelegatorValidatorsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDelegatorValidatorsRequest): unknown {
     const obj: any = {};
@@ -2456,9 +2426,7 @@ export const QueryDelegatorValidatorsRequest = {
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
     const message = createBaseQueryDelegatorValidatorsRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
@@ -2551,10 +2519,10 @@ export const QueryDelegatorValidatorsResponse = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorValidatorsResponse {
-    const obj = createBaseQueryDelegatorValidatorsResponse();
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDelegatorValidatorsResponse): unknown {
     const obj: any = {};
@@ -2569,9 +2537,7 @@ export const QueryDelegatorValidatorsResponse = {
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
     const message = createBaseQueryDelegatorValidatorsResponse();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorValidatorsResponseSDKType): QueryDelegatorValidatorsResponse {
@@ -2672,10 +2638,10 @@ export const QueryDelegatorValidatorRequest = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorValidatorRequest {
-    const obj = createBaseQueryDelegatorValidatorRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
+    return {
+      delegatorAddr: isSet(object.delegatorAddr) ? String(object.delegatorAddr) : "",
+      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
+    };
   },
   toJSON(message: QueryDelegatorValidatorRequest): unknown {
     const obj: any = {};
@@ -2772,9 +2738,9 @@ export const QueryDelegatorValidatorResponse = {
     return message;
   },
   fromJSON(object: any): QueryDelegatorValidatorResponse {
-    const obj = createBaseQueryDelegatorValidatorResponse();
-    if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
-    return obj;
+    return {
+      validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined
+    };
   },
   toJSON(message: QueryDelegatorValidatorResponse): unknown {
     const obj: any = {};
@@ -2783,9 +2749,7 @@ export const QueryDelegatorValidatorResponse = {
   },
   fromPartial(object: DeepPartial<QueryDelegatorValidatorResponse>): QueryDelegatorValidatorResponse {
     const message = createBaseQueryDelegatorValidatorResponse();
-    if (object.validator !== undefined && object.validator !== null) {
-      message.validator = Validator.fromPartial(object.validator);
-    }
+    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : Validator.fromPartial({});
     return message;
   },
   fromSDK(object: QueryDelegatorValidatorResponseSDKType): QueryDelegatorValidatorResponse {
@@ -2866,9 +2830,9 @@ export const QueryHistoricalInfoRequest = {
     return message;
   },
   fromJSON(object: any): QueryHistoricalInfoRequest {
-    const obj = createBaseQueryHistoricalInfoRequest();
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    return obj;
+    return {
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryHistoricalInfoRequest): unknown {
     const obj: any = {};
@@ -2877,9 +2841,7 @@ export const QueryHistoricalInfoRequest = {
   },
   fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     const message = createBaseQueryHistoricalInfoRequest();
-    if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
-    }
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryHistoricalInfoRequestSDKType): QueryHistoricalInfoRequest {
@@ -2960,9 +2922,9 @@ export const QueryHistoricalInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryHistoricalInfoResponse {
-    const obj = createBaseQueryHistoricalInfoResponse();
-    if (isSet(object.hist)) obj.hist = HistoricalInfo.fromJSON(object.hist);
-    return obj;
+    return {
+      hist: isSet(object.hist) ? HistoricalInfo.fromJSON(object.hist) : undefined
+    };
   },
   toJSON(message: QueryHistoricalInfoResponse): unknown {
     const obj: any = {};
@@ -2971,9 +2933,7 @@ export const QueryHistoricalInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryHistoricalInfoResponse>): QueryHistoricalInfoResponse {
     const message = createBaseQueryHistoricalInfoResponse();
-    if (object.hist !== undefined && object.hist !== null) {
-      message.hist = HistoricalInfo.fromPartial(object.hist);
-    }
+    message.hist = object.hist !== undefined && object.hist !== null ? HistoricalInfo.fromPartial(object.hist) : HistoricalInfo.fromPartial({});
     return message;
   },
   fromSDK(object: QueryHistoricalInfoResponseSDKType): QueryHistoricalInfoResponse {
@@ -3046,8 +3006,7 @@ export const QueryPoolRequest = {
     return message;
   },
   fromJSON(_: any): QueryPoolRequest {
-    const obj = createBaseQueryPoolRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryPoolRequest): unknown {
     const obj: any = {};
@@ -3127,9 +3086,9 @@ export const QueryPoolResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolResponse {
-    const obj = createBaseQueryPoolResponse();
-    if (isSet(object.pool)) obj.pool = Pool.fromJSON(object.pool);
-    return obj;
+    return {
+      pool: isSet(object.pool) ? Pool.fromJSON(object.pool) : undefined
+    };
   },
   toJSON(message: QueryPoolResponse): unknown {
     const obj: any = {};
@@ -3138,9 +3097,7 @@ export const QueryPoolResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
     const message = createBaseQueryPoolResponse();
-    if (object.pool !== undefined && object.pool !== null) {
-      message.pool = Pool.fromPartial(object.pool);
-    }
+    message.pool = object.pool !== undefined && object.pool !== null ? Pool.fromPartial(object.pool) : Pool.fromPartial({});
     return message;
   },
   fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
@@ -3213,8 +3170,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -3294,9 +3250,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -3305,9 +3261,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

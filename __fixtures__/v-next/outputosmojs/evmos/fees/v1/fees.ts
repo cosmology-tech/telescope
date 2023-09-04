@@ -70,11 +70,11 @@ export const DevFeeInfo = {
     return message;
   },
   fromJSON(object: any): DevFeeInfo {
-    const obj = createBaseDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    return obj;
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
+      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : ""
+    };
   },
   toJSON(message: DevFeeInfo): unknown {
     const obj: any = {};

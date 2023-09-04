@@ -133,13 +133,13 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.codes)) object.codes.map((e: any) => Code.fromJSON(e));
-    if (Array.isArray(object?.contracts)) object.contracts.map((e: any) => Contract.fromJSON(e));
-    if (Array.isArray(object?.sequences)) object.sequences.map((e: any) => Sequence.fromJSON(e));
-    if (Array.isArray(object?.genMsgs)) object.genMsgs.map((e: any) => GenesisState_GenMsgs.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromJSON(e)) : [],
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromJSON(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromJSON(e)) : [],
+      genMsgs: Array.isArray(object?.genMsgs) ? object.genMsgs.map((e: any) => GenesisState_GenMsgs.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -168,9 +168,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.codes = object.codes?.map(e => Code.fromPartial(e)) || [];
     message.contracts = object.contracts?.map(e => Contract.fromPartial(e)) || [];
     message.sequences = object.sequences?.map(e => Sequence.fromPartial(e)) || [];
@@ -321,11 +319,11 @@ export const GenesisState_GenMsgs = {
     return message;
   },
   fromJSON(object: any): GenesisState_GenMsgs {
-    const obj = createBaseGenesisState_GenMsgs();
-    if (isSet(object.storeCode)) obj.storeCode = MsgStoreCode.fromJSON(object.storeCode);
-    if (isSet(object.instantiateContract)) obj.instantiateContract = MsgInstantiateContract.fromJSON(object.instantiateContract);
-    if (isSet(object.executeContract)) obj.executeContract = MsgExecuteContract.fromJSON(object.executeContract);
-    return obj;
+    return {
+      storeCode: isSet(object.storeCode) ? MsgStoreCode.fromJSON(object.storeCode) : undefined,
+      instantiateContract: isSet(object.instantiateContract) ? MsgInstantiateContract.fromJSON(object.instantiateContract) : undefined,
+      executeContract: isSet(object.executeContract) ? MsgExecuteContract.fromJSON(object.executeContract) : undefined
+    };
   },
   toJSON(message: GenesisState_GenMsgs): unknown {
     const obj: any = {};
@@ -336,15 +334,9 @@ export const GenesisState_GenMsgs = {
   },
   fromPartial(object: DeepPartial<GenesisState_GenMsgs>): GenesisState_GenMsgs {
     const message = createBaseGenesisState_GenMsgs();
-    if (object.storeCode !== undefined && object.storeCode !== null) {
-      message.storeCode = MsgStoreCode.fromPartial(object.storeCode);
-    }
-    if (object.instantiateContract !== undefined && object.instantiateContract !== null) {
-      message.instantiateContract = MsgInstantiateContract.fromPartial(object.instantiateContract);
-    }
-    if (object.executeContract !== undefined && object.executeContract !== null) {
-      message.executeContract = MsgExecuteContract.fromPartial(object.executeContract);
-    }
+    message.storeCode = object.storeCode !== undefined && object.storeCode !== null ? MsgStoreCode.fromPartial(object.storeCode) : MsgStoreCode.fromPartial({});
+    message.instantiateContract = object.instantiateContract !== undefined && object.instantiateContract !== null ? MsgInstantiateContract.fromPartial(object.instantiateContract) : MsgInstantiateContract.fromPartial({});
+    message.executeContract = object.executeContract !== undefined && object.executeContract !== null ? MsgExecuteContract.fromPartial(object.executeContract) : MsgExecuteContract.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
@@ -456,12 +448,12 @@ export const Code = {
     return message;
   },
   fromJSON(object: any): Code {
-    const obj = createBaseCode();
-    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
-    if (isSet(object.codeInfo)) obj.codeInfo = CodeInfo.fromJSON(object.codeInfo);
-    if (isSet(object.codeBytes)) obj.codeBytes = bytesFromBase64(object.codeBytes);
-    if (isSet(object.pinned)) obj.pinned = Boolean(object.pinned);
-    return obj;
+    return {
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
+      codeInfo: isSet(object.codeInfo) ? CodeInfo.fromJSON(object.codeInfo) : undefined,
+      codeBytes: isSet(object.codeBytes) ? bytesFromBase64(object.codeBytes) : new Uint8Array(),
+      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
+    };
   },
   toJSON(message: Code): unknown {
     const obj: any = {};
@@ -473,12 +465,8 @@ export const Code = {
   },
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
-    if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = BigInt(object.codeId.toString());
-    }
-    if (object.codeInfo !== undefined && object.codeInfo !== null) {
-      message.codeInfo = CodeInfo.fromPartial(object.codeInfo);
-    }
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : CodeInfo.fromPartial({});
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
     return message;
@@ -590,11 +578,11 @@ export const Contract = {
     return message;
   },
   fromJSON(object: any): Contract {
-    const obj = createBaseContract();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.contractInfo)) obj.contractInfo = ContractInfo.fromJSON(object.contractInfo);
-    if (Array.isArray(object?.contractState)) object.contractState.map((e: any) => Model.fromJSON(e));
-    return obj;
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
+      contractInfo: isSet(object.contractInfo) ? ContractInfo.fromJSON(object.contractInfo) : undefined,
+      contractState: Array.isArray(object?.contractState) ? object.contractState.map((e: any) => Model.fromJSON(e)) : []
+    };
   },
   toJSON(message: Contract): unknown {
     const obj: any = {};
@@ -610,9 +598,7 @@ export const Contract = {
   fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
     message.contractAddress = object.contractAddress ?? "";
-    if (object.contractInfo !== undefined && object.contractInfo !== null) {
-      message.contractInfo = ContractInfo.fromPartial(object.contractInfo);
-    }
+    message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : ContractInfo.fromPartial({});
     message.contractState = object.contractState?.map(e => Model.fromPartial(e)) || [];
     return message;
   },
@@ -719,10 +705,10 @@ export const Sequence = {
     return message;
   },
   fromJSON(object: any): Sequence {
-    const obj = createBaseSequence();
-    if (isSet(object.idKey)) obj.idKey = bytesFromBase64(object.idKey);
-    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
+    return {
+      idKey: isSet(object.idKey) ? bytesFromBase64(object.idKey) : new Uint8Array(),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Sequence): unknown {
     const obj: any = {};
@@ -733,9 +719,7 @@ export const Sequence = {
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
-    if (object.value !== undefined && object.value !== null) {
-      message.value = BigInt(object.value.toString());
-    }
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SequenceSDKType): Sequence {

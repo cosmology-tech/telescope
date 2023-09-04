@@ -36,8 +36,7 @@ export const ConfigRequest = {
     return message;
   },
   fromJSON(_: any): ConfigRequest {
-    const obj = createBaseConfigRequest();
-    return obj;
+    return {};
   },
   toJSON(_: ConfigRequest): unknown {
     const obj: any = {};
@@ -117,9 +116,9 @@ export const ConfigResponse = {
     return message;
   },
   fromJSON(object: any): ConfigResponse {
-    const obj = createBaseConfigResponse();
-    if (isSet(object.minimumGasPrice)) obj.minimumGasPrice = String(object.minimumGasPrice);
-    return obj;
+    return {
+      minimumGasPrice: isSet(object.minimumGasPrice) ? String(object.minimumGasPrice) : ""
+    };
   },
   toJSON(message: ConfigResponse): unknown {
     const obj: any = {};

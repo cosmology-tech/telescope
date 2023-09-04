@@ -84,13 +84,13 @@ export const ClawbackVestingAccount = {
     return message;
   },
   fromJSON(object: any): ClawbackVestingAccount {
-    const obj = createBaseClawbackVestingAccount();
-    if (isSet(object.baseVestingAccount)) obj.baseVestingAccount = BaseVestingAccount.fromJSON(object.baseVestingAccount);
-    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
-    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
-    if (Array.isArray(object?.lockupPeriods)) object.lockupPeriods.map((e: any) => Period.fromJSON(e));
-    if (Array.isArray(object?.vestingPeriods)) object.vestingPeriods.map((e: any) => Period.fromJSON(e));
-    return obj;
+    return {
+      baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined,
+      funderAddress: isSet(object.funderAddress) ? String(object.funderAddress) : "",
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
+      vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
+    };
   },
   toJSON(message: ClawbackVestingAccount): unknown {
     const obj: any = {};
@@ -111,13 +111,9 @@ export const ClawbackVestingAccount = {
   },
   fromPartial(object: DeepPartial<ClawbackVestingAccount>): ClawbackVestingAccount {
     const message = createBaseClawbackVestingAccount();
-    if (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null) {
-      message.baseVestingAccount = BaseVestingAccount.fromPartial(object.baseVestingAccount);
-    }
+    message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : BaseVestingAccount.fromPartial({});
     message.funderAddress = object.funderAddress ?? "";
-    if (object.startTime !== undefined && object.startTime !== null) {
-      message.startTime = Timestamp.fromPartial(object.startTime);
-    }
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
