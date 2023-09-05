@@ -53,9 +53,9 @@ export const PubKey = {
     return message;
   },
   fromJSON(object: any): PubKey {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
-    };
+    const obj = createBasePubKey();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    return obj;
   },
   toJSON(message: PubKey): unknown {
     const obj: any = {};
@@ -145,9 +145,9 @@ export const PrivKey = {
     return message;
   },
   fromJSON(object: any): PrivKey {
-    return {
-      secret: isSet(object.secret) ? bytesFromBase64(object.secret) : new Uint8Array()
-    };
+    const obj = createBasePrivKey();
+    if (isSet(object.secret)) obj.secret = bytesFromBase64(object.secret);
+    return obj;
   },
   toJSON(message: PrivKey): unknown {
     const obj: any = {};

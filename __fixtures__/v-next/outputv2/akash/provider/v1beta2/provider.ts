@@ -212,10 +212,10 @@ export const ProviderInfo = {
     return message;
   },
   fromJSON(object: any): ProviderInfo {
-    return {
-      email: isSet(object.email) ? String(object.email) : "",
-      website: isSet(object.website) ? String(object.website) : ""
-    };
+    const obj = createBaseProviderInfo();
+    if (isSet(object.email)) obj.email = String(object.email);
+    if (isSet(object.website)) obj.website = String(object.website);
+    return obj;
   },
   toJSON(message: ProviderInfo): unknown {
     const obj: any = {};
@@ -321,12 +321,12 @@ export const MsgCreateProvider = {
     return message;
   },
   fromJSON(object: any): MsgCreateProvider {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      hostUri: isSet(object.hostUri) ? String(object.hostUri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromJSON(object.info) : undefined
-    };
+    const obj = createBaseMsgCreateProvider();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
+    return obj;
   },
   toJSON(message: MsgCreateProvider): unknown {
     const obj: any = {};
@@ -345,7 +345,9 @@ export const MsgCreateProvider = {
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromPartial(object.info);
+    }
     return message;
   },
   fromSDK(object: MsgCreateProviderSDKType): MsgCreateProvider {
@@ -427,7 +429,8 @@ export const MsgCreateProviderResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateProviderResponse {
-    return {};
+    const obj = createBaseMsgCreateProviderResponse();
+    return obj;
   },
   toJSON(_: MsgCreateProviderResponse): unknown {
     const obj: any = {};
@@ -519,12 +522,12 @@ export const MsgUpdateProvider = {
     return message;
   },
   fromJSON(object: any): MsgUpdateProvider {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      hostUri: isSet(object.hostUri) ? String(object.hostUri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromJSON(object.info) : undefined
-    };
+    const obj = createBaseMsgUpdateProvider();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
+    return obj;
   },
   toJSON(message: MsgUpdateProvider): unknown {
     const obj: any = {};
@@ -543,7 +546,9 @@ export const MsgUpdateProvider = {
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromPartial(object.info);
+    }
     return message;
   },
   fromSDK(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
@@ -625,7 +630,8 @@ export const MsgUpdateProviderResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateProviderResponse {
-    return {};
+    const obj = createBaseMsgUpdateProviderResponse();
+    return obj;
   },
   toJSON(_: MsgUpdateProviderResponse): unknown {
     const obj: any = {};
@@ -696,9 +702,9 @@ export const MsgDeleteProvider = {
     return message;
   },
   fromJSON(object: any): MsgDeleteProvider {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseMsgDeleteProvider();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: MsgDeleteProvider): unknown {
     const obj: any = {};
@@ -769,7 +775,8 @@ export const MsgDeleteProviderResponse = {
     return message;
   },
   fromJSON(_: any): MsgDeleteProviderResponse {
-    return {};
+    const obj = createBaseMsgDeleteProviderResponse();
+    return obj;
   },
   toJSON(_: MsgDeleteProviderResponse): unknown {
     const obj: any = {};
@@ -861,12 +868,12 @@ export const Provider = {
     return message;
   },
   fromJSON(object: any): Provider {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      hostUri: isSet(object.hostUri) ? String(object.hostUri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromJSON(object.info) : undefined
-    };
+    const obj = createBaseProvider();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
+    return obj;
   },
   toJSON(message: Provider): unknown {
     const obj: any = {};
@@ -885,7 +892,9 @@ export const Provider = {
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromPartial(object.info);
+    }
     return message;
   },
   fromSDK(object: ProviderSDKType): Provider {

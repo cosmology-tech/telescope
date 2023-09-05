@@ -128,6 +128,7 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
                 return fromPartial.fixed64(args);
             case 'sfixed64':
                 return fromPartial.sfixed64(args);
+            // TODO: handle Date and Duration choices
             case 'google.protobuf.Duration':
             case 'Duration':
                 return fromPartial.duration(args);

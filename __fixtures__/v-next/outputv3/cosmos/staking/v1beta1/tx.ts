@@ -353,15 +353,15 @@ export const MsgCreateValidator = {
     return message;
   },
   fromJSON(object: any): MsgCreateValidator {
-    return {
-      description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      commission: isSet(object.commission) ? CommissionRates.fromJSON(object.commission) : undefined,
-      minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : "",
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      pubkey: isSet(object.pubkey) ? Any.fromJSON(object.pubkey) : undefined,
-      value: isSet(object.value) ? Coin.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseMsgCreateValidator();
+    if (isSet(object.description)) obj.description = Description.fromJSON(object.description);
+    if (isSet(object.commission)) obj.commission = CommissionRates.fromJSON(object.commission);
+    if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
+    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
+    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
+    if (isSet(object.pubkey)) obj.pubkey = Any.fromJSON(object.pubkey);
+    if (isSet(object.value)) obj.value = Coin.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: MsgCreateValidator): unknown {
     const obj: any = {};
@@ -376,13 +376,21 @@ export const MsgCreateValidator = {
   },
   fromPartial(object: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
-    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
-    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : undefined;
+    if (object.description !== undefined && object.description !== null) {
+      message.description = Description.fromPartial(object.description);
+    }
+    if (object.commission !== undefined && object.commission !== null) {
+      message.commission = CommissionRates.fromPartial(object.commission);
+    }
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : undefined;
-    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : undefined;
+    if (object.pubkey !== undefined && object.pubkey !== null) {
+      message.pubkey = Any.fromPartial(object.pubkey);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Coin.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
@@ -475,7 +483,8 @@ export const MsgCreateValidatorResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateValidatorResponse {
-    return {};
+    const obj = createBaseMsgCreateValidatorResponse();
+    return obj;
   },
   toJSON(_: MsgCreateValidatorResponse): unknown {
     const obj: any = {};
@@ -574,12 +583,12 @@ export const MsgEditValidator = {
     return message;
   },
   fromJSON(object: any): MsgEditValidator {
-    return {
-      description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      commissionRate: isSet(object.commissionRate) ? String(object.commissionRate) : "",
-      minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
-    };
+    const obj = createBaseMsgEditValidator();
+    if (isSet(object.description)) obj.description = Description.fromJSON(object.description);
+    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
+    if (isSet(object.commissionRate)) obj.commissionRate = String(object.commissionRate);
+    if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
+    return obj;
   },
   toJSON(message: MsgEditValidator): unknown {
     const obj: any = {};
@@ -591,7 +600,9 @@ export const MsgEditValidator = {
   },
   fromPartial(object: DeepPartial<MsgEditValidator>): MsgEditValidator {
     const message = createBaseMsgEditValidator();
-    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
+    if (object.description !== undefined && object.description !== null) {
+      message.description = Description.fromPartial(object.description);
+    }
     message.validatorAddress = object.validatorAddress ?? "";
     message.commissionRate = object.commissionRate ?? "";
     message.minSelfDelegation = object.minSelfDelegation ?? "";
@@ -675,7 +686,8 @@ export const MsgEditValidatorResponse = {
     return message;
   },
   fromJSON(_: any): MsgEditValidatorResponse {
-    return {};
+    const obj = createBaseMsgEditValidatorResponse();
+    return obj;
   },
   toJSON(_: MsgEditValidatorResponse): unknown {
     const obj: any = {};
@@ -767,11 +779,11 @@ export const MsgDelegate = {
     return message;
   },
   fromJSON(object: any): MsgDelegate {
-    return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
-    };
+    const obj = createBaseMsgDelegate();
+    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
+    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
+    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
+    return obj;
   },
   toJSON(message: MsgDelegate): unknown {
     const obj: any = {};
@@ -784,7 +796,9 @@ export const MsgDelegate = {
     const message = createBaseMsgDelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgDelegateSDKType): MsgDelegate {
@@ -861,7 +875,8 @@ export const MsgDelegateResponse = {
     return message;
   },
   fromJSON(_: any): MsgDelegateResponse {
-    return {};
+    const obj = createBaseMsgDelegateResponse();
+    return obj;
   },
   toJSON(_: MsgDelegateResponse): unknown {
     const obj: any = {};
@@ -960,12 +975,12 @@ export const MsgBeginRedelegate = {
     return message;
   },
   fromJSON(object: any): MsgBeginRedelegate {
-    return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorSrcAddress: isSet(object.validatorSrcAddress) ? String(object.validatorSrcAddress) : "",
-      validatorDstAddress: isSet(object.validatorDstAddress) ? String(object.validatorDstAddress) : "",
-      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
-    };
+    const obj = createBaseMsgBeginRedelegate();
+    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
+    if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
+    if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
+    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
+    return obj;
   },
   toJSON(message: MsgBeginRedelegate): unknown {
     const obj: any = {};
@@ -980,7 +995,9 @@ export const MsgBeginRedelegate = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorSrcAddress = object.validatorSrcAddress ?? "";
     message.validatorDstAddress = object.validatorDstAddress ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgBeginRedelegateSDKType): MsgBeginRedelegate {
@@ -1069,9 +1086,9 @@ export const MsgBeginRedelegateResponse = {
     return message;
   },
   fromJSON(object: any): MsgBeginRedelegateResponse {
-    return {
-      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined
-    };
+    const obj = createBaseMsgBeginRedelegateResponse();
+    if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
+    return obj;
   },
   toJSON(message: MsgBeginRedelegateResponse): unknown {
     const obj: any = {};
@@ -1171,11 +1188,11 @@ export const MsgUndelegate = {
     return message;
   },
   fromJSON(object: any): MsgUndelegate {
-    return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
-    };
+    const obj = createBaseMsgUndelegate();
+    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
+    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
+    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
+    return obj;
   },
   toJSON(message: MsgUndelegate): unknown {
     const obj: any = {};
@@ -1188,7 +1205,9 @@ export const MsgUndelegate = {
     const message = createBaseMsgUndelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: MsgUndelegateSDKType): MsgUndelegate {
@@ -1273,9 +1292,9 @@ export const MsgUndelegateResponse = {
     return message;
   },
   fromJSON(object: any): MsgUndelegateResponse {
-    return {
-      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined
-    };
+    const obj = createBaseMsgUndelegateResponse();
+    if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
+    return obj;
   },
   toJSON(message: MsgUndelegateResponse): unknown {
     const obj: any = {};

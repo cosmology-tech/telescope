@@ -137,13 +137,13 @@ export const Decl = {
     return message;
   },
   fromJSON(object: any): Decl {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      doc: isSet(object.doc) ? String(object.doc) : "",
-      ident: isSet(object.ident) ? IdentDecl.fromJSON(object.ident) : undefined,
-      function: isSet(object.function) ? FunctionDecl.fromJSON(object.function) : undefined
-    };
+    const obj = createBaseDecl();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.doc)) obj.doc = String(object.doc);
+    if (isSet(object.ident)) obj.ident = IdentDecl.fromJSON(object.ident);
+    if (isSet(object.function)) obj.function = FunctionDecl.fromJSON(object.function);
+    return obj;
   },
   toJSON(message: Decl): unknown {
     const obj: any = {};
@@ -159,8 +159,12 @@ export const Decl = {
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
     message.doc = object.doc ?? "";
-    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
-    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = IdentDecl.fromPartial(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = FunctionDecl.fromPartial(object.function);
+    }
     return message;
   },
   fromSDK(object: DeclSDKType): Decl {
@@ -269,11 +273,11 @@ export const DeclType = {
     return message;
   },
   fromJSON(object: any): DeclType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      type: isSet(object.type) ? String(object.type) : "",
-      typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => DeclType.fromJSON(e)) : []
-    };
+    const obj = createBaseDeclType();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (Array.isArray(object?.typeParams)) object.typeParams.map((e: any) => DeclType.fromJSON(e));
+    return obj;
   },
   toJSON(message: DeclType): unknown {
     const obj: any = {};
@@ -390,10 +394,10 @@ export const IdentDecl = {
     return message;
   },
   fromJSON(object: any): IdentDecl {
-    return {
-      type: isSet(object.type) ? DeclType.fromJSON(object.type) : undefined,
-      value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseIdentDecl();
+    if (isSet(object.type)) obj.type = DeclType.fromJSON(object.type);
+    if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: IdentDecl): unknown {
     const obj: any = {};
@@ -403,8 +407,12 @@ export const IdentDecl = {
   },
   fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
     const message = createBaseIdentDecl();
-    message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : undefined;
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
+    if (object.type !== undefined && object.type !== null) {
+      message.type = DeclType.fromPartial(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: IdentDeclSDKType): IdentDecl {
@@ -498,11 +506,11 @@ export const FunctionDecl = {
     return message;
   },
   fromJSON(object: any): FunctionDecl {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromJSON(e)) : [],
-      returnType: isSet(object.returnType) ? DeclType.fromJSON(object.returnType) : undefined,
-      receiverFunction: isSet(object.receiverFunction) ? Boolean(object.receiverFunction) : false
-    };
+    const obj = createBaseFunctionDecl();
+    if (Array.isArray(object?.args)) object.args.map((e: any) => IdentDecl.fromJSON(e));
+    if (isSet(object.returnType)) obj.returnType = DeclType.fromJSON(object.returnType);
+    if (isSet(object.receiverFunction)) obj.receiverFunction = Boolean(object.receiverFunction);
+    return obj;
   },
   toJSON(message: FunctionDecl): unknown {
     const obj: any = {};
@@ -518,7 +526,9 @@ export const FunctionDecl = {
   fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
     const message = createBaseFunctionDecl();
     message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
-    message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : undefined;
+    if (object.returnType !== undefined && object.returnType !== null) {
+      message.returnType = DeclType.fromPartial(object.returnType);
+    }
     message.receiverFunction = object.receiverFunction ?? false;
     return message;
   },

@@ -113,10 +113,10 @@ export const CPU = {
     return message;
   },
   fromJSON(object: any): CPU {
-    return {
-      units: isSet(object.units) ? ResourceValue.fromJSON(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
-    };
+    const obj = createBaseCPU();
+    if (isSet(object.units)) obj.units = ResourceValue.fromJSON(object.units);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    return obj;
   },
   toJSON(message: CPU): unknown {
     const obj: any = {};
@@ -130,7 +130,9 @@ export const CPU = {
   },
   fromPartial(object: DeepPartial<CPU>): CPU {
     const message = createBaseCPU();
-    message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromPartial(object.units);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -220,10 +222,10 @@ export const Memory = {
     return message;
   },
   fromJSON(object: any): Memory {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
-    };
+    const obj = createBaseMemory();
+    if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    return obj;
   },
   toJSON(message: Memory): unknown {
     const obj: any = {};
@@ -237,7 +239,9 @@ export const Memory = {
   },
   fromPartial(object: DeepPartial<Memory>): Memory {
     const message = createBaseMemory();
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromPartial(object.quantity);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -334,11 +338,11 @@ export const Storage = {
     return message;
   },
   fromJSON(object: any): Storage {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      quantity: isSet(object.quantity) ? ResourceValue.fromJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
-    };
+    const obj = createBaseStorage();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    return obj;
   },
   toJSON(message: Storage): unknown {
     const obj: any = {};
@@ -354,7 +358,9 @@ export const Storage = {
   fromPartial(object: DeepPartial<Storage>): Storage {
     const message = createBaseStorage();
     message.name = object.name ?? "";
-    message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromPartial(object.quantity);
+    }
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },

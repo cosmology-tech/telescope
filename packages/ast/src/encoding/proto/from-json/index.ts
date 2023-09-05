@@ -3,7 +3,8 @@ import { ProtoType, ProtoField } from '@cosmology/types';
 import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { fromJSON, arrayTypes } from './utils';
+import { fromJSON as fromJSONNonStrict, arrayTypes } from './utils';
+import { fromJSON as fromJSONStrict} from './strict-utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromJSON (${field.type} rules[${field.rule}] name[${name}])`);
@@ -16,6 +17,10 @@ export interface FromJSONMethod {
 }
 
 export const fromJSONMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const strictNullCheckForPrototypeMethods = context.pluginValue('prototypes.strictNullCheckForPrototypeMethods');
+
+    const fromJSON = strictNullCheckForPrototypeMethods ? fromJSONStrict : fromJSONNonStrict;
+
     const oneOfs = getOneOfs(proto);
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = {
@@ -145,14 +150,43 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
     return fields;
 };
 
+
 export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const strictNullCheckForPrototypeMethods = context.pluginValue('prototypes.strictNullCheckForPrototypeMethods');
+
     const fields = fromJSONMethodFields(context, name, proto);
     let varName = 'object';
     if (!fields.length) {
         varName = '_';
     }
 
-    return objectMethod('method',
+    //scaffold block statement
+    let statements: t.Statement[] = [
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator(
+                    t.identifier('obj'),
+                    t.callExpression(
+                        t.identifier('createBase' + name),
+                        []
+                    )
+                )
+            ]
+        )
+    ]
+
+    for (let i = 0; i < fields.length; i++) {
+        statements.push(fields[i] as t.Statement);
+    }
+
+    statements.push(
+        t.returnStatement(
+        t.identifier('obj')
+    ));
+
+    return objectMethod(
+        'method',
         t.identifier('fromJSON'),
         [
             identifier(varName,
@@ -161,18 +195,20 @@ export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: 
                 ),
                 false
             )
-
         ],
         t.blockStatement(
+            strictNullCheckForPrototypeMethods ?
+            statements :
             [
-                t.returnStatement(
-                    t.objectExpression(fields)
-                )
+              t.returnStatement(
+                  t.objectExpression(fields as t.ObjectProperty[])
+              )
             ]
         ),
         false,
         false,
         false,
+        // returnType
         t.tsTypeAnnotation(
             t.tsTypeReference(
                 t.identifier(name)

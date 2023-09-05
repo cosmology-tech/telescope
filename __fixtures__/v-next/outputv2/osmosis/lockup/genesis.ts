@@ -74,11 +74,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      lastLockId: isSet(object.lastLockId) ? BigInt(object.lastLockId.toString()) : BigInt(0),
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : [],
-      syntheticLocks: Array.isArray(object?.syntheticLocks) ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.lastLockId)) obj.lastLockId = BigInt(object.lastLockId.toString());
+    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.syntheticLocks)) object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -97,7 +97,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.lastLockId = object.lastLockId !== undefined && object.lastLockId !== null ? BigInt(object.lastLockId.toString()) : BigInt(0);
+    if (object.lastLockId !== undefined && object.lastLockId !== null) {
+      message.lastLockId = BigInt(object.lastLockId.toString());
+    }
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;

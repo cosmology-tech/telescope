@@ -70,12 +70,12 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      airdropStartTime: isSet(object.airdropStartTime) ? new Date(object.airdropStartTime) : undefined,
-      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
-      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
-      claimDenom: isSet(object.claimDenom) ? String(object.claimDenom) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.airdropStartTime)) obj.airdropStartTime = new Date(object.airdropStartTime);
+    if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
+    if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
+    if (isSet(object.claimDenom)) obj.claimDenom = String(object.claimDenom);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -88,8 +88,12 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : undefined;
-    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
+    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
+      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
+    }
+    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
+      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
+    }
     message.claimDenom = object.claimDenom ?? "";
     return message;
   },

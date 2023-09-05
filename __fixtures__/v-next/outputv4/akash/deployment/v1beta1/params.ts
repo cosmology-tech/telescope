@@ -41,9 +41,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      deploymentMinDeposit: isSet(object.deploymentMinDeposit) ? Coin.fromJSON(object.deploymentMinDeposit) : undefined
-    };
+    const obj = createBaseParams();
+    if (isSet(object.deploymentMinDeposit)) obj.deploymentMinDeposit = Coin.fromJSON(object.deploymentMinDeposit);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -52,7 +52,9 @@ export const Params = {
   },
   fromPartial<I extends Exact<Partial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : undefined;
+    if (object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null) {
+      message.deploymentMinDeposit = Coin.fromPartial(object.deploymentMinDeposit);
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

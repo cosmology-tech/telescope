@@ -49,9 +49,9 @@ export const DenomAuthorityMetadata = {
     return message;
   },
   fromJSON(object: any): DenomAuthorityMetadata {
-    return {
-      admin: isSet(object.admin) ? String(object.admin) : ""
-    };
+    const obj = createBaseDenomAuthorityMetadata();
+    if (isSet(object.admin)) obj.admin = String(object.admin);
+    return obj;
   },
   toJSON(message: DenomAuthorityMetadata): unknown {
     const obj: any = {};

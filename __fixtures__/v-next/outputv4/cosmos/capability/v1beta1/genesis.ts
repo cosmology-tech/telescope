@@ -67,10 +67,10 @@ export const GenesisOwners = {
     return message;
   },
   fromJSON(object: any): GenesisOwners {
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      indexOwners: isSet(object.indexOwners) ? CapabilityOwners.fromJSON(object.indexOwners) : undefined
-    };
+    const obj = createBaseGenesisOwners();
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
+    if (isSet(object.indexOwners)) obj.indexOwners = CapabilityOwners.fromJSON(object.indexOwners);
+    return obj;
   },
   toJSON(message: GenesisOwners): unknown {
     const obj: any = {};
@@ -80,8 +80,12 @@ export const GenesisOwners = {
   },
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
-    message.indexOwners = object.indexOwners !== undefined && object.indexOwners !== null ? CapabilityOwners.fromPartial(object.indexOwners) : undefined;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
+    if (object.indexOwners !== undefined && object.indexOwners !== null) {
+      message.indexOwners = CapabilityOwners.fromPartial(object.indexOwners);
+    }
     return message;
   },
   fromSDK(object: GenesisOwnersSDKType): GenesisOwners {
@@ -174,10 +178,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
+    if (Array.isArray(object?.owners)) object.owners.map((e: any) => GenesisOwners.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -191,7 +195,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     message.owners = object.owners?.map(e => GenesisOwners.fromPartial(e)) || [];
     return message;
   },

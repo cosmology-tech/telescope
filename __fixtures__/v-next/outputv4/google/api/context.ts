@@ -156,9 +156,9 @@ export const Context = {
     return message;
   },
   fromJSON(object: any): Context {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromJSON(e)) : []
-    };
+    const obj = createBaseContext();
+    if (Array.isArray(object?.rules)) object.rules.map((e: any) => ContextRule.fromJSON(e));
+    return obj;
   },
   toJSON(message: Context): unknown {
     const obj: any = {};
@@ -282,13 +282,13 @@ export const ContextRule = {
     return message;
   },
   fromJSON(object: any): ContextRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => String(e)) : [],
-      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => String(e)) : [],
-      allowedRequestExtensions: Array.isArray(object?.allowedRequestExtensions) ? object.allowedRequestExtensions.map((e: any) => String(e)) : [],
-      allowedResponseExtensions: Array.isArray(object?.allowedResponseExtensions) ? object.allowedResponseExtensions.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseContextRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (Array.isArray(object?.requested)) object.requested.map((e: any) => String(e));
+    if (Array.isArray(object?.provided)) object.provided.map((e: any) => String(e));
+    if (Array.isArray(object?.allowedRequestExtensions)) object.allowedRequestExtensions.map((e: any) => String(e));
+    if (Array.isArray(object?.allowedResponseExtensions)) object.allowedResponseExtensions.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: ContextRule): unknown {
     const obj: any = {};

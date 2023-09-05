@@ -52,9 +52,9 @@ export const Control = {
     return message;
   },
   fromJSON(object: any): Control {
-    return {
-      environment: isSet(object.environment) ? String(object.environment) : ""
-    };
+    const obj = createBaseControl();
+    if (isSet(object.environment)) obj.environment = String(object.environment);
+    return obj;
   },
   toJSON(message: Control): unknown {
     const obj: any = {};

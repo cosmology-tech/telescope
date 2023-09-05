@@ -198,10 +198,10 @@ export const LogEntry_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): LogEntry_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseLogEntry_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: LogEntry_LabelsEntry): unknown {
     const obj: any = {};
@@ -369,25 +369,25 @@ export const LogEntry = {
     return message;
   },
   fromJSON(object: any): LogEntry {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
-      httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
-      trace: isSet(object.trace) ? String(object.trace) : "",
-      insertId: isSet(object.insertId) ? String(object.insertId) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
-      textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
-      structPayload: isSet(object.structPayload) ? Struct.fromJSON(object.structPayload) : undefined,
-      operation: isSet(object.operation) ? LogEntryOperation.fromJSON(object.operation) : undefined,
-      sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined
-    };
+    const obj = createBaseLogEntry();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
+    if (isSet(object.severity)) obj.severity = logSeverityFromJSON(object.severity);
+    if (isSet(object.httpRequest)) obj.httpRequest = HttpRequest.fromJSON(object.httpRequest);
+    if (isSet(object.trace)) obj.trace = String(object.trace);
+    if (isSet(object.insertId)) obj.insertId = String(object.insertId);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.protoPayload)) obj.protoPayload = Any.fromJSON(object.protoPayload);
+    if (isSet(object.textPayload)) obj.textPayload = String(object.textPayload);
+    if (isSet(object.structPayload)) obj.structPayload = Struct.fromJSON(object.structPayload);
+    if (isSet(object.operation)) obj.operation = LogEntryOperation.fromJSON(object.operation);
+    if (isSet(object.sourceLocation)) obj.sourceLocation = LogEntrySourceLocation.fromJSON(object.sourceLocation);
+    return obj;
   },
   toJSON(message: LogEntry): unknown {
     const obj: any = {};
@@ -415,7 +415,9 @@ export const LogEntry = {
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
     message.severity = object.severity ?? 0;
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
+    if (object.httpRequest !== undefined && object.httpRequest !== null) {
+      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
+    }
     message.trace = object.trace ?? "";
     message.insertId = object.insertId ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -426,11 +428,19 @@ export const LogEntry = {
       }
       return acc;
     }, {});
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
+    if (object.protoPayload !== undefined && object.protoPayload !== null) {
+      message.protoPayload = Any.fromPartial(object.protoPayload);
+    }
     message.textPayload = object.textPayload ?? undefined;
-    message.structPayload = object.structPayload !== undefined && object.structPayload !== null ? Struct.fromPartial(object.structPayload) : undefined;
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
+    if (object.structPayload !== undefined && object.structPayload !== null) {
+      message.structPayload = Struct.fromPartial(object.structPayload);
+    }
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromPartial(object.operation);
+    }
+    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
+    }
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {
@@ -606,12 +616,12 @@ export const LogEntryOperation = {
     return message;
   },
   fromJSON(object: any): LogEntryOperation {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      producer: isSet(object.producer) ? String(object.producer) : "",
-      first: isSet(object.first) ? Boolean(object.first) : false,
-      last: isSet(object.last) ? Boolean(object.last) : false
-    };
+    const obj = createBaseLogEntryOperation();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.producer)) obj.producer = String(object.producer);
+    if (isSet(object.first)) obj.first = Boolean(object.first);
+    if (isSet(object.last)) obj.last = Boolean(object.last);
+    return obj;
   },
   toJSON(message: LogEntryOperation): unknown {
     const obj: any = {};
@@ -730,11 +740,11 @@ export const LogEntrySourceLocation = {
     return message;
   },
   fromJSON(object: any): LogEntrySourceLocation {
-    return {
-      file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
-      function: isSet(object.function) ? String(object.function) : ""
-    };
+    const obj = createBaseLogEntrySourceLocation();
+    if (isSet(object.file)) obj.file = String(object.file);
+    if (isSet(object.line)) obj.line = BigInt(object.line.toString());
+    if (isSet(object.function)) obj.function = String(object.function);
+    return obj;
   },
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
@@ -746,7 +756,9 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt(0);
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line.toString());
+    }
     message.function = object.function ?? "";
     return message;
   },

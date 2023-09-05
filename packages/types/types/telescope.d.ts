@@ -39,6 +39,7 @@ interface TelescopeOpts {
             toProto?: boolean;
             fromProto?: boolean;
         };
+        strictNullCheckForPrototypeMethods?: boolean;
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
@@ -100,6 +101,9 @@ interface TelescopeOpts {
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
+        /**
+        * @deprecated The logic of useLegacyInlineEncoding will be deprecated.
+        */
         useLegacyInlineEncoding?: boolean;
     };
     lcdClients?: {

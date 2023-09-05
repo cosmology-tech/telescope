@@ -175,13 +175,13 @@ export const Plan = {
     return message;
   },
   fromJSON(object: any): Plan {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      info: isSet(object.info) ? String(object.info) : "",
-      upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
-    };
+    const obj = createBasePlan();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.info)) obj.info = String(object.info);
+    if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
+    return obj;
   },
   toJSON(message: Plan): unknown {
     const obj: any = {};
@@ -196,9 +196,13 @@ export const Plan = {
     const message = createBasePlan();
     message.name = object.name ?? "";
     message.time = object.time ?? undefined;
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.info = object.info ?? "";
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
   },
   fromSDK(object: PlanSDKType): Plan {
@@ -313,11 +317,11 @@ export const SoftwareUpgradeProposal = {
     return message;
   },
   fromJSON(object: any): SoftwareUpgradeProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined
-    };
+    const obj = createBaseSoftwareUpgradeProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
+    return obj;
   },
   toJSON(message: SoftwareUpgradeProposal): unknown {
     const obj: any = {};
@@ -330,7 +334,9 @@ export const SoftwareUpgradeProposal = {
     const message = createBaseSoftwareUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
     return message;
   },
   fromSDK(object: SoftwareUpgradeProposalSDKType): SoftwareUpgradeProposal {
@@ -428,10 +434,10 @@ export const CancelSoftwareUpgradeProposal = {
     return message;
   },
   fromJSON(object: any): CancelSoftwareUpgradeProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseCancelSoftwareUpgradeProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: CancelSoftwareUpgradeProposal): unknown {
     const obj: any = {};
@@ -535,10 +541,10 @@ export const ModuleVersion = {
     return message;
   },
   fromJSON(object: any): ModuleVersion {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0)
-    };
+    const obj = createBaseModuleVersion();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.version)) obj.version = BigInt(object.version.toString());
+    return obj;
   },
   toJSON(message: ModuleVersion): unknown {
     const obj: any = {};
@@ -549,7 +555,9 @@ export const ModuleVersion = {
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";
-    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version.toString());
+    }
     return message;
   },
   fromSDK(object: ModuleVersionSDKType): ModuleVersion {

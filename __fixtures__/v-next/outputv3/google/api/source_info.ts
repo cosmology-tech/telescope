@@ -55,9 +55,9 @@ export const SourceInfo = {
     return message;
   },
   fromJSON(object: any): SourceInfo {
-    return {
-      sourceFiles: Array.isArray(object?.sourceFiles) ? object.sourceFiles.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseSourceInfo();
+    if (Array.isArray(object?.sourceFiles)) object.sourceFiles.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: SourceInfo): unknown {
     const obj: any = {};

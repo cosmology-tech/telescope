@@ -120,11 +120,11 @@ export const LabelDescriptor = {
     return message;
   },
   fromJSON(object: any): LabelDescriptor {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      valueType: isSet(object.valueType) ? labelDescriptor_ValueTypeFromJSON(object.valueType) : -1,
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseLabelDescriptor();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.valueType)) obj.valueType = labelDescriptor_ValueTypeFromJSON(object.valueType);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: LabelDescriptor): unknown {
     const obj: any = {};

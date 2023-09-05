@@ -148,12 +148,12 @@ export const LogDescriptor = {
     return message;
   },
   fromJSON(object: any): LogDescriptor {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
-      description: isSet(object.description) ? String(object.description) : "",
-      displayName: isSet(object.displayName) ? String(object.displayName) : ""
-    };
+    const obj = createBaseLogDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.labels)) object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
+    return obj;
   },
   toJSON(message: LogDescriptor): unknown {
     const obj: any = {};

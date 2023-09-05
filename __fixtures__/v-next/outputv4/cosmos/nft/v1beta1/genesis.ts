@@ -63,10 +63,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.classes)) object.classes.map((e: any) => Class.fromJSON(e));
+    if (Array.isArray(object?.entries)) object.entries.map((e: any) => Entry.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -194,10 +194,10 @@ export const Entry = {
     return message;
   },
   fromJSON(object: any): Entry {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : []
-    };
+    const obj = createBaseEntry();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (Array.isArray(object?.nfts)) object.nfts.map((e: any) => NFT.fromJSON(e));
+    return obj;
   },
   toJSON(message: Entry): unknown {
     const obj: any = {};

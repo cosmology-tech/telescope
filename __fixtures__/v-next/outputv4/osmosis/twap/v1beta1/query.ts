@@ -109,13 +109,13 @@ export const ArithmeticTwapRequest = {
     return message;
   },
   fromJSON(object: any): ArithmeticTwapRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
-      quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined
-    };
+    const obj = createBaseArithmeticTwapRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.baseAsset)) obj.baseAsset = String(object.baseAsset);
+    if (isSet(object.quoteAsset)) obj.quoteAsset = String(object.quoteAsset);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
+    return obj;
   },
   toJSON(message: ArithmeticTwapRequest): unknown {
     const obj: any = {};
@@ -128,7 +128,9 @@ export const ArithmeticTwapRequest = {
   },
   fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime ?? undefined;
@@ -233,9 +235,9 @@ export const ArithmeticTwapResponse = {
     return message;
   },
   fromJSON(object: any): ArithmeticTwapResponse {
-    return {
-      arithmeticTwap: isSet(object.arithmeticTwap) ? String(object.arithmeticTwap) : ""
-    };
+    const obj = createBaseArithmeticTwapResponse();
+    if (isSet(object.arithmeticTwap)) obj.arithmeticTwap = String(object.arithmeticTwap);
+    return obj;
   },
   toJSON(message: ArithmeticTwapResponse): unknown {
     const obj: any = {};
@@ -346,12 +348,12 @@ export const ArithmeticTwapToNowRequest = {
     return message;
   },
   fromJSON(object: any): ArithmeticTwapToNowRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
-      quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined
-    };
+    const obj = createBaseArithmeticTwapToNowRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.baseAsset)) obj.baseAsset = String(object.baseAsset);
+    if (isSet(object.quoteAsset)) obj.quoteAsset = String(object.quoteAsset);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    return obj;
   },
   toJSON(message: ArithmeticTwapToNowRequest): unknown {
     const obj: any = {};
@@ -363,7 +365,9 @@ export const ArithmeticTwapToNowRequest = {
   },
   fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
     const message = createBaseArithmeticTwapToNowRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime ?? undefined;
@@ -462,9 +466,9 @@ export const ArithmeticTwapToNowResponse = {
     return message;
   },
   fromJSON(object: any): ArithmeticTwapToNowResponse {
-    return {
-      arithmeticTwap: isSet(object.arithmeticTwap) ? String(object.arithmeticTwap) : ""
-    };
+    const obj = createBaseArithmeticTwapToNowResponse();
+    if (isSet(object.arithmeticTwap)) obj.arithmeticTwap = String(object.arithmeticTwap);
+    return obj;
   },
   toJSON(message: ArithmeticTwapToNowResponse): unknown {
     const obj: any = {};
@@ -546,7 +550,8 @@ export const ParamsRequest = {
     return message;
   },
   fromJSON(_: any): ParamsRequest {
-    return {};
+    const obj = createBaseParamsRequest();
+    return obj;
   },
   toJSON(_: ParamsRequest): unknown {
     const obj: any = {};
@@ -626,9 +631,9 @@ export const ParamsResponse = {
     return message;
   },
   fromJSON(object: any): ParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: ParamsResponse): unknown {
     const obj: any = {};
@@ -637,7 +642,9 @@ export const ParamsResponse = {
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {

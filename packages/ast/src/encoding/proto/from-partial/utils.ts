@@ -34,39 +34,78 @@ const setNotUndefinedAndNotNull = (
     prop: string,
     value: t.Expression,
     defaultValue: t.Expression,
+    args: FromPartialMethod
 ): t.Statement => {
-    return t.expressionStatement(
-        t.assignmentExpression(
-            '=',
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(prop)
-            ),
-            t.conditionalExpression(
-                t.logicalExpression(
-                    '&&',
-                    t.binaryExpression(
-                        '!==',
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('undefined')
-                    ),
-                    t.binaryExpression(
-                        '!==',
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        ),
-                        t.nullLiteral()
-                    )
-                ),
-                value,
-                defaultValue
-            )
-        )
-    );
+    const strictNullCheckForPrototypeMethods = args.context.pluginValue('prototypes.strictNullCheckForPrototypeMethods');
+
+    if(strictNullCheckForPrototypeMethods){
+      return t.ifStatement(
+          t.logicalExpression(
+              '&&',
+              t.binaryExpression(
+                  '!==',
+                  t.memberExpression(
+                      t.identifier('object'),
+                      t.identifier(prop)
+                  ),
+                  t.identifier('undefined')
+              ),
+              t.binaryExpression(
+                  '!==',
+                  t.memberExpression(
+                      t.identifier('object'),
+                      t.identifier(prop)
+                  ),
+                  t.nullLiteral()
+              )
+          ),
+          t.blockStatement([
+              t.expressionStatement(
+                  t.assignmentExpression(
+                      '=',
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(prop)
+                      ),
+                      value
+                  ))
+          ])
+      )
+    } else{
+      return t.expressionStatement(
+          t.assignmentExpression(
+              '=',
+              t.memberExpression(
+                  t.identifier('message'),
+                  t.identifier(prop)
+              ),
+              t.conditionalExpression(
+                  t.logicalExpression(
+                      '&&',
+                      t.binaryExpression(
+                          '!==',
+                          t.memberExpression(
+                              t.identifier('object'),
+                              t.identifier(prop)
+                          ),
+                          t.identifier('undefined')
+                      ),
+                      t.binaryExpression(
+                          '!==',
+                          t.memberExpression(
+                              t.identifier('object'),
+                              t.identifier(prop)
+                          ),
+                          t.nullLiteral()
+                      )
+                  ),
+                  value,
+                  defaultValue
+              )
+          )
+      );
+    }
+
 };
 
 export const fromPartial = {
@@ -122,7 +161,8 @@ export const fromPartial = {
     },
 
 
-    // message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
+    // OLD: message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
+    // NEW: if( object.myInt64Value !== undefined && object.myInt64Value !== null ) { message.myInt64Value = Long.fromValue(object.myInt64Value) }
     long(args: FromPartialMethod) {
         const prop = args.field.name;
 
@@ -136,7 +176,8 @@ export const fromPartial = {
                     t.identifier(prop)
                 )
             ),
-            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf),
+            args
         );
     },
 
@@ -156,7 +197,7 @@ export const fromPartial = {
         return fromPartial.long(args);
     },
 
-    // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : SignDocDirectAux.fromPartial({});
     type(args: FromPartialMethod) {
         const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
@@ -174,7 +215,8 @@ export const fromPartial = {
                     )
                 ]
             ),
-            t.identifier('undefined')
+            t.identifier('undefined'),
+            args
         );
     },
 

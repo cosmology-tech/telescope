@@ -404,11 +404,11 @@ export const MsgStoreCode = {
     return message;
   },
   fromJSON(object: any): MsgStoreCode {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(),
-      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
-    };
+    const obj = createBaseMsgStoreCode();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.wasmByteCode)) obj.wasmByteCode = bytesFromBase64(object.wasmByteCode);
+    if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
+    return obj;
   },
   toJSON(message: MsgStoreCode): unknown {
     const obj: any = {};
@@ -421,7 +421,9 @@ export const MsgStoreCode = {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
+      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
+    }
     return message;
   },
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
@@ -506,9 +508,9 @@ export const MsgStoreCodeResponse = {
     return message;
   },
   fromJSON(object: any): MsgStoreCodeResponse {
-    return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0)
-    };
+    const obj = createBaseMsgStoreCodeResponse();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    return obj;
   },
   toJSON(message: MsgStoreCodeResponse): unknown {
     const obj: any = {};
@@ -517,7 +519,9 @@ export const MsgStoreCodeResponse = {
   },
   fromPartial(object: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
     const message = createBaseMsgStoreCodeResponse();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgStoreCodeResponseSDKType): MsgStoreCodeResponse {
@@ -629,14 +633,14 @@ export const MsgInstantiateContract = {
     return message;
   },
   fromJSON(object: any): MsgInstantiateContract {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
-      label: isSet(object.label) ? String(object.label) : "",
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseMsgInstantiateContract();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.admin)) obj.admin = String(object.admin);
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.label)) obj.label = String(object.label);
+    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
+    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: MsgInstantiateContract): unknown {
     const obj: any = {};
@@ -656,7 +660,9 @@ export const MsgInstantiateContract = {
     const message = createBaseMsgInstantiateContract();
     message.sender = object.sender ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -771,10 +777,10 @@ export const MsgInstantiateContractResponse = {
     return message;
   },
   fromJSON(object: any): MsgInstantiateContractResponse {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBaseMsgInstantiateContractResponse();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: MsgInstantiateContractResponse): unknown {
     const obj: any = {};
@@ -887,12 +893,12 @@ export const MsgExecuteContract = {
     return message;
   },
   fromJSON(object: any): MsgExecuteContract {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseMsgExecuteContract();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
+    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: MsgExecuteContract): unknown {
     const obj: any = {};
@@ -1008,9 +1014,9 @@ export const MsgExecuteContractResponse = {
     return message;
   },
   fromJSON(object: any): MsgExecuteContractResponse {
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBaseMsgExecuteContractResponse();
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: MsgExecuteContractResponse): unknown {
     const obj: any = {};
@@ -1117,12 +1123,12 @@ export const MsgMigrateContract = {
     return message;
   },
   fromJSON(object: any): MsgMigrateContract {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
-    };
+    const obj = createBaseMsgMigrateContract();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
+    return obj;
   },
   toJSON(message: MsgMigrateContract): unknown {
     const obj: any = {};
@@ -1136,7 +1142,9 @@ export const MsgMigrateContract = {
     const message = createBaseMsgMigrateContract();
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },
@@ -1226,9 +1234,9 @@ export const MsgMigrateContractResponse = {
     return message;
   },
   fromJSON(object: any): MsgMigrateContractResponse {
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBaseMsgMigrateContractResponse();
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: MsgMigrateContractResponse): unknown {
     const obj: any = {};
@@ -1328,11 +1336,11 @@ export const MsgUpdateAdmin = {
     return message;
   },
   fromJSON(object: any): MsgUpdateAdmin {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
-      contract: isSet(object.contract) ? String(object.contract) : ""
-    };
+    const obj = createBaseMsgUpdateAdmin();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    return obj;
   },
   toJSON(message: MsgUpdateAdmin): unknown {
     const obj: any = {};
@@ -1422,7 +1430,8 @@ export const MsgUpdateAdminResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateAdminResponse {
-    return {};
+    const obj = createBaseMsgUpdateAdminResponse();
+    return obj;
   },
   toJSON(_: MsgUpdateAdminResponse): unknown {
     const obj: any = {};
@@ -1507,10 +1516,10 @@ export const MsgClearAdmin = {
     return message;
   },
   fromJSON(object: any): MsgClearAdmin {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : ""
-    };
+    const obj = createBaseMsgClearAdmin();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    return obj;
   },
   toJSON(message: MsgClearAdmin): unknown {
     const obj: any = {};
@@ -1594,7 +1603,8 @@ export const MsgClearAdminResponse = {
     return message;
   },
   fromJSON(_: any): MsgClearAdminResponse {
-    return {};
+    const obj = createBaseMsgClearAdminResponse();
+    return obj;
   },
   toJSON(_: MsgClearAdminResponse): unknown {
     const obj: any = {};

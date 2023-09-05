@@ -104,12 +104,12 @@ export const MsgCreateBalancerPool = {
     return message;
   },
   fromJSON(object: any): MsgCreateBalancerPool {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
-      poolAssets: Array.isArray(object?.poolAssets) ? object.poolAssets.map((e: any) => PoolAsset.fromJSON(e)) : [],
-      futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : ""
-    };
+    const obj = createBaseMsgCreateBalancerPool();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
+    if (Array.isArray(object?.poolAssets)) object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
+    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
+    return obj;
   },
   toJSON(message: MsgCreateBalancerPool): unknown {
     const obj: any = {};
@@ -126,7 +126,9 @@ export const MsgCreateBalancerPool = {
   fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
@@ -225,9 +227,9 @@ export const MsgCreateBalancerPoolResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseMsgCreateBalancerPoolResponse();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: MsgCreateBalancerPoolResponse): unknown {
     const obj: any = {};
@@ -236,7 +238,9 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: MsgCreateBalancerPoolResponseSDKType): MsgCreateBalancerPoolResponse {

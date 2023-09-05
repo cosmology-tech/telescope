@@ -163,11 +163,11 @@ export const SetSuperfluidAssetsProposal = {
     return message;
   },
   fromJSON(object: any): SetSuperfluidAssetsProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromJSON(e)) : []
-    };
+    const obj = createBaseSetSuperfluidAssetsProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.assets)) object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
+    return obj;
   },
   toJSON(message: SetSuperfluidAssetsProposal): unknown {
     const obj: any = {};
@@ -292,11 +292,11 @@ export const RemoveSuperfluidAssetsProposal = {
     return message;
   },
   fromJSON(object: any): RemoveSuperfluidAssetsProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      superfluidAssetDenoms: Array.isArray(object?.superfluidAssetDenoms) ? object.superfluidAssetDenoms.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseRemoveSuperfluidAssetsProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.superfluidAssetDenoms)) object.superfluidAssetDenoms.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: RemoveSuperfluidAssetsProposal): unknown {
     const obj: any = {};
@@ -437,12 +437,12 @@ export const UpdateUnpoolWhiteListProposal = {
     return message;
   },
   fromJSON(object: any): UpdateUnpoolWhiteListProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : [],
-      isOverwrite: isSet(object.isOverwrite) ? Boolean(object.isOverwrite) : false
-    };
+    const obj = createBaseUpdateUnpoolWhiteListProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.ids)) object.ids.map((e: any) => BigInt(e.toString()));
+    if (isSet(object.isOverwrite)) obj.isOverwrite = Boolean(object.isOverwrite);
+    return obj;
   },
   toJSON(message: UpdateUnpoolWhiteListProposal): unknown {
     const obj: any = {};

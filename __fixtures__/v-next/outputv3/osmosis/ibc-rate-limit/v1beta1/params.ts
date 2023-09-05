@@ -53,9 +53,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

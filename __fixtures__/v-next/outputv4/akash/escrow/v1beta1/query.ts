@@ -116,13 +116,13 @@ export const QueryAccountsRequest = {
     return message;
   },
   fromJSON(object: any): QueryAccountsRequest {
-    return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? String(object.state) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAccountsRequest();
+    if (isSet(object.scope)) obj.scope = String(object.scope);
+    if (isSet(object.xid)) obj.xid = String(object.xid);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = String(object.state);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAccountsRequest): unknown {
     const obj: any = {};
@@ -139,7 +139,9 @@ export const QueryAccountsRequest = {
     message.xid = object.xid ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
@@ -247,10 +249,10 @@ export const QueryAccountsResponse = {
     return message;
   },
   fromJSON(object: any): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAccountsResponse();
+    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Account.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAccountsResponse): unknown {
     const obj: any = {};
@@ -265,7 +267,9 @@ export const QueryAccountsResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryAccountsResponse>, I>>(object: I): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
@@ -394,14 +398,14 @@ export const QueryPaymentsRequest = {
     return message;
   },
   fromJSON(object: any): QueryPaymentsRequest {
-    return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? String(object.state) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPaymentsRequest();
+    if (isSet(object.scope)) obj.scope = String(object.scope);
+    if (isSet(object.xid)) obj.xid = String(object.xid);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = String(object.state);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPaymentsRequest): unknown {
     const obj: any = {};
@@ -420,7 +424,9 @@ export const QueryPaymentsRequest = {
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPaymentsRequestSDKType): QueryPaymentsRequest {
@@ -533,10 +539,10 @@ export const QueryPaymentsResponse = {
     return message;
   },
   fromJSON(object: any): QueryPaymentsResponse {
-    return {
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPaymentsResponse();
+    if (Array.isArray(object?.payments)) object.payments.map((e: any) => Payment.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPaymentsResponse): unknown {
     const obj: any = {};
@@ -551,7 +557,9 @@ export const QueryPaymentsResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryPaymentsResponse>, I>>(object: I): QueryPaymentsResponse {
     const message = createBaseQueryPaymentsResponse();
     message.payments = object.payments?.map(e => Payment.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPaymentsResponseSDKType): QueryPaymentsResponse {

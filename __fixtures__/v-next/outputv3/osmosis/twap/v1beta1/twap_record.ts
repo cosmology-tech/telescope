@@ -201,18 +201,18 @@ export const TwapRecord = {
     return message;
   },
   fromJSON(object: any): TwapRecord {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
-      asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
-      p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
-      p0ArithmeticTwapAccumulator: isSet(object.p0ArithmeticTwapAccumulator) ? String(object.p0ArithmeticTwapAccumulator) : "",
-      p1ArithmeticTwapAccumulator: isSet(object.p1ArithmeticTwapAccumulator) ? String(object.p1ArithmeticTwapAccumulator) : "",
-      lastErrorTime: isSet(object.lastErrorTime) ? new Date(object.lastErrorTime) : undefined
-    };
+    const obj = createBaseTwapRecord();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.asset0Denom)) obj.asset0Denom = String(object.asset0Denom);
+    if (isSet(object.asset1Denom)) obj.asset1Denom = String(object.asset1Denom);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.p0LastSpotPrice)) obj.p0LastSpotPrice = String(object.p0LastSpotPrice);
+    if (isSet(object.p1LastSpotPrice)) obj.p1LastSpotPrice = String(object.p1LastSpotPrice);
+    if (isSet(object.p0ArithmeticTwapAccumulator)) obj.p0ArithmeticTwapAccumulator = String(object.p0ArithmeticTwapAccumulator);
+    if (isSet(object.p1ArithmeticTwapAccumulator)) obj.p1ArithmeticTwapAccumulator = String(object.p1ArithmeticTwapAccumulator);
+    if (isSet(object.lastErrorTime)) obj.lastErrorTime = new Date(object.lastErrorTime);
+    return obj;
   },
   toJSON(message: TwapRecord): unknown {
     const obj: any = {};
@@ -230,10 +230,14 @@ export const TwapRecord = {
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.time = object.time ?? undefined;
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";

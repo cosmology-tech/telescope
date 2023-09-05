@@ -120,11 +120,11 @@ export const InflationDistribution = {
     return message;
   },
   fromJSON(object: any): InflationDistribution {
-    return {
-      stakingRewards: isSet(object.stakingRewards) ? String(object.stakingRewards) : "",
-      usageIncentives: isSet(object.usageIncentives) ? String(object.usageIncentives) : "",
-      communityPool: isSet(object.communityPool) ? String(object.communityPool) : ""
-    };
+    const obj = createBaseInflationDistribution();
+    if (isSet(object.stakingRewards)) obj.stakingRewards = String(object.stakingRewards);
+    if (isSet(object.usageIncentives)) obj.usageIncentives = String(object.usageIncentives);
+    if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
+    return obj;
   },
   toJSON(message: InflationDistribution): unknown {
     const obj: any = {};
@@ -250,13 +250,13 @@ export const ExponentialCalculation = {
     return message;
   },
   fromJSON(object: any): ExponentialCalculation {
-    return {
-      a: isSet(object.a) ? String(object.a) : "",
-      r: isSet(object.r) ? String(object.r) : "",
-      c: isSet(object.c) ? String(object.c) : "",
-      bondingTarget: isSet(object.bondingTarget) ? String(object.bondingTarget) : "",
-      maxVariance: isSet(object.maxVariance) ? String(object.maxVariance) : ""
-    };
+    const obj = createBaseExponentialCalculation();
+    if (isSet(object.a)) obj.a = String(object.a);
+    if (isSet(object.r)) obj.r = String(object.r);
+    if (isSet(object.c)) obj.c = String(object.c);
+    if (isSet(object.bondingTarget)) obj.bondingTarget = String(object.bondingTarget);
+    if (isSet(object.maxVariance)) obj.maxVariance = String(object.maxVariance);
+    return obj;
   },
   toJSON(message: ExponentialCalculation): unknown {
     const obj: any = {};

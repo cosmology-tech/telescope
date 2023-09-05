@@ -153,7 +153,8 @@ export const QueryPeriodRequest = {
     return message;
   },
   fromJSON(_: any): QueryPeriodRequest {
-    return {};
+    const obj = createBaseQueryPeriodRequest();
+    return obj;
   },
   toJSON(_: QueryPeriodRequest): unknown {
     const obj: any = {};
@@ -227,9 +228,9 @@ export const QueryPeriodResponse = {
     return message;
   },
   fromJSON(object: any): QueryPeriodResponse {
-    return {
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryPeriodResponse();
+    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
+    return obj;
   },
   toJSON(message: QueryPeriodResponse): unknown {
     const obj: any = {};
@@ -238,7 +239,9 @@ export const QueryPeriodResponse = {
   },
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period.toString());
+    }
     return message;
   },
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
@@ -305,7 +308,8 @@ export const QueryEpochMintProvisionRequest = {
     return message;
   },
   fromJSON(_: any): QueryEpochMintProvisionRequest {
-    return {};
+    const obj = createBaseQueryEpochMintProvisionRequest();
+    return obj;
   },
   toJSON(_: QueryEpochMintProvisionRequest): unknown {
     const obj: any = {};
@@ -379,9 +383,9 @@ export const QueryEpochMintProvisionResponse = {
     return message;
   },
   fromJSON(object: any): QueryEpochMintProvisionResponse {
-    return {
-      epochMintProvision: isSet(object.epochMintProvision) ? DecCoin.fromJSON(object.epochMintProvision) : undefined
-    };
+    const obj = createBaseQueryEpochMintProvisionResponse();
+    if (isSet(object.epochMintProvision)) obj.epochMintProvision = DecCoin.fromJSON(object.epochMintProvision);
+    return obj;
   },
   toJSON(message: QueryEpochMintProvisionResponse): unknown {
     const obj: any = {};
@@ -390,7 +394,9 @@ export const QueryEpochMintProvisionResponse = {
   },
   fromPartial(object: DeepPartial<QueryEpochMintProvisionResponse>): QueryEpochMintProvisionResponse {
     const message = createBaseQueryEpochMintProvisionResponse();
-    message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
+    if (object.epochMintProvision !== undefined && object.epochMintProvision !== null) {
+      message.epochMintProvision = DecCoin.fromPartial(object.epochMintProvision);
+    }
     return message;
   },
   fromSDK(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
@@ -457,7 +463,8 @@ export const QuerySkippedEpochsRequest = {
     return message;
   },
   fromJSON(_: any): QuerySkippedEpochsRequest {
-    return {};
+    const obj = createBaseQuerySkippedEpochsRequest();
+    return obj;
   },
   toJSON(_: QuerySkippedEpochsRequest): unknown {
     const obj: any = {};
@@ -531,9 +538,9 @@ export const QuerySkippedEpochsResponse = {
     return message;
   },
   fromJSON(object: any): QuerySkippedEpochsResponse {
-    return {
-      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt(0)
-    };
+    const obj = createBaseQuerySkippedEpochsResponse();
+    if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
+    return obj;
   },
   toJSON(message: QuerySkippedEpochsResponse): unknown {
     const obj: any = {};
@@ -542,7 +549,9 @@ export const QuerySkippedEpochsResponse = {
   },
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt(0);
+    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
+      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
+    }
     return message;
   },
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
@@ -609,7 +618,8 @@ export const QueryCirculatingSupplyRequest = {
     return message;
   },
   fromJSON(_: any): QueryCirculatingSupplyRequest {
-    return {};
+    const obj = createBaseQueryCirculatingSupplyRequest();
+    return obj;
   },
   toJSON(_: QueryCirculatingSupplyRequest): unknown {
     const obj: any = {};
@@ -683,9 +693,9 @@ export const QueryCirculatingSupplyResponse = {
     return message;
   },
   fromJSON(object: any): QueryCirculatingSupplyResponse {
-    return {
-      circulatingSupply: isSet(object.circulatingSupply) ? DecCoin.fromJSON(object.circulatingSupply) : undefined
-    };
+    const obj = createBaseQueryCirculatingSupplyResponse();
+    if (isSet(object.circulatingSupply)) obj.circulatingSupply = DecCoin.fromJSON(object.circulatingSupply);
+    return obj;
   },
   toJSON(message: QueryCirculatingSupplyResponse): unknown {
     const obj: any = {};
@@ -694,7 +704,9 @@ export const QueryCirculatingSupplyResponse = {
   },
   fromPartial(object: DeepPartial<QueryCirculatingSupplyResponse>): QueryCirculatingSupplyResponse {
     const message = createBaseQueryCirculatingSupplyResponse();
-    message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
+    if (object.circulatingSupply !== undefined && object.circulatingSupply !== null) {
+      message.circulatingSupply = DecCoin.fromPartial(object.circulatingSupply);
+    }
     return message;
   },
   fromSDK(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
@@ -761,7 +773,8 @@ export const QueryInflationRateRequest = {
     return message;
   },
   fromJSON(_: any): QueryInflationRateRequest {
-    return {};
+    const obj = createBaseQueryInflationRateRequest();
+    return obj;
   },
   toJSON(_: QueryInflationRateRequest): unknown {
     const obj: any = {};
@@ -835,9 +848,9 @@ export const QueryInflationRateResponse = {
     return message;
   },
   fromJSON(object: any): QueryInflationRateResponse {
-    return {
-      inflationRate: isSet(object.inflationRate) ? String(object.inflationRate) : ""
-    };
+    const obj = createBaseQueryInflationRateResponse();
+    if (isSet(object.inflationRate)) obj.inflationRate = String(object.inflationRate);
+    return obj;
   },
   toJSON(message: QueryInflationRateResponse): unknown {
     const obj: any = {};
@@ -913,7 +926,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -987,9 +1001,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -998,7 +1012,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

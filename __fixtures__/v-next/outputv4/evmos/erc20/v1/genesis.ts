@@ -68,10 +68,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      tokenPairs: Array.isArray(object?.tokenPairs) ? object.tokenPairs.map((e: any) => TokenPair.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.tokenPairs)) object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -85,7 +85,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     return message;
   },
@@ -181,10 +183,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      enableErc20: isSet(object.enableErc20) ? Boolean(object.enableErc20) : false,
-      enableEvmHook: isSet(object.enableEvmHook) ? Boolean(object.enableEvmHook) : false
-    };
+    const obj = createBaseParams();
+    if (isSet(object.enableErc20)) obj.enableErc20 = Boolean(object.enableErc20);
+    if (isSet(object.enableEvmHook)) obj.enableEvmHook = Boolean(object.enableEvmHook);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

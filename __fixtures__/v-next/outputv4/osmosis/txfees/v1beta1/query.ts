@@ -84,7 +84,8 @@ export const QueryFeeTokensRequest = {
     return message;
   },
   fromJSON(_: any): QueryFeeTokensRequest {
-    return {};
+    const obj = createBaseQueryFeeTokensRequest();
+    return obj;
   },
   toJSON(_: QueryFeeTokensRequest): unknown {
     const obj: any = {};
@@ -164,9 +165,9 @@ export const QueryFeeTokensResponse = {
     return message;
   },
   fromJSON(object: any): QueryFeeTokensResponse {
-    return {
-      feeTokens: Array.isArray(object?.feeTokens) ? object.feeTokens.map((e: any) => FeeToken.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryFeeTokensResponse();
+    if (Array.isArray(object?.feeTokens)) object.feeTokens.map((e: any) => FeeToken.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryFeeTokensResponse): unknown {
     const obj: any = {};
@@ -268,9 +269,9 @@ export const QueryDenomSpotPriceRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomSpotPriceRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQueryDenomSpotPriceRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QueryDenomSpotPriceRequest): unknown {
     const obj: any = {};
@@ -367,10 +368,10 @@ export const QueryDenomSpotPriceResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomSpotPriceResponse {
-    return {
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0),
-      spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
-    };
+    const obj = createBaseQueryDenomSpotPriceResponse();
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
+    return obj;
   },
   toJSON(message: QueryDenomSpotPriceResponse): unknown {
     const obj: any = {};
@@ -380,7 +381,9 @@ export const QueryDenomSpotPriceResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     message.spotPrice = object.spotPrice ?? "";
     return message;
   },
@@ -467,9 +470,9 @@ export const QueryDenomPoolIdRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomPoolIdRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQueryDenomPoolIdRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QueryDenomPoolIdRequest): unknown {
     const obj: any = {};
@@ -559,9 +562,9 @@ export const QueryDenomPoolIdResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomPoolIdResponse {
-    return {
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryDenomPoolIdResponse();
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    return obj;
   },
   toJSON(message: QueryDenomPoolIdResponse): unknown {
     const obj: any = {};
@@ -570,7 +573,9 @@ export const QueryDenomPoolIdResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     return message;
   },
   fromSDK(object: QueryDenomPoolIdResponseSDKType): QueryDenomPoolIdResponse {
@@ -643,7 +648,8 @@ export const QueryBaseDenomRequest = {
     return message;
   },
   fromJSON(_: any): QueryBaseDenomRequest {
-    return {};
+    const obj = createBaseQueryBaseDenomRequest();
+    return obj;
   },
   toJSON(_: QueryBaseDenomRequest): unknown {
     const obj: any = {};
@@ -723,9 +729,9 @@ export const QueryBaseDenomResponse = {
     return message;
   },
   fromJSON(object: any): QueryBaseDenomResponse {
-    return {
-      baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : ""
-    };
+    const obj = createBaseQueryBaseDenomResponse();
+    if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
+    return obj;
   },
   toJSON(message: QueryBaseDenomResponse): unknown {
     const obj: any = {};

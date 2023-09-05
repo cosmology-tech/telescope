@@ -210,16 +210,16 @@ export const Gauge = {
     return message;
   },
   fromJSON(object: any): Gauge {
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
-      distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0),
-      filledEpochs: isSet(object.filledEpochs) ? BigInt(object.filledEpochs.toString()) : BigInt(0),
-      distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseGauge();
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
+    if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
+    if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
+    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
+    if (isSet(object.filledEpochs)) obj.filledEpochs = BigInt(object.filledEpochs.toString());
+    if (Array.isArray(object?.distributedCoins)) object.distributedCoins.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: Gauge): unknown {
     const obj: any = {};
@@ -243,13 +243,21 @@ export const Gauge = {
   },
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.isPerpetual = object.isPerpetual ?? false;
-    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
+    if (object.distributeTo !== undefined && object.distributeTo !== null) {
+      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
+    }
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
-    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? BigInt(object.filledEpochs.toString()) : BigInt(0);
+    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
+      message.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
+    }
+    if (object.filledEpochs !== undefined && object.filledEpochs !== null) {
+      message.filledEpochs = BigInt(object.filledEpochs.toString());
+    }
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -371,9 +379,9 @@ export const LockableDurationsInfo = {
     return message;
   },
   fromJSON(object: any): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
-    };
+    const obj = createBaseLockableDurationsInfo();
+    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    return obj;
   },
   toJSON(message: LockableDurationsInfo): unknown {
     const obj: any = {};

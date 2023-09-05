@@ -146,9 +146,9 @@ export const QueryEvidenceRequest = {
     return message;
   },
   fromJSON(object: any): QueryEvidenceRequest {
-    return {
-      evidenceHash: isSet(object.evidenceHash) ? bytesFromBase64(object.evidenceHash) : new Uint8Array()
-    };
+    const obj = createBaseQueryEvidenceRequest();
+    if (isSet(object.evidenceHash)) obj.evidenceHash = bytesFromBase64(object.evidenceHash);
+    return obj;
   },
   toJSON(message: QueryEvidenceRequest): unknown {
     const obj: any = {};
@@ -234,9 +234,9 @@ export const QueryEvidenceResponse = {
     return message;
   },
   fromJSON(object: any): QueryEvidenceResponse {
-    return {
-      evidence: isSet(object.evidence) ? Any.fromJSON(object.evidence) : undefined
-    };
+    const obj = createBaseQueryEvidenceResponse();
+    if (isSet(object.evidence)) obj.evidence = Any.fromJSON(object.evidence);
+    return obj;
   },
   toJSON(message: QueryEvidenceResponse): unknown {
     const obj: any = {};
@@ -245,7 +245,9 @@ export const QueryEvidenceResponse = {
   },
   fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
     const message = createBaseQueryEvidenceResponse();
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Any.fromPartial(object.evidence);
+    }
     return message;
   },
   fromSDK(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
@@ -322,9 +324,9 @@ export const QueryAllEvidenceRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllEvidenceRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllEvidenceRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllEvidenceRequest): unknown {
     const obj: any = {};
@@ -333,7 +335,9 @@ export const QueryAllEvidenceRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
     const message = createBaseQueryAllEvidenceRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
@@ -417,10 +421,10 @@ export const QueryAllEvidenceResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllEvidenceResponse {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllEvidenceResponse();
+    if (Array.isArray(object?.evidence)) object.evidence.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllEvidenceResponse): unknown {
     const obj: any = {};
@@ -435,7 +439,9 @@ export const QueryAllEvidenceResponse = {
   fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {
     const message = createBaseQueryAllEvidenceResponse();
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {

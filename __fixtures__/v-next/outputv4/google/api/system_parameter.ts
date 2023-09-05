@@ -143,9 +143,9 @@ export const SystemParameters = {
     return message;
   },
   fromJSON(object: any): SystemParameters {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromJSON(e)) : []
-    };
+    const obj = createBaseSystemParameters();
+    if (Array.isArray(object?.rules)) object.rules.map((e: any) => SystemParameterRule.fromJSON(e));
+    return obj;
   },
   toJSON(message: SystemParameters): unknown {
     const obj: any = {};
@@ -248,10 +248,10 @@ export const SystemParameterRule = {
     return message;
   },
   fromJSON(object: any): SystemParameterRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromJSON(e)) : []
-    };
+    const obj = createBaseSystemParameterRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (Array.isArray(object?.parameters)) object.parameters.map((e: any) => SystemParameter.fromJSON(e));
+    return obj;
   },
   toJSON(message: SystemParameterRule): unknown {
     const obj: any = {};
@@ -368,11 +368,11 @@ export const SystemParameter = {
     return message;
   },
   fromJSON(object: any): SystemParameter {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      httpHeader: isSet(object.httpHeader) ? String(object.httpHeader) : "",
-      urlQueryParameter: isSet(object.urlQueryParameter) ? String(object.urlQueryParameter) : ""
-    };
+    const obj = createBaseSystemParameter();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.httpHeader)) obj.httpHeader = String(object.httpHeader);
+    if (isSet(object.urlQueryParameter)) obj.urlQueryParameter = String(object.urlQueryParameter);
+    return obj;
   },
   toJSON(message: SystemParameter): unknown {
     const obj: any = {};

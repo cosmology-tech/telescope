@@ -312,13 +312,13 @@ export const LeaseID = {
     return message;
   },
   fromJSON(object: any): LeaseID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : ""
-    };
+    const obj = createBaseLeaseID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
+    if (isSet(object.provider)) obj.provider = String(object.provider);
+    return obj;
   },
   toJSON(message: LeaseID): unknown {
     const obj: any = {};
@@ -332,7 +332,9 @@ export const LeaseID = {
   fromPartial(object: DeepPartial<LeaseID>): LeaseID {
     const message = createBaseLeaseID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -449,13 +451,13 @@ export const Lease = {
     return message;
   },
   fromJSON(object: any): Lease {
-    return {
-      leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
-      price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0),
-      closedOn: isSet(object.closedOn) ? BigInt(object.closedOn.toString()) : BigInt(0)
-    };
+    const obj = createBaseLease();
+    if (isSet(object.leaseId)) obj.leaseId = LeaseID.fromJSON(object.leaseId);
+    if (isSet(object.state)) obj.state = lease_StateFromJSON(object.state);
+    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
+    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
+    if (isSet(object.closedOn)) obj.closedOn = BigInt(object.closedOn.toString());
+    return obj;
   },
   toJSON(message: Lease): unknown {
     const obj: any = {};
@@ -468,11 +470,19 @@ export const Lease = {
   },
   fromPartial(object: DeepPartial<Lease>): Lease {
     const message = createBaseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
+    if (object.leaseId !== undefined && object.leaseId !== null) {
+      message.leaseId = LeaseID.fromPartial(object.leaseId);
+    }
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
-    message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? BigInt(object.closedOn.toString()) : BigInt(0);
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromPartial(object.price);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
+    if (object.closedOn !== undefined && object.closedOn !== null) {
+      message.closedOn = BigInt(object.closedOn.toString());
+    }
     return message;
   },
   fromSDK(object: LeaseSDKType): Lease {
@@ -593,14 +603,14 @@ export const LeaseFilters = {
     return message;
   },
   fromJSON(object: any): LeaseFilters {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
+    const obj = createBaseLeaseFilters();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
+    if (isSet(object.provider)) obj.provider = String(object.provider);
+    if (isSet(object.state)) obj.state = String(object.state);
+    return obj;
   },
   toJSON(message: LeaseFilters): unknown {
     const obj: any = {};
@@ -615,7 +625,9 @@ export const LeaseFilters = {
   fromPartial(object: DeepPartial<LeaseFilters>): LeaseFilters {
     const message = createBaseLeaseFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -709,9 +721,9 @@ export const MsgCreateLease = {
     return message;
   },
   fromJSON(object: any): MsgCreateLease {
-    return {
-      bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined
-    };
+    const obj = createBaseMsgCreateLease();
+    if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
+    return obj;
   },
   toJSON(message: MsgCreateLease): unknown {
     const obj: any = {};
@@ -720,7 +732,9 @@ export const MsgCreateLease = {
   },
   fromPartial(object: DeepPartial<MsgCreateLease>): MsgCreateLease {
     const message = createBaseMsgCreateLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
+    if (object.bidId !== undefined && object.bidId !== null) {
+      message.bidId = BidID.fromPartial(object.bidId);
+    }
     return message;
   },
   fromSDK(object: MsgCreateLeaseSDKType): MsgCreateLease {
@@ -782,7 +796,8 @@ export const MsgCreateLeaseResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateLeaseResponse {
-    return {};
+    const obj = createBaseMsgCreateLeaseResponse();
+    return obj;
   },
   toJSON(_: MsgCreateLeaseResponse): unknown {
     const obj: any = {};
@@ -853,9 +868,9 @@ export const MsgWithdrawLease = {
     return message;
   },
   fromJSON(object: any): MsgWithdrawLease {
-    return {
-      bidId: isSet(object.bidId) ? LeaseID.fromJSON(object.bidId) : undefined
-    };
+    const obj = createBaseMsgWithdrawLease();
+    if (isSet(object.bidId)) obj.bidId = LeaseID.fromJSON(object.bidId);
+    return obj;
   },
   toJSON(message: MsgWithdrawLease): unknown {
     const obj: any = {};
@@ -864,7 +879,9 @@ export const MsgWithdrawLease = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawLease>): MsgWithdrawLease {
     const message = createBaseMsgWithdrawLease();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : undefined;
+    if (object.bidId !== undefined && object.bidId !== null) {
+      message.bidId = LeaseID.fromPartial(object.bidId);
+    }
     return message;
   },
   fromSDK(object: MsgWithdrawLeaseSDKType): MsgWithdrawLease {
@@ -926,7 +943,8 @@ export const MsgWithdrawLeaseResponse = {
     return message;
   },
   fromJSON(_: any): MsgWithdrawLeaseResponse {
-    return {};
+    const obj = createBaseMsgWithdrawLeaseResponse();
+    return obj;
   },
   toJSON(_: MsgWithdrawLeaseResponse): unknown {
     const obj: any = {};
@@ -997,9 +1015,9 @@ export const MsgCloseLease = {
     return message;
   },
   fromJSON(object: any): MsgCloseLease {
-    return {
-      leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined
-    };
+    const obj = createBaseMsgCloseLease();
+    if (isSet(object.leaseId)) obj.leaseId = LeaseID.fromJSON(object.leaseId);
+    return obj;
   },
   toJSON(message: MsgCloseLease): unknown {
     const obj: any = {};
@@ -1008,7 +1026,9 @@ export const MsgCloseLease = {
   },
   fromPartial(object: DeepPartial<MsgCloseLease>): MsgCloseLease {
     const message = createBaseMsgCloseLease();
-    message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
+    if (object.leaseId !== undefined && object.leaseId !== null) {
+      message.leaseId = LeaseID.fromPartial(object.leaseId);
+    }
     return message;
   },
   fromSDK(object: MsgCloseLeaseSDKType): MsgCloseLease {
@@ -1070,7 +1090,8 @@ export const MsgCloseLeaseResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseLeaseResponse {
-    return {};
+    const obj = createBaseMsgCloseLeaseResponse();
+    return obj;
   },
   toJSON(_: MsgCloseLeaseResponse): unknown {
     const obj: any = {};

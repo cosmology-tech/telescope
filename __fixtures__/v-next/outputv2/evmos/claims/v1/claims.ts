@@ -211,11 +211,11 @@ export const Claim = {
     return message;
   },
   fromJSON(object: any): Claim {
-    return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
-      completed: isSet(object.completed) ? Boolean(object.completed) : false,
-      claimableAmount: isSet(object.claimableAmount) ? String(object.claimableAmount) : ""
-    };
+    const obj = createBaseClaim();
+    if (isSet(object.action)) obj.action = actionFromJSON(object.action);
+    if (isSet(object.completed)) obj.completed = Boolean(object.completed);
+    if (isSet(object.claimableAmount)) obj.claimableAmount = String(object.claimableAmount);
+    return obj;
   },
   toJSON(message: Claim): unknown {
     const obj: any = {};
@@ -329,11 +329,11 @@ export const ClaimsRecordAddress = {
     return message;
   },
   fromJSON(object: any): ClaimsRecordAddress {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      initialClaimableAmount: isSet(object.initialClaimableAmount) ? String(object.initialClaimableAmount) : "",
-      actionsCompleted: Array.isArray(object?.actionsCompleted) ? object.actionsCompleted.map((e: any) => Boolean(e)) : []
-    };
+    const obj = createBaseClaimsRecordAddress();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
+    if (Array.isArray(object?.actionsCompleted)) object.actionsCompleted.map((e: any) => Boolean(e));
+    return obj;
   },
   toJSON(message: ClaimsRecordAddress): unknown {
     const obj: any = {};
@@ -452,10 +452,10 @@ export const ClaimsRecord = {
     return message;
   },
   fromJSON(object: any): ClaimsRecord {
-    return {
-      initialClaimableAmount: isSet(object.initialClaimableAmount) ? String(object.initialClaimableAmount) : "",
-      actionsCompleted: Array.isArray(object?.actionsCompleted) ? object.actionsCompleted.map((e: any) => Boolean(e)) : []
-    };
+    const obj = createBaseClaimsRecord();
+    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
+    if (Array.isArray(object?.actionsCompleted)) object.actionsCompleted.map((e: any) => Boolean(e));
+    return obj;
   },
   toJSON(message: ClaimsRecord): unknown {
     const obj: any = {};

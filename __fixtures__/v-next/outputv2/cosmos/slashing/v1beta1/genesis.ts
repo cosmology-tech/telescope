@@ -182,11 +182,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      signingInfos: Array.isArray(object?.signingInfos) ? object.signingInfos.map((e: any) => SigningInfo.fromJSON(e)) : [],
-      missedBlocks: Array.isArray(object?.missedBlocks) ? object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.signingInfos)) object.signingInfos.map((e: any) => SigningInfo.fromJSON(e));
+    if (Array.isArray(object?.missedBlocks)) object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -205,7 +205,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
     message.missedBlocks = object.missedBlocks?.map(e => ValidatorMissedBlocks.fromPartial(e)) || [];
     return message;
@@ -315,10 +317,10 @@ export const SigningInfo = {
     return message;
   },
   fromJSON(object: any): SigningInfo {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      validatorSigningInfo: isSet(object.validatorSigningInfo) ? ValidatorSigningInfo.fromJSON(object.validatorSigningInfo) : undefined
-    };
+    const obj = createBaseSigningInfo();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.validatorSigningInfo)) obj.validatorSigningInfo = ValidatorSigningInfo.fromJSON(object.validatorSigningInfo);
+    return obj;
   },
   toJSON(message: SigningInfo): unknown {
     const obj: any = {};
@@ -329,7 +331,9 @@ export const SigningInfo = {
   fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
     message.address = object.address ?? "";
-    message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : undefined;
+    if (object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null) {
+      message.validatorSigningInfo = ValidatorSigningInfo.fromPartial(object.validatorSigningInfo);
+    }
     return message;
   },
   fromSDK(object: SigningInfoSDKType): SigningInfo {
@@ -417,10 +421,10 @@ export const ValidatorMissedBlocks = {
     return message;
   },
   fromJSON(object: any): ValidatorMissedBlocks {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      missedBlocks: Array.isArray(object?.missedBlocks) ? object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e)) : []
-    };
+    const obj = createBaseValidatorMissedBlocks();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (Array.isArray(object?.missedBlocks)) object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e));
+    return obj;
   },
   toJSON(message: ValidatorMissedBlocks): unknown {
     const obj: any = {};
@@ -531,10 +535,10 @@ export const MissedBlock = {
     return message;
   },
   fromJSON(object: any): MissedBlock {
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      missed: isSet(object.missed) ? Boolean(object.missed) : false
-    };
+    const obj = createBaseMissedBlock();
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
+    if (isSet(object.missed)) obj.missed = Boolean(object.missed);
+    return obj;
   },
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
@@ -544,7 +548,9 @@ export const MissedBlock = {
   },
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     message.missed = object.missed ?? false;
     return message;
   },

@@ -192,10 +192,10 @@ export const MetricValue_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): MetricValue_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseMetricValue_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: MetricValue_LabelsEntry): unknown {
     const obj: any = {};
@@ -329,21 +329,21 @@ export const MetricValue = {
     return message;
   },
   fromJSON(object: any): MetricValue {
-    return {
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
-      distributionValue: isSet(object.distributionValue) ? Distribution.fromJSON(object.distributionValue) : undefined
-    };
+    const obj = createBaseMetricValue();
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.distributionValue)) obj.distributionValue = Distribution.fromJSON(object.distributionValue);
+    return obj;
   },
   toJSON(message: MetricValue): unknown {
     const obj: any = {};
@@ -375,10 +375,14 @@ export const MetricValue = {
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
-    message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
+    if (object.distributionValue !== undefined && object.distributionValue !== null) {
+      message.distributionValue = Distribution.fromPartial(object.distributionValue);
+    }
     return message;
   },
   fromSDK(object: MetricValueSDKType): MetricValue {
@@ -503,10 +507,10 @@ export const MetricValueSet = {
     return message;
   },
   fromJSON(object: any): MetricValueSet {
-    return {
-      metricName: isSet(object.metricName) ? String(object.metricName) : "",
-      metricValues: Array.isArray(object?.metricValues) ? object.metricValues.map((e: any) => MetricValue.fromJSON(e)) : []
-    };
+    const obj = createBaseMetricValueSet();
+    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
+    if (Array.isArray(object?.metricValues)) object.metricValues.map((e: any) => MetricValue.fromJSON(e));
+    return obj;
   },
   toJSON(message: MetricValueSet): unknown {
     const obj: any = {};

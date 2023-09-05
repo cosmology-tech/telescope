@@ -63,9 +63,9 @@ export const QueryBalancesRequest = {
     return message;
   },
   fromJSON(object: any): QueryBalancesRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseQueryBalancesRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: QueryBalancesRequest): unknown {
     const obj: any = {};
@@ -163,11 +163,11 @@ export const QueryBalancesResponse = {
     return message;
   },
   fromJSON(object: any): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromJSON(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromJSON(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryBalancesResponse();
+    if (Array.isArray(object?.locked)) object.locked.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.unvested)) object.unvested.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.vested)) object.vested.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryBalancesResponse): unknown {
     const obj: any = {};

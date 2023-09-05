@@ -602,10 +602,10 @@ export const QueryBalanceRequest = {
     return message;
   },
   fromJSON(object: any): QueryBalanceRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQueryBalanceRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
@@ -697,9 +697,9 @@ export const QueryBalanceResponse = {
     return message;
   },
   fromJSON(object: any): QueryBalanceResponse {
-    return {
-      balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined
-    };
+    const obj = createBaseQueryBalanceResponse();
+    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
+    return obj;
   },
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
@@ -708,7 +708,9 @@ export const QueryBalanceResponse = {
   },
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
     return message;
   },
   fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
@@ -792,10 +794,10 @@ export const QueryAllBalancesRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllBalancesRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllBalancesRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllBalancesRequest): unknown {
     const obj: any = {};
@@ -806,7 +808,9 @@ export const QueryAllBalancesRequest = {
   fromPartial(object: DeepPartial<QueryAllBalancesRequest>): QueryAllBalancesRequest {
     const message = createBaseQueryAllBalancesRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAllBalancesRequestSDKType): QueryAllBalancesRequest {
@@ -894,10 +898,10 @@ export const QueryAllBalancesResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllBalancesResponse();
+    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllBalancesResponse): unknown {
     const obj: any = {};
@@ -912,7 +916,9 @@ export const QueryAllBalancesResponse = {
   fromPartial(object: DeepPartial<QueryAllBalancesResponse>): QueryAllBalancesResponse {
     const message = createBaseQueryAllBalancesResponse();
     message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAllBalancesResponseSDKType): QueryAllBalancesResponse {
@@ -1008,10 +1014,10 @@ export const QuerySpendableBalancesRequest = {
     return message;
   },
   fromJSON(object: any): QuerySpendableBalancesRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQuerySpendableBalancesRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QuerySpendableBalancesRequest): unknown {
     const obj: any = {};
@@ -1022,7 +1028,9 @@ export const QuerySpendableBalancesRequest = {
   fromPartial(object: DeepPartial<QuerySpendableBalancesRequest>): QuerySpendableBalancesRequest {
     const message = createBaseQuerySpendableBalancesRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QuerySpendableBalancesRequestSDKType): QuerySpendableBalancesRequest {
@@ -1110,10 +1118,10 @@ export const QuerySpendableBalancesResponse = {
     return message;
   },
   fromJSON(object: any): QuerySpendableBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQuerySpendableBalancesResponse();
+    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QuerySpendableBalancesResponse): unknown {
     const obj: any = {};
@@ -1128,7 +1136,9 @@ export const QuerySpendableBalancesResponse = {
   fromPartial(object: DeepPartial<QuerySpendableBalancesResponse>): QuerySpendableBalancesResponse {
     const message = createBaseQuerySpendableBalancesResponse();
     message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QuerySpendableBalancesResponseSDKType): QuerySpendableBalancesResponse {
@@ -1217,9 +1227,9 @@ export const QueryTotalSupplyRequest = {
     return message;
   },
   fromJSON(object: any): QueryTotalSupplyRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryTotalSupplyRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryTotalSupplyRequest): unknown {
     const obj: any = {};
@@ -1228,7 +1238,9 @@ export const QueryTotalSupplyRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalSupplyRequest>): QueryTotalSupplyRequest {
     const message = createBaseQueryTotalSupplyRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryTotalSupplyRequestSDKType): QueryTotalSupplyRequest {
@@ -1312,10 +1324,10 @@ export const QueryTotalSupplyResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalSupplyResponse {
-    return {
-      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryTotalSupplyResponse();
+    if (Array.isArray(object?.supply)) object.supply.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryTotalSupplyResponse): unknown {
     const obj: any = {};
@@ -1330,7 +1342,9 @@ export const QueryTotalSupplyResponse = {
   fromPartial(object: DeepPartial<QueryTotalSupplyResponse>): QueryTotalSupplyResponse {
     const message = createBaseQueryTotalSupplyResponse();
     message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryTotalSupplyResponseSDKType): QueryTotalSupplyResponse {
@@ -1419,9 +1433,9 @@ export const QuerySupplyOfRequest = {
     return message;
   },
   fromJSON(object: any): QuerySupplyOfRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQuerySupplyOfRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QuerySupplyOfRequest): unknown {
     const obj: any = {};
@@ -1507,9 +1521,9 @@ export const QuerySupplyOfResponse = {
     return message;
   },
   fromJSON(object: any): QuerySupplyOfResponse {
-    return {
-      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
-    };
+    const obj = createBaseQuerySupplyOfResponse();
+    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
+    return obj;
   },
   toJSON(message: QuerySupplyOfResponse): unknown {
     const obj: any = {};
@@ -1518,7 +1532,9 @@ export const QuerySupplyOfResponse = {
   },
   fromPartial(object: DeepPartial<QuerySupplyOfResponse>): QuerySupplyOfResponse {
     const message = createBaseQuerySupplyOfResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
     return message;
   },
   fromSDK(object: QuerySupplyOfResponseSDKType): QuerySupplyOfResponse {
@@ -1587,7 +1603,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -1665,9 +1682,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -1676,7 +1693,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -1753,9 +1772,9 @@ export const QueryDenomsMetadataRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomsMetadataRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryDenomsMetadataRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryDenomsMetadataRequest): unknown {
     const obj: any = {};
@@ -1764,7 +1783,9 @@ export const QueryDenomsMetadataRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomsMetadataRequest>): QueryDenomsMetadataRequest {
     const message = createBaseQueryDenomsMetadataRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDenomsMetadataRequestSDKType): QueryDenomsMetadataRequest {
@@ -1848,10 +1869,10 @@ export const QueryDenomsMetadataResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomsMetadataResponse {
-    return {
-      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryDenomsMetadataResponse();
+    if (Array.isArray(object?.metadatas)) object.metadatas.map((e: any) => Metadata.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryDenomsMetadataResponse): unknown {
     const obj: any = {};
@@ -1866,7 +1887,9 @@ export const QueryDenomsMetadataResponse = {
   fromPartial(object: DeepPartial<QueryDenomsMetadataResponse>): QueryDenomsMetadataResponse {
     const message = createBaseQueryDenomsMetadataResponse();
     message.metadatas = object.metadatas?.map(e => Metadata.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDenomsMetadataResponseSDKType): QueryDenomsMetadataResponse {
@@ -1955,9 +1978,9 @@ export const QueryDenomMetadataRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomMetadataRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQueryDenomMetadataRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QueryDenomMetadataRequest): unknown {
     const obj: any = {};
@@ -2043,9 +2066,9 @@ export const QueryDenomMetadataResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomMetadataResponse {
-    return {
-      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
-    };
+    const obj = createBaseQueryDenomMetadataResponse();
+    if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
+    return obj;
   },
   toJSON(message: QueryDenomMetadataResponse): unknown {
     const obj: any = {};
@@ -2054,7 +2077,9 @@ export const QueryDenomMetadataResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomMetadataResponse>): QueryDenomMetadataResponse {
     const message = createBaseQueryDenomMetadataResponse();
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromPartial(object.metadata);
+    }
     return message;
   },
   fromSDK(object: QueryDenomMetadataResponseSDKType): QueryDenomMetadataResponse {
@@ -2138,10 +2163,10 @@ export const QueryDenomOwnersRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomOwnersRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryDenomOwnersRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryDenomOwnersRequest): unknown {
     const obj: any = {};
@@ -2152,7 +2177,9 @@ export const QueryDenomOwnersRequest = {
   fromPartial(object: DeepPartial<QueryDenomOwnersRequest>): QueryDenomOwnersRequest {
     const message = createBaseQueryDenomOwnersRequest();
     message.denom = object.denom ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDenomOwnersRequestSDKType): QueryDenomOwnersRequest {
@@ -2240,10 +2267,10 @@ export const DenomOwner = {
     return message;
   },
   fromJSON(object: any): DenomOwner {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined
-    };
+    const obj = createBaseDenomOwner();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
+    return obj;
   },
   toJSON(message: DenomOwner): unknown {
     const obj: any = {};
@@ -2254,7 +2281,9 @@ export const DenomOwner = {
   fromPartial(object: DeepPartial<DenomOwner>): DenomOwner {
     const message = createBaseDenomOwner();
     message.address = object.address ?? "";
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
     return message;
   },
   fromSDK(object: DenomOwnerSDKType): DenomOwner {
@@ -2342,10 +2371,10 @@ export const QueryDenomOwnersResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomOwnersResponse {
-    return {
-      denomOwners: Array.isArray(object?.denomOwners) ? object.denomOwners.map((e: any) => DenomOwner.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryDenomOwnersResponse();
+    if (Array.isArray(object?.denomOwners)) object.denomOwners.map((e: any) => DenomOwner.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryDenomOwnersResponse): unknown {
     const obj: any = {};
@@ -2360,7 +2389,9 @@ export const QueryDenomOwnersResponse = {
   fromPartial(object: DeepPartial<QueryDenomOwnersResponse>): QueryDenomOwnersResponse {
     const message = createBaseQueryDenomOwnersResponse();
     message.denomOwners = object.denomOwners?.map(e => DenomOwner.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryDenomOwnersResponseSDKType): QueryDenomOwnersResponse {

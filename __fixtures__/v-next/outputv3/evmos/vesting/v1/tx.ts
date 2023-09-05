@@ -220,14 +220,14 @@ export const MsgCreateClawbackVestingAccount = {
     return message;
   },
   fromJSON(object: any): MsgCreateClawbackVestingAccount {
-    return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
-      vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : [],
-      merge: isSet(object.merge) ? Boolean(object.merge) : false
-    };
+    const obj = createBaseMsgCreateClawbackVestingAccount();
+    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
+    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (Array.isArray(object?.lockupPeriods)) object.lockupPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.vestingPeriods)) object.vestingPeriods.map((e: any) => Period.fromJSON(e));
+    if (isSet(object.merge)) obj.merge = Boolean(object.merge);
+    return obj;
   },
   toJSON(message: MsgCreateClawbackVestingAccount): unknown {
     const obj: any = {};
@@ -352,7 +352,8 @@ export const MsgCreateClawbackVestingAccountResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateClawbackVestingAccountResponse {
-    return {};
+    const obj = createBaseMsgCreateClawbackVestingAccountResponse();
+    return obj;
   },
   toJSON(_: MsgCreateClawbackVestingAccountResponse): unknown {
     const obj: any = {};
@@ -437,11 +438,11 @@ export const MsgClawback = {
     return message;
   },
   fromJSON(object: any): MsgClawback {
-    return {
-      funderAddress: isSet(object.funderAddress) ? String(object.funderAddress) : "",
-      accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : "",
-      destAddress: isSet(object.destAddress) ? String(object.destAddress) : ""
-    };
+    const obj = createBaseMsgClawback();
+    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
+    if (isSet(object.accountAddress)) obj.accountAddress = String(object.accountAddress);
+    if (isSet(object.destAddress)) obj.destAddress = String(object.destAddress);
+    return obj;
   },
   toJSON(message: MsgClawback): unknown {
     const obj: any = {};
@@ -524,7 +525,8 @@ export const MsgClawbackResponse = {
     return message;
   },
   fromJSON(_: any): MsgClawbackResponse {
-    return {};
+    const obj = createBaseMsgClawbackResponse();
+    return obj;
   },
   toJSON(_: MsgClawbackResponse): unknown {
     const obj: any = {};
