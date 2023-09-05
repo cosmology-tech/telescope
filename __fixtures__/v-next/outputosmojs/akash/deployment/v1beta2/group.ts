@@ -81,7 +81,6 @@ function createBaseGroup(): Group {
   };
 }
 export const Group = {
-  typeUrl: "/akash.deployment.v1beta2.Group",
   encode(message: Group, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();
@@ -170,42 +169,5 @@ export const Group = {
     message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toSDK(message.groupSpec) : undefined);
     obj.created_at = message.createdAt;
     return obj;
-  },
-  fromAmino(object: GroupAmino): Group {
-    return {
-      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
-  },
-  toAmino(message: Group): GroupAmino {
-    const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
-    obj.state = message.state;
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GroupAminoMsg): Group {
-    return Group.fromAmino(object.value);
-  },
-  toAminoMsg(message: Group): GroupAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/group",
-      value: Group.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GroupProtoMsg): Group {
-    return Group.decode(message.value);
-  },
-  toProto(message: Group): Uint8Array {
-    return Group.encode(message).finish();
-  },
-  toProtoMsg(message: Group): GroupProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.Group",
-      value: Group.encode(message).finish()
-    };
   }
 };

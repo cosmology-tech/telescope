@@ -489,7 +489,6 @@ function createBaseExistenceProof(): ExistenceProof {
   };
 }
 export const ExistenceProof = {
-  typeUrl: "/cosmos.ics23.v1.ExistenceProof",
   encode(message: ExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -586,47 +585,6 @@ export const ExistenceProof = {
       obj.path = [];
     }
     return obj;
-  },
-  fromAmino(object: ExistenceProofAmino): ExistenceProof {
-    return {
-      key: object.key,
-      value: object.value,
-      leaf: object?.leaf ? LeafOp.fromAmino(object.leaf) : undefined,
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ExistenceProof): ExistenceProofAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    obj.leaf = message.leaf ? LeafOp.toAmino(message.leaf) : undefined;
-    if (message.path) {
-      obj.path = message.path.map(e => e ? InnerOp.toAmino(e) : undefined);
-    } else {
-      obj.path = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ExistenceProofAminoMsg): ExistenceProof {
-    return ExistenceProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: ExistenceProof): ExistenceProofAminoMsg {
-    return {
-      type: "cosmos-sdk/ExistenceProof",
-      value: ExistenceProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ExistenceProofProtoMsg): ExistenceProof {
-    return ExistenceProof.decode(message.value);
-  },
-  toProto(message: ExistenceProof): Uint8Array {
-    return ExistenceProof.encode(message).finish();
-  },
-  toProtoMsg(message: ExistenceProof): ExistenceProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.ExistenceProof",
-      value: ExistenceProof.encode(message).finish()
-    };
   }
 };
 function createBaseNonExistenceProof(): NonExistenceProof {
@@ -637,7 +595,6 @@ function createBaseNonExistenceProof(): NonExistenceProof {
   };
 }
 export const NonExistenceProof = {
-  typeUrl: "/cosmos.ics23.v1.NonExistenceProof",
   encode(message: NonExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -714,41 +671,6 @@ export const NonExistenceProof = {
     message.left !== undefined && (obj.left = message.left ? ExistenceProof.toSDK(message.left) : undefined);
     message.right !== undefined && (obj.right = message.right ? ExistenceProof.toSDK(message.right) : undefined);
     return obj;
-  },
-  fromAmino(object: NonExistenceProofAmino): NonExistenceProof {
-    return {
-      key: object.key,
-      left: object?.left ? ExistenceProof.fromAmino(object.left) : undefined,
-      right: object?.right ? ExistenceProof.fromAmino(object.right) : undefined
-    };
-  },
-  toAmino(message: NonExistenceProof): NonExistenceProofAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.left = message.left ? ExistenceProof.toAmino(message.left) : undefined;
-    obj.right = message.right ? ExistenceProof.toAmino(message.right) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: NonExistenceProofAminoMsg): NonExistenceProof {
-    return NonExistenceProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: NonExistenceProof): NonExistenceProofAminoMsg {
-    return {
-      type: "cosmos-sdk/NonExistenceProof",
-      value: NonExistenceProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: NonExistenceProofProtoMsg): NonExistenceProof {
-    return NonExistenceProof.decode(message.value);
-  },
-  toProto(message: NonExistenceProof): Uint8Array {
-    return NonExistenceProof.encode(message).finish();
-  },
-  toProtoMsg(message: NonExistenceProof): NonExistenceProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.NonExistenceProof",
-      value: NonExistenceProof.encode(message).finish()
-    };
   }
 };
 function createBaseCommitmentProof(): CommitmentProof {
@@ -760,7 +682,6 @@ function createBaseCommitmentProof(): CommitmentProof {
   };
 }
 export const CommitmentProof = {
-  typeUrl: "/cosmos.ics23.v1.CommitmentProof",
   encode(message: CommitmentProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.exist !== undefined) {
       ExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -849,43 +770,6 @@ export const CommitmentProof = {
     message.batch !== undefined && (obj.batch = message.batch ? BatchProof.toSDK(message.batch) : undefined);
     message.compressed !== undefined && (obj.compressed = message.compressed ? CompressedBatchProof.toSDK(message.compressed) : undefined);
     return obj;
-  },
-  fromAmino(object: CommitmentProofAmino): CommitmentProof {
-    return {
-      exist: object?.exist ? ExistenceProof.fromAmino(object.exist) : undefined,
-      nonexist: object?.nonexist ? NonExistenceProof.fromAmino(object.nonexist) : undefined,
-      batch: object?.batch ? BatchProof.fromAmino(object.batch) : undefined,
-      compressed: object?.compressed ? CompressedBatchProof.fromAmino(object.compressed) : undefined
-    };
-  },
-  toAmino(message: CommitmentProof): CommitmentProofAmino {
-    const obj: any = {};
-    obj.exist = message.exist ? ExistenceProof.toAmino(message.exist) : undefined;
-    obj.nonexist = message.nonexist ? NonExistenceProof.toAmino(message.nonexist) : undefined;
-    obj.batch = message.batch ? BatchProof.toAmino(message.batch) : undefined;
-    obj.compressed = message.compressed ? CompressedBatchProof.toAmino(message.compressed) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CommitmentProofAminoMsg): CommitmentProof {
-    return CommitmentProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: CommitmentProof): CommitmentProofAminoMsg {
-    return {
-      type: "cosmos-sdk/CommitmentProof",
-      value: CommitmentProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CommitmentProofProtoMsg): CommitmentProof {
-    return CommitmentProof.decode(message.value);
-  },
-  toProto(message: CommitmentProof): Uint8Array {
-    return CommitmentProof.encode(message).finish();
-  },
-  toProtoMsg(message: CommitmentProof): CommitmentProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.CommitmentProof",
-      value: CommitmentProof.encode(message).finish()
-    };
   }
 };
 function createBaseLeafOp(): LeafOp {
@@ -898,7 +782,6 @@ function createBaseLeafOp(): LeafOp {
   };
 }
 export const LeafOp = {
-  typeUrl: "/cosmos.ics23.v1.LeafOp",
   encode(message: LeafOp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
@@ -999,45 +882,6 @@ export const LeafOp = {
     message.length !== undefined && (obj.length = lengthOpToJSON(message.length));
     obj.prefix = message.prefix;
     return obj;
-  },
-  fromAmino(object: LeafOpAmino): LeafOp {
-    return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
-      prefix: object.prefix
-    };
-  },
-  toAmino(message: LeafOp): LeafOpAmino {
-    const obj: any = {};
-    obj.hash = message.hash;
-    obj.prehash_key = message.prehashKey;
-    obj.prehash_value = message.prehashValue;
-    obj.length = message.length;
-    obj.prefix = message.prefix;
-    return obj;
-  },
-  fromAminoMsg(object: LeafOpAminoMsg): LeafOp {
-    return LeafOp.fromAmino(object.value);
-  },
-  toAminoMsg(message: LeafOp): LeafOpAminoMsg {
-    return {
-      type: "cosmos-sdk/LeafOp",
-      value: LeafOp.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: LeafOpProtoMsg): LeafOp {
-    return LeafOp.decode(message.value);
-  },
-  toProto(message: LeafOp): Uint8Array {
-    return LeafOp.encode(message).finish();
-  },
-  toProtoMsg(message: LeafOp): LeafOpProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.LeafOp",
-      value: LeafOp.encode(message).finish()
-    };
   }
 };
 function createBaseInnerOp(): InnerOp {
@@ -1048,7 +892,6 @@ function createBaseInnerOp(): InnerOp {
   };
 }
 export const InnerOp = {
-  typeUrl: "/cosmos.ics23.v1.InnerOp",
   encode(message: InnerOp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
@@ -1125,41 +968,6 @@ export const InnerOp = {
     obj.prefix = message.prefix;
     obj.suffix = message.suffix;
     return obj;
-  },
-  fromAmino(object: InnerOpAmino): InnerOp {
-    return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
-      prefix: object.prefix,
-      suffix: object.suffix
-    };
-  },
-  toAmino(message: InnerOp): InnerOpAmino {
-    const obj: any = {};
-    obj.hash = message.hash;
-    obj.prefix = message.prefix;
-    obj.suffix = message.suffix;
-    return obj;
-  },
-  fromAminoMsg(object: InnerOpAminoMsg): InnerOp {
-    return InnerOp.fromAmino(object.value);
-  },
-  toAminoMsg(message: InnerOp): InnerOpAminoMsg {
-    return {
-      type: "cosmos-sdk/InnerOp",
-      value: InnerOp.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: InnerOpProtoMsg): InnerOp {
-    return InnerOp.decode(message.value);
-  },
-  toProto(message: InnerOp): Uint8Array {
-    return InnerOp.encode(message).finish();
-  },
-  toProtoMsg(message: InnerOp): InnerOpProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.InnerOp",
-      value: InnerOp.encode(message).finish()
-    };
   }
 };
 function createBaseProofSpec(): ProofSpec {
@@ -1171,7 +979,6 @@ function createBaseProofSpec(): ProofSpec {
   };
 }
 export const ProofSpec = {
-  typeUrl: "/cosmos.ics23.v1.ProofSpec",
   encode(message: ProofSpec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.leafSpec !== undefined) {
       LeafOp.encode(message.leafSpec, writer.uint32(10).fork()).ldelim();
@@ -1260,43 +1067,6 @@ export const ProofSpec = {
     obj.max_depth = message.maxDepth;
     obj.min_depth = message.minDepth;
     return obj;
-  },
-  fromAmino(object: ProofSpecAmino): ProofSpec {
-    return {
-      leafSpec: object?.leaf_spec ? LeafOp.fromAmino(object.leaf_spec) : undefined,
-      innerSpec: object?.inner_spec ? InnerSpec.fromAmino(object.inner_spec) : undefined,
-      maxDepth: object.max_depth,
-      minDepth: object.min_depth
-    };
-  },
-  toAmino(message: ProofSpec): ProofSpecAmino {
-    const obj: any = {};
-    obj.leaf_spec = message.leafSpec ? LeafOp.toAmino(message.leafSpec) : undefined;
-    obj.inner_spec = message.innerSpec ? InnerSpec.toAmino(message.innerSpec) : undefined;
-    obj.max_depth = message.maxDepth;
-    obj.min_depth = message.minDepth;
-    return obj;
-  },
-  fromAminoMsg(object: ProofSpecAminoMsg): ProofSpec {
-    return ProofSpec.fromAmino(object.value);
-  },
-  toAminoMsg(message: ProofSpec): ProofSpecAminoMsg {
-    return {
-      type: "cosmos-sdk/ProofSpec",
-      value: ProofSpec.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ProofSpecProtoMsg): ProofSpec {
-    return ProofSpec.decode(message.value);
-  },
-  toProto(message: ProofSpec): Uint8Array {
-    return ProofSpec.encode(message).finish();
-  },
-  toProtoMsg(message: ProofSpec): ProofSpecProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.ProofSpec",
-      value: ProofSpec.encode(message).finish()
-    };
   }
 };
 function createBaseInnerSpec(): InnerSpec {
@@ -1310,7 +1080,6 @@ function createBaseInnerSpec(): InnerSpec {
   };
 }
 export const InnerSpec = {
-  typeUrl: "/cosmos.ics23.v1.InnerSpec",
   encode(message: InnerSpec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.childOrder) {
@@ -1440,51 +1209,6 @@ export const InnerSpec = {
     obj.empty_child = message.emptyChild;
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     return obj;
-  },
-  fromAmino(object: InnerSpecAmino): InnerSpec {
-    return {
-      childOrder: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => e) : [],
-      childSize: object.child_size,
-      minPrefixLength: object.min_prefix_length,
-      maxPrefixLength: object.max_prefix_length,
-      emptyChild: object.empty_child,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
-    };
-  },
-  toAmino(message: InnerSpec): InnerSpecAmino {
-    const obj: any = {};
-    if (message.childOrder) {
-      obj.child_order = message.childOrder.map(e => e);
-    } else {
-      obj.child_order = [];
-    }
-    obj.child_size = message.childSize;
-    obj.min_prefix_length = message.minPrefixLength;
-    obj.max_prefix_length = message.maxPrefixLength;
-    obj.empty_child = message.emptyChild;
-    obj.hash = message.hash;
-    return obj;
-  },
-  fromAminoMsg(object: InnerSpecAminoMsg): InnerSpec {
-    return InnerSpec.fromAmino(object.value);
-  },
-  toAminoMsg(message: InnerSpec): InnerSpecAminoMsg {
-    return {
-      type: "cosmos-sdk/InnerSpec",
-      value: InnerSpec.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: InnerSpecProtoMsg): InnerSpec {
-    return InnerSpec.decode(message.value);
-  },
-  toProto(message: InnerSpec): Uint8Array {
-    return InnerSpec.encode(message).finish();
-  },
-  toProtoMsg(message: InnerSpec): InnerSpecProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.InnerSpec",
-      value: InnerSpec.encode(message).finish()
-    };
   }
 };
 function createBaseBatchProof(): BatchProof {
@@ -1493,7 +1217,6 @@ function createBaseBatchProof(): BatchProof {
   };
 }
 export const BatchProof = {
-  typeUrl: "/cosmos.ics23.v1.BatchProof",
   encode(message: BatchProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       BatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1554,41 +1277,6 @@ export const BatchProof = {
       obj.entries = [];
     }
     return obj;
-  },
-  fromAmino(object: BatchProofAmino): BatchProof {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => BatchEntry.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: BatchProof): BatchProofAmino {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? BatchEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchProofAminoMsg): BatchProof {
-    return BatchProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: BatchProof): BatchProofAminoMsg {
-    return {
-      type: "cosmos-sdk/BatchProof",
-      value: BatchProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: BatchProofProtoMsg): BatchProof {
-    return BatchProof.decode(message.value);
-  },
-  toProto(message: BatchProof): Uint8Array {
-    return BatchProof.encode(message).finish();
-  },
-  toProtoMsg(message: BatchProof): BatchProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.BatchProof",
-      value: BatchProof.encode(message).finish()
-    };
   }
 };
 function createBaseBatchEntry(): BatchEntry {
@@ -1598,7 +1286,6 @@ function createBaseBatchEntry(): BatchEntry {
   };
 }
 export const BatchEntry = {
-  typeUrl: "/cosmos.ics23.v1.BatchEntry",
   encode(message: BatchEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.exist !== undefined) {
       ExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -1663,39 +1350,6 @@ export const BatchEntry = {
     message.exist !== undefined && (obj.exist = message.exist ? ExistenceProof.toSDK(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toSDK(message.nonexist) : undefined);
     return obj;
-  },
-  fromAmino(object: BatchEntryAmino): BatchEntry {
-    return {
-      exist: object?.exist ? ExistenceProof.fromAmino(object.exist) : undefined,
-      nonexist: object?.nonexist ? NonExistenceProof.fromAmino(object.nonexist) : undefined
-    };
-  },
-  toAmino(message: BatchEntry): BatchEntryAmino {
-    const obj: any = {};
-    obj.exist = message.exist ? ExistenceProof.toAmino(message.exist) : undefined;
-    obj.nonexist = message.nonexist ? NonExistenceProof.toAmino(message.nonexist) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: BatchEntryAminoMsg): BatchEntry {
-    return BatchEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: BatchEntry): BatchEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/BatchEntry",
-      value: BatchEntry.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: BatchEntryProtoMsg): BatchEntry {
-    return BatchEntry.decode(message.value);
-  },
-  toProto(message: BatchEntry): Uint8Array {
-    return BatchEntry.encode(message).finish();
-  },
-  toProtoMsg(message: BatchEntry): BatchEntryProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.BatchEntry",
-      value: BatchEntry.encode(message).finish()
-    };
   }
 };
 function createBaseCompressedBatchProof(): CompressedBatchProof {
@@ -1705,7 +1359,6 @@ function createBaseCompressedBatchProof(): CompressedBatchProof {
   };
 }
 export const CompressedBatchProof = {
-  typeUrl: "/cosmos.ics23.v1.CompressedBatchProof",
   encode(message: CompressedBatchProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       CompressedBatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1786,47 +1439,6 @@ export const CompressedBatchProof = {
       obj.lookup_inners = [];
     }
     return obj;
-  },
-  fromAmino(object: CompressedBatchProofAmino): CompressedBatchProof {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => CompressedBatchEntry.fromAmino(e)) : [],
-      lookupInners: Array.isArray(object?.lookup_inners) ? object.lookup_inners.map((e: any) => InnerOp.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: CompressedBatchProof): CompressedBatchProofAmino {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? CompressedBatchEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    if (message.lookupInners) {
-      obj.lookup_inners = message.lookupInners.map(e => e ? InnerOp.toAmino(e) : undefined);
-    } else {
-      obj.lookup_inners = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CompressedBatchProofAminoMsg): CompressedBatchProof {
-    return CompressedBatchProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: CompressedBatchProof): CompressedBatchProofAminoMsg {
-    return {
-      type: "cosmos-sdk/CompressedBatchProof",
-      value: CompressedBatchProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CompressedBatchProofProtoMsg): CompressedBatchProof {
-    return CompressedBatchProof.decode(message.value);
-  },
-  toProto(message: CompressedBatchProof): Uint8Array {
-    return CompressedBatchProof.encode(message).finish();
-  },
-  toProtoMsg(message: CompressedBatchProof): CompressedBatchProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.CompressedBatchProof",
-      value: CompressedBatchProof.encode(message).finish()
-    };
   }
 };
 function createBaseCompressedBatchEntry(): CompressedBatchEntry {
@@ -1836,7 +1448,6 @@ function createBaseCompressedBatchEntry(): CompressedBatchEntry {
   };
 }
 export const CompressedBatchEntry = {
-  typeUrl: "/cosmos.ics23.v1.CompressedBatchEntry",
   encode(message: CompressedBatchEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.exist !== undefined) {
       CompressedExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -1901,39 +1512,6 @@ export const CompressedBatchEntry = {
     message.exist !== undefined && (obj.exist = message.exist ? CompressedExistenceProof.toSDK(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? CompressedNonExistenceProof.toSDK(message.nonexist) : undefined);
     return obj;
-  },
-  fromAmino(object: CompressedBatchEntryAmino): CompressedBatchEntry {
-    return {
-      exist: object?.exist ? CompressedExistenceProof.fromAmino(object.exist) : undefined,
-      nonexist: object?.nonexist ? CompressedNonExistenceProof.fromAmino(object.nonexist) : undefined
-    };
-  },
-  toAmino(message: CompressedBatchEntry): CompressedBatchEntryAmino {
-    const obj: any = {};
-    obj.exist = message.exist ? CompressedExistenceProof.toAmino(message.exist) : undefined;
-    obj.nonexist = message.nonexist ? CompressedNonExistenceProof.toAmino(message.nonexist) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CompressedBatchEntryAminoMsg): CompressedBatchEntry {
-    return CompressedBatchEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: CompressedBatchEntry): CompressedBatchEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/CompressedBatchEntry",
-      value: CompressedBatchEntry.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CompressedBatchEntryProtoMsg): CompressedBatchEntry {
-    return CompressedBatchEntry.decode(message.value);
-  },
-  toProto(message: CompressedBatchEntry): Uint8Array {
-    return CompressedBatchEntry.encode(message).finish();
-  },
-  toProtoMsg(message: CompressedBatchEntry): CompressedBatchEntryProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.CompressedBatchEntry",
-      value: CompressedBatchEntry.encode(message).finish()
-    };
   }
 };
 function createBaseCompressedExistenceProof(): CompressedExistenceProof {
@@ -1945,7 +1523,6 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
   };
 }
 export const CompressedExistenceProof = {
-  typeUrl: "/cosmos.ics23.v1.CompressedExistenceProof",
   encode(message: CompressedExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -2051,47 +1628,6 @@ export const CompressedExistenceProof = {
       obj.path = [];
     }
     return obj;
-  },
-  fromAmino(object: CompressedExistenceProofAmino): CompressedExistenceProof {
-    return {
-      key: object.key,
-      value: object.value,
-      leaf: object?.leaf ? LeafOp.fromAmino(object.leaf) : undefined,
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: CompressedExistenceProof): CompressedExistenceProofAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    obj.leaf = message.leaf ? LeafOp.toAmino(message.leaf) : undefined;
-    if (message.path) {
-      obj.path = message.path.map(e => e);
-    } else {
-      obj.path = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CompressedExistenceProofAminoMsg): CompressedExistenceProof {
-    return CompressedExistenceProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: CompressedExistenceProof): CompressedExistenceProofAminoMsg {
-    return {
-      type: "cosmos-sdk/CompressedExistenceProof",
-      value: CompressedExistenceProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CompressedExistenceProofProtoMsg): CompressedExistenceProof {
-    return CompressedExistenceProof.decode(message.value);
-  },
-  toProto(message: CompressedExistenceProof): Uint8Array {
-    return CompressedExistenceProof.encode(message).finish();
-  },
-  toProtoMsg(message: CompressedExistenceProof): CompressedExistenceProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.CompressedExistenceProof",
-      value: CompressedExistenceProof.encode(message).finish()
-    };
   }
 };
 function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
@@ -2102,7 +1638,6 @@ function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
   };
 }
 export const CompressedNonExistenceProof = {
-  typeUrl: "/cosmos.ics23.v1.CompressedNonExistenceProof",
   encode(message: CompressedNonExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -2179,40 +1714,5 @@ export const CompressedNonExistenceProof = {
     message.left !== undefined && (obj.left = message.left ? CompressedExistenceProof.toSDK(message.left) : undefined);
     message.right !== undefined && (obj.right = message.right ? CompressedExistenceProof.toSDK(message.right) : undefined);
     return obj;
-  },
-  fromAmino(object: CompressedNonExistenceProofAmino): CompressedNonExistenceProof {
-    return {
-      key: object.key,
-      left: object?.left ? CompressedExistenceProof.fromAmino(object.left) : undefined,
-      right: object?.right ? CompressedExistenceProof.fromAmino(object.right) : undefined
-    };
-  },
-  toAmino(message: CompressedNonExistenceProof): CompressedNonExistenceProofAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.left = message.left ? CompressedExistenceProof.toAmino(message.left) : undefined;
-    obj.right = message.right ? CompressedExistenceProof.toAmino(message.right) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CompressedNonExistenceProofAminoMsg): CompressedNonExistenceProof {
-    return CompressedNonExistenceProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: CompressedNonExistenceProof): CompressedNonExistenceProofAminoMsg {
-    return {
-      type: "cosmos-sdk/CompressedNonExistenceProof",
-      value: CompressedNonExistenceProof.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CompressedNonExistenceProofProtoMsg): CompressedNonExistenceProof {
-    return CompressedNonExistenceProof.decode(message.value);
-  },
-  toProto(message: CompressedNonExistenceProof): Uint8Array {
-    return CompressedNonExistenceProof.encode(message).finish();
-  },
-  toProtoMsg(message: CompressedNonExistenceProof): CompressedNonExistenceProofProtoMsg {
-    return {
-      typeUrl: "/cosmos.ics23.v1.CompressedNonExistenceProof",
-      value: CompressedNonExistenceProof.encode(message).finish()
-    };
   }
 };

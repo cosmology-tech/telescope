@@ -1599,7 +1599,6 @@ function createBaseLogBucket(): LogBucket {
   };
 }
 export const LogBucket = {
-  typeUrl: "/google.logging.v2.LogBucket",
   encode(message: LogBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1756,51 +1755,6 @@ export const LogBucket = {
     }
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     return obj;
-  },
-  fromAmino(object: LogBucketAmino): LogBucket {
-    return {
-      name: object.name,
-      description: object.description,
-      createTime: object.create_time,
-      updateTime: object.update_time,
-      retentionDays: object.retention_days,
-      locked: object.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
-      restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
-      cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined
-    };
-  },
-  toAmino(message: LogBucket): LogBucketAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.retention_days = message.retentionDays;
-    obj.locked = message.locked;
-    obj.lifecycle_state = message.lifecycleState;
-    if (message.restrictedFields) {
-      obj.restricted_fields = message.restrictedFields.map(e => e);
-    } else {
-      obj.restricted_fields = [];
-    }
-    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: LogBucketAminoMsg): LogBucket {
-    return LogBucket.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogBucketProtoMsg): LogBucket {
-    return LogBucket.decode(message.value);
-  },
-  toProto(message: LogBucket): Uint8Array {
-    return LogBucket.encode(message).finish();
-  },
-  toProtoMsg(message: LogBucket): LogBucketProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogBucket",
-      value: LogBucket.encode(message).finish()
-    };
   }
 };
 function createBaseLogView(): LogView {
@@ -1813,7 +1767,6 @@ function createBaseLogView(): LogView {
   };
 }
 export const LogView = {
-  typeUrl: "/google.logging.v2.LogView",
   encode(message: LogView, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1914,39 +1867,6 @@ export const LogView = {
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     obj.filter = message.filter;
     return obj;
-  },
-  fromAmino(object: LogViewAmino): LogView {
-    return {
-      name: object.name,
-      description: object.description,
-      createTime: object.create_time,
-      updateTime: object.update_time,
-      filter: object.filter
-    };
-  },
-  toAmino(message: LogView): LogViewAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAminoMsg(object: LogViewAminoMsg): LogView {
-    return LogView.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogViewProtoMsg): LogView {
-    return LogView.decode(message.value);
-  },
-  toProto(message: LogView): Uint8Array {
-    return LogView.encode(message).finish();
-  },
-  toProtoMsg(message: LogView): LogViewProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogView",
-      value: LogView.encode(message).finish()
-    };
   }
 };
 function createBaseLogSink(): LogSink {
@@ -1966,7 +1886,6 @@ function createBaseLogSink(): LogSink {
   };
 }
 export const LogSink = {
-  typeUrl: "/google.logging.v2.LogSink",
   encode(message: LogSink, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2159,57 +2078,6 @@ export const LogSink = {
     message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
-  },
-  fromAmino(object: LogSinkAmino): LogSink {
-    return {
-      name: object.name,
-      destination: object.destination,
-      filter: object.filter,
-      description: object.description,
-      disabled: object.disabled,
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
-      writerIdentity: object.writer_identity,
-      includeChildren: object.include_children,
-      bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: object.create_time,
-      updateTime: object.update_time
-    };
-  },
-  toAmino(message: LogSink): LogSinkAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.destination = message.destination;
-    obj.filter = message.filter;
-    obj.description = message.description;
-    obj.disabled = message.disabled;
-    if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
-    } else {
-      obj.exclusions = [];
-    }
-    obj.output_version_format = message.outputVersionFormat;
-    obj.writer_identity = message.writerIdentity;
-    obj.include_children = message.includeChildren;
-    obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    return obj;
-  },
-  fromAminoMsg(object: LogSinkAminoMsg): LogSink {
-    return LogSink.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogSinkProtoMsg): LogSink {
-    return LogSink.decode(message.value);
-  },
-  toProto(message: LogSink): Uint8Array {
-    return LogSink.encode(message).finish();
-  },
-  toProtoMsg(message: LogSink): LogSinkProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogSink",
-      value: LogSink.encode(message).finish()
-    };
   }
 };
 function createBaseBigQueryOptions(): BigQueryOptions {
@@ -2219,7 +2087,6 @@ function createBaseBigQueryOptions(): BigQueryOptions {
   };
 }
 export const BigQueryOptions = {
-  typeUrl: "/google.logging.v2.BigQueryOptions",
   encode(message: BigQueryOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.usePartitionedTables === true) {
       writer.uint32(8).bool(message.usePartitionedTables);
@@ -2284,33 +2151,6 @@ export const BigQueryOptions = {
     obj.use_partitioned_tables = message.usePartitionedTables;
     obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
     return obj;
-  },
-  fromAmino(object: BigQueryOptionsAmino): BigQueryOptions {
-    return {
-      usePartitionedTables: object.use_partitioned_tables,
-      usesTimestampColumnPartitioning: object.uses_timestamp_column_partitioning
-    };
-  },
-  toAmino(message: BigQueryOptions): BigQueryOptionsAmino {
-    const obj: any = {};
-    obj.use_partitioned_tables = message.usePartitionedTables;
-    obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
-    return obj;
-  },
-  fromAminoMsg(object: BigQueryOptionsAminoMsg): BigQueryOptions {
-    return BigQueryOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BigQueryOptionsProtoMsg): BigQueryOptions {
-    return BigQueryOptions.decode(message.value);
-  },
-  toProto(message: BigQueryOptions): Uint8Array {
-    return BigQueryOptions.encode(message).finish();
-  },
-  toProtoMsg(message: BigQueryOptions): BigQueryOptionsProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.BigQueryOptions",
-      value: BigQueryOptions.encode(message).finish()
-    };
   }
 };
 function createBaseListBucketsRequest(): ListBucketsRequest {
@@ -2321,7 +2161,6 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
   };
 }
 export const ListBucketsRequest = {
-  typeUrl: "/google.logging.v2.ListBucketsRequest",
   encode(message: ListBucketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2398,35 +2237,6 @@ export const ListBucketsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
-  },
-  fromAmino(object: ListBucketsRequestAmino): ListBucketsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListBucketsRequest): ListBucketsRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListBucketsRequestAminoMsg): ListBucketsRequest {
-    return ListBucketsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListBucketsRequestProtoMsg): ListBucketsRequest {
-    return ListBucketsRequest.decode(message.value);
-  },
-  toProto(message: ListBucketsRequest): Uint8Array {
-    return ListBucketsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListBucketsRequest): ListBucketsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListBucketsRequest",
-      value: ListBucketsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListBucketsResponse(): ListBucketsResponse {
@@ -2436,7 +2246,6 @@ function createBaseListBucketsResponse(): ListBucketsResponse {
   };
 }
 export const ListBucketsResponse = {
-  typeUrl: "/google.logging.v2.ListBucketsResponse",
   encode(message: ListBucketsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2509,37 +2318,6 @@ export const ListBucketsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListBucketsResponseAmino): ListBucketsResponse {
-    return {
-      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListBucketsResponse): ListBucketsResponseAmino {
-    const obj: any = {};
-    if (message.buckets) {
-      obj.buckets = message.buckets.map(e => e ? LogBucket.toAmino(e) : undefined);
-    } else {
-      obj.buckets = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListBucketsResponseAminoMsg): ListBucketsResponse {
-    return ListBucketsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListBucketsResponseProtoMsg): ListBucketsResponse {
-    return ListBucketsResponse.decode(message.value);
-  },
-  toProto(message: ListBucketsResponse): Uint8Array {
-    return ListBucketsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListBucketsResponse): ListBucketsResponseProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListBucketsResponse",
-      value: ListBucketsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseCreateBucketRequest(): CreateBucketRequest {
@@ -2550,7 +2328,6 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
   };
 }
 export const CreateBucketRequest = {
-  typeUrl: "/google.logging.v2.CreateBucketRequest",
   encode(message: CreateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2627,35 +2404,6 @@ export const CreateBucketRequest = {
     obj.bucket_id = message.bucketId;
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     return obj;
-  },
-  fromAmino(object: CreateBucketRequestAmino): CreateBucketRequest {
-    return {
-      parent: object.parent,
-      bucketId: object.bucket_id,
-      bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined
-    };
-  },
-  toAmino(message: CreateBucketRequest): CreateBucketRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.bucket_id = message.bucketId;
-    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateBucketRequestAminoMsg): CreateBucketRequest {
-    return CreateBucketRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateBucketRequestProtoMsg): CreateBucketRequest {
-    return CreateBucketRequest.decode(message.value);
-  },
-  toProto(message: CreateBucketRequest): Uint8Array {
-    return CreateBucketRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateBucketRequest): CreateBucketRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CreateBucketRequest",
-      value: CreateBucketRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
@@ -2666,7 +2414,6 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
   };
 }
 export const UpdateBucketRequest = {
-  typeUrl: "/google.logging.v2.UpdateBucketRequest",
   encode(message: UpdateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2743,35 +2490,6 @@ export const UpdateBucketRequest = {
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-  fromAmino(object: UpdateBucketRequestAmino): UpdateBucketRequest {
-    return {
-      name: object.name,
-      bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-  toAmino(message: UpdateBucketRequest): UpdateBucketRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateBucketRequestAminoMsg): UpdateBucketRequest {
-    return UpdateBucketRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateBucketRequestProtoMsg): UpdateBucketRequest {
-    return UpdateBucketRequest.decode(message.value);
-  },
-  toProto(message: UpdateBucketRequest): Uint8Array {
-    return UpdateBucketRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateBucketRequest): UpdateBucketRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UpdateBucketRequest",
-      value: UpdateBucketRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGetBucketRequest(): GetBucketRequest {
@@ -2780,7 +2498,6 @@ function createBaseGetBucketRequest(): GetBucketRequest {
   };
 }
 export const GetBucketRequest = {
-  typeUrl: "/google.logging.v2.GetBucketRequest",
   encode(message: GetBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2833,31 +2550,6 @@ export const GetBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: GetBucketRequestAmino): GetBucketRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetBucketRequest): GetBucketRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetBucketRequestAminoMsg): GetBucketRequest {
-    return GetBucketRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetBucketRequestProtoMsg): GetBucketRequest {
-    return GetBucketRequest.decode(message.value);
-  },
-  toProto(message: GetBucketRequest): Uint8Array {
-    return GetBucketRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetBucketRequest): GetBucketRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.GetBucketRequest",
-      value: GetBucketRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteBucketRequest(): DeleteBucketRequest {
@@ -2866,7 +2558,6 @@ function createBaseDeleteBucketRequest(): DeleteBucketRequest {
   };
 }
 export const DeleteBucketRequest = {
-  typeUrl: "/google.logging.v2.DeleteBucketRequest",
   encode(message: DeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2919,31 +2610,6 @@ export const DeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: DeleteBucketRequestAmino): DeleteBucketRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: DeleteBucketRequest): DeleteBucketRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteBucketRequestAminoMsg): DeleteBucketRequest {
-    return DeleteBucketRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteBucketRequestProtoMsg): DeleteBucketRequest {
-    return DeleteBucketRequest.decode(message.value);
-  },
-  toProto(message: DeleteBucketRequest): Uint8Array {
-    return DeleteBucketRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteBucketRequest): DeleteBucketRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.DeleteBucketRequest",
-      value: DeleteBucketRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
@@ -2952,7 +2618,6 @@ function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
   };
 }
 export const UndeleteBucketRequest = {
-  typeUrl: "/google.logging.v2.UndeleteBucketRequest",
   encode(message: UndeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3005,31 +2670,6 @@ export const UndeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: UndeleteBucketRequestAmino): UndeleteBucketRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: UndeleteBucketRequestAminoMsg): UndeleteBucketRequest {
-    return UndeleteBucketRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UndeleteBucketRequestProtoMsg): UndeleteBucketRequest {
-    return UndeleteBucketRequest.decode(message.value);
-  },
-  toProto(message: UndeleteBucketRequest): Uint8Array {
-    return UndeleteBucketRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UndeleteBucketRequest): UndeleteBucketRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UndeleteBucketRequest",
-      value: UndeleteBucketRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListViewsRequest(): ListViewsRequest {
@@ -3040,7 +2680,6 @@ function createBaseListViewsRequest(): ListViewsRequest {
   };
 }
 export const ListViewsRequest = {
-  typeUrl: "/google.logging.v2.ListViewsRequest",
   encode(message: ListViewsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3117,35 +2756,6 @@ export const ListViewsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
-  },
-  fromAmino(object: ListViewsRequestAmino): ListViewsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListViewsRequest): ListViewsRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListViewsRequestAminoMsg): ListViewsRequest {
-    return ListViewsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListViewsRequestProtoMsg): ListViewsRequest {
-    return ListViewsRequest.decode(message.value);
-  },
-  toProto(message: ListViewsRequest): Uint8Array {
-    return ListViewsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListViewsRequest): ListViewsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListViewsRequest",
-      value: ListViewsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListViewsResponse(): ListViewsResponse {
@@ -3155,7 +2765,6 @@ function createBaseListViewsResponse(): ListViewsResponse {
   };
 }
 export const ListViewsResponse = {
-  typeUrl: "/google.logging.v2.ListViewsResponse",
   encode(message: ListViewsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3228,37 +2837,6 @@ export const ListViewsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListViewsResponseAmino): ListViewsResponse {
-    return {
-      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListViewsResponse): ListViewsResponseAmino {
-    const obj: any = {};
-    if (message.views) {
-      obj.views = message.views.map(e => e ? LogView.toAmino(e) : undefined);
-    } else {
-      obj.views = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListViewsResponseAminoMsg): ListViewsResponse {
-    return ListViewsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListViewsResponseProtoMsg): ListViewsResponse {
-    return ListViewsResponse.decode(message.value);
-  },
-  toProto(message: ListViewsResponse): Uint8Array {
-    return ListViewsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListViewsResponse): ListViewsResponseProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListViewsResponse",
-      value: ListViewsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseCreateViewRequest(): CreateViewRequest {
@@ -3269,7 +2847,6 @@ function createBaseCreateViewRequest(): CreateViewRequest {
   };
 }
 export const CreateViewRequest = {
-  typeUrl: "/google.logging.v2.CreateViewRequest",
   encode(message: CreateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3346,35 +2923,6 @@ export const CreateViewRequest = {
     obj.view_id = message.viewId;
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     return obj;
-  },
-  fromAmino(object: CreateViewRequestAmino): CreateViewRequest {
-    return {
-      parent: object.parent,
-      viewId: object.view_id,
-      view: object?.view ? LogView.fromAmino(object.view) : undefined
-    };
-  },
-  toAmino(message: CreateViewRequest): CreateViewRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.view_id = message.viewId;
-    obj.view = message.view ? LogView.toAmino(message.view) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateViewRequestAminoMsg): CreateViewRequest {
-    return CreateViewRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateViewRequestProtoMsg): CreateViewRequest {
-    return CreateViewRequest.decode(message.value);
-  },
-  toProto(message: CreateViewRequest): Uint8Array {
-    return CreateViewRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateViewRequest): CreateViewRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CreateViewRequest",
-      value: CreateViewRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateViewRequest(): UpdateViewRequest {
@@ -3385,7 +2933,6 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
   };
 }
 export const UpdateViewRequest = {
-  typeUrl: "/google.logging.v2.UpdateViewRequest",
   encode(message: UpdateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3462,35 +3009,6 @@ export const UpdateViewRequest = {
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-  fromAmino(object: UpdateViewRequestAmino): UpdateViewRequest {
-    return {
-      name: object.name,
-      view: object?.view ? LogView.fromAmino(object.view) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-  toAmino(message: UpdateViewRequest): UpdateViewRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.view = message.view ? LogView.toAmino(message.view) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateViewRequestAminoMsg): UpdateViewRequest {
-    return UpdateViewRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateViewRequestProtoMsg): UpdateViewRequest {
-    return UpdateViewRequest.decode(message.value);
-  },
-  toProto(message: UpdateViewRequest): Uint8Array {
-    return UpdateViewRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateViewRequest): UpdateViewRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UpdateViewRequest",
-      value: UpdateViewRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGetViewRequest(): GetViewRequest {
@@ -3499,7 +3017,6 @@ function createBaseGetViewRequest(): GetViewRequest {
   };
 }
 export const GetViewRequest = {
-  typeUrl: "/google.logging.v2.GetViewRequest",
   encode(message: GetViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3552,31 +3069,6 @@ export const GetViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: GetViewRequestAmino): GetViewRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetViewRequest): GetViewRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetViewRequestAminoMsg): GetViewRequest {
-    return GetViewRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetViewRequestProtoMsg): GetViewRequest {
-    return GetViewRequest.decode(message.value);
-  },
-  toProto(message: GetViewRequest): Uint8Array {
-    return GetViewRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetViewRequest): GetViewRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.GetViewRequest",
-      value: GetViewRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteViewRequest(): DeleteViewRequest {
@@ -3585,7 +3077,6 @@ function createBaseDeleteViewRequest(): DeleteViewRequest {
   };
 }
 export const DeleteViewRequest = {
-  typeUrl: "/google.logging.v2.DeleteViewRequest",
   encode(message: DeleteViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3638,31 +3129,6 @@ export const DeleteViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: DeleteViewRequestAmino): DeleteViewRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: DeleteViewRequest): DeleteViewRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteViewRequestAminoMsg): DeleteViewRequest {
-    return DeleteViewRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteViewRequestProtoMsg): DeleteViewRequest {
-    return DeleteViewRequest.decode(message.value);
-  },
-  toProto(message: DeleteViewRequest): Uint8Array {
-    return DeleteViewRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteViewRequest): DeleteViewRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.DeleteViewRequest",
-      value: DeleteViewRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListSinksRequest(): ListSinksRequest {
@@ -3673,7 +3139,6 @@ function createBaseListSinksRequest(): ListSinksRequest {
   };
 }
 export const ListSinksRequest = {
-  typeUrl: "/google.logging.v2.ListSinksRequest",
   encode(message: ListSinksRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3750,35 +3215,6 @@ export const ListSinksRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
-  },
-  fromAmino(object: ListSinksRequestAmino): ListSinksRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListSinksRequest): ListSinksRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListSinksRequestAminoMsg): ListSinksRequest {
-    return ListSinksRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListSinksRequestProtoMsg): ListSinksRequest {
-    return ListSinksRequest.decode(message.value);
-  },
-  toProto(message: ListSinksRequest): Uint8Array {
-    return ListSinksRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListSinksRequest): ListSinksRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListSinksRequest",
-      value: ListSinksRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListSinksResponse(): ListSinksResponse {
@@ -3788,7 +3224,6 @@ function createBaseListSinksResponse(): ListSinksResponse {
   };
 }
 export const ListSinksResponse = {
-  typeUrl: "/google.logging.v2.ListSinksResponse",
   encode(message: ListSinksResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3861,37 +3296,6 @@ export const ListSinksResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListSinksResponseAmino): ListSinksResponse {
-    return {
-      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListSinksResponse): ListSinksResponseAmino {
-    const obj: any = {};
-    if (message.sinks) {
-      obj.sinks = message.sinks.map(e => e ? LogSink.toAmino(e) : undefined);
-    } else {
-      obj.sinks = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListSinksResponseAminoMsg): ListSinksResponse {
-    return ListSinksResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListSinksResponseProtoMsg): ListSinksResponse {
-    return ListSinksResponse.decode(message.value);
-  },
-  toProto(message: ListSinksResponse): Uint8Array {
-    return ListSinksResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListSinksResponse): ListSinksResponseProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListSinksResponse",
-      value: ListSinksResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetSinkRequest(): GetSinkRequest {
@@ -3900,7 +3304,6 @@ function createBaseGetSinkRequest(): GetSinkRequest {
   };
 }
 export const GetSinkRequest = {
-  typeUrl: "/google.logging.v2.GetSinkRequest",
   encode(message: GetSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
@@ -3953,31 +3356,6 @@ export const GetSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
-  },
-  fromAmino(object: GetSinkRequestAmino): GetSinkRequest {
-    return {
-      sinkName: object.sink_name
-    };
-  },
-  toAmino(message: GetSinkRequest): GetSinkRequestAmino {
-    const obj: any = {};
-    obj.sink_name = message.sinkName;
-    return obj;
-  },
-  fromAminoMsg(object: GetSinkRequestAminoMsg): GetSinkRequest {
-    return GetSinkRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetSinkRequestProtoMsg): GetSinkRequest {
-    return GetSinkRequest.decode(message.value);
-  },
-  toProto(message: GetSinkRequest): Uint8Array {
-    return GetSinkRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetSinkRequest): GetSinkRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.GetSinkRequest",
-      value: GetSinkRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCreateSinkRequest(): CreateSinkRequest {
@@ -3988,7 +3366,6 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
   };
 }
 export const CreateSinkRequest = {
-  typeUrl: "/google.logging.v2.CreateSinkRequest",
   encode(message: CreateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4065,35 +3442,6 @@ export const CreateSinkRequest = {
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
-  },
-  fromAmino(object: CreateSinkRequestAmino): CreateSinkRequest {
-    return {
-      parent: object.parent,
-      sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: object.unique_writer_identity
-    };
-  },
-  toAmino(message: CreateSinkRequest): CreateSinkRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
-    obj.unique_writer_identity = message.uniqueWriterIdentity;
-    return obj;
-  },
-  fromAminoMsg(object: CreateSinkRequestAminoMsg): CreateSinkRequest {
-    return CreateSinkRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateSinkRequestProtoMsg): CreateSinkRequest {
-    return CreateSinkRequest.decode(message.value);
-  },
-  toProto(message: CreateSinkRequest): Uint8Array {
-    return CreateSinkRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateSinkRequest): CreateSinkRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CreateSinkRequest",
-      value: CreateSinkRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
@@ -4105,7 +3453,6 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
   };
 }
 export const UpdateSinkRequest = {
-  typeUrl: "/google.logging.v2.UpdateSinkRequest",
   encode(message: UpdateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
@@ -4194,37 +3541,6 @@ export const UpdateSinkRequest = {
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-  fromAmino(object: UpdateSinkRequestAmino): UpdateSinkRequest {
-    return {
-      sinkName: object.sink_name,
-      sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: object.unique_writer_identity,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-  toAmino(message: UpdateSinkRequest): UpdateSinkRequestAmino {
-    const obj: any = {};
-    obj.sink_name = message.sinkName;
-    obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
-    obj.unique_writer_identity = message.uniqueWriterIdentity;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateSinkRequestAminoMsg): UpdateSinkRequest {
-    return UpdateSinkRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateSinkRequestProtoMsg): UpdateSinkRequest {
-    return UpdateSinkRequest.decode(message.value);
-  },
-  toProto(message: UpdateSinkRequest): Uint8Array {
-    return UpdateSinkRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateSinkRequest): UpdateSinkRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UpdateSinkRequest",
-      value: UpdateSinkRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteSinkRequest(): DeleteSinkRequest {
@@ -4233,7 +3549,6 @@ function createBaseDeleteSinkRequest(): DeleteSinkRequest {
   };
 }
 export const DeleteSinkRequest = {
-  typeUrl: "/google.logging.v2.DeleteSinkRequest",
   encode(message: DeleteSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
@@ -4286,31 +3601,6 @@ export const DeleteSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
-  },
-  fromAmino(object: DeleteSinkRequestAmino): DeleteSinkRequest {
-    return {
-      sinkName: object.sink_name
-    };
-  },
-  toAmino(message: DeleteSinkRequest): DeleteSinkRequestAmino {
-    const obj: any = {};
-    obj.sink_name = message.sinkName;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteSinkRequestAminoMsg): DeleteSinkRequest {
-    return DeleteSinkRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteSinkRequestProtoMsg): DeleteSinkRequest {
-    return DeleteSinkRequest.decode(message.value);
-  },
-  toProto(message: DeleteSinkRequest): Uint8Array {
-    return DeleteSinkRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteSinkRequest): DeleteSinkRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.DeleteSinkRequest",
-      value: DeleteSinkRequest.encode(message).finish()
-    };
   }
 };
 function createBaseLogExclusion(): LogExclusion {
@@ -4324,7 +3614,6 @@ function createBaseLogExclusion(): LogExclusion {
   };
 }
 export const LogExclusion = {
-  typeUrl: "/google.logging.v2.LogExclusion",
   encode(message: LogExclusion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4437,41 +3726,6 @@ export const LogExclusion = {
     message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
-  },
-  fromAmino(object: LogExclusionAmino): LogExclusion {
-    return {
-      name: object.name,
-      description: object.description,
-      filter: object.filter,
-      disabled: object.disabled,
-      createTime: object.create_time,
-      updateTime: object.update_time
-    };
-  },
-  toAmino(message: LogExclusion): LogExclusionAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    return obj;
-  },
-  fromAminoMsg(object: LogExclusionAminoMsg): LogExclusion {
-    return LogExclusion.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogExclusionProtoMsg): LogExclusion {
-    return LogExclusion.decode(message.value);
-  },
-  toProto(message: LogExclusion): Uint8Array {
-    return LogExclusion.encode(message).finish();
-  },
-  toProtoMsg(message: LogExclusion): LogExclusionProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogExclusion",
-      value: LogExclusion.encode(message).finish()
-    };
   }
 };
 function createBaseListExclusionsRequest(): ListExclusionsRequest {
@@ -4482,7 +3736,6 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
   };
 }
 export const ListExclusionsRequest = {
-  typeUrl: "/google.logging.v2.ListExclusionsRequest",
   encode(message: ListExclusionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4559,35 +3812,6 @@ export const ListExclusionsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
-  },
-  fromAmino(object: ListExclusionsRequestAmino): ListExclusionsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListExclusionsRequest): ListExclusionsRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListExclusionsRequestAminoMsg): ListExclusionsRequest {
-    return ListExclusionsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListExclusionsRequestProtoMsg): ListExclusionsRequest {
-    return ListExclusionsRequest.decode(message.value);
-  },
-  toProto(message: ListExclusionsRequest): Uint8Array {
-    return ListExclusionsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListExclusionsRequest): ListExclusionsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListExclusionsRequest",
-      value: ListExclusionsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListExclusionsResponse(): ListExclusionsResponse {
@@ -4597,7 +3821,6 @@ function createBaseListExclusionsResponse(): ListExclusionsResponse {
   };
 }
 export const ListExclusionsResponse = {
-  typeUrl: "/google.logging.v2.ListExclusionsResponse",
   encode(message: ListExclusionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4670,37 +3893,6 @@ export const ListExclusionsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListExclusionsResponseAmino): ListExclusionsResponse {
-    return {
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListExclusionsResponse): ListExclusionsResponseAmino {
-    const obj: any = {};
-    if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
-    } else {
-      obj.exclusions = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListExclusionsResponseAminoMsg): ListExclusionsResponse {
-    return ListExclusionsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListExclusionsResponseProtoMsg): ListExclusionsResponse {
-    return ListExclusionsResponse.decode(message.value);
-  },
-  toProto(message: ListExclusionsResponse): Uint8Array {
-    return ListExclusionsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListExclusionsResponse): ListExclusionsResponseProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.ListExclusionsResponse",
-      value: ListExclusionsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetExclusionRequest(): GetExclusionRequest {
@@ -4709,7 +3901,6 @@ function createBaseGetExclusionRequest(): GetExclusionRequest {
   };
 }
 export const GetExclusionRequest = {
-  typeUrl: "/google.logging.v2.GetExclusionRequest",
   encode(message: GetExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4762,31 +3953,6 @@ export const GetExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: GetExclusionRequestAmino): GetExclusionRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetExclusionRequest): GetExclusionRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetExclusionRequestAminoMsg): GetExclusionRequest {
-    return GetExclusionRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetExclusionRequestProtoMsg): GetExclusionRequest {
-    return GetExclusionRequest.decode(message.value);
-  },
-  toProto(message: GetExclusionRequest): Uint8Array {
-    return GetExclusionRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetExclusionRequest): GetExclusionRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.GetExclusionRequest",
-      value: GetExclusionRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
@@ -4796,7 +3962,6 @@ function createBaseCreateExclusionRequest(): CreateExclusionRequest {
   };
 }
 export const CreateExclusionRequest = {
-  typeUrl: "/google.logging.v2.CreateExclusionRequest",
   encode(message: CreateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4861,33 +4026,6 @@ export const CreateExclusionRequest = {
     obj.parent = message.parent;
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     return obj;
-  },
-  fromAmino(object: CreateExclusionRequestAmino): CreateExclusionRequest {
-    return {
-      parent: object.parent,
-      exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined
-    };
-  },
-  toAmino(message: CreateExclusionRequest): CreateExclusionRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateExclusionRequestAminoMsg): CreateExclusionRequest {
-    return CreateExclusionRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateExclusionRequestProtoMsg): CreateExclusionRequest {
-    return CreateExclusionRequest.decode(message.value);
-  },
-  toProto(message: CreateExclusionRequest): Uint8Array {
-    return CreateExclusionRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateExclusionRequest): CreateExclusionRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CreateExclusionRequest",
-      value: CreateExclusionRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
@@ -4898,7 +4036,6 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
   };
 }
 export const UpdateExclusionRequest = {
-  typeUrl: "/google.logging.v2.UpdateExclusionRequest",
   encode(message: UpdateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4975,35 +4112,6 @@ export const UpdateExclusionRequest = {
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-  fromAmino(object: UpdateExclusionRequestAmino): UpdateExclusionRequest {
-    return {
-      name: object.name,
-      exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-  toAmino(message: UpdateExclusionRequest): UpdateExclusionRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateExclusionRequestAminoMsg): UpdateExclusionRequest {
-    return UpdateExclusionRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateExclusionRequestProtoMsg): UpdateExclusionRequest {
-    return UpdateExclusionRequest.decode(message.value);
-  },
-  toProto(message: UpdateExclusionRequest): Uint8Array {
-    return UpdateExclusionRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateExclusionRequest): UpdateExclusionRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UpdateExclusionRequest",
-      value: UpdateExclusionRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
@@ -5012,7 +4120,6 @@ function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
   };
 }
 export const DeleteExclusionRequest = {
-  typeUrl: "/google.logging.v2.DeleteExclusionRequest",
   encode(message: DeleteExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5065,31 +4172,6 @@ export const DeleteExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: DeleteExclusionRequestAmino): DeleteExclusionRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteExclusionRequestAminoMsg): DeleteExclusionRequest {
-    return DeleteExclusionRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteExclusionRequestProtoMsg): DeleteExclusionRequest {
-    return DeleteExclusionRequest.decode(message.value);
-  },
-  toProto(message: DeleteExclusionRequest): Uint8Array {
-    return DeleteExclusionRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteExclusionRequest): DeleteExclusionRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.DeleteExclusionRequest",
-      value: DeleteExclusionRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
@@ -5098,7 +4180,6 @@ function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
   };
 }
 export const GetCmekSettingsRequest = {
-  typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
   encode(message: GetCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5151,31 +4232,6 @@ export const GetCmekSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: GetCmekSettingsRequestAmino): GetCmekSettingsRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetCmekSettingsRequestAminoMsg): GetCmekSettingsRequest {
-    return GetCmekSettingsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetCmekSettingsRequestProtoMsg): GetCmekSettingsRequest {
-    return GetCmekSettingsRequest.decode(message.value);
-  },
-  toProto(message: GetCmekSettingsRequest): Uint8Array {
-    return GetCmekSettingsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetCmekSettingsRequest): GetCmekSettingsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
-      value: GetCmekSettingsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
@@ -5186,7 +4242,6 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
   };
 }
 export const UpdateCmekSettingsRequest = {
-  typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
   encode(message: UpdateCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5263,35 +4318,6 @@ export const UpdateCmekSettingsRequest = {
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-  fromAmino(object: UpdateCmekSettingsRequestAmino): UpdateCmekSettingsRequest {
-    return {
-      name: object.name,
-      cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-  toAmino(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateCmekSettingsRequestAminoMsg): UpdateCmekSettingsRequest {
-    return UpdateCmekSettingsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateCmekSettingsRequestProtoMsg): UpdateCmekSettingsRequest {
-    return UpdateCmekSettingsRequest.decode(message.value);
-  },
-  toProto(message: UpdateCmekSettingsRequest): Uint8Array {
-    return UpdateCmekSettingsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
-      value: UpdateCmekSettingsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCmekSettings(): CmekSettings {
@@ -5302,7 +4328,6 @@ function createBaseCmekSettings(): CmekSettings {
   };
 }
 export const CmekSettings = {
-  typeUrl: "/google.logging.v2.CmekSettings",
   encode(message: CmekSettings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5379,35 +4404,6 @@ export const CmekSettings = {
     obj.kms_key_name = message.kmsKeyName;
     obj.service_account_id = message.serviceAccountId;
     return obj;
-  },
-  fromAmino(object: CmekSettingsAmino): CmekSettings {
-    return {
-      name: object.name,
-      kmsKeyName: object.kms_key_name,
-      serviceAccountId: object.service_account_id
-    };
-  },
-  toAmino(message: CmekSettings): CmekSettingsAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.kms_key_name = message.kmsKeyName;
-    obj.service_account_id = message.serviceAccountId;
-    return obj;
-  },
-  fromAminoMsg(object: CmekSettingsAminoMsg): CmekSettings {
-    return CmekSettings.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CmekSettingsProtoMsg): CmekSettings {
-    return CmekSettings.decode(message.value);
-  },
-  toProto(message: CmekSettings): Uint8Array {
-    return CmekSettings.encode(message).finish();
-  },
-  toProtoMsg(message: CmekSettings): CmekSettingsProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CmekSettings",
-      value: CmekSettings.encode(message).finish()
-    };
   }
 };
 function createBaseGetSettingsRequest(): GetSettingsRequest {
@@ -5416,7 +4412,6 @@ function createBaseGetSettingsRequest(): GetSettingsRequest {
   };
 }
 export const GetSettingsRequest = {
-  typeUrl: "/google.logging.v2.GetSettingsRequest",
   encode(message: GetSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5469,31 +4464,6 @@ export const GetSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: GetSettingsRequestAmino): GetSettingsRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetSettingsRequest): GetSettingsRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetSettingsRequestAminoMsg): GetSettingsRequest {
-    return GetSettingsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetSettingsRequestProtoMsg): GetSettingsRequest {
-    return GetSettingsRequest.decode(message.value);
-  },
-  toProto(message: GetSettingsRequest): Uint8Array {
-    return GetSettingsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetSettingsRequest): GetSettingsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.GetSettingsRequest",
-      value: GetSettingsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
@@ -5504,7 +4474,6 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
   };
 }
 export const UpdateSettingsRequest = {
-  typeUrl: "/google.logging.v2.UpdateSettingsRequest",
   encode(message: UpdateSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5581,35 +4550,6 @@ export const UpdateSettingsRequest = {
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toSDK(message.settings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-  fromAmino(object: UpdateSettingsRequestAmino): UpdateSettingsRequest {
-    return {
-      name: object.name,
-      settings: object?.settings ? Settings.fromAmino(object.settings) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-  toAmino(message: UpdateSettingsRequest): UpdateSettingsRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateSettingsRequestAminoMsg): UpdateSettingsRequest {
-    return UpdateSettingsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateSettingsRequestProtoMsg): UpdateSettingsRequest {
-    return UpdateSettingsRequest.decode(message.value);
-  },
-  toProto(message: UpdateSettingsRequest): Uint8Array {
-    return UpdateSettingsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateSettingsRequest): UpdateSettingsRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.UpdateSettingsRequest",
-      value: UpdateSettingsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseSettings(): Settings {
@@ -5622,7 +4562,6 @@ function createBaseSettings(): Settings {
   };
 }
 export const Settings = {
-  typeUrl: "/google.logging.v2.Settings",
   encode(message: Settings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5723,39 +4662,6 @@ export const Settings = {
     obj.storage_location = message.storageLocation;
     obj.disable_default_sink = message.disableDefaultSink;
     return obj;
-  },
-  fromAmino(object: SettingsAmino): Settings {
-    return {
-      name: object.name,
-      kmsKeyName: object.kms_key_name,
-      kmsServiceAccountId: object.kms_service_account_id,
-      storageLocation: object.storage_location,
-      disableDefaultSink: object.disable_default_sink
-    };
-  },
-  toAmino(message: Settings): SettingsAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.kms_key_name = message.kmsKeyName;
-    obj.kms_service_account_id = message.kmsServiceAccountId;
-    obj.storage_location = message.storageLocation;
-    obj.disable_default_sink = message.disableDefaultSink;
-    return obj;
-  },
-  fromAminoMsg(object: SettingsAminoMsg): Settings {
-    return Settings.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SettingsProtoMsg): Settings {
-    return Settings.decode(message.value);
-  },
-  toProto(message: Settings): Uint8Array {
-    return Settings.encode(message).finish();
-  },
-  toProtoMsg(message: Settings): SettingsProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.Settings",
-      value: Settings.encode(message).finish()
-    };
   }
 };
 function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
@@ -5766,7 +4672,6 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
   };
 }
 export const CopyLogEntriesRequest = {
-  typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
   encode(message: CopyLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5843,35 +4748,6 @@ export const CopyLogEntriesRequest = {
     obj.filter = message.filter;
     obj.destination = message.destination;
     return obj;
-  },
-  fromAmino(object: CopyLogEntriesRequestAmino): CopyLogEntriesRequest {
-    return {
-      name: object.name,
-      filter: object.filter,
-      destination: object.destination
-    };
-  },
-  toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.filter = message.filter;
-    obj.destination = message.destination;
-    return obj;
-  },
-  fromAminoMsg(object: CopyLogEntriesRequestAminoMsg): CopyLogEntriesRequest {
-    return CopyLogEntriesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CopyLogEntriesRequestProtoMsg): CopyLogEntriesRequest {
-    return CopyLogEntriesRequest.decode(message.value);
-  },
-  toProto(message: CopyLogEntriesRequest): Uint8Array {
-    return CopyLogEntriesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CopyLogEntriesRequest): CopyLogEntriesRequestProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
-      value: CopyLogEntriesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
@@ -5886,7 +4762,6 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   };
 }
 export const CopyLogEntriesMetadata = {
-  typeUrl: "/google.logging.v2.CopyLogEntriesMetadata",
   encode(message: CopyLogEntriesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
@@ -6011,43 +4886,6 @@ export const CopyLogEntriesMetadata = {
     obj.progress = message.progress;
     obj.writer_identity = message.writerIdentity;
     return obj;
-  },
-  fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
-    return {
-      startTime: object.start_time,
-      endTime: object.end_time,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
-      cancellationRequested: object.cancellation_requested,
-      request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
-      progress: object.progress,
-      writerIdentity: object.writer_identity
-    };
-  },
-  toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
-    const obj: any = {};
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
-    obj.state = message.state;
-    obj.cancellation_requested = message.cancellationRequested;
-    obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;
-    obj.progress = message.progress;
-    obj.writer_identity = message.writerIdentity;
-    return obj;
-  },
-  fromAminoMsg(object: CopyLogEntriesMetadataAminoMsg): CopyLogEntriesMetadata {
-    return CopyLogEntriesMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg): CopyLogEntriesMetadata {
-    return CopyLogEntriesMetadata.decode(message.value);
-  },
-  toProto(message: CopyLogEntriesMetadata): Uint8Array {
-    return CopyLogEntriesMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CopyLogEntriesMetadata",
-      value: CopyLogEntriesMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
@@ -6056,7 +4894,6 @@ function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   };
 }
 export const CopyLogEntriesResponse = {
-  typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
   encode(message: CopyLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.logEntriesCopiedCount !== BigInt(0)) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
@@ -6109,30 +4946,5 @@ export const CopyLogEntriesResponse = {
     const obj: any = {};
     obj.log_entries_copied_count = message.logEntriesCopiedCount;
     return obj;
-  },
-  fromAmino(object: CopyLogEntriesResponseAmino): CopyLogEntriesResponse {
-    return {
-      logEntriesCopiedCount: BigInt(object.log_entries_copied_count)
-    };
-  },
-  toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {
-    const obj: any = {};
-    obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CopyLogEntriesResponseAminoMsg): CopyLogEntriesResponse {
-    return CopyLogEntriesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CopyLogEntriesResponseProtoMsg): CopyLogEntriesResponse {
-    return CopyLogEntriesResponse.decode(message.value);
-  },
-  toProto(message: CopyLogEntriesResponse): Uint8Array {
-    return CopyLogEntriesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: CopyLogEntriesResponse): CopyLogEntriesResponseProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
-      value: CopyLogEntriesResponse.encode(message).finish()
-    };
   }
 };

@@ -3,12 +3,12 @@ import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockAmino, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoAmino, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
-  height: bigint;
+  height: Long;
   /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
@@ -28,12 +28,12 @@ export interface GetValidatorSetByHeightRequestAminoMsg {
 }
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequestSDKType {
-  height: bigint;
+  height: Long;
   pagination: PageRequestSDKType;
 }
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
-  blockHeight: bigint;
+  blockHeight: Long;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
   pagination: PageResponse;
@@ -55,7 +55,7 @@ export interface GetValidatorSetByHeightResponseAminoMsg {
 }
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponseSDKType {
-  block_height: bigint;
+  block_height: Long;
   validators: ValidatorSDKType[];
   pagination: PageResponseSDKType;
 }
@@ -83,7 +83,7 @@ export interface GetLatestValidatorSetRequestSDKType {
 }
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
-  blockHeight: bigint;
+  blockHeight: Long;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
   pagination: PageResponse;
@@ -105,7 +105,7 @@ export interface GetLatestValidatorSetResponseAminoMsg {
 }
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponseSDKType {
-  block_height: bigint;
+  block_height: Long;
   validators: ValidatorSDKType[];
   pagination: PageResponseSDKType;
 }
@@ -113,8 +113,8 @@ export interface GetLatestValidatorSetResponseSDKType {
 export interface Validator {
   address: string;
   pubKey: Any;
-  votingPower: bigint;
-  proposerPriority: bigint;
+  votingPower: Long;
+  proposerPriority: Long;
 }
 export interface ValidatorProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.Validator";
@@ -135,12 +135,12 @@ export interface ValidatorAminoMsg {
 export interface ValidatorSDKType {
   address: string;
   pub_key: AnySDKType;
-  voting_power: bigint;
-  proposer_priority: bigint;
+  voting_power: Long;
+  proposer_priority: Long;
 }
 /** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequest {
-  height: bigint;
+  height: Long;
 }
 export interface GetBlockByHeightRequestProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest";
@@ -156,7 +156,7 @@ export interface GetBlockByHeightRequestAminoMsg {
 }
 /** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequestSDKType {
-  height: bigint;
+  height: Long;
 }
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
@@ -366,15 +366,15 @@ export interface ModuleSDKType {
 }
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
-    height: BigInt(0),
+    height: Long.ZERO,
     pagination: PageRequest.fromPartial({})
   };
 }
 export const GetValidatorSetByHeightRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest",
   aminoType: "cosmos-sdk/GetValidatorSetByHeightRequest",
-  encode(message: GetValidatorSetByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+  encode(message: GetValidatorSetByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
     if (message.pagination !== undefined) {
@@ -382,15 +382,15 @@ export const GetValidatorSetByHeightRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = reader.int64();
+          message.height = (reader.int64() as Long);
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -404,20 +404,20 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromJSON(object: any): GetValidatorSetByHeightRequest {
     const obj = createBaseGetValidatorSetByHeightRequest();
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
   toJSON(message: GetValidatorSetByHeightRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
     if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
+      message.height = Long.fromValue(object.height);
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
@@ -438,7 +438,7 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromAmino(object: GetValidatorSetByHeightRequestAmino): GetValidatorSetByHeightRequest {
     return {
-      height: BigInt(object.height),
+      height: Long.fromString(object.height),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -472,7 +472,7 @@ export const GetValidatorSetByHeightRequest = {
 };
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return {
-    blockHeight: BigInt(0),
+    blockHeight: Long.ZERO,
     validators: [],
     pagination: PageResponse.fromPartial({})
   };
@@ -480,8 +480,8 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
 export const GetValidatorSetByHeightResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse",
   aminoType: "cosmos-sdk/GetValidatorSetByHeightResponse",
-  encode(message: GetValidatorSetByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.blockHeight !== BigInt(0)) {
+  encode(message: GetValidatorSetByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
@@ -492,15 +492,15 @@ export const GetValidatorSetByHeightResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = reader.int64();
+          message.blockHeight = (reader.int64() as Long);
           break;
         case 2:
           message.validators.push(Validator.decode(reader, reader.uint32()));
@@ -517,14 +517,14 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     const obj = createBaseGetValidatorSetByHeightResponse();
-    if (isSet(object.blockHeight)) obj.blockHeight = BigInt(object.blockHeight.toString());
+    if (isSet(object.blockHeight)) obj.blockHeight = Long.fromValue(object.blockHeight);
     if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
   toJSON(message: GetValidatorSetByHeightResponse): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.ZERO).toString());
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
@@ -536,7 +536,7 @@ export const GetValidatorSetByHeightResponse = {
   fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
     if (object.blockHeight !== undefined && object.blockHeight !== null) {
-      message.blockHeight = BigInt(object.blockHeight.toString());
+      message.blockHeight = Long.fromValue(object.blockHeight);
     }
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -564,7 +564,7 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromAmino(object: GetValidatorSetByHeightResponseAmino): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: BigInt(object.block_height),
+      blockHeight: Long.fromString(object.block_height),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
@@ -610,14 +610,14 @@ function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest 
 export const GetLatestValidatorSetRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest",
   aminoType: "cosmos-sdk/GetLatestValidatorSetRequest",
-  encode(message: GetLatestValidatorSetRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GetLatestValidatorSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetRequest();
     while (reader.pos < end) {
@@ -694,7 +694,7 @@ export const GetLatestValidatorSetRequest = {
 };
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return {
-    blockHeight: BigInt(0),
+    blockHeight: Long.ZERO,
     validators: [],
     pagination: PageResponse.fromPartial({})
   };
@@ -702,8 +702,8 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
 export const GetLatestValidatorSetResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse",
   aminoType: "cosmos-sdk/GetLatestValidatorSetResponse",
-  encode(message: GetLatestValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.blockHeight !== BigInt(0)) {
+  encode(message: GetLatestValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
@@ -714,15 +714,15 @@ export const GetLatestValidatorSetResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = reader.int64();
+          message.blockHeight = (reader.int64() as Long);
           break;
         case 2:
           message.validators.push(Validator.decode(reader, reader.uint32()));
@@ -739,14 +739,14 @@ export const GetLatestValidatorSetResponse = {
   },
   fromJSON(object: any): GetLatestValidatorSetResponse {
     const obj = createBaseGetLatestValidatorSetResponse();
-    if (isSet(object.blockHeight)) obj.blockHeight = BigInt(object.blockHeight.toString());
+    if (isSet(object.blockHeight)) obj.blockHeight = Long.fromValue(object.blockHeight);
     if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
   toJSON(message: GetLatestValidatorSetResponse): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.ZERO).toString());
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
@@ -758,7 +758,7 @@ export const GetLatestValidatorSetResponse = {
   fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
     if (object.blockHeight !== undefined && object.blockHeight !== null) {
-      message.blockHeight = BigInt(object.blockHeight.toString());
+      message.blockHeight = Long.fromValue(object.blockHeight);
     }
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -786,7 +786,7 @@ export const GetLatestValidatorSetResponse = {
   },
   fromAmino(object: GetLatestValidatorSetResponseAmino): GetLatestValidatorSetResponse {
     return {
-      blockHeight: BigInt(object.block_height),
+      blockHeight: Long.fromString(object.block_height),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
@@ -828,30 +828,30 @@ function createBaseValidator(): Validator {
   return {
     address: "",
     pubKey: Any.fromPartial({}),
-    votingPower: BigInt(0),
-    proposerPriority: BigInt(0)
+    votingPower: Long.ZERO,
+    proposerPriority: Long.ZERO
   };
 }
 export const Validator = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.Validator",
   aminoType: "cosmos-sdk/Validator",
-  encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.pubKey !== undefined) {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.votingPower !== BigInt(0)) {
+    if (!message.votingPower.isZero()) {
       writer.uint32(24).int64(message.votingPower);
     }
-    if (message.proposerPriority !== BigInt(0)) {
+    if (!message.proposerPriority.isZero()) {
       writer.uint32(32).int64(message.proposerPriority);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Validator {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Validator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
     while (reader.pos < end) {
@@ -864,10 +864,10 @@ export const Validator = {
           message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 3:
-          message.votingPower = reader.int64();
+          message.votingPower = (reader.int64() as Long);
           break;
         case 4:
-          message.proposerPriority = reader.int64();
+          message.proposerPriority = (reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -880,16 +880,16 @@ export const Validator = {
     const obj = createBaseValidator();
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.pubKey)) obj.pubKey = Any.fromJSON(object.pubKey);
-    if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
-    if (isSet(object.proposerPriority)) obj.proposerPriority = BigInt(object.proposerPriority.toString());
+    if (isSet(object.votingPower)) obj.votingPower = Long.fromValue(object.votingPower);
+    if (isSet(object.proposerPriority)) obj.proposerPriority = Long.fromValue(object.proposerPriority);
     return obj;
   },
   toJSON(message: Validator): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
-    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || BigInt(0)).toString());
+    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || Long.ZERO).toString());
+    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || Long.ZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Validator>): Validator {
@@ -899,10 +899,10 @@ export const Validator = {
       message.pubKey = Any.fromPartial(object.pubKey);
     }
     if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = BigInt(object.votingPower.toString());
+      message.votingPower = Long.fromValue(object.votingPower);
     }
     if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
-      message.proposerPriority = BigInt(object.proposerPriority.toString());
+      message.proposerPriority = Long.fromValue(object.proposerPriority);
     }
     return message;
   },
@@ -926,8 +926,8 @@ export const Validator = {
     return {
       address: object.address,
       pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      votingPower: BigInt(object.voting_power),
-      proposerPriority: BigInt(object.proposer_priority)
+      votingPower: Long.fromString(object.voting_power),
+      proposerPriority: Long.fromString(object.proposer_priority)
     };
   },
   toAmino(message: Validator): ValidatorAmino {
@@ -962,27 +962,27 @@ export const Validator = {
 };
 function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
   return {
-    height: BigInt(0)
+    height: Long.ZERO
   };
 }
 export const GetBlockByHeightRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest",
   aminoType: "cosmos-sdk/GetBlockByHeightRequest",
-  encode(message: GetBlockByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+  encode(message: GetBlockByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = reader.int64();
+          message.height = (reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -993,18 +993,18 @@ export const GetBlockByHeightRequest = {
   },
   fromJSON(object: any): GetBlockByHeightRequest {
     const obj = createBaseGetBlockByHeightRequest();
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
     return obj;
   },
   toJSON(message: GetBlockByHeightRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
     if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
+      message.height = Long.fromValue(object.height);
     }
     return message;
   },
@@ -1020,7 +1020,7 @@ export const GetBlockByHeightRequest = {
   },
   fromAmino(object: GetBlockByHeightRequestAmino): GetBlockByHeightRequest {
     return {
-      height: BigInt(object.height)
+      height: Long.fromString(object.height)
     };
   },
   toAmino(message: GetBlockByHeightRequest): GetBlockByHeightRequestAmino {
@@ -1059,7 +1059,7 @@ function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
 export const GetBlockByHeightResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse",
   aminoType: "cosmos-sdk/GetBlockByHeightResponse",
-  encode(message: GetBlockByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GetBlockByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -1068,8 +1068,8 @@ export const GetBlockByHeightResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightResponse();
     while (reader.pos < end) {
@@ -1162,11 +1162,11 @@ function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
 export const GetLatestBlockRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockRequest",
   aminoType: "cosmos-sdk/GetLatestBlockRequest",
-  encode(_: GetLatestBlockRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockRequest();
     while (reader.pos < end) {
@@ -1236,7 +1236,7 @@ function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
 export const GetLatestBlockResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockResponse",
   aminoType: "cosmos-sdk/GetLatestBlockResponse",
-  encode(message: GetLatestBlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GetLatestBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -1245,8 +1245,8 @@ export const GetLatestBlockResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockResponse();
     while (reader.pos < end) {
@@ -1339,11 +1339,11 @@ function createBaseGetSyncingRequest(): GetSyncingRequest {
 export const GetSyncingRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingRequest",
   aminoType: "cosmos-sdk/GetSyncingRequest",
-  encode(_: GetSyncingRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingRequest();
     while (reader.pos < end) {
@@ -1412,14 +1412,14 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
 export const GetSyncingResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingResponse",
   aminoType: "cosmos-sdk/GetSyncingResponse",
-  encode(message: GetSyncingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GetSyncingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syncing === true) {
       writer.uint32(8).bool(message.syncing);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingResponse();
     while (reader.pos < end) {
@@ -1498,11 +1498,11 @@ function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
 export const GetNodeInfoRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoRequest",
   aminoType: "cosmos-sdk/GetNodeInfoRequest",
-  encode(_: GetNodeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoRequest();
     while (reader.pos < end) {
@@ -1572,7 +1572,7 @@ function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
 export const GetNodeInfoResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoResponse",
   aminoType: "cosmos-sdk/GetNodeInfoResponse",
-  encode(message: GetNodeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GetNodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nodeInfo !== undefined) {
       NodeInfo.encode(message.nodeInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -1581,8 +1581,8 @@ export const GetNodeInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoResponse();
     while (reader.pos < end) {
@@ -1684,7 +1684,7 @@ function createBaseVersionInfo(): VersionInfo {
 export const VersionInfo = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.VersionInfo",
   aminoType: "cosmos-sdk/VersionInfo",
-  encode(message: VersionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: VersionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1711,8 +1711,8 @@ export const VersionInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): VersionInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): VersionInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionInfo();
     while (reader.pos < end) {
@@ -1877,7 +1877,7 @@ function createBaseModule(): Module {
 export const Module = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.Module",
   aminoType: "cosmos-sdk/Module",
-  encode(message: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
@@ -1889,8 +1889,8 @@ export const Module = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Module {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Module {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
     while (reader.pos < end) {

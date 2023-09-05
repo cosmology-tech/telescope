@@ -8,12 +8,12 @@ import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPoo
 import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** =============================== Pool */
 export interface QueryPoolRequest {
-  poolId: bigint;
+  poolId: Long;
 }
 export interface QueryPoolRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest";
@@ -29,7 +29,7 @@ export interface QueryPoolRequestAminoMsg {
 }
 /** =============================== Pool */
 export interface QueryPoolRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
 }
 export interface QueryPoolResponse {
   pool: Pool1 | Pool2 | Any | undefined;
@@ -113,7 +113,7 @@ export interface QueryNumPoolsRequestAminoMsg {
 /** =============================== NumPools */
 export interface QueryNumPoolsRequestSDKType {}
 export interface QueryNumPoolsResponse {
-  numPools: bigint;
+  numPools: Long;
 }
 export interface QueryNumPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse";
@@ -127,11 +127,11 @@ export interface QueryNumPoolsResponseAminoMsg {
   value: QueryNumPoolsResponseAmino;
 }
 export interface QueryNumPoolsResponseSDKType {
-  num_pools: bigint;
+  num_pools: Long;
 }
 /** =============================== PoolType */
 export interface QueryPoolTypeRequest {
-  poolId: bigint;
+  poolId: Long;
 }
 export interface QueryPoolTypeRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest";
@@ -147,7 +147,7 @@ export interface QueryPoolTypeRequestAminoMsg {
 }
 /** =============================== PoolType */
 export interface QueryPoolTypeRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
 }
 export interface QueryPoolTypeResponse {
   poolType: string;
@@ -168,7 +168,7 @@ export interface QueryPoolTypeResponseSDKType {
 }
 /** =============================== CalcJoinPoolShares */
 export interface QueryCalcJoinPoolSharesRequest {
-  poolId: bigint;
+  poolId: Long;
   tokensIn: Coin[];
 }
 export interface QueryCalcJoinPoolSharesRequestProtoMsg {
@@ -186,7 +186,7 @@ export interface QueryCalcJoinPoolSharesRequestAminoMsg {
 }
 /** =============================== CalcJoinPoolShares */
 export interface QueryCalcJoinPoolSharesRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
   tokens_in: CoinSDKType[];
 }
 export interface QueryCalcJoinPoolSharesResponse {
@@ -211,7 +211,7 @@ export interface QueryCalcJoinPoolSharesResponseSDKType {
 }
 /** =============================== CalcExitPoolCoinsFromShares */
 export interface QueryCalcExitPoolCoinsFromSharesRequest {
-  poolId: bigint;
+  poolId: Long;
   shareInAmount: string;
 }
 export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
@@ -229,7 +229,7 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestAminoMsg {
 }
 /** =============================== CalcExitPoolCoinsFromShares */
 export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
   share_in_amount: string;
 }
 export interface QueryCalcExitPoolCoinsFromSharesResponse {
@@ -251,7 +251,7 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
 }
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
-  poolId: bigint;
+  poolId: Long;
 }
 export interface QueryPoolParamsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest";
@@ -267,7 +267,7 @@ export interface QueryPoolParamsRequestAminoMsg {
 }
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
 }
 export interface QueryPoolParamsResponse {
   params: Any;
@@ -288,7 +288,7 @@ export interface QueryPoolParamsResponseSDKType {
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
-  poolId: bigint;
+  poolId: Long;
 }
 export interface QueryTotalPoolLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
@@ -304,7 +304,7 @@ export interface QueryTotalPoolLiquidityRequestAminoMsg {
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
 }
 export interface QueryTotalPoolLiquidityResponse {
   liquidity: Coin[];
@@ -325,7 +325,7 @@ export interface QueryTotalPoolLiquidityResponseSDKType {
 }
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequest {
-  poolId: bigint;
+  poolId: Long;
 }
 export interface QueryTotalSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest";
@@ -341,7 +341,7 @@ export interface QueryTotalSharesRequestAminoMsg {
 }
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
 }
 export interface QueryTotalSharesResponse {
   totalShares: Coin;
@@ -362,7 +362,7 @@ export interface QueryTotalSharesResponseSDKType {
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequest {
-  poolId: bigint;
+  poolId: Long;
   tokensIn: Coin[];
 }
 export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
@@ -380,7 +380,7 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestAminoMsg {
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
   tokens_in: CoinSDKType[];
 }
 export interface QueryCalcJoinPoolNoSwapSharesResponse {
@@ -409,7 +409,7 @@ export interface QueryCalcJoinPoolNoSwapSharesResponseSDKType {
  */
 /** @deprecated */
 export interface QuerySpotPriceRequest {
-  poolId: bigint;
+  poolId: Long;
   baseAssetDenom: string;
   quoteAssetDenom: string;
 }
@@ -437,7 +437,7 @@ export interface QuerySpotPriceRequestAminoMsg {
  */
 /** @deprecated */
 export interface QuerySpotPriceRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
   base_asset_denom: string;
   quote_asset_denom: string;
 }
@@ -527,7 +527,7 @@ export interface QuerySpotPriceResponseSDKType {
 export interface QuerySwapExactAmountInRequest {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
-  poolId: bigint;
+  poolId: Long;
   tokenIn: string;
   routes: SwapAmountInRoute[];
 }
@@ -550,7 +550,7 @@ export interface QuerySwapExactAmountInRequestAminoMsg {
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
   sender: string;
-  pool_id: bigint;
+  pool_id: Long;
   token_in: string;
   routes: SwapAmountInRouteSDKType[];
 }
@@ -575,7 +575,7 @@ export interface QuerySwapExactAmountInResponseSDKType {
 export interface QuerySwapExactAmountOutRequest {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
-  poolId: bigint;
+  poolId: Long;
   routes: SwapAmountOutRoute[];
   tokenOut: string;
 }
@@ -598,7 +598,7 @@ export interface QuerySwapExactAmountOutRequestAminoMsg {
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
   sender: string;
-  pool_id: bigint;
+  pool_id: Long;
   routes: SwapAmountOutRouteSDKType[];
   token_out: string;
 }
@@ -649,27 +649,27 @@ export interface QueryTotalLiquidityResponseSDKType {
 }
 function createBaseQueryPoolRequest(): QueryPoolRequest {
   return {
-    poolId: BigInt(0)
+    poolId: Long.UZERO
   };
 }
 export const QueryPoolRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest",
   aminoType: "osmosis/gamm/query-pool-request",
-  encode(message: QueryPoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -680,18 +680,18 @@ export const QueryPoolRequest = {
   },
   fromJSON(object: any): QueryPoolRequest {
     const obj = createBaseQueryPoolRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     return obj;
   },
   toJSON(message: QueryPoolRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     return message;
   },
@@ -707,7 +707,7 @@ export const QueryPoolRequest = {
   },
   fromAmino(object: QueryPoolRequestAmino): QueryPoolRequest {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: Long.fromString(object.pool_id)
     };
   },
   toAmino(message: QueryPoolRequest): QueryPoolRequestAmino {
@@ -745,14 +745,14 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
 export const QueryPoolResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse",
   aminoType: "osmosis/gamm/query-pool-response",
-  encode(message: QueryPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pool !== undefined) {
       Any.encode((message.pool as Any), writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolResponse();
     while (reader.pos < end) {
@@ -835,14 +835,14 @@ function createBaseQueryPoolsRequest(): QueryPoolsRequest {
 export const QueryPoolsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest",
   aminoType: "osmosis/gamm/query-pools-request",
-  encode(message: QueryPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsRequest();
     while (reader.pos < end) {
@@ -926,7 +926,7 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
 export const QueryPoolsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
   aminoType: "osmosis/gamm/query-pools-response",
-  encode(message: QueryPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
       Any.encode((v! as Any), writer.uint32(10).fork()).ldelim();
     }
@@ -935,8 +935,8 @@ export const QueryPoolsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
     while (reader.pos < end) {
@@ -1039,11 +1039,11 @@ function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
 export const QueryNumPoolsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest",
   aminoType: "osmosis/gamm/query-num-pools-request",
-  encode(_: QueryNumPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: QueryNumPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryNumPoolsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNumPoolsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNumPoolsRequest();
     while (reader.pos < end) {
@@ -1106,27 +1106,27 @@ export const QueryNumPoolsRequest = {
 };
 function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
   return {
-    numPools: BigInt(0)
+    numPools: Long.UZERO
   };
 }
 export const QueryNumPoolsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse",
   aminoType: "osmosis/gamm/query-num-pools-response",
-  encode(message: QueryNumPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numPools !== BigInt(0)) {
+  encode(message: QueryNumPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.numPools.isZero()) {
       writer.uint32(8).uint64(message.numPools);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryNumPoolsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNumPoolsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNumPoolsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.numPools = reader.uint64();
+          message.numPools = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1137,18 +1137,18 @@ export const QueryNumPoolsResponse = {
   },
   fromJSON(object: any): QueryNumPoolsResponse {
     const obj = createBaseQueryNumPoolsResponse();
-    if (isSet(object.numPools)) obj.numPools = BigInt(object.numPools.toString());
+    if (isSet(object.numPools)) obj.numPools = Long.fromValue(object.numPools);
     return obj;
   },
   toJSON(message: QueryNumPoolsResponse): unknown {
     const obj: any = {};
-    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt(0)).toString());
+    message.numPools !== undefined && (obj.numPools = (message.numPools || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryNumPoolsResponse>): QueryNumPoolsResponse {
     const message = createBaseQueryNumPoolsResponse();
     if (object.numPools !== undefined && object.numPools !== null) {
-      message.numPools = BigInt(object.numPools.toString());
+      message.numPools = Long.fromValue(object.numPools);
     }
     return message;
   },
@@ -1164,7 +1164,7 @@ export const QueryNumPoolsResponse = {
   },
   fromAmino(object: QueryNumPoolsResponseAmino): QueryNumPoolsResponse {
     return {
-      numPools: BigInt(object.num_pools)
+      numPools: Long.fromString(object.num_pools)
     };
   },
   toAmino(message: QueryNumPoolsResponse): QueryNumPoolsResponseAmino {
@@ -1196,27 +1196,27 @@ export const QueryNumPoolsResponse = {
 };
 function createBaseQueryPoolTypeRequest(): QueryPoolTypeRequest {
   return {
-    poolId: BigInt(0)
+    poolId: Long.UZERO
   };
 }
 export const QueryPoolTypeRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest",
   aminoType: "osmosis/gamm/query-pool-type-request",
-  encode(message: QueryPoolTypeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryPoolTypeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolTypeRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolTypeRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolTypeRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1227,18 +1227,18 @@ export const QueryPoolTypeRequest = {
   },
   fromJSON(object: any): QueryPoolTypeRequest {
     const obj = createBaseQueryPoolTypeRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     return obj;
   },
   toJSON(message: QueryPoolTypeRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolTypeRequest>): QueryPoolTypeRequest {
     const message = createBaseQueryPoolTypeRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     return message;
   },
@@ -1254,7 +1254,7 @@ export const QueryPoolTypeRequest = {
   },
   fromAmino(object: QueryPoolTypeRequestAmino): QueryPoolTypeRequest {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: Long.fromString(object.pool_id)
     };
   },
   toAmino(message: QueryPoolTypeRequest): QueryPoolTypeRequestAmino {
@@ -1292,14 +1292,14 @@ function createBaseQueryPoolTypeResponse(): QueryPoolTypeResponse {
 export const QueryPoolTypeResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse",
   aminoType: "osmosis/gamm/query-pool-type-response",
-  encode(message: QueryPoolTypeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolTypeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.poolType !== "") {
       writer.uint32(10).string(message.poolType);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolTypeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolTypeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolTypeResponse();
     while (reader.pos < end) {
@@ -1374,15 +1374,15 @@ export const QueryPoolTypeResponse = {
 };
 function createBaseQueryCalcJoinPoolSharesRequest(): QueryCalcJoinPoolSharesRequest {
   return {
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     tokensIn: []
   };
 }
 export const QueryCalcJoinPoolSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest",
   aminoType: "osmosis/gamm/query-calc-join-pool-shares-request",
-  encode(message: QueryCalcJoinPoolSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryCalcJoinPoolSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     for (const v of message.tokensIn) {
@@ -1390,15 +1390,15 @@ export const QueryCalcJoinPoolSharesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolSharesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 2:
           message.tokensIn.push(Coin.decode(reader, reader.uint32()));
@@ -1412,13 +1412,13 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   fromJSON(object: any): QueryCalcJoinPoolSharesRequest {
     const obj = createBaseQueryCalcJoinPoolSharesRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (Array.isArray(object?.tokensIn)) object.tokensIn.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCalcJoinPoolSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     if (message.tokensIn) {
       obj.tokensIn = message.tokensIn.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -1429,7 +1429,7 @@ export const QueryCalcJoinPoolSharesRequest = {
   fromPartial(object: DeepPartial<QueryCalcJoinPoolSharesRequest>): QueryCalcJoinPoolSharesRequest {
     const message = createBaseQueryCalcJoinPoolSharesRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -1452,7 +1452,7 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   fromAmino(object: QueryCalcJoinPoolSharesRequestAmino): QueryCalcJoinPoolSharesRequest {
     return {
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       tokensIn: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -1497,7 +1497,7 @@ function createBaseQueryCalcJoinPoolSharesResponse(): QueryCalcJoinPoolSharesRes
 export const QueryCalcJoinPoolSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse",
   aminoType: "osmosis/gamm/query-calc-join-pool-shares-response",
-  encode(message: QueryCalcJoinPoolSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryCalcJoinPoolSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.shareOutAmount !== "") {
       writer.uint32(10).string(message.shareOutAmount);
     }
@@ -1506,8 +1506,8 @@ export const QueryCalcJoinPoolSharesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolSharesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolSharesResponse();
     while (reader.pos < end) {
@@ -1604,15 +1604,15 @@ export const QueryCalcJoinPoolSharesResponse = {
 };
 function createBaseQueryCalcExitPoolCoinsFromSharesRequest(): QueryCalcExitPoolCoinsFromSharesRequest {
   return {
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     shareInAmount: ""
   };
 }
 export const QueryCalcExitPoolCoinsFromSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest",
   aminoType: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-request",
-  encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.shareInAmount !== "") {
@@ -1620,15 +1620,15 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 2:
           message.shareInAmount = reader.string();
@@ -1642,20 +1642,20 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
   },
   fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequest {
     const obj = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.shareInAmount)) obj.shareInAmount = String(object.shareInAmount);
     return obj;
   },
   toJSON(message: QueryCalcExitPoolCoinsFromSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.shareInAmount !== undefined && (obj.shareInAmount = message.shareInAmount);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCalcExitPoolCoinsFromSharesRequest>): QueryCalcExitPoolCoinsFromSharesRequest {
     const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.shareInAmount = object.shareInAmount ?? "";
     return message;
@@ -1674,7 +1674,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
   },
   fromAmino(object: QueryCalcExitPoolCoinsFromSharesRequestAmino): QueryCalcExitPoolCoinsFromSharesRequest {
     return {
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       shareInAmount: object.share_in_amount
     };
   },
@@ -1714,14 +1714,14 @@ function createBaseQueryCalcExitPoolCoinsFromSharesResponse(): QueryCalcExitPool
 export const QueryCalcExitPoolCoinsFromSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse",
   aminoType: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-response",
-  encode(message: QueryCalcExitPoolCoinsFromSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryCalcExitPoolCoinsFromSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
     while (reader.pos < end) {
@@ -1808,27 +1808,27 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
 };
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
   return {
-    poolId: BigInt(0)
+    poolId: Long.UZERO
   };
 }
 export const QueryPoolParamsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest",
   aminoType: "osmosis/gamm/query-pool-params-request",
-  encode(message: QueryPoolParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryPoolParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolParamsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolParamsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolParamsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1839,18 +1839,18 @@ export const QueryPoolParamsRequest = {
   },
   fromJSON(object: any): QueryPoolParamsRequest {
     const obj = createBaseQueryPoolParamsRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     return obj;
   },
   toJSON(message: QueryPoolParamsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolParamsRequest>): QueryPoolParamsRequest {
     const message = createBaseQueryPoolParamsRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     return message;
   },
@@ -1866,7 +1866,7 @@ export const QueryPoolParamsRequest = {
   },
   fromAmino(object: QueryPoolParamsRequestAmino): QueryPoolParamsRequest {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: Long.fromString(object.pool_id)
     };
   },
   toAmino(message: QueryPoolParamsRequest): QueryPoolParamsRequestAmino {
@@ -1904,14 +1904,14 @@ function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
 export const QueryPoolParamsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse",
   aminoType: "osmosis/gamm/query-pool-params-response",
-  encode(message: QueryPoolParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Any.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolParamsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolParamsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolParamsResponse();
     while (reader.pos < end) {
@@ -1988,27 +1988,27 @@ export const QueryPoolParamsResponse = {
 };
 function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequest {
   return {
-    poolId: BigInt(0)
+    poolId: Long.UZERO
   };
 }
 export const QueryTotalPoolLiquidityRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest",
   aminoType: "osmosis/gamm/query-total-pool-liquidity-request",
-  encode(message: QueryTotalPoolLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryTotalPoolLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalPoolLiquidityRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalPoolLiquidityRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalPoolLiquidityRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2019,18 +2019,18 @@ export const QueryTotalPoolLiquidityRequest = {
   },
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
     const obj = createBaseQueryTotalPoolLiquidityRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     return obj;
   },
   toJSON(message: QueryTotalPoolLiquidityRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTotalPoolLiquidityRequest>): QueryTotalPoolLiquidityRequest {
     const message = createBaseQueryTotalPoolLiquidityRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     return message;
   },
@@ -2046,7 +2046,7 @@ export const QueryTotalPoolLiquidityRequest = {
   },
   fromAmino(object: QueryTotalPoolLiquidityRequestAmino): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: Long.fromString(object.pool_id)
     };
   },
   toAmino(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestAmino {
@@ -2084,14 +2084,14 @@ function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityRes
 export const QueryTotalPoolLiquidityResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse",
   aminoType: "osmosis/gamm/query-total-pool-liquidity-response",
-  encode(message: QueryTotalPoolLiquidityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryTotalPoolLiquidityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalPoolLiquidityResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalPoolLiquidityResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalPoolLiquidityResponse();
     while (reader.pos < end) {
@@ -2178,27 +2178,27 @@ export const QueryTotalPoolLiquidityResponse = {
 };
 function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
   return {
-    poolId: BigInt(0)
+    poolId: Long.UZERO
   };
 }
 export const QueryTotalSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest",
   aminoType: "osmosis/gamm/query-total-shares-request",
-  encode(message: QueryTotalSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryTotalSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSharesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2209,18 +2209,18 @@ export const QueryTotalSharesRequest = {
   },
   fromJSON(object: any): QueryTotalSharesRequest {
     const obj = createBaseQueryTotalSharesRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     return obj;
   },
   toJSON(message: QueryTotalSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTotalSharesRequest>): QueryTotalSharesRequest {
     const message = createBaseQueryTotalSharesRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     return message;
   },
@@ -2236,7 +2236,7 @@ export const QueryTotalSharesRequest = {
   },
   fromAmino(object: QueryTotalSharesRequestAmino): QueryTotalSharesRequest {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: Long.fromString(object.pool_id)
     };
   },
   toAmino(message: QueryTotalSharesRequest): QueryTotalSharesRequestAmino {
@@ -2274,14 +2274,14 @@ function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
 export const QueryTotalSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse",
   aminoType: "osmosis/gamm/query-total-shares-response",
-  encode(message: QueryTotalSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryTotalSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.totalShares !== undefined) {
       Coin.encode(message.totalShares, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSharesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSharesResponse();
     while (reader.pos < end) {
@@ -2358,15 +2358,15 @@ export const QueryTotalSharesResponse = {
 };
 function createBaseQueryCalcJoinPoolNoSwapSharesRequest(): QueryCalcJoinPoolNoSwapSharesRequest {
   return {
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     tokensIn: []
   };
 }
 export const QueryCalcJoinPoolNoSwapSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest",
   aminoType: "osmosis/gamm/query-calc-join-pool-no-swap-shares-request",
-  encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     for (const v of message.tokensIn) {
@@ -2374,15 +2374,15 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 2:
           message.tokensIn.push(Coin.decode(reader, reader.uint32()));
@@ -2396,13 +2396,13 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequest {
     const obj = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (Array.isArray(object?.tokensIn)) object.tokensIn.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     if (message.tokensIn) {
       obj.tokensIn = message.tokensIn.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -2413,7 +2413,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   fromPartial(object: DeepPartial<QueryCalcJoinPoolNoSwapSharesRequest>): QueryCalcJoinPoolNoSwapSharesRequest {
     const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -2436,7 +2436,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   fromAmino(object: QueryCalcJoinPoolNoSwapSharesRequestAmino): QueryCalcJoinPoolNoSwapSharesRequest {
     return {
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       tokensIn: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -2481,7 +2481,7 @@ function createBaseQueryCalcJoinPoolNoSwapSharesResponse(): QueryCalcJoinPoolNoS
 export const QueryCalcJoinPoolNoSwapSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse",
   aminoType: "osmosis/gamm/query-calc-join-pool-no-swap-shares-response",
-  encode(message: QueryCalcJoinPoolNoSwapSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryCalcJoinPoolNoSwapSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2490,8 +2490,8 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolNoSwapSharesResponse();
     while (reader.pos < end) {
@@ -2588,7 +2588,7 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
 };
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     baseAssetDenom: "",
     quoteAssetDenom: ""
   };
@@ -2596,8 +2596,8 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 export const QuerySpotPriceRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest",
   aminoType: "osmosis/gamm/query-spot-price-request",
-  encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: QuerySpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.baseAssetDenom !== "") {
@@ -2608,15 +2608,15 @@ export const QuerySpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpotPriceRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 2:
           message.baseAssetDenom = reader.string();
@@ -2633,14 +2633,14 @@ export const QuerySpotPriceRequest = {
   },
   fromJSON(object: any): QuerySpotPriceRequest {
     const obj = createBaseQuerySpotPriceRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.baseAssetDenom)) obj.baseAssetDenom = String(object.baseAssetDenom);
     if (isSet(object.quoteAssetDenom)) obj.quoteAssetDenom = String(object.quoteAssetDenom);
     return obj;
   },
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
@@ -2648,7 +2648,7 @@ export const QuerySpotPriceRequest = {
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
@@ -2670,7 +2670,7 @@ export const QuerySpotPriceRequest = {
   },
   fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
     return {
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       baseAssetDenom: object.base_asset_denom,
       quoteAssetDenom: object.quote_asset_denom
     };
@@ -2714,7 +2714,7 @@ function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
 export const QueryPoolsWithFilterRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest",
   aminoType: "osmosis/gamm/query-pools-with-filter-request",
-  encode(message: QueryPoolsWithFilterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolsWithFilterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minLiquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2726,8 +2726,8 @@ export const QueryPoolsWithFilterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsWithFilterRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsWithFilterRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsWithFilterRequest();
     while (reader.pos < end) {
@@ -2843,7 +2843,7 @@ function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse 
 export const QueryPoolsWithFilterResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse",
   aminoType: "osmosis/gamm/query-pools-with-filter-response",
-  encode(message: QueryPoolsWithFilterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryPoolsWithFilterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
       Any.encode((v! as Any), writer.uint32(10).fork()).ldelim();
     }
@@ -2852,8 +2852,8 @@ export const QueryPoolsWithFilterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsWithFilterResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsWithFilterResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsWithFilterResponse();
     while (reader.pos < end) {
@@ -2958,14 +2958,14 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
 export const QuerySpotPriceResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse",
   aminoType: "osmosis/gamm/query-spot-price-response",
-  encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QuerySpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpotPriceResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceResponse();
     while (reader.pos < end) {
@@ -3041,7 +3041,7 @@ export const QuerySpotPriceResponse = {
 function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInRequest {
   return {
     sender: "",
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     tokenIn: "",
     routes: []
   };
@@ -3049,11 +3049,11 @@ function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInReques
 export const QuerySwapExactAmountInRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest",
   aminoType: "osmosis/gamm/query-swap-exact-amount-in-request",
-  encode(message: QuerySwapExactAmountInRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QuerySwapExactAmountInRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (!message.poolId.isZero()) {
       writer.uint32(16).uint64(message.poolId);
     }
     if (message.tokenIn !== "") {
@@ -3064,8 +3064,8 @@ export const QuerySwapExactAmountInRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountInRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountInRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountInRequest();
     while (reader.pos < end) {
@@ -3075,7 +3075,7 @@ export const QuerySwapExactAmountInRequest = {
           message.sender = reader.string();
           break;
         case 2:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 3:
           message.tokenIn = reader.string();
@@ -3093,7 +3093,7 @@ export const QuerySwapExactAmountInRequest = {
   fromJSON(object: any): QuerySwapExactAmountInRequest {
     const obj = createBaseQuerySwapExactAmountInRequest();
     if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
     if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
     return obj;
@@ -3101,7 +3101,7 @@ export const QuerySwapExactAmountInRequest = {
   toJSON(message: QuerySwapExactAmountInRequest): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toJSON(e) : undefined);
@@ -3114,7 +3114,7 @@ export const QuerySwapExactAmountInRequest = {
     const message = createBaseQuerySwapExactAmountInRequest();
     message.sender = object.sender ?? "";
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
@@ -3143,7 +3143,7 @@ export const QuerySwapExactAmountInRequest = {
   fromAmino(object: QuerySwapExactAmountInRequestAmino): QuerySwapExactAmountInRequest {
     return {
       sender: object.sender,
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       tokenIn: object.token_in,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : []
     };
@@ -3190,14 +3190,14 @@ function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInRespo
 export const QuerySwapExactAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse",
   aminoType: "osmosis/gamm/query-swap-exact-amount-in-response",
-  encode(message: QuerySwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QuerySwapExactAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountInResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountInResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountInResponse();
     while (reader.pos < end) {
@@ -3273,7 +3273,7 @@ export const QuerySwapExactAmountInResponse = {
 function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequest {
   return {
     sender: "",
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     routes: [],
     tokenOut: ""
   };
@@ -3281,11 +3281,11 @@ function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequ
 export const QuerySwapExactAmountOutRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest",
   aminoType: "osmosis/gamm/query-swap-exact-amount-out-request",
-  encode(message: QuerySwapExactAmountOutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QuerySwapExactAmountOutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (!message.poolId.isZero()) {
       writer.uint32(16).uint64(message.poolId);
     }
     for (const v of message.routes) {
@@ -3296,8 +3296,8 @@ export const QuerySwapExactAmountOutRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountOutRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountOutRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountOutRequest();
     while (reader.pos < end) {
@@ -3307,7 +3307,7 @@ export const QuerySwapExactAmountOutRequest = {
           message.sender = reader.string();
           break;
         case 2:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 3:
           message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
@@ -3325,7 +3325,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
     const obj = createBaseQuerySwapExactAmountOutRequest();
     if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
     if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
     return obj;
@@ -3333,7 +3333,7 @@ export const QuerySwapExactAmountOutRequest = {
   toJSON(message: QuerySwapExactAmountOutRequest): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
     } else {
@@ -3346,7 +3346,7 @@ export const QuerySwapExactAmountOutRequest = {
     const message = createBaseQuerySwapExactAmountOutRequest();
     message.sender = object.sender ?? "";
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
@@ -3375,7 +3375,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromAmino(object: QuerySwapExactAmountOutRequestAmino): QuerySwapExactAmountOutRequest {
     return {
       sender: object.sender,
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
       tokenOut: object.token_out
     };
@@ -3422,14 +3422,14 @@ function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutRes
 export const QuerySwapExactAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse",
   aminoType: "osmosis/gamm/query-swap-exact-amount-out-response",
-  encode(message: QuerySwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QuerySwapExactAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountOutResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountOutResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountOutResponse();
     while (reader.pos < end) {
@@ -3508,11 +3508,11 @@ function createBaseQueryTotalLiquidityRequest(): QueryTotalLiquidityRequest {
 export const QueryTotalLiquidityRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest",
   aminoType: "osmosis/gamm/query-total-liquidity-request",
-  encode(_: QueryTotalLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: QueryTotalLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalLiquidityRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalLiquidityRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalLiquidityRequest();
     while (reader.pos < end) {
@@ -3581,14 +3581,14 @@ function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
 export const QueryTotalLiquidityResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse",
   aminoType: "osmosis/gamm/query-total-liquidity-response",
-  encode(message: QueryTotalLiquidityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryTotalLiquidityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalLiquidityResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalLiquidityResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalLiquidityResponse();
     while (reader.pos < end) {
@@ -3673,8 +3673,8 @@ export const QueryTotalLiquidityResponse = {
     };
   }
 };
-export const PoolI_InterfaceDecoder = (input: BinaryReader | Uint8Array): Pool1 | Pool2 | Any => {
-  const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool1 | Pool2 | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
   const data = Any.decode(reader, reader.uint32());
   switch (data.typeUrl) {
     case "/osmosis.gamm.v1beta1.Pool":

@@ -1,6 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -144,7 +143,7 @@ export interface Params {
    * reduction_period_in_epochs the number of epochs it takes
    * to reduce the rewards.
    */
-  reductionPeriodInEpochs: bigint;
+  reductionPeriodInEpochs: Long;
   /**
    * reduction_factor is the reduction multiplier to execute
    * at the end of each period set by reduction_period_in_epochs.
@@ -167,7 +166,7 @@ export interface Params {
    * minting_rewards_distribution_start_epoch start epoch to distribute minting
    * rewards
    */
-  mintingRewardsDistributionStartEpoch: bigint;
+  mintingRewardsDistributionStartEpoch: Long;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.Params";
@@ -219,11 +218,11 @@ export interface ParamsSDKType {
   mint_denom: string;
   genesis_epoch_provisions: string;
   epoch_identifier: string;
-  reduction_period_in_epochs: bigint;
+  reduction_period_in_epochs: Long;
   reduction_factor: string;
   distribution_proportions: DistributionProportionsSDKType;
   weighted_developer_rewards_receivers: WeightedAddressSDKType[];
-  minting_rewards_distribution_start_epoch: bigint;
+  minting_rewards_distribution_start_epoch: Long;
 }
 function createBaseMinter(): Minter {
   return {
@@ -233,21 +232,21 @@ function createBaseMinter(): Minter {
 export const Minter = {
   typeUrl: "/osmosis.mint.v1beta1.Minter",
   aminoType: "osmosis/mint/minter",
-  encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.epochProvisions !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
+      writer.uint32(10).string(message.epochProvisions);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Minter {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.epochProvisions = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.epochProvisions = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -322,17 +321,17 @@ function createBaseWeightedAddress(): WeightedAddress {
 export const WeightedAddress = {
   typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
   aminoType: "osmosis/mint/weighted-address",
-  encode(message: WeightedAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: WeightedAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.weight !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.weight, 18).atomics);
+      writer.uint32(18).string(message.weight);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): WeightedAddress {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): WeightedAddress {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedAddress();
     while (reader.pos < end) {
@@ -342,7 +341,7 @@ export const WeightedAddress = {
           message.address = reader.string();
           break;
         case 2:
-          message.weight = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.weight = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -426,39 +425,39 @@ function createBaseDistributionProportions(): DistributionProportions {
 export const DistributionProportions = {
   typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
   aminoType: "osmosis/mint/distribution-proportions",
-  encode(message: DistributionProportions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: DistributionProportions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.staking !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
+      writer.uint32(10).string(message.staking);
     }
     if (message.poolIncentives !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.poolIncentives, 18).atomics);
+      writer.uint32(18).string(message.poolIncentives);
     }
     if (message.developerRewards !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.developerRewards, 18).atomics);
+      writer.uint32(26).string(message.developerRewards);
     }
     if (message.communityPool !== "") {
-      writer.uint32(34).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
+      writer.uint32(34).string(message.communityPool);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DistributionProportions {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): DistributionProportions {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistributionProportions();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.staking = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.staking = reader.string();
           break;
         case 2:
-          message.poolIncentives = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.poolIncentives = reader.string();
           break;
         case 3:
-          message.developerRewards = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.developerRewards = reader.string();
           break;
         case 4:
-          message.communityPool = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.communityPool = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -550,31 +549,31 @@ function createBaseParams(): Params {
     mintDenom: "",
     genesisEpochProvisions: "",
     epochIdentifier: "",
-    reductionPeriodInEpochs: BigInt(0),
+    reductionPeriodInEpochs: Long.ZERO,
     reductionFactor: "",
     distributionProportions: DistributionProportions.fromPartial({}),
     weightedDeveloperRewardsReceivers: [],
-    mintingRewardsDistributionStartEpoch: BigInt(0)
+    mintingRewardsDistributionStartEpoch: Long.ZERO
   };
 }
 export const Params = {
   typeUrl: "/osmosis.mint.v1beta1.Params",
   aminoType: "osmosis/mint/params",
-  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.genesisEpochProvisions !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.genesisEpochProvisions, 18).atomics);
+      writer.uint32(18).string(message.genesisEpochProvisions);
     }
     if (message.epochIdentifier !== "") {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.reductionPeriodInEpochs !== BigInt(0)) {
+    if (!message.reductionPeriodInEpochs.isZero()) {
       writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
     if (message.reductionFactor !== "") {
-      writer.uint32(42).string(Decimal.fromUserInput(message.reductionFactor, 18).atomics);
+      writer.uint32(42).string(message.reductionFactor);
     }
     if (message.distributionProportions !== undefined) {
       DistributionProportions.encode(message.distributionProportions, writer.uint32(50).fork()).ldelim();
@@ -582,13 +581,13 @@ export const Params = {
     for (const v of message.weightedDeveloperRewardsReceivers) {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
+    if (!message.mintingRewardsDistributionStartEpoch.isZero()) {
       writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -598,16 +597,16 @@ export const Params = {
           message.mintDenom = reader.string();
           break;
         case 2:
-          message.genesisEpochProvisions = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.genesisEpochProvisions = reader.string();
           break;
         case 3:
           message.epochIdentifier = reader.string();
           break;
         case 4:
-          message.reductionPeriodInEpochs = reader.int64();
+          message.reductionPeriodInEpochs = (reader.int64() as Long);
           break;
         case 5:
-          message.reductionFactor = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.reductionFactor = reader.string();
           break;
         case 6:
           message.distributionProportions = DistributionProportions.decode(reader, reader.uint32());
@@ -616,7 +615,7 @@ export const Params = {
           message.weightedDeveloperRewardsReceivers.push(WeightedAddress.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.mintingRewardsDistributionStartEpoch = reader.int64();
+          message.mintingRewardsDistributionStartEpoch = (reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -630,11 +629,11 @@ export const Params = {
     if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
     if (isSet(object.genesisEpochProvisions)) obj.genesisEpochProvisions = String(object.genesisEpochProvisions);
     if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
-    if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
+    if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = Long.fromValue(object.reductionPeriodInEpochs);
     if (isSet(object.reductionFactor)) obj.reductionFactor = String(object.reductionFactor);
     if (isSet(object.distributionProportions)) obj.distributionProportions = DistributionProportions.fromJSON(object.distributionProportions);
     if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
-    if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
+    if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = Long.fromValue(object.mintingRewardsDistributionStartEpoch);
     return obj;
   },
   toJSON(message: Params): unknown {
@@ -642,7 +641,7 @@ export const Params = {
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || BigInt(0)).toString());
+    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || Long.ZERO).toString());
     message.reductionFactor !== undefined && (obj.reductionFactor = message.reductionFactor);
     message.distributionProportions !== undefined && (obj.distributionProportions = message.distributionProportions ? DistributionProportions.toJSON(message.distributionProportions) : undefined);
     if (message.weightedDeveloperRewardsReceivers) {
@@ -650,7 +649,7 @@ export const Params = {
     } else {
       obj.weightedDeveloperRewardsReceivers = [];
     }
-    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || BigInt(0)).toString());
+    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || Long.ZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -659,7 +658,7 @@ export const Params = {
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
     if (object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null) {
-      message.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
+      message.reductionPeriodInEpochs = Long.fromValue(object.reductionPeriodInEpochs);
     }
     message.reductionFactor = object.reductionFactor ?? "";
     if (object.distributionProportions !== undefined && object.distributionProportions !== null) {
@@ -667,7 +666,7 @@ export const Params = {
     }
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
     if (object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null) {
-      message.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
+      message.mintingRewardsDistributionStartEpoch = Long.fromValue(object.mintingRewardsDistributionStartEpoch);
     }
     return message;
   },
@@ -704,11 +703,11 @@ export const Params = {
       mintDenom: object.mint_denom,
       genesisEpochProvisions: object.genesis_epoch_provisions,
       epochIdentifier: object.epoch_identifier,
-      reductionPeriodInEpochs: BigInt(object.reduction_period_in_epochs),
+      reductionPeriodInEpochs: Long.fromString(object.reduction_period_in_epochs),
       reductionFactor: object.reduction_factor,
       distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
-      mintingRewardsDistributionStartEpoch: BigInt(object.minting_rewards_distribution_start_epoch)
+      mintingRewardsDistributionStartEpoch: Long.fromString(object.minting_rewards_distribution_start_epoch)
     };
   },
   toAmino(message: Params): ParamsAmino {

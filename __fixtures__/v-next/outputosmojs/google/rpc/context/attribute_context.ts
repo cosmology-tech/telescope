@@ -542,7 +542,6 @@ function createBaseAttributeContext(): AttributeContext {
   };
 }
 export const AttributeContext = {
-  typeUrl: "/google.rpc.context.AttributeContext",
   encode(message: AttributeContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.origin !== undefined) {
       AttributeContext_Peer.encode(message.origin, writer.uint32(58).fork()).ldelim();
@@ -687,49 +686,6 @@ export const AttributeContext = {
       obj.extensions = [];
     }
     return obj;
-  },
-  fromAmino(object: AttributeContextAmino): AttributeContext {
-    return {
-      origin: object?.origin ? AttributeContext_Peer.fromAmino(object.origin) : undefined,
-      source: object?.source ? AttributeContext_Peer.fromAmino(object.source) : undefined,
-      destination: object?.destination ? AttributeContext_Peer.fromAmino(object.destination) : undefined,
-      request: object?.request ? AttributeContext_Request.fromAmino(object.request) : undefined,
-      response: object?.response ? AttributeContext_Response.fromAmino(object.response) : undefined,
-      resource: object?.resource ? AttributeContext_Resource.fromAmino(object.resource) : undefined,
-      api: object?.api ? AttributeContext_Api.fromAmino(object.api) : undefined,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AttributeContext): AttributeContextAmino {
-    const obj: any = {};
-    obj.origin = message.origin ? AttributeContext_Peer.toAmino(message.origin) : undefined;
-    obj.source = message.source ? AttributeContext_Peer.toAmino(message.source) : undefined;
-    obj.destination = message.destination ? AttributeContext_Peer.toAmino(message.destination) : undefined;
-    obj.request = message.request ? AttributeContext_Request.toAmino(message.request) : undefined;
-    obj.response = message.response ? AttributeContext_Response.toAmino(message.response) : undefined;
-    obj.resource = message.resource ? AttributeContext_Resource.toAmino(message.resource) : undefined;
-    obj.api = message.api ? AttributeContext_Api.toAmino(message.api) : undefined;
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContextAminoMsg): AttributeContext {
-    return AttributeContext.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContextProtoMsg): AttributeContext {
-    return AttributeContext.decode(message.value);
-  },
-  toProto(message: AttributeContext): Uint8Array {
-    return AttributeContext.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext): AttributeContextProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.AttributeContext",
-      value: AttributeContext.encode(message).finish()
-    };
   }
 };
 function createBaseAttributeContext_Peer_LabelsEntry(): AttributeContext_Peer_LabelsEntry {
@@ -803,27 +759,6 @@ export const AttributeContext_Peer_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AttributeContext_Peer_LabelsEntryAmino): AttributeContext_Peer_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
-    return AttributeContext_Peer_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_Peer_LabelsEntryProtoMsg): AttributeContext_Peer_LabelsEntry {
-    return AttributeContext_Peer_LabelsEntry.decode(message.value);
-  },
-  toProto(message: AttributeContext_Peer_LabelsEntry): Uint8Array {
-    return AttributeContext_Peer_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseAttributeContext_Peer(): AttributeContext_Peer {
@@ -836,7 +771,6 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
   };
 }
 export const AttributeContext_Peer = {
-  typeUrl: "/google.rpc.context.Peer",
   encode(message: AttributeContext_Peer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ip !== "") {
       writer.uint32(10).string(message.ip);
@@ -975,49 +909,6 @@ export const AttributeContext_Peer = {
     obj.principal = message.principal;
     obj.region_code = message.regionCode;
     return obj;
-  },
-  fromAmino(object: AttributeContext_PeerAmino): AttributeContext_Peer {
-    return {
-      ip: object.ip,
-      port: BigInt(object.port),
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      principal: object.principal,
-      regionCode: object.region_code
-    };
-  },
-  toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
-    const obj: any = {};
-    obj.ip = message.ip;
-    obj.port = message.port ? message.port.toString() : undefined;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.principal = message.principal;
-    obj.region_code = message.regionCode;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
-    return AttributeContext_Peer.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_PeerProtoMsg): AttributeContext_Peer {
-    return AttributeContext_Peer.decode(message.value);
-  },
-  toProto(message: AttributeContext_Peer): Uint8Array {
-    return AttributeContext_Peer.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext_Peer): AttributeContext_PeerProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.Peer",
-      value: AttributeContext_Peer.encode(message).finish()
-    };
   }
 };
 function createBaseAttributeContext_Api(): AttributeContext_Api {
@@ -1029,7 +920,6 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
   };
 }
 export const AttributeContext_Api = {
-  typeUrl: "/google.rpc.context.Api",
   encode(message: AttributeContext_Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
@@ -1118,37 +1008,6 @@ export const AttributeContext_Api = {
     obj.protocol = message.protocol;
     obj.version = message.version;
     return obj;
-  },
-  fromAmino(object: AttributeContext_ApiAmino): AttributeContext_Api {
-    return {
-      service: object.service,
-      operation: object.operation,
-      protocol: object.protocol,
-      version: object.version
-    };
-  },
-  toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
-    const obj: any = {};
-    obj.service = message.service;
-    obj.operation = message.operation;
-    obj.protocol = message.protocol;
-    obj.version = message.version;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
-    return AttributeContext_Api.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_ApiProtoMsg): AttributeContext_Api {
-    return AttributeContext_Api.decode(message.value);
-  },
-  toProto(message: AttributeContext_Api): Uint8Array {
-    return AttributeContext_Api.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext_Api): AttributeContext_ApiProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.Api",
-      value: AttributeContext_Api.encode(message).finish()
-    };
   }
 };
 function createBaseAttributeContext_Auth(): AttributeContext_Auth {
@@ -1161,7 +1020,6 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
   };
 }
 export const AttributeContext_Auth = {
-  typeUrl: "/google.rpc.context.Auth",
   encode(message: AttributeContext_Auth, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
@@ -1278,47 +1136,6 @@ export const AttributeContext_Auth = {
       obj.access_levels = [];
     }
     return obj;
-  },
-  fromAmino(object: AttributeContext_AuthAmino): AttributeContext_Auth {
-    return {
-      principal: object.principal,
-      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
-      presenter: object.presenter,
-      claims: object?.claims ? Struct.fromAmino(object.claims) : undefined,
-      accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
-    const obj: any = {};
-    obj.principal = message.principal;
-    if (message.audiences) {
-      obj.audiences = message.audiences.map(e => e);
-    } else {
-      obj.audiences = [];
-    }
-    obj.presenter = message.presenter;
-    obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
-    if (message.accessLevels) {
-      obj.access_levels = message.accessLevels.map(e => e);
-    } else {
-      obj.access_levels = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_AuthAminoMsg): AttributeContext_Auth {
-    return AttributeContext_Auth.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_AuthProtoMsg): AttributeContext_Auth {
-    return AttributeContext_Auth.decode(message.value);
-  },
-  toProto(message: AttributeContext_Auth): Uint8Array {
-    return AttributeContext_Auth.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext_Auth): AttributeContext_AuthProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.Auth",
-      value: AttributeContext_Auth.encode(message).finish()
-    };
   }
 };
 function createBaseAttributeContext_Request_HeadersEntry(): AttributeContext_Request_HeadersEntry {
@@ -1392,27 +1209,6 @@ export const AttributeContext_Request_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AttributeContext_Request_HeadersEntryAmino): AttributeContext_Request_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
-    return AttributeContext_Request_HeadersEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_Request_HeadersEntryProtoMsg): AttributeContext_Request_HeadersEntry {
-    return AttributeContext_Request_HeadersEntry.decode(message.value);
-  },
-  toProto(message: AttributeContext_Request_HeadersEntry): Uint8Array {
-    return AttributeContext_Request_HeadersEntry.encode(message).finish();
   }
 };
 function createBaseAttributeContext_Request(): AttributeContext_Request {
@@ -1432,7 +1228,6 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
   };
 }
 export const AttributeContext_Request = {
-  typeUrl: "/google.rpc.context.Request",
   encode(message: AttributeContext_Request, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -1655,63 +1450,6 @@ export const AttributeContext_Request = {
     obj.reason = message.reason;
     message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toSDK(message.auth) : undefined);
     return obj;
-  },
-  fromAmino(object: AttributeContext_RequestAmino): AttributeContext_Request {
-    return {
-      id: object.id,
-      method: object.method,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      path: object.path,
-      host: object.host,
-      scheme: object.scheme,
-      query: object.query,
-      time: object.time,
-      size: BigInt(object.size),
-      protocol: object.protocol,
-      reason: object.reason,
-      auth: object?.auth ? AttributeContext_Auth.fromAmino(object.auth) : undefined
-    };
-  },
-  toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.method = message.method;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    obj.path = message.path;
-    obj.host = message.host;
-    obj.scheme = message.scheme;
-    obj.query = message.query;
-    obj.time = message.time;
-    obj.size = message.size ? message.size.toString() : undefined;
-    obj.protocol = message.protocol;
-    obj.reason = message.reason;
-    obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_RequestAminoMsg): AttributeContext_Request {
-    return AttributeContext_Request.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_RequestProtoMsg): AttributeContext_Request {
-    return AttributeContext_Request.decode(message.value);
-  },
-  toProto(message: AttributeContext_Request): Uint8Array {
-    return AttributeContext_Request.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext_Request): AttributeContext_RequestProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.Request",
-      value: AttributeContext_Request.encode(message).finish()
-    };
   }
 };
 function createBaseAttributeContext_Response_HeadersEntry(): AttributeContext_Response_HeadersEntry {
@@ -1785,27 +1523,6 @@ export const AttributeContext_Response_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AttributeContext_Response_HeadersEntryAmino): AttributeContext_Response_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
-    return AttributeContext_Response_HeadersEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_Response_HeadersEntryProtoMsg): AttributeContext_Response_HeadersEntry {
-    return AttributeContext_Response_HeadersEntry.decode(message.value);
-  },
-  toProto(message: AttributeContext_Response_HeadersEntry): Uint8Array {
-    return AttributeContext_Response_HeadersEntry.encode(message).finish();
   }
 };
 function createBaseAttributeContext_Response(): AttributeContext_Response {
@@ -1818,7 +1535,6 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
   };
 }
 export const AttributeContext_Response = {
-  typeUrl: "/google.rpc.context.Response",
   encode(message: AttributeContext_Response, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.code !== BigInt(0)) {
       writer.uint32(8).int64(message.code);
@@ -1957,49 +1673,6 @@ export const AttributeContext_Response = {
     message.time !== undefined && (obj.time = message.time ?? undefined);
     message.backendLatency !== undefined && (obj.backend_latency = message.backendLatency ? Duration.toSDK(message.backendLatency) : undefined);
     return obj;
-  },
-  fromAmino(object: AttributeContext_ResponseAmino): AttributeContext_Response {
-    return {
-      code: BigInt(object.code),
-      size: BigInt(object.size),
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      time: object.time,
-      backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
-    };
-  },
-  toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
-    const obj: any = {};
-    obj.code = message.code ? message.code.toString() : undefined;
-    obj.size = message.size ? message.size.toString() : undefined;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    obj.time = message.time;
-    obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ResponseAminoMsg): AttributeContext_Response {
-    return AttributeContext_Response.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_ResponseProtoMsg): AttributeContext_Response {
-    return AttributeContext_Response.decode(message.value);
-  },
-  toProto(message: AttributeContext_Response): Uint8Array {
-    return AttributeContext_Response.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext_Response): AttributeContext_ResponseProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.Response",
-      value: AttributeContext_Response.encode(message).finish()
-    };
   }
 };
 function createBaseAttributeContext_Resource_LabelsEntry(): AttributeContext_Resource_LabelsEntry {
@@ -2073,27 +1746,6 @@ export const AttributeContext_Resource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AttributeContext_Resource_LabelsEntryAmino): AttributeContext_Resource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
-    return AttributeContext_Resource_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_Resource_LabelsEntryProtoMsg): AttributeContext_Resource_LabelsEntry {
-    return AttributeContext_Resource_LabelsEntry.decode(message.value);
-  },
-  toProto(message: AttributeContext_Resource_LabelsEntry): Uint8Array {
-    return AttributeContext_Resource_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseAttributeContext_Resource_AnnotationsEntry(): AttributeContext_Resource_AnnotationsEntry {
@@ -2167,27 +1819,6 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AttributeContext_Resource_AnnotationsEntryAmino): AttributeContext_Resource_AnnotationsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
-    return AttributeContext_Resource_AnnotationsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_Resource_AnnotationsEntryProtoMsg): AttributeContext_Resource_AnnotationsEntry {
-    return AttributeContext_Resource_AnnotationsEntry.decode(message.value);
-  },
-  toProto(message: AttributeContext_Resource_AnnotationsEntry): Uint8Array {
-    return AttributeContext_Resource_AnnotationsEntry.encode(message).finish();
   }
 };
 function createBaseAttributeContext_Resource(): AttributeContext_Resource {
@@ -2207,7 +1838,6 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
   };
 }
 export const AttributeContext_Resource = {
-  typeUrl: "/google.rpc.context.Resource",
   encode(message: AttributeContext_Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
@@ -2468,72 +2098,5 @@ export const AttributeContext_Resource = {
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;
-  },
-  fromAmino(object: AttributeContext_ResourceAmino): AttributeContext_Resource {
-    return {
-      service: object.service,
-      name: object.name,
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      uid: object.uid,
-      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      displayName: object.display_name,
-      createTime: object.create_time,
-      updateTime: object.update_time,
-      deleteTime: object.delete_time,
-      etag: object.etag,
-      location: object.location
-    };
-  },
-  toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
-    const obj: any = {};
-    obj.service = message.service;
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.uid = message.uid;
-    obj.annotations = {};
-    if (message.annotations) {
-      Object.entries(message.annotations).forEach(([k, v]) => {
-        obj.annotations[k] = v;
-      });
-    }
-    obj.display_name = message.displayName;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.delete_time = message.deleteTime;
-    obj.etag = message.etag;
-    obj.location = message.location;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {
-    return AttributeContext_Resource.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeContext_ResourceProtoMsg): AttributeContext_Resource {
-    return AttributeContext_Resource.decode(message.value);
-  },
-  toProto(message: AttributeContext_Resource): Uint8Array {
-    return AttributeContext_Resource.encode(message).finish();
-  },
-  toProtoMsg(message: AttributeContext_Resource): AttributeContext_ResourceProtoMsg {
-    return {
-      typeUrl: "/google.rpc.context.Resource",
-      value: AttributeContext_Resource.encode(message).finish()
-    };
   }
 };

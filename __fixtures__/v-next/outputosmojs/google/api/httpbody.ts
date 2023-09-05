@@ -116,7 +116,6 @@ function createBaseHttpBody(): HttpBody {
   };
 }
 export const HttpBody = {
-  typeUrl: "/google.api.HttpBody",
   encode(message: HttpBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentType !== "") {
       writer.uint32(10).string(message.contentType);
@@ -201,38 +200,5 @@ export const HttpBody = {
       obj.extensions = [];
     }
     return obj;
-  },
-  fromAmino(object: HttpBodyAmino): HttpBody {
-    return {
-      contentType: object.content_type,
-      data: object.data,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: HttpBody): HttpBodyAmino {
-    const obj: any = {};
-    obj.content_type = message.contentType;
-    obj.data = message.data;
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: HttpBodyAminoMsg): HttpBody {
-    return HttpBody.fromAmino(object.value);
-  },
-  fromProtoMsg(message: HttpBodyProtoMsg): HttpBody {
-    return HttpBody.decode(message.value);
-  },
-  toProto(message: HttpBody): Uint8Array {
-    return HttpBody.encode(message).finish();
-  },
-  toProtoMsg(message: HttpBody): HttpBodyProtoMsg {
-    return {
-      typeUrl: "/google.api.HttpBody",
-      value: HttpBody.encode(message).finish()
-    };
   }
 };

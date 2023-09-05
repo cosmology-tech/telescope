@@ -27,7 +27,6 @@ function createBaseControl(): Control {
   };
 }
 export const Control = {
-  typeUrl: "/google.api.Control",
   encode(message: Control, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.environment !== "") {
       writer.uint32(10).string(message.environment);
@@ -80,30 +79,5 @@ export const Control = {
     const obj: any = {};
     obj.environment = message.environment;
     return obj;
-  },
-  fromAmino(object: ControlAmino): Control {
-    return {
-      environment: object.environment
-    };
-  },
-  toAmino(message: Control): ControlAmino {
-    const obj: any = {};
-    obj.environment = message.environment;
-    return obj;
-  },
-  fromAminoMsg(object: ControlAminoMsg): Control {
-    return Control.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ControlProtoMsg): Control {
-    return Control.decode(message.value);
-  },
-  toProto(message: Control): Uint8Array {
-    return Control.encode(message).finish();
-  },
-  toProtoMsg(message: Control): ControlProtoMsg {
-    return {
-      typeUrl: "/google.api.Control",
-      value: Control.encode(message).finish()
-    };
   }
 };

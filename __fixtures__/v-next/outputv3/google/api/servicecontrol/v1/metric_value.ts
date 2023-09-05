@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -51,7 +51,7 @@ export interface MetricValue {
   /** A boolean value. */
   boolValue?: boolean;
   /** A signed 64-bit integer value. */
-  int64Value?: bigint;
+  int64Value?: Long;
   /** A double precision floating point value. */
   doubleValue?: number;
   /** A text string value. */
@@ -111,7 +111,7 @@ export interface MetricValueSDKType {
   start_time: Date;
   end_time: Date;
   bool_value?: boolean;
-  int64_value?: bigint;
+  int64_value?: Long;
   double_value?: number;
   string_value?: string;
   distribution_value?: DistributionSDKType;
@@ -162,7 +162,7 @@ function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   };
 }
 export const MetricValue_LabelsEntry = {
-  encode(message: MetricValue_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MetricValue_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -171,8 +171,8 @@ export const MetricValue_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue_LabelsEntry {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue_LabelsEntry();
     while (reader.pos < end) {
@@ -257,7 +257,7 @@ function createBaseMetricValue(): MetricValue {
 }
 export const MetricValue = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValue",
-  encode(message: MetricValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MetricValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode({
         key: (key as any),
@@ -287,8 +287,8 @@ export const MetricValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue();
     while (reader.pos < end) {
@@ -310,7 +310,7 @@ export const MetricValue = {
           message.boolValue = reader.bool();
           break;
         case 5:
-          message.int64Value = reader.int64();
+          message.int64Value = (reader.int64() as Long);
           break;
         case 6:
           message.doubleValue = reader.double();
@@ -339,7 +339,7 @@ export const MetricValue = {
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
     if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
-    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.int64Value)) obj.int64Value = Long.fromValue(object.int64Value);
     if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
     if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
     if (isSet(object.distributionValue)) obj.distributionValue = Distribution.fromJSON(object.distributionValue);
@@ -376,7 +376,7 @@ export const MetricValue = {
     message.endTime = object.endTime ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
     if (object.int64Value !== undefined && object.int64Value !== null) {
-      message.int64Value = BigInt(object.int64Value.toString());
+      message.int64Value = Long.fromValue(object.int64Value);
     }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
@@ -430,7 +430,7 @@ export const MetricValue = {
       startTime: object.start_time,
       endTime: object.end_time,
       boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
+      int64Value: object?.int64_value ? Long.fromString(object.int64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
       distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
@@ -477,7 +477,7 @@ function createBaseMetricValueSet(): MetricValueSet {
 }
 export const MetricValueSet = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
-  encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MetricValueSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
@@ -486,8 +486,8 @@ export const MetricValueSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricValueSet {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValueSet {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValueSet();
     while (reader.pos < end) {

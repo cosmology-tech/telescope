@@ -1,4 +1,4 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
@@ -175,7 +175,7 @@ function createBaseClaim(): Claim {
 }
 export const Claim = {
   typeUrl: "/evmos.claims.v1.Claim",
-  encode(message: Claim, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Claim, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
     }
@@ -187,8 +187,8 @@ export const Claim = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Claim {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Claim {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaim();
     while (reader.pos < end) {
@@ -284,7 +284,7 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
 }
 export const ClaimsRecordAddress = {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
-  encode(message: ClaimsRecordAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ClaimsRecordAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -298,8 +298,8 @@ export const ClaimsRecordAddress = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClaimsRecordAddress {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClaimsRecordAddress {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaimsRecordAddress();
     while (reader.pos < end) {
@@ -413,7 +413,7 @@ function createBaseClaimsRecord(): ClaimsRecord {
 }
 export const ClaimsRecord = {
   typeUrl: "/evmos.claims.v1.ClaimsRecord",
-  encode(message: ClaimsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ClaimsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
@@ -424,8 +424,8 @@ export const ClaimsRecord = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClaimsRecord {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClaimsRecord {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaimsRecord();
     while (reader.pos < end) {

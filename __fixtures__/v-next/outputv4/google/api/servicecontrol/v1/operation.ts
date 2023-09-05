@@ -222,27 +222,6 @@ export const Operation_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: Operation_LabelsEntryAmino): Operation_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
-    return Operation_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Operation_LabelsEntryProtoMsg): Operation_LabelsEntry {
-    return Operation_LabelsEntry.decode(message.value);
-  },
-  toProto(message: Operation_LabelsEntry): Uint8Array {
-    return Operation_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseOperation(): Operation {
@@ -260,7 +239,6 @@ function createBaseOperation(): Operation {
   };
 }
 export const Operation = {
-  typeUrl: "/google.api.servicecontrol.v1.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
@@ -483,70 +461,5 @@ export const Operation = {
       obj.extensions = [];
     }
     return obj;
-  },
-  fromAmino(object: OperationAmino): Operation {
-    return {
-      operationId: object.operation_id,
-      operationName: object.operation_name,
-      consumerId: object.consumer_id,
-      startTime: object.start_time,
-      endTime: object.end_time,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Operation): OperationAmino {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.operation_name = message.operationName;
-    obj.consumer_id = message.consumerId;
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.metricValueSets) {
-      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e) : undefined);
-    } else {
-      obj.metric_value_sets = [];
-    }
-    if (message.logEntries) {
-      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e) : undefined);
-    } else {
-      obj.log_entries = [];
-    }
-    obj.importance = message.importance;
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: OperationAminoMsg): Operation {
-    return Operation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OperationProtoMsg): Operation {
-    return Operation.decode(message.value);
-  },
-  toProto(message: Operation): Uint8Array {
-    return Operation.encode(message).finish();
-  },
-  toProtoMsg(message: Operation): OperationProtoMsg {
-    return {
-      typeUrl: "/google.api.servicecontrol.v1.Operation",
-      value: Operation.encode(message).finish()
-    };
   }
 };

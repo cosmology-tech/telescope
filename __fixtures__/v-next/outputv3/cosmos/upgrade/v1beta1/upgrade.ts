@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
@@ -26,7 +26,7 @@ export interface Plan {
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
    */
-  height: bigint;
+  height: Long;
   /**
    * Any application specific upgrade info to be included on-chain
    * such as a git commit that validators could automatically upgrade to
@@ -90,7 +90,7 @@ export interface PlanSDKType {
   name: string;
   /** @deprecated */
   time: Date;
-  height: bigint;
+  height: Long;
   info: string;
   /** @deprecated */
   upgraded_client_state: AnySDKType;
@@ -189,7 +189,7 @@ export interface ModuleVersion {
   /** name of the app module */
   name: string;
   /** consensus version of the app module */
-  version: bigint;
+  version: Long;
 }
 export interface ModuleVersionProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion";
@@ -217,13 +217,13 @@ export interface ModuleVersionAminoMsg {
  */
 export interface ModuleVersionSDKType {
   name: string;
-  version: bigint;
+  version: Long;
 }
 function createBasePlan(): Plan {
   return {
     name: "",
     time: new Date(),
-    height: BigInt(0),
+    height: Long.ZERO,
     info: "",
     upgradedClientState: Any.fromPartial({})
   };
@@ -231,14 +231,14 @@ function createBasePlan(): Plan {
 export const Plan = {
   typeUrl: "/cosmos.upgrade.v1beta1.Plan",
   aminoType: "cosmos-sdk/Plan",
-  encode(message: Plan, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Plan, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
-    if (message.height !== BigInt(0)) {
+    if (!message.height.isZero()) {
       writer.uint32(24).int64(message.height);
     }
     if (message.info !== "") {
@@ -249,8 +249,8 @@ export const Plan = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Plan {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Plan {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlan();
     while (reader.pos < end) {
@@ -263,7 +263,7 @@ export const Plan = {
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.height = reader.int64();
+          message.height = (reader.int64() as Long);
           break;
         case 4:
           message.info = reader.string();
@@ -282,7 +282,7 @@ export const Plan = {
     const obj = createBasePlan();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
     if (isSet(object.info)) obj.info = String(object.info);
     if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
     return obj;
@@ -291,7 +291,7 @@ export const Plan = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.info !== undefined && (obj.info = message.info);
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
@@ -301,7 +301,7 @@ export const Plan = {
     message.name = object.name ?? "";
     message.time = object.time ?? undefined;
     if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
+      message.height = Long.fromValue(object.height);
     }
     message.info = object.info ?? "";
     if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
@@ -331,7 +331,7 @@ export const Plan = {
     return {
       name: object.name,
       time: object.time,
-      height: BigInt(object.height),
+      height: Long.fromString(object.height),
       info: object.info,
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
@@ -377,7 +377,7 @@ function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
 export const SoftwareUpgradeProposal = {
   typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
   aminoType: "cosmos-sdk/SoftwareUpgradeProposal",
-  encode(message: SoftwareUpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: SoftwareUpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -389,8 +389,8 @@ export const SoftwareUpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SoftwareUpgradeProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): SoftwareUpgradeProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSoftwareUpgradeProposal();
     while (reader.pos < end) {
@@ -494,7 +494,7 @@ function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposa
 export const CancelSoftwareUpgradeProposal = {
   typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
   aminoType: "cosmos-sdk/CancelSoftwareUpgradeProposal",
-  encode(message: CancelSoftwareUpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: CancelSoftwareUpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -503,8 +503,8 @@ export const CancelSoftwareUpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelSoftwareUpgradeProposal();
     while (reader.pos < end) {
@@ -590,23 +590,23 @@ export const CancelSoftwareUpgradeProposal = {
 function createBaseModuleVersion(): ModuleVersion {
   return {
     name: "",
-    version: BigInt(0)
+    version: Long.UZERO
   };
 }
 export const ModuleVersion = {
   typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion",
   aminoType: "cosmos-sdk/ModuleVersion",
-  encode(message: ModuleVersion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ModuleVersion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.version !== BigInt(0)) {
+    if (!message.version.isZero()) {
       writer.uint32(16).uint64(message.version);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleVersion {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleVersion {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleVersion();
     while (reader.pos < end) {
@@ -616,7 +616,7 @@ export const ModuleVersion = {
           message.name = reader.string();
           break;
         case 2:
-          message.version = reader.uint64();
+          message.version = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -628,20 +628,20 @@ export const ModuleVersion = {
   fromJSON(object: any): ModuleVersion {
     const obj = createBaseModuleVersion();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.version)) obj.version = BigInt(object.version.toString());
+    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
     return obj;
   },
   toJSON(message: ModuleVersion): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
+    message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";
     if (object.version !== undefined && object.version !== null) {
-      message.version = BigInt(object.version.toString());
+      message.version = Long.fromValue(object.version);
     }
     return message;
   },
@@ -660,7 +660,7 @@ export const ModuleVersion = {
   fromAmino(object: ModuleVersionAmino): ModuleVersion {
     return {
       name: object.name,
-      version: BigInt(object.version)
+      version: Long.fromString(object.version)
     };
   },
   toAmino(message: ModuleVersion): ModuleVersionAmino {

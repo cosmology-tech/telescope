@@ -1,5 +1,4 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { Decimal } from "@cosmjs/math";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
@@ -42,21 +41,21 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.superfluid.Params",
   aminoType: "osmosis/params",
-  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minimumRiskFactor !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
+      writer.uint32(10).string(message.minimumRiskFactor);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minimumRiskFactor = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.minimumRiskFactor = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

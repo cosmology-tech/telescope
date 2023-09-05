@@ -6,7 +6,7 @@ exports[`cosmos/authz/v1beta1/authz date 1`] = `
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -18,8 +18,7 @@ export interface Grant {
 
 exports[`cosmos/authz/v1beta1/authz date 2`] = `
 "export const Grant = {
-  typeUrl: "/cosmos.authz.v1beta1.Grant",
-  encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authorization !== undefined) {
       Any.encode(message.authorization, writer.uint32(10).fork()).ldelim();
     }
@@ -28,8 +27,8 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Grant {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Grant {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
     while (reader.pos < end) {
@@ -60,7 +59,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
     return obj;
   },
-  fromPartial(object: Partial<Grant>): Grant {
+  fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration ?? undefined;
@@ -77,39 +76,6 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
-  },
-  fromAmino(object: GrantAmino): Grant {
-    return {
-      authorization: object?.authorization ? Any.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration
-    };
-  },
-  toAmino(message: Grant): GrantAmino {
-    const obj: any = {};
-    obj.authorization = message.authorization ? Any.toAmino(message.authorization) : undefined;
-    obj.expiration = message.expiration;
-    return obj;
-  },
-  fromAminoMsg(object: GrantAminoMsg): Grant {
-    return Grant.fromAmino(object.value);
-  },
-  toAminoMsg(message: Grant): GrantAminoMsg {
-    return {
-      type: "cosmos-sdk/Grant",
-      value: Grant.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GrantProtoMsg): Grant {
-    return Grant.decode(message.value);
-  },
-  toProto(message: Grant): Uint8Array {
-    return Grant.encode(message).finish();
-  },
-  toProtoMsg(message: Grant): GrantProtoMsg {
-    return {
-      typeUrl: "/cosmos.authz.v1beta1.Grant",
-      value: Grant.encode(message).finish()
-    };
   }
 };"
 `;
@@ -168,7 +134,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 1`] = `
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -180,8 +146,7 @@ export interface Grant {
 
 exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
 "export const Grant = {
-  typeUrl: "/cosmos.authz.v1beta1.Grant",
-  encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authorization !== undefined) {
       Any.encode(message.authorization, writer.uint32(10).fork()).ldelim();
     }
@@ -190,8 +155,8 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Grant {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Grant {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
     while (reader.pos < end) {
@@ -222,7 +187,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
     return obj;
   },
-  fromPartial(object: Partial<Grant>): Grant {
+  fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
@@ -239,39 +204,6 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
     return obj;
-  },
-  fromAmino(object: GrantAmino): Grant {
-    return {
-      authorization: object?.authorization ? Any.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration
-    };
-  },
-  toAmino(message: Grant): GrantAmino {
-    const obj: any = {};
-    obj.authorization = message.authorization ? Any.toAmino(message.authorization) : undefined;
-    obj.expiration = message.expiration;
-    return obj;
-  },
-  fromAminoMsg(object: GrantAminoMsg): Grant {
-    return Grant.fromAmino(object.value);
-  },
-  toAminoMsg(message: Grant): GrantAminoMsg {
-    return {
-      type: "cosmos-sdk/Grant",
-      value: Grant.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GrantProtoMsg): Grant {
-    return Grant.decode(message.value);
-  },
-  toProto(message: Grant): Uint8Array {
-    return Grant.encode(message).finish();
-  },
-  toProtoMsg(message: Grant): GrantProtoMsg {
-    return {
-      typeUrl: "/cosmos.authz.v1beta1.Grant",
-      value: Grant.encode(message).finish()
-    };
   }
 };"
 `;

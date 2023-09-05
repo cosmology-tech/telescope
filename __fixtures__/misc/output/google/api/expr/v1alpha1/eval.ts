@@ -45,7 +45,6 @@ function createBaseExprValue(): ExprValue {
   };
 }
 export const ExprValue = {
-  typeUrl: "/google.api.expr.v1alpha1.ExprValue",
   encode(message: ExprValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.exprs) {
       IdRef.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -143,7 +142,6 @@ function createBaseIdRef(): IdRef {
   };
 }
 export const IdRef = {
-  typeUrl: "/google.api.expr.v1alpha1.IdRef",
   encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);

@@ -64,7 +64,6 @@ function createBaseCoin(): Coin {
   };
 }
 export const Coin = {
-  typeUrl: "/cosmos.base.v1beta1.Coin",
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -129,39 +128,6 @@ export const Coin = {
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
-  },
-  fromAmino(object: CoinAmino): Coin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
-  },
-  toAmino(message: Coin): CoinAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
-    return obj;
-  },
-  fromAminoMsg(object: CoinAminoMsg): Coin {
-    return Coin.fromAmino(object.value);
-  },
-  toAminoMsg(message: Coin): CoinAminoMsg {
-    return {
-      type: "cosmos-sdk/Coin",
-      value: Coin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CoinProtoMsg): Coin {
-    return Coin.decode(message.value);
-  },
-  toProto(message: Coin): Uint8Array {
-    return Coin.encode(message).finish();
-  },
-  toProtoMsg(message: Coin): CoinProtoMsg {
-    return {
-      typeUrl: "/cosmos.base.v1beta1.Coin",
-      value: Coin.encode(message).finish()
-    };
   }
 };
 function createBaseDecCoin(): DecCoin {
@@ -171,7 +137,6 @@ function createBaseDecCoin(): DecCoin {
   };
 }
 export const DecCoin = {
-  typeUrl: "/cosmos.base.v1beta1.DecCoin",
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -236,39 +201,6 @@ export const DecCoin = {
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
-  },
-  fromAmino(object: DecCoinAmino): DecCoin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
-  },
-  toAmino(message: DecCoin): DecCoinAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
-    return obj;
-  },
-  fromAminoMsg(object: DecCoinAminoMsg): DecCoin {
-    return DecCoin.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecCoin): DecCoinAminoMsg {
-    return {
-      type: "cosmos-sdk/DecCoin",
-      value: DecCoin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DecCoinProtoMsg): DecCoin {
-    return DecCoin.decode(message.value);
-  },
-  toProto(message: DecCoin): Uint8Array {
-    return DecCoin.encode(message).finish();
-  },
-  toProtoMsg(message: DecCoin): DecCoinProtoMsg {
-    return {
-      typeUrl: "/cosmos.base.v1beta1.DecCoin",
-      value: DecCoin.encode(message).finish()
-    };
   }
 };
 function createBaseIntProto(): IntProto {
@@ -277,7 +209,6 @@ function createBaseIntProto(): IntProto {
   };
 }
 export const IntProto = {
-  typeUrl: "/cosmos.base.v1beta1.IntProto",
   encode(message: IntProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.int !== "") {
       writer.uint32(10).string(message.int);
@@ -330,37 +261,6 @@ export const IntProto = {
     const obj: any = {};
     obj.int = message.int;
     return obj;
-  },
-  fromAmino(object: IntProtoAmino): IntProto {
-    return {
-      int: object.int
-    };
-  },
-  toAmino(message: IntProto): IntProtoAmino {
-    const obj: any = {};
-    obj.int = message.int;
-    return obj;
-  },
-  fromAminoMsg(object: IntProtoAminoMsg): IntProto {
-    return IntProto.fromAmino(object.value);
-  },
-  toAminoMsg(message: IntProto): IntProtoAminoMsg {
-    return {
-      type: "cosmos-sdk/IntProto",
-      value: IntProto.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: IntProtoProtoMsg): IntProto {
-    return IntProto.decode(message.value);
-  },
-  toProto(message: IntProto): Uint8Array {
-    return IntProto.encode(message).finish();
-  },
-  toProtoMsg(message: IntProto): IntProtoProtoMsg {
-    return {
-      typeUrl: "/cosmos.base.v1beta1.IntProto",
-      value: IntProto.encode(message).finish()
-    };
   }
 };
 function createBaseDecProto(): DecProto {
@@ -369,7 +269,6 @@ function createBaseDecProto(): DecProto {
   };
 }
 export const DecProto = {
-  typeUrl: "/cosmos.base.v1beta1.DecProto",
   encode(message: DecProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.dec !== "") {
       writer.uint32(10).string(message.dec);
@@ -422,36 +321,5 @@ export const DecProto = {
     const obj: any = {};
     obj.dec = message.dec;
     return obj;
-  },
-  fromAmino(object: DecProtoAmino): DecProto {
-    return {
-      dec: object.dec
-    };
-  },
-  toAmino(message: DecProto): DecProtoAmino {
-    const obj: any = {};
-    obj.dec = message.dec;
-    return obj;
-  },
-  fromAminoMsg(object: DecProtoAminoMsg): DecProto {
-    return DecProto.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecProto): DecProtoAminoMsg {
-    return {
-      type: "cosmos-sdk/DecProto",
-      value: DecProto.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DecProtoProtoMsg): DecProto {
-    return DecProto.decode(message.value);
-  },
-  toProto(message: DecProto): Uint8Array {
-    return DecProto.encode(message).finish();
-  },
-  toProtoMsg(message: DecProto): DecProtoProtoMsg {
-    return {
-      typeUrl: "/cosmos.base.v1beta1.DecProto",
-      value: DecProto.encode(message).finish()
-    };
   }
 };

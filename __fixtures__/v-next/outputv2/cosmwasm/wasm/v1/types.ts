@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
@@ -148,7 +148,7 @@ export interface AccessConfigSDKType {
 export interface Params {
   codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
-  maxWasmCodeSize: bigint;
+  maxWasmCodeSize: Long;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Params";
@@ -168,7 +168,7 @@ export interface ParamsAminoMsg {
 export interface ParamsSDKType {
   code_upload_access: AccessConfigSDKType;
   instantiate_default_permission: AccessType;
-  max_wasm_code_size: bigint;
+  max_wasm_code_size: Long;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfo {
@@ -205,7 +205,7 @@ export interface CodeInfoSDKType {
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
   /** CodeID is the reference to the stored Wasm code */
-  codeId: bigint;
+  codeId: Long;
   /** Creator address who initially instantiated the contract */
   creator: string;
   /** Admin is an optional address that can execute migrations */
@@ -265,7 +265,7 @@ export interface ContractInfoAminoMsg {
 }
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
-  code_id: bigint;
+  code_id: Long;
   creator: string;
   admin: string;
   label: string;
@@ -277,7 +277,7 @@ export interface ContractInfoSDKType {
 export interface ContractCodeHistoryEntry {
   operation: ContractCodeHistoryOperationType;
   /** CodeID is the reference to the stored WASM code */
-  codeId: bigint;
+  codeId: Long;
   /** Updated Tx position when the operation was executed. */
   updated: AbsoluteTxPosition;
   msg: Uint8Array;
@@ -302,7 +302,7 @@ export interface ContractCodeHistoryEntryAminoMsg {
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
   operation: ContractCodeHistoryOperationType;
-  code_id: bigint;
+  code_id: Long;
   updated: AbsoluteTxPositionSDKType;
   msg: Uint8Array;
 }
@@ -312,12 +312,12 @@ export interface ContractCodeHistoryEntrySDKType {
  */
 export interface AbsoluteTxPosition {
   /** BlockHeight is the block the contract was created at */
-  blockHeight: bigint;
+  blockHeight: Long;
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
    * or gas consumed)
    */
-  txIndex: bigint;
+  txIndex: Long;
 }
 export interface AbsoluteTxPositionProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition";
@@ -345,8 +345,8 @@ export interface AbsoluteTxPositionAminoMsg {
  * ordering of transactions.
  */
 export interface AbsoluteTxPositionSDKType {
-  block_height: bigint;
-  tx_index: bigint;
+  block_height: Long;
+  tx_index: Long;
 }
 /** Model is a struct that holds a KV pair */
 export interface Model {
@@ -383,14 +383,14 @@ function createBaseAccessTypeParam(): AccessTypeParam {
 export const AccessTypeParam = {
   typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam",
   aminoType: "wasm/AccessTypeParam",
-  encode(message: AccessTypeParam, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: AccessTypeParam, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AccessTypeParam {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccessTypeParam {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessTypeParam();
     while (reader.pos < end) {
@@ -472,7 +472,7 @@ function createBaseAccessConfig(): AccessConfig {
 export const AccessConfig = {
   typeUrl: "/cosmwasm.wasm.v1.AccessConfig",
   aminoType: "wasm/AccessConfig",
-  encode(message: AccessConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: AccessConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.permission !== 0) {
       writer.uint32(8).int32(message.permission);
     }
@@ -481,8 +481,8 @@ export const AccessConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AccessConfig {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccessConfig {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessConfig();
     while (reader.pos < end) {
@@ -569,26 +569,26 @@ function createBaseParams(): Params {
   return {
     codeUploadAccess: AccessConfig.fromPartial({}),
     instantiateDefaultPermission: 0,
-    maxWasmCodeSize: BigInt(0)
+    maxWasmCodeSize: Long.UZERO
   };
 }
 export const Params = {
   typeUrl: "/cosmwasm.wasm.v1.Params",
   aminoType: "wasm/Params",
-  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeUploadAccess !== undefined) {
       AccessConfig.encode(message.codeUploadAccess, writer.uint32(10).fork()).ldelim();
     }
     if (message.instantiateDefaultPermission !== 0) {
       writer.uint32(16).int32(message.instantiateDefaultPermission);
     }
-    if (message.maxWasmCodeSize !== BigInt(0)) {
+    if (!message.maxWasmCodeSize.isZero()) {
       writer.uint32(24).uint64(message.maxWasmCodeSize);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -601,7 +601,7 @@ export const Params = {
           message.instantiateDefaultPermission = (reader.int32() as any);
           break;
         case 3:
-          message.maxWasmCodeSize = reader.uint64();
+          message.maxWasmCodeSize = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -614,14 +614,14 @@ export const Params = {
     const obj = createBaseParams();
     if (isSet(object.codeUploadAccess)) obj.codeUploadAccess = AccessConfig.fromJSON(object.codeUploadAccess);
     if (isSet(object.instantiateDefaultPermission)) obj.instantiateDefaultPermission = accessTypeFromJSON(object.instantiateDefaultPermission);
-    if (isSet(object.maxWasmCodeSize)) obj.maxWasmCodeSize = BigInt(object.maxWasmCodeSize.toString());
+    if (isSet(object.maxWasmCodeSize)) obj.maxWasmCodeSize = Long.fromValue(object.maxWasmCodeSize);
     return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.codeUploadAccess !== undefined && (obj.codeUploadAccess = message.codeUploadAccess ? AccessConfig.toJSON(message.codeUploadAccess) : undefined);
     message.instantiateDefaultPermission !== undefined && (obj.instantiateDefaultPermission = accessTypeToJSON(message.instantiateDefaultPermission));
-    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = (message.maxWasmCodeSize || BigInt(0)).toString());
+    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = (message.maxWasmCodeSize || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -631,7 +631,7 @@ export const Params = {
     }
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
     if (object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null) {
-      message.maxWasmCodeSize = BigInt(object.maxWasmCodeSize.toString());
+      message.maxWasmCodeSize = Long.fromValue(object.maxWasmCodeSize);
     }
     return message;
   },
@@ -653,7 +653,7 @@ export const Params = {
     return {
       codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
       instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
-      maxWasmCodeSize: BigInt(object.max_wasm_code_size)
+      maxWasmCodeSize: Long.fromString(object.max_wasm_code_size)
     };
   },
   toAmino(message: Params): ParamsAmino {
@@ -695,7 +695,7 @@ function createBaseCodeInfo(): CodeInfo {
 export const CodeInfo = {
   typeUrl: "/cosmwasm.wasm.v1.CodeInfo",
   aminoType: "wasm/CodeInfo",
-  encode(message: CodeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: CodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
     }
@@ -707,8 +707,8 @@ export const CodeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CodeInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): CodeInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeInfo();
     while (reader.pos < end) {
@@ -805,7 +805,7 @@ export const CodeInfo = {
 };
 function createBaseContractInfo(): ContractInfo {
   return {
-    codeId: BigInt(0),
+    codeId: Long.UZERO,
     creator: "",
     admin: "",
     label: "",
@@ -817,8 +817,8 @@ function createBaseContractInfo(): ContractInfo {
 export const ContractInfo = {
   typeUrl: "/cosmwasm.wasm.v1.ContractInfo",
   aminoType: "wasm/ContractInfo",
-  encode(message: ContractInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+  encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.creator !== "") {
@@ -841,15 +841,15 @@ export const ContractInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContractInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ContractInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeId = reader.uint64();
+          message.codeId = (reader.uint64() as Long);
           break;
         case 2:
           message.creator = reader.string();
@@ -878,7 +878,7 @@ export const ContractInfo = {
   },
   fromJSON(object: any): ContractInfo {
     const obj = createBaseContractInfo();
-    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
     if (isSet(object.creator)) obj.creator = String(object.creator);
     if (isSet(object.admin)) obj.admin = String(object.admin);
     if (isSet(object.label)) obj.label = String(object.label);
@@ -889,7 +889,7 @@ export const ContractInfo = {
   },
   toJSON(message: ContractInfo): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.creator !== undefined && (obj.creator = message.creator);
     message.admin !== undefined && (obj.admin = message.admin);
     message.label !== undefined && (obj.label = message.label);
@@ -901,7 +901,7 @@ export const ContractInfo = {
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
     if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = BigInt(object.codeId.toString());
+      message.codeId = Long.fromValue(object.codeId);
     }
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
@@ -939,7 +939,7 @@ export const ContractInfo = {
   },
   fromAmino(object: ContractInfoAmino): ContractInfo {
     return {
-      codeId: BigInt(object.code_id),
+      codeId: Long.fromString(object.code_id),
       creator: object.creator,
       admin: object.admin,
       label: object.label,
@@ -984,7 +984,7 @@ export const ContractInfo = {
 function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
-    codeId: BigInt(0),
+    codeId: Long.UZERO,
     updated: AbsoluteTxPosition.fromPartial({}),
     msg: new Uint8Array()
   };
@@ -992,11 +992,11 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
 export const ContractCodeHistoryEntry = {
   typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry",
   aminoType: "wasm/ContractCodeHistoryEntry",
-  encode(message: ContractCodeHistoryEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ContractCodeHistoryEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operation !== 0) {
       writer.uint32(8).int32(message.operation);
     }
-    if (message.codeId !== BigInt(0)) {
+    if (!message.codeId.isZero()) {
       writer.uint32(16).uint64(message.codeId);
     }
     if (message.updated !== undefined) {
@@ -1007,8 +1007,8 @@ export const ContractCodeHistoryEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContractCodeHistoryEntry {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ContractCodeHistoryEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractCodeHistoryEntry();
     while (reader.pos < end) {
@@ -1018,7 +1018,7 @@ export const ContractCodeHistoryEntry = {
           message.operation = (reader.int32() as any);
           break;
         case 2:
-          message.codeId = reader.uint64();
+          message.codeId = (reader.uint64() as Long);
           break;
         case 3:
           message.updated = AbsoluteTxPosition.decode(reader, reader.uint32());
@@ -1036,7 +1036,7 @@ export const ContractCodeHistoryEntry = {
   fromJSON(object: any): ContractCodeHistoryEntry {
     const obj = createBaseContractCodeHistoryEntry();
     if (isSet(object.operation)) obj.operation = contractCodeHistoryOperationTypeFromJSON(object.operation);
-    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
     if (isSet(object.updated)) obj.updated = AbsoluteTxPosition.fromJSON(object.updated);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     return obj;
@@ -1044,7 +1044,7 @@ export const ContractCodeHistoryEntry = {
   toJSON(message: ContractCodeHistoryEntry): unknown {
     const obj: any = {};
     message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toJSON(message.updated) : undefined);
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
@@ -1053,7 +1053,7 @@ export const ContractCodeHistoryEntry = {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
     if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = BigInt(object.codeId.toString());
+      message.codeId = Long.fromValue(object.codeId);
     }
     if (object.updated !== undefined && object.updated !== null) {
       message.updated = AbsoluteTxPosition.fromPartial(object.updated);
@@ -1080,7 +1080,7 @@ export const ContractCodeHistoryEntry = {
   fromAmino(object: ContractCodeHistoryEntryAmino): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
-      codeId: BigInt(object.code_id),
+      codeId: Long.fromString(object.code_id),
       updated: object?.updated ? AbsoluteTxPosition.fromAmino(object.updated) : undefined,
       msg: toUtf8(JSON.stringify(object.msg))
     };
@@ -1117,34 +1117,34 @@ export const ContractCodeHistoryEntry = {
 };
 function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   return {
-    blockHeight: BigInt(0),
-    txIndex: BigInt(0)
+    blockHeight: Long.UZERO,
+    txIndex: Long.UZERO
   };
 }
 export const AbsoluteTxPosition = {
   typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition",
   aminoType: "wasm/AbsoluteTxPosition",
-  encode(message: AbsoluteTxPosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.blockHeight !== BigInt(0)) {
+  encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.blockHeight.isZero()) {
       writer.uint32(8).uint64(message.blockHeight);
     }
-    if (message.txIndex !== BigInt(0)) {
+    if (!message.txIndex.isZero()) {
       writer.uint32(16).uint64(message.txIndex);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AbsoluteTxPosition {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): AbsoluteTxPosition {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAbsoluteTxPosition();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = reader.uint64();
+          message.blockHeight = (reader.uint64() as Long);
           break;
         case 2:
-          message.txIndex = reader.uint64();
+          message.txIndex = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1155,23 +1155,23 @@ export const AbsoluteTxPosition = {
   },
   fromJSON(object: any): AbsoluteTxPosition {
     const obj = createBaseAbsoluteTxPosition();
-    if (isSet(object.blockHeight)) obj.blockHeight = BigInt(object.blockHeight.toString());
-    if (isSet(object.txIndex)) obj.txIndex = BigInt(object.txIndex.toString());
+    if (isSet(object.blockHeight)) obj.blockHeight = Long.fromValue(object.blockHeight);
+    if (isSet(object.txIndex)) obj.txIndex = Long.fromValue(object.txIndex);
     return obj;
   },
   toJSON(message: AbsoluteTxPosition): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
-    message.txIndex !== undefined && (obj.txIndex = (message.txIndex || BigInt(0)).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.UZERO).toString());
+    message.txIndex !== undefined && (obj.txIndex = (message.txIndex || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
     if (object.blockHeight !== undefined && object.blockHeight !== null) {
-      message.blockHeight = BigInt(object.blockHeight.toString());
+      message.blockHeight = Long.fromValue(object.blockHeight);
     }
     if (object.txIndex !== undefined && object.txIndex !== null) {
-      message.txIndex = BigInt(object.txIndex.toString());
+      message.txIndex = Long.fromValue(object.txIndex);
     }
     return message;
   },
@@ -1189,8 +1189,8 @@ export const AbsoluteTxPosition = {
   },
   fromAmino(object: AbsoluteTxPositionAmino): AbsoluteTxPosition {
     return {
-      blockHeight: BigInt(object.block_height),
-      txIndex: BigInt(object.tx_index)
+      blockHeight: Long.fromString(object.block_height),
+      txIndex: Long.fromString(object.tx_index)
     };
   },
   toAmino(message: AbsoluteTxPosition): AbsoluteTxPositionAmino {
@@ -1230,7 +1230,7 @@ function createBaseModel(): Model {
 export const Model = {
   typeUrl: "/cosmwasm.wasm.v1.Model",
   aminoType: "wasm/Model",
-  encode(message: Model, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Model, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -1239,8 +1239,8 @@ export const Model = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Model {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Model {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModel();
     while (reader.pos < end) {
@@ -1323,8 +1323,8 @@ export const Model = {
     };
   }
 };
-export const ContractInfoExtension_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
-  const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+export const ContractInfoExtension_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
   const data = Any.decode(reader, reader.uint32());
   switch (data.typeUrl) {
     default:

@@ -1,7 +1,6 @@
 import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
-import { Decimal } from "@cosmjs/math";
+import { Long, DeepPartial, isSet } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensRequestProtoMsg {
@@ -65,7 +64,7 @@ export interface QueryDenomSpotPriceRequestSDKType {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceResponse {
-  poolID: bigint;
+  poolID: Long;
   spotPrice: string;
 }
 export interface QueryDenomSpotPriceResponseProtoMsg {
@@ -89,7 +88,7 @@ export interface QueryDenomSpotPriceResponseAminoMsg {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceResponseSDKType {
-  poolID: bigint;
+  poolID: Long;
   spot_price: string;
 }
 export interface QueryDenomPoolIdRequest {
@@ -110,7 +109,7 @@ export interface QueryDenomPoolIdRequestSDKType {
   denom: string;
 }
 export interface QueryDenomPoolIdResponse {
-  poolID: bigint;
+  poolID: Long;
 }
 export interface QueryDenomPoolIdResponseProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdResponse";
@@ -124,7 +123,7 @@ export interface QueryDenomPoolIdResponseAminoMsg {
   value: QueryDenomPoolIdResponseAmino;
 }
 export interface QueryDenomPoolIdResponseSDKType {
-  poolID: bigint;
+  poolID: Long;
 }
 export interface QueryBaseDenomRequest {}
 export interface QueryBaseDenomRequestProtoMsg {
@@ -160,11 +159,11 @@ function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
 export const QueryFeeTokensRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensRequest",
   aminoType: "osmosis/txfees/query-fee-tokens-request",
-  encode(_: QueryFeeTokensRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: QueryFeeTokensRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeTokensRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensRequest();
     while (reader.pos < end) {
@@ -233,14 +232,14 @@ function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
 export const QueryFeeTokensResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensResponse",
   aminoType: "osmosis/txfees/query-fee-tokens-response",
-  encode(message: QueryFeeTokensResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryFeeTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.feeTokens) {
       FeeToken.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeTokensResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensResponse();
     while (reader.pos < end) {
@@ -333,14 +332,14 @@ function createBaseQueryDenomSpotPriceRequest(): QueryDenomSpotPriceRequest {
 export const QueryDenomSpotPriceRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceRequest",
   aminoType: "osmosis/txfees/query-denom-spot-price-request",
-  encode(message: QueryDenomSpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryDenomSpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomSpotPriceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomSpotPriceRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomSpotPriceRequest();
     while (reader.pos < end) {
@@ -415,34 +414,34 @@ export const QueryDenomSpotPriceRequest = {
 };
 function createBaseQueryDenomSpotPriceResponse(): QueryDenomSpotPriceResponse {
   return {
-    poolID: BigInt(0),
+    poolID: Long.UZERO,
     spotPrice: ""
   };
 }
 export const QueryDenomSpotPriceResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceResponse",
   aminoType: "osmosis/txfees/query-denom-spot-price-response",
-  encode(message: QueryDenomSpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolID !== BigInt(0)) {
+  encode(message: QueryDenomSpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolID.isZero()) {
       writer.uint32(8).uint64(message.poolID);
     }
     if (message.spotPrice !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.spotPrice, 18).atomics);
+      writer.uint32(18).string(message.spotPrice);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomSpotPriceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomSpotPriceResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomSpotPriceResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolID = reader.uint64();
+          message.poolID = (reader.uint64() as Long);
           break;
         case 2:
-          message.spotPrice = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.spotPrice = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -453,20 +452,20 @@ export const QueryDenomSpotPriceResponse = {
   },
   fromJSON(object: any): QueryDenomSpotPriceResponse {
     const obj = createBaseQueryDenomSpotPriceResponse();
-    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    if (isSet(object.poolID)) obj.poolID = Long.fromValue(object.poolID);
     if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
     return obj;
   },
   toJSON(message: QueryDenomSpotPriceResponse): unknown {
     const obj: any = {};
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
+    message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
     if (object.poolID !== undefined && object.poolID !== null) {
-      message.poolID = BigInt(object.poolID.toString());
+      message.poolID = Long.fromValue(object.poolID);
     }
     message.spotPrice = object.spotPrice ?? "";
     return message;
@@ -485,7 +484,7 @@ export const QueryDenomSpotPriceResponse = {
   },
   fromAmino(object: QueryDenomSpotPriceResponseAmino): QueryDenomSpotPriceResponse {
     return {
-      poolID: BigInt(object.poolID),
+      poolID: Long.fromString(object.poolID),
       spotPrice: object.spot_price
     };
   },
@@ -525,14 +524,14 @@ function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
 export const QueryDenomPoolIdRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdRequest",
   aminoType: "osmosis/txfees/query-denom-pool-id-request",
-  encode(message: QueryDenomPoolIdRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryDenomPoolIdRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomPoolIdRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdRequest();
     while (reader.pos < end) {
@@ -607,27 +606,27 @@ export const QueryDenomPoolIdRequest = {
 };
 function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
   return {
-    poolID: BigInt(0)
+    poolID: Long.UZERO
   };
 }
 export const QueryDenomPoolIdResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdResponse",
   aminoType: "osmosis/txfees/query-denom-pool-id-response",
-  encode(message: QueryDenomPoolIdResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolID !== BigInt(0)) {
+  encode(message: QueryDenomPoolIdResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolID.isZero()) {
       writer.uint32(8).uint64(message.poolID);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomPoolIdResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolID = reader.uint64();
+          message.poolID = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -638,18 +637,18 @@ export const QueryDenomPoolIdResponse = {
   },
   fromJSON(object: any): QueryDenomPoolIdResponse {
     const obj = createBaseQueryDenomPoolIdResponse();
-    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    if (isSet(object.poolID)) obj.poolID = Long.fromValue(object.poolID);
     return obj;
   },
   toJSON(message: QueryDenomPoolIdResponse): unknown {
     const obj: any = {};
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
+    message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
     if (object.poolID !== undefined && object.poolID !== null) {
-      message.poolID = BigInt(object.poolID.toString());
+      message.poolID = Long.fromValue(object.poolID);
     }
     return message;
   },
@@ -665,7 +664,7 @@ export const QueryDenomPoolIdResponse = {
   },
   fromAmino(object: QueryDenomPoolIdResponseAmino): QueryDenomPoolIdResponse {
     return {
-      poolID: BigInt(object.poolID)
+      poolID: Long.fromString(object.poolID)
     };
   },
   toAmino(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseAmino {
@@ -701,11 +700,11 @@ function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
 export const QueryBaseDenomRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomRequest",
   aminoType: "osmosis/txfees/query-base-denom-request",
-  encode(_: QueryBaseDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: QueryBaseDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBaseDenomRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomRequest();
     while (reader.pos < end) {
@@ -774,14 +773,14 @@ function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
 export const QueryBaseDenomResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomResponse",
   aminoType: "osmosis/txfees/query-base-denom-response",
-  encode(message: QueryBaseDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryBaseDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseDenom !== "") {
       writer.uint32(10).string(message.baseDenom);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBaseDenomResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomResponse();
     while (reader.pos < end) {

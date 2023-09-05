@@ -2,7 +2,6 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -298,7 +297,6 @@ function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
   };
 }
 export const QueryContractInfoRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest",
   encode(message: QueryContractInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -351,37 +349,6 @@ export const QueryContractInfoRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
-  },
-  fromAmino(object: QueryContractInfoRequestAmino): QueryContractInfoRequest {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: QueryContractInfoRequest): QueryContractInfoRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: QueryContractInfoRequestAminoMsg): QueryContractInfoRequest {
-    return QueryContractInfoRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryContractInfoRequest): QueryContractInfoRequestAminoMsg {
-    return {
-      type: "wasm/QueryContractInfoRequest",
-      value: QueryContractInfoRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryContractInfoRequestProtoMsg): QueryContractInfoRequest {
-    return QueryContractInfoRequest.decode(message.value);
-  },
-  toProto(message: QueryContractInfoRequest): Uint8Array {
-    return QueryContractInfoRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryContractInfoRequest): QueryContractInfoRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest",
-      value: QueryContractInfoRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
@@ -391,7 +358,6 @@ function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
   };
 }
 export const QueryContractInfoResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse",
   encode(message: QueryContractInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -458,39 +424,6 @@ export const QueryContractInfoResponse = {
     obj.address = message.address;
     message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toSDK(message.contractInfo) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryContractInfoResponseAmino): QueryContractInfoResponse {
-    return {
-      address: object.address,
-      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : undefined
-    };
-  },
-  toAmino(message: QueryContractInfoResponse): QueryContractInfoResponseAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryContractInfoResponseAminoMsg): QueryContractInfoResponse {
-    return QueryContractInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryContractInfoResponse): QueryContractInfoResponseAminoMsg {
-    return {
-      type: "wasm/QueryContractInfoResponse",
-      value: QueryContractInfoResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryContractInfoResponseProtoMsg): QueryContractInfoResponse {
-    return QueryContractInfoResponse.decode(message.value);
-  },
-  toProto(message: QueryContractInfoResponse): Uint8Array {
-    return QueryContractInfoResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryContractInfoResponse): QueryContractInfoResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse",
-      value: QueryContractInfoResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
@@ -500,7 +433,6 @@ function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
   };
 }
 export const QueryContractHistoryRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest",
   encode(message: QueryContractHistoryRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -567,39 +499,6 @@ export const QueryContractHistoryRequest = {
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryContractHistoryRequestAmino): QueryContractHistoryRequest {
-    return {
-      address: object.address,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryContractHistoryRequest): QueryContractHistoryRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryContractHistoryRequestAminoMsg): QueryContractHistoryRequest {
-    return QueryContractHistoryRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryContractHistoryRequest): QueryContractHistoryRequestAminoMsg {
-    return {
-      type: "wasm/QueryContractHistoryRequest",
-      value: QueryContractHistoryRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryContractHistoryRequestProtoMsg): QueryContractHistoryRequest {
-    return QueryContractHistoryRequest.decode(message.value);
-  },
-  toProto(message: QueryContractHistoryRequest): Uint8Array {
-    return QueryContractHistoryRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryContractHistoryRequest): QueryContractHistoryRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest",
-      value: QueryContractHistoryRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryContractHistoryResponse(): QueryContractHistoryResponse {
@@ -609,7 +508,6 @@ function createBaseQueryContractHistoryResponse(): QueryContractHistoryResponse 
   };
 }
 export const QueryContractHistoryResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse",
   encode(message: QueryContractHistoryResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       ContractCodeHistoryEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -684,43 +582,6 @@ export const QueryContractHistoryResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryContractHistoryResponseAmino): QueryContractHistoryResponse {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryContractHistoryResponse): QueryContractHistoryResponseAmino {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? ContractCodeHistoryEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryContractHistoryResponseAminoMsg): QueryContractHistoryResponse {
-    return QueryContractHistoryResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryContractHistoryResponse): QueryContractHistoryResponseAminoMsg {
-    return {
-      type: "wasm/QueryContractHistoryResponse",
-      value: QueryContractHistoryResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryContractHistoryResponseProtoMsg): QueryContractHistoryResponse {
-    return QueryContractHistoryResponse.decode(message.value);
-  },
-  toProto(message: QueryContractHistoryResponse): Uint8Array {
-    return QueryContractHistoryResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryContractHistoryResponse): QueryContractHistoryResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse",
-      value: QueryContractHistoryResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
@@ -730,7 +591,6 @@ function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
   };
 }
 export const QueryContractsByCodeRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest",
   encode(message: QueryContractsByCodeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
       writer.uint32(8).uint64(message.codeId);
@@ -799,39 +659,6 @@ export const QueryContractsByCodeRequest = {
     obj.code_id = message.codeId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryContractsByCodeRequestAmino): QueryContractsByCodeRequest {
-    return {
-      codeId: BigInt(object.code_id),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestAmino {
-    const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryContractsByCodeRequestAminoMsg): QueryContractsByCodeRequest {
-    return QueryContractsByCodeRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestAminoMsg {
-    return {
-      type: "wasm/QueryContractsByCodeRequest",
-      value: QueryContractsByCodeRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryContractsByCodeRequestProtoMsg): QueryContractsByCodeRequest {
-    return QueryContractsByCodeRequest.decode(message.value);
-  },
-  toProto(message: QueryContractsByCodeRequest): Uint8Array {
-    return QueryContractsByCodeRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest",
-      value: QueryContractsByCodeRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse {
@@ -841,7 +668,6 @@ function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse 
   };
 }
 export const QueryContractsByCodeResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse",
   encode(message: QueryContractsByCodeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.contracts) {
       writer.uint32(10).string(v!);
@@ -916,43 +742,6 @@ export const QueryContractsByCodeResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryContractsByCodeResponseAmino): QueryContractsByCodeResponse {
-    return {
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => e) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseAmino {
-    const obj: any = {};
-    if (message.contracts) {
-      obj.contracts = message.contracts.map(e => e);
-    } else {
-      obj.contracts = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryContractsByCodeResponseAminoMsg): QueryContractsByCodeResponse {
-    return QueryContractsByCodeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseAminoMsg {
-    return {
-      type: "wasm/QueryContractsByCodeResponse",
-      value: QueryContractsByCodeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryContractsByCodeResponseProtoMsg): QueryContractsByCodeResponse {
-    return QueryContractsByCodeResponse.decode(message.value);
-  },
-  toProto(message: QueryContractsByCodeResponse): Uint8Array {
-    return QueryContractsByCodeResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse",
-      value: QueryContractsByCodeResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest {
@@ -962,7 +751,6 @@ function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest 
   };
 }
 export const QueryAllContractStateRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest",
   encode(message: QueryAllContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1029,39 +817,6 @@ export const QueryAllContractStateRequest = {
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryAllContractStateRequestAmino): QueryAllContractStateRequest {
-    return {
-      address: object.address,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryAllContractStateRequest): QueryAllContractStateRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryAllContractStateRequestAminoMsg): QueryAllContractStateRequest {
-    return QueryAllContractStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllContractStateRequest): QueryAllContractStateRequestAminoMsg {
-    return {
-      type: "wasm/QueryAllContractStateRequest",
-      value: QueryAllContractStateRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAllContractStateRequestProtoMsg): QueryAllContractStateRequest {
-    return QueryAllContractStateRequest.decode(message.value);
-  },
-  toProto(message: QueryAllContractStateRequest): Uint8Array {
-    return QueryAllContractStateRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryAllContractStateRequest): QueryAllContractStateRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest",
-      value: QueryAllContractStateRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryAllContractStateResponse(): QueryAllContractStateResponse {
@@ -1071,7 +826,6 @@ function createBaseQueryAllContractStateResponse(): QueryAllContractStateRespons
   };
 }
 export const QueryAllContractStateResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse",
   encode(message: QueryAllContractStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.models) {
       Model.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1146,43 +900,6 @@ export const QueryAllContractStateResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryAllContractStateResponseAmino): QueryAllContractStateResponse {
-    return {
-      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryAllContractStateResponse): QueryAllContractStateResponseAmino {
-    const obj: any = {};
-    if (message.models) {
-      obj.models = message.models.map(e => e ? Model.toAmino(e) : undefined);
-    } else {
-      obj.models = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryAllContractStateResponseAminoMsg): QueryAllContractStateResponse {
-    return QueryAllContractStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllContractStateResponse): QueryAllContractStateResponseAminoMsg {
-    return {
-      type: "wasm/QueryAllContractStateResponse",
-      value: QueryAllContractStateResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAllContractStateResponseProtoMsg): QueryAllContractStateResponse {
-    return QueryAllContractStateResponse.decode(message.value);
-  },
-  toProto(message: QueryAllContractStateResponse): Uint8Array {
-    return QueryAllContractStateResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryAllContractStateResponse): QueryAllContractStateResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse",
-      value: QueryAllContractStateResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest {
@@ -1192,7 +909,6 @@ function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest 
   };
 }
 export const QueryRawContractStateRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
   encode(message: QueryRawContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1257,39 +973,6 @@ export const QueryRawContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
-  },
-  fromAmino(object: QueryRawContractStateRequestAmino): QueryRawContractStateRequest {
-    return {
-      address: object.address,
-      queryData: object.query_data
-    };
-  },
-  toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.query_data = message.queryData;
-    return obj;
-  },
-  fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
-    return QueryRawContractStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestAminoMsg {
-    return {
-      type: "wasm/QueryRawContractStateRequest",
-      value: QueryRawContractStateRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryRawContractStateRequestProtoMsg): QueryRawContractStateRequest {
-    return QueryRawContractStateRequest.decode(message.value);
-  },
-  toProto(message: QueryRawContractStateRequest): Uint8Array {
-    return QueryRawContractStateRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
-      value: QueryRawContractStateRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryRawContractStateResponse(): QueryRawContractStateResponse {
@@ -1298,7 +981,6 @@ function createBaseQueryRawContractStateResponse(): QueryRawContractStateRespons
   };
 }
 export const QueryRawContractStateResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse",
   encode(message: QueryRawContractStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1351,37 +1033,6 @@ export const QueryRawContractStateResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
-  },
-  fromAmino(object: QueryRawContractStateResponseAmino): QueryRawContractStateResponse {
-    return {
-      data: object.data
-    };
-  },
-  toAmino(message: QueryRawContractStateResponse): QueryRawContractStateResponseAmino {
-    const obj: any = {};
-    obj.data = message.data;
-    return obj;
-  },
-  fromAminoMsg(object: QueryRawContractStateResponseAminoMsg): QueryRawContractStateResponse {
-    return QueryRawContractStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryRawContractStateResponse): QueryRawContractStateResponseAminoMsg {
-    return {
-      type: "wasm/QueryRawContractStateResponse",
-      value: QueryRawContractStateResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryRawContractStateResponseProtoMsg): QueryRawContractStateResponse {
-    return QueryRawContractStateResponse.decode(message.value);
-  },
-  toProto(message: QueryRawContractStateResponse): Uint8Array {
-    return QueryRawContractStateResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryRawContractStateResponse): QueryRawContractStateResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse",
-      value: QueryRawContractStateResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequest {
@@ -1391,7 +1042,6 @@ function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequ
   };
 }
 export const QuerySmartContractStateRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest",
   encode(message: QuerySmartContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1456,39 +1106,6 @@ export const QuerySmartContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
-  },
-  fromAmino(object: QuerySmartContractStateRequestAmino): QuerySmartContractStateRequest {
-    return {
-      address: object.address,
-      queryData: toUtf8(JSON.stringify(object.query_data))
-    };
-  },
-  toAmino(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.query_data = message.queryData ? JSON.parse(fromUtf8(message.queryData)) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySmartContractStateRequestAminoMsg): QuerySmartContractStateRequest {
-    return QuerySmartContractStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestAminoMsg {
-    return {
-      type: "wasm/QuerySmartContractStateRequest",
-      value: QuerySmartContractStateRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySmartContractStateRequestProtoMsg): QuerySmartContractStateRequest {
-    return QuerySmartContractStateRequest.decode(message.value);
-  },
-  toProto(message: QuerySmartContractStateRequest): Uint8Array {
-    return QuerySmartContractStateRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest",
-      value: QuerySmartContractStateRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateResponse {
@@ -1497,7 +1114,6 @@ function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateRes
   };
 }
 export const QuerySmartContractStateResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse",
   encode(message: QuerySmartContractStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1550,37 +1166,6 @@ export const QuerySmartContractStateResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
-  },
-  fromAmino(object: QuerySmartContractStateResponseAmino): QuerySmartContractStateResponse {
-    return {
-      data: toUtf8(JSON.stringify(object.data))
-    };
-  },
-  toAmino(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseAmino {
-    const obj: any = {};
-    obj.data = message.data ? JSON.parse(fromUtf8(message.data)) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySmartContractStateResponseAminoMsg): QuerySmartContractStateResponse {
-    return QuerySmartContractStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseAminoMsg {
-    return {
-      type: "wasm/QuerySmartContractStateResponse",
-      value: QuerySmartContractStateResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySmartContractStateResponseProtoMsg): QuerySmartContractStateResponse {
-    return QuerySmartContractStateResponse.decode(message.value);
-  },
-  toProto(message: QuerySmartContractStateResponse): Uint8Array {
-    return QuerySmartContractStateResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse",
-      value: QuerySmartContractStateResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCodeRequest(): QueryCodeRequest {
@@ -1589,7 +1174,6 @@ function createBaseQueryCodeRequest(): QueryCodeRequest {
   };
 }
 export const QueryCodeRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest",
   encode(message: QueryCodeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
       writer.uint32(8).uint64(message.codeId);
@@ -1644,37 +1228,6 @@ export const QueryCodeRequest = {
     const obj: any = {};
     obj.code_id = message.codeId;
     return obj;
-  },
-  fromAmino(object: QueryCodeRequestAmino): QueryCodeRequest {
-    return {
-      codeId: BigInt(object.code_id)
-    };
-  },
-  toAmino(message: QueryCodeRequest): QueryCodeRequestAmino {
-    const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCodeRequestAminoMsg): QueryCodeRequest {
-    return QueryCodeRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCodeRequest): QueryCodeRequestAminoMsg {
-    return {
-      type: "wasm/QueryCodeRequest",
-      value: QueryCodeRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCodeRequestProtoMsg): QueryCodeRequest {
-    return QueryCodeRequest.decode(message.value);
-  },
-  toProto(message: QueryCodeRequest): Uint8Array {
-    return QueryCodeRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCodeRequest): QueryCodeRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest",
-      value: QueryCodeRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCodeInfoResponse(): CodeInfoResponse {
@@ -1685,7 +1238,6 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
   };
 }
 export const CodeInfoResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse",
   encode(message: CodeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
       writer.uint32(8).uint64(message.codeId);
@@ -1764,41 +1316,6 @@ export const CodeInfoResponse = {
     obj.creator = message.creator;
     obj.data_hash = message.dataHash;
     return obj;
-  },
-  fromAmino(object: CodeInfoResponseAmino): CodeInfoResponse {
-    return {
-      codeId: BigInt(object.code_id),
-      creator: object.creator,
-      dataHash: object.data_hash
-    };
-  },
-  toAmino(message: CodeInfoResponse): CodeInfoResponseAmino {
-    const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.creator = message.creator;
-    obj.data_hash = message.dataHash;
-    return obj;
-  },
-  fromAminoMsg(object: CodeInfoResponseAminoMsg): CodeInfoResponse {
-    return CodeInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: CodeInfoResponse): CodeInfoResponseAminoMsg {
-    return {
-      type: "wasm/CodeInfoResponse",
-      value: CodeInfoResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CodeInfoResponseProtoMsg): CodeInfoResponse {
-    return CodeInfoResponse.decode(message.value);
-  },
-  toProto(message: CodeInfoResponse): Uint8Array {
-    return CodeInfoResponse.encode(message).finish();
-  },
-  toProtoMsg(message: CodeInfoResponse): CodeInfoResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse",
-      value: CodeInfoResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCodeResponse(): QueryCodeResponse {
@@ -1808,7 +1325,6 @@ function createBaseQueryCodeResponse(): QueryCodeResponse {
   };
 }
 export const QueryCodeResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse",
   encode(message: QueryCodeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeInfo !== undefined) {
       CodeInfoResponse.encode(message.codeInfo, writer.uint32(10).fork()).ldelim();
@@ -1875,39 +1391,6 @@ export const QueryCodeResponse = {
     message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfoResponse.toSDK(message.codeInfo) : undefined);
     obj.data = message.data;
     return obj;
-  },
-  fromAmino(object: QueryCodeResponseAmino): QueryCodeResponse {
-    return {
-      codeInfo: object?.code_info ? CodeInfoResponse.fromAmino(object.code_info) : undefined,
-      data: object.data
-    };
-  },
-  toAmino(message: QueryCodeResponse): QueryCodeResponseAmino {
-    const obj: any = {};
-    obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo) : undefined;
-    obj.data = message.data;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCodeResponseAminoMsg): QueryCodeResponse {
-    return QueryCodeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCodeResponse): QueryCodeResponseAminoMsg {
-    return {
-      type: "wasm/QueryCodeResponse",
-      value: QueryCodeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCodeResponseProtoMsg): QueryCodeResponse {
-    return QueryCodeResponse.decode(message.value);
-  },
-  toProto(message: QueryCodeResponse): Uint8Array {
-    return QueryCodeResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCodeResponse): QueryCodeResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse",
-      value: QueryCodeResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCodesRequest(): QueryCodesRequest {
@@ -1916,7 +1399,6 @@ function createBaseQueryCodesRequest(): QueryCodesRequest {
   };
 }
 export const QueryCodesRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest",
   encode(message: QueryCodesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1971,37 +1453,6 @@ export const QueryCodesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryCodesRequestAmino): QueryCodesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryCodesRequest): QueryCodesRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCodesRequestAminoMsg): QueryCodesRequest {
-    return QueryCodesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCodesRequest): QueryCodesRequestAminoMsg {
-    return {
-      type: "wasm/QueryCodesRequest",
-      value: QueryCodesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCodesRequestProtoMsg): QueryCodesRequest {
-    return QueryCodesRequest.decode(message.value);
-  },
-  toProto(message: QueryCodesRequest): Uint8Array {
-    return QueryCodesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCodesRequest): QueryCodesRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest",
-      value: QueryCodesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCodesResponse(): QueryCodesResponse {
@@ -2011,7 +1462,6 @@ function createBaseQueryCodesResponse(): QueryCodesResponse {
   };
 }
 export const QueryCodesResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse",
   encode(message: QueryCodesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.codeInfos) {
       CodeInfoResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2086,43 +1536,6 @@ export const QueryCodesResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryCodesResponseAmino): QueryCodesResponse {
-    return {
-      codeInfos: Array.isArray(object?.code_infos) ? object.code_infos.map((e: any) => CodeInfoResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryCodesResponse): QueryCodesResponseAmino {
-    const obj: any = {};
-    if (message.codeInfos) {
-      obj.code_infos = message.codeInfos.map(e => e ? CodeInfoResponse.toAmino(e) : undefined);
-    } else {
-      obj.code_infos = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCodesResponseAminoMsg): QueryCodesResponse {
-    return QueryCodesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCodesResponse): QueryCodesResponseAminoMsg {
-    return {
-      type: "wasm/QueryCodesResponse",
-      value: QueryCodesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCodesResponseProtoMsg): QueryCodesResponse {
-    return QueryCodesResponse.decode(message.value);
-  },
-  toProto(message: QueryCodesResponse): Uint8Array {
-    return QueryCodesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCodesResponse): QueryCodesResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse",
-      value: QueryCodesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryPinnedCodesRequest(): QueryPinnedCodesRequest {
@@ -2131,7 +1544,6 @@ function createBaseQueryPinnedCodesRequest(): QueryPinnedCodesRequest {
   };
 }
 export const QueryPinnedCodesRequest = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest",
   encode(message: QueryPinnedCodesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -2186,37 +1598,6 @@ export const QueryPinnedCodesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryPinnedCodesRequestAmino): QueryPinnedCodesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryPinnedCodesRequestAminoMsg): QueryPinnedCodesRequest {
-    return QueryPinnedCodesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestAminoMsg {
-    return {
-      type: "wasm/QueryPinnedCodesRequest",
-      value: QueryPinnedCodesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryPinnedCodesRequestProtoMsg): QueryPinnedCodesRequest {
-    return QueryPinnedCodesRequest.decode(message.value);
-  },
-  toProto(message: QueryPinnedCodesRequest): Uint8Array {
-    return QueryPinnedCodesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest",
-      value: QueryPinnedCodesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
@@ -2226,7 +1607,6 @@ function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
   };
 }
 export const QueryPinnedCodesResponse = {
-  typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse",
   encode(message: QueryPinnedCodesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.codeIds) {
@@ -2310,42 +1690,5 @@ export const QueryPinnedCodesResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryPinnedCodesResponseAmino): QueryPinnedCodesResponse {
-    return {
-      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseAmino {
-    const obj: any = {};
-    if (message.codeIds) {
-      obj.code_ids = message.codeIds.map(e => e.toString());
-    } else {
-      obj.code_ids = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryPinnedCodesResponseAminoMsg): QueryPinnedCodesResponse {
-    return QueryPinnedCodesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseAminoMsg {
-    return {
-      type: "wasm/QueryPinnedCodesResponse",
-      value: QueryPinnedCodesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryPinnedCodesResponseProtoMsg): QueryPinnedCodesResponse {
-    return QueryPinnedCodesResponse.decode(message.value);
-  },
-  toProto(message: QueryPinnedCodesResponse): Uint8Array {
-    return QueryPinnedCodesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseProtoMsg {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse",
-      value: QueryPinnedCodesResponse.encode(message).finish()
-    };
   }
 };

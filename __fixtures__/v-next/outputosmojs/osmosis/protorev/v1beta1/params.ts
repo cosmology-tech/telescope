@@ -20,7 +20,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/osmosis.protorev.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
@@ -85,38 +84,5 @@ export const Params = {
     obj.enabled = message.enabled;
     obj.admin = message.admin;
     return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      enabled: object.enabled,
-      admin: object.admin
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.enabled = message.enabled;
-    obj.admin = message.admin;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/protorev/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/osmosis.protorev.v1beta1.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

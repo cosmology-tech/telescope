@@ -1,10 +1,10 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
   owner: string;
-  dseq: bigint;
+  dseq: Long;
   gseq: number;
 }
 export interface GroupIDProtoMsg {
@@ -24,23 +24,23 @@ export interface GroupIDAminoMsg {
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
   owner: string;
-  dseq: bigint;
+  dseq: Long;
   gseq: number;
 }
 function createBaseGroupID(): GroupID {
   return {
     owner: "",
-    dseq: BigInt(0),
+    dseq: Long.UZERO,
     gseq: 0
   };
 }
 export const GroupID = {
   typeUrl: "/akash.deployment.v1beta2.GroupID",
-  encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GroupID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (!message.dseq.isZero()) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -48,8 +48,8 @@ export const GroupID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GroupID {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GroupID {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupID();
     while (reader.pos < end) {
@@ -59,7 +59,7 @@ export const GroupID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = reader.uint64();
+          message.dseq = (reader.uint64() as Long);
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -74,14 +74,14 @@ export const GroupID = {
   fromJSON(object: any): GroupID {
     const obj = createBaseGroupID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
     return obj;
   },
   toJSON(message: GroupID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
@@ -89,7 +89,7 @@ export const GroupID = {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
+      message.dseq = Long.fromValue(object.dseq);
     }
     message.gseq = object.gseq ?? 0;
     return message;
@@ -111,7 +111,7 @@ export const GroupID = {
   fromAmino(object: GroupIDAmino): GroupID {
     return {
       owner: object.owner,
-      dseq: BigInt(object.dseq),
+      dseq: Long.fromString(object.dseq),
       gseq: object.gseq
     };
   },

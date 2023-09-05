@@ -44,7 +44,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/evmos.incentives.v1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -139,43 +138,6 @@ export const GenesisState = {
       obj.gas_meters = [];
     }
     return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    if (message.incentives) {
-      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
-    } else {
-      obj.incentives = [];
-    }
-    if (message.gasMeters) {
-      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
-    } else {
-      obj.gas_meters = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/evmos.incentives.v1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };
 function createBaseParams(): Params {
@@ -187,7 +149,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/evmos.incentives.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enableIncentives === true) {
       writer.uint32(8).bool(message.enableIncentives);
@@ -276,36 +237,5 @@ export const Params = {
     obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
     obj.reward_scaler = message.rewardScaler;
     return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      enableIncentives: object.enable_incentives,
-      allocationLimit: object.allocation_limit,
-      incentivesEpochIdentifier: object.incentives_epoch_identifier,
-      rewardScaler: object.reward_scaler
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.enable_incentives = message.enableIncentives;
-    obj.allocation_limit = message.allocationLimit;
-    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
-    obj.reward_scaler = message.rewardScaler;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/evmos.incentives.v1.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

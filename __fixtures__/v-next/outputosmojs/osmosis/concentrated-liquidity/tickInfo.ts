@@ -30,7 +30,6 @@ function createBaseTickInfo(): TickInfo {
   };
 }
 export const TickInfo = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.TickInfo",
   encode(message: TickInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.liquidityGross !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.liquidityGross, 18).atomics);
@@ -135,51 +134,6 @@ export const TickInfo = {
       obj.uptime_trackers = [];
     }
     return obj;
-  },
-  fromAmino(object: TickInfoAmino): TickInfo {
-    return {
-      liquidityGross: object.liquidity_gross,
-      liquidityNet: object.liquidity_net,
-      feeGrowthOutside: Array.isArray(object?.fee_growth_outside) ? object.fee_growth_outside.map((e: any) => DecCoin.fromAmino(e)) : [],
-      uptimeTrackers: Array.isArray(object?.uptime_trackers) ? object.uptime_trackers.map((e: any) => UptimeTracker.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: TickInfo): TickInfoAmino {
-    const obj: any = {};
-    obj.liquidity_gross = message.liquidityGross;
-    obj.liquidity_net = message.liquidityNet;
-    if (message.feeGrowthOutside) {
-      obj.fee_growth_outside = message.feeGrowthOutside.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.fee_growth_outside = [];
-    }
-    if (message.uptimeTrackers) {
-      obj.uptime_trackers = message.uptimeTrackers.map(e => e ? UptimeTracker.toAmino(e) : undefined);
-    } else {
-      obj.uptime_trackers = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: TickInfoAminoMsg): TickInfo {
-    return TickInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: TickInfo): TickInfoAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/tick-info",
-      value: TickInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: TickInfoProtoMsg): TickInfo {
-    return TickInfo.decode(message.value);
-  },
-  toProto(message: TickInfo): Uint8Array {
-    return TickInfo.encode(message).finish();
-  },
-  toProtoMsg(message: TickInfo): TickInfoProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.TickInfo",
-      value: TickInfo.encode(message).finish()
-    };
   }
 };
 function createBaseUptimeTracker(): UptimeTracker {
@@ -188,7 +142,6 @@ function createBaseUptimeTracker(): UptimeTracker {
   };
 }
 export const UptimeTracker = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.UptimeTracker",
   encode(message: UptimeTracker, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.uptimeGrowthOutside) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -249,40 +202,5 @@ export const UptimeTracker = {
       obj.uptime_growth_outside = [];
     }
     return obj;
-  },
-  fromAmino(object: UptimeTrackerAmino): UptimeTracker {
-    return {
-      uptimeGrowthOutside: Array.isArray(object?.uptime_growth_outside) ? object.uptime_growth_outside.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: UptimeTracker): UptimeTrackerAmino {
-    const obj: any = {};
-    if (message.uptimeGrowthOutside) {
-      obj.uptime_growth_outside = message.uptimeGrowthOutside.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.uptime_growth_outside = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UptimeTrackerAminoMsg): UptimeTracker {
-    return UptimeTracker.fromAmino(object.value);
-  },
-  toAminoMsg(message: UptimeTracker): UptimeTrackerAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/uptime-tracker",
-      value: UptimeTracker.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UptimeTrackerProtoMsg): UptimeTracker {
-    return UptimeTracker.decode(message.value);
-  },
-  toProto(message: UptimeTracker): Uint8Array {
-    return UptimeTracker.encode(message).finish();
-  },
-  toProtoMsg(message: UptimeTracker): UptimeTrackerProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.UptimeTracker",
-      value: UptimeTracker.encode(message).finish()
-    };
   }
 };

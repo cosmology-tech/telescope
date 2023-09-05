@@ -1,11 +1,10 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { Decimal } from "@cosmjs/math";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
-  poolId: bigint;
+  poolId: Long;
   baseAsset: string;
   quoteAsset: string;
   startTime: Date;
@@ -27,7 +26,7 @@ export interface ArithmeticTwapRequestAminoMsg {
   value: ArithmeticTwapRequestAmino;
 }
 export interface ArithmeticTwapRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
   base_asset: string;
   quote_asset: string;
   start_time: Date;
@@ -51,7 +50,7 @@ export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
 }
 export interface ArithmeticTwapToNowRequest {
-  poolId: bigint;
+  poolId: Long;
   baseAsset: string;
   quoteAsset: string;
   startTime: Date;
@@ -71,7 +70,7 @@ export interface ArithmeticTwapToNowRequestAminoMsg {
   value: ArithmeticTwapToNowRequestAmino;
 }
 export interface ArithmeticTwapToNowRequestSDKType {
-  pool_id: bigint;
+  pool_id: Long;
   base_asset: string;
   quote_asset: string;
   start_time: Date;
@@ -123,7 +122,7 @@ export interface ParamsResponseSDKType {
 }
 function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   return {
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     baseAsset: "",
     quoteAsset: "",
     startTime: new Date(),
@@ -133,8 +132,8 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
 export const ArithmeticTwapRequest = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
   aminoType: "osmosis/twap/arithmetic-twap-request",
-  encode(message: ArithmeticTwapRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: ArithmeticTwapRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.baseAsset !== "") {
@@ -151,15 +150,15 @@ export const ArithmeticTwapRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ArithmeticTwapRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 2:
           message.baseAsset = reader.string();
@@ -182,7 +181,7 @@ export const ArithmeticTwapRequest = {
   },
   fromJSON(object: any): ArithmeticTwapRequest {
     const obj = createBaseArithmeticTwapRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.baseAsset)) obj.baseAsset = String(object.baseAsset);
     if (isSet(object.quoteAsset)) obj.quoteAsset = String(object.quoteAsset);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
@@ -191,7 +190,7 @@ export const ArithmeticTwapRequest = {
   },
   toJSON(message: ArithmeticTwapRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAsset !== undefined && (obj.baseAsset = message.baseAsset);
     message.quoteAsset !== undefined && (obj.quoteAsset = message.quoteAsset);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
@@ -201,7 +200,7 @@ export const ArithmeticTwapRequest = {
   fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
@@ -229,7 +228,7 @@ export const ArithmeticTwapRequest = {
   },
   fromAmino(object: ArithmeticTwapRequestAmino): ArithmeticTwapRequest {
     return {
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
       startTime: object.start_time,
@@ -275,21 +274,21 @@ function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
 export const ArithmeticTwapResponse = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
   aminoType: "osmosis/twap/arithmetic-twap-response",
-  encode(message: ArithmeticTwapResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ArithmeticTwapResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
+      writer.uint32(10).string(message.arithmeticTwap);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ArithmeticTwapResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.arithmeticTwap = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.arithmeticTwap = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -357,7 +356,7 @@ export const ArithmeticTwapResponse = {
 };
 function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
   return {
-    poolId: BigInt(0),
+    poolId: Long.UZERO,
     baseAsset: "",
     quoteAsset: "",
     startTime: new Date()
@@ -366,8 +365,8 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
 export const ArithmeticTwapToNowRequest = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
   aminoType: "osmosis/twap/arithmetic-twap-to-now-request",
-  encode(message: ArithmeticTwapToNowRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: ArithmeticTwapToNowRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.baseAsset !== "") {
@@ -381,15 +380,15 @@ export const ArithmeticTwapToNowRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapToNowRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ArithmeticTwapToNowRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapToNowRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         case 2:
           message.baseAsset = reader.string();
@@ -409,7 +408,7 @@ export const ArithmeticTwapToNowRequest = {
   },
   fromJSON(object: any): ArithmeticTwapToNowRequest {
     const obj = createBaseArithmeticTwapToNowRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.baseAsset)) obj.baseAsset = String(object.baseAsset);
     if (isSet(object.quoteAsset)) obj.quoteAsset = String(object.quoteAsset);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
@@ -417,7 +416,7 @@ export const ArithmeticTwapToNowRequest = {
   },
   toJSON(message: ArithmeticTwapToNowRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAsset !== undefined && (obj.baseAsset = message.baseAsset);
     message.quoteAsset !== undefined && (obj.quoteAsset = message.quoteAsset);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
@@ -426,7 +425,7 @@ export const ArithmeticTwapToNowRequest = {
   fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
     const message = createBaseArithmeticTwapToNowRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
@@ -451,7 +450,7 @@ export const ArithmeticTwapToNowRequest = {
   },
   fromAmino(object: ArithmeticTwapToNowRequestAmino): ArithmeticTwapToNowRequest {
     return {
-      poolId: BigInt(object.pool_id),
+      poolId: Long.fromString(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
       startTime: object.start_time
@@ -495,21 +494,21 @@ function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
 export const ArithmeticTwapToNowResponse = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
   aminoType: "osmosis/twap/arithmetic-twap-to-now-response",
-  encode(message: ArithmeticTwapToNowResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ArithmeticTwapToNowResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
+      writer.uint32(10).string(message.arithmeticTwap);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapToNowResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ArithmeticTwapToNowResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapToNowResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.arithmeticTwap = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.arithmeticTwap = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -581,11 +580,11 @@ function createBaseParamsRequest(): ParamsRequest {
 export const ParamsRequest = {
   typeUrl: "/osmosis.twap.v1beta1.ParamsRequest",
   aminoType: "osmosis/twap/params-request",
-  encode(_: ParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: ParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParamsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParamsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsRequest();
     while (reader.pos < end) {
@@ -654,14 +653,14 @@ function createBaseParamsResponse(): ParamsResponse {
 export const ParamsResponse = {
   typeUrl: "/osmosis.twap.v1beta1.ParamsResponse",
   aminoType: "osmosis/twap/params-response",
-  encode(message: ParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParamsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParamsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsResponse();
     while (reader.pos < end) {

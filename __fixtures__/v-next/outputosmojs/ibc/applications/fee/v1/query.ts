@@ -214,7 +214,6 @@ function createBaseQueryIncentivizedPacketsRequest(): QueryIncentivizedPacketsRe
   };
 }
 export const QueryIncentivizedPacketsRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsRequest",
   encode(message: QueryIncentivizedPacketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -279,39 +278,6 @@ export const QueryIncentivizedPacketsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     obj.query_height = message.queryHeight;
     return obj;
-  },
-  fromAmino(object: QueryIncentivizedPacketsRequestAmino): QueryIncentivizedPacketsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      queryHeight: BigInt(object.query_height)
-    };
-  },
-  toAmino(message: QueryIncentivizedPacketsRequest): QueryIncentivizedPacketsRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.query_height = message.queryHeight ? message.queryHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryIncentivizedPacketsRequestAminoMsg): QueryIncentivizedPacketsRequest {
-    return QueryIncentivizedPacketsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryIncentivizedPacketsRequest): QueryIncentivizedPacketsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryIncentivizedPacketsRequest",
-      value: QueryIncentivizedPacketsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryIncentivizedPacketsRequestProtoMsg): QueryIncentivizedPacketsRequest {
-    return QueryIncentivizedPacketsRequest.decode(message.value);
-  },
-  toProto(message: QueryIncentivizedPacketsRequest): Uint8Array {
-    return QueryIncentivizedPacketsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryIncentivizedPacketsRequest): QueryIncentivizedPacketsRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsRequest",
-      value: QueryIncentivizedPacketsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryIncentivizedPacketsResponse(): QueryIncentivizedPacketsResponse {
@@ -321,7 +287,6 @@ function createBaseQueryIncentivizedPacketsResponse(): QueryIncentivizedPacketsR
   };
 }
 export const QueryIncentivizedPacketsResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsResponse",
   encode(message: QueryIncentivizedPacketsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.incentivizedPackets) {
       IdentifiedPacketFees.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -394,43 +359,6 @@ export const QueryIncentivizedPacketsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryIncentivizedPacketsResponseAmino): QueryIncentivizedPacketsResponse {
-    return {
-      incentivizedPackets: Array.isArray(object?.incentivized_packets) ? object.incentivized_packets.map((e: any) => IdentifiedPacketFees.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryIncentivizedPacketsResponse): QueryIncentivizedPacketsResponseAmino {
-    const obj: any = {};
-    if (message.incentivizedPackets) {
-      obj.incentivized_packets = message.incentivizedPackets.map(e => e ? IdentifiedPacketFees.toAmino(e) : undefined);
-    } else {
-      obj.incentivized_packets = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryIncentivizedPacketsResponseAminoMsg): QueryIncentivizedPacketsResponse {
-    return QueryIncentivizedPacketsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryIncentivizedPacketsResponse): QueryIncentivizedPacketsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryIncentivizedPacketsResponse",
-      value: QueryIncentivizedPacketsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryIncentivizedPacketsResponseProtoMsg): QueryIncentivizedPacketsResponse {
-    return QueryIncentivizedPacketsResponse.decode(message.value);
-  },
-  toProto(message: QueryIncentivizedPacketsResponse): Uint8Array {
-    return QueryIncentivizedPacketsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryIncentivizedPacketsResponse): QueryIncentivizedPacketsResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsResponse",
-      value: QueryIncentivizedPacketsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryIncentivizedPacketRequest(): QueryIncentivizedPacketRequest {
@@ -439,7 +367,6 @@ function createBaseQueryIncentivizedPacketRequest(): QueryIncentivizedPacketRequ
   };
 }
 export const QueryIncentivizedPacketRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketRequest",
   encode(message: QueryIncentivizedPacketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.queryHeight !== BigInt(0)) {
       writer.uint32(16).uint64(message.queryHeight);
@@ -492,37 +419,6 @@ export const QueryIncentivizedPacketRequest = {
     const obj: any = {};
     obj.query_height = message.queryHeight;
     return obj;
-  },
-  fromAmino(object: QueryIncentivizedPacketRequestAmino): QueryIncentivizedPacketRequest {
-    return {
-      queryHeight: BigInt(object.query_height)
-    };
-  },
-  toAmino(message: QueryIncentivizedPacketRequest): QueryIncentivizedPacketRequestAmino {
-    const obj: any = {};
-    obj.query_height = message.queryHeight ? message.queryHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryIncentivizedPacketRequestAminoMsg): QueryIncentivizedPacketRequest {
-    return QueryIncentivizedPacketRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryIncentivizedPacketRequest): QueryIncentivizedPacketRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryIncentivizedPacketRequest",
-      value: QueryIncentivizedPacketRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryIncentivizedPacketRequestProtoMsg): QueryIncentivizedPacketRequest {
-    return QueryIncentivizedPacketRequest.decode(message.value);
-  },
-  toProto(message: QueryIncentivizedPacketRequest): Uint8Array {
-    return QueryIncentivizedPacketRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryIncentivizedPacketRequest): QueryIncentivizedPacketRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketRequest",
-      value: QueryIncentivizedPacketRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryIncentivizedPacketResponse(): QueryIncentivizedPacketResponse {
@@ -531,7 +427,6 @@ function createBaseQueryIncentivizedPacketResponse(): QueryIncentivizedPacketRes
   };
 }
 export const QueryIncentivizedPacketResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketResponse",
   encode(message: QueryIncentivizedPacketResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.incentivizedPacket !== undefined) {
       IdentifiedPacketFees.encode(message.incentivizedPacket, writer.uint32(10).fork()).ldelim();
@@ -584,37 +479,6 @@ export const QueryIncentivizedPacketResponse = {
     const obj: any = {};
     message.incentivizedPacket !== undefined && (obj.incentivized_packet = message.incentivizedPacket ? IdentifiedPacketFees.toSDK(message.incentivizedPacket) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryIncentivizedPacketResponseAmino): QueryIncentivizedPacketResponse {
-    return {
-      incentivizedPacket: object?.incentivized_packet ? IdentifiedPacketFees.fromAmino(object.incentivized_packet) : undefined
-    };
-  },
-  toAmino(message: QueryIncentivizedPacketResponse): QueryIncentivizedPacketResponseAmino {
-    const obj: any = {};
-    obj.incentivized_packet = message.incentivizedPacket ? IdentifiedPacketFees.toAmino(message.incentivizedPacket) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryIncentivizedPacketResponseAminoMsg): QueryIncentivizedPacketResponse {
-    return QueryIncentivizedPacketResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryIncentivizedPacketResponse): QueryIncentivizedPacketResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryIncentivizedPacketResponse",
-      value: QueryIncentivizedPacketResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryIncentivizedPacketResponseProtoMsg): QueryIncentivizedPacketResponse {
-    return QueryIncentivizedPacketResponse.decode(message.value);
-  },
-  toProto(message: QueryIncentivizedPacketResponse): Uint8Array {
-    return QueryIncentivizedPacketResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryIncentivizedPacketResponse): QueryIncentivizedPacketResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketResponse",
-      value: QueryIncentivizedPacketResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryIncentivizedPacketsForChannelRequest(): QueryIncentivizedPacketsForChannelRequest {
@@ -626,7 +490,6 @@ function createBaseQueryIncentivizedPacketsForChannelRequest(): QueryIncentivize
   };
 }
 export const QueryIncentivizedPacketsForChannelRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsForChannelRequest",
   encode(message: QueryIncentivizedPacketsForChannelRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -715,43 +578,6 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     obj.channel_id = message.channelId;
     obj.query_height = message.queryHeight;
     return obj;
-  },
-  fromAmino(object: QueryIncentivizedPacketsForChannelRequestAmino): QueryIncentivizedPacketsForChannelRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      portId: object.port_id,
-      channelId: object.channel_id,
-      queryHeight: BigInt(object.query_height)
-    };
-  },
-  toAmino(message: QueryIncentivizedPacketsForChannelRequest): QueryIncentivizedPacketsForChannelRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.query_height = message.queryHeight ? message.queryHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryIncentivizedPacketsForChannelRequestAminoMsg): QueryIncentivizedPacketsForChannelRequest {
-    return QueryIncentivizedPacketsForChannelRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryIncentivizedPacketsForChannelRequest): QueryIncentivizedPacketsForChannelRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryIncentivizedPacketsForChannelRequest",
-      value: QueryIncentivizedPacketsForChannelRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryIncentivizedPacketsForChannelRequestProtoMsg): QueryIncentivizedPacketsForChannelRequest {
-    return QueryIncentivizedPacketsForChannelRequest.decode(message.value);
-  },
-  toProto(message: QueryIncentivizedPacketsForChannelRequest): Uint8Array {
-    return QueryIncentivizedPacketsForChannelRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryIncentivizedPacketsForChannelRequest): QueryIncentivizedPacketsForChannelRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsForChannelRequest",
-      value: QueryIncentivizedPacketsForChannelRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryIncentivizedPacketsForChannelResponse(): QueryIncentivizedPacketsForChannelResponse {
@@ -761,7 +587,6 @@ function createBaseQueryIncentivizedPacketsForChannelResponse(): QueryIncentiviz
   };
 }
 export const QueryIncentivizedPacketsForChannelResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsForChannelResponse",
   encode(message: QueryIncentivizedPacketsForChannelResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.incentivizedPackets) {
       IdentifiedPacketFees.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -834,50 +659,12 @@ export const QueryIncentivizedPacketsForChannelResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryIncentivizedPacketsForChannelResponseAmino): QueryIncentivizedPacketsForChannelResponse {
-    return {
-      incentivizedPackets: Array.isArray(object?.incentivized_packets) ? object.incentivized_packets.map((e: any) => IdentifiedPacketFees.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryIncentivizedPacketsForChannelResponse): QueryIncentivizedPacketsForChannelResponseAmino {
-    const obj: any = {};
-    if (message.incentivizedPackets) {
-      obj.incentivized_packets = message.incentivizedPackets.map(e => e ? IdentifiedPacketFees.toAmino(e) : undefined);
-    } else {
-      obj.incentivized_packets = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryIncentivizedPacketsForChannelResponseAminoMsg): QueryIncentivizedPacketsForChannelResponse {
-    return QueryIncentivizedPacketsForChannelResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryIncentivizedPacketsForChannelResponse): QueryIncentivizedPacketsForChannelResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryIncentivizedPacketsForChannelResponse",
-      value: QueryIncentivizedPacketsForChannelResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryIncentivizedPacketsForChannelResponseProtoMsg): QueryIncentivizedPacketsForChannelResponse {
-    return QueryIncentivizedPacketsForChannelResponse.decode(message.value);
-  },
-  toProto(message: QueryIncentivizedPacketsForChannelResponse): Uint8Array {
-    return QueryIncentivizedPacketsForChannelResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryIncentivizedPacketsForChannelResponse): QueryIncentivizedPacketsForChannelResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryIncentivizedPacketsForChannelResponse",
-      value: QueryIncentivizedPacketsForChannelResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalRecvFeesRequest(): QueryTotalRecvFeesRequest {
   return {};
 }
 export const QueryTotalRecvFeesRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryTotalRecvFeesRequest",
   encode(_: QueryTotalRecvFeesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -915,34 +702,6 @@ export const QueryTotalRecvFeesRequest = {
   toSDK(_: QueryTotalRecvFeesRequest): QueryTotalRecvFeesRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: QueryTotalRecvFeesRequestAmino): QueryTotalRecvFeesRequest {
-    return {};
-  },
-  toAmino(_: QueryTotalRecvFeesRequest): QueryTotalRecvFeesRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalRecvFeesRequestAminoMsg): QueryTotalRecvFeesRequest {
-    return QueryTotalRecvFeesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalRecvFeesRequest): QueryTotalRecvFeesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalRecvFeesRequest",
-      value: QueryTotalRecvFeesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalRecvFeesRequestProtoMsg): QueryTotalRecvFeesRequest {
-    return QueryTotalRecvFeesRequest.decode(message.value);
-  },
-  toProto(message: QueryTotalRecvFeesRequest): Uint8Array {
-    return QueryTotalRecvFeesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalRecvFeesRequest): QueryTotalRecvFeesRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryTotalRecvFeesRequest",
-      value: QueryTotalRecvFeesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalRecvFeesResponse(): QueryTotalRecvFeesResponse {
@@ -951,7 +710,6 @@ function createBaseQueryTotalRecvFeesResponse(): QueryTotalRecvFeesResponse {
   };
 }
 export const QueryTotalRecvFeesResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryTotalRecvFeesResponse",
   encode(message: QueryTotalRecvFeesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.recvFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1012,48 +770,12 @@ export const QueryTotalRecvFeesResponse = {
       obj.recv_fees = [];
     }
     return obj;
-  },
-  fromAmino(object: QueryTotalRecvFeesResponseAmino): QueryTotalRecvFeesResponse {
-    return {
-      recvFees: Array.isArray(object?.recv_fees) ? object.recv_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryTotalRecvFeesResponse): QueryTotalRecvFeesResponseAmino {
-    const obj: any = {};
-    if (message.recvFees) {
-      obj.recv_fees = message.recvFees.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.recv_fees = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalRecvFeesResponseAminoMsg): QueryTotalRecvFeesResponse {
-    return QueryTotalRecvFeesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalRecvFeesResponse): QueryTotalRecvFeesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalRecvFeesResponse",
-      value: QueryTotalRecvFeesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalRecvFeesResponseProtoMsg): QueryTotalRecvFeesResponse {
-    return QueryTotalRecvFeesResponse.decode(message.value);
-  },
-  toProto(message: QueryTotalRecvFeesResponse): Uint8Array {
-    return QueryTotalRecvFeesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalRecvFeesResponse): QueryTotalRecvFeesResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryTotalRecvFeesResponse",
-      value: QueryTotalRecvFeesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalAckFeesRequest(): QueryTotalAckFeesRequest {
   return {};
 }
 export const QueryTotalAckFeesRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryTotalAckFeesRequest",
   encode(_: QueryTotalAckFeesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1091,34 +813,6 @@ export const QueryTotalAckFeesRequest = {
   toSDK(_: QueryTotalAckFeesRequest): QueryTotalAckFeesRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: QueryTotalAckFeesRequestAmino): QueryTotalAckFeesRequest {
-    return {};
-  },
-  toAmino(_: QueryTotalAckFeesRequest): QueryTotalAckFeesRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalAckFeesRequestAminoMsg): QueryTotalAckFeesRequest {
-    return QueryTotalAckFeesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalAckFeesRequest): QueryTotalAckFeesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalAckFeesRequest",
-      value: QueryTotalAckFeesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalAckFeesRequestProtoMsg): QueryTotalAckFeesRequest {
-    return QueryTotalAckFeesRequest.decode(message.value);
-  },
-  toProto(message: QueryTotalAckFeesRequest): Uint8Array {
-    return QueryTotalAckFeesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalAckFeesRequest): QueryTotalAckFeesRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryTotalAckFeesRequest",
-      value: QueryTotalAckFeesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalAckFeesResponse(): QueryTotalAckFeesResponse {
@@ -1127,7 +821,6 @@ function createBaseQueryTotalAckFeesResponse(): QueryTotalAckFeesResponse {
   };
 }
 export const QueryTotalAckFeesResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryTotalAckFeesResponse",
   encode(message: QueryTotalAckFeesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.ackFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1188,48 +881,12 @@ export const QueryTotalAckFeesResponse = {
       obj.ack_fees = [];
     }
     return obj;
-  },
-  fromAmino(object: QueryTotalAckFeesResponseAmino): QueryTotalAckFeesResponse {
-    return {
-      ackFees: Array.isArray(object?.ack_fees) ? object.ack_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryTotalAckFeesResponse): QueryTotalAckFeesResponseAmino {
-    const obj: any = {};
-    if (message.ackFees) {
-      obj.ack_fees = message.ackFees.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.ack_fees = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalAckFeesResponseAminoMsg): QueryTotalAckFeesResponse {
-    return QueryTotalAckFeesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalAckFeesResponse): QueryTotalAckFeesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalAckFeesResponse",
-      value: QueryTotalAckFeesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalAckFeesResponseProtoMsg): QueryTotalAckFeesResponse {
-    return QueryTotalAckFeesResponse.decode(message.value);
-  },
-  toProto(message: QueryTotalAckFeesResponse): Uint8Array {
-    return QueryTotalAckFeesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalAckFeesResponse): QueryTotalAckFeesResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryTotalAckFeesResponse",
-      value: QueryTotalAckFeesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalTimeoutFeesRequest(): QueryTotalTimeoutFeesRequest {
   return {};
 }
 export const QueryTotalTimeoutFeesRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryTotalTimeoutFeesRequest",
   encode(_: QueryTotalTimeoutFeesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1267,34 +924,6 @@ export const QueryTotalTimeoutFeesRequest = {
   toSDK(_: QueryTotalTimeoutFeesRequest): QueryTotalTimeoutFeesRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: QueryTotalTimeoutFeesRequestAmino): QueryTotalTimeoutFeesRequest {
-    return {};
-  },
-  toAmino(_: QueryTotalTimeoutFeesRequest): QueryTotalTimeoutFeesRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalTimeoutFeesRequestAminoMsg): QueryTotalTimeoutFeesRequest {
-    return QueryTotalTimeoutFeesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalTimeoutFeesRequest): QueryTotalTimeoutFeesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalTimeoutFeesRequest",
-      value: QueryTotalTimeoutFeesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalTimeoutFeesRequestProtoMsg): QueryTotalTimeoutFeesRequest {
-    return QueryTotalTimeoutFeesRequest.decode(message.value);
-  },
-  toProto(message: QueryTotalTimeoutFeesRequest): Uint8Array {
-    return QueryTotalTimeoutFeesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalTimeoutFeesRequest): QueryTotalTimeoutFeesRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryTotalTimeoutFeesRequest",
-      value: QueryTotalTimeoutFeesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalTimeoutFeesResponse(): QueryTotalTimeoutFeesResponse {
@@ -1303,7 +932,6 @@ function createBaseQueryTotalTimeoutFeesResponse(): QueryTotalTimeoutFeesRespons
   };
 }
 export const QueryTotalTimeoutFeesResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryTotalTimeoutFeesResponse",
   encode(message: QueryTotalTimeoutFeesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.timeoutFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1364,41 +992,6 @@ export const QueryTotalTimeoutFeesResponse = {
       obj.timeout_fees = [];
     }
     return obj;
-  },
-  fromAmino(object: QueryTotalTimeoutFeesResponseAmino): QueryTotalTimeoutFeesResponse {
-    return {
-      timeoutFees: Array.isArray(object?.timeout_fees) ? object.timeout_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryTotalTimeoutFeesResponse): QueryTotalTimeoutFeesResponseAmino {
-    const obj: any = {};
-    if (message.timeoutFees) {
-      obj.timeout_fees = message.timeoutFees.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.timeout_fees = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalTimeoutFeesResponseAminoMsg): QueryTotalTimeoutFeesResponse {
-    return QueryTotalTimeoutFeesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalTimeoutFeesResponse): QueryTotalTimeoutFeesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalTimeoutFeesResponse",
-      value: QueryTotalTimeoutFeesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalTimeoutFeesResponseProtoMsg): QueryTotalTimeoutFeesResponse {
-    return QueryTotalTimeoutFeesResponse.decode(message.value);
-  },
-  toProto(message: QueryTotalTimeoutFeesResponse): Uint8Array {
-    return QueryTotalTimeoutFeesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalTimeoutFeesResponse): QueryTotalTimeoutFeesResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryTotalTimeoutFeesResponse",
-      value: QueryTotalTimeoutFeesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryPayeeRequest(): QueryPayeeRequest {
@@ -1408,7 +1001,6 @@ function createBaseQueryPayeeRequest(): QueryPayeeRequest {
   };
 }
 export const QueryPayeeRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryPayeeRequest",
   encode(message: QueryPayeeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -1473,39 +1065,6 @@ export const QueryPayeeRequest = {
     obj.channel_id = message.channelId;
     obj.relayer = message.relayer;
     return obj;
-  },
-  fromAmino(object: QueryPayeeRequestAmino): QueryPayeeRequest {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer
-    };
-  },
-  toAmino(message: QueryPayeeRequest): QueryPayeeRequestAmino {
-    const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    return obj;
-  },
-  fromAminoMsg(object: QueryPayeeRequestAminoMsg): QueryPayeeRequest {
-    return QueryPayeeRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryPayeeRequest): QueryPayeeRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryPayeeRequest",
-      value: QueryPayeeRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryPayeeRequestProtoMsg): QueryPayeeRequest {
-    return QueryPayeeRequest.decode(message.value);
-  },
-  toProto(message: QueryPayeeRequest): Uint8Array {
-    return QueryPayeeRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryPayeeRequest): QueryPayeeRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryPayeeRequest",
-      value: QueryPayeeRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryPayeeResponse(): QueryPayeeResponse {
@@ -1514,7 +1073,6 @@ function createBaseQueryPayeeResponse(): QueryPayeeResponse {
   };
 }
 export const QueryPayeeResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryPayeeResponse",
   encode(message: QueryPayeeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.payeeAddress !== "") {
       writer.uint32(10).string(message.payeeAddress);
@@ -1567,37 +1125,6 @@ export const QueryPayeeResponse = {
     const obj: any = {};
     obj.payee_address = message.payeeAddress;
     return obj;
-  },
-  fromAmino(object: QueryPayeeResponseAmino): QueryPayeeResponse {
-    return {
-      payeeAddress: object.payee_address
-    };
-  },
-  toAmino(message: QueryPayeeResponse): QueryPayeeResponseAmino {
-    const obj: any = {};
-    obj.payee_address = message.payeeAddress;
-    return obj;
-  },
-  fromAminoMsg(object: QueryPayeeResponseAminoMsg): QueryPayeeResponse {
-    return QueryPayeeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryPayeeResponse): QueryPayeeResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryPayeeResponse",
-      value: QueryPayeeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryPayeeResponseProtoMsg): QueryPayeeResponse {
-    return QueryPayeeResponse.decode(message.value);
-  },
-  toProto(message: QueryPayeeResponse): Uint8Array {
-    return QueryPayeeResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryPayeeResponse): QueryPayeeResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryPayeeResponse",
-      value: QueryPayeeResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCounterpartyPayeeRequest(): QueryCounterpartyPayeeRequest {
@@ -1607,7 +1134,6 @@ function createBaseQueryCounterpartyPayeeRequest(): QueryCounterpartyPayeeReques
   };
 }
 export const QueryCounterpartyPayeeRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryCounterpartyPayeeRequest",
   encode(message: QueryCounterpartyPayeeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -1672,39 +1198,6 @@ export const QueryCounterpartyPayeeRequest = {
     obj.channel_id = message.channelId;
     obj.relayer = message.relayer;
     return obj;
-  },
-  fromAmino(object: QueryCounterpartyPayeeRequestAmino): QueryCounterpartyPayeeRequest {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer
-    };
-  },
-  toAmino(message: QueryCounterpartyPayeeRequest): QueryCounterpartyPayeeRequestAmino {
-    const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCounterpartyPayeeRequestAminoMsg): QueryCounterpartyPayeeRequest {
-    return QueryCounterpartyPayeeRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCounterpartyPayeeRequest): QueryCounterpartyPayeeRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryCounterpartyPayeeRequest",
-      value: QueryCounterpartyPayeeRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCounterpartyPayeeRequestProtoMsg): QueryCounterpartyPayeeRequest {
-    return QueryCounterpartyPayeeRequest.decode(message.value);
-  },
-  toProto(message: QueryCounterpartyPayeeRequest): Uint8Array {
-    return QueryCounterpartyPayeeRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCounterpartyPayeeRequest): QueryCounterpartyPayeeRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryCounterpartyPayeeRequest",
-      value: QueryCounterpartyPayeeRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCounterpartyPayeeResponse(): QueryCounterpartyPayeeResponse {
@@ -1713,7 +1206,6 @@ function createBaseQueryCounterpartyPayeeResponse(): QueryCounterpartyPayeeRespo
   };
 }
 export const QueryCounterpartyPayeeResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryCounterpartyPayeeResponse",
   encode(message: QueryCounterpartyPayeeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.counterpartyPayee !== "") {
       writer.uint32(10).string(message.counterpartyPayee);
@@ -1766,37 +1258,6 @@ export const QueryCounterpartyPayeeResponse = {
     const obj: any = {};
     obj.counterparty_payee = message.counterpartyPayee;
     return obj;
-  },
-  fromAmino(object: QueryCounterpartyPayeeResponseAmino): QueryCounterpartyPayeeResponse {
-    return {
-      counterpartyPayee: object.counterparty_payee
-    };
-  },
-  toAmino(message: QueryCounterpartyPayeeResponse): QueryCounterpartyPayeeResponseAmino {
-    const obj: any = {};
-    obj.counterparty_payee = message.counterpartyPayee;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCounterpartyPayeeResponseAminoMsg): QueryCounterpartyPayeeResponse {
-    return QueryCounterpartyPayeeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCounterpartyPayeeResponse): QueryCounterpartyPayeeResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryCounterpartyPayeeResponse",
-      value: QueryCounterpartyPayeeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCounterpartyPayeeResponseProtoMsg): QueryCounterpartyPayeeResponse {
-    return QueryCounterpartyPayeeResponse.decode(message.value);
-  },
-  toProto(message: QueryCounterpartyPayeeResponse): Uint8Array {
-    return QueryCounterpartyPayeeResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCounterpartyPayeeResponse): QueryCounterpartyPayeeResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryCounterpartyPayeeResponse",
-      value: QueryCounterpartyPayeeResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryFeeEnabledChannelsRequest(): QueryFeeEnabledChannelsRequest {
@@ -1806,7 +1267,6 @@ function createBaseQueryFeeEnabledChannelsRequest(): QueryFeeEnabledChannelsRequ
   };
 }
 export const QueryFeeEnabledChannelsRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelsRequest",
   encode(message: QueryFeeEnabledChannelsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1871,39 +1331,6 @@ export const QueryFeeEnabledChannelsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     obj.query_height = message.queryHeight;
     return obj;
-  },
-  fromAmino(object: QueryFeeEnabledChannelsRequestAmino): QueryFeeEnabledChannelsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      queryHeight: BigInt(object.query_height)
-    };
-  },
-  toAmino(message: QueryFeeEnabledChannelsRequest): QueryFeeEnabledChannelsRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.query_height = message.queryHeight ? message.queryHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryFeeEnabledChannelsRequestAminoMsg): QueryFeeEnabledChannelsRequest {
-    return QueryFeeEnabledChannelsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryFeeEnabledChannelsRequest): QueryFeeEnabledChannelsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryFeeEnabledChannelsRequest",
-      value: QueryFeeEnabledChannelsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryFeeEnabledChannelsRequestProtoMsg): QueryFeeEnabledChannelsRequest {
-    return QueryFeeEnabledChannelsRequest.decode(message.value);
-  },
-  toProto(message: QueryFeeEnabledChannelsRequest): Uint8Array {
-    return QueryFeeEnabledChannelsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryFeeEnabledChannelsRequest): QueryFeeEnabledChannelsRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelsRequest",
-      value: QueryFeeEnabledChannelsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryFeeEnabledChannelsResponse(): QueryFeeEnabledChannelsResponse {
@@ -1913,7 +1340,6 @@ function createBaseQueryFeeEnabledChannelsResponse(): QueryFeeEnabledChannelsRes
   };
 }
 export const QueryFeeEnabledChannelsResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelsResponse",
   encode(message: QueryFeeEnabledChannelsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.feeEnabledChannels) {
       FeeEnabledChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1986,43 +1412,6 @@ export const QueryFeeEnabledChannelsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryFeeEnabledChannelsResponseAmino): QueryFeeEnabledChannelsResponse {
-    return {
-      feeEnabledChannels: Array.isArray(object?.fee_enabled_channels) ? object.fee_enabled_channels.map((e: any) => FeeEnabledChannel.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryFeeEnabledChannelsResponse): QueryFeeEnabledChannelsResponseAmino {
-    const obj: any = {};
-    if (message.feeEnabledChannels) {
-      obj.fee_enabled_channels = message.feeEnabledChannels.map(e => e ? FeeEnabledChannel.toAmino(e) : undefined);
-    } else {
-      obj.fee_enabled_channels = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryFeeEnabledChannelsResponseAminoMsg): QueryFeeEnabledChannelsResponse {
-    return QueryFeeEnabledChannelsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryFeeEnabledChannelsResponse): QueryFeeEnabledChannelsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryFeeEnabledChannelsResponse",
-      value: QueryFeeEnabledChannelsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryFeeEnabledChannelsResponseProtoMsg): QueryFeeEnabledChannelsResponse {
-    return QueryFeeEnabledChannelsResponse.decode(message.value);
-  },
-  toProto(message: QueryFeeEnabledChannelsResponse): Uint8Array {
-    return QueryFeeEnabledChannelsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryFeeEnabledChannelsResponse): QueryFeeEnabledChannelsResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelsResponse",
-      value: QueryFeeEnabledChannelsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryFeeEnabledChannelRequest(): QueryFeeEnabledChannelRequest {
@@ -2032,7 +1421,6 @@ function createBaseQueryFeeEnabledChannelRequest(): QueryFeeEnabledChannelReques
   };
 }
 export const QueryFeeEnabledChannelRequest = {
-  typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelRequest",
   encode(message: QueryFeeEnabledChannelRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2097,39 +1485,6 @@ export const QueryFeeEnabledChannelRequest = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
-  },
-  fromAmino(object: QueryFeeEnabledChannelRequestAmino): QueryFeeEnabledChannelRequest {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id
-    };
-  },
-  toAmino(message: QueryFeeEnabledChannelRequest): QueryFeeEnabledChannelRequestAmino {
-    const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    return obj;
-  },
-  fromAminoMsg(object: QueryFeeEnabledChannelRequestAminoMsg): QueryFeeEnabledChannelRequest {
-    return QueryFeeEnabledChannelRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryFeeEnabledChannelRequest): QueryFeeEnabledChannelRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryFeeEnabledChannelRequest",
-      value: QueryFeeEnabledChannelRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryFeeEnabledChannelRequestProtoMsg): QueryFeeEnabledChannelRequest {
-    return QueryFeeEnabledChannelRequest.decode(message.value);
-  },
-  toProto(message: QueryFeeEnabledChannelRequest): Uint8Array {
-    return QueryFeeEnabledChannelRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryFeeEnabledChannelRequest): QueryFeeEnabledChannelRequestProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelRequest",
-      value: QueryFeeEnabledChannelRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryFeeEnabledChannelResponse(): QueryFeeEnabledChannelResponse {
@@ -2138,7 +1493,6 @@ function createBaseQueryFeeEnabledChannelResponse(): QueryFeeEnabledChannelRespo
   };
 }
 export const QueryFeeEnabledChannelResponse = {
-  typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelResponse",
   encode(message: QueryFeeEnabledChannelResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.feeEnabled === true) {
       writer.uint32(8).bool(message.feeEnabled);
@@ -2191,36 +1545,5 @@ export const QueryFeeEnabledChannelResponse = {
     const obj: any = {};
     obj.fee_enabled = message.feeEnabled;
     return obj;
-  },
-  fromAmino(object: QueryFeeEnabledChannelResponseAmino): QueryFeeEnabledChannelResponse {
-    return {
-      feeEnabled: object.fee_enabled
-    };
-  },
-  toAmino(message: QueryFeeEnabledChannelResponse): QueryFeeEnabledChannelResponseAmino {
-    const obj: any = {};
-    obj.fee_enabled = message.feeEnabled;
-    return obj;
-  },
-  fromAminoMsg(object: QueryFeeEnabledChannelResponseAminoMsg): QueryFeeEnabledChannelResponse {
-    return QueryFeeEnabledChannelResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryFeeEnabledChannelResponse): QueryFeeEnabledChannelResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryFeeEnabledChannelResponse",
-      value: QueryFeeEnabledChannelResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryFeeEnabledChannelResponseProtoMsg): QueryFeeEnabledChannelResponse {
-    return QueryFeeEnabledChannelResponse.decode(message.value);
-  },
-  toProto(message: QueryFeeEnabledChannelResponse): Uint8Array {
-    return QueryFeeEnabledChannelResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryFeeEnabledChannelResponse): QueryFeeEnabledChannelResponseProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.QueryFeeEnabledChannelResponse",
-      value: QueryFeeEnabledChannelResponse.encode(message).finish()
-    };
   }
 };

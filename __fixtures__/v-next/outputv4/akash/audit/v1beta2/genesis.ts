@@ -16,7 +16,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/akash.audit.v1beta2.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.attributes) {
       AuditedAttributes.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -77,40 +76,5 @@ export const GenesisState = {
       obj.attributes = [];
     }
     return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "akash/audit/v1beta2/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/akash.audit.v1beta2.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };

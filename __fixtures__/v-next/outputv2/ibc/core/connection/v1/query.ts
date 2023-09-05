@@ -2,8 +2,8 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { ConnectionEnd, ConnectionEndAmino, ConnectionEndSDKType, IdentifiedConnection, IdentifiedConnectionAmino, IdentifiedConnectionSDKType } from "./connection";
 import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -301,8 +301,8 @@ export interface QueryConnectionClientStateResponseSDKType {
 export interface QueryConnectionConsensusStateRequest {
   /** connection identifier */
   connectionId: string;
-  revisionNumber: bigint;
-  revisionHeight: bigint;
+  revisionNumber: Long;
+  revisionHeight: Long;
 }
 export interface QueryConnectionConsensusStateRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
@@ -328,8 +328,8 @@ export interface QueryConnectionConsensusStateRequestAminoMsg {
  */
 export interface QueryConnectionConsensusStateRequestSDKType {
   connection_id: string;
-  revision_number: bigint;
-  revision_height: bigint;
+  revision_number: Long;
+  revision_height: Long;
 }
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
@@ -385,14 +385,14 @@ function createBaseQueryConnectionRequest(): QueryConnectionRequest {
 export const QueryConnectionRequest = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest",
   aminoType: "cosmos-sdk/QueryConnectionRequest",
-  encode(message: QueryConnectionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionRequest();
     while (reader.pos < end) {
@@ -475,7 +475,7 @@ function createBaseQueryConnectionResponse(): QueryConnectionResponse {
 export const QueryConnectionResponse = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse",
   aminoType: "cosmos-sdk/QueryConnectionResponse",
-  encode(message: QueryConnectionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connection !== undefined) {
       ConnectionEnd.encode(message.connection, writer.uint32(10).fork()).ldelim();
     }
@@ -487,8 +487,8 @@ export const QueryConnectionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionResponse();
     while (reader.pos < end) {
@@ -593,14 +593,14 @@ function createBaseQueryConnectionsRequest(): QueryConnectionsRequest {
 export const QueryConnectionsRequest = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest",
   aminoType: "cosmos-sdk/QueryConnectionsRequest",
-  encode(message: QueryConnectionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsRequest();
     while (reader.pos < end) {
@@ -685,7 +685,7 @@ function createBaseQueryConnectionsResponse(): QueryConnectionsResponse {
 export const QueryConnectionsResponse = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse",
   aminoType: "cosmos-sdk/QueryConnectionsResponse",
-  encode(message: QueryConnectionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.connections) {
       IdentifiedConnection.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -697,8 +697,8 @@ export const QueryConnectionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsResponse();
     while (reader.pos < end) {
@@ -815,14 +815,14 @@ function createBaseQueryClientConnectionsRequest(): QueryClientConnectionsReques
 export const QueryClientConnectionsRequest = {
   typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest",
   aminoType: "cosmos-sdk/QueryClientConnectionsRequest",
-  encode(message: QueryClientConnectionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryClientConnectionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClientConnectionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientConnectionsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsRequest();
     while (reader.pos < end) {
@@ -905,7 +905,7 @@ function createBaseQueryClientConnectionsResponse(): QueryClientConnectionsRespo
 export const QueryClientConnectionsResponse = {
   typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse",
   aminoType: "cosmos-sdk/QueryClientConnectionsResponse",
-  encode(message: QueryClientConnectionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryClientConnectionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.connectionPaths) {
       writer.uint32(10).string(v!);
     }
@@ -917,8 +917,8 @@ export const QueryClientConnectionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClientConnectionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientConnectionsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsResponse();
     while (reader.pos < end) {
@@ -1033,14 +1033,14 @@ function createBaseQueryConnectionClientStateRequest(): QueryConnectionClientSta
 export const QueryConnectionClientStateRequest = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest",
   aminoType: "cosmos-sdk/QueryConnectionClientStateRequest",
-  encode(message: QueryConnectionClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionClientStateRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionClientStateRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateRequest();
     while (reader.pos < end) {
@@ -1123,7 +1123,7 @@ function createBaseQueryConnectionClientStateResponse(): QueryConnectionClientSt
 export const QueryConnectionClientStateResponse = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse",
   aminoType: "cosmos-sdk/QueryConnectionClientStateResponse",
-  encode(message: QueryConnectionClientStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
     }
@@ -1135,8 +1135,8 @@ export const QueryConnectionClientStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionClientStateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionClientStateResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateResponse();
     while (reader.pos < end) {
@@ -1236,27 +1236,27 @@ export const QueryConnectionClientStateResponse = {
 function createBaseQueryConnectionConsensusStateRequest(): QueryConnectionConsensusStateRequest {
   return {
     connectionId: "",
-    revisionNumber: BigInt(0),
-    revisionHeight: BigInt(0)
+    revisionNumber: Long.UZERO,
+    revisionHeight: Long.UZERO
   };
 }
 export const QueryConnectionConsensusStateRequest = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest",
   aminoType: "cosmos-sdk/QueryConnectionConsensusStateRequest",
-  encode(message: QueryConnectionConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
-    if (message.revisionNumber !== BigInt(0)) {
+    if (!message.revisionNumber.isZero()) {
       writer.uint32(16).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== BigInt(0)) {
+    if (!message.revisionHeight.isZero()) {
       writer.uint32(24).uint64(message.revisionHeight);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionConsensusStateRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionConsensusStateRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateRequest();
     while (reader.pos < end) {
@@ -1266,10 +1266,10 @@ export const QueryConnectionConsensusStateRequest = {
           message.connectionId = reader.string();
           break;
         case 2:
-          message.revisionNumber = reader.uint64();
+          message.revisionNumber = (reader.uint64() as Long);
           break;
         case 3:
-          message.revisionHeight = reader.uint64();
+          message.revisionHeight = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1281,25 +1281,25 @@ export const QueryConnectionConsensusStateRequest = {
   fromJSON(object: any): QueryConnectionConsensusStateRequest {
     const obj = createBaseQueryConnectionConsensusStateRequest();
     if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
-    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
+    if (isSet(object.revisionNumber)) obj.revisionNumber = Long.fromValue(object.revisionNumber);
+    if (isSet(object.revisionHeight)) obj.revisionHeight = Long.fromValue(object.revisionHeight);
     return obj;
   },
   toJSON(message: QueryConnectionConsensusStateRequest): unknown {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryConnectionConsensusStateRequest>): QueryConnectionConsensusStateRequest {
     const message = createBaseQueryConnectionConsensusStateRequest();
     message.connectionId = object.connectionId ?? "";
     if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
-      message.revisionNumber = BigInt(object.revisionNumber.toString());
+      message.revisionNumber = Long.fromValue(object.revisionNumber);
     }
     if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
-      message.revisionHeight = BigInt(object.revisionHeight.toString());
+      message.revisionHeight = Long.fromValue(object.revisionHeight);
     }
     return message;
   },
@@ -1320,8 +1320,8 @@ export const QueryConnectionConsensusStateRequest = {
   fromAmino(object: QueryConnectionConsensusStateRequestAmino): QueryConnectionConsensusStateRequest {
     return {
       connectionId: object.connection_id,
-      revisionNumber: BigInt(object.revision_number),
-      revisionHeight: BigInt(object.revision_height)
+      revisionNumber: Long.fromString(object.revision_number),
+      revisionHeight: Long.fromString(object.revision_height)
     };
   },
   toAmino(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAmino {
@@ -1364,7 +1364,7 @@ function createBaseQueryConnectionConsensusStateResponse(): QueryConnectionConse
 export const QueryConnectionConsensusStateResponse = {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse",
   aminoType: "cosmos-sdk/QueryConnectionConsensusStateResponse",
-  encode(message: QueryConnectionConsensusStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: QueryConnectionConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
     }
@@ -1379,8 +1379,8 @@ export const QueryConnectionConsensusStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionConsensusStateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionConsensusStateResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateResponse();
     while (reader.pos < end) {

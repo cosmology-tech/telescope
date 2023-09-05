@@ -2,8 +2,7 @@
 
 exports[`Duraation: duration DepositParams 1`] = `
 "export const DepositParams = {
-  typeUrl: "/cosmos.gov.v1beta1.DepositParams",
-  encode(message: DepositParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: DepositParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -12,8 +11,8 @@ exports[`Duraation: duration DepositParams 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DepositParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): DepositParams {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositParams();
     while (reader.pos < end) {
@@ -32,56 +31,18 @@ exports[`Duraation: duration DepositParams 1`] = `
     }
     return message;
   },
-  fromPartial(object: Partial<DepositParams>): DepositParams {
+  fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.maxDepositPeriod = object.maxDepositPeriod ?? undefined;
     return message;
-  },
-  fromAmino(object: DepositParamsAmino): DepositParams {
-    return {
-      minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
-    };
-  },
-  toAmino(message: DepositParams): DepositParamsAmino {
-    const obj: any = {};
-    if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.min_deposit = [];
-    }
-    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
-    return DepositParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/DepositParams",
-      value: DepositParams.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
-    return DepositParams.decode(message.value);
-  },
-  toProto(message: DepositParams): Uint8Array {
-    return DepositParams.encode(message).finish();
-  },
-  toProtoMsg(message: DepositParams): DepositParamsProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.DepositParams",
-      value: DepositParams.encode(message).finish()
-    };
   }
 };"
 `;
 
 exports[`Duration: string DepositParams 1`] = `
 "export const DepositParams = {
-  typeUrl: "/cosmos.gov.v1beta1.DepositParams",
-  encode(message: DepositParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: DepositParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -90,8 +51,8 @@ exports[`Duration: string DepositParams 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DepositParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): DepositParams {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositParams();
     while (reader.pos < end) {
@@ -110,48 +71,11 @@ exports[`Duration: string DepositParams 1`] = `
     }
     return message;
   },
-  fromPartial(object: Partial<DepositParams>): DepositParams {
+  fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.maxDepositPeriod = object.maxDepositPeriod ?? undefined;
     return message;
-  },
-  fromAmino(object: DepositParamsAmino): DepositParams {
-    return {
-      minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
-    };
-  },
-  toAmino(message: DepositParams): DepositParamsAmino {
-    const obj: any = {};
-    if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.min_deposit = [];
-    }
-    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
-    return DepositParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/DepositParams",
-      value: DepositParams.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
-    return DepositParams.decode(message.value);
-  },
-  toProto(message: DepositParams): Uint8Array {
-    return DepositParams.encode(message).finish();
-  },
-  toProtoMsg(message: DepositParams): DepositParamsProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.DepositParams",
-      value: DepositParams.encode(message).finish()
-    };
   }
 };"
 `;

@@ -44,7 +44,6 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  typeUrl: "/osmosis.mint.v1beta1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -82,34 +81,6 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "osmosis/mint/query-params-request",
-      value: QueryParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
-  },
-  toProto(message: QueryParamsRequest): Uint8Array {
-    return QueryParamsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.QueryParamsRequest",
-      value: QueryParamsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -118,7 +89,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  typeUrl: "/osmosis.mint.v1beta1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -171,44 +141,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "osmosis/mint/query-params-response",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
-  },
-  toProto(message: QueryParamsResponse): Uint8Array {
-    return QueryParamsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.QueryParamsResponse",
-      value: QueryParamsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryEpochProvisionsRequest(): QueryEpochProvisionsRequest {
   return {};
 }
 export const QueryEpochProvisionsRequest = {
-  typeUrl: "/osmosis.mint.v1beta1.QueryEpochProvisionsRequest",
   encode(_: QueryEpochProvisionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -246,34 +184,6 @@ export const QueryEpochProvisionsRequest = {
   toSDK(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: QueryEpochProvisionsRequestAmino): QueryEpochProvisionsRequest {
-    return {};
-  },
-  toAmino(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryEpochProvisionsRequestAminoMsg): QueryEpochProvisionsRequest {
-    return QueryEpochProvisionsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestAminoMsg {
-    return {
-      type: "osmosis/mint/query-epoch-provisions-request",
-      value: QueryEpochProvisionsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryEpochProvisionsRequestProtoMsg): QueryEpochProvisionsRequest {
-    return QueryEpochProvisionsRequest.decode(message.value);
-  },
-  toProto(message: QueryEpochProvisionsRequest): Uint8Array {
-    return QueryEpochProvisionsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.QueryEpochProvisionsRequest",
-      value: QueryEpochProvisionsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryEpochProvisionsResponse(): QueryEpochProvisionsResponse {
@@ -282,7 +192,6 @@ function createBaseQueryEpochProvisionsResponse(): QueryEpochProvisionsResponse 
   };
 }
 export const QueryEpochProvisionsResponse = {
-  typeUrl: "/osmosis.mint.v1beta1.QueryEpochProvisionsResponse",
   encode(message: QueryEpochProvisionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.epochProvisions.length !== 0) {
       writer.uint32(10).bytes(message.epochProvisions);
@@ -335,36 +244,5 @@ export const QueryEpochProvisionsResponse = {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
-  },
-  fromAmino(object: QueryEpochProvisionsResponseAmino): QueryEpochProvisionsResponse {
-    return {
-      epochProvisions: object.epoch_provisions
-    };
-  },
-  toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAmino {
-    const obj: any = {};
-    obj.epoch_provisions = message.epochProvisions;
-    return obj;
-  },
-  fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {
-    return QueryEpochProvisionsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAminoMsg {
-    return {
-      type: "osmosis/mint/query-epoch-provisions-response",
-      value: QueryEpochProvisionsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryEpochProvisionsResponseProtoMsg): QueryEpochProvisionsResponse {
-    return QueryEpochProvisionsResponse.decode(message.value);
-  },
-  toProto(message: QueryEpochProvisionsResponse): Uint8Array {
-    return QueryEpochProvisionsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.QueryEpochProvisionsResponse",
-      value: QueryEpochProvisionsResponse.encode(message).finish()
-    };
   }
 };

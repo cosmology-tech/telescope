@@ -68,8 +68,8 @@ exports[`PageRequest api interface 1`] = `
  */
 export interface PageRequestSDKType {
   key: Uint8Array;
-  offset: bigint;
-  limit: bigint;
+  offset: Long;
+  limit: Long;
   count_total: boolean;
   reverse: boolean;
 }"
@@ -97,12 +97,12 @@ export interface PageRequest {
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
-  offset: bigint;
+  offset: Long;
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
-  limit: bigint;
+  limit: Long;
   /**
    * count_total is set to true  to indicate that the result set should include
    * a count of the total number of items available for pagination in UIs.
@@ -131,7 +131,7 @@ exports[`PageResponse api interface 1`] = `
  */
 export interface PageResponseSDKType {
   next_key: Uint8Array;
-  total: bigint;
+  total: Long;
 }"
 `;
 
@@ -156,7 +156,7 @@ export interface PageResponse {
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
    */
-  total: bigint;
+  total: Long;
 }"
 `;
 
@@ -197,18 +197,16 @@ exports[`cosmos/auth/v1beta1/auth.proto BaseAccount 1`] = `
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
-  $typeUrl?: string;
   address: string;
   pubKey: Any;
-  accountNumber: bigint;
-  sequence: bigint;
+  accountNumber: Long;
+  sequence: Long;
 }"
 `;
 
 exports[`cosmos/auth/v1beta1/auth.proto ModuleAccount 1`] = `
 "/** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  $typeUrl?: string;
   baseAccount: BaseAccount;
   name: string;
   permissions: string[];
@@ -221,7 +219,7 @@ exports[`cosmos/authz/v1beta1/authz.proto Grant 1`] = `
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -246,7 +244,7 @@ exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization 1`] = `
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
-  authorization: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
+  authorization: Any;
   expiration: Date;
 }"
 `;

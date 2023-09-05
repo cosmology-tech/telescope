@@ -60,7 +60,6 @@ function createBasePool(): Pool {
   };
 }
 export const Pool = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -245,58 +244,5 @@ export const Pool = {
     obj.swap_fee = message.swapFee;
     message.lastLiquidityUpdate !== undefined && (obj.last_liquidity_update = message.lastLiquidityUpdate ?? undefined);
     return obj;
-  },
-  fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      incentivesAddress: object.incentives_address,
-      id: BigInt(object.id),
-      currentTickLiquidity: object.current_tick_liquidity,
-      token0: object.token0,
-      token1: object.token1,
-      currentSqrtPrice: object.current_sqrt_price,
-      currentTick: object.current_tick,
-      tickSpacing: BigInt(object.tick_spacing),
-      exponentAtPriceOne: object.exponent_at_price_one,
-      swapFee: object.swap_fee,
-      lastLiquidityUpdate: object.last_liquidity_update
-    };
-  },
-  toAmino(message: Pool): PoolAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.incentives_address = message.incentivesAddress;
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.current_tick_liquidity = message.currentTickLiquidity;
-    obj.token0 = message.token0;
-    obj.token1 = message.token1;
-    obj.current_sqrt_price = message.currentSqrtPrice;
-    obj.current_tick = message.currentTick;
-    obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
-    obj.exponent_at_price_one = message.exponentAtPriceOne;
-    obj.swap_fee = message.swapFee;
-    obj.last_liquidity_update = message.lastLiquidityUpdate;
-    return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/pool",
-      value: Pool.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PoolProtoMsg): Pool {
-    return Pool.decode(message.value);
-  },
-  toProto(message: Pool): Uint8Array {
-    return Pool.encode(message).finish();
-  },
-  toProtoMsg(message: Pool): PoolProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.Pool",
-      value: Pool.encode(message).finish()
-    };
   }
 };

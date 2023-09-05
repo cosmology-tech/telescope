@@ -16,7 +16,6 @@ function createBaseBitArray(): BitArray {
   };
 }
 export const BitArray = {
-  typeUrl: "/tendermint.libs.bits.BitArray",
   encode(message: BitArray, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bits !== BigInt(0)) {
       writer.uint32(8).int64(message.bits);
@@ -98,36 +97,5 @@ export const BitArray = {
       obj.elems = [];
     }
     return obj;
-  },
-  fromAmino(object: BitArrayAmino): BitArray {
-    return {
-      bits: BigInt(object.bits),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e)) : []
-    };
-  },
-  toAmino(message: BitArray): BitArrayAmino {
-    const obj: any = {};
-    obj.bits = message.bits ? message.bits.toString() : undefined;
-    if (message.elems) {
-      obj.elems = message.elems.map(e => e.toString());
-    } else {
-      obj.elems = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BitArrayAminoMsg): BitArray {
-    return BitArray.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BitArrayProtoMsg): BitArray {
-    return BitArray.decode(message.value);
-  },
-  toProto(message: BitArray): Uint8Array {
-    return BitArray.encode(message).finish();
-  },
-  toProtoMsg(message: BitArray): BitArrayProtoMsg {
-    return {
-      typeUrl: "/tendermint.libs.bits.BitArray",
-      value: BitArray.encode(message).finish()
-    };
   }
 };

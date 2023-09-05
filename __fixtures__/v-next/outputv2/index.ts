@@ -25,6 +25,3 @@ export * from "./hooks";
 export * from "./extern";
 export * from "./react-query";
 export * from "./grpc-web";
-export * from "./varint";
-export * from "./utf8";
-export * from "./binary";

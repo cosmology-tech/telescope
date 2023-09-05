@@ -1,6 +1,6 @@
 import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
-import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial } from "../../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -33,7 +33,7 @@ export interface MsgCreateBalancerPoolSDKType {
 }
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponse {
-  poolId: bigint;
+  poolId: Long;
 }
 export interface MsgCreateBalancerPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse";
@@ -49,7 +49,7 @@ export interface MsgCreateBalancerPoolResponseAminoMsg {
 }
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseSDKType {
-  pool_id: bigint;
+  pool_id: Long;
 }
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
   return {
@@ -62,7 +62,7 @@ function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
 export const MsgCreateBalancerPool = {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
   aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
-  encode(message: MsgCreateBalancerPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgCreateBalancerPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -77,8 +77,8 @@ export const MsgCreateBalancerPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBalancerPool {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBalancerPool {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBalancerPool();
     while (reader.pos < end) {
@@ -197,27 +197,27 @@ export const MsgCreateBalancerPool = {
 };
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
   return {
-    poolId: BigInt(0)
+    poolId: Long.UZERO
   };
 }
 export const MsgCreateBalancerPoolResponse = {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
   aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
-  encode(message: MsgCreateBalancerPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+  encode(message: MsgCreateBalancerPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBalancerPoolResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBalancerPoolResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBalancerPoolResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = reader.uint64();
+          message.poolId = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -228,18 +228,18 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     const obj = createBaseMsgCreateBalancerPoolResponse();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     return obj;
   },
   toJSON(message: MsgCreateBalancerPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
     if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
+      message.poolId = Long.fromValue(object.poolId);
     }
     return message;
   },
@@ -255,7 +255,7 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromAmino(object: MsgCreateBalancerPoolResponseAmino): MsgCreateBalancerPoolResponse {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: Long.fromString(object.pool_id)
     };
   },
   toAmino(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAmino {
