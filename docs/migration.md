@@ -22,18 +22,6 @@ If it's wanted to be kept off, please set explicitly:
     },
 ```
 
-### interfaces.enabled
-
-the default value of `interfaces.enabled` handling decoding of Any type has been changed into true.
-
-If it's wanted to be kept off, please set explicitly:
-
-```
-    interfaces: {
-        enabled: false,
-    },
-```
-
 ### prototypes.typingsFormat.customTypes.useCosmosSDKDec
 
 the default value of `prototypes.typingsFormat.customTypes.useCosmosSDKDec` has been changed into true for decimal fields to be properly decoded using Decimal.fromAtomics.

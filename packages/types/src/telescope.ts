@@ -231,7 +231,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     logLevel: TelescopeLogLevel.None,
 
     interfaces: {
-        enabled: true,
+        enabled: false,
         useUnionTypes: false,
     },
 
@@ -251,10 +251,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toSDK: false,
             fromSDK: false,
             fromSDKJSON: false,
-            toAmino: true,
-            fromAmino: true,
-            toProto: true,
-            fromProto: true,
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
         },
         strictNullCheckForPrototypeMethods: false,
         includePackageVar: false,
@@ -262,19 +262,19 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         allowUndefinedTypes: false,
         useOptionalNullable: true,
 
-        addTypeUrlToObjects: true,
+        addTypeUrlToObjects: false,
         addAminoTypeToObjects: false,
-        addTypeUrlToDecoders: true,
+        addTypeUrlToDecoders: false,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: true
+              useCosmosSDKDec: false
             },
-            num64: 'bigint',
-            useDeepPartial: false,
+            num64: 'long',
+            useDeepPartial: true,
             useExact: false,
             timestamp: 'date',
             duration: 'duration',
@@ -311,7 +311,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
         },
-        useLegacyInlineEncoding: false
+        useLegacyInlineEncoding: true
     },
     lcdClients: {
         bundle: true,
