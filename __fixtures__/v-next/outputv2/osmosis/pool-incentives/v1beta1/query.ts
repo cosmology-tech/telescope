@@ -1,11 +1,11 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { DistrInfo, DistrInfoAmino, DistrInfoSDKType, Params, ParamsAmino, ParamsSDKType } from "./incentives";
 import { Gauge, GaugeAmino, GaugeSDKType } from "../../incentives/gauge";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
-  poolId: Long;
+  poolId: bigint;
 }
 export interface QueryGaugeIdsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest";
@@ -19,7 +19,7 @@ export interface QueryGaugeIdsRequestAminoMsg {
   value: QueryGaugeIdsRequestAmino;
 }
 export interface QueryGaugeIdsRequestSDKType {
-  pool_id: Long;
+  pool_id: bigint;
 }
 export interface QueryGaugeIdsResponse {
   gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
@@ -39,7 +39,7 @@ export interface QueryGaugeIdsResponseSDKType {
   gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType[];
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
-  gaugeId: Long;
+  gaugeId: bigint;
   duration: Duration;
   gaugeIncentivePercentage: string;
 }
@@ -57,7 +57,7 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
   value: QueryGaugeIdsResponse_GaugeIdWithDurationAmino;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
-  gauge_id: Long;
+  gauge_id: bigint;
   duration: DurationSDKType;
   gauge_incentive_percentage: string;
 }
@@ -157,9 +157,9 @@ export interface QueryIncentivizedPoolsRequestAminoMsg {
 }
 export interface QueryIncentivizedPoolsRequestSDKType {}
 export interface IncentivizedPool {
-  poolId: Long;
+  poolId: bigint;
   lockableDuration: Duration;
-  gaugeId: Long;
+  gaugeId: bigint;
 }
 export interface IncentivizedPoolProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool";
@@ -175,9 +175,9 @@ export interface IncentivizedPoolAminoMsg {
   value: IncentivizedPoolAmino;
 }
 export interface IncentivizedPoolSDKType {
-  pool_id: Long;
+  pool_id: bigint;
   lockable_duration: DurationSDKType;
-  gauge_id: Long;
+  gauge_id: bigint;
 }
 export interface QueryIncentivizedPoolsResponse {
   incentivizedPools: IncentivizedPool[];
@@ -226,27 +226,27 @@ export interface QueryExternalIncentiveGaugesResponseSDKType {
 }
 function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
   return {
-    poolId: Long.UZERO
+    poolId: BigInt(0)
   };
 }
 export const QueryGaugeIdsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
   aminoType: "osmosis/poolincentives/query-gauge-ids-request",
-  encode(message: QueryGaugeIdsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
+  encode(message: QueryGaugeIdsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGaugeIdsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -257,17 +257,17 @@ export const QueryGaugeIdsRequest = {
   },
   fromJSON(object: any): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryGaugeIdsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsRequest>): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryGaugeIdsRequestSDKType): QueryGaugeIdsRequest {
@@ -282,7 +282,7 @@ export const QueryGaugeIdsRequest = {
   },
   fromAmino(object: QueryGaugeIdsRequestAmino): QueryGaugeIdsRequest {
     return {
-      poolId: Long.fromString(object.pool_id)
+      poolId: BigInt(object.pool_id)
     };
   },
   toAmino(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestAmino {
@@ -320,14 +320,14 @@ function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
 export const QueryGaugeIdsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse",
   aminoType: "osmosis/poolincentives/query-gauge-ids-response",
-  encode(message: QueryGaugeIdsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGaugeIdsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.gaugeIdsWithDuration) {
       QueryGaugeIdsResponse_GaugeIdWithDuration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGaugeIdsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse();
     while (reader.pos < end) {
@@ -414,7 +414,7 @@ export const QueryGaugeIdsResponse = {
 };
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
   return {
-    gaugeId: Long.UZERO,
+    gaugeId: BigInt(0),
     duration: Duration.fromPartial({}),
     gaugeIncentivePercentage: ""
   };
@@ -422,8 +422,8 @@ function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsRes
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration",
   aminoType: "osmosis/poolincentives/gauge-id-with-duration",
-  encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.gaugeId.isZero()) {
+  encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.gaugeId !== BigInt(0)) {
       writer.uint32(8).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
@@ -434,15 +434,15 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsResponse_GaugeIdWithDuration {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGaugeIdsResponse_GaugeIdWithDuration {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = reader.uint64();
           break;
         case 2:
           message.duration = Duration.decode(reader, reader.uint32());
@@ -459,21 +459,21 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       gaugeIncentivePercentage: isSet(object.gaugeIncentivePercentage) ? String(object.gaugeIncentivePercentage) : ""
     };
   },
   toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     message.gaugeIncentivePercentage !== undefined && (obj.gaugeIncentivePercentage = message.gaugeIncentivePercentage);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
@@ -494,7 +494,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   fromAmino(object: QueryGaugeIdsResponse_GaugeIdWithDurationAmino): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: Long.fromString(object.gauge_id),
+      gaugeId: BigInt(object.gauge_id),
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       gaugeIncentivePercentage: object.gauge_incentive_percentage
     };
@@ -534,11 +534,11 @@ function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
 export const QueryDistrInfoRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest",
   aminoType: "osmosis/poolincentives/query-distr-info-request",
-  encode(_: QueryDistrInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryDistrInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDistrInfoRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDistrInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoRequest();
     while (reader.pos < end) {
@@ -606,14 +606,14 @@ function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
 export const QueryDistrInfoResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse",
   aminoType: "osmosis/poolincentives/query-distr-info-response",
-  encode(message: QueryDistrInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDistrInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.distrInfo !== undefined) {
       DistrInfo.encode(message.distrInfo, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDistrInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDistrInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoResponse();
     while (reader.pos < end) {
@@ -692,11 +692,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 export const QueryParamsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest",
   aminoType: "osmosis/poolincentives/query-params-request",
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -764,14 +764,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 export const QueryParamsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse",
   aminoType: "osmosis/poolincentives/query-params-response",
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -850,11 +850,11 @@ function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsReques
 export const QueryLockableDurationsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest",
   aminoType: "osmosis/poolincentives/query-lockable-durations-request",
-  encode(_: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryLockableDurationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLockableDurationsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLockableDurationsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsRequest();
     while (reader.pos < end) {
@@ -922,14 +922,14 @@ function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsRespo
 export const QueryLockableDurationsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse",
   aminoType: "osmosis/poolincentives/query-lockable-durations-response",
-  encode(message: QueryLockableDurationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLockableDurationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLockableDurationsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLockableDurationsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsResponse();
     while (reader.pos < end) {
@@ -1020,11 +1020,11 @@ function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsReques
 export const QueryIncentivizedPoolsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest",
   aminoType: "osmosis/poolincentives/query-incentivized-pools-request",
-  encode(_: QueryIncentivizedPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryIncentivizedPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivizedPoolsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentivizedPoolsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsRequest();
     while (reader.pos < end) {
@@ -1086,41 +1086,41 @@ export const QueryIncentivizedPoolsRequest = {
 };
 function createBaseIncentivizedPool(): IncentivizedPool {
   return {
-    poolId: Long.UZERO,
+    poolId: BigInt(0),
     lockableDuration: Duration.fromPartial({}),
-    gaugeId: Long.UZERO
+    gaugeId: BigInt(0)
   };
 }
 export const IncentivizedPool = {
   typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool",
   aminoType: "osmosis/poolincentives/incentivized-pool",
-  encode(message: IncentivizedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
+  encode(message: IncentivizedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.lockableDuration !== undefined) {
       Duration.encode(message.lockableDuration, writer.uint32(18).fork()).ldelim();
     }
-    if (!message.gaugeId.isZero()) {
+    if (message.gaugeId !== BigInt(0)) {
       writer.uint32(24).uint64(message.gaugeId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IncentivizedPool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IncentivizedPool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentivizedPool();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.lockableDuration = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1131,23 +1131,23 @@ export const IncentivizedPool = {
   },
   fromJSON(object: any): IncentivizedPool {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       lockableDuration: isSet(object.lockableDuration) ? Duration.fromJSON(object.lockableDuration) : undefined,
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0)
     };
   },
   toJSON(message: IncentivizedPool): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.lockableDuration !== undefined && (obj.lockableDuration = message.lockableDuration ? Duration.toJSON(message.lockableDuration) : undefined);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<IncentivizedPool>): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : undefined;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: IncentivizedPoolSDKType): IncentivizedPool {
@@ -1166,9 +1166,9 @@ export const IncentivizedPool = {
   },
   fromAmino(object: IncentivizedPoolAmino): IncentivizedPool {
     return {
-      poolId: Long.fromString(object.pool_id),
+      poolId: BigInt(object.pool_id),
       lockableDuration: object?.lockable_duration ? Duration.fromAmino(object.lockable_duration) : undefined,
-      gaugeId: Long.fromString(object.gauge_id)
+      gaugeId: BigInt(object.gauge_id)
     };
   },
   toAmino(message: IncentivizedPool): IncentivizedPoolAmino {
@@ -1208,14 +1208,14 @@ function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsRespo
 export const QueryIncentivizedPoolsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse",
   aminoType: "osmosis/poolincentives/query-incentivized-pools-response",
-  encode(message: QueryIncentivizedPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentivizedPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.incentivizedPools) {
       IncentivizedPool.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivizedPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentivizedPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsResponse();
     while (reader.pos < end) {
@@ -1306,11 +1306,11 @@ function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentive
 export const QueryExternalIncentiveGaugesRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest",
   aminoType: "osmosis/poolincentives/query-external-incentive-gauges-request",
-  encode(_: QueryExternalIncentiveGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryExternalIncentiveGaugesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryExternalIncentiveGaugesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryExternalIncentiveGaugesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesRequest();
     while (reader.pos < end) {
@@ -1378,14 +1378,14 @@ function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiv
 export const QueryExternalIncentiveGaugesResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse",
   aminoType: "osmosis/poolincentives/query-external-incentive-gauges-response",
-  encode(message: QueryExternalIncentiveGaugesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryExternalIncentiveGaugesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryExternalIncentiveGaugesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryExternalIncentiveGaugesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesResponse();
     while (reader.pos < end) {

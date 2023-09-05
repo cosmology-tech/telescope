@@ -14,8 +14,11 @@ cases('cosmos/authz/v1beta1/authz', opts => {
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
     context.options.env = 'v-next';
     context.options.prototypes.typingsFormat.timestamp = opts.name;
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     aminoCtx.options.env = 'v-next';
     aminoCtx.options.prototypes.typingsFormat.timestamp = opts.name;
+    aminoCtx.options.aminoEncoding.useLegacyInlineEncoding = true;
+
     expectCode(createProtoType(context, 'Grant',
         getNestedProto(ref.traversed).Grant
     ));

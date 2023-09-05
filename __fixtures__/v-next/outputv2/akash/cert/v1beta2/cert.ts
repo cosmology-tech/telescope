@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** State is an enum which refers to state of deployment */
@@ -200,7 +200,7 @@ function createBaseCertificateID(): CertificateID {
 }
 export const CertificateID = {
   typeUrl: "/akash.cert.v1beta2.CertificateID",
-  encode(message: CertificateID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CertificateID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -209,8 +209,8 @@ export const CertificateID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CertificateID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CertificateID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateID();
     while (reader.pos < end) {
@@ -296,7 +296,7 @@ function createBaseCertificate(): Certificate {
 }
 export const Certificate = {
   typeUrl: "/akash.cert.v1beta2.Certificate",
-  encode(message: Certificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Certificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.state !== 0) {
       writer.uint32(16).int32(message.state);
     }
@@ -308,8 +308,8 @@ export const Certificate = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Certificate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Certificate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificate();
     while (reader.pos < end) {
@@ -405,7 +405,7 @@ function createBaseCertificateFilter(): CertificateFilter {
 }
 export const CertificateFilter = {
   typeUrl: "/akash.cert.v1beta2.CertificateFilter",
-  encode(message: CertificateFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CertificateFilter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -417,8 +417,8 @@ export const CertificateFilter = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CertificateFilter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CertificateFilter {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateFilter();
     while (reader.pos < end) {
@@ -514,7 +514,7 @@ function createBaseMsgCreateCertificate(): MsgCreateCertificate {
 }
 export const MsgCreateCertificate = {
   typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate",
-  encode(message: MsgCreateCertificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateCertificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -526,8 +526,8 @@ export const MsgCreateCertificate = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateCertificate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateCertificate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateCertificate();
     while (reader.pos < end) {
@@ -619,11 +619,11 @@ function createBaseMsgCreateCertificateResponse(): MsgCreateCertificateResponse 
 }
 export const MsgCreateCertificateResponse = {
   typeUrl: "/akash.cert.v1beta2.MsgCreateCertificateResponse",
-  encode(_: MsgCreateCertificateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateCertificateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateCertificateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateCertificateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateCertificateResponse();
     while (reader.pos < end) {
@@ -684,14 +684,14 @@ function createBaseMsgRevokeCertificate(): MsgRevokeCertificate {
 }
 export const MsgRevokeCertificate = {
   typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
-  encode(message: MsgRevokeCertificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRevokeCertificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       CertificateID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeCertificate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeCertificate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeCertificate();
     while (reader.pos < end) {
@@ -763,11 +763,11 @@ function createBaseMsgRevokeCertificateResponse(): MsgRevokeCertificateResponse 
 }
 export const MsgRevokeCertificateResponse = {
   typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificateResponse",
-  encode(_: MsgRevokeCertificateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgRevokeCertificateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeCertificateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeCertificateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeCertificateResponse();
     while (reader.pos < end) {

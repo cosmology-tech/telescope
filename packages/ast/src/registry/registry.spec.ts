@@ -4,6 +4,7 @@ import {
   createRegistryLoader,
   ServiceMethod
 } from './registry';
+import { AminoParseContext } from '../encoding';
 
 export const mutations: ServiceMethod[] = [
   {
@@ -19,7 +20,7 @@ export const mutations: ServiceMethod[] = [
 ];
 
 
-const context = {
+const context: unknown = {
   addUtil: () => { }
 }
 
@@ -35,9 +36,9 @@ const printCode = (ast) => {
 }
 
 it('createTypeRegistry', async () => {
-  expectCode(createTypeRegistry(context, mutations));
+  expectCode(createTypeRegistry(context as AminoParseContext, mutations));
 });
 
 it('createRegistryLoader', async () => {
-  expectCode(createRegistryLoader(context));
+  expectCode(createRegistryLoader(context as AminoParseContext));
 });

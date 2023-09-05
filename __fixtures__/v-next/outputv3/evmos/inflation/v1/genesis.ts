@@ -1,19 +1,19 @@
 import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionSDKType } from "./inflation";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
   /** amount of past periods, based on the epochs per period param */
-  period: Long;
+  period: bigint;
   /** inflation epoch identifier */
   epochIdentifier: string;
   /** number of epochs after which inflation is recalculated */
-  epochsPerPeriod: Long;
+  epochsPerPeriod: bigint;
   /** number of epochs that have passed while inflation is disabled */
-  skippedEpochs: Long;
+  skippedEpochs: bigint;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.inflation.v1.GenesisState";
@@ -39,10 +39,10 @@ export interface GenesisStateAminoMsg {
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
-  period: Long;
+  period: bigint;
   epoch_identifier: string;
-  epochs_per_period: Long;
-  skipped_epochs: Long;
+  epochs_per_period: bigint;
+  skipped_epochs: bigint;
 }
 /** Params holds parameters for the inflation module. */
 export interface Params {
@@ -84,34 +84,34 @@ export interface ParamsSDKType {
 function createBaseGenesisState(): GenesisState {
   return {
     params: Params.fromPartial({}),
-    period: Long.UZERO,
+    period: BigInt(0),
     epochIdentifier: "",
-    epochsPerPeriod: Long.ZERO,
-    skippedEpochs: Long.UZERO
+    epochsPerPeriod: BigInt(0),
+    skippedEpochs: BigInt(0)
   };
 }
 export const GenesisState = {
   typeUrl: "/evmos.inflation.v1.GenesisState",
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
-    if (!message.period.isZero()) {
+    if (message.period !== BigInt(0)) {
       writer.uint32(16).uint64(message.period);
     }
     if (message.epochIdentifier !== "") {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (!message.epochsPerPeriod.isZero()) {
+    if (message.epochsPerPeriod !== BigInt(0)) {
       writer.uint32(32).int64(message.epochsPerPeriod);
     }
-    if (!message.skippedEpochs.isZero()) {
+    if (message.skippedEpochs !== BigInt(0)) {
       writer.uint32(40).uint64(message.skippedEpochs);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -121,16 +121,16 @@ export const GenesisState = {
           message.params = Params.decode(reader, reader.uint32());
           break;
         case 2:
-          message.period = (reader.uint64() as Long);
+          message.period = reader.uint64();
           break;
         case 3:
           message.epochIdentifier = reader.string();
           break;
         case 4:
-          message.epochsPerPeriod = (reader.int64() as Long);
+          message.epochsPerPeriod = reader.int64();
           break;
         case 5:
-          message.skippedEpochs = (reader.uint64() as Long);
+          message.skippedEpochs = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -142,28 +142,28 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      epochsPerPeriod: isSet(object.epochsPerPeriod) ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO,
-      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromValue(object.skippedEpochs) : Long.UZERO
+      epochsPerPeriod: isSet(object.epochsPerPeriod) ? BigInt(object.epochsPerPeriod.toString()) : BigInt(0),
+      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt(0)
     };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.epochsPerPeriod !== undefined && (obj.epochsPerPeriod = (message.epochsPerPeriod || Long.ZERO).toString());
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || Long.UZERO).toString());
+    message.epochsPerPeriod !== undefined && (obj.epochsPerPeriod = (message.epochsPerPeriod || BigInt(0)).toString());
+    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
-    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO;
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
+    message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? BigInt(object.epochsPerPeriod.toString()) : BigInt(0);
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -187,10 +187,10 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined,
-      period: Long.fromString(object.period),
+      period: BigInt(object.period),
       epochIdentifier: object.epoch_identifier,
-      epochsPerPeriod: Long.fromString(object.epochs_per_period),
-      skippedEpochs: Long.fromString(object.skipped_epochs)
+      epochsPerPeriod: BigInt(object.epochs_per_period),
+      skippedEpochs: BigInt(object.skipped_epochs)
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -228,7 +228,7 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/evmos.inflation.v1.Params",
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
@@ -243,8 +243,8 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {

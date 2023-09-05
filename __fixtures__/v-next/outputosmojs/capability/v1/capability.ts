@@ -51,6 +51,7 @@ function createBaseCapability(): Capability {
   };
 }
 export const Capability = {
+  typeUrl: "/capability.v1.Capability",
   encode(message: Capability, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.index !== BigInt(0)) {
       writer.uint32(8).uint64(message.index);
@@ -103,6 +104,31 @@ export const Capability = {
     const obj: any = {};
     obj.index = message.index;
     return obj;
+  },
+  fromAmino(object: CapabilityAmino): Capability {
+    return {
+      index: BigInt(object.index)
+    };
+  },
+  toAmino(message: Capability): CapabilityAmino {
+    const obj: any = {};
+    obj.index = message.index ? message.index.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CapabilityAminoMsg): Capability {
+    return Capability.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CapabilityProtoMsg): Capability {
+    return Capability.decode(message.value);
+  },
+  toProto(message: Capability): Uint8Array {
+    return Capability.encode(message).finish();
+  },
+  toProtoMsg(message: Capability): CapabilityProtoMsg {
+    return {
+      typeUrl: "/capability.v1.Capability",
+      value: Capability.encode(message).finish()
+    };
   }
 };
 function createBaseOwner(): Owner {
@@ -112,6 +138,7 @@ function createBaseOwner(): Owner {
   };
 }
 export const Owner = {
+  typeUrl: "/capability.v1.Owner",
   encode(message: Owner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
@@ -176,6 +203,33 @@ export const Owner = {
     obj.module = message.module;
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: OwnerAmino): Owner {
+    return {
+      module: object.module,
+      name: object.name
+    };
+  },
+  toAmino(message: Owner): OwnerAmino {
+    const obj: any = {};
+    obj.module = message.module;
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: OwnerAminoMsg): Owner {
+    return Owner.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OwnerProtoMsg): Owner {
+    return Owner.decode(message.value);
+  },
+  toProto(message: Owner): Uint8Array {
+    return Owner.encode(message).finish();
+  },
+  toProtoMsg(message: Owner): OwnerProtoMsg {
+    return {
+      typeUrl: "/capability.v1.Owner",
+      value: Owner.encode(message).finish()
+    };
   }
 };
 function createBaseCapabilityOwners(): CapabilityOwners {
@@ -184,6 +238,7 @@ function createBaseCapabilityOwners(): CapabilityOwners {
   };
 }
 export const CapabilityOwners = {
+  typeUrl: "/capability.v1.CapabilityOwners",
   encode(message: CapabilityOwners, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -244,5 +299,34 @@ export const CapabilityOwners = {
       obj.owners = [];
     }
     return obj;
+  },
+  fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
+    const obj: any = {};
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
+    } else {
+      obj.owners = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CapabilityOwnersAminoMsg): CapabilityOwners {
+    return CapabilityOwners.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CapabilityOwnersProtoMsg): CapabilityOwners {
+    return CapabilityOwners.decode(message.value);
+  },
+  toProto(message: CapabilityOwners): Uint8Array {
+    return CapabilityOwners.encode(message).finish();
+  },
+  toProtoMsg(message: CapabilityOwners): CapabilityOwnersProtoMsg {
+    return {
+      typeUrl: "/capability.v1.CapabilityOwners",
+      value: CapabilityOwners.encode(message).finish()
+    };
   }
 };

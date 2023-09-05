@@ -141,7 +141,7 @@ export const makeAminoTypeInterface = ({
         }
     });
 
-    const annotation = context.options.aminoEncoding.useRecursiveV2encoding ?
+    const annotation = !context.options.aminoEncoding.useLegacyInlineEncoding ?
         t.tsTypeAnnotation(t.tsTypeReference(
             t.identifier(TypeName + 'Amino')
         )) :

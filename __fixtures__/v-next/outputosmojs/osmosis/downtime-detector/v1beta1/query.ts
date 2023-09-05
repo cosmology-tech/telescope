@@ -32,6 +32,7 @@ function createBaseRecoveredSinceDowntimeOfLengthRequest(): RecoveredSinceDownti
   };
 }
 export const RecoveredSinceDowntimeOfLengthRequest = {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthRequest",
   encode(message: RecoveredSinceDowntimeOfLengthRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.downtime !== 0) {
       writer.uint32(8).int32(message.downtime);
@@ -96,6 +97,39 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
     message.downtime !== undefined && (obj.downtime = downtimeToJSON(message.downtime));
     message.recovery !== undefined && (obj.recovery = message.recovery ? Duration.toSDK(message.recovery) : undefined);
     return obj;
+  },
+  fromAmino(object: RecoveredSinceDowntimeOfLengthRequestAmino): RecoveredSinceDowntimeOfLengthRequest {
+    return {
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
+      recovery: object?.recovery ? Duration.fromAmino(object.recovery) : undefined
+    };
+  },
+  toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {
+    const obj: any = {};
+    obj.downtime = message.downtime;
+    obj.recovery = message.recovery ? Duration.toAmino(message.recovery) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: RecoveredSinceDowntimeOfLengthRequestAminoMsg): RecoveredSinceDowntimeOfLengthRequest {
+    return RecoveredSinceDowntimeOfLengthRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAminoMsg {
+    return {
+      type: "osmosis/downtimedetector/recovered-since-downtime-of-length-request",
+      value: RecoveredSinceDowntimeOfLengthRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: RecoveredSinceDowntimeOfLengthRequestProtoMsg): RecoveredSinceDowntimeOfLengthRequest {
+    return RecoveredSinceDowntimeOfLengthRequest.decode(message.value);
+  },
+  toProto(message: RecoveredSinceDowntimeOfLengthRequest): Uint8Array {
+    return RecoveredSinceDowntimeOfLengthRequest.encode(message).finish();
+  },
+  toProtoMsg(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthRequest",
+      value: RecoveredSinceDowntimeOfLengthRequest.encode(message).finish()
+    };
   }
 };
 function createBaseRecoveredSinceDowntimeOfLengthResponse(): RecoveredSinceDowntimeOfLengthResponse {
@@ -104,6 +138,7 @@ function createBaseRecoveredSinceDowntimeOfLengthResponse(): RecoveredSinceDownt
   };
 }
 export const RecoveredSinceDowntimeOfLengthResponse = {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthResponse",
   encode(message: RecoveredSinceDowntimeOfLengthResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.succesfullyRecovered === true) {
       writer.uint32(8).bool(message.succesfullyRecovered);
@@ -156,5 +191,36 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
     const obj: any = {};
     obj.succesfully_recovered = message.succesfullyRecovered;
     return obj;
+  },
+  fromAmino(object: RecoveredSinceDowntimeOfLengthResponseAmino): RecoveredSinceDowntimeOfLengthResponse {
+    return {
+      succesfullyRecovered: object.succesfully_recovered
+    };
+  },
+  toAmino(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseAmino {
+    const obj: any = {};
+    obj.succesfully_recovered = message.succesfullyRecovered;
+    return obj;
+  },
+  fromAminoMsg(object: RecoveredSinceDowntimeOfLengthResponseAminoMsg): RecoveredSinceDowntimeOfLengthResponse {
+    return RecoveredSinceDowntimeOfLengthResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseAminoMsg {
+    return {
+      type: "osmosis/downtimedetector/recovered-since-downtime-of-length-response",
+      value: RecoveredSinceDowntimeOfLengthResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: RecoveredSinceDowntimeOfLengthResponseProtoMsg): RecoveredSinceDowntimeOfLengthResponse {
+    return RecoveredSinceDowntimeOfLengthResponse.decode(message.value);
+  },
+  toProto(message: RecoveredSinceDowntimeOfLengthResponse): Uint8Array {
+    return RecoveredSinceDowntimeOfLengthResponse.encode(message).finish();
+  },
+  toProtoMsg(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthResponse",
+      value: RecoveredSinceDowntimeOfLengthResponse.encode(message).finish()
+    };
   }
 };

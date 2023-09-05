@@ -122,7 +122,10 @@ interface TelescopeOpts {
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
         // temporary field for backwards compat
 
-        useRecursiveV2encoding?: boolean;
+        /**
+        * @deprecated The logic of useLegacyInlineEncoding will be deprecated.
+        */
+        useLegacyInlineEncoding?: boolean;
 
     };
 
@@ -227,7 +230,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     logLevel: TelescopeLogLevel.None,
 
     interfaces: {
-        enabled: false,
+        enabled: true,
         useUnionTypes: false,
     },
 
@@ -247,29 +250,29 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toSDK: false,
             fromSDK: false,
             fromSDKJSON: false,
-            toAmino: false,
-            fromAmino: false,
-            toProto: false,
-            fromProto: false,
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
 
-        addTypeUrlToObjects: false,
+        addTypeUrlToObjects: true,
         addAminoTypeToObjects: false,
-        addTypeUrlToDecoders: false,
+        addTypeUrlToDecoders: true,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
 
         typingsFormat: {
             customTypes: {
-                useCosmosSDKDec: false
+              useCosmosSDKDec: true
             },
-            num64: 'long',
-            useDeepPartial: true,
+            num64: 'bigint',
+            useDeepPartial: false,
             useExact: false,
             timestamp: 'date',
             duration: 'duration',
@@ -306,7 +309,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
         },
-        useRecursiveV2encoding: false
+        useLegacyInlineEncoding: false
     },
     lcdClients: {
         bundle: true,

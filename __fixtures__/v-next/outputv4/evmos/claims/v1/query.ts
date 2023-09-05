@@ -113,6 +113,7 @@ function createBaseQueryTotalUnclaimedRequest(): QueryTotalUnclaimedRequest {
   return {};
 }
 export const QueryTotalUnclaimedRequest = {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
   encode(_: QueryTotalUnclaimedRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -150,6 +151,28 @@ export const QueryTotalUnclaimedRequest = {
   toSDK(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryTotalUnclaimedRequestAmino): QueryTotalUnclaimedRequest {
+    return {};
+  },
+  toAmino(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryTotalUnclaimedRequestAminoMsg): QueryTotalUnclaimedRequest {
+    return QueryTotalUnclaimedRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTotalUnclaimedRequestProtoMsg): QueryTotalUnclaimedRequest {
+    return QueryTotalUnclaimedRequest.decode(message.value);
+  },
+  toProto(message: QueryTotalUnclaimedRequest): Uint8Array {
+    return QueryTotalUnclaimedRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
+      value: QueryTotalUnclaimedRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryTotalUnclaimedResponse(): QueryTotalUnclaimedResponse {
@@ -158,6 +181,7 @@ function createBaseQueryTotalUnclaimedResponse(): QueryTotalUnclaimedResponse {
   };
 }
 export const QueryTotalUnclaimedResponse = {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
   encode(message: QueryTotalUnclaimedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -218,12 +242,42 @@ export const QueryTotalUnclaimedResponse = {
       obj.coins = [];
     }
     return obj;
+  },
+  fromAmino(object: QueryTotalUnclaimedResponseAmino): QueryTotalUnclaimedResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseAmino {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryTotalUnclaimedResponseAminoMsg): QueryTotalUnclaimedResponse {
+    return QueryTotalUnclaimedResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTotalUnclaimedResponseProtoMsg): QueryTotalUnclaimedResponse {
+    return QueryTotalUnclaimedResponse.decode(message.value);
+  },
+  toProto(message: QueryTotalUnclaimedResponse): Uint8Array {
+    return QueryTotalUnclaimedResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
+      value: QueryTotalUnclaimedResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.claims.v1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -261,6 +315,28 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -269,6 +345,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.claims.v1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -321,6 +398,31 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
@@ -329,6 +431,7 @@ function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
   };
 }
 export const QueryClaimsRecordsRequest = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
   encode(message: QueryClaimsRecordsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -381,6 +484,31 @@ export const QueryClaimsRecordsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryClaimsRecordsRequestAmino): QueryClaimsRecordsRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClaimsRecordsRequestAminoMsg): QueryClaimsRecordsRequest {
+    return QueryClaimsRecordsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryClaimsRecordsRequestProtoMsg): QueryClaimsRecordsRequest {
+    return QueryClaimsRecordsRequest.decode(message.value);
+  },
+  toProto(message: QueryClaimsRecordsRequest): Uint8Array {
+    return QueryClaimsRecordsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
+      value: QueryClaimsRecordsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
@@ -390,6 +518,7 @@ function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
   };
 }
 export const QueryClaimsRecordsResponse = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
   encode(message: QueryClaimsRecordsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.claims) {
       ClaimsRecordAddress.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -462,6 +591,37 @@ export const QueryClaimsRecordsResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryClaimsRecordsResponseAmino): QueryClaimsRecordsResponse {
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseAmino {
+    const obj: any = {};
+    if (message.claims) {
+      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
+    } else {
+      obj.claims = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClaimsRecordsResponseAminoMsg): QueryClaimsRecordsResponse {
+    return QueryClaimsRecordsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryClaimsRecordsResponseProtoMsg): QueryClaimsRecordsResponse {
+    return QueryClaimsRecordsResponse.decode(message.value);
+  },
+  toProto(message: QueryClaimsRecordsResponse): Uint8Array {
+    return QueryClaimsRecordsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
+      value: QueryClaimsRecordsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
@@ -470,6 +630,7 @@ function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
   };
 }
 export const QueryClaimsRecordRequest = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
   encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -522,6 +683,31 @@ export const QueryClaimsRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: QueryClaimsRecordRequestAmino): QueryClaimsRecordRequest {
+    return {
+      address: object.address
+    };
+  },
+  toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClaimsRecordRequestAminoMsg): QueryClaimsRecordRequest {
+    return QueryClaimsRecordRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryClaimsRecordRequestProtoMsg): QueryClaimsRecordRequest {
+    return QueryClaimsRecordRequest.decode(message.value);
+  },
+  toProto(message: QueryClaimsRecordRequest): Uint8Array {
+    return QueryClaimsRecordRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
+      value: QueryClaimsRecordRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
@@ -531,6 +717,7 @@ function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
   };
 }
 export const QueryClaimsRecordResponse = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
   encode(message: QueryClaimsRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);
@@ -603,5 +790,36 @@ export const QueryClaimsRecordResponse = {
       obj.claims = [];
     }
     return obj;
+  },
+  fromAmino(object: QueryClaimsRecordResponseAmino): QueryClaimsRecordResponse {
+    return {
+      initialClaimableAmount: object.initial_claimable_amount,
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseAmino {
+    const obj: any = {};
+    obj.initial_claimable_amount = message.initialClaimableAmount;
+    if (message.claims) {
+      obj.claims = message.claims.map(e => e ? Claim.toAmino(e) : undefined);
+    } else {
+      obj.claims = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryClaimsRecordResponseAminoMsg): QueryClaimsRecordResponse {
+    return QueryClaimsRecordResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryClaimsRecordResponseProtoMsg): QueryClaimsRecordResponse {
+    return QueryClaimsRecordResponse.decode(message.value);
+  },
+  toProto(message: QueryClaimsRecordResponse): Uint8Array {
+    return QueryClaimsRecordResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
+      value: QueryClaimsRecordResponse.encode(message).finish()
+    };
   }
 };

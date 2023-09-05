@@ -28,6 +28,7 @@ function createBasePubKey(): PubKey {
   };
 }
 export const PubKey = {
+  typeUrl: "/cosmos.crypto.secp256r1.PubKey",
   encode(message: PubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -80,6 +81,37 @@ export const PubKey = {
     const obj: any = {};
     obj.key = message.key;
     return obj;
+  },
+  fromAmino(object: PubKeyAmino): PubKey {
+    return {
+      key: object.key
+    };
+  },
+  toAmino(message: PubKey): PubKeyAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    return obj;
+  },
+  fromAminoMsg(object: PubKeyAminoMsg): PubKey {
+    return PubKey.fromAmino(object.value);
+  },
+  toAminoMsg(message: PubKey): PubKeyAminoMsg {
+    return {
+      type: "cosmos-sdk/PubKey",
+      value: PubKey.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PubKeyProtoMsg): PubKey {
+    return PubKey.decode(message.value);
+  },
+  toProto(message: PubKey): Uint8Array {
+    return PubKey.encode(message).finish();
+  },
+  toProtoMsg(message: PubKey): PubKeyProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.secp256r1.PubKey",
+      value: PubKey.encode(message).finish()
+    };
   }
 };
 function createBasePrivKey(): PrivKey {
@@ -88,6 +120,7 @@ function createBasePrivKey(): PrivKey {
   };
 }
 export const PrivKey = {
+  typeUrl: "/cosmos.crypto.secp256r1.PrivKey",
   encode(message: PrivKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.secret.length !== 0) {
       writer.uint32(10).bytes(message.secret);
@@ -140,5 +173,36 @@ export const PrivKey = {
     const obj: any = {};
     obj.secret = message.secret;
     return obj;
+  },
+  fromAmino(object: PrivKeyAmino): PrivKey {
+    return {
+      secret: object.secret
+    };
+  },
+  toAmino(message: PrivKey): PrivKeyAmino {
+    const obj: any = {};
+    obj.secret = message.secret;
+    return obj;
+  },
+  fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {
+    return PrivKey.fromAmino(object.value);
+  },
+  toAminoMsg(message: PrivKey): PrivKeyAminoMsg {
+    return {
+      type: "cosmos-sdk/PrivKey",
+      value: PrivKey.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PrivKeyProtoMsg): PrivKey {
+    return PrivKey.decode(message.value);
+  },
+  toProto(message: PrivKey): Uint8Array {
+    return PrivKey.encode(message).finish();
+  },
+  toProtoMsg(message: PrivKey): PrivKeyProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.secp256r1.PrivKey",
+      value: PrivKey.encode(message).finish()
+    };
   }
 };

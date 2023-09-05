@@ -29,6 +29,7 @@ function createBaseEmpty(): Empty {
   return {};
 }
 export const Empty = {
+  typeUrl: "/google.protobuf.Empty",
   encode(_: Empty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -66,5 +67,27 @@ export const Empty = {
   toSDK(_: Empty): EmptySDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: EmptyAmino): Empty {
+    return {};
+  },
+  toAmino(_: Empty): EmptyAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: EmptyAminoMsg): Empty {
+    return Empty.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EmptyProtoMsg): Empty {
+    return Empty.decode(message.value);
+  },
+  toProto(message: Empty): Uint8Array {
+    return Empty.encode(message).finish();
+  },
+  toProtoMsg(message: Empty): EmptyProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Empty",
+      value: Empty.encode(message).finish()
+    };
   }
 };

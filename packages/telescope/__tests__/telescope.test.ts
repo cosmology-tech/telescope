@@ -54,8 +54,14 @@ const options: TelescopeOptions = {
       toJSON: true,
       fromPartial: true,
       toSDK: true,
-      fromSDK: true
+      fromSDK: true,
+      toAmino: false,
+      fromAmino: false,
+      toProto: false,
+      fromProto: false,
     },
+    addTypeUrlToObjects: false,
+    addTypeUrlToDecoders: false,
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
@@ -70,6 +76,10 @@ const options: TelescopeOptions = {
       ]
     },
     typingsFormat: {
+      customTypes: {
+        useCosmosSDKDec: false
+      },
+      num64: 'long',
       useDeepPartial: true,
       useExact: false,
       timestamp: 'date',
@@ -240,7 +250,7 @@ const options: TelescopeOptions = {
         }
       }
     },
-    useRecursiveV2encoding: false
+    useLegacyInlineEncoding: true
   },
   packages: {
     akash: {

@@ -109,6 +109,7 @@ function createBaseModuleDescriptor(): ModuleDescriptor {
   };
 }
 export const ModuleDescriptor = {
+  typeUrl: "/cosmos.app.v1alpha1.ModuleDescriptor",
   encode(message: ModuleDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.goImport !== "") {
       writer.uint32(10).string(message.goImport);
@@ -201,6 +202,49 @@ export const ModuleDescriptor = {
       obj.can_migrate_from = [];
     }
     return obj;
+  },
+  fromAmino(object: ModuleDescriptorAmino): ModuleDescriptor {
+    return {
+      goImport: object.go_import,
+      usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromAmino(e)) : [],
+      canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ModuleDescriptor): ModuleDescriptorAmino {
+    const obj: any = {};
+    obj.go_import = message.goImport;
+    if (message.usePackage) {
+      obj.use_package = message.usePackage.map(e => e ? PackageReference.toAmino(e) : undefined);
+    } else {
+      obj.use_package = [];
+    }
+    if (message.canMigrateFrom) {
+      obj.can_migrate_from = message.canMigrateFrom.map(e => e ? MigrateFromInfo.toAmino(e) : undefined);
+    } else {
+      obj.can_migrate_from = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ModuleDescriptorAminoMsg): ModuleDescriptor {
+    return ModuleDescriptor.fromAmino(object.value);
+  },
+  toAminoMsg(message: ModuleDescriptor): ModuleDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/ModuleDescriptor",
+      value: ModuleDescriptor.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ModuleDescriptorProtoMsg): ModuleDescriptor {
+    return ModuleDescriptor.decode(message.value);
+  },
+  toProto(message: ModuleDescriptor): Uint8Array {
+    return ModuleDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: ModuleDescriptor): ModuleDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.ModuleDescriptor",
+      value: ModuleDescriptor.encode(message).finish()
+    };
   }
 };
 function createBasePackageReference(): PackageReference {
@@ -210,6 +254,7 @@ function createBasePackageReference(): PackageReference {
   };
 }
 export const PackageReference = {
+  typeUrl: "/cosmos.app.v1alpha1.PackageReference",
   encode(message: PackageReference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -274,6 +319,39 @@ export const PackageReference = {
     obj.name = message.name;
     obj.revision = message.revision;
     return obj;
+  },
+  fromAmino(object: PackageReferenceAmino): PackageReference {
+    return {
+      name: object.name,
+      revision: object.revision
+    };
+  },
+  toAmino(message: PackageReference): PackageReferenceAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.revision = message.revision;
+    return obj;
+  },
+  fromAminoMsg(object: PackageReferenceAminoMsg): PackageReference {
+    return PackageReference.fromAmino(object.value);
+  },
+  toAminoMsg(message: PackageReference): PackageReferenceAminoMsg {
+    return {
+      type: "cosmos-sdk/PackageReference",
+      value: PackageReference.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PackageReferenceProtoMsg): PackageReference {
+    return PackageReference.decode(message.value);
+  },
+  toProto(message: PackageReference): Uint8Array {
+    return PackageReference.encode(message).finish();
+  },
+  toProtoMsg(message: PackageReference): PackageReferenceProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.PackageReference",
+      value: PackageReference.encode(message).finish()
+    };
   }
 };
 function createBaseMigrateFromInfo(): MigrateFromInfo {
@@ -282,6 +360,7 @@ function createBaseMigrateFromInfo(): MigrateFromInfo {
   };
 }
 export const MigrateFromInfo = {
+  typeUrl: "/cosmos.app.v1alpha1.MigrateFromInfo",
   encode(message: MigrateFromInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
@@ -334,5 +413,36 @@ export const MigrateFromInfo = {
     const obj: any = {};
     obj.module = message.module;
     return obj;
+  },
+  fromAmino(object: MigrateFromInfoAmino): MigrateFromInfo {
+    return {
+      module: object.module
+    };
+  },
+  toAmino(message: MigrateFromInfo): MigrateFromInfoAmino {
+    const obj: any = {};
+    obj.module = message.module;
+    return obj;
+  },
+  fromAminoMsg(object: MigrateFromInfoAminoMsg): MigrateFromInfo {
+    return MigrateFromInfo.fromAmino(object.value);
+  },
+  toAminoMsg(message: MigrateFromInfo): MigrateFromInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/MigrateFromInfo",
+      value: MigrateFromInfo.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MigrateFromInfoProtoMsg): MigrateFromInfo {
+    return MigrateFromInfo.decode(message.value);
+  },
+  toProto(message: MigrateFromInfo): Uint8Array {
+    return MigrateFromInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MigrateFromInfo): MigrateFromInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.MigrateFromInfo",
+      value: MigrateFromInfo.encode(message).finish()
+    };
   }
 };

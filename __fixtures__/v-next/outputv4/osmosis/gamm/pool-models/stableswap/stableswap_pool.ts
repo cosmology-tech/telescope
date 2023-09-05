@@ -66,6 +66,7 @@ function createBasePoolParams(): PoolParams {
   };
 }
 export const PoolParams = {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
   encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.swapFee !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
@@ -130,6 +131,39 @@ export const PoolParams = {
     obj.swap_fee = message.swapFee;
     obj.exit_fee = message.exitFee;
     return obj;
+  },
+  fromAmino(object: PoolParamsAmino): PoolParams {
+    return {
+      swapFee: object.swap_fee,
+      exitFee: object.exit_fee
+    };
+  },
+  toAmino(message: PoolParams): PoolParamsAmino {
+    const obj: any = {};
+    obj.swap_fee = message.swapFee;
+    obj.exit_fee = message.exitFee;
+    return obj;
+  },
+  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
+    return PoolParams.fromAmino(object.value);
+  },
+  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/pool-params",
+      value: PoolParams.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
+    return PoolParams.decode(message.value);
+  },
+  toProto(message: PoolParams): Uint8Array {
+    return PoolParams.encode(message).finish();
+  },
+  toProtoMsg(message: PoolParams): PoolParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
+      value: PoolParams.encode(message).finish()
+    };
   }
 };
 function createBasePool(): Pool {
@@ -145,6 +179,7 @@ function createBasePool(): Pool {
   };
 }
 export const Pool = {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -306,5 +341,58 @@ export const Pool = {
     }
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
+  },
+  fromAmino(object: PoolAmino): Pool {
+    return {
+      address: object.address,
+      id: BigInt(object.id),
+      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
+      futurePoolGovernor: object.future_pool_governor,
+      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
+      poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
+      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : [],
+      scalingFactorController: object.scaling_factor_controller
+    };
+  },
+  toAmino(message: Pool): PoolAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
+    obj.future_pool_governor = message.futurePoolGovernor;
+    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
+    if (message.poolLiquidity) {
+      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.pool_liquidity = [];
+    }
+    if (message.scalingFactors) {
+      obj.scaling_factors = message.scalingFactors.map(e => e.toString());
+    } else {
+      obj.scaling_factors = [];
+    }
+    obj.scaling_factor_controller = message.scalingFactorController;
+    return obj;
+  },
+  fromAminoMsg(object: PoolAminoMsg): Pool {
+    return Pool.fromAmino(object.value);
+  },
+  toAminoMsg(message: Pool): PoolAminoMsg {
+    return {
+      type: "osmosis/gamm/pool",
+      value: Pool.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PoolProtoMsg): Pool {
+    return Pool.decode(message.value);
+  },
+  toProto(message: Pool): Uint8Array {
+    return Pool.encode(message).finish();
+  },
+  toProtoMsg(message: Pool): PoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
+      value: Pool.encode(message).finish()
+    };
   }
 };

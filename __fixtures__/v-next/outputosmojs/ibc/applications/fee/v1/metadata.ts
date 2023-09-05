@@ -26,6 +26,7 @@ function createBaseMetadata(): Metadata {
   };
 }
 export const Metadata = {
+  typeUrl: "/ibc.applications.fee.v1.Metadata",
   encode(message: Metadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.feeVersion !== "") {
       writer.uint32(10).string(message.feeVersion);
@@ -90,5 +91,38 @@ export const Metadata = {
     obj.fee_version = message.feeVersion;
     obj.app_version = message.appVersion;
     return obj;
+  },
+  fromAmino(object: MetadataAmino): Metadata {
+    return {
+      feeVersion: object.fee_version,
+      appVersion: object.app_version
+    };
+  },
+  toAmino(message: Metadata): MetadataAmino {
+    const obj: any = {};
+    obj.fee_version = message.feeVersion;
+    obj.app_version = message.appVersion;
+    return obj;
+  },
+  fromAminoMsg(object: MetadataAminoMsg): Metadata {
+    return Metadata.fromAmino(object.value);
+  },
+  toAminoMsg(message: Metadata): MetadataAminoMsg {
+    return {
+      type: "cosmos-sdk/Metadata",
+      value: Metadata.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MetadataProtoMsg): Metadata {
+    return Metadata.decode(message.value);
+  },
+  toProto(message: Metadata): Uint8Array {
+    return Metadata.encode(message).finish();
+  },
+  toProtoMsg(message: Metadata): MetadataProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.fee.v1.Metadata",
+      value: Metadata.encode(message).finish()
+    };
   }
 };

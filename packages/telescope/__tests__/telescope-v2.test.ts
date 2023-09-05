@@ -42,7 +42,7 @@ const options: TelescopeOptions = {
   },
   aminoEncoding: {
     enabled: true,
-    useRecursiveV2encoding: true
+    useLegacyInlineEncoding: false
   },
   prototypes: {
     enabled: true,

@@ -28,6 +28,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
+  typeUrl: "/osmosis.mint.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minter !== undefined) {
       Minter.encode(message.minter, writer.uint32(10).fork()).ldelim();
@@ -104,5 +105,40 @@ export const GenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     obj.reduction_started_epoch = message.reductionStartedEpoch;
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      reductionStartedEpoch: BigInt(object.reduction_started_epoch)
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.reduction_started_epoch = message.reductionStartedEpoch ? message.reductionStartedEpoch.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/mint/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

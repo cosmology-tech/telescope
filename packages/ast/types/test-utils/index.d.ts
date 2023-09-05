@@ -97,7 +97,7 @@ export declare const defaultTelescopeOptions: {
         casingFn?: Function;
         exceptions?: import("@cosmology/types").AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string;
-        useRecursiveV2encoding?: boolean;
+        useLegacyInlineEncoding?: boolean;
     };
     lcdClients: {
         enabled: boolean;

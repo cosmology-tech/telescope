@@ -6,7 +6,7 @@ import { createAminoType } from '../amino';
 
 const store = getTestProtoStore();
 store.options.interfaces.enabled = true;
-store.options.aminoEncoding.useRecursiveV2encoding = true;
+store.options.aminoEncoding.useLegacyInlineEncoding = false;
 store.traverseAll();
 
 describe('cosmos/gov/v1beta1/tx.proto', () => {

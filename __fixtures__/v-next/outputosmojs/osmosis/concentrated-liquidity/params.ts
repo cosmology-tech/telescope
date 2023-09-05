@@ -23,6 +23,7 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
+  typeUrl: "/osmosis.concentratedliquidity.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.authorizedTickSpacing) {
@@ -112,5 +113,46 @@ export const Params = {
       obj.authorized_swap_fees = [];
     }
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      authorizedTickSpacing: Array.isArray(object?.authorized_tick_spacing) ? object.authorized_tick_spacing.map((e: any) => BigInt(e)) : [],
+      authorizedSwapFees: Array.isArray(object?.authorized_swap_fees) ? object.authorized_swap_fees.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    if (message.authorizedTickSpacing) {
+      obj.authorized_tick_spacing = message.authorizedTickSpacing.map(e => e.toString());
+    } else {
+      obj.authorized_tick_spacing = [];
+    }
+    if (message.authorizedSwapFees) {
+      obj.authorized_swap_fees = message.authorizedSwapFees.map(e => e);
+    } else {
+      obj.authorized_swap_fees = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/concentratedliquidity/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.concentratedliquidity.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

@@ -22,6 +22,7 @@ function createBaseCosmWasmPool(): CosmWasmPool {
   };
 }
 export const CosmWasmPool = {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.CosmWasmPool",
   encode(message: CosmWasmPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolAddress !== "") {
       writer.uint32(10).string(message.poolAddress);
@@ -110,5 +111,42 @@ export const CosmWasmPool = {
     obj.pool_id = message.poolId;
     obj.code_id = message.codeId;
     return obj;
+  },
+  fromAmino(object: CosmWasmPoolAmino): CosmWasmPool {
+    return {
+      poolAddress: object.pool_address,
+      contractAddress: object.contract_address,
+      poolId: BigInt(object.pool_id),
+      codeId: BigInt(object.code_id)
+    };
+  },
+  toAmino(message: CosmWasmPool): CosmWasmPoolAmino {
+    const obj: any = {};
+    obj.pool_address = message.poolAddress;
+    obj.contract_address = message.contractAddress;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CosmWasmPoolAminoMsg): CosmWasmPool {
+    return CosmWasmPool.fromAmino(object.value);
+  },
+  toAminoMsg(message: CosmWasmPool): CosmWasmPoolAminoMsg {
+    return {
+      type: "osmosis/cosmwasmpool/cosm-wasm-pool",
+      value: CosmWasmPool.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CosmWasmPoolProtoMsg): CosmWasmPool {
+    return CosmWasmPool.decode(message.value);
+  },
+  toProto(message: CosmWasmPool): Uint8Array {
+    return CosmWasmPool.encode(message).finish();
+  },
+  toProtoMsg(message: CosmWasmPool): CosmWasmPoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.cosmwasmpool.v1beta1.CosmWasmPool",
+      value: CosmWasmPool.encode(message).finish()
+    };
   }
 };

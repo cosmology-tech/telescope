@@ -66,6 +66,7 @@ describe('cosmology/example/msg', () => {
 
     it('AminoConverter', () => {
         context.options.aminoEncoding.casingFn = camel;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createAminoConverter({
             context,
             root,
