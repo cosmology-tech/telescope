@@ -24,7 +24,6 @@ function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
   };
 }
 export const DenomAuthorityMetadata = {
-  typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
   encode(message: DenomAuthorityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -77,36 +76,5 @@ export const DenomAuthorityMetadata = {
     const obj: any = {};
     obj.admin = message.admin;
     return obj;
-  },
-  fromAmino(object: DenomAuthorityMetadataAmino): DenomAuthorityMetadata {
-    return {
-      admin: object.admin
-    };
-  },
-  toAmino(message: DenomAuthorityMetadata): DenomAuthorityMetadataAmino {
-    const obj: any = {};
-    obj.admin = message.admin;
-    return obj;
-  },
-  fromAminoMsg(object: DenomAuthorityMetadataAminoMsg): DenomAuthorityMetadata {
-    return DenomAuthorityMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomAuthorityMetadata): DenomAuthorityMetadataAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/denom-authority-metadata",
-      value: DenomAuthorityMetadata.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DenomAuthorityMetadataProtoMsg): DenomAuthorityMetadata {
-    return DenomAuthorityMetadata.decode(message.value);
-  },
-  toProto(message: DenomAuthorityMetadata): Uint8Array {
-    return DenomAuthorityMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: DenomAuthorityMetadata): DenomAuthorityMetadataProtoMsg {
-    return {
-      typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
-      value: DenomAuthorityMetadata.encode(message).finish()
-    };
   }
 };

@@ -104,7 +104,6 @@ function createBaseVisibility(): Visibility {
   };
 }
 export const Visibility = {
-  typeUrl: "/google.api.Visibility",
   encode(message: Visibility, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rules) {
       VisibilityRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -165,35 +164,6 @@ export const Visibility = {
       obj.rules = [];
     }
     return obj;
-  },
-  fromAmino(object: VisibilityAmino): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Visibility): VisibilityAmino {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
-    return Visibility.fromAmino(object.value);
-  },
-  fromProtoMsg(message: VisibilityProtoMsg): Visibility {
-    return Visibility.decode(message.value);
-  },
-  toProto(message: Visibility): Uint8Array {
-    return Visibility.encode(message).finish();
-  },
-  toProtoMsg(message: Visibility): VisibilityProtoMsg {
-    return {
-      typeUrl: "/google.api.Visibility",
-      value: Visibility.encode(message).finish()
-    };
   }
 };
 function createBaseVisibilityRule(): VisibilityRule {
@@ -203,7 +173,6 @@ function createBaseVisibilityRule(): VisibilityRule {
   };
 }
 export const VisibilityRule = {
-  typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -268,32 +237,5 @@ export const VisibilityRule = {
     obj.selector = message.selector;
     obj.restriction = message.restriction;
     return obj;
-  },
-  fromAmino(object: VisibilityRuleAmino): VisibilityRule {
-    return {
-      selector: object.selector,
-      restriction: object.restriction
-    };
-  },
-  toAmino(message: VisibilityRule): VisibilityRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.restriction = message.restriction;
-    return obj;
-  },
-  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
-    return VisibilityRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
-    return VisibilityRule.decode(message.value);
-  },
-  toProto(message: VisibilityRule): Uint8Array {
-    return VisibilityRule.encode(message).finish();
-  },
-  toProtoMsg(message: VisibilityRule): VisibilityRuleProtoMsg {
-    return {
-      typeUrl: "/google.api.VisibilityRule",
-      value: VisibilityRule.encode(message).finish()
-    };
   }
 };

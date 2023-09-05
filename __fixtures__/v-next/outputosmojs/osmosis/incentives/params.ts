@@ -19,7 +19,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/osmosis.incentives.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.distrEpochIdentifier !== "") {
       writer.uint32(10).string(message.distrEpochIdentifier);
@@ -72,36 +71,5 @@ export const Params = {
     const obj: any = {};
     obj.distr_epoch_identifier = message.distrEpochIdentifier;
     return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      distrEpochIdentifier: object.distr_epoch_identifier
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.distr_epoch_identifier = message.distrEpochIdentifier;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/incentives/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/osmosis.incentives.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

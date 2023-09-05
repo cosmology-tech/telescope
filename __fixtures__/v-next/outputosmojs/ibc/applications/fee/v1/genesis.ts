@@ -90,7 +90,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/ibc.applications.fee.v1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.identifiedFees) {
       IdentifiedPacketFees.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -231,65 +230,6 @@ export const GenesisState = {
       obj.forward_relayers = [];
     }
     return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      identifiedFees: Array.isArray(object?.identified_fees) ? object.identified_fees.map((e: any) => IdentifiedPacketFees.fromAmino(e)) : [],
-      feeEnabledChannels: Array.isArray(object?.fee_enabled_channels) ? object.fee_enabled_channels.map((e: any) => FeeEnabledChannel.fromAmino(e)) : [],
-      registeredPayees: Array.isArray(object?.registered_payees) ? object.registered_payees.map((e: any) => RegisteredPayee.fromAmino(e)) : [],
-      registeredCounterpartyPayees: Array.isArray(object?.registered_counterparty_payees) ? object.registered_counterparty_payees.map((e: any) => RegisteredCounterpartyPayee.fromAmino(e)) : [],
-      forwardRelayers: Array.isArray(object?.forward_relayers) ? object.forward_relayers.map((e: any) => ForwardRelayerAddress.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.identifiedFees) {
-      obj.identified_fees = message.identifiedFees.map(e => e ? IdentifiedPacketFees.toAmino(e) : undefined);
-    } else {
-      obj.identified_fees = [];
-    }
-    if (message.feeEnabledChannels) {
-      obj.fee_enabled_channels = message.feeEnabledChannels.map(e => e ? FeeEnabledChannel.toAmino(e) : undefined);
-    } else {
-      obj.fee_enabled_channels = [];
-    }
-    if (message.registeredPayees) {
-      obj.registered_payees = message.registeredPayees.map(e => e ? RegisteredPayee.toAmino(e) : undefined);
-    } else {
-      obj.registered_payees = [];
-    }
-    if (message.registeredCounterpartyPayees) {
-      obj.registered_counterparty_payees = message.registeredCounterpartyPayees.map(e => e ? RegisteredCounterpartyPayee.toAmino(e) : undefined);
-    } else {
-      obj.registered_counterparty_payees = [];
-    }
-    if (message.forwardRelayers) {
-      obj.forward_relayers = message.forwardRelayers.map(e => e ? ForwardRelayerAddress.toAmino(e) : undefined);
-    } else {
-      obj.forward_relayers = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };
 function createBaseFeeEnabledChannel(): FeeEnabledChannel {
@@ -299,7 +239,6 @@ function createBaseFeeEnabledChannel(): FeeEnabledChannel {
   };
 }
 export const FeeEnabledChannel = {
-  typeUrl: "/ibc.applications.fee.v1.FeeEnabledChannel",
   encode(message: FeeEnabledChannel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -364,39 +303,6 @@ export const FeeEnabledChannel = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
-  },
-  fromAmino(object: FeeEnabledChannelAmino): FeeEnabledChannel {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id
-    };
-  },
-  toAmino(message: FeeEnabledChannel): FeeEnabledChannelAmino {
-    const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    return obj;
-  },
-  fromAminoMsg(object: FeeEnabledChannelAminoMsg): FeeEnabledChannel {
-    return FeeEnabledChannel.fromAmino(object.value);
-  },
-  toAminoMsg(message: FeeEnabledChannel): FeeEnabledChannelAminoMsg {
-    return {
-      type: "cosmos-sdk/FeeEnabledChannel",
-      value: FeeEnabledChannel.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: FeeEnabledChannelProtoMsg): FeeEnabledChannel {
-    return FeeEnabledChannel.decode(message.value);
-  },
-  toProto(message: FeeEnabledChannel): Uint8Array {
-    return FeeEnabledChannel.encode(message).finish();
-  },
-  toProtoMsg(message: FeeEnabledChannel): FeeEnabledChannelProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.FeeEnabledChannel",
-      value: FeeEnabledChannel.encode(message).finish()
-    };
   }
 };
 function createBaseRegisteredPayee(): RegisteredPayee {
@@ -407,7 +313,6 @@ function createBaseRegisteredPayee(): RegisteredPayee {
   };
 }
 export const RegisteredPayee = {
-  typeUrl: "/ibc.applications.fee.v1.RegisteredPayee",
   encode(message: RegisteredPayee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -484,41 +389,6 @@ export const RegisteredPayee = {
     obj.relayer = message.relayer;
     obj.payee = message.payee;
     return obj;
-  },
-  fromAmino(object: RegisteredPayeeAmino): RegisteredPayee {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer,
-      payee: object.payee
-    };
-  },
-  toAmino(message: RegisteredPayee): RegisteredPayeeAmino {
-    const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.payee = message.payee;
-    return obj;
-  },
-  fromAminoMsg(object: RegisteredPayeeAminoMsg): RegisteredPayee {
-    return RegisteredPayee.fromAmino(object.value);
-  },
-  toAminoMsg(message: RegisteredPayee): RegisteredPayeeAminoMsg {
-    return {
-      type: "cosmos-sdk/RegisteredPayee",
-      value: RegisteredPayee.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: RegisteredPayeeProtoMsg): RegisteredPayee {
-    return RegisteredPayee.decode(message.value);
-  },
-  toProto(message: RegisteredPayee): Uint8Array {
-    return RegisteredPayee.encode(message).finish();
-  },
-  toProtoMsg(message: RegisteredPayee): RegisteredPayeeProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.RegisteredPayee",
-      value: RegisteredPayee.encode(message).finish()
-    };
   }
 };
 function createBaseRegisteredCounterpartyPayee(): RegisteredCounterpartyPayee {
@@ -529,7 +399,6 @@ function createBaseRegisteredCounterpartyPayee(): RegisteredCounterpartyPayee {
   };
 }
 export const RegisteredCounterpartyPayee = {
-  typeUrl: "/ibc.applications.fee.v1.RegisteredCounterpartyPayee",
   encode(message: RegisteredCounterpartyPayee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -606,41 +475,6 @@ export const RegisteredCounterpartyPayee = {
     obj.relayer = message.relayer;
     obj.counterparty_payee = message.counterpartyPayee;
     return obj;
-  },
-  fromAmino(object: RegisteredCounterpartyPayeeAmino): RegisteredCounterpartyPayee {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer,
-      counterpartyPayee: object.counterparty_payee
-    };
-  },
-  toAmino(message: RegisteredCounterpartyPayee): RegisteredCounterpartyPayeeAmino {
-    const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.counterparty_payee = message.counterpartyPayee;
-    return obj;
-  },
-  fromAminoMsg(object: RegisteredCounterpartyPayeeAminoMsg): RegisteredCounterpartyPayee {
-    return RegisteredCounterpartyPayee.fromAmino(object.value);
-  },
-  toAminoMsg(message: RegisteredCounterpartyPayee): RegisteredCounterpartyPayeeAminoMsg {
-    return {
-      type: "cosmos-sdk/RegisteredCounterpartyPayee",
-      value: RegisteredCounterpartyPayee.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: RegisteredCounterpartyPayeeProtoMsg): RegisteredCounterpartyPayee {
-    return RegisteredCounterpartyPayee.decode(message.value);
-  },
-  toProto(message: RegisteredCounterpartyPayee): Uint8Array {
-    return RegisteredCounterpartyPayee.encode(message).finish();
-  },
-  toProtoMsg(message: RegisteredCounterpartyPayee): RegisteredCounterpartyPayeeProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.RegisteredCounterpartyPayee",
-      value: RegisteredCounterpartyPayee.encode(message).finish()
-    };
   }
 };
 function createBaseForwardRelayerAddress(): ForwardRelayerAddress {
@@ -649,7 +483,6 @@ function createBaseForwardRelayerAddress(): ForwardRelayerAddress {
   };
 }
 export const ForwardRelayerAddress = {
-  typeUrl: "/ibc.applications.fee.v1.ForwardRelayerAddress",
   encode(message: ForwardRelayerAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -702,36 +535,5 @@ export const ForwardRelayerAddress = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
-  },
-  fromAmino(object: ForwardRelayerAddressAmino): ForwardRelayerAddress {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: ForwardRelayerAddress): ForwardRelayerAddressAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: ForwardRelayerAddressAminoMsg): ForwardRelayerAddress {
-    return ForwardRelayerAddress.fromAmino(object.value);
-  },
-  toAminoMsg(message: ForwardRelayerAddress): ForwardRelayerAddressAminoMsg {
-    return {
-      type: "cosmos-sdk/ForwardRelayerAddress",
-      value: ForwardRelayerAddress.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ForwardRelayerAddressProtoMsg): ForwardRelayerAddress {
-    return ForwardRelayerAddress.decode(message.value);
-  },
-  toProto(message: ForwardRelayerAddress): Uint8Array {
-    return ForwardRelayerAddress.encode(message).finish();
-  },
-  toProtoMsg(message: ForwardRelayerAddress): ForwardRelayerAddressProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.ForwardRelayerAddress",
-      value: ForwardRelayerAddress.encode(message).finish()
-    };
   }
 };

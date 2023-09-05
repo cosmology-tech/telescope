@@ -23,7 +23,6 @@ function createBaseResource(): Resource {
   };
 }
 export const Resource = {
-  typeUrl: "/akash.deployment.v1beta2.Resource",
   encode(message: Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();
@@ -100,40 +99,5 @@ export const Resource = {
     obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     return obj;
-  },
-  fromAmino(object: ResourceAmino): Resource {
-    return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: object.count,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
-    };
-  },
-  toAmino(message: Resource): ResourceAmino {
-    const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
-    obj.count = message.count;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ResourceAminoMsg): Resource {
-    return Resource.fromAmino(object.value);
-  },
-  toAminoMsg(message: Resource): ResourceAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/resource",
-      value: Resource.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ResourceProtoMsg): Resource {
-    return Resource.decode(message.value);
-  },
-  toProto(message: Resource): Uint8Array {
-    return Resource.encode(message).finish();
-  },
-  toProtoMsg(message: Resource): ResourceProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.Resource",
-      value: Resource.encode(message).finish()
-    };
   }
 };

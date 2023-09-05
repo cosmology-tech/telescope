@@ -81,7 +81,6 @@ function createBaseGauge(): Gauge {
   };
 }
 export const Gauge = {
-  typeUrl: "/osmosis.incentives.Gauge",
   encode(message: Gauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
@@ -242,59 +241,6 @@ export const Gauge = {
       obj.distributed_coins = [];
     }
     return obj;
-  },
-  fromAmino(object: GaugeAmino): Gauge {
-    return {
-      id: BigInt(object.id),
-      isPerpetual: object.is_perpetual,
-      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object.start_time,
-      numEpochsPaidOver: BigInt(object.num_epochs_paid_over),
-      filledEpochs: BigInt(object.filled_epochs),
-      distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Gauge): GaugeAmino {
-    const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.is_perpetual = message.isPerpetual;
-    obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    obj.start_time = message.startTime;
-    obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
-    obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
-    if (message.distributedCoins) {
-      obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.distributed_coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GaugeAminoMsg): Gauge {
-    return Gauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: Gauge): GaugeAminoMsg {
-    return {
-      type: "osmosis/incentives/gauge",
-      value: Gauge.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GaugeProtoMsg): Gauge {
-    return Gauge.decode(message.value);
-  },
-  toProto(message: Gauge): Uint8Array {
-    return Gauge.encode(message).finish();
-  },
-  toProtoMsg(message: Gauge): GaugeProtoMsg {
-    return {
-      typeUrl: "/osmosis.incentives.Gauge",
-      value: Gauge.encode(message).finish()
-    };
   }
 };
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {
@@ -303,7 +249,6 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
   };
 }
 export const LockableDurationsInfo = {
-  typeUrl: "/osmosis.incentives.LockableDurationsInfo",
   encode(message: LockableDurationsInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -364,40 +309,5 @@ export const LockableDurationsInfo = {
       obj.lockable_durations = [];
     }
     return obj;
-  },
-  fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
-    const obj: any = {};
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: LockableDurationsInfo): LockableDurationsInfoAminoMsg {
-    return {
-      type: "osmosis/incentives/lockable-durations-info",
-      value: LockableDurationsInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.decode(message.value);
-  },
-  toProto(message: LockableDurationsInfo): Uint8Array {
-    return LockableDurationsInfo.encode(message).finish();
-  },
-  toProtoMsg(message: LockableDurationsInfo): LockableDurationsInfoProtoMsg {
-    return {
-      typeUrl: "/osmosis.incentives.LockableDurationsInfo",
-      value: LockableDurationsInfo.encode(message).finish()
-    };
   }
 };

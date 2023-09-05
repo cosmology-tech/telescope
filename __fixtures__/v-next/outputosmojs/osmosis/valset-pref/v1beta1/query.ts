@@ -25,7 +25,6 @@ function createBaseUserValidatorPreferencesRequest(): UserValidatorPreferencesRe
   };
 }
 export const UserValidatorPreferencesRequest = {
-  typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesRequest",
   encode(message: UserValidatorPreferencesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -78,37 +77,6 @@ export const UserValidatorPreferencesRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
-  },
-  fromAmino(object: UserValidatorPreferencesRequestAmino): UserValidatorPreferencesRequest {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: UserValidatorPreferencesRequest): UserValidatorPreferencesRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: UserValidatorPreferencesRequestAminoMsg): UserValidatorPreferencesRequest {
-    return UserValidatorPreferencesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: UserValidatorPreferencesRequest): UserValidatorPreferencesRequestAminoMsg {
-    return {
-      type: "osmosis/valsetpref/user-validator-preferences-request",
-      value: UserValidatorPreferencesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UserValidatorPreferencesRequestProtoMsg): UserValidatorPreferencesRequest {
-    return UserValidatorPreferencesRequest.decode(message.value);
-  },
-  toProto(message: UserValidatorPreferencesRequest): Uint8Array {
-    return UserValidatorPreferencesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UserValidatorPreferencesRequest): UserValidatorPreferencesRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesRequest",
-      value: UserValidatorPreferencesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUserValidatorPreferencesResponse(): UserValidatorPreferencesResponse {
@@ -117,7 +85,6 @@ function createBaseUserValidatorPreferencesResponse(): UserValidatorPreferencesR
   };
 }
 export const UserValidatorPreferencesResponse = {
-  typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesResponse",
   encode(message: UserValidatorPreferencesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.preferences) {
       ValidatorPreference.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -178,40 +145,5 @@ export const UserValidatorPreferencesResponse = {
       obj.preferences = [];
     }
     return obj;
-  },
-  fromAmino(object: UserValidatorPreferencesResponseAmino): UserValidatorPreferencesResponse {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: UserValidatorPreferencesResponse): UserValidatorPreferencesResponseAmino {
-    const obj: any = {};
-    if (message.preferences) {
-      obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
-    } else {
-      obj.preferences = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UserValidatorPreferencesResponseAminoMsg): UserValidatorPreferencesResponse {
-    return UserValidatorPreferencesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: UserValidatorPreferencesResponse): UserValidatorPreferencesResponseAminoMsg {
-    return {
-      type: "osmosis/valsetpref/user-validator-preferences-response",
-      value: UserValidatorPreferencesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UserValidatorPreferencesResponseProtoMsg): UserValidatorPreferencesResponse {
-    return UserValidatorPreferencesResponse.decode(message.value);
-  },
-  toProto(message: UserValidatorPreferencesResponse): Uint8Array {
-    return UserValidatorPreferencesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: UserValidatorPreferencesResponse): UserValidatorPreferencesResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesResponse",
-      value: UserValidatorPreferencesResponse.encode(message).finish()
-    };
   }
 };

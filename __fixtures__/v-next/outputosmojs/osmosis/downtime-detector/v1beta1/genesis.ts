@@ -28,7 +28,6 @@ function createBaseGenesisDowntimeEntry(): GenesisDowntimeEntry {
   };
 }
 export const GenesisDowntimeEntry = {
-  typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisDowntimeEntry",
   encode(message: GenesisDowntimeEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.duration !== 0) {
       writer.uint32(8).int32(message.duration);
@@ -93,39 +92,6 @@ export const GenesisDowntimeEntry = {
     message.duration !== undefined && (obj.duration = downtimeToJSON(message.duration));
     message.lastDowntime !== undefined && (obj.last_downtime = message.lastDowntime ?? undefined);
     return obj;
-  },
-  fromAmino(object: GenesisDowntimeEntryAmino): GenesisDowntimeEntry {
-    return {
-      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
-      lastDowntime: object.last_downtime
-    };
-  },
-  toAmino(message: GenesisDowntimeEntry): GenesisDowntimeEntryAmino {
-    const obj: any = {};
-    obj.duration = message.duration;
-    obj.last_downtime = message.lastDowntime;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisDowntimeEntryAminoMsg): GenesisDowntimeEntry {
-    return GenesisDowntimeEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisDowntimeEntry): GenesisDowntimeEntryAminoMsg {
-    return {
-      type: "osmosis/downtimedetector/genesis-downtime-entry",
-      value: GenesisDowntimeEntry.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisDowntimeEntryProtoMsg): GenesisDowntimeEntry {
-    return GenesisDowntimeEntry.decode(message.value);
-  },
-  toProto(message: GenesisDowntimeEntry): Uint8Array {
-    return GenesisDowntimeEntry.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisDowntimeEntry): GenesisDowntimeEntryProtoMsg {
-    return {
-      typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisDowntimeEntry",
-      value: GenesisDowntimeEntry.encode(message).finish()
-    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -135,7 +101,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.downtimes) {
       GenesisDowntimeEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -208,42 +173,5 @@ export const GenesisState = {
     }
     message.lastBlockTime !== undefined && (obj.last_block_time = message.lastBlockTime ?? undefined);
     return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      downtimes: Array.isArray(object?.downtimes) ? object.downtimes.map((e: any) => GenesisDowntimeEntry.fromAmino(e)) : [],
-      lastBlockTime: object.last_block_time
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.downtimes) {
-      obj.downtimes = message.downtimes.map(e => e ? GenesisDowntimeEntry.toAmino(e) : undefined);
-    } else {
-      obj.downtimes = [];
-    }
-    obj.last_block_time = message.lastBlockTime;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/downtimedetector/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };

@@ -1,5 +1,5 @@
 import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta1";
 /** Provider stores owner auditor and attributes details */
@@ -186,7 +186,7 @@ function createBaseProvider(): Provider {
 }
 export const Provider = {
   typeUrl: "/akash.audit.v1beta1.Provider",
-  encode(message: Provider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Provider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -198,8 +198,8 @@ export const Provider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Provider {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Provider {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProvider();
     while (reader.pos < end) {
@@ -307,7 +307,7 @@ function createBaseAuditedAttributes(): AuditedAttributes {
 }
 export const AuditedAttributes = {
   typeUrl: "/akash.audit.v1beta1.AuditedAttributes",
-  encode(message: AuditedAttributes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: AuditedAttributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -319,8 +319,8 @@ export const AuditedAttributes = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AuditedAttributes {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuditedAttributes {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuditedAttributes();
     while (reader.pos < end) {
@@ -426,14 +426,14 @@ function createBaseAttributesResponse(): AttributesResponse {
 }
 export const AttributesResponse = {
   typeUrl: "/akash.audit.v1beta1.AttributesResponse",
-  encode(message: AttributesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: AttributesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.attributes) {
       AuditedAttributes.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): AttributesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesResponse();
     while (reader.pos < end) {
@@ -520,7 +520,7 @@ function createBaseAttributesFilters(): AttributesFilters {
 }
 export const AttributesFilters = {
   typeUrl: "/akash.audit.v1beta1.AttributesFilters",
-  encode(message: AttributesFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: AttributesFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.auditors) {
       writer.uint32(10).string(v!);
     }
@@ -529,8 +529,8 @@ export const AttributesFilters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributesFilters {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): AttributesFilters {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesFilters();
     while (reader.pos < end) {
@@ -640,7 +640,7 @@ function createBaseMsgSignProviderAttributes(): MsgSignProviderAttributes {
 }
 export const MsgSignProviderAttributes = {
   typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes",
-  encode(message: MsgSignProviderAttributes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgSignProviderAttributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -652,8 +652,8 @@ export const MsgSignProviderAttributes = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSignProviderAttributes {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSignProviderAttributes {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignProviderAttributes();
     while (reader.pos < end) {
@@ -757,11 +757,11 @@ function createBaseMsgSignProviderAttributesResponse(): MsgSignProviderAttribute
 }
 export const MsgSignProviderAttributesResponse = {
   typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributesResponse",
-  encode(_: MsgSignProviderAttributesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: MsgSignProviderAttributesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSignProviderAttributesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSignProviderAttributesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignProviderAttributesResponse();
     while (reader.pos < end) {
@@ -825,7 +825,7 @@ function createBaseMsgDeleteProviderAttributes(): MsgDeleteProviderAttributes {
 }
 export const MsgDeleteProviderAttributes = {
   typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
-  encode(message: MsgDeleteProviderAttributes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgDeleteProviderAttributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -837,8 +837,8 @@ export const MsgDeleteProviderAttributes = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeleteProviderAttributes {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderAttributes {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderAttributes();
     while (reader.pos < end) {
@@ -942,11 +942,11 @@ function createBaseMsgDeleteProviderAttributesResponse(): MsgDeleteProviderAttri
 }
 export const MsgDeleteProviderAttributesResponse = {
   typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributesResponse",
-  encode(_: MsgDeleteProviderAttributesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: MsgDeleteProviderAttributesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeleteProviderAttributesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderAttributesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderAttributesResponse();
     while (reader.pos < end) {

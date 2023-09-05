@@ -5,8 +5,8 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/
 import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
 import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
 import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -263,8 +263,8 @@ export interface HeaderSDKType {
  * supports positive values.
  */
 export interface Fraction {
-  numerator: bigint;
-  denominator: bigint;
+  numerator: Long;
+  denominator: Long;
 }
 export interface FractionProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
@@ -287,8 +287,8 @@ export interface FractionAminoMsg {
  * supports positive values.
  */
 export interface FractionSDKType {
-  numerator: bigint;
-  denominator: bigint;
+  numerator: Long;
+  denominator: Long;
 }
 function createBaseClientState(): ClientState {
   return {
@@ -308,7 +308,7 @@ function createBaseClientState(): ClientState {
 export const ClientState = {
   typeUrl: "/ibc.lightclients.tendermint.v1.ClientState",
   aminoType: "cosmos-sdk/ClientState",
-  encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }
@@ -344,8 +344,8 @@ export const ClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClientState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
     while (reader.pos < end) {
@@ -564,7 +564,7 @@ function createBaseConsensusState(): ConsensusState {
 export const ConsensusState = {
   typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState",
   aminoType: "cosmos-sdk/ConsensusState",
-  encode(message: ConsensusState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ConsensusState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).ldelim();
     }
@@ -576,8 +576,8 @@ export const ConsensusState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConsensusState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusState();
     while (reader.pos < end) {
@@ -682,7 +682,7 @@ function createBaseMisbehaviour(): Misbehaviour {
 export const Misbehaviour = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour",
   aminoType: "cosmos-sdk/Misbehaviour",
-  encode(message: Misbehaviour, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Misbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -694,8 +694,8 @@ export const Misbehaviour = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Misbehaviour {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Misbehaviour {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMisbehaviour();
     while (reader.pos < end) {
@@ -803,7 +803,7 @@ function createBaseHeader(): Header {
 export const Header = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Header",
   aminoType: "cosmos-sdk/Header",
-  encode(message: Header, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedHeader !== undefined) {
       SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).ldelim();
     }
@@ -818,8 +818,8 @@ export const Header = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Header {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Header {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
     while (reader.pos < end) {
@@ -932,34 +932,34 @@ export const Header = {
 };
 function createBaseFraction(): Fraction {
   return {
-    numerator: BigInt(0),
-    denominator: BigInt(0)
+    numerator: Long.UZERO,
+    denominator: Long.UZERO
   };
 }
 export const Fraction = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Fraction",
   aminoType: "cosmos-sdk/Fraction",
-  encode(message: Fraction, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numerator !== BigInt(0)) {
+  encode(message: Fraction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.numerator.isZero()) {
       writer.uint32(8).uint64(message.numerator);
     }
-    if (message.denominator !== BigInt(0)) {
+    if (!message.denominator.isZero()) {
       writer.uint32(16).uint64(message.denominator);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Fraction {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Fraction {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFraction();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.numerator = reader.uint64();
+          message.numerator = (reader.uint64() as Long);
           break;
         case 2:
-          message.denominator = reader.uint64();
+          message.denominator = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -970,23 +970,23 @@ export const Fraction = {
   },
   fromJSON(object: any): Fraction {
     const obj = createBaseFraction();
-    if (isSet(object.numerator)) obj.numerator = BigInt(object.numerator.toString());
-    if (isSet(object.denominator)) obj.denominator = BigInt(object.denominator.toString());
+    if (isSet(object.numerator)) obj.numerator = Long.fromValue(object.numerator);
+    if (isSet(object.denominator)) obj.denominator = Long.fromValue(object.denominator);
     return obj;
   },
   toJSON(message: Fraction): unknown {
     const obj: any = {};
-    message.numerator !== undefined && (obj.numerator = (message.numerator || BigInt(0)).toString());
-    message.denominator !== undefined && (obj.denominator = (message.denominator || BigInt(0)).toString());
+    message.numerator !== undefined && (obj.numerator = (message.numerator || Long.UZERO).toString());
+    message.denominator !== undefined && (obj.denominator = (message.denominator || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
     if (object.numerator !== undefined && object.numerator !== null) {
-      message.numerator = BigInt(object.numerator.toString());
+      message.numerator = Long.fromValue(object.numerator);
     }
     if (object.denominator !== undefined && object.denominator !== null) {
-      message.denominator = BigInt(object.denominator.toString());
+      message.denominator = Long.fromValue(object.denominator);
     }
     return message;
   },
@@ -1004,8 +1004,8 @@ export const Fraction = {
   },
   fromAmino(object: FractionAmino): Fraction {
     return {
-      numerator: BigInt(object.numerator),
-      denominator: BigInt(object.denominator)
+      numerator: Long.fromString(object.numerator),
+      denominator: Long.fromString(object.denominator)
     };
   },
   toAmino(message: Fraction): FractionAmino {

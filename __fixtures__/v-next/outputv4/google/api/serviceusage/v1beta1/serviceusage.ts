@@ -762,7 +762,6 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
   };
 }
 export const EnableServiceRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -815,31 +814,6 @@ export const EnableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
-    return EnableServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnableServiceRequestProtoMsg): EnableServiceRequest {
-    return EnableServiceRequest.decode(message.value);
-  },
-  toProto(message: EnableServiceRequest): Uint8Array {
-    return EnableServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: EnableServiceRequest): EnableServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest",
-      value: EnableServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDisableServiceRequest(): DisableServiceRequest {
@@ -848,7 +822,6 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
   };
 }
 export const DisableServiceRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -901,31 +874,6 @@ export const DisableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
-    return DisableServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DisableServiceRequestProtoMsg): DisableServiceRequest {
-    return DisableServiceRequest.decode(message.value);
-  },
-  toProto(message: DisableServiceRequest): Uint8Array {
-    return DisableServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DisableServiceRequest): DisableServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest",
-      value: DisableServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGetServiceRequest(): GetServiceRequest {
@@ -934,7 +882,6 @@ function createBaseGetServiceRequest(): GetServiceRequest {
   };
 }
 export const GetServiceRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -987,31 +934,6 @@ export const GetServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
-    return GetServiceRequest.decode(message.value);
-  },
-  toProto(message: GetServiceRequest): Uint8Array {
-    return GetServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetServiceRequest): GetServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest",
-      value: GetServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServicesRequest(): ListServicesRequest {
@@ -1023,7 +945,6 @@ function createBaseListServicesRequest(): ListServicesRequest {
   };
 }
 export const ListServicesRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1112,37 +1033,6 @@ export const ListServicesRequest = {
     obj.page_token = message.pageToken;
     obj.filter = message.filter;
     return obj;
-  },
-  fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      filter: object.filter
-    };
-  },
-  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
-    return ListServicesRequest.decode(message.value);
-  },
-  toProto(message: ListServicesRequest): Uint8Array {
-    return ListServicesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListServicesRequest): ListServicesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest",
-      value: ListServicesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServicesResponse(): ListServicesResponse {
@@ -1152,7 +1042,6 @@ function createBaseListServicesResponse(): ListServicesResponse {
   };
 }
 export const ListServicesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse",
   encode(message: ListServicesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1225,37 +1114,6 @@ export const ListServicesResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
-    return ListServicesResponse.decode(message.value);
-  },
-  toProto(message: ListServicesResponse): Uint8Array {
-    return ListServicesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListServicesResponse): ListServicesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse",
-      value: ListServicesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
@@ -1265,7 +1123,6 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
   };
 }
 export const BatchEnableServicesRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1338,37 +1195,6 @@ export const BatchEnableServicesRequest = {
       obj.service_ids = [];
     }
     return obj;
-  },
-  fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
-    return {
-      parent: object.parent,
-      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    if (message.serviceIds) {
-      obj.service_ids = message.serviceIds.map(e => e);
-    } else {
-      obj.service_ids = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesRequestAminoMsg): BatchEnableServicesRequest {
-    return BatchEnableServicesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BatchEnableServicesRequestProtoMsg): BatchEnableServicesRequest {
-    return BatchEnableServicesRequest.decode(message.value);
-  },
-  toProto(message: BatchEnableServicesRequest): Uint8Array {
-    return BatchEnableServicesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: BatchEnableServicesRequest): BatchEnableServicesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest",
-      value: BatchEnableServicesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRequest {
@@ -1380,7 +1206,6 @@ function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRe
   };
 }
 export const ListConsumerQuotaMetricsRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest",
   encode(message: ListConsumerQuotaMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1469,37 +1294,6 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.page_token = message.pageToken;
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
-  },
-  fromAmino(object: ListConsumerQuotaMetricsRequestAmino): ListConsumerQuotaMetricsRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
-    };
-  },
-  toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.view = message.view;
-    return obj;
-  },
-  fromAminoMsg(object: ListConsumerQuotaMetricsRequestAminoMsg): ListConsumerQuotaMetricsRequest {
-    return ListConsumerQuotaMetricsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg): ListConsumerQuotaMetricsRequest {
-    return ListConsumerQuotaMetricsRequest.decode(message.value);
-  },
-  toProto(message: ListConsumerQuotaMetricsRequest): Uint8Array {
-    return ListConsumerQuotaMetricsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest",
-      value: ListConsumerQuotaMetricsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListConsumerQuotaMetricsResponse(): ListConsumerQuotaMetricsResponse {
@@ -1509,7 +1303,6 @@ function createBaseListConsumerQuotaMetricsResponse(): ListConsumerQuotaMetricsR
   };
 }
 export const ListConsumerQuotaMetricsResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse",
   encode(message: ListConsumerQuotaMetricsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.metrics) {
       ConsumerQuotaMetric.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1582,37 +1375,6 @@ export const ListConsumerQuotaMetricsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListConsumerQuotaMetricsResponseAmino): ListConsumerQuotaMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseAmino {
-    const obj: any = {};
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toAmino(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListConsumerQuotaMetricsResponseAminoMsg): ListConsumerQuotaMetricsResponse {
-    return ListConsumerQuotaMetricsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListConsumerQuotaMetricsResponseProtoMsg): ListConsumerQuotaMetricsResponse {
-    return ListConsumerQuotaMetricsResponse.decode(message.value);
-  },
-  toProto(message: ListConsumerQuotaMetricsResponse): Uint8Array {
-    return ListConsumerQuotaMetricsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse",
-      value: ListConsumerQuotaMetricsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricRequest {
@@ -1622,7 +1384,6 @@ function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricReques
   };
 }
 export const GetConsumerQuotaMetricRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest",
   encode(message: GetConsumerQuotaMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1687,33 +1448,6 @@ export const GetConsumerQuotaMetricRequest = {
     obj.name = message.name;
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
-  },
-  fromAmino(object: GetConsumerQuotaMetricRequestAmino): GetConsumerQuotaMetricRequest {
-    return {
-      name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
-    };
-  },
-  toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.view = message.view;
-    return obj;
-  },
-  fromAminoMsg(object: GetConsumerQuotaMetricRequestAminoMsg): GetConsumerQuotaMetricRequest {
-    return GetConsumerQuotaMetricRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg): GetConsumerQuotaMetricRequest {
-    return GetConsumerQuotaMetricRequest.decode(message.value);
-  },
-  toProto(message: GetConsumerQuotaMetricRequest): Uint8Array {
-    return GetConsumerQuotaMetricRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest",
-      value: GetConsumerQuotaMetricRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest {
@@ -1723,7 +1457,6 @@ function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest 
   };
 }
 export const GetConsumerQuotaLimitRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest",
   encode(message: GetConsumerQuotaLimitRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1788,33 +1521,6 @@ export const GetConsumerQuotaLimitRequest = {
     obj.name = message.name;
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
-  },
-  fromAmino(object: GetConsumerQuotaLimitRequestAmino): GetConsumerQuotaLimitRequest {
-    return {
-      name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
-    };
-  },
-  toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.view = message.view;
-    return obj;
-  },
-  fromAminoMsg(object: GetConsumerQuotaLimitRequestAminoMsg): GetConsumerQuotaLimitRequest {
-    return GetConsumerQuotaLimitRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg): GetConsumerQuotaLimitRequest {
-    return GetConsumerQuotaLimitRequest.decode(message.value);
-  },
-  toProto(message: GetConsumerQuotaLimitRequest): Uint8Array {
-    return GetConsumerQuotaLimitRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest",
-      value: GetConsumerQuotaLimitRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
@@ -1826,7 +1532,6 @@ function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
   };
 }
 export const CreateAdminOverrideRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest",
   encode(message: CreateAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1934,41 +1639,6 @@ export const CreateAdminOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: CreateAdminOverrideRequestAmino): CreateAdminOverrideRequest {
-    return {
-      parent: object.parent,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CreateAdminOverrideRequestAminoMsg): CreateAdminOverrideRequest {
-    return CreateAdminOverrideRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateAdminOverrideRequestProtoMsg): CreateAdminOverrideRequest {
-    return CreateAdminOverrideRequest.decode(message.value);
-  },
-  toProto(message: CreateAdminOverrideRequest): Uint8Array {
-    return CreateAdminOverrideRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest",
-      value: CreateAdminOverrideRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
@@ -1981,7 +1651,6 @@ function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
   };
 }
 export const UpdateAdminOverrideRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest",
   encode(message: UpdateAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2103,43 +1772,6 @@ export const UpdateAdminOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: UpdateAdminOverrideRequestAmino): UpdateAdminOverrideRequest {
-    return {
-      name: object.name,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UpdateAdminOverrideRequestAminoMsg): UpdateAdminOverrideRequest {
-    return UpdateAdminOverrideRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateAdminOverrideRequestProtoMsg): UpdateAdminOverrideRequest {
-    return UpdateAdminOverrideRequest.decode(message.value);
-  },
-  toProto(message: UpdateAdminOverrideRequest): Uint8Array {
-    return UpdateAdminOverrideRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest",
-      value: UpdateAdminOverrideRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
@@ -2150,7 +1782,6 @@ function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
   };
 }
 export const DeleteAdminOverrideRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest",
   encode(message: DeleteAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2244,39 +1875,6 @@ export const DeleteAdminOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: DeleteAdminOverrideRequestAmino): DeleteAdminOverrideRequest {
-    return {
-      name: object.name,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.force = message.force;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DeleteAdminOverrideRequestAminoMsg): DeleteAdminOverrideRequest {
-    return DeleteAdminOverrideRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteAdminOverrideRequestProtoMsg): DeleteAdminOverrideRequest {
-    return DeleteAdminOverrideRequest.decode(message.value);
-  },
-  toProto(message: DeleteAdminOverrideRequest): Uint8Array {
-    return DeleteAdminOverrideRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest",
-      value: DeleteAdminOverrideRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListAdminOverridesRequest(): ListAdminOverridesRequest {
@@ -2287,7 +1885,6 @@ function createBaseListAdminOverridesRequest(): ListAdminOverridesRequest {
   };
 }
 export const ListAdminOverridesRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest",
   encode(message: ListAdminOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2364,35 +1961,6 @@ export const ListAdminOverridesRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
-  },
-  fromAmino(object: ListAdminOverridesRequestAmino): ListAdminOverridesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
-  },
-  toAmino(message: ListAdminOverridesRequest): ListAdminOverridesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListAdminOverridesRequestAminoMsg): ListAdminOverridesRequest {
-    return ListAdminOverridesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListAdminOverridesRequestProtoMsg): ListAdminOverridesRequest {
-    return ListAdminOverridesRequest.decode(message.value);
-  },
-  toProto(message: ListAdminOverridesRequest): Uint8Array {
-    return ListAdminOverridesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListAdminOverridesRequest): ListAdminOverridesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest",
-      value: ListAdminOverridesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListAdminOverridesResponse(): ListAdminOverridesResponse {
@@ -2402,7 +1970,6 @@ function createBaseListAdminOverridesResponse(): ListAdminOverridesResponse {
   };
 }
 export const ListAdminOverridesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse",
   encode(message: ListAdminOverridesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2475,37 +2042,6 @@ export const ListAdminOverridesResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListAdminOverridesResponseAmino): ListAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListAdminOverridesResponse): ListAdminOverridesResponseAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListAdminOverridesResponseAminoMsg): ListAdminOverridesResponse {
-    return ListAdminOverridesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListAdminOverridesResponseProtoMsg): ListAdminOverridesResponse {
-    return ListAdminOverridesResponse.decode(message.value);
-  },
-  toProto(message: ListAdminOverridesResponse): Uint8Array {
-    return ListAdminOverridesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListAdminOverridesResponse): ListAdminOverridesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse",
-      value: ListAdminOverridesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseBatchCreateAdminOverridesResponse(): BatchCreateAdminOverridesResponse {
@@ -2514,7 +2050,6 @@ function createBaseBatchCreateAdminOverridesResponse(): BatchCreateAdminOverride
   };
 }
 export const BatchCreateAdminOverridesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse",
   encode(message: BatchCreateAdminOverridesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2575,35 +2110,6 @@ export const BatchCreateAdminOverridesResponse = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAmino(object: BatchCreateAdminOverridesResponseAmino): BatchCreateAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchCreateAdminOverridesResponseAminoMsg): BatchCreateAdminOverridesResponse {
-    return BatchCreateAdminOverridesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BatchCreateAdminOverridesResponseProtoMsg): BatchCreateAdminOverridesResponse {
-    return BatchCreateAdminOverridesResponse.decode(message.value);
-  },
-  toProto(message: BatchCreateAdminOverridesResponse): Uint8Array {
-    return BatchCreateAdminOverridesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse",
-      value: BatchCreateAdminOverridesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
@@ -2615,7 +2121,6 @@ function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
   };
 }
 export const ImportAdminOverridesRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest",
   encode(message: ImportAdminOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2723,41 +2228,6 @@ export const ImportAdminOverridesRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: ImportAdminOverridesRequestAmino): ImportAdminOverridesRequest {
-    return {
-      parent: object.parent,
-      inlineSource: object?.inline_source ? OverrideInlineSource.fromAmino(object.inline_source) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
-    obj.force = message.force;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ImportAdminOverridesRequestAminoMsg): ImportAdminOverridesRequest {
-    return ImportAdminOverridesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportAdminOverridesRequestProtoMsg): ImportAdminOverridesRequest {
-    return ImportAdminOverridesRequest.decode(message.value);
-  },
-  toProto(message: ImportAdminOverridesRequest): Uint8Array {
-    return ImportAdminOverridesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest",
-      value: ImportAdminOverridesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseImportAdminOverridesResponse(): ImportAdminOverridesResponse {
@@ -2766,7 +2236,6 @@ function createBaseImportAdminOverridesResponse(): ImportAdminOverridesResponse 
   };
 }
 export const ImportAdminOverridesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse",
   encode(message: ImportAdminOverridesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2827,42 +2296,12 @@ export const ImportAdminOverridesResponse = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAmino(object: ImportAdminOverridesResponseAmino): ImportAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ImportAdminOverridesResponseAminoMsg): ImportAdminOverridesResponse {
-    return ImportAdminOverridesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportAdminOverridesResponseProtoMsg): ImportAdminOverridesResponse {
-    return ImportAdminOverridesResponse.decode(message.value);
-  },
-  toProto(message: ImportAdminOverridesResponse): Uint8Array {
-    return ImportAdminOverridesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse",
-      value: ImportAdminOverridesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseImportAdminOverridesMetadata(): ImportAdminOverridesMetadata {
   return {};
 }
 export const ImportAdminOverridesMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata",
   encode(_: ImportAdminOverridesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -2901,28 +2340,6 @@ export const ImportAdminOverridesMetadata = {
   toSDK(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: ImportAdminOverridesMetadataAmino): ImportAdminOverridesMetadata {
-    return {};
-  },
-  toAmino(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: ImportAdminOverridesMetadataAminoMsg): ImportAdminOverridesMetadata {
-    return ImportAdminOverridesMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportAdminOverridesMetadataProtoMsg): ImportAdminOverridesMetadata {
-    return ImportAdminOverridesMetadata.decode(message.value);
-  },
-  toProto(message: ImportAdminOverridesMetadata): Uint8Array {
-    return ImportAdminOverridesMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata",
-      value: ImportAdminOverridesMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideRequest {
@@ -2934,7 +2351,6 @@ function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideReques
   };
 }
 export const CreateConsumerOverrideRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest",
   encode(message: CreateConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3042,41 +2458,6 @@ export const CreateConsumerOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: CreateConsumerOverrideRequestAmino): CreateConsumerOverrideRequest {
-    return {
-      parent: object.parent,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CreateConsumerOverrideRequestAminoMsg): CreateConsumerOverrideRequest {
-    return CreateConsumerOverrideRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateConsumerOverrideRequestProtoMsg): CreateConsumerOverrideRequest {
-    return CreateConsumerOverrideRequest.decode(message.value);
-  },
-  toProto(message: CreateConsumerOverrideRequest): Uint8Array {
-    return CreateConsumerOverrideRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest",
-      value: CreateConsumerOverrideRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideRequest {
@@ -3089,7 +2470,6 @@ function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideReques
   };
 }
 export const UpdateConsumerOverrideRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest",
   encode(message: UpdateConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3211,43 +2591,6 @@ export const UpdateConsumerOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: UpdateConsumerOverrideRequestAmino): UpdateConsumerOverrideRequest {
-    return {
-      name: object.name,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UpdateConsumerOverrideRequestAminoMsg): UpdateConsumerOverrideRequest {
-    return UpdateConsumerOverrideRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateConsumerOverrideRequestProtoMsg): UpdateConsumerOverrideRequest {
-    return UpdateConsumerOverrideRequest.decode(message.value);
-  },
-  toProto(message: UpdateConsumerOverrideRequest): Uint8Array {
-    return UpdateConsumerOverrideRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest",
-      value: UpdateConsumerOverrideRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideRequest {
@@ -3258,7 +2601,6 @@ function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideReques
   };
 }
 export const DeleteConsumerOverrideRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest",
   encode(message: DeleteConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3352,39 +2694,6 @@ export const DeleteConsumerOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: DeleteConsumerOverrideRequestAmino): DeleteConsumerOverrideRequest {
-    return {
-      name: object.name,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.force = message.force;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DeleteConsumerOverrideRequestAminoMsg): DeleteConsumerOverrideRequest {
-    return DeleteConsumerOverrideRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteConsumerOverrideRequestProtoMsg): DeleteConsumerOverrideRequest {
-    return DeleteConsumerOverrideRequest.decode(message.value);
-  },
-  toProto(message: DeleteConsumerOverrideRequest): Uint8Array {
-    return DeleteConsumerOverrideRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest",
-      value: DeleteConsumerOverrideRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListConsumerOverridesRequest(): ListConsumerOverridesRequest {
@@ -3395,7 +2704,6 @@ function createBaseListConsumerOverridesRequest(): ListConsumerOverridesRequest 
   };
 }
 export const ListConsumerOverridesRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest",
   encode(message: ListConsumerOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3472,35 +2780,6 @@ export const ListConsumerOverridesRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
-  },
-  fromAmino(object: ListConsumerOverridesRequestAmino): ListConsumerOverridesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
-  },
-  toAmino(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListConsumerOverridesRequestAminoMsg): ListConsumerOverridesRequest {
-    return ListConsumerOverridesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListConsumerOverridesRequestProtoMsg): ListConsumerOverridesRequest {
-    return ListConsumerOverridesRequest.decode(message.value);
-  },
-  toProto(message: ListConsumerOverridesRequest): Uint8Array {
-    return ListConsumerOverridesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest",
-      value: ListConsumerOverridesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListConsumerOverridesResponse(): ListConsumerOverridesResponse {
@@ -3510,7 +2789,6 @@ function createBaseListConsumerOverridesResponse(): ListConsumerOverridesRespons
   };
 }
 export const ListConsumerOverridesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse",
   encode(message: ListConsumerOverridesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3583,37 +2861,6 @@ export const ListConsumerOverridesResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAmino(object: ListConsumerOverridesResponseAmino): ListConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListConsumerOverridesResponseAminoMsg): ListConsumerOverridesResponse {
-    return ListConsumerOverridesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListConsumerOverridesResponseProtoMsg): ListConsumerOverridesResponse {
-    return ListConsumerOverridesResponse.decode(message.value);
-  },
-  toProto(message: ListConsumerOverridesResponse): Uint8Array {
-    return ListConsumerOverridesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse",
-      value: ListConsumerOverridesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseBatchCreateConsumerOverridesResponse(): BatchCreateConsumerOverridesResponse {
@@ -3622,7 +2869,6 @@ function createBaseBatchCreateConsumerOverridesResponse(): BatchCreateConsumerOv
   };
 }
 export const BatchCreateConsumerOverridesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse",
   encode(message: BatchCreateConsumerOverridesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3683,35 +2929,6 @@ export const BatchCreateConsumerOverridesResponse = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAmino(object: BatchCreateConsumerOverridesResponseAmino): BatchCreateConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchCreateConsumerOverridesResponseAminoMsg): BatchCreateConsumerOverridesResponse {
-    return BatchCreateConsumerOverridesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BatchCreateConsumerOverridesResponseProtoMsg): BatchCreateConsumerOverridesResponse {
-    return BatchCreateConsumerOverridesResponse.decode(message.value);
-  },
-  toProto(message: BatchCreateConsumerOverridesResponse): Uint8Array {
-    return BatchCreateConsumerOverridesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse",
-      value: BatchCreateConsumerOverridesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequest {
@@ -3723,7 +2940,6 @@ function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequ
   };
 }
 export const ImportConsumerOverridesRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest",
   encode(message: ImportConsumerOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3831,41 +3047,6 @@ export const ImportConsumerOverridesRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAmino(object: ImportConsumerOverridesRequestAmino): ImportConsumerOverridesRequest {
-    return {
-      parent: object.parent,
-      inlineSource: object?.inline_source ? OverrideInlineSource.fromAmino(object.inline_source) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-  toAmino(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
-    obj.force = message.force;
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ImportConsumerOverridesRequestAminoMsg): ImportConsumerOverridesRequest {
-    return ImportConsumerOverridesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportConsumerOverridesRequestProtoMsg): ImportConsumerOverridesRequest {
-    return ImportConsumerOverridesRequest.decode(message.value);
-  },
-  toProto(message: ImportConsumerOverridesRequest): Uint8Array {
-    return ImportConsumerOverridesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest",
-      value: ImportConsumerOverridesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseImportConsumerOverridesResponse(): ImportConsumerOverridesResponse {
@@ -3874,7 +3055,6 @@ function createBaseImportConsumerOverridesResponse(): ImportConsumerOverridesRes
   };
 }
 export const ImportConsumerOverridesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse",
   encode(message: ImportConsumerOverridesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3935,42 +3115,12 @@ export const ImportConsumerOverridesResponse = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAmino(object: ImportConsumerOverridesResponseAmino): ImportConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ImportConsumerOverridesResponseAminoMsg): ImportConsumerOverridesResponse {
-    return ImportConsumerOverridesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportConsumerOverridesResponseProtoMsg): ImportConsumerOverridesResponse {
-    return ImportConsumerOverridesResponse.decode(message.value);
-  },
-  toProto(message: ImportConsumerOverridesResponse): Uint8Array {
-    return ImportConsumerOverridesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse",
-      value: ImportConsumerOverridesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseImportConsumerOverridesMetadata(): ImportConsumerOverridesMetadata {
   return {};
 }
 export const ImportConsumerOverridesMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata",
   encode(_: ImportConsumerOverridesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -4009,28 +3159,6 @@ export const ImportConsumerOverridesMetadata = {
   toSDK(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: ImportConsumerOverridesMetadataAmino): ImportConsumerOverridesMetadata {
-    return {};
-  },
-  toAmino(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: ImportConsumerOverridesMetadataAminoMsg): ImportConsumerOverridesMetadata {
-    return ImportConsumerOverridesMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportConsumerOverridesMetadataProtoMsg): ImportConsumerOverridesMetadata {
-    return ImportConsumerOverridesMetadata.decode(message.value);
-  },
-  toProto(message: ImportConsumerOverridesMetadata): Uint8Array {
-    return ImportConsumerOverridesMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata",
-      value: ImportConsumerOverridesMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseImportAdminQuotaPoliciesResponse(): ImportAdminQuotaPoliciesResponse {
@@ -4039,7 +3167,6 @@ function createBaseImportAdminQuotaPoliciesResponse(): ImportAdminQuotaPoliciesR
   };
 }
 export const ImportAdminQuotaPoliciesResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse",
   encode(message: ImportAdminQuotaPoliciesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.policies) {
       AdminQuotaPolicy.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4100,42 +3227,12 @@ export const ImportAdminQuotaPoliciesResponse = {
       obj.policies = [];
     }
     return obj;
-  },
-  fromAmino(object: ImportAdminQuotaPoliciesResponseAmino): ImportAdminQuotaPoliciesResponse {
-    return {
-      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseAmino {
-    const obj: any = {};
-    if (message.policies) {
-      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toAmino(e) : undefined);
-    } else {
-      obj.policies = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ImportAdminQuotaPoliciesResponseAminoMsg): ImportAdminQuotaPoliciesResponse {
-    return ImportAdminQuotaPoliciesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportAdminQuotaPoliciesResponseProtoMsg): ImportAdminQuotaPoliciesResponse {
-    return ImportAdminQuotaPoliciesResponse.decode(message.value);
-  },
-  toProto(message: ImportAdminQuotaPoliciesResponse): Uint8Array {
-    return ImportAdminQuotaPoliciesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse",
-      value: ImportAdminQuotaPoliciesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseImportAdminQuotaPoliciesMetadata(): ImportAdminQuotaPoliciesMetadata {
   return {};
 }
 export const ImportAdminQuotaPoliciesMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata",
   encode(_: ImportAdminQuotaPoliciesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -4174,35 +3271,12 @@ export const ImportAdminQuotaPoliciesMetadata = {
   toSDK(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: ImportAdminQuotaPoliciesMetadataAmino): ImportAdminQuotaPoliciesMetadata {
-    return {};
-  },
-  toAmino(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: ImportAdminQuotaPoliciesMetadataAminoMsg): ImportAdminQuotaPoliciesMetadata {
-    return ImportAdminQuotaPoliciesMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ImportAdminQuotaPoliciesMetadataProtoMsg): ImportAdminQuotaPoliciesMetadata {
-    return ImportAdminQuotaPoliciesMetadata.decode(message.value);
-  },
-  toProto(message: ImportAdminQuotaPoliciesMetadata): Uint8Array {
-    return ImportAdminQuotaPoliciesMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata",
-      value: ImportAdminQuotaPoliciesMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseCreateAdminQuotaPolicyMetadata(): CreateAdminQuotaPolicyMetadata {
   return {};
 }
 export const CreateAdminQuotaPolicyMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata",
   encode(_: CreateAdminQuotaPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -4241,35 +3315,12 @@ export const CreateAdminQuotaPolicyMetadata = {
   toSDK(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: CreateAdminQuotaPolicyMetadataAmino): CreateAdminQuotaPolicyMetadata {
-    return {};
-  },
-  toAmino(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: CreateAdminQuotaPolicyMetadataAminoMsg): CreateAdminQuotaPolicyMetadata {
-    return CreateAdminQuotaPolicyMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateAdminQuotaPolicyMetadataProtoMsg): CreateAdminQuotaPolicyMetadata {
-    return CreateAdminQuotaPolicyMetadata.decode(message.value);
-  },
-  toProto(message: CreateAdminQuotaPolicyMetadata): Uint8Array {
-    return CreateAdminQuotaPolicyMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata",
-      value: CreateAdminQuotaPolicyMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseUpdateAdminQuotaPolicyMetadata(): UpdateAdminQuotaPolicyMetadata {
   return {};
 }
 export const UpdateAdminQuotaPolicyMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata",
   encode(_: UpdateAdminQuotaPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -4308,35 +3359,12 @@ export const UpdateAdminQuotaPolicyMetadata = {
   toSDK(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: UpdateAdminQuotaPolicyMetadataAmino): UpdateAdminQuotaPolicyMetadata {
-    return {};
-  },
-  toAmino(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: UpdateAdminQuotaPolicyMetadataAminoMsg): UpdateAdminQuotaPolicyMetadata {
-    return UpdateAdminQuotaPolicyMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateAdminQuotaPolicyMetadataProtoMsg): UpdateAdminQuotaPolicyMetadata {
-    return UpdateAdminQuotaPolicyMetadata.decode(message.value);
-  },
-  toProto(message: UpdateAdminQuotaPolicyMetadata): Uint8Array {
-    return UpdateAdminQuotaPolicyMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata",
-      value: UpdateAdminQuotaPolicyMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteAdminQuotaPolicyMetadata(): DeleteAdminQuotaPolicyMetadata {
   return {};
 }
 export const DeleteAdminQuotaPolicyMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata",
   encode(_: DeleteAdminQuotaPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -4375,28 +3403,6 @@ export const DeleteAdminQuotaPolicyMetadata = {
   toSDK(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: DeleteAdminQuotaPolicyMetadataAmino): DeleteAdminQuotaPolicyMetadata {
-    return {};
-  },
-  toAmino(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: DeleteAdminQuotaPolicyMetadataAminoMsg): DeleteAdminQuotaPolicyMetadata {
-    return DeleteAdminQuotaPolicyMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteAdminQuotaPolicyMetadataProtoMsg): DeleteAdminQuotaPolicyMetadata {
-    return DeleteAdminQuotaPolicyMetadata.decode(message.value);
-  },
-  toProto(message: DeleteAdminQuotaPolicyMetadata): Uint8Array {
-    return DeleteAdminQuotaPolicyMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata",
-      value: DeleteAdminQuotaPolicyMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseGenerateServiceIdentityRequest(): GenerateServiceIdentityRequest {
@@ -4405,7 +3411,6 @@ function createBaseGenerateServiceIdentityRequest(): GenerateServiceIdentityRequ
   };
 }
 export const GenerateServiceIdentityRequest = {
-  typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest",
   encode(message: GenerateServiceIdentityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4458,31 +3463,6 @@ export const GenerateServiceIdentityRequest = {
     const obj: any = {};
     obj.parent = message.parent;
     return obj;
-  },
-  fromAmino(object: GenerateServiceIdentityRequestAmino): GenerateServiceIdentityRequest {
-    return {
-      parent: object.parent
-    };
-  },
-  toAmino(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    return obj;
-  },
-  fromAminoMsg(object: GenerateServiceIdentityRequestAminoMsg): GenerateServiceIdentityRequest {
-    return GenerateServiceIdentityRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenerateServiceIdentityRequestProtoMsg): GenerateServiceIdentityRequest {
-    return GenerateServiceIdentityRequest.decode(message.value);
-  },
-  toProto(message: GenerateServiceIdentityRequest): Uint8Array {
-    return GenerateServiceIdentityRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest",
-      value: GenerateServiceIdentityRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
@@ -4492,7 +3472,6 @@ function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
   };
 }
 export const GetServiceIdentityResponse = {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse",
   encode(message: GetServiceIdentityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identity !== undefined) {
       ServiceIdentity.encode(message.identity, writer.uint32(10).fork()).ldelim();
@@ -4559,40 +3538,12 @@ export const GetServiceIdentityResponse = {
     message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toSDK(message.identity) : undefined);
     message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
     return obj;
-  },
-  fromAmino(object: GetServiceIdentityResponseAmino): GetServiceIdentityResponse {
-    return {
-      identity: object?.identity ? ServiceIdentity.fromAmino(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
-    };
-  },
-  toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {
-    const obj: any = {};
-    obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceIdentityResponseAminoMsg): GetServiceIdentityResponse {
-    return GetServiceIdentityResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetServiceIdentityResponseProtoMsg): GetServiceIdentityResponse {
-    return GetServiceIdentityResponse.decode(message.value);
-  },
-  toProto(message: GetServiceIdentityResponse): Uint8Array {
-    return GetServiceIdentityResponse.encode(message).finish();
-  },
-  toProtoMsg(message: GetServiceIdentityResponse): GetServiceIdentityResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse",
-      value: GetServiceIdentityResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetServiceIdentityMetadata(): GetServiceIdentityMetadata {
   return {};
 }
 export const GetServiceIdentityMetadata = {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata",
   encode(_: GetServiceIdentityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -4631,27 +3582,5 @@ export const GetServiceIdentityMetadata = {
   toSDK(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: GetServiceIdentityMetadataAmino): GetServiceIdentityMetadata {
-    return {};
-  },
-  toAmino(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceIdentityMetadataAminoMsg): GetServiceIdentityMetadata {
-    return GetServiceIdentityMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetServiceIdentityMetadataProtoMsg): GetServiceIdentityMetadata {
-    return GetServiceIdentityMetadata.decode(message.value);
-  },
-  toProto(message: GetServiceIdentityMetadata): Uint8Array {
-    return GetServiceIdentityMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: GetServiceIdentityMetadata): GetServiceIdentityMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata",
-      value: GetServiceIdentityMetadata.encode(message).finish()
-    };
   }
 };

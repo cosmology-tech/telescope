@@ -1,5 +1,4 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { Decimal } from "@cosmjs/math";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
@@ -55,33 +54,33 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/akash.inflation.v1beta2.Params",
-  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationDecayFactor !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.inflationDecayFactor, 18).atomics);
+      writer.uint32(10).string(message.inflationDecayFactor);
     }
     if (message.initialInflation !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.initialInflation, 18).atomics);
+      writer.uint32(18).string(message.initialInflation);
     }
     if (message.variance !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.variance, 18).atomics);
+      writer.uint32(26).string(message.variance);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.inflationDecayFactor = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.inflationDecayFactor = reader.string();
           break;
         case 2:
-          message.initialInflation = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.initialInflation = reader.string();
           break;
         case 3:
-          message.variance = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.variance = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

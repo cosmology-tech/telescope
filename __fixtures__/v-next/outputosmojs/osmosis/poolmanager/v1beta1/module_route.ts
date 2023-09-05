@@ -86,7 +86,6 @@ function createBaseModuleRoute(): ModuleRoute {
   };
 }
 export const ModuleRoute = {
-  typeUrl: "/osmosis.poolmanager.v1beta1.ModuleRoute",
   encode(message: ModuleRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolType !== 0) {
       writer.uint32(8).int32(message.poolType);
@@ -151,38 +150,5 @@ export const ModuleRoute = {
     message.poolType !== undefined && (obj.pool_type = poolTypeToJSON(message.poolType));
     obj.pool_id = message.poolId;
     return obj;
-  },
-  fromAmino(object: ModuleRouteAmino): ModuleRoute {
-    return {
-      poolType: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : -1,
-      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined
-    };
-  },
-  toAmino(message: ModuleRoute): ModuleRouteAmino {
-    const obj: any = {};
-    obj.pool_type = message.poolType;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ModuleRouteAminoMsg): ModuleRoute {
-    return ModuleRoute.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleRoute): ModuleRouteAminoMsg {
-    return {
-      type: "osmosis/poolmanager/module-route",
-      value: ModuleRoute.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModuleRouteProtoMsg): ModuleRoute {
-    return ModuleRoute.decode(message.value);
-  },
-  toProto(message: ModuleRoute): Uint8Array {
-    return ModuleRoute.encode(message).finish();
-  },
-  toProtoMsg(message: ModuleRoute): ModuleRouteProtoMsg {
-    return {
-      typeUrl: "/osmosis.poolmanager.v1beta1.ModuleRoute",
-      value: ModuleRoute.encode(message).finish()
-    };
   }
 };

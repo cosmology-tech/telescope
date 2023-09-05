@@ -86,7 +86,6 @@ function createBaseFullTick(): FullTick {
   };
 }
 export const FullTick = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.FullTick",
   encode(message: FullTick, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -163,41 +162,6 @@ export const FullTick = {
     obj.tick_index = message.tickIndex;
     message.info !== undefined && (obj.info = message.info ? TickInfo.toSDK(message.info) : undefined);
     return obj;
-  },
-  fromAmino(object: FullTickAmino): FullTick {
-    return {
-      poolId: BigInt(object.pool_id),
-      tickIndex: BigInt(object.tick_index),
-      info: object?.info ? TickInfo.fromAmino(object.info) : undefined
-    };
-  },
-  toAmino(message: FullTick): FullTickAmino {
-    const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.tick_index = message.tickIndex ? message.tickIndex.toString() : undefined;
-    obj.info = message.info ? TickInfo.toAmino(message.info) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: FullTickAminoMsg): FullTick {
-    return FullTick.fromAmino(object.value);
-  },
-  toAminoMsg(message: FullTick): FullTickAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/full-tick",
-      value: FullTick.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: FullTickProtoMsg): FullTick {
-    return FullTick.decode(message.value);
-  },
-  toProto(message: FullTick): Uint8Array {
-    return FullTick.encode(message).finish();
-  },
-  toProtoMsg(message: FullTick): FullTickProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.FullTick",
-      value: FullTick.encode(message).finish()
-    };
   }
 };
 function createBasePoolData(): PoolData {
@@ -210,7 +174,6 @@ function createBasePoolData(): PoolData {
   };
 }
 export const PoolData = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.PoolData",
   encode(message: PoolData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
       Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
@@ -335,57 +298,6 @@ export const PoolData = {
       obj.incentive_records = [];
     }
     return obj;
-  },
-  fromAmino(object: PoolDataAmino): PoolData {
-    return {
-      pool: object?.pool ? Any.fromAmino(object.pool) : undefined,
-      ticks: Array.isArray(object?.ticks) ? object.ticks.map((e: any) => FullTick.fromAmino(e)) : [],
-      feeAccumulator: object?.fee_accumulator ? AccumObject.fromAmino(object.fee_accumulator) : undefined,
-      incentivesAccumulators: Array.isArray(object?.incentives_accumulators) ? object.incentives_accumulators.map((e: any) => AccumObject.fromAmino(e)) : [],
-      incentiveRecords: Array.isArray(object?.incentive_records) ? object.incentive_records.map((e: any) => IncentiveRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: PoolData): PoolDataAmino {
-    const obj: any = {};
-    obj.pool = message.pool ? Any.toAmino(message.pool) : undefined;
-    if (message.ticks) {
-      obj.ticks = message.ticks.map(e => e ? FullTick.toAmino(e) : undefined);
-    } else {
-      obj.ticks = [];
-    }
-    obj.fee_accumulator = message.feeAccumulator ? AccumObject.toAmino(message.feeAccumulator) : undefined;
-    if (message.incentivesAccumulators) {
-      obj.incentives_accumulators = message.incentivesAccumulators.map(e => e ? AccumObject.toAmino(e) : undefined);
-    } else {
-      obj.incentives_accumulators = [];
-    }
-    if (message.incentiveRecords) {
-      obj.incentive_records = message.incentiveRecords.map(e => e ? IncentiveRecord.toAmino(e) : undefined);
-    } else {
-      obj.incentive_records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PoolDataAminoMsg): PoolData {
-    return PoolData.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolData): PoolDataAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/pool-data",
-      value: PoolData.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PoolDataProtoMsg): PoolData {
-    return PoolData.decode(message.value);
-  },
-  toProto(message: PoolData): Uint8Array {
-    return PoolData.encode(message).finish();
-  },
-  toProtoMsg(message: PoolData): PoolDataProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.PoolData",
-      value: PoolData.encode(message).finish()
-    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -397,7 +309,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -502,51 +413,6 @@ export const GenesisState = {
     }
     obj.next_position_id = message.nextPositionId;
     return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      poolData: Array.isArray(object?.pool_data) ? object.pool_data.map((e: any) => PoolData.fromAmino(e)) : [],
-      positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromAmino(e)) : [],
-      nextPositionId: BigInt(object.next_position_id)
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    if (message.poolData) {
-      obj.pool_data = message.poolData.map(e => e ? PoolData.toAmino(e) : undefined);
-    } else {
-      obj.pool_data = [];
-    }
-    if (message.positions) {
-      obj.positions = message.positions.map(e => e ? Position.toAmino(e) : undefined);
-    } else {
-      obj.positions = [];
-    }
-    obj.next_position_id = message.nextPositionId ? message.nextPositionId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };
 function createBaseAccumObject(): AccumObject {
@@ -556,7 +422,6 @@ function createBaseAccumObject(): AccumObject {
   };
 }
 export const AccumObject = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.AccumObject",
   encode(message: AccumObject, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -621,38 +486,5 @@ export const AccumObject = {
     obj.name = message.name;
     message.accumContent !== undefined && (obj.accum_content = message.accumContent ? AccumulatorContent.toSDK(message.accumContent) : undefined);
     return obj;
-  },
-  fromAmino(object: AccumObjectAmino): AccumObject {
-    return {
-      name: object.name,
-      accumContent: object?.accum_content ? AccumulatorContent.fromAmino(object.accum_content) : undefined
-    };
-  },
-  toAmino(message: AccumObject): AccumObjectAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.accum_content = message.accumContent ? AccumulatorContent.toAmino(message.accumContent) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AccumObjectAminoMsg): AccumObject {
-    return AccumObject.fromAmino(object.value);
-  },
-  toAminoMsg(message: AccumObject): AccumObjectAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/accum-object",
-      value: AccumObject.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AccumObjectProtoMsg): AccumObject {
-    return AccumObject.decode(message.value);
-  },
-  toProto(message: AccumObject): Uint8Array {
-    return AccumObject.encode(message).finish();
-  },
-  toProtoMsg(message: AccumObject): AccumObjectProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.AccumObject",
-      value: AccumObject.encode(message).finish()
-    };
   }
 };

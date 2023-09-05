@@ -1,7 +1,7 @@
 import { ResourceValue, ResourceValueAmino, ResourceValueSDKType } from "./resourcevalue";
 import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
 import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** CPU stores resource units and cpu config attributes */
@@ -119,7 +119,7 @@ function createBaseCPU(): CPU {
 }
 export const CPU = {
   typeUrl: "/akash.base.v1beta1.CPU",
-  encode(message: CPU, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: CPU, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.units !== undefined) {
       ResourceValue.encode(message.units, writer.uint32(10).fork()).ldelim();
     }
@@ -128,8 +128,8 @@ export const CPU = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CPU {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): CPU {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCPU();
     while (reader.pos < end) {
@@ -228,7 +228,7 @@ function createBaseMemory(): Memory {
 }
 export const Memory = {
   typeUrl: "/akash.base.v1beta1.Memory",
-  encode(message: Memory, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Memory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
     }
@@ -237,8 +237,8 @@ export const Memory = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Memory {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Memory {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMemory();
     while (reader.pos < end) {
@@ -337,7 +337,7 @@ function createBaseStorage(): Storage {
 }
 export const Storage = {
   typeUrl: "/akash.base.v1beta1.Storage",
-  encode(message: Storage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Storage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
     }
@@ -346,8 +346,8 @@ export const Storage = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Storage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Storage {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStorage();
     while (reader.pos < end) {
@@ -448,7 +448,7 @@ function createBaseResourceUnits(): ResourceUnits {
 }
 export const ResourceUnits = {
   typeUrl: "/akash.base.v1beta1.ResourceUnits",
-  encode(message: ResourceUnits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ResourceUnits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();
     }
@@ -463,8 +463,8 @@ export const ResourceUnits = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceUnits {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceUnits {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceUnits();
     while (reader.pos < end) {

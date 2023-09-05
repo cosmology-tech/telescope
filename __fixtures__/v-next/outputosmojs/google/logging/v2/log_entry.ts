@@ -352,27 +352,6 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
-    return LogEntry_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
-    return LogEntry_LabelsEntry.decode(message.value);
-  },
-  toProto(message: LogEntry_LabelsEntry): Uint8Array {
-    return LogEntry_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseLogEntry(): LogEntry {
@@ -397,7 +376,6 @@ function createBaseLogEntry(): LogEntry {
   };
 }
 export const LogEntry = {
-  typeUrl: "/google.logging.v2.LogEntry",
   encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.logName !== "") {
       writer.uint32(98).string(message.logName);
@@ -680,73 +658,6 @@ export const LogEntry = {
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     message.split !== undefined && (obj.split = message.split ? LogSplit.toSDK(message.split) : undefined);
     return obj;
-  },
-  fromAmino(object: LogEntryAmino): LogEntry {
-    return {
-      logName: object.log_name,
-      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
-      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
-      textPayload: object?.text_payload,
-      jsonPayload: object?.json_payload ? Struct.fromAmino(object.json_payload) : undefined,
-      timestamp: object.timestamp,
-      receiveTimestamp: object.receive_timestamp,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
-      insertId: object.insert_id,
-      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
-      trace: object.trace,
-      spanId: object.span_id,
-      traceSampled: object.trace_sampled,
-      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined,
-      split: object?.split ? LogSplit.fromAmino(object.split) : undefined
-    };
-  },
-  toAmino(message: LogEntry): LogEntryAmino {
-    const obj: any = {};
-    obj.log_name = message.logName;
-    obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
-    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
-    obj.text_payload = message.textPayload;
-    obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
-    obj.timestamp = message.timestamp;
-    obj.receive_timestamp = message.receiveTimestamp;
-    obj.severity = message.severity;
-    obj.insert_id = message.insertId;
-    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
-    obj.trace = message.trace;
-    obj.span_id = message.spanId;
-    obj.trace_sampled = message.traceSampled;
-    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
-    obj.split = message.split ? LogSplit.toAmino(message.split) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
-    return LogEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
-    return LogEntry.decode(message.value);
-  },
-  toProto(message: LogEntry): Uint8Array {
-    return LogEntry.encode(message).finish();
-  },
-  toProtoMsg(message: LogEntry): LogEntryProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogEntry",
-      value: LogEntry.encode(message).finish()
-    };
   }
 };
 function createBaseLogEntryOperation(): LogEntryOperation {
@@ -758,7 +669,6 @@ function createBaseLogEntryOperation(): LogEntryOperation {
   };
 }
 export const LogEntryOperation = {
-  typeUrl: "/google.logging.v2.LogEntryOperation",
   encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -847,37 +757,6 @@ export const LogEntryOperation = {
     obj.first = message.first;
     obj.last = message.last;
     return obj;
-  },
-  fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
-    return {
-      id: object.id,
-      producer: object.producer,
-      first: object.first,
-      last: object.last
-    };
-  },
-  toAmino(message: LogEntryOperation): LogEntryOperationAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.producer = message.producer;
-    obj.first = message.first;
-    obj.last = message.last;
-    return obj;
-  },
-  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
-    return LogEntryOperation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
-    return LogEntryOperation.decode(message.value);
-  },
-  toProto(message: LogEntryOperation): Uint8Array {
-    return LogEntryOperation.encode(message).finish();
-  },
-  toProtoMsg(message: LogEntryOperation): LogEntryOperationProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogEntryOperation",
-      value: LogEntryOperation.encode(message).finish()
-    };
   }
 };
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
@@ -888,7 +767,6 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   };
 }
 export const LogEntrySourceLocation = {
-  typeUrl: "/google.logging.v2.LogEntrySourceLocation",
   encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
@@ -965,35 +843,6 @@ export const LogEntrySourceLocation = {
     obj.line = message.line;
     obj.function = message.function;
     return obj;
-  },
-  fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
-    return {
-      file: object.file,
-      line: BigInt(object.line),
-      function: object.function
-    };
-  },
-  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
-    const obj: any = {};
-    obj.file = message.file;
-    obj.line = message.line ? message.line.toString() : undefined;
-    obj.function = message.function;
-    return obj;
-  },
-  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
-    return LogEntrySourceLocation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
-    return LogEntrySourceLocation.decode(message.value);
-  },
-  toProto(message: LogEntrySourceLocation): Uint8Array {
-    return LogEntrySourceLocation.encode(message).finish();
-  },
-  toProtoMsg(message: LogEntrySourceLocation): LogEntrySourceLocationProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogEntrySourceLocation",
-      value: LogEntrySourceLocation.encode(message).finish()
-    };
   }
 };
 function createBaseLogSplit(): LogSplit {
@@ -1004,7 +853,6 @@ function createBaseLogSplit(): LogSplit {
   };
 }
 export const LogSplit = {
-  typeUrl: "/google.logging.v2.LogSplit",
   encode(message: LogSplit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.uid !== "") {
       writer.uint32(10).string(message.uid);
@@ -1081,34 +929,5 @@ export const LogSplit = {
     obj.index = message.index;
     obj.total_splits = message.totalSplits;
     return obj;
-  },
-  fromAmino(object: LogSplitAmino): LogSplit {
-    return {
-      uid: object.uid,
-      index: object.index,
-      totalSplits: object.total_splits
-    };
-  },
-  toAmino(message: LogSplit): LogSplitAmino {
-    const obj: any = {};
-    obj.uid = message.uid;
-    obj.index = message.index;
-    obj.total_splits = message.totalSplits;
-    return obj;
-  },
-  fromAminoMsg(object: LogSplitAminoMsg): LogSplit {
-    return LogSplit.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogSplitProtoMsg): LogSplit {
-    return LogSplit.decode(message.value);
-  },
-  toProto(message: LogSplit): Uint8Array {
-    return LogSplit.encode(message).finish();
-  },
-  toProtoMsg(message: LogSplit): LogSplitProtoMsg {
-    return {
-      typeUrl: "/google.logging.v2.LogSplit",
-      value: LogSplit.encode(message).finish()
-    };
   }
 };

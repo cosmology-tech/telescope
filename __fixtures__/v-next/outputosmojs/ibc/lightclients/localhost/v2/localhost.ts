@@ -17,7 +17,6 @@ function createBaseClientState(): ClientState {
   };
 }
 export const ClientState = {
-  typeUrl: "/ibc.lightclients.localhost.v2.ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.latestHeight !== undefined) {
       Height.encode(message.latestHeight, writer.uint32(10).fork()).ldelim();
@@ -70,36 +69,5 @@ export const ClientState = {
     const obj: any = {};
     message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
     return obj;
-  },
-  fromAmino(object: ClientStateAmino): ClientState {
-    return {
-      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : undefined
-    };
-  },
-  toAmino(message: ClientState): ClientStateAmino {
-    const obj: any = {};
-    obj.latest_height = message.latestHeight ? Height.toAmino(message.latestHeight) : {};
-    return obj;
-  },
-  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
-    return ClientState.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientState): ClientStateAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
-    return ClientState.decode(message.value);
-  },
-  toProto(message: ClientState): Uint8Array {
-    return ClientState.encode(message).finish();
-  },
-  toProtoMsg(message: ClientState): ClientStateProtoMsg {
-    return {
-      typeUrl: "/ibc.lightclients.localhost.v2.ClientState",
-      value: ClientState.encode(message).finish()
-    };
   }
 };

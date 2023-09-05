@@ -103,7 +103,6 @@ function createBasePageRequest(): PageRequest {
   };
 }
 export const PageRequest = {
-  typeUrl: "/cosmos.base.query.v1beta1.PageRequest",
   encode(message: PageRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -204,45 +203,6 @@ export const PageRequest = {
     obj.count_total = message.countTotal;
     obj.reverse = message.reverse;
     return obj;
-  },
-  fromAmino(object: PageRequestAmino): PageRequest {
-    return {
-      key: object.key,
-      offset: BigInt(object.offset),
-      limit: BigInt(object.limit),
-      countTotal: object.count_total,
-      reverse: object.reverse
-    };
-  },
-  toAmino(message: PageRequest): PageRequestAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.offset = message.offset ? message.offset.toString() : undefined;
-    obj.limit = message.limit ? message.limit.toString() : undefined;
-    obj.count_total = message.countTotal;
-    obj.reverse = message.reverse;
-    return obj;
-  },
-  fromAminoMsg(object: PageRequestAminoMsg): PageRequest {
-    return PageRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: PageRequest): PageRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/PageRequest",
-      value: PageRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PageRequestProtoMsg): PageRequest {
-    return PageRequest.decode(message.value);
-  },
-  toProto(message: PageRequest): Uint8Array {
-    return PageRequest.encode(message).finish();
-  },
-  toProtoMsg(message: PageRequest): PageRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.base.query.v1beta1.PageRequest",
-      value: PageRequest.encode(message).finish()
-    };
   }
 };
 function createBasePageResponse(): PageResponse {
@@ -252,7 +212,6 @@ function createBasePageResponse(): PageResponse {
   };
 }
 export const PageResponse = {
-  typeUrl: "/cosmos.base.query.v1beta1.PageResponse",
   encode(message: PageResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
@@ -317,38 +276,5 @@ export const PageResponse = {
     obj.next_key = message.nextKey;
     obj.total = message.total;
     return obj;
-  },
-  fromAmino(object: PageResponseAmino): PageResponse {
-    return {
-      nextKey: object.next_key,
-      total: BigInt(object.total)
-    };
-  },
-  toAmino(message: PageResponse): PageResponseAmino {
-    const obj: any = {};
-    obj.next_key = message.nextKey;
-    obj.total = message.total ? message.total.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: PageResponseAminoMsg): PageResponse {
-    return PageResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: PageResponse): PageResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/PageResponse",
-      value: PageResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PageResponseProtoMsg): PageResponse {
-    return PageResponse.decode(message.value);
-  },
-  toProto(message: PageResponse): Uint8Array {
-    return PageResponse.encode(message).finish();
-  },
-  toProtoMsg(message: PageResponse): PageResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.base.query.v1beta1.PageResponse",
-      value: PageResponse.encode(message).finish()
-    };
   }
 };

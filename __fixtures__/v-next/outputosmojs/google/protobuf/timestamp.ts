@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -195,7 +195,6 @@ function createBaseTimestamp(): Timestamp {
   };
 }
 export const Timestamp = {
-  typeUrl: "/google.protobuf.Timestamp",
   encode(message: Timestamp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seconds !== BigInt(0)) {
       writer.uint32(8).int64(message.seconds);
@@ -260,26 +259,5 @@ export const Timestamp = {
     obj.seconds = message.seconds;
     obj.nanos = message.nanos;
     return obj;
-  },
-  fromAmino(object: TimestampAmino): Timestamp {
-    return fromJsonTimestamp(object);
-  },
-  toAmino(message: Timestamp): TimestampAmino {
-    return fromTimestamp(message).toString();
-  },
-  fromAminoMsg(object: TimestampAminoMsg): Timestamp {
-    return Timestamp.fromAmino(object.value);
-  },
-  fromProtoMsg(message: TimestampProtoMsg): Timestamp {
-    return Timestamp.decode(message.value);
-  },
-  toProto(message: Timestamp): Uint8Array {
-    return Timestamp.encode(message).finish();
-  },
-  toProtoMsg(message: Timestamp): TimestampProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.Timestamp",
-      value: Timestamp.encode(message).finish()
-    };
   }
 };

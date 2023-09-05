@@ -16,7 +16,6 @@ function createBaseParamsRequest(): ParamsRequest {
   return {};
 }
 export const ParamsRequest = {
-  typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsRequest",
   encode(_: ParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -54,34 +53,6 @@ export const ParamsRequest = {
   toSDK(_: ParamsRequest): ParamsRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: ParamsRequestAmino): ParamsRequest {
-    return {};
-  },
-  toAmino(_: ParamsRequest): ParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: ParamsRequestAminoMsg): ParamsRequest {
-    return ParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamsRequest): ParamsRequestAminoMsg {
-    return {
-      type: "osmosis/cosmwasmpool/params-request",
-      value: ParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsRequestProtoMsg): ParamsRequest {
-    return ParamsRequest.decode(message.value);
-  },
-  toProto(message: ParamsRequest): Uint8Array {
-    return ParamsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ParamsRequest): ParamsRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsRequest",
-      value: ParamsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseParamsResponse(): ParamsResponse {
@@ -90,7 +61,6 @@ function createBaseParamsResponse(): ParamsResponse {
   };
 }
 export const ParamsResponse = {
-  typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsResponse",
   encode(message: ParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -143,36 +113,5 @@ export const ParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-  fromAmino(object: ParamsResponseAmino): ParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: ParamsResponse): ParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsResponseAminoMsg): ParamsResponse {
-    return ParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamsResponse): ParamsResponseAminoMsg {
-    return {
-      type: "osmosis/cosmwasmpool/params-response",
-      value: ParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsResponseProtoMsg): ParamsResponse {
-    return ParamsResponse.decode(message.value);
-  },
-  toProto(message: ParamsResponse): Uint8Array {
-    return ParamsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ParamsResponse): ParamsResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsResponse",
-      value: ParamsResponse.encode(message).finish()
-    };
   }
 };

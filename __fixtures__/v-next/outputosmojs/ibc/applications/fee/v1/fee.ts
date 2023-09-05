@@ -58,7 +58,6 @@ function createBaseFee(): Fee {
   };
 }
 export const Fee = {
-  typeUrl: "/ibc.applications.fee.v1.Fee",
   encode(message: Fee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.recvFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -159,53 +158,6 @@ export const Fee = {
       obj.timeout_fee = [];
     }
     return obj;
-  },
-  fromAmino(object: FeeAmino): Fee {
-    return {
-      recvFee: Array.isArray(object?.recv_fee) ? object.recv_fee.map((e: any) => Coin.fromAmino(e)) : [],
-      ackFee: Array.isArray(object?.ack_fee) ? object.ack_fee.map((e: any) => Coin.fromAmino(e)) : [],
-      timeoutFee: Array.isArray(object?.timeout_fee) ? object.timeout_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Fee): FeeAmino {
-    const obj: any = {};
-    if (message.recvFee) {
-      obj.recv_fee = message.recvFee.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.recv_fee = [];
-    }
-    if (message.ackFee) {
-      obj.ack_fee = message.ackFee.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.ack_fee = [];
-    }
-    if (message.timeoutFee) {
-      obj.timeout_fee = message.timeoutFee.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.timeout_fee = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: FeeAminoMsg): Fee {
-    return Fee.fromAmino(object.value);
-  },
-  toAminoMsg(message: Fee): FeeAminoMsg {
-    return {
-      type: "cosmos-sdk/Fee",
-      value: Fee.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: FeeProtoMsg): Fee {
-    return Fee.decode(message.value);
-  },
-  toProto(message: Fee): Uint8Array {
-    return Fee.encode(message).finish();
-  },
-  toProtoMsg(message: Fee): FeeProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.Fee",
-      value: Fee.encode(message).finish()
-    };
   }
 };
 function createBasePacketFee(): PacketFee {
@@ -216,7 +168,6 @@ function createBasePacketFee(): PacketFee {
   };
 }
 export const PacketFee = {
-  typeUrl: "/ibc.applications.fee.v1.PacketFee",
   encode(message: PacketFee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fee !== undefined) {
       Fee.encode(message.fee, writer.uint32(10).fork()).ldelim();
@@ -301,45 +252,6 @@ export const PacketFee = {
       obj.relayers = [];
     }
     return obj;
-  },
-  fromAmino(object: PacketFeeAmino): PacketFee {
-    return {
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
-      refundAddress: object.refund_address,
-      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: PacketFee): PacketFeeAmino {
-    const obj: any = {};
-    obj.fee = message.fee ? Fee.toAmino(message.fee) : undefined;
-    obj.refund_address = message.refundAddress;
-    if (message.relayers) {
-      obj.relayers = message.relayers.map(e => e);
-    } else {
-      obj.relayers = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PacketFeeAminoMsg): PacketFee {
-    return PacketFee.fromAmino(object.value);
-  },
-  toAminoMsg(message: PacketFee): PacketFeeAminoMsg {
-    return {
-      type: "cosmos-sdk/PacketFee",
-      value: PacketFee.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PacketFeeProtoMsg): PacketFee {
-    return PacketFee.decode(message.value);
-  },
-  toProto(message: PacketFee): Uint8Array {
-    return PacketFee.encode(message).finish();
-  },
-  toProtoMsg(message: PacketFee): PacketFeeProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.PacketFee",
-      value: PacketFee.encode(message).finish()
-    };
   }
 };
 function createBasePacketFees(): PacketFees {
@@ -348,7 +260,6 @@ function createBasePacketFees(): PacketFees {
   };
 }
 export const PacketFees = {
-  typeUrl: "/ibc.applications.fee.v1.PacketFees",
   encode(message: PacketFees, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.packetFees) {
       PacketFee.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -409,41 +320,6 @@ export const PacketFees = {
       obj.packet_fees = [];
     }
     return obj;
-  },
-  fromAmino(object: PacketFeesAmino): PacketFees {
-    return {
-      packetFees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: PacketFees): PacketFeesAmino {
-    const obj: any = {};
-    if (message.packetFees) {
-      obj.packet_fees = message.packetFees.map(e => e ? PacketFee.toAmino(e) : undefined);
-    } else {
-      obj.packet_fees = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PacketFeesAminoMsg): PacketFees {
-    return PacketFees.fromAmino(object.value);
-  },
-  toAminoMsg(message: PacketFees): PacketFeesAminoMsg {
-    return {
-      type: "cosmos-sdk/PacketFees",
-      value: PacketFees.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PacketFeesProtoMsg): PacketFees {
-    return PacketFees.decode(message.value);
-  },
-  toProto(message: PacketFees): Uint8Array {
-    return PacketFees.encode(message).finish();
-  },
-  toProtoMsg(message: PacketFees): PacketFeesProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.PacketFees",
-      value: PacketFees.encode(message).finish()
-    };
   }
 };
 function createBaseIdentifiedPacketFees(): IdentifiedPacketFees {
@@ -452,7 +328,6 @@ function createBaseIdentifiedPacketFees(): IdentifiedPacketFees {
   };
 }
 export const IdentifiedPacketFees = {
-  typeUrl: "/ibc.applications.fee.v1.IdentifiedPacketFees",
   encode(message: IdentifiedPacketFees, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.packetFees) {
       PacketFee.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -513,40 +388,5 @@ export const IdentifiedPacketFees = {
       obj.packet_fees = [];
     }
     return obj;
-  },
-  fromAmino(object: IdentifiedPacketFeesAmino): IdentifiedPacketFees {
-    return {
-      packetFees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: IdentifiedPacketFees): IdentifiedPacketFeesAmino {
-    const obj: any = {};
-    if (message.packetFees) {
-      obj.packet_fees = message.packetFees.map(e => e ? PacketFee.toAmino(e) : undefined);
-    } else {
-      obj.packet_fees = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: IdentifiedPacketFeesAminoMsg): IdentifiedPacketFees {
-    return IdentifiedPacketFees.fromAmino(object.value);
-  },
-  toAminoMsg(message: IdentifiedPacketFees): IdentifiedPacketFeesAminoMsg {
-    return {
-      type: "cosmos-sdk/IdentifiedPacketFees",
-      value: IdentifiedPacketFees.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: IdentifiedPacketFeesProtoMsg): IdentifiedPacketFees {
-    return IdentifiedPacketFees.decode(message.value);
-  },
-  toProto(message: IdentifiedPacketFees): Uint8Array {
-    return IdentifiedPacketFees.encode(message).finish();
-  },
-  toProtoMsg(message: IdentifiedPacketFees): IdentifiedPacketFeesProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.fee.v1.IdentifiedPacketFees",
-      value: IdentifiedPacketFees.encode(message).finish()
-    };
   }
 };

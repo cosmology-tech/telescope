@@ -102,7 +102,6 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   };
 }
 export const MsgSubmitProposal = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
   encode(message: MsgSubmitProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(10).fork()).ldelim();
@@ -189,45 +188,6 @@ export const MsgSubmitProposal = {
     }
     obj.proposer = message.proposer;
     return obj;
-  },
-  fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
-    return {
-      content: object?.content ? Any.fromAmino(object.content) : undefined,
-      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      proposer: object.proposer
-    };
-  },
-  toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
-    const obj: any = {};
-    obj.content = message.content ? Any.toAmino(message.content) : undefined;
-    if (message.initialDeposit) {
-      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.initial_deposit = [];
-    }
-    obj.proposer = message.proposer;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
-    return MsgSubmitProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitProposal",
-      value: MsgSubmitProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
-    return MsgSubmitProposal.decode(message.value);
-  },
-  toProto(message: MsgSubmitProposal): Uint8Array {
-    return MsgSubmitProposal.encode(message).finish();
-  },
-  toProtoMsg(message: MsgSubmitProposal): MsgSubmitProposalProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
-      value: MsgSubmitProposal.encode(message).finish()
-    };
   }
 };
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
@@ -236,7 +196,6 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
   };
 }
 export const MsgSubmitProposalResponse = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse",
   encode(message: MsgSubmitProposalResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -291,37 +250,6 @@ export const MsgSubmitProposalResponse = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
-  },
-  fromAmino(object: MsgSubmitProposalResponseAmino): MsgSubmitProposalResponse {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
-  },
-  toAmino(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
-    return MsgSubmitProposalResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitProposalResponse",
-      value: MsgSubmitProposalResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg): MsgSubmitProposalResponse {
-    return MsgSubmitProposalResponse.decode(message.value);
-  },
-  toProto(message: MsgSubmitProposalResponse): Uint8Array {
-    return MsgSubmitProposalResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse",
-      value: MsgSubmitProposalResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgVote(): MsgVote {
@@ -332,7 +260,6 @@ function createBaseMsgVote(): MsgVote {
   };
 }
 export const MsgVote = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgVote",
   encode(message: MsgVote, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -411,48 +338,12 @@ export const MsgVote = {
     obj.voter = message.voter;
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     return obj;
-  },
-  fromAmino(object: MsgVoteAmino): MsgVote {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
-    };
-  },
-  toAmino(message: MsgVote): MsgVoteAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    obj.option = message.option;
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
-    return MsgVote.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVote): MsgVoteAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVote",
-      value: MsgVote.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgVoteProtoMsg): MsgVote {
-    return MsgVote.decode(message.value);
-  },
-  toProto(message: MsgVote): Uint8Array {
-    return MsgVote.encode(message).finish();
-  },
-  toProtoMsg(message: MsgVote): MsgVoteProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgVote",
-      value: MsgVote.encode(message).finish()
-    };
   }
 };
 function createBaseMsgVoteResponse(): MsgVoteResponse {
   return {};
 }
 export const MsgVoteResponse = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse",
   encode(_: MsgVoteResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -491,34 +382,6 @@ export const MsgVoteResponse = {
   toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
-    return {};
-  },
-  toAmino(_: MsgVoteResponse): MsgVoteResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteResponseAminoMsg): MsgVoteResponse {
-    return MsgVoteResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVoteResponse): MsgVoteResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVoteResponse",
-      value: MsgVoteResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgVoteResponseProtoMsg): MsgVoteResponse {
-    return MsgVoteResponse.decode(message.value);
-  },
-  toProto(message: MsgVoteResponse): Uint8Array {
-    return MsgVoteResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgVoteResponse): MsgVoteResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse",
-      value: MsgVoteResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgVoteWeighted(): MsgVoteWeighted {
@@ -529,7 +392,6 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
   };
 }
 export const MsgVoteWeighted = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted",
   encode(message: MsgVoteWeighted, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -616,52 +478,12 @@ export const MsgVoteWeighted = {
       obj.options = [];
     }
     return obj;
-  },
-  fromAmino(object: MsgVoteWeightedAmino): MsgVoteWeighted {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MsgVoteWeighted): MsgVoteWeightedAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteWeightedAminoMsg): MsgVoteWeighted {
-    return MsgVoteWeighted.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVoteWeighted): MsgVoteWeightedAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVoteWeighted",
-      value: MsgVoteWeighted.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgVoteWeightedProtoMsg): MsgVoteWeighted {
-    return MsgVoteWeighted.decode(message.value);
-  },
-  toProto(message: MsgVoteWeighted): Uint8Array {
-    return MsgVoteWeighted.encode(message).finish();
-  },
-  toProtoMsg(message: MsgVoteWeighted): MsgVoteWeightedProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted",
-      value: MsgVoteWeighted.encode(message).finish()
-    };
   }
 };
 function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
   return {};
 }
 export const MsgVoteWeightedResponse = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse",
   encode(_: MsgVoteWeightedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -700,34 +522,6 @@ export const MsgVoteWeightedResponse = {
   toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: MsgVoteWeightedResponseAmino): MsgVoteWeightedResponse {
-    return {};
-  },
-  toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteWeightedResponseAminoMsg): MsgVoteWeightedResponse {
-    return MsgVoteWeightedResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVoteWeightedResponse",
-      value: MsgVoteWeightedResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg): MsgVoteWeightedResponse {
-    return MsgVoteWeightedResponse.decode(message.value);
-  },
-  toProto(message: MsgVoteWeightedResponse): Uint8Array {
-    return MsgVoteWeightedResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse",
-      value: MsgVoteWeightedResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgDeposit(): MsgDeposit {
@@ -738,7 +532,6 @@ function createBaseMsgDeposit(): MsgDeposit {
   };
 }
 export const MsgDeposit = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgDeposit",
   encode(message: MsgDeposit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
@@ -825,52 +618,12 @@ export const MsgDeposit = {
       obj.amount = [];
     }
     return obj;
-  },
-  fromAmino(object: MsgDepositAmino): MsgDeposit {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      depositor: object.depositor,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MsgDeposit): MsgDepositAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.depositor = message.depositor;
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgDepositAminoMsg): MsgDeposit {
-    return MsgDeposit.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDeposit): MsgDepositAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgDeposit",
-      value: MsgDeposit.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgDepositProtoMsg): MsgDeposit {
-    return MsgDeposit.decode(message.value);
-  },
-  toProto(message: MsgDeposit): Uint8Array {
-    return MsgDeposit.encode(message).finish();
-  },
-  toProtoMsg(message: MsgDeposit): MsgDepositProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgDeposit",
-      value: MsgDeposit.encode(message).finish()
-    };
   }
 };
 function createBaseMsgDepositResponse(): MsgDepositResponse {
   return {};
 }
 export const MsgDepositResponse = {
-  typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse",
   encode(_: MsgDepositResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -909,33 +662,5 @@ export const MsgDepositResponse = {
   toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: MsgDepositResponseAmino): MsgDepositResponse {
-    return {};
-  },
-  toAmino(_: MsgDepositResponse): MsgDepositResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgDepositResponseAminoMsg): MsgDepositResponse {
-    return MsgDepositResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDepositResponse): MsgDepositResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgDepositResponse",
-      value: MsgDepositResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgDepositResponseProtoMsg): MsgDepositResponse {
-    return MsgDepositResponse.decode(message.value);
-  },
-  toProto(message: MsgDepositResponse): Uint8Array {
-    return MsgDepositResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgDepositResponse): MsgDepositResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse",
-      value: MsgDepositResponse.encode(message).finish()
-    };
   }
 };

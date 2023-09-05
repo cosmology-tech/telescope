@@ -209,7 +209,6 @@ function createBaseParseRequest(): ParseRequest {
   };
 }
 export const ParseRequest = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
   encode(message: ParseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
@@ -298,37 +297,6 @@ export const ParseRequest = {
     obj.source_location = message.sourceLocation;
     obj.disable_macros = message.disableMacros;
     return obj;
-  },
-  fromAmino(object: ParseRequestAmino): ParseRequest {
-    return {
-      celSource: object.cel_source,
-      syntaxVersion: object.syntax_version,
-      sourceLocation: object.source_location,
-      disableMacros: object.disable_macros
-    };
-  },
-  toAmino(message: ParseRequest): ParseRequestAmino {
-    const obj: any = {};
-    obj.cel_source = message.celSource;
-    obj.syntax_version = message.syntaxVersion;
-    obj.source_location = message.sourceLocation;
-    obj.disable_macros = message.disableMacros;
-    return obj;
-  },
-  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
-    return ParseRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
-    return ParseRequest.decode(message.value);
-  },
-  toProto(message: ParseRequest): Uint8Array {
-    return ParseRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ParseRequest): ParseRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
-      value: ParseRequest.encode(message).finish()
-    };
   }
 };
 function createBaseParseResponse(): ParseResponse {
@@ -338,7 +306,6 @@ function createBaseParseResponse(): ParseResponse {
   };
 }
 export const ParseResponse = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse",
   encode(message: ParseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -413,37 +380,6 @@ export const ParseResponse = {
       obj.issues = [];
     }
     return obj;
-  },
-  fromAmino(object: ParseResponseAmino): ParseResponse {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ParseResponse): ParseResponseAmino {
-    const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
-    return ParseResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParseResponseProtoMsg): ParseResponse {
-    return ParseResponse.decode(message.value);
-  },
-  toProto(message: ParseResponse): Uint8Array {
-    return ParseResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ParseResponse): ParseResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse",
-      value: ParseResponse.encode(message).finish()
-    };
   }
 };
 function createBaseCheckRequest(): CheckRequest {
@@ -455,7 +391,6 @@ function createBaseCheckRequest(): CheckRequest {
   };
 }
 export const CheckRequest = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest",
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -554,41 +489,6 @@ export const CheckRequest = {
     obj.container = message.container;
     obj.no_std_env = message.noStdEnv;
     return obj;
-  },
-  fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromAmino(e)) : [],
-      container: object.container,
-      noStdEnv: object.no_std_env
-    };
-  },
-  toAmino(message: CheckRequest): CheckRequestAmino {
-    const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    if (message.typeEnv) {
-      obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e) : undefined);
-    } else {
-      obj.type_env = [];
-    }
-    obj.container = message.container;
-    obj.no_std_env = message.noStdEnv;
-    return obj;
-  },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
-    return CheckRequest.decode(message.value);
-  },
-  toProto(message: CheckRequest): Uint8Array {
-    return CheckRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest",
-      value: CheckRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCheckResponse(): CheckResponse {
@@ -598,7 +498,6 @@ function createBaseCheckResponse(): CheckResponse {
   };
 }
 export const CheckResponse = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse",
   encode(message: CheckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.checkedExpr !== undefined) {
       CheckedExpr.encode(message.checkedExpr, writer.uint32(10).fork()).ldelim();
@@ -673,37 +572,6 @@ export const CheckResponse = {
       obj.issues = [];
     }
     return obj;
-  },
-  fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: CheckResponse): CheckResponseAmino {
-    const obj: any = {};
-    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
-    return CheckResponse.decode(message.value);
-  },
-  toProto(message: CheckResponse): Uint8Array {
-    return CheckResponse.encode(message).finish();
-  },
-  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse",
-      value: CheckResponse.encode(message).finish()
-    };
   }
 };
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
@@ -779,27 +647,6 @@ export const EvalRequest_BindingsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? ExprValue.toSDK(message.value) : undefined);
     return obj;
-  },
-  fromAmino(object: EvalRequest_BindingsEntryAmino): EvalRequest_BindingsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? ExprValue.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
-    return EvalRequest_BindingsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg): EvalRequest_BindingsEntry {
-    return EvalRequest_BindingsEntry.decode(message.value);
-  },
-  toProto(message: EvalRequest_BindingsEntry): Uint8Array {
-    return EvalRequest_BindingsEntry.encode(message).finish();
   }
 };
 function createBaseEvalRequest(): EvalRequest {
@@ -811,7 +658,6 @@ function createBaseEvalRequest(): EvalRequest {
   };
 }
 export const EvalRequest = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest",
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -942,47 +788,6 @@ export const EvalRequest = {
     }
     obj.container = message.container;
     return obj;
-  },
-  fromAmino(object: EvalRequestAmino): EvalRequest {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      container: object.container
-    };
-  },
-  toAmino(message: EvalRequest): EvalRequestAmino {
-    const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
-    obj.bindings = {};
-    if (message.bindings) {
-      Object.entries(message.bindings).forEach(([k, v]) => {
-        obj.bindings[k] = ExprValue.toAmino(v);
-      });
-    }
-    obj.container = message.container;
-    return obj;
-  },
-  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
-    return EvalRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
-    return EvalRequest.decode(message.value);
-  },
-  toProto(message: EvalRequest): Uint8Array {
-    return EvalRequest.encode(message).finish();
-  },
-  toProtoMsg(message: EvalRequest): EvalRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest",
-      value: EvalRequest.encode(message).finish()
-    };
   }
 };
 function createBaseEvalResponse(): EvalResponse {
@@ -992,7 +797,6 @@ function createBaseEvalResponse(): EvalResponse {
   };
 }
 export const EvalResponse = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse",
   encode(message: EvalResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.result !== undefined) {
       ExprValue.encode(message.result, writer.uint32(10).fork()).ldelim();
@@ -1067,37 +871,6 @@ export const EvalResponse = {
       obj.issues = [];
     }
     return obj;
-  },
-  fromAmino(object: EvalResponseAmino): EvalResponse {
-    return {
-      result: object?.result ? ExprValue.fromAmino(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: EvalResponse): EvalResponseAmino {
-    const obj: any = {};
-    obj.result = message.result ? ExprValue.toAmino(message.result) : undefined;
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
-    return EvalResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalResponseProtoMsg): EvalResponse {
-    return EvalResponse.decode(message.value);
-  },
-  toProto(message: EvalResponse): Uint8Array {
-    return EvalResponse.encode(message).finish();
-  },
-  toProtoMsg(message: EvalResponse): EvalResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse",
-      value: EvalResponse.encode(message).finish()
-    };
   }
 };
 function createBaseIssueDetails(): IssueDetails {
@@ -1108,7 +881,6 @@ function createBaseIssueDetails(): IssueDetails {
   };
 }
 export const IssueDetails = {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails",
   encode(message: IssueDetails, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);
@@ -1189,34 +961,5 @@ export const IssueDetails = {
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toSDK(message.position) : undefined);
     obj.id = message.id;
     return obj;
-  },
-  fromAmino(object: IssueDetailsAmino): IssueDetails {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
-      position: object?.position ? SourcePosition.fromAmino(object.position) : undefined,
-      id: BigInt(object.id)
-    };
-  },
-  toAmino(message: IssueDetails): IssueDetailsAmino {
-    const obj: any = {};
-    obj.severity = message.severity;
-    obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
-    obj.id = message.id ? message.id.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
-    return IssueDetails.fromAmino(object.value);
-  },
-  fromProtoMsg(message: IssueDetailsProtoMsg): IssueDetails {
-    return IssueDetails.decode(message.value);
-  },
-  toProto(message: IssueDetails): Uint8Array {
-    return IssueDetails.encode(message).finish();
-  },
-  toProtoMsg(message: IssueDetails): IssueDetailsProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails",
-      value: IssueDetails.encode(message).finish()
-    };
   }
 };

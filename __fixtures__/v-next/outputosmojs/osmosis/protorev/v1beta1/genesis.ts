@@ -71,7 +71,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/osmosis.protorev.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -268,68 +267,5 @@ export const GenesisState = {
     obj.max_pool_points_per_tx = message.maxPoolPointsPerTx;
     obj.point_count_for_block = message.pointCountForBlock;
     return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      tokenPairArbRoutes: Array.isArray(object?.token_pair_arb_routes) ? object.token_pair_arb_routes.map((e: any) => TokenPairArbRoutes.fromAmino(e)) : [],
-      baseDenoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromAmino(e)) : [],
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined,
-      daysSinceModuleGenesis: BigInt(object.days_since_module_genesis),
-      developerFees: Array.isArray(object?.developer_fees) ? object.developer_fees.map((e: any) => Coin.fromAmino(e)) : [],
-      latestBlockHeight: BigInt(object.latest_block_height),
-      developerAddress: object.developer_address,
-      maxPoolPointsPerBlock: BigInt(object.max_pool_points_per_block),
-      maxPoolPointsPerTx: BigInt(object.max_pool_points_per_tx),
-      pointCountForBlock: BigInt(object.point_count_for_block)
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    if (message.tokenPairArbRoutes) {
-      obj.token_pair_arb_routes = message.tokenPairArbRoutes.map(e => e ? TokenPairArbRoutes.toAmino(e) : undefined);
-    } else {
-      obj.token_pair_arb_routes = [];
-    }
-    if (message.baseDenoms) {
-      obj.base_denoms = message.baseDenoms.map(e => e ? BaseDenom.toAmino(e) : undefined);
-    } else {
-      obj.base_denoms = [];
-    }
-    obj.pool_weights = message.poolWeights ? PoolWeights.toAmino(message.poolWeights) : undefined;
-    obj.days_since_module_genesis = message.daysSinceModuleGenesis ? message.daysSinceModuleGenesis.toString() : undefined;
-    if (message.developerFees) {
-      obj.developer_fees = message.developerFees.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.developer_fees = [];
-    }
-    obj.latest_block_height = message.latestBlockHeight ? message.latestBlockHeight.toString() : undefined;
-    obj.developer_address = message.developerAddress;
-    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock ? message.maxPoolPointsPerBlock.toString() : undefined;
-    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx ? message.maxPoolPointsPerTx.toString() : undefined;
-    obj.point_count_for_block = message.pointCountForBlock ? message.pointCountForBlock.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/protorev/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/osmosis.protorev.v1beta1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };

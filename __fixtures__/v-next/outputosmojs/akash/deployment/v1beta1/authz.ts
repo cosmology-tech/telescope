@@ -26,7 +26,6 @@ function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorizat
   };
 }
 export const DepositDeploymentAuthorization = {
-  typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
   encode(message: DepositDeploymentAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spendLimit !== undefined) {
       Coin.encode(message.spendLimit, writer.uint32(10).fork()).ldelim();
@@ -79,36 +78,5 @@ export const DepositDeploymentAuthorization = {
     const obj: any = {};
     message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toSDK(message.spendLimit) : undefined);
     return obj;
-  },
-  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
-    return {
-      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
-    };
-  },
-  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
-    const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAminoMsg {
-    return {
-      type: "akash/deployment/deposit-deployment-authorization",
-      value: DepositDeploymentAuthorization.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.decode(message.value);
-  },
-  toProto(message: DepositDeploymentAuthorization): Uint8Array {
-    return DepositDeploymentAuthorization.encode(message).finish();
-  },
-  toProtoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-      value: DepositDeploymentAuthorization.encode(message).finish()
-    };
   }
 };

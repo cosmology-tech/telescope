@@ -10,4 +10,3 @@ We're excited you made it here! Please read about how to build and contribute to
 - [Common helpers or utils](https://github.com/cosmology-tech/telescope/blob/main/docs/helpers.md)
 - [Creating generators](https://github.com/cosmology-tech/telescope/blob/main/docs/creating-new-generators.md)
 - [Plugin generators](https://github.com/cosmology-tech/telescope/blob/main/packages/telescope/src/generators)
-- [Migration to v1.0](https://github.com/cosmology-tech/telescope/blob/main/docs/migration.md)

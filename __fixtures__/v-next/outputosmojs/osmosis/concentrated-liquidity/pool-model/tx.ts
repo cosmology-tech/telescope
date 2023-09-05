@@ -39,7 +39,6 @@ function createBaseMsgCreateConcentratedPool(): MsgCreateConcentratedPool {
   };
 }
 export const MsgCreateConcentratedPool = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateConcentratedPool",
   encode(message: MsgCreateConcentratedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -152,47 +151,6 @@ export const MsgCreateConcentratedPool = {
     obj.exponent_at_price_one = message.exponentAtPriceOne;
     obj.swap_fee = message.swapFee;
     return obj;
-  },
-  fromAmino(object: MsgCreateConcentratedPoolAmino): MsgCreateConcentratedPool {
-    return {
-      sender: object.sender,
-      denom0: object.denom0,
-      denom1: object.denom1,
-      tickSpacing: BigInt(object.tick_spacing),
-      exponentAtPriceOne: object.exponent_at_price_one,
-      swapFee: object.swap_fee
-    };
-  },
-  toAmino(message: MsgCreateConcentratedPool): MsgCreateConcentratedPoolAmino {
-    const obj: any = {};
-    obj.sender = message.sender;
-    obj.denom0 = message.denom0;
-    obj.denom1 = message.denom1;
-    obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
-    obj.exponent_at_price_one = message.exponentAtPriceOne;
-    obj.swap_fee = message.swapFee;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateConcentratedPoolAminoMsg): MsgCreateConcentratedPool {
-    return MsgCreateConcentratedPool.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateConcentratedPool): MsgCreateConcentratedPoolAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/create-concentrated-pool",
-      value: MsgCreateConcentratedPool.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCreateConcentratedPoolProtoMsg): MsgCreateConcentratedPool {
-    return MsgCreateConcentratedPool.decode(message.value);
-  },
-  toProto(message: MsgCreateConcentratedPool): Uint8Array {
-    return MsgCreateConcentratedPool.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCreateConcentratedPool): MsgCreateConcentratedPoolProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateConcentratedPool",
-      value: MsgCreateConcentratedPool.encode(message).finish()
-    };
   }
 };
 function createBaseMsgCreateConcentratedPoolResponse(): MsgCreateConcentratedPoolResponse {
@@ -201,7 +159,6 @@ function createBaseMsgCreateConcentratedPoolResponse(): MsgCreateConcentratedPoo
   };
 }
 export const MsgCreateConcentratedPoolResponse = {
-  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateConcentratedPoolResponse",
   encode(message: MsgCreateConcentratedPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -254,36 +211,5 @@ export const MsgCreateConcentratedPoolResponse = {
     const obj: any = {};
     obj.pool_id = message.poolId;
     return obj;
-  },
-  fromAmino(object: MsgCreateConcentratedPoolResponseAmino): MsgCreateConcentratedPoolResponse {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
-  },
-  toAmino(message: MsgCreateConcentratedPoolResponse): MsgCreateConcentratedPoolResponseAmino {
-    const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateConcentratedPoolResponseAminoMsg): MsgCreateConcentratedPoolResponse {
-    return MsgCreateConcentratedPoolResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateConcentratedPoolResponse): MsgCreateConcentratedPoolResponseAminoMsg {
-    return {
-      type: "osmosis/concentratedliquidity/create-concentrated-pool-response",
-      value: MsgCreateConcentratedPoolResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCreateConcentratedPoolResponseProtoMsg): MsgCreateConcentratedPoolResponse {
-    return MsgCreateConcentratedPoolResponse.decode(message.value);
-  },
-  toProto(message: MsgCreateConcentratedPoolResponse): Uint8Array {
-    return MsgCreateConcentratedPoolResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCreateConcentratedPoolResponse): MsgCreateConcentratedPoolResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateConcentratedPoolResponse",
-      value: MsgCreateConcentratedPoolResponse.encode(message).finish()
-    };
   }
 };

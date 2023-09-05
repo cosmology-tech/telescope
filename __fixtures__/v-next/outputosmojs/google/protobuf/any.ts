@@ -83,7 +83,6 @@ export const protobufPackage = "google.protobuf";
  *     }
  */
 export interface Any {
-  $typeUrl?: string;
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
    * protocol buffer message. This string must contain at least
@@ -199,19 +198,16 @@ export interface Any {
  *     }
  */
 export interface AnySDKType {
-  $typeUrl?: string;
   type_url: string;
   value: Uint8Array;
 }
 function createBaseAny(): Any {
   return {
-    $typeUrl: "/google.protobuf.Any",
     typeUrl: "",
     value: new Uint8Array()
   };
 }
 export const Any = {
-  typeUrl: "/google.protobuf.Any",
   encode(message: Any, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.typeUrl !== "") {
       writer.uint32(10).string(message.typeUrl);
@@ -276,32 +272,5 @@ export const Any = {
     obj.type_url = message.typeUrl;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AnyAmino): Any {
-    return {
-      typeUrl: object.type,
-      value: object.value
-    };
-  },
-  toAmino(message: Any): AnyAmino {
-    const obj: any = {};
-    obj.type = message.typeUrl;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AnyAminoMsg): Any {
-    return Any.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AnyProtoMsg): Any {
-    return Any.decode(message.value);
-  },
-  toProto(message: Any): Uint8Array {
-    return Any.encode(message).finish();
-  },
-  toProtoMsg(message: Any): AnyProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.Any",
-      value: Any.encode(message).finish()
-    };
   }
 };

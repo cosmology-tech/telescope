@@ -1,7 +1,6 @@
 import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { Decimal } from "@cosmjs/math";
+import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -48,7 +47,7 @@ export interface Params {
    * addr_derivation_cost_create defines the cost of address derivation for
    * verifying the contract deployer at fee registration
    */
-  addrDerivationCostCreate: bigint;
+  addrDerivationCostCreate: Long;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
 }
@@ -87,7 +86,7 @@ export interface ParamsSDKType {
   enable_fees: boolean;
   developer_shares: string;
   validator_shares: string;
-  addr_derivation_cost_create: bigint;
+  addr_derivation_cost_create: Long;
   min_gas_price: string;
 }
 function createBaseGenesisState(): GenesisState {
@@ -98,7 +97,7 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/evmos.fees.v1.GenesisState",
-  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -107,8 +106,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -204,32 +203,32 @@ function createBaseParams(): Params {
     enableFees: false,
     developerShares: "",
     validatorShares: "",
-    addrDerivationCostCreate: BigInt(0),
+    addrDerivationCostCreate: Long.UZERO,
     minGasPrice: ""
   };
 }
 export const Params = {
   typeUrl: "/evmos.fees.v1.Params",
-  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enableFees === true) {
       writer.uint32(8).bool(message.enableFees);
     }
     if (message.developerShares !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.developerShares, 18).atomics);
+      writer.uint32(18).string(message.developerShares);
     }
     if (message.validatorShares !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
+      writer.uint32(26).string(message.validatorShares);
     }
-    if (message.addrDerivationCostCreate !== BigInt(0)) {
+    if (!message.addrDerivationCostCreate.isZero()) {
       writer.uint32(32).uint64(message.addrDerivationCostCreate);
     }
     if (message.minGasPrice !== "") {
-      writer.uint32(42).string(Decimal.fromUserInput(message.minGasPrice, 18).atomics);
+      writer.uint32(42).string(message.minGasPrice);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -239,16 +238,16 @@ export const Params = {
           message.enableFees = reader.bool();
           break;
         case 2:
-          message.developerShares = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.developerShares = reader.string();
           break;
         case 3:
-          message.validatorShares = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.validatorShares = reader.string();
           break;
         case 4:
-          message.addrDerivationCostCreate = reader.uint64();
+          message.addrDerivationCostCreate = (reader.uint64() as Long);
           break;
         case 5:
-          message.minGasPrice = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.minGasPrice = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -262,7 +261,7 @@ export const Params = {
     if (isSet(object.enableFees)) obj.enableFees = Boolean(object.enableFees);
     if (isSet(object.developerShares)) obj.developerShares = String(object.developerShares);
     if (isSet(object.validatorShares)) obj.validatorShares = String(object.validatorShares);
-    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
+    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = Long.fromValue(object.addrDerivationCostCreate);
     if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
     return obj;
   },
@@ -271,7 +270,7 @@ export const Params = {
     message.enableFees !== undefined && (obj.enableFees = message.enableFees);
     message.developerShares !== undefined && (obj.developerShares = message.developerShares);
     message.validatorShares !== undefined && (obj.validatorShares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || BigInt(0)).toString());
+    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || Long.UZERO).toString());
     message.minGasPrice !== undefined && (obj.minGasPrice = message.minGasPrice);
     return obj;
   },
@@ -281,7 +280,7 @@ export const Params = {
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
     if (object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null) {
-      message.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
+      message.addrDerivationCostCreate = Long.fromValue(object.addrDerivationCostCreate);
     }
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
@@ -309,7 +308,7 @@ export const Params = {
       enableFees: object.enable_fees,
       developerShares: object.developer_shares,
       validatorShares: object.validator_shares,
-      addrDerivationCostCreate: BigInt(object.addr_derivation_cost_create),
+      addrDerivationCostCreate: Long.fromString(object.addr_derivation_cost_create),
       minGasPrice: object.min_gas_price
     };
   },

@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -204,7 +204,7 @@ export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
-  dseq: bigint;
+  dseq: Long;
 }
 export interface DeploymentIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DeploymentID";
@@ -222,14 +222,14 @@ export interface DeploymentIDAminoMsg {
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
-  dseq: bigint;
+  dseq: Long;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
   deploymentId: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
-  createdAt: bigint;
+  createdAt: Long;
 }
 export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Deployment";
@@ -251,12 +251,12 @@ export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
-  created_at: bigint;
+  created_at: Long;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFilters {
   owner: string;
-  dseq: bigint;
+  dseq: Long;
   state: string;
 }
 export interface DeploymentFiltersProtoMsg {
@@ -276,7 +276,7 @@ export interface DeploymentFiltersAminoMsg {
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
   owner: string;
-  dseq: bigint;
+  dseq: Long;
   state: string;
 }
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
@@ -289,7 +289,7 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
 }
 export const MsgCreateDeployment = {
   typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
-  encode(message: MsgCreateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgCreateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -304,8 +304,8 @@ export const MsgCreateDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDeployment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDeployment {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeployment();
     while (reader.pos < end) {
@@ -423,11 +423,11 @@ function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
 }
 export const MsgCreateDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse",
-  encode(_: MsgCreateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: MsgCreateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDeploymentResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDeploymentResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeploymentResponse();
     while (reader.pos < end) {
@@ -490,7 +490,7 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
 }
 export const MsgDepositDeployment = {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
-  encode(message: MsgDepositDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgDepositDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -499,8 +499,8 @@ export const MsgDepositDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositDeployment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositDeployment {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeployment();
     while (reader.pos < end) {
@@ -586,11 +586,11 @@ function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse 
 }
 export const MsgDepositDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse",
-  encode(_: MsgDepositDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: MsgDepositDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositDeploymentResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositDeploymentResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeploymentResponse();
     while (reader.pos < end) {
@@ -654,7 +654,7 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
 }
 export const MsgUpdateDeployment = {
   typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
-  encode(message: MsgUpdateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgUpdateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -666,8 +666,8 @@ export const MsgUpdateDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDeployment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDeployment {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeployment();
     while (reader.pos < end) {
@@ -773,11 +773,11 @@ function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
 }
 export const MsgUpdateDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse",
-  encode(_: MsgUpdateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: MsgUpdateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDeploymentResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDeploymentResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeploymentResponse();
     while (reader.pos < end) {
@@ -839,14 +839,14 @@ function createBaseMsgCloseDeployment(): MsgCloseDeployment {
 }
 export const MsgCloseDeployment = {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
-  encode(message: MsgCloseDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: MsgCloseDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseDeployment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseDeployment {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeployment();
     while (reader.pos < end) {
@@ -920,11 +920,11 @@ function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
 }
 export const MsgCloseDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse",
-  encode(_: MsgCloseDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(_: MsgCloseDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseDeploymentResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseDeploymentResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeploymentResponse();
     while (reader.pos < end) {
@@ -982,22 +982,22 @@ export const MsgCloseDeploymentResponse = {
 function createBaseDeploymentID(): DeploymentID {
   return {
     owner: "",
-    dseq: BigInt(0)
+    dseq: Long.UZERO
   };
 }
 export const DeploymentID = {
   typeUrl: "/akash.deployment.v1beta1.DeploymentID",
-  encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (!message.dseq.isZero()) {
       writer.uint32(16).uint64(message.dseq);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentID {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentID {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentID();
     while (reader.pos < end) {
@@ -1007,7 +1007,7 @@ export const DeploymentID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = reader.uint64();
+          message.dseq = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1019,20 +1019,20 @@ export const DeploymentID = {
   fromJSON(object: any): DeploymentID {
     const obj = createBaseDeploymentID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
     return obj;
   },
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
+      message.dseq = Long.fromValue(object.dseq);
     }
     return message;
   },
@@ -1051,7 +1051,7 @@ export const DeploymentID = {
   fromAmino(object: DeploymentIDAmino): DeploymentID {
     return {
       owner: object.owner,
-      dseq: BigInt(object.dseq)
+      dseq: Long.fromString(object.dseq)
     };
   },
   toAmino(message: DeploymentID): DeploymentIDAmino {
@@ -1081,12 +1081,12 @@ function createBaseDeployment(): Deployment {
     deploymentId: DeploymentID.fromPartial({}),
     state: 0,
     version: new Uint8Array(),
-    createdAt: BigInt(0)
+    createdAt: Long.ZERO
   };
 }
 export const Deployment = {
   typeUrl: "/akash.deployment.v1beta1.Deployment",
-  encode(message: Deployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
     }
@@ -1096,13 +1096,13 @@ export const Deployment = {
     if (message.version.length !== 0) {
       writer.uint32(26).bytes(message.version);
     }
-    if (message.createdAt !== BigInt(0)) {
+    if (!message.createdAt.isZero()) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Deployment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Deployment {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeployment();
     while (reader.pos < end) {
@@ -1118,7 +1118,7 @@ export const Deployment = {
           message.version = reader.bytes();
           break;
         case 4:
-          message.createdAt = reader.int64();
+          message.createdAt = (reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1132,7 +1132,7 @@ export const Deployment = {
     if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
     if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
+    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
     return obj;
   },
   toJSON(message: Deployment): unknown {
@@ -1140,7 +1140,7 @@ export const Deployment = {
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
     message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Deployment>): Deployment {
@@ -1151,7 +1151,7 @@ export const Deployment = {
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
     if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = BigInt(object.createdAt.toString());
+      message.createdAt = Long.fromValue(object.createdAt);
     }
     return message;
   },
@@ -1176,7 +1176,7 @@ export const Deployment = {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object.version,
-      createdAt: BigInt(object.created_at)
+      createdAt: Long.fromString(object.created_at)
     };
   },
   toAmino(message: Deployment): DeploymentAmino {
@@ -1206,17 +1206,17 @@ export const Deployment = {
 function createBaseDeploymentFilters(): DeploymentFilters {
   return {
     owner: "",
-    dseq: BigInt(0),
+    dseq: Long.UZERO,
     state: ""
   };
 }
 export const DeploymentFilters = {
   typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
-  encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (!message.dseq.isZero()) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.state !== "") {
@@ -1224,8 +1224,8 @@ export const DeploymentFilters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentFilters {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentFilters {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentFilters();
     while (reader.pos < end) {
@@ -1235,7 +1235,7 @@ export const DeploymentFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = reader.uint64();
+          message.dseq = (reader.uint64() as Long);
           break;
         case 3:
           message.state = reader.string();
@@ -1250,14 +1250,14 @@ export const DeploymentFilters = {
   fromJSON(object: any): DeploymentFilters {
     const obj = createBaseDeploymentFilters();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
   },
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
@@ -1265,7 +1265,7 @@ export const DeploymentFilters = {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
+      message.dseq = Long.fromValue(object.dseq);
     }
     message.state = object.state ?? "";
     return message;
@@ -1287,7 +1287,7 @@ export const DeploymentFilters = {
   fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
     return {
       owner: object.owner,
-      dseq: BigInt(object.dseq),
+      dseq: Long.fromString(object.dseq),
       state: object.state
     };
   },

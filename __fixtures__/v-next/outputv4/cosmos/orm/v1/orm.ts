@@ -117,7 +117,6 @@ function createBaseTableDescriptor(): TableDescriptor {
   };
 }
 export const TableDescriptor = {
-  typeUrl: "/cosmos.orm.v1.TableDescriptor",
   encode(message: TableDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.primaryKey !== undefined) {
       PrimaryKeyDescriptor.encode(message.primaryKey, writer.uint32(10).fork()).ldelim();
@@ -204,45 +203,6 @@ export const TableDescriptor = {
     }
     obj.id = message.id;
     return obj;
-  },
-  fromAmino(object: TableDescriptorAmino): TableDescriptor {
-    return {
-      primaryKey: object?.primary_key ? PrimaryKeyDescriptor.fromAmino(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromAmino(e)) : [],
-      id: object.id
-    };
-  },
-  toAmino(message: TableDescriptor): TableDescriptorAmino {
-    const obj: any = {};
-    obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toAmino(message.primaryKey) : undefined;
-    if (message.index) {
-      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.index = [];
-    }
-    obj.id = message.id;
-    return obj;
-  },
-  fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor {
-    return TableDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: TableDescriptor): TableDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/TableDescriptor",
-      value: TableDescriptor.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: TableDescriptorProtoMsg): TableDescriptor {
-    return TableDescriptor.decode(message.value);
-  },
-  toProto(message: TableDescriptor): Uint8Array {
-    return TableDescriptor.encode(message).finish();
-  },
-  toProtoMsg(message: TableDescriptor): TableDescriptorProtoMsg {
-    return {
-      typeUrl: "/cosmos.orm.v1.TableDescriptor",
-      value: TableDescriptor.encode(message).finish()
-    };
   }
 };
 function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
@@ -252,7 +212,6 @@ function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
   };
 }
 export const PrimaryKeyDescriptor = {
-  typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor",
   encode(message: PrimaryKeyDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
@@ -317,39 +276,6 @@ export const PrimaryKeyDescriptor = {
     obj.fields = message.fields;
     obj.auto_increment = message.autoIncrement;
     return obj;
-  },
-  fromAmino(object: PrimaryKeyDescriptorAmino): PrimaryKeyDescriptor {
-    return {
-      fields: object.fields,
-      autoIncrement: object.auto_increment
-    };
-  },
-  toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino {
-    const obj: any = {};
-    obj.fields = message.fields;
-    obj.auto_increment = message.autoIncrement;
-    return obj;
-  },
-  fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor {
-    return PrimaryKeyDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/PrimaryKeyDescriptor",
-      value: PrimaryKeyDescriptor.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg): PrimaryKeyDescriptor {
-    return PrimaryKeyDescriptor.decode(message.value);
-  },
-  toProto(message: PrimaryKeyDescriptor): Uint8Array {
-    return PrimaryKeyDescriptor.encode(message).finish();
-  },
-  toProtoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorProtoMsg {
-    return {
-      typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor",
-      value: PrimaryKeyDescriptor.encode(message).finish()
-    };
   }
 };
 function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
@@ -360,7 +286,6 @@ function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
   };
 }
 export const SecondaryIndexDescriptor = {
-  typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor",
   encode(message: SecondaryIndexDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
@@ -437,41 +362,6 @@ export const SecondaryIndexDescriptor = {
     obj.id = message.id;
     obj.unique = message.unique;
     return obj;
-  },
-  fromAmino(object: SecondaryIndexDescriptorAmino): SecondaryIndexDescriptor {
-    return {
-      fields: object.fields,
-      id: object.id,
-      unique: object.unique
-    };
-  },
-  toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino {
-    const obj: any = {};
-    obj.fields = message.fields;
-    obj.id = message.id;
-    obj.unique = message.unique;
-    return obj;
-  },
-  fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor {
-    return SecondaryIndexDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SecondaryIndexDescriptor",
-      value: SecondaryIndexDescriptor.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg): SecondaryIndexDescriptor {
-    return SecondaryIndexDescriptor.decode(message.value);
-  },
-  toProto(message: SecondaryIndexDescriptor): Uint8Array {
-    return SecondaryIndexDescriptor.encode(message).finish();
-  },
-  toProtoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorProtoMsg {
-    return {
-      typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor",
-      value: SecondaryIndexDescriptor.encode(message).finish()
-    };
   }
 };
 function createBaseSingletonDescriptor(): SingletonDescriptor {
@@ -480,7 +370,6 @@ function createBaseSingletonDescriptor(): SingletonDescriptor {
   };
 }
 export const SingletonDescriptor = {
-  typeUrl: "/cosmos.orm.v1.SingletonDescriptor",
   encode(message: SingletonDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
@@ -533,36 +422,5 @@ export const SingletonDescriptor = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
-  },
-  fromAmino(object: SingletonDescriptorAmino): SingletonDescriptor {
-    return {
-      id: object.id
-    };
-  },
-  toAmino(message: SingletonDescriptor): SingletonDescriptorAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    return obj;
-  },
-  fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor {
-    return SingletonDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SingletonDescriptor): SingletonDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SingletonDescriptor",
-      value: SingletonDescriptor.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SingletonDescriptorProtoMsg): SingletonDescriptor {
-    return SingletonDescriptor.decode(message.value);
-  },
-  toProto(message: SingletonDescriptor): Uint8Array {
-    return SingletonDescriptor.encode(message).finish();
-  },
-  toProtoMsg(message: SingletonDescriptor): SingletonDescriptorProtoMsg {
-    return {
-      typeUrl: "/cosmos.orm.v1.SingletonDescriptor",
-      value: SingletonDescriptor.encode(message).finish()
-    };
   }
 };

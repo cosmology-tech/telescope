@@ -1,5 +1,4 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { Decimal } from "@cosmjs/math";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /**
@@ -145,33 +144,33 @@ function createBaseInflationDistribution(): InflationDistribution {
 }
 export const InflationDistribution = {
   typeUrl: "/evmos.inflation.v1.InflationDistribution",
-  encode(message: InflationDistribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: InflationDistribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.stakingRewards !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
+      writer.uint32(10).string(message.stakingRewards);
     }
     if (message.usageIncentives !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.usageIncentives, 18).atomics);
+      writer.uint32(18).string(message.usageIncentives);
     }
     if (message.communityPool !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
+      writer.uint32(26).string(message.communityPool);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): InflationDistribution {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): InflationDistribution {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInflationDistribution();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.stakingRewards = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.stakingRewards = reader.string();
           break;
         case 2:
-          message.usageIncentives = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.usageIncentives = reader.string();
           break;
         case 3:
-          message.communityPool = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.communityPool = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -256,45 +255,45 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 }
 export const ExponentialCalculation = {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
-  encode(message: ExponentialCalculation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ExponentialCalculation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.a !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
+      writer.uint32(10).string(message.a);
     }
     if (message.r !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.r, 18).atomics);
+      writer.uint32(18).string(message.r);
     }
     if (message.c !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.c, 18).atomics);
+      writer.uint32(26).string(message.c);
     }
     if (message.bondingTarget !== "") {
-      writer.uint32(34).string(Decimal.fromUserInput(message.bondingTarget, 18).atomics);
+      writer.uint32(34).string(message.bondingTarget);
     }
     if (message.maxVariance !== "") {
-      writer.uint32(42).string(Decimal.fromUserInput(message.maxVariance, 18).atomics);
+      writer.uint32(42).string(message.maxVariance);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ExponentialCalculation {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExponentialCalculation {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExponentialCalculation();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.a = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.a = reader.string();
           break;
         case 2:
-          message.r = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.r = reader.string();
           break;
         case 3:
-          message.c = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.c = reader.string();
           break;
         case 4:
-          message.bondingTarget = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.bondingTarget = reader.string();
           break;
         case 5:
-          message.maxVariance = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.maxVariance = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

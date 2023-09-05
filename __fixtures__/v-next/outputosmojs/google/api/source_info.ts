@@ -17,7 +17,6 @@ function createBaseSourceInfo(): SourceInfo {
   };
 }
 export const SourceInfo = {
-  typeUrl: "/google.api.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sourceFiles) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -78,34 +77,5 @@ export const SourceInfo = {
       obj.source_files = [];
     }
     return obj;
-  },
-  fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SourceInfo): SourceInfoAmino {
-    const obj: any = {};
-    if (message.sourceFiles) {
-      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.source_files = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
-    return SourceInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
-    return SourceInfo.decode(message.value);
-  },
-  toProto(message: SourceInfo): Uint8Array {
-    return SourceInfo.encode(message).finish();
-  },
-  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
-    return {
-      typeUrl: "/google.api.SourceInfo",
-      value: SourceInfo.encode(message).finish()
-    };
   }
 };

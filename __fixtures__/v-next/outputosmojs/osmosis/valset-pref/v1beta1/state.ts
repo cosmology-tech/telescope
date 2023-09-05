@@ -55,7 +55,6 @@ function createBaseValidatorPreference(): ValidatorPreference {
   };
 }
 export const ValidatorPreference = {
-  typeUrl: "/osmosis.valsetpref.v1beta1.ValidatorPreference",
   encode(message: ValidatorPreference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.valOperAddress !== "") {
       writer.uint32(10).string(message.valOperAddress);
@@ -120,39 +119,6 @@ export const ValidatorPreference = {
     obj.val_oper_address = message.valOperAddress;
     obj.weight = message.weight;
     return obj;
-  },
-  fromAmino(object: ValidatorPreferenceAmino): ValidatorPreference {
-    return {
-      valOperAddress: object.val_oper_address,
-      weight: object.weight
-    };
-  },
-  toAmino(message: ValidatorPreference): ValidatorPreferenceAmino {
-    const obj: any = {};
-    obj.val_oper_address = message.valOperAddress;
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorPreferenceAminoMsg): ValidatorPreference {
-    return ValidatorPreference.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorPreference): ValidatorPreferenceAminoMsg {
-    return {
-      type: "osmosis/valsetpref/validator-preference",
-      value: ValidatorPreference.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorPreferenceProtoMsg): ValidatorPreference {
-    return ValidatorPreference.decode(message.value);
-  },
-  toProto(message: ValidatorPreference): Uint8Array {
-    return ValidatorPreference.encode(message).finish();
-  },
-  toProtoMsg(message: ValidatorPreference): ValidatorPreferenceProtoMsg {
-    return {
-      typeUrl: "/osmosis.valsetpref.v1beta1.ValidatorPreference",
-      value: ValidatorPreference.encode(message).finish()
-    };
   }
 };
 function createBaseValidatorSetPreferences(): ValidatorSetPreferences {
@@ -161,7 +127,6 @@ function createBaseValidatorSetPreferences(): ValidatorSetPreferences {
   };
 }
 export const ValidatorSetPreferences = {
-  typeUrl: "/osmosis.valsetpref.v1beta1.ValidatorSetPreferences",
   encode(message: ValidatorSetPreferences, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.preferences) {
       ValidatorPreference.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -222,40 +187,5 @@ export const ValidatorSetPreferences = {
       obj.preferences = [];
     }
     return obj;
-  },
-  fromAmino(object: ValidatorSetPreferencesAmino): ValidatorSetPreferences {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ValidatorSetPreferences): ValidatorSetPreferencesAmino {
-    const obj: any = {};
-    if (message.preferences) {
-      obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
-    } else {
-      obj.preferences = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorSetPreferencesAminoMsg): ValidatorSetPreferences {
-    return ValidatorSetPreferences.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorSetPreferences): ValidatorSetPreferencesAminoMsg {
-    return {
-      type: "osmosis/valsetpref/validator-set-preferences",
-      value: ValidatorSetPreferences.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorSetPreferencesProtoMsg): ValidatorSetPreferences {
-    return ValidatorSetPreferences.decode(message.value);
-  },
-  toProto(message: ValidatorSetPreferences): Uint8Array {
-    return ValidatorSetPreferences.encode(message).finish();
-  },
-  toProtoMsg(message: ValidatorSetPreferences): ValidatorSetPreferencesProtoMsg {
-    return {
-      typeUrl: "/osmosis.valsetpref.v1beta1.ValidatorSetPreferences",
-      value: ValidatorSetPreferences.encode(message).finish()
-    };
   }
 };

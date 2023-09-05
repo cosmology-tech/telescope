@@ -1,7 +1,7 @@
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Plan, PlanAmino, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -118,7 +118,6 @@ export interface ClientConsensusStatesSDKType {
  * chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposal {
-  $typeUrl?: string;
   /** the title of the update proposal */
   title: string;
   /** the description of the proposal */
@@ -165,7 +164,6 @@ export interface ClientUpdateProposalAminoMsg {
  * chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposalSDKType {
-  $typeUrl?: string;
   title: string;
   description: string;
   subject_client_id: string;
@@ -176,7 +174,6 @@ export interface ClientUpdateProposalSDKType {
  * upgrade.
  */
 export interface UpgradeProposal {
-  $typeUrl?: string;
   title: string;
   description: string;
   plan: Plan;
@@ -221,7 +218,6 @@ export interface UpgradeProposalAminoMsg {
  * upgrade.
  */
 export interface UpgradeProposalSDKType {
-  $typeUrl?: string;
   title: string;
   description: string;
   plan: PlanSDKType;
@@ -241,9 +237,9 @@ export interface UpgradeProposalSDKType {
  */
 export interface Height {
   /** the revision that the client is currently on */
-  revisionNumber: bigint;
+  revisionNumber: Long;
   /** the height within the given revision */
-  revisionHeight: bigint;
+  revisionHeight: Long;
 }
 export interface HeightProtoMsg {
   typeUrl: "/ibc.core.client.v1.Height";
@@ -284,8 +280,8 @@ export interface HeightAminoMsg {
  * gets reset
  */
 export interface HeightSDKType {
-  revision_number: bigint;
-  revision_height: bigint;
+  revision_number: Long;
+  revision_height: Long;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface Params {
@@ -318,7 +314,7 @@ function createBaseIdentifiedClientState(): IdentifiedClientState {
 export const IdentifiedClientState = {
   typeUrl: "/ibc.core.client.v1.IdentifiedClientState",
   aminoType: "cosmos-sdk/IdentifiedClientState",
-  encode(message: IdentifiedClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: IdentifiedClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -327,8 +323,8 @@ export const IdentifiedClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedClientState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedClientState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedClientState();
     while (reader.pos < end) {
@@ -422,7 +418,7 @@ function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
 export const ConsensusStateWithHeight = {
   typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight",
   aminoType: "cosmos-sdk/ConsensusStateWithHeight",
-  encode(message: ConsensusStateWithHeight, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ConsensusStateWithHeight, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== undefined) {
       Height.encode(message.height, writer.uint32(10).fork()).ldelim();
     }
@@ -431,8 +427,8 @@ export const ConsensusStateWithHeight = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConsensusStateWithHeight {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusStateWithHeight {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusStateWithHeight();
     while (reader.pos < end) {
@@ -528,7 +524,7 @@ function createBaseClientConsensusStates(): ClientConsensusStates {
 export const ClientConsensusStates = {
   typeUrl: "/ibc.core.client.v1.ClientConsensusStates",
   aminoType: "cosmos-sdk/ClientConsensusStates",
-  encode(message: ClientConsensusStates, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ClientConsensusStates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -537,8 +533,8 @@ export const ClientConsensusStates = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClientConsensusStates {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientConsensusStates {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientConsensusStates();
     while (reader.pos < end) {
@@ -635,7 +631,6 @@ export const ClientConsensusStates = {
 };
 function createBaseClientUpdateProposal(): ClientUpdateProposal {
   return {
-    $typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
     title: "",
     description: "",
     subjectClientId: "",
@@ -645,7 +640,7 @@ function createBaseClientUpdateProposal(): ClientUpdateProposal {
 export const ClientUpdateProposal = {
   typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
   aminoType: "cosmos-sdk/ClientUpdateProposal",
-  encode(message: ClientUpdateProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: ClientUpdateProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -660,8 +655,8 @@ export const ClientUpdateProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClientUpdateProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientUpdateProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientUpdateProposal();
     while (reader.pos < end) {
@@ -766,7 +761,6 @@ export const ClientUpdateProposal = {
 };
 function createBaseUpgradeProposal(): UpgradeProposal {
   return {
-    $typeUrl: "/ibc.core.client.v1.UpgradeProposal",
     title: "",
     description: "",
     plan: Plan.fromPartial({}),
@@ -776,7 +770,7 @@ function createBaseUpgradeProposal(): UpgradeProposal {
 export const UpgradeProposal = {
   typeUrl: "/ibc.core.client.v1.UpgradeProposal",
   aminoType: "cosmos-sdk/UpgradeProposal",
-  encode(message: UpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: UpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -791,8 +785,8 @@ export const UpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpgradeProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpgradeProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpgradeProposal();
     while (reader.pos < end) {
@@ -901,34 +895,34 @@ export const UpgradeProposal = {
 };
 function createBaseHeight(): Height {
   return {
-    revisionNumber: BigInt(0),
-    revisionHeight: BigInt(0)
+    revisionNumber: Long.UZERO,
+    revisionHeight: Long.UZERO
   };
 }
 export const Height = {
   typeUrl: "/ibc.core.client.v1.Height",
   aminoType: "cosmos-sdk/Height",
-  encode(message: Height, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.revisionNumber !== BigInt(0)) {
+  encode(message: Height, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.revisionNumber.isZero()) {
       writer.uint32(8).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== BigInt(0)) {
+    if (!message.revisionHeight.isZero()) {
       writer.uint32(16).uint64(message.revisionHeight);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Height {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Height {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeight();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.revisionNumber = reader.uint64();
+          message.revisionNumber = (reader.uint64() as Long);
           break;
         case 2:
-          message.revisionHeight = reader.uint64();
+          message.revisionHeight = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -939,23 +933,23 @@ export const Height = {
   },
   fromJSON(object: any): Height {
     const obj = createBaseHeight();
-    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
-    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
+    if (isSet(object.revisionNumber)) obj.revisionNumber = Long.fromValue(object.revisionNumber);
+    if (isSet(object.revisionHeight)) obj.revisionHeight = Long.fromValue(object.revisionHeight);
     return obj;
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Height>): Height {
     const message = createBaseHeight();
     if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
-      message.revisionNumber = BigInt(object.revisionNumber.toString());
+      message.revisionNumber = Long.fromValue(object.revisionNumber);
     }
     if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
-      message.revisionHeight = BigInt(object.revisionHeight.toString());
+      message.revisionHeight = Long.fromValue(object.revisionHeight);
     }
     return message;
   },
@@ -973,8 +967,8 @@ export const Height = {
   },
   fromAmino(object: HeightAmino): Height {
     return {
-      revisionNumber: BigInt(object.revision_number || "0"),
-      revisionHeight: BigInt(object.revision_height || "0")
+      revisionNumber: Long.fromString(object.revision_number || "0", true),
+      revisionHeight: Long.fromString(object.revision_height || "0", true)
     };
   },
   toAmino(message: Height): HeightAmino {
@@ -1013,14 +1007,14 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/ibc.core.client.v1.Params",
   aminoType: "cosmos-sdk/Params",
-  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowedClients) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
