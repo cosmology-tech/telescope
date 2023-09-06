@@ -49,7 +49,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryClientStateResponse.decode(new BinaryReader(data)));
   }
   clientStates(request: QueryClientStatesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClientStatesResponse> {
     const data = QueryClientStatesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientStates", data);

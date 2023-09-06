@@ -30,7 +30,7 @@ export class LCDQueryClient {
   }
   /* ClaimsRecords returns all claims records */
   async claimsRecords(params: QueryClaimsRecordsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClaimsRecordsResponseSDKType> {
     const options: any = {
       params: {}

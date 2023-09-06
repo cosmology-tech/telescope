@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryTokenPairsRequest, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType } from "./query";
@@ -15,7 +16,7 @@ export class LCDQueryClient {
   }
   /* TokenPairs retrieves registered token pairs */
   async tokenPairs(params: QueryTokenPairsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryTokenPairsResponseSDKType> {
     const options: any = {
       params: {}

@@ -1,3 +1,4 @@
+import { PageRequest } from "../../base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryBalanceRequest, QueryBalanceResponseSDKType, QueryOwnerRequest, QueryOwnerResponseSDKType, QuerySupplyRequest, QuerySupplyResponseSDKType, QueryNFTsRequest, QueryNFTsResponseSDKType, QueryNFTRequest, QueryNFTResponseSDKType, QueryClassRequest, QueryClassResponseSDKType, QueryClassesRequest, QueryClassesResponseSDKType } from "./query";
@@ -62,7 +63,7 @@ export class LCDQueryClient {
   }
   /* Classes queries all NFT classes */
   async classes(params: QueryClassesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClassesResponseSDKType> {
     const options: any = {
       params: {}

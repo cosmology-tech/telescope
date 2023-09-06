@@ -41,7 +41,7 @@ export class QueryClientImpl implements Query {
     this.addressStringToBytes = this.addressStringToBytes.bind(this);
   }
   accounts(request: QueryAccountsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryAccountsResponse> {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);

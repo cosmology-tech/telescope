@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
@@ -27,7 +28,7 @@ export class QueryClientImpl implements Query {
     this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
   devFeeInfos(request: DeepPartial<QueryDevFeeInfosRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse> {
     return this.rpc.unary(QueryDevFeeInfosDesc, QueryDevFeeInfosRequest.fromPartial(request), metadata);
   }

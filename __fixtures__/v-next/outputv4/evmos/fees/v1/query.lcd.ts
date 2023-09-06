@@ -19,7 +19,7 @@ export class LCDQueryClient {
   }
   /* DevFeeInfos retrieves all registered contracts for fee distribution */
   async devFeeInfos(params: QueryDevFeeInfosRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryDevFeeInfosResponseSDKType> {
     const options: any = {
       params: {}

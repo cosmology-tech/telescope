@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryEpochsInfoRequest, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochResponseSDKType } from "./query";
@@ -14,7 +15,7 @@ export class LCDQueryClient {
   }
   /* EpochInfos provide running epochInfos */
   async epochInfos(params: QueryEpochsInfoRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryEpochsInfoResponseSDKType> {
     const options: any = {
       params: {}

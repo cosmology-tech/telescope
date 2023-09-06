@@ -1,3 +1,4 @@
+import { PageRequest } from "../../query/v1beta1/pagination";
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { GetNodeInfoRequest, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponseSDKType } from "./query";
@@ -38,7 +39,7 @@ export class LCDQueryClient {
   }
   /* GetLatestValidatorSet queries latest validator-set. */
   async getLatestValidatorSet(params: GetLatestValidatorSetRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<GetLatestValidatorSetResponseSDKType> {
     const options: any = {
       params: {}

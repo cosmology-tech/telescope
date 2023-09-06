@@ -23,7 +23,7 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
   tokenPairs(request: QueryTokenPairsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryTokenPairsResponse> {
     const data = QueryTokenPairsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPairs", data);

@@ -1,3 +1,4 @@
+import { PageRequest } from "../../query/v1beta1/pagination";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../../grpc-web";
 import { DeepPartial } from "../../../../helpers";
@@ -42,7 +43,7 @@ export class ServiceClientImpl implements Service {
     return this.rpc.unary(GetBlockByHeightDesc, GetBlockByHeightRequest.fromPartial(request), metadata);
   }
   getLatestValidatorSet(request: DeepPartial<GetLatestValidatorSetRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<GetLatestValidatorSetResponse> {
     return this.rpc.unary(GetLatestValidatorSetDesc, GetLatestValidatorSetRequest.fromPartial(request), metadata);
   }

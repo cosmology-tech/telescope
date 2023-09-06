@@ -1,3 +1,4 @@
+import { PageRequest } from "../../base/query/v1beta1/pagination";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
@@ -37,7 +38,7 @@ export class QueryClientImpl implements Query {
     this.addressStringToBytes = this.addressStringToBytes.bind(this);
   }
   accounts(request: DeepPartial<QueryAccountsRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<QueryAccountsResponse> {
     return this.rpc.unary(QueryAccountsDesc, QueryAccountsRequest.fromPartial(request), metadata);
   }

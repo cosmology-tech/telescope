@@ -76,7 +76,7 @@ export class LCDQueryClient {
   }
   /* Codes gets the metadata for all stored wasm codes */
   async codes(params: QueryCodesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryCodesResponseSDKType> {
     const options: any = {
       params: {}
@@ -89,7 +89,7 @@ export class LCDQueryClient {
   }
   /* PinnedCodes gets the pinned code ids */
   async pinnedCodes(params: QueryPinnedCodesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryPinnedCodesResponseSDKType> {
     const options: any = {
       params: {}

@@ -1,3 +1,4 @@
+import { PageRequest } from "../../base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryEvidenceRequest, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceResponseSDKType } from "./query";
@@ -19,7 +20,7 @@ export class LCDQueryClient {
   }
   /* AllEvidence queries all evidence. */
   async allEvidence(params: QueryAllEvidenceRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryAllEvidenceResponseSDKType> {
     const options: any = {
       params: {}

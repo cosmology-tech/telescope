@@ -199,6 +199,8 @@ const GrpcWebClassMethod = (
             t.objectExpression([])
         )
     } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
+        const paginationDefaultFromPartial = context.pluginValue('prototypes.paginationDefaultFromPartial');
+
         // if only argument "required" is pagination
         // also default to empty
         methodArgs = t.assignmentPattern(
@@ -206,6 +208,10 @@ const GrpcWebClassMethod = (
             t.objectExpression([
                 t.objectProperty(
                     t.identifier('pagination'),
+                    paginationDefaultFromPartial ? t.callExpression(
+                      t.memberExpression(t.identifier("PageRequest"), t.identifier("fromPartial")),
+                      [t.objectExpression([])]
+                    ) :
                     t.identifier('undefined'),
                     false,
                     false
@@ -223,7 +229,7 @@ const GrpcWebClassMethod = (
         serviceName = implementsName
     }
 
-    /* 
+    /*
     return this.rpc.unary(
       QueryParamsDesc,
       QueryParamsRequest.fromPartial(request),
@@ -293,7 +299,7 @@ export const createGrpcWebQueryClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-    //adding import 
+    //adding import
     context.addUtil('_m0');
     context.addUtil('grpc');
     context.addUtil('UnaryMethodDefinitionish'); // for other descriptor

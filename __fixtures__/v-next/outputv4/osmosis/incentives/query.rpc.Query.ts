@@ -62,14 +62,14 @@ export class QueryClientImpl implements Query {
     return promise.then(data => GaugeByIDResponse.decode(new BinaryReader(data)));
   }
   gauges(request: GaugesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<GaugesResponse> {
     const data = GaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "Gauges", data);
     return promise.then(data => GaugesResponse.decode(new BinaryReader(data)));
   }
   activeGauges(request: ActiveGaugesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<ActiveGaugesResponse> {
     const data = ActiveGaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "ActiveGauges", data);
@@ -81,7 +81,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => ActiveGaugesPerDenomResponse.decode(new BinaryReader(data)));
   }
   upcomingGauges(request: UpcomingGaugesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<UpcomingGaugesResponse> {
     const data = UpcomingGaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "UpcomingGauges", data);

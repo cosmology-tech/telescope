@@ -52,7 +52,7 @@ export class QueryClient {
   }
   /* TotalSupply queries the total supply of all coins. */
   async totalSupply(params: QueryTotalSupplyRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryTotalSupplyResponseSDKType> {
     const options: any = {
       params: {}
@@ -87,7 +87,7 @@ export class QueryClient {
   /* DenomsMetadata queries the client metadata for all registered coin
    denominations. */
   async denomsMetadata(params: QueryDenomsMetadataRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryDenomsMetadataResponseSDKType> {
     const options: any = {
       params: {}
@@ -112,7 +112,7 @@ export class QueryClient {
   }
   /* Pools */
   async pools(params: QueryPoolsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryPoolsResponseSDKType> {
     const options: any = {
       params: {}

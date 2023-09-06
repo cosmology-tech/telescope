@@ -1,3 +1,4 @@
+import { PageRequest } from "../../base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryAccountsRequest, QueryAccountsResponseSDKType, QueryAccountRequest, QueryAccountResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryModuleAccountsRequest, QueryModuleAccountsResponseSDKType, Bech32PrefixRequest, Bech32PrefixResponseSDKType, AddressBytesToStringRequest, AddressBytesToStringResponseSDKType, AddressStringToBytesRequest, AddressStringToBytesResponseSDKType } from "./query";
@@ -21,7 +22,7 @@ export class LCDQueryClient {
   
    Since: cosmos-sdk 0.43 */
   async accounts(params: QueryAccountsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryAccountsResponseSDKType> {
     const options: any = {
       params: {}

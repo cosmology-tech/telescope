@@ -29,7 +29,7 @@ export class QueryClientImpl implements Query {
     this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
   devFeeInfos(request: QueryDevFeeInfosRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryDevFeeInfosResponse> {
     const data = QueryDevFeeInfosRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfos", data);

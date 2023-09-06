@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
@@ -36,7 +37,7 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
   incentives(request: DeepPartial<QueryIncentivesRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<QueryIncentivesResponse> {
     return this.rpc.unary(QueryIncentivesDesc, QueryIncentivesRequest.fromPartial(request), metadata);
   }
@@ -50,7 +51,7 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QueryGasMeterDesc, QueryGasMeterRequest.fromPartial(request), metadata);
   }
   allocationMeters(request: DeepPartial<QueryAllocationMetersRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<QueryAllocationMetersResponse> {
     return this.rpc.unary(QueryAllocationMetersDesc, QueryAllocationMetersRequest.fromPartial(request), metadata);
   }

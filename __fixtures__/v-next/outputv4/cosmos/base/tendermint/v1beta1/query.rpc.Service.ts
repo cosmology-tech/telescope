@@ -54,7 +54,7 @@ export class ServiceClientImpl implements Service {
     return promise.then(data => GetBlockByHeightResponse.decode(new BinaryReader(data)));
   }
   getLatestValidatorSet(request: GetLatestValidatorSetRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<GetLatestValidatorSetResponse> {
     const data = GetLatestValidatorSetRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetLatestValidatorSet", data);

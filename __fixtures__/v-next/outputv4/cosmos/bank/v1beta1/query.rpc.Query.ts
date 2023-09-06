@@ -67,7 +67,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QuerySpendableBalancesResponse.decode(new BinaryReader(data)));
   }
   totalSupply(request: QueryTotalSupplyRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryTotalSupplyResponse> {
     const data = QueryTotalSupplyRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.bank.v1beta1.Query", "TotalSupply", data);
@@ -89,7 +89,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDenomMetadataResponse.decode(new BinaryReader(data)));
   }
   denomsMetadata(request: QueryDenomsMetadataRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryDenomsMetadataResponse> {
     const data = QueryDenomsMetadataRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.bank.v1beta1.Query", "DenomsMetadata", data);

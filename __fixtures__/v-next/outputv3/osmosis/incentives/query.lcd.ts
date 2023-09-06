@@ -35,7 +35,7 @@ export class LCDQueryClient {
   }
   /* Gauges returns both upcoming and active gauges */
   async gauges(params: GaugesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<GaugesResponseSDKType> {
     const options: any = {
       params: {}
@@ -48,7 +48,7 @@ export class LCDQueryClient {
   }
   /* ActiveGauges returns active gauges */
   async activeGauges(params: ActiveGaugesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<ActiveGaugesResponseSDKType> {
     const options: any = {
       params: {}
@@ -75,7 +75,7 @@ export class LCDQueryClient {
   }
   /* Returns scheduled gauges that have not yet occured */
   async upcomingGauges(params: UpcomingGaugesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<UpcomingGaugesResponseSDKType> {
     const options: any = {
       params: {}

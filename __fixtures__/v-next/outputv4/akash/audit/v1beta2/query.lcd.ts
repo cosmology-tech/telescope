@@ -16,7 +16,7 @@ export class LCDQueryClient {
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   allProvidersAttributes = async (params: QueryAllProvidersAttributesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryProvidersResponseSDKType> => {
     const options: any = {
       params: {}
