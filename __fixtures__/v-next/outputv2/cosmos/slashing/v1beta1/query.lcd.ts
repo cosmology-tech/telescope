@@ -1,3 +1,4 @@
+import { PageRequest } from "../../base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryParamsRequest, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosResponseSDKType } from "./query";
@@ -25,7 +26,7 @@ export class LCDQueryClient {
   }
   /* SigningInfos queries signing info of all validators */
   async signingInfos(params: QuerySigningInfosRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QuerySigningInfosResponseSDKType> {
     const options: any = {
       params: {}

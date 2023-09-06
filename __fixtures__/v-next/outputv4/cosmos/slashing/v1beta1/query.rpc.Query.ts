@@ -32,7 +32,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QuerySigningInfoResponse.decode(new BinaryReader(data)));
   }
   signingInfos(request: QuerySigningInfosRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QuerySigningInfosResponse> {
     const data = QuerySigningInfosRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Query", "SigningInfos", data);

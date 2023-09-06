@@ -19,7 +19,7 @@ export class QueryClientImpl implements Query {
     this.currentEpoch = this.currentEpoch.bind(this);
   }
   epochInfos(request: QueryEpochsInfoRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryEpochsInfoResponse> {
     const data = QueryEpochsInfoRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.epochs.v1.Query", "EpochInfos", data);

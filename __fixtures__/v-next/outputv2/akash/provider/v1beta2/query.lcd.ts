@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryProvidersRequest, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderResponseSDKType } from "./query";
@@ -14,7 +15,7 @@ export class LCDQueryClient {
   }
   /* Providers queries providers */
   async providers(params: QueryProvidersRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryProvidersResponseSDKType> {
     const options: any = {
       params: {}

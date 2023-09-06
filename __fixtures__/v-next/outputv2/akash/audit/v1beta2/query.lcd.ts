@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryAllProvidersAttributesRequest, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAuditorRequest, QueryAuditorAttributesRequest } from "./query";
@@ -18,7 +19,7 @@ export class LCDQueryClient {
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   async allProvidersAttributes(params: QueryAllProvidersAttributesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryProvidersResponseSDKType> {
     const options: any = {
       params: {}

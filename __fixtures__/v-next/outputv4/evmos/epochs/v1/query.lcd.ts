@@ -16,7 +16,7 @@ export class LCDQueryClient {
   }
   /* EpochInfos provide running epochInfos */
   async epochInfos(params: QueryEpochsInfoRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryEpochsInfoResponseSDKType> {
     const options: any = {
       params: {}

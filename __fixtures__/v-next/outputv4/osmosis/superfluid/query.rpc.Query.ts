@@ -98,7 +98,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => AssetMultiplierResponse.decode(new BinaryReader(data)));
   }
   allIntermediaryAccounts(request: AllIntermediaryAccountsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<AllIntermediaryAccountsResponse> {
     const data = AllIntermediaryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Query", "AllIntermediaryAccounts", data);

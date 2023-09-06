@@ -69,7 +69,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryClassResponse.decode(new BinaryReader(data)));
   }
   classes(request: QueryClassesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClassesResponse> {
     const data = QueryClassesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.nft.v1beta1.Query", "Classes", data);

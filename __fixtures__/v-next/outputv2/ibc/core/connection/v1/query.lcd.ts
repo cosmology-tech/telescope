@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryConnectionRequest, QueryConnectionResponseSDKType, QueryConnectionsRequest, QueryConnectionsResponseSDKType, QueryClientConnectionsRequest, QueryClientConnectionsResponseSDKType, QueryConnectionClientStateRequest, QueryConnectionClientStateResponseSDKType, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponseSDKType } from "./query";
@@ -22,7 +23,7 @@ export class LCDQueryClient {
   }
   /* Connections queries all the IBC connections of a chain. */
   async connections(params: QueryConnectionsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryConnectionsResponseSDKType> {
     const options: any = {
       params: {}

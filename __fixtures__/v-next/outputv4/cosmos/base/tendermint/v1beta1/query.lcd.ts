@@ -43,7 +43,7 @@ export class LCDQueryClient {
   }
   /* GetLatestValidatorSet queries latest validator-set. */
   async getLatestValidatorSet(params: GetLatestValidatorSetRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<GetLatestValidatorSetResponseSDKType> {
     const options: any = {
       params: {}

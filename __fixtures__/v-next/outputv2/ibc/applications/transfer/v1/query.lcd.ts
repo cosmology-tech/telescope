@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryDenomTraceRequest, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType } from "./query";
@@ -20,7 +21,7 @@ export class LCDQueryClient {
   }
   /* DenomTraces queries all denomination traces. */
   async denomTraces(params: QueryDenomTracesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryDenomTracesResponseSDKType> {
     const options: any = {
       params: {}

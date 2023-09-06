@@ -40,7 +40,7 @@ export class QueryClientImpl implements Query {
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   allProvidersAttributes = async (request: QueryAllProvidersAttributesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryProvidersResponse> => {
     const data = QueryAllProvidersAttributesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "AllProvidersAttributes", data);

@@ -46,6 +46,7 @@ interface TelescopeOpts {
             fromProto?: boolean;
         },
         strictNullCheckForPrototypeMethods?: boolean;
+        paginationDefaultFromPartial?: boolean;
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;

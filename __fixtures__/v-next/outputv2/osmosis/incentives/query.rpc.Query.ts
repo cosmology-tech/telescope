@@ -1,3 +1,4 @@
+import { PageRequest } from "../../cosmos/base/query/v1beta1/pagination";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../grpc-web";
 import { DeepPartial } from "../../helpers";
@@ -55,12 +56,12 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QueryGaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
   }
   gauges(request: DeepPartial<GaugesRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<GaugesResponse> {
     return this.rpc.unary(QueryGaugesDesc, GaugesRequest.fromPartial(request), metadata);
   }
   activeGauges(request: DeepPartial<ActiveGaugesRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse> {
     return this.rpc.unary(QueryActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
   }
@@ -68,7 +69,7 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QueryActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
   }
   upcomingGauges(request: DeepPartial<UpcomingGaugesRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse> {
     return this.rpc.unary(QueryUpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
   }

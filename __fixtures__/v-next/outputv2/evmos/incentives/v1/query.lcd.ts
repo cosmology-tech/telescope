@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryIncentivesRequest, QueryIncentivesResponseSDKType, QueryIncentiveRequest, QueryIncentiveResponseSDKType, QueryGasMetersRequest, QueryGasMetersResponseSDKType, QueryGasMeterRequest, QueryGasMeterResponseSDKType, QueryAllocationMetersRequest, QueryAllocationMetersResponseSDKType, QueryAllocationMeterRequest, QueryAllocationMeterResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType } from "./query";
@@ -19,7 +20,7 @@ export class LCDQueryClient {
   }
   /* Incentives retrieves registered incentives */
   async incentives(params: QueryIncentivesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryIncentivesResponseSDKType> {
     const options: any = {
       params: {}
@@ -54,7 +55,7 @@ export class LCDQueryClient {
   /* AllocationMeters retrieves active allocation meters for a given
    denomination */
   async allocationMeters(params: QueryAllocationMetersRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryAllocationMetersResponseSDKType> {
     const options: any = {
       params: {}

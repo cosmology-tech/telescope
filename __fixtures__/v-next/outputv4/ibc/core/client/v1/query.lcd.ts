@@ -28,7 +28,7 @@ export class LCDQueryClient {
   }
   /* ClientStates queries all the IBC light clients of a chain. */
   async clientStates(params: QueryClientStatesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClientStatesResponseSDKType> {
     const options: any = {
       params: {}

@@ -27,7 +27,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDenomTraceResponse.decode(new BinaryReader(data)));
   }
   denomTraces(request: QueryDenomTracesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryDenomTracesResponse> {
     const data = QueryDenomTracesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "DenomTraces", data);

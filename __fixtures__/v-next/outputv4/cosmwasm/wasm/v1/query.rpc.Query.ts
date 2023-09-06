@@ -75,14 +75,14 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryCodeResponse.decode(new BinaryReader(data)));
   }
   codes(request: QueryCodesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryCodesResponse> {
     const data = QueryCodesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmwasm.wasm.v1.Query", "Codes", data);
     return promise.then(data => QueryCodesResponse.decode(new BinaryReader(data)));
   }
   pinnedCodes(request: QueryPinnedCodesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryPinnedCodesResponse> {
     const data = QueryPinnedCodesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmwasm.wasm.v1.Query", "PinnedCodes", data);

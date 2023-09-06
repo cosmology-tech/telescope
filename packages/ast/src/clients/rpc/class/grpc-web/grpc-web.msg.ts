@@ -175,6 +175,8 @@ const rpcClassMethod = (
             t.objectExpression([])
         )
     } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
+        const paginationDefaultFromPartial = context.pluginValue('prototypes.paginationDefaultFromPartial');
+
         // if only argument "required" is pagination
         // also default to empty
         methodArgs = t.assignmentPattern(
@@ -182,6 +184,10 @@ const rpcClassMethod = (
             t.objectExpression([
                 t.objectProperty(
                     t.identifier('pagination'),
+                    paginationDefaultFromPartial ? t.callExpression(
+                      t.memberExpression(t.identifier("PageRequest"), t.identifier("fromPartial")),
+                      [t.objectExpression([])]
+                    ) :
                     t.identifier('undefined'),
                     false,
                     false

@@ -1,3 +1,4 @@
+import { PageRequest } from "../../cosmos/base/query/v1beta1/pagination";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../grpc-web";
 import { DeepPartial } from "../../helpers";
@@ -85,7 +86,7 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QueryAssetMultiplierDesc, AssetMultiplierRequest.fromPartial(request), metadata);
   }
   allIntermediaryAccounts(request: DeepPartial<AllIntermediaryAccountsRequest> = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }, metadata?: grpc.Metadata): Promise<AllIntermediaryAccountsResponse> {
     return this.rpc.unary(QueryAllIntermediaryAccountsDesc, AllIntermediaryAccountsRequest.fromPartial(request), metadata);
   }

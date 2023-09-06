@@ -24,7 +24,7 @@ export class LCDQueryClient {
   
    Since: cosmos-sdk 0.43 */
   async accounts(params: QueryAccountsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryAccountsResponseSDKType> {
     const options: any = {
       params: {}

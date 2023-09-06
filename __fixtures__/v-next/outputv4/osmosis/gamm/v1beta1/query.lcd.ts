@@ -30,7 +30,7 @@ export class LCDQueryClient {
   }
   /* Pools */
   async pools(params: QueryPoolsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryPoolsResponseSDKType> {
     const options: any = {
       params: {}

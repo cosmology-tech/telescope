@@ -34,7 +34,7 @@ export class LCDQueryClient {
   }
   /* Channels queries all the IBC channels of a chain. */
   async channels(params: QueryChannelsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryChannelsResponseSDKType> {
     const options: any = {
       params: {}

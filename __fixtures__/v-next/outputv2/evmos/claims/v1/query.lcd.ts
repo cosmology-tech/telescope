@@ -1,3 +1,4 @@
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordResponseSDKType } from "./query";
@@ -26,7 +27,7 @@ export class LCDQueryClient {
   }
   /* ClaimsRecords returns all claims records */
   async claimsRecords(params: QueryClaimsRecordsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClaimsRecordsResponseSDKType> {
     const options: any = {
       params: {}

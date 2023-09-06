@@ -37,7 +37,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
   claimsRecords(request: QueryClaimsRecordsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClaimsRecordsResponse> {
     const data = QueryClaimsRecordsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecords", data);

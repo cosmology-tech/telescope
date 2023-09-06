@@ -21,7 +21,7 @@ export class LCDQueryClient {
   }
   /* AllEvidence queries all evidence. */
   async allEvidence(params: QueryAllEvidenceRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryAllEvidenceResponseSDKType> {
     const options: any = {
       params: {}

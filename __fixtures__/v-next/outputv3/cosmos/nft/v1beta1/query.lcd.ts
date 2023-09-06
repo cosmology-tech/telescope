@@ -64,7 +64,7 @@ export class LCDQueryClient {
   }
   /* Classes queries all NFT classes */
   async classes(params: QueryClassesRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryClassesResponseSDKType> {
     const options: any = {
       params: {}

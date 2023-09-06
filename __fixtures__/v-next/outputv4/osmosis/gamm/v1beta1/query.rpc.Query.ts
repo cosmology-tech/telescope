@@ -67,7 +67,7 @@ export class QueryClientImpl implements Query {
     this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
   pools(request: QueryPoolsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryPoolsResponse> {
     const data = QueryPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pools", data);
