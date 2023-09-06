@@ -617,7 +617,7 @@ export const ListValue = {
   },
   fromJSON(object: any): ListValue {
     const obj = createBaseListValue();
-    if (Array.isArray(object?.values)) object.values.map((e: any) => Value.fromJSON(e));
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
     return obj;
   },
   toJSON(message: ListValue): unknown {
@@ -710,7 +710,7 @@ export const MapValue = {
   },
   fromJSON(object: any): MapValue {
     const obj = createBaseMapValue();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => MapValue_Entry.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => MapValue_Entry.fromJSON(e));
     return obj;
   },
   toJSON(message: MapValue): unknown {

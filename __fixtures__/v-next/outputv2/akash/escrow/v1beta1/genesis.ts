@@ -64,8 +64,8 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Account.fromJSON(e));
-    if (Array.isArray(object?.payments)) object.payments.map((e: any) => Payment.fromJSON(e));
+    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Account.fromJSON(e));
+    if (Array.isArray(object?.payments)) obj.payments = object.payments.map((e: any) => Payment.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

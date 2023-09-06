@@ -118,8 +118,8 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.incentives)) object.incentives.map((e: any) => Incentive.fromJSON(e));
-    if (Array.isArray(object?.gasMeters)) object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
+    if (Array.isArray(object?.incentives)) obj.incentives = object.incentives.map((e: any) => Incentive.fromJSON(e));
+    if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

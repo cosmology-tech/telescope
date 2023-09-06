@@ -156,8 +156,8 @@ export const SignedBy = {
   },
   fromJSON(object: any): SignedBy {
     const obj = createBaseSignedBy();
-    if (Array.isArray(object?.allOf)) object.allOf.map((e: any) => String(e));
-    if (Array.isArray(object?.anyOf)) object.anyOf.map((e: any) => String(e));
+    if (Array.isArray(object?.allOf)) obj.allOf = object.allOf.map((e: any) => String(e));
+    if (Array.isArray(object?.anyOf)) obj.anyOf = object.anyOf.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: SignedBy): unknown {
@@ -246,7 +246,7 @@ export const PlacementRequirements = {
   fromJSON(object: any): PlacementRequirements {
     const obj = createBasePlacementRequirements();
     if (isSet(object.signedBy)) obj.signedBy = SignedBy.fromJSON(object.signedBy);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: PlacementRequirements): unknown {

@@ -403,7 +403,7 @@ export const MonitoredResourceDescriptor = {
     if (isSet(object.type)) obj.type = String(object.type);
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.labels)) object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
+    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
     if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
     return obj;
   },

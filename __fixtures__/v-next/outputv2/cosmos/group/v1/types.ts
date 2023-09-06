@@ -920,7 +920,7 @@ export const Members = {
   },
   fromJSON(object: any): Members {
     const obj = createBaseMembers();
-    if (Array.isArray(object?.members)) object.members.map((e: any) => Member.fromJSON(e));
+    if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => Member.fromJSON(e));
     return obj;
   },
   toJSON(message: Members): unknown {
@@ -1867,7 +1867,7 @@ export const Proposal = {
     if (isSet(object.id)) obj.id = Long.fromValue(object.id);
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (Array.isArray(object?.proposers)) object.proposers.map((e: any) => String(e));
+    if (Array.isArray(object?.proposers)) obj.proposers = object.proposers.map((e: any) => String(e));
     if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
     if (isSet(object.groupVersion)) obj.groupVersion = Long.fromValue(object.groupVersion);
     if (isSet(object.groupPolicyVersion)) obj.groupPolicyVersion = Long.fromValue(object.groupPolicyVersion);
@@ -1876,7 +1876,7 @@ export const Proposal = {
     if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
     if (isSet(object.votingPeriodEnd)) obj.votingPeriodEnd = new Date(object.votingPeriodEnd);
     if (isSet(object.executorResult)) obj.executorResult = proposalExecutorResultFromJSON(object.executorResult);
-    if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: Proposal): unknown {

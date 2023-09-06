@@ -178,8 +178,8 @@ export const EvalState = {
   },
   fromJSON(object: any): EvalState {
     const obj = createBaseEvalState();
-    if (Array.isArray(object?.values)) object.values.map((e: any) => ExprValue.fromJSON(e));
-    if (Array.isArray(object?.results)) object.results.map((e: any) => EvalState_Result.fromJSON(e));
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => ExprValue.fromJSON(e));
+    if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => EvalState_Result.fromJSON(e));
     return obj;
   },
   toJSON(message: EvalState): unknown {
@@ -427,7 +427,7 @@ export const ErrorSet = {
   },
   fromJSON(object: any): ErrorSet {
     const obj = createBaseErrorSet();
-    if (Array.isArray(object?.errors)) object.errors.map((e: any) => Status.fromJSON(e));
+    if (Array.isArray(object?.errors)) obj.errors = object.errors.map((e: any) => Status.fromJSON(e));
     return obj;
   },
   toJSON(message: ErrorSet): unknown {
@@ -495,7 +495,7 @@ export const UnknownSet = {
   },
   fromJSON(object: any): UnknownSet {
     const obj = createBaseUnknownSet();
-    if (Array.isArray(object?.exprs)) object.exprs.map((e: any) => IdRef.fromJSON(e));
+    if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => IdRef.fromJSON(e));
     return obj;
   },
   toJSON(message: UnknownSet): unknown {

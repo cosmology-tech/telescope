@@ -125,9 +125,9 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.clients)) object.clients.map((e: any) => IdentifiedClientState.fromJSON(e));
-    if (Array.isArray(object?.clientsConsensus)) object.clientsConsensus.map((e: any) => ClientConsensusStates.fromJSON(e));
-    if (Array.isArray(object?.clientsMetadata)) object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e));
+    if (Array.isArray(object?.clients)) obj.clients = object.clients.map((e: any) => IdentifiedClientState.fromJSON(e));
+    if (Array.isArray(object?.clientsConsensus)) obj.clientsConsensus = object.clientsConsensus.map((e: any) => ClientConsensusStates.fromJSON(e));
+    if (Array.isArray(object?.clientsMetadata)) obj.clientsMetadata = object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     if (isSet(object.createLocalhost)) obj.createLocalhost = Boolean(object.createLocalhost);
     if (isSet(object.nextClientSequence)) obj.nextClientSequence = BigInt(object.nextClientSequence.toString());
@@ -324,7 +324,7 @@ export const IdentifiedGenesisMetadata = {
   fromJSON(object: any): IdentifiedGenesisMetadata {
     const obj = createBaseIdentifiedGenesisMetadata();
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (Array.isArray(object?.clientMetadata)) object.clientMetadata.map((e: any) => GenesisMetadata.fromJSON(e));
+    if (Array.isArray(object?.clientMetadata)) obj.clientMetadata = object.clientMetadata.map((e: any) => GenesisMetadata.fromJSON(e));
     return obj;
   },
   toJSON(message: IdentifiedGenesisMetadata): unknown {

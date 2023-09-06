@@ -165,9 +165,9 @@ export const BaseVestingAccount = {
   fromJSON(object: any): BaseVestingAccount {
     const obj = createBaseBaseVestingAccount();
     if (isSet(object.baseAccount)) obj.baseAccount = BaseAccount.fromJSON(object.baseAccount);
-    if (Array.isArray(object?.originalVesting)) object.originalVesting.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.delegatedFree)) object.delegatedFree.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.delegatedVesting)) object.delegatedVesting.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.originalVesting)) obj.originalVesting = object.originalVesting.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.delegatedFree)) obj.delegatedFree = object.delegatedFree.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.delegatedVesting)) obj.delegatedVesting = object.delegatedVesting.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.endTime)) obj.endTime = BigInt(object.endTime.toString());
     return obj;
   },
@@ -423,7 +423,7 @@ export const Period = {
   fromJSON(object: any): Period {
     const obj = createBasePeriod();
     if (isSet(object.length)) obj.length = BigInt(object.length.toString());
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: Period): unknown {
@@ -514,7 +514,7 @@ export const PeriodicVestingAccount = {
     const obj = createBasePeriodicVestingAccount();
     if (isSet(object.baseVestingAccount)) obj.baseVestingAccount = BaseVestingAccount.fromJSON(object.baseVestingAccount);
     if (isSet(object.startTime)) obj.startTime = BigInt(object.startTime.toString());
-    if (Array.isArray(object?.vestingPeriods)) object.vestingPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
     return obj;
   },
   toJSON(message: PeriodicVestingAccount): unknown {

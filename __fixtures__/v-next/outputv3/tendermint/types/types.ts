@@ -1114,7 +1114,7 @@ export const Data = {
   },
   fromJSON(object: any): Data {
     const obj = createBaseData();
-    if (Array.isArray(object?.txs)) object.txs.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.txs)) obj.txs = object.txs.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: Data): unknown {
@@ -1414,7 +1414,7 @@ export const Commit = {
     if (isSet(object.height)) obj.height = Long.fromValue(object.height);
     if (isSet(object.round)) obj.round = Number(object.round);
     if (isSet(object.blockId)) obj.blockId = BlockID.fromJSON(object.blockId);
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => CommitSig.fromJSON(e));
+    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => CommitSig.fromJSON(e));
     return obj;
   },
   toJSON(message: Commit): unknown {

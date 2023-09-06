@@ -106,7 +106,7 @@ export const LogDescriptor = {
   fromJSON(object: any): LogDescriptor {
     const obj = createBaseLogDescriptor();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.labels)) object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
+    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
     return obj;

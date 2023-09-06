@@ -85,7 +85,7 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (isSet(object.moduleAccountBalance)) obj.moduleAccountBalance = Coin.fromJSON(object.moduleAccountBalance);
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.claimRecords)) object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e));
+    if (Array.isArray(object?.claimRecords)) obj.claimRecords = object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

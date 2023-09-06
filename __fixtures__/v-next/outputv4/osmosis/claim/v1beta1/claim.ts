@@ -118,8 +118,8 @@ export const ClaimRecord = {
   fromJSON(object: any): ClaimRecord {
     const obj = createBaseClaimRecord();
     if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.initialClaimableAmount)) object.initialClaimableAmount.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.actionCompleted)) object.actionCompleted.map((e: any) => Boolean(e));
+    if (Array.isArray(object?.initialClaimableAmount)) obj.initialClaimableAmount = object.initialClaimableAmount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.actionCompleted)) obj.actionCompleted = object.actionCompleted.map((e: any) => Boolean(e));
     return obj;
   },
   toJSON(message: ClaimRecord): unknown {

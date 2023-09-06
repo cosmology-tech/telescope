@@ -936,7 +936,7 @@ export const QueryContractHistoryResponse = {
   },
   fromJSON(object: any): QueryContractHistoryResponse {
     const obj = createBaseQueryContractHistoryResponse();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => ContractCodeHistoryEntry.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => ContractCodeHistoryEntry.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1158,7 +1158,7 @@ export const QueryContractsByCodeResponse = {
   },
   fromJSON(object: any): QueryContractsByCodeResponse {
     const obj = createBaseQueryContractsByCodeResponse();
-    if (Array.isArray(object?.contracts)) object.contracts.map((e: any) => String(e));
+    if (Array.isArray(object?.contracts)) obj.contracts = object.contracts.map((e: any) => String(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1378,7 +1378,7 @@ export const QueryAllContractStateResponse = {
   },
   fromJSON(object: any): QueryAllContractStateResponse {
     const obj = createBaseQueryAllContractStateResponse();
-    if (Array.isArray(object?.models)) object.models.map((e: any) => Model.fromJSON(e));
+    if (Array.isArray(object?.models)) obj.models = object.models.map((e: any) => Model.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -2276,7 +2276,7 @@ export const QueryCodesResponse = {
   },
   fromJSON(object: any): QueryCodesResponse {
     const obj = createBaseQueryCodesResponse();
-    if (Array.isArray(object?.codeInfos)) object.codeInfos.map((e: any) => CodeInfoResponse.fromJSON(e));
+    if (Array.isArray(object?.codeInfos)) obj.codeInfos = object.codeInfos.map((e: any) => CodeInfoResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -2491,7 +2491,7 @@ export const QueryPinnedCodesResponse = {
   },
   fromJSON(object: any): QueryPinnedCodesResponse {
     const obj = createBaseQueryPinnedCodesResponse();
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => Long.fromValue(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

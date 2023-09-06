@@ -358,7 +358,7 @@ export const ValidatorHistoricalRewards = {
   },
   fromJSON(object: any): ValidatorHistoricalRewards {
     const obj = createBaseValidatorHistoricalRewards();
-    if (Array.isArray(object?.cumulativeRewardRatio)) object.cumulativeRewardRatio.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.cumulativeRewardRatio)) obj.cumulativeRewardRatio = object.cumulativeRewardRatio.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.referenceCount)) obj.referenceCount = Number(object.referenceCount);
     return obj;
   },
@@ -439,7 +439,7 @@ export const ValidatorCurrentRewards = {
   },
   fromJSON(object: any): ValidatorCurrentRewards {
     const obj = createBaseValidatorCurrentRewards();
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.period)) obj.period = BigInt(object.period.toString());
     return obj;
   },
@@ -515,7 +515,7 @@ export const ValidatorAccumulatedCommission = {
   },
   fromJSON(object: any): ValidatorAccumulatedCommission {
     const obj = createBaseValidatorAccumulatedCommission();
-    if (Array.isArray(object?.commission)) object.commission.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.commission)) obj.commission = object.commission.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: ValidatorAccumulatedCommission): unknown {
@@ -583,7 +583,7 @@ export const ValidatorOutstandingRewards = {
   },
   fromJSON(object: any): ValidatorOutstandingRewards {
     const obj = createBaseValidatorOutstandingRewards();
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: ValidatorOutstandingRewards): unknown {
@@ -726,7 +726,7 @@ export const ValidatorSlashEvents = {
   },
   fromJSON(object: any): ValidatorSlashEvents {
     const obj = createBaseValidatorSlashEvents();
-    if (Array.isArray(object?.validatorSlashEvents)) object.validatorSlashEvents.map((e: any) => ValidatorSlashEvent.fromJSON(e));
+    if (Array.isArray(object?.validatorSlashEvents)) obj.validatorSlashEvents = object.validatorSlashEvents.map((e: any) => ValidatorSlashEvent.fromJSON(e));
     return obj;
   },
   toJSON(message: ValidatorSlashEvents): unknown {
@@ -794,7 +794,7 @@ export const FeePool = {
   },
   fromJSON(object: any): FeePool {
     const obj = createBaseFeePool();
-    if (Array.isArray(object?.communityPool)) object.communityPool.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.communityPool)) obj.communityPool = object.communityPool.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: FeePool): unknown {
@@ -886,7 +886,7 @@ export const CommunityPoolSpendProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.recipient)) obj.recipient = String(object.recipient);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: CommunityPoolSpendProposal): unknown {
@@ -1067,7 +1067,7 @@ export const DelegationDelegatorReward = {
   fromJSON(object: any): DelegationDelegatorReward {
     const obj = createBaseDelegationDelegatorReward();
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (Array.isArray(object?.reward)) object.reward.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.reward)) obj.reward = object.reward.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: DelegationDelegatorReward): unknown {

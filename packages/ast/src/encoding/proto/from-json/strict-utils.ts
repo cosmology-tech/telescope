@@ -670,7 +670,7 @@ export const fromJSON = {
     },
 
     //OLD: codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-    //NEW: if (Array.isArray(object?.codeIds)) { object.codeIds.map((e: any) => Long.fromString(e)) }
+    //NEW: if (Array.isArray(object?.codeIds)) { obj.codeIds = object.codeIds.map((e: any) => Long.fromString(e)) }
     array(args: FromJSONMethod, expr: t.Expression) {
         const { messageProp, objProp } = getPropNames(args.field);
 
@@ -690,26 +690,23 @@ export const fromJSON = {
                     ]
             ),
             t.expressionStatement(
+              t.assignmentExpression(
+                "=",
+                t.memberExpression(t.identifier("obj"), t.identifier(objProp)),
                 t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        ),
-                        t.identifier('map')
+                  t.memberExpression(
+                    t.memberExpression(t.identifier("object"), t.identifier(objProp)),
+                    t.identifier("map")
+                  ),
+                  [
+                    t.arrowFunctionExpression(
+                      [identifier("e", t.tsTypeAnnotation(t.tsAnyKeyword()))],
+                      expr,
+                      false
                     ),
-                    [
-                        t.arrowFunctionExpression(
-                            [
-                                identifier('e', t.tsTypeAnnotation(
-                                    t.tsAnyKeyword()
-                                ))
-                            ],
-                            expr,
-                            false
-                        )
-                    ]
+                  ]
                 )
+              )
             )
         )
     }

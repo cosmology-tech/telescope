@@ -76,7 +76,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (Array.isArray(object?.denomTraces)) object.denomTraces.map((e: any) => DenomTrace.fromJSON(e));
+    if (Array.isArray(object?.denomTraces)) obj.denomTraces = object.denomTraces.map((e: any) => DenomTrace.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },

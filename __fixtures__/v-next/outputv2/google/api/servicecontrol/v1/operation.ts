@@ -454,10 +454,10 @@ export const Operation = {
       acc[key] = String(value);
       return acc;
     }, {});
-    if (Array.isArray(object?.metricValueSets)) object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e));
-    if (Array.isArray(object?.logEntries)) object.logEntries.map((e: any) => LogEntry.fromJSON(e));
+    if (Array.isArray(object?.metricValueSets)) obj.metricValueSets = object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e));
+    if (Array.isArray(object?.logEntries)) obj.logEntries = object.logEntries.map((e: any) => LogEntry.fromJSON(e));
     if (isSet(object.importance)) obj.importance = operation_ImportanceFromJSON(object.importance);
-    if (Array.isArray(object?.extensions)) object.extensions.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: Operation): unknown {

@@ -484,7 +484,7 @@ export const TxDescriptor = {
   fromJSON(object: any): TxDescriptor {
     const obj = createBaseTxDescriptor();
     if (isSet(object.fullname)) obj.fullname = String(object.fullname);
-    if (Array.isArray(object?.msgs)) object.msgs.map((e: any) => MsgDescriptor.fromJSON(e));
+    if (Array.isArray(object?.msgs)) obj.msgs = object.msgs.map((e: any) => MsgDescriptor.fromJSON(e));
     return obj;
   },
   toJSON(message: TxDescriptor): unknown {
@@ -557,7 +557,7 @@ export const AuthnDescriptor = {
   },
   fromJSON(object: any): AuthnDescriptor {
     const obj = createBaseAuthnDescriptor();
-    if (Array.isArray(object?.signModes)) object.signModes.map((e: any) => SigningModeDescriptor.fromJSON(e));
+    if (Array.isArray(object?.signModes)) obj.signModes = object.signModes.map((e: any) => SigningModeDescriptor.fromJSON(e));
     return obj;
   },
   toJSON(message: AuthnDescriptor): unknown {
@@ -771,7 +771,7 @@ export const CodecDescriptor = {
   },
   fromJSON(object: any): CodecDescriptor {
     const obj = createBaseCodecDescriptor();
-    if (Array.isArray(object?.interfaces)) object.interfaces.map((e: any) => InterfaceDescriptor.fromJSON(e));
+    if (Array.isArray(object?.interfaces)) obj.interfaces = object.interfaces.map((e: any) => InterfaceDescriptor.fromJSON(e));
     return obj;
   },
   toJSON(message: CodecDescriptor): unknown {
@@ -854,8 +854,8 @@ export const InterfaceDescriptor = {
   fromJSON(object: any): InterfaceDescriptor {
     const obj = createBaseInterfaceDescriptor();
     if (isSet(object.fullname)) obj.fullname = String(object.fullname);
-    if (Array.isArray(object?.interfaceAcceptingMessages)) object.interfaceAcceptingMessages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromJSON(e));
-    if (Array.isArray(object?.interfaceImplementers)) object.interfaceImplementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e));
+    if (Array.isArray(object?.interfaceAcceptingMessages)) obj.interfaceAcceptingMessages = object.interfaceAcceptingMessages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromJSON(e));
+    if (Array.isArray(object?.interfaceImplementers)) obj.interfaceImplementers = object.interfaceImplementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e));
     return obj;
   },
   toJSON(message: InterfaceDescriptor): unknown {
@@ -1022,7 +1022,7 @@ export const InterfaceAcceptingMessageDescriptor = {
   fromJSON(object: any): InterfaceAcceptingMessageDescriptor {
     const obj = createBaseInterfaceAcceptingMessageDescriptor();
     if (isSet(object.fullname)) obj.fullname = String(object.fullname);
-    if (Array.isArray(object?.fieldDescriptorNames)) object.fieldDescriptorNames.map((e: any) => String(e));
+    if (Array.isArray(object?.fieldDescriptorNames)) obj.fieldDescriptorNames = object.fieldDescriptorNames.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: InterfaceAcceptingMessageDescriptor): unknown {
@@ -1851,7 +1851,7 @@ export const QueryServicesDescriptor = {
   },
   fromJSON(object: any): QueryServicesDescriptor {
     const obj = createBaseQueryServicesDescriptor();
-    if (Array.isArray(object?.queryServices)) object.queryServices.map((e: any) => QueryServiceDescriptor.fromJSON(e));
+    if (Array.isArray(object?.queryServices)) obj.queryServices = object.queryServices.map((e: any) => QueryServiceDescriptor.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryServicesDescriptor): unknown {
@@ -1935,7 +1935,7 @@ export const QueryServiceDescriptor = {
     const obj = createBaseQueryServiceDescriptor();
     if (isSet(object.fullname)) obj.fullname = String(object.fullname);
     if (isSet(object.isModule)) obj.isModule = Boolean(object.isModule);
-    if (Array.isArray(object?.methods)) object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e));
+    if (Array.isArray(object?.methods)) obj.methods = object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryServiceDescriptor): unknown {

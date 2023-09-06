@@ -810,7 +810,7 @@ export const ExistenceProof = {
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     if (isSet(object.leaf)) obj.leaf = LeafOp.fromJSON(object.leaf);
-    if (Array.isArray(object?.path)) object.path.map((e: any) => InnerOp.fromJSON(e));
+    if (Array.isArray(object?.path)) obj.path = object.path.map((e: any) => InnerOp.fromJSON(e));
     return obj;
   },
   toJSON(message: ExistenceProof): unknown {
@@ -1584,7 +1584,7 @@ export const InnerSpec = {
   },
   fromJSON(object: any): InnerSpec {
     const obj = createBaseInnerSpec();
-    if (Array.isArray(object?.childOrder)) object.childOrder.map((e: any) => Number(e));
+    if (Array.isArray(object?.childOrder)) obj.childOrder = object.childOrder.map((e: any) => Number(e));
     if (isSet(object.childSize)) obj.childSize = Number(object.childSize);
     if (isSet(object.minPrefixLength)) obj.minPrefixLength = Number(object.minPrefixLength);
     if (isSet(object.maxPrefixLength)) obj.maxPrefixLength = Number(object.maxPrefixLength);
@@ -1712,7 +1712,7 @@ export const BatchProof = {
   },
   fromJSON(object: any): BatchProof {
     const obj = createBaseBatchProof();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => BatchEntry.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => BatchEntry.fromJSON(e));
     return obj;
   },
   toJSON(message: BatchProof): unknown {
@@ -1911,8 +1911,8 @@ export const CompressedBatchProof = {
   },
   fromJSON(object: any): CompressedBatchProof {
     const obj = createBaseCompressedBatchProof();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => CompressedBatchEntry.fromJSON(e));
-    if (Array.isArray(object?.lookupInners)) object.lookupInners.map((e: any) => InnerOp.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => CompressedBatchEntry.fromJSON(e));
+    if (Array.isArray(object?.lookupInners)) obj.lookupInners = object.lookupInners.map((e: any) => InnerOp.fromJSON(e));
     return obj;
   },
   toJSON(message: CompressedBatchProof): unknown {
@@ -2155,7 +2155,7 @@ export const CompressedExistenceProof = {
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     if (isSet(object.leaf)) obj.leaf = LeafOp.fromJSON(object.leaf);
-    if (Array.isArray(object?.path)) object.path.map((e: any) => Number(e));
+    if (Array.isArray(object?.path)) obj.path = object.path.map((e: any) => Number(e));
     return obj;
   },
   toJSON(message: CompressedExistenceProof): unknown {

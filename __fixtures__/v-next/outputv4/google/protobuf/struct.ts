@@ -460,7 +460,7 @@ export const ListValue = {
   },
   fromJSON(object: any): ListValue {
     const obj = createBaseListValue();
-    if (Array.isArray(object?.values)) object.values.map((e: any) => Value.fromJSON(e));
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
     return obj;
   },
   toJSON(message: ListValue): unknown {

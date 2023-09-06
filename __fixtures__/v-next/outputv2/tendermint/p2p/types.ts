@@ -572,7 +572,7 @@ export const PeerInfo = {
   fromJSON(object: any): PeerInfo {
     const obj = createBasePeerInfo();
     if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.addressInfo)) object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e));
+    if (Array.isArray(object?.addressInfo)) obj.addressInfo = object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e));
     if (isSet(object.lastConnected)) obj.lastConnected = new Date(object.lastConnected);
     return obj;
   },

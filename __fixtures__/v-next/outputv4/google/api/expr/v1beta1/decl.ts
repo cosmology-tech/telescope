@@ -241,7 +241,7 @@ export const DeclType = {
     const obj = createBaseDeclType();
     if (isSet(object.id)) obj.id = Number(object.id);
     if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.typeParams)) object.typeParams.map((e: any) => DeclType.fromJSON(e));
+    if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => DeclType.fromJSON(e));
     return obj;
   },
   toJSON(message: DeclType): unknown {
@@ -410,7 +410,7 @@ export const FunctionDecl = {
   },
   fromJSON(object: any): FunctionDecl {
     const obj = createBaseFunctionDecl();
-    if (Array.isArray(object?.args)) object.args.map((e: any) => IdentDecl.fromJSON(e));
+    if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => IdentDecl.fromJSON(e));
     if (isSet(object.returnType)) obj.returnType = DeclType.fromJSON(object.returnType);
     if (isSet(object.receiverFunction)) obj.receiverFunction = Boolean(object.receiverFunction);
     return obj;

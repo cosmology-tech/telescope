@@ -90,7 +90,7 @@ export const GenesisDeployment = {
   fromJSON(object: any): GenesisDeployment {
     const obj = createBaseGenesisDeployment();
     if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => Group.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisDeployment): unknown {
@@ -198,7 +198,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.deployments)) object.deployments.map((e: any) => GenesisDeployment.fromJSON(e));
+    if (Array.isArray(object?.deployments)) obj.deployments = object.deployments.map((e: any) => GenesisDeployment.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },

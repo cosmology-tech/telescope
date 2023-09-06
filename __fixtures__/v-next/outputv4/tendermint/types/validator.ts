@@ -77,7 +77,7 @@ export const ValidatorSet = {
   },
   fromJSON(object: any): ValidatorSet {
     const obj = createBaseValidatorSet();
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.proposer)) obj.proposer = Validator.fromJSON(object.proposer);
     if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
     return obj;

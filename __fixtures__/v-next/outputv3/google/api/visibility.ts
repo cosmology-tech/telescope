@@ -208,7 +208,7 @@ export const Visibility = {
   },
   fromJSON(object: any): Visibility {
     const obj = createBaseVisibility();
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => VisibilityRule.fromJSON(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => VisibilityRule.fromJSON(e));
     return obj;
   },
   toJSON(message: Visibility): unknown {

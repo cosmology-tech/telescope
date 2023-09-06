@@ -103,9 +103,9 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.startingProposalId)) obj.startingProposalId = BigInt(object.startingProposalId.toString());
-    if (Array.isArray(object?.deposits)) object.deposits.map((e: any) => Deposit.fromJSON(e));
-    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
-    if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
+    if (Array.isArray(object?.deposits)) obj.deposits = object.deposits.map((e: any) => Deposit.fromJSON(e));
+    if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
+    if (Array.isArray(object?.proposals)) obj.proposals = object.proposals.map((e: any) => Proposal.fromJSON(e));
     if (isSet(object.depositParams)) obj.depositParams = DepositParams.fromJSON(object.depositParams);
     if (isSet(object.votingParams)) obj.votingParams = VotingParams.fromJSON(object.votingParams);
     if (isSet(object.tallyParams)) obj.tallyParams = TallyParams.fromJSON(object.tallyParams);

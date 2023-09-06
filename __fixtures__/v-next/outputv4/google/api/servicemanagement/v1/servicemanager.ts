@@ -506,7 +506,7 @@ export const ListServicesResponse = {
   },
   fromJSON(object: any): ListServicesResponse {
     const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => ManagedService.fromJSON(e));
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => ManagedService.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -1063,7 +1063,7 @@ export const ListServiceConfigsResponse = {
   },
   fromJSON(object: any): ListServiceConfigsResponse {
     const obj = createBaseListServiceConfigsResponse();
-    if (Array.isArray(object?.serviceConfigs)) object.serviceConfigs.map((e: any) => Service.fromJSON(e));
+    if (Array.isArray(object?.serviceConfigs)) obj.serviceConfigs = object.serviceConfigs.map((e: any) => Service.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -1543,7 +1543,7 @@ export const ListServiceRolloutsResponse = {
   },
   fromJSON(object: any): ListServiceRolloutsResponse {
     const obj = createBaseListServiceRolloutsResponse();
-    if (Array.isArray(object?.rollouts)) object.rollouts.map((e: any) => Rollout.fromJSON(e));
+    if (Array.isArray(object?.rollouts)) obj.rollouts = object.rollouts.map((e: any) => Rollout.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -1790,8 +1790,8 @@ export const GenerateConfigReportResponse = {
     const obj = createBaseGenerateConfigReportResponse();
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.changeReports)) object.changeReports.map((e: any) => ChangeReport.fromJSON(e));
-    if (Array.isArray(object?.diagnostics)) object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
+    if (Array.isArray(object?.changeReports)) obj.changeReports = object.changeReports.map((e: any) => ChangeReport.fromJSON(e));
+    if (Array.isArray(object?.diagnostics)) obj.diagnostics = object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
     return obj;
   },
   toJSON(message: GenerateConfigReportResponse): unknown {

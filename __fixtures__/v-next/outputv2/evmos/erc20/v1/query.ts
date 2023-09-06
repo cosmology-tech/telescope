@@ -291,7 +291,7 @@ export const QueryTokenPairsResponse = {
   },
   fromJSON(object: any): QueryTokenPairsResponse {
     const obj = createBaseQueryTokenPairsResponse();
-    if (Array.isArray(object?.tokenPairs)) object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
+    if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

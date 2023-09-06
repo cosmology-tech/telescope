@@ -54,7 +54,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

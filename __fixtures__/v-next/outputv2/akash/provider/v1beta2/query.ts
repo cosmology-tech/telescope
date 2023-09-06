@@ -208,7 +208,7 @@ export const QueryProvidersResponse = {
   },
   fromJSON(object: any): QueryProvidersResponse {
     const obj = createBaseQueryProvidersResponse();
-    if (Array.isArray(object?.providers)) object.providers.map((e: any) => Provider.fromJSON(e));
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => Provider.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

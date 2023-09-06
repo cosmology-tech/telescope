@@ -3128,7 +3128,7 @@ export const LogBucket = {
     if (isSet(object.retentionDays)) obj.retentionDays = Number(object.retentionDays);
     if (isSet(object.locked)) obj.locked = Boolean(object.locked);
     if (isSet(object.lifecycleState)) obj.lifecycleState = lifecycleStateFromJSON(object.lifecycleState);
-    if (Array.isArray(object?.restrictedFields)) object.restrictedFields.map((e: any) => String(e));
+    if (Array.isArray(object?.restrictedFields)) obj.restrictedFields = object.restrictedFields.map((e: any) => String(e));
     if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
     return obj;
   },
@@ -3491,7 +3491,7 @@ export const LogSink = {
     if (isSet(object.filter)) obj.filter = String(object.filter);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
-    if (Array.isArray(object?.exclusions)) object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
+    if (Array.isArray(object?.exclusions)) obj.exclusions = object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
     if (isSet(object.outputVersionFormat)) obj.outputVersionFormat = logSink_VersionFormatFromJSON(object.outputVersionFormat);
     if (isSet(object.writerIdentity)) obj.writerIdentity = String(object.writerIdentity);
     if (isSet(object.includeChildren)) obj.includeChildren = Boolean(object.includeChildren);
@@ -3869,7 +3869,7 @@ export const ListBucketsResponse = {
   },
   fromJSON(object: any): ListBucketsResponse {
     const obj = createBaseListBucketsResponse();
-    if (Array.isArray(object?.buckets)) object.buckets.map((e: any) => LogBucket.fromJSON(e));
+    if (Array.isArray(object?.buckets)) obj.buckets = object.buckets.map((e: any) => LogBucket.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -4552,7 +4552,7 @@ export const ListViewsResponse = {
   },
   fromJSON(object: any): ListViewsResponse {
     const obj = createBaseListViewsResponse();
-    if (Array.isArray(object?.views)) object.views.map((e: any) => LogView.fromJSON(e));
+    if (Array.isArray(object?.views)) obj.views = object.views.map((e: any) => LogView.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -5154,7 +5154,7 @@ export const ListSinksResponse = {
   },
   fromJSON(object: any): ListSinksResponse {
     const obj = createBaseListSinksResponse();
-    if (Array.isArray(object?.sinks)) object.sinks.map((e: any) => LogSink.fromJSON(e));
+    if (Array.isArray(object?.sinks)) obj.sinks = object.sinks.map((e: any) => LogSink.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -5921,7 +5921,7 @@ export const ListExclusionsResponse = {
   },
   fromJSON(object: any): ListExclusionsResponse {
     const obj = createBaseListExclusionsResponse();
-    if (Array.isArray(object?.exclusions)) object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
+    if (Array.isArray(object?.exclusions)) obj.exclusions = object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },

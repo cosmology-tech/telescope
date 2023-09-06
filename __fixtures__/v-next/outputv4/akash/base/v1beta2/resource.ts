@@ -74,7 +74,7 @@ export const CPU = {
   fromJSON(object: any): CPU {
     const obj = createBaseCPU();
     if (isSet(object.units)) obj.units = ResourceValue.fromJSON(object.units);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: CPU): unknown {
@@ -157,7 +157,7 @@ export const Memory = {
   fromJSON(object: any): Memory {
     const obj = createBaseMemory();
     if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: Memory): unknown {
@@ -248,7 +248,7 @@ export const Storage = {
     const obj = createBaseStorage();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: Storage): unknown {

@@ -1431,7 +1431,7 @@ export const Expr_Call = {
     const obj = createBaseExpr_Call();
     if (isSet(object.target)) obj.target = Expr.fromJSON(object.target);
     if (isSet(object.function)) obj.function = String(object.function);
-    if (Array.isArray(object?.args)) object.args.map((e: any) => Expr.fromJSON(e));
+    if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
   toJSON(message: Expr_Call): unknown {
@@ -1538,7 +1538,7 @@ export const Expr_CreateList = {
   },
   fromJSON(object: any): Expr_CreateList {
     const obj = createBaseExpr_CreateList();
-    if (Array.isArray(object?.elements)) object.elements.map((e: any) => Expr.fromJSON(e));
+    if (Array.isArray(object?.elements)) obj.elements = object.elements.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
   toJSON(message: Expr_CreateList): unknown {
@@ -1639,7 +1639,7 @@ export const Expr_CreateStruct = {
   fromJSON(object: any): Expr_CreateStruct {
     const obj = createBaseExpr_CreateStruct();
     if (isSet(object.messageName)) obj.messageName = String(object.messageName);
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
     return obj;
   },
   toJSON(message: Expr_CreateStruct): unknown {
@@ -2474,7 +2474,7 @@ export const SourceInfo = {
     const obj = createBaseSourceInfo();
     if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
     if (isSet(object.location)) obj.location = String(object.location);
-    if (Array.isArray(object?.lineOffsets)) object.lineOffsets.map((e: any) => Number(e));
+    if (Array.isArray(object?.lineOffsets)) obj.lineOffsets = object.lineOffsets.map((e: any) => Number(e));
     if (isObject(object.positions)) obj.positions = Object.entries(object.positions).reduce<{
       [key: Long]: number;
     }>((acc, [key, value]) => {

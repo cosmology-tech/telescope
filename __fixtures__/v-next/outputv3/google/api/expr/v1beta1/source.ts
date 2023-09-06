@@ -288,7 +288,7 @@ export const SourceInfo = {
   fromJSON(object: any): SourceInfo {
     const obj = createBaseSourceInfo();
     if (isSet(object.location)) obj.location = String(object.location);
-    if (Array.isArray(object?.lineOffsets)) object.lineOffsets.map((e: any) => Number(e));
+    if (Array.isArray(object?.lineOffsets)) obj.lineOffsets = object.lineOffsets.map((e: any) => Number(e));
     if (isObject(object.positions)) obj.positions = Object.entries(object.positions).reduce<{
       [key: number]: number;
     }>((acc, [key, value]) => {

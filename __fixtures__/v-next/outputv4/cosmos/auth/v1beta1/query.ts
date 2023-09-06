@@ -228,7 +228,7 @@ export const QueryAccountsResponse = {
   },
   fromJSON(object: any): QueryAccountsResponse {
     const obj = createBaseQueryAccountsResponse();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Any.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -576,7 +576,7 @@ export const QueryModuleAccountsResponse = {
   },
   fromJSON(object: any): QueryModuleAccountsResponse {
     const obj = createBaseQueryModuleAccountsResponse();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryModuleAccountsResponse): unknown {

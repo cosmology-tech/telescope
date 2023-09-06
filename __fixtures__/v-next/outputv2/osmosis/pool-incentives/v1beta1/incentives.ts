@@ -249,7 +249,7 @@ export const LockableDurationsInfo = {
   },
   fromJSON(object: any): LockableDurationsInfo {
     const obj = createBaseLockableDurationsInfo();
-    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     return obj;
   },
   toJSON(message: LockableDurationsInfo): unknown {
@@ -357,7 +357,7 @@ export const DistrInfo = {
   fromJSON(object: any): DistrInfo {
     const obj = createBaseDistrInfo();
     if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
     return obj;
   },
   toJSON(message: DistrInfo): unknown {
@@ -689,7 +689,7 @@ export const PoolToGauges = {
   },
   fromJSON(object: any): PoolToGauges {
     const obj = createBasePoolToGauges();
-    if (Array.isArray(object?.poolToGauge)) object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
+    if (Array.isArray(object?.poolToGauge)) obj.poolToGauge = object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
     return obj;
   },
   toJSON(message: PoolToGauges): unknown {

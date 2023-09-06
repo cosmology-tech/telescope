@@ -151,11 +151,11 @@ export const Gauge = {
     if (isSet(object.id)) obj.id = BigInt(object.id.toString());
     if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
     if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
     if (isSet(object.filledEpochs)) obj.filledEpochs = BigInt(object.filledEpochs.toString());
-    if (Array.isArray(object?.distributedCoins)) object.distributedCoins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.distributedCoins)) obj.distributedCoins = object.distributedCoins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: Gauge): unknown {
@@ -274,7 +274,7 @@ export const LockableDurationsInfo = {
   },
   fromJSON(object: any): LockableDurationsInfo {
     const obj = createBaseLockableDurationsInfo();
-    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     return obj;
   },
   toJSON(message: LockableDurationsInfo): unknown {

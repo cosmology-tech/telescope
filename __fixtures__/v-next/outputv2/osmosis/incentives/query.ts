@@ -492,7 +492,7 @@ export const ModuleToDistributeCoinsResponse = {
   },
   fromJSON(object: any): ModuleToDistributeCoinsResponse {
     const obj = createBaseModuleToDistributeCoinsResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: ModuleToDistributeCoinsResponse): unknown {
@@ -869,7 +869,7 @@ export const GaugesResponse = {
   },
   fromJSON(object: any): GaugesResponse {
     const obj = createBaseGaugesResponse();
-    if (Array.isArray(object?.data)) object.data.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1075,7 +1075,7 @@ export const ActiveGaugesResponse = {
   },
   fromJSON(object: any): ActiveGaugesResponse {
     const obj = createBaseActiveGaugesResponse();
-    if (Array.isArray(object?.data)) object.data.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1295,7 +1295,7 @@ export const ActiveGaugesPerDenomResponse = {
   },
   fromJSON(object: any): ActiveGaugesPerDenomResponse {
     const obj = createBaseActiveGaugesPerDenomResponse();
-    if (Array.isArray(object?.data)) object.data.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1501,7 +1501,7 @@ export const UpcomingGaugesResponse = {
   },
   fromJSON(object: any): UpcomingGaugesResponse {
     const obj = createBaseUpcomingGaugesResponse();
-    if (Array.isArray(object?.data)) object.data.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1721,7 +1721,7 @@ export const UpcomingGaugesPerDenomResponse = {
   },
   fromJSON(object: any): UpcomingGaugesPerDenomResponse {
     const obj = createBaseUpcomingGaugesPerDenomResponse();
-    if (Array.isArray(object?.upcomingGauges)) object.upcomingGauges.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.upcomingGauges)) obj.upcomingGauges = object.upcomingGauges.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1854,7 +1854,7 @@ export const RewardsEstRequest = {
   fromJSON(object: any): RewardsEstRequest {
     const obj = createBaseRewardsEstRequest();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (Array.isArray(object?.lockIds)) object.lockIds.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.lockIds)) obj.lockIds = object.lockIds.map((e: any) => Long.fromValue(e));
     if (isSet(object.endEpoch)) obj.endEpoch = Long.fromValue(object.endEpoch);
     return obj;
   },
@@ -1969,7 +1969,7 @@ export const RewardsEstResponse = {
   },
   fromJSON(object: any): RewardsEstResponse {
     const obj = createBaseRewardsEstResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: RewardsEstResponse): unknown {
@@ -2140,7 +2140,7 @@ export const QueryLockableDurationsResponse = {
   },
   fromJSON(object: any): QueryLockableDurationsResponse {
     const obj = createBaseQueryLockableDurationsResponse();
-    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryLockableDurationsResponse): unknown {

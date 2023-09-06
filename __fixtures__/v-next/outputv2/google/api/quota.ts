@@ -548,8 +548,8 @@ export const Quota = {
   },
   fromJSON(object: any): Quota {
     const obj = createBaseQuota();
-    if (Array.isArray(object?.limits)) object.limits.map((e: any) => QuotaLimit.fromJSON(e));
-    if (Array.isArray(object?.metricRules)) object.metricRules.map((e: any) => MetricRule.fromJSON(e));
+    if (Array.isArray(object?.limits)) obj.limits = object.limits.map((e: any) => QuotaLimit.fromJSON(e));
+    if (Array.isArray(object?.metricRules)) obj.metricRules = object.metricRules.map((e: any) => MetricRule.fromJSON(e));
     return obj;
   },
   toJSON(message: Quota): unknown {

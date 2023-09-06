@@ -639,7 +639,7 @@ export const MsgInstantiateContract = {
     if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
     if (isSet(object.label)) obj.label = String(object.label);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgInstantiateContract): unknown {
@@ -897,7 +897,7 @@ export const MsgExecuteContract = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgExecuteContract): unknown {

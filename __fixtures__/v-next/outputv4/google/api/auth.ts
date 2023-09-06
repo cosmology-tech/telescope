@@ -356,8 +356,8 @@ export const Authentication = {
   },
   fromJSON(object: any): Authentication {
     const obj = createBaseAuthentication();
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => AuthenticationRule.fromJSON(e));
-    if (Array.isArray(object?.providers)) object.providers.map((e: any) => AuthProvider.fromJSON(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => AuthenticationRule.fromJSON(e));
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => AuthProvider.fromJSON(e));
     return obj;
   },
   toJSON(message: Authentication): unknown {
@@ -462,7 +462,7 @@ export const AuthenticationRule = {
     if (isSet(object.selector)) obj.selector = String(object.selector);
     if (isSet(object.oauth)) obj.oauth = OAuthRequirements.fromJSON(object.oauth);
     if (isSet(object.allowWithoutCredential)) obj.allowWithoutCredential = Boolean(object.allowWithoutCredential);
-    if (Array.isArray(object?.requirements)) object.requirements.map((e: any) => AuthRequirement.fromJSON(e));
+    if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => AuthRequirement.fromJSON(e));
     return obj;
   },
   toJSON(message: AuthenticationRule): unknown {
@@ -673,7 +673,7 @@ export const AuthProvider = {
     if (isSet(object.jwksUri)) obj.jwksUri = String(object.jwksUri);
     if (isSet(object.audiences)) obj.audiences = String(object.audiences);
     if (isSet(object.authorizationUrl)) obj.authorizationUrl = String(object.authorizationUrl);
-    if (Array.isArray(object?.jwtLocations)) object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e));
+    if (Array.isArray(object?.jwtLocations)) obj.jwtLocations = object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e));
     return obj;
   },
   toJSON(message: AuthProvider): unknown {

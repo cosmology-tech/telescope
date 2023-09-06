@@ -136,7 +136,7 @@ export const Config = {
   },
   fromJSON(object: any): Config {
     const obj = createBaseConfig();
-    if (Array.isArray(object?.modules)) object.modules.map((e: any) => ModuleConfig.fromJSON(e));
+    if (Array.isArray(object?.modules)) obj.modules = object.modules.map((e: any) => ModuleConfig.fromJSON(e));
     return obj;
   },
   toJSON(message: Config): unknown {

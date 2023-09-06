@@ -184,7 +184,7 @@ export const QueryTotalUnclaimedResponse = {
   },
   fromJSON(object: any): QueryTotalUnclaimedResponse {
     const obj = createBaseQueryTotalUnclaimedResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryTotalUnclaimedResponse): unknown {
@@ -427,7 +427,7 @@ export const QueryClaimsRecordsResponse = {
   },
   fromJSON(object: any): QueryClaimsRecordsResponse {
     const obj = createBaseQueryClaimsRecordsResponse();
-    if (Array.isArray(object?.claims)) object.claims.map((e: any) => ClaimsRecordAddress.fromJSON(e));
+    if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => ClaimsRecordAddress.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -571,7 +571,7 @@ export const QueryClaimsRecordResponse = {
   fromJSON(object: any): QueryClaimsRecordResponse {
     const obj = createBaseQueryClaimsRecordResponse();
     if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.claims)) object.claims.map((e: any) => Claim.fromJSON(e));
+    if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => Claim.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryClaimsRecordResponse): unknown {

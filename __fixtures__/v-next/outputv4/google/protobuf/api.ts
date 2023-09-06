@@ -350,11 +350,11 @@ export const Api = {
   fromJSON(object: any): Api {
     const obj = createBaseApi();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.methods)) object.methods.map((e: any) => Method.fromJSON(e));
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
+    if (Array.isArray(object?.methods)) obj.methods = object.methods.map((e: any) => Method.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     if (isSet(object.version)) obj.version = String(object.version);
     if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
-    if (Array.isArray(object?.mixins)) object.mixins.map((e: any) => Mixin.fromJSON(e));
+    if (Array.isArray(object?.mixins)) obj.mixins = object.mixins.map((e: any) => Mixin.fromJSON(e));
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
@@ -518,7 +518,7 @@ export const Method = {
     if (isSet(object.requestStreaming)) obj.requestStreaming = Boolean(object.requestStreaming);
     if (isSet(object.responseTypeUrl)) obj.responseTypeUrl = String(object.responseTypeUrl);
     if (isSet(object.responseStreaming)) obj.responseStreaming = Boolean(object.responseStreaming);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },

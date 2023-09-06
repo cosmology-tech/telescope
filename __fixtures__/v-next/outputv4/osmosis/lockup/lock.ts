@@ -223,7 +223,7 @@ export const PeriodLock = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: PeriodLock): unknown {

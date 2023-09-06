@@ -957,7 +957,7 @@ export const QueryPoolsResponse = {
   },
   fromJSON(object: any): QueryPoolsResponse {
     const obj = createBaseQueryPoolsResponse();
-    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1413,7 +1413,7 @@ export const QueryCalcJoinPoolSharesRequest = {
   fromJSON(object: any): QueryCalcJoinPoolSharesRequest {
     const obj = createBaseQueryCalcJoinPoolSharesRequest();
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (Array.isArray(object?.tokensIn)) object.tokensIn.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokensIn)) obj.tokensIn = object.tokensIn.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCalcJoinPoolSharesRequest): unknown {
@@ -1529,7 +1529,7 @@ export const QueryCalcJoinPoolSharesResponse = {
   fromJSON(object: any): QueryCalcJoinPoolSharesResponse {
     const obj = createBaseQueryCalcJoinPoolSharesResponse();
     if (isSet(object.shareOutAmount)) obj.shareOutAmount = String(object.shareOutAmount);
-    if (Array.isArray(object?.tokensOut)) object.tokensOut.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokensOut)) obj.tokensOut = object.tokensOut.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCalcJoinPoolSharesResponse): unknown {
@@ -1739,7 +1739,7 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
   },
   fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesResponse {
     const obj = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
-    if (Array.isArray(object?.tokensOut)) object.tokensOut.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokensOut)) obj.tokensOut = object.tokensOut.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCalcExitPoolCoinsFromSharesResponse): unknown {
@@ -2109,7 +2109,7 @@ export const QueryTotalPoolLiquidityResponse = {
   },
   fromJSON(object: any): QueryTotalPoolLiquidityResponse {
     const obj = createBaseQueryTotalPoolLiquidityResponse();
-    if (Array.isArray(object?.liquidity)) object.liquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.liquidity)) obj.liquidity = object.liquidity.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryTotalPoolLiquidityResponse): unknown {
@@ -2397,7 +2397,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequest {
     const obj = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (Array.isArray(object?.tokensIn)) object.tokensIn.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokensIn)) obj.tokensIn = object.tokensIn.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): unknown {
@@ -2512,7 +2512,7 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
   },
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesResponse {
     const obj = createBaseQueryCalcJoinPoolNoSwapSharesResponse();
-    if (Array.isArray(object?.tokensOut)) object.tokensOut.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokensOut)) obj.tokensOut = object.tokensOut.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.sharesOut)) obj.sharesOut = String(object.sharesOut);
     return obj;
   },
@@ -2751,7 +2751,7 @@ export const QueryPoolsWithFilterRequest = {
   },
   fromJSON(object: any): QueryPoolsWithFilterRequest {
     const obj = createBaseQueryPoolsWithFilterRequest();
-    if (Array.isArray(object?.minLiquidity)) object.minLiquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.minLiquidity)) obj.minLiquidity = object.minLiquidity.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.poolType)) obj.poolType = String(object.poolType);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
@@ -2874,7 +2874,7 @@ export const QueryPoolsWithFilterResponse = {
   },
   fromJSON(object: any): QueryPoolsWithFilterResponse {
     const obj = createBaseQueryPoolsWithFilterResponse();
-    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -3095,7 +3095,7 @@ export const QuerySwapExactAmountInRequest = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
+    if (Array.isArray(object?.routes)) obj.routes = object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
     return obj;
   },
   toJSON(message: QuerySwapExactAmountInRequest): unknown {
@@ -3326,7 +3326,7 @@ export const QuerySwapExactAmountOutRequest = {
     const obj = createBaseQuerySwapExactAmountOutRequest();
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
+    if (Array.isArray(object?.routes)) obj.routes = object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
     if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
     return obj;
   },
@@ -3606,7 +3606,7 @@ export const QueryTotalLiquidityResponse = {
   },
   fromJSON(object: any): QueryTotalLiquidityResponse {
     const obj = createBaseQueryTotalLiquidityResponse();
-    if (Array.isArray(object?.liquidity)) object.liquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.liquidity)) obj.liquidity = object.liquidity.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryTotalLiquidityResponse): unknown {

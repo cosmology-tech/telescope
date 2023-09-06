@@ -440,7 +440,7 @@ export const ValidatorParams = {
   },
   fromJSON(object: any): ValidatorParams {
     const obj = createBaseValidatorParams();
-    if (Array.isArray(object?.pubKeyTypes)) object.pubKeyTypes.map((e: any) => String(e));
+    if (Array.isArray(object?.pubKeyTypes)) obj.pubKeyTypes = object.pubKeyTypes.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: ValidatorParams): unknown {

@@ -309,7 +309,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
   },
   fromJSON(object: any): MsgWithdrawDelegatorRewardResponse {
     const obj = createBaseMsgWithdrawDelegatorRewardResponse();
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgWithdrawDelegatorRewardResponse): unknown {
@@ -437,7 +437,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
   },
   fromJSON(object: any): MsgWithdrawValidatorCommissionResponse {
     const obj = createBaseMsgWithdrawValidatorCommissionResponse();
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgWithdrawValidatorCommissionResponse): unknown {
@@ -512,7 +512,7 @@ export const MsgFundCommunityPool = {
   },
   fromJSON(object: any): MsgFundCommunityPool {
     const obj = createBaseMsgFundCommunityPool();
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     return obj;
   },

@@ -616,7 +616,7 @@ export const AttributeContext = {
     if (isSet(object.response)) obj.response = AttributeContext_Response.fromJSON(object.response);
     if (isSet(object.resource)) obj.resource = AttributeContext_Resource.fromJSON(object.resource);
     if (isSet(object.api)) obj.api = AttributeContext_Api.fromJSON(object.api);
-    if (Array.isArray(object?.extensions)) object.extensions.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: AttributeContext): unknown {
@@ -1086,10 +1086,10 @@ export const AttributeContext_Auth = {
   fromJSON(object: any): AttributeContext_Auth {
     const obj = createBaseAttributeContext_Auth();
     if (isSet(object.principal)) obj.principal = String(object.principal);
-    if (Array.isArray(object?.audiences)) object.audiences.map((e: any) => String(e));
+    if (Array.isArray(object?.audiences)) obj.audiences = object.audiences.map((e: any) => String(e));
     if (isSet(object.presenter)) obj.presenter = String(object.presenter);
     if (isSet(object.claims)) obj.claims = Struct.fromJSON(object.claims);
-    if (Array.isArray(object?.accessLevels)) object.accessLevels.map((e: any) => String(e));
+    if (Array.isArray(object?.accessLevels)) obj.accessLevels = object.accessLevels.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: AttributeContext_Auth): unknown {

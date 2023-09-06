@@ -259,7 +259,7 @@ export const MsgSubmitProposal = {
   fromJSON(object: any): MsgSubmitProposal {
     const obj = createBaseMsgSubmitProposal();
     if (isSet(object.content)) obj.content = Any.fromJSON(object.content);
-    if (Array.isArray(object?.initialDeposit)) object.initialDeposit.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.initialDeposit)) obj.initialDeposit = object.initialDeposit.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.proposer)) obj.proposer = String(object.proposer);
     return obj;
   },
@@ -669,7 +669,7 @@ export const MsgVoteWeighted = {
     const obj = createBaseMsgVoteWeighted();
     if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
     if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgVoteWeighted): unknown {
@@ -870,7 +870,7 @@ export const MsgDeposit = {
     const obj = createBaseMsgDeposit();
     if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgDeposit): unknown {

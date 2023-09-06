@@ -104,7 +104,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.factoryDenoms)) object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e));
+    if (Array.isArray(object?.factoryDenoms)) obj.factoryDenoms = object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

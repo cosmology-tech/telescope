@@ -899,7 +899,7 @@ export const QueryAllBalancesResponse = {
   },
   fromJSON(object: any): QueryAllBalancesResponse {
     const obj = createBaseQueryAllBalancesResponse();
-    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.balances)) obj.balances = object.balances.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1119,7 +1119,7 @@ export const QuerySpendableBalancesResponse = {
   },
   fromJSON(object: any): QuerySpendableBalancesResponse {
     const obj = createBaseQuerySpendableBalancesResponse();
-    if (Array.isArray(object?.balances)) object.balances.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.balances)) obj.balances = object.balances.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1325,7 +1325,7 @@ export const QueryTotalSupplyResponse = {
   },
   fromJSON(object: any): QueryTotalSupplyResponse {
     const obj = createBaseQueryTotalSupplyResponse();
-    if (Array.isArray(object?.supply)) object.supply.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.supply)) obj.supply = object.supply.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1870,7 +1870,7 @@ export const QueryDenomsMetadataResponse = {
   },
   fromJSON(object: any): QueryDenomsMetadataResponse {
     const obj = createBaseQueryDenomsMetadataResponse();
-    if (Array.isArray(object?.metadatas)) object.metadatas.map((e: any) => Metadata.fromJSON(e));
+    if (Array.isArray(object?.metadatas)) obj.metadatas = object.metadatas.map((e: any) => Metadata.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -2372,7 +2372,7 @@ export const QueryDenomOwnersResponse = {
   },
   fromJSON(object: any): QueryDenomOwnersResponse {
     const obj = createBaseQueryDenomOwnersResponse();
-    if (Array.isArray(object?.denomOwners)) object.denomOwners.map((e: any) => DenomOwner.fromJSON(e));
+    if (Array.isArray(object?.denomOwners)) obj.denomOwners = object.denomOwners.map((e: any) => DenomOwner.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

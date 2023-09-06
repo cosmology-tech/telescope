@@ -129,7 +129,7 @@ export const MsgSend = {
     const obj = createBaseMsgSend();
     if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
     if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgSend): unknown {
@@ -319,8 +319,8 @@ export const MsgMultiSend = {
   },
   fromJSON(object: any): MsgMultiSend {
     const obj = createBaseMsgMultiSend();
-    if (Array.isArray(object?.inputs)) object.inputs.map((e: any) => Input.fromJSON(e));
-    if (Array.isArray(object?.outputs)) object.outputs.map((e: any) => Output.fromJSON(e));
+    if (Array.isArray(object?.inputs)) obj.inputs = object.inputs.map((e: any) => Input.fromJSON(e));
+    if (Array.isArray(object?.outputs)) obj.outputs = object.outputs.map((e: any) => Output.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgMultiSend): unknown {

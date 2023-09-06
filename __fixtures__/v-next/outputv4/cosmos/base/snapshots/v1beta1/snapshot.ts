@@ -251,7 +251,7 @@ export const Metadata = {
   },
   fromJSON(object: any): Metadata {
     const obj = createBaseMetadata();
-    if (Array.isArray(object?.chunkHashes)) object.chunkHashes.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.chunkHashes)) obj.chunkHashes = object.chunkHashes.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: Metadata): unknown {
@@ -823,7 +823,7 @@ export const SnapshotSchema = {
   },
   fromJSON(object: any): SnapshotSchema {
     const obj = createBaseSnapshotSchema();
-    if (Array.isArray(object?.keys)) object.keys.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: SnapshotSchema): unknown {

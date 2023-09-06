@@ -129,8 +129,8 @@ export const Explain = {
   },
   fromJSON(object: any): Explain {
     const obj = createBaseExplain();
-    if (Array.isArray(object?.values)) object.values.map((e: any) => Value.fromJSON(e));
-    if (Array.isArray(object?.exprSteps)) object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e));
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
+    if (Array.isArray(object?.exprSteps)) obj.exprSteps = object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e));
     return obj;
   },
   toJSON(message: Explain): unknown {

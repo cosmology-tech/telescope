@@ -339,7 +339,7 @@ export const QueryGrantsResponse = {
   },
   fromJSON(object: any): QueryGrantsResponse {
     const obj = createBaseQueryGrantsResponse();
-    if (Array.isArray(object?.grants)) object.grants.map((e: any) => Grant.fromJSON(e));
+    if (Array.isArray(object?.grants)) obj.grants = object.grants.map((e: any) => Grant.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -559,7 +559,7 @@ export const QueryGranterGrantsResponse = {
   },
   fromJSON(object: any): QueryGranterGrantsResponse {
     const obj = createBaseQueryGranterGrantsResponse();
-    if (Array.isArray(object?.grants)) object.grants.map((e: any) => GrantAuthorization.fromJSON(e));
+    if (Array.isArray(object?.grants)) obj.grants = object.grants.map((e: any) => GrantAuthorization.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -779,7 +779,7 @@ export const QueryGranteeGrantsResponse = {
   },
   fromJSON(object: any): QueryGranteeGrantsResponse {
     const obj = createBaseQueryGranteeGrantsResponse();
-    if (Array.isArray(object?.grants)) object.grants.map((e: any) => GrantAuthorization.fromJSON(e));
+    if (Array.isArray(object?.grants)) obj.grants = object.grants.map((e: any) => GrantAuthorization.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

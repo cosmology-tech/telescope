@@ -195,7 +195,7 @@ export const MsgCreateDeployment = {
   fromJSON(object: any): MsgCreateDeployment {
     const obj = createBaseMsgCreateDeployment();
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupSpec.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupSpec.fromJSON(e));
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
     return obj;
@@ -464,7 +464,7 @@ export const MsgUpdateDeployment = {
   fromJSON(object: any): MsgUpdateDeployment {
     const obj = createBaseMsgUpdateDeployment();
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupSpec.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupSpec.fromJSON(e));
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     return obj;
   },

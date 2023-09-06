@@ -78,7 +78,7 @@ export const ParameterChangeProposal = {
     const obj = createBaseParameterChangeProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.changes)) object.changes.map((e: any) => ParamChange.fromJSON(e));
+    if (Array.isArray(object?.changes)) obj.changes = object.changes.map((e: any) => ParamChange.fromJSON(e));
     return obj;
   },
   toJSON(message: ParameterChangeProposal): unknown {

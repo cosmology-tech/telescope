@@ -136,7 +136,7 @@ export const QueryFeeTokensResponse = {
   },
   fromJSON(object: any): QueryFeeTokensResponse {
     const obj = createBaseQueryFeeTokensResponse();
-    if (Array.isArray(object?.feeTokens)) object.feeTokens.map((e: any) => FeeToken.fromJSON(e));
+    if (Array.isArray(object?.feeTokens)) obj.feeTokens = object.feeTokens.map((e: any) => FeeToken.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryFeeTokensResponse): unknown {

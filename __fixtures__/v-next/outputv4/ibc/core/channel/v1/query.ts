@@ -794,7 +794,7 @@ export const QueryChannelsResponse = {
   },
   fromJSON(object: any): QueryChannelsResponse {
     const obj = createBaseQueryChannelsResponse();
-    if (Array.isArray(object?.channels)) object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
+    if (Array.isArray(object?.channels)) obj.channels = object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
@@ -967,7 +967,7 @@ export const QueryConnectionChannelsResponse = {
   },
   fromJSON(object: any): QueryConnectionChannelsResponse {
     const obj = createBaseQueryConnectionChannelsResponse();
-    if (Array.isArray(object?.channels)) object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
+    if (Array.isArray(object?.channels)) obj.channels = object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
@@ -1698,7 +1698,7 @@ export const QueryPacketCommitmentsResponse = {
   },
   fromJSON(object: any): QueryPacketCommitmentsResponse {
     const obj = createBaseQueryPacketCommitmentsResponse();
-    if (Array.isArray(object?.commitments)) object.commitments.map((e: any) => PacketState.fromJSON(e));
+    if (Array.isArray(object?.commitments)) obj.commitments = object.commitments.map((e: any) => PacketState.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
@@ -2167,7 +2167,7 @@ export const QueryPacketAcknowledgementsRequest = {
     if (isSet(object.portId)) obj.portId = String(object.portId);
     if (isSet(object.channelId)) obj.channelId = String(object.channelId);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    if (Array.isArray(object?.packetCommitmentSequences)) object.packetCommitmentSequences.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.packetCommitmentSequences)) obj.packetCommitmentSequences = object.packetCommitmentSequences.map((e: any) => BigInt(e.toString()));
     return obj;
   },
   toJSON(message: QueryPacketAcknowledgementsRequest): unknown {
@@ -2266,7 +2266,7 @@ export const QueryPacketAcknowledgementsResponse = {
   },
   fromJSON(object: any): QueryPacketAcknowledgementsResponse {
     const obj = createBaseQueryPacketAcknowledgementsResponse();
-    if (Array.isArray(object?.acknowledgements)) object.acknowledgements.map((e: any) => PacketState.fromJSON(e));
+    if (Array.isArray(object?.acknowledgements)) obj.acknowledgements = object.acknowledgements.map((e: any) => PacketState.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
@@ -2375,7 +2375,7 @@ export const QueryUnreceivedPacketsRequest = {
     const obj = createBaseQueryUnreceivedPacketsRequest();
     if (isSet(object.portId)) obj.portId = String(object.portId);
     if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (Array.isArray(object?.packetCommitmentSequences)) object.packetCommitmentSequences.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.packetCommitmentSequences)) obj.packetCommitmentSequences = object.packetCommitmentSequences.map((e: any) => BigInt(e.toString()));
     return obj;
   },
   toJSON(message: QueryUnreceivedPacketsRequest): unknown {
@@ -2469,7 +2469,7 @@ export const QueryUnreceivedPacketsResponse = {
   },
   fromJSON(object: any): QueryUnreceivedPacketsResponse {
     const obj = createBaseQueryUnreceivedPacketsResponse();
-    if (Array.isArray(object?.sequences)) object.sequences.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.sequences)) obj.sequences = object.sequences.map((e: any) => BigInt(e.toString()));
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
   },
@@ -2570,7 +2570,7 @@ export const QueryUnreceivedAcksRequest = {
     const obj = createBaseQueryUnreceivedAcksRequest();
     if (isSet(object.portId)) obj.portId = String(object.portId);
     if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (Array.isArray(object?.packetAckSequences)) object.packetAckSequences.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.packetAckSequences)) obj.packetAckSequences = object.packetAckSequences.map((e: any) => BigInt(e.toString()));
     return obj;
   },
   toJSON(message: QueryUnreceivedAcksRequest): unknown {
@@ -2664,7 +2664,7 @@ export const QueryUnreceivedAcksResponse = {
   },
   fromJSON(object: any): QueryUnreceivedAcksResponse {
     const obj = createBaseQueryUnreceivedAcksResponse();
-    if (Array.isArray(object?.sequences)) object.sequences.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.sequences)) obj.sequences = object.sequences.map((e: any) => BigInt(e.toString()));
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
   },

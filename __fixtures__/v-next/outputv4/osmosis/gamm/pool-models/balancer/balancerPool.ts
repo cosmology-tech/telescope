@@ -198,8 +198,8 @@ export const SmoothWeightChangeParams = {
     const obj = createBaseSmoothWeightChangeParams();
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (Array.isArray(object?.initialPoolWeights)) object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
-    if (Array.isArray(object?.targetPoolWeights)) object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
+    if (Array.isArray(object?.initialPoolWeights)) obj.initialPoolWeights = object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
+    if (Array.isArray(object?.targetPoolWeights)) obj.targetPoolWeights = object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
     return obj;
   },
   toJSON(message: SmoothWeightChangeParams): unknown {
@@ -502,7 +502,7 @@ export const Pool = {
     if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
     if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
     if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
-    if (Array.isArray(object?.poolAssets)) object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
+    if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
     if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
     return obj;
   },

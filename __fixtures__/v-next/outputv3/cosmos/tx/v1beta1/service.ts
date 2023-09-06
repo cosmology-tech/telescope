@@ -532,7 +532,7 @@ export const GetTxsEventRequest = {
   },
   fromJSON(object: any): GetTxsEventRequest {
     const obj = createBaseGetTxsEventRequest();
-    if (Array.isArray(object?.events)) object.events.map((e: any) => String(e));
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => String(e));
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     if (isSet(object.orderBy)) obj.orderBy = orderByFromJSON(object.orderBy);
     return obj;
@@ -662,8 +662,8 @@ export const GetTxsEventResponse = {
   },
   fromJSON(object: any): GetTxsEventResponse {
     const obj = createBaseGetTxsEventResponse();
-    if (Array.isArray(object?.txs)) object.txs.map((e: any) => Tx.fromJSON(e));
-    if (Array.isArray(object?.txResponses)) object.txResponses.map((e: any) => TxResponse.fromJSON(e));
+    if (Array.isArray(object?.txs)) obj.txs = object.txs.map((e: any) => Tx.fromJSON(e));
+    if (Array.isArray(object?.txResponses)) obj.txResponses = object.txResponses.map((e: any) => TxResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1513,7 +1513,7 @@ export const GetBlockWithTxsResponse = {
   },
   fromJSON(object: any): GetBlockWithTxsResponse {
     const obj = createBaseGetBlockWithTxsResponse();
-    if (Array.isArray(object?.txs)) object.txs.map((e: any) => Tx.fromJSON(e));
+    if (Array.isArray(object?.txs)) obj.txs = object.txs.map((e: any) => Tx.fromJSON(e));
     if (isSet(object.blockId)) obj.blockId = BlockID.fromJSON(object.blockId);
     if (isSet(object.block)) obj.block = Block.fromJSON(object.block);
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);

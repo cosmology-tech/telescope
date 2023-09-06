@@ -485,7 +485,7 @@ export const MetricDescriptor = {
     const obj = createBaseMetricDescriptor();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.labels)) object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
+    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
     if (isSet(object.metricKind)) obj.metricKind = metricDescriptor_MetricKindFromJSON(object.metricKind);
     if (isSet(object.valueType)) obj.valueType = metricDescriptor_ValueTypeFromJSON(object.valueType);
     if (isSet(object.unit)) obj.unit = String(object.unit);
@@ -493,7 +493,7 @@ export const MetricDescriptor = {
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
     if (isSet(object.metadata)) obj.metadata = MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata);
     if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (Array.isArray(object?.monitoredResourceTypes)) object.monitoredResourceTypes.map((e: any) => String(e));
+    if (Array.isArray(object?.monitoredResourceTypes)) obj.monitoredResourceTypes = object.monitoredResourceTypes.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: MetricDescriptor): unknown {

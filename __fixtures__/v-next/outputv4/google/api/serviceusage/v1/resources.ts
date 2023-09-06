@@ -355,13 +355,13 @@ export const ServiceConfig = {
     const obj = createBaseServiceConfig();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.title)) obj.title = String(object.title);
-    if (Array.isArray(object?.apis)) object.apis.map((e: any) => Api.fromJSON(e));
+    if (Array.isArray(object?.apis)) obj.apis = object.apis.map((e: any) => Api.fromJSON(e));
     if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
     if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
     if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
     if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
+    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
+    if (Array.isArray(object?.monitoredResources)) obj.monitoredResources = object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
     if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
     return obj;
   },
@@ -501,7 +501,7 @@ export const OperationMetadata = {
   },
   fromJSON(object: any): OperationMetadata {
     const obj = createBaseOperationMetadata();
-    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: OperationMetadata): unknown {

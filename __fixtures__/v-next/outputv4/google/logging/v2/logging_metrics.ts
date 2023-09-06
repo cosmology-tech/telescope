@@ -747,7 +747,7 @@ export const ListLogMetricsResponse = {
   },
   fromJSON(object: any): ListLogMetricsResponse {
     const obj = createBaseListLogMetricsResponse();
-    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => LogMetric.fromJSON(e));
+    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => LogMetric.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },

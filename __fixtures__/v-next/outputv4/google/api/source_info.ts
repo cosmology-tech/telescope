@@ -42,7 +42,7 @@ export const SourceInfo = {
   },
   fromJSON(object: any): SourceInfo {
     const obj = createBaseSourceInfo();
-    if (Array.isArray(object?.sourceFiles)) object.sourceFiles.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.sourceFiles)) obj.sourceFiles = object.sourceFiles.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: SourceInfo): unknown {

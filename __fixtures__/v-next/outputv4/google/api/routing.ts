@@ -835,7 +835,7 @@ export const RoutingRule = {
   },
   fromJSON(object: any): RoutingRule {
     const obj = createBaseRoutingRule();
-    if (Array.isArray(object?.routingParameters)) object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
+    if (Array.isArray(object?.routingParameters)) obj.routingParameters = object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
     return obj;
   },
   toJSON(message: RoutingRule): unknown {

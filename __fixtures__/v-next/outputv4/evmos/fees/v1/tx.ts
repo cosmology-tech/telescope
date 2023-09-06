@@ -147,7 +147,7 @@ export const MsgRegisterDevFeeInfo = {
     if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
     if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    if (Array.isArray(object?.nonces)) object.nonces.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.nonces)) obj.nonces = object.nonces.map((e: any) => BigInt(e.toString()));
     return obj;
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {

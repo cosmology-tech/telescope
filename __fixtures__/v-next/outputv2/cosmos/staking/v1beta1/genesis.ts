@@ -180,11 +180,11 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     if (isSet(object.lastTotalPower)) obj.lastTotalPower = bytesFromBase64(object.lastTotalPower);
-    if (Array.isArray(object?.lastValidatorPowers)) object.lastValidatorPowers.map((e: any) => LastValidatorPower.fromJSON(e));
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
-    if (Array.isArray(object?.delegations)) object.delegations.map((e: any) => Delegation.fromJSON(e));
-    if (Array.isArray(object?.unbondingDelegations)) object.unbondingDelegations.map((e: any) => UnbondingDelegation.fromJSON(e));
-    if (Array.isArray(object?.redelegations)) object.redelegations.map((e: any) => Redelegation.fromJSON(e));
+    if (Array.isArray(object?.lastValidatorPowers)) obj.lastValidatorPowers = object.lastValidatorPowers.map((e: any) => LastValidatorPower.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.delegations)) obj.delegations = object.delegations.map((e: any) => Delegation.fromJSON(e));
+    if (Array.isArray(object?.unbondingDelegations)) obj.unbondingDelegations = object.unbondingDelegations.map((e: any) => UnbondingDelegation.fromJSON(e));
+    if (Array.isArray(object?.redelegations)) obj.redelegations = object.redelegations.map((e: any) => Redelegation.fromJSON(e));
     if (isSet(object.exported)) obj.exported = Boolean(object.exported);
     return obj;
   },

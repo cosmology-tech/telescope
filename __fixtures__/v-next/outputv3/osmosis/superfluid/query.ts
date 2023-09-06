@@ -1024,7 +1024,7 @@ export const AllAssetsResponse = {
   },
   fromJSON(object: any): AllAssetsResponse {
     const obj = createBaseAllAssetsResponse();
-    if (Array.isArray(object?.assets)) object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
+    if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
     return obj;
   },
   toJSON(message: AllAssetsResponse): unknown {
@@ -1531,7 +1531,7 @@ export const AllIntermediaryAccountsResponse = {
   },
   fromJSON(object: any): AllIntermediaryAccountsResponse {
     const obj = createBaseAllIntermediaryAccountsResponse();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromJSON(e));
+    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1908,7 +1908,7 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
   },
   fromJSON(object: any): QueryTotalDelegationByValidatorForDenomResponse {
     const obj = createBaseQueryTotalDelegationByValidatorForDenomResponse();
-    if (Array.isArray(object?.assets)) object.assets.map((e: any) => Delegations.fromJSON(e));
+    if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => Delegations.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryTotalDelegationByValidatorForDenomResponse): unknown {
@@ -2399,7 +2399,7 @@ export const SuperfluidDelegationAmountResponse = {
   },
   fromJSON(object: any): SuperfluidDelegationAmountResponse {
     const obj = createBaseSuperfluidDelegationAmountResponse();
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: SuperfluidDelegationAmountResponse): unknown {
@@ -2601,8 +2601,8 @@ export const SuperfluidDelegationsByDelegatorResponse = {
   },
   fromJSON(object: any): SuperfluidDelegationsByDelegatorResponse {
     const obj = createBaseSuperfluidDelegationsByDelegatorResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    if (Array.isArray(object?.totalDelegatedCoins)) object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
+    if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.totalEquivalentStakedAmount)) obj.totalEquivalentStakedAmount = Coin.fromJSON(object.totalEquivalentStakedAmount);
     return obj;
   },
@@ -2845,9 +2845,9 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
   },
   fromJSON(object: any): SuperfluidUndelegationsByDelegatorResponse {
     const obj = createBaseSuperfluidUndelegationsByDelegatorResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    if (Array.isArray(object?.totalUndelegatedCoins)) object.totalUndelegatedCoins.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.syntheticLocks)) object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
+    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
+    if (Array.isArray(object?.totalUndelegatedCoins)) obj.totalUndelegatedCoins = object.totalUndelegatedCoins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
     return obj;
   },
   toJSON(message: SuperfluidUndelegationsByDelegatorResponse): unknown {
@@ -3085,7 +3085,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
   },
   fromJSON(object: any): SuperfluidDelegationsByValidatorDenomResponse {
     const obj = createBaseSuperfluidDelegationsByValidatorDenomResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
+    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
     return obj;
   },
   toJSON(message: SuperfluidDelegationsByValidatorDenomResponse): unknown {
@@ -3287,7 +3287,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
   },
   fromJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     const obj = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();
-    if (Array.isArray(object?.totalDelegatedCoins)) object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): unknown {
@@ -3496,9 +3496,9 @@ export const QueryTotalDelegationByDelegatorResponse = {
   },
   fromJSON(object: any): QueryTotalDelegationByDelegatorResponse {
     const obj = createBaseQueryTotalDelegationByDelegatorResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    if (Array.isArray(object?.delegationResponse)) object.delegationResponse.map((e: any) => DelegationResponse.fromJSON(e));
-    if (Array.isArray(object?.totalDelegatedCoins)) object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
+    if (Array.isArray(object?.delegationResponse)) obj.delegationResponse = object.delegationResponse.map((e: any) => DelegationResponse.fromJSON(e));
+    if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.totalEquivalentStakedAmount)) obj.totalEquivalentStakedAmount = Coin.fromJSON(object.totalEquivalentStakedAmount);
     return obj;
   },
@@ -3723,7 +3723,7 @@ export const QueryUnpoolWhitelistResponse = {
   },
   fromJSON(object: any): QueryUnpoolWhitelistResponse {
     const obj = createBaseQueryUnpoolWhitelistResponse();
-    if (Array.isArray(object?.poolIds)) object.poolIds.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.poolIds)) obj.poolIds = object.poolIds.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: QueryUnpoolWhitelistResponse): unknown {

@@ -316,7 +316,7 @@ export const CapabilityOwners = {
   },
   fromJSON(object: any): CapabilityOwners {
     const obj = createBaseCapabilityOwners();
-    if (Array.isArray(object?.owners)) object.owners.map((e: any) => Owner.fromJSON(e));
+    if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => Owner.fromJSON(e));
     return obj;
   },
   toJSON(message: CapabilityOwners): unknown {

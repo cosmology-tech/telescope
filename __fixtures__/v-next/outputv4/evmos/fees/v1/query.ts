@@ -218,7 +218,7 @@ export const QueryDevFeeInfosResponse = {
   },
   fromJSON(object: any): QueryDevFeeInfosResponse {
     const obj = createBaseQueryDevFeeInfosResponse();
-    if (Array.isArray(object?.fees)) object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
+    if (Array.isArray(object?.fees)) obj.fees = object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -604,7 +604,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
   },
   fromJSON(object: any): QueryDevFeeInfosPerDeployerResponse {
     const obj = createBaseQueryDevFeeInfosPerDeployerResponse();
-    if (Array.isArray(object?.fees)) object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
+    if (Array.isArray(object?.fees)) obj.fees = object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

@@ -41,7 +41,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.authorization)) object.authorization.map((e: any) => GrantAuthorization.fromJSON(e));
+    if (Array.isArray(object?.authorization)) obj.authorization = object.authorization.map((e: any) => GrantAuthorization.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

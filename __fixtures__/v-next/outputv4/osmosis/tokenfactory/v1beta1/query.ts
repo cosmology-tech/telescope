@@ -391,7 +391,7 @@ export const QueryDenomsFromCreatorResponse = {
   },
   fromJSON(object: any): QueryDenomsFromCreatorResponse {
     const obj = createBaseQueryDenomsFromCreatorResponse();
-    if (Array.isArray(object?.denoms)) object.denoms.map((e: any) => String(e));
+    if (Array.isArray(object?.denoms)) obj.denoms = object.denoms.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: QueryDenomsFromCreatorResponse): unknown {

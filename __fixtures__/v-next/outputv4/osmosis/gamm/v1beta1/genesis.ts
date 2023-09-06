@@ -55,7 +55,7 @@ export const Params = {
   },
   fromJSON(object: any): Params {
     const obj = createBaseParams();
-    if (Array.isArray(object?.poolCreationFee)) object.poolCreationFee.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.poolCreationFee)) obj.poolCreationFee = object.poolCreationFee.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: Params): unknown {
@@ -137,7 +137,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
     if (isSet(object.nextPoolNumber)) obj.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;

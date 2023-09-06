@@ -276,7 +276,7 @@ export const TableDescriptor = {
   fromJSON(object: any): TableDescriptor {
     const obj = createBaseTableDescriptor();
     if (isSet(object.primaryKey)) obj.primaryKey = PrimaryKeyDescriptor.fromJSON(object.primaryKey);
-    if (Array.isArray(object?.index)) object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e));
+    if (Array.isArray(object?.index)) obj.index = object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e));
     if (isSet(object.id)) obj.id = Number(object.id);
     return obj;
   },

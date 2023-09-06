@@ -1249,7 +1249,7 @@ export const QueryValidatorSlashesResponse = {
   },
   fromJSON(object: any): QueryValidatorSlashesResponse {
     const obj = createBaseQueryValidatorSlashesResponse();
-    if (Array.isArray(object?.slashes)) object.slashes.map((e: any) => ValidatorSlashEvent.fromJSON(e));
+    if (Array.isArray(object?.slashes)) obj.slashes = object.slashes.map((e: any) => ValidatorSlashEvent.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1460,7 +1460,7 @@ export const QueryDelegationRewardsResponse = {
   },
   fromJSON(object: any): QueryDelegationRewardsResponse {
     const obj = createBaseQueryDelegationRewardsResponse();
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryDelegationRewardsResponse): unknown {
@@ -1655,8 +1655,8 @@ export const QueryDelegationTotalRewardsResponse = {
   },
   fromJSON(object: any): QueryDelegationTotalRewardsResponse {
     const obj = createBaseQueryDelegationTotalRewardsResponse();
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => DelegationDelegatorReward.fromJSON(e));
-    if (Array.isArray(object?.total)) object.total.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DelegationDelegatorReward.fromJSON(e));
+    if (Array.isArray(object?.total)) obj.total = object.total.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryDelegationTotalRewardsResponse): unknown {
@@ -1862,7 +1862,7 @@ export const QueryDelegatorValidatorsResponse = {
   },
   fromJSON(object: any): QueryDelegatorValidatorsResponse {
     const obj = createBaseQueryDelegatorValidatorsResponse();
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => String(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: QueryDelegatorValidatorsResponse): unknown {
@@ -2209,7 +2209,7 @@ export const QueryCommunityPoolResponse = {
   },
   fromJSON(object: any): QueryCommunityPoolResponse {
     const obj = createBaseQueryCommunityPoolResponse();
-    if (Array.isArray(object?.pool)) object.pool.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.pool)) obj.pool = object.pool.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryCommunityPoolResponse): unknown {

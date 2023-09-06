@@ -519,7 +519,7 @@ export const QueryValidatorsResponse = {
   },
   fromJSON(object: any): QueryValidatorsResponse {
     const obj = createBaseQueryValidatorsResponse();
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -799,7 +799,7 @@ export const QueryValidatorDelegationsResponse = {
   },
   fromJSON(object: any): QueryValidatorDelegationsResponse {
     const obj = createBaseQueryValidatorDelegationsResponse();
-    if (Array.isArray(object?.delegationResponses)) object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
+    if (Array.isArray(object?.delegationResponses)) obj.delegationResponses = object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -957,7 +957,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   },
   fromJSON(object: any): QueryValidatorUnbondingDelegationsResponse {
     const obj = createBaseQueryValidatorUnbondingDelegationsResponse();
-    if (Array.isArray(object?.unbondingResponses)) object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
+    if (Array.isArray(object?.unbondingResponses)) obj.unbondingResponses = object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1385,7 +1385,7 @@ export const QueryDelegatorDelegationsResponse = {
   },
   fromJSON(object: any): QueryDelegatorDelegationsResponse {
     const obj = createBaseQueryDelegatorDelegationsResponse();
-    if (Array.isArray(object?.delegationResponses)) object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
+    if (Array.isArray(object?.delegationResponses)) obj.delegationResponses = object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1543,7 +1543,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   },
   fromJSON(object: any): QueryDelegatorUnbondingDelegationsResponse {
     const obj = createBaseQueryDelegatorUnbondingDelegationsResponse();
-    if (Array.isArray(object?.unbondingResponses)) object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
+    if (Array.isArray(object?.unbondingResponses)) obj.unbondingResponses = object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1727,7 +1727,7 @@ export const QueryRedelegationsResponse = {
   },
   fromJSON(object: any): QueryRedelegationsResponse {
     const obj = createBaseQueryRedelegationsResponse();
-    if (Array.isArray(object?.redelegationResponses)) object.redelegationResponses.map((e: any) => RedelegationResponse.fromJSON(e));
+    if (Array.isArray(object?.redelegationResponses)) obj.redelegationResponses = object.redelegationResponses.map((e: any) => RedelegationResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1885,7 +1885,7 @@ export const QueryDelegatorValidatorsResponse = {
   },
   fromJSON(object: any): QueryDelegatorValidatorsResponse {
     const obj = createBaseQueryDelegatorValidatorsResponse();
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

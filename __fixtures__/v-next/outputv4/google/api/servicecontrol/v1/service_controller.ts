@@ -412,7 +412,7 @@ export const CheckResponse = {
   fromJSON(object: any): CheckResponse {
     const obj = createBaseCheckResponse();
     if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (Array.isArray(object?.checkErrors)) object.checkErrors.map((e: any) => CheckError.fromJSON(e));
+    if (Array.isArray(object?.checkErrors)) obj.checkErrors = object.checkErrors.map((e: any) => CheckError.fromJSON(e));
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
     if (isSet(object.checkInfo)) obj.checkInfo = CheckResponse_CheckInfo.fromJSON(object.checkInfo);
@@ -512,7 +512,7 @@ export const CheckResponse_CheckInfo = {
   },
   fromJSON(object: any): CheckResponse_CheckInfo {
     const obj = createBaseCheckResponse_CheckInfo();
-    if (Array.isArray(object?.unusedArguments)) object.unusedArguments.map((e: any) => String(e));
+    if (Array.isArray(object?.unusedArguments)) obj.unusedArguments = object.unusedArguments.map((e: any) => String(e));
     if (isSet(object.consumerInfo)) obj.consumerInfo = CheckResponse_ConsumerInfo.fromJSON(object.consumerInfo);
     return obj;
   },
@@ -693,7 +693,7 @@ export const ReportRequest = {
   fromJSON(object: any): ReportRequest {
     const obj = createBaseReportRequest();
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (Array.isArray(object?.operations)) object.operations.map((e: any) => Operation.fromJSON(e));
+    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => Operation.fromJSON(e));
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
@@ -786,7 +786,7 @@ export const ReportResponse = {
   },
   fromJSON(object: any): ReportResponse {
     const obj = createBaseReportResponse();
-    if (Array.isArray(object?.reportErrors)) object.reportErrors.map((e: any) => ReportResponse_ReportError.fromJSON(e));
+    if (Array.isArray(object?.reportErrors)) obj.reportErrors = object.reportErrors.map((e: any) => ReportResponse_ReportError.fromJSON(e));
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
     return obj;

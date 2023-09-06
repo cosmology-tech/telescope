@@ -777,7 +777,7 @@ export const QuotaOperation = {
       acc[key] = String(value);
       return acc;
     }, {});
-    if (Array.isArray(object?.quotaMetrics)) object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
+    if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
     if (isSet(object.quotaMode)) obj.quotaMode = quotaOperation_QuotaModeFromJSON(object.quotaMode);
     return obj;
   },
@@ -955,8 +955,8 @@ export const AllocateQuotaResponse = {
   fromJSON(object: any): AllocateQuotaResponse {
     const obj = createBaseAllocateQuotaResponse();
     if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (Array.isArray(object?.allocateErrors)) object.allocateErrors.map((e: any) => QuotaError.fromJSON(e));
-    if (Array.isArray(object?.quotaMetrics)) object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
+    if (Array.isArray(object?.allocateErrors)) obj.allocateErrors = object.allocateErrors.map((e: any) => QuotaError.fromJSON(e));
+    if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },

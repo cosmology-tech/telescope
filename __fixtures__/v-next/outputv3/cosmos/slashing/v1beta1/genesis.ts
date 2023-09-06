@@ -184,8 +184,8 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.signingInfos)) object.signingInfos.map((e: any) => SigningInfo.fromJSON(e));
-    if (Array.isArray(object?.missedBlocks)) object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e));
+    if (Array.isArray(object?.signingInfos)) obj.signingInfos = object.signingInfos.map((e: any) => SigningInfo.fromJSON(e));
+    if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {
@@ -423,7 +423,7 @@ export const ValidatorMissedBlocks = {
   fromJSON(object: any): ValidatorMissedBlocks {
     const obj = createBaseValidatorMissedBlocks();
     if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.missedBlocks)) object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e));
+    if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e));
     return obj;
   },
   toJSON(message: ValidatorMissedBlocks): unknown {

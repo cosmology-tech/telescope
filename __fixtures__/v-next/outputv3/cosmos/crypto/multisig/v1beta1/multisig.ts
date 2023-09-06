@@ -104,7 +104,7 @@ export const MultiSignature = {
   },
   fromJSON(object: any): MultiSignature {
     const obj = createBaseMultiSignature();
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: MultiSignature): unknown {

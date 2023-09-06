@@ -197,7 +197,7 @@ export const MsgExecResponse = {
   },
   fromJSON(object: any): MsgExecResponse {
     const obj = createBaseMsgExecResponse();
-    if (Array.isArray(object?.results)) object.results.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: MsgExecResponse): unknown {
@@ -273,7 +273,7 @@ export const MsgExec = {
   fromJSON(object: any): MsgExec {
     const obj = createBaseMsgExec();
     if (isSet(object.grantee)) obj.grantee = String(object.grantee);
-    if (Array.isArray(object?.msgs)) object.msgs.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.msgs)) obj.msgs = object.msgs.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgExec): unknown {

@@ -871,7 +871,7 @@ export const UnpoolWhitelistedPools = {
   },
   fromJSON(object: any): UnpoolWhitelistedPools {
     const obj = createBaseUnpoolWhitelistedPools();
-    if (Array.isArray(object?.ids)) object.ids.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.ids)) obj.ids = object.ids.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: UnpoolWhitelistedPools): unknown {

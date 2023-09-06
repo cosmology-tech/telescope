@@ -223,7 +223,7 @@ export const QueryCertificatesResponse = {
   },
   fromJSON(object: any): QueryCertificatesResponse {
     const obj = createBaseQueryCertificatesResponse();
-    if (Array.isArray(object?.certificates)) object.certificates.map((e: any) => CertificateResponse.fromJSON(e));
+    if (Array.isArray(object?.certificates)) obj.certificates = object.certificates.map((e: any) => CertificateResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

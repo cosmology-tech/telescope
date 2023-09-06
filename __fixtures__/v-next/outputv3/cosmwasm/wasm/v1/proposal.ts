@@ -642,7 +642,7 @@ export const InstantiateContractProposal = {
     if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
     if (isSet(object.label)) obj.label = String(object.label);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: InstantiateContractProposal): unknown {
@@ -1102,7 +1102,7 @@ export const ExecuteContractProposal = {
     if (isSet(object.runAs)) obj.runAs = String(object.runAs);
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    if (Array.isArray(object?.funds)) object.funds.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: ExecuteContractProposal): unknown {
@@ -1503,7 +1503,7 @@ export const PinCodesProposal = {
     const obj = createBasePinCodesProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: PinCodesProposal): unknown {
@@ -1640,7 +1640,7 @@ export const UnpinCodesProposal = {
     const obj = createBaseUnpinCodesProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.codeIds)) object.codeIds.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: UnpinCodesProposal): unknown {

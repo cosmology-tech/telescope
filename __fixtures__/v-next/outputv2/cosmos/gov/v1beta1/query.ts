@@ -776,7 +776,7 @@ export const QueryProposalsResponse = {
   },
   fromJSON(object: any): QueryProposalsResponse {
     const obj = createBaseQueryProposalsResponse();
-    if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
+    if (Array.isArray(object?.proposals)) obj.proposals = object.proposals.map((e: any) => Proposal.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1192,7 +1192,7 @@ export const QueryVotesResponse = {
   },
   fromJSON(object: any): QueryVotesResponse {
     const obj = createBaseQueryVotesResponse();
-    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
+    if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1818,7 +1818,7 @@ export const QueryDepositsResponse = {
   },
   fromJSON(object: any): QueryDepositsResponse {
     const obj = createBaseQueryDepositsResponse();
-    if (Array.isArray(object?.deposits)) object.deposits.map((e: any) => Deposit.fromJSON(e));
+    if (Array.isArray(object?.deposits)) obj.deposits = object.deposits.map((e: any) => Deposit.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

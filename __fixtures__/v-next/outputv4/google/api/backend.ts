@@ -234,7 +234,7 @@ export const Backend = {
   },
   fromJSON(object: any): Backend {
     const obj = createBaseBackend();
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => BackendRule.fromJSON(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => BackendRule.fromJSON(e));
     return obj;
   },
   toJSON(message: Backend): unknown {

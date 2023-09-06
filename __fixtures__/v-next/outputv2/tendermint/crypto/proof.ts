@@ -188,7 +188,7 @@ export const Proof = {
     if (isSet(object.total)) obj.total = Long.fromValue(object.total);
     if (isSet(object.index)) obj.index = Long.fromValue(object.index);
     if (isSet(object.leafHash)) obj.leafHash = bytesFromBase64(object.leafHash);
-    if (Array.isArray(object?.aunts)) object.aunts.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.aunts)) obj.aunts = object.aunts.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: Proof): unknown {
@@ -618,7 +618,7 @@ export const ProofOps = {
   },
   fromJSON(object: any): ProofOps {
     const obj = createBaseProofOps();
-    if (Array.isArray(object?.ops)) object.ops.map((e: any) => ProofOp.fromJSON(e));
+    if (Array.isArray(object?.ops)) obj.ops = object.ops.map((e: any) => ProofOp.fromJSON(e));
     return obj;
   },
   toJSON(message: ProofOps): unknown {

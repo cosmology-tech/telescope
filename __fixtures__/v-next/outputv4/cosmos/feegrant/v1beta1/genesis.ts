@@ -41,7 +41,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.allowances)) object.allowances.map((e: any) => Grant.fromJSON(e));
+    if (Array.isArray(object?.allowances)) obj.allowances = object.allowances.map((e: any) => Grant.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

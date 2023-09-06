@@ -565,9 +565,9 @@ export const Type = {
   fromJSON(object: any): Type {
     const obj = createBaseType();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.fields)) object.fields.map((e: any) => Field.fromJSON(e));
-    if (Array.isArray(object?.oneofs)) object.oneofs.map((e: any) => String(e));
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
+    if (Array.isArray(object?.fields)) obj.fields = object.fields.map((e: any) => Field.fromJSON(e));
+    if (Array.isArray(object?.oneofs)) obj.oneofs = object.oneofs.map((e: any) => String(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
@@ -788,7 +788,7 @@ export const Field = {
     if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
     if (isSet(object.oneofIndex)) obj.oneofIndex = Number(object.oneofIndex);
     if (isSet(object.packed)) obj.packed = Boolean(object.packed);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     if (isSet(object.jsonName)) obj.jsonName = String(object.jsonName);
     if (isSet(object.defaultValue)) obj.defaultValue = String(object.defaultValue);
     return obj;
@@ -966,8 +966,8 @@ export const Enum = {
   fromJSON(object: any): Enum {
     const obj = createBaseEnum();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.enumvalue)) object.enumvalue.map((e: any) => EnumValue.fromJSON(e));
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
+    if (Array.isArray(object?.enumvalue)) obj.enumvalue = object.enumvalue.map((e: any) => EnumValue.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
@@ -1116,7 +1116,7 @@ export const EnumValue = {
     const obj = createBaseEnumValue();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.number)) obj.number = Number(object.number);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => Option.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     return obj;
   },
   toJSON(message: EnumValue): unknown {

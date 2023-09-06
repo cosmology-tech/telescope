@@ -129,8 +129,8 @@ export const ClawbackVestingAccount = {
     if (isSet(object.baseVestingAccount)) obj.baseVestingAccount = BaseVestingAccount.fromJSON(object.baseVestingAccount);
     if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (Array.isArray(object?.lockupPeriods)) object.lockupPeriods.map((e: any) => Period.fromJSON(e));
-    if (Array.isArray(object?.vestingPeriods)) object.vestingPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
     return obj;
   },
   toJSON(message: ClawbackVestingAccount): unknown {

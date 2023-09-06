@@ -188,7 +188,7 @@ export const Endpoint = {
   fromJSON(object: any): Endpoint {
     const obj = createBaseEndpoint();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.aliases)) object.aliases.map((e: any) => String(e));
+    if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
     if (isSet(object.target)) obj.target = String(object.target);
     if (isSet(object.allowCors)) obj.allowCors = Boolean(object.allowCors);
     return obj;

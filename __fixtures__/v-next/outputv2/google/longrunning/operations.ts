@@ -747,7 +747,7 @@ export const ListOperationsResponse = {
   },
   fromJSON(object: any): ListOperationsResponse {
     const obj = createBaseListOperationsResponse();
-    if (Array.isArray(object?.operations)) object.operations.map((e: any) => Operation.fromJSON(e));
+    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => Operation.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },

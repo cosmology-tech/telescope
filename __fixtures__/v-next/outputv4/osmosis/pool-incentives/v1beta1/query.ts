@@ -169,7 +169,7 @@ export const QueryGaugeIdsResponse = {
   },
   fromJSON(object: any): QueryGaugeIdsResponse {
     const obj = createBaseQueryGaugeIdsResponse();
-    if (Array.isArray(object?.gaugeIdsWithDuration)) object.gaugeIdsWithDuration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromJSON(e));
+    if (Array.isArray(object?.gaugeIdsWithDuration)) obj.gaugeIdsWithDuration = object.gaugeIdsWithDuration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryGaugeIdsResponse): unknown {
@@ -583,7 +583,7 @@ export const QueryLockableDurationsResponse = {
   },
   fromJSON(object: any): QueryLockableDurationsResponse {
     const obj = createBaseQueryLockableDurationsResponse();
-    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryLockableDurationsResponse): unknown {
@@ -787,7 +787,7 @@ export const QueryIncentivizedPoolsResponse = {
   },
   fromJSON(object: any): QueryIncentivizedPoolsResponse {
     const obj = createBaseQueryIncentivizedPoolsResponse();
-    if (Array.isArray(object?.incentivizedPools)) object.incentivizedPools.map((e: any) => IncentivizedPool.fromJSON(e));
+    if (Array.isArray(object?.incentivizedPools)) obj.incentivizedPools = object.incentivizedPools.map((e: any) => IncentivizedPool.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryIncentivizedPoolsResponse): unknown {
@@ -899,7 +899,7 @@ export const QueryExternalIncentiveGaugesResponse = {
   },
   fromJSON(object: any): QueryExternalIncentiveGaugesResponse {
     const obj = createBaseQueryExternalIncentiveGaugesResponse();
-    if (Array.isArray(object?.data)) object.data.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryExternalIncentiveGaugesResponse): unknown {

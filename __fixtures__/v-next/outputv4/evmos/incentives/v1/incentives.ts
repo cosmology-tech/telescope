@@ -141,7 +141,7 @@ export const Incentive = {
   fromJSON(object: any): Incentive {
     const obj = createBaseIncentive();
     if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (Array.isArray(object?.allocations)) object.allocations.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.allocations)) obj.allocations = object.allocations.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     if (isSet(object.totalGas)) obj.totalGas = BigInt(object.totalGas.toString());
@@ -353,7 +353,7 @@ export const RegisterIncentiveProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (Array.isArray(object?.allocations)) object.allocations.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.allocations)) obj.allocations = object.allocations.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
     return obj;
   },

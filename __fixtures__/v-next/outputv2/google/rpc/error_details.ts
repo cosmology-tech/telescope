@@ -900,7 +900,7 @@ export const DebugInfo = {
   },
   fromJSON(object: any): DebugInfo {
     const obj = createBaseDebugInfo();
-    if (Array.isArray(object?.stackEntries)) object.stackEntries.map((e: any) => String(e));
+    if (Array.isArray(object?.stackEntries)) obj.stackEntries = object.stackEntries.map((e: any) => String(e));
     if (isSet(object.detail)) obj.detail = String(object.detail);
     return obj;
   },
@@ -1000,7 +1000,7 @@ export const QuotaFailure = {
   },
   fromJSON(object: any): QuotaFailure {
     const obj = createBaseQuotaFailure();
-    if (Array.isArray(object?.violations)) object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
+    if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
     return obj;
   },
   toJSON(message: QuotaFailure): unknown {
@@ -1428,7 +1428,7 @@ export const PreconditionFailure = {
   },
   fromJSON(object: any): PreconditionFailure {
     const obj = createBasePreconditionFailure();
-    if (Array.isArray(object?.violations)) object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
+    if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
     return obj;
   },
   toJSON(message: PreconditionFailure): unknown {
@@ -1630,7 +1630,7 @@ export const BadRequest = {
   },
   fromJSON(object: any): BadRequest {
     const obj = createBaseBadRequest();
-    if (Array.isArray(object?.fieldViolations)) object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
+    if (Array.isArray(object?.fieldViolations)) obj.fieldViolations = object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
     return obj;
   },
   toJSON(message: BadRequest): unknown {
@@ -2036,7 +2036,7 @@ export const Help = {
   },
   fromJSON(object: any): Help {
     const obj = createBaseHelp();
-    if (Array.isArray(object?.links)) object.links.map((e: any) => Help_Link.fromJSON(e));
+    if (Array.isArray(object?.links)) obj.links = object.links.map((e: any) => Help_Link.fromJSON(e));
     return obj;
   },
   toJSON(message: Help): unknown {

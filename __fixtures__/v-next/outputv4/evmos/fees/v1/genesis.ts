@@ -84,7 +84,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.devFeeInfos)) object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
+    if (Array.isArray(object?.devFeeInfos)) obj.devFeeInfos = object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

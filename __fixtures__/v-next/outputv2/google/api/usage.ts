@@ -261,8 +261,8 @@ export const Usage = {
   },
   fromJSON(object: any): Usage {
     const obj = createBaseUsage();
-    if (Array.isArray(object?.requirements)) object.requirements.map((e: any) => String(e));
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => UsageRule.fromJSON(e));
+    if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => String(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => UsageRule.fromJSON(e));
     if (isSet(object.producerNotificationChannel)) obj.producerNotificationChannel = String(object.producerNotificationChannel);
     return obj;
   },

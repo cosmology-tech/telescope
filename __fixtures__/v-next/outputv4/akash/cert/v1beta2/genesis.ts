@@ -126,7 +126,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.certificates)) object.certificates.map((e: any) => GenesisCertificate.fromJSON(e));
+    if (Array.isArray(object?.certificates)) obj.certificates = object.certificates.map((e: any) => GenesisCertificate.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

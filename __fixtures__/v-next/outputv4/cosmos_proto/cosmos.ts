@@ -238,7 +238,7 @@ export const ScalarDescriptor = {
     const obj = createBaseScalarDescriptor();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.fieldType)) object.fieldType.map((e: any) => scalarTypeFromJSON(e));
+    if (Array.isArray(object?.fieldType)) obj.fieldType = object.fieldType.map((e: any) => scalarTypeFromJSON(e));
     return obj;
   },
   toJSON(message: ScalarDescriptor): unknown {

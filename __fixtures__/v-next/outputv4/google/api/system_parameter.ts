@@ -143,7 +143,7 @@ export const SystemParameters = {
   },
   fromJSON(object: any): SystemParameters {
     const obj = createBaseSystemParameters();
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => SystemParameterRule.fromJSON(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => SystemParameterRule.fromJSON(e));
     return obj;
   },
   toJSON(message: SystemParameters): unknown {
@@ -219,7 +219,7 @@ export const SystemParameterRule = {
   fromJSON(object: any): SystemParameterRule {
     const obj = createBaseSystemParameterRule();
     if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (Array.isArray(object?.parameters)) object.parameters.map((e: any) => SystemParameter.fromJSON(e));
+    if (Array.isArray(object?.parameters)) obj.parameters = object.parameters.map((e: any) => SystemParameter.fromJSON(e));
     return obj;
   },
   toJSON(message: SystemParameterRule): unknown {

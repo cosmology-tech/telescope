@@ -613,12 +613,12 @@ export const ResourceDescriptor = {
   fromJSON(object: any): ResourceDescriptor {
     const obj = createBaseResourceDescriptor();
     if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.pattern)) object.pattern.map((e: any) => String(e));
+    if (Array.isArray(object?.pattern)) obj.pattern = object.pattern.map((e: any) => String(e));
     if (isSet(object.nameField)) obj.nameField = String(object.nameField);
     if (isSet(object.history)) obj.history = resourceDescriptor_HistoryFromJSON(object.history);
     if (isSet(object.plural)) obj.plural = String(object.plural);
     if (isSet(object.singular)) obj.singular = String(object.singular);
-    if (Array.isArray(object?.style)) object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
+    if (Array.isArray(object?.style)) obj.style = object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
     return obj;
   },
   toJSON(message: ResourceDescriptor): unknown {

@@ -66,7 +66,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.basedenom)) obj.basedenom = String(object.basedenom);
-    if (Array.isArray(object?.feetokens)) object.feetokens.map((e: any) => FeeToken.fromJSON(e));
+    if (Array.isArray(object?.feetokens)) obj.feetokens = object.feetokens.map((e: any) => FeeToken.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

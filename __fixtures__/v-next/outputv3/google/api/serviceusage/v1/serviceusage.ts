@@ -1170,7 +1170,7 @@ export const ListServicesResponse = {
   },
   fromJSON(object: any): ListServicesResponse {
     const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => Service.fromJSON(e));
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -1278,7 +1278,7 @@ export const BatchEnableServicesRequest = {
   fromJSON(object: any): BatchEnableServicesRequest {
     const obj = createBaseBatchEnableServicesRequest();
     if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.serviceIds)) object.serviceIds.map((e: any) => String(e));
+    if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: BatchEnableServicesRequest): unknown {
@@ -1384,8 +1384,8 @@ export const BatchEnableServicesResponse = {
   },
   fromJSON(object: any): BatchEnableServicesResponse {
     const obj = createBaseBatchEnableServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => Service.fromJSON(e));
-    if (Array.isArray(object?.failures)) object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
+    if (Array.isArray(object?.failures)) obj.failures = object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
     return obj;
   },
   toJSON(message: BatchEnableServicesResponse): unknown {
@@ -1599,7 +1599,7 @@ export const BatchGetServicesRequest = {
   fromJSON(object: any): BatchGetServicesRequest {
     const obj = createBaseBatchGetServicesRequest();
     if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.names)) object.names.map((e: any) => String(e));
+    if (Array.isArray(object?.names)) obj.names = object.names.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: BatchGetServicesRequest): unknown {
@@ -1698,7 +1698,7 @@ export const BatchGetServicesResponse = {
   },
   fromJSON(object: any): BatchGetServicesResponse {
     const obj = createBaseBatchGetServicesResponse();
-    if (Array.isArray(object?.services)) object.services.map((e: any) => Service.fromJSON(e));
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
     return obj;
   },
   toJSON(message: BatchGetServicesResponse): unknown {

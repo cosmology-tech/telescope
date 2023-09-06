@@ -294,7 +294,7 @@ export const QueryAccountsResponse = {
   },
   fromJSON(object: any): QueryAccountsResponse {
     const obj = createBaseQueryAccountsResponse();
-    if (Array.isArray(object?.accounts)) object.accounts.map((e: any) => Account.fromJSON(e));
+    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Account.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -556,7 +556,7 @@ export const QueryPaymentsResponse = {
   },
   fromJSON(object: any): QueryPaymentsResponse {
     const obj = createBaseQueryPaymentsResponse();
-    if (Array.isArray(object?.payments)) object.payments.map((e: any) => FractionalPayment.fromJSON(e));
+    if (Array.isArray(object?.payments)) obj.payments = object.payments.map((e: any) => FractionalPayment.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

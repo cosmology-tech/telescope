@@ -225,7 +225,7 @@ export const Provider = {
     const obj = createBaseProvider();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: Provider): unknown {
@@ -346,7 +346,7 @@ export const AuditedAttributes = {
     const obj = createBaseAuditedAttributes();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: AuditedAttributes): unknown {
@@ -451,7 +451,7 @@ export const AttributesResponse = {
   },
   fromJSON(object: any): AttributesResponse {
     const obj = createBaseAttributesResponse();
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
     return obj;
   },
   toJSON(message: AttributesResponse): unknown {
@@ -551,8 +551,8 @@ export const AttributesFilters = {
   },
   fromJSON(object: any): AttributesFilters {
     const obj = createBaseAttributesFilters();
-    if (Array.isArray(object?.auditors)) object.auditors.map((e: any) => String(e));
-    if (Array.isArray(object?.owners)) object.owners.map((e: any) => String(e));
+    if (Array.isArray(object?.auditors)) obj.auditors = object.auditors.map((e: any) => String(e));
+    if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: AttributesFilters): unknown {
@@ -679,7 +679,7 @@ export const MsgSignProviderAttributes = {
     const obj = createBaseMsgSignProviderAttributes();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgSignProviderAttributes): unknown {
@@ -864,7 +864,7 @@ export const MsgDeleteProviderAttributes = {
     const obj = createBaseMsgDeleteProviderAttributes();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.keys)) object.keys.map((e: any) => String(e));
+    if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: MsgDeleteProviderAttributes): unknown {

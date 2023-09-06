@@ -201,7 +201,7 @@ export const MsgCreateProvider = {
     const obj = createBaseMsgCreateProvider();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
     return obj;
   },
@@ -354,7 +354,7 @@ export const MsgUpdateProvider = {
     const obj = createBaseMsgUpdateProvider();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
     return obj;
   },
@@ -611,7 +611,7 @@ export const Provider = {
     const obj = createBaseProvider();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
     return obj;
   },

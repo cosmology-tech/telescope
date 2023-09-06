@@ -509,7 +509,7 @@ export const MetricValueSet = {
   fromJSON(object: any): MetricValueSet {
     const obj = createBaseMetricValueSet();
     if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    if (Array.isArray(object?.metricValues)) object.metricValues.map((e: any) => MetricValue.fromJSON(e));
+    if (Array.isArray(object?.metricValues)) obj.metricValues = object.metricValues.map((e: any) => MetricValue.fromJSON(e));
     return obj;
   },
   toJSON(message: MetricValueSet): unknown {

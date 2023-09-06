@@ -286,7 +286,7 @@ export const ModuleAccount = {
     const obj = createBaseModuleAccount();
     if (isSet(object.baseAccount)) obj.baseAccount = BaseAccount.fromJSON(object.baseAccount);
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.permissions)) object.permissions.map((e: any) => String(e));
+    if (Array.isArray(object?.permissions)) obj.permissions = object.permissions.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: ModuleAccount): unknown {

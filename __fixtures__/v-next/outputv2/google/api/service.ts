@@ -529,9 +529,9 @@ export const Service = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
     if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.apis)) object.apis.map((e: any) => Api.fromJSON(e));
-    if (Array.isArray(object?.types)) object.types.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.enums)) object.enums.map((e: any) => Enum.fromJSON(e));
+    if (Array.isArray(object?.apis)) obj.apis = object.apis.map((e: any) => Api.fromJSON(e));
+    if (Array.isArray(object?.types)) obj.types = object.types.map((e: any) => Type.fromJSON(e));
+    if (Array.isArray(object?.enums)) obj.enums = object.enums.map((e: any) => Enum.fromJSON(e));
     if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
     if (isSet(object.backend)) obj.backend = Backend.fromJSON(object.backend);
     if (isSet(object.http)) obj.http = Http.fromJSON(object.http);
@@ -539,11 +539,11 @@ export const Service = {
     if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
     if (isSet(object.context)) obj.context = Context.fromJSON(object.context);
     if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
+    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
     if (isSet(object.control)) obj.control = Control.fromJSON(object.control);
-    if (Array.isArray(object?.logs)) object.logs.map((e: any) => LogDescriptor.fromJSON(e));
-    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => MetricDescriptor.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
+    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => LogDescriptor.fromJSON(e));
+    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => MetricDescriptor.fromJSON(e));
+    if (Array.isArray(object?.monitoredResources)) obj.monitoredResources = object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
     if (isSet(object.billing)) obj.billing = Billing.fromJSON(object.billing);
     if (isSet(object.logging)) obj.logging = Logging.fromJSON(object.logging);
     if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);

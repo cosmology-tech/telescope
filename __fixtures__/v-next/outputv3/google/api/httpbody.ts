@@ -220,7 +220,7 @@ export const HttpBody = {
     const obj = createBaseHttpBody();
     if (isSet(object.contentType)) obj.contentType = String(object.contentType);
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (Array.isArray(object?.extensions)) object.extensions.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: HttpBody): unknown {

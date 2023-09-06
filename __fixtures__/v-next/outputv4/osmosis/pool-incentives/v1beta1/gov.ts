@@ -105,7 +105,7 @@ export const ReplacePoolIncentivesProposal = {
     const obj = createBaseReplacePoolIncentivesProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
     return obj;
   },
   toJSON(message: ReplacePoolIncentivesProposal): unknown {
@@ -199,7 +199,7 @@ export const UpdatePoolIncentivesProposal = {
     const obj = createBaseUpdatePoolIncentivesProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
     return obj;
   },
   toJSON(message: UpdatePoolIncentivesProposal): unknown {

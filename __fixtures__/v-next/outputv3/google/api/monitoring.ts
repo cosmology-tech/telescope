@@ -302,8 +302,8 @@ export const Monitoring = {
   },
   fromJSON(object: any): Monitoring {
     const obj = createBaseMonitoring();
-    if (Array.isArray(object?.producerDestinations)) object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
-    if (Array.isArray(object?.consumerDestinations)) object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
+    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
+    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
     return obj;
   },
   toJSON(message: Monitoring): unknown {
@@ -422,7 +422,7 @@ export const Monitoring_MonitoringDestination = {
   fromJSON(object: any): Monitoring_MonitoringDestination {
     const obj = createBaseMonitoring_MonitoringDestination();
     if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => String(e));
+    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: Monitoring_MonitoringDestination): unknown {

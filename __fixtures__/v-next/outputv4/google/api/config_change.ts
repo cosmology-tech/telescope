@@ -196,7 +196,7 @@ export const ConfigChange = {
     if (isSet(object.oldValue)) obj.oldValue = String(object.oldValue);
     if (isSet(object.newValue)) obj.newValue = String(object.newValue);
     if (isSet(object.changeType)) obj.changeType = changeTypeFromJSON(object.changeType);
-    if (Array.isArray(object?.advices)) object.advices.map((e: any) => Advice.fromJSON(e));
+    if (Array.isArray(object?.advices)) obj.advices = object.advices.map((e: any) => Advice.fromJSON(e));
     return obj;
   },
   toJSON(message: ConfigChange): unknown {

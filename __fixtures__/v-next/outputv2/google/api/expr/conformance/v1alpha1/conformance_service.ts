@@ -520,7 +520,7 @@ export const ParseResponse = {
   fromJSON(object: any): ParseResponse {
     const obj = createBaseParseResponse();
     if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
-    if (Array.isArray(object?.issues)) object.issues.map((e: any) => Status.fromJSON(e));
+    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
     return obj;
   },
   toJSON(message: ParseResponse): unknown {
@@ -643,7 +643,7 @@ export const CheckRequest = {
   fromJSON(object: any): CheckRequest {
     const obj = createBaseCheckRequest();
     if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
-    if (Array.isArray(object?.typeEnv)) object.typeEnv.map((e: any) => Decl.fromJSON(e));
+    if (Array.isArray(object?.typeEnv)) obj.typeEnv = object.typeEnv.map((e: any) => Decl.fromJSON(e));
     if (isSet(object.container)) obj.container = String(object.container);
     if (isSet(object.noStdEnv)) obj.noStdEnv = Boolean(object.noStdEnv);
     return obj;
@@ -766,7 +766,7 @@ export const CheckResponse = {
   fromJSON(object: any): CheckResponse {
     const obj = createBaseCheckResponse();
     if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
-    if (Array.isArray(object?.issues)) object.issues.map((e: any) => Status.fromJSON(e));
+    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
     return obj;
   },
   toJSON(message: CheckResponse): unknown {
@@ -1135,7 +1135,7 @@ export const EvalResponse = {
   fromJSON(object: any): EvalResponse {
     const obj = createBaseEvalResponse();
     if (isSet(object.result)) obj.result = ExprValue.fromJSON(object.result);
-    if (Array.isArray(object?.issues)) object.issues.map((e: any) => Status.fromJSON(e));
+    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
     return obj;
   },
   toJSON(message: EvalResponse): unknown {

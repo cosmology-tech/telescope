@@ -183,8 +183,8 @@ export const MsgCreateStableswapPool = {
     const obj = createBaseMsgCreateStableswapPool();
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
-    if (Array.isArray(object?.initialPoolLiquidity)) object.initialPoolLiquidity.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.scalingFactors)) object.scalingFactors.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.initialPoolLiquidity)) obj.initialPoolLiquidity = object.initialPoolLiquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.scalingFactors)) obj.scalingFactors = object.scalingFactors.map((e: any) => Long.fromValue(e));
     if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
     if (isSet(object.scalingFactorController)) obj.scalingFactorController = String(object.scalingFactorController);
     return obj;
@@ -445,7 +445,7 @@ export const MsgStableSwapAdjustScalingFactors = {
     const obj = createBaseMsgStableSwapAdjustScalingFactors();
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
-    if (Array.isArray(object?.scalingFactors)) object.scalingFactors.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.scalingFactors)) obj.scalingFactors = object.scalingFactors.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: MsgStableSwapAdjustScalingFactors): unknown {

@@ -492,7 +492,7 @@ export const QueryAllowancesResponse = {
   },
   fromJSON(object: any): QueryAllowancesResponse {
     const obj = createBaseQueryAllowancesResponse();
-    if (Array.isArray(object?.allowances)) object.allowances.map((e: any) => Grant.fromJSON(e));
+    if (Array.isArray(object?.allowances)) obj.allowances = object.allowances.map((e: any) => Grant.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -712,7 +712,7 @@ export const QueryAllowancesByGranterResponse = {
   },
   fromJSON(object: any): QueryAllowancesByGranterResponse {
     const obj = createBaseQueryAllowancesByGranterResponse();
-    if (Array.isArray(object?.allowances)) object.allowances.map((e: any) => Grant.fromJSON(e));
+    if (Array.isArray(object?.allowances)) obj.allowances = object.allowances.map((e: any) => Grant.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

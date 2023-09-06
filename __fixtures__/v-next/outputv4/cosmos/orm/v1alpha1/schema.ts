@@ -163,7 +163,7 @@ export const ModuleSchemaDescriptor = {
   },
   fromJSON(object: any): ModuleSchemaDescriptor {
     const obj = createBaseModuleSchemaDescriptor();
-    if (Array.isArray(object?.schemaFile)) object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e));
+    if (Array.isArray(object?.schemaFile)) obj.schemaFile = object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e));
     if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
     return obj;
   },

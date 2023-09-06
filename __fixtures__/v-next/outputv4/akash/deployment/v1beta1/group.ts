@@ -598,7 +598,7 @@ export const GroupSpec = {
     const obj = createBaseGroupSpec();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.requirements)) obj.requirements = PlacementRequirements.fromJSON(object.requirements);
-    if (Array.isArray(object?.resources)) object.resources.map((e: any) => Resource.fromJSON(e));
+    if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => Resource.fromJSON(e));
     return obj;
   },
   toJSON(message: GroupSpec): unknown {

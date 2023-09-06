@@ -807,7 +807,7 @@ export const Tx = {
     const obj = createBaseTx();
     if (isSet(object.body)) obj.body = TxBody.fromJSON(object.body);
     if (isSet(object.authInfo)) obj.authInfo = AuthInfo.fromJSON(object.authInfo);
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: Tx): unknown {
@@ -939,7 +939,7 @@ export const TxRaw = {
     const obj = createBaseTxRaw();
     if (isSet(object.bodyBytes)) obj.bodyBytes = bytesFromBase64(object.bodyBytes);
     if (isSet(object.authInfoBytes)) obj.authInfoBytes = bytesFromBase64(object.authInfoBytes);
-    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => bytesFromBase64(e));
+    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: TxRaw): unknown {
@@ -1377,11 +1377,11 @@ export const TxBody = {
   },
   fromJSON(object: any): TxBody {
     const obj = createBaseTxBody();
-    if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
     if (isSet(object.memo)) obj.memo = String(object.memo);
     if (isSet(object.timeoutHeight)) obj.timeoutHeight = Long.fromValue(object.timeoutHeight);
-    if (Array.isArray(object?.extensionOptions)) object.extensionOptions.map((e: any) => Any.fromJSON(e));
-    if (Array.isArray(object?.nonCriticalExtensionOptions)) object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.extensionOptions)) obj.extensionOptions = object.extensionOptions.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.nonCriticalExtensionOptions)) obj.nonCriticalExtensionOptions = object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: TxBody): unknown {
@@ -1545,7 +1545,7 @@ export const AuthInfo = {
   },
   fromJSON(object: any): AuthInfo {
     const obj = createBaseAuthInfo();
-    if (Array.isArray(object?.signerInfos)) object.signerInfos.map((e: any) => SignerInfo.fromJSON(e));
+    if (Array.isArray(object?.signerInfos)) obj.signerInfos = object.signerInfos.map((e: any) => SignerInfo.fromJSON(e));
     if (isSet(object.fee)) obj.fee = Fee.fromJSON(object.fee);
     if (isSet(object.tip)) obj.tip = Tip.fromJSON(object.tip);
     return obj;
@@ -1987,7 +1987,7 @@ export const ModeInfo_Multi = {
   fromJSON(object: any): ModeInfo_Multi {
     const obj = createBaseModeInfo_Multi();
     if (isSet(object.bitarray)) obj.bitarray = CompactBitArray.fromJSON(object.bitarray);
-    if (Array.isArray(object?.modeInfos)) object.modeInfos.map((e: any) => ModeInfo.fromJSON(e));
+    if (Array.isArray(object?.modeInfos)) obj.modeInfos = object.modeInfos.map((e: any) => ModeInfo.fromJSON(e));
     return obj;
   },
   toJSON(message: ModeInfo_Multi): unknown {
@@ -2116,7 +2116,7 @@ export const Fee = {
   },
   fromJSON(object: any): Fee {
     const obj = createBaseFee();
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.gasLimit)) obj.gasLimit = Long.fromValue(object.gasLimit);
     if (isSet(object.payer)) obj.payer = String(object.payer);
     if (isSet(object.granter)) obj.granter = String(object.granter);
@@ -2246,7 +2246,7 @@ export const Tip = {
   },
   fromJSON(object: any): Tip {
     const obj = createBaseTip();
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.tipper)) obj.tipper = String(object.tipper);
     return obj;
   },

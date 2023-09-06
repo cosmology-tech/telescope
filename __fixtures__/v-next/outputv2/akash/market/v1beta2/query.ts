@@ -408,7 +408,7 @@ export const QueryOrdersResponse = {
   },
   fromJSON(object: any): QueryOrdersResponse {
     const obj = createBaseQueryOrdersResponse();
-    if (Array.isArray(object?.orders)) object.orders.map((e: any) => Order.fromJSON(e));
+    if (Array.isArray(object?.orders)) obj.orders = object.orders.map((e: any) => Order.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -782,7 +782,7 @@ export const QueryBidsResponse = {
   },
   fromJSON(object: any): QueryBidsResponse {
     const obj = createBaseQueryBidsResponse();
-    if (Array.isArray(object?.bids)) object.bids.map((e: any) => QueryBidResponse.fromJSON(e));
+    if (Array.isArray(object?.bids)) obj.bids = object.bids.map((e: any) => QueryBidResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1172,7 +1172,7 @@ export const QueryLeasesResponse = {
   },
   fromJSON(object: any): QueryLeasesResponse {
     const obj = createBaseQueryLeasesResponse();
-    if (Array.isArray(object?.leases)) object.leases.map((e: any) => QueryLeaseResponse.fromJSON(e));
+    if (Array.isArray(object?.leases)) obj.leases = object.leases.map((e: any) => QueryLeaseResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

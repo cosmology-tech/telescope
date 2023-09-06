@@ -226,7 +226,7 @@ export const MsgCreateDeployment = {
   fromJSON(object: any): MsgCreateDeployment {
     const obj = createBaseMsgCreateDeployment();
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupSpec.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupSpec.fromJSON(e));
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);

@@ -301,7 +301,7 @@ export const QueryDenomTracesResponse = {
   },
   fromJSON(object: any): QueryDenomTracesResponse {
     const obj = createBaseQueryDenomTracesResponse();
-    if (Array.isArray(object?.denomTraces)) object.denomTraces.map((e: any) => DenomTrace.fromJSON(e));
+    if (Array.isArray(object?.denomTraces)) obj.denomTraces = object.denomTraces.map((e: any) => DenomTrace.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

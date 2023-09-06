@@ -1309,7 +1309,7 @@ export const FileDescriptorSet = {
   },
   fromJSON(object: any): FileDescriptorSet {
     const obj = createBaseFileDescriptorSet();
-    if (Array.isArray(object?.file)) object.file.map((e: any) => FileDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.file)) obj.file = object.file.map((e: any) => FileDescriptorProto.fromJSON(e));
     return obj;
   },
   toJSON(message: FileDescriptorSet): unknown {
@@ -1474,13 +1474,13 @@ export const FileDescriptorProto = {
     const obj = createBaseFileDescriptorProto();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.package)) obj.package = String(object.package);
-    if (Array.isArray(object?.dependency)) object.dependency.map((e: any) => String(e));
-    if (Array.isArray(object?.publicDependency)) object.publicDependency.map((e: any) => Number(e));
-    if (Array.isArray(object?.weakDependency)) object.weakDependency.map((e: any) => Number(e));
-    if (Array.isArray(object?.messageType)) object.messageType.map((e: any) => DescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.enumType)) object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.service)) object.service.map((e: any) => ServiceDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.extension)) object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.dependency)) obj.dependency = object.dependency.map((e: any) => String(e));
+    if (Array.isArray(object?.publicDependency)) obj.publicDependency = object.publicDependency.map((e: any) => Number(e));
+    if (Array.isArray(object?.weakDependency)) obj.weakDependency = object.weakDependency.map((e: any) => Number(e));
+    if (Array.isArray(object?.messageType)) obj.messageType = object.messageType.map((e: any) => DescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.enumType)) obj.enumType = object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.service)) obj.service = object.service.map((e: any) => ServiceDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.extension)) obj.extension = object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e));
     if (isSet(object.options)) obj.options = FileOptions.fromJSON(object.options);
     if (isSet(object.sourceCodeInfo)) obj.sourceCodeInfo = SourceCodeInfo.fromJSON(object.sourceCodeInfo);
     if (isSet(object.syntax)) obj.syntax = String(object.syntax);
@@ -1722,15 +1722,15 @@ export const DescriptorProto = {
   fromJSON(object: any): DescriptorProto {
     const obj = createBaseDescriptorProto();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.field)) object.field.map((e: any) => FieldDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.extension)) object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.nestedType)) object.nestedType.map((e: any) => DescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.enumType)) object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e));
-    if (Array.isArray(object?.extensionRange)) object.extensionRange.map((e: any) => DescriptorProto_ExtensionRange.fromJSON(e));
-    if (Array.isArray(object?.oneofDecl)) object.oneofDecl.map((e: any) => OneofDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.field)) obj.field = object.field.map((e: any) => FieldDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.extension)) obj.extension = object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.nestedType)) obj.nestedType = object.nestedType.map((e: any) => DescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.enumType)) obj.enumType = object.enumType.map((e: any) => EnumDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.extensionRange)) obj.extensionRange = object.extensionRange.map((e: any) => DescriptorProto_ExtensionRange.fromJSON(e));
+    if (Array.isArray(object?.oneofDecl)) obj.oneofDecl = object.oneofDecl.map((e: any) => OneofDescriptorProto.fromJSON(e));
     if (isSet(object.options)) obj.options = MessageOptions.fromJSON(object.options);
-    if (Array.isArray(object?.reservedRange)) object.reservedRange.map((e: any) => DescriptorProto_ReservedRange.fromJSON(e));
-    if (Array.isArray(object?.reservedName)) object.reservedName.map((e: any) => String(e));
+    if (Array.isArray(object?.reservedRange)) obj.reservedRange = object.reservedRange.map((e: any) => DescriptorProto_ReservedRange.fromJSON(e));
+    if (Array.isArray(object?.reservedName)) obj.reservedName = object.reservedName.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: DescriptorProto): unknown {
@@ -2062,7 +2062,7 @@ export const ExtensionRangeOptions = {
   },
   fromJSON(object: any): ExtensionRangeOptions {
     const obj = createBaseExtensionRangeOptions();
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: ExtensionRangeOptions): unknown {
@@ -2413,10 +2413,10 @@ export const EnumDescriptorProto = {
   fromJSON(object: any): EnumDescriptorProto {
     const obj = createBaseEnumDescriptorProto();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.value)) object.value.map((e: any) => EnumValueDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.value)) obj.value = object.value.map((e: any) => EnumValueDescriptorProto.fromJSON(e));
     if (isSet(object.options)) obj.options = EnumOptions.fromJSON(object.options);
-    if (Array.isArray(object?.reservedRange)) object.reservedRange.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromJSON(e));
-    if (Array.isArray(object?.reservedName)) object.reservedName.map((e: any) => String(e));
+    if (Array.isArray(object?.reservedRange)) obj.reservedRange = object.reservedRange.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromJSON(e));
+    if (Array.isArray(object?.reservedName)) obj.reservedName = object.reservedName.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: EnumDescriptorProto): unknown {
@@ -2698,7 +2698,7 @@ export const ServiceDescriptorProto = {
   fromJSON(object: any): ServiceDescriptorProto {
     const obj = createBaseServiceDescriptorProto();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.method)) object.method.map((e: any) => MethodDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.method)) obj.method = object.method.map((e: any) => MethodDescriptorProto.fromJSON(e));
     if (isSet(object.options)) obj.options = ServiceOptions.fromJSON(object.options);
     return obj;
   },
@@ -3066,7 +3066,7 @@ export const FileOptions = {
     if (isSet(object.phpNamespace)) obj.phpNamespace = String(object.phpNamespace);
     if (isSet(object.phpMetadataNamespace)) obj.phpMetadataNamespace = String(object.phpMetadataNamespace);
     if (isSet(object.rubyPackage)) obj.rubyPackage = String(object.rubyPackage);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: FileOptions): unknown {
@@ -3266,7 +3266,7 @@ export const MessageOptions = {
     if (isSet(object.noStandardDescriptorAccessor)) obj.noStandardDescriptorAccessor = Boolean(object.noStandardDescriptorAccessor);
     if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
     if (isSet(object.mapEntry)) obj.mapEntry = Boolean(object.mapEntry);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: MessageOptions): unknown {
@@ -3402,7 +3402,7 @@ export const FieldOptions = {
     if (isSet(object.lazy)) obj.lazy = Boolean(object.lazy);
     if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
     if (isSet(object.weak)) obj.weak = Boolean(object.weak);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: FieldOptions): unknown {
@@ -3500,7 +3500,7 @@ export const OneofOptions = {
   },
   fromJSON(object: any): OneofOptions {
     const obj = createBaseOneofOptions();
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: OneofOptions): unknown {
@@ -3584,7 +3584,7 @@ export const EnumOptions = {
     const obj = createBaseEnumOptions();
     if (isSet(object.allowAlias)) obj.allowAlias = Boolean(object.allowAlias);
     if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: EnumOptions): unknown {
@@ -3670,7 +3670,7 @@ export const EnumValueOptions = {
   fromJSON(object: any): EnumValueOptions {
     const obj = createBaseEnumValueOptions();
     if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: EnumValueOptions): unknown {
@@ -3751,7 +3751,7 @@ export const ServiceOptions = {
   fromJSON(object: any): ServiceOptions {
     const obj = createBaseServiceOptions();
     if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: ServiceOptions): unknown {
@@ -3840,7 +3840,7 @@ export const MethodOptions = {
     const obj = createBaseMethodOptions();
     if (isSet(object.deprecated)) obj.deprecated = Boolean(object.deprecated);
     if (isSet(object.idempotencyLevel)) obj.idempotencyLevel = methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel);
-    if (Array.isArray(object?.uninterpretedOption)) object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
+    if (Array.isArray(object?.uninterpretedOption)) obj.uninterpretedOption = object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e));
     return obj;
   },
   toJSON(message: MethodOptions): unknown {
@@ -3960,7 +3960,7 @@ export const UninterpretedOption = {
   },
   fromJSON(object: any): UninterpretedOption {
     const obj = createBaseUninterpretedOption();
-    if (Array.isArray(object?.name)) object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e));
+    if (Array.isArray(object?.name)) obj.name = object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e));
     if (isSet(object.identifierValue)) obj.identifierValue = String(object.identifierValue);
     if (isSet(object.positiveIntValue)) obj.positiveIntValue = BigInt(object.positiveIntValue.toString());
     if (isSet(object.negativeIntValue)) obj.negativeIntValue = BigInt(object.negativeIntValue.toString());
@@ -4141,7 +4141,7 @@ export const SourceCodeInfo = {
   },
   fromJSON(object: any): SourceCodeInfo {
     const obj = createBaseSourceCodeInfo();
-    if (Array.isArray(object?.location)) object.location.map((e: any) => SourceCodeInfo_Location.fromJSON(e));
+    if (Array.isArray(object?.location)) obj.location = object.location.map((e: any) => SourceCodeInfo_Location.fromJSON(e));
     return obj;
   },
   toJSON(message: SourceCodeInfo): unknown {
@@ -4255,11 +4255,11 @@ export const SourceCodeInfo_Location = {
   },
   fromJSON(object: any): SourceCodeInfo_Location {
     const obj = createBaseSourceCodeInfo_Location();
-    if (Array.isArray(object?.path)) object.path.map((e: any) => Number(e));
-    if (Array.isArray(object?.span)) object.span.map((e: any) => Number(e));
+    if (Array.isArray(object?.path)) obj.path = object.path.map((e: any) => Number(e));
+    if (Array.isArray(object?.span)) obj.span = object.span.map((e: any) => Number(e));
     if (isSet(object.leadingComments)) obj.leadingComments = String(object.leadingComments);
     if (isSet(object.trailingComments)) obj.trailingComments = String(object.trailingComments);
-    if (Array.isArray(object?.leadingDetachedComments)) object.leadingDetachedComments.map((e: any) => String(e));
+    if (Array.isArray(object?.leadingDetachedComments)) obj.leadingDetachedComments = object.leadingDetachedComments.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: SourceCodeInfo_Location): unknown {
@@ -4363,7 +4363,7 @@ export const GeneratedCodeInfo = {
   },
   fromJSON(object: any): GeneratedCodeInfo {
     const obj = createBaseGeneratedCodeInfo();
-    if (Array.isArray(object?.annotation)) object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromJSON(e));
+    if (Array.isArray(object?.annotation)) obj.annotation = object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromJSON(e));
     return obj;
   },
   toJSON(message: GeneratedCodeInfo): unknown {
@@ -4461,7 +4461,7 @@ export const GeneratedCodeInfo_Annotation = {
   },
   fromJSON(object: any): GeneratedCodeInfo_Annotation {
     const obj = createBaseGeneratedCodeInfo_Annotation();
-    if (Array.isArray(object?.path)) object.path.map((e: any) => Number(e));
+    if (Array.isArray(object?.path)) obj.path = object.path.map((e: any) => Number(e));
     if (isSet(object.sourceFile)) obj.sourceFile = String(object.sourceFile);
     if (isSet(object.begin)) obj.begin = Number(object.begin);
     if (isSet(object.end)) obj.end = Number(object.end);

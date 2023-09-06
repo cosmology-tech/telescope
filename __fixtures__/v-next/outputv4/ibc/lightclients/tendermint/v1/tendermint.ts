@@ -267,8 +267,8 @@ export const ClientState = {
     if (isSet(object.maxClockDrift)) obj.maxClockDrift = Duration.fromJSON(object.maxClockDrift);
     if (isSet(object.frozenHeight)) obj.frozenHeight = Height.fromJSON(object.frozenHeight);
     if (isSet(object.latestHeight)) obj.latestHeight = Height.fromJSON(object.latestHeight);
-    if (Array.isArray(object?.proofSpecs)) object.proofSpecs.map((e: any) => ProofSpec.fromJSON(e));
-    if (Array.isArray(object?.upgradePath)) object.upgradePath.map((e: any) => String(e));
+    if (Array.isArray(object?.proofSpecs)) obj.proofSpecs = object.proofSpecs.map((e: any) => ProofSpec.fromJSON(e));
+    if (Array.isArray(object?.upgradePath)) obj.upgradePath = object.upgradePath.map((e: any) => String(e));
     if (isSet(object.allowUpdateAfterExpiry)) obj.allowUpdateAfterExpiry = Boolean(object.allowUpdateAfterExpiry);
     if (isSet(object.allowUpdateAfterMisbehaviour)) obj.allowUpdateAfterMisbehaviour = Boolean(object.allowUpdateAfterMisbehaviour);
     return obj;

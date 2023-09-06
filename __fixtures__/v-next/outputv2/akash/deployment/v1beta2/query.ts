@@ -276,7 +276,7 @@ export const QueryDeploymentsResponse = {
   },
   fromJSON(object: any): QueryDeploymentsResponse {
     const obj = createBaseQueryDeploymentsResponse();
-    if (Array.isArray(object?.deployments)) object.deployments.map((e: any) => QueryDeploymentResponse.fromJSON(e));
+    if (Array.isArray(object?.deployments)) obj.deployments = object.deployments.map((e: any) => QueryDeploymentResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -476,7 +476,7 @@ export const QueryDeploymentResponse = {
   fromJSON(object: any): QueryDeploymentResponse {
     const obj = createBaseQueryDeploymentResponse();
     if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => Group.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
     if (isSet(object.escrowAccount)) obj.escrowAccount = Account.fromJSON(object.escrowAccount);
     return obj;
   },

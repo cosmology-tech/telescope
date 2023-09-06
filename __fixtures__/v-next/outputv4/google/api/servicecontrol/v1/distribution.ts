@@ -266,11 +266,11 @@ export const Distribution = {
     if (isSet(object.minimum)) obj.minimum = Number(object.minimum);
     if (isSet(object.maximum)) obj.maximum = Number(object.maximum);
     if (isSet(object.sumOfSquaredDeviation)) obj.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
-    if (Array.isArray(object?.bucketCounts)) object.bucketCounts.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.bucketCounts)) obj.bucketCounts = object.bucketCounts.map((e: any) => BigInt(e.toString()));
     if (isSet(object.linearBuckets)) obj.linearBuckets = Distribution_LinearBuckets.fromJSON(object.linearBuckets);
     if (isSet(object.exponentialBuckets)) obj.exponentialBuckets = Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets);
     if (isSet(object.explicitBuckets)) obj.explicitBuckets = Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets);
-    if (Array.isArray(object?.exemplars)) object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
+    if (Array.isArray(object?.exemplars)) obj.exemplars = object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
     return obj;
   },
   toJSON(message: Distribution): unknown {
@@ -580,7 +580,7 @@ export const Distribution_ExplicitBuckets = {
   },
   fromJSON(object: any): Distribution_ExplicitBuckets {
     const obj = createBaseDistribution_ExplicitBuckets();
-    if (Array.isArray(object?.bounds)) object.bounds.map((e: any) => Number(e));
+    if (Array.isArray(object?.bounds)) obj.bounds = object.bounds.map((e: any) => Number(e));
     return obj;
   },
   toJSON(message: Distribution_ExplicitBuckets): unknown {

@@ -595,13 +595,13 @@ export const TxResponse = {
     if (isSet(object.code)) obj.code = Number(object.code);
     if (isSet(object.data)) obj.data = String(object.data);
     if (isSet(object.rawLog)) obj.rawLog = String(object.rawLog);
-    if (Array.isArray(object?.logs)) object.logs.map((e: any) => ABCIMessageLog.fromJSON(e));
+    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => ABCIMessageLog.fromJSON(e));
     if (isSet(object.info)) obj.info = String(object.info);
     if (isSet(object.gasWanted)) obj.gasWanted = Long.fromValue(object.gasWanted);
     if (isSet(object.gasUsed)) obj.gasUsed = Long.fromValue(object.gasUsed);
     if (isSet(object.tx)) obj.tx = Any.fromJSON(object.tx);
     if (isSet(object.timestamp)) obj.timestamp = String(object.timestamp);
-    if (Array.isArray(object?.events)) object.events.map((e: any) => Event.fromJSON(e));
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
   toJSON(message: TxResponse): unknown {
@@ -809,7 +809,7 @@ export const ABCIMessageLog = {
     const obj = createBaseABCIMessageLog();
     if (isSet(object.msgIndex)) obj.msgIndex = Number(object.msgIndex);
     if (isSet(object.log)) obj.log = String(object.log);
-    if (Array.isArray(object?.events)) object.events.map((e: any) => StringEvent.fromJSON(e));
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => StringEvent.fromJSON(e));
     return obj;
   },
   toJSON(message: ABCIMessageLog): unknown {
@@ -929,7 +929,7 @@ export const StringEvent = {
   fromJSON(object: any): StringEvent {
     const obj = createBaseStringEvent();
     if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
   toJSON(message: StringEvent): unknown {
@@ -1266,8 +1266,8 @@ export const Result = {
     const obj = createBaseResult();
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     if (isSet(object.log)) obj.log = String(object.log);
-    if (Array.isArray(object?.events)) object.events.map((e: any) => Event.fromJSON(e));
-    if (Array.isArray(object?.msgResponses)) object.msgResponses.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
+    if (Array.isArray(object?.msgResponses)) obj.msgResponses = object.msgResponses.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: Result): unknown {
@@ -1612,8 +1612,8 @@ export const TxMsgData = {
   },
   fromJSON(object: any): TxMsgData {
     const obj = createBaseTxMsgData();
-    if (Array.isArray(object?.data)) object.data.map((e: any) => MsgData.fromJSON(e));
-    if (Array.isArray(object?.msgResponses)) object.msgResponses.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => MsgData.fromJSON(e));
+    if (Array.isArray(object?.msgResponses)) obj.msgResponses = object.msgResponses.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: TxMsgData): unknown {
@@ -1771,7 +1771,7 @@ export const SearchTxsResult = {
     if (isSet(object.pageNumber)) obj.pageNumber = Long.fromValue(object.pageNumber);
     if (isSet(object.pageTotal)) obj.pageTotal = Long.fromValue(object.pageTotal);
     if (isSet(object.limit)) obj.limit = Long.fromValue(object.limit);
-    if (Array.isArray(object?.txs)) object.txs.map((e: any) => TxResponse.fromJSON(e));
+    if (Array.isArray(object?.txs)) obj.txs = object.txs.map((e: any) => TxResponse.fromJSON(e));
     return obj;
   },
   toJSON(message: SearchTxsResult): unknown {

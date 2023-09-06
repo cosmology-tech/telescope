@@ -129,7 +129,7 @@ export const QueryEpochsInfoResponse = {
   },
   fromJSON(object: any): QueryEpochsInfoResponse {
     const obj = createBaseQueryEpochsInfoResponse();
-    if (Array.isArray(object?.epochs)) object.epochs.map((e: any) => EpochInfo.fromJSON(e));
+    if (Array.isArray(object?.epochs)) obj.epochs = object.epochs.map((e: any) => EpochInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

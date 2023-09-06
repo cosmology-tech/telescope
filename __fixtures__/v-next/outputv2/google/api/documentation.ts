@@ -471,8 +471,8 @@ export const Documentation = {
   fromJSON(object: any): Documentation {
     const obj = createBaseDocumentation();
     if (isSet(object.summary)) obj.summary = String(object.summary);
-    if (Array.isArray(object?.pages)) object.pages.map((e: any) => Page.fromJSON(e));
-    if (Array.isArray(object?.rules)) object.rules.map((e: any) => DocumentationRule.fromJSON(e));
+    if (Array.isArray(object?.pages)) obj.pages = object.pages.map((e: any) => Page.fromJSON(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => DocumentationRule.fromJSON(e));
     if (isSet(object.documentationRootUrl)) obj.documentationRootUrl = String(object.documentationRootUrl);
     if (isSet(object.serviceRootUrl)) obj.serviceRootUrl = String(object.serviceRootUrl);
     if (isSet(object.overview)) obj.overview = String(object.overview);
@@ -735,7 +735,7 @@ export const Page = {
     const obj = createBasePage();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.content)) obj.content = String(object.content);
-    if (Array.isArray(object?.subpages)) object.subpages.map((e: any) => Page.fromJSON(e));
+    if (Array.isArray(object?.subpages)) obj.subpages = object.subpages.map((e: any) => Page.fromJSON(e));
     return obj;
   },
   toJSON(message: Page): unknown {

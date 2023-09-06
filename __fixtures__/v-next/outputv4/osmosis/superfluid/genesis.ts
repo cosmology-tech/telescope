@@ -91,10 +91,10 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.superfluidAssets)) object.superfluidAssets.map((e: any) => SuperfluidAsset.fromJSON(e));
-    if (Array.isArray(object?.osmoEquivalentMultipliers)) object.osmoEquivalentMultipliers.map((e: any) => OsmoEquivalentMultiplierRecord.fromJSON(e));
-    if (Array.isArray(object?.intermediaryAccounts)) object.intermediaryAccounts.map((e: any) => SuperfluidIntermediaryAccount.fromJSON(e));
-    if (Array.isArray(object?.intemediaryAccountConnections)) object.intemediaryAccountConnections.map((e: any) => LockIdIntermediaryAccountConnection.fromJSON(e));
+    if (Array.isArray(object?.superfluidAssets)) obj.superfluidAssets = object.superfluidAssets.map((e: any) => SuperfluidAsset.fromJSON(e));
+    if (Array.isArray(object?.osmoEquivalentMultipliers)) obj.osmoEquivalentMultipliers = object.osmoEquivalentMultipliers.map((e: any) => OsmoEquivalentMultiplierRecord.fromJSON(e));
+    if (Array.isArray(object?.intermediaryAccounts)) obj.intermediaryAccounts = object.intermediaryAccounts.map((e: any) => SuperfluidIntermediaryAccount.fromJSON(e));
+    if (Array.isArray(object?.intemediaryAccountConnections)) obj.intemediaryAccountConnections = object.intemediaryAccountConnections.map((e: any) => LockIdIntermediaryAccountConnection.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

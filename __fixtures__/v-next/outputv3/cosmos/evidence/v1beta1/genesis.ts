@@ -57,7 +57,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.evidence)) object.evidence.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.evidence)) obj.evidence = object.evidence.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

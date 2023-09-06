@@ -230,7 +230,7 @@ export const StakeAuthorization_Validators = {
   },
   fromJSON(object: any): StakeAuthorization_Validators {
     const obj = createBaseStakeAuthorization_Validators();
-    if (Array.isArray(object?.address)) object.address.map((e: any) => String(e));
+    if (Array.isArray(object?.address)) obj.address = object.address.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: StakeAuthorization_Validators): unknown {

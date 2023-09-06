@@ -78,7 +78,7 @@ export const MsgCreateBalancerPool = {
     const obj = createBaseMsgCreateBalancerPool();
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
-    if (Array.isArray(object?.poolAssets)) object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
+    if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
     if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
     return obj;
   },

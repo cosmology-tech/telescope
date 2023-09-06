@@ -105,7 +105,7 @@ export const SetSuperfluidAssetsProposal = {
     const obj = createBaseSetSuperfluidAssetsProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.assets)) object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
+    if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
     return obj;
   },
   toJSON(message: SetSuperfluidAssetsProposal): unknown {
@@ -199,7 +199,7 @@ export const RemoveSuperfluidAssetsProposal = {
     const obj = createBaseRemoveSuperfluidAssetsProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.superfluidAssetDenoms)) object.superfluidAssetDenoms.map((e: any) => String(e));
+    if (Array.isArray(object?.superfluidAssetDenoms)) obj.superfluidAssetDenoms = object.superfluidAssetDenoms.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: RemoveSuperfluidAssetsProposal): unknown {
@@ -309,7 +309,7 @@ export const UpdateUnpoolWhiteListProposal = {
     const obj = createBaseUpdateUnpoolWhiteListProposal();
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.ids)) object.ids.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.ids)) obj.ids = object.ids.map((e: any) => BigInt(e.toString()));
     if (isSet(object.isOverwrite)) obj.isOverwrite = Boolean(object.isOverwrite);
     return obj;
   },

@@ -88,7 +88,7 @@ export const Node = {
   },
   fromJSON(object: any): Node {
     const obj = createBaseNode();
-    if (Array.isArray(object?.children)) object.children.map((e: any) => Child.fromJSON(e));
+    if (Array.isArray(object?.children)) obj.children = object.children.map((e: any) => Child.fromJSON(e));
     return obj;
   },
   toJSON(message: Node): unknown {

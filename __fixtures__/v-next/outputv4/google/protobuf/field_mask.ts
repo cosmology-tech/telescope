@@ -441,7 +441,7 @@ export const FieldMask = {
   },
   fromJSON(object: any): FieldMask {
     const obj = createBaseFieldMask();
-    if (Array.isArray(object?.paths)) object.paths.map((e: any) => String(e));
+    if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: FieldMask): unknown {

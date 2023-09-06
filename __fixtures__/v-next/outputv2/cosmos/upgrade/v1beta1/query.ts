@@ -970,7 +970,7 @@ export const QueryModuleVersionsResponse = {
   },
   fromJSON(object: any): QueryModuleVersionsResponse {
     const obj = createBaseQueryModuleVersionsResponse();
-    if (Array.isArray(object?.moduleVersions)) object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e));
+    if (Array.isArray(object?.moduleVersions)) obj.moduleVersions = object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryModuleVersionsResponse): unknown {

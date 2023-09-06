@@ -283,7 +283,7 @@ export const MsgLockTokens = {
     const obj = createBaseMsgLockTokens();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgLockTokens): unknown {
@@ -575,7 +575,7 @@ export const MsgBeginUnlockingAllResponse = {
   },
   fromJSON(object: any): MsgBeginUnlockingAllResponse {
     const obj = createBaseMsgBeginUnlockingAllResponse();
-    if (Array.isArray(object?.unlocks)) object.unlocks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.unlocks)) obj.unlocks = object.unlocks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgBeginUnlockingAllResponse): unknown {
@@ -691,7 +691,7 @@ export const MsgBeginUnlocking = {
     const obj = createBaseMsgBeginUnlocking();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.ID)) obj.ID = Long.fromValue(object.ID);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgBeginUnlocking): unknown {
@@ -1117,7 +1117,7 @@ export const MsgForceUnlock = {
     const obj = createBaseMsgForceUnlock();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.ID)) obj.ID = Long.fromValue(object.ID);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgForceUnlock): unknown {

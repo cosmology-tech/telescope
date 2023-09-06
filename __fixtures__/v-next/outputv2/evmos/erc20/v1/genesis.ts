@@ -104,7 +104,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.tokenPairs)) object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
+    if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

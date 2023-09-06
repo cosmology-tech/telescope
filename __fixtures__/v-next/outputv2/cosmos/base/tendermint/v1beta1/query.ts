@@ -518,7 +518,7 @@ export const GetValidatorSetByHeightResponse = {
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     const obj = createBaseGetValidatorSetByHeightResponse();
     if (isSet(object.blockHeight)) obj.blockHeight = Long.fromValue(object.blockHeight);
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -740,7 +740,7 @@ export const GetLatestValidatorSetResponse = {
   fromJSON(object: any): GetLatestValidatorSetResponse {
     const obj = createBaseGetLatestValidatorSetResponse();
     if (isSet(object.blockHeight)) obj.blockHeight = Long.fromValue(object.blockHeight);
-    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1757,7 +1757,7 @@ export const VersionInfo = {
     if (isSet(object.gitCommit)) obj.gitCommit = String(object.gitCommit);
     if (isSet(object.buildTags)) obj.buildTags = String(object.buildTags);
     if (isSet(object.goVersion)) obj.goVersion = String(object.goVersion);
-    if (Array.isArray(object?.buildDeps)) object.buildDeps.map((e: any) => Module.fromJSON(e));
+    if (Array.isArray(object?.buildDeps)) obj.buildDeps = object.buildDeps.map((e: any) => Module.fromJSON(e));
     if (isSet(object.cosmosSdkVersion)) obj.cosmosSdkVersion = String(object.cosmosSdkVersion);
     return obj;
   },

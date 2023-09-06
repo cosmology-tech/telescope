@@ -1201,7 +1201,7 @@ export const WriteLogEntriesRequest = {
       acc[key] = String(value);
       return acc;
     }, {});
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => LogEntry.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => LogEntry.fromJSON(e));
     if (isSet(object.partialSuccess)) obj.partialSuccess = Boolean(object.partialSuccess);
     if (isSet(object.dryRun)) obj.dryRun = Boolean(object.dryRun);
     return obj;
@@ -1666,7 +1666,7 @@ export const ListLogEntriesRequest = {
   },
   fromJSON(object: any): ListLogEntriesRequest {
     const obj = createBaseListLogEntriesRequest();
-    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     if (isSet(object.filter)) obj.filter = String(object.filter);
     if (isSet(object.orderBy)) obj.orderBy = String(object.orderBy);
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
@@ -1794,7 +1794,7 @@ export const ListLogEntriesResponse = {
   },
   fromJSON(object: any): ListLogEntriesResponse {
     const obj = createBaseListLogEntriesResponse();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => LogEntry.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => LogEntry.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -1996,7 +1996,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
   },
   fromJSON(object: any): ListMonitoredResourceDescriptorsResponse {
     const obj = createBaseListMonitoredResourceDescriptorsResponse();
-    if (Array.isArray(object?.resourceDescriptors)) object.resourceDescriptors.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
+    if (Array.isArray(object?.resourceDescriptors)) obj.resourceDescriptors = object.resourceDescriptors.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -2120,7 +2120,7 @@ export const ListLogsRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: ListLogsRequest): unknown {
@@ -2238,7 +2238,7 @@ export const ListLogsResponse = {
   },
   fromJSON(object: any): ListLogsResponse {
     const obj = createBaseListLogsResponse();
-    if (Array.isArray(object?.logNames)) object.logNames.map((e: any) => String(e));
+    if (Array.isArray(object?.logNames)) obj.logNames = object.logNames.map((e: any) => String(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
@@ -2352,7 +2352,7 @@ export const TailLogEntriesRequest = {
   },
   fromJSON(object: any): TailLogEntriesRequest {
     const obj = createBaseTailLogEntriesRequest();
-    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     if (isSet(object.filter)) obj.filter = String(object.filter);
     if (isSet(object.bufferWindow)) obj.bufferWindow = Duration.fromJSON(object.bufferWindow);
     return obj;
@@ -2468,8 +2468,8 @@ export const TailLogEntriesResponse = {
   },
   fromJSON(object: any): TailLogEntriesResponse {
     const obj = createBaseTailLogEntriesResponse();
-    if (Array.isArray(object?.entries)) object.entries.map((e: any) => LogEntry.fromJSON(e));
-    if (Array.isArray(object?.suppressionInfo)) object.suppressionInfo.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => LogEntry.fromJSON(e));
+    if (Array.isArray(object?.suppressionInfo)) obj.suppressionInfo = object.suppressionInfo.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromJSON(e));
     return obj;
   },
   toJSON(message: TailLogEntriesResponse): unknown {

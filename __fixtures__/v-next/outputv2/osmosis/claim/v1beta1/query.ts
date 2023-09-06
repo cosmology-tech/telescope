@@ -285,7 +285,7 @@ export const QueryModuleAccountBalanceResponse = {
   },
   fromJSON(object: any): QueryModuleAccountBalanceResponse {
     const obj = createBaseQueryModuleAccountBalanceResponse();
-    if (Array.isArray(object?.moduleAccountBalance)) object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.moduleAccountBalance)) obj.moduleAccountBalance = object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryModuleAccountBalanceResponse): unknown {
@@ -826,7 +826,7 @@ export const QueryClaimableForActionResponse = {
   },
   fromJSON(object: any): QueryClaimableForActionResponse {
     const obj = createBaseQueryClaimableForActionResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryClaimableForActionResponse): unknown {
@@ -1014,7 +1014,7 @@ export const QueryTotalClaimableResponse = {
   },
   fromJSON(object: any): QueryTotalClaimableResponse {
     const obj = createBaseQueryTotalClaimableResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryTotalClaimableResponse): unknown {

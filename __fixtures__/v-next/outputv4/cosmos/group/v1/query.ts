@@ -649,7 +649,7 @@ export const QueryGroupMembersResponse = {
   },
   fromJSON(object: any): QueryGroupMembersResponse {
     const obj = createBaseQueryGroupMembersResponse();
-    if (Array.isArray(object?.members)) object.members.map((e: any) => GroupMember.fromJSON(e));
+    if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => GroupMember.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -807,7 +807,7 @@ export const QueryGroupsByAdminResponse = {
   },
   fromJSON(object: any): QueryGroupsByAdminResponse {
     const obj = createBaseQueryGroupsByAdminResponse();
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupInfo.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -967,7 +967,7 @@ export const QueryGroupPoliciesByGroupResponse = {
   },
   fromJSON(object: any): QueryGroupPoliciesByGroupResponse {
     const obj = createBaseQueryGroupPoliciesByGroupResponse();
-    if (Array.isArray(object?.groupPolicies)) object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
+    if (Array.isArray(object?.groupPolicies)) obj.groupPolicies = object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1125,7 +1125,7 @@ export const QueryGroupPoliciesByAdminResponse = {
   },
   fromJSON(object: any): QueryGroupPoliciesByAdminResponse {
     const obj = createBaseQueryGroupPoliciesByAdminResponse();
-    if (Array.isArray(object?.groupPolicies)) object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
+    if (Array.isArray(object?.groupPolicies)) obj.groupPolicies = object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1407,7 +1407,7 @@ export const QueryProposalsByGroupPolicyResponse = {
   },
   fromJSON(object: any): QueryProposalsByGroupPolicyResponse {
     const obj = createBaseQueryProposalsByGroupPolicyResponse();
-    if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
+    if (Array.isArray(object?.proposals)) obj.proposals = object.proposals.map((e: any) => Proposal.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1704,7 +1704,7 @@ export const QueryVotesByProposalResponse = {
   },
   fromJSON(object: any): QueryVotesByProposalResponse {
     const obj = createBaseQueryVotesByProposalResponse();
-    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
+    if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1862,7 +1862,7 @@ export const QueryVotesByVoterResponse = {
   },
   fromJSON(object: any): QueryVotesByVoterResponse {
     const obj = createBaseQueryVotesByVoterResponse();
-    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
+    if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -2020,7 +2020,7 @@ export const QueryGroupsByMemberResponse = {
   },
   fromJSON(object: any): QueryGroupsByMemberResponse {
     const obj = createBaseQueryGroupsByMemberResponse();
-    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupInfo.fromJSON(e));
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

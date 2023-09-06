@@ -674,8 +674,8 @@ export const OperationMetadata = {
   },
   fromJSON(object: any): OperationMetadata {
     const obj = createBaseOperationMetadata();
-    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
-    if (Array.isArray(object?.steps)) object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e));
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.steps)) obj.steps = object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e));
     if (isSet(object.progressPercentage)) obj.progressPercentage = Number(object.progressPercentage);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     return obj;
@@ -935,7 +935,7 @@ export const ConfigSource = {
   fromJSON(object: any): ConfigSource {
     const obj = createBaseConfigSource();
     if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.files)) object.files.map((e: any) => ConfigFile.fromJSON(e));
+    if (Array.isArray(object?.files)) obj.files = object.files.map((e: any) => ConfigFile.fromJSON(e));
     return obj;
   },
   toJSON(message: ConfigSource): unknown {
@@ -1154,7 +1154,7 @@ export const ChangeReport = {
   },
   fromJSON(object: any): ChangeReport {
     const obj = createBaseChangeReport();
-    if (Array.isArray(object?.configChanges)) object.configChanges.map((e: any) => ConfigChange.fromJSON(e));
+    if (Array.isArray(object?.configChanges)) obj.configChanges = object.configChanges.map((e: any) => ConfigChange.fromJSON(e));
     return obj;
   },
   toJSON(message: ChangeReport): unknown {

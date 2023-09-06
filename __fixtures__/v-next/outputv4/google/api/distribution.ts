@@ -390,8 +390,8 @@ export const Distribution = {
     if (isSet(object.sumOfSquaredDeviation)) obj.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
     if (isSet(object.range)) obj.range = Distribution_Range.fromJSON(object.range);
     if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (Array.isArray(object?.bucketCounts)) object.bucketCounts.map((e: any) => BigInt(e.toString()));
-    if (Array.isArray(object?.exemplars)) object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
+    if (Array.isArray(object?.bucketCounts)) obj.bucketCounts = object.bucketCounts.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.exemplars)) obj.exemplars = object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
     return obj;
   },
   toJSON(message: Distribution): unknown {
@@ -849,7 +849,7 @@ export const Distribution_BucketOptions_Explicit = {
   },
   fromJSON(object: any): Distribution_BucketOptions_Explicit {
     const obj = createBaseDistribution_BucketOptions_Explicit();
-    if (Array.isArray(object?.bounds)) object.bounds.map((e: any) => Number(e));
+    if (Array.isArray(object?.bounds)) obj.bounds = object.bounds.map((e: any) => Number(e));
     return obj;
   },
   toJSON(message: Distribution_BucketOptions_Explicit): unknown {
@@ -933,7 +933,7 @@ export const Distribution_Exemplar = {
     const obj = createBaseDistribution_Exemplar();
     if (isSet(object.value)) obj.value = Number(object.value);
     if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
-    if (Array.isArray(object?.attachments)) object.attachments.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.attachments)) obj.attachments = object.attachments.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: Distribution_Exemplar): unknown {

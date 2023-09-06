@@ -273,7 +273,7 @@ export const QuerySubspacesResponse = {
   },
   fromJSON(object: any): QuerySubspacesResponse {
     const obj = createBaseQuerySubspacesResponse();
-    if (Array.isArray(object?.subspaces)) object.subspaces.map((e: any) => Subspace.fromJSON(e));
+    if (Array.isArray(object?.subspaces)) obj.subspaces = object.subspaces.map((e: any) => Subspace.fromJSON(e));
     return obj;
   },
   toJSON(message: QuerySubspacesResponse): unknown {
@@ -349,7 +349,7 @@ export const Subspace = {
   fromJSON(object: any): Subspace {
     const obj = createBaseSubspace();
     if (isSet(object.subspace)) obj.subspace = String(object.subspace);
-    if (Array.isArray(object?.keys)) object.keys.map((e: any) => String(e));
+    if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: Subspace): unknown {

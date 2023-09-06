@@ -224,8 +224,8 @@ export const MsgCreateClawbackVestingAccount = {
     if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
     if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (Array.isArray(object?.lockupPeriods)) object.lockupPeriods.map((e: any) => Period.fromJSON(e));
-    if (Array.isArray(object?.vestingPeriods)) object.vestingPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
     if (isSet(object.merge)) obj.merge = Boolean(object.merge);
     return obj;
   },

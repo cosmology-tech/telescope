@@ -77,7 +77,7 @@ export const Pairs = {
   },
   fromJSON(object: any): Pairs {
     const obj = createBasePairs();
-    if (Array.isArray(object?.pairs)) object.pairs.map((e: any) => Pair.fromJSON(e));
+    if (Array.isArray(object?.pairs)) obj.pairs = object.pairs.map((e: any) => Pair.fromJSON(e));
     return obj;
   },
   toJSON(message: Pairs): unknown {

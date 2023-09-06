@@ -77,8 +77,8 @@ export const ResourceUnits = {
     const obj = createBaseResourceUnits();
     if (isSet(object.cpu)) obj.cpu = CPU.fromJSON(object.cpu);
     if (isSet(object.memory)) obj.memory = Memory.fromJSON(object.memory);
-    if (Array.isArray(object?.storage)) object.storage.map((e: any) => Storage.fromJSON(e));
-    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
+    if (Array.isArray(object?.storage)) obj.storage = object.storage.map((e: any) => Storage.fromJSON(e));
+    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
     return obj;
   },
   toJSON(message: ResourceUnits): unknown {

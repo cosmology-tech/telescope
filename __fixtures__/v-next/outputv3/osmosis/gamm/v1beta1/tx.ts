@@ -494,7 +494,7 @@ export const MsgJoinPool = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.shareOutAmount)) obj.shareOutAmount = String(object.shareOutAmount);
-    if (Array.isArray(object?.tokenInMaxs)) object.tokenInMaxs.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokenInMaxs)) obj.tokenInMaxs = object.tokenInMaxs.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgJoinPool): unknown {
@@ -622,7 +622,7 @@ export const MsgJoinPoolResponse = {
   fromJSON(object: any): MsgJoinPoolResponse {
     const obj = createBaseMsgJoinPoolResponse();
     if (isSet(object.shareOutAmount)) obj.shareOutAmount = String(object.shareOutAmount);
-    if (Array.isArray(object?.tokenIn)) object.tokenIn.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokenIn)) obj.tokenIn = object.tokenIn.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgJoinPoolResponse): unknown {
@@ -752,7 +752,7 @@ export const MsgExitPool = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
     if (isSet(object.shareInAmount)) obj.shareInAmount = String(object.shareInAmount);
-    if (Array.isArray(object?.tokenOutMins)) object.tokenOutMins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokenOutMins)) obj.tokenOutMins = object.tokenOutMins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgExitPool): unknown {
@@ -872,7 +872,7 @@ export const MsgExitPoolResponse = {
   },
   fromJSON(object: any): MsgExitPoolResponse {
     const obj = createBaseMsgExitPoolResponse();
-    if (Array.isArray(object?.tokenOut)) object.tokenOut.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.tokenOut)) obj.tokenOut = object.tokenOut.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgExitPoolResponse): unknown {
@@ -1098,7 +1098,7 @@ export const MsgSwapExactAmountIn = {
   fromJSON(object: any): MsgSwapExactAmountIn {
     const obj = createBaseMsgSwapExactAmountIn();
     if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
+    if (Array.isArray(object?.routes)) obj.routes = object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
     if (isSet(object.tokenIn)) obj.tokenIn = Coin.fromJSON(object.tokenIn);
     if (isSet(object.tokenOutMinAmount)) obj.tokenOutMinAmount = String(object.tokenOutMinAmount);
     return obj;
@@ -1434,7 +1434,7 @@ export const MsgSwapExactAmountOut = {
   fromJSON(object: any): MsgSwapExactAmountOut {
     const obj = createBaseMsgSwapExactAmountOut();
     if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
+    if (Array.isArray(object?.routes)) obj.routes = object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
     if (isSet(object.tokenInMaxAmount)) obj.tokenInMaxAmount = String(object.tokenInMaxAmount);
     if (isSet(object.tokenOut)) obj.tokenOut = Coin.fromJSON(object.tokenOut);
     return obj;

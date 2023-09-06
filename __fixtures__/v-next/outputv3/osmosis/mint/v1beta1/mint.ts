@@ -632,7 +632,7 @@ export const Params = {
     if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = Long.fromValue(object.reductionPeriodInEpochs);
     if (isSet(object.reductionFactor)) obj.reductionFactor = String(object.reductionFactor);
     if (isSet(object.distributionProportions)) obj.distributionProportions = DistributionProportions.fromJSON(object.distributionProportions);
-    if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
+    if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) obj.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
     if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = Long.fromValue(object.mintingRewardsDistributionStartEpoch);
     return obj;
   },

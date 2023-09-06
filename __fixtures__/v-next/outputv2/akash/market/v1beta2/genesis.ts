@@ -76,8 +76,8 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.orders)) object.orders.map((e: any) => Order.fromJSON(e));
-    if (Array.isArray(object?.leases)) object.leases.map((e: any) => Lease.fromJSON(e));
+    if (Array.isArray(object?.orders)) obj.orders = object.orders.map((e: any) => Order.fromJSON(e));
+    if (Array.isArray(object?.leases)) obj.leases = object.leases.map((e: any) => Lease.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },

@@ -260,7 +260,7 @@ export const ConnectionEnd = {
   fromJSON(object: any): ConnectionEnd {
     const obj = createBaseConnectionEnd();
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (Array.isArray(object?.versions)) object.versions.map((e: any) => Version.fromJSON(e));
+    if (Array.isArray(object?.versions)) obj.versions = object.versions.map((e: any) => Version.fromJSON(e));
     if (isSet(object.state)) obj.state = stateFromJSON(object.state);
     if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
     if (isSet(object.delayPeriod)) obj.delayPeriod = BigInt(object.delayPeriod.toString());
@@ -392,7 +392,7 @@ export const IdentifiedConnection = {
     const obj = createBaseIdentifiedConnection();
     if (isSet(object.id)) obj.id = String(object.id);
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (Array.isArray(object?.versions)) object.versions.map((e: any) => Version.fromJSON(e));
+    if (Array.isArray(object?.versions)) obj.versions = object.versions.map((e: any) => Version.fromJSON(e));
     if (isSet(object.state)) obj.state = stateFromJSON(object.state);
     if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
     if (isSet(object.delayPeriod)) obj.delayPeriod = BigInt(object.delayPeriod.toString());
@@ -580,7 +580,7 @@ export const ClientPaths = {
   },
   fromJSON(object: any): ClientPaths {
     const obj = createBaseClientPaths();
-    if (Array.isArray(object?.paths)) object.paths.map((e: any) => String(e));
+    if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: ClientPaths): unknown {
@@ -656,7 +656,7 @@ export const ConnectionPaths = {
   fromJSON(object: any): ConnectionPaths {
     const obj = createBaseConnectionPaths();
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (Array.isArray(object?.paths)) object.paths.map((e: any) => String(e));
+    if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: ConnectionPaths): unknown {
@@ -737,7 +737,7 @@ export const Version = {
   fromJSON(object: any): Version {
     const obj = createBaseVersion();
     if (isSet(object.identifier)) obj.identifier = String(object.identifier);
-    if (Array.isArray(object?.features)) object.features.map((e: any) => String(e));
+    if (Array.isArray(object?.features)) obj.features = object.features.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: Version): unknown {

@@ -120,7 +120,7 @@ export const Status = {
     const obj = createBaseStatus();
     if (isSet(object.code)) obj.code = Number(object.code);
     if (isSet(object.message)) obj.message = String(object.message);
-    if (Array.isArray(object?.details)) object.details.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.details)) obj.details = object.details.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: Status): unknown {

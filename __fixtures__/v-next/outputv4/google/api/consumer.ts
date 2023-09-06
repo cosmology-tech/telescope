@@ -167,7 +167,7 @@ export const ProjectProperties = {
   },
   fromJSON(object: any): ProjectProperties {
     const obj = createBaseProjectProperties();
-    if (Array.isArray(object?.properties)) object.properties.map((e: any) => Property.fromJSON(e));
+    if (Array.isArray(object?.properties)) obj.properties = object.properties.map((e: any) => Property.fromJSON(e));
     return obj;
   },
   toJSON(message: ProjectProperties): unknown {

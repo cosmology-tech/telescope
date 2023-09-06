@@ -229,8 +229,8 @@ export const Logging = {
   },
   fromJSON(object: any): Logging {
     const obj = createBaseLogging();
-    if (Array.isArray(object?.producerDestinations)) object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
-    if (Array.isArray(object?.consumerDestinations)) object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
+    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
+    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
     return obj;
   },
   toJSON(message: Logging): unknown {
@@ -349,7 +349,7 @@ export const Logging_LoggingDestination = {
   fromJSON(object: any): Logging_LoggingDestination {
     const obj = createBaseLogging_LoggingDestination();
     if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.logs)) object.logs.map((e: any) => String(e));
+    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: Logging_LoggingDestination): unknown {

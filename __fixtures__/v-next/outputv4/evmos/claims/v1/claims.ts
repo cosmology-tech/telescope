@@ -252,7 +252,7 @@ export const ClaimsRecordAddress = {
     const obj = createBaseClaimsRecordAddress();
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.actionsCompleted)) object.actionsCompleted.map((e: any) => Boolean(e));
+    if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
     return obj;
   },
   toJSON(message: ClaimsRecordAddress): unknown {
@@ -347,7 +347,7 @@ export const ClaimsRecord = {
   fromJSON(object: any): ClaimsRecord {
     const obj = createBaseClaimsRecord();
     if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.actionsCompleted)) object.actionsCompleted.map((e: any) => Boolean(e));
+    if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
     return obj;
   },
   toJSON(message: ClaimsRecord): unknown {

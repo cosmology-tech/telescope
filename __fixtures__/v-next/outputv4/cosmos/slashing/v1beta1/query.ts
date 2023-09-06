@@ -404,7 +404,7 @@ export const QuerySigningInfosResponse = {
   },
   fromJSON(object: any): QuerySigningInfosResponse {
     const obj = createBaseQuerySigningInfosResponse();
-    if (Array.isArray(object?.info)) object.info.map((e: any) => ValidatorSigningInfo.fromJSON(e));
+    if (Array.isArray(object?.info)) obj.info = object.info.map((e: any) => ValidatorSigningInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

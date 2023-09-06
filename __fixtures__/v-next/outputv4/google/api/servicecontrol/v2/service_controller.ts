@@ -202,7 +202,7 @@ export const CheckRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     if (isSet(object.attributes)) obj.attributes = AttributeContext.fromJSON(object.attributes);
-    if (Array.isArray(object?.resources)) object.resources.map((e: any) => ResourceInfo.fromJSON(e));
+    if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => ResourceInfo.fromJSON(e));
     if (isSet(object.flags)) obj.flags = String(object.flags);
     return obj;
   },
@@ -607,7 +607,7 @@ export const ReportRequest = {
     const obj = createBaseReportRequest();
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (Array.isArray(object?.operations)) object.operations.map((e: any) => AttributeContext.fromJSON(e));
+    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => AttributeContext.fromJSON(e));
     return obj;
   },
   toJSON(message: ReportRequest): unknown {

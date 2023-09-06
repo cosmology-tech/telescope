@@ -499,7 +499,7 @@ export const Deposit = {
     const obj = createBaseDeposit();
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: Deposit): unknown {
@@ -641,7 +641,7 @@ export const Proposal = {
     if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
     if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
     if (isSet(object.depositEndTime)) obj.depositEndTime = new Date(object.depositEndTime);
-    if (Array.isArray(object?.totalDeposit)) object.totalDeposit.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.totalDeposit)) obj.totalDeposit = object.totalDeposit.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.votingStartTime)) obj.votingStartTime = new Date(object.votingStartTime);
     if (isSet(object.votingEndTime)) obj.votingEndTime = new Date(object.votingEndTime);
     return obj;
@@ -880,7 +880,7 @@ export const Vote = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.voter)) obj.voter = String(object.voter);
     if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (Array.isArray(object?.options)) object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
     return obj;
   },
   toJSON(message: Vote): unknown {
@@ -972,7 +972,7 @@ export const DepositParams = {
   },
   fromJSON(object: any): DepositParams {
     const obj = createBaseDepositParams();
-    if (Array.isArray(object?.minDeposit)) object.minDeposit.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.minDeposit)) obj.minDeposit = object.minDeposit.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.maxDepositPeriod)) obj.maxDepositPeriod = Duration.fromJSON(object.maxDepositPeriod);
     return obj;
   },

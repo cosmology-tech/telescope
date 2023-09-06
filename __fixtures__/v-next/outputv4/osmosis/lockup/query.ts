@@ -295,7 +295,7 @@ export const ModuleBalanceResponse = {
   },
   fromJSON(object: any): ModuleBalanceResponse {
     const obj = createBaseModuleBalanceResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: ModuleBalanceResponse): unknown {
@@ -407,7 +407,7 @@ export const ModuleLockedAmountResponse = {
   },
   fromJSON(object: any): ModuleLockedAmountResponse {
     const obj = createBaseModuleLockedAmountResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: ModuleLockedAmountResponse): unknown {
@@ -535,7 +535,7 @@ export const AccountUnlockableCoinsResponse = {
   },
   fromJSON(object: any): AccountUnlockableCoinsResponse {
     const obj = createBaseAccountUnlockableCoinsResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountUnlockableCoinsResponse): unknown {
@@ -663,7 +663,7 @@ export const AccountUnlockingCoinsResponse = {
   },
   fromJSON(object: any): AccountUnlockingCoinsResponse {
     const obj = createBaseAccountUnlockingCoinsResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountUnlockingCoinsResponse): unknown {
@@ -791,7 +791,7 @@ export const AccountLockedCoinsResponse = {
   },
   fromJSON(object: any): AccountLockedCoinsResponse {
     const obj = createBaseAccountLockedCoinsResponse();
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedCoinsResponse): unknown {
@@ -932,7 +932,7 @@ export const AccountLockedPastTimeResponse = {
   },
   fromJSON(object: any): AccountLockedPastTimeResponse {
     const obj = createBaseAccountLockedPastTimeResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedPastTimeResponse): unknown {
@@ -1073,7 +1073,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
   },
   fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const obj = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedPastTimeNotUnlockingOnlyResponse): unknown {
@@ -1214,7 +1214,7 @@ export const AccountUnlockedBeforeTimeResponse = {
   },
   fromJSON(object: any): AccountUnlockedBeforeTimeResponse {
     const obj = createBaseAccountUnlockedBeforeTimeResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountUnlockedBeforeTimeResponse): unknown {
@@ -1368,7 +1368,7 @@ export const AccountLockedPastTimeDenomResponse = {
   },
   fromJSON(object: any): AccountLockedPastTimeDenomResponse {
     const obj = createBaseAccountLockedPastTimeDenomResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedPastTimeDenomResponse): unknown {
@@ -1757,7 +1757,7 @@ export const SyntheticLockupsByLockupIDResponse = {
   },
   fromJSON(object: any): SyntheticLockupsByLockupIDResponse {
     const obj = createBaseSyntheticLockupsByLockupIDResponse();
-    if (Array.isArray(object?.syntheticLocks)) object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
+    if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
     return obj;
   },
   toJSON(message: SyntheticLockupsByLockupIDResponse): unknown {
@@ -1900,7 +1900,7 @@ export const AccountLockedLongerDurationResponse = {
   },
   fromJSON(object: any): AccountLockedLongerDurationResponse {
     const obj = createBaseAccountLockedLongerDurationResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedLongerDurationResponse): unknown {
@@ -2043,7 +2043,7 @@ export const AccountLockedDurationResponse = {
   },
   fromJSON(object: any): AccountLockedDurationResponse {
     const obj = createBaseAccountLockedDurationResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedDurationResponse): unknown {
@@ -2186,7 +2186,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
   },
   fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const obj = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): unknown {
@@ -2342,7 +2342,7 @@ export const AccountLockedLongerDurationDenomResponse = {
   },
   fromJSON(object: any): AccountLockedLongerDurationDenomResponse {
     const obj = createBaseAccountLockedLongerDurationDenomResponse();
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
   toJSON(message: AccountLockedLongerDurationDenomResponse): unknown {

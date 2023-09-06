@@ -145,7 +145,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    if (Array.isArray(object?.owners)) object.owners.map((e: any) => GenesisOwners.fromJSON(e));
+    if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => GenesisOwners.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

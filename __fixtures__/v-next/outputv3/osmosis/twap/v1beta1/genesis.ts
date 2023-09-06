@@ -197,7 +197,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.twaps)) object.twaps.map((e: any) => TwapRecord.fromJSON(e));
+    if (Array.isArray(object?.twaps)) obj.twaps = object.twaps.map((e: any) => TwapRecord.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },

@@ -41,7 +41,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.providers)) object.providers.map((e: any) => Provider.fromJSON(e));
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => Provider.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

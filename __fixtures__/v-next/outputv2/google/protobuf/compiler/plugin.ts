@@ -465,9 +465,9 @@ export const CodeGeneratorRequest = {
   },
   fromJSON(object: any): CodeGeneratorRequest {
     const obj = createBaseCodeGeneratorRequest();
-    if (Array.isArray(object?.fileToGenerate)) object.fileToGenerate.map((e: any) => String(e));
+    if (Array.isArray(object?.fileToGenerate)) obj.fileToGenerate = object.fileToGenerate.map((e: any) => String(e));
     if (isSet(object.parameter)) obj.parameter = String(object.parameter);
-    if (Array.isArray(object?.protoFile)) object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e));
+    if (Array.isArray(object?.protoFile)) obj.protoFile = object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e));
     if (isSet(object.compilerVersion)) obj.compilerVersion = Version.fromJSON(object.compilerVersion);
     return obj;
   },
@@ -601,7 +601,7 @@ export const CodeGeneratorResponse = {
   fromJSON(object: any): CodeGeneratorResponse {
     const obj = createBaseCodeGeneratorResponse();
     if (isSet(object.error)) obj.error = String(object.error);
-    if (Array.isArray(object?.file)) object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
+    if (Array.isArray(object?.file)) obj.file = object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
     return obj;
   },
   toJSON(message: CodeGeneratorResponse): unknown {

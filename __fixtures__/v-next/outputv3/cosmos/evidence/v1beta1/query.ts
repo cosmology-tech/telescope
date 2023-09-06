@@ -422,7 +422,7 @@ export const QueryAllEvidenceResponse = {
   },
   fromJSON(object: any): QueryAllEvidenceResponse {
     const obj = createBaseQueryAllEvidenceResponse();
-    if (Array.isArray(object?.evidence)) object.evidence.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.evidence)) obj.evidence = object.evidence.map((e: any) => Any.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

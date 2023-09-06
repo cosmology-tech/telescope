@@ -515,7 +515,7 @@ export const QueryClientStatesResponse = {
   },
   fromJSON(object: any): QueryClientStatesResponse {
     const obj = createBaseQueryClientStatesResponse();
-    if (Array.isArray(object?.clientStates)) object.clientStates.map((e: any) => IdentifiedClientState.fromJSON(e));
+    if (Array.isArray(object?.clientStates)) obj.clientStates = object.clientStates.map((e: any) => IdentifiedClientState.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -866,7 +866,7 @@ export const QueryConsensusStatesResponse = {
   },
   fromJSON(object: any): QueryConsensusStatesResponse {
     const obj = createBaseQueryConsensusStatesResponse();
-    if (Array.isArray(object?.consensusStates)) object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
+    if (Array.isArray(object?.consensusStates)) obj.consensusStates = object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

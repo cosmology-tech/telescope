@@ -85,7 +85,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.claimsRecords)) object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e));
+    if (Array.isArray(object?.claimsRecords)) obj.claimsRecords = object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {
@@ -207,8 +207,8 @@ export const Params = {
     if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
     if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
     if (isSet(object.claimsDenom)) obj.claimsDenom = String(object.claimsDenom);
-    if (Array.isArray(object?.authorizedChannels)) object.authorizedChannels.map((e: any) => String(e));
-    if (Array.isArray(object?.evmChannels)) object.evmChannels.map((e: any) => String(e));
+    if (Array.isArray(object?.authorizedChannels)) obj.authorizedChannels = object.authorizedChannels.map((e: any) => String(e));
+    if (Array.isArray(object?.evmChannels)) obj.evmChannels = object.evmChannels.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: Params): unknown {

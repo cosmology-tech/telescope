@@ -60,8 +60,8 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.lastLockId)) obj.lastLockId = BigInt(object.lastLockId.toString());
-    if (Array.isArray(object?.locks)) object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    if (Array.isArray(object?.syntheticLocks)) object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
     return obj;
   },
   toJSON(message: GenesisState): unknown {

@@ -1794,7 +1794,7 @@ export const Type_FunctionType = {
   fromJSON(object: any): Type_FunctionType {
     const obj = createBaseType_FunctionType();
     if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
-    if (Array.isArray(object?.argTypes)) object.argTypes.map((e: any) => Type.fromJSON(e));
+    if (Array.isArray(object?.argTypes)) obj.argTypes = object.argTypes.map((e: any) => Type.fromJSON(e));
     return obj;
   },
   toJSON(message: Type_FunctionType): unknown {
@@ -1903,7 +1903,7 @@ export const Type_AbstractType = {
   fromJSON(object: any): Type_AbstractType {
     const obj = createBaseType_AbstractType();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.parameterTypes)) object.parameterTypes.map((e: any) => Type.fromJSON(e));
+    if (Array.isArray(object?.parameterTypes)) obj.parameterTypes = object.parameterTypes.map((e: any) => Type.fromJSON(e));
     return obj;
   },
   toJSON(message: Type_AbstractType): unknown {
@@ -2228,7 +2228,7 @@ export const Decl_FunctionDecl = {
   },
   fromJSON(object: any): Decl_FunctionDecl {
     const obj = createBaseDecl_FunctionDecl();
-    if (Array.isArray(object?.overloads)) object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e));
+    if (Array.isArray(object?.overloads)) obj.overloads = object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e));
     return obj;
   },
   toJSON(message: Decl_FunctionDecl): unknown {
@@ -2357,8 +2357,8 @@ export const Decl_FunctionDecl_Overload = {
   fromJSON(object: any): Decl_FunctionDecl_Overload {
     const obj = createBaseDecl_FunctionDecl_Overload();
     if (isSet(object.overloadId)) obj.overloadId = String(object.overloadId);
-    if (Array.isArray(object?.params)) object.params.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.typeParams)) object.typeParams.map((e: any) => String(e));
+    if (Array.isArray(object?.params)) obj.params = object.params.map((e: any) => Type.fromJSON(e));
+    if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => String(e));
     if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
     if (isSet(object.isInstanceFunction)) obj.isInstanceFunction = Boolean(object.isInstanceFunction);
     if (isSet(object.doc)) obj.doc = String(object.doc);
@@ -2513,7 +2513,7 @@ export const Reference = {
   fromJSON(object: any): Reference {
     const obj = createBaseReference();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.overloadId)) object.overloadId.map((e: any) => String(e));
+    if (Array.isArray(object?.overloadId)) obj.overloadId = object.overloadId.map((e: any) => String(e));
     if (isSet(object.value)) obj.value = Constant.fromJSON(object.value);
     return obj;
   },

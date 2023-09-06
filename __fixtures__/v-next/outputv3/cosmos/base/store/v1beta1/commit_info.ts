@@ -138,7 +138,7 @@ export const CommitInfo = {
   fromJSON(object: any): CommitInfo {
     const obj = createBaseCommitInfo();
     if (isSet(object.version)) obj.version = Long.fromValue(object.version);
-    if (Array.isArray(object?.storeInfos)) object.storeInfos.map((e: any) => StoreInfo.fromJSON(e));
+    if (Array.isArray(object?.storeInfos)) obj.storeInfos = object.storeInfos.map((e: any) => StoreInfo.fromJSON(e));
     return obj;
   },
   toJSON(message: CommitInfo): unknown {

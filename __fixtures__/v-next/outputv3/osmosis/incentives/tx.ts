@@ -200,7 +200,7 @@ export const MsgCreateGauge = {
     if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = Long.fromValue(object.numEpochsPaidOver);
     return obj;
@@ -423,7 +423,7 @@ export const MsgAddToGauge = {
     const obj = createBaseMsgAddToGauge();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
-    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: MsgAddToGauge): unknown {

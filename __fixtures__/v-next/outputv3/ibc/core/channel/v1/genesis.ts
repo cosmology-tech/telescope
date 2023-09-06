@@ -162,13 +162,13 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.channels)) object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
-    if (Array.isArray(object?.acknowledgements)) object.acknowledgements.map((e: any) => PacketState.fromJSON(e));
-    if (Array.isArray(object?.commitments)) object.commitments.map((e: any) => PacketState.fromJSON(e));
-    if (Array.isArray(object?.receipts)) object.receipts.map((e: any) => PacketState.fromJSON(e));
-    if (Array.isArray(object?.sendSequences)) object.sendSequences.map((e: any) => PacketSequence.fromJSON(e));
-    if (Array.isArray(object?.recvSequences)) object.recvSequences.map((e: any) => PacketSequence.fromJSON(e));
-    if (Array.isArray(object?.ackSequences)) object.ackSequences.map((e: any) => PacketSequence.fromJSON(e));
+    if (Array.isArray(object?.channels)) obj.channels = object.channels.map((e: any) => IdentifiedChannel.fromJSON(e));
+    if (Array.isArray(object?.acknowledgements)) obj.acknowledgements = object.acknowledgements.map((e: any) => PacketState.fromJSON(e));
+    if (Array.isArray(object?.commitments)) obj.commitments = object.commitments.map((e: any) => PacketState.fromJSON(e));
+    if (Array.isArray(object?.receipts)) obj.receipts = object.receipts.map((e: any) => PacketState.fromJSON(e));
+    if (Array.isArray(object?.sendSequences)) obj.sendSequences = object.sendSequences.map((e: any) => PacketSequence.fromJSON(e));
+    if (Array.isArray(object?.recvSequences)) obj.recvSequences = object.recvSequences.map((e: any) => PacketSequence.fromJSON(e));
+    if (Array.isArray(object?.ackSequences)) obj.ackSequences = object.ackSequences.map((e: any) => PacketSequence.fromJSON(e));
     if (isSet(object.nextChannelSequence)) obj.nextChannelSequence = Long.fromValue(object.nextChannelSequence);
     return obj;
   },

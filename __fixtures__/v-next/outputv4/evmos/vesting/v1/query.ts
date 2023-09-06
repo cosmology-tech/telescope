@@ -137,9 +137,9 @@ export const QueryBalancesResponse = {
   },
   fromJSON(object: any): QueryBalancesResponse {
     const obj = createBaseQueryBalancesResponse();
-    if (Array.isArray(object?.locked)) object.locked.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.unvested)) object.unvested.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.vested)) object.vested.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.locked)) obj.locked = object.locked.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.unvested)) obj.unvested = object.unvested.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.vested)) obj.vested = object.vested.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
   toJSON(message: QueryBalancesResponse): unknown {

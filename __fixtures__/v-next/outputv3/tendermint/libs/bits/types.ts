@@ -70,7 +70,7 @@ export const BitArray = {
   fromJSON(object: any): BitArray {
     const obj = createBaseBitArray();
     if (isSet(object.bits)) obj.bits = Long.fromValue(object.bits);
-    if (Array.isArray(object?.elems)) object.elems.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.elems)) obj.elems = object.elems.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: BitArray): unknown {

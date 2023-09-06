@@ -507,7 +507,7 @@ export const GrantQueueItem = {
   },
   fromJSON(object: any): GrantQueueItem {
     const obj = createBaseGrantQueueItem();
-    if (Array.isArray(object?.msgTypeUrls)) object.msgTypeUrls.map((e: any) => String(e));
+    if (Array.isArray(object?.msgTypeUrls)) obj.msgTypeUrls = object.msgTypeUrls.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: GrantQueueItem): unknown {

@@ -1024,7 +1024,7 @@ export const QueryNFTsResponse = {
   },
   fromJSON(object: any): QueryNFTsResponse {
     const obj = createBaseQueryNFTsResponse();
-    if (Array.isArray(object?.nfts)) object.nfts.map((e: any) => NFT.fromJSON(e));
+    if (Array.isArray(object?.nfts)) obj.nfts = object.nfts.map((e: any) => NFT.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -1600,7 +1600,7 @@ export const QueryClassesResponse = {
   },
   fromJSON(object: any): QueryClassesResponse {
     const obj = createBaseQueryClassesResponse();
-    if (Array.isArray(object?.classes)) object.classes.map((e: any) => Class.fromJSON(e));
+    if (Array.isArray(object?.classes)) obj.classes = object.classes.map((e: any) => Class.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

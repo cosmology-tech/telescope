@@ -304,7 +304,7 @@ export const QueryIncentivesResponse = {
   },
   fromJSON(object: any): QueryIncentivesResponse {
     const obj = createBaseQueryIncentivesResponse();
-    if (Array.isArray(object?.incentives)) object.incentives.map((e: any) => Incentive.fromJSON(e));
+    if (Array.isArray(object?.incentives)) obj.incentives = object.incentives.map((e: any) => Incentive.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -584,7 +584,7 @@ export const QueryGasMetersResponse = {
   },
   fromJSON(object: any): QueryGasMetersResponse {
     const obj = createBaseQueryGasMetersResponse();
-    if (Array.isArray(object?.gasMeters)) object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
+    if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
@@ -864,7 +864,7 @@ export const QueryAllocationMetersResponse = {
   },
   fromJSON(object: any): QueryAllocationMetersResponse {
     const obj = createBaseQueryAllocationMetersResponse();
-    if (Array.isArray(object?.allocationMeters)) object.allocationMeters.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.allocationMeters)) obj.allocationMeters = object.allocationMeters.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },

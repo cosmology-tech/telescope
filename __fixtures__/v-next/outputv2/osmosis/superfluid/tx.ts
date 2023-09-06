@@ -807,7 +807,7 @@ export const MsgLockAndSuperfluidDelegate = {
   fromJSON(object: any): MsgLockAndSuperfluidDelegate {
     const obj = createBaseMsgLockAndSuperfluidDelegate();
     if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
     return obj;
   },
@@ -1123,7 +1123,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
   },
   fromJSON(object: any): MsgUnPoolWhitelistedPoolResponse {
     const obj = createBaseMsgUnPoolWhitelistedPoolResponse();
-    if (Array.isArray(object?.exitedLockIds)) object.exitedLockIds.map((e: any) => Long.fromValue(e));
+    if (Array.isArray(object?.exitedLockIds)) obj.exitedLockIds = object.exitedLockIds.map((e: any) => Long.fromValue(e));
     return obj;
   },
   toJSON(message: MsgUnPoolWhitelistedPoolResponse): unknown {

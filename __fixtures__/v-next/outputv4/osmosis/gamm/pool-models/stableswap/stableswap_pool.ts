@@ -226,8 +226,8 @@ export const Pool = {
     if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
     if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
     if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
-    if (Array.isArray(object?.poolLiquidity)) object.poolLiquidity.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.scalingFactors)) object.scalingFactors.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.poolLiquidity)) obj.poolLiquidity = object.poolLiquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.scalingFactors)) obj.scalingFactors = object.scalingFactors.map((e: any) => BigInt(e.toString()));
     if (isSet(object.scalingFactorController)) obj.scalingFactorController = String(object.scalingFactorController);
     return obj;
   },
