@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.51.0...@cosmology/proto-parser@0.51.1) (2023-09-07)
+
+**Note:** Version bump only for package @cosmology/proto-parser
+
 # [0.51.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.50.0...@cosmology/proto-parser@0.51.0) (2023-09-06)
 
 **Note:** Version bump only for package @cosmology/proto-parser
