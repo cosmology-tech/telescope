@@ -109,7 +109,7 @@ interface TelescopeOpts {
         /**
         * legacy option, if useLegacyInlineEncoding is set, this will be ignored.
         *
-        * @deprecated The logic of useRecursiveV2encoding will be deprecated.
+        * @deprecated The logic of useRecursiveV2encoding will be deprecated after v1.0.
         */
         useRecursiveV2encoding?: boolean;
     };
