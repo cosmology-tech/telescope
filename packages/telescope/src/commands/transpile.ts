@@ -70,7 +70,6 @@ export default async (argv: {
 
       aminoEncoding: {
         enabled: true,
-        useRecursiveV2encoding: false
       },
 
       lcdClients: {

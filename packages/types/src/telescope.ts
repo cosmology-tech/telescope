@@ -129,6 +129,12 @@ interface TelescopeOpts {
         */
         useLegacyInlineEncoding?: boolean;
 
+        /**
+        * legacy option, if useLegacyInlineEncoding is set, this will be ignored.
+        *
+        * @deprecated The logic of useRecursiveV2encoding will be deprecated.
+        */
+        useRecursiveV2encoding?: boolean;
     };
 
     lcdClients?: {
@@ -312,7 +318,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
         },
-        useLegacyInlineEncoding: true
+        // TODO:: set default value here after v1.0
+        // useLegacyInlineEncoding: true
     },
     lcdClients: {
         bundle: true,

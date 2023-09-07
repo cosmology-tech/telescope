@@ -106,6 +106,12 @@ interface TelescopeOpts {
         * @deprecated The logic of useLegacyInlineEncoding will be deprecated.
         */
         useLegacyInlineEncoding?: boolean;
+        /**
+        * legacy option, if useLegacyInlineEncoding is set, this will be ignored.
+        *
+        * @deprecated The logic of useRecursiveV2encoding will be deprecated.
+        */
+        useRecursiveV2encoding?: boolean;
     };
     lcdClients?: {
         enabled: boolean;

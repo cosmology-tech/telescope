@@ -30,6 +30,12 @@ import { plugin as createPiniaStoreBundle } from './generators/create-pinia-stor
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
   options = deepmerge(defaultTelescopeOptions, options ?? {});
+
+  // handle legacy useRecursiveV2encoding option
+  if(options.aminoEncoding.useLegacyInlineEncoding === undefined || options.aminoEncoding.useLegacyInlineEncoding === null){
+    options.aminoEncoding.useLegacyInlineEncoding = options.aminoEncoding.useRecursiveV2encoding === undefined || options.aminoEncoding.useRecursiveV2encoding === null ? true : !options.aminoEncoding.useRecursiveV2encoding;
+  }
+
   // strip off leading slashes
   options.tsDisable.files = options.tsDisable.files.map((file) =>
     file.startsWith('/') ? file : file.replace(/^\//, '')
