@@ -258,7 +258,7 @@ telescope({
 | `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
-| `aminoEncoding.useLegacyInlineEncoding` | To use legacy inline encoding instead of using v2 recursive encoding                  | `false`|
+| `aminoEncoding.useLegacyInlineEncoding` | @deprecated. To use legacy inline encoding instead of using v2 recursive encoding                  | `false`|
 | `aminoEncoding.useRecursiveV2encoding` | this's been removed. See useLegacyInlineEncoding instead.                  |  |
 
 ### Implemented Interface Options
