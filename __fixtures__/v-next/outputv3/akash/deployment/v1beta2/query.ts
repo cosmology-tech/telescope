@@ -3,7 +3,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
 import { Group, GroupAmino, GroupSDKType } from "./group";
 import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta2/types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
@@ -146,7 +146,7 @@ function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
 }
 export const QueryDeploymentsRequest = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest",
-  encode(message: QueryDeploymentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDeploymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       DeploymentFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
     }
@@ -155,8 +155,8 @@ export const QueryDeploymentsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsRequest();
     while (reader.pos < end) {
@@ -245,7 +245,7 @@ function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
 }
 export const QueryDeploymentsResponse = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse",
-  encode(message: QueryDeploymentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDeploymentsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.deployments) {
       QueryDeploymentResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -254,8 +254,8 @@ export const QueryDeploymentsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsResponse();
     while (reader.pos < end) {
@@ -353,14 +353,14 @@ function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
 }
 export const QueryDeploymentRequest = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest",
-  encode(message: QueryDeploymentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDeploymentRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentRequest();
     while (reader.pos < end) {
@@ -438,7 +438,7 @@ function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
 }
 export const QueryDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse",
-  encode(message: QueryDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
     }
@@ -450,8 +450,8 @@ export const QueryDeploymentResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentResponse();
     while (reader.pos < end) {
@@ -561,14 +561,14 @@ function createBaseQueryGroupRequest(): QueryGroupRequest {
 }
 export const QueryGroupRequest = {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest",
-  encode(message: QueryGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGroupRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupRequest();
     while (reader.pos < end) {
@@ -644,14 +644,14 @@ function createBaseQueryGroupResponse(): QueryGroupResponse {
 }
 export const QueryGroupResponse = {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse",
-  encode(message: QueryGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.group !== undefined) {
       Group.encode(message.group, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupResponse();
     while (reader.pos < end) {

@@ -53,6 +53,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
+  typeUrl: "/evmos.claims.v1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -127,6 +128,37 @@ export const GenesisState = {
       obj.claims_records = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      claimsRecords: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    if (message.claimsRecords) {
+      obj.claims_records = message.claimsRecords.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
+    } else {
+      obj.claims_records = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };
 function createBaseParams(): Params {
@@ -141,6 +173,7 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
+  typeUrl: "/evmos.claims.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enableClaims === true) {
       writer.uint32(8).bool(message.enableClaims);
@@ -285,5 +318,50 @@ export const Params = {
       obj.evm_channels = [];
     }
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableClaims: object.enable_claims,
+      airdropStartTime: object.airdrop_start_time,
+      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
+      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
+      claimsDenom: object.claims_denom,
+      authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
+      evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_claims = message.enableClaims;
+    obj.airdrop_start_time = message.airdropStartTime;
+    obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
+    obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
+    obj.claims_denom = message.claimsDenom;
+    if (message.authorizedChannels) {
+      obj.authorized_channels = message.authorizedChannels.map(e => e);
+    } else {
+      obj.authorized_channels = [];
+    }
+    if (message.evmChannels) {
+      obj.evm_channels = message.evmChannels.map(e => e);
+    } else {
+      obj.evm_channels = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

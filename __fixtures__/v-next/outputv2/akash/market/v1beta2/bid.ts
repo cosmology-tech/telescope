@@ -1,7 +1,7 @@
 import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
 export enum Bid_State {
@@ -142,7 +142,7 @@ export interface MsgCloseBidResponseSDKType {}
  */
 export interface BidID {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -172,7 +172,7 @@ export interface BidIDAminoMsg {
  */
 export interface BidIDSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -182,7 +182,7 @@ export interface Bid {
   bidId: BidID;
   state: Bid_State;
   price: DecCoin;
-  createdAt: Long;
+  createdAt: bigint;
 }
 export interface BidProtoMsg {
   typeUrl: "/akash.market.v1beta2.Bid";
@@ -204,12 +204,12 @@ export interface BidSDKType {
   bid_id: BidIDSDKType;
   state: Bid_State;
   price: DecCoinSDKType;
-  created_at: Long;
+  created_at: bigint;
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFilters {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -235,7 +235,7 @@ export interface BidFiltersAminoMsg {
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -251,7 +251,7 @@ function createBaseMsgCreateBid(): MsgCreateBid {
 }
 export const MsgCreateBid = {
   typeUrl: "/akash.market.v1beta2.MsgCreateBid",
-  encode(message: MsgCreateBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.order !== undefined) {
       OrderID.encode(message.order, writer.uint32(10).fork()).ldelim();
     }
@@ -266,8 +266,8 @@ export const MsgCreateBid = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBid();
     while (reader.pos < end) {
@@ -375,11 +375,11 @@ function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
 }
 export const MsgCreateBidResponse = {
   typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse",
-  encode(_: MsgCreateBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBidResponse();
     while (reader.pos < end) {
@@ -441,14 +441,14 @@ function createBaseMsgCloseBid(): MsgCloseBid {
 }
 export const MsgCloseBid = {
   typeUrl: "/akash.market.v1beta2.MsgCloseBid",
-  encode(message: MsgCloseBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCloseBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseBid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBid();
     while (reader.pos < end) {
@@ -522,11 +522,11 @@ function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
 }
 export const MsgCloseBidResponse = {
   typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse",
-  encode(_: MsgCloseBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCloseBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBidResponse();
     while (reader.pos < end) {
@@ -584,7 +584,7 @@ export const MsgCloseBidResponse = {
 function createBaseBidID(): BidID {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     provider: ""
@@ -592,11 +592,11 @@ function createBaseBidID(): BidID {
 }
 export const BidID = {
   typeUrl: "/akash.market.v1beta2.BidID",
-  encode(message: BidID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BidID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -610,8 +610,8 @@ export const BidID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BidID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BidID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidID();
     while (reader.pos < end) {
@@ -621,7 +621,7 @@ export const BidID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -642,7 +642,7 @@ export const BidID = {
   fromJSON(object: any): BidID {
     const obj = createBaseBidID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
     if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
     if (isSet(object.provider)) obj.provider = String(object.provider);
@@ -651,7 +651,7 @@ export const BidID = {
   toJSON(message: BidID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.provider !== undefined && (obj.provider = message.provider);
@@ -661,7 +661,7 @@ export const BidID = {
     const message = createBaseBidID();
     message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = Long.fromValue(object.dseq);
+      message.dseq = BigInt(object.dseq.toString());
     }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
@@ -689,7 +689,7 @@ export const BidID = {
   fromAmino(object: BidIDAmino): BidID {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       gseq: object.gseq,
       oseq: object.oseq,
       provider: object.provider
@@ -725,12 +725,12 @@ function createBaseBid(): Bid {
     bidId: BidID.fromPartial({}),
     state: 0,
     price: DecCoin.fromPartial({}),
-    createdAt: Long.ZERO
+    createdAt: BigInt(0)
   };
 }
 export const Bid = {
   typeUrl: "/akash.market.v1beta2.Bid",
-  encode(message: Bid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Bid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
@@ -740,13 +740,13 @@ export const Bid = {
     if (message.price !== undefined) {
       DecCoin.encode(message.price, writer.uint32(26).fork()).ldelim();
     }
-    if (!message.createdAt.isZero()) {
+    if (message.createdAt !== BigInt(0)) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Bid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Bid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBid();
     while (reader.pos < end) {
@@ -762,7 +762,7 @@ export const Bid = {
           message.price = DecCoin.decode(reader, reader.uint32());
           break;
         case 4:
-          message.createdAt = (reader.int64() as Long);
+          message.createdAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -776,7 +776,7 @@ export const Bid = {
     if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
     if (isSet(object.state)) obj.state = bid_StateFromJSON(object.state);
     if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
-    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
+    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
     return obj;
   },
   toJSON(message: Bid): unknown {
@@ -784,7 +784,7 @@ export const Bid = {
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
     message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Bid>): Bid {
@@ -797,7 +797,7 @@ export const Bid = {
       message.price = DecCoin.fromPartial(object.price);
     }
     if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = Long.fromValue(object.createdAt);
+      message.createdAt = BigInt(object.createdAt.toString());
     }
     return message;
   },
@@ -822,7 +822,7 @@ export const Bid = {
       bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
       price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      createdAt: Long.fromString(object.created_at)
+      createdAt: BigInt(object.created_at)
     };
   },
   toAmino(message: Bid): BidAmino {
@@ -852,7 +852,7 @@ export const Bid = {
 function createBaseBidFilters(): BidFilters {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     provider: "",
@@ -861,11 +861,11 @@ function createBaseBidFilters(): BidFilters {
 }
 export const BidFilters = {
   typeUrl: "/akash.market.v1beta2.BidFilters",
-  encode(message: BidFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BidFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -882,8 +882,8 @@ export const BidFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BidFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BidFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidFilters();
     while (reader.pos < end) {
@@ -893,7 +893,7 @@ export const BidFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -917,7 +917,7 @@ export const BidFilters = {
   fromJSON(object: any): BidFilters {
     const obj = createBaseBidFilters();
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
     if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
     if (isSet(object.provider)) obj.provider = String(object.provider);
@@ -927,7 +927,7 @@ export const BidFilters = {
   toJSON(message: BidFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.provider !== undefined && (obj.provider = message.provider);
@@ -938,7 +938,7 @@ export const BidFilters = {
     const message = createBaseBidFilters();
     message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = Long.fromValue(object.dseq);
+      message.dseq = BigInt(object.dseq.toString());
     }
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
@@ -969,7 +969,7 @@ export const BidFilters = {
   fromAmino(object: BidFiltersAmino): BidFilters {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       gseq: object.gseq,
       oseq: object.oseq,
       provider: object.provider,

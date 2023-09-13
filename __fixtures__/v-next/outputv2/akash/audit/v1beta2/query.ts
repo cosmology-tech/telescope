@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
@@ -146,7 +146,7 @@ function createBaseQueryProvidersResponse(): QueryProvidersResponse {
 }
 export const QueryProvidersResponse = {
   typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse",
-  encode(message: QueryProvidersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProvidersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -155,8 +155,8 @@ export const QueryProvidersResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProvidersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProvidersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProvidersResponse();
     while (reader.pos < end) {
@@ -255,7 +255,7 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 }
 export const QueryProviderRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
-  encode(message: QueryProviderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
     }
@@ -264,8 +264,8 @@ export const QueryProviderRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderRequest();
     while (reader.pos < end) {
@@ -349,14 +349,14 @@ function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttrib
 }
 export const QueryAllProvidersAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest",
-  encode(message: QueryAllProvidersAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllProvidersAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllProvidersAttributesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllProvidersAttributesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllProvidersAttributesRequest();
     while (reader.pos < end) {
@@ -433,7 +433,7 @@ function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequ
 }
 export const QueryProviderAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
-  encode(message: QueryProviderAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProviderAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -442,8 +442,8 @@ export const QueryProviderAttributesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderAttributesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderAttributesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderAttributesRequest();
     while (reader.pos < end) {
@@ -530,7 +530,7 @@ function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
 }
 export const QueryProviderAuditorRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
-  encode(message: QueryProviderAuditorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProviderAuditorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
     }
@@ -539,8 +539,8 @@ export const QueryProviderAuditorRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderAuditorRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderAuditorRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderAuditorRequest();
     while (reader.pos < end) {
@@ -625,7 +625,7 @@ function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesReques
 }
 export const QueryAuditorAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
-  encode(message: QueryAuditorAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAuditorAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
     }
@@ -634,8 +634,8 @@ export const QueryAuditorAttributesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAuditorAttributesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAuditorAttributesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuditorAttributesRequest();
     while (reader.pos < end) {

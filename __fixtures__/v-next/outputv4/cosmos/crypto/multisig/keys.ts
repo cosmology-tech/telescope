@@ -27,6 +27,7 @@ function createBaseLegacyAminoPubKey(): LegacyAminoPubKey {
   };
 }
 export const LegacyAminoPubKey = {
+  typeUrl: "/cosmos.crypto.multisig.LegacyAminoPubKey",
   encode(message: LegacyAminoPubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.threshold !== 0) {
       writer.uint32(8).uint32(message.threshold);
@@ -99,5 +100,42 @@ export const LegacyAminoPubKey = {
       obj.public_keys = [];
     }
     return obj;
+  },
+  fromAmino(object: LegacyAminoPubKeyAmino): LegacyAminoPubKey {
+    return {
+      threshold: object.threshold,
+      publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeyAmino {
+    const obj: any = {};
+    obj.threshold = message.threshold;
+    if (message.publicKeys) {
+      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.public_keys = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: LegacyAminoPubKeyAminoMsg): LegacyAminoPubKey {
+    return LegacyAminoPubKey.fromAmino(object.value);
+  },
+  toAminoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyAminoMsg {
+    return {
+      type: "cosmos-sdk/LegacyAminoPubKey",
+      value: LegacyAminoPubKey.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg): LegacyAminoPubKey {
+    return LegacyAminoPubKey.decode(message.value);
+  },
+  toProto(message: LegacyAminoPubKey): Uint8Array {
+    return LegacyAminoPubKey.encode(message).finish();
+  },
+  toProtoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.multisig.LegacyAminoPubKey",
+      value: LegacyAminoPubKey.encode(message).finish()
+    };
   }
 };

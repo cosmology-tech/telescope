@@ -19,6 +19,7 @@ function createBaseQueryConfigRequest(): QueryConfigRequest {
   return {};
 }
 export const QueryConfigRequest = {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest",
   encode(_: QueryConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -57,6 +58,34 @@ export const QueryConfigRequest = {
   toSDK(_: QueryConfigRequest): QueryConfigRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
+    return {};
+  },
+  toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryConfigRequestAminoMsg): QueryConfigRequest {
+    return QueryConfigRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConfigRequest): QueryConfigRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConfigRequest",
+      value: QueryConfigRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConfigRequestProtoMsg): QueryConfigRequest {
+    return QueryConfigRequest.decode(message.value);
+  },
+  toProto(message: QueryConfigRequest): Uint8Array {
+    return QueryConfigRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConfigRequest): QueryConfigRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest",
+      value: QueryConfigRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryConfigResponse(): QueryConfigResponse {
@@ -65,6 +94,7 @@ function createBaseQueryConfigResponse(): QueryConfigResponse {
   };
 }
 export const QueryConfigResponse = {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse",
   encode(message: QueryConfigResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.config !== undefined) {
       Config.encode(message.config, writer.uint32(10).fork()).ldelim();
@@ -119,5 +149,36 @@ export const QueryConfigResponse = {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? Config.toSDK(message.config) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {
+    return {
+      config: object?.config ? Config.fromAmino(object.config) : undefined
+    };
+  },
+  toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
+    const obj: any = {};
+    obj.config = message.config ? Config.toAmino(message.config) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConfigResponseAminoMsg): QueryConfigResponse {
+    return QueryConfigResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConfigResponse): QueryConfigResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConfigResponse",
+      value: QueryConfigResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConfigResponseProtoMsg): QueryConfigResponse {
+    return QueryConfigResponse.decode(message.value);
+  },
+  toProto(message: QueryConfigResponse): Uint8Array {
+    return QueryConfigResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConfigResponse): QueryConfigResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse",
+      value: QueryConfigResponse.encode(message).finish()
+    };
   }
 };

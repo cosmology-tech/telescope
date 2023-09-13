@@ -67,6 +67,7 @@ function createBaseInterchainAccountPacketData(): InterchainAccountPacketData {
   };
 }
 export const InterchainAccountPacketData = {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccountPacketData",
   encode(message: InterchainAccountPacketData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -143,6 +144,41 @@ export const InterchainAccountPacketData = {
     obj.data = message.data;
     obj.memo = message.memo;
     return obj;
+  },
+  fromAmino(object: InterchainAccountPacketDataAmino): InterchainAccountPacketData {
+    return {
+      type: isSet(object.type) ? typeFromJSON(object.type) : -1,
+      data: object.data,
+      memo: object.memo
+    };
+  },
+  toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.data = message.data;
+    obj.memo = message.memo;
+    return obj;
+  },
+  fromAminoMsg(object: InterchainAccountPacketDataAminoMsg): InterchainAccountPacketData {
+    return InterchainAccountPacketData.fromAmino(object.value);
+  },
+  toAminoMsg(message: InterchainAccountPacketData): InterchainAccountPacketDataAminoMsg {
+    return {
+      type: "cosmos-sdk/InterchainAccountPacketData",
+      value: InterchainAccountPacketData.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: InterchainAccountPacketDataProtoMsg): InterchainAccountPacketData {
+    return InterchainAccountPacketData.decode(message.value);
+  },
+  toProto(message: InterchainAccountPacketData): Uint8Array {
+    return InterchainAccountPacketData.encode(message).finish();
+  },
+  toProtoMsg(message: InterchainAccountPacketData): InterchainAccountPacketDataProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccountPacketData",
+      value: InterchainAccountPacketData.encode(message).finish()
+    };
   }
 };
 function createBaseCosmosTx(): CosmosTx {
@@ -151,6 +187,7 @@ function createBaseCosmosTx(): CosmosTx {
   };
 }
 export const CosmosTx = {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.CosmosTx",
   encode(message: CosmosTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -211,5 +248,40 @@ export const CosmosTx = {
       obj.messages = [];
     }
     return obj;
+  },
+  fromAmino(object: CosmosTxAmino): CosmosTx {
+    return {
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CosmosTx): CosmosTxAmino {
+    const obj: any = {};
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CosmosTxAminoMsg): CosmosTx {
+    return CosmosTx.fromAmino(object.value);
+  },
+  toAminoMsg(message: CosmosTx): CosmosTxAminoMsg {
+    return {
+      type: "cosmos-sdk/CosmosTx",
+      value: CosmosTx.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CosmosTxProtoMsg): CosmosTx {
+    return CosmosTx.decode(message.value);
+  },
+  toProto(message: CosmosTx): Uint8Array {
+    return CosmosTx.encode(message).finish();
+  },
+  toProtoMsg(message: CosmosTx): CosmosTxProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.interchain_accounts.v1.CosmosTx",
+      value: CosmosTx.encode(message).finish()
+    };
   }
 };

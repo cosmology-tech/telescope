@@ -258,14 +258,14 @@ telescope({
 | `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
-| `aminoEncoding.useLegacyInlineEncoding` | @deprecated, To use legacy inline encoding instead of using v2 recursive encoding                  | `true`|
-| `aminoEncoding.useRecursiveV2encoding` | @deprecated, legacy option, if useLegacyInlineEncoding is set, this will be ignored.                  | null |
+| `aminoEncoding.useLegacyInlineEncoding` | @deprecated. To use legacy inline encoding instead of using v2 recursive encoding                  | `false`|
+| `aminoEncoding.useRecursiveV2encoding` | this's been removed. See useLegacyInlineEncoding instead.                  |  |
 
 ### Implemented Interface Options
 
 | option                                    | description                                                     | defaults   |
 | ----------------------------------------- | --------------------------------------------------------------  | ---------- |
-| `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `false`     |
+| `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `true`     |
 | `interfaces.useUnionTypes`                      | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
 
 ### Prototypes Options
@@ -281,8 +281,6 @@ telescope({
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
 | `prototypes.optionalQueryParams`          | boolean value setting queryParams to be optional                | `false`    |
 | `prototypes.optionalPageRequests`         | boolean value setting `PageRequest` fields to optional          | `false`    |
-| `prototypes.addTypeUrlToDecoders`         |     Include typeUrl feild into decoders to indicate the original type.     | `true`    |
-| `prototypes.addTypeUrlToObjects`         |     Include typeUrl feild into objects to indicate the original type    | `true`    |
 
 ### Prototypes Methods
 
@@ -295,10 +293,6 @@ telescope({
 | `prototypes.methods.fromPartial`   | boolean to enable `fromPartial` method on proto objects            | `true`  |
 | `prototypes.methods.fromSDK`       | boolean to enable `fromSDK` method on proto objects                | `false` |
 | `prototypes.methods.toSDK`         | boolean to enable `toSDK` method on proto objects                  | `false` |
-| `prototypes.methods.toAmino`         | boolean to enable `toAmino` method on proto objects                  | `true` |
-| `prototypes.methods.fromAmino`         | boolean to enable `fromAmino` method on proto objects                  | `true` |
-| `prototypes.methods.toProto`         | boolean to enable `toProto` method on proto objects                  | `true` |
-| `prototypes.methods.fromProto`         | boolean to enable `fromProto` method on proto objects                  | `true` |
 
 ### LCD Client Options
 
@@ -369,7 +363,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | ----------------------------------------- | --------------------------------------------------------------  | --------- |
 | `prototypes.typingsFormat.customTypes.useCosmosSDKDec` | enable handling "prototypes.typingsFormat.customTypes.useCosmosSDKDec" proto custom type. Used to show decimal fields with the custom type correctly. Highly recommend set to true.    | `true`    |
 | `prototypes.typingsFormat.num64` | 'long' or 'bigint', the way of generating int64 proto types, set to 'bigint' to enable using more stable built-in type   | `bigint`    |
-| `prototypes.typingsFormat.useDeepPartial` | By default using the `Partial` TS type, otherwise using `DeepPartial`    | `false`    |
+| `prototypes.typingsFormat.useDeepPartial` | defaults to true, but if disabled uses the `Partial` TS type    | `false`    |
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
@@ -414,7 +408,6 @@ See [RPC Clients](#rpc-clients) for more info.
 | `removeUnusedImports`          | removes unused imports                                             | `true`     |
 | `classesUseArrowFunctions`     | classes use arrow functions instead of `bind()`ing in constructors | `false`    |
 | `includeExternalHelpers`       | exports a few helpers functions in `extern.ts`                     | `false`    |
-| `interfaces.enabled`       |      Enable handling accepts_interface to decode or encode fields that can be multiple types    | `true`    |
 
 ## Types
 

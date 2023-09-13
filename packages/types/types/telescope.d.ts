@@ -103,15 +103,9 @@ interface TelescopeOpts {
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
         /**
-        * @deprecated The logic of useLegacyInlineEncoding will be deprecated.
+        * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
         */
         useLegacyInlineEncoding?: boolean;
-        /**
-        * legacy option, if useLegacyInlineEncoding is set, this will be ignored.
-        *
-        * @deprecated The logic of useRecursiveV2encoding will be deprecated after v1.0.
-        */
-        useRecursiveV2encoding?: boolean;
     };
     lcdClients?: {
         enabled: boolean;

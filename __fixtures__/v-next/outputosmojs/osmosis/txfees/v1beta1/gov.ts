@@ -34,6 +34,7 @@ function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   };
 }
 export const UpdateFeeTokenProposal = {
+  typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
   encode(message: UpdateFeeTokenProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -110,5 +111,40 @@ export const UpdateFeeTokenProposal = {
     obj.description = message.description;
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toSDK(message.feetoken) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
+    };
+  },
+  toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateFeeTokenProposalAminoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAminoMsg {
+    return {
+      type: "osmosis/txfees/update-fee-token-proposal",
+      value: UpdateFeeTokenProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.decode(message.value);
+  },
+  toProto(message: UpdateFeeTokenProposal): Uint8Array {
+    return UpdateFeeTokenProposal.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
+      value: UpdateFeeTokenProposal.encode(message).finish()
+    };
   }
 };

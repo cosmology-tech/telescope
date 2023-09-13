@@ -52,6 +52,7 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
   };
 }
 export const MsgSwapExactAmountIn = {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountIn",
   encode(message: MsgSwapExactAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -148,6 +149,47 @@ export const MsgSwapExactAmountIn = {
     message.tokenIn !== undefined && (obj.token_in = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
     obj.token_out_min_amount = message.tokenOutMinAmount;
     return obj;
+  },
+  fromAmino(object: MsgSwapExactAmountInAmino): MsgSwapExactAmountIn {
+    return {
+      sender: object.sender,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : [],
+      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : undefined,
+      tokenOutMinAmount: object.token_out_min_amount
+    };
+  },
+  toAmino(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+    obj.token_in = message.tokenIn ? Coin.toAmino(message.tokenIn) : undefined;
+    obj.token_out_min_amount = message.tokenOutMinAmount;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSwapExactAmountInAminoMsg): MsgSwapExactAmountIn {
+    return MsgSwapExactAmountIn.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAminoMsg {
+    return {
+      type: "osmosis/poolmanager/swap-exact-amount-in",
+      value: MsgSwapExactAmountIn.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSwapExactAmountInProtoMsg): MsgSwapExactAmountIn {
+    return MsgSwapExactAmountIn.decode(message.value);
+  },
+  toProto(message: MsgSwapExactAmountIn): Uint8Array {
+    return MsgSwapExactAmountIn.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSwapExactAmountIn): MsgSwapExactAmountInProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountIn",
+      value: MsgSwapExactAmountIn.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse {
@@ -156,6 +198,7 @@ function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse 
   };
 }
 export const MsgSwapExactAmountInResponse = {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountInResponse",
   encode(message: MsgSwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
@@ -208,6 +251,37 @@ export const MsgSwapExactAmountInResponse = {
     const obj: any = {};
     obj.token_out_amount = message.tokenOutAmount;
     return obj;
+  },
+  fromAmino(object: MsgSwapExactAmountInResponseAmino): MsgSwapExactAmountInResponse {
+    return {
+      tokenOutAmount: object.token_out_amount
+    };
+  },
+  toAmino(message: MsgSwapExactAmountInResponse): MsgSwapExactAmountInResponseAmino {
+    const obj: any = {};
+    obj.token_out_amount = message.tokenOutAmount;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSwapExactAmountInResponseAminoMsg): MsgSwapExactAmountInResponse {
+    return MsgSwapExactAmountInResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSwapExactAmountInResponse): MsgSwapExactAmountInResponseAminoMsg {
+    return {
+      type: "osmosis/poolmanager/swap-exact-amount-in-response",
+      value: MsgSwapExactAmountInResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSwapExactAmountInResponseProtoMsg): MsgSwapExactAmountInResponse {
+    return MsgSwapExactAmountInResponse.decode(message.value);
+  },
+  toProto(message: MsgSwapExactAmountInResponse): Uint8Array {
+    return MsgSwapExactAmountInResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSwapExactAmountInResponse): MsgSwapExactAmountInResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountInResponse",
+      value: MsgSwapExactAmountInResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
@@ -219,6 +293,7 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
   };
 }
 export const MsgSwapExactAmountOut = {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOut",
   encode(message: MsgSwapExactAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -315,6 +390,47 @@ export const MsgSwapExactAmountOut = {
     obj.token_in_max_amount = message.tokenInMaxAmount;
     message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgSwapExactAmountOutAmino): MsgSwapExactAmountOut {
+    return {
+      sender: object.sender,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
+      tokenInMaxAmount: object.token_in_max_amount,
+      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
+    };
+  },
+  toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+    obj.token_in_max_amount = message.tokenInMaxAmount;
+    obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSwapExactAmountOutAminoMsg): MsgSwapExactAmountOut {
+    return MsgSwapExactAmountOut.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAminoMsg {
+    return {
+      type: "osmosis/poolmanager/swap-exact-amount-out",
+      value: MsgSwapExactAmountOut.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSwapExactAmountOutProtoMsg): MsgSwapExactAmountOut {
+    return MsgSwapExactAmountOut.decode(message.value);
+  },
+  toProto(message: MsgSwapExactAmountOut): Uint8Array {
+    return MsgSwapExactAmountOut.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOut",
+      value: MsgSwapExactAmountOut.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutResponse {
@@ -323,6 +439,7 @@ function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutRespons
   };
 }
 export const MsgSwapExactAmountOutResponse = {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOutResponse",
   encode(message: MsgSwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
@@ -375,5 +492,36 @@ export const MsgSwapExactAmountOutResponse = {
     const obj: any = {};
     obj.token_in_amount = message.tokenInAmount;
     return obj;
+  },
+  fromAmino(object: MsgSwapExactAmountOutResponseAmino): MsgSwapExactAmountOutResponse {
+    return {
+      tokenInAmount: object.token_in_amount
+    };
+  },
+  toAmino(message: MsgSwapExactAmountOutResponse): MsgSwapExactAmountOutResponseAmino {
+    const obj: any = {};
+    obj.token_in_amount = message.tokenInAmount;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSwapExactAmountOutResponseAminoMsg): MsgSwapExactAmountOutResponse {
+    return MsgSwapExactAmountOutResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSwapExactAmountOutResponse): MsgSwapExactAmountOutResponseAminoMsg {
+    return {
+      type: "osmosis/poolmanager/swap-exact-amount-out-response",
+      value: MsgSwapExactAmountOutResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSwapExactAmountOutResponseProtoMsg): MsgSwapExactAmountOutResponse {
+    return MsgSwapExactAmountOutResponse.decode(message.value);
+  },
+  toProto(message: MsgSwapExactAmountOutResponse): Uint8Array {
+    return MsgSwapExactAmountOutResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSwapExactAmountOutResponse): MsgSwapExactAmountOutResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOutResponse",
+      value: MsgSwapExactAmountOutResponse.encode(message).finish()
+    };
   }
 };

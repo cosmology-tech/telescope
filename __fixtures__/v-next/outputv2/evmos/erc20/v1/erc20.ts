@@ -1,5 +1,5 @@
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
@@ -229,7 +229,7 @@ function createBaseTokenPair(): TokenPair {
 }
 export const TokenPair = {
   typeUrl: "/evmos.erc20.v1.TokenPair",
-  encode(message: TokenPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TokenPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.erc20Address !== "") {
       writer.uint32(10).string(message.erc20Address);
     }
@@ -244,8 +244,8 @@ export const TokenPair = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TokenPair {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TokenPair {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenPair();
     while (reader.pos < end) {
@@ -351,7 +351,7 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
 }
 export const RegisterCoinProposal = {
   typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
-  encode(message: RegisterCoinProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RegisterCoinProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -363,8 +363,8 @@ export const RegisterCoinProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RegisterCoinProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RegisterCoinProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterCoinProposal();
     while (reader.pos < end) {
@@ -462,7 +462,7 @@ function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
 }
 export const RegisterERC20Proposal = {
   typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
-  encode(message: RegisterERC20Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RegisterERC20Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -474,8 +474,8 @@ export const RegisterERC20Proposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RegisterERC20Proposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RegisterERC20Proposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterERC20Proposal();
     while (reader.pos < end) {
@@ -571,7 +571,7 @@ function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposa
 }
 export const ToggleTokenConversionProposal = {
   typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
-  encode(message: ToggleTokenConversionProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ToggleTokenConversionProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -583,8 +583,8 @@ export const ToggleTokenConversionProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ToggleTokenConversionProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ToggleTokenConversionProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseToggleTokenConversionProposal();
     while (reader.pos < end) {

@@ -6,8 +6,8 @@ import { Usage, UsageAmino, UsageSDKType } from "../../usage";
 import { Endpoint, EndpointAmino, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringAmino, MonitoringSDKType } from "../../monitoring";
-import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -587,12 +587,12 @@ export interface QuotaBucket {
    * The effective limit of this quota bucket. Equal to default_limit if there
    * are no overrides.
    */
-  effectiveLimit: Long;
+  effectiveLimit: bigint;
   /**
    * The default limit of this quota bucket, as specified by the service
    * configuration.
    */
-  defaultLimit: Long;
+  defaultLimit: bigint;
   /** Producer override on this quota bucket. */
   producerOverride: QuotaOverride;
   /** Consumer override on this quota bucket. */
@@ -661,8 +661,8 @@ export interface QuotaBucketAminoMsg {
 }
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
-  effective_limit: Long;
-  default_limit: Long;
+  effective_limit: bigint;
+  default_limit: bigint;
   producer_override: QuotaOverrideSDKType;
   consumer_override: QuotaOverrideSDKType;
   admin_override: QuotaOverrideSDKType;
@@ -708,7 +708,7 @@ export interface QuotaOverride {
    * The overriding quota limit value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  overrideValue: Long;
+  overrideValue: bigint;
   /**
    * If this map is nonempty, then this override applies only to specific values
    * for dimensions defined in the limit unit.
@@ -839,7 +839,7 @@ export interface QuotaOverrideAminoMsg {
 /** A quota override */
 export interface QuotaOverrideSDKType {
   name: string;
-  override_value: Long;
+  override_value: bigint;
   dimensions: {
     [key: string]: string;
   };
@@ -913,7 +913,7 @@ export interface AdminQuotaPolicy {
    * The quota policy value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  policyValue: Long;
+  policyValue: bigint;
   /**
    * If this map is nonempty, then this policy applies only to specific values
    * for dimensions defined in the limit unit.
@@ -1018,7 +1018,7 @@ export interface AdminQuotaPolicyAminoMsg {
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
   name: string;
-  policy_value: Long;
+  policy_value: bigint;
   dimensions: {
     [key: string]: string;
   };
@@ -1084,7 +1084,7 @@ function createBaseService(): Service {
 }
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1beta1.Service",
-  encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1099,8 +1099,8 @@ export const Service = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Service {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
     while (reader.pos < end) {
@@ -1215,7 +1215,7 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
-  encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1248,8 +1248,8 @@ export const ServiceConfig = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceConfig {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceConfig();
     while (reader.pos < end) {
@@ -1459,14 +1459,14 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 export const OperationMetadata = {
   typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata",
-  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
     while (reader.pos < end) {
@@ -1557,7 +1557,7 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
 }
 export const ConsumerQuotaMetric = {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
-  encode(message: ConsumerQuotaMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsumerQuotaMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1578,8 +1578,8 @@ export const ConsumerQuotaMetric = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetric {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConsumerQuotaMetric {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaMetric();
     while (reader.pos < end) {
@@ -1732,7 +1732,7 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
 }
 export const ConsumerQuotaLimit = {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
-  encode(message: ConsumerQuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsumerQuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1753,8 +1753,8 @@ export const ConsumerQuotaLimit = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConsumerQuotaLimit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaLimit();
     while (reader.pos < end) {
@@ -1890,7 +1890,7 @@ function createBaseQuotaBucket_DimensionsEntry(): QuotaBucket_DimensionsEntry {
   };
 }
 export const QuotaBucket_DimensionsEntry = {
-  encode(message: QuotaBucket_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaBucket_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1899,8 +1899,8 @@ export const QuotaBucket_DimensionsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket_DimensionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaBucket_DimensionsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaBucket_DimensionsEntry();
     while (reader.pos < end) {
@@ -1973,8 +1973,8 @@ export const QuotaBucket_DimensionsEntry = {
 };
 function createBaseQuotaBucket(): QuotaBucket {
   return {
-    effectiveLimit: Long.ZERO,
-    defaultLimit: Long.ZERO,
+    effectiveLimit: BigInt(0),
+    defaultLimit: BigInt(0),
     producerOverride: QuotaOverride.fromPartial({}),
     consumerOverride: QuotaOverride.fromPartial({}),
     adminOverride: QuotaOverride.fromPartial({}),
@@ -1983,11 +1983,11 @@ function createBaseQuotaBucket(): QuotaBucket {
 }
 export const QuotaBucket = {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
-  encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.effectiveLimit.isZero()) {
+  encode(message: QuotaBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.effectiveLimit !== BigInt(0)) {
       writer.uint32(8).int64(message.effectiveLimit);
     }
-    if (!message.defaultLimit.isZero()) {
+    if (message.defaultLimit !== BigInt(0)) {
       writer.uint32(16).int64(message.defaultLimit);
     }
     if (message.producerOverride !== undefined) {
@@ -2007,18 +2007,18 @@ export const QuotaBucket = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaBucket {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaBucket();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.effectiveLimit = (reader.int64() as Long);
+          message.effectiveLimit = reader.int64();
           break;
         case 2:
-          message.defaultLimit = (reader.int64() as Long);
+          message.defaultLimit = reader.int64();
           break;
         case 3:
           message.producerOverride = QuotaOverride.decode(reader, reader.uint32());
@@ -2044,8 +2044,8 @@ export const QuotaBucket = {
   },
   fromJSON(object: any): QuotaBucket {
     const obj = createBaseQuotaBucket();
-    if (isSet(object.effectiveLimit)) obj.effectiveLimit = Long.fromValue(object.effectiveLimit);
-    if (isSet(object.defaultLimit)) obj.defaultLimit = Long.fromValue(object.defaultLimit);
+    if (isSet(object.effectiveLimit)) obj.effectiveLimit = BigInt(object.effectiveLimit.toString());
+    if (isSet(object.defaultLimit)) obj.defaultLimit = BigInt(object.defaultLimit.toString());
     if (isSet(object.producerOverride)) obj.producerOverride = QuotaOverride.fromJSON(object.producerOverride);
     if (isSet(object.consumerOverride)) obj.consumerOverride = QuotaOverride.fromJSON(object.consumerOverride);
     if (isSet(object.adminOverride)) obj.adminOverride = QuotaOverride.fromJSON(object.adminOverride);
@@ -2059,8 +2059,8 @@ export const QuotaBucket = {
   },
   toJSON(message: QuotaBucket): unknown {
     const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || Long.ZERO).toString());
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || Long.ZERO).toString());
+    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt(0)).toString());
+    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
     message.producerOverride !== undefined && (obj.producerOverride = message.producerOverride ? QuotaOverride.toJSON(message.producerOverride) : undefined);
     message.consumerOverride !== undefined && (obj.consumerOverride = message.consumerOverride ? QuotaOverride.toJSON(message.consumerOverride) : undefined);
     message.adminOverride !== undefined && (obj.adminOverride = message.adminOverride ? QuotaOverride.toJSON(message.adminOverride) : undefined);
@@ -2075,10 +2075,10 @@ export const QuotaBucket = {
   fromPartial(object: DeepPartial<QuotaBucket>): QuotaBucket {
     const message = createBaseQuotaBucket();
     if (object.effectiveLimit !== undefined && object.effectiveLimit !== null) {
-      message.effectiveLimit = Long.fromValue(object.effectiveLimit);
+      message.effectiveLimit = BigInt(object.effectiveLimit.toString());
     }
     if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
-      message.defaultLimit = Long.fromValue(object.defaultLimit);
+      message.defaultLimit = BigInt(object.defaultLimit.toString());
     }
     if (object.producerOverride !== undefined && object.producerOverride !== null) {
       message.producerOverride = QuotaOverride.fromPartial(object.producerOverride);
@@ -2131,8 +2131,8 @@ export const QuotaBucket = {
   },
   fromAmino(object: QuotaBucketAmino): QuotaBucket {
     return {
-      effectiveLimit: Long.fromString(object.effective_limit),
-      defaultLimit: Long.fromString(object.default_limit),
+      effectiveLimit: BigInt(object.effective_limit),
+      defaultLimit: BigInt(object.default_limit),
       producerOverride: object?.producer_override ? QuotaOverride.fromAmino(object.producer_override) : undefined,
       consumerOverride: object?.consumer_override ? QuotaOverride.fromAmino(object.consumer_override) : undefined,
       adminOverride: object?.admin_override ? QuotaOverride.fromAmino(object.admin_override) : undefined,
@@ -2182,7 +2182,7 @@ function createBaseQuotaOverride_DimensionsEntry(): QuotaOverride_DimensionsEntr
   };
 }
 export const QuotaOverride_DimensionsEntry = {
-  encode(message: QuotaOverride_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOverride_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -2191,8 +2191,8 @@ export const QuotaOverride_DimensionsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride_DimensionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaOverride_DimensionsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOverride_DimensionsEntry();
     while (reader.pos < end) {
@@ -2266,7 +2266,7 @@ export const QuotaOverride_DimensionsEntry = {
 function createBaseQuotaOverride(): QuotaOverride {
   return {
     name: "",
-    overrideValue: Long.ZERO,
+    overrideValue: BigInt(0),
     dimensions: {},
     metric: "",
     unit: "",
@@ -2275,11 +2275,11 @@ function createBaseQuotaOverride(): QuotaOverride {
 }
 export const QuotaOverride = {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
-  encode(message: QuotaOverride, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOverride, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (!message.overrideValue.isZero()) {
+    if (message.overrideValue !== BigInt(0)) {
       writer.uint32(16).int64(message.overrideValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -2299,8 +2299,8 @@ export const QuotaOverride = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaOverride {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOverride();
     while (reader.pos < end) {
@@ -2310,7 +2310,7 @@ export const QuotaOverride = {
           message.name = reader.string();
           break;
         case 2:
-          message.overrideValue = (reader.int64() as Long);
+          message.overrideValue = reader.int64();
           break;
         case 3:
           const entry3 = QuotaOverride_DimensionsEntry.decode(reader, reader.uint32());
@@ -2337,7 +2337,7 @@ export const QuotaOverride = {
   fromJSON(object: any): QuotaOverride {
     const obj = createBaseQuotaOverride();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.overrideValue)) obj.overrideValue = Long.fromValue(object.overrideValue);
+    if (isSet(object.overrideValue)) obj.overrideValue = BigInt(object.overrideValue.toString());
     if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -2352,7 +2352,7 @@ export const QuotaOverride = {
   toJSON(message: QuotaOverride): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || Long.ZERO).toString());
+    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt(0)).toString());
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
@@ -2368,7 +2368,7 @@ export const QuotaOverride = {
     const message = createBaseQuotaOverride();
     message.name = object.name ?? "";
     if (object.overrideValue !== undefined && object.overrideValue !== null) {
-      message.overrideValue = Long.fromValue(object.overrideValue);
+      message.overrideValue = BigInt(object.overrideValue.toString());
     }
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
@@ -2416,7 +2416,7 @@ export const QuotaOverride = {
   fromAmino(object: QuotaOverrideAmino): QuotaOverride {
     return {
       name: object.name,
-      overrideValue: Long.fromString(object.override_value),
+      overrideValue: BigInt(object.override_value),
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2466,14 +2466,14 @@ function createBaseOverrideInlineSource(): OverrideInlineSource {
 }
 export const OverrideInlineSource = {
   typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource",
-  encode(message: OverrideInlineSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OverrideInlineSource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OverrideInlineSource {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OverrideInlineSource {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOverrideInlineSource();
     while (reader.pos < end) {
@@ -2559,7 +2559,7 @@ function createBaseAdminQuotaPolicy_DimensionsEntry(): AdminQuotaPolicy_Dimensio
   };
 }
 export const AdminQuotaPolicy_DimensionsEntry = {
-  encode(message: AdminQuotaPolicy_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AdminQuotaPolicy_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -2568,8 +2568,8 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy_DimensionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AdminQuotaPolicy_DimensionsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminQuotaPolicy_DimensionsEntry();
     while (reader.pos < end) {
@@ -2643,7 +2643,7 @@ export const AdminQuotaPolicy_DimensionsEntry = {
 function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   return {
     name: "",
-    policyValue: Long.ZERO,
+    policyValue: BigInt(0),
     dimensions: {},
     metric: "",
     unit: "",
@@ -2652,11 +2652,11 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
 }
 export const AdminQuotaPolicy = {
   typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
-  encode(message: AdminQuotaPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AdminQuotaPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (!message.policyValue.isZero()) {
+    if (message.policyValue !== BigInt(0)) {
       writer.uint32(16).int64(message.policyValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -2676,8 +2676,8 @@ export const AdminQuotaPolicy = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AdminQuotaPolicy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminQuotaPolicy();
     while (reader.pos < end) {
@@ -2687,7 +2687,7 @@ export const AdminQuotaPolicy = {
           message.name = reader.string();
           break;
         case 2:
-          message.policyValue = (reader.int64() as Long);
+          message.policyValue = reader.int64();
           break;
         case 3:
           const entry3 = AdminQuotaPolicy_DimensionsEntry.decode(reader, reader.uint32());
@@ -2714,7 +2714,7 @@ export const AdminQuotaPolicy = {
   fromJSON(object: any): AdminQuotaPolicy {
     const obj = createBaseAdminQuotaPolicy();
     if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.policyValue)) obj.policyValue = Long.fromValue(object.policyValue);
+    if (isSet(object.policyValue)) obj.policyValue = BigInt(object.policyValue.toString());
     if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -2729,7 +2729,7 @@ export const AdminQuotaPolicy = {
   toJSON(message: AdminQuotaPolicy): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || Long.ZERO).toString());
+    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt(0)).toString());
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
@@ -2745,7 +2745,7 @@ export const AdminQuotaPolicy = {
     const message = createBaseAdminQuotaPolicy();
     message.name = object.name ?? "";
     if (object.policyValue !== undefined && object.policyValue !== null) {
-      message.policyValue = Long.fromValue(object.policyValue);
+      message.policyValue = BigInt(object.policyValue.toString());
     }
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
@@ -2793,7 +2793,7 @@ export const AdminQuotaPolicy = {
   fromAmino(object: AdminQuotaPolicyAmino): AdminQuotaPolicy {
     return {
       name: object.name,
-      policyValue: Long.fromString(object.policy_value),
+      policyValue: BigInt(object.policy_value),
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2844,7 +2844,7 @@ function createBaseServiceIdentity(): ServiceIdentity {
 }
 export const ServiceIdentity = {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
-  encode(message: ServiceIdentity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceIdentity, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
     }
@@ -2853,8 +2853,8 @@ export const ServiceIdentity = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceIdentity {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceIdentity {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceIdentity();
     while (reader.pos < end) {

@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
@@ -63,14 +63,14 @@ function createBaseEndpoint(): Endpoint {
 }
 export const Endpoint = {
   typeUrl: "/akash.base.v1beta1.Endpoint",
-  encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Endpoint {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Endpoint {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndpoint();
     while (reader.pos < end) {

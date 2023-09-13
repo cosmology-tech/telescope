@@ -1,6 +1,6 @@
 import { CPU, CPUAmino, CPUSDKType, Memory, MemoryAmino, MemorySDKType, Storage, StorageAmino, StorageSDKType } from "./resource";
 import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /**
@@ -51,7 +51,7 @@ function createBaseResourceUnits(): ResourceUnits {
 }
 export const ResourceUnits = {
   typeUrl: "/akash.base.v1beta2.ResourceUnits",
-  encode(message: ResourceUnits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResourceUnits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();
     }
@@ -66,8 +66,8 @@ export const ResourceUnits = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceUnits {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ResourceUnits {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceUnits();
     while (reader.pos < end) {

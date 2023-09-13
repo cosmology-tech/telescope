@@ -27,6 +27,7 @@ function createBaseGenesisCertificate(): GenesisCertificate {
   };
 }
 export const GenesisCertificate = {
+  typeUrl: "/akash.cert.v1beta2.GenesisCertificate",
   encode(message: GenesisCertificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -93,6 +94,39 @@ export const GenesisCertificate = {
     obj.owner = message.owner;
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
     return obj;
+  },
+  fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
+    return {
+      owner: object.owner,
+      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
+    };
+  },
+  toAmino(message: GenesisCertificate): GenesisCertificateAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisCertificateAminoMsg): GenesisCertificate {
+    return GenesisCertificate.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisCertificate): GenesisCertificateAminoMsg {
+    return {
+      type: "akash/cert/v1beta2/genesis-certificate",
+      value: GenesisCertificate.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisCertificateProtoMsg): GenesisCertificate {
+    return GenesisCertificate.decode(message.value);
+  },
+  toProto(message: GenesisCertificate): Uint8Array {
+    return GenesisCertificate.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisCertificate): GenesisCertificateProtoMsg {
+    return {
+      typeUrl: "/akash.cert.v1beta2.GenesisCertificate",
+      value: GenesisCertificate.encode(message).finish()
+    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -101,6 +135,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
+  typeUrl: "/akash.cert.v1beta2.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.certificates) {
       GenesisCertificate.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -161,5 +196,40 @@ export const GenesisState = {
       obj.certificates = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/cert/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.cert.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

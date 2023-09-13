@@ -209,6 +209,7 @@ function createBaseBackend(): Backend {
   };
 }
 export const Backend = {
+  typeUrl: "/google.api.Backend",
   encode(message: Backend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rules) {
       BackendRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -269,6 +270,35 @@ export const Backend = {
       obj.rules = [];
     }
     return obj;
+  },
+  fromAmino(object: BackendAmino): Backend {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Backend): BackendAmino {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: BackendAminoMsg): Backend {
+    return Backend.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BackendProtoMsg): Backend {
+    return Backend.decode(message.value);
+  },
+  toProto(message: Backend): Uint8Array {
+    return Backend.encode(message).finish();
+  },
+  toProtoMsg(message: Backend): BackendProtoMsg {
+    return {
+      typeUrl: "/google.api.Backend",
+      value: Backend.encode(message).finish()
+    };
   }
 };
 function createBaseBackendRule(): BackendRule {
@@ -285,6 +315,7 @@ function createBaseBackendRule(): BackendRule {
   };
 }
 export const BackendRule = {
+  typeUrl: "/google.api.BackendRule",
   encode(message: BackendRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -433,5 +464,46 @@ export const BackendRule = {
     obj.disable_auth = message.disableAuth;
     obj.protocol = message.protocol;
     return obj;
+  },
+  fromAmino(object: BackendRuleAmino): BackendRule {
+    return {
+      selector: object.selector,
+      address: object.address,
+      deadline: object.deadline,
+      minDeadline: object.min_deadline,
+      operationDeadline: object.operation_deadline,
+      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
+      jwtAudience: object?.jwt_audience,
+      disableAuth: object?.disable_auth,
+      protocol: object.protocol
+    };
+  },
+  toAmino(message: BackendRule): BackendRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.address = message.address;
+    obj.deadline = message.deadline;
+    obj.min_deadline = message.minDeadline;
+    obj.operation_deadline = message.operationDeadline;
+    obj.path_translation = message.pathTranslation;
+    obj.jwt_audience = message.jwtAudience;
+    obj.disable_auth = message.disableAuth;
+    obj.protocol = message.protocol;
+    return obj;
+  },
+  fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {
+    return BackendRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BackendRuleProtoMsg): BackendRule {
+    return BackendRule.decode(message.value);
+  },
+  toProto(message: BackendRule): Uint8Array {
+    return BackendRule.encode(message).finish();
+  },
+  toProtoMsg(message: BackendRule): BackendRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.BackendRule",
+      value: BackendRule.encode(message).finish()
+    };
   }
 };

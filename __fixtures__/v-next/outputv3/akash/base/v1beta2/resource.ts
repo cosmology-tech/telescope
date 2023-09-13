@@ -1,6 +1,6 @@
 import { ResourceValue, ResourceValueAmino, ResourceValueSDKType } from "./resourcevalue";
 import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** CPU stores resource units and cpu config attributes */
@@ -83,7 +83,7 @@ function createBaseCPU(): CPU {
 }
 export const CPU = {
   typeUrl: "/akash.base.v1beta2.CPU",
-  encode(message: CPU, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CPU, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.units !== undefined) {
       ResourceValue.encode(message.units, writer.uint32(10).fork()).ldelim();
     }
@@ -92,8 +92,8 @@ export const CPU = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CPU {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CPU {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCPU();
     while (reader.pos < end) {
@@ -192,7 +192,7 @@ function createBaseMemory(): Memory {
 }
 export const Memory = {
   typeUrl: "/akash.base.v1beta2.Memory",
-  encode(message: Memory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Memory, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
     }
@@ -201,8 +201,8 @@ export const Memory = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Memory {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Memory {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMemory();
     while (reader.pos < end) {
@@ -302,7 +302,7 @@ function createBaseStorage(): Storage {
 }
 export const Storage = {
   typeUrl: "/akash.base.v1beta2.Storage",
-  encode(message: Storage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Storage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -314,8 +314,8 @@ export const Storage = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Storage {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Storage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStorage();
     while (reader.pos < end) {

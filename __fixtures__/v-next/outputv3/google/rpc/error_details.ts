@@ -1,5 +1,5 @@
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.rpc";
 /**
@@ -785,14 +785,14 @@ function createBaseRetryInfo(): RetryInfo {
 }
 export const RetryInfo = {
   typeUrl: "/google.rpc.RetryInfo",
-  encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RetryInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.retryDelay !== undefined) {
       Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RetryInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RetryInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRetryInfo();
     while (reader.pos < end) {
@@ -869,7 +869,7 @@ function createBaseDebugInfo(): DebugInfo {
 }
 export const DebugInfo = {
   typeUrl: "/google.rpc.DebugInfo",
-  encode(message: DebugInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DebugInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
@@ -878,8 +878,8 @@ export const DebugInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DebugInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DebugInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDebugInfo();
     while (reader.pos < end) {
@@ -975,14 +975,14 @@ function createBaseQuotaFailure(): QuotaFailure {
 }
 export const QuotaFailure = {
   typeUrl: "/google.rpc.QuotaFailure",
-  encode(message: QuotaFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaFailure {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure();
     while (reader.pos < end) {
@@ -1069,7 +1069,7 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 }
 export const QuotaFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
-  encode(message: QuotaFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
     }
@@ -1078,8 +1078,8 @@ export const QuotaFailure_Violation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure_Violation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaFailure_Violation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure_Violation();
     while (reader.pos < end) {
@@ -1163,7 +1163,7 @@ function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
   };
 }
 export const ErrorInfo_MetadataEntry = {
-  encode(message: ErrorInfo_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ErrorInfo_MetadataEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1172,8 +1172,8 @@ export const ErrorInfo_MetadataEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo_MetadataEntry();
     while (reader.pos < end) {
@@ -1253,7 +1253,7 @@ function createBaseErrorInfo(): ErrorInfo {
 }
 export const ErrorInfo = {
   typeUrl: "/google.rpc.ErrorInfo",
-  encode(message: ErrorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ErrorInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
     }
@@ -1268,8 +1268,8 @@ export const ErrorInfo = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ErrorInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo();
     while (reader.pos < end) {
@@ -1403,14 +1403,14 @@ function createBasePreconditionFailure(): PreconditionFailure {
 }
 export const PreconditionFailure = {
   typeUrl: "/google.rpc.PreconditionFailure",
-  encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PreconditionFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PreconditionFailure {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
     while (reader.pos < end) {
@@ -1498,7 +1498,7 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 }
 export const PreconditionFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
-  encode(message: PreconditionFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PreconditionFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -1510,8 +1510,8 @@ export const PreconditionFailure_Violation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure_Violation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PreconditionFailure_Violation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure_Violation();
     while (reader.pos < end) {
@@ -1605,14 +1605,14 @@ function createBaseBadRequest(): BadRequest {
 }
 export const BadRequest = {
   typeUrl: "/google.rpc.BadRequest",
-  encode(message: BadRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BadRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.fieldViolations) {
       BadRequest_FieldViolation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BadRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest();
     while (reader.pos < end) {
@@ -1699,7 +1699,7 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 }
 export const BadRequest_FieldViolation = {
   typeUrl: "/google.rpc.FieldViolation",
-  encode(message: BadRequest_FieldViolation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BadRequest_FieldViolation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
     }
@@ -1708,8 +1708,8 @@ export const BadRequest_FieldViolation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest_FieldViolation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BadRequest_FieldViolation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest_FieldViolation();
     while (reader.pos < end) {
@@ -1794,7 +1794,7 @@ function createBaseRequestInfo(): RequestInfo {
 }
 export const RequestInfo = {
   typeUrl: "/google.rpc.RequestInfo",
-  encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -1803,8 +1803,8 @@ export const RequestInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RequestInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RequestInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequestInfo();
     while (reader.pos < end) {
@@ -1891,7 +1891,7 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 export const ResourceInfo = {
   typeUrl: "/google.rpc.ResourceInfo",
-  encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
     }
@@ -1906,8 +1906,8 @@ export const ResourceInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ResourceInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceInfo();
     while (reader.pos < end) {
@@ -2011,14 +2011,14 @@ function createBaseHelp(): Help {
 }
 export const Help = {
   typeUrl: "/google.rpc.Help",
-  encode(message: Help, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Help, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.links) {
       Help_Link.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Help {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Help {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp();
     while (reader.pos < end) {
@@ -2105,7 +2105,7 @@ function createBaseHelp_Link(): Help_Link {
 }
 export const Help_Link = {
   typeUrl: "/google.rpc.Link",
-  encode(message: Help_Link, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Help_Link, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -2114,8 +2114,8 @@ export const Help_Link = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Help_Link {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Help_Link {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp_Link();
     while (reader.pos < end) {
@@ -2200,7 +2200,7 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 }
 export const LocalizedMessage = {
   typeUrl: "/google.rpc.LocalizedMessage",
-  encode(message: LocalizedMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LocalizedMessage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.locale !== "") {
       writer.uint32(10).string(message.locale);
     }
@@ -2209,8 +2209,8 @@ export const LocalizedMessage = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LocalizedMessage {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LocalizedMessage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLocalizedMessage();
     while (reader.pos < end) {

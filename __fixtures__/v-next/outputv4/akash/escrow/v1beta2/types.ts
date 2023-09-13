@@ -172,6 +172,7 @@ function createBaseAccountID(): AccountID {
   };
 }
 export const AccountID = {
+  typeUrl: "/akash.escrow.v1beta2.AccountID",
   encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -236,6 +237,39 @@ export const AccountID = {
     obj.scope = message.scope;
     obj.xid = message.xid;
     return obj;
+  },
+  fromAmino(object: AccountIDAmino): AccountID {
+    return {
+      scope: object.scope,
+      xid: object.xid
+    };
+  },
+  toAmino(message: AccountID): AccountIDAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    return obj;
+  },
+  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
+    return AccountID.fromAmino(object.value);
+  },
+  toAminoMsg(message: AccountID): AccountIDAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/account-i-d",
+      value: AccountID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AccountIDProtoMsg): AccountID {
+    return AccountID.decode(message.value);
+  },
+  toProto(message: AccountID): Uint8Array {
+    return AccountID.encode(message).finish();
+  },
+  toProtoMsg(message: AccountID): AccountIDProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta2.AccountID",
+      value: AccountID.encode(message).finish()
+    };
   }
 };
 function createBaseAccount(): Account {
@@ -251,6 +285,7 @@ function createBaseAccount(): Account {
   };
 }
 export const Account = {
+  typeUrl: "/akash.escrow.v1beta2.Account",
   encode(message: Account, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -397,6 +432,51 @@ export const Account = {
     obj.depositor = message.depositor;
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toSDK(message.funds) : undefined);
     return obj;
+  },
+  fromAmino(object: AccountAmino): Account {
+    return {
+      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
+      owner: object.owner,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
+      transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
+      settledAt: BigInt(object.settled_at),
+      depositor: object.depositor,
+      funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
+    };
+  },
+  toAmino(message: Account): AccountAmino {
+    const obj: any = {};
+    obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
+    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : undefined;
+    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
+    obj.depositor = message.depositor;
+    obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: AccountAminoMsg): Account {
+    return Account.fromAmino(object.value);
+  },
+  toAminoMsg(message: Account): AccountAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/account",
+      value: Account.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AccountProtoMsg): Account {
+    return Account.decode(message.value);
+  },
+  toProto(message: Account): Uint8Array {
+    return Account.encode(message).finish();
+  },
+  toProtoMsg(message: Account): AccountProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta2.Account",
+      value: Account.encode(message).finish()
+    };
   }
 };
 function createBaseFractionalPayment(): FractionalPayment {
@@ -411,6 +491,7 @@ function createBaseFractionalPayment(): FractionalPayment {
   };
 }
 export const FractionalPayment = {
+  typeUrl: "/akash.escrow.v1beta2.FractionalPayment",
   encode(message: FractionalPayment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
@@ -543,5 +624,48 @@ export const FractionalPayment = {
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toSDK(message.balance) : undefined);
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toSDK(message.withdrawn) : undefined);
     return obj;
+  },
+  fromAmino(object: FractionalPaymentAmino): FractionalPayment {
+    return {
+      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
+      paymentId: object.payment_id,
+      owner: object.owner,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
+      rate: object?.rate ? DecCoin.fromAmino(object.rate) : undefined,
+      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
+      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
+    };
+  },
+  toAmino(message: FractionalPayment): FractionalPaymentAmino {
+    const obj: any = {};
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.rate = message.rate ? DecCoin.toAmino(message.rate) : undefined;
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {
+    return FractionalPayment.fromAmino(object.value);
+  },
+  toAminoMsg(message: FractionalPayment): FractionalPaymentAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/fractional-payment",
+      value: FractionalPayment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: FractionalPaymentProtoMsg): FractionalPayment {
+    return FractionalPayment.decode(message.value);
+  },
+  toProto(message: FractionalPayment): Uint8Array {
+    return FractionalPayment.encode(message).finish();
+  },
+  toProtoMsg(message: FractionalPayment): FractionalPaymentProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta2.FractionalPayment",
+      value: FractionalPayment.encode(message).finish()
+    };
   }
 };
