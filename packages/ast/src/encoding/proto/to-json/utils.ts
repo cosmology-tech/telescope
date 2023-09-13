@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { ProtoField } from '@cosmology/types';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ToJSONMethod } from './index';
+import { getFieldOptionalityForDefaults } from '../types';
 
 const notUndefinedSetValue = (messageProp: string, objProp: string, expr: t.Expression) => {
     return t.expressionStatement(
@@ -103,7 +104,37 @@ export const toJSON = {
     // message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
     long(args: ToJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
-        return notUndefinedSetValue(
+
+        const isOptional = getFieldOptionalityForDefaults(args.context, args.field, args.isOneOf);
+
+        if(isOptional){
+          return t.ifStatement(
+            t.binaryExpression(
+              "!==",
+              t.memberExpression(t.identifier("message"), t.identifier(messageProp)),
+              t.identifier("undefined")
+            ),
+            t.blockStatement([
+              t.expressionStatement(
+                t.assignmentExpression(
+                  "=",
+                  t.memberExpression(t.identifier("obj"), t.identifier(objProp)),
+                  t.callExpression(
+                    t.memberExpression(
+                      t.memberExpression(
+                        t.identifier("message"),
+                        t.identifier(messageProp)
+                      ),
+                      t.identifier("toString")
+                    ),
+                    []
+                  )
+                )
+              ),
+            ])
+          );
+        } else {
+          return notUndefinedSetValue(
             messageProp,
             objProp,
             t.callExpression(
@@ -120,7 +151,8 @@ export const toJSON = {
                 ),
                 []
             )
-        );
+          );
+        }
     },
 
     int64(args: ToJSONMethod) {

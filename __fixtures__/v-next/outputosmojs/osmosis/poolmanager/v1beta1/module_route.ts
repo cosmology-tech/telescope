@@ -125,7 +125,9 @@ export const ModuleRoute = {
   toJSON(message: ModuleRoute): unknown {
     const obj: any = {};
     message.poolType !== undefined && (obj.poolType = poolTypeToJSON(message.poolType));
-    message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
+    if (message.poolId !== undefined) {
+      obj.poolId = message.poolId.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleRoute>): ModuleRoute {
