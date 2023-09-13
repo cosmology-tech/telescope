@@ -315,6 +315,7 @@ function createBaseDistribution(): Distribution {
   };
 }
 export const Distribution = {
+  typeUrl: "/google.api.Distribution",
   encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.count !== BigInt(0)) {
       writer.uint32(8).int64(message.count);
@@ -470,6 +471,51 @@ export const Distribution = {
       obj.exemplars = [];
     }
     return obj;
+  },
+  fromAmino(object: DistributionAmino): Distribution {
+    return {
+      count: BigInt(object.count),
+      mean: object.mean,
+      sumOfSquaredDeviation: object.sum_of_squared_deviation,
+      range: object?.range ? Distribution_Range.fromAmino(object.range) : undefined,
+      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
+      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e)) : [],
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Distribution): DistributionAmino {
+    const obj: any = {};
+    obj.count = message.count ? message.count.toString() : undefined;
+    obj.mean = message.mean;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+    obj.range = message.range ? Distribution_Range.toAmino(message.range) : undefined;
+    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
+    if (message.bucketCounts) {
+      obj.bucket_counts = message.bucketCounts.map(e => e.toString());
+    } else {
+      obj.bucket_counts = [];
+    }
+    if (message.exemplars) {
+      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
+    } else {
+      obj.exemplars = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: DistributionAminoMsg): Distribution {
+    return Distribution.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DistributionProtoMsg): Distribution {
+    return Distribution.decode(message.value);
+  },
+  toProto(message: Distribution): Uint8Array {
+    return Distribution.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution): DistributionProtoMsg {
+    return {
+      typeUrl: "/google.api.Distribution",
+      value: Distribution.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_Range(): Distribution_Range {
@@ -479,6 +525,7 @@ function createBaseDistribution_Range(): Distribution_Range {
   };
 }
 export const Distribution_Range = {
+  typeUrl: "/google.api.Range",
   encode(message: Distribution_Range, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.min !== 0) {
       writer.uint32(9).double(message.min);
@@ -543,6 +590,33 @@ export const Distribution_Range = {
     obj.min = message.min;
     obj.max = message.max;
     return obj;
+  },
+  fromAmino(object: Distribution_RangeAmino): Distribution_Range {
+    return {
+      min: object.min,
+      max: object.max
+    };
+  },
+  toAmino(message: Distribution_Range): Distribution_RangeAmino {
+    const obj: any = {};
+    obj.min = message.min;
+    obj.max = message.max;
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_RangeAminoMsg): Distribution_Range {
+    return Distribution_Range.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_RangeProtoMsg): Distribution_Range {
+    return Distribution_Range.decode(message.value);
+  },
+  toProto(message: Distribution_Range): Uint8Array {
+    return Distribution_Range.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_Range): Distribution_RangeProtoMsg {
+    return {
+      typeUrl: "/google.api.Range",
+      value: Distribution_Range.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
@@ -553,6 +627,7 @@ function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
   };
 }
 export const Distribution_BucketOptions = {
+  typeUrl: "/google.api.BucketOptions",
   encode(message: Distribution_BucketOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.linearBuckets !== undefined) {
       Distribution_BucketOptions_Linear.encode(message.linearBuckets, writer.uint32(10).fork()).ldelim();
@@ -635,6 +710,35 @@ export const Distribution_BucketOptions = {
     message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toSDK(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toSDK(message.explicitBuckets) : undefined);
     return obj;
+  },
+  fromAmino(object: Distribution_BucketOptionsAmino): Distribution_BucketOptions {
+    return {
+      linearBuckets: object?.linear_buckets ? Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets) : undefined,
+      exponentialBuckets: object?.exponential_buckets ? Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets) : undefined,
+      explicitBuckets: object?.explicit_buckets ? Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets) : undefined
+    };
+  },
+  toAmino(message: Distribution_BucketOptions): Distribution_BucketOptionsAmino {
+    const obj: any = {};
+    obj.linear_buckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toAmino(message.linearBuckets) : undefined;
+    obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toAmino(message.exponentialBuckets) : undefined;
+    obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toAmino(message.explicitBuckets) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_BucketOptionsAminoMsg): Distribution_BucketOptions {
+    return Distribution_BucketOptions.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_BucketOptionsProtoMsg): Distribution_BucketOptions {
+    return Distribution_BucketOptions.decode(message.value);
+  },
+  toProto(message: Distribution_BucketOptions): Uint8Array {
+    return Distribution_BucketOptions.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_BucketOptions): Distribution_BucketOptionsProtoMsg {
+    return {
+      typeUrl: "/google.api.BucketOptions",
+      value: Distribution_BucketOptions.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptions_Linear {
@@ -645,6 +749,7 @@ function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptio
   };
 }
 export const Distribution_BucketOptions_Linear = {
+  typeUrl: "/google.api.Linear",
   encode(message: Distribution_BucketOptions_Linear, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -721,6 +826,35 @@ export const Distribution_BucketOptions_Linear = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
+  },
+  fromAmino(object: Distribution_BucketOptions_LinearAmino): Distribution_BucketOptions_Linear {
+    return {
+      numFiniteBuckets: object.num_finite_buckets,
+      width: object.width,
+      offset: object.offset
+    };
+  },
+  toAmino(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearAmino {
+    const obj: any = {};
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.width = message.width;
+    obj.offset = message.offset;
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_BucketOptions_LinearAminoMsg): Distribution_BucketOptions_Linear {
+    return Distribution_BucketOptions_Linear.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_BucketOptions_LinearProtoMsg): Distribution_BucketOptions_Linear {
+    return Distribution_BucketOptions_Linear.decode(message.value);
+  },
+  toProto(message: Distribution_BucketOptions_Linear): Uint8Array {
+    return Distribution_BucketOptions_Linear.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearProtoMsg {
+    return {
+      typeUrl: "/google.api.Linear",
+      value: Distribution_BucketOptions_Linear.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_BucketOptions_Exponential(): Distribution_BucketOptions_Exponential {
@@ -731,6 +865,7 @@ function createBaseDistribution_BucketOptions_Exponential(): Distribution_Bucket
   };
 }
 export const Distribution_BucketOptions_Exponential = {
+  typeUrl: "/google.api.Exponential",
   encode(message: Distribution_BucketOptions_Exponential, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -807,6 +942,35 @@ export const Distribution_BucketOptions_Exponential = {
     obj.growth_factor = message.growthFactor;
     obj.scale = message.scale;
     return obj;
+  },
+  fromAmino(object: Distribution_BucketOptions_ExponentialAmino): Distribution_BucketOptions_Exponential {
+    return {
+      numFiniteBuckets: object.num_finite_buckets,
+      growthFactor: object.growth_factor,
+      scale: object.scale
+    };
+  },
+  toAmino(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialAmino {
+    const obj: any = {};
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor;
+    obj.scale = message.scale;
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_BucketOptions_ExponentialAminoMsg): Distribution_BucketOptions_Exponential {
+    return Distribution_BucketOptions_Exponential.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_BucketOptions_ExponentialProtoMsg): Distribution_BucketOptions_Exponential {
+    return Distribution_BucketOptions_Exponential.decode(message.value);
+  },
+  toProto(message: Distribution_BucketOptions_Exponential): Uint8Array {
+    return Distribution_BucketOptions_Exponential.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialProtoMsg {
+    return {
+      typeUrl: "/google.api.Exponential",
+      value: Distribution_BucketOptions_Exponential.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOptions_Explicit {
@@ -815,6 +979,7 @@ function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOpt
   };
 }
 export const Distribution_BucketOptions_Explicit = {
+  typeUrl: "/google.api.Explicit",
   encode(message: Distribution_BucketOptions_Explicit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.bounds) {
@@ -884,6 +1049,35 @@ export const Distribution_BucketOptions_Explicit = {
       obj.bounds = [];
     }
     return obj;
+  },
+  fromAmino(object: Distribution_BucketOptions_ExplicitAmino): Distribution_BucketOptions_Explicit {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitAmino {
+    const obj: any = {};
+    if (message.bounds) {
+      obj.bounds = message.bounds.map(e => e);
+    } else {
+      obj.bounds = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_BucketOptions_ExplicitAminoMsg): Distribution_BucketOptions_Explicit {
+    return Distribution_BucketOptions_Explicit.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_BucketOptions_ExplicitProtoMsg): Distribution_BucketOptions_Explicit {
+    return Distribution_BucketOptions_Explicit.decode(message.value);
+  },
+  toProto(message: Distribution_BucketOptions_Explicit): Uint8Array {
+    return Distribution_BucketOptions_Explicit.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitProtoMsg {
+    return {
+      typeUrl: "/google.api.Explicit",
+      value: Distribution_BucketOptions_Explicit.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
@@ -894,6 +1088,7 @@ function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   };
 }
 export const Distribution_Exemplar = {
+  typeUrl: "/google.api.Exemplar",
   encode(message: Distribution_Exemplar, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
@@ -978,5 +1173,38 @@ export const Distribution_Exemplar = {
       obj.attachments = [];
     }
     return obj;
+  },
+  fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
+    return {
+      value: object.value,
+      timestamp: object.timestamp,
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    obj.timestamp = message.timestamp;
+    if (message.attachments) {
+      obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.attachments = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_ExemplarAminoMsg): Distribution_Exemplar {
+    return Distribution_Exemplar.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_ExemplarProtoMsg): Distribution_Exemplar {
+    return Distribution_Exemplar.decode(message.value);
+  },
+  toProto(message: Distribution_Exemplar): Uint8Array {
+    return Distribution_Exemplar.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_Exemplar): Distribution_ExemplarProtoMsg {
+    return {
+      typeUrl: "/google.api.Exemplar",
+      value: Distribution_Exemplar.encode(message).finish()
+    };
   }
 };

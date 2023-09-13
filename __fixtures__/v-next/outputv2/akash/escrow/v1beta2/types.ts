@@ -1,6 +1,6 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -136,7 +136,7 @@ export interface Account {
   /** total coins spent by this account */
   transferred: DecCoin;
   /** block height at which this account was last settled */
-  settledAt: Long;
+  settledAt: bigint;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
@@ -190,7 +190,7 @@ export interface AccountSDKType {
   state: Account_State;
   balance: DecCoinSDKType;
   transferred: DecCoinSDKType;
-  settled_at: Long;
+  settled_at: bigint;
   depositor: string;
   funds: DecCoinSDKType;
 }
@@ -240,7 +240,7 @@ function createBaseAccountID(): AccountID {
 }
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta2.AccountID",
-  encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
@@ -249,8 +249,8 @@ export const AccountID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountID();
     while (reader.pos < end) {
@@ -334,14 +334,14 @@ function createBaseAccount(): Account {
     state: 0,
     balance: DecCoin.fromPartial({}),
     transferred: DecCoin.fromPartial({}),
-    settledAt: Long.ZERO,
+    settledAt: BigInt(0),
     depositor: "",
     funds: DecCoin.fromPartial({})
   };
 }
 export const Account = {
   typeUrl: "/akash.escrow.v1beta2.Account",
-  encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Account, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -357,7 +357,7 @@ export const Account = {
     if (message.transferred !== undefined) {
       DecCoin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
-    if (!message.settledAt.isZero()) {
+    if (message.settledAt !== BigInt(0)) {
       writer.uint32(48).int64(message.settledAt);
     }
     if (message.depositor !== "") {
@@ -368,8 +368,8 @@ export const Account = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Account {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Account {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccount();
     while (reader.pos < end) {
@@ -391,7 +391,7 @@ export const Account = {
           message.transferred = DecCoin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.settledAt = (reader.int64() as Long);
+          message.settledAt = reader.int64();
           break;
         case 7:
           message.depositor = reader.string();
@@ -413,7 +413,7 @@ export const Account = {
     if (isSet(object.state)) obj.state = account_StateFromJSON(object.state);
     if (isSet(object.balance)) obj.balance = DecCoin.fromJSON(object.balance);
     if (isSet(object.transferred)) obj.transferred = DecCoin.fromJSON(object.transferred);
-    if (isSet(object.settledAt)) obj.settledAt = Long.fromValue(object.settledAt);
+    if (isSet(object.settledAt)) obj.settledAt = BigInt(object.settledAt.toString());
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     if (isSet(object.funds)) obj.funds = DecCoin.fromJSON(object.funds);
     return obj;
@@ -425,7 +425,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || Long.ZERO).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toJSON(message.funds) : undefined);
     return obj;
@@ -444,7 +444,7 @@ export const Account = {
       message.transferred = DecCoin.fromPartial(object.transferred);
     }
     if (object.settledAt !== undefined && object.settledAt !== null) {
-      message.settledAt = Long.fromValue(object.settledAt);
+      message.settledAt = BigInt(object.settledAt.toString());
     }
     message.depositor = object.depositor ?? "";
     if (object.funds !== undefined && object.funds !== null) {
@@ -483,7 +483,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
       transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
-      settledAt: Long.fromString(object.settled_at),
+      settledAt: BigInt(object.settled_at),
       depositor: object.depositor,
       funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
     };
@@ -529,7 +529,7 @@ function createBaseFractionalPayment(): FractionalPayment {
 }
 export const FractionalPayment = {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment",
-  encode(message: FractionalPayment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FractionalPayment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
@@ -553,8 +553,8 @@ export const FractionalPayment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FractionalPayment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FractionalPayment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFractionalPayment();
     while (reader.pos < end) {

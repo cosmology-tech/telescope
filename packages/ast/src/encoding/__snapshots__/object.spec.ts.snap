@@ -2,7 +2,8 @@
 
 exports[`cosmos/staking/v1beta1 Delegation 1`] = `
 "export const Delegation = {
-  encode(message: Delegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.staking.v1beta1.Delegation",
+  encode(message: Delegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -14,8 +15,8 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Delegation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Delegation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegation();
     while (reader.pos < end) {
@@ -51,7 +52,7 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     message.shares !== undefined && (obj.shares = message.shares);
     return obj;
   },
-  fromPartial(object: DeepPartial<Delegation>): Delegation {
+  fromPartial(object: Partial<Delegation>): Delegation {
     const message = createBaseDelegation();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
@@ -71,26 +72,62 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     obj.validator_address = message.validatorAddress;
     obj.shares = message.shares;
     return obj;
+  },
+  fromAmino(object: DelegationAmino): Delegation {
+    return {
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address,
+      shares: object.shares
+    };
+  },
+  toAmino(message: Delegation): DelegationAmino {
+    const obj: any = {};
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    obj.shares = message.shares;
+    return obj;
+  },
+  fromAminoMsg(object: DelegationAminoMsg): Delegation {
+    return Delegation.fromAmino(object.value);
+  },
+  toAminoMsg(message: Delegation): DelegationAminoMsg {
+    return {
+      type: "cosmos-sdk/Delegation",
+      value: Delegation.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DelegationProtoMsg): Delegation {
+    return Delegation.decode(message.value);
+  },
+  toProto(message: Delegation): Uint8Array {
+    return Delegation.encode(message).finish();
+  },
+  toProtoMsg(message: Delegation): DelegationProtoMsg {
+    return {
+      typeUrl: "/cosmos.staking.v1beta1.Delegation",
+      value: Delegation.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
 "export const SignatureDescriptor = {
-  encode(message: SignatureDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptor",
+  encode(message: SignatureDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
     }
     if (message.data !== undefined) {
       SignatureDescriptor_Data.encode(message.data, writer.uint32(18).fork()).ldelim();
     }
-    if (!message.sequence.isZero()) {
+    if (message.sequence !== BigInt(0)) {
       writer.uint32(24).uint64(message.sequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SignatureDescriptor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor();
     while (reader.pos < end) {
@@ -103,7 +140,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
           message.data = SignatureDescriptor_Data.decode(reader, reader.uint32());
           break;
         case 3:
-          message.sequence = (reader.uint64() as Long);
+          message.sequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -116,21 +153,21 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: SignatureDescriptor): unknown {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
+  fromPartial(object: Partial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
@@ -146,20 +183,56 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
     obj.sequence = message.sequence;
     return obj;
+  },
+  fromAmino(object: SignatureDescriptorAmino): SignatureDescriptor {
+    return {
+      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
+      data: object?.data ? SignatureDescriptor_Data.fromAmino(object.data) : undefined,
+      sequence: BigInt(object.sequence)
+    };
+  },
+  toAmino(message: SignatureDescriptor): SignatureDescriptorAmino {
+    const obj: any = {};
+    obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
+    obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
+    return SignatureDescriptor.fromAmino(object.value);
+  },
+  toAminoMsg(message: SignatureDescriptor): SignatureDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/SignatureDescriptor",
+      value: SignatureDescriptor.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SignatureDescriptorProtoMsg): SignatureDescriptor {
+    return SignatureDescriptor.decode(message.value);
+  },
+  toProto(message: SignatureDescriptor): Uint8Array {
+    return SignatureDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: SignatureDescriptor): SignatureDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptor",
+      value: SignatureDescriptor.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
 "export const SignatureDescriptors = {
-  encode(message: SignatureDescriptors, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptors",
+  encode(message: SignatureDescriptors, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.signatures) {
       SignatureDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptors {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SignatureDescriptors {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptors();
     while (reader.pos < end) {
@@ -189,7 +262,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
+  fromPartial(object: Partial<SignatureDescriptors>): SignatureDescriptors {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
@@ -207,13 +280,49 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
       obj.signatures = [];
     }
     return obj;
+  },
+  fromAmino(object: SignatureDescriptorsAmino): SignatureDescriptors {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: SignatureDescriptors): SignatureDescriptorsAmino {
+    const obj: any = {};
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SignatureDescriptorsAminoMsg): SignatureDescriptors {
+    return SignatureDescriptors.fromAmino(object.value);
+  },
+  toAminoMsg(message: SignatureDescriptors): SignatureDescriptorsAminoMsg {
+    return {
+      type: "cosmos-sdk/SignatureDescriptors",
+      value: SignatureDescriptors.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SignatureDescriptorsProtoMsg): SignatureDescriptors {
+    return SignatureDescriptors.decode(message.value);
+  },
+  toProto(message: SignatureDescriptors): Uint8Array {
+    return SignatureDescriptors.encode(message).finish();
+  },
+  toProtoMsg(message: SignatureDescriptors): SignatureDescriptorsProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptors",
+      value: SignatureDescriptors.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
 "export const AuxSignerData = {
-  encode(message: AuxSignerData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.tx.v1beta1.AuxSignerData",
+  encode(message: AuxSignerData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -228,8 +337,8 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuxSignerData {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AuxSignerData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxSignerData();
     while (reader.pos < end) {
@@ -270,7 +379,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     message.sig !== undefined && (obj.sig = base64FromBytes(message.sig !== undefined ? message.sig : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: DeepPartial<AuxSignerData>): AuxSignerData {
+  fromPartial(object: Partial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";
     message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
@@ -293,13 +402,51 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     obj.sig = message.sig;
     return obj;
+  },
+  fromAmino(object: AuxSignerDataAmino): AuxSignerData {
+    return {
+      address: object.address,
+      signDoc: object?.sign_doc ? SignDocDirectAux.fromAmino(object.sign_doc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      sig: object.sig
+    };
+  },
+  toAmino(message: AuxSignerData): AuxSignerDataAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
+    obj.mode = message.mode;
+    obj.sig = message.sig;
+    return obj;
+  },
+  fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {
+    return AuxSignerData.fromAmino(object.value);
+  },
+  toAminoMsg(message: AuxSignerData): AuxSignerDataAminoMsg {
+    return {
+      type: "cosmos-sdk/AuxSignerData",
+      value: AuxSignerData.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AuxSignerDataProtoMsg): AuxSignerData {
+    return AuxSignerData.decode(message.value);
+  },
+  toProto(message: AuxSignerData): Uint8Array {
+    return AuxSignerData.encode(message).finish();
+  },
+  toProtoMsg(message: AuxSignerData): AuxSignerDataProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.AuxSignerData",
+      value: AuxSignerData.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
 "export const ModeInfo_Multi = {
-  encode(message: ModeInfo_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.tx.v1beta1.ModeInfo",
+  encode(message: ModeInfo_Multi, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.single !== undefined) {
       ModeInfo_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
     }
@@ -308,8 +455,8 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Multi {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ModeInfo_Multi {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Multi();
     while (reader.pos < end) {
@@ -340,7 +487,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toJSON(message.multi) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
+  fromPartial(object: Partial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
     message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
@@ -357,13 +504,47 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toSDK(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toSDK(message.multi) : undefined);
     return obj;
+  },
+  fromAmino(object: ModeInfo_MultiAmino): ModeInfo_Multi {
+    return {
+      single: object?.single ? ModeInfo_Single.fromAmino(object.single) : undefined,
+      multi: object?.multi ? ModeInfo_Multi.fromAmino(object.multi) : undefined
+    };
+  },
+  toAmino(message: ModeInfo_Multi): ModeInfo_MultiAmino {
+    const obj: any = {};
+    obj.single = message.single ? ModeInfo_Single.toAmino(message.single) : undefined;
+    obj.multi = message.multi ? ModeInfo_Multi.toAmino(message.multi) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ModeInfo_MultiAminoMsg): ModeInfo_Multi {
+    return ModeInfo_Multi.fromAmino(object.value);
+  },
+  toAminoMsg(message: ModeInfo_Multi): ModeInfo_MultiAminoMsg {
+    return {
+      type: "cosmos-sdk/ModeInfo",
+      value: ModeInfo_Multi.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ModeInfo_MultiProtoMsg): ModeInfo_Multi {
+    return ModeInfo_Multi.decode(message.value);
+  },
+  toProto(message: ModeInfo_Multi): Uint8Array {
+    return ModeInfo_Multi.encode(message).finish();
+  },
+  toProtoMsg(message: ModeInfo_Multi): ModeInfo_MultiProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.ModeInfo",
+      value: ModeInfo_Multi.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
 "export const PinCodesProposal = {
-  encode(message: PinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal",
+  encode(message: PinCodesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -377,8 +558,8 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PinCodesProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PinCodesProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
     while (reader.pos < end) {
@@ -394,10 +575,10 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
+              message.codeIds.push(reader.uint64());
             }
           } else {
-            message.codeIds.push((reader.uint64() as Long));
+            message.codeIds.push(reader.uint64());
           }
           break;
         default:
@@ -411,7 +592,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
   toJSON(message: PinCodesProposal): unknown {
@@ -419,17 +600,17 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.codeIds = [];
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal {
+  fromPartial(object: Partial<PinCodesProposal>): PinCodesProposal {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
   fromSDK(object: PinCodesProposalSDKType): PinCodesProposal {
@@ -449,13 +630,53 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       obj.code_ids = [];
     }
     return obj;
+  },
+  fromAmino(object: PinCodesProposalAmino): PinCodesProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
+    };
+  },
+  toAmino(message: PinCodesProposal): PinCodesProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e.toString());
+    } else {
+      obj.code_ids = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PinCodesProposalAminoMsg): PinCodesProposal {
+    return PinCodesProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: PinCodesProposal): PinCodesProposalAminoMsg {
+    return {
+      type: "wasm/PinCodesProposal",
+      value: PinCodesProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PinCodesProposalProtoMsg): PinCodesProposal {
+    return PinCodesProposal.decode(message.value);
+  },
+  toProto(message: PinCodesProposal): Uint8Array {
+    return PinCodesProposal.encode(message).finish();
+  },
+  toProtoMsg(message: PinCodesProposal): PinCodesProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal",
+      value: PinCodesProposal.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmwasm/wasm/v1/proposal 2`] = `
 "export const UnpinCodesProposal = {
-  encode(message: UnpinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
+  encode(message: UnpinCodesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -469,8 +690,8 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UnpinCodesProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UnpinCodesProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
     while (reader.pos < end) {
@@ -486,10 +707,10 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
+              message.codeIds.push(reader.uint64());
             }
           } else {
-            message.codeIds.push((reader.uint64() as Long));
+            message.codeIds.push(reader.uint64());
           }
           break;
         default:
@@ -503,7 +724,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
   toJSON(message: UnpinCodesProposal): unknown {
@@ -511,17 +732,17 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.codeIds = [];
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {
+  fromPartial(object: Partial<UnpinCodesProposal>): UnpinCodesProposal {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
   fromSDK(object: UnpinCodesProposalSDKType): UnpinCodesProposal {
@@ -541,13 +762,53 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       obj.code_ids = [];
     }
     return obj;
+  },
+  fromAmino(object: UnpinCodesProposalAmino): UnpinCodesProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
+    };
+  },
+  toAmino(message: UnpinCodesProposal): UnpinCodesProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e.toString());
+    } else {
+      obj.code_ids = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: UnpinCodesProposalAminoMsg): UnpinCodesProposal {
+    return UnpinCodesProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UnpinCodesProposal): UnpinCodesProposalAminoMsg {
+    return {
+      type: "wasm/UnpinCodesProposal",
+      value: UnpinCodesProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: UnpinCodesProposalProtoMsg): UnpinCodesProposal {
+    return UnpinCodesProposal.decode(message.value);
+  },
+  toProto(message: UnpinCodesProposal): Uint8Array {
+    return UnpinCodesProposal.encode(message).finish();
+  },
+  toProtoMsg(message: UnpinCodesProposal): UnpinCodesProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
+      value: UnpinCodesProposal.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`cosmwasm/wasm/v1/query 1`] = `
 "export const QueryRawContractStateRequest = {
-  encode(message: QueryRawContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
+  encode(message: QueryRawContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -556,8 +817,8 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryRawContractStateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRawContractStateRequest();
     while (reader.pos < end) {
@@ -588,7 +849,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
+  fromPartial(object: Partial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
     message.address = object.address ?? "";
     message.queryData = object.queryData ?? new Uint8Array();
@@ -605,13 +866,47 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
+  },
+  fromAmino(object: QueryRawContractStateRequestAmino): QueryRawContractStateRequest {
+    return {
+      address: object.address,
+      queryData: object.query_data
+    };
+  },
+  toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.query_data = message.queryData;
+    return obj;
+  },
+  fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
+    return QueryRawContractStateRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestAminoMsg {
+    return {
+      type: "wasm/QueryRawContractStateRequest",
+      value: QueryRawContractStateRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryRawContractStateRequestProtoMsg): QueryRawContractStateRequest {
+    return QueryRawContractStateRequest.decode(message.value);
+  },
+  toProto(message: QueryRawContractStateRequest): Uint8Array {
+    return QueryRawContractStateRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
+      value: QueryRawContractStateRequest.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`evmos/fees/v1/tx 1`] = `
 "export const MsgRegisterDevFeeInfo = {
-  encode(message: MsgRegisterDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+  encode(message: MsgRegisterDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -628,8 +923,8 @@ exports[`evmos/fees/v1/tx 1`] = `
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfo();
     while (reader.pos < end) {
@@ -648,10 +943,10 @@ exports[`evmos/fees/v1/tx 1`] = `
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.nonces.push((reader.uint64() as Long));
+              message.nonces.push(reader.uint64());
             }
           } else {
-            message.nonces.push((reader.uint64() as Long));
+            message.nonces.push(reader.uint64());
           }
           break;
         default:
@@ -666,7 +961,7 @@ exports[`evmos/fees/v1/tx 1`] = `
       contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
       deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
     };
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
@@ -675,18 +970,18 @@ exports[`evmos/fees/v1/tx 1`] = `
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || Long.UZERO).toString());
+      obj.nonces = message.nonces.map(e => (e || BigInt(0)).toString());
     } else {
       obj.nonces = [];
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
+  fromPartial(object: Partial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
     const message = createBaseMsgRegisterDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
-    message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
+    message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
     return message;
   },
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
@@ -708,13 +1003,49 @@ exports[`evmos/fees/v1/tx 1`] = `
       obj.nonces = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address,
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
+    };
+  },
+  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e.toString());
+    } else {
+      obj.nonces = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgRegisterDevFeeInfo): Uint8Array {
+    return MsgRegisterDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+      value: MsgRegisterDevFeeInfo.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1`] = `
 "export const ParseRequest = {
-  encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
+  encode(message: ParseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
     }
@@ -729,8 +1060,8 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ParseRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ParseRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
     while (reader.pos < end) {
@@ -771,7 +1102,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
     return obj;
   },
-  fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
+  fromPartial(object: Partial<ParseRequest>): ParseRequest {
     const message = createBaseParseRequest();
     message.celSource = object.celSource ?? "";
     message.syntaxVersion = object.syntaxVersion ?? "";
@@ -794,13 +1125,45 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     obj.source_location = message.sourceLocation;
     obj.disable_macros = message.disableMacros;
     return obj;
+  },
+  fromAmino(object: ParseRequestAmino): ParseRequest {
+    return {
+      celSource: object.cel_source,
+      syntaxVersion: object.syntax_version,
+      sourceLocation: object.source_location,
+      disableMacros: object.disable_macros
+    };
+  },
+  toAmino(message: ParseRequest): ParseRequestAmino {
+    const obj: any = {};
+    obj.cel_source = message.celSource;
+    obj.syntax_version = message.syntaxVersion;
+    obj.source_location = message.sourceLocation;
+    obj.disable_macros = message.disableMacros;
+    return obj;
+  },
+  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
+    return ParseRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
+    return ParseRequest.decode(message.value);
+  },
+  toProto(message: ParseRequest): Uint8Array {
+    return ParseRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ParseRequest): ParseRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
+      value: ParseRequest.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`] = `
 "export const Decl_FunctionDecl_Overload = {
-  encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.Overload",
+  encode(message: Decl_FunctionDecl_Overload, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
@@ -821,8 +1184,8 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
     while (reader.pos < end) {
@@ -881,7 +1244,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
-  fromPartial(object: DeepPartial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
+  fromPartial(object: Partial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
     const message = createBaseDecl_FunctionDecl_Overload();
     message.overloadId = object.overloadId ?? "";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
@@ -918,13 +1281,57 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     obj.is_instance_function = message.isInstanceFunction;
     obj.doc = message.doc;
     return obj;
+  },
+  fromAmino(object: Decl_FunctionDecl_OverloadAmino): Decl_FunctionDecl_Overload {
+    return {
+      overloadId: object.overload_id,
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromAmino(e)) : [],
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
+      resultType: object?.result_type ? Type.fromAmino(object.result_type) : undefined,
+      isInstanceFunction: object.is_instance_function,
+      doc: object.doc
+    };
+  },
+  toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadAmino {
+    const obj: any = {};
+    obj.overload_id = message.overloadId;
+    if (message.params) {
+      obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
+    } else {
+      obj.params = [];
+    }
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e);
+    } else {
+      obj.type_params = [];
+    }
+    obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
+    obj.is_instance_function = message.isInstanceFunction;
+    obj.doc = message.doc;
+    return obj;
+  },
+  fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
+    return Decl_FunctionDecl_Overload.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg): Decl_FunctionDecl_Overload {
+    return Decl_FunctionDecl_Overload.decode(message.value);
+  },
+  toProto(message: Decl_FunctionDecl_Overload): Uint8Array {
+    return Decl_FunctionDecl_Overload.encode(message).finish();
+  },
+  toProtoMsg(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Overload",
+      value: Decl_FunctionDecl_Overload.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 "export const Type = {
-  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.Type",
+  encode(message: Type, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
@@ -966,8 +1373,8 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
     while (reader.pos < end) {
@@ -1053,7 +1460,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.abstractType !== undefined && (obj.abstractType = message.abstractType ? Type_AbstractType.toJSON(message.abstractType) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<Type>): Type {
+  fromPartial(object: Partial<Type>): Type {
     const message = createBaseType();
     message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
     message.null = object.null ?? undefined;
@@ -1103,13 +1510,63 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.error !== undefined && (obj.error = message.error ? Empty.toSDK(message.error) : undefined);
     message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
     return obj;
+  },
+  fromAmino(object: TypeAmino): Type {
+    return {
+      dyn: object?.dyn ? Empty.fromAmino(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
+      listType: object?.list_type ? Type_ListType.fromAmino(object.list_type) : undefined,
+      mapType: object?.map_type ? Type_MapType.fromAmino(object.map_type) : undefined,
+      function: object?.function ? Type_FunctionType.fromAmino(object.function) : undefined,
+      messageType: object?.message_type,
+      typeParam: object?.type_param,
+      type: object?.type ? Type.fromAmino(object.type) : undefined,
+      error: object?.error ? Empty.fromAmino(object.error) : undefined,
+      abstractType: object?.abstract_type ? Type_AbstractType.fromAmino(object.abstract_type) : undefined
+    };
+  },
+  toAmino(message: Type): TypeAmino {
+    const obj: any = {};
+    obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
+    obj.null = message.null;
+    obj.primitive = message.primitive;
+    obj.wrapper = message.wrapper;
+    obj.well_known = message.wellKnown;
+    obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
+    obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
+    obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
+    obj.message_type = message.messageType;
+    obj.type_param = message.typeParam;
+    obj.type = message.type ? Type.toAmino(message.type) : undefined;
+    obj.error = message.error ? Empty.toAmino(message.error) : undefined;
+    obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: TypeAminoMsg): Type {
+    return Type.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TypeProtoMsg): Type {
+    return Type.decode(message.value);
+  },
+  toProto(message: Type): Uint8Array {
+    return Type.encode(message).finish();
+  },
+  toProtoMsg(message: Type): TypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Type",
+      value: Type.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
 "export const Type_MapType = {
-  encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.MapType",
+  encode(message: Type_MapType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
@@ -1118,8 +1575,8 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type_MapType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type_MapType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
     while (reader.pos < end) {
@@ -1150,7 +1607,7 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
+  fromPartial(object: Partial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
@@ -1167,13 +1624,41 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
     message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
     return obj;
+  },
+  fromAmino(object: Type_MapTypeAmino): Type_MapType {
+    return {
+      keyType: object?.key_type ? Type.fromAmino(object.key_type) : undefined,
+      valueType: object?.value_type ? Type.fromAmino(object.value_type) : undefined
+    };
+  },
+  toAmino(message: Type_MapType): Type_MapTypeAmino {
+    const obj: any = {};
+    obj.key_type = message.keyType ? Type.toAmino(message.keyType) : undefined;
+    obj.value_type = message.valueType ? Type.toAmino(message.valueType) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Type_MapTypeAminoMsg): Type_MapType {
+    return Type_MapType.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Type_MapTypeProtoMsg): Type_MapType {
+    return Type_MapType.decode(message.value);
+  },
+  toProto(message: Type_MapType): Uint8Array {
+    return Type_MapType.encode(message).finish();
+  },
+  toProtoMsg(message: Type_MapType): Type_MapTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.MapType",
+      value: Type_MapType.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 "export const CheckedExpr = {
-  encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr",
+  encode(message: CheckedExpr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode({
         key: (key as any),
@@ -1197,8 +1682,8 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckedExpr {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
     while (reader.pos < end) {
@@ -1235,13 +1720,13 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
-        [key: Long]: Reference;
+        [key: bigint]: Reference;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Reference.fromJSON(value);
         return acc;
       }, {}) : {},
       typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
-        [key: Long]: Type;
+        [key: bigint]: Type;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Type.fromJSON(value);
         return acc;
@@ -1270,10 +1755,10 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
+  fromPartial(object: Partial<CheckedExpr>): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
-      [key: Long]: Reference;
+      [key: bigint]: Reference;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[Number(key)] = Reference.fromPartial(value);
@@ -1281,7 +1766,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       return acc;
     }, {});
     message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
-      [key: Long]: Type;
+      [key: bigint]: Type;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[Number(key)] = Type.fromPartial(value);
@@ -1296,13 +1781,13 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
     return {
       referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: Long]: Reference;
+        [key: bigint]: Reference;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Reference.fromSDK(value);
         return acc;
       }, {}) : {},
       typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: Long]: Type;
+        [key: bigint]: Type;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Type.fromSDK(value);
         return acc;
@@ -1330,13 +1815,67 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     obj.expr_version = message.exprVersion;
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
     return obj;
+  },
+  fromAmino(object: CheckedExprAmino): CheckedExpr {
+    return {
+      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
+        [key: bigint]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
+        [key: bigint]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
+      exprVersion: object.expr_version,
+      expr: object?.expr ? Expr.fromAmino(object.expr) : undefined
+    };
+  },
+  toAmino(message: CheckedExpr): CheckedExprAmino {
+    const obj: any = {};
+    obj.reference_map = {};
+    if (message.referenceMap) {
+      Object.entries(message.referenceMap).forEach(([k, v]) => {
+        obj.reference_map[k] = Reference.toAmino(v);
+      });
+    }
+    obj.type_map = {};
+    if (message.typeMap) {
+      Object.entries(message.typeMap).forEach(([k, v]) => {
+        obj.type_map[k] = Type.toAmino(v);
+      });
+    }
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
+    obj.expr_version = message.exprVersion;
+    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CheckedExprAminoMsg): CheckedExpr {
+    return CheckedExpr.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckedExprProtoMsg): CheckedExpr {
+    return CheckedExpr.decode(message.value);
+  },
+  toProto(message: CheckedExpr): Uint8Array {
+    return CheckedExpr.encode(message).finish();
+  },
+  toProtoMsg(message: CheckedExpr): CheckedExprProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.CheckedExpr",
+      value: CheckedExpr.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 "export const Constant = {
-  encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.Constant",
+  encode(message: Constant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
@@ -1366,8 +1905,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Constant {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Constant {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstant();
     while (reader.pos < end) {
@@ -1380,10 +1919,10 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
           message.boolValue = reader.bool();
           break;
         case 3:
-          message.int64Value = (reader.int64() as Long);
+          message.int64Value = reader.int64();
           break;
         case 4:
-          message.uint64Value = (reader.uint64() as Long);
+          message.uint64Value = reader.uint64();
           break;
         case 5:
           message.doubleValue = reader.double();
@@ -1411,8 +1950,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? Long.fromValue(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
+      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
@@ -1433,12 +1972,12 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;
   },
-  fromPartial(object: DeepPartial<Constant>): Constant {
+  fromPartial(object: Partial<Constant>): Constant {
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
@@ -1471,13 +2010,55 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toSDK(message.durationValue) : undefined);
     message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
     return obj;
+  },
+  fromAmino(object: ConstantAmino): Constant {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
+      uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
+      durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
+      timestampValue: object?.timestamp_value
+    };
+  },
+  toAmino(message: Constant): ConstantAmino {
+    const obj: any = {};
+    obj.null_value = message.nullValue;
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
+    obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
+    obj.timestamp_value = message.timestampValue;
+    return obj;
+  },
+  fromAminoMsg(object: ConstantAminoMsg): Constant {
+    return Constant.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ConstantProtoMsg): Constant {
+    return Constant.decode(message.value);
+  },
+  toProto(message: Constant): Uint8Array {
+    return Constant.encode(message).finish();
+  },
+  toProtoMsg(message: Constant): ConstantProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Constant",
+      value: Constant.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/expr/v1alpha1/value Entry 1`] = `
 "export const Entry = {
-  encode(message: Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.Entry",
+  encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
     }
@@ -1486,8 +2067,8 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Entry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
     while (reader.pos < end) {
@@ -1518,7 +2099,7 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<Entry>): Entry {
+  fromPartial(object: Partial<Entry>): Entry {
     const message = createBaseEntry();
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
@@ -1535,6 +2116,33 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: EntryAmino): Entry {
+    return {
+      key: object?.key ? Value.fromAmino(object.key) : undefined,
+      value: object?.value ? Value.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: Entry): EntryAmino {
+    const obj: any = {};
+    obj.key = message.key ? Value.toAmino(message.key) : undefined;
+    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EntryAminoMsg): Entry {
+    return Entry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EntryProtoMsg): Entry {
+    return Entry.decode(message.value);
+  },
+  toProto(message: Entry): Uint8Array {
+    return Entry.encode(message).finish();
+  },
+  toProtoMsg(message: Entry): EntryProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Entry",
+      value: Entry.encode(message).finish()
+    };
   }
 };"
 `;
@@ -1543,14 +2151,15 @@ exports[`google/api/expr/v1alpha1/value Entry 2`] = `[]`;
 
 exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
 "export const MapValue = {
-  encode(message: MapValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1alpha1.MapValue",
+  encode(message: MapValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MapValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MapValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
     while (reader.pos < end) {
@@ -1580,7 +2189,7 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MapValue>): MapValue {
+  fromPartial(object: Partial<MapValue>): MapValue {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
@@ -1598,6 +2207,35 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
       obj.entries = [];
     }
     return obj;
+  },
+  fromAmino(object: MapValueAmino): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MapValue): MapValueAmino {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MapValueAminoMsg): MapValue {
+    return MapValue.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MapValueProtoMsg): MapValue {
+    return MapValue.decode(message.value);
+  },
+  toProto(message: MapValue): Uint8Array {
+    return MapValue.encode(message).finish();
+  },
+  toProtoMsg(message: MapValue): MapValueProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.MapValue",
+      value: MapValue.encode(message).finish()
+    };
   }
 };"
 `;
@@ -1606,7 +2244,8 @@ exports[`google/api/expr/v1alpha1/value MapValue 2`] = `[]`;
 
 exports[`google/api/expr/v1beta1/source 1`] = `
 "export const SourceInfo = {
-  encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.expr.v1beta1.SourceInfo",
+  encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== "") {
       writer.uint32(18).string(message.location);
     }
@@ -1623,8 +2262,8 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
     while (reader.pos < end) {
@@ -1684,7 +2323,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
+  fromPartial(object: Partial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.location = object.location ?? "";
     message.lineOffsets = object.lineOffsets?.map(e => e) || [];
@@ -1725,13 +2364,57 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       });
     }
     return obj;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      location: object.location,
+      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    if (message.lineOffsets) {
+      obj.line_offsets = message.lineOffsets.map(e => e);
+    } else {
+      obj.line_offsets = [];
+    }
+    obj.positions = {};
+    if (message.positions) {
+      Object.entries(message.positions).forEach(([k, v]) => {
+        obj.positions[k] = Math.round(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`google/api/quota keyType 1`] = `
 "export const MetricRule = {
-  encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.MetricRule",
+  encode(message: MetricRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -1743,8 +2426,8 @@ exports[`google/api/quota keyType 1`] = `
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricRule {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
     while (reader.pos < end) {
@@ -1770,9 +2453,9 @@ exports[`google/api/quota keyType 1`] = `
     return {
       selector: isSet(object.selector) ? String(object.selector) : "",
       metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
-        [key: string]: Long;
+        [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = Long.fromValue((value as Long | string));
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {}
     };
@@ -1788,14 +2471,14 @@ exports[`google/api/quota keyType 1`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MetricRule>): MetricRule {
+  fromPartial(object: Partial<MetricRule>): MetricRule {
     const message = createBaseMetricRule();
     message.selector = object.selector ?? "";
     message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
-      [key: string]: Long;
+      [key: string]: bigint;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = Long.fromValue(value);
+        acc[key] = BigInt(value.toString());
       }
       return acc;
     }, {});
@@ -1805,9 +2488,9 @@ exports[`google/api/quota keyType 1`] = `
     return {
       selector: object?.selector,
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
-        [key: string]: Long;
+        [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = Long.fromValue((value as Long | string));
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {}
     };
@@ -1822,6 +2505,43 @@ exports[`google/api/quota keyType 1`] = `
       });
     }
     return obj;
+  },
+  fromAmino(object: MetricRuleAmino): MetricRule {
+    return {
+      selector: object.selector,
+      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
+        [key: string]: bigint;
+      }>((acc, [key, value]) => {
+        acc[key] = BigInt((value as bigint | string).toString());
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: MetricRule): MetricRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.metric_costs = {};
+    if (message.metricCosts) {
+      Object.entries(message.metricCosts).forEach(([k, v]) => {
+        obj.metric_costs[k] = v.toString();
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MetricRuleAminoMsg): MetricRule {
+    return MetricRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricRuleProtoMsg): MetricRule {
+    return MetricRule.decode(message.value);
+  },
+  toProto(message: MetricRule): Uint8Array {
+    return MetricRule.encode(message).finish();
+  },
+  toProtoMsg(message: MetricRule): MetricRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricRule",
+      value: MetricRule.encode(message).finish()
+    };
   }
 };"
 `;
@@ -1830,7 +2550,8 @@ exports[`google/api/quota keyType 2`] = `[]`;
 
 exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 "export const LogEntry = {
-  encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+  encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
     }
@@ -1872,8 +2593,8 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
     while (reader.pos < end) {
@@ -1967,7 +2688,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation ? LogEntrySourceLocation.toJSON(message.sourceLocation) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<LogEntry>): LogEntry {
+  fromPartial(object: Partial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
@@ -2031,6 +2752,63 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     return obj;
+  },
+  fromAmino(object: LogEntryAmino): LogEntry {
+    return {
+      name: object.name,
+      timestamp: object.timestamp,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
+      trace: object.trace,
+      insertId: object.insert_id,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
+      textPayload: object?.text_payload,
+      structPayload: object?.struct_payload ? Struct.fromAmino(object.struct_payload) : undefined,
+      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
+      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined
+    };
+  },
+  toAmino(message: LogEntry): LogEntryAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.timestamp = message.timestamp;
+    obj.severity = message.severity;
+    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
+    obj.trace = message.trace;
+    obj.insert_id = message.insertId;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
+    obj.text_payload = message.textPayload;
+    obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined;
+    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
+    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
+    return LogEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
+    return LogEntry.decode(message.value);
+  },
+  toProto(message: LogEntry): Uint8Array {
+    return LogEntry.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntry): LogEntryProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+      value: LogEntry.encode(message).finish()
+    };
   }
 };"
 `;
@@ -2051,14 +2829,15 @@ export interface PreconditionFailure {
 
 exports[`google/rpc/error_details name collisions 2`] = `
 "export const PreconditionFailure = {
-  encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/google.rpc.PreconditionFailure",
+  encode(message: PreconditionFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PreconditionFailure {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
     while (reader.pos < end) {
@@ -2088,7 +2867,7 @@ exports[`google/rpc/error_details name collisions 2`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
+  fromPartial(object: Partial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
@@ -2106,13 +2885,43 @@ exports[`google/rpc/error_details name collisions 2`] = `
       obj.violations = [];
     }
     return obj;
+  },
+  fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: PreconditionFailure): PreconditionFailureAmino {
+    const obj: any = {};
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
+    return PreconditionFailure.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
+    return PreconditionFailure.decode(message.value);
+  },
+  toProto(message: PreconditionFailure): Uint8Array {
+    return PreconditionFailure.encode(message).finish();
+  },
+  toProtoMsg(message: PreconditionFailure): PreconditionFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.PreconditionFailure",
+      value: PreconditionFailure.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`ibc/core/port/v1/query 1`] = `
 "export const QueryAppVersionRequest = {
-  encode(message: QueryAppVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
+  encode(message: QueryAppVersionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -2130,8 +2939,8 @@ exports[`ibc/core/port/v1/query 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppVersionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAppVersionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionRequest();
     while (reader.pos < end) {
@@ -2177,7 +2986,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.proposedVersion !== undefined && (obj.proposedVersion = message.proposedVersion);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryAppVersionRequest>): QueryAppVersionRequest {
+  fromPartial(object: Partial<QueryAppVersionRequest>): QueryAppVersionRequest {
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
@@ -2203,6 +3012,45 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
     obj.proposed_version = message.proposedVersion;
     return obj;
+  },
+  fromAmino(object: QueryAppVersionRequestAmino): QueryAppVersionRequest {
+    return {
+      portId: object.port_id,
+      connectionId: object.connection_id,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      proposedVersion: object.proposed_version
+    };
+  },
+  toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.connection_id = message.connectionId;
+    obj.ordering = message.ordering;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.proposed_version = message.proposedVersion;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
+    return QueryAppVersionRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAppVersionRequest",
+      value: QueryAppVersionRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAppVersionRequestProtoMsg): QueryAppVersionRequest {
+    return QueryAppVersionRequest.decode(message.value);
+  },
+  toProto(message: QueryAppVersionRequest): Uint8Array {
+    return QueryAppVersionRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
+      value: QueryAppVersionRequest.encode(message).finish()
+    };
   }
 };"
 `;
@@ -2271,6 +3119,23 @@ exports[`ibc/core/port/v1/query 2`] = `
     "name": "Counterparty",
     "type": "typeImport",
   },
+  {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "name": "orderFromJSON",
+    "type": "fromJSONEnum",
+  },
+  {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
+    "name": "Counterparty",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
+    "name": "Counterparty",
+    "type": "typeImport",
+  },
 ]
 `;
 
@@ -2288,7 +3153,8 @@ export interface GenesisState {
 
 exports[`ibc/core/types/v1/genesis name collisions 2`] = `
 "export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.types.v1.GenesisState",
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientGenesis !== undefined) {
       GenesisState1.encode(message.clientGenesis, writer.uint32(10).fork()).ldelim();
     }
@@ -2300,8 +3166,8 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -2337,7 +3203,7 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     message.channelGenesis !== undefined && (obj.channelGenesis = message.channelGenesis ? GenesisState3.toJSON(message.channelGenesis) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+  fromPartial(object: Partial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : undefined;
     message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : undefined;
@@ -2357,6 +3223,41 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     message.connectionGenesis !== undefined && (obj.connection_genesis = message.connectionGenesis ? GenesisState2.toSDK(message.connectionGenesis) : undefined);
     message.channelGenesis !== undefined && (obj.channel_genesis = message.channelGenesis ? GenesisState3.toSDK(message.channelGenesis) : undefined);
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,
+      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : undefined,
+      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis) : undefined;
+    obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis) : undefined;
+    obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/ibc.core.types.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };"
 `;
@@ -2507,12 +3408,49 @@ exports[`ibc/core/types/v1/genesis name collisions 3`] = `
     "name": "GenesisState",
     "type": "typeImport",
   },
+  {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
 ]
 `;
 
 exports[`osmosis/gamm/v1beta1/query 1`] = `
 "export const QueryPoolsResponse = {
-  encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
+  encode(message: QueryPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2521,8 +3459,8 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
     while (reader.pos < end) {
@@ -2557,7 +3495,7 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
+  fromPartial(object: Partial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -2578,17 +3516,55 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryPoolsResponseAmino): QueryPoolsResponse {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryPoolsResponse): QueryPoolsResponseAmino {
+    const obj: any = {};
+    if (message.pools) {
+      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.pools = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryPoolsResponseAminoMsg): QueryPoolsResponse {
+    return QueryPoolsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryPoolsResponse): QueryPoolsResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pools-response",
+      value: QueryPoolsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryPoolsResponseProtoMsg): QueryPoolsResponse {
+    return QueryPoolsResponse.decode(message.value);
+  },
+  toProto(message: QueryPoolsResponse): Uint8Array {
+    return QueryPoolsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryPoolsResponse): QueryPoolsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
+      value: QueryPoolsResponse.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
 "export const MsgJoinPool = {
-  encode(message: MsgJoinPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
+  encode(message: MsgJoinPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (!message.poolId.isZero()) {
+    if (message.poolId !== BigInt(0)) {
       writer.uint32(16).uint64(message.poolId);
     }
     if (message.shareOutAmount !== "") {
@@ -2599,8 +3575,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinPool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgJoinPool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPool();
     while (reader.pos < end) {
@@ -2610,7 +3586,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
           message.sender = reader.string();
           break;
         case 2:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.shareOutAmount = reader.string();
@@ -2628,7 +3604,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromJSON(object: any): MsgJoinPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -2636,7 +3612,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   toJSON(message: MsgJoinPool): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
     if (message.tokenInMaxs) {
       obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
@@ -2645,10 +3621,10 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgJoinPool>): MsgJoinPool {
+  fromPartial(object: Partial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.shareOutAmount = object.shareOutAmount ?? "";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -2672,13 +3648,55 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
       obj.token_in_maxs = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgJoinPoolAmino): MsgJoinPool {
+    return {
+      sender: object.sender,
+      poolId: BigInt(object.pool_id),
+      shareOutAmount: object.share_out_amount,
+      tokenInMaxs: Array.isArray(object?.token_in_maxs) ? object.token_in_maxs.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgJoinPool): MsgJoinPoolAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.share_out_amount = message.shareOutAmount;
+    if (message.tokenInMaxs) {
+      obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.token_in_maxs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgJoinPoolAminoMsg): MsgJoinPool {
+    return MsgJoinPool.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgJoinPool): MsgJoinPoolAminoMsg {
+    return {
+      type: "osmosis/gamm/join-pool",
+      value: MsgJoinPool.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgJoinPoolProtoMsg): MsgJoinPool {
+    return MsgJoinPool.decode(message.value);
+  },
+  toProto(message: MsgJoinPool): Uint8Array {
+    return MsgJoinPool.encode(message).finish();
+  },
+  toProtoMsg(message: MsgJoinPool): MsgJoinPoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
+      value: MsgJoinPool.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
 "export const MsgSwapExactAmountIn = {
-  encode(message: MsgSwapExactAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+  encode(message: MsgSwapExactAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -2693,8 +3711,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountIn {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSwapExactAmountIn {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountIn();
     while (reader.pos < end) {
@@ -2739,7 +3757,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     message.tokenOutMinAmount !== undefined && (obj.tokenOutMinAmount = message.tokenOutMinAmount);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgSwapExactAmountIn>): MsgSwapExactAmountIn {
+  fromPartial(object: Partial<MsgSwapExactAmountIn>): MsgSwapExactAmountIn {
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
@@ -2766,13 +3784,55 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     message.tokenIn !== undefined && (obj.token_in = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
     obj.token_out_min_amount = message.tokenOutMinAmount;
     return obj;
+  },
+  fromAmino(object: MsgSwapExactAmountInAmino): MsgSwapExactAmountIn {
+    return {
+      sender: object.sender,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : [],
+      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : undefined,
+      tokenOutMinAmount: object.token_out_min_amount
+    };
+  },
+  toAmino(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+    obj.token_in = message.tokenIn ? Coin.toAmino(message.tokenIn) : undefined;
+    obj.token_out_min_amount = message.tokenOutMinAmount;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSwapExactAmountInAminoMsg): MsgSwapExactAmountIn {
+    return MsgSwapExactAmountIn.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAminoMsg {
+    return {
+      type: "osmosis/gamm/swap-exact-amount-in",
+      value: MsgSwapExactAmountIn.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSwapExactAmountInProtoMsg): MsgSwapExactAmountIn {
+    return MsgSwapExactAmountIn.decode(message.value);
+  },
+  toProto(message: MsgSwapExactAmountIn): Uint8Array {
+    return MsgSwapExactAmountIn.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSwapExactAmountIn): MsgSwapExactAmountInProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+      value: MsgSwapExactAmountIn.encode(message).finish()
+    };
   }
 };"
 `;
 
 exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
 "export const MsgSwapExactAmountOut = {
-  encode(message: MsgSwapExactAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+  encode(message: MsgSwapExactAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -2787,8 +3847,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountOut {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSwapExactAmountOut {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOut();
     while (reader.pos < end) {
@@ -2833,7 +3893,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut ? Coin.toJSON(message.tokenOut) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgSwapExactAmountOut>): MsgSwapExactAmountOut {
+  fromPartial(object: Partial<MsgSwapExactAmountOut>): MsgSwapExactAmountOut {
     const message = createBaseMsgSwapExactAmountOut();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
@@ -2860,6 +3920,47 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     obj.token_in_max_amount = message.tokenInMaxAmount;
     message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgSwapExactAmountOutAmino): MsgSwapExactAmountOut {
+    return {
+      sender: object.sender,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
+      tokenInMaxAmount: object.token_in_max_amount,
+      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
+    };
+  },
+  toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+    obj.token_in_max_amount = message.tokenInMaxAmount;
+    obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSwapExactAmountOutAminoMsg): MsgSwapExactAmountOut {
+    return MsgSwapExactAmountOut.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAminoMsg {
+    return {
+      type: "osmosis/gamm/swap-exact-amount-out",
+      value: MsgSwapExactAmountOut.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSwapExactAmountOutProtoMsg): MsgSwapExactAmountOut {
+    return MsgSwapExactAmountOut.decode(message.value);
+  },
+  toProto(message: MsgSwapExactAmountOut): Uint8Array {
+    return MsgSwapExactAmountOut.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+      value: MsgSwapExactAmountOut.encode(message).finish()
+    };
   }
 };"
 `;

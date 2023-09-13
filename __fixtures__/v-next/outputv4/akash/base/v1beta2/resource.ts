@@ -42,6 +42,7 @@ function createBaseCPU(): CPU {
   };
 }
 export const CPU = {
+  typeUrl: "/akash.base.v1beta2.CPU",
   encode(message: CPU, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.units !== undefined) {
       ResourceValue.encode(message.units, writer.uint32(10).fork()).ldelim();
@@ -116,6 +117,43 @@ export const CPU = {
       obj.attributes = [];
     }
     return obj;
+  },
+  fromAmino(object: CPUAmino): CPU {
+    return {
+      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CPU): CPUAmino {
+    const obj: any = {};
+    obj.units = message.units ? ResourceValue.toAmino(message.units) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CPUAminoMsg): CPU {
+    return CPU.fromAmino(object.value);
+  },
+  toAminoMsg(message: CPU): CPUAminoMsg {
+    return {
+      type: "akash/base/v1beta2/cpu",
+      value: CPU.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CPUProtoMsg): CPU {
+    return CPU.decode(message.value);
+  },
+  toProto(message: CPU): Uint8Array {
+    return CPU.encode(message).finish();
+  },
+  toProtoMsg(message: CPU): CPUProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.CPU",
+      value: CPU.encode(message).finish()
+    };
   }
 };
 function createBaseMemory(): Memory {
@@ -125,6 +163,7 @@ function createBaseMemory(): Memory {
   };
 }
 export const Memory = {
+  typeUrl: "/akash.base.v1beta2.Memory",
   encode(message: Memory, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
@@ -199,6 +238,43 @@ export const Memory = {
       obj.attributes = [];
     }
     return obj;
+  },
+  fromAmino(object: MemoryAmino): Memory {
+    return {
+      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Memory): MemoryAmino {
+    const obj: any = {};
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MemoryAminoMsg): Memory {
+    return Memory.fromAmino(object.value);
+  },
+  toAminoMsg(message: Memory): MemoryAminoMsg {
+    return {
+      type: "akash/base/v1beta2/memory",
+      value: Memory.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MemoryProtoMsg): Memory {
+    return Memory.decode(message.value);
+  },
+  toProto(message: Memory): Uint8Array {
+    return Memory.encode(message).finish();
+  },
+  toProtoMsg(message: Memory): MemoryProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.Memory",
+      value: Memory.encode(message).finish()
+    };
   }
 };
 function createBaseStorage(): Storage {
@@ -209,6 +285,7 @@ function createBaseStorage(): Storage {
   };
 }
 export const Storage = {
+  typeUrl: "/akash.base.v1beta2.Storage",
   encode(message: Storage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -295,5 +372,44 @@ export const Storage = {
       obj.attributes = [];
     }
     return obj;
+  },
+  fromAmino(object: StorageAmino): Storage {
+    return {
+      name: object.name,
+      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Storage): StorageAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: StorageAminoMsg): Storage {
+    return Storage.fromAmino(object.value);
+  },
+  toAminoMsg(message: Storage): StorageAminoMsg {
+    return {
+      type: "akash/base/v1beta2/storage",
+      value: Storage.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: StorageProtoMsg): Storage {
+    return Storage.decode(message.value);
+  },
+  toProto(message: Storage): Uint8Array {
+    return Storage.encode(message).finish();
+  },
+  toProtoMsg(message: Storage): StorageProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.Storage",
+      value: Storage.encode(message).finish()
+    };
   }
 };

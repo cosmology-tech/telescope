@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -17,7 +17,7 @@ export interface Incentive {
   /** distribution start time */
   startTime: Date;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
-  totalGas: Long;
+  totalGas: bigint;
 }
 export interface IncentiveProtoMsg {
   typeUrl: "/evmos.incentives.v1.Incentive";
@@ -52,7 +52,7 @@ export interface IncentiveSDKType {
   allocations: DecCoinSDKType[];
   epochs: number;
   start_time: Date;
-  total_gas: Long;
+  total_gas: bigint;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeter {
@@ -61,7 +61,7 @@ export interface GasMeter {
   /** participant address that interacts with the incentive */
   participant: string;
   /** cumulative gas spent during the epoch */
-  cumulativeGas: Long;
+  cumulativeGas: bigint;
 }
 export interface GasMeterProtoMsg {
   typeUrl: "/evmos.incentives.v1.GasMeter";
@@ -84,10 +84,11 @@ export interface GasMeterAminoMsg {
 export interface GasMeterSDKType {
   contract: string;
   participant: string;
-  cumulative_gas: Long;
+  cumulative_gas: bigint;
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposal {
+  $typeUrl?: string;
   /** title of the proposal */
   title: string;
   /** proposal description */
@@ -122,6 +123,7 @@ export interface RegisterIncentiveProposalAminoMsg {
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
+  $typeUrl?: string;
   title: string;
   description: string;
   contract: string;
@@ -166,12 +168,12 @@ function createBaseIncentive(): Incentive {
     allocations: [],
     epochs: 0,
     startTime: new Date(),
-    totalGas: Long.UZERO
+    totalGas: BigInt(0)
   };
 }
 export const Incentive = {
   typeUrl: "/evmos.incentives.v1.Incentive",
-  encode(message: Incentive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Incentive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
@@ -184,13 +186,13 @@ export const Incentive = {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
     }
-    if (!message.totalGas.isZero()) {
+    if (message.totalGas !== BigInt(0)) {
       writer.uint32(40).uint64(message.totalGas);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Incentive {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Incentive {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentive();
     while (reader.pos < end) {
@@ -209,7 +211,7 @@ export const Incentive = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.totalGas = (reader.uint64() as Long);
+          message.totalGas = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -224,7 +226,7 @@ export const Incentive = {
     if (Array.isArray(object?.allocations)) obj.allocations = object.allocations.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.totalGas)) obj.totalGas = Long.fromValue(object.totalGas);
+    if (isSet(object.totalGas)) obj.totalGas = BigInt(object.totalGas.toString());
     return obj;
   },
   toJSON(message: Incentive): unknown {
@@ -237,7 +239,7 @@ export const Incentive = {
     }
     message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.totalGas !== undefined && (obj.totalGas = (message.totalGas || Long.UZERO).toString());
+    message.totalGas !== undefined && (obj.totalGas = (message.totalGas || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Incentive>): Incentive {
@@ -247,7 +249,7 @@ export const Incentive = {
     message.epochs = object.epochs ?? 0;
     message.startTime = object.startTime ?? undefined;
     if (object.totalGas !== undefined && object.totalGas !== null) {
-      message.totalGas = Long.fromValue(object.totalGas);
+      message.totalGas = BigInt(object.totalGas.toString());
     }
     return message;
   },
@@ -279,7 +281,7 @@ export const Incentive = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
       startTime: object.start_time,
-      totalGas: Long.fromString(object.total_gas)
+      totalGas: BigInt(object.total_gas)
     };
   },
   toAmino(message: Incentive): IncentiveAmino {
@@ -315,25 +317,25 @@ function createBaseGasMeter(): GasMeter {
   return {
     contract: "",
     participant: "",
-    cumulativeGas: Long.UZERO
+    cumulativeGas: BigInt(0)
   };
 }
 export const GasMeter = {
   typeUrl: "/evmos.incentives.v1.GasMeter",
-  encode(message: GasMeter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GasMeter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
     if (message.participant !== "") {
       writer.uint32(18).string(message.participant);
     }
-    if (!message.cumulativeGas.isZero()) {
+    if (message.cumulativeGas !== BigInt(0)) {
       writer.uint32(24).uint64(message.cumulativeGas);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GasMeter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GasMeter {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGasMeter();
     while (reader.pos < end) {
@@ -346,7 +348,7 @@ export const GasMeter = {
           message.participant = reader.string();
           break;
         case 3:
-          message.cumulativeGas = (reader.uint64() as Long);
+          message.cumulativeGas = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -359,14 +361,14 @@ export const GasMeter = {
     const obj = createBaseGasMeter();
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.participant)) obj.participant = String(object.participant);
-    if (isSet(object.cumulativeGas)) obj.cumulativeGas = Long.fromValue(object.cumulativeGas);
+    if (isSet(object.cumulativeGas)) obj.cumulativeGas = BigInt(object.cumulativeGas.toString());
     return obj;
   },
   toJSON(message: GasMeter): unknown {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     message.participant !== undefined && (obj.participant = message.participant);
-    message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || Long.UZERO).toString());
+    message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GasMeter>): GasMeter {
@@ -374,7 +376,7 @@ export const GasMeter = {
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
     if (object.cumulativeGas !== undefined && object.cumulativeGas !== null) {
-      message.cumulativeGas = Long.fromValue(object.cumulativeGas);
+      message.cumulativeGas = BigInt(object.cumulativeGas.toString());
     }
     return message;
   },
@@ -396,7 +398,7 @@ export const GasMeter = {
     return {
       contract: object.contract,
       participant: object.participant,
-      cumulativeGas: Long.fromString(object.cumulative_gas)
+      cumulativeGas: BigInt(object.cumulative_gas)
     };
   },
   toAmino(message: GasMeter): GasMeterAmino {
@@ -424,6 +426,7 @@ export const GasMeter = {
 };
 function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
   return {
+    $typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
     title: "",
     description: "",
     contract: "",
@@ -433,7 +436,7 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
 }
 export const RegisterIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
-  encode(message: RegisterIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RegisterIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -451,8 +454,8 @@ export const RegisterIncentiveProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RegisterIncentiveProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RegisterIncentiveProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterIncentiveProposal();
     while (reader.pos < end) {
@@ -580,7 +583,7 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
 }
 export const CancelIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
-  encode(message: CancelIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CancelIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -592,8 +595,8 @@ export const CancelIncentiveProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CancelIncentiveProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CancelIncentiveProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelIncentiveProposal();
     while (reader.pos < end) {

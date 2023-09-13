@@ -125,16 +125,9 @@ interface TelescopeOpts {
         // temporary field for backwards compat
 
         /**
-        * @deprecated The logic of useLegacyInlineEncoding will be deprecated.
+        * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
         */
         useLegacyInlineEncoding?: boolean;
-
-        /**
-        * legacy option, if useLegacyInlineEncoding is set, this will be ignored.
-        *
-        * @deprecated The logic of useRecursiveV2encoding will be deprecated after v1.0.
-        */
-        useRecursiveV2encoding?: boolean;
     };
 
     lcdClients?: {
@@ -238,7 +231,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     logLevel: TelescopeLogLevel.None,
 
     interfaces: {
-        enabled: false,
+        enabled: true,
         useUnionTypes: false,
     },
 
@@ -258,10 +251,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toSDK: false,
             fromSDK: false,
             fromSDKJSON: false,
-            toAmino: false,
-            fromAmino: false,
-            toProto: false,
-            fromProto: false,
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
         },
         strictNullCheckForPrototypeMethods: false,
         includePackageVar: false,
@@ -269,19 +262,19 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         allowUndefinedTypes: false,
         useOptionalNullable: true,
 
-        addTypeUrlToObjects: false,
+        addTypeUrlToObjects: true,
         addAminoTypeToObjects: false,
-        addTypeUrlToDecoders: false,
+        addTypeUrlToDecoders: true,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: false
+              useCosmosSDKDec: true
             },
-            num64: 'long',
-            useDeepPartial: true,
+            num64: 'bigint',
+            useDeepPartial: false,
             useExact: false,
             timestamp: 'date',
             duration: 'duration',
@@ -318,8 +311,6 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
         },
-        // TODO:: set default value here after v1.0
-        // useLegacyInlineEncoding: true
     },
     lcdClients: {
         bundle: true,

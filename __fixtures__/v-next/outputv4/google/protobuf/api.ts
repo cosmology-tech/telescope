@@ -288,6 +288,7 @@ function createBaseApi(): Api {
   };
 }
 export const Api = {
+  typeUrl: "/google.protobuf.Api",
   encode(message: Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -438,6 +439,55 @@ export const Api = {
     }
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
+  },
+  fromAmino(object: ApiAmino): Api {
+    return {
+      name: object.name,
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromAmino(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      version: object.version,
+      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
+      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromAmino(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toAmino(message: Api): ApiAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.methods) {
+      obj.methods = message.methods.map(e => e ? Method.toAmino(e) : undefined);
+    } else {
+      obj.methods = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.version = message.version;
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
+    if (message.mixins) {
+      obj.mixins = message.mixins.map(e => e ? Mixin.toAmino(e) : undefined);
+    } else {
+      obj.mixins = [];
+    }
+    obj.syntax = message.syntax;
+    return obj;
+  },
+  fromAminoMsg(object: ApiAminoMsg): Api {
+    return Api.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ApiProtoMsg): Api {
+    return Api.decode(message.value);
+  },
+  toProto(message: Api): Uint8Array {
+    return Api.encode(message).finish();
+  },
+  toProtoMsg(message: Api): ApiProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Api",
+      value: Api.encode(message).finish()
+    };
   }
 };
 function createBaseMethod(): Method {
@@ -452,6 +502,7 @@ function createBaseMethod(): Method {
   };
 }
 export const Method = {
+  typeUrl: "/google.protobuf.Method",
   encode(message: Method, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -584,6 +635,47 @@ export const Method = {
     }
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
+  },
+  fromAmino(object: MethodAmino): Method {
+    return {
+      name: object.name,
+      requestTypeUrl: object.request_type_url,
+      requestStreaming: object.request_streaming,
+      responseTypeUrl: object.response_type_url,
+      responseStreaming: object.response_streaming,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toAmino(message: Method): MethodAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.request_type_url = message.requestTypeUrl;
+    obj.request_streaming = message.requestStreaming;
+    obj.response_type_url = message.responseTypeUrl;
+    obj.response_streaming = message.responseStreaming;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.syntax = message.syntax;
+    return obj;
+  },
+  fromAminoMsg(object: MethodAminoMsg): Method {
+    return Method.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MethodProtoMsg): Method {
+    return Method.decode(message.value);
+  },
+  toProto(message: Method): Uint8Array {
+    return Method.encode(message).finish();
+  },
+  toProtoMsg(message: Method): MethodProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Method",
+      value: Method.encode(message).finish()
+    };
   }
 };
 function createBaseMixin(): Mixin {
@@ -593,6 +685,7 @@ function createBaseMixin(): Mixin {
   };
 }
 export const Mixin = {
+  typeUrl: "/google.protobuf.Mixin",
   encode(message: Mixin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -657,5 +750,32 @@ export const Mixin = {
     obj.name = message.name;
     obj.root = message.root;
     return obj;
+  },
+  fromAmino(object: MixinAmino): Mixin {
+    return {
+      name: object.name,
+      root: object.root
+    };
+  },
+  toAmino(message: Mixin): MixinAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.root = message.root;
+    return obj;
+  },
+  fromAminoMsg(object: MixinAminoMsg): Mixin {
+    return Mixin.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MixinProtoMsg): Mixin {
+    return Mixin.decode(message.value);
+  },
+  toProto(message: Mixin): Uint8Array {
+    return Mixin.encode(message).finish();
+  },
+  toProtoMsg(message: Mixin): MixinProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Mixin",
+      value: Mixin.encode(message).finish()
+    };
   }
 };

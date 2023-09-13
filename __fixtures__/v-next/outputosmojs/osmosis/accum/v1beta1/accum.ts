@@ -32,6 +32,7 @@ function createBaseAccumulatorContent(): AccumulatorContent {
   };
 }
 export const AccumulatorContent = {
+  typeUrl: "/osmosis.accum.v1beta1.AccumulatorContent",
   encode(message: AccumulatorContent, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.accumValue) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -104,12 +105,50 @@ export const AccumulatorContent = {
     }
     obj.total_shares = message.totalShares;
     return obj;
+  },
+  fromAmino(object: AccumulatorContentAmino): AccumulatorContent {
+    return {
+      accumValue: Array.isArray(object?.accum_value) ? object.accum_value.map((e: any) => DecCoin.fromAmino(e)) : [],
+      totalShares: object.total_shares
+    };
+  },
+  toAmino(message: AccumulatorContent): AccumulatorContentAmino {
+    const obj: any = {};
+    if (message.accumValue) {
+      obj.accum_value = message.accumValue.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.accum_value = [];
+    }
+    obj.total_shares = message.totalShares;
+    return obj;
+  },
+  fromAminoMsg(object: AccumulatorContentAminoMsg): AccumulatorContent {
+    return AccumulatorContent.fromAmino(object.value);
+  },
+  toAminoMsg(message: AccumulatorContent): AccumulatorContentAminoMsg {
+    return {
+      type: "osmosis/accum/accumulator-content",
+      value: AccumulatorContent.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: AccumulatorContentProtoMsg): AccumulatorContent {
+    return AccumulatorContent.decode(message.value);
+  },
+  toProto(message: AccumulatorContent): Uint8Array {
+    return AccumulatorContent.encode(message).finish();
+  },
+  toProtoMsg(message: AccumulatorContent): AccumulatorContentProtoMsg {
+    return {
+      typeUrl: "/osmosis.accum.v1beta1.AccumulatorContent",
+      value: AccumulatorContent.encode(message).finish()
+    };
   }
 };
 function createBaseOptions(): Options {
   return {};
 }
 export const Options = {
+  typeUrl: "/osmosis.accum.v1beta1.Options",
   encode(_: Options, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -147,6 +186,34 @@ export const Options = {
   toSDK(_: Options): OptionsSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: OptionsAmino): Options {
+    return {};
+  },
+  toAmino(_: Options): OptionsAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: OptionsAminoMsg): Options {
+    return Options.fromAmino(object.value);
+  },
+  toAminoMsg(message: Options): OptionsAminoMsg {
+    return {
+      type: "osmosis/accum/options",
+      value: Options.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: OptionsProtoMsg): Options {
+    return Options.decode(message.value);
+  },
+  toProto(message: Options): Uint8Array {
+    return Options.encode(message).finish();
+  },
+  toProtoMsg(message: Options): OptionsProtoMsg {
+    return {
+      typeUrl: "/osmosis.accum.v1beta1.Options",
+      value: Options.encode(message).finish()
+    };
   }
 };
 function createBaseRecord(): Record {
@@ -158,6 +225,7 @@ function createBaseRecord(): Record {
   };
 }
 export const Record = {
+  typeUrl: "/osmosis.accum.v1beta1.Record",
   encode(message: Record, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numShares !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.numShares, 18).atomics);
@@ -262,5 +330,50 @@ export const Record = {
     }
     message.options !== undefined && (obj.options = message.options ? Options.toSDK(message.options) : undefined);
     return obj;
+  },
+  fromAmino(object: RecordAmino): Record {
+    return {
+      numShares: object.num_shares,
+      initAccumValue: Array.isArray(object?.init_accum_value) ? object.init_accum_value.map((e: any) => DecCoin.fromAmino(e)) : [],
+      unclaimedRewards: Array.isArray(object?.unclaimed_rewards) ? object.unclaimed_rewards.map((e: any) => DecCoin.fromAmino(e)) : [],
+      options: object?.options ? Options.fromAmino(object.options) : undefined
+    };
+  },
+  toAmino(message: Record): RecordAmino {
+    const obj: any = {};
+    obj.num_shares = message.numShares;
+    if (message.initAccumValue) {
+      obj.init_accum_value = message.initAccumValue.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.init_accum_value = [];
+    }
+    if (message.unclaimedRewards) {
+      obj.unclaimed_rewards = message.unclaimedRewards.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.unclaimed_rewards = [];
+    }
+    obj.options = message.options ? Options.toAmino(message.options) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: RecordAminoMsg): Record {
+    return Record.fromAmino(object.value);
+  },
+  toAminoMsg(message: Record): RecordAminoMsg {
+    return {
+      type: "osmosis/accum/record",
+      value: Record.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: RecordProtoMsg): Record {
+    return Record.decode(message.value);
+  },
+  toProto(message: Record): Uint8Array {
+    return Record.encode(message).finish();
+  },
+  toProtoMsg(message: Record): RecordProtoMsg {
+    return {
+      typeUrl: "/osmosis.accum.v1beta1.Record",
+      value: Record.encode(message).finish()
+    };
   }
 };

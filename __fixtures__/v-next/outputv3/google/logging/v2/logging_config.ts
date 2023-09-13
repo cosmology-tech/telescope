@@ -1,7 +1,7 @@
 import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../protobuf/field_mask";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
@@ -3014,7 +3014,7 @@ export interface CopyLogEntriesMetadataSDKType {
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
-  logEntriesCopiedCount: Long;
+  logEntriesCopiedCount: bigint;
 }
 export interface CopyLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
@@ -3031,7 +3031,7 @@ export interface CopyLogEntriesResponseAminoMsg {
 }
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseSDKType {
-  log_entries_copied_count: Long;
+  log_entries_copied_count: bigint;
 }
 function createBaseLogBucket(): LogBucket {
   return {
@@ -3048,7 +3048,7 @@ function createBaseLogBucket(): LogBucket {
 }
 export const LogBucket = {
   typeUrl: "/google.logging.v2.LogBucket",
-  encode(message: LogBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3078,8 +3078,8 @@ export const LogBucket = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogBucket {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogBucket {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogBucket();
     while (reader.pos < end) {
@@ -3251,7 +3251,7 @@ function createBaseLogView(): LogView {
 }
 export const LogView = {
   typeUrl: "/google.logging.v2.LogView",
-  encode(message: LogView, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogView, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3269,8 +3269,8 @@ export const LogView = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogView {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogView {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogView();
     while (reader.pos < end) {
@@ -3395,7 +3395,7 @@ function createBaseLogSink(): LogSink {
 }
 export const LogSink = {
   typeUrl: "/google.logging.v2.LogSink",
-  encode(message: LogSink, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogSink, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3434,8 +3434,8 @@ export const LogSink = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogSink {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogSink {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSink();
     while (reader.pos < end) {
@@ -3634,7 +3634,7 @@ function createBaseBigQueryOptions(): BigQueryOptions {
 }
 export const BigQueryOptions = {
   typeUrl: "/google.logging.v2.BigQueryOptions",
-  encode(message: BigQueryOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BigQueryOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.usePartitionedTables === true) {
       writer.uint32(8).bool(message.usePartitionedTables);
     }
@@ -3643,8 +3643,8 @@ export const BigQueryOptions = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BigQueryOptions {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BigQueryOptions {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBigQueryOptions();
     while (reader.pos < end) {
@@ -3730,7 +3730,7 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
 }
 export const ListBucketsRequest = {
   typeUrl: "/google.logging.v2.ListBucketsRequest",
-  encode(message: ListBucketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListBucketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -3742,8 +3742,8 @@ export const ListBucketsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListBucketsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsRequest();
     while (reader.pos < end) {
@@ -3838,7 +3838,7 @@ function createBaseListBucketsResponse(): ListBucketsResponse {
 }
 export const ListBucketsResponse = {
   typeUrl: "/google.logging.v2.ListBucketsResponse",
-  encode(message: ListBucketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListBucketsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -3847,8 +3847,8 @@ export const ListBucketsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListBucketsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsResponse();
     while (reader.pos < end) {
@@ -3946,7 +3946,7 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
 }
 export const CreateBucketRequest = {
   typeUrl: "/google.logging.v2.CreateBucketRequest",
-  encode(message: CreateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -3958,8 +3958,8 @@ export const CreateBucketRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateBucketRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreateBucketRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateBucketRequest();
     while (reader.pos < end) {
@@ -4057,7 +4057,7 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
 }
 export const UpdateBucketRequest = {
   typeUrl: "/google.logging.v2.UpdateBucketRequest",
-  encode(message: UpdateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4069,8 +4069,8 @@ export const UpdateBucketRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateBucketRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateBucketRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateBucketRequest();
     while (reader.pos < end) {
@@ -4168,14 +4168,14 @@ function createBaseGetBucketRequest(): GetBucketRequest {
 }
 export const GetBucketRequest = {
   typeUrl: "/google.logging.v2.GetBucketRequest",
-  encode(message: GetBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetBucketRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetBucketRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBucketRequest();
     while (reader.pos < end) {
@@ -4249,14 +4249,14 @@ function createBaseDeleteBucketRequest(): DeleteBucketRequest {
 }
 export const DeleteBucketRequest = {
   typeUrl: "/google.logging.v2.DeleteBucketRequest",
-  encode(message: DeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteBucketRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeleteBucketRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteBucketRequest();
     while (reader.pos < end) {
@@ -4330,14 +4330,14 @@ function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
 }
 export const UndeleteBucketRequest = {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest",
-  encode(message: UndeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UndeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteBucketRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UndeleteBucketRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteBucketRequest();
     while (reader.pos < end) {
@@ -4413,7 +4413,7 @@ function createBaseListViewsRequest(): ListViewsRequest {
 }
 export const ListViewsRequest = {
   typeUrl: "/google.logging.v2.ListViewsRequest",
-  encode(message: ListViewsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListViewsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -4425,8 +4425,8 @@ export const ListViewsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListViewsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsRequest();
     while (reader.pos < end) {
@@ -4521,7 +4521,7 @@ function createBaseListViewsResponse(): ListViewsResponse {
 }
 export const ListViewsResponse = {
   typeUrl: "/google.logging.v2.ListViewsResponse",
-  encode(message: ListViewsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListViewsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -4530,8 +4530,8 @@ export const ListViewsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListViewsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsResponse();
     while (reader.pos < end) {
@@ -4629,7 +4629,7 @@ function createBaseCreateViewRequest(): CreateViewRequest {
 }
 export const CreateViewRequest = {
   typeUrl: "/google.logging.v2.CreateViewRequest",
-  encode(message: CreateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -4641,8 +4641,8 @@ export const CreateViewRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateViewRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreateViewRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateViewRequest();
     while (reader.pos < end) {
@@ -4740,7 +4740,7 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
 }
 export const UpdateViewRequest = {
   typeUrl: "/google.logging.v2.UpdateViewRequest",
-  encode(message: UpdateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4752,8 +4752,8 @@ export const UpdateViewRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateViewRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateViewRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateViewRequest();
     while (reader.pos < end) {
@@ -4851,14 +4851,14 @@ function createBaseGetViewRequest(): GetViewRequest {
 }
 export const GetViewRequest = {
   typeUrl: "/google.logging.v2.GetViewRequest",
-  encode(message: GetViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetViewRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetViewRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetViewRequest();
     while (reader.pos < end) {
@@ -4932,14 +4932,14 @@ function createBaseDeleteViewRequest(): DeleteViewRequest {
 }
 export const DeleteViewRequest = {
   typeUrl: "/google.logging.v2.DeleteViewRequest",
-  encode(message: DeleteViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteViewRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeleteViewRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteViewRequest();
     while (reader.pos < end) {
@@ -5015,7 +5015,7 @@ function createBaseListSinksRequest(): ListSinksRequest {
 }
 export const ListSinksRequest = {
   typeUrl: "/google.logging.v2.ListSinksRequest",
-  encode(message: ListSinksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListSinksRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -5027,8 +5027,8 @@ export const ListSinksRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListSinksRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksRequest();
     while (reader.pos < end) {
@@ -5123,7 +5123,7 @@ function createBaseListSinksResponse(): ListSinksResponse {
 }
 export const ListSinksResponse = {
   typeUrl: "/google.logging.v2.ListSinksResponse",
-  encode(message: ListSinksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListSinksResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -5132,8 +5132,8 @@ export const ListSinksResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListSinksResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksResponse();
     while (reader.pos < end) {
@@ -5229,14 +5229,14 @@ function createBaseGetSinkRequest(): GetSinkRequest {
 }
 export const GetSinkRequest = {
   typeUrl: "/google.logging.v2.GetSinkRequest",
-  encode(message: GetSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSinkRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSinkRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSinkRequest();
     while (reader.pos < end) {
@@ -5312,7 +5312,7 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
 }
 export const CreateSinkRequest = {
   typeUrl: "/google.logging.v2.CreateSinkRequest",
-  encode(message: CreateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -5324,8 +5324,8 @@ export const CreateSinkRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateSinkRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreateSinkRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateSinkRequest();
     while (reader.pos < end) {
@@ -5424,7 +5424,7 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
 }
 export const UpdateSinkRequest = {
   typeUrl: "/google.logging.v2.UpdateSinkRequest",
-  encode(message: UpdateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
@@ -5439,8 +5439,8 @@ export const UpdateSinkRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSinkRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateSinkRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSinkRequest();
     while (reader.pos < end) {
@@ -5548,14 +5548,14 @@ function createBaseDeleteSinkRequest(): DeleteSinkRequest {
 }
 export const DeleteSinkRequest = {
   typeUrl: "/google.logging.v2.DeleteSinkRequest",
-  encode(message: DeleteSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSinkRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeleteSinkRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSinkRequest();
     while (reader.pos < end) {
@@ -5634,7 +5634,7 @@ function createBaseLogExclusion(): LogExclusion {
 }
 export const LogExclusion = {
   typeUrl: "/google.logging.v2.LogExclusion",
-  encode(message: LogExclusion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogExclusion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -5655,8 +5655,8 @@ export const LogExclusion = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusion {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogExclusion {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogExclusion();
     while (reader.pos < end) {
@@ -5782,7 +5782,7 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
 }
 export const ListExclusionsRequest = {
   typeUrl: "/google.logging.v2.ListExclusionsRequest",
-  encode(message: ListExclusionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListExclusionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -5794,8 +5794,8 @@ export const ListExclusionsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListExclusionsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsRequest();
     while (reader.pos < end) {
@@ -5890,7 +5890,7 @@ function createBaseListExclusionsResponse(): ListExclusionsResponse {
 }
 export const ListExclusionsResponse = {
   typeUrl: "/google.logging.v2.ListExclusionsResponse",
-  encode(message: ListExclusionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListExclusionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -5899,8 +5899,8 @@ export const ListExclusionsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListExclusionsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsResponse();
     while (reader.pos < end) {
@@ -5996,14 +5996,14 @@ function createBaseGetExclusionRequest(): GetExclusionRequest {
 }
 export const GetExclusionRequest = {
   typeUrl: "/google.logging.v2.GetExclusionRequest",
-  encode(message: GetExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetExclusionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetExclusionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetExclusionRequest();
     while (reader.pos < end) {
@@ -6078,7 +6078,7 @@ function createBaseCreateExclusionRequest(): CreateExclusionRequest {
 }
 export const CreateExclusionRequest = {
   typeUrl: "/google.logging.v2.CreateExclusionRequest",
-  encode(message: CreateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -6087,8 +6087,8 @@ export const CreateExclusionRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateExclusionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreateExclusionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateExclusionRequest();
     while (reader.pos < end) {
@@ -6176,7 +6176,7 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
 }
 export const UpdateExclusionRequest = {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest",
-  encode(message: UpdateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6188,8 +6188,8 @@ export const UpdateExclusionRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateExclusionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateExclusionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateExclusionRequest();
     while (reader.pos < end) {
@@ -6287,14 +6287,14 @@ function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
 }
 export const DeleteExclusionRequest = {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest",
-  encode(message: DeleteExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteExclusionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeleteExclusionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteExclusionRequest();
     while (reader.pos < end) {
@@ -6368,14 +6368,14 @@ function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
 }
 export const GetCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
-  encode(message: GetCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetCmekSettingsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetCmekSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCmekSettingsRequest();
     while (reader.pos < end) {
@@ -6451,7 +6451,7 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
 }
 export const UpdateCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
-  encode(message: UpdateCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6463,8 +6463,8 @@ export const UpdateCmekSettingsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateCmekSettingsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateCmekSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateCmekSettingsRequest();
     while (reader.pos < end) {
@@ -6564,7 +6564,7 @@ function createBaseCmekSettings(): CmekSettings {
 }
 export const CmekSettings = {
   typeUrl: "/google.logging.v2.CmekSettings",
-  encode(message: CmekSettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CmekSettings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6576,8 +6576,8 @@ export const CmekSettings = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettings {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CmekSettings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCmekSettings();
     while (reader.pos < end) {
@@ -6671,14 +6671,14 @@ function createBaseGetSettingsRequest(): GetSettingsRequest {
 }
 export const GetSettingsRequest = {
   typeUrl: "/google.logging.v2.GetSettingsRequest",
-  encode(message: GetSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSettingsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSettingsRequest();
     while (reader.pos < end) {
@@ -6754,7 +6754,7 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
 }
 export const UpdateSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest",
-  encode(message: UpdateSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6766,8 +6766,8 @@ export const UpdateSettingsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSettingsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSettingsRequest();
     while (reader.pos < end) {
@@ -6869,7 +6869,7 @@ function createBaseSettings(): Settings {
 }
 export const Settings = {
   typeUrl: "/google.logging.v2.Settings",
-  encode(message: Settings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Settings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6887,8 +6887,8 @@ export const Settings = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Settings {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Settings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettings();
     while (reader.pos < end) {
@@ -7004,7 +7004,7 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
 }
 export const CopyLogEntriesRequest = {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
-  encode(message: CopyLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CopyLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -7016,8 +7016,8 @@ export const CopyLogEntriesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CopyLogEntriesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesRequest();
     while (reader.pos < end) {
@@ -7117,7 +7117,7 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
 }
 export const CopyLogEntriesMetadata = {
   typeUrl: "/google.logging.v2.CopyLogEntriesMetadata",
-  encode(message: CopyLogEntriesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CopyLogEntriesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
     }
@@ -7141,8 +7141,8 @@ export const CopyLogEntriesMetadata = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CopyLogEntriesMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesMetadata();
     while (reader.pos < end) {
@@ -7273,26 +7273,26 @@ export const CopyLogEntriesMetadata = {
 };
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   return {
-    logEntriesCopiedCount: Long.ZERO
+    logEntriesCopiedCount: BigInt(0)
   };
 }
 export const CopyLogEntriesResponse = {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
-  encode(message: CopyLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.logEntriesCopiedCount.isZero()) {
+  encode(message: CopyLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.logEntriesCopiedCount !== BigInt(0)) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CopyLogEntriesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.logEntriesCopiedCount = (reader.int64() as Long);
+          message.logEntriesCopiedCount = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -7303,18 +7303,18 @@ export const CopyLogEntriesResponse = {
   },
   fromJSON(object: any): CopyLogEntriesResponse {
     const obj = createBaseCopyLogEntriesResponse();
-    if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = Long.fromValue(object.logEntriesCopiedCount);
+    if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
     return obj;
   },
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
-    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || Long.ZERO).toString());
+    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
     if (object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null) {
-      message.logEntriesCopiedCount = Long.fromValue(object.logEntriesCopiedCount);
+      message.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
     }
     return message;
   },
@@ -7330,7 +7330,7 @@ export const CopyLogEntriesResponse = {
   },
   fromAmino(object: CopyLogEntriesResponseAmino): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: Long.fromString(object.log_entries_copied_count)
+      logEntriesCopiedCount: BigInt(object.log_entries_copied_count)
     };
   },
   toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {

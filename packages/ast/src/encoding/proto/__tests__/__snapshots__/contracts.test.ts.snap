@@ -16,7 +16,8 @@ export interface MsgExecuteContract {
 
 exports[`MsgExecuteContract interface 2`] = `
 "export const MsgExecuteContract = {
-  encode(message: MsgExecuteContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+  encode(message: MsgExecuteContract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -31,8 +32,8 @@ exports[`MsgExecuteContract interface 2`] = `
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecuteContract {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgExecuteContract {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContract();
     while (reader.pos < end) {
@@ -77,7 +78,7 @@ exports[`MsgExecuteContract interface 2`] = `
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
+  fromPartial(object: Partial<MsgExecuteContract>): MsgExecuteContract {
     const message = createBaseMsgExecuteContract();
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
@@ -104,6 +105,47 @@ exports[`MsgExecuteContract interface 2`] = `
       obj.funds = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgExecuteContractAmino): MsgExecuteContract {
+    return {
+      sender: object.sender,
+      contract: object.contract,
+      msg: toUtf8(JSON.stringify(object.msg)),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgExecuteContract): MsgExecuteContractAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgExecuteContractAminoMsg): MsgExecuteContract {
+    return MsgExecuteContract.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgExecuteContract): MsgExecuteContractAminoMsg {
+    return {
+      type: "wasm/MsgExecuteContract",
+      value: MsgExecuteContract.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgExecuteContractProtoMsg): MsgExecuteContract {
+    return MsgExecuteContract.decode(message.value);
+  },
+  toProto(message: MsgExecuteContract): Uint8Array {
+    return MsgExecuteContract.encode(message).finish();
+  },
+  toProtoMsg(message: MsgExecuteContract): MsgExecuteContractProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.encode(message).finish()
+    };
   }
 };"
 `;

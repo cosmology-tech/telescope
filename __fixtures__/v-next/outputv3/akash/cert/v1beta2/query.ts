@@ -1,6 +1,6 @@
 import { CertificateFilter, CertificateFilterAmino, CertificateFilterSDKType, Certificate, CertificateAmino, CertificateSDKType } from "./cert";
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
@@ -80,7 +80,7 @@ function createBaseCertificateResponse(): CertificateResponse {
 }
 export const CertificateResponse = {
   typeUrl: "/akash.cert.v1beta2.CertificateResponse",
-  encode(message: CertificateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CertificateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
     }
@@ -89,8 +89,8 @@ export const CertificateResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CertificateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CertificateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateResponse();
     while (reader.pos < end) {
@@ -177,7 +177,7 @@ function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
 }
 export const QueryCertificatesRequest = {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest",
-  encode(message: QueryCertificatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCertificatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filter !== undefined) {
       CertificateFilter.encode(message.filter, writer.uint32(10).fork()).ldelim();
     }
@@ -186,8 +186,8 @@ export const QueryCertificatesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCertificatesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCertificatesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCertificatesRequest();
     while (reader.pos < end) {
@@ -276,7 +276,7 @@ function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
 }
 export const QueryCertificatesResponse = {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse",
-  encode(message: QueryCertificatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCertificatesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.certificates) {
       CertificateResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -285,8 +285,8 @@ export const QueryCertificatesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCertificatesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCertificatesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCertificatesResponse();
     while (reader.pos < end) {

@@ -2,11 +2,11 @@
 
 ## Migration to v1.0
 
-### aminoEncoding.useRecursiveV2encoding
+### deprecated aminoEncoding.useRecursiveV2encoding
 
-If `aminoEncoding.useRecursiveV2encoding: false` is used, and want to keep it(not recommemded). It's changed into `aminoEncoding.useLegacyInlineEncoding: true`.
+If `aminoEncoding.useRecursiveV2encoding: false` is used in your config, and want to keep it(not recommemded). It's changed into `aminoEncoding.useLegacyInlineEncoding: true`.
 
-We recommend to remove the `useRecursiveV2encoding` option, then Telescope will use `useLegacyInlineEncoding: false` as default value. And the new version of the logic of this part will be applied.
+We have removed the `useRecursiveV2encoding` option, then Telescope will use `useLegacyInlineEncoding: false` as default value. And the new version of the logic of this part will be applied.
 
 And we'll deprecate `useLegacyInlineEncoding` option eventually to make sure the new logic will be applied.
 

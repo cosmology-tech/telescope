@@ -1,7 +1,7 @@
 import { MsgStoreCode, MsgStoreCodeAmino, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractAmino, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractAmino, MsgExecuteContractSDKType } from "./tx";
 import { Params, ParamsAmino, ParamsSDKType, CodeInfo, CodeInfoAmino, CodeInfoSDKType, ContractInfo, ContractInfoAmino, ContractInfoSDKType, Model, ModelAmino, ModelSDKType } from "./types";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -72,7 +72,7 @@ export interface GenesisState_GenMsgsSDKType {
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
-  codeId: Long;
+  codeId: bigint;
   codeInfo: CodeInfo;
   codeBytes: Uint8Array;
   /** Pinned to wasmvm cache */
@@ -96,7 +96,7 @@ export interface CodeAminoMsg {
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
-  code_id: Long;
+  code_id: bigint;
   code_info: CodeInfoSDKType;
   code_bytes: Uint8Array;
   pinned: boolean;
@@ -130,7 +130,7 @@ export interface ContractSDKType {
 /** Sequence key and value of an id generation counter */
 export interface Sequence {
   idKey: Uint8Array;
-  value: Long;
+  value: bigint;
 }
 export interface SequenceProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Sequence";
@@ -148,7 +148,7 @@ export interface SequenceAminoMsg {
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {
   id_key: Uint8Array;
-  value: Long;
+  value: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -162,7 +162,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/cosmwasm.wasm.v1.GenesisState",
   aminoType: "wasm/GenesisState",
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -180,8 +180,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -354,7 +354,7 @@ function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
 export const GenesisState_GenMsgs = {
   typeUrl: "/cosmwasm.wasm.v1.GenMsgs",
   aminoType: "wasm/GenMsgs",
-  encode(message: GenesisState_GenMsgs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState_GenMsgs, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.storeCode !== undefined) {
       MsgStoreCode.encode(message.storeCode, writer.uint32(10).fork()).ldelim();
     }
@@ -366,8 +366,8 @@ export const GenesisState_GenMsgs = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState_GenMsgs {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState_GenMsgs {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState_GenMsgs();
     while (reader.pos < end) {
@@ -468,7 +468,7 @@ export const GenesisState_GenMsgs = {
 };
 function createBaseCode(): Code {
   return {
-    codeId: Long.UZERO,
+    codeId: BigInt(0),
     codeInfo: CodeInfo.fromPartial({}),
     codeBytes: new Uint8Array(),
     pinned: false
@@ -477,8 +477,8 @@ function createBaseCode(): Code {
 export const Code = {
   typeUrl: "/cosmwasm.wasm.v1.Code",
   aminoType: "wasm/Code",
-  encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.codeId.isZero()) {
+  encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.codeId !== BigInt(0)) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
@@ -492,15 +492,15 @@ export const Code = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Code {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Code {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCode();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeId = (reader.uint64() as Long);
+          message.codeId = reader.uint64();
           break;
         case 2:
           message.codeInfo = CodeInfo.decode(reader, reader.uint32());
@@ -520,7 +520,7 @@ export const Code = {
   },
   fromJSON(object: any): Code {
     const obj = createBaseCode();
-    if (isSet(object.codeId)) obj.codeId = Long.fromValue(object.codeId);
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
     if (isSet(object.codeInfo)) obj.codeInfo = CodeInfo.fromJSON(object.codeInfo);
     if (isSet(object.codeBytes)) obj.codeBytes = bytesFromBase64(object.codeBytes);
     if (isSet(object.pinned)) obj.pinned = Boolean(object.pinned);
@@ -528,7 +528,7 @@ export const Code = {
   },
   toJSON(message: Code): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfo.toJSON(message.codeInfo) : undefined);
     message.codeBytes !== undefined && (obj.codeBytes = base64FromBytes(message.codeBytes !== undefined ? message.codeBytes : new Uint8Array()));
     message.pinned !== undefined && (obj.pinned = message.pinned);
@@ -537,7 +537,7 @@ export const Code = {
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
     if (object.codeId !== undefined && object.codeId !== null) {
-      message.codeId = Long.fromValue(object.codeId);
+      message.codeId = BigInt(object.codeId.toString());
     }
     if (object.codeInfo !== undefined && object.codeInfo !== null) {
       message.codeInfo = CodeInfo.fromPartial(object.codeInfo);
@@ -564,7 +564,7 @@ export const Code = {
   },
   fromAmino(object: CodeAmino): Code {
     return {
-      codeId: Long.fromString(object.code_id),
+      codeId: BigInt(object.code_id),
       codeInfo: object?.code_info ? CodeInfo.fromAmino(object.code_info) : undefined,
       codeBytes: object.code_bytes,
       pinned: object.pinned
@@ -610,7 +610,7 @@ function createBaseContract(): Contract {
 export const Contract = {
   typeUrl: "/cosmwasm.wasm.v1.Contract",
   aminoType: "wasm/Contract",
-  encode(message: Contract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -622,8 +622,8 @@ export const Contract = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Contract {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Contract {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContract();
     while (reader.pos < end) {
@@ -733,23 +733,23 @@ export const Contract = {
 function createBaseSequence(): Sequence {
   return {
     idKey: new Uint8Array(),
-    value: Long.UZERO
+    value: BigInt(0)
   };
 }
 export const Sequence = {
   typeUrl: "/cosmwasm.wasm.v1.Sequence",
   aminoType: "wasm/Sequence",
-  encode(message: Sequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Sequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }
-    if (!message.value.isZero()) {
+    if (message.value !== BigInt(0)) {
       writer.uint32(16).uint64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Sequence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Sequence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequence();
     while (reader.pos < end) {
@@ -759,7 +759,7 @@ export const Sequence = {
           message.idKey = reader.bytes();
           break;
         case 2:
-          message.value = (reader.uint64() as Long);
+          message.value = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -771,20 +771,20 @@ export const Sequence = {
   fromJSON(object: any): Sequence {
     const obj = createBaseSequence();
     if (isSet(object.idKey)) obj.idKey = bytesFromBase64(object.idKey);
-    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
   },
   toJSON(message: Sequence): unknown {
     const obj: any = {};
     message.idKey !== undefined && (obj.idKey = base64FromBytes(message.idKey !== undefined ? message.idKey : new Uint8Array()));
-    message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
     if (object.value !== undefined && object.value !== null) {
-      message.value = Long.fromValue(object.value);
+      message.value = BigInt(object.value.toString());
     }
     return message;
   },
@@ -803,7 +803,7 @@ export const Sequence = {
   fromAmino(object: SequenceAmino): Sequence {
     return {
       idKey: object.id_key,
-      value: Long.fromString(object.value)
+      value: BigInt(object.value)
     };
   },
   toAmino(message: Sequence): SequenceAmino {

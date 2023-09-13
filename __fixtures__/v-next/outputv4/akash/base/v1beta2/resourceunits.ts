@@ -32,6 +32,7 @@ function createBaseResourceUnits(): ResourceUnits {
   };
 }
 export const ResourceUnits = {
+  typeUrl: "/akash.base.v1beta2.ResourceUnits",
   encode(message: ResourceUnits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();
@@ -140,5 +141,50 @@ export const ResourceUnits = {
       obj.endpoints = [];
     }
     return obj;
+  },
+  fromAmino(object: ResourceUnitsAmino): ResourceUnits {
+    return {
+      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
+      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
+      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromAmino(e)) : [],
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ResourceUnits): ResourceUnitsAmino {
+    const obj: any = {};
+    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
+    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
+    if (message.storage) {
+      obj.storage = message.storage.map(e => e ? Storage.toAmino(e) : undefined);
+    } else {
+      obj.storage = [];
+    }
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
+    return ResourceUnits.fromAmino(object.value);
+  },
+  toAminoMsg(message: ResourceUnits): ResourceUnitsAminoMsg {
+    return {
+      type: "akash/base/v1beta2/resource-units",
+      value: ResourceUnits.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
+    return ResourceUnits.decode(message.value);
+  },
+  toProto(message: ResourceUnits): Uint8Array {
+    return ResourceUnits.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceUnits): ResourceUnitsProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.ResourceUnits",
+      value: ResourceUnits.encode(message).finish()
+    };
   }
 };

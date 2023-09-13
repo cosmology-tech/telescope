@@ -151,6 +151,7 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   };
 }
 export const MsgCreateDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
   encode(message: MsgCreateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -247,12 +248,54 @@ export const MsgCreateDeployment = {
     obj.version = message.version;
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
+      version: object.version,
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+    };
+  },
+  toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    obj.version = message.version;
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateDeploymentAminoMsg): MsgCreateDeployment {
+    return MsgCreateDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateDeployment): MsgCreateDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-create-deployment",
+      value: MsgCreateDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateDeploymentProtoMsg): MsgCreateDeployment {
+    return MsgCreateDeployment.decode(message.value);
+  },
+  toProto(message: MsgCreateDeployment): Uint8Array {
+    return MsgCreateDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateDeployment): MsgCreateDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
+      value: MsgCreateDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
   return {};
 }
 export const MsgCreateDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse",
   encode(_: MsgCreateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -290,6 +333,34 @@ export const MsgCreateDeploymentResponse = {
   toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateDeploymentResponseAminoMsg): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-create-deployment-response",
+      value: MsgCreateDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateDeploymentResponse): Uint8Array {
+    return MsgCreateDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse",
+      value: MsgCreateDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
@@ -299,6 +370,7 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   };
 }
 export const MsgDepositDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
   encode(message: MsgDepositDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -363,12 +435,46 @@ export const MsgDepositDeployment = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+    };
+  },
+  toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDepositDeploymentAminoMsg): MsgDepositDeployment {
+    return MsgDepositDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDepositDeployment): MsgDepositDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-deposit-deployment",
+      value: MsgDepositDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgDepositDeploymentProtoMsg): MsgDepositDeployment {
+    return MsgDepositDeployment.decode(message.value);
+  },
+  toProto(message: MsgDepositDeployment): Uint8Array {
+    return MsgDepositDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDepositDeployment): MsgDepositDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
+      value: MsgDepositDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse {
   return {};
 }
 export const MsgDepositDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse",
   encode(_: MsgDepositDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -406,6 +512,34 @@ export const MsgDepositDeploymentResponse = {
   toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgDepositDeploymentResponseAminoMsg): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-deposit-deployment-response",
+      value: MsgDepositDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgDepositDeploymentResponse): Uint8Array {
+    return MsgDepositDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse",
+      value: MsgDepositDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
@@ -416,6 +550,7 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   };
 }
 export const MsgUpdateDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
   encode(message: MsgUpdateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -500,12 +635,52 @@ export const MsgUpdateDeployment = {
     }
     obj.version = message.version;
     return obj;
+  },
+  fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
+      version: object.version
+    };
+  },
+  toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    obj.version = message.version;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
+    return MsgUpdateDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateDeployment): MsgUpdateDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-update-deployment",
+      value: MsgUpdateDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateDeploymentProtoMsg): MsgUpdateDeployment {
+    return MsgUpdateDeployment.decode(message.value);
+  },
+  toProto(message: MsgUpdateDeployment): Uint8Array {
+    return MsgUpdateDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDeployment): MsgUpdateDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
+      value: MsgUpdateDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
   return {};
 }
 export const MsgUpdateDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse",
   encode(_: MsgUpdateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -543,6 +718,34 @@ export const MsgUpdateDeploymentResponse = {
   toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDeploymentResponseAminoMsg): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-update-deployment-response",
+      value: MsgUpdateDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateDeploymentResponse): Uint8Array {
+    return MsgUpdateDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse",
+      value: MsgUpdateDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
@@ -551,6 +754,7 @@ function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   };
 }
 export const MsgCloseDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
   encode(message: MsgCloseDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -603,12 +807,44 @@ export const MsgCloseDeployment = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
+    };
+  },
+  toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCloseDeploymentAminoMsg): MsgCloseDeployment {
+    return MsgCloseDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseDeployment): MsgCloseDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-close-deployment",
+      value: MsgCloseDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCloseDeploymentProtoMsg): MsgCloseDeployment {
+    return MsgCloseDeployment.decode(message.value);
+  },
+  toProto(message: MsgCloseDeployment): Uint8Array {
+    return MsgCloseDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCloseDeployment): MsgCloseDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
+      value: MsgCloseDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
   return {};
 }
 export const MsgCloseDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse",
   encode(_: MsgCloseDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -646,6 +882,34 @@ export const MsgCloseDeploymentResponse = {
   toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCloseDeploymentResponseAminoMsg): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-close-deployment-response",
+      value: MsgCloseDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgCloseDeploymentResponse): Uint8Array {
+    return MsgCloseDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse",
+      value: MsgCloseDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseDeploymentID(): DeploymentID {
@@ -655,6 +919,7 @@ function createBaseDeploymentID(): DeploymentID {
   };
 }
 export const DeploymentID = {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentID",
   encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -719,6 +984,39 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq;
     return obj;
+  },
+  fromAmino(object: DeploymentIDAmino): DeploymentID {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq)
+    };
+  },
+  toAmino(message: DeploymentID): DeploymentIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
+    return DeploymentID.fromAmino(object.value);
+  },
+  toAminoMsg(message: DeploymentID): DeploymentIDAminoMsg {
+    return {
+      type: "akash/deployment/deployment-i-d",
+      value: DeploymentID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
+    return DeploymentID.decode(message.value);
+  },
+  toProto(message: DeploymentID): Uint8Array {
+    return DeploymentID.encode(message).finish();
+  },
+  toProtoMsg(message: DeploymentID): DeploymentIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DeploymentID",
+      value: DeploymentID.encode(message).finish()
+    };
   }
 };
 function createBaseDeployment(): Deployment {
@@ -730,6 +1028,7 @@ function createBaseDeployment(): Deployment {
   };
 }
 export const Deployment = {
+  typeUrl: "/akash.deployment.v1beta1.Deployment",
   encode(message: Deployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
@@ -818,6 +1117,43 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt;
     return obj;
+  },
+  fromAmino(object: DeploymentAmino): Deployment {
+    return {
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      version: object.version,
+      createdAt: BigInt(object.created_at)
+    };
+  },
+  toAmino(message: Deployment): DeploymentAmino {
+    const obj: any = {};
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
+    obj.state = message.state;
+    obj.version = message.version;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
+    return Deployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: Deployment): DeploymentAminoMsg {
+    return {
+      type: "akash/deployment/deployment",
+      value: Deployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DeploymentProtoMsg): Deployment {
+    return Deployment.decode(message.value);
+  },
+  toProto(message: Deployment): Uint8Array {
+    return Deployment.encode(message).finish();
+  },
+  toProtoMsg(message: Deployment): DeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Deployment",
+      value: Deployment.encode(message).finish()
+    };
   }
 };
 function createBaseDeploymentFilters(): DeploymentFilters {
@@ -828,6 +1164,7 @@ function createBaseDeploymentFilters(): DeploymentFilters {
   };
 }
 export const DeploymentFilters = {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
   encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -904,6 +1241,41 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq;
     obj.state = message.state;
     return obj;
+  },
+  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      state: object.state
+    };
+  },
+  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
+    return DeploymentFilters.fromAmino(object.value);
+  },
+  toAminoMsg(message: DeploymentFilters): DeploymentFiltersAminoMsg {
+    return {
+      type: "akash/deployment/deployment-filters",
+      value: DeploymentFilters.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
+    return DeploymentFilters.decode(message.value);
+  },
+  toProto(message: DeploymentFilters): Uint8Array {
+    return DeploymentFilters.encode(message).finish();
+  },
+  toProtoMsg(message: DeploymentFilters): DeploymentFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
+      value: DeploymentFilters.encode(message).finish()
+    };
   }
 };
 /** Msg defines the deployment Msg service. */

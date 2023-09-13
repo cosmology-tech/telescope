@@ -489,6 +489,7 @@ function createBaseDeleteLogRequest(): DeleteLogRequest {
   };
 }
 export const DeleteLogRequest = {
+  typeUrl: "/google.logging.v2.DeleteLogRequest",
   encode(message: DeleteLogRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
@@ -541,6 +542,31 @@ export const DeleteLogRequest = {
     const obj: any = {};
     obj.log_name = message.logName;
     return obj;
+  },
+  fromAmino(object: DeleteLogRequestAmino): DeleteLogRequest {
+    return {
+      logName: object.log_name
+    };
+  },
+  toAmino(message: DeleteLogRequest): DeleteLogRequestAmino {
+    const obj: any = {};
+    obj.log_name = message.logName;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteLogRequestAminoMsg): DeleteLogRequest {
+    return DeleteLogRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteLogRequestProtoMsg): DeleteLogRequest {
+    return DeleteLogRequest.decode(message.value);
+  },
+  toProto(message: DeleteLogRequest): Uint8Array {
+    return DeleteLogRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteLogRequest): DeleteLogRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteLogRequest",
+      value: DeleteLogRequest.encode(message).finish()
+    };
   }
 };
 function createBaseWriteLogEntriesRequest_LabelsEntry(): WriteLogEntriesRequest_LabelsEntry {
@@ -614,6 +640,27 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: WriteLogEntriesRequest_LabelsEntryAmino): WriteLogEntriesRequest_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: WriteLogEntriesRequest_LabelsEntry): WriteLogEntriesRequest_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesRequest_LabelsEntryAminoMsg): WriteLogEntriesRequest_LabelsEntry {
+    return WriteLogEntriesRequest_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesRequest_LabelsEntryProtoMsg): WriteLogEntriesRequest_LabelsEntry {
+    return WriteLogEntriesRequest_LabelsEntry.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesRequest_LabelsEntry): Uint8Array {
+    return WriteLogEntriesRequest_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
@@ -627,6 +674,7 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   };
 }
 export const WriteLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
   encode(message: WriteLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
@@ -787,12 +835,62 @@ export const WriteLogEntriesRequest = {
     obj.partial_success = message.partialSuccess;
     obj.dry_run = message.dryRun;
     return obj;
+  },
+  fromAmino(object: WriteLogEntriesRequestAmino): WriteLogEntriesRequest {
+    return {
+      logName: object.log_name,
+      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      partialSuccess: object.partial_success,
+      dryRun: object.dry_run
+    };
+  },
+  toAmino(message: WriteLogEntriesRequest): WriteLogEntriesRequestAmino {
+    const obj: any = {};
+    obj.log_name = message.logName;
+    obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    obj.partial_success = message.partialSuccess;
+    obj.dry_run = message.dryRun;
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesRequestAminoMsg): WriteLogEntriesRequest {
+    return WriteLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesRequestProtoMsg): WriteLogEntriesRequest {
+    return WriteLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesRequest): Uint8Array {
+    return WriteLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: WriteLogEntriesRequest): WriteLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
+      value: WriteLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseWriteLogEntriesResponse(): WriteLogEntriesResponse {
   return {};
 }
 export const WriteLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
   encode(_: WriteLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -831,6 +929,28 @@ export const WriteLogEntriesResponse = {
   toSDK(_: WriteLogEntriesResponse): WriteLogEntriesResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: WriteLogEntriesResponseAmino): WriteLogEntriesResponse {
+    return {};
+  },
+  toAmino(_: WriteLogEntriesResponse): WriteLogEntriesResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesResponseAminoMsg): WriteLogEntriesResponse {
+    return WriteLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesResponseProtoMsg): WriteLogEntriesResponse {
+    return WriteLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesResponse): Uint8Array {
+    return WriteLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: WriteLogEntriesResponse): WriteLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
+      value: WriteLogEntriesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -906,6 +1026,27 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Status.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return {
+      key: object.key,
+      value: object?.value ? Status.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value ? Status.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAminoMsg): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): Uint8Array {
+    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode(message).finish();
   }
 };
 function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors {
@@ -914,6 +1055,7 @@ function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors 
   };
 }
 export const WriteLogEntriesPartialErrors = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
   encode(message: WriteLogEntriesPartialErrors, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.logEntryErrors).forEach(([key, value]) => {
       WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode({
@@ -1004,6 +1146,41 @@ export const WriteLogEntriesPartialErrors = {
       });
     }
     return obj;
+  },
+  fromAmino(object: WriteLogEntriesPartialErrorsAmino): WriteLogEntriesPartialErrors {
+    return {
+      logEntryErrors: isObject(object.log_entry_errors) ? Object.entries(object.log_entry_errors).reduce<{
+        [key: number]: Status;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Status.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: WriteLogEntriesPartialErrors): WriteLogEntriesPartialErrorsAmino {
+    const obj: any = {};
+    obj.log_entry_errors = {};
+    if (message.logEntryErrors) {
+      Object.entries(message.logEntryErrors).forEach(([k, v]) => {
+        obj.log_entry_errors[k] = Status.toAmino(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesPartialErrorsAminoMsg): WriteLogEntriesPartialErrors {
+    return WriteLogEntriesPartialErrors.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesPartialErrorsProtoMsg): WriteLogEntriesPartialErrors {
+    return WriteLogEntriesPartialErrors.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesPartialErrors): Uint8Array {
+    return WriteLogEntriesPartialErrors.encode(message).finish();
+  },
+  toProtoMsg(message: WriteLogEntriesPartialErrors): WriteLogEntriesPartialErrorsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
+      value: WriteLogEntriesPartialErrors.encode(message).finish()
+    };
   }
 };
 function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
@@ -1016,6 +1193,7 @@ function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
   };
 }
 export const ListLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.ListLogEntriesRequest",
   encode(message: ListLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
@@ -1124,6 +1302,43 @@ export const ListLogEntriesRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+  fromAmino(object: ListLogEntriesRequestAmino): ListLogEntriesRequest {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      filter: object.filter,
+      orderBy: object.order_by,
+      pageSize: object.page_size,
+      pageToken: object.page_token
+    };
+  },
+  toAmino(message: ListLogEntriesRequest): ListLogEntriesRequestAmino {
+    const obj: any = {};
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    obj.filter = message.filter;
+    obj.order_by = message.orderBy;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogEntriesRequestAminoMsg): ListLogEntriesRequest {
+    return ListLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogEntriesRequestProtoMsg): ListLogEntriesRequest {
+    return ListLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: ListLogEntriesRequest): Uint8Array {
+    return ListLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogEntriesRequest): ListLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogEntriesRequest",
+      value: ListLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
@@ -1133,6 +1348,7 @@ function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
   };
 }
 export const ListLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.ListLogEntriesResponse",
   encode(message: ListLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1205,6 +1421,37 @@ export const ListLogEntriesResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListLogEntriesResponseAmino): ListLogEntriesResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListLogEntriesResponse): ListLogEntriesResponseAmino {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogEntriesResponseAminoMsg): ListLogEntriesResponse {
+    return ListLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogEntriesResponseProtoMsg): ListLogEntriesResponse {
+    return ListLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: ListLogEntriesResponse): Uint8Array {
+    return ListLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogEntriesResponse): ListLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogEntriesResponse",
+      value: ListLogEntriesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResourceDescriptorsRequest {
@@ -1214,6 +1461,7 @@ function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResou
   };
 }
 export const ListMonitoredResourceDescriptorsRequest = {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
   encode(message: ListMonitoredResourceDescriptorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pageSize !== 0) {
       writer.uint32(8).int32(message.pageSize);
@@ -1278,6 +1526,33 @@ export const ListMonitoredResourceDescriptorsRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+  fromAmino(object: ListMonitoredResourceDescriptorsRequestAmino): ListMonitoredResourceDescriptorsRequest {
+    return {
+      pageSize: object.page_size,
+      pageToken: object.page_token
+    };
+  },
+  toAmino(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestAmino {
+    const obj: any = {};
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListMonitoredResourceDescriptorsRequestAminoMsg): ListMonitoredResourceDescriptorsRequest {
+    return ListMonitoredResourceDescriptorsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListMonitoredResourceDescriptorsRequestProtoMsg): ListMonitoredResourceDescriptorsRequest {
+    return ListMonitoredResourceDescriptorsRequest.decode(message.value);
+  },
+  toProto(message: ListMonitoredResourceDescriptorsRequest): Uint8Array {
+    return ListMonitoredResourceDescriptorsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
+      value: ListMonitoredResourceDescriptorsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredResourceDescriptorsResponse {
@@ -1287,6 +1562,7 @@ function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredReso
   };
 }
 export const ListMonitoredResourceDescriptorsResponse = {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
   encode(message: ListMonitoredResourceDescriptorsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1359,6 +1635,37 @@ export const ListMonitoredResourceDescriptorsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListMonitoredResourceDescriptorsResponseAmino): ListMonitoredResourceDescriptorsResponse {
+    return {
+      resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseAmino {
+    const obj: any = {};
+    if (message.resourceDescriptors) {
+      obj.resource_descriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.resource_descriptors = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListMonitoredResourceDescriptorsResponseAminoMsg): ListMonitoredResourceDescriptorsResponse {
+    return ListMonitoredResourceDescriptorsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListMonitoredResourceDescriptorsResponseProtoMsg): ListMonitoredResourceDescriptorsResponse {
+    return ListMonitoredResourceDescriptorsResponse.decode(message.value);
+  },
+  toProto(message: ListMonitoredResourceDescriptorsResponse): Uint8Array {
+    return ListMonitoredResourceDescriptorsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
+      value: ListMonitoredResourceDescriptorsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseListLogsRequest(): ListLogsRequest {
@@ -1370,6 +1677,7 @@ function createBaseListLogsRequest(): ListLogsRequest {
   };
 }
 export const ListLogsRequest = {
+  typeUrl: "/google.logging.v2.ListLogsRequest",
   encode(message: ListLogsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1466,6 +1774,41 @@ export const ListLogsRequest = {
       obj.resource_names = [];
     }
     return obj;
+  },
+  fromAmino(object: ListLogsRequestAmino): ListLogsRequest {
+    return {
+      parent: object.parent,
+      pageSize: object.page_size,
+      pageToken: object.page_token,
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: ListLogsRequest): ListLogsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListLogsRequestAminoMsg): ListLogsRequest {
+    return ListLogsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogsRequestProtoMsg): ListLogsRequest {
+    return ListLogsRequest.decode(message.value);
+  },
+  toProto(message: ListLogsRequest): Uint8Array {
+    return ListLogsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogsRequest): ListLogsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogsRequest",
+      value: ListLogsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListLogsResponse(): ListLogsResponse {
@@ -1475,6 +1818,7 @@ function createBaseListLogsResponse(): ListLogsResponse {
   };
 }
 export const ListLogsResponse = {
+  typeUrl: "/google.logging.v2.ListLogsResponse",
   encode(message: ListLogsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
@@ -1547,6 +1891,37 @@ export const ListLogsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListLogsResponseAmino): ListLogsResponse {
+    return {
+      logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListLogsResponse): ListLogsResponseAmino {
+    const obj: any = {};
+    if (message.logNames) {
+      obj.log_names = message.logNames.map(e => e);
+    } else {
+      obj.log_names = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogsResponseAminoMsg): ListLogsResponse {
+    return ListLogsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogsResponseProtoMsg): ListLogsResponse {
+    return ListLogsResponse.decode(message.value);
+  },
+  toProto(message: ListLogsResponse): Uint8Array {
+    return ListLogsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogsResponse): ListLogsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogsResponse",
+      value: ListLogsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
@@ -1557,6 +1932,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   };
 }
 export const TailLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.TailLogEntriesRequest",
   encode(message: TailLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -1643,6 +2019,39 @@ export const TailLogEntriesRequest = {
     obj.filter = message.filter;
     message.bufferWindow !== undefined && (obj.buffer_window = message.bufferWindow ? Duration.toSDK(message.bufferWindow) : undefined);
     return obj;
+  },
+  fromAmino(object: TailLogEntriesRequestAmino): TailLogEntriesRequest {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      filter: object.filter,
+      bufferWindow: object?.buffer_window ? Duration.fromAmino(object.buffer_window) : undefined
+    };
+  },
+  toAmino(message: TailLogEntriesRequest): TailLogEntriesRequestAmino {
+    const obj: any = {};
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    obj.filter = message.filter;
+    obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: TailLogEntriesRequestAminoMsg): TailLogEntriesRequest {
+    return TailLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TailLogEntriesRequestProtoMsg): TailLogEntriesRequest {
+    return TailLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: TailLogEntriesRequest): Uint8Array {
+    return TailLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: TailLogEntriesRequest): TailLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.TailLogEntriesRequest",
+      value: TailLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
@@ -1652,6 +2061,7 @@ function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
   };
 }
 export const TailLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.TailLogEntriesResponse",
   encode(message: TailLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1732,6 +2142,41 @@ export const TailLogEntriesResponse = {
       obj.suppression_info = [];
     }
     return obj;
+  },
+  fromAmino(object: TailLogEntriesResponseAmino): TailLogEntriesResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      suppressionInfo: Array.isArray(object?.suppression_info) ? object.suppression_info.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: TailLogEntriesResponse): TailLogEntriesResponseAmino {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    if (message.suppressionInfo) {
+      obj.suppression_info = message.suppressionInfo.map(e => e ? TailLogEntriesResponse_SuppressionInfo.toAmino(e) : undefined);
+    } else {
+      obj.suppression_info = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: TailLogEntriesResponseAminoMsg): TailLogEntriesResponse {
+    return TailLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TailLogEntriesResponseProtoMsg): TailLogEntriesResponse {
+    return TailLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: TailLogEntriesResponse): Uint8Array {
+    return TailLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: TailLogEntriesResponse): TailLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.TailLogEntriesResponse",
+      value: TailLogEntriesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesResponse_SuppressionInfo {
@@ -1741,6 +2186,7 @@ function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesRespo
   };
 }
 export const TailLogEntriesResponse_SuppressionInfo = {
+  typeUrl: "/google.logging.v2.SuppressionInfo",
   encode(message: TailLogEntriesResponse_SuppressionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.reason !== 0) {
       writer.uint32(8).int32(message.reason);
@@ -1805,5 +2251,32 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
     obj.suppressed_count = message.suppressedCount;
     return obj;
+  },
+  fromAmino(object: TailLogEntriesResponse_SuppressionInfoAmino): TailLogEntriesResponse_SuppressionInfo {
+    return {
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
+      suppressedCount: object.suppressed_count
+    };
+  },
+  toAmino(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoAmino {
+    const obj: any = {};
+    obj.reason = message.reason;
+    obj.suppressed_count = message.suppressedCount;
+    return obj;
+  },
+  fromAminoMsg(object: TailLogEntriesResponse_SuppressionInfoAminoMsg): TailLogEntriesResponse_SuppressionInfo {
+    return TailLogEntriesResponse_SuppressionInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TailLogEntriesResponse_SuppressionInfoProtoMsg): TailLogEntriesResponse_SuppressionInfo {
+    return TailLogEntriesResponse_SuppressionInfo.decode(message.value);
+  },
+  toProto(message: TailLogEntriesResponse_SuppressionInfo): Uint8Array {
+    return TailLogEntriesResponse_SuppressionInfo.encode(message).finish();
+  },
+  toProtoMsg(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.SuppressionInfo",
+      value: TailLogEntriesResponse_SuppressionInfo.encode(message).finish()
+    };
   }
 };

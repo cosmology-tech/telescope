@@ -1,7 +1,8 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
-import { Long, DeepPartial, isSet } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, isSet } from "../../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.inflation.v1";
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequest {}
@@ -20,7 +21,7 @@ export interface QueryPeriodRequestSDKType {}
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
-  period: Long;
+  period: bigint;
 }
 export interface QueryPeriodResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
@@ -37,7 +38,7 @@ export interface QueryPeriodResponseAminoMsg {
 }
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseSDKType {
-  period: Long;
+  period: bigint;
 }
 /**
  * QueryEpochMintProvisionRequest is the request type for the
@@ -122,7 +123,7 @@ export interface QuerySkippedEpochsRequestSDKType {}
  */
 export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
-  skippedEpochs: Long;
+  skippedEpochs: bigint;
 }
 export interface QuerySkippedEpochsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
@@ -145,7 +146,7 @@ export interface QuerySkippedEpochsResponseAminoMsg {
  * RPC method.
  */
 export interface QuerySkippedEpochsResponseSDKType {
-  skipped_epochs: Long;
+  skipped_epochs: bigint;
 }
 /**
  * QueryCirculatingSupplyRequest is the request type for the
@@ -296,11 +297,11 @@ function createBaseQueryPeriodRequest(): QueryPeriodRequest {
 }
 export const QueryPeriodRequest = {
   typeUrl: "/evmos.inflation.v1.QueryPeriodRequest",
-  encode(_: QueryPeriodRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryPeriodRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPeriodRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPeriodRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPeriodRequest();
     while (reader.pos < end) {
@@ -357,26 +358,26 @@ export const QueryPeriodRequest = {
 };
 function createBaseQueryPeriodResponse(): QueryPeriodResponse {
   return {
-    period: Long.UZERO
+    period: BigInt(0)
   };
 }
 export const QueryPeriodResponse = {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
-  encode(message: QueryPeriodResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.period.isZero()) {
+  encode(message: QueryPeriodResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.period !== BigInt(0)) {
       writer.uint32(8).uint64(message.period);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPeriodResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPeriodResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPeriodResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.period = (reader.uint64() as Long);
+          message.period = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -387,18 +388,18 @@ export const QueryPeriodResponse = {
   },
   fromJSON(object: any): QueryPeriodResponse {
     const obj = createBaseQueryPeriodResponse();
-    if (isSet(object.period)) obj.period = Long.fromValue(object.period);
+    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
     return obj;
   },
   toJSON(message: QueryPeriodResponse): unknown {
     const obj: any = {};
-    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
     if (object.period !== undefined && object.period !== null) {
-      message.period = Long.fromValue(object.period);
+      message.period = BigInt(object.period.toString());
     }
     return message;
   },
@@ -414,7 +415,7 @@ export const QueryPeriodResponse = {
   },
   fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
     return {
-      period: Long.fromString(object.period)
+      period: BigInt(object.period)
     };
   },
   toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
@@ -443,11 +444,11 @@ function createBaseQueryEpochMintProvisionRequest(): QueryEpochMintProvisionRequ
 }
 export const QueryEpochMintProvisionRequest = {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest",
-  encode(_: QueryEpochMintProvisionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryEpochMintProvisionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochMintProvisionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryEpochMintProvisionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochMintProvisionRequest();
     while (reader.pos < end) {
@@ -509,14 +510,14 @@ function createBaseQueryEpochMintProvisionResponse(): QueryEpochMintProvisionRes
 }
 export const QueryEpochMintProvisionResponse = {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse",
-  encode(message: QueryEpochMintProvisionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryEpochMintProvisionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.epochMintProvision !== undefined) {
       DecCoin.encode(message.epochMintProvision, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochMintProvisionResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryEpochMintProvisionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochMintProvisionResponse();
     while (reader.pos < end) {
@@ -590,11 +591,11 @@ function createBaseQuerySkippedEpochsRequest(): QuerySkippedEpochsRequest {
 }
 export const QuerySkippedEpochsRequest = {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest",
-  encode(_: QuerySkippedEpochsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QuerySkippedEpochsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySkippedEpochsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySkippedEpochsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySkippedEpochsRequest();
     while (reader.pos < end) {
@@ -651,26 +652,26 @@ export const QuerySkippedEpochsRequest = {
 };
 function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
   return {
-    skippedEpochs: Long.UZERO
+    skippedEpochs: BigInt(0)
   };
 }
 export const QuerySkippedEpochsResponse = {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
-  encode(message: QuerySkippedEpochsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.skippedEpochs.isZero()) {
+  encode(message: QuerySkippedEpochsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.skippedEpochs !== BigInt(0)) {
       writer.uint32(8).uint64(message.skippedEpochs);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySkippedEpochsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySkippedEpochsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySkippedEpochsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.skippedEpochs = (reader.uint64() as Long);
+          message.skippedEpochs = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -681,18 +682,18 @@ export const QuerySkippedEpochsResponse = {
   },
   fromJSON(object: any): QuerySkippedEpochsResponse {
     const obj = createBaseQuerySkippedEpochsResponse();
-    if (isSet(object.skippedEpochs)) obj.skippedEpochs = Long.fromValue(object.skippedEpochs);
+    if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
     return obj;
   },
   toJSON(message: QuerySkippedEpochsResponse): unknown {
     const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || Long.UZERO).toString());
+    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
     if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
-      message.skippedEpochs = Long.fromValue(object.skippedEpochs);
+      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
     }
     return message;
   },
@@ -708,7 +709,7 @@ export const QuerySkippedEpochsResponse = {
   },
   fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: Long.fromString(object.skipped_epochs)
+      skippedEpochs: BigInt(object.skipped_epochs)
     };
   },
   toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {
@@ -737,11 +738,11 @@ function createBaseQueryCirculatingSupplyRequest(): QueryCirculatingSupplyReques
 }
 export const QueryCirculatingSupplyRequest = {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest",
-  encode(_: QueryCirculatingSupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryCirculatingSupplyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCirculatingSupplyRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCirculatingSupplyRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCirculatingSupplyRequest();
     while (reader.pos < end) {
@@ -803,14 +804,14 @@ function createBaseQueryCirculatingSupplyResponse(): QueryCirculatingSupplyRespo
 }
 export const QueryCirculatingSupplyResponse = {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse",
-  encode(message: QueryCirculatingSupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCirculatingSupplyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.circulatingSupply !== undefined) {
       DecCoin.encode(message.circulatingSupply, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCirculatingSupplyResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCirculatingSupplyResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCirculatingSupplyResponse();
     while (reader.pos < end) {
@@ -884,11 +885,11 @@ function createBaseQueryInflationRateRequest(): QueryInflationRateRequest {
 }
 export const QueryInflationRateRequest = {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest",
-  encode(_: QueryInflationRateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryInflationRateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInflationRateRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryInflationRateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationRateRequest();
     while (reader.pos < end) {
@@ -950,21 +951,21 @@ function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
 }
 export const QueryInflationRateResponse = {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
-  encode(message: QueryInflationRateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryInflationRateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.inflationRate !== "") {
-      writer.uint32(10).string(message.inflationRate);
+      writer.uint32(10).string(Decimal.fromUserInput(message.inflationRate, 18).atomics);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInflationRateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryInflationRateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationRateResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.inflationRate = reader.string();
+          message.inflationRate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1029,11 +1030,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/evmos.inflation.v1.QueryParamsRequest",
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -1095,14 +1096,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/evmos.inflation.v1.QueryParamsResponse",
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
