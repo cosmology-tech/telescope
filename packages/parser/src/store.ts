@@ -215,8 +215,8 @@ export class ProtoStore implements IProtoStore {
         let resolver = new ProtoResolver(this.getDeps());
 
         this.protos = this.getProtos().map((ref: ProtoRef) => {
-            const isHardExcluded = isRefExcluded(ref, {
-              protos: this.options.prototypes.excluded.hardProtos
+            const isHardExcluded = this.options?.prototypes?.excluded?.hardProtos && isRefExcluded(ref, {
+              protos: this.options?.prototypes?.excluded?.hardProtos
             })
 
             if(isHardExcluded){
