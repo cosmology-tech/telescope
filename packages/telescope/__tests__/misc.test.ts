@@ -16,6 +16,14 @@ const options: TelescopeOptions = {
 
   prototypes: {
     enabled: true,
+
+    excluded:{
+      // hard exclude faulty proto files
+      hardProtos:[
+        "google/api/expr/v1alpha1/eval1.proto"
+      ]
+    },
+
     parser: {
       keepCase: false,
     },

@@ -53,6 +53,7 @@ interface TelescopeOpts {
         excluded?: {
             packages?: string[];
             protos?: string[];
+            hardProtos?: string[];
         };
         includes?: {
             packages?: string[];

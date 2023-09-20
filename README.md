@@ -275,7 +275,8 @@ telescope({
 | `prototypes.enabled`                      | enables the generation of proto encoding methods                | `true`     |
 | `prototypes.includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
 | `prototypes.excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
-| `prototypes.excluded.protos`              | exclude a set of proto files from transpilation                 | `undefined`|
+| `prototypes.excluded.protos`              | try to exclude a set of proto files from transpilation. if files inside the list are dependencies to other files, they'll be still transpiled.                 | `undefined`|
+| `prototypes.excluded.hardProtos`              | exclude a set of proto files from transpilation. Files in this list will be excluded no mater it's dependency to other files or not.                 | `undefined`|
 | `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`    |
 | `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`     |
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
