@@ -122,6 +122,7 @@ const scalarType = (num: number, prop: string, type: string, args?: EncodeMethod
 const customType = (num: number, prop: string, type: string, customType: string, args: EncodeMethod) => {
     switch (customType) {
         case "github.com/cosmos/cosmos-sdk/types.Dec":
+        case "cosmossdk.io/math.LegacyDec":
         default:
             args.context.addUtil("Decimal");
 
@@ -359,8 +360,10 @@ export const types = {
             'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
         );
         const isCosmosSDKDec =
-            args.field.options?.['(gogoproto.customtype)'] ==
-            'github.com/cosmos/cosmos-sdk/types.Dec';
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
 
         return t.ifStatement(
             wrapOptional(prop, notEmptyString(prop), isOptional),
@@ -1115,8 +1118,10 @@ export const arrayTypes = {
             'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
         );
         const isCosmosSDKDec =
-            args.field.options?.['(gogoproto.customtype)'] ==
-            'github.com/cosmos/cosmos-sdk/types.Dec';
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
 
         const num = getTagNumber(args.field);
 
