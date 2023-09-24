@@ -173,8 +173,10 @@ export const baseTypes = {
           'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
         );
         const isCosmosSDKDec =
-          args.field.options?.['(gogoproto.customtype)'] ==
-          'github.com/cosmos/cosmos-sdk/types.Dec';
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
 
         let valueExpression = t.callExpression(
             t.memberExpression(
