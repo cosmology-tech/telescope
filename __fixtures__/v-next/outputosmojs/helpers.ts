@@ -226,13 +226,6 @@ export function fromTimestamp(t: Timestamp): Date {
   return new Date(millis);
 }
 
-const fromJSON = (object: any): Timestamp => {
-  return {
-    seconds: isSet(object.seconds) ? BigInt(object.seconds) : BigInt(0),
-    nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-  };
-};
-
 const timestampFromJSON = (object: any): Timestamp => {
   return {
     seconds: isSet(object.seconds)
@@ -253,5 +246,5 @@ export function fromJsonTimestamp(o: any): Timestamp {
 }
 
 function numberToLong(number: number) {
-  return BigInt(number);
+  return BigInt(Math.trunc(number));
 }

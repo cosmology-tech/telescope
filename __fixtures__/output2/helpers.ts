@@ -142,7 +142,7 @@ export const setPaginationParams = (options: Params, pagination?: PageRequest) =
     }
     if (typeof pagination?.key !== "undefined") {
         // String to Uint8Array
-        // let uint8arr = new Uint8Array(Buffer.from(data,'base64')); 
+        // let uint8arr = new Uint8Array(Buffer.from(data,'base64'));
 
         // Uint8Array to String
         options.params['pagination.key'] = Buffer.from(pagination.key).toString('base64');
@@ -152,7 +152,7 @@ export const setPaginationParams = (options: Params, pagination?: PageRequest) =
     }
     if (typeof pagination?.offset !== "undefined") {
       options.params["pagination.offset"] = pagination.offset.toString()
-    }    
+    }
     if (typeof pagination?.reverse !== "undefined") {
         options.params['pagination.reverse'] = pagination.reverse;
     }
@@ -215,20 +215,13 @@ export function fromTimestamp(t: Timestamp): Date {
     return new Date(millis);
 };
 
-const fromJSON = (object: any): Timestamp => {
-    return {
-        seconds: isSet(object.seconds) ? Long.fromString(object.seconds) : Long.ZERO,
-        nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
-};
-
 const timestampFromJSON = (object: any): Timestamp => {
   return {
     seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
     nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
   };
 }
-  
+
 export function fromJsonTimestamp(o: any): Timestamp {
   if (o instanceof Date) {
     return toTimestamp(o);
@@ -238,7 +231,7 @@ export function fromJsonTimestamp(o: any): Timestamp {
     return timestampFromJSON(o);
   }
 }
-  
+
 function numberToLong(number: number) {
     return Long.fromNumber(number);
 }
