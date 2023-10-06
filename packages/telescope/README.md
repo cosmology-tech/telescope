@@ -132,7 +132,7 @@ To create the Typescript files, run the `transpile` command.
 telescope transpile
 ```
 
-You should now seem some `.ts` files generated in `./src`. These are the real source files used in your application.
+You should now see some `.ts` files generated in `./src`. These are the real source files used in your application.
 
 Examples:
 
