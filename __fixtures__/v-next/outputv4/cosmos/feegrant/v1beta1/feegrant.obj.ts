@@ -1,10 +1,5 @@
 import { Coin } from "../../base/v1beta1/coin";
-import {
-  IProto,
-  IProtoMsg,
-  ProtoMsg,
-  ProtoOps,
-} from "../../../base";
+import { IProto, IProtoMsg, ProtoMsg, ProtoOps } from "../../../base";
 import { BasicAllowance, AllowedMsgAllowance } from "./feegrant";
 import { BinaryWriter } from "../../../binary";
 
@@ -44,6 +39,10 @@ export class BasicAllowanceProto
 
   toProtoInterface(): BasicAllowance {
     return this as BasicAllowance;
+  }
+
+  static decode(input: Uint8Array): BasicAllowanceProto {
+    return new BasicAllowanceProto(BasicAllowance.decode(input));
   }
 
   static fromProtoMsg(msg: IProtoMsg): BasicAllowanceProto {
@@ -96,6 +95,10 @@ export class AllowedMsgAllowanceProto
 
   toProtoInterface(): AllowedMsgAllowance {
     return this as AllowedMsgAllowance;
+  }
+
+  static decode(input: Uint8Array): AllowedMsgAllowanceProto {
+    return new AllowedMsgAllowanceProto(AllowedMsgAllowance.decode(input));
   }
 
   static fromProtoMsg(msg: IProtoMsg): AllowedMsgAllowanceProto {
