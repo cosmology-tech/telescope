@@ -13,11 +13,11 @@ export interface IProtoField {
 export interface IProto {
   readonly typeUrl: string;
   readonly fields: IProtoField[];
-  toProtoMsg(): IProtoMsg;
 }
 
 export interface IProtoOps extends IProto {
   encode(writer: BinaryWriter): BinaryWriter;
+  toProtoMsg(): IProtoMsg;
 }
 
 export interface IProtoMsg {
@@ -25,28 +25,73 @@ export interface IProtoMsg {
   value: Uint8Array;
 }
 
+export class ProtoMsg implements IProtoMsg {
+  constructor(
+    obj: IProtoMsg,
+    decodersMapping: {
+      [key: string]: (
+        input: Uint8Array | BinaryReader,
+        length?: number | undefined
+      ) => unknown;
+    }
+  ) {
+    this.typeUrl = obj.typeUrl;
+    this.value = obj.value;
+    this.decodersMapping = decodersMapping;
+  }
+
+  readonly decodersMapping: {
+    [key: string]: (
+      input: Uint8Array | BinaryReader,
+      length?: number | undefined
+    ) => unknown;
+  };
+  readonly typeUrl: string;
+  value: Uint8Array;
+
+  protoValue?: unknown;
+
+  unwrap<T>(extraDecodersMapping?: {
+    [key: string]: (
+      input: Uint8Array | BinaryReader,
+      length?: number | undefined
+    ) => unknown;
+  }): T {
+    if (!this.protoValue) {
+      let decoder;
+
+      if (extraDecodersMapping) {
+        decoder = extraDecodersMapping[this.typeUrl];
+      }
+
+      if (!decoder) {
+        decoder = this.decodersMapping[this.typeUrl];
+      }
+
+      if (!decoder) {
+        throw new Error(
+          `There's not decoder registered for typeUrl: ${this.typeUrl}`
+        );
+      }
+
+      this.protoValue = decoder(this.value);
+    }
+
+    return this.protoValue as T;
+  }
+}
+
 export abstract class ProtoOps implements IProtoOps {
   readonly typeUrl: string;
   readonly fields: IProtoField[];
 
-  abstract encoder(message: unknown, writer?: BinaryWriter): BinaryWriter;
-
-  abstract decoder(input: BinaryReader | Uint8Array, length?: number): unknown;
+  protected abstract encoder(
+    message: unknown,
+    writer?: BinaryWriter
+  ): BinaryWriter;
 
   encode(writer?: BinaryWriter): BinaryWriter {
-    return this.encoder(this.wrapAndClone(), writer);
-  }
-
-  wrapAndClone(): unknown {
-    let obj = { ...this };
-
-    for (const field of this.fields) {
-      if (field.isAcceptsInterface) {
-        obj[field.protoName] = this[field.protoName]?.toProtoMsg();
-      }
-    }
-
-    return obj;
+    return this.encoder(this, writer);
   }
 
   toProtoMsg(): IProtoMsg {

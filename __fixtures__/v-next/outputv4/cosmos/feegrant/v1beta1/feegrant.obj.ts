@@ -1,13 +1,20 @@
 import { Coin } from "../../base/v1beta1/coin";
-import { IProto, IProtoField, IProtoMsg, ProtoOps } from "../../../base";
-import { BasicAllowance } from "./feegrant";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import {
+  IProto,
+  IProtoMsg,
+  ProtoMsg,
+  ProtoOps,
+} from "../../../base";
+import { BasicAllowance, AllowedMsgAllowance } from "./feegrant";
+import { BinaryWriter } from "../../../binary";
 
-// the name's converted from FeeAllowanceI
-export interface IFeeAllowance extends IProto {}
+export const FeeAllowanceIDecoders = {
+  "/cosmos.feegrant.v1beta1.BasicAllowance": BasicAllowance.decode,
+  "/cosmos.feegrant.v1beta1.AllowedMsgAllowance": AllowedMsgAllowance.decode,
+};
 
-export interface IBasicAllowanceProto extends IFeeAllowance, IProto {
-  typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
+export interface IBasicAllowanceProto extends IProto {
+  readonly typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
 
   spendLimit: Coin[];
   expiration: Date;
@@ -17,6 +24,13 @@ export class BasicAllowanceProto
   extends ProtoOps
   implements IBasicAllowanceProto
 {
+  constructor(input: Partial<IBasicAllowanceProto>) {
+    super();
+
+    this.spendLimit = input.spendLimit ?? [];
+    this.expiration = input.expiration ?? new Date();
+  }
+
   readonly typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
 
   readonly fields = [
@@ -24,40 +38,70 @@ export class BasicAllowanceProto
     { no: 2, name: "expiration", protoName: "expiration" },
   ];
 
-  encoder(message: BasicAllowance, writer?: BinaryWriter) {
+  protected encoder(message: BasicAllowance, writer?: BinaryWriter) {
     return BasicAllowance.encode(message, writer);
   }
 
-  decoder(input: BinaryReader | Uint8Array, length?: number) {
-    return BasicAllowance.decode(input, length);
+  toProtoInterface(): BasicAllowance {
+    return this as BasicAllowance;
   }
 
-  toProtoInterface(): BasicAllowance {
-    return this.wrapAndClone() as BasicAllowance;
+  static fromProtoMsg(msg: IProtoMsg): BasicAllowanceProto {
+    return new BasicAllowanceProto(BasicAllowance.decode(msg.value));
   }
 
   spendLimit: Coin[];
   expiration: Date;
 }
 
-export interface IAllowedMsgAllowanceProto extends IFeeAllowance, IProto {
+export interface IAllowedMsgAllowanceProto extends IProto {
   typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
 
-  allowance: IFeeAllowance | IProtoMsg | undefined;
+  allowance: IProtoMsg | undefined;
   allowedMessages: string[];
 }
 
-export class AllowedMsgAllowanceProto implements IAllowedMsgAllowanceProto {
-  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
-  readonly fields: IProtoField[];
+export class AllowedMsgAllowanceProto
+  extends ProtoOps
+  implements IAllowedMsgAllowanceProto
+{
+  constructor(input: Partial<IAllowedMsgAllowanceProto>) {
+    super();
 
-  allowance: IFeeAllowance | IProtoMsg | undefined;
-  allowedMessages: string[];
+    if (input.allowance) {
+      this.allowance = new ProtoMsg(input.allowance, FeeAllowanceIDecoders);
+    }
 
-  toProtoMsg(): IProtoMsg {
-    return {
-      typeUrl: this.typeUrl,
-      value: new Uint8Array(),
-    };
+    this.allowedMessages = input.allowedMessages ?? [];
   }
+
+  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
+  readonly fields = [
+    {
+      no: 1,
+      name: "allowance",
+      protoName: "allowance",
+      isAcceptsInterface: true,
+    },
+    {
+      no: 2,
+      name: "allowed_messages",
+      protoName: "allowedMessages",
+    },
+  ];
+
+  protected encoder(message: AllowedMsgAllowance, writer?: BinaryWriter) {
+    return AllowedMsgAllowance.encode(message, writer);
+  }
+
+  toProtoInterface(): AllowedMsgAllowance {
+    return this as AllowedMsgAllowance;
+  }
+
+  static fromProtoMsg(msg: IProtoMsg): AllowedMsgAllowanceProto {
+    return new AllowedMsgAllowanceProto(AllowedMsgAllowance.decode(msg.value));
+  }
+
+  allowance: IProtoMsg | undefined;
+  allowedMessages: string[];
 }
