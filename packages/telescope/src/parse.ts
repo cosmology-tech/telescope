@@ -30,6 +30,7 @@ export const getParsedObjectName = (
 };
 
 // TODO potentially move this back to ast or proto bc the ast lib references MapEntries...
+// Creating those BindingsEntry interfaces
 const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
     const root = getRoot(ref);
     const scoped = [...scope].splice(root.package.split('.').length);
@@ -46,7 +47,9 @@ const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
                     type: field.keyType
                 },
                 comment: undefined,
-                options: undefined
+                options: {
+                  "(telescope:map_entry_type_field)": true
+                }
             },
             value: {
                 id: 2,
@@ -57,7 +60,9 @@ const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
                     type: field.parsedType.type
                 },
                 comment: undefined,
-                options: undefined
+                options: {
+                  "(telescope:map_entry_type_field)": true
+                }
             }
         }
     };

@@ -167,20 +167,22 @@ export const getFieldOptionality = (
     field: ProtoField,
     isOneOf: boolean
 ) => {
+    const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
+    const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
 
-    // const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
-    // const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
-    // const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
+    if(fieldDefaultIsOptional){
+      return HandleFieldsOptionalityDefaultTrue(useOptionalNullable, field, isOneOf);
+    } else {
+      if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
+          // these field types are required by default!
+          if (isOneOf) {
+              return true;
+          }
+          return false;
+      }
 
-    if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
-        // these field types are required by default!
-        if (isOneOf) {
-            return true;
-        }
-        return false;
+      return true;
     }
-
-    return true;
 };
 
 export const isScalarField = (
@@ -209,27 +211,52 @@ export const getFieldOptionalityForDefaults = (
     const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
 
-    if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
-        // these field types are required by default!
+    if(fieldDefaultIsOptional){
+      return HandleFieldsOptionalityDefaultTrue(useOptionalNullable, field, isOneOf);
+    } else {
+      if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
+          // these field types are required by default!
 
-        if (isOneOf || (useOptionalNullable &&
-            field?.options?.['(gogoproto.nullable)'])) {
-            return true;
-        }
-        return false;
+          if (isOneOf || (useOptionalNullable &&
+              field?.options?.['(gogoproto.nullable)'])) {
+              return true;
+          }
+          return false;
+      }
+
+      return isOneOf ||
+          (
+              useOptionalNullable &&
+              field?.options?.['(gogoproto.nullable)']
+          )
+          ||
+          (
+              // this would only happen if previous predicate is false,
+              // so lets ensure not to override required properties when gogoproto.nullable=false
+              !useOptionalNullable &&
+              fieldDefaultIsOptional
+          );
     }
-
-    return isOneOf ||
-        (
-            useOptionalNullable &&
-            field?.options?.['(gogoproto.nullable)']
-        )
-        ||
-        (
-            // this would only happen if previous predicate is false,
-            // so lets ensure not to override required properties when gogoproto.nullable=false
-            !useOptionalNullable &&
-            fieldDefaultIsOptional
-        );
 };
+
+export const HandleFieldsOptionalityDefaultTrue = (
+  useOptionalNullable: boolean,
+  field: ProtoField,
+  isOneOf: boolean
+) => {
+    //Handle fields optionality default to true
+    //All fields will be set to optional(return true), only if:
+    //  when (telescope:map_entry_type_field) == true
+    //  when useOptionalNullable == true
+    //    and (gogoproto.nullable) == false
+    //    and it's not inside oneof block,
+    //  in these cases, false will be returned.
+
+    //by default, gogoproto.nullable should be true
+    const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? true;
+
+    return ( isOneOf || !useOptionalNullable || gogoprotoNullable ) && !field?.options?.['(telescope:map_entry_type_field)'];
+};
+
+
 

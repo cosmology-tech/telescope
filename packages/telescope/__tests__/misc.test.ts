@@ -42,7 +42,7 @@ const options: TelescopeOptions = {
       fromProto: true,
     },
     includePackageVar: true,
-    fieldDefaultIsOptional: false,
+    fieldDefaultIsOptional: true,
     useOptionalNullable: true,
     allowUndefinedTypes: false,
     typingsFormat: {

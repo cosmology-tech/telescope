@@ -12,7 +12,7 @@ export interface EvalRequest_BindingsEntryProtoMsg {
 }
 export interface EvalRequest_BindingsEntryAmino {
   key: string;
-  value?: ExprValueAmino;
+  value: ExprValueAmino;
 }
 export interface EvalRequest_BindingsEntryAminoMsg {
   type: string;
@@ -32,7 +32,7 @@ export interface EvalRequest_RefsEntryProtoMsg {
 }
 export interface EvalRequest_RefsEntryAmino {
   key: string;
-  value?: IdRefAmino;
+  value: IdRefAmino;
 }
 export interface EvalRequest_RefsEntryAminoMsg {
   type: string;
@@ -47,12 +47,20 @@ export interface EvalRequest {
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
-  bindings: {
+  bindings?: {
     [key: string]: ExprValue;
   };
-  refs: {
+  refs?: {
     [key: string]: IdRef;
   };
+  testNum?: number;
+  testString: string;
+  testBool?: boolean;
+  instantiatePermission?: AccessConfig;
+  /** [(gogoproto.nullable) = false] wouldn't work in this case */
+  id?: string;
+  name?: string;
+  testArray?: string[];
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/misc.EvalRequest";
@@ -69,18 +77,50 @@ export interface EvalRequestAmino {
   refs?: {
     [key: string]: IdRefAmino;
   };
+  test_num?: number;
+  test_string: string;
+  test_bool?: boolean;
+  instantiate_permission?: AccessConfigAmino;
+  /** [(gogoproto.nullable) = false] wouldn't work in this case */
+  id?: string;
+  name?: string;
+  test_array?: string[];
 }
 export interface EvalRequestAminoMsg {
   type: "/misc.EvalRequest";
   value: EvalRequestAmino;
 }
 export interface EvalRequestSDKType {
-  bindings: {
+  bindings?: {
     [key: string]: ExprValueSDKType;
   };
-  refs: {
+  refs?: {
     [key: string]: IdRefSDKType;
   };
+  test_num?: number;
+  test_string: string;
+  test_bool?: boolean;
+  instantiate_permission?: AccessConfigSDKType;
+  id?: string;
+  name?: string;
+  test_array?: string[];
+}
+export interface AccessConfig {
+  sender?: string;
+}
+export interface AccessConfigProtoMsg {
+  typeUrl: "/misc.AccessConfig";
+  value: Uint8Array;
+}
+export interface AccessConfigAmino {
+  sender?: string;
+}
+export interface AccessConfigAminoMsg {
+  type: "/misc.AccessConfig";
+  value: AccessConfigAmino;
+}
+export interface AccessConfigSDKType {
+  sender?: string;
 }
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
@@ -272,8 +312,15 @@ export const EvalRequest_RefsEntry = {
 };
 function createBaseEvalRequest(): EvalRequest {
   return {
-    bindings: {},
-    refs: {}
+    bindings: undefined,
+    refs: undefined,
+    testNum: undefined,
+    testString: "",
+    testBool: undefined,
+    instantiatePermission: undefined,
+    id: undefined,
+    name: undefined,
+    testArray: undefined
   };
 }
 export const EvalRequest = {
@@ -291,6 +338,27 @@ export const EvalRequest = {
         value
       }, writer.uint32(18).fork()).ldelim();
     });
+    if (message.testNum !== undefined) {
+      writer.uint32(24).uint32(message.testNum);
+    }
+    if (message.testString !== "") {
+      writer.uint32(34).string(message.testString);
+    }
+    if (message.testBool !== undefined) {
+      writer.uint32(40).bool(message.testBool);
+    }
+    if (message.instantiatePermission !== undefined) {
+      AccessConfig.encode(message.instantiatePermission, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.id !== undefined) {
+      writer.uint32(98).string(message.id);
+    }
+    if (message.name !== undefined) {
+      writer.uint32(106).string(message.name);
+    }
+    for (const v of message.testArray) {
+      writer.uint32(114).string(v!);
+    }
     return writer;
   },
   decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
@@ -312,6 +380,27 @@ export const EvalRequest = {
             message.refs[entry2.key] = entry2.value;
           }
           break;
+        case 3:
+          message.testNum = reader.uint32();
+          break;
+        case 4:
+          message.testString = reader.string();
+          break;
+        case 5:
+          message.testBool = reader.bool();
+          break;
+        case 8:
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          break;
+        case 12:
+          message.id = reader.string();
+          break;
+        case 13:
+          message.name = reader.string();
+          break;
+        case 14:
+          message.testArray.push(reader.string());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -332,7 +421,14 @@ export const EvalRequest = {
       }>((acc, [key, value]) => {
         acc[key] = IdRef.fromJSON(value);
         return acc;
-      }, {}) : {}
+      }, {}) : {},
+      testNum: isSet(object.testNum) ? Number(object.testNum) : undefined,
+      testString: isSet(object.testString) ? String(object.testString) : "",
+      testBool: isSet(object.testBool) ? Boolean(object.testBool) : undefined,
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined,
+      id: isSet(object.id) ? String(object.id) : undefined,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : []
     };
   },
   toJSON(message: EvalRequest): unknown {
@@ -348,6 +444,17 @@ export const EvalRequest = {
       Object.entries(message.refs).forEach(([k, v]) => {
         obj.refs[k] = IdRef.toJSON(v);
       });
+    }
+    message.testNum !== undefined && (obj.testNum = Math.round(message.testNum));
+    message.testString !== undefined && (obj.testString = message.testString);
+    message.testBool !== undefined && (obj.testBool = message.testBool);
+    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    if (message.testArray) {
+      obj.testArray = message.testArray.map(e => e);
+    } else {
+      obj.testArray = [];
     }
     return obj;
   },
@@ -369,6 +476,13 @@ export const EvalRequest = {
       }
       return acc;
     }, {});
+    message.testNum = object.testNum ?? undefined;
+    message.testString = object.testString ?? "";
+    message.testBool = object.testBool ?? undefined;
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    message.id = object.id ?? undefined;
+    message.name = object.name ?? undefined;
+    message.testArray = object.testArray?.map(e => e) || [];
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -384,7 +498,14 @@ export const EvalRequest = {
       }>((acc, [key, value]) => {
         acc[key] = IdRef.fromSDK(value);
         return acc;
-      }, {}) : {}
+      }, {}) : {},
+      testNum: object?.test_num,
+      testString: object?.test_string,
+      testBool: object?.test_bool,
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined,
+      id: object?.id,
+      name: object?.name,
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): EvalRequestSDKType {
@@ -400,7 +521,14 @@ export const EvalRequest = {
       }>((acc, [key, value]) => {
         acc[key] = IdRef.fromSDKJSON(value);
         return acc;
-      }, {}) : {}
+      }, {}) : {},
+      test_num: isSet(object.test_num) ? Number(object.test_num) : undefined,
+      test_string: isSet(object.test_string) ? String(object.test_string) : "",
+      test_bool: isSet(object.test_bool) ? Boolean(object.test_bool) : undefined,
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined,
+      id: isSet(object.id) ? String(object.id) : undefined,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      test_array: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => String(e)) : []
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -417,6 +545,17 @@ export const EvalRequest = {
         obj.refs[k] = IdRef.toSDK(v);
       });
     }
+    obj.test_num = message.testNum;
+    obj.test_string = message.testString;
+    obj.test_bool = message.testBool;
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    obj.id = message.id;
+    obj.name = message.name;
+    if (message.testArray) {
+      obj.test_array = message.testArray.map(e => e);
+    } else {
+      obj.test_array = [];
+    }
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
@@ -432,7 +571,14 @@ export const EvalRequest = {
       }>((acc, [key, value]) => {
         acc[key] = IdRef.fromAmino(value);
         return acc;
-      }, {}) : {}
+      }, {}) : {},
+      testNum: object?.test_num,
+      testString: object.test_string,
+      testBool: object?.test_bool,
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined,
+      id: object?.id,
+      name: object?.name,
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
     };
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -449,6 +595,17 @@ export const EvalRequest = {
         obj.refs[k] = IdRef.toAmino(v);
       });
     }
+    obj.test_num = message.testNum;
+    obj.test_string = message.testString;
+    obj.test_bool = message.testBool;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    obj.id = message.id;
+    obj.name = message.name;
+    if (message.testArray) {
+      obj.test_array = message.testArray.map(e => e);
+    } else {
+      obj.test_array = [];
+    }
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
@@ -464,6 +621,92 @@ export const EvalRequest = {
     return {
       typeUrl: "/misc.EvalRequest",
       value: EvalRequest.encode(message).finish()
+    };
+  }
+};
+function createBaseAccessConfig(): AccessConfig {
+  return {
+    sender: undefined
+  };
+}
+export const AccessConfig = {
+  typeUrl: "/misc.AccessConfig",
+  encode(message: AccessConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sender !== undefined) {
+      writer.uint32(10).string(message.sender);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): AccessConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAccessConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): AccessConfig {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : undefined
+    };
+  },
+  toJSON(message: AccessConfig): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    return obj;
+  },
+  fromPartial(object: DeepPartial<AccessConfig>): AccessConfig {
+    const message = createBaseAccessConfig();
+    message.sender = object.sender ?? undefined;
+    return message;
+  },
+  fromSDK(object: AccessConfigSDKType): AccessConfig {
+    return {
+      sender: object?.sender
+    };
+  },
+  fromSDKJSON(object: any): AccessConfigSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : undefined
+    };
+  },
+  toSDK(message: AccessConfig): AccessConfigSDKType {
+    const obj: any = {};
+    obj.sender = message.sender;
+    return obj;
+  },
+  fromAmino(object: AccessConfigAmino): AccessConfig {
+    return {
+      sender: object?.sender
+    };
+  },
+  toAmino(message: AccessConfig): AccessConfigAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    return obj;
+  },
+  fromAminoMsg(object: AccessConfigAminoMsg): AccessConfig {
+    return AccessConfig.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AccessConfigProtoMsg): AccessConfig {
+    return AccessConfig.decode(message.value);
+  },
+  toProto(message: AccessConfig): Uint8Array {
+    return AccessConfig.encode(message).finish();
+  },
+  toProtoMsg(message: AccessConfig): AccessConfigProtoMsg {
+    return {
+      typeUrl: "/misc.AccessConfig",
+      value: AccessConfig.encode(message).finish()
     };
   }
 };

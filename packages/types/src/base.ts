@@ -85,6 +85,7 @@ export interface ProtoField {
         "(telescope:name)"?: string;
         "(telescope:orig)"?: string;
         "(telescope:camel)"?: string;
+        "(telescope:map_entry_type_field)"?: boolean;
         "(gogoproto.casttype)"?: string;
         "(gogoproto.customtype)"?: string;
         "(gogoproto.moretags)"?: string;

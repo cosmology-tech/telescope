@@ -3,7 +3,7 @@ import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRef[];
+  exprs?: IdRef[];
 }
 export interface ExprValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprValue";
@@ -11,18 +11,18 @@ export interface ExprValueProtoMsg {
 }
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
+  exprs?: IdRefAmino[];
 }
 export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprValue";
   value: ExprValueAmino;
 }
 export interface ExprValueSDKType {
-  exprs: IdRefSDKType[];
+  exprs?: IdRefSDKType[];
 }
 export interface IdRef {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.IdRef";
@@ -30,18 +30,18 @@ export interface IdRefProtoMsg {
 }
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefAminoMsg {
   type: "/google.api.expr.v1alpha1.IdRef";
   value: IdRefAmino;
 }
 export interface IdRefSDKType {
-  id: number;
+  id?: number;
 }
 function createBaseExprValue(): ExprValue {
   return {
-    exprs: []
+    exprs: undefined
   };
 }
 export const ExprValue = {
@@ -139,13 +139,13 @@ export const ExprValue = {
 };
 function createBaseIdRef(): IdRef {
   return {
-    id: 0
+    id: undefined
   };
 }
 export const IdRef = {
   typeUrl: "/google.api.expr.v1alpha1.IdRef",
   encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
     }
     return writer;
@@ -169,7 +169,7 @@ export const IdRef = {
   },
   fromJSON(object: any): IdRef {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0
+      id: isSet(object.id) ? Number(object.id) : undefined
     };
   },
   toJSON(message: IdRef): unknown {
@@ -179,7 +179,7 @@ export const IdRef = {
   },
   fromPartial(object: DeepPartial<IdRef>): IdRef {
     const message = createBaseIdRef();
-    message.id = object.id ?? 0;
+    message.id = object.id ?? undefined;
     return message;
   },
   fromSDK(object: IdRefSDKType): IdRef {
@@ -189,7 +189,7 @@ export const IdRef = {
   },
   fromSDKJSON(object: any): IdRefSDKType {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0
+      id: isSet(object.id) ? Number(object.id) : undefined
     };
   },
   toSDK(message: IdRef): IdRefSDKType {
@@ -199,7 +199,7 @@ export const IdRef = {
   },
   fromAmino(object: IdRefAmino): IdRef {
     return {
-      id: object.id
+      id: object?.id
     };
   },
   toAmino(message: IdRef): IdRefAmino {
