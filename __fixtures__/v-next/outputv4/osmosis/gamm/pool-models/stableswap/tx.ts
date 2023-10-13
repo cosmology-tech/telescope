@@ -5,64 +5,64 @@ import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPool {
-  sender: string;
-  poolParams: PoolParams;
+  sender?: string;
+  poolParams?: PoolParams;
   initialPoolLiquidity: Coin[];
-  scalingFactors: bigint[];
-  futurePoolGovernor: string;
-  scalingFactorController: string;
+  scalingFactors?: bigint[];
+  futurePoolGovernor?: string;
+  scalingFactorController?: string;
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
-  sender: string;
-  pool_params: PoolParamsSDKType;
+  sender?: string;
+  pool_params?: PoolParamsSDKType;
   initial_pool_liquidity: CoinSDKType[];
-  scaling_factors: bigint[];
-  future_pool_governor: string;
-  scaling_factor_controller: string;
+  scaling_factors?: bigint[];
+  future_pool_governor?: string;
+  scaling_factor_controller?: string;
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponse {
-  poolId: bigint;
+  poolId?: bigint;
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseSDKType {
-  pool_id: bigint;
+  pool_id?: bigint;
 }
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
  */
 export interface MsgStableSwapAdjustScalingFactors {
-  sender: string;
-  poolId: bigint;
-  scalingFactors: bigint[];
+  sender?: string;
+  poolId?: bigint;
+  scalingFactors?: bigint[];
 }
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
  */
 export interface MsgStableSwapAdjustScalingFactorsSDKType {
-  sender: string;
-  pool_id: bigint;
-  scaling_factors: bigint[];
+  sender?: string;
+  pool_id?: bigint;
+  scaling_factors?: bigint[];
 }
 export interface MsgStableSwapAdjustScalingFactorsResponse {}
 export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
   return {
-    sender: "",
-    poolParams: PoolParams.fromPartial({}),
+    sender: undefined,
+    poolParams: undefined,
     initialPoolLiquidity: [],
-    scalingFactors: [],
-    futurePoolGovernor: "",
-    scalingFactorController: ""
+    scalingFactors: undefined,
+    futurePoolGovernor: undefined,
+    scalingFactorController: undefined
   };
 }
 export const MsgCreateStableswapPool = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool",
   encode(message: MsgCreateStableswapPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     if (message.poolParams !== undefined) {
@@ -76,10 +76,10 @@ export const MsgCreateStableswapPool = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(42).string(message.futurePoolGovernor);
     }
-    if (message.scalingFactorController !== "") {
+    if (message.scalingFactorController !== undefined) {
       writer.uint32(50).string(message.scalingFactorController);
     }
     return writer;
@@ -143,7 +143,7 @@ export const MsgCreateStableswapPool = {
       obj.initialPoolLiquidity = [];
     }
     if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt(0)).toString());
+      obj.scalingFactors = message.scalingFactors.map(e => (e || undefined).toString());
     } else {
       obj.scalingFactors = [];
     }
@@ -153,14 +153,14 @@ export const MsgCreateStableswapPool = {
   },
   fromPartial(object: DeepPartial<MsgCreateStableswapPool>): MsgCreateStableswapPool {
     const message = createBaseMsgCreateStableswapPool();
-    message.sender = object.sender ?? "";
+    message.sender = object.sender ?? undefined;
     if (object.poolParams !== undefined && object.poolParams !== null) {
       message.poolParams = PoolParams.fromPartial(object.poolParams);
     }
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
-    message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    message.scalingFactorController = object.scalingFactorController ?? "";
+    message.futurePoolGovernor = object.futurePoolGovernor ?? undefined;
+    message.scalingFactorController = object.scalingFactorController ?? undefined;
     return message;
   },
   fromSDK(object: MsgCreateStableswapPoolSDKType): MsgCreateStableswapPool {
@@ -175,12 +175,12 @@ export const MsgCreateStableswapPool = {
   },
   fromSDKJSON(object: any): MsgCreateStableswapPoolSDKType {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
+      sender: isSet(object.sender) ? String(object.sender) : undefined,
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
       initial_pool_liquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
       scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : [],
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
-      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : undefined,
+      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : undefined
     };
   },
   toSDK(message: MsgCreateStableswapPool): MsgCreateStableswapPoolSDKType {
@@ -203,12 +203,12 @@ export const MsgCreateStableswapPool = {
   },
   fromAmino(object: MsgCreateStableswapPoolAmino): MsgCreateStableswapPool {
     return {
-      sender: object.sender,
+      sender: object?.sender,
       poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
       initialPoolLiquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : [],
-      futurePoolGovernor: object.future_pool_governor,
-      scalingFactorController: object.scaling_factor_controller
+      futurePoolGovernor: object?.future_pool_governor,
+      scalingFactorController: object?.scaling_factor_controller
     };
   },
   toAmino(message: MsgCreateStableswapPool): MsgCreateStableswapPoolAmino {
@@ -253,13 +253,13 @@ export const MsgCreateStableswapPool = {
 };
 function createBaseMsgCreateStableswapPoolResponse(): MsgCreateStableswapPoolResponse {
   return {
-    poolId: BigInt(0)
+    poolId: undefined
   };
 }
 export const MsgCreateStableswapPoolResponse = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPoolResponse",
   encode(message: MsgCreateStableswapPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -288,7 +288,9 @@ export const MsgCreateStableswapPoolResponse = {
   },
   toJSON(message: MsgCreateStableswapPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    if (message.poolId !== undefined) {
+      obj.poolId = message.poolId.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateStableswapPoolResponse>): MsgCreateStableswapPoolResponse {
@@ -305,7 +307,7 @@ export const MsgCreateStableswapPoolResponse = {
   },
   fromSDKJSON(object: any): MsgCreateStableswapPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : undefined
     };
   },
   toSDK(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseSDKType {
@@ -315,7 +317,7 @@ export const MsgCreateStableswapPoolResponse = {
   },
   fromAmino(object: MsgCreateStableswapPoolResponseAmino): MsgCreateStableswapPoolResponse {
     return {
-      poolId: BigInt(object.pool_id)
+      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined
     };
   },
   toAmino(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseAmino {
@@ -347,18 +349,18 @@ export const MsgCreateStableswapPoolResponse = {
 };
 function createBaseMsgStableSwapAdjustScalingFactors(): MsgStableSwapAdjustScalingFactors {
   return {
-    sender: "",
-    poolId: BigInt(0),
-    scalingFactors: []
+    sender: undefined,
+    poolId: undefined,
+    scalingFactors: undefined
   };
 }
 export const MsgStableSwapAdjustScalingFactors = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
   encode(message: MsgStableSwapAdjustScalingFactors, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
     writer.uint32(26).fork();
@@ -408,9 +410,11 @@ export const MsgStableSwapAdjustScalingFactors = {
   toJSON(message: MsgStableSwapAdjustScalingFactors): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    if (message.poolId !== undefined) {
+      obj.poolId = message.poolId.toString();
+    }
     if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt(0)).toString());
+      obj.scalingFactors = message.scalingFactors.map(e => (e || undefined).toString());
     } else {
       obj.scalingFactors = [];
     }
@@ -418,7 +422,7 @@ export const MsgStableSwapAdjustScalingFactors = {
   },
   fromPartial(object: DeepPartial<MsgStableSwapAdjustScalingFactors>): MsgStableSwapAdjustScalingFactors {
     const message = createBaseMsgStableSwapAdjustScalingFactors();
-    message.sender = object.sender ?? "";
+    message.sender = object.sender ?? undefined;
     if (object.poolId !== undefined && object.poolId !== null) {
       message.poolId = BigInt(object.poolId.toString());
     }
@@ -434,8 +438,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   },
   fromSDKJSON(object: any): MsgStableSwapAdjustScalingFactorsSDKType {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
+      sender: isSet(object.sender) ? String(object.sender) : undefined,
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : undefined,
       scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : []
     };
   },
@@ -452,8 +456,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   },
   fromAmino(object: MsgStableSwapAdjustScalingFactorsAmino): MsgStableSwapAdjustScalingFactors {
     return {
-      sender: object.sender,
-      poolId: BigInt(object.pool_id),
+      sender: object?.sender,
+      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined,
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : []
     };
   },

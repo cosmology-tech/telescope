@@ -76,7 +76,7 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
  */
 export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
-  properties: Property[];
+  properties?: Property[];
 }
 /**
  * A descriptor for defining project properties for a service. One service may
@@ -97,7 +97,7 @@ export interface ProjectProperties {
  *        type: INT64
  */
 export interface ProjectPropertiesSDKType {
-  properties: PropertySDKType[];
+  properties?: PropertySDKType[];
 }
 /**
  * Defines project properties.
@@ -113,11 +113,11 @@ export interface ProjectPropertiesSDKType {
  */
 export interface Property {
   /** The name of the property (a.k.a key). */
-  name: string;
+  name?: string;
   /** The type of this property. */
-  type: Property_PropertyType;
+  type?: Property_PropertyType;
   /** The description of the property */
-  description: string;
+  description?: string;
 }
 /**
  * Defines project properties.
@@ -132,13 +132,13 @@ export interface Property {
  * define and set these properties.
  */
 export interface PropertySDKType {
-  name: string;
-  type: Property_PropertyType;
-  description: string;
+  name?: string;
+  type?: Property_PropertyType;
+  description?: string;
 }
 function createBaseProjectProperties(): ProjectProperties {
   return {
-    properties: []
+    properties: undefined
   };
 }
 export const ProjectProperties = {
@@ -236,21 +236,21 @@ export const ProjectProperties = {
 };
 function createBaseProperty(): Property {
   return {
-    name: "",
-    type: 0,
-    description: ""
+    name: undefined,
+    type: undefined,
+    description: undefined
   };
 }
 export const Property = {
   typeUrl: "/google.api.Property",
   encode(message: Property, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -294,23 +294,23 @@ export const Property = {
   },
   fromPartial(object: DeepPartial<Property>): Property {
     const message = createBaseProperty();
-    message.name = object.name ?? "";
-    message.type = object.type ?? 0;
-    message.description = object.description ?? "";
+    message.name = object.name ?? undefined;
+    message.type = object.type ?? undefined;
+    message.description = object.description ?? undefined;
     return message;
   },
   fromSDK(object: PropertySDKType): Property {
     return {
       name: object?.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : undefined,
       description: object?.description
     };
   },
   fromSDKJSON(object: any): PropertySDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: isSet(object.description) ? String(object.description) : ""
+      name: isSet(object.name) ? String(object.name) : undefined,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined
     };
   },
   toSDK(message: Property): PropertySDKType {
@@ -322,9 +322,9 @@ export const Property = {
   },
   fromAmino(object: PropertyAmino): Property {
     return {
-      name: object.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object.description
+      name: object?.name,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : undefined,
+      description: object?.description
     };
   },
   toAmino(message: Property): PropertyAmino {

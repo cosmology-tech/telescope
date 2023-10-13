@@ -91,14 +91,14 @@ export interface Timestamp {
    * 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
    * 9999-12-31T23:59:59Z inclusive.
    */
-  seconds: bigint;
+  seconds?: bigint;
   /**
    * Non-negative fractions of a second at nanosecond resolution. Negative
    * second values with fractions must still have non-negative nanos values
    * that count forward in time. Must be from 0 to 999,999,999
    * inclusive.
    */
-  nanos: number;
+  nanos?: number;
 }
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -185,22 +185,22 @@ export interface Timestamp {
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
 export interface TimestampSDKType {
-  seconds: bigint;
-  nanos: number;
+  seconds?: bigint;
+  nanos?: number;
 }
 function createBaseTimestamp(): Timestamp {
   return {
-    seconds: BigInt(0),
-    nanos: 0
+    seconds: undefined,
+    nanos: undefined
   };
 }
 export const Timestamp = {
   typeUrl: "/google.protobuf.Timestamp",
   encode(message: Timestamp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.seconds !== BigInt(0)) {
+    if (message.seconds !== undefined) {
       writer.uint32(8).int64(message.seconds);
     }
-    if (message.nanos !== 0) {
+    if (message.nanos !== undefined) {
       writer.uint32(16).int32(message.nanos);
     }
     return writer;
@@ -233,7 +233,9 @@ export const Timestamp = {
   },
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
+    if (message.seconds !== undefined) {
+      obj.seconds = message.seconds.toString();
+    }
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
@@ -242,7 +244,7 @@ export const Timestamp = {
     if (object.seconds !== undefined && object.seconds !== null) {
       message.seconds = BigInt(object.seconds.toString());
     }
-    message.nanos = object.nanos ?? 0;
+    message.nanos = object.nanos ?? undefined;
     return message;
   },
   fromSDK(object: TimestampSDKType): Timestamp {
@@ -253,8 +255,8 @@ export const Timestamp = {
   },
   fromSDKJSON(object: any): TimestampSDKType {
     return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : undefined,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : undefined
     };
   },
   toSDK(message: Timestamp): TimestampSDKType {

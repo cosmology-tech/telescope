@@ -110,8 +110,8 @@ export interface PoolAssetSDKType {
   weight: string;
 }
 export interface Pool {
-  address: string;
-  id: bigint;
+  address?: string;
+  id?: bigint;
   poolParams: PoolParams;
   /**
    * This string specifies who will govern the pool in the future.
@@ -124,7 +124,7 @@ export interface Pool {
    * would need to be locked up to count in governance. 0w means no lockup.
    * TODO: Further improve these docs
    */
-  futurePoolGovernor: string;
+  futurePoolGovernor?: string;
   /** sum of all LP tokens sent out */
   totalShares: Coin;
   /**
@@ -136,10 +136,10 @@ export interface Pool {
   totalWeight: string;
 }
 export interface PoolSDKType {
-  address: string;
-  id: bigint;
+  address?: string;
+  id?: bigint;
   pool_params: PoolParamsSDKType;
-  future_pool_governor: string;
+  future_pool_governor?: string;
   total_shares: CoinSDKType;
   pool_assets: PoolAssetSDKType[];
   total_weight: string;
@@ -542,10 +542,10 @@ export const PoolAsset = {
 };
 function createBasePool(): Pool {
   return {
-    address: "",
-    id: BigInt(0),
+    address: undefined,
+    id: undefined,
     poolParams: PoolParams.fromPartial({}),
-    futurePoolGovernor: "",
+    futurePoolGovernor: undefined,
     totalShares: Coin.fromPartial({}),
     poolAssets: [],
     totalWeight: ""
@@ -554,16 +554,16 @@ function createBasePool(): Pool {
 export const Pool = {
   typeUrl: "/osmosis.gamm.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     if (message.totalShares !== undefined) {
@@ -626,7 +626,9 @@ export const Pool = {
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
+    if (message.id !== undefined) {
+      obj.id = message.id.toString();
+    }
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
@@ -640,14 +642,14 @@ export const Pool = {
   },
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     if (object.id !== undefined && object.id !== null) {
       message.id = BigInt(object.id.toString());
     }
     if (object.poolParams !== undefined && object.poolParams !== null) {
       message.poolParams = PoolParams.fromPartial(object.poolParams);
     }
-    message.futurePoolGovernor = object.futurePoolGovernor ?? "";
+    message.futurePoolGovernor = object.futurePoolGovernor ?? undefined;
     if (object.totalShares !== undefined && object.totalShares !== null) {
       message.totalShares = Coin.fromPartial(object.totalShares);
     }
@@ -668,10 +670,10 @@ export const Pool = {
   },
   fromSDKJSON(object: any): PoolSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      address: isSet(object.address) ? String(object.address) : undefined,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined,
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : undefined,
       total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
       pool_assets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
       total_weight: isSet(object.total_weight) ? String(object.total_weight) : ""
@@ -694,10 +696,10 @@ export const Pool = {
   },
   fromAmino(object: PoolAmino): Pool {
     return {
-      address: object.address,
-      id: BigInt(object.id),
+      address: object?.address,
+      id: object?.id ? BigInt(object.id) : undefined,
       poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
+      futurePoolGovernor: object?.future_pool_governor,
       totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
       poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
       totalWeight: object.total_weight

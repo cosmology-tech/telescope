@@ -48,32 +48,32 @@ export function actionToJSON(object: Action): string {
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecord {
   /** address of claim user */
-  address: string;
+  address?: string;
   /** total initial claimable amount for the user */
   initialClaimableAmount: Coin[];
   /**
    * true if action is completed
    * index of bool in array refers to action enum #
    */
-  actionCompleted: boolean[];
+  actionCompleted?: boolean[];
 }
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
-  address: string;
+  address?: string;
   initial_claimable_amount: CoinSDKType[];
-  action_completed: boolean[];
+  action_completed?: boolean[];
 }
 function createBaseClaimRecord(): ClaimRecord {
   return {
-    address: "",
+    address: undefined,
     initialClaimableAmount: [],
-    actionCompleted: []
+    actionCompleted: undefined
   };
 }
 export const ClaimRecord = {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
   encode(message: ClaimRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.initialClaimableAmount) {
@@ -140,7 +140,7 @@ export const ClaimRecord = {
   },
   fromPartial(object: DeepPartial<ClaimRecord>): ClaimRecord {
     const message = createBaseClaimRecord();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     message.initialClaimableAmount = object.initialClaimableAmount?.map(e => Coin.fromPartial(e)) || [];
     message.actionCompleted = object.actionCompleted?.map(e => e) || [];
     return message;
@@ -154,7 +154,7 @@ export const ClaimRecord = {
   },
   fromSDKJSON(object: any): ClaimRecordSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? String(object.address) : undefined,
       initial_claimable_amount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
       action_completed: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => Boolean(e)) : []
     };
@@ -176,7 +176,7 @@ export const ClaimRecord = {
   },
   fromAmino(object: ClaimRecordAmino): ClaimRecord {
     return {
-      address: object.address,
+      address: object?.address,
       initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromAmino(e)) : [],
       actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
     };

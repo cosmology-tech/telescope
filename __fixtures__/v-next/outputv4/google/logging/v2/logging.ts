@@ -71,11 +71,11 @@ export interface DeleteLogRequest {
    * For more information about log names, see
    * [LogEntry][google.logging.v2.LogEntry].
    */
-  logName: string;
+  logName?: string;
 }
 /** The parameters to DeleteLog. */
 export interface DeleteLogRequestSDKType {
-  log_name: string;
+  log_name?: string;
 }
 export interface WriteLogEntriesRequest_LabelsEntry {
   key: string;
@@ -106,7 +106,7 @@ export interface WriteLogEntriesRequest {
    * entries, whether the resource is specified in `logName` or in an
    * individual log entry.
    */
-  logName: string;
+  logName?: string;
   /**
    * Optional. A default monitored resource object that is assigned to all log
    * entries in `entries` that do not specify a value for `resource`. Example:
@@ -117,14 +117,14 @@ export interface WriteLogEntriesRequest {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource: MonitoredResource;
+  resource?: MonitoredResource;
   /**
    * Optional. Default labels that are added to the `labels` field of all log
    * entries in `entries`. If a log entry already has a label with the same key
    * as a label in this parameter, then the log entry's label is not changed.
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -153,7 +153,7 @@ export interface WriteLogEntriesRequest {
    * `entries.write`, you should try to include several log entries in this
    * list, rather than calling this method for each individual log entry.
    */
-  entries: LogEntry[];
+  entries?: LogEntry[];
   /**
    * Optional. Whether valid entries should be written even if some other
    * entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -161,24 +161,24 @@ export interface WriteLogEntriesRequest {
    * with one of the failed entries and the response includes error details
    * keyed by the entries' zero-based index in the `entries.write` method.
    */
-  partialSuccess: boolean;
+  partialSuccess?: boolean;
   /**
    * Optional. If true, the request should expect normal response, but the
    * entries won't be persisted nor exported. Useful for checking whether the
    * logging API endpoints are working properly before sending valuable data.
    */
-  dryRun: boolean;
+  dryRun?: boolean;
 }
 /** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequestSDKType {
-  log_name: string;
-  resource: MonitoredResourceSDKType;
-  labels: {
+  log_name?: string;
+  resource?: MonitoredResourceSDKType;
+  labels?: {
     [key: string]: string;
   };
-  entries: LogEntrySDKType[];
-  partial_success: boolean;
-  dry_run: boolean;
+  entries?: LogEntrySDKType[];
+  partial_success?: boolean;
+  dry_run?: boolean;
 }
 /** Result returned from WriteLogEntries. */
 export interface WriteLogEntriesResponse {}
@@ -202,13 +202,13 @@ export interface WriteLogEntriesPartialErrors {
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
-  logEntryErrors: {
+  logEntryErrors?: {
     [key: number]: Status;
   };
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrorsSDKType {
-  log_entry_errors: {
+  log_entry_errors?: {
     [key: number]: StatusSDKType;
   };
 }
@@ -232,7 +232,7 @@ export interface ListLogEntriesRequest {
    * 
    * Projects listed in the `project_ids` field are added to this list.
    */
-  resourceNames: string[];
+  resourceNames?: string[];
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
@@ -242,7 +242,7 @@ export interface ListLogEntriesRequest {
    * cause the filter to return no results. The maximum length of the filter is
    * 20000 characters.
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. How the results should be sorted.  Presently, the only permitted
    * values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -251,29 +251,29 @@ export interface ListLogEntriesRequest {
    * in order of decreasing timestamps (newest first).  Entries with equal
    * timestamps are returned in order of their `insert_id` values.
    */
-  orderBy: string;
+  orderBy?: string;
   /**
    * Optional. The maximum number of results to return from this request. Default is 50.
    * If the value is negative or exceeds 1000, the request is rejected. The
    * presence of `next_page_token` in the response indicates that more results
    * might be available.
    */
-  pageSize: number;
+  pageSize?: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `page_token` must be the value of
    * `next_page_token` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
 }
 /** The parameters to `ListLogEntries`. */
 export interface ListLogEntriesRequestSDKType {
-  resource_names: string[];
-  filter: string;
-  order_by: string;
-  page_size: number;
-  page_token: string;
+  resource_names?: string[];
+  filter?: string;
+  order_by?: string;
+  page_size?: number;
+  page_token?: string;
 }
 /** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponse {
@@ -282,7 +282,7 @@ export interface ListLogEntriesResponse {
    * returned, indicating that more entries may exist.  See `nextPageToken` for
    * more information.
    */
-  entries: LogEntry[];
+  entries?: LogEntry[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -295,12 +295,12 @@ export interface ListLogEntriesResponse {
    * speeding up the search by changing your filter to specify a single log name
    * or resource type, or to narrow the time range of the search.
    */
-  nextPageToken: string;
+  nextPageToken?: string;
 }
 /** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponseSDKType {
-  entries: LogEntrySDKType[];
-  next_page_token: string;
+  entries?: LogEntrySDKType[];
+  next_page_token?: string;
 }
 /** The parameters to ListMonitoredResourceDescriptors */
 export interface ListMonitoredResourceDescriptorsRequest {
@@ -309,35 +309,35 @@ export interface ListMonitoredResourceDescriptorsRequest {
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize: number;
+  pageSize?: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
 }
 /** The parameters to ListMonitoredResourceDescriptors */
 export interface ListMonitoredResourceDescriptorsRequestSDKType {
-  page_size: number;
-  page_token: string;
+  page_size?: number;
+  page_token?: string;
 }
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponse {
   /** A list of resource descriptors. */
-  resourceDescriptors: MonitoredResourceDescriptor[];
+  resourceDescriptors?: MonitoredResourceDescriptor[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken: string;
+  nextPageToken?: string;
 }
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponseSDKType {
-  resource_descriptors: MonitoredResourceDescriptorSDKType[];
-  next_page_token: string;
+  resource_descriptors?: MonitoredResourceDescriptorSDKType[];
+  next_page_token?: string;
 }
 /** The parameters to ListLogs. */
 export interface ListLogsRequest {
@@ -349,20 +349,20 @@ export interface ListLogsRequest {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize: number;
+  pageSize?: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
   /**
    * Optional. The resource name that owns the logs:
    * 
@@ -378,14 +378,14 @@ export interface ListLogsRequest {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  resourceNames: string[];
+  resourceNames?: string[];
 }
 /** The parameters to ListLogs. */
 export interface ListLogsRequestSDKType {
-  parent: string;
-  page_size: number;
-  page_token: string;
-  resource_names: string[];
+  parent?: string;
+  page_size?: number;
+  page_token?: string;
+  resource_names?: string[];
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponse {
@@ -394,18 +394,18 @@ export interface ListLogsResponse {
    * `"projects/my-project/logs/syslog"` or
    * `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
    */
-  logNames: string[];
+  logNames?: string[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken: string;
+  nextPageToken?: string;
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponseSDKType {
-  log_names: string[];
-  next_page_token: string;
+  log_names?: string[];
+  next_page_token?: string;
 }
 /** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequest {
@@ -424,7 +424,7 @@ export interface TailLogEntriesRequest {
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    */
-  resourceNames: string[];
+  resourceNames?: string[];
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -434,20 +434,20 @@ export interface TailLogEntriesRequest {
    * the filter to return no results. The maximum length of the filter is 20000
    * characters.
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. The amount of time to buffer log entries at the server before
    * being returned to prevent out of order results due to late arriving log
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  bufferWindow: Duration;
+  bufferWindow?: Duration;
 }
 /** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequestSDKType {
-  resource_names: string[];
-  filter: string;
-  buffer_window: DurationSDKType;
+  resource_names?: string[];
+  filter?: string;
+  buffer_window?: DurationSDKType;
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponse {
@@ -456,7 +456,7 @@ export interface TailLogEntriesResponse {
    * increasing values of `LogEntry.timestamp`. Ordering is not guaranteed
    * between separate responses.
    */
-  entries: LogEntry[];
+  entries?: LogEntry[];
   /**
    * If entries that otherwise would have been included in the session were not
    * sent back to the client, counts of relevant entries omitted from the
@@ -464,34 +464,34 @@ export interface TailLogEntriesResponse {
    * one of each reason per response. The counts represent the number of
    * suppressed entries since the last streamed response.
    */
-  suppressionInfo: TailLogEntriesResponse_SuppressionInfo[];
+  suppressionInfo?: TailLogEntriesResponse_SuppressionInfo[];
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponseSDKType {
-  entries: LogEntrySDKType[];
-  suppression_info: TailLogEntriesResponse_SuppressionInfoSDKType[];
+  entries?: LogEntrySDKType[];
+  suppression_info?: TailLogEntriesResponse_SuppressionInfoSDKType[];
 }
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfo {
   /** The reason that entries were omitted from the session. */
-  reason: TailLogEntriesResponse_SuppressionInfo_Reason;
+  reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
   /** A lower bound on the count of entries omitted due to `reason`. */
-  suppressedCount: number;
+  suppressedCount?: number;
 }
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {
-  reason: TailLogEntriesResponse_SuppressionInfo_Reason;
-  suppressed_count: number;
+  reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+  suppressed_count?: number;
 }
 function createBaseDeleteLogRequest(): DeleteLogRequest {
   return {
-    logName: ""
+    logName: undefined
   };
 }
 export const DeleteLogRequest = {
   typeUrl: "/google.logging.v2.DeleteLogRequest",
   encode(message: DeleteLogRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logName !== "") {
+    if (message.logName !== undefined) {
       writer.uint32(10).string(message.logName);
     }
     return writer;
@@ -525,7 +525,7 @@ export const DeleteLogRequest = {
   },
   fromPartial(object: DeepPartial<DeleteLogRequest>): DeleteLogRequest {
     const message = createBaseDeleteLogRequest();
-    message.logName = object.logName ?? "";
+    message.logName = object.logName ?? undefined;
     return message;
   },
   fromSDK(object: DeleteLogRequestSDKType): DeleteLogRequest {
@@ -535,7 +535,7 @@ export const DeleteLogRequest = {
   },
   fromSDKJSON(object: any): DeleteLogRequestSDKType {
     return {
-      log_name: isSet(object.log_name) ? String(object.log_name) : ""
+      log_name: isSet(object.log_name) ? String(object.log_name) : undefined
     };
   },
   toSDK(message: DeleteLogRequest): DeleteLogRequestSDKType {
@@ -545,7 +545,7 @@ export const DeleteLogRequest = {
   },
   fromAmino(object: DeleteLogRequestAmino): DeleteLogRequest {
     return {
-      logName: object.log_name
+      logName: object?.log_name
     };
   },
   toAmino(message: DeleteLogRequest): DeleteLogRequestAmino {
@@ -665,18 +665,18 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 };
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
-    logName: "",
-    resource: MonitoredResource.fromPartial({}),
-    labels: {},
-    entries: [],
-    partialSuccess: false,
-    dryRun: false
+    logName: undefined,
+    resource: undefined,
+    labels: undefined,
+    entries: undefined,
+    partialSuccess: undefined,
+    dryRun: undefined
   };
 }
 export const WriteLogEntriesRequest = {
   typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
   encode(message: WriteLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logName !== "") {
+    if (message.logName !== undefined) {
       writer.uint32(10).string(message.logName);
     }
     if (message.resource !== undefined) {
@@ -691,10 +691,10 @@ export const WriteLogEntriesRequest = {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.partialSuccess === true) {
+    if (message.partialSuccess !== undefined) {
       writer.uint32(40).bool(message.partialSuccess);
     }
-    if (message.dryRun === true) {
+    if (message.dryRun !== undefined) {
       writer.uint32(48).bool(message.dryRun);
     }
     return writer;
@@ -770,7 +770,7 @@ export const WriteLogEntriesRequest = {
   },
   fromPartial(object: DeepPartial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
     const message = createBaseWriteLogEntriesRequest();
-    message.logName = object.logName ?? "";
+    message.logName = object.logName ?? undefined;
     if (object.resource !== undefined && object.resource !== null) {
       message.resource = MonitoredResource.fromPartial(object.resource);
     }
@@ -783,8 +783,8 @@ export const WriteLogEntriesRequest = {
       return acc;
     }, {});
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
-    message.partialSuccess = object.partialSuccess ?? false;
-    message.dryRun = object.dryRun ?? false;
+    message.partialSuccess = object.partialSuccess ?? undefined;
+    message.dryRun = object.dryRun ?? undefined;
     return message;
   },
   fromSDK(object: WriteLogEntriesRequestSDKType): WriteLogEntriesRequest {
@@ -804,7 +804,7 @@ export const WriteLogEntriesRequest = {
   },
   fromSDKJSON(object: any): WriteLogEntriesRequestSDKType {
     return {
-      log_name: isSet(object.log_name) ? String(object.log_name) : "",
+      log_name: isSet(object.log_name) ? String(object.log_name) : undefined,
       resource: isSet(object.resource) ? MonitoredResource.fromSDKJSON(object.resource) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
@@ -813,8 +813,8 @@ export const WriteLogEntriesRequest = {
         return acc;
       }, {}) : {},
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
-      partial_success: isSet(object.partial_success) ? Boolean(object.partial_success) : false,
-      dry_run: isSet(object.dry_run) ? Boolean(object.dry_run) : false
+      partial_success: isSet(object.partial_success) ? Boolean(object.partial_success) : undefined,
+      dry_run: isSet(object.dry_run) ? Boolean(object.dry_run) : undefined
     };
   },
   toSDK(message: WriteLogEntriesRequest): WriteLogEntriesRequestSDKType {
@@ -838,7 +838,7 @@ export const WriteLogEntriesRequest = {
   },
   fromAmino(object: WriteLogEntriesRequestAmino): WriteLogEntriesRequest {
     return {
-      logName: object.log_name,
+      logName: object?.log_name,
       resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
@@ -847,8 +847,8 @@ export const WriteLogEntriesRequest = {
         return acc;
       }, {}) : {},
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      partialSuccess: object.partial_success,
-      dryRun: object.dry_run
+      partialSuccess: object?.partial_success,
+      dryRun: object?.dry_run
     };
   },
   toAmino(message: WriteLogEntriesRequest): WriteLogEntriesRequestAmino {
@@ -1051,7 +1051,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
 };
 function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors {
   return {
-    logEntryErrors: {}
+    logEntryErrors: undefined
   };
 }
 export const WriteLogEntriesPartialErrors = {
@@ -1185,11 +1185,11 @@ export const WriteLogEntriesPartialErrors = {
 };
 function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
   return {
-    resourceNames: [],
-    filter: "",
-    orderBy: "",
-    pageSize: 0,
-    pageToken: ""
+    resourceNames: undefined,
+    filter: undefined,
+    orderBy: undefined,
+    pageSize: undefined,
+    pageToken: undefined
   };
 }
 export const ListLogEntriesRequest = {
@@ -1198,16 +1198,16 @@ export const ListLogEntriesRequest = {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(18).string(message.filter);
     }
-    if (message.orderBy !== "") {
+    if (message.orderBy !== undefined) {
       writer.uint32(26).string(message.orderBy);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(32).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(42).string(message.pageToken);
     }
     return writer;
@@ -1266,10 +1266,10 @@ export const ListLogEntriesRequest = {
   fromPartial(object: DeepPartial<ListLogEntriesRequest>): ListLogEntriesRequest {
     const message = createBaseListLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
-    message.filter = object.filter ?? "";
-    message.orderBy = object.orderBy ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
+    message.filter = object.filter ?? undefined;
+    message.orderBy = object.orderBy ?? undefined;
+    message.pageSize = object.pageSize ?? undefined;
+    message.pageToken = object.pageToken ?? undefined;
     return message;
   },
   fromSDK(object: ListLogEntriesRequestSDKType): ListLogEntriesRequest {
@@ -1284,10 +1284,10 @@ export const ListLogEntriesRequest = {
   fromSDKJSON(object: any): ListLogEntriesRequestSDKType {
     return {
       resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      order_by: isSet(object.order_by) ? String(object.order_by) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
-      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+      filter: isSet(object.filter) ? String(object.filter) : undefined,
+      order_by: isSet(object.order_by) ? String(object.order_by) : undefined,
+      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined,
+      page_token: isSet(object.page_token) ? String(object.page_token) : undefined
     };
   },
   toSDK(message: ListLogEntriesRequest): ListLogEntriesRequestSDKType {
@@ -1306,10 +1306,10 @@ export const ListLogEntriesRequest = {
   fromAmino(object: ListLogEntriesRequestAmino): ListLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: object.filter,
-      orderBy: object.order_by,
-      pageSize: object.page_size,
-      pageToken: object.page_token
+      filter: object?.filter,
+      orderBy: object?.order_by,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
   toAmino(message: ListLogEntriesRequest): ListLogEntriesRequestAmino {
@@ -1343,8 +1343,8 @@ export const ListLogEntriesRequest = {
 };
 function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
   return {
-    entries: [],
-    nextPageToken: ""
+    entries: undefined,
+    nextPageToken: undefined
   };
 }
 export const ListLogEntriesResponse = {
@@ -1353,7 +1353,7 @@ export const ListLogEntriesResponse = {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1397,7 +1397,7 @@ export const ListLogEntriesResponse = {
   fromPartial(object: DeepPartial<ListLogEntriesResponse>): ListLogEntriesResponse {
     const message = createBaseListLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
+    message.nextPageToken = object.nextPageToken ?? undefined;
     return message;
   },
   fromSDK(object: ListLogEntriesResponseSDKType): ListLogEntriesResponse {
@@ -1409,7 +1409,7 @@ export const ListLogEntriesResponse = {
   fromSDKJSON(object: any): ListLogEntriesResponseSDKType {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
     };
   },
   toSDK(message: ListLogEntriesResponse): ListLogEntriesResponseSDKType {
@@ -1425,7 +1425,7 @@ export const ListLogEntriesResponse = {
   fromAmino(object: ListLogEntriesResponseAmino): ListLogEntriesResponse {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
+      nextPageToken: object?.next_page_token
     };
   },
   toAmino(message: ListLogEntriesResponse): ListLogEntriesResponseAmino {
@@ -1456,17 +1456,17 @@ export const ListLogEntriesResponse = {
 };
 function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResourceDescriptorsRequest {
   return {
-    pageSize: 0,
-    pageToken: ""
+    pageSize: undefined,
+    pageToken: undefined
   };
 }
 export const ListMonitoredResourceDescriptorsRequest = {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
   encode(message: ListMonitoredResourceDescriptorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(8).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
     return writer;
@@ -1505,8 +1505,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
   },
   fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsRequest>): ListMonitoredResourceDescriptorsRequest {
     const message = createBaseListMonitoredResourceDescriptorsRequest();
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? undefined;
+    message.pageToken = object.pageToken ?? undefined;
     return message;
   },
   fromSDK(object: ListMonitoredResourceDescriptorsRequestSDKType): ListMonitoredResourceDescriptorsRequest {
@@ -1517,8 +1517,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
   },
   fromSDKJSON(object: any): ListMonitoredResourceDescriptorsRequestSDKType {
     return {
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
-      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined,
+      page_token: isSet(object.page_token) ? String(object.page_token) : undefined
     };
   },
   toSDK(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestSDKType {
@@ -1529,8 +1529,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
   },
   fromAmino(object: ListMonitoredResourceDescriptorsRequestAmino): ListMonitoredResourceDescriptorsRequest {
     return {
-      pageSize: object.page_size,
-      pageToken: object.page_token
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
   toAmino(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestAmino {
@@ -1557,8 +1557,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
 };
 function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredResourceDescriptorsResponse {
   return {
-    resourceDescriptors: [],
-    nextPageToken: ""
+    resourceDescriptors: undefined,
+    nextPageToken: undefined
   };
 }
 export const ListMonitoredResourceDescriptorsResponse = {
@@ -1567,7 +1567,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1611,7 +1611,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
   fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsResponse>): ListMonitoredResourceDescriptorsResponse {
     const message = createBaseListMonitoredResourceDescriptorsResponse();
     message.resourceDescriptors = object.resourceDescriptors?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
+    message.nextPageToken = object.nextPageToken ?? undefined;
     return message;
   },
   fromSDK(object: ListMonitoredResourceDescriptorsResponseSDKType): ListMonitoredResourceDescriptorsResponse {
@@ -1623,7 +1623,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
   fromSDKJSON(object: any): ListMonitoredResourceDescriptorsResponseSDKType {
     return {
       resource_descriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
     };
   },
   toSDK(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseSDKType {
@@ -1639,7 +1639,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
   fromAmino(object: ListMonitoredResourceDescriptorsResponseAmino): ListMonitoredResourceDescriptorsResponse {
     return {
       resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
+      nextPageToken: object?.next_page_token
     };
   },
   toAmino(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseAmino {
@@ -1670,22 +1670,22 @@ export const ListMonitoredResourceDescriptorsResponse = {
 };
 function createBaseListLogsRequest(): ListLogsRequest {
   return {
-    parent: "",
-    pageSize: 0,
-    pageToken: "",
-    resourceNames: []
+    parent: undefined,
+    pageSize: undefined,
+    pageToken: undefined,
+    resourceNames: undefined
   };
 }
 export const ListLogsRequest = {
   typeUrl: "/google.logging.v2.ListLogsRequest",
   encode(message: ListLogsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     for (const v of message.resourceNames) {
@@ -1741,9 +1741,9 @@ export const ListLogsRequest = {
   },
   fromPartial(object: DeepPartial<ListLogsRequest>): ListLogsRequest {
     const message = createBaseListLogsRequest();
-    message.parent = object.parent ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
+    message.parent = object.parent ?? undefined;
+    message.pageSize = object.pageSize ?? undefined;
+    message.pageToken = object.pageToken ?? undefined;
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     return message;
   },
@@ -1757,9 +1757,9 @@ export const ListLogsRequest = {
   },
   fromSDKJSON(object: any): ListLogsRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined,
+      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
       resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : []
     };
   },
@@ -1777,9 +1777,9 @@ export const ListLogsRequest = {
   },
   fromAmino(object: ListLogsRequestAmino): ListLogsRequest {
     return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
     };
   },
@@ -1813,8 +1813,8 @@ export const ListLogsRequest = {
 };
 function createBaseListLogsResponse(): ListLogsResponse {
   return {
-    logNames: [],
-    nextPageToken: ""
+    logNames: undefined,
+    nextPageToken: undefined
   };
 }
 export const ListLogsResponse = {
@@ -1823,7 +1823,7 @@ export const ListLogsResponse = {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1867,7 +1867,7 @@ export const ListLogsResponse = {
   fromPartial(object: DeepPartial<ListLogsResponse>): ListLogsResponse {
     const message = createBaseListLogsResponse();
     message.logNames = object.logNames?.map(e => e) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
+    message.nextPageToken = object.nextPageToken ?? undefined;
     return message;
   },
   fromSDK(object: ListLogsResponseSDKType): ListLogsResponse {
@@ -1879,7 +1879,7 @@ export const ListLogsResponse = {
   fromSDKJSON(object: any): ListLogsResponseSDKType {
     return {
       log_names: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => String(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
     };
   },
   toSDK(message: ListLogsResponse): ListLogsResponseSDKType {
@@ -1895,7 +1895,7 @@ export const ListLogsResponse = {
   fromAmino(object: ListLogsResponseAmino): ListLogsResponse {
     return {
       logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
-      nextPageToken: object.next_page_token
+      nextPageToken: object?.next_page_token
     };
   },
   toAmino(message: ListLogsResponse): ListLogsResponseAmino {
@@ -1926,9 +1926,9 @@ export const ListLogsResponse = {
 };
 function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
-    resourceNames: [],
-    filter: "",
-    bufferWindow: Duration.fromPartial({})
+    resourceNames: undefined,
+    filter: undefined,
+    bufferWindow: undefined
   };
 }
 export const TailLogEntriesRequest = {
@@ -1937,7 +1937,7 @@ export const TailLogEntriesRequest = {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(18).string(message.filter);
     }
     if (message.bufferWindow !== undefined) {
@@ -1989,7 +1989,7 @@ export const TailLogEntriesRequest = {
   fromPartial(object: DeepPartial<TailLogEntriesRequest>): TailLogEntriesRequest {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
-    message.filter = object.filter ?? "";
+    message.filter = object.filter ?? undefined;
     if (object.bufferWindow !== undefined && object.bufferWindow !== null) {
       message.bufferWindow = Duration.fromPartial(object.bufferWindow);
     }
@@ -2005,7 +2005,7 @@ export const TailLogEntriesRequest = {
   fromSDKJSON(object: any): TailLogEntriesRequestSDKType {
     return {
       resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
-      filter: isSet(object.filter) ? String(object.filter) : "",
+      filter: isSet(object.filter) ? String(object.filter) : undefined,
       buffer_window: isSet(object.buffer_window) ? Duration.fromSDKJSON(object.buffer_window) : undefined
     };
   },
@@ -2023,7 +2023,7 @@ export const TailLogEntriesRequest = {
   fromAmino(object: TailLogEntriesRequestAmino): TailLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: object.filter,
+      filter: object?.filter,
       bufferWindow: object?.buffer_window ? Duration.fromAmino(object.buffer_window) : undefined
     };
   },
@@ -2056,8 +2056,8 @@ export const TailLogEntriesRequest = {
 };
 function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
   return {
-    entries: [],
-    suppressionInfo: []
+    entries: undefined,
+    suppressionInfo: undefined
   };
 }
 export const TailLogEntriesResponse = {
@@ -2181,17 +2181,17 @@ export const TailLogEntriesResponse = {
 };
 function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesResponse_SuppressionInfo {
   return {
-    reason: 0,
-    suppressedCount: 0
+    reason: undefined,
+    suppressedCount: undefined
   };
 }
 export const TailLogEntriesResponse_SuppressionInfo = {
   typeUrl: "/google.logging.v2.SuppressionInfo",
   encode(message: TailLogEntriesResponse_SuppressionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.reason !== 0) {
+    if (message.reason !== undefined) {
       writer.uint32(8).int32(message.reason);
     }
-    if (message.suppressedCount !== 0) {
+    if (message.suppressedCount !== undefined) {
       writer.uint32(16).int32(message.suppressedCount);
     }
     return writer;
@@ -2230,20 +2230,20 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromPartial(object: DeepPartial<TailLogEntriesResponse_SuppressionInfo>): TailLogEntriesResponse_SuppressionInfo {
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
-    message.reason = object.reason ?? 0;
-    message.suppressedCount = object.suppressedCount ?? 0;
+    message.reason = object.reason ?? undefined;
+    message.suppressedCount = object.suppressedCount ?? undefined;
     return message;
   },
   fromSDK(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : undefined,
       suppressedCount: object?.suppressed_count
     };
   },
   fromSDKJSON(object: any): TailLogEntriesResponse_SuppressionInfoSDKType {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
-      suppressed_count: isSet(object.suppressed_count) ? Number(object.suppressed_count) : 0
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : undefined,
+      suppressed_count: isSet(object.suppressed_count) ? Number(object.suppressed_count) : undefined
     };
   },
   toSDK(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoSDKType {
@@ -2254,8 +2254,8 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromAmino(object: TailLogEntriesResponse_SuppressionInfoAmino): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
-      suppressedCount: object.suppressed_count
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : undefined,
+      suppressedCount: object?.suppressed_count
     };
   },
   toAmino(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoAmino {

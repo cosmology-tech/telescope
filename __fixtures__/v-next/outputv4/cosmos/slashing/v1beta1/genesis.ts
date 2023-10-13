@@ -26,13 +26,13 @@ export interface GenesisStateSDKType {
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfo {
   /** address is the validator address. */
-  address: string;
+  address?: string;
   /** validator_signing_info represents the signing info of this validator. */
   validatorSigningInfo: ValidatorSigningInfo;
 }
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoSDKType {
-  address: string;
+  address?: string;
   validator_signing_info: ValidatorSigningInfoSDKType;
 }
 /**
@@ -41,7 +41,7 @@ export interface SigningInfoSDKType {
  */
 export interface ValidatorMissedBlocks {
   /** address is the validator address. */
-  address: string;
+  address?: string;
   /** missed_blocks is an array of missed blocks by the validator. */
   missedBlocks: MissedBlock[];
 }
@@ -50,20 +50,20 @@ export interface ValidatorMissedBlocks {
  * address.
  */
 export interface ValidatorMissedBlocksSDKType {
-  address: string;
+  address?: string;
   missed_blocks: MissedBlockSDKType[];
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlock {
   /** index is the height at which the block was missed. */
-  index: bigint;
+  index?: bigint;
   /** missed is the missed status. */
-  missed: boolean;
+  missed?: boolean;
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockSDKType {
-  index: bigint;
-  missed: boolean;
+  index?: bigint;
+  missed?: boolean;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -215,14 +215,14 @@ export const GenesisState = {
 };
 function createBaseSigningInfo(): SigningInfo {
   return {
-    address: "",
+    address: undefined,
     validatorSigningInfo: ValidatorSigningInfo.fromPartial({})
   };
 }
 export const SigningInfo = {
   typeUrl: "/cosmos.slashing.v1beta1.SigningInfo",
   encode(message: SigningInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.validatorSigningInfo !== undefined) {
@@ -264,7 +264,7 @@ export const SigningInfo = {
   },
   fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     if (object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null) {
       message.validatorSigningInfo = ValidatorSigningInfo.fromPartial(object.validatorSigningInfo);
     }
@@ -278,7 +278,7 @@ export const SigningInfo = {
   },
   fromSDKJSON(object: any): SigningInfoSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? String(object.address) : undefined,
       validator_signing_info: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.validator_signing_info) : undefined
     };
   },
@@ -290,7 +290,7 @@ export const SigningInfo = {
   },
   fromAmino(object: SigningInfoAmino): SigningInfo {
     return {
-      address: object.address,
+      address: object?.address,
       validatorSigningInfo: object?.validator_signing_info ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : undefined
     };
   },
@@ -324,14 +324,14 @@ export const SigningInfo = {
 };
 function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
   return {
-    address: "",
+    address: undefined,
     missedBlocks: []
   };
 }
 export const ValidatorMissedBlocks = {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks",
   encode(message: ValidatorMissedBlocks, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.missedBlocks) {
@@ -377,7 +377,7 @@ export const ValidatorMissedBlocks = {
   },
   fromPartial(object: DeepPartial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
     const message = createBaseValidatorMissedBlocks();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     message.missedBlocks = object.missedBlocks?.map(e => MissedBlock.fromPartial(e)) || [];
     return message;
   },
@@ -389,7 +389,7 @@ export const ValidatorMissedBlocks = {
   },
   fromSDKJSON(object: any): ValidatorMissedBlocksSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? String(object.address) : undefined,
       missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDKJSON(e)) : []
     };
   },
@@ -405,7 +405,7 @@ export const ValidatorMissedBlocks = {
   },
   fromAmino(object: ValidatorMissedBlocksAmino): ValidatorMissedBlocks {
     return {
-      address: object.address,
+      address: object?.address,
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
     };
   },
@@ -443,17 +443,17 @@ export const ValidatorMissedBlocks = {
 };
 function createBaseMissedBlock(): MissedBlock {
   return {
-    index: BigInt(0),
-    missed: false
+    index: undefined,
+    missed: undefined
   };
 }
 export const MissedBlock = {
   typeUrl: "/cosmos.slashing.v1beta1.MissedBlock",
   encode(message: MissedBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).int64(message.index);
     }
-    if (message.missed === true) {
+    if (message.missed !== undefined) {
       writer.uint32(16).bool(message.missed);
     }
     return writer;
@@ -486,7 +486,9 @@ export const MissedBlock = {
   },
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
+    if (message.index !== undefined) {
+      obj.index = message.index.toString();
+    }
     message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
@@ -495,7 +497,7 @@ export const MissedBlock = {
     if (object.index !== undefined && object.index !== null) {
       message.index = BigInt(object.index.toString());
     }
-    message.missed = object.missed ?? false;
+    message.missed = object.missed ?? undefined;
     return message;
   },
   fromSDK(object: MissedBlockSDKType): MissedBlock {
@@ -506,8 +508,8 @@ export const MissedBlock = {
   },
   fromSDKJSON(object: any): MissedBlockSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      missed: isSet(object.missed) ? Boolean(object.missed) : false
+      index: isSet(object.index) ? BigInt(object.index.toString()) : undefined,
+      missed: isSet(object.missed) ? Boolean(object.missed) : undefined
     };
   },
   toSDK(message: MissedBlock): MissedBlockSDKType {
@@ -518,8 +520,8 @@ export const MissedBlock = {
   },
   fromAmino(object: MissedBlockAmino): MissedBlock {
     return {
-      index: BigInt(object.index),
-      missed: object.missed
+      index: object?.index ? BigInt(object.index) : undefined,
+      missed: object?.missed
     };
   },
   toAmino(message: MissedBlock): MissedBlockAmino {

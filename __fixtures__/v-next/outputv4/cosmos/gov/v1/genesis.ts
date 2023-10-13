@@ -5,45 +5,45 @@ export const protobufPackage = "cosmos.gov.v1";
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisState {
   /** starting_proposal_id is the ID of the starting proposal. */
-  startingProposalId: bigint;
+  startingProposalId?: bigint;
   /** deposits defines all the deposits present at genesis. */
-  deposits: Deposit[];
+  deposits?: Deposit[];
   /** votes defines all the votes present at genesis. */
-  votes: Vote[];
+  votes?: Vote[];
   /** proposals defines all the proposals present at genesis. */
-  proposals: Proposal[];
+  proposals?: Proposal[];
   /** params defines all the paramaters of related to deposit. */
-  depositParams: DepositParams;
+  depositParams?: DepositParams;
   /** params defines all the paramaters of related to voting. */
-  votingParams: VotingParams;
+  votingParams?: VotingParams;
   /** params defines all the paramaters of related to tally. */
-  tallyParams: TallyParams;
+  tallyParams?: TallyParams;
 }
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateSDKType {
-  starting_proposal_id: bigint;
-  deposits: DepositSDKType[];
-  votes: VoteSDKType[];
-  proposals: ProposalSDKType[];
-  deposit_params: DepositParamsSDKType;
-  voting_params: VotingParamsSDKType;
-  tally_params: TallyParamsSDKType;
+  starting_proposal_id?: bigint;
+  deposits?: DepositSDKType[];
+  votes?: VoteSDKType[];
+  proposals?: ProposalSDKType[];
+  deposit_params?: DepositParamsSDKType;
+  voting_params?: VotingParamsSDKType;
+  tally_params?: TallyParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    startingProposalId: BigInt(0),
-    deposits: [],
-    votes: [],
-    proposals: [],
-    depositParams: DepositParams.fromPartial({}),
-    votingParams: VotingParams.fromPartial({}),
-    tallyParams: TallyParams.fromPartial({})
+    startingProposalId: undefined,
+    deposits: undefined,
+    votes: undefined,
+    proposals: undefined,
+    depositParams: undefined,
+    votingParams: undefined,
+    tallyParams: undefined
   };
 }
 export const GenesisState = {
   typeUrl: "/cosmos.gov.v1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.startingProposalId !== BigInt(0)) {
+    if (message.startingProposalId !== undefined) {
       writer.uint32(8).uint64(message.startingProposalId);
     }
     for (const v of message.deposits) {
@@ -114,7 +114,9 @@ export const GenesisState = {
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.startingProposalId !== undefined && (obj.startingProposalId = (message.startingProposalId || BigInt(0)).toString());
+    if (message.startingProposalId !== undefined) {
+      obj.startingProposalId = message.startingProposalId.toString();
+    }
     if (message.deposits) {
       obj.deposits = message.deposits.map(e => e ? Deposit.toJSON(e) : undefined);
     } else {
@@ -167,7 +169,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      starting_proposal_id: isSet(object.starting_proposal_id) ? BigInt(object.starting_proposal_id.toString()) : BigInt(0),
+      starting_proposal_id: isSet(object.starting_proposal_id) ? BigInt(object.starting_proposal_id.toString()) : undefined,
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDKJSON(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : [],
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDKJSON(e)) : [],
@@ -201,7 +203,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      startingProposalId: BigInt(object.starting_proposal_id),
+      startingProposalId: object?.starting_proposal_id ? BigInt(object.starting_proposal_id) : undefined,
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromAmino(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],

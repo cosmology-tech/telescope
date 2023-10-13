@@ -4,25 +4,25 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta1";
 /** ProviderInfo */
 export interface ProviderInfo {
-  email: string;
-  website: string;
+  email?: string;
+  website?: string;
 }
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
-  email: string;
-  website: string;
+  email?: string;
+  website?: string;
 }
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProvider {
-  owner: string;
-  hostUri: string;
+  owner?: string;
+  hostUri?: string;
   attributes: Attribute[];
   info: ProviderInfo;
 }
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
-  owner: string;
-  host_uri: string;
+  owner?: string;
+  host_uri?: string;
   attributes: AttributeSDKType[];
   info: ProviderInfoSDKType;
 }
@@ -32,15 +32,15 @@ export interface MsgCreateProviderResponse {}
 export interface MsgCreateProviderResponseSDKType {}
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProvider {
-  owner: string;
-  hostUri: string;
+  owner?: string;
+  hostUri?: string;
   attributes: Attribute[];
   info: ProviderInfo;
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
-  owner: string;
-  host_uri: string;
+  owner?: string;
+  host_uri?: string;
   attributes: AttributeSDKType[];
   info: ProviderInfoSDKType;
 }
@@ -50,11 +50,11 @@ export interface MsgUpdateProviderResponse {}
 export interface MsgUpdateProviderResponseSDKType {}
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
-  owner: string;
+  owner?: string;
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
-  owner: string;
+  owner?: string;
 }
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponse {}
@@ -62,31 +62,31 @@ export interface MsgDeleteProviderResponse {}
 export interface MsgDeleteProviderResponseSDKType {}
 /** Provider stores owner and host details */
 export interface Provider {
-  owner: string;
-  hostUri: string;
+  owner?: string;
+  hostUri?: string;
   attributes: Attribute[];
   info: ProviderInfo;
 }
 /** Provider stores owner and host details */
 export interface ProviderSDKType {
-  owner: string;
-  host_uri: string;
+  owner?: string;
+  host_uri?: string;
   attributes: AttributeSDKType[];
   info: ProviderInfoSDKType;
 }
 function createBaseProviderInfo(): ProviderInfo {
   return {
-    email: "",
-    website: ""
+    email: undefined,
+    website: undefined
   };
 }
 export const ProviderInfo = {
   typeUrl: "/akash.provider.v1beta1.ProviderInfo",
   encode(message: ProviderInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.email !== "") {
+    if (message.email !== undefined) {
       writer.uint32(10).string(message.email);
     }
-    if (message.website !== "") {
+    if (message.website !== undefined) {
       writer.uint32(18).string(message.website);
     }
     return writer;
@@ -125,8 +125,8 @@ export const ProviderInfo = {
   },
   fromPartial<I extends Exact<DeepPartial<ProviderInfo>, I>>(object: I): ProviderInfo {
     const message = createBaseProviderInfo();
-    message.email = object.email ?? "";
-    message.website = object.website ?? "";
+    message.email = object.email ?? undefined;
+    message.website = object.website ?? undefined;
     return message;
   },
   fromSDK(object: ProviderInfoSDKType): ProviderInfo {
@@ -137,8 +137,8 @@ export const ProviderInfo = {
   },
   fromSDKJSON(object: any): ProviderInfoSDKType {
     return {
-      email: isSet(object.email) ? String(object.email) : "",
-      website: isSet(object.website) ? String(object.website) : ""
+      email: isSet(object.email) ? String(object.email) : undefined,
+      website: isSet(object.website) ? String(object.website) : undefined
     };
   },
   toSDK(message: ProviderInfo): ProviderInfoSDKType {
@@ -149,8 +149,8 @@ export const ProviderInfo = {
   },
   fromAmino(object: ProviderInfoAmino): ProviderInfo {
     return {
-      email: object.email,
-      website: object.website
+      email: object?.email,
+      website: object?.website
     };
   },
   toAmino(message: ProviderInfo): ProviderInfoAmino {
@@ -183,8 +183,8 @@ export const ProviderInfo = {
 };
 function createBaseMsgCreateProvider(): MsgCreateProvider {
   return {
-    owner: "",
-    hostUri: "",
+    owner: undefined,
+    hostUri: undefined,
     attributes: [],
     info: ProviderInfo.fromPartial({})
   };
@@ -192,10 +192,10 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
 export const MsgCreateProvider = {
   typeUrl: "/akash.provider.v1beta1.MsgCreateProvider",
   encode(message: MsgCreateProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.hostUri !== "") {
+    if (message.hostUri !== undefined) {
       writer.uint32(18).string(message.hostUri);
     }
     for (const v of message.attributes) {
@@ -254,8 +254,8 @@ export const MsgCreateProvider = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateProvider>, I>>(object: I): MsgCreateProvider {
     const message = createBaseMsgCreateProvider();
-    message.owner = object.owner ?? "";
-    message.hostUri = object.hostUri ?? "";
+    message.owner = object.owner ?? undefined;
+    message.hostUri = object.hostUri ?? undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     if (object.info !== undefined && object.info !== null) {
       message.info = ProviderInfo.fromPartial(object.info);
@@ -272,8 +272,8 @@ export const MsgCreateProvider = {
   },
   fromSDKJSON(object: any): MsgCreateProviderSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      host_uri: isSet(object.host_uri) ? String(object.host_uri) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
       info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
     };
@@ -292,8 +292,8 @@ export const MsgCreateProvider = {
   },
   fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
     return {
-      owner: object.owner,
-      hostUri: object.host_uri,
+      owner: object?.owner,
+      hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
       info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
     };
@@ -407,8 +407,8 @@ export const MsgCreateProviderResponse = {
 };
 function createBaseMsgUpdateProvider(): MsgUpdateProvider {
   return {
-    owner: "",
-    hostUri: "",
+    owner: undefined,
+    hostUri: undefined,
     attributes: [],
     info: ProviderInfo.fromPartial({})
   };
@@ -416,10 +416,10 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
 export const MsgUpdateProvider = {
   typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider",
   encode(message: MsgUpdateProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.hostUri !== "") {
+    if (message.hostUri !== undefined) {
       writer.uint32(18).string(message.hostUri);
     }
     for (const v of message.attributes) {
@@ -478,8 +478,8 @@ export const MsgUpdateProvider = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateProvider>, I>>(object: I): MsgUpdateProvider {
     const message = createBaseMsgUpdateProvider();
-    message.owner = object.owner ?? "";
-    message.hostUri = object.hostUri ?? "";
+    message.owner = object.owner ?? undefined;
+    message.hostUri = object.hostUri ?? undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     if (object.info !== undefined && object.info !== null) {
       message.info = ProviderInfo.fromPartial(object.info);
@@ -496,8 +496,8 @@ export const MsgUpdateProvider = {
   },
   fromSDKJSON(object: any): MsgUpdateProviderSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      host_uri: isSet(object.host_uri) ? String(object.host_uri) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
       info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
     };
@@ -516,8 +516,8 @@ export const MsgUpdateProvider = {
   },
   fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
     return {
-      owner: object.owner,
-      hostUri: object.host_uri,
+      owner: object?.owner,
+      hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
       info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
     };
@@ -631,13 +631,13 @@ export const MsgUpdateProviderResponse = {
 };
 function createBaseMsgDeleteProvider(): MsgDeleteProvider {
   return {
-    owner: ""
+    owner: undefined
   };
 }
 export const MsgDeleteProvider = {
   typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider",
   encode(message: MsgDeleteProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -671,7 +671,7 @@ export const MsgDeleteProvider = {
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteProvider>, I>>(object: I): MsgDeleteProvider {
     const message = createBaseMsgDeleteProvider();
-    message.owner = object.owner ?? "";
+    message.owner = object.owner ?? undefined;
     return message;
   },
   fromSDK(object: MsgDeleteProviderSDKType): MsgDeleteProvider {
@@ -681,7 +681,7 @@ export const MsgDeleteProvider = {
   },
   fromSDKJSON(object: any): MsgDeleteProviderSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
+      owner: isSet(object.owner) ? String(object.owner) : undefined
     };
   },
   toSDK(message: MsgDeleteProvider): MsgDeleteProviderSDKType {
@@ -691,7 +691,7 @@ export const MsgDeleteProvider = {
   },
   fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
     return {
-      owner: object.owner
+      owner: object?.owner
     };
   },
   toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
@@ -796,8 +796,8 @@ export const MsgDeleteProviderResponse = {
 };
 function createBaseProvider(): Provider {
   return {
-    owner: "",
-    hostUri: "",
+    owner: undefined,
+    hostUri: undefined,
     attributes: [],
     info: ProviderInfo.fromPartial({})
   };
@@ -805,10 +805,10 @@ function createBaseProvider(): Provider {
 export const Provider = {
   typeUrl: "/akash.provider.v1beta1.Provider",
   encode(message: Provider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.hostUri !== "") {
+    if (message.hostUri !== undefined) {
       writer.uint32(18).string(message.hostUri);
     }
     for (const v of message.attributes) {
@@ -867,8 +867,8 @@ export const Provider = {
   },
   fromPartial<I extends Exact<DeepPartial<Provider>, I>>(object: I): Provider {
     const message = createBaseProvider();
-    message.owner = object.owner ?? "";
-    message.hostUri = object.hostUri ?? "";
+    message.owner = object.owner ?? undefined;
+    message.hostUri = object.hostUri ?? undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     if (object.info !== undefined && object.info !== null) {
       message.info = ProviderInfo.fromPartial(object.info);
@@ -885,8 +885,8 @@ export const Provider = {
   },
   fromSDKJSON(object: any): ProviderSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      host_uri: isSet(object.host_uri) ? String(object.host_uri) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
       info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
     };
@@ -905,8 +905,8 @@ export const Provider = {
   },
   fromAmino(object: ProviderAmino): Provider {
     return {
-      owner: object.owner,
-      hostUri: object.host_uri,
+      owner: object?.owner,
+      hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
       info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
     };

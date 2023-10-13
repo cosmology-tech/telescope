@@ -11,11 +11,11 @@ export interface QueryPeriodRequestSDKType {}
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
-  period: bigint;
+  period?: bigint;
 }
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseSDKType {
-  period: bigint;
+  period?: bigint;
 }
 /**
  * QueryEpochMintProvisionRequest is the request type for the
@@ -58,14 +58,14 @@ export interface QuerySkippedEpochsRequestSDKType {}
  */
 export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
-  skippedEpochs: bigint;
+  skippedEpochs?: bigint;
 }
 /**
  * QuerySkippedEpochsResponse is the response type for the Query/SkippedEpochs
  * RPC method.
  */
 export interface QuerySkippedEpochsResponseSDKType {
-  skipped_epochs: bigint;
+  skipped_epochs?: bigint;
 }
 /**
  * QueryCirculatingSupplyRequest is the request type for the
@@ -199,13 +199,13 @@ export const QueryPeriodRequest = {
 };
 function createBaseQueryPeriodResponse(): QueryPeriodResponse {
   return {
-    period: BigInt(0)
+    period: undefined
   };
 }
 export const QueryPeriodResponse = {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
   encode(message: QueryPeriodResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.period !== BigInt(0)) {
+    if (message.period !== undefined) {
       writer.uint32(8).uint64(message.period);
     }
     return writer;
@@ -234,7 +234,9 @@ export const QueryPeriodResponse = {
   },
   toJSON(message: QueryPeriodResponse): unknown {
     const obj: any = {};
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
+    if (message.period !== undefined) {
+      obj.period = message.period.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
@@ -251,7 +253,7 @@ export const QueryPeriodResponse = {
   },
   fromSDKJSON(object: any): QueryPeriodResponseSDKType {
     return {
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
+      period: isSet(object.period) ? BigInt(object.period.toString()) : undefined
     };
   },
   toSDK(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
@@ -261,7 +263,7 @@ export const QueryPeriodResponse = {
   },
   fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
     return {
-      period: BigInt(object.period)
+      period: object?.period ? BigInt(object.period) : undefined
     };
   },
   toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
@@ -509,13 +511,13 @@ export const QuerySkippedEpochsRequest = {
 };
 function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
   return {
-    skippedEpochs: BigInt(0)
+    skippedEpochs: undefined
   };
 }
 export const QuerySkippedEpochsResponse = {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
   encode(message: QuerySkippedEpochsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.skippedEpochs !== BigInt(0)) {
+    if (message.skippedEpochs !== undefined) {
       writer.uint32(8).uint64(message.skippedEpochs);
     }
     return writer;
@@ -544,7 +546,9 @@ export const QuerySkippedEpochsResponse = {
   },
   toJSON(message: QuerySkippedEpochsResponse): unknown {
     const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
+    if (message.skippedEpochs !== undefined) {
+      obj.skippedEpochs = message.skippedEpochs.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
@@ -561,7 +565,7 @@ export const QuerySkippedEpochsResponse = {
   },
   fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
     return {
-      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt(0)
+      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : undefined
     };
   },
   toSDK(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {
@@ -571,7 +575,7 @@ export const QuerySkippedEpochsResponse = {
   },
   fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: BigInt(object.skipped_epochs)
+      skippedEpochs: object?.skipped_epochs ? BigInt(object.skipped_epochs) : undefined
     };
   },
   toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {

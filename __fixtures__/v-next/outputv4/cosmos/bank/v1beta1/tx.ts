@@ -5,14 +5,14 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
-  fromAddress: string;
-  toAddress: string;
+  fromAddress?: string;
+  toAddress?: string;
   amount: Coin[];
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendSDKType {
-  from_address: string;
-  to_address: string;
+  from_address?: string;
+  to_address?: string;
   amount: CoinSDKType[];
 }
 /** MsgSendResponse defines the Msg/Send response type. */
@@ -35,18 +35,18 @@ export interface MsgMultiSendResponse {}
 export interface MsgMultiSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
   return {
-    fromAddress: "",
-    toAddress: "",
+    fromAddress: undefined,
+    toAddress: undefined,
     amount: []
   };
 }
 export const MsgSend = {
   typeUrl: "/cosmos.bank.v1beta1.MsgSend",
   encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fromAddress !== "") {
+    if (message.fromAddress !== undefined) {
       writer.uint32(10).string(message.fromAddress);
     }
-    if (message.toAddress !== "") {
+    if (message.toAddress !== undefined) {
       writer.uint32(18).string(message.toAddress);
     }
     for (const v of message.amount) {
@@ -97,8 +97,8 @@ export const MsgSend = {
   },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
-    message.fromAddress = object.fromAddress ?? "";
-    message.toAddress = object.toAddress ?? "";
+    message.fromAddress = object.fromAddress ?? undefined;
+    message.toAddress = object.toAddress ?? undefined;
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -111,8 +111,8 @@ export const MsgSend = {
   },
   fromSDKJSON(object: any): MsgSendSDKType {
     return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      from_address: isSet(object.from_address) ? String(object.from_address) : undefined,
+      to_address: isSet(object.to_address) ? String(object.to_address) : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -129,8 +129,8 @@ export const MsgSend = {
   },
   fromAmino(object: MsgSendAmino): MsgSend {
     return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
+      fromAddress: object?.from_address,
+      toAddress: object?.to_address,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },

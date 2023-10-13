@@ -9,17 +9,17 @@ export const protobufPackage = "ibc.core.client.v1";
  */
 export interface IdentifiedClientState {
   /** client identifier */
-  clientId: string;
+  clientId?: string;
   /** client state */
-  clientState: Any;
+  clientState?: Any;
 }
 /**
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
  */
 export interface IdentifiedClientStateSDKType {
-  client_id: string;
-  client_state: AnySDKType;
+  client_id?: string;
+  client_state?: AnySDKType;
 }
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -29,7 +29,7 @@ export interface ConsensusStateWithHeight {
   /** consensus state height */
   height: Height;
   /** consensus state */
-  consensusState: Any;
+  consensusState?: Any;
 }
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -37,7 +37,7 @@ export interface ConsensusStateWithHeight {
  */
 export interface ConsensusStateWithHeightSDKType {
   height: HeightSDKType;
-  consensus_state: AnySDKType;
+  consensus_state?: AnySDKType;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -45,7 +45,7 @@ export interface ConsensusStateWithHeightSDKType {
  */
 export interface ClientConsensusStates {
   /** client identifier */
-  clientId: string;
+  clientId?: string;
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
 }
@@ -54,7 +54,7 @@ export interface ClientConsensusStates {
  * client.
  */
 export interface ClientConsensusStatesSDKType {
-  client_id: string;
+  client_id?: string;
   consensus_states: ConsensusStateWithHeightSDKType[];
 }
 /**
@@ -65,16 +65,16 @@ export interface ClientConsensusStatesSDKType {
  */
 export interface ClientUpdateProposal {
   /** the title of the update proposal */
-  title: string;
+  title?: string;
   /** the description of the proposal */
-  description: string;
+  description?: string;
   /** the client identifier for the client to be updated if the proposal passes */
-  subjectClientId: string;
+  subjectClientId?: string;
   /**
    * the substitute client identifier for the client standing in for the subject
    * client
    */
-  substituteClientId: string;
+  substituteClientId?: string;
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -83,18 +83,18 @@ export interface ClientUpdateProposal {
  * chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposalSDKType {
-  title: string;
-  description: string;
-  subject_client_id: string;
-  substitute_client_id: string;
+  title?: string;
+  description?: string;
+  subject_client_id?: string;
+  substitute_client_id?: string;
 }
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
  */
 export interface UpgradeProposal {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   plan: Plan;
   /**
    * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
@@ -104,17 +104,17 @@ export interface UpgradeProposal {
    * of the chain. This will allow IBC connections to persist smoothly across
    * planned chain upgrades
    */
-  upgradedClientState: Any;
+  upgradedClientState?: Any;
 }
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
  */
 export interface UpgradeProposalSDKType {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   plan: PlanSDKType;
-  upgraded_client_state: AnySDKType;
+  upgraded_client_state?: AnySDKType;
 }
 /**
  * Height is a monotonically increasing data type
@@ -130,9 +130,9 @@ export interface UpgradeProposalSDKType {
  */
 export interface Height {
   /** the revision that the client is currently on */
-  revisionNumber: bigint;
+  revisionNumber?: bigint;
   /** the height within the given revision */
-  revisionHeight: bigint;
+  revisionHeight?: bigint;
 }
 /**
  * Height is a monotonically increasing data type
@@ -147,28 +147,28 @@ export interface Height {
  * gets reset
  */
 export interface HeightSDKType {
-  revision_number: bigint;
-  revision_height: bigint;
+  revision_number?: bigint;
+  revision_height?: bigint;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
-  allowedClients: string[];
+  allowedClients?: string[];
 }
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {
-  allowed_clients: string[];
+  allowed_clients?: string[];
 }
 function createBaseIdentifiedClientState(): IdentifiedClientState {
   return {
-    clientId: "",
-    clientState: Any.fromPartial({})
+    clientId: undefined,
+    clientState: undefined
   };
 }
 export const IdentifiedClientState = {
   typeUrl: "/ibc.core.client.v1.IdentifiedClientState",
   encode(message: IdentifiedClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.clientState !== undefined) {
@@ -210,7 +210,7 @@ export const IdentifiedClientState = {
   },
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
-    message.clientId = object.clientId ?? "";
+    message.clientId = object.clientId ?? undefined;
     if (object.clientState !== undefined && object.clientState !== null) {
       message.clientState = Any.fromPartial(object.clientState);
     }
@@ -224,7 +224,7 @@ export const IdentifiedClientState = {
   },
   fromSDKJSON(object: any): IdentifiedClientStateSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
       client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined
     };
   },
@@ -236,7 +236,7 @@ export const IdentifiedClientState = {
   },
   fromAmino(object: IdentifiedClientStateAmino): IdentifiedClientState {
     return {
-      clientId: object.client_id,
+      clientId: object?.client_id,
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
     };
   },
@@ -271,7 +271,7 @@ export const IdentifiedClientState = {
 function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
   return {
     height: Height.fromPartial({}),
-    consensusState: Any.fromPartial({})
+    consensusState: undefined
   };
 }
 export const ConsensusStateWithHeight = {
@@ -381,14 +381,14 @@ export const ConsensusStateWithHeight = {
 };
 function createBaseClientConsensusStates(): ClientConsensusStates {
   return {
-    clientId: "",
+    clientId: undefined,
     consensusStates: []
   };
 }
 export const ClientConsensusStates = {
   typeUrl: "/ibc.core.client.v1.ClientConsensusStates",
   encode(message: ClientConsensusStates, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.consensusStates) {
@@ -434,7 +434,7 @@ export const ClientConsensusStates = {
   },
   fromPartial(object: DeepPartial<ClientConsensusStates>): ClientConsensusStates {
     const message = createBaseClientConsensusStates();
-    message.clientId = object.clientId ?? "";
+    message.clientId = object.clientId ?? undefined;
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     return message;
   },
@@ -446,7 +446,7 @@ export const ClientConsensusStates = {
   },
   fromSDKJSON(object: any): ClientConsensusStatesSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
       consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : []
     };
   },
@@ -462,7 +462,7 @@ export const ClientConsensusStates = {
   },
   fromAmino(object: ClientConsensusStatesAmino): ClientConsensusStates {
     return {
-      clientId: object.client_id,
+      clientId: object?.client_id,
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
     };
   },
@@ -500,25 +500,25 @@ export const ClientConsensusStates = {
 };
 function createBaseClientUpdateProposal(): ClientUpdateProposal {
   return {
-    title: "",
-    description: "",
-    subjectClientId: "",
-    substituteClientId: ""
+    title: undefined,
+    description: undefined,
+    subjectClientId: undefined,
+    substituteClientId: undefined
   };
 }
 export const ClientUpdateProposal = {
   typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
   encode(message: ClientUpdateProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.subjectClientId !== "") {
+    if (message.subjectClientId !== undefined) {
       writer.uint32(26).string(message.subjectClientId);
     }
-    if (message.substituteClientId !== "") {
+    if (message.substituteClientId !== undefined) {
       writer.uint32(34).string(message.substituteClientId);
     }
     return writer;
@@ -567,10 +567,10 @@ export const ClientUpdateProposal = {
   },
   fromPartial(object: DeepPartial<ClientUpdateProposal>): ClientUpdateProposal {
     const message = createBaseClientUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.subjectClientId = object.subjectClientId ?? "";
-    message.substituteClientId = object.substituteClientId ?? "";
+    message.title = object.title ?? undefined;
+    message.description = object.description ?? undefined;
+    message.subjectClientId = object.subjectClientId ?? undefined;
+    message.substituteClientId = object.substituteClientId ?? undefined;
     return message;
   },
   fromSDK(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
@@ -583,10 +583,10 @@ export const ClientUpdateProposal = {
   },
   fromSDKJSON(object: any): ClientUpdateProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : "",
-      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : ""
+      title: isSet(object.title) ? String(object.title) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined,
+      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : undefined,
+      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : undefined
     };
   },
   toSDK(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
@@ -599,10 +599,10 @@ export const ClientUpdateProposal = {
   },
   fromAmino(object: ClientUpdateProposalAmino): ClientUpdateProposal {
     return {
-      title: object.title,
-      description: object.description,
-      subjectClientId: object.subject_client_id,
-      substituteClientId: object.substitute_client_id
+      title: object?.title,
+      description: object?.description,
+      subjectClientId: object?.subject_client_id,
+      substituteClientId: object?.substitute_client_id
     };
   },
   toAmino(message: ClientUpdateProposal): ClientUpdateProposalAmino {
@@ -637,19 +637,19 @@ export const ClientUpdateProposal = {
 };
 function createBaseUpgradeProposal(): UpgradeProposal {
   return {
-    title: "",
-    description: "",
+    title: undefined,
+    description: undefined,
     plan: Plan.fromPartial({}),
-    upgradedClientState: Any.fromPartial({})
+    upgradedClientState: undefined
   };
 }
 export const UpgradeProposal = {
   typeUrl: "/ibc.core.client.v1.UpgradeProposal",
   encode(message: UpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.plan !== undefined) {
@@ -704,8 +704,8 @@ export const UpgradeProposal = {
   },
   fromPartial(object: DeepPartial<UpgradeProposal>): UpgradeProposal {
     const message = createBaseUpgradeProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
+    message.title = object.title ?? undefined;
+    message.description = object.description ?? undefined;
     if (object.plan !== undefined && object.plan !== null) {
       message.plan = Plan.fromPartial(object.plan);
     }
@@ -724,8 +724,8 @@ export const UpgradeProposal = {
   },
   fromSDKJSON(object: any): UpgradeProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      title: isSet(object.title) ? String(object.title) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined,
       plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined,
       upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
     };
@@ -740,8 +740,8 @@ export const UpgradeProposal = {
   },
   fromAmino(object: UpgradeProposalAmino): UpgradeProposal {
     return {
-      title: object.title,
-      description: object.description,
+      title: object?.title,
+      description: object?.description,
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined,
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
@@ -778,17 +778,17 @@ export const UpgradeProposal = {
 };
 function createBaseHeight(): Height {
   return {
-    revisionNumber: BigInt(0),
-    revisionHeight: BigInt(0)
+    revisionNumber: undefined,
+    revisionHeight: undefined
   };
 }
 export const Height = {
   typeUrl: "/ibc.core.client.v1.Height",
   encode(message: Height, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.revisionNumber !== BigInt(0)) {
+    if (message.revisionNumber !== undefined) {
       writer.uint32(8).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== BigInt(0)) {
+    if (message.revisionHeight !== undefined) {
       writer.uint32(16).uint64(message.revisionHeight);
     }
     return writer;
@@ -821,8 +821,12 @@ export const Height = {
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
+    if (message.revisionNumber !== undefined) {
+      obj.revisionNumber = message.revisionNumber.toString();
+    }
+    if (message.revisionHeight !== undefined) {
+      obj.revisionHeight = message.revisionHeight.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Height>): Height {
@@ -843,8 +847,8 @@ export const Height = {
   },
   fromSDKJSON(object: any): HeightSDKType {
     return {
-      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
-      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0)
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : undefined,
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : undefined
     };
   },
   toSDK(message: Height): HeightSDKType {
@@ -889,7 +893,7 @@ export const Height = {
 };
 function createBaseParams(): Params {
   return {
-    allowedClients: []
+    allowedClients: undefined
   };
 }
 export const Params = {

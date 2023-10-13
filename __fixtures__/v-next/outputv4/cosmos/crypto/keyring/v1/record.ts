@@ -6,9 +6,9 @@ export const protobufPackage = "cosmos.crypto.keyring.v1";
 /** Record is used for representing a key in the keyring. */
 export interface Record {
   /** name represents a name of Record */
-  name: string;
+  name?: string;
   /** pub_key represents a public key in any format */
-  pubKey: Any;
+  pubKey?: Any;
   /** local stores the public information about a locally stored key */
   local?: Record_Local;
   /** ledger stores the public information about a Ledger key */
@@ -20,8 +20,8 @@ export interface Record {
 }
 /** Record is used for representing a key in the keyring. */
 export interface RecordSDKType {
-  name: string;
-  pub_key: AnySDKType;
+  name?: string;
+  pub_key?: AnySDKType;
   local?: Record_LocalSDKType;
   ledger?: Record_LedgerSDKType;
   multi?: Record_MultiSDKType;
@@ -32,24 +32,24 @@ export interface RecordSDKType {
  * Local item
  */
 export interface Record_Local {
-  privKey: Any;
-  privKeyType: string;
+  privKey?: Any;
+  privKeyType?: string;
 }
 /**
  * Item is a keyring item stored in a keyring backend.
  * Local item
  */
 export interface Record_LocalSDKType {
-  priv_key: AnySDKType;
-  priv_key_type: string;
+  priv_key?: AnySDKType;
+  priv_key_type?: string;
 }
 /** Ledger item */
 export interface Record_Ledger {
-  path: BIP44Params;
+  path?: BIP44Params;
 }
 /** Ledger item */
 export interface Record_LedgerSDKType {
-  path: BIP44ParamsSDKType;
+  path?: BIP44ParamsSDKType;
 }
 /** Multi item */
 export interface Record_Multi {}
@@ -61,8 +61,8 @@ export interface Record_Offline {}
 export interface Record_OfflineSDKType {}
 function createBaseRecord(): Record {
   return {
-    name: "",
-    pubKey: Any.fromPartial({}),
+    name: undefined,
+    pubKey: undefined,
     local: undefined,
     ledger: undefined,
     multi: undefined,
@@ -72,7 +72,7 @@ function createBaseRecord(): Record {
 export const Record = {
   typeUrl: "/cosmos.crypto.keyring.v1.Record",
   encode(message: Record, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.pubKey !== undefined) {
@@ -146,7 +146,7 @@ export const Record = {
   },
   fromPartial(object: DeepPartial<Record>): Record {
     const message = createBaseRecord();
-    message.name = object.name ?? "";
+    message.name = object.name ?? undefined;
     if (object.pubKey !== undefined && object.pubKey !== null) {
       message.pubKey = Any.fromPartial(object.pubKey);
     }
@@ -176,7 +176,7 @@ export const Record = {
   },
   fromSDKJSON(object: any): RecordSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
       pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
       local: isSet(object.local) ? Record_Local.fromSDKJSON(object.local) : undefined,
       ledger: isSet(object.ledger) ? Record_Ledger.fromSDKJSON(object.ledger) : undefined,
@@ -196,7 +196,7 @@ export const Record = {
   },
   fromAmino(object: RecordAmino): Record {
     return {
-      name: object.name,
+      name: object?.name,
       pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
       local: object?.local ? Record_Local.fromAmino(object.local) : undefined,
       ledger: object?.ledger ? Record_Ledger.fromAmino(object.ledger) : undefined,
@@ -238,8 +238,8 @@ export const Record = {
 };
 function createBaseRecord_Local(): Record_Local {
   return {
-    privKey: Any.fromPartial({}),
-    privKeyType: ""
+    privKey: undefined,
+    privKeyType: undefined
   };
 }
 export const Record_Local = {
@@ -248,7 +248,7 @@ export const Record_Local = {
     if (message.privKey !== undefined) {
       Any.encode(message.privKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.privKeyType !== "") {
+    if (message.privKeyType !== undefined) {
       writer.uint32(18).string(message.privKeyType);
     }
     return writer;
@@ -290,7 +290,7 @@ export const Record_Local = {
     if (object.privKey !== undefined && object.privKey !== null) {
       message.privKey = Any.fromPartial(object.privKey);
     }
-    message.privKeyType = object.privKeyType ?? "";
+    message.privKeyType = object.privKeyType ?? undefined;
     return message;
   },
   fromSDK(object: Record_LocalSDKType): Record_Local {
@@ -302,7 +302,7 @@ export const Record_Local = {
   fromSDKJSON(object: any): Record_LocalSDKType {
     return {
       priv_key: isSet(object.priv_key) ? Any.fromSDKJSON(object.priv_key) : undefined,
-      priv_key_type: isSet(object.priv_key_type) ? String(object.priv_key_type) : ""
+      priv_key_type: isSet(object.priv_key_type) ? String(object.priv_key_type) : undefined
     };
   },
   toSDK(message: Record_Local): Record_LocalSDKType {
@@ -314,7 +314,7 @@ export const Record_Local = {
   fromAmino(object: Record_LocalAmino): Record_Local {
     return {
       privKey: object?.priv_key ? Any.fromAmino(object.priv_key) : undefined,
-      privKeyType: object.priv_key_type
+      privKeyType: object?.priv_key_type
     };
   },
   toAmino(message: Record_Local): Record_LocalAmino {
@@ -347,7 +347,7 @@ export const Record_Local = {
 };
 function createBaseRecord_Ledger(): Record_Ledger {
   return {
-    path: BIP44Params.fromPartial({})
+    path: undefined
   };
 }
 export const Record_Ledger = {

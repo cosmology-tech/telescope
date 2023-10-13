@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.base.v1beta1";
  * signatures required by gogoproto.
  */
 export interface Coin {
-  denom: string;
+  denom?: string;
   amount: string;
 }
 /**
@@ -18,7 +18,7 @@ export interface Coin {
  * signatures required by gogoproto.
  */
 export interface CoinSDKType {
-  denom: string;
+  denom?: string;
   amount: string;
 }
 /**
@@ -28,7 +28,7 @@ export interface CoinSDKType {
  * signatures required by gogoproto.
  */
 export interface DecCoin {
-  denom: string;
+  denom?: string;
   amount: string;
 }
 /**
@@ -38,7 +38,7 @@ export interface DecCoin {
  * signatures required by gogoproto.
  */
 export interface DecCoinSDKType {
-  denom: string;
+  denom?: string;
   amount: string;
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
@@ -59,14 +59,14 @@ export interface DecProtoSDKType {
 }
 function createBaseCoin(): Coin {
   return {
-    denom: "",
+    denom: undefined,
     amount: ""
   };
 }
 export const Coin = {
   typeUrl: "/cosmos.base.v1beta1.Coin",
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     if (message.amount !== "") {
@@ -108,7 +108,7 @@ export const Coin = {
   },
   fromPartial(object: DeepPartial<Coin>): Coin {
     const message = createBaseCoin();
-    message.denom = object.denom ?? "";
+    message.denom = object.denom ?? undefined;
     message.amount = object.amount ?? "";
     return message;
   },
@@ -120,7 +120,7 @@ export const Coin = {
   },
   fromSDKJSON(object: any): CoinSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
+      denom: isSet(object.denom) ? String(object.denom) : undefined,
       amount: isSet(object.amount) ? String(object.amount) : ""
     };
   },
@@ -132,7 +132,7 @@ export const Coin = {
   },
   fromAmino(object: CoinAmino): Coin {
     return {
-      denom: object.denom,
+      denom: object?.denom,
       amount: object.amount
     };
   },
@@ -166,14 +166,14 @@ export const Coin = {
 };
 function createBaseDecCoin(): DecCoin {
   return {
-    denom: "",
+    denom: undefined,
     amount: ""
   };
 }
 export const DecCoin = {
   typeUrl: "/cosmos.base.v1beta1.DecCoin",
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     if (message.amount !== "") {
@@ -215,7 +215,7 @@ export const DecCoin = {
   },
   fromPartial(object: DeepPartial<DecCoin>): DecCoin {
     const message = createBaseDecCoin();
-    message.denom = object.denom ?? "";
+    message.denom = object.denom ?? undefined;
     message.amount = object.amount ?? "";
     return message;
   },
@@ -227,7 +227,7 @@ export const DecCoin = {
   },
   fromSDKJSON(object: any): DecCoinSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
+      denom: isSet(object.denom) ? String(object.denom) : undefined,
       amount: isSet(object.amount) ? String(object.amount) : ""
     };
   },
@@ -239,7 +239,7 @@ export const DecCoin = {
   },
   fromAmino(object: DecCoinAmino): DecCoin {
     return {
-      denom: object.denom,
+      denom: object?.denom,
       amount: object.amount
     };
   },

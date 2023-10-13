@@ -6,30 +6,30 @@ export const protobufPackage = "cosmos.capability.v1beta1";
  * provided to a Capability must be globally unique.
  */
 export interface Capability {
-  index: bigint;
+  index?: bigint;
 }
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
  */
 export interface CapabilitySDKType {
-  index: bigint;
+  index?: bigint;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
  * capability and the module name.
  */
 export interface Owner {
-  module: string;
-  name: string;
+  module?: string;
+  name?: string;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
  * capability and the module name.
  */
 export interface OwnerSDKType {
-  module: string;
-  name: string;
+  module?: string;
+  name?: string;
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -47,13 +47,13 @@ export interface CapabilityOwnersSDKType {
 }
 function createBaseCapability(): Capability {
   return {
-    index: BigInt(0)
+    index: undefined
   };
 }
 export const Capability = {
   typeUrl: "/cosmos.capability.v1beta1.Capability",
   encode(message: Capability, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     return writer;
@@ -82,7 +82,9 @@ export const Capability = {
   },
   toJSON(message: Capability): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
+    if (message.index !== undefined) {
+      obj.index = message.index.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
@@ -99,7 +101,7 @@ export const Capability = {
   },
   fromSDKJSON(object: any): CapabilitySDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0)
+      index: isSet(object.index) ? BigInt(object.index.toString()) : undefined
     };
   },
   toSDK(message: Capability): CapabilitySDKType {
@@ -109,7 +111,7 @@ export const Capability = {
   },
   fromAmino(object: CapabilityAmino): Capability {
     return {
-      index: BigInt(object.index)
+      index: object?.index ? BigInt(object.index) : undefined
     };
   },
   toAmino(message: Capability): CapabilityAmino {
@@ -141,17 +143,17 @@ export const Capability = {
 };
 function createBaseOwner(): Owner {
   return {
-    module: "",
-    name: ""
+    module: undefined,
+    name: undefined
   };
 }
 export const Owner = {
   typeUrl: "/cosmos.capability.v1beta1.Owner",
   encode(message: Owner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.module !== "") {
+    if (message.module !== undefined) {
       writer.uint32(10).string(message.module);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
     return writer;
@@ -190,8 +192,8 @@ export const Owner = {
   },
   fromPartial(object: DeepPartial<Owner>): Owner {
     const message = createBaseOwner();
-    message.module = object.module ?? "";
-    message.name = object.name ?? "";
+    message.module = object.module ?? undefined;
+    message.name = object.name ?? undefined;
     return message;
   },
   fromSDK(object: OwnerSDKType): Owner {
@@ -202,8 +204,8 @@ export const Owner = {
   },
   fromSDKJSON(object: any): OwnerSDKType {
     return {
-      module: isSet(object.module) ? String(object.module) : "",
-      name: isSet(object.name) ? String(object.name) : ""
+      module: isSet(object.module) ? String(object.module) : undefined,
+      name: isSet(object.name) ? String(object.name) : undefined
     };
   },
   toSDK(message: Owner): OwnerSDKType {
@@ -214,8 +216,8 @@ export const Owner = {
   },
   fromAmino(object: OwnerAmino): Owner {
     return {
-      module: object.module,
-      name: object.name
+      module: object?.module,
+      name: object?.name
     };
   },
   toAmino(message: Owner): OwnerAmino {

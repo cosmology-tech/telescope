@@ -10,24 +10,24 @@ export interface SourceContext {
    * The path-qualified name of the .proto file that contained the associated
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
-  fileName: string;
+  fileName?: string;
 }
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
 export interface SourceContextSDKType {
-  file_name: string;
+  file_name?: string;
 }
 function createBaseSourceContext(): SourceContext {
   return {
-    fileName: ""
+    fileName: undefined
   };
 }
 export const SourceContext = {
   typeUrl: "/google.protobuf.SourceContext",
   encode(message: SourceContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fileName !== "") {
+    if (message.fileName !== undefined) {
       writer.uint32(10).string(message.fileName);
     }
     return writer;
@@ -61,7 +61,7 @@ export const SourceContext = {
   },
   fromPartial(object: DeepPartial<SourceContext>): SourceContext {
     const message = createBaseSourceContext();
-    message.fileName = object.fileName ?? "";
+    message.fileName = object.fileName ?? undefined;
     return message;
   },
   fromSDK(object: SourceContextSDKType): SourceContext {
@@ -71,7 +71,7 @@ export const SourceContext = {
   },
   fromSDKJSON(object: any): SourceContextSDKType {
     return {
-      file_name: isSet(object.file_name) ? String(object.file_name) : ""
+      file_name: isSet(object.file_name) ? String(object.file_name) : undefined
     };
   },
   toSDK(message: SourceContext): SourceContextSDKType {
@@ -81,7 +81,7 @@ export const SourceContext = {
   },
   fromAmino(object: SourceContextAmino): SourceContext {
     return {
-      fileName: object.file_name
+      fileName: object?.file_name
     };
   },
   toAmino(message: SourceContext): SourceContextAmino {

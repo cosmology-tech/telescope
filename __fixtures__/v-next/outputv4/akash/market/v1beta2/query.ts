@@ -9,22 +9,22 @@ export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
   filters: OrderFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequestSDKType {
   filters: OrderFiltersSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponse {
   orders: Order[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseSDKType {
   orders: OrderSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
@@ -45,22 +45,22 @@ export interface QueryOrderResponseSDKType {
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequest {
   filters: BidFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequestSDKType {
   filters: BidFiltersSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponse {
   bids: QueryBidResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseSDKType {
   bids: QueryBidResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequest {
@@ -83,22 +83,22 @@ export interface QueryBidResponseSDKType {
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequest {
   filters: LeaseFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequestSDKType {
   filters: LeaseFiltersSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponseSDKType {
   leases: QueryLeaseResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequest {
@@ -121,7 +121,7 @@ export interface QueryLeaseResponseSDKType {
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   return {
     filters: OrderFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryOrdersRequest = {
@@ -232,7 +232,7 @@ export const QueryOrdersRequest = {
 function createBaseQueryOrdersResponse(): QueryOrdersResponse {
   return {
     orders: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryOrdersResponse = {
@@ -541,7 +541,7 @@ export const QueryOrderResponse = {
 function createBaseQueryBidsRequest(): QueryBidsRequest {
   return {
     filters: BidFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBidsRequest = {
@@ -652,7 +652,7 @@ export const QueryBidsRequest = {
 function createBaseQueryBidsResponse(): QueryBidsResponse {
   return {
     bids: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBidsResponse = {
@@ -978,7 +978,7 @@ export const QueryBidResponse = {
 function createBaseQueryLeasesRequest(): QueryLeasesRequest {
   return {
     filters: LeaseFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryLeasesRequest = {
@@ -1089,7 +1089,7 @@ export const QueryLeasesRequest = {
 function createBaseQueryLeasesResponse(): QueryLeasesResponse {
   return {
     leases: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryLeasesResponse = {

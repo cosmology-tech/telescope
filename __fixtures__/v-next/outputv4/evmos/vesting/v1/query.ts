@@ -5,11 +5,11 @@ export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
-  address: string;
+  address?: string;
 }
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
-  address: string;
+  address?: string;
 }
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
@@ -34,13 +34,13 @@ export interface QueryBalancesResponseSDKType {
 }
 function createBaseQueryBalancesRequest(): QueryBalancesRequest {
   return {
-    address: ""
+    address: undefined
   };
 }
 export const QueryBalancesRequest = {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
   encode(message: QueryBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -74,7 +74,7 @@ export const QueryBalancesRequest = {
   },
   fromPartial(object: DeepPartial<QueryBalancesRequest>): QueryBalancesRequest {
     const message = createBaseQueryBalancesRequest();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     return message;
   },
   fromSDK(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
@@ -84,7 +84,7 @@ export const QueryBalancesRequest = {
   },
   fromSDKJSON(object: any): QueryBalancesRequestSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : ""
+      address: isSet(object.address) ? String(object.address) : undefined
     };
   },
   toSDK(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
@@ -94,7 +94,7 @@ export const QueryBalancesRequest = {
   },
   fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
     return {
-      address: object.address
+      address: object?.address
     };
   },
   toAmino(message: QueryBalancesRequest): QueryBalancesRequestAmino {

@@ -67,9 +67,9 @@ export interface Operation {
    * and an idempotent id is desirable for deduplication purpose, UUID version 5
    * is recommended. See RFC 4122 for details.
    */
-  operationId: string;
+  operationId?: string;
   /** Fully qualified name of the operation. Reserved for future use. */
-  operationName: string;
+  operationName?: string;
   /**
    * Identity of the consumer who is using the service.
    * This field should be filled in for the operations initiated by a
@@ -84,9 +84,9 @@ export interface Operation {
    *     - organizations/ORGANIZATION_NUMBER,
    *     - api`_`key:API_KEY.
    */
-  consumerId: string;
+  consumerId?: string;
   /** Required. Start time of the operation. */
-  startTime: Date;
+  startTime?: Date;
   /**
    * End time of the operation.
    * Required when the operation is used in
@@ -94,7 +94,7 @@ export interface Operation {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  endTime: Date;
+  endTime?: Date;
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 
@@ -113,7 +113,7 @@ export interface Operation {
    *        where the API is served, such as App Engine, Compute Engine, or
    *        Kubernetes Engine.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -128,28 +128,28 @@ export interface Operation {
    * instances, the entire request is rejected with
    * an invalid argument error.
    */
-  metricValueSets: MetricValueSet[];
+  metricValueSets?: MetricValueSet[];
   /** Represents information to be logged. */
-  logEntries: LogEntry[];
+  logEntries?: LogEntry[];
   /** DO NOT USE. This is an experimental field. */
-  importance: Operation_Importance;
+  importance?: Operation_Importance;
   /** Unimplemented. */
-  extensions: Any[];
+  extensions?: Any[];
 }
 /** Represents information regarding an operation. */
 export interface OperationSDKType {
-  operation_id: string;
-  operation_name: string;
-  consumer_id: string;
-  start_time: Date;
-  end_time: Date;
-  labels: {
+  operation_id?: string;
+  operation_name?: string;
+  consumer_id?: string;
+  start_time?: Date;
+  end_time?: Date;
+  labels?: {
     [key: string]: string;
   };
-  metric_value_sets: MetricValueSetSDKType[];
-  log_entries: LogEntrySDKType[];
-  importance: Operation_Importance;
-  extensions: AnySDKType[];
+  metric_value_sets?: MetricValueSetSDKType[];
+  log_entries?: LogEntrySDKType[];
+  importance?: Operation_Importance;
+  extensions?: AnySDKType[];
 }
 function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   return {
@@ -247,28 +247,28 @@ export const Operation_LabelsEntry = {
 };
 function createBaseOperation(): Operation {
   return {
-    operationId: "",
-    operationName: "",
-    consumerId: "",
-    startTime: new Date(),
-    endTime: new Date(),
-    labels: {},
-    metricValueSets: [],
-    logEntries: [],
-    importance: 0,
-    extensions: []
+    operationId: undefined,
+    operationName: undefined,
+    consumerId: undefined,
+    startTime: undefined,
+    endTime: undefined,
+    labels: undefined,
+    metricValueSets: undefined,
+    logEntries: undefined,
+    importance: undefined,
+    extensions: undefined
   };
 }
 export const Operation = {
   typeUrl: "/google.api.servicecontrol.v1.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
-    if (message.operationName !== "") {
+    if (message.operationName !== undefined) {
       writer.uint32(18).string(message.operationName);
     }
-    if (message.consumerId !== "") {
+    if (message.consumerId !== undefined) {
       writer.uint32(26).string(message.consumerId);
     }
     if (message.startTime !== undefined) {
@@ -289,7 +289,7 @@ export const Operation = {
     for (const v of message.logEntries) {
       LogEntry.encode(v!, writer.uint32(66).fork()).ldelim();
     }
-    if (message.importance !== 0) {
+    if (message.importance !== undefined) {
       writer.uint32(88).int32(message.importance);
     }
     for (const v of message.extensions) {
@@ -396,9 +396,9 @@ export const Operation = {
   },
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
-    message.operationId = object.operationId ?? "";
-    message.operationName = object.operationName ?? "";
-    message.consumerId = object.consumerId ?? "";
+    message.operationId = object.operationId ?? undefined;
+    message.operationName = object.operationName ?? undefined;
+    message.consumerId = object.consumerId ?? undefined;
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -411,7 +411,7 @@ export const Operation = {
     }, {});
     message.metricValueSets = object.metricValueSets?.map(e => MetricValueSet.fromPartial(e)) || [];
     message.logEntries = object.logEntries?.map(e => LogEntry.fromPartial(e)) || [];
-    message.importance = object.importance ?? 0;
+    message.importance = object.importance ?? undefined;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -430,15 +430,15 @@ export const Operation = {
       }, {}) : {},
       metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDK(e)) : [],
       logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : undefined,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
     };
   },
   fromSDKJSON(object: any): OperationSDKType {
     return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
-      operation_name: isSet(object.operation_name) ? String(object.operation_name) : "",
-      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : undefined,
+      operation_name: isSet(object.operation_name) ? String(object.operation_name) : undefined,
+      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : undefined,
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -449,7 +449,7 @@ export const Operation = {
       }, {}) : {},
       metric_value_sets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
       log_entries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : undefined,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
@@ -486,11 +486,11 @@ export const Operation = {
   },
   fromAmino(object: OperationAmino): Operation {
     return {
-      operationId: object.operation_id,
-      operationName: object.operation_name,
-      consumerId: object.consumer_id,
-      startTime: object.start_time,
-      endTime: object.end_time,
+      operationId: object?.operation_id,
+      operationName: object?.operation_name,
+      consumerId: object?.consumer_id,
+      startTime: object?.start_time,
+      endTime: object?.end_time,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -499,7 +499,7 @@ export const Operation = {
       }, {}) : {},
       metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromAmino(e)) : [],
       logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : undefined,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },

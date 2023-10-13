@@ -117,18 +117,18 @@ export function orderToJSON(object: Order): string {
  */
 export interface Channel {
   /** current state of the channel end */
-  state: State;
+  state?: State;
   /** whether the channel is ordered or unordered */
-  ordering: Order;
+  ordering?: Order;
   /** counterparty channel end */
   counterparty: Counterparty;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-  connectionHops: string[];
+  connectionHops?: string[];
   /** opaque channel version, which is agreed upon during the handshake */
-  version: string;
+  version?: string;
 }
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
@@ -136,11 +136,11 @@ export interface Channel {
  * sending packets and one end capable of receiving packets.
  */
 export interface ChannelSDKType {
-  state: State;
-  ordering: Order;
+  state?: State;
+  ordering?: Order;
   counterparty: CounterpartySDKType;
-  connection_hops: string[];
-  version: string;
+  connection_hops?: string[];
+  version?: string;
 }
 /**
  * IdentifiedChannel defines a channel with additional port and channel
@@ -148,47 +148,47 @@ export interface ChannelSDKType {
  */
 export interface IdentifiedChannel {
   /** current state of the channel end */
-  state: State;
+  state?: State;
   /** whether the channel is ordered or unordered */
-  ordering: Order;
+  ordering?: Order;
   /** counterparty channel end */
   counterparty: Counterparty;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-  connectionHops: string[];
+  connectionHops?: string[];
   /** opaque channel version, which is agreed upon during the handshake */
-  version: string;
+  version?: string;
   /** port identifier */
-  portId: string;
+  portId?: string;
   /** channel identifier */
-  channelId: string;
+  channelId?: string;
 }
 /**
  * IdentifiedChannel defines a channel with additional port and channel
  * identifier fields.
  */
 export interface IdentifiedChannelSDKType {
-  state: State;
-  ordering: Order;
+  state?: State;
+  ordering?: Order;
   counterparty: CounterpartySDKType;
-  connection_hops: string[];
-  version: string;
-  port_id: string;
-  channel_id: string;
+  connection_hops?: string[];
+  version?: string;
+  port_id?: string;
+  channel_id?: string;
 }
 /** Counterparty defines a channel end counterparty */
 export interface Counterparty {
   /** port on the counterparty chain which owns the other end of the channel. */
-  portId: string;
+  portId?: string;
   /** channel end on the counterparty chain */
-  channelId: string;
+  channelId?: string;
 }
 /** Counterparty defines a channel end counterparty */
 export interface CounterpartySDKType {
-  port_id: string;
-  channel_id: string;
+  port_id?: string;
+  channel_id?: string;
 }
 /** Packet defines a type that carries data across different chains through IBC */
 export interface Packet {
@@ -197,32 +197,32 @@ export interface Packet {
    * with an earlier sequence number must be sent and received before a Packet
    * with a later sequence number.
    */
-  sequence: bigint;
+  sequence?: bigint;
   /** identifies the port on the sending chain. */
-  sourcePort: string;
+  sourcePort?: string;
   /** identifies the channel end on the sending chain. */
-  sourceChannel: string;
+  sourceChannel?: string;
   /** identifies the port on the receiving chain. */
-  destinationPort: string;
+  destinationPort?: string;
   /** identifies the channel end on the receiving chain. */
-  destinationChannel: string;
+  destinationChannel?: string;
   /** actual opaque bytes transferred directly to the application module */
-  data: Uint8Array;
+  data?: Uint8Array;
   /** block height after which the packet times out */
   timeoutHeight: Height;
   /** block timestamp (in nanoseconds) after which the packet times out */
-  timeoutTimestamp: bigint;
+  timeoutTimestamp?: bigint;
 }
 /** Packet defines a type that carries data across different chains through IBC */
 export interface PacketSDKType {
-  sequence: bigint;
-  source_port: string;
-  source_channel: string;
-  destination_port: string;
-  destination_channel: string;
-  data: Uint8Array;
+  sequence?: bigint;
+  source_port?: string;
+  source_channel?: string;
+  destination_port?: string;
+  destination_channel?: string;
+  data?: Uint8Array;
   timeout_height: HeightSDKType;
-  timeout_timestamp: bigint;
+  timeout_timestamp?: bigint;
 }
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -232,13 +232,13 @@ export interface PacketSDKType {
  */
 export interface PacketState {
   /** channel port identifier. */
-  portId: string;
+  portId?: string;
   /** channel unique identifier. */
-  channelId: string;
+  channelId?: string;
   /** packet sequence. */
-  sequence: bigint;
+  sequence?: bigint;
   /** embedded data that represents packet state. */
-  data: Uint8Array;
+  data?: Uint8Array;
 }
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -247,10 +247,10 @@ export interface PacketState {
  * state as a commitment, acknowledgement, or a receipt.
  */
 export interface PacketStateSDKType {
-  port_id: string;
-  channel_id: string;
-  sequence: bigint;
-  data: Uint8Array;
+  port_id?: string;
+  channel_id?: string;
+  sequence?: bigint;
+  data?: Uint8Array;
 }
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by
@@ -280,20 +280,20 @@ export interface AcknowledgementSDKType {
 }
 function createBaseChannel(): Channel {
   return {
-    state: 0,
-    ordering: 0,
+    state: undefined,
+    ordering: undefined,
     counterparty: Counterparty.fromPartial({}),
-    connectionHops: [],
-    version: ""
+    connectionHops: undefined,
+    version: undefined
   };
 }
 export const Channel = {
   typeUrl: "/ibc.core.channel.v1.Channel",
   encode(message: Channel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(8).int32(message.state);
     }
-    if (message.ordering !== 0) {
+    if (message.ordering !== undefined) {
       writer.uint32(16).int32(message.ordering);
     }
     if (message.counterparty !== undefined) {
@@ -302,7 +302,7 @@ export const Channel = {
     for (const v of message.connectionHops) {
       writer.uint32(34).string(v!);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(42).string(message.version);
     }
     return writer;
@@ -360,19 +360,19 @@ export const Channel = {
   },
   fromPartial(object: DeepPartial<Channel>): Channel {
     const message = createBaseChannel();
-    message.state = object.state ?? 0;
-    message.ordering = object.ordering ?? 0;
+    message.state = object.state ?? undefined;
+    message.ordering = object.ordering ?? undefined;
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromPartial(object.counterparty);
     }
     message.connectionHops = object.connectionHops?.map(e => e) || [];
-    message.version = object.version ?? "";
+    message.version = object.version ?? undefined;
     return message;
   },
   fromSDK(object: ChannelSDKType): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : undefined,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version
@@ -380,11 +380,11 @@ export const Channel = {
   },
   fromSDKJSON(object: any): ChannelSDKType {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
-      version: isSet(object.version) ? String(object.version) : ""
+      version: isSet(object.version) ? String(object.version) : undefined
     };
   },
   toSDK(message: Channel): ChannelSDKType {
@@ -402,11 +402,11 @@ export const Channel = {
   },
   fromAmino(object: ChannelAmino): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : undefined,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: object.version
+      version: object?.version
     };
   },
   toAmino(message: Channel): ChannelAmino {
@@ -446,22 +446,22 @@ export const Channel = {
 };
 function createBaseIdentifiedChannel(): IdentifiedChannel {
   return {
-    state: 0,
-    ordering: 0,
+    state: undefined,
+    ordering: undefined,
     counterparty: Counterparty.fromPartial({}),
-    connectionHops: [],
-    version: "",
-    portId: "",
-    channelId: ""
+    connectionHops: undefined,
+    version: undefined,
+    portId: undefined,
+    channelId: undefined
   };
 }
 export const IdentifiedChannel = {
   typeUrl: "/ibc.core.channel.v1.IdentifiedChannel",
   encode(message: IdentifiedChannel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(8).int32(message.state);
     }
-    if (message.ordering !== 0) {
+    if (message.ordering !== undefined) {
       writer.uint32(16).int32(message.ordering);
     }
     if (message.counterparty !== undefined) {
@@ -470,13 +470,13 @@ export const IdentifiedChannel = {
     for (const v of message.connectionHops) {
       writer.uint32(34).string(v!);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(42).string(message.version);
     }
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(50).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(58).string(message.channelId);
     }
     return writer;
@@ -544,21 +544,21 @@ export const IdentifiedChannel = {
   },
   fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
-    message.state = object.state ?? 0;
-    message.ordering = object.ordering ?? 0;
+    message.state = object.state ?? undefined;
+    message.ordering = object.ordering ?? undefined;
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromPartial(object.counterparty);
     }
     message.connectionHops = object.connectionHops?.map(e => e) || [];
-    message.version = object.version ?? "";
-    message.portId = object.portId ?? "";
-    message.channelId = object.channelId ?? "";
+    message.version = object.version ?? undefined;
+    message.portId = object.portId ?? undefined;
+    message.channelId = object.channelId ?? undefined;
     return message;
   },
   fromSDK(object: IdentifiedChannelSDKType): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : undefined,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version,
@@ -568,13 +568,13 @@ export const IdentifiedChannel = {
   },
   fromSDKJSON(object: any): IdentifiedChannelSDKType {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
-      version: isSet(object.version) ? String(object.version) : "",
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+      version: isSet(object.version) ? String(object.version) : undefined,
+      port_id: isSet(object.port_id) ? String(object.port_id) : undefined,
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : undefined
     };
   },
   toSDK(message: IdentifiedChannel): IdentifiedChannelSDKType {
@@ -594,13 +594,13 @@ export const IdentifiedChannel = {
   },
   fromAmino(object: IdentifiedChannelAmino): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : undefined,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: object.version,
-      portId: object.port_id,
-      channelId: object.channel_id
+      version: object?.version,
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
   toAmino(message: IdentifiedChannel): IdentifiedChannelAmino {
@@ -642,17 +642,17 @@ export const IdentifiedChannel = {
 };
 function createBaseCounterparty(): Counterparty {
   return {
-    portId: "",
-    channelId: ""
+    portId: undefined,
+    channelId: undefined
   };
 }
 export const Counterparty = {
   typeUrl: "/ibc.core.channel.v1.Counterparty",
   encode(message: Counterparty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(18).string(message.channelId);
     }
     return writer;
@@ -691,8 +691,8 @@ export const Counterparty = {
   },
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
-    message.portId = object.portId ?? "";
-    message.channelId = object.channelId ?? "";
+    message.portId = object.portId ?? undefined;
+    message.channelId = object.channelId ?? undefined;
     return message;
   },
   fromSDK(object: CounterpartySDKType): Counterparty {
@@ -703,8 +703,8 @@ export const Counterparty = {
   },
   fromSDKJSON(object: any): CounterpartySDKType {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+      port_id: isSet(object.port_id) ? String(object.port_id) : undefined,
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : undefined
     };
   },
   toSDK(message: Counterparty): CounterpartySDKType {
@@ -715,8 +715,8 @@ export const Counterparty = {
   },
   fromAmino(object: CounterpartyAmino): Counterparty {
     return {
-      portId: object.port_id,
-      channelId: object.channel_id
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
   toAmino(message: Counterparty): CounterpartyAmino {
@@ -749,41 +749,41 @@ export const Counterparty = {
 };
 function createBasePacket(): Packet {
   return {
-    sequence: BigInt(0),
-    sourcePort: "",
-    sourceChannel: "",
-    destinationPort: "",
-    destinationChannel: "",
-    data: new Uint8Array(),
+    sequence: undefined,
+    sourcePort: undefined,
+    sourceChannel: undefined,
+    destinationPort: undefined,
+    destinationChannel: undefined,
+    data: undefined,
     timeoutHeight: Height.fromPartial({}),
-    timeoutTimestamp: BigInt(0)
+    timeoutTimestamp: undefined
   };
 }
 export const Packet = {
   typeUrl: "/ibc.core.channel.v1.Packet",
   encode(message: Packet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.sourcePort !== "") {
+    if (message.sourcePort !== undefined) {
       writer.uint32(18).string(message.sourcePort);
     }
-    if (message.sourceChannel !== "") {
+    if (message.sourceChannel !== undefined) {
       writer.uint32(26).string(message.sourceChannel);
     }
-    if (message.destinationPort !== "") {
+    if (message.destinationPort !== undefined) {
       writer.uint32(34).string(message.destinationPort);
     }
-    if (message.destinationChannel !== "") {
+    if (message.destinationChannel !== undefined) {
       writer.uint32(42).string(message.destinationChannel);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(50).bytes(message.data);
     }
     if (message.timeoutHeight !== undefined) {
       Height.encode(message.timeoutHeight, writer.uint32(58).fork()).ldelim();
     }
-    if (message.timeoutTimestamp !== BigInt(0)) {
+    if (message.timeoutTimestamp !== undefined) {
       writer.uint32(64).uint64(message.timeoutTimestamp);
     }
     return writer;
@@ -840,14 +840,18 @@ export const Packet = {
   },
   toJSON(message: Packet): unknown {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
+    if (message.sequence !== undefined) {
+      obj.sequence = message.sequence.toString();
+    }
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
     message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
     message.destinationPort !== undefined && (obj.destinationPort = message.destinationPort);
     message.destinationChannel !== undefined && (obj.destinationChannel = message.destinationChannel);
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
+    if (message.timeoutTimestamp !== undefined) {
+      obj.timeoutTimestamp = message.timeoutTimestamp.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Packet>): Packet {
@@ -855,11 +859,11 @@ export const Packet = {
     if (object.sequence !== undefined && object.sequence !== null) {
       message.sequence = BigInt(object.sequence.toString());
     }
-    message.sourcePort = object.sourcePort ?? "";
-    message.sourceChannel = object.sourceChannel ?? "";
-    message.destinationPort = object.destinationPort ?? "";
-    message.destinationChannel = object.destinationChannel ?? "";
-    message.data = object.data ?? new Uint8Array();
+    message.sourcePort = object.sourcePort ?? undefined;
+    message.sourceChannel = object.sourceChannel ?? undefined;
+    message.destinationPort = object.destinationPort ?? undefined;
+    message.destinationChannel = object.destinationChannel ?? undefined;
+    message.data = object.data ?? undefined;
     if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
       message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
     }
@@ -882,14 +886,14 @@ export const Packet = {
   },
   fromSDKJSON(object: any): PacketSDKType {
     return {
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
-      source_port: isSet(object.source_port) ? String(object.source_port) : "",
-      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
-      destination_port: isSet(object.destination_port) ? String(object.destination_port) : "",
-      destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : "",
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : undefined,
+      source_port: isSet(object.source_port) ? String(object.source_port) : undefined,
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : undefined,
+      destination_port: isSet(object.destination_port) ? String(object.destination_port) : undefined,
+      destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
       timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt(0)
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : undefined
     };
   },
   toSDK(message: Packet): PacketSDKType {
@@ -906,14 +910,14 @@ export const Packet = {
   },
   fromAmino(object: PacketAmino): Packet {
     return {
-      sequence: BigInt(object.sequence),
-      sourcePort: object.source_port,
-      sourceChannel: object.source_channel,
-      destinationPort: object.destination_port,
-      destinationChannel: object.destination_channel,
-      data: object.data,
+      sequence: object?.sequence ? BigInt(object.sequence) : undefined,
+      sourcePort: object?.source_port,
+      sourceChannel: object?.source_channel,
+      destinationPort: object?.destination_port,
+      destinationChannel: object?.destination_channel,
+      data: object?.data,
       timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: BigInt(object.timeout_timestamp)
+      timeoutTimestamp: object?.timeout_timestamp ? BigInt(object.timeout_timestamp) : undefined
     };
   },
   toAmino(message: Packet): PacketAmino {
@@ -952,25 +956,25 @@ export const Packet = {
 };
 function createBasePacketState(): PacketState {
   return {
-    portId: "",
-    channelId: "",
-    sequence: BigInt(0),
-    data: new Uint8Array()
+    portId: undefined,
+    channelId: undefined,
+    sequence: undefined,
+    data: undefined
   };
 }
 export const PacketState = {
   typeUrl: "/ibc.core.channel.v1.PacketState",
   encode(message: PacketState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(18).string(message.channelId);
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(24).uint64(message.sequence);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(34).bytes(message.data);
     }
     return writer;
@@ -1013,18 +1017,20 @@ export const PacketState = {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    if (message.sequence !== undefined) {
+      obj.sequence = message.sequence.toString();
+    }
+    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<PacketState>): PacketState {
     const message = createBasePacketState();
-    message.portId = object.portId ?? "";
-    message.channelId = object.channelId ?? "";
+    message.portId = object.portId ?? undefined;
+    message.channelId = object.channelId ?? undefined;
     if (object.sequence !== undefined && object.sequence !== null) {
       message.sequence = BigInt(object.sequence.toString());
     }
-    message.data = object.data ?? new Uint8Array();
+    message.data = object.data ?? undefined;
     return message;
   },
   fromSDK(object: PacketStateSDKType): PacketState {
@@ -1037,10 +1043,10 @@ export const PacketState = {
   },
   fromSDKJSON(object: any): PacketStateSDKType {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+      port_id: isSet(object.port_id) ? String(object.port_id) : undefined,
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : undefined,
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined
     };
   },
   toSDK(message: PacketState): PacketStateSDKType {
@@ -1053,10 +1059,10 @@ export const PacketState = {
   },
   fromAmino(object: PacketStateAmino): PacketState {
     return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      sequence: BigInt(object.sequence),
-      data: object.data
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence ? BigInt(object.sequence) : undefined,
+      data: object?.data
     };
   },
   toAmino(message: PacketState): PacketStateAmino {

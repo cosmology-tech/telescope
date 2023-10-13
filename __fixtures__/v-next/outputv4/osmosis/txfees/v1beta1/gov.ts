@@ -10,8 +10,8 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposal {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   feetoken: FeeToken;
 }
 /**
@@ -22,24 +22,24 @@ export interface UpdateFeeTokenProposal {
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposalSDKType {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   feetoken: FeeTokenSDKType;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
-    title: "",
-    description: "",
+    title: undefined,
+    description: undefined,
     feetoken: FeeToken.fromPartial({})
   };
 }
 export const UpdateFeeTokenProposal = {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
   encode(message: UpdateFeeTokenProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.feetoken !== undefined) {
@@ -86,8 +86,8 @@ export const UpdateFeeTokenProposal = {
   },
   fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
+    message.title = object.title ?? undefined;
+    message.description = object.description ?? undefined;
     if (object.feetoken !== undefined && object.feetoken !== null) {
       message.feetoken = FeeToken.fromPartial(object.feetoken);
     }
@@ -102,8 +102,8 @@ export const UpdateFeeTokenProposal = {
   },
   fromSDKJSON(object: any): UpdateFeeTokenProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      title: isSet(object.title) ? String(object.title) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined,
       feetoken: isSet(object.feetoken) ? FeeToken.fromSDKJSON(object.feetoken) : undefined
     };
   },
@@ -116,8 +116,8 @@ export const UpdateFeeTokenProposal = {
   },
   fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
     return {
-      title: object.title,
-      description: object.description,
+      title: object?.title,
+      description: object?.description,
       feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
     };
   },

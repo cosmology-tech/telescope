@@ -11,13 +11,13 @@ export interface PairsSDKType {
 }
 /** Pair defines a key/value bytes tuple. */
 export interface Pair {
-  key: Uint8Array;
-  value: Uint8Array;
+  key?: Uint8Array;
+  value?: Uint8Array;
 }
 /** Pair defines a key/value bytes tuple. */
 export interface PairSDKType {
-  key: Uint8Array;
-  value: Uint8Array;
+  key?: Uint8Array;
+  value?: Uint8Array;
 }
 function createBasePairs(): Pairs {
   return {
@@ -125,17 +125,17 @@ export const Pairs = {
 };
 function createBasePair(): Pair {
   return {
-    key: new Uint8Array(),
-    value: new Uint8Array()
+    key: undefined,
+    value: undefined
   };
 }
 export const Pair = {
   typeUrl: "/cosmos.base.kv.v1beta1.Pair",
   encode(message: Pair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(18).bytes(message.value);
     }
     return writer;
@@ -168,14 +168,14 @@ export const Pair = {
   },
   toJSON(message: Pair): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Pair>): Pair {
     const message = createBasePair();
-    message.key = object.key ?? new Uint8Array();
-    message.value = object.value ?? new Uint8Array();
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
     return message;
   },
   fromSDK(object: PairSDKType): Pair {
@@ -186,8 +186,8 @@ export const Pair = {
   },
   fromSDKJSON(object: any): PairSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
+      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined
     };
   },
   toSDK(message: Pair): PairSDKType {
@@ -198,8 +198,8 @@ export const Pair = {
   },
   fromAmino(object: PairAmino): Pair {
     return {
-      key: object.key,
-      value: object.value
+      key: object?.key,
+      value: object?.value
     };
   },
   toAmino(message: Pair): PairAmino {

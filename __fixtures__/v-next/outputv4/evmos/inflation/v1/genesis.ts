@@ -7,47 +7,47 @@ export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
   /** amount of past periods, based on the epochs per period param */
-  period: bigint;
+  period?: bigint;
   /** inflation epoch identifier */
-  epochIdentifier: string;
+  epochIdentifier?: string;
   /** number of epochs after which inflation is recalculated */
-  epochsPerPeriod: bigint;
+  epochsPerPeriod?: bigint;
   /** number of epochs that have passed while inflation is disabled */
-  skippedEpochs: bigint;
+  skippedEpochs?: bigint;
 }
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
-  period: bigint;
-  epoch_identifier: string;
-  epochs_per_period: bigint;
-  skipped_epochs: bigint;
+  period?: bigint;
+  epoch_identifier?: string;
+  epochs_per_period?: bigint;
+  skipped_epochs?: bigint;
 }
 /** Params holds parameters for the inflation module. */
 export interface Params {
   /** type of coin to mint */
-  mintDenom: string;
+  mintDenom?: string;
   /** variables to calculate exponential inflation */
   exponentialCalculation: ExponentialCalculation;
   /** inflation distribution of the minted denom */
   inflationDistribution: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
-  enableInflation: boolean;
+  enableInflation?: boolean;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
-  mint_denom: string;
+  mint_denom?: string;
   exponential_calculation: ExponentialCalculationSDKType;
   inflation_distribution: InflationDistributionSDKType;
-  enable_inflation: boolean;
+  enable_inflation?: boolean;
 }
 function createBaseGenesisState(): GenesisState {
   return {
     params: Params.fromPartial({}),
-    period: BigInt(0),
-    epochIdentifier: "",
-    epochsPerPeriod: BigInt(0),
-    skippedEpochs: BigInt(0)
+    period: undefined,
+    epochIdentifier: undefined,
+    epochsPerPeriod: undefined,
+    skippedEpochs: undefined
   };
 }
 export const GenesisState = {
@@ -56,16 +56,16 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
-    if (message.period !== BigInt(0)) {
+    if (message.period !== undefined) {
       writer.uint32(16).uint64(message.period);
     }
-    if (message.epochIdentifier !== "") {
+    if (message.epochIdentifier !== undefined) {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.epochsPerPeriod !== BigInt(0)) {
+    if (message.epochsPerPeriod !== undefined) {
       writer.uint32(32).int64(message.epochsPerPeriod);
     }
-    if (message.skippedEpochs !== BigInt(0)) {
+    if (message.skippedEpochs !== undefined) {
       writer.uint32(40).uint64(message.skippedEpochs);
     }
     return writer;
@@ -111,10 +111,16 @@ export const GenesisState = {
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
+    if (message.period !== undefined) {
+      obj.period = message.period.toString();
+    }
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.epochsPerPeriod !== undefined && (obj.epochsPerPeriod = (message.epochsPerPeriod || BigInt(0)).toString());
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
+    if (message.epochsPerPeriod !== undefined) {
+      obj.epochsPerPeriod = message.epochsPerPeriod.toString();
+    }
+    if (message.skippedEpochs !== undefined) {
+      obj.skippedEpochs = message.skippedEpochs.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -125,7 +131,7 @@ export const GenesisState = {
     if (object.period !== undefined && object.period !== null) {
       message.period = BigInt(object.period.toString());
     }
-    message.epochIdentifier = object.epochIdentifier ?? "";
+    message.epochIdentifier = object.epochIdentifier ?? undefined;
     if (object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null) {
       message.epochsPerPeriod = BigInt(object.epochsPerPeriod.toString());
     }
@@ -146,10 +152,10 @@ export const GenesisState = {
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
-      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      epochs_per_period: isSet(object.epochs_per_period) ? BigInt(object.epochs_per_period.toString()) : BigInt(0),
-      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt(0)
+      period: isSet(object.period) ? BigInt(object.period.toString()) : undefined,
+      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : undefined,
+      epochs_per_period: isSet(object.epochs_per_period) ? BigInt(object.epochs_per_period.toString()) : undefined,
+      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : undefined
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {
@@ -164,10 +170,10 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined,
-      period: BigInt(object.period),
-      epochIdentifier: object.epoch_identifier,
-      epochsPerPeriod: BigInt(object.epochs_per_period),
-      skippedEpochs: BigInt(object.skipped_epochs)
+      period: object?.period ? BigInt(object.period) : undefined,
+      epochIdentifier: object?.epoch_identifier,
+      epochsPerPeriod: object?.epochs_per_period ? BigInt(object.epochs_per_period) : undefined,
+      skippedEpochs: object?.skipped_epochs ? BigInt(object.skipped_epochs) : undefined
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -197,16 +203,16 @@ export const GenesisState = {
 };
 function createBaseParams(): Params {
   return {
-    mintDenom: "",
+    mintDenom: undefined,
     exponentialCalculation: ExponentialCalculation.fromPartial({}),
     inflationDistribution: InflationDistribution.fromPartial({}),
-    enableInflation: false
+    enableInflation: undefined
   };
 }
 export const Params = {
   typeUrl: "/evmos.inflation.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.exponentialCalculation !== undefined) {
@@ -215,7 +221,7 @@ export const Params = {
     if (message.inflationDistribution !== undefined) {
       InflationDistribution.encode(message.inflationDistribution, writer.uint32(26).fork()).ldelim();
     }
-    if (message.enableInflation === true) {
+    if (message.enableInflation !== undefined) {
       writer.uint32(32).bool(message.enableInflation);
     }
     return writer;
@@ -264,14 +270,14 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.mintDenom = object.mintDenom ?? "";
+    message.mintDenom = object.mintDenom ?? undefined;
     if (object.exponentialCalculation !== undefined && object.exponentialCalculation !== null) {
       message.exponentialCalculation = ExponentialCalculation.fromPartial(object.exponentialCalculation);
     }
     if (object.inflationDistribution !== undefined && object.inflationDistribution !== null) {
       message.inflationDistribution = InflationDistribution.fromPartial(object.inflationDistribution);
     }
-    message.enableInflation = object.enableInflation ?? false;
+    message.enableInflation = object.enableInflation ?? undefined;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -284,10 +290,10 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : undefined,
       exponential_calculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromSDKJSON(object.exponential_calculation) : undefined,
       inflation_distribution: isSet(object.inflation_distribution) ? InflationDistribution.fromSDKJSON(object.inflation_distribution) : undefined,
-      enable_inflation: isSet(object.enable_inflation) ? Boolean(object.enable_inflation) : false
+      enable_inflation: isSet(object.enable_inflation) ? Boolean(object.enable_inflation) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -300,10 +306,10 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      mintDenom: object.mint_denom,
+      mintDenom: object?.mint_denom,
       exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
       inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
-      enableInflation: object.enable_inflation
+      enableInflation: object?.enable_inflation
     };
   },
   toAmino(message: Params): ParamsAmino {

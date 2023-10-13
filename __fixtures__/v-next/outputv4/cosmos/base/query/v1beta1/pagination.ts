@@ -16,31 +16,31 @@ export interface PageRequest {
    * querying the next page most efficiently. Only one of offset or key
    * should be set.
    */
-  key: Uint8Array;
+  key?: Uint8Array;
   /**
    * offset is a numeric offset that can be used when key is unavailable.
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
-  offset: bigint;
+  offset?: bigint;
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
-  limit: bigint;
+  limit?: bigint;
   /**
    * count_total is set to true  to indicate that the result set should include
    * a count of the total number of items available for pagination in UIs.
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal: boolean;
+  countTotal?: boolean;
   /**
    * reverse is set to true if results are to be returned in the descending order.
    * 
    * Since: cosmos-sdk 0.43
    */
-  reverse: boolean;
+  reverse?: boolean;
 }
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -52,11 +52,11 @@ export interface PageRequest {
  *  }
  */
 export interface PageRequestSDKType {
-  key: Uint8Array;
-  offset: bigint;
-  limit: bigint;
-  count_total: boolean;
-  reverse: boolean;
+  key?: Uint8Array;
+  offset?: bigint;
+  limit?: bigint;
+  count_total?: boolean;
+  reverse?: boolean;
 }
 /**
  * PageResponse is to be embedded in gRPC response messages where the
@@ -73,12 +73,12 @@ export interface PageResponse {
    * query the next page most efficiently. It will be empty if
    * there are no more results.
    */
-  nextKey: Uint8Array;
+  nextKey?: Uint8Array;
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
    */
-  total: bigint;
+  total?: bigint;
 }
 /**
  * PageResponse is to be embedded in gRPC response messages where the
@@ -90,34 +90,34 @@ export interface PageResponse {
  *  }
  */
 export interface PageResponseSDKType {
-  next_key: Uint8Array;
-  total: bigint;
+  next_key?: Uint8Array;
+  total?: bigint;
 }
 function createBasePageRequest(): PageRequest {
   return {
-    key: new Uint8Array(),
-    offset: BigInt(0),
-    limit: BigInt(0),
-    countTotal: false,
-    reverse: false
+    key: undefined,
+    offset: undefined,
+    limit: undefined,
+    countTotal: undefined,
+    reverse: undefined
   };
 }
 export const PageRequest = {
   typeUrl: "/cosmos.base.query.v1beta1.PageRequest",
   encode(message: PageRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.offset !== BigInt(0)) {
+    if (message.offset !== undefined) {
       writer.uint32(16).uint64(message.offset);
     }
-    if (message.limit !== BigInt(0)) {
+    if (message.limit !== undefined) {
       writer.uint32(24).uint64(message.limit);
     }
-    if (message.countTotal === true) {
+    if (message.countTotal !== undefined) {
       writer.uint32(32).bool(message.countTotal);
     }
-    if (message.reverse === true) {
+    if (message.reverse !== undefined) {
       writer.uint32(40).bool(message.reverse);
     }
     return writer;
@@ -162,24 +162,28 @@ export const PageRequest = {
   },
   toJSON(message: PageRequest): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.offset !== undefined && (obj.offset = (message.offset || BigInt(0)).toString());
-    message.limit !== undefined && (obj.limit = (message.limit || BigInt(0)).toString());
+    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    if (message.offset !== undefined) {
+      obj.offset = message.offset.toString();
+    }
+    if (message.limit !== undefined) {
+      obj.limit = message.limit.toString();
+    }
     message.countTotal !== undefined && (obj.countTotal = message.countTotal);
     message.reverse !== undefined && (obj.reverse = message.reverse);
     return obj;
   },
   fromPartial(object: DeepPartial<PageRequest>): PageRequest {
     const message = createBasePageRequest();
-    message.key = object.key ?? new Uint8Array();
+    message.key = object.key ?? undefined;
     if (object.offset !== undefined && object.offset !== null) {
       message.offset = BigInt(object.offset.toString());
     }
     if (object.limit !== undefined && object.limit !== null) {
       message.limit = BigInt(object.limit.toString());
     }
-    message.countTotal = object.countTotal ?? false;
-    message.reverse = object.reverse ?? false;
+    message.countTotal = object.countTotal ?? undefined;
+    message.reverse = object.reverse ?? undefined;
     return message;
   },
   fromSDK(object: PageRequestSDKType): PageRequest {
@@ -193,11 +197,11 @@ export const PageRequest = {
   },
   fromSDKJSON(object: any): PageRequestSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: isSet(object.offset) ? BigInt(object.offset.toString()) : BigInt(0),
-      limit: isSet(object.limit) ? BigInt(object.limit.toString()) : BigInt(0),
-      count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
-      reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
+      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
+      offset: isSet(object.offset) ? BigInt(object.offset.toString()) : undefined,
+      limit: isSet(object.limit) ? BigInt(object.limit.toString()) : undefined,
+      count_total: isSet(object.count_total) ? Boolean(object.count_total) : undefined,
+      reverse: isSet(object.reverse) ? Boolean(object.reverse) : undefined
     };
   },
   toSDK(message: PageRequest): PageRequestSDKType {
@@ -211,11 +215,11 @@ export const PageRequest = {
   },
   fromAmino(object: PageRequestAmino): PageRequest {
     return {
-      key: object.key,
-      offset: BigInt(object.offset),
-      limit: BigInt(object.limit),
-      countTotal: object.count_total,
-      reverse: object.reverse
+      key: object?.key,
+      offset: object?.offset ? BigInt(object.offset) : undefined,
+      limit: object?.limit ? BigInt(object.limit) : undefined,
+      countTotal: object?.count_total,
+      reverse: object?.reverse
     };
   },
   toAmino(message: PageRequest): PageRequestAmino {
@@ -251,17 +255,17 @@ export const PageRequest = {
 };
 function createBasePageResponse(): PageResponse {
   return {
-    nextKey: new Uint8Array(),
-    total: BigInt(0)
+    nextKey: undefined,
+    total: undefined
   };
 }
 export const PageResponse = {
   typeUrl: "/cosmos.base.query.v1beta1.PageResponse",
   encode(message: PageResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.nextKey.length !== 0) {
+    if (message.nextKey !== undefined) {
       writer.uint32(10).bytes(message.nextKey);
     }
-    if (message.total !== BigInt(0)) {
+    if (message.total !== undefined) {
       writer.uint32(16).uint64(message.total);
     }
     return writer;
@@ -294,13 +298,15 @@ export const PageResponse = {
   },
   toJSON(message: PageResponse): unknown {
     const obj: any = {};
-    message.nextKey !== undefined && (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array()));
-    message.total !== undefined && (obj.total = (message.total || BigInt(0)).toString());
+    message.nextKey !== undefined && (obj.nextKey = message.nextKey !== undefined ? base64FromBytes(message.nextKey) : undefined);
+    if (message.total !== undefined) {
+      obj.total = message.total.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<PageResponse>): PageResponse {
     const message = createBasePageResponse();
-    message.nextKey = object.nextKey ?? new Uint8Array();
+    message.nextKey = object.nextKey ?? undefined;
     if (object.total !== undefined && object.total !== null) {
       message.total = BigInt(object.total.toString());
     }
@@ -314,8 +320,8 @@ export const PageResponse = {
   },
   fromSDKJSON(object: any): PageResponseSDKType {
     return {
-      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
-      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt(0)
+      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : undefined,
+      total: isSet(object.total) ? BigInt(object.total.toString()) : undefined
     };
   },
   toSDK(message: PageResponse): PageResponseSDKType {
@@ -326,8 +332,8 @@ export const PageResponse = {
   },
   fromAmino(object: PageResponseAmino): PageResponse {
     return {
-      nextKey: object.next_key,
-      total: BigInt(object.total)
+      nextKey: object?.next_key,
+      total: object?.total ? BigInt(object.total) : undefined
     };
   },
   toAmino(message: PageResponse): PageResponseAmino {

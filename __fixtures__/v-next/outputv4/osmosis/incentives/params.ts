@@ -7,21 +7,21 @@ export interface Params {
    * distr_epoch_identifier is what epoch type distribution will be triggered by
    * (day, week, etc.)
    */
-  distrEpochIdentifier: string;
+  distrEpochIdentifier?: string;
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
-  distr_epoch_identifier: string;
+  distr_epoch_identifier?: string;
 }
 function createBaseParams(): Params {
   return {
-    distrEpochIdentifier: ""
+    distrEpochIdentifier: undefined
   };
 }
 export const Params = {
   typeUrl: "/osmosis.incentives.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.distrEpochIdentifier !== "") {
+    if (message.distrEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.distrEpochIdentifier);
     }
     return writer;
@@ -55,7 +55,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
+    message.distrEpochIdentifier = object.distrEpochIdentifier ?? undefined;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -65,7 +65,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      distr_epoch_identifier: isSet(object.distr_epoch_identifier) ? String(object.distr_epoch_identifier) : ""
+      distr_epoch_identifier: isSet(object.distr_epoch_identifier) ? String(object.distr_epoch_identifier) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -75,7 +75,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      distrEpochIdentifier: object.distr_epoch_identifier
+      distrEpochIdentifier: object?.distr_epoch_identifier
     };
   },
   toAmino(message: Params): ParamsAmino {

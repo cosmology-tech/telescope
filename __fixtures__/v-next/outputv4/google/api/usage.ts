@@ -14,13 +14,13 @@ export interface Usage {
    * "serviceusage.googleapis.com/tos/universal". Additional ToS can be
    * included based on the business needs.
    */
-  requirements: string[];
+  requirements?: string[];
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: UsageRule[];
+  rules?: UsageRule[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -31,13 +31,13 @@ export interface Usage {
    * of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
-  producerNotificationChannel: string;
+  producerNotificationChannel?: string;
 }
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
-  requirements: string[];
-  rules: UsageRuleSDKType[];
-  producer_notification_channel: string;
+  requirements?: string[];
+  rules?: UsageRuleSDKType[];
+  producer_notification_channel?: string;
 }
 /**
  * Usage configuration rules for the service.
@@ -73,19 +73,19 @@ export interface UsageRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * If true, the selected method allows unregistered calls, e.g. calls
    * that don't identify any user or application.
    */
-  allowUnregisteredCalls: boolean;
+  allowUnregisteredCalls?: boolean;
   /**
    * If true, the selected method should skip service control and the control
    * plane features, such as quota and billing, will not be available.
    * This flag is used by Google Cloud Endpoints to bypass checks for internal
    * methods, such as service health check methods.
    */
-  skipServiceControl: boolean;
+  skipServiceControl?: boolean;
 }
 /**
  * Usage configuration rules for the service.
@@ -115,15 +115,15 @@ export interface UsageRule {
  *         allow_unregistered_calls: true
  */
 export interface UsageRuleSDKType {
-  selector: string;
-  allow_unregistered_calls: boolean;
-  skip_service_control: boolean;
+  selector?: string;
+  allow_unregistered_calls?: boolean;
+  skip_service_control?: boolean;
 }
 function createBaseUsage(): Usage {
   return {
-    requirements: [],
-    rules: [],
-    producerNotificationChannel: ""
+    requirements: undefined,
+    rules: undefined,
+    producerNotificationChannel: undefined
   };
 }
 export const Usage = {
@@ -135,7 +135,7 @@ export const Usage = {
     for (const v of message.rules) {
       UsageRule.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.producerNotificationChannel !== "") {
+    if (message.producerNotificationChannel !== undefined) {
       writer.uint32(58).string(message.producerNotificationChannel);
     }
     return writer;
@@ -189,7 +189,7 @@ export const Usage = {
     const message = createBaseUsage();
     message.requirements = object.requirements?.map(e => e) || [];
     message.rules = object.rules?.map(e => UsageRule.fromPartial(e)) || [];
-    message.producerNotificationChannel = object.producerNotificationChannel ?? "";
+    message.producerNotificationChannel = object.producerNotificationChannel ?? undefined;
     return message;
   },
   fromSDK(object: UsageSDKType): Usage {
@@ -203,7 +203,7 @@ export const Usage = {
     return {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => String(e)) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDKJSON(e)) : [],
-      producer_notification_channel: isSet(object.producer_notification_channel) ? String(object.producer_notification_channel) : ""
+      producer_notification_channel: isSet(object.producer_notification_channel) ? String(object.producer_notification_channel) : undefined
     };
   },
   toSDK(message: Usage): UsageSDKType {
@@ -225,7 +225,7 @@ export const Usage = {
     return {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromAmino(e)) : [],
-      producerNotificationChannel: object.producer_notification_channel
+      producerNotificationChannel: object?.producer_notification_channel
     };
   },
   toAmino(message: Usage): UsageAmino {
@@ -261,21 +261,21 @@ export const Usage = {
 };
 function createBaseUsageRule(): UsageRule {
   return {
-    selector: "",
-    allowUnregisteredCalls: false,
-    skipServiceControl: false
+    selector: undefined,
+    allowUnregisteredCalls: undefined,
+    skipServiceControl: undefined
   };
 }
 export const UsageRule = {
   typeUrl: "/google.api.UsageRule",
   encode(message: UsageRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.allowUnregisteredCalls === true) {
+    if (message.allowUnregisteredCalls !== undefined) {
       writer.uint32(16).bool(message.allowUnregisteredCalls);
     }
-    if (message.skipServiceControl === true) {
+    if (message.skipServiceControl !== undefined) {
       writer.uint32(24).bool(message.skipServiceControl);
     }
     return writer;
@@ -319,9 +319,9 @@ export const UsageRule = {
   },
   fromPartial(object: DeepPartial<UsageRule>): UsageRule {
     const message = createBaseUsageRule();
-    message.selector = object.selector ?? "";
-    message.allowUnregisteredCalls = object.allowUnregisteredCalls ?? false;
-    message.skipServiceControl = object.skipServiceControl ?? false;
+    message.selector = object.selector ?? undefined;
+    message.allowUnregisteredCalls = object.allowUnregisteredCalls ?? undefined;
+    message.skipServiceControl = object.skipServiceControl ?? undefined;
     return message;
   },
   fromSDK(object: UsageRuleSDKType): UsageRule {
@@ -333,9 +333,9 @@ export const UsageRule = {
   },
   fromSDKJSON(object: any): UsageRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      allow_unregistered_calls: isSet(object.allow_unregistered_calls) ? Boolean(object.allow_unregistered_calls) : false,
-      skip_service_control: isSet(object.skip_service_control) ? Boolean(object.skip_service_control) : false
+      selector: isSet(object.selector) ? String(object.selector) : undefined,
+      allow_unregistered_calls: isSet(object.allow_unregistered_calls) ? Boolean(object.allow_unregistered_calls) : undefined,
+      skip_service_control: isSet(object.skip_service_control) ? Boolean(object.skip_service_control) : undefined
     };
   },
   toSDK(message: UsageRule): UsageRuleSDKType {
@@ -347,9 +347,9 @@ export const UsageRule = {
   },
   fromAmino(object: UsageRuleAmino): UsageRule {
     return {
-      selector: object.selector,
-      allowUnregisteredCalls: object.allow_unregistered_calls,
-      skipServiceControl: object.skip_service_control
+      selector: object?.selector,
+      allowUnregisteredCalls: object?.allow_unregistered_calls,
+      skipServiceControl: object?.skip_service_control
     };
   },
   toAmino(message: UsageRule): UsageRuleAmino {

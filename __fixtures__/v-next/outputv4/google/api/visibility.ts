@@ -31,7 +31,7 @@ export interface Visibility {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: VisibilityRule[];
+  rules?: VisibilityRule[];
 }
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -58,7 +58,7 @@ export interface Visibility {
  * EnhancedSearch and Delegate.
  */
 export interface VisibilitySDKType {
-  rules: VisibilityRuleSDKType[];
+  rules?: VisibilityRuleSDKType[];
 }
 /**
  * A visibility rule provides visibility configuration for an individual API
@@ -70,7 +70,7 @@ export interface VisibilityRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -88,19 +88,19 @@ export interface VisibilityRule {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
-  restriction: string;
+  restriction?: string;
 }
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
 export interface VisibilityRuleSDKType {
-  selector: string;
-  restriction: string;
+  selector?: string;
+  restriction?: string;
 }
 function createBaseVisibility(): Visibility {
   return {
-    rules: []
+    rules: undefined
   };
 }
 export const Visibility = {
@@ -198,17 +198,17 @@ export const Visibility = {
 };
 function createBaseVisibilityRule(): VisibilityRule {
   return {
-    selector: "",
-    restriction: ""
+    selector: undefined,
+    restriction: undefined
   };
 }
 export const VisibilityRule = {
   typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.restriction !== "") {
+    if (message.restriction !== undefined) {
       writer.uint32(18).string(message.restriction);
     }
     return writer;
@@ -247,8 +247,8 @@ export const VisibilityRule = {
   },
   fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
     const message = createBaseVisibilityRule();
-    message.selector = object.selector ?? "";
-    message.restriction = object.restriction ?? "";
+    message.selector = object.selector ?? undefined;
+    message.restriction = object.restriction ?? undefined;
     return message;
   },
   fromSDK(object: VisibilityRuleSDKType): VisibilityRule {
@@ -259,8 +259,8 @@ export const VisibilityRule = {
   },
   fromSDKJSON(object: any): VisibilityRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      restriction: isSet(object.restriction) ? String(object.restriction) : ""
+      selector: isSet(object.selector) ? String(object.selector) : undefined,
+      restriction: isSet(object.restriction) ? String(object.restriction) : undefined
     };
   },
   toSDK(message: VisibilityRule): VisibilityRuleSDKType {
@@ -271,8 +271,8 @@ export const VisibilityRule = {
   },
   fromAmino(object: VisibilityRuleAmino): VisibilityRule {
     return {
-      selector: object.selector,
-      restriction: object.restriction
+      selector: object?.selector,
+      restriction: object?.restriction
     };
   },
   toAmino(message: VisibilityRule): VisibilityRuleAmino {

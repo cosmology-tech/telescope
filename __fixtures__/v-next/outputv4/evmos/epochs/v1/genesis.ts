@@ -4,22 +4,22 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
-  identifier: string;
+  identifier?: string;
   startTime: Date;
   duration: Duration;
-  currentEpoch: bigint;
+  currentEpoch?: bigint;
   currentEpochStartTime: Date;
-  epochCountingStarted: boolean;
-  currentEpochStartHeight: bigint;
+  epochCountingStarted?: boolean;
+  currentEpochStartHeight?: bigint;
 }
 export interface EpochInfoSDKType {
-  identifier: string;
+  identifier?: string;
   start_time: Date;
   duration: DurationSDKType;
-  current_epoch: bigint;
+  current_epoch?: bigint;
   current_epoch_start_time: Date;
-  epoch_counting_started: boolean;
-  current_epoch_start_height: bigint;
+  epoch_counting_started?: boolean;
+  current_epoch_start_height?: bigint;
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
@@ -31,19 +31,19 @@ export interface GenesisStateSDKType {
 }
 function createBaseEpochInfo(): EpochInfo {
   return {
-    identifier: "",
+    identifier: undefined,
     startTime: new Date(),
     duration: Duration.fromPartial({}),
-    currentEpoch: BigInt(0),
+    currentEpoch: undefined,
     currentEpochStartTime: new Date(),
-    epochCountingStarted: false,
-    currentEpochStartHeight: BigInt(0)
+    epochCountingStarted: undefined,
+    currentEpochStartHeight: undefined
   };
 }
 export const EpochInfo = {
   typeUrl: "/evmos.epochs.v1.EpochInfo",
   encode(message: EpochInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
     if (message.startTime !== undefined) {
@@ -52,16 +52,16 @@ export const EpochInfo = {
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
-    if (message.currentEpoch !== BigInt(0)) {
+    if (message.currentEpoch !== undefined) {
       writer.uint32(32).int64(message.currentEpoch);
     }
     if (message.currentEpochStartTime !== undefined) {
       Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.epochCountingStarted === true) {
+    if (message.epochCountingStarted !== undefined) {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
-    if (message.currentEpochStartHeight !== BigInt(0)) {
+    if (message.currentEpochStartHeight !== undefined) {
       writer.uint32(56).int64(message.currentEpochStartHeight);
     }
     return writer;
@@ -117,15 +117,19 @@ export const EpochInfo = {
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
+    if (message.currentEpoch !== undefined) {
+      obj.currentEpoch = message.currentEpoch.toString();
+    }
     message.currentEpochStartTime !== undefined && (obj.currentEpochStartTime = message.currentEpochStartTime.toISOString());
     message.epochCountingStarted !== undefined && (obj.epochCountingStarted = message.epochCountingStarted);
-    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || BigInt(0)).toString());
+    if (message.currentEpochStartHeight !== undefined) {
+      obj.currentEpochStartHeight = message.currentEpochStartHeight.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<EpochInfo>): EpochInfo {
     const message = createBaseEpochInfo();
-    message.identifier = object.identifier ?? "";
+    message.identifier = object.identifier ?? undefined;
     message.startTime = object.startTime ?? undefined;
     if (object.duration !== undefined && object.duration !== null) {
       message.duration = Duration.fromPartial(object.duration);
@@ -134,7 +138,7 @@ export const EpochInfo = {
       message.currentEpoch = BigInt(object.currentEpoch.toString());
     }
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
-    message.epochCountingStarted = object.epochCountingStarted ?? false;
+    message.epochCountingStarted = object.epochCountingStarted ?? undefined;
     if (object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null) {
       message.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
     }
@@ -153,13 +157,13 @@ export const EpochInfo = {
   },
   fromSDKJSON(object: any): EpochInfoSDKType {
     return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      identifier: isSet(object.identifier) ? String(object.identifier) : undefined,
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt(0),
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : undefined,
       current_epoch_start_time: isSet(object.current_epoch_start_time) ? new Date(object.current_epoch_start_time) : undefined,
-      epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
-      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : BigInt(0)
+      epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : undefined,
+      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : undefined
     };
   },
   toSDK(message: EpochInfo): EpochInfoSDKType {
@@ -175,13 +179,13 @@ export const EpochInfo = {
   },
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
-      identifier: object.identifier,
+      identifier: object?.identifier,
       startTime: object.start_time,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      currentEpoch: BigInt(object.current_epoch),
+      currentEpoch: object?.current_epoch ? BigInt(object.current_epoch) : undefined,
       currentEpochStartTime: object.current_epoch_start_time,
-      epochCountingStarted: object.epoch_counting_started,
-      currentEpochStartHeight: BigInt(object.current_epoch_start_height)
+      epochCountingStarted: object?.epoch_counting_started,
+      currentEpochStartHeight: object?.current_epoch_start_height ? BigInt(object.current_epoch_start_height) : undefined
     };
   },
   toAmino(message: EpochInfo): EpochInfoAmino {

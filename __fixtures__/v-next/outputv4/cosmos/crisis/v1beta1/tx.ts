@@ -3,15 +3,15 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
-  sender: string;
-  invariantModuleName: string;
-  invariantRoute: string;
+  sender?: string;
+  invariantModuleName?: string;
+  invariantRoute?: string;
 }
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantSDKType {
-  sender: string;
-  invariant_module_name: string;
-  invariant_route: string;
+  sender?: string;
+  invariant_module_name?: string;
+  invariant_route?: string;
 }
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
@@ -19,21 +19,21 @@ export interface MsgVerifyInvariantResponse {}
 export interface MsgVerifyInvariantResponseSDKType {}
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
   return {
-    sender: "",
-    invariantModuleName: "",
-    invariantRoute: ""
+    sender: undefined,
+    invariantModuleName: undefined,
+    invariantRoute: undefined
   };
 }
 export const MsgVerifyInvariant = {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
   encode(message: MsgVerifyInvariant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.invariantModuleName !== "") {
+    if (message.invariantModuleName !== undefined) {
       writer.uint32(18).string(message.invariantModuleName);
     }
-    if (message.invariantRoute !== "") {
+    if (message.invariantRoute !== undefined) {
       writer.uint32(26).string(message.invariantRoute);
     }
     return writer;
@@ -77,9 +77,9 @@ export const MsgVerifyInvariant = {
   },
   fromPartial(object: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
     const message = createBaseMsgVerifyInvariant();
-    message.sender = object.sender ?? "";
-    message.invariantModuleName = object.invariantModuleName ?? "";
-    message.invariantRoute = object.invariantRoute ?? "";
+    message.sender = object.sender ?? undefined;
+    message.invariantModuleName = object.invariantModuleName ?? undefined;
+    message.invariantRoute = object.invariantRoute ?? undefined;
     return message;
   },
   fromSDK(object: MsgVerifyInvariantSDKType): MsgVerifyInvariant {
@@ -91,9 +91,9 @@ export const MsgVerifyInvariant = {
   },
   fromSDKJSON(object: any): MsgVerifyInvariantSDKType {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      invariant_module_name: isSet(object.invariant_module_name) ? String(object.invariant_module_name) : "",
-      invariant_route: isSet(object.invariant_route) ? String(object.invariant_route) : ""
+      sender: isSet(object.sender) ? String(object.sender) : undefined,
+      invariant_module_name: isSet(object.invariant_module_name) ? String(object.invariant_module_name) : undefined,
+      invariant_route: isSet(object.invariant_route) ? String(object.invariant_route) : undefined
     };
   },
   toSDK(message: MsgVerifyInvariant): MsgVerifyInvariantSDKType {
@@ -105,9 +105,9 @@ export const MsgVerifyInvariant = {
   },
   fromAmino(object: MsgVerifyInvariantAmino): MsgVerifyInvariant {
     return {
-      sender: object.sender,
-      invariantModuleName: object.invariant_module_name,
-      invariantRoute: object.invariant_route
+      sender: object?.sender,
+      invariantModuleName: object?.invariant_module_name,
+      invariantRoute: object?.invariant_route
     };
   },
   toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {

@@ -4,12 +4,12 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
-  owner: string;
+  owner?: string;
   certificate: Certificate;
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
-  owner: string;
+  owner?: string;
   certificate: CertificateSDKType;
 }
 /** GenesisState defines the basic genesis state used by cert module */
@@ -22,14 +22,14 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisCertificate(): GenesisCertificate {
   return {
-    owner: "",
+    owner: undefined,
     certificate: Certificate.fromPartial({})
   };
 }
 export const GenesisCertificate = {
   typeUrl: "/akash.cert.v1beta2.GenesisCertificate",
   encode(message: GenesisCertificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.certificate !== undefined) {
@@ -71,7 +71,7 @@ export const GenesisCertificate = {
   },
   fromPartial<I extends Exact<DeepPartial<GenesisCertificate>, I>>(object: I): GenesisCertificate {
     const message = createBaseGenesisCertificate();
-    message.owner = object.owner ?? "";
+    message.owner = object.owner ?? undefined;
     if (object.certificate !== undefined && object.certificate !== null) {
       message.certificate = Certificate.fromPartial(object.certificate);
     }
@@ -85,7 +85,7 @@ export const GenesisCertificate = {
   },
   fromSDKJSON(object: any): GenesisCertificateSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
       certificate: isSet(object.certificate) ? Certificate.fromSDKJSON(object.certificate) : undefined
     };
   },
@@ -97,7 +97,7 @@ export const GenesisCertificate = {
   },
   fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
     return {
-      owner: object.owner,
+      owner: object?.owner,
       certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
     };
   },

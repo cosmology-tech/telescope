@@ -4,48 +4,48 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** Params defines the parameters for the bank module. */
 export interface Params {
-  sendEnabled: SendEnabled[];
-  defaultSendEnabled: boolean;
+  sendEnabled?: SendEnabled[];
+  defaultSendEnabled?: boolean;
 }
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
-  send_enabled: SendEnabledSDKType[];
-  default_send_enabled: boolean;
+  send_enabled?: SendEnabledSDKType[];
+  default_send_enabled?: boolean;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
  * sendable).
  */
 export interface SendEnabled {
-  denom: string;
-  enabled: boolean;
+  denom?: string;
+  enabled?: boolean;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
  * sendable).
  */
 export interface SendEnabledSDKType {
-  denom: string;
-  enabled: boolean;
+  denom?: string;
+  enabled?: boolean;
 }
 /** Input models transaction input. */
 export interface Input {
-  address: string;
+  address?: string;
   coins: Coin[];
 }
 /** Input models transaction input. */
 export interface InputSDKType {
-  address: string;
+  address?: string;
   coins: CoinSDKType[];
 }
 /** Output models transaction outputs. */
 export interface Output {
-  address: string;
+  address?: string;
   coins: Coin[];
 }
 /** Output models transaction outputs. */
 export interface OutputSDKType {
-  address: string;
+  address?: string;
   coins: CoinSDKType[];
 }
 /**
@@ -72,7 +72,7 @@ export interface SupplySDKType {
  */
 export interface DenomUnit {
   /** denom represents the string name of the given denom unit (e.g uatom). */
-  denom: string;
+  denom?: string;
   /**
    * exponent represents power of 10 exponent that one must
    * raise the base_denom to in order to equal the given DenomUnit's denom
@@ -80,79 +80,79 @@ export interface DenomUnit {
    * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
    * exponent = 6, thus: 1 atom = 10^6 uatom).
    */
-  exponent: number;
+  exponent?: number;
   /** aliases is a list of string aliases for the given denom */
-  aliases: string[];
+  aliases?: string[];
 }
 /**
  * DenomUnit represents a struct that describes a given
  * denomination unit of the basic token.
  */
 export interface DenomUnitSDKType {
-  denom: string;
-  exponent: number;
-  aliases: string[];
+  denom?: string;
+  exponent?: number;
+  aliases?: string[];
 }
 /**
  * Metadata represents a struct that describes
  * a basic token.
  */
 export interface Metadata {
-  description: string;
+  description?: string;
   /** denom_units represents the list of DenomUnit's for a given coin */
-  denomUnits: DenomUnit[];
+  denomUnits?: DenomUnit[];
   /** base represents the base denom (should be the DenomUnit with exponent = 0). */
-  base: string;
+  base?: string;
   /**
    * display indicates the suggested denom that should be
    * displayed in clients.
    */
-  display: string;
+  display?: string;
   /**
    * name defines the name of the token (eg: Cosmos Atom)
    * 
    * Since: cosmos-sdk 0.43
    */
-  name: string;
+  name?: string;
   /**
    * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
    * be the same as the display.
    * 
    * Since: cosmos-sdk 0.43
    */
-  symbol: string;
+  symbol?: string;
   /**
    * URI to a document (on or off-chain) that contains additional information. Optional.
    * 
    * Since: cosmos-sdk 0.46
    */
-  uri: string;
+  uri?: string;
   /**
    * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
    * the document didn't change. Optional.
    * 
    * Since: cosmos-sdk 0.46
    */
-  uriHash: string;
+  uriHash?: string;
 }
 /**
  * Metadata represents a struct that describes
  * a basic token.
  */
 export interface MetadataSDKType {
-  description: string;
-  denom_units: DenomUnitSDKType[];
-  base: string;
-  display: string;
-  name: string;
-  symbol: string;
-  uri: string;
-  uri_hash: string;
+  description?: string;
+  denom_units?: DenomUnitSDKType[];
+  base?: string;
+  display?: string;
+  name?: string;
+  symbol?: string;
+  uri?: string;
+  uri_hash?: string;
 }
 function createBaseParams(): Params {
   return {
-    sendEnabled: [],
-    defaultSendEnabled: false
+    sendEnabled: undefined,
+    defaultSendEnabled: undefined
   };
 }
 export const Params = {
@@ -161,7 +161,7 @@ export const Params = {
     for (const v of message.sendEnabled) {
       SendEnabled.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.defaultSendEnabled === true) {
+    if (message.defaultSendEnabled !== undefined) {
       writer.uint32(16).bool(message.defaultSendEnabled);
     }
     return writer;
@@ -205,7 +205,7 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.sendEnabled = object.sendEnabled?.map(e => SendEnabled.fromPartial(e)) || [];
-    message.defaultSendEnabled = object.defaultSendEnabled ?? false;
+    message.defaultSendEnabled = object.defaultSendEnabled ?? undefined;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -217,7 +217,7 @@ export const Params = {
   fromSDKJSON(object: any): ParamsSDKType {
     return {
       send_enabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromSDKJSON(e)) : [],
-      default_send_enabled: isSet(object.default_send_enabled) ? Boolean(object.default_send_enabled) : false
+      default_send_enabled: isSet(object.default_send_enabled) ? Boolean(object.default_send_enabled) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -233,7 +233,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromAmino(e)) : [],
-      defaultSendEnabled: object.default_send_enabled
+      defaultSendEnabled: object?.default_send_enabled
     };
   },
   toAmino(message: Params): ParamsAmino {
@@ -270,17 +270,17 @@ export const Params = {
 };
 function createBaseSendEnabled(): SendEnabled {
   return {
-    denom: "",
-    enabled: false
+    denom: undefined,
+    enabled: undefined
   };
 }
 export const SendEnabled = {
   typeUrl: "/cosmos.bank.v1beta1.SendEnabled",
   encode(message: SendEnabled, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.enabled === true) {
+    if (message.enabled !== undefined) {
       writer.uint32(16).bool(message.enabled);
     }
     return writer;
@@ -319,8 +319,8 @@ export const SendEnabled = {
   },
   fromPartial(object: DeepPartial<SendEnabled>): SendEnabled {
     const message = createBaseSendEnabled();
-    message.denom = object.denom ?? "";
-    message.enabled = object.enabled ?? false;
+    message.denom = object.denom ?? undefined;
+    message.enabled = object.enabled ?? undefined;
     return message;
   },
   fromSDK(object: SendEnabledSDKType): SendEnabled {
@@ -331,8 +331,8 @@ export const SendEnabled = {
   },
   fromSDKJSON(object: any): SendEnabledSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
+      denom: isSet(object.denom) ? String(object.denom) : undefined,
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : undefined
     };
   },
   toSDK(message: SendEnabled): SendEnabledSDKType {
@@ -343,8 +343,8 @@ export const SendEnabled = {
   },
   fromAmino(object: SendEnabledAmino): SendEnabled {
     return {
-      denom: object.denom,
-      enabled: object.enabled
+      denom: object?.denom,
+      enabled: object?.enabled
     };
   },
   toAmino(message: SendEnabled): SendEnabledAmino {
@@ -377,14 +377,14 @@ export const SendEnabled = {
 };
 function createBaseInput(): Input {
   return {
-    address: "",
+    address: undefined,
     coins: []
   };
 }
 export const Input = {
   typeUrl: "/cosmos.bank.v1beta1.Input",
   encode(message: Input, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.coins) {
@@ -430,7 +430,7 @@ export const Input = {
   },
   fromPartial(object: DeepPartial<Input>): Input {
     const message = createBaseInput();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -442,7 +442,7 @@ export const Input = {
   },
   fromSDKJSON(object: any): InputSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? String(object.address) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -458,7 +458,7 @@ export const Input = {
   },
   fromAmino(object: InputAmino): Input {
     return {
-      address: object.address,
+      address: object?.address,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -496,14 +496,14 @@ export const Input = {
 };
 function createBaseOutput(): Output {
   return {
-    address: "",
+    address: undefined,
     coins: []
   };
 }
 export const Output = {
   typeUrl: "/cosmos.bank.v1beta1.Output",
   encode(message: Output, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.coins) {
@@ -549,7 +549,7 @@ export const Output = {
   },
   fromPartial(object: DeepPartial<Output>): Output {
     const message = createBaseOutput();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -561,7 +561,7 @@ export const Output = {
   },
   fromSDKJSON(object: any): OutputSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? String(object.address) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -577,7 +577,7 @@ export const Output = {
   },
   fromAmino(object: OutputAmino): Output {
     return {
-      address: object.address,
+      address: object?.address,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -719,18 +719,18 @@ export const Supply = {
 };
 function createBaseDenomUnit(): DenomUnit {
   return {
-    denom: "",
-    exponent: 0,
-    aliases: []
+    denom: undefined,
+    exponent: undefined,
+    aliases: undefined
   };
 }
 export const DenomUnit = {
   typeUrl: "/cosmos.bank.v1beta1.DenomUnit",
   encode(message: DenomUnit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.exponent !== 0) {
+    if (message.exponent !== undefined) {
       writer.uint32(16).uint32(message.exponent);
     }
     for (const v of message.aliases) {
@@ -781,8 +781,8 @@ export const DenomUnit = {
   },
   fromPartial(object: DeepPartial<DenomUnit>): DenomUnit {
     const message = createBaseDenomUnit();
-    message.denom = object.denom ?? "";
-    message.exponent = object.exponent ?? 0;
+    message.denom = object.denom ?? undefined;
+    message.exponent = object.exponent ?? undefined;
     message.aliases = object.aliases?.map(e => e) || [];
     return message;
   },
@@ -795,8 +795,8 @@ export const DenomUnit = {
   },
   fromSDKJSON(object: any): DenomUnitSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
+      denom: isSet(object.denom) ? String(object.denom) : undefined,
+      exponent: isSet(object.exponent) ? Number(object.exponent) : undefined,
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : []
     };
   },
@@ -813,8 +813,8 @@ export const DenomUnit = {
   },
   fromAmino(object: DenomUnitAmino): DenomUnit {
     return {
-      denom: object.denom,
-      exponent: object.exponent,
+      denom: object?.denom,
+      exponent: object?.exponent,
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
     };
   },
@@ -853,41 +853,41 @@ export const DenomUnit = {
 };
 function createBaseMetadata(): Metadata {
   return {
-    description: "",
-    denomUnits: [],
-    base: "",
-    display: "",
-    name: "",
-    symbol: "",
-    uri: "",
-    uriHash: ""
+    description: undefined,
+    denomUnits: undefined,
+    base: undefined,
+    display: undefined,
+    name: undefined,
+    symbol: undefined,
+    uri: undefined,
+    uriHash: undefined
   };
 }
 export const Metadata = {
   typeUrl: "/cosmos.bank.v1beta1.Metadata",
   encode(message: Metadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(10).string(message.description);
     }
     for (const v of message.denomUnits) {
       DenomUnit.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.base !== "") {
+    if (message.base !== undefined) {
       writer.uint32(26).string(message.base);
     }
-    if (message.display !== "") {
+    if (message.display !== undefined) {
       writer.uint32(34).string(message.display);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(42).string(message.name);
     }
-    if (message.symbol !== "") {
+    if (message.symbol !== undefined) {
       writer.uint32(50).string(message.symbol);
     }
-    if (message.uri !== "") {
+    if (message.uri !== undefined) {
       writer.uint32(58).string(message.uri);
     }
-    if (message.uriHash !== "") {
+    if (message.uriHash !== undefined) {
       writer.uint32(66).string(message.uriHash);
     }
     return writer;
@@ -960,14 +960,14 @@ export const Metadata = {
   },
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
-    message.description = object.description ?? "";
+    message.description = object.description ?? undefined;
     message.denomUnits = object.denomUnits?.map(e => DenomUnit.fromPartial(e)) || [];
-    message.base = object.base ?? "";
-    message.display = object.display ?? "";
-    message.name = object.name ?? "";
-    message.symbol = object.symbol ?? "";
-    message.uri = object.uri ?? "";
-    message.uriHash = object.uriHash ?? "";
+    message.base = object.base ?? undefined;
+    message.display = object.display ?? undefined;
+    message.name = object.name ?? undefined;
+    message.symbol = object.symbol ?? undefined;
+    message.uri = object.uri ?? undefined;
+    message.uriHash = object.uriHash ?? undefined;
     return message;
   },
   fromSDK(object: MetadataSDKType): Metadata {
@@ -984,14 +984,14 @@ export const Metadata = {
   },
   fromSDKJSON(object: any): MetadataSDKType {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
+      description: isSet(object.description) ? String(object.description) : undefined,
       denom_units: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromSDKJSON(e)) : [],
-      base: isSet(object.base) ? String(object.base) : "",
-      display: isSet(object.display) ? String(object.display) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : ""
+      base: isSet(object.base) ? String(object.base) : undefined,
+      display: isSet(object.display) ? String(object.display) : undefined,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      symbol: isSet(object.symbol) ? String(object.symbol) : undefined,
+      uri: isSet(object.uri) ? String(object.uri) : undefined,
+      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : undefined
     };
   },
   toSDK(message: Metadata): MetadataSDKType {
@@ -1012,14 +1012,14 @@ export const Metadata = {
   },
   fromAmino(object: MetadataAmino): Metadata {
     return {
-      description: object.description,
+      description: object?.description,
       denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromAmino(e)) : [],
-      base: object.base,
-      display: object.display,
-      name: object.name,
-      symbol: object.symbol,
-      uri: object.uri,
-      uriHash: object.uri_hash
+      base: object?.base,
+      display: object?.display,
+      name: object?.name,
+      symbol: object?.symbol,
+      uri: object?.uri,
+      uriHash: object?.uri_hash
     };
   },
   toAmino(message: Metadata): MetadataAmino {

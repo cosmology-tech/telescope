@@ -6,18 +6,18 @@ export const protobufPackage = "osmosis.gamm.v2";
  * query.
  */
 export interface QuerySpotPriceRequest {
-  poolId: bigint;
-  baseAssetDenom: string;
-  quoteAssetDenom: string;
+  poolId?: bigint;
+  baseAssetDenom?: string;
+  quoteAssetDenom?: string;
 }
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
 export interface QuerySpotPriceRequestSDKType {
-  pool_id: bigint;
-  base_asset_denom: string;
-  quote_asset_denom: string;
+  pool_id?: bigint;
+  base_asset_denom?: string;
+  quote_asset_denom?: string;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -25,32 +25,32 @@ export interface QuerySpotPriceRequestSDKType {
  */
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
-  spotPrice: string;
+  spotPrice?: string;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
 export interface QuerySpotPriceResponseSDKType {
-  spot_price: string;
+  spot_price?: string;
 }
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
-    poolId: BigInt(0),
-    baseAssetDenom: "",
-    quoteAssetDenom: ""
+    poolId: undefined,
+    baseAssetDenom: undefined,
+    quoteAssetDenom: undefined
   };
 }
 export const QuerySpotPriceRequest = {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest",
   encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.baseAssetDenom !== "") {
+    if (message.baseAssetDenom !== undefined) {
       writer.uint32(18).string(message.baseAssetDenom);
     }
-    if (message.quoteAssetDenom !== "") {
+    if (message.quoteAssetDenom !== undefined) {
       writer.uint32(26).string(message.quoteAssetDenom);
     }
     return writer;
@@ -87,7 +87,9 @@ export const QuerySpotPriceRequest = {
   },
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    if (message.poolId !== undefined) {
+      obj.poolId = message.poolId.toString();
+    }
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
@@ -97,8 +99,8 @@ export const QuerySpotPriceRequest = {
     if (object.poolId !== undefined && object.poolId !== null) {
       message.poolId = BigInt(object.poolId.toString());
     }
-    message.baseAssetDenom = object.baseAssetDenom ?? "";
-    message.quoteAssetDenom = object.quoteAssetDenom ?? "";
+    message.baseAssetDenom = object.baseAssetDenom ?? undefined;
+    message.quoteAssetDenom = object.quoteAssetDenom ?? undefined;
     return message;
   },
   fromSDK(object: QuerySpotPriceRequestSDKType): QuerySpotPriceRequest {
@@ -110,9 +112,9 @@ export const QuerySpotPriceRequest = {
   },
   fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
-      base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
-      quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : undefined,
+      base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : undefined,
+      quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : undefined
     };
   },
   toSDK(message: QuerySpotPriceRequest): QuerySpotPriceRequestSDKType {
@@ -124,9 +126,9 @@ export const QuerySpotPriceRequest = {
   },
   fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
     return {
-      poolId: BigInt(object.pool_id),
-      baseAssetDenom: object.base_asset_denom,
-      quoteAssetDenom: object.quote_asset_denom
+      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined,
+      baseAssetDenom: object?.base_asset_denom,
+      quoteAssetDenom: object?.quote_asset_denom
     };
   },
   toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
@@ -160,13 +162,13 @@ export const QuerySpotPriceRequest = {
 };
 function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
   return {
-    spotPrice: ""
+    spotPrice: undefined
   };
 }
 export const QuerySpotPriceResponse = {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse",
   encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.spotPrice !== "") {
+    if (message.spotPrice !== undefined) {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
@@ -200,7 +202,7 @@ export const QuerySpotPriceResponse = {
   },
   fromPartial(object: DeepPartial<QuerySpotPriceResponse>): QuerySpotPriceResponse {
     const message = createBaseQuerySpotPriceResponse();
-    message.spotPrice = object.spotPrice ?? "";
+    message.spotPrice = object.spotPrice ?? undefined;
     return message;
   },
   fromSDK(object: QuerySpotPriceResponseSDKType): QuerySpotPriceResponse {
@@ -210,7 +212,7 @@ export const QuerySpotPriceResponse = {
   },
   fromSDKJSON(object: any): QuerySpotPriceResponseSDKType {
     return {
-      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : undefined
     };
   },
   toSDK(message: QuerySpotPriceResponse): QuerySpotPriceResponseSDKType {
@@ -220,7 +222,7 @@ export const QuerySpotPriceResponse = {
   },
   fromAmino(object: QuerySpotPriceResponseAmino): QuerySpotPriceResponse {
     return {
-      spotPrice: object.spot_price
+      spotPrice: object?.spot_price
     };
   },
   toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseAmino {

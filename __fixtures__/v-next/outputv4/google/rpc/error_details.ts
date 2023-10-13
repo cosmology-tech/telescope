@@ -19,7 +19,7 @@ export const protobufPackage = "google.rpc";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: Duration;
+  retryDelay?: Duration;
 }
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -37,19 +37,19 @@ export interface RetryInfo {
  * reached.
  */
 export interface RetryInfoSDKType {
-  retry_delay: DurationSDKType;
+  retry_delay?: DurationSDKType;
 }
 /** Describes additional debugging info. */
 export interface DebugInfo {
   /** The stack trace entries indicating where the error occurred. */
-  stackEntries: string[];
+  stackEntries?: string[];
   /** Additional debugging information provided by the server. */
-  detail: string;
+  detail?: string;
 }
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
-  stack_entries: string[];
-  detail: string;
+  stack_entries?: string[];
+  detail?: string;
 }
 /**
  * Describes how a quota check failed.
@@ -66,7 +66,7 @@ export interface DebugInfoSDKType {
  */
 export interface QuotaFailure {
   /** Describes all quota violations. */
-  violations: QuotaFailure_Violation[];
+  violations?: QuotaFailure_Violation[];
 }
 /**
  * Describes how a quota check failed.
@@ -82,7 +82,7 @@ export interface QuotaFailure {
  * quota failure.
  */
 export interface QuotaFailureSDKType {
-  violations: QuotaFailure_ViolationSDKType[];
+  violations?: QuotaFailure_ViolationSDKType[];
 }
 /**
  * A message type used to describe a single quota violation.  For example, a
@@ -94,7 +94,7 @@ export interface QuotaFailure_Violation {
    * For example, "clientip:<ip address of client>" or "project:<Google
    * developer project id>".
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -104,15 +104,15 @@ export interface QuotaFailure_Violation {
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
-  description: string;
+  description?: string;
 }
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
  */
 export interface QuotaFailure_ViolationSDKType {
-  subject: string;
-  description: string;
+  subject?: string;
+  description?: string;
 }
 export interface ErrorInfo_MetadataEntry {
   key: string;
@@ -155,7 +155,7 @@ export interface ErrorInfo {
    * domain of errors. This should be at most 63 characters and match
    * /[A-Z0-9_]+/.
    */
-  reason: string;
+  reason?: string;
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -164,7 +164,7 @@ export interface ErrorInfo {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-  domain: string;
+  domain?: string;
   /**
    * Additional structured details about this error.
    * 
@@ -175,7 +175,7 @@ export interface ErrorInfo {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
-  metadata: {
+  metadata?: {
     [key: string]: string;
   };
 }
@@ -206,9 +206,9 @@ export interface ErrorInfo {
  *     }
  */
 export interface ErrorInfoSDKType {
-  reason: string;
-  domain: string;
-  metadata: {
+  reason?: string;
+  domain?: string;
+  metadata?: {
     [key: string]: string;
   };
 }
@@ -221,7 +221,7 @@ export interface ErrorInfoSDKType {
  */
 export interface PreconditionFailure {
   /** Describes all precondition violations. */
-  violations: PreconditionFailure_Violation[];
+  violations?: PreconditionFailure_Violation[];
 }
 /**
  * Describes what preconditions have failed.
@@ -231,7 +231,7 @@ export interface PreconditionFailure {
  * PreconditionFailure message.
  */
 export interface PreconditionFailureSDKType {
-  violations: PreconditionFailure_ViolationSDKType[];
+  violations?: PreconditionFailure_ViolationSDKType[];
 }
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_Violation {
@@ -240,26 +240,26 @@ export interface PreconditionFailure_Violation {
    * enum type to define the supported precondition violation subjects. For
    * example, "TOS" for "Terms of Service violation".
    */
-  type: string;
+  type?: string;
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
    * 
    * For example: "Terms of service not accepted".
    */
-  description: string;
+  description?: string;
 }
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
-  type: string;
-  subject: string;
-  description: string;
+  type?: string;
+  subject?: string;
+  description?: string;
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -267,14 +267,14 @@ export interface PreconditionFailure_ViolationSDKType {
  */
 export interface BadRequest {
   /** Describes all violations in a client request. */
-  fieldViolations: BadRequest_FieldViolation[];
+  fieldViolations?: BadRequest_FieldViolation[];
 }
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
  */
 export interface BadRequestSDKType {
-  field_violations: BadRequest_FieldViolationSDKType[];
+  field_violations?: BadRequest_FieldViolationSDKType[];
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolation {
@@ -283,14 +283,14 @@ export interface BadRequest_FieldViolation {
    * sequence of dot-separated identifiers that identify a protocol buffer
    * field. E.g., "field_violations.field" would identify this field.
    */
-  field: string;
+  field?: string;
   /** A description of why the request element is bad. */
-  description: string;
+  description?: string;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
-  field: string;
-  description: string;
+  field?: string;
+  description?: string;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -301,20 +301,20 @@ export interface RequestInfo {
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
-  requestId: string;
+  requestId?: string;
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
-  servingData: string;
+  servingData?: string;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
  */
 export interface RequestInfoSDKType {
-  request_id: string;
-  serving_data: string;
+  request_id?: string;
+  serving_data?: string;
 }
 /** Describes the resource that is being accessed. */
 export interface ResourceInfo {
@@ -323,32 +323,32 @@ export interface ResourceInfo {
    * "cloud storage bucket", "file", "Google calendar"; or the type URL
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
-  resourceType: string;
+  resourceType?: string;
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-  resourceName: string;
+  resourceName?: string;
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-  owner: string;
+  owner?: string;
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
-  description: string;
+  description?: string;
 }
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
-  resource_type: string;
-  resource_name: string;
-  owner: string;
-  description: string;
+  resource_type?: string;
+  resource_name?: string;
+  owner?: string;
+  description?: string;
 }
 /**
  * Provides links to documentation or for performing an out of band action.
@@ -359,7 +359,7 @@ export interface ResourceInfoSDKType {
  */
 export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
-  links: Help_Link[];
+  links?: Help_Link[];
 }
 /**
  * Provides links to documentation or for performing an out of band action.
@@ -369,19 +369,19 @@ export interface Help {
  * directly to the right place in the developer console to flip the bit.
  */
 export interface HelpSDKType {
-  links: Help_LinkSDKType[];
+  links?: Help_LinkSDKType[];
 }
 /** Describes a URL link. */
 export interface Help_Link {
   /** Describes what the link offers. */
-  description: string;
+  description?: string;
   /** The URL of the link. */
-  url: string;
+  url?: string;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
-  description: string;
-  url: string;
+  description?: string;
+  url?: string;
 }
 /**
  * Provides a localized error message that is safe to return to the user
@@ -393,21 +393,21 @@ export interface LocalizedMessage {
    * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
-  locale: string;
+  locale?: string;
   /** The localized error message in the above locale. */
-  message: string;
+  message?: string;
 }
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
  */
 export interface LocalizedMessageSDKType {
-  locale: string;
-  message: string;
+  locale?: string;
+  message?: string;
 }
 function createBaseRetryInfo(): RetryInfo {
   return {
-    retryDelay: Duration.fromPartial({})
+    retryDelay: undefined
   };
 }
 export const RetryInfo = {
@@ -495,8 +495,8 @@ export const RetryInfo = {
 };
 function createBaseDebugInfo(): DebugInfo {
   return {
-    stackEntries: [],
-    detail: ""
+    stackEntries: undefined,
+    detail: undefined
   };
 }
 export const DebugInfo = {
@@ -505,7 +505,7 @@ export const DebugInfo = {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     return writer;
@@ -549,7 +549,7 @@ export const DebugInfo = {
   fromPartial(object: DeepPartial<DebugInfo>): DebugInfo {
     const message = createBaseDebugInfo();
     message.stackEntries = object.stackEntries?.map(e => e) || [];
-    message.detail = object.detail ?? "";
+    message.detail = object.detail ?? undefined;
     return message;
   },
   fromSDK(object: DebugInfoSDKType): DebugInfo {
@@ -561,7 +561,7 @@ export const DebugInfo = {
   fromSDKJSON(object: any): DebugInfoSDKType {
     return {
       stack_entries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => String(e)) : [],
-      detail: isSet(object.detail) ? String(object.detail) : ""
+      detail: isSet(object.detail) ? String(object.detail) : undefined
     };
   },
   toSDK(message: DebugInfo): DebugInfoSDKType {
@@ -577,7 +577,7 @@ export const DebugInfo = {
   fromAmino(object: DebugInfoAmino): DebugInfo {
     return {
       stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object.detail
+      detail: object?.detail
     };
   },
   toAmino(message: DebugInfo): DebugInfoAmino {
@@ -608,7 +608,7 @@ export const DebugInfo = {
 };
 function createBaseQuotaFailure(): QuotaFailure {
   return {
-    violations: []
+    violations: undefined
   };
 }
 export const QuotaFailure = {
@@ -706,17 +706,17 @@ export const QuotaFailure = {
 };
 function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
   return {
-    subject: "",
-    description: ""
+    subject: undefined,
+    description: undefined
   };
 }
 export const QuotaFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: QuotaFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(10).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -755,8 +755,8 @@ export const QuotaFailure_Violation = {
   },
   fromPartial(object: DeepPartial<QuotaFailure_Violation>): QuotaFailure_Violation {
     const message = createBaseQuotaFailure_Violation();
-    message.subject = object.subject ?? "";
-    message.description = object.description ?? "";
+    message.subject = object.subject ?? undefined;
+    message.description = object.description ?? undefined;
     return message;
   },
   fromSDK(object: QuotaFailure_ViolationSDKType): QuotaFailure_Violation {
@@ -767,8 +767,8 @@ export const QuotaFailure_Violation = {
   },
   fromSDKJSON(object: any): QuotaFailure_ViolationSDKType {
     return {
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : ""
+      subject: isSet(object.subject) ? String(object.subject) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined
     };
   },
   toSDK(message: QuotaFailure_Violation): QuotaFailure_ViolationSDKType {
@@ -779,8 +779,8 @@ export const QuotaFailure_Violation = {
   },
   fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
     return {
-      subject: object.subject,
-      description: object.description
+      subject: object?.subject,
+      description: object?.description
     };
   },
   toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
@@ -901,18 +901,18 @@ export const ErrorInfo_MetadataEntry = {
 };
 function createBaseErrorInfo(): ErrorInfo {
   return {
-    reason: "",
-    domain: "",
-    metadata: {}
+    reason: undefined,
+    domain: undefined,
+    metadata: undefined
   };
 }
 export const ErrorInfo = {
   typeUrl: "/google.rpc.ErrorInfo",
   encode(message: ErrorInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.reason !== "") {
+    if (message.reason !== undefined) {
       writer.uint32(10).string(message.reason);
     }
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       writer.uint32(18).string(message.domain);
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
@@ -975,8 +975,8 @@ export const ErrorInfo = {
   },
   fromPartial(object: DeepPartial<ErrorInfo>): ErrorInfo {
     const message = createBaseErrorInfo();
-    message.reason = object.reason ?? "";
-    message.domain = object.domain ?? "";
+    message.reason = object.reason ?? undefined;
+    message.domain = object.domain ?? undefined;
     message.metadata = Object.entries(object.metadata ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1001,8 +1001,8 @@ export const ErrorInfo = {
   },
   fromSDKJSON(object: any): ErrorInfoSDKType {
     return {
-      reason: isSet(object.reason) ? String(object.reason) : "",
-      domain: isSet(object.domain) ? String(object.domain) : "",
+      reason: isSet(object.reason) ? String(object.reason) : undefined,
+      domain: isSet(object.domain) ? String(object.domain) : undefined,
       metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1025,8 +1025,8 @@ export const ErrorInfo = {
   },
   fromAmino(object: ErrorInfoAmino): ErrorInfo {
     return {
-      reason: object.reason,
-      domain: object.domain,
+      reason: object?.reason,
+      domain: object?.domain,
       metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1065,7 +1065,7 @@ export const ErrorInfo = {
 };
 function createBasePreconditionFailure(): PreconditionFailure {
   return {
-    violations: []
+    violations: undefined
   };
 }
 export const PreconditionFailure = {
@@ -1163,21 +1163,21 @@ export const PreconditionFailure = {
 };
 function createBasePreconditionFailure_Violation(): PreconditionFailure_Violation {
   return {
-    type: "",
-    subject: "",
-    description: ""
+    type: undefined,
+    subject: undefined,
+    description: undefined
   };
 }
 export const PreconditionFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: PreconditionFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(18).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -1221,9 +1221,9 @@ export const PreconditionFailure_Violation = {
   },
   fromPartial(object: DeepPartial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
     const message = createBasePreconditionFailure_Violation();
-    message.type = object.type ?? "";
-    message.subject = object.subject ?? "";
-    message.description = object.description ?? "";
+    message.type = object.type ?? undefined;
+    message.subject = object.subject ?? undefined;
+    message.description = object.description ?? undefined;
     return message;
   },
   fromSDK(object: PreconditionFailure_ViolationSDKType): PreconditionFailure_Violation {
@@ -1235,9 +1235,9 @@ export const PreconditionFailure_Violation = {
   },
   fromSDKJSON(object: any): PreconditionFailure_ViolationSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : "",
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : ""
+      type: isSet(object.type) ? String(object.type) : undefined,
+      subject: isSet(object.subject) ? String(object.subject) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined
     };
   },
   toSDK(message: PreconditionFailure_Violation): PreconditionFailure_ViolationSDKType {
@@ -1249,9 +1249,9 @@ export const PreconditionFailure_Violation = {
   },
   fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
     return {
-      type: object.type,
-      subject: object.subject,
-      description: object.description
+      type: object?.type,
+      subject: object?.subject,
+      description: object?.description
     };
   },
   toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
@@ -1279,7 +1279,7 @@ export const PreconditionFailure_Violation = {
 };
 function createBaseBadRequest(): BadRequest {
   return {
-    fieldViolations: []
+    fieldViolations: undefined
   };
 }
 export const BadRequest = {
@@ -1377,17 +1377,17 @@ export const BadRequest = {
 };
 function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
   return {
-    field: "",
-    description: ""
+    field: undefined,
+    description: undefined
   };
 }
 export const BadRequest_FieldViolation = {
   typeUrl: "/google.rpc.FieldViolation",
   encode(message: BadRequest_FieldViolation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(10).string(message.field);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -1426,8 +1426,8 @@ export const BadRequest_FieldViolation = {
   },
   fromPartial(object: DeepPartial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
     const message = createBaseBadRequest_FieldViolation();
-    message.field = object.field ?? "";
-    message.description = object.description ?? "";
+    message.field = object.field ?? undefined;
+    message.description = object.description ?? undefined;
     return message;
   },
   fromSDK(object: BadRequest_FieldViolationSDKType): BadRequest_FieldViolation {
@@ -1438,8 +1438,8 @@ export const BadRequest_FieldViolation = {
   },
   fromSDKJSON(object: any): BadRequest_FieldViolationSDKType {
     return {
-      field: isSet(object.field) ? String(object.field) : "",
-      description: isSet(object.description) ? String(object.description) : ""
+      field: isSet(object.field) ? String(object.field) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined
     };
   },
   toSDK(message: BadRequest_FieldViolation): BadRequest_FieldViolationSDKType {
@@ -1450,8 +1450,8 @@ export const BadRequest_FieldViolation = {
   },
   fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
     return {
-      field: object.field,
-      description: object.description
+      field: object?.field,
+      description: object?.description
     };
   },
   toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
@@ -1478,17 +1478,17 @@ export const BadRequest_FieldViolation = {
 };
 function createBaseRequestInfo(): RequestInfo {
   return {
-    requestId: "",
-    servingData: ""
+    requestId: undefined,
+    servingData: undefined
   };
 }
 export const RequestInfo = {
   typeUrl: "/google.rpc.RequestInfo",
   encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestId !== "") {
+    if (message.requestId !== undefined) {
       writer.uint32(10).string(message.requestId);
     }
-    if (message.servingData !== "") {
+    if (message.servingData !== undefined) {
       writer.uint32(18).string(message.servingData);
     }
     return writer;
@@ -1527,8 +1527,8 @@ export const RequestInfo = {
   },
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
-    message.requestId = object.requestId ?? "";
-    message.servingData = object.servingData ?? "";
+    message.requestId = object.requestId ?? undefined;
+    message.servingData = object.servingData ?? undefined;
     return message;
   },
   fromSDK(object: RequestInfoSDKType): RequestInfo {
@@ -1539,8 +1539,8 @@ export const RequestInfo = {
   },
   fromSDKJSON(object: any): RequestInfoSDKType {
     return {
-      request_id: isSet(object.request_id) ? String(object.request_id) : "",
-      serving_data: isSet(object.serving_data) ? String(object.serving_data) : ""
+      request_id: isSet(object.request_id) ? String(object.request_id) : undefined,
+      serving_data: isSet(object.serving_data) ? String(object.serving_data) : undefined
     };
   },
   toSDK(message: RequestInfo): RequestInfoSDKType {
@@ -1551,8 +1551,8 @@ export const RequestInfo = {
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
     return {
-      requestId: object.request_id,
-      servingData: object.serving_data
+      requestId: object?.request_id,
+      servingData: object?.serving_data
     };
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
@@ -1579,25 +1579,25 @@ export const RequestInfo = {
 };
 function createBaseResourceInfo(): ResourceInfo {
   return {
-    resourceType: "",
-    resourceName: "",
-    owner: "",
-    description: ""
+    resourceType: undefined,
+    resourceName: undefined,
+    owner: undefined,
+    description: undefined
   };
 }
 export const ResourceInfo = {
   typeUrl: "/google.rpc.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.resourceType !== "") {
+    if (message.resourceType !== undefined) {
       writer.uint32(10).string(message.resourceType);
     }
-    if (message.resourceName !== "") {
+    if (message.resourceName !== undefined) {
       writer.uint32(18).string(message.resourceName);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(34).string(message.description);
     }
     return writer;
@@ -1646,10 +1646,10 @@ export const ResourceInfo = {
   },
   fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
-    message.resourceType = object.resourceType ?? "";
-    message.resourceName = object.resourceName ?? "";
-    message.owner = object.owner ?? "";
-    message.description = object.description ?? "";
+    message.resourceType = object.resourceType ?? undefined;
+    message.resourceName = object.resourceName ?? undefined;
+    message.owner = object.owner ?? undefined;
+    message.description = object.description ?? undefined;
     return message;
   },
   fromSDK(object: ResourceInfoSDKType): ResourceInfo {
@@ -1662,10 +1662,10 @@ export const ResourceInfo = {
   },
   fromSDKJSON(object: any): ResourceInfoSDKType {
     return {
-      resource_type: isSet(object.resource_type) ? String(object.resource_type) : "",
-      resource_name: isSet(object.resource_name) ? String(object.resource_name) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      description: isSet(object.description) ? String(object.description) : ""
+      resource_type: isSet(object.resource_type) ? String(object.resource_type) : undefined,
+      resource_name: isSet(object.resource_name) ? String(object.resource_name) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined
     };
   },
   toSDK(message: ResourceInfo): ResourceInfoSDKType {
@@ -1678,10 +1678,10 @@ export const ResourceInfo = {
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
     return {
-      resourceType: object.resource_type,
-      resourceName: object.resource_name,
-      owner: object.owner,
-      description: object.description
+      resourceType: object?.resource_type,
+      resourceName: object?.resource_name,
+      owner: object?.owner,
+      description: object?.description
     };
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
@@ -1710,7 +1710,7 @@ export const ResourceInfo = {
 };
 function createBaseHelp(): Help {
   return {
-    links: []
+    links: undefined
   };
 }
 export const Help = {
@@ -1808,17 +1808,17 @@ export const Help = {
 };
 function createBaseHelp_Link(): Help_Link {
   return {
-    description: "",
-    url: ""
+    description: undefined,
+    url: undefined
   };
 }
 export const Help_Link = {
   typeUrl: "/google.rpc.Link",
   encode(message: Help_Link, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(10).string(message.description);
     }
-    if (message.url !== "") {
+    if (message.url !== undefined) {
       writer.uint32(18).string(message.url);
     }
     return writer;
@@ -1857,8 +1857,8 @@ export const Help_Link = {
   },
   fromPartial(object: DeepPartial<Help_Link>): Help_Link {
     const message = createBaseHelp_Link();
-    message.description = object.description ?? "";
-    message.url = object.url ?? "";
+    message.description = object.description ?? undefined;
+    message.url = object.url ?? undefined;
     return message;
   },
   fromSDK(object: Help_LinkSDKType): Help_Link {
@@ -1869,8 +1869,8 @@ export const Help_Link = {
   },
   fromSDKJSON(object: any): Help_LinkSDKType {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
-      url: isSet(object.url) ? String(object.url) : ""
+      description: isSet(object.description) ? String(object.description) : undefined,
+      url: isSet(object.url) ? String(object.url) : undefined
     };
   },
   toSDK(message: Help_Link): Help_LinkSDKType {
@@ -1881,8 +1881,8 @@ export const Help_Link = {
   },
   fromAmino(object: Help_LinkAmino): Help_Link {
     return {
-      description: object.description,
-      url: object.url
+      description: object?.description,
+      url: object?.url
     };
   },
   toAmino(message: Help_Link): Help_LinkAmino {
@@ -1909,17 +1909,17 @@ export const Help_Link = {
 };
 function createBaseLocalizedMessage(): LocalizedMessage {
   return {
-    locale: "",
-    message: ""
+    locale: undefined,
+    message: undefined
   };
 }
 export const LocalizedMessage = {
   typeUrl: "/google.rpc.LocalizedMessage",
   encode(message: LocalizedMessage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.locale !== "") {
+    if (message.locale !== undefined) {
       writer.uint32(10).string(message.locale);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(18).string(message.message);
     }
     return writer;
@@ -1958,8 +1958,8 @@ export const LocalizedMessage = {
   },
   fromPartial(object: DeepPartial<LocalizedMessage>): LocalizedMessage {
     const message = createBaseLocalizedMessage();
-    message.locale = object.locale ?? "";
-    message.message = object.message ?? "";
+    message.locale = object.locale ?? undefined;
+    message.message = object.message ?? undefined;
     return message;
   },
   fromSDK(object: LocalizedMessageSDKType): LocalizedMessage {
@@ -1970,8 +1970,8 @@ export const LocalizedMessage = {
   },
   fromSDKJSON(object: any): LocalizedMessageSDKType {
     return {
-      locale: isSet(object.locale) ? String(object.locale) : "",
-      message: isSet(object.message) ? String(object.message) : ""
+      locale: isSet(object.locale) ? String(object.locale) : undefined,
+      message: isSet(object.message) ? String(object.message) : undefined
     };
   },
   toSDK(message: LocalizedMessage): LocalizedMessageSDKType {
@@ -1982,8 +1982,8 @@ export const LocalizedMessage = {
   },
   fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
     return {
-      locale: object.locale,
-      message: object.message
+      locale: object?.locale,
+      message: object?.message
     };
   },
   toAmino(message: LocalizedMessage): LocalizedMessageAmino {

@@ -7,41 +7,41 @@ export const protobufPackage = "evmos.fees.v1";
  */
 export interface DevFeeInfo {
   /** hex address of registered contract */
-  contractAddress: string;
+  contractAddress?: string;
   /** bech32 address of contract deployer */
-  deployerAddress: string;
+  deployerAddress?: string;
   /**
    * bech32 address of account receiving the transaction fees
    * it defaults to deployer_address
    */
-  withdrawAddress: string;
+  withdrawAddress?: string;
 }
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
  */
 export interface DevFeeInfoSDKType {
-  contract_address: string;
-  deployer_address: string;
-  withdraw_address: string;
+  contract_address?: string;
+  deployer_address?: string;
+  withdraw_address?: string;
 }
 function createBaseDevFeeInfo(): DevFeeInfo {
   return {
-    contractAddress: "",
-    deployerAddress: "",
-    withdrawAddress: ""
+    contractAddress: undefined,
+    deployerAddress: undefined,
+    withdrawAddress: undefined
   };
 }
 export const DevFeeInfo = {
   typeUrl: "/evmos.fees.v1.DevFeeInfo",
   encode(message: DevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(18).string(message.deployerAddress);
     }
-    if (message.withdrawAddress !== "") {
+    if (message.withdrawAddress !== undefined) {
       writer.uint32(26).string(message.withdrawAddress);
     }
     return writer;
@@ -85,9 +85,9 @@ export const DevFeeInfo = {
   },
   fromPartial(object: DeepPartial<DevFeeInfo>): DevFeeInfo {
     const message = createBaseDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
+    message.deployerAddress = object.deployerAddress ?? undefined;
+    message.withdrawAddress = object.withdrawAddress ?? undefined;
     return message;
   },
   fromSDK(object: DevFeeInfoSDKType): DevFeeInfo {
@@ -99,9 +99,9 @@ export const DevFeeInfo = {
   },
   fromSDKJSON(object: any): DevFeeInfoSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined,
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : undefined,
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : undefined
     };
   },
   toSDK(message: DevFeeInfo): DevFeeInfoSDKType {
@@ -113,9 +113,9 @@ export const DevFeeInfo = {
   },
   fromAmino(object: DevFeeInfoAmino): DevFeeInfo {
     return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address,
+      withdrawAddress: object?.withdraw_address
     };
   },
   toAmino(message: DevFeeInfo): DevFeeInfoAmino {

@@ -10,14 +10,14 @@ export const protobufPackage = "google.api.expr.v1alpha1";
  */
 export interface EvalState {
   /** The unique values referenced in this message. */
-  values: ExprValue[];
+  values?: ExprValue[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results: EvalState_Result[];
+  results?: EvalState_Result[];
 }
 /**
  * The state of an evaluation.
@@ -25,20 +25,20 @@ export interface EvalState {
  * Can represent an inital, partial, or completed state of evaluation.
  */
 export interface EvalStateSDKType {
-  values: ExprValueSDKType[];
-  results: EvalState_ResultSDKType[];
+  values?: ExprValueSDKType[];
+  results?: EvalState_ResultSDKType[];
 }
 /** A single evalution result. */
 export interface EvalState_Result {
   /** The id of the expression this result if for. */
-  expr: bigint;
+  expr?: bigint;
   /** The index in `values` of the resulting value. */
-  value: bigint;
+  value?: bigint;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
-  expr: bigint;
-  value: bigint;
+  expr?: bigint;
+  value?: bigint;
 }
 /** The value of an evaluated expression. */
 export interface ExprValue {
@@ -104,7 +104,7 @@ export interface ExprValueSDKType {
  */
 export interface ErrorSet {
   /** The errors in the set. */
-  errors: Status[];
+  errors?: Status[];
 }
 /**
  * A set of errors.
@@ -112,7 +112,7 @@ export interface ErrorSet {
  * The errors included depend on the context. See `ExprValue.error`.
  */
 export interface ErrorSetSDKType {
-  errors: StatusSDKType[];
+  errors?: StatusSDKType[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -121,7 +121,7 @@ export interface ErrorSetSDKType {
  */
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
-  exprs: bigint[];
+  exprs?: bigint[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -129,12 +129,12 @@ export interface UnknownSet {
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
 export interface UnknownSetSDKType {
-  exprs: bigint[];
+  exprs?: bigint[];
 }
 function createBaseEvalState(): EvalState {
   return {
-    values: [],
-    results: []
+    values: undefined,
+    results: undefined
   };
 }
 export const EvalState = {
@@ -258,17 +258,17 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: BigInt(0),
-    value: BigInt(0)
+    expr: undefined,
+    value: undefined
   };
 }
 export const EvalState_Result = {
   typeUrl: "/google.api.expr.v1alpha1.Result",
   encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.expr !== BigInt(0)) {
+    if (message.expr !== undefined) {
       writer.uint32(8).int64(message.expr);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).int64(message.value);
     }
     return writer;
@@ -301,8 +301,12 @@ export const EvalState_Result = {
   },
   toJSON(message: EvalState_Result): unknown {
     const obj: any = {};
-    message.expr !== undefined && (obj.expr = (message.expr || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
+    if (message.expr !== undefined) {
+      obj.expr = message.expr.toString();
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
@@ -323,8 +327,8 @@ export const EvalState_Result = {
   },
   fromSDKJSON(object: any): EvalState_ResultSDKType {
     return {
-      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt(0),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
+      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : undefined,
+      value: isSet(object.value) ? BigInt(object.value.toString()) : undefined
     };
   },
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
@@ -335,8 +339,8 @@ export const EvalState_Result = {
   },
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
     return {
-      expr: BigInt(object.expr),
-      value: BigInt(object.value)
+      expr: object?.expr ? BigInt(object.expr) : undefined,
+      value: object?.value ? BigInt(object.value) : undefined
     };
   },
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
@@ -485,7 +489,7 @@ export const ExprValue = {
 };
 function createBaseErrorSet(): ErrorSet {
   return {
-    errors: []
+    errors: undefined
   };
 }
 export const ErrorSet = {
@@ -583,7 +587,7 @@ export const ErrorSet = {
 };
 function createBaseUnknownSet(): UnknownSet {
   return {
-    exprs: []
+    exprs: undefined
   };
 }
 export const UnknownSet = {
@@ -628,7 +632,7 @@ export const UnknownSet = {
   toJSON(message: UnknownSet): unknown {
     const obj: any = {};
     if (message.exprs) {
-      obj.exprs = message.exprs.map(e => (e || BigInt(0)).toString());
+      obj.exprs = message.exprs.map(e => (e || undefined).toString());
     } else {
       obj.exprs = [];
     }

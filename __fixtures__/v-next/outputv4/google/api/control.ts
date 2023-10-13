@@ -11,7 +11,7 @@ export interface Control {
    * The service control environment to use. If empty, no control plane
    * feature (like quota and billing) will be enabled.
    */
-  environment: string;
+  environment?: string;
 }
 /**
  * Selects and configures the service controller used by the service.  The
@@ -19,17 +19,17 @@ export interface Control {
  * monitoring, etc.
  */
 export interface ControlSDKType {
-  environment: string;
+  environment?: string;
 }
 function createBaseControl(): Control {
   return {
-    environment: ""
+    environment: undefined
   };
 }
 export const Control = {
   typeUrl: "/google.api.Control",
   encode(message: Control, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.environment !== "") {
+    if (message.environment !== undefined) {
       writer.uint32(10).string(message.environment);
     }
     return writer;
@@ -63,7 +63,7 @@ export const Control = {
   },
   fromPartial(object: DeepPartial<Control>): Control {
     const message = createBaseControl();
-    message.environment = object.environment ?? "";
+    message.environment = object.environment ?? undefined;
     return message;
   },
   fromSDK(object: ControlSDKType): Control {
@@ -73,7 +73,7 @@ export const Control = {
   },
   fromSDKJSON(object: any): ControlSDKType {
     return {
-      environment: isSet(object.environment) ? String(object.environment) : ""
+      environment: isSet(object.environment) ? String(object.environment) : undefined
     };
   },
   toSDK(message: Control): ControlSDKType {
@@ -83,7 +83,7 @@ export const Control = {
   },
   fromAmino(object: ControlAmino): Control {
     return {
-      environment: object.environment
+      environment: object?.environment
     };
   },
   toAmino(message: Control): ControlAmino {

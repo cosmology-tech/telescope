@@ -49,14 +49,14 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
  * method.
  */
 export interface QueryClaimsRecordsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -66,7 +66,7 @@ export interface QueryClaimsRecordsResponse {
   /** claims defines all claims records */
   claims: ClaimsRecordAddress[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -74,7 +74,7 @@ export interface QueryClaimsRecordsResponse {
  */
 export interface QueryClaimsRecordsResponseSDKType {
   claims: ClaimsRecordAddressSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -82,14 +82,14 @@ export interface QueryClaimsRecordsResponseSDKType {
  */
 export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
-  address: string;
+  address?: string;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
  * method.
  */
 export interface QueryClaimsRecordRequestSDKType {
-  address: string;
+  address?: string;
 }
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
@@ -431,7 +431,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClaimsRecordsRequest = {
@@ -520,7 +520,7 @@ export const QueryClaimsRecordsRequest = {
 function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
   return {
     claims: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClaimsRecordsResponse = {
@@ -634,13 +634,13 @@ export const QueryClaimsRecordsResponse = {
 };
 function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
   return {
-    address: ""
+    address: undefined
   };
 }
 export const QueryClaimsRecordRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
   encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -674,7 +674,7 @@ export const QueryClaimsRecordRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimsRecordRequest>): QueryClaimsRecordRequest {
     const message = createBaseQueryClaimsRecordRequest();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     return message;
   },
   fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
@@ -684,7 +684,7 @@ export const QueryClaimsRecordRequest = {
   },
   fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : ""
+      address: isSet(object.address) ? String(object.address) : undefined
     };
   },
   toSDK(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestSDKType {
@@ -694,7 +694,7 @@ export const QueryClaimsRecordRequest = {
   },
   fromAmino(object: QueryClaimsRecordRequestAmino): QueryClaimsRecordRequest {
     return {
-      address: object.address
+      address: object?.address
     };
   },
   toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {

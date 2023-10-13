@@ -64,14 +64,14 @@ export function stateToJSON(object: State): string {
  */
 export interface ConnectionEnd {
   /** client associated with this connection. */
-  clientId: string;
+  clientId?: string;
   /**
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection.
    */
-  versions: Version[];
+  versions?: Version[];
   /** current state of the connection end. */
-  state: State;
+  state?: State;
   /** counterparty chain associated with this connection. */
   counterparty: Counterparty;
   /**
@@ -79,7 +79,7 @@ export interface ConnectionEnd {
    * packet-verification NOTE: delay period logic is only implemented by some
    * clients.
    */
-  delayPeriod: bigint;
+  delayPeriod?: bigint;
 }
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
@@ -88,11 +88,11 @@ export interface ConnectionEnd {
  * a connection between two chains.
  */
 export interface ConnectionEndSDKType {
-  client_id: string;
-  versions: VersionSDKType[];
-  state: State;
+  client_id?: string;
+  versions?: VersionSDKType[];
+  state?: State;
   counterparty: CounterpartySDKType;
-  delay_period: bigint;
+  delay_period?: bigint;
 }
 /**
  * IdentifiedConnection defines a connection with additional connection
@@ -100,32 +100,32 @@ export interface ConnectionEndSDKType {
  */
 export interface IdentifiedConnection {
   /** connection identifier. */
-  id: string;
+  id?: string;
   /** client associated with this connection. */
-  clientId: string;
+  clientId?: string;
   /**
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection
    */
-  versions: Version[];
+  versions?: Version[];
   /** current state of the connection end. */
-  state: State;
+  state?: State;
   /** counterparty chain associated with this connection. */
   counterparty: Counterparty;
   /** delay period associated with this connection. */
-  delayPeriod: bigint;
+  delayPeriod?: bigint;
 }
 /**
  * IdentifiedConnection defines a connection with additional connection
  * identifier field.
  */
 export interface IdentifiedConnectionSDKType {
-  id: string;
-  client_id: string;
-  versions: VersionSDKType[];
-  state: State;
+  id?: string;
+  client_id?: string;
+  versions?: VersionSDKType[];
+  state?: State;
   counterparty: CounterpartySDKType;
-  delay_period: bigint;
+  delay_period?: bigint;
 }
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface Counterparty {
@@ -133,41 +133,41 @@ export interface Counterparty {
    * identifies the client on the counterparty chain associated with a given
    * connection.
    */
-  clientId: string;
+  clientId?: string;
   /**
    * identifies the connection end on the counterparty chain associated with a
    * given connection.
    */
-  connectionId: string;
+  connectionId?: string;
   /** commitment merkle prefix of the counterparty chain. */
   prefix: MerklePrefix;
 }
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartySDKType {
-  client_id: string;
-  connection_id: string;
+  client_id?: string;
+  connection_id?: string;
   prefix: MerklePrefixSDKType;
 }
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPaths {
   /** list of connection paths */
-  paths: string[];
+  paths?: string[];
 }
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsSDKType {
-  paths: string[];
+  paths?: string[];
 }
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPaths {
   /** client state unique identifier */
-  clientId: string;
+  clientId?: string;
   /** list of connection paths */
-  paths: string[];
+  paths?: string[];
 }
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsSDKType {
-  client_id: string;
-  paths: string[];
+  client_id?: string;
+  paths?: string[];
 }
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
@@ -175,17 +175,17 @@ export interface ConnectionPathsSDKType {
  */
 export interface Version {
   /** unique version identifier */
-  identifier: string;
+  identifier?: string;
   /** list of features compatible with the specified identifier */
-  features: string[];
+  features?: string[];
 }
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
  * the connection handshake.
  */
 export interface VersionSDKType {
-  identifier: string;
-  features: string[];
+  identifier?: string;
+  features?: string[];
 }
 /** Params defines the set of Connection parameters. */
 export interface Params {
@@ -194,37 +194,37 @@ export interface Params {
    * largest amount of time that the chain might reasonably take to produce the next block under normal operating
    * conditions. A safe choice is 3-5x the expected time per block.
    */
-  maxExpectedTimePerBlock: bigint;
+  maxExpectedTimePerBlock?: bigint;
 }
 /** Params defines the set of Connection parameters. */
 export interface ParamsSDKType {
-  max_expected_time_per_block: bigint;
+  max_expected_time_per_block?: bigint;
 }
 function createBaseConnectionEnd(): ConnectionEnd {
   return {
-    clientId: "",
-    versions: [],
-    state: 0,
+    clientId: undefined,
+    versions: undefined,
+    state: undefined,
     counterparty: Counterparty.fromPartial({}),
-    delayPeriod: BigInt(0)
+    delayPeriod: undefined
   };
 }
 export const ConnectionEnd = {
   typeUrl: "/ibc.core.connection.v1.ConnectionEnd",
   encode(message: ConnectionEnd, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.versions) {
       Version.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(24).int32(message.state);
     }
     if (message.counterparty !== undefined) {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
-    if (message.delayPeriod !== BigInt(0)) {
+    if (message.delayPeriod !== undefined) {
       writer.uint32(40).uint64(message.delayPeriod);
     }
     return writer;
@@ -277,14 +277,16 @@ export const ConnectionEnd = {
     }
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
+    if (message.delayPeriod !== undefined) {
+      obj.delayPeriod = message.delayPeriod.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<ConnectionEnd>): ConnectionEnd {
     const message = createBaseConnectionEnd();
-    message.clientId = object.clientId ?? "";
+    message.clientId = object.clientId ?? undefined;
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromPartial(object.counterparty);
     }
@@ -297,18 +299,18 @@ export const ConnectionEnd = {
     return {
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
   },
   fromSDKJSON(object: any): ConnectionEndSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0)
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : undefined
     };
   },
   toSDK(message: ConnectionEnd): ConnectionEndSDKType {
@@ -326,11 +328,11 @@ export const ConnectionEnd = {
   },
   fromAmino(object: ConnectionEndAmino): ConnectionEnd {
     return {
-      clientId: object.client_id,
+      clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
-      delayPeriod: BigInt(object.delay_period)
+      delayPeriod: object?.delay_period ? BigInt(object.delay_period) : undefined
     };
   },
   toAmino(message: ConnectionEnd): ConnectionEndAmino {
@@ -370,33 +372,33 @@ export const ConnectionEnd = {
 };
 function createBaseIdentifiedConnection(): IdentifiedConnection {
   return {
-    id: "",
-    clientId: "",
-    versions: [],
-    state: 0,
+    id: undefined,
+    clientId: undefined,
+    versions: undefined,
+    state: undefined,
     counterparty: Counterparty.fromPartial({}),
-    delayPeriod: BigInt(0)
+    delayPeriod: undefined
   };
 }
 export const IdentifiedConnection = {
   typeUrl: "/ibc.core.connection.v1.IdentifiedConnection",
   encode(message: IdentifiedConnection, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(18).string(message.clientId);
     }
     for (const v of message.versions) {
       Version.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(32).int32(message.state);
     }
     if (message.counterparty !== undefined) {
       Counterparty.encode(message.counterparty, writer.uint32(42).fork()).ldelim();
     }
-    if (message.delayPeriod !== BigInt(0)) {
+    if (message.delayPeriod !== undefined) {
       writer.uint32(48).uint64(message.delayPeriod);
     }
     return writer;
@@ -454,15 +456,17 @@ export const IdentifiedConnection = {
     }
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
+    if (message.delayPeriod !== undefined) {
+      obj.delayPeriod = message.delayPeriod.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<IdentifiedConnection>): IdentifiedConnection {
     const message = createBaseIdentifiedConnection();
-    message.id = object.id ?? "";
-    message.clientId = object.clientId ?? "";
+    message.id = object.id ?? undefined;
+    message.clientId = object.clientId ?? undefined;
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromPartial(object.counterparty);
     }
@@ -476,19 +480,19 @@ export const IdentifiedConnection = {
       id: object?.id,
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
   },
   fromSDKJSON(object: any): IdentifiedConnectionSDKType {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      id: isSet(object.id) ? String(object.id) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0)
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : undefined
     };
   },
   toSDK(message: IdentifiedConnection): IdentifiedConnectionSDKType {
@@ -507,12 +511,12 @@ export const IdentifiedConnection = {
   },
   fromAmino(object: IdentifiedConnectionAmino): IdentifiedConnection {
     return {
-      id: object.id,
-      clientId: object.client_id,
+      id: object?.id,
+      clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
-      delayPeriod: BigInt(object.delay_period)
+      delayPeriod: object?.delay_period ? BigInt(object.delay_period) : undefined
     };
   },
   toAmino(message: IdentifiedConnection): IdentifiedConnectionAmino {
@@ -553,18 +557,18 @@ export const IdentifiedConnection = {
 };
 function createBaseCounterparty(): Counterparty {
   return {
-    clientId: "",
-    connectionId: "",
+    clientId: undefined,
+    connectionId: undefined,
     prefix: MerklePrefix.fromPartial({})
   };
 }
 export const Counterparty = {
   typeUrl: "/ibc.core.connection.v1.Counterparty",
   encode(message: Counterparty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
-    if (message.connectionId !== "") {
+    if (message.connectionId !== undefined) {
       writer.uint32(18).string(message.connectionId);
     }
     if (message.prefix !== undefined) {
@@ -611,8 +615,8 @@ export const Counterparty = {
   },
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
-    message.clientId = object.clientId ?? "";
-    message.connectionId = object.connectionId ?? "";
+    message.clientId = object.clientId ?? undefined;
+    message.connectionId = object.connectionId ?? undefined;
     if (object.prefix !== undefined && object.prefix !== null) {
       message.prefix = MerklePrefix.fromPartial(object.prefix);
     }
@@ -627,8 +631,8 @@ export const Counterparty = {
   },
   fromSDKJSON(object: any): CounterpartySDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : undefined,
       prefix: isSet(object.prefix) ? MerklePrefix.fromSDKJSON(object.prefix) : undefined
     };
   },
@@ -641,8 +645,8 @@ export const Counterparty = {
   },
   fromAmino(object: CounterpartyAmino): Counterparty {
     return {
-      clientId: object.client_id,
-      connectionId: object.connection_id,
+      clientId: object?.client_id,
+      connectionId: object?.connection_id,
       prefix: object?.prefix ? MerklePrefix.fromAmino(object.prefix) : undefined
     };
   },
@@ -677,7 +681,7 @@ export const Counterparty = {
 };
 function createBaseClientPaths(): ClientPaths {
   return {
-    paths: []
+    paths: undefined
   };
 }
 export const ClientPaths = {
@@ -781,14 +785,14 @@ export const ClientPaths = {
 };
 function createBaseConnectionPaths(): ConnectionPaths {
   return {
-    clientId: "",
-    paths: []
+    clientId: undefined,
+    paths: undefined
   };
 }
 export const ConnectionPaths = {
   typeUrl: "/ibc.core.connection.v1.ConnectionPaths",
   encode(message: ConnectionPaths, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.paths) {
@@ -834,7 +838,7 @@ export const ConnectionPaths = {
   },
   fromPartial(object: DeepPartial<ConnectionPaths>): ConnectionPaths {
     const message = createBaseConnectionPaths();
-    message.clientId = object.clientId ?? "";
+    message.clientId = object.clientId ?? undefined;
     message.paths = object.paths?.map(e => e) || [];
     return message;
   },
@@ -846,7 +850,7 @@ export const ConnectionPaths = {
   },
   fromSDKJSON(object: any): ConnectionPathsSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
     };
   },
@@ -862,7 +866,7 @@ export const ConnectionPaths = {
   },
   fromAmino(object: ConnectionPathsAmino): ConnectionPaths {
     return {
-      clientId: object.client_id,
+      clientId: object?.client_id,
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
@@ -900,14 +904,14 @@ export const ConnectionPaths = {
 };
 function createBaseVersion(): Version {
   return {
-    identifier: "",
-    features: []
+    identifier: undefined,
+    features: undefined
   };
 }
 export const Version = {
   typeUrl: "/ibc.core.connection.v1.Version",
   encode(message: Version, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
     for (const v of message.features) {
@@ -953,7 +957,7 @@ export const Version = {
   },
   fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
-    message.identifier = object.identifier ?? "";
+    message.identifier = object.identifier ?? undefined;
     message.features = object.features?.map(e => e) || [];
     return message;
   },
@@ -965,7 +969,7 @@ export const Version = {
   },
   fromSDKJSON(object: any): VersionSDKType {
     return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      identifier: isSet(object.identifier) ? String(object.identifier) : undefined,
       features: Array.isArray(object?.features) ? object.features.map((e: any) => String(e)) : []
     };
   },
@@ -981,7 +985,7 @@ export const Version = {
   },
   fromAmino(object: VersionAmino): Version {
     return {
-      identifier: object.identifier,
+      identifier: object?.identifier,
       features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
     };
   },
@@ -1019,13 +1023,13 @@ export const Version = {
 };
 function createBaseParams(): Params {
   return {
-    maxExpectedTimePerBlock: BigInt(0)
+    maxExpectedTimePerBlock: undefined
   };
 }
 export const Params = {
   typeUrl: "/ibc.core.connection.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.maxExpectedTimePerBlock !== BigInt(0)) {
+    if (message.maxExpectedTimePerBlock !== undefined) {
       writer.uint32(8).uint64(message.maxExpectedTimePerBlock);
     }
     return writer;
@@ -1054,7 +1058,9 @@ export const Params = {
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = (message.maxExpectedTimePerBlock || BigInt(0)).toString());
+    if (message.maxExpectedTimePerBlock !== undefined) {
+      obj.maxExpectedTimePerBlock = message.maxExpectedTimePerBlock.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -1071,7 +1077,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? BigInt(object.max_expected_time_per_block.toString()) : BigInt(0)
+      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? BigInt(object.max_expected_time_per_block.toString()) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -1081,7 +1087,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      maxExpectedTimePerBlock: BigInt(object.max_expected_time_per_block)
+      maxExpectedTimePerBlock: object?.max_expected_time_per_block ? BigInt(object.max_expected_time_per_block) : undefined
     };
   },
   toAmino(message: Params): ParamsAmino {

@@ -42,7 +42,7 @@ export interface Billing {
    * a different monitored resource type. A metric can be used in at most
    * one consumer destination.
    */
-  consumerDestinations: Billing_BillingDestination[];
+  consumerDestinations?: Billing_BillingDestination[];
 }
 /**
  * Billing related configuration of the service.
@@ -79,7 +79,7 @@ export interface Billing {
  *         - library.googleapis.com/book/borrowed_count
  */
 export interface BillingSDKType {
-  consumer_destinations: Billing_BillingDestinationSDKType[];
+  consumer_destinations?: Billing_BillingDestinationSDKType[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -90,24 +90,24 @@ export interface Billing_BillingDestination {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitoredResource: string;
+  monitoredResource?: string;
   /**
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
+  metrics?: string[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
  */
 export interface Billing_BillingDestinationSDKType {
-  monitored_resource: string;
-  metrics: string[];
+  monitored_resource?: string;
+  metrics?: string[];
 }
 function createBaseBilling(): Billing {
   return {
-    consumerDestinations: []
+    consumerDestinations: undefined
   };
 }
 export const Billing = {
@@ -205,14 +205,14 @@ export const Billing = {
 };
 function createBaseBilling_BillingDestination(): Billing_BillingDestination {
   return {
-    monitoredResource: "",
-    metrics: []
+    monitoredResource: undefined,
+    metrics: undefined
   };
 }
 export const Billing_BillingDestination = {
   typeUrl: "/google.api.BillingDestination",
   encode(message: Billing_BillingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -258,7 +258,7 @@ export const Billing_BillingDestination = {
   },
   fromPartial(object: DeepPartial<Billing_BillingDestination>): Billing_BillingDestination {
     const message = createBaseBilling_BillingDestination();
-    message.monitoredResource = object.monitoredResource ?? "";
+    message.monitoredResource = object.monitoredResource ?? undefined;
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
   },
@@ -270,7 +270,7 @@ export const Billing_BillingDestination = {
   },
   fromSDKJSON(object: any): Billing_BillingDestinationSDKType {
     return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : undefined,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
     };
   },
@@ -286,7 +286,7 @@ export const Billing_BillingDestination = {
   },
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
     return {
-      monitoredResource: object.monitored_resource,
+      monitoredResource: object?.monitored_resource,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },

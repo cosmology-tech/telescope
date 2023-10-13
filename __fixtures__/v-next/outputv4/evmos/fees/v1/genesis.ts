@@ -18,7 +18,7 @@ export interface GenesisStateSDKType {
 /** Params defines the fees module params */
 export interface Params {
   /** parameter to enable fees */
-  enableFees: boolean;
+  enableFees?: boolean;
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to the registered contract owner
@@ -33,16 +33,16 @@ export interface Params {
    * addr_derivation_cost_create defines the cost of address derivation for
    * verifying the contract deployer at fee registration
    */
-  addrDerivationCostCreate: bigint;
+  addrDerivationCostCreate?: bigint;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
 }
 /** Params defines the fees module params */
 export interface ParamsSDKType {
-  enable_fees: boolean;
+  enable_fees?: boolean;
   developer_shares: string;
   validator_shares: string;
-  addr_derivation_cost_create: bigint;
+  addr_derivation_cost_create?: bigint;
   min_gas_price: string;
 }
 function createBaseGenesisState(): GenesisState {
@@ -162,17 +162,17 @@ export const GenesisState = {
 };
 function createBaseParams(): Params {
   return {
-    enableFees: false,
+    enableFees: undefined,
     developerShares: "",
     validatorShares: "",
-    addrDerivationCostCreate: BigInt(0),
+    addrDerivationCostCreate: undefined,
     minGasPrice: ""
   };
 }
 export const Params = {
   typeUrl: "/evmos.fees.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableFees === true) {
+    if (message.enableFees !== undefined) {
       writer.uint32(8).bool(message.enableFees);
     }
     if (message.developerShares !== "") {
@@ -181,7 +181,7 @@ export const Params = {
     if (message.validatorShares !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
     }
-    if (message.addrDerivationCostCreate !== BigInt(0)) {
+    if (message.addrDerivationCostCreate !== undefined) {
       writer.uint32(32).uint64(message.addrDerivationCostCreate);
     }
     if (message.minGasPrice !== "") {
@@ -232,13 +232,15 @@ export const Params = {
     message.enableFees !== undefined && (obj.enableFees = message.enableFees);
     message.developerShares !== undefined && (obj.developerShares = message.developerShares);
     message.validatorShares !== undefined && (obj.validatorShares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || BigInt(0)).toString());
+    if (message.addrDerivationCostCreate !== undefined) {
+      obj.addrDerivationCostCreate = message.addrDerivationCostCreate.toString();
+    }
     message.minGasPrice !== undefined && (obj.minGasPrice = message.minGasPrice);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.enableFees = object.enableFees ?? false;
+    message.enableFees = object.enableFees ?? undefined;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
     if (object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null) {
@@ -258,10 +260,10 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : false,
+      enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : undefined,
       developer_shares: isSet(object.developer_shares) ? String(object.developer_shares) : "",
       validator_shares: isSet(object.validator_shares) ? String(object.validator_shares) : "",
-      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? BigInt(object.addr_derivation_cost_create.toString()) : BigInt(0),
+      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? BigInt(object.addr_derivation_cost_create.toString()) : undefined,
       min_gas_price: isSet(object.min_gas_price) ? String(object.min_gas_price) : ""
     };
   },
@@ -276,10 +278,10 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      enableFees: object.enable_fees,
+      enableFees: object?.enable_fees,
       developerShares: object.developer_shares,
       validatorShares: object.validator_shares,
-      addrDerivationCostCreate: BigInt(object.addr_derivation_cost_create),
+      addrDerivationCostCreate: object?.addr_derivation_cost_create ? BigInt(object.addr_derivation_cost_create) : undefined,
       minGasPrice: object.min_gas_price
     };
   },

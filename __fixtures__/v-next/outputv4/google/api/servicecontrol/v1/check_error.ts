@@ -196,7 +196,7 @@ export function checkError_CodeToJSON(object: CheckError_Code): string {
  */
 export interface CheckError {
   /** The error code. */
-  code: CheckError_Code;
+  code?: CheckError_Code;
   /**
    * Subject to whom this error applies. See the specific code enum for more
    * details on this field. For example:
@@ -205,44 +205,44 @@ export interface CheckError {
    * - "folder:<folder-id>"
    * - "organization:<organization-id>"
    */
-  subject: string;
+  subject?: string;
   /** Free-form text providing details on the error cause of the error. */
-  detail: string;
+  detail?: string;
   /**
    * Contains public information about the check error. If available,
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
-  status: Status;
+  status?: Status;
 }
 /**
  * Defines the errors to be returned in
  * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
  */
 export interface CheckErrorSDKType {
-  code: CheckError_Code;
-  subject: string;
-  detail: string;
-  status: StatusSDKType;
+  code?: CheckError_Code;
+  subject?: string;
+  detail?: string;
+  status?: StatusSDKType;
 }
 function createBaseCheckError(): CheckError {
   return {
-    code: 0,
-    subject: "",
-    detail: "",
-    status: Status.fromPartial({})
+    code: undefined,
+    subject: undefined,
+    detail: undefined,
+    status: undefined
   };
 }
 export const CheckError = {
   typeUrl: "/google.api.servicecontrol.v1.CheckError",
   encode(message: CheckError, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(34).string(message.subject);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     if (message.status !== undefined) {
@@ -294,9 +294,9 @@ export const CheckError = {
   },
   fromPartial(object: DeepPartial<CheckError>): CheckError {
     const message = createBaseCheckError();
-    message.code = object.code ?? 0;
-    message.subject = object.subject ?? "";
-    message.detail = object.detail ?? "";
+    message.code = object.code ?? undefined;
+    message.subject = object.subject ?? undefined;
+    message.detail = object.detail ?? undefined;
     if (object.status !== undefined && object.status !== null) {
       message.status = Status.fromPartial(object.status);
     }
@@ -304,7 +304,7 @@ export const CheckError = {
   },
   fromSDK(object: CheckErrorSDKType): CheckError {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : undefined,
       subject: object?.subject,
       detail: object?.detail,
       status: object.status ? Status.fromSDK(object.status) : undefined
@@ -312,9 +312,9 @@ export const CheckError = {
   },
   fromSDKJSON(object: any): CheckErrorSDKType {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      detail: isSet(object.detail) ? String(object.detail) : "",
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : undefined,
+      subject: isSet(object.subject) ? String(object.subject) : undefined,
+      detail: isSet(object.detail) ? String(object.detail) : undefined,
       status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
     };
   },
@@ -328,9 +328,9 @@ export const CheckError = {
   },
   fromAmino(object: CheckErrorAmino): CheckError {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      detail: object.detail,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : undefined,
+      subject: object?.subject,
+      detail: object?.detail,
       status: object?.status ? Status.fromAmino(object.status) : undefined
     };
   },

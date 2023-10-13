@@ -10,14 +10,14 @@ export const protobufPackage = "evmos.erc20.v1";
  */
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
  * method.
  */
 export interface QueryTokenPairsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -26,7 +26,7 @@ export interface QueryTokenPairsRequestSDKType {
 export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -34,7 +34,7 @@ export interface QueryTokenPairsResponse {
  */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequest {
@@ -42,11 +42,11 @@ export interface QueryTokenPairRequest {
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token: string;
+  token?: string;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
-  token: string;
+  token?: string;
 }
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
@@ -82,7 +82,7 @@ export interface QueryParamsResponseSDKType {
 }
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryTokenPairsRequest = {
@@ -171,7 +171,7 @@ export const QueryTokenPairsRequest = {
 function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
   return {
     tokenPairs: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryTokenPairsResponse = {
@@ -285,13 +285,13 @@ export const QueryTokenPairsResponse = {
 };
 function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
   return {
-    token: ""
+    token: undefined
   };
 }
 export const QueryTokenPairRequest = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
   encode(message: QueryTokenPairRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.token !== "") {
+    if (message.token !== undefined) {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -325,7 +325,7 @@ export const QueryTokenPairRequest = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairRequest>): QueryTokenPairRequest {
     const message = createBaseQueryTokenPairRequest();
-    message.token = object.token ?? "";
+    message.token = object.token ?? undefined;
     return message;
   },
   fromSDK(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
@@ -335,7 +335,7 @@ export const QueryTokenPairRequest = {
   },
   fromSDKJSON(object: any): QueryTokenPairRequestSDKType {
     return {
-      token: isSet(object.token) ? String(object.token) : ""
+      token: isSet(object.token) ? String(object.token) : undefined
     };
   },
   toSDK(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
@@ -345,7 +345,7 @@ export const QueryTokenPairRequest = {
   },
   fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
     return {
-      token: object.token
+      token: object?.token
     };
   },
   toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {

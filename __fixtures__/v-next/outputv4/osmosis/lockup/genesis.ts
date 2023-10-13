@@ -4,19 +4,19 @@ import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
-  lastLockId: bigint;
+  lastLockId?: bigint;
   locks: PeriodLock[];
   syntheticLocks: SyntheticLock[];
 }
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateSDKType {
-  last_lock_id: bigint;
+  last_lock_id?: bigint;
   locks: PeriodLockSDKType[];
   synthetic_locks: SyntheticLockSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    lastLockId: BigInt(0),
+    lastLockId: undefined,
     locks: [],
     syntheticLocks: []
   };
@@ -24,7 +24,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/osmosis.lockup.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.lastLockId !== BigInt(0)) {
+    if (message.lastLockId !== undefined) {
       writer.uint32(8).uint64(message.lastLockId);
     }
     for (const v of message.locks) {
@@ -67,7 +67,9 @@ export const GenesisState = {
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || BigInt(0)).toString());
+    if (message.lastLockId !== undefined) {
+      obj.lastLockId = message.lastLockId.toString();
+    }
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
     } else {
@@ -98,7 +100,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      last_lock_id: isSet(object.last_lock_id) ? BigInt(object.last_lock_id.toString()) : BigInt(0),
+      last_lock_id: isSet(object.last_lock_id) ? BigInt(object.last_lock_id.toString()) : undefined,
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : [],
       synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
     };
@@ -120,7 +122,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      lastLockId: BigInt(object.last_lock_id),
+      lastLockId: object?.last_lock_id ? BigInt(object.last_lock_id) : undefined,
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : [],
       syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromAmino(e)) : []
     };

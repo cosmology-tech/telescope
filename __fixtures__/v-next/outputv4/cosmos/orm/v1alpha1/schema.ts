@@ -87,17 +87,17 @@ export function storageTypeToJSON(object: StorageType): string {
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptor {
-  schemaFile: ModuleSchemaDescriptor_FileEntry[];
+  schemaFile?: ModuleSchemaDescriptor_FileEntry[];
   /**
    * prefix is an optional prefix that precedes all keys in this module's
    * store.
    */
-  prefix: Uint8Array;
+  prefix?: Uint8Array;
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorSDKType {
-  schema_file: ModuleSchemaDescriptor_FileEntrySDKType[];
-  prefix: Uint8Array;
+  schema_file?: ModuleSchemaDescriptor_FileEntrySDKType[];
+  prefix?: Uint8Array;
 }
 /** FileEntry describes an ORM file used in a module. */
 export interface ModuleSchemaDescriptor_FileEntry {
@@ -105,30 +105,30 @@ export interface ModuleSchemaDescriptor_FileEntry {
    * id is a prefix that will be varint encoded and prepended to all the
    * table keys specified in the file's tables.
    */
-  id: number;
+  id?: number;
   /**
    * proto_file_name is the name of a file .proto in that contains
    * table definitions. The .proto file must be in a package that the
    * module has referenced using cosmos.app.v1.ModuleDescriptor.use_package.
    */
-  protoFileName: string;
+  protoFileName?: string;
   /**
    * storage_type optionally indicates the type of storage this file's
    * tables should used. If it is left unspecified, the default KV-storage
    * of the app will be used.
    */
-  storageType: StorageType;
+  storageType?: StorageType;
 }
 /** FileEntry describes an ORM file used in a module. */
 export interface ModuleSchemaDescriptor_FileEntrySDKType {
-  id: number;
-  proto_file_name: string;
-  storage_type: StorageType;
+  id?: number;
+  proto_file_name?: string;
+  storage_type?: StorageType;
 }
 function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
   return {
-    schemaFile: [],
-    prefix: new Uint8Array()
+    schemaFile: undefined,
+    prefix: undefined
   };
 }
 export const ModuleSchemaDescriptor = {
@@ -137,7 +137,7 @@ export const ModuleSchemaDescriptor = {
     for (const v of message.schemaFile) {
       ModuleSchemaDescriptor_FileEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.prefix.length !== 0) {
+    if (message.prefix !== undefined) {
       writer.uint32(18).bytes(message.prefix);
     }
     return writer;
@@ -175,13 +175,13 @@ export const ModuleSchemaDescriptor = {
     } else {
       obj.schemaFile = [];
     }
-    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array()));
+    message.prefix !== undefined && (obj.prefix = message.prefix !== undefined ? base64FromBytes(message.prefix) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
     const message = createBaseModuleSchemaDescriptor();
     message.schemaFile = object.schemaFile?.map(e => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
-    message.prefix = object.prefix ?? new Uint8Array();
+    message.prefix = object.prefix ?? undefined;
     return message;
   },
   fromSDK(object: ModuleSchemaDescriptorSDKType): ModuleSchemaDescriptor {
@@ -193,7 +193,7 @@ export const ModuleSchemaDescriptor = {
   fromSDKJSON(object: any): ModuleSchemaDescriptorSDKType {
     return {
       schema_file: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromSDKJSON(e)) : [],
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : undefined
     };
   },
   toSDK(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorSDKType {
@@ -209,7 +209,7 @@ export const ModuleSchemaDescriptor = {
   fromAmino(object: ModuleSchemaDescriptorAmino): ModuleSchemaDescriptor {
     return {
       schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
-      prefix: object.prefix
+      prefix: object?.prefix
     };
   },
   toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAmino {
@@ -246,21 +246,21 @@ export const ModuleSchemaDescriptor = {
 };
 function createBaseModuleSchemaDescriptor_FileEntry(): ModuleSchemaDescriptor_FileEntry {
   return {
-    id: 0,
-    protoFileName: "",
-    storageType: 0
+    id: undefined,
+    protoFileName: undefined,
+    storageType: undefined
   };
 }
 export const ModuleSchemaDescriptor_FileEntry = {
   typeUrl: "/cosmos.orm.v1alpha1.FileEntry",
   encode(message: ModuleSchemaDescriptor_FileEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).uint32(message.id);
     }
-    if (message.protoFileName !== "") {
+    if (message.protoFileName !== undefined) {
       writer.uint32(18).string(message.protoFileName);
     }
-    if (message.storageType !== 0) {
+    if (message.storageType !== undefined) {
       writer.uint32(24).int32(message.storageType);
     }
     return writer;
@@ -304,23 +304,23 @@ export const ModuleSchemaDescriptor_FileEntry = {
   },
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {
     const message = createBaseModuleSchemaDescriptor_FileEntry();
-    message.id = object.id ?? 0;
-    message.protoFileName = object.protoFileName ?? "";
-    message.storageType = object.storageType ?? 0;
+    message.id = object.id ?? undefined;
+    message.protoFileName = object.protoFileName ?? undefined;
+    message.storageType = object.storageType ?? undefined;
     return message;
   },
   fromSDK(object: ModuleSchemaDescriptor_FileEntrySDKType): ModuleSchemaDescriptor_FileEntry {
     return {
       id: object?.id,
       protoFileName: object?.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
+      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : undefined
     };
   },
   fromSDKJSON(object: any): ModuleSchemaDescriptor_FileEntrySDKType {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      proto_file_name: isSet(object.proto_file_name) ? String(object.proto_file_name) : "",
-      storage_type: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
+      id: isSet(object.id) ? Number(object.id) : undefined,
+      proto_file_name: isSet(object.proto_file_name) ? String(object.proto_file_name) : undefined,
+      storage_type: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : undefined
     };
   },
   toSDK(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntrySDKType {
@@ -332,9 +332,9 @@ export const ModuleSchemaDescriptor_FileEntry = {
   },
   fromAmino(object: ModuleSchemaDescriptor_FileEntryAmino): ModuleSchemaDescriptor_FileEntry {
     return {
-      id: object.id,
-      protoFileName: object.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
+      id: object?.id,
+      protoFileName: object?.proto_file_name,
+      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : undefined
     };
   },
   toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {

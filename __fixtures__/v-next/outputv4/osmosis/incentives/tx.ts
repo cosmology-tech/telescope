@@ -13,9 +13,9 @@ export interface MsgCreateGauge {
    * at a single time and only distribute their tokens again once the gauge is
    * refilled
    */
-  isPerpetual: boolean;
+  isPerpetual?: boolean;
   /** owner is the address of gauge creator */
-  owner: string;
+  owner?: string;
   /**
    * distribute_to show which lock the gauge should distribute to by time
    * duration or by timestamp
@@ -29,53 +29,53 @@ export interface MsgCreateGauge {
    * num_epochs_paid_over is the number of epochs distribution will be completed
    * over
    */
-  numEpochsPaidOver: bigint;
+  numEpochsPaidOver?: bigint;
 }
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
-  is_perpetual: boolean;
-  owner: string;
+  is_perpetual?: boolean;
+  owner?: string;
   distribute_to: QueryConditionSDKType;
   coins: CoinSDKType[];
   start_time: Date;
-  num_epochs_paid_over: bigint;
+  num_epochs_paid_over?: bigint;
 }
 export interface MsgCreateGaugeResponse {}
 export interface MsgCreateGaugeResponseSDKType {}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGauge {
   /** owner is the gauge owner's address */
-  owner: string;
+  owner?: string;
   /** gauge_id is the ID of gauge that rewards are getting added to */
-  gaugeId: bigint;
+  gaugeId?: bigint;
   /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
-  owner: string;
-  gauge_id: bigint;
+  owner?: string;
+  gauge_id?: bigint;
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
 export interface MsgAddToGaugeResponseSDKType {}
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
-    isPerpetual: false,
-    owner: "",
+    isPerpetual: undefined,
+    owner: undefined,
     distributeTo: QueryCondition.fromPartial({}),
     coins: [],
     startTime: new Date(),
-    numEpochsPaidOver: BigInt(0)
+    numEpochsPaidOver: undefined
   };
 }
 export const MsgCreateGauge = {
   typeUrl: "/osmosis.incentives.MsgCreateGauge",
   encode(message: MsgCreateGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.isPerpetual === true) {
+    if (message.isPerpetual !== undefined) {
       writer.uint32(8).bool(message.isPerpetual);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     if (message.distributeTo !== undefined) {
@@ -87,7 +87,7 @@ export const MsgCreateGauge = {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.numEpochsPaidOver !== BigInt(0)) {
+    if (message.numEpochsPaidOver !== undefined) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
     return writer;
@@ -145,13 +145,15 @@ export const MsgCreateGauge = {
       obj.coins = [];
     }
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || BigInt(0)).toString());
+    if (message.numEpochsPaidOver !== undefined) {
+      obj.numEpochsPaidOver = message.numEpochsPaidOver.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateGauge>): MsgCreateGauge {
     const message = createBaseMsgCreateGauge();
-    message.isPerpetual = object.isPerpetual ?? false;
-    message.owner = object.owner ?? "";
+    message.isPerpetual = object.isPerpetual ?? undefined;
+    message.owner = object.owner ?? undefined;
     if (object.distributeTo !== undefined && object.distributeTo !== null) {
       message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
     }
@@ -174,12 +176,12 @@ export const MsgCreateGauge = {
   },
   fromSDKJSON(object: any): MsgCreateGaugeSDKType {
     return {
-      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
-      owner: isSet(object.owner) ? String(object.owner) : "",
+      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
       distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt(0)
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : undefined
     };
   },
   toSDK(message: MsgCreateGauge): MsgCreateGaugeSDKType {
@@ -198,12 +200,12 @@ export const MsgCreateGauge = {
   },
   fromAmino(object: MsgCreateGaugeAmino): MsgCreateGauge {
     return {
-      isPerpetual: object.is_perpetual,
-      owner: object.owner,
+      isPerpetual: object?.is_perpetual,
+      owner: object?.owner,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
       startTime: object.start_time,
-      numEpochsPaidOver: BigInt(object.num_epochs_paid_over)
+      numEpochsPaidOver: object?.num_epochs_paid_over ? BigInt(object.num_epochs_paid_over) : undefined
     };
   },
   toAmino(message: MsgCreateGauge): MsgCreateGaugeAmino {
@@ -317,18 +319,18 @@ export const MsgCreateGaugeResponse = {
 };
 function createBaseMsgAddToGauge(): MsgAddToGauge {
   return {
-    owner: "",
-    gaugeId: BigInt(0),
+    owner: undefined,
+    gaugeId: undefined,
     rewards: []
   };
 }
 export const MsgAddToGauge = {
   typeUrl: "/osmosis.incentives.MsgAddToGauge",
   encode(message: MsgAddToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     for (const v of message.rewards) {
@@ -369,7 +371,9 @@ export const MsgAddToGauge = {
   toJSON(message: MsgAddToGauge): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
+    if (message.gaugeId !== undefined) {
+      obj.gaugeId = message.gaugeId.toString();
+    }
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -379,7 +383,7 @@ export const MsgAddToGauge = {
   },
   fromPartial(object: DeepPartial<MsgAddToGauge>): MsgAddToGauge {
     const message = createBaseMsgAddToGauge();
-    message.owner = object.owner ?? "";
+    message.owner = object.owner ?? undefined;
     if (object.gaugeId !== undefined && object.gaugeId !== null) {
       message.gaugeId = BigInt(object.gaugeId.toString());
     }
@@ -395,8 +399,8 @@ export const MsgAddToGauge = {
   },
   fromSDKJSON(object: any): MsgAddToGaugeSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : undefined,
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -413,8 +417,8 @@ export const MsgAddToGauge = {
   },
   fromAmino(object: MsgAddToGaugeAmino): MsgAddToGauge {
     return {
-      owner: object.owner,
-      gaugeId: BigInt(object.gauge_id),
+      owner: object?.owner,
+      gaugeId: object?.gauge_id ? BigInt(object.gauge_id) : undefined,
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromAmino(e)) : []
     };
   },

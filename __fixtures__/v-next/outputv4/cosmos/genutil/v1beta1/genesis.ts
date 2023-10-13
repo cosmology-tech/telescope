@@ -4,15 +4,15 @@ export const protobufPackage = "cosmos.genutil.v1beta1";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
   /** gen_txs defines the genesis transactions. */
-  genTxs: Uint8Array[];
+  genTxs?: Uint8Array[];
 }
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisStateSDKType {
-  gen_txs: Uint8Array[];
+  gen_txs?: Uint8Array[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    genTxs: []
+    genTxs: undefined
   };
 }
 export const GenesisState = {
@@ -48,7 +48,7 @@ export const GenesisState = {
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     if (message.genTxs) {
-      obj.genTxs = message.genTxs.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+      obj.genTxs = message.genTxs.map(e => base64FromBytes(e !== undefined ? e : undefined));
     } else {
       obj.genTxs = [];
     }

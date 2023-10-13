@@ -8,18 +8,18 @@ export const protobufPackage = "akash.deployment.v1beta2";
 export interface MsgCreateDeployment {
   id: DeploymentID;
   groups: GroupSpec[];
-  version: Uint8Array;
+  version?: Uint8Array;
   deposit: Coin;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
-  version: Uint8Array;
+  version?: Uint8Array;
   deposit: CoinSDKType;
-  depositor: string;
+  depositor?: string;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
@@ -30,13 +30,13 @@ export interface MsgDepositDeployment {
   id: DeploymentID;
   amount: Coin;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
   id: DeploymentIDSDKType;
   amount: CoinSDKType;
-  depositor: string;
+  depositor?: string;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
@@ -45,12 +45,12 @@ export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
   id: DeploymentID;
-  version: Uint8Array;
+  version?: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
   id: DeploymentIDSDKType;
-  version: Uint8Array;
+  version?: Uint8Array;
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
@@ -72,9 +72,9 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   return {
     id: DeploymentID.fromPartial({}),
     groups: [],
-    version: new Uint8Array(),
+    version: undefined,
     deposit: Coin.fromPartial({}),
-    depositor: ""
+    depositor: undefined
   };
 }
 export const MsgCreateDeployment = {
@@ -86,13 +86,13 @@ export const MsgCreateDeployment = {
     for (const v of message.groups) {
       GroupSpec.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.version.length !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(26).bytes(message.version);
     }
     if (message.deposit !== undefined) {
       Coin.encode(message.deposit, writer.uint32(34).fork()).ldelim();
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       writer.uint32(42).string(message.depositor);
     }
     return writer;
@@ -143,7 +143,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
+    message.version !== undefined && (obj.version = message.version !== undefined ? base64FromBytes(message.version) : undefined);
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toJSON(message.deposit) : undefined);
     message.depositor !== undefined && (obj.depositor = message.depositor);
     return obj;
@@ -154,11 +154,11 @@ export const MsgCreateDeployment = {
       message.id = DeploymentID.fromPartial(object.id);
     }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
-    message.version = object.version ?? new Uint8Array();
+    message.version = object.version ?? undefined;
     if (object.deposit !== undefined && object.deposit !== null) {
       message.deposit = Coin.fromPartial(object.deposit);
     }
-    message.depositor = object.depositor ?? "";
+    message.depositor = object.depositor ?? undefined;
     return message;
   },
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
@@ -174,9 +174,9 @@ export const MsgCreateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      version: isSet(object.version) ? bytesFromBase64(object.version) : undefined,
       deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined,
-      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+      depositor: isSet(object.depositor) ? String(object.depositor) : undefined
     };
   },
   toSDK(message: MsgCreateDeployment): MsgCreateDeploymentSDKType {
@@ -196,9 +196,9 @@ export const MsgCreateDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
+      version: object?.version,
       deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined,
-      depositor: object.depositor
+      depositor: object?.depositor
     };
   },
   toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
@@ -313,7 +313,7 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
     id: DeploymentID.fromPartial({}),
     amount: Coin.fromPartial({}),
-    depositor: ""
+    depositor: undefined
   };
 }
 export const MsgDepositDeployment = {
@@ -325,7 +325,7 @@ export const MsgDepositDeployment = {
     if (message.amount !== undefined) {
       Coin.encode(message.amount, writer.uint32(18).fork()).ldelim();
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       writer.uint32(26).string(message.depositor);
     }
     return writer;
@@ -375,7 +375,7 @@ export const MsgDepositDeployment = {
     if (object.amount !== undefined && object.amount !== null) {
       message.amount = Coin.fromPartial(object.amount);
     }
-    message.depositor = object.depositor ?? "";
+    message.depositor = object.depositor ?? undefined;
     return message;
   },
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
@@ -389,7 +389,7 @@ export const MsgDepositDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
       amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined,
-      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+      depositor: isSet(object.depositor) ? String(object.depositor) : undefined
     };
   },
   toSDK(message: MsgDepositDeployment): MsgDepositDeploymentSDKType {
@@ -403,7 +403,7 @@ export const MsgDepositDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
       amount: object?.amount ? Coin.fromAmino(object.amount) : undefined,
-      depositor: object.depositor
+      depositor: object?.depositor
     };
   },
   toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
@@ -511,7 +511,7 @@ export const MsgDepositDeploymentResponse = {
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
     id: DeploymentID.fromPartial({}),
-    version: new Uint8Array()
+    version: undefined
   };
 }
 export const MsgUpdateDeployment = {
@@ -520,7 +520,7 @@ export const MsgUpdateDeployment = {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.version.length !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(26).bytes(message.version);
     }
     return writer;
@@ -554,7 +554,7 @@ export const MsgUpdateDeployment = {
   toJSON(message: MsgUpdateDeployment): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
+    message.version !== undefined && (obj.version = message.version !== undefined ? base64FromBytes(message.version) : undefined);
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
@@ -562,7 +562,7 @@ export const MsgUpdateDeployment = {
     if (object.id !== undefined && object.id !== null) {
       message.id = DeploymentID.fromPartial(object.id);
     }
-    message.version = object.version ?? new Uint8Array();
+    message.version = object.version ?? undefined;
     return message;
   },
   fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
@@ -574,7 +574,7 @@ export const MsgUpdateDeployment = {
   fromSDKJSON(object: any): MsgUpdateDeploymentSDKType {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
+      version: isSet(object.version) ? bytesFromBase64(object.version) : undefined
     };
   },
   toSDK(message: MsgUpdateDeployment): MsgUpdateDeploymentSDKType {
@@ -586,7 +586,7 @@ export const MsgUpdateDeployment = {
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      version: object.version
+      version: object?.version
     };
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {

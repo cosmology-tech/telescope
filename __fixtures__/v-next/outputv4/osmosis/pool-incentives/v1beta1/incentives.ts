@@ -9,10 +9,10 @@ export interface Params {
    * itself, but rather manages the distribution of coins that matches the
    * defined minted_denom.
    */
-  mintedDenom: string;
+  mintedDenom?: string;
 }
 export interface ParamsSDKType {
-  minted_denom: string;
+  minted_denom?: string;
 }
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
@@ -29,21 +29,21 @@ export interface DistrInfoSDKType {
   records: DistrRecordSDKType[];
 }
 export interface DistrRecord {
-  gaugeId: bigint;
+  gaugeId?: bigint;
   weight: string;
 }
 export interface DistrRecordSDKType {
-  gauge_id: bigint;
+  gauge_id?: bigint;
   weight: string;
 }
 export interface PoolToGauge {
-  poolId: bigint;
-  gaugeId: bigint;
+  poolId?: bigint;
+  gaugeId?: bigint;
   duration: Duration;
 }
 export interface PoolToGaugeSDKType {
-  pool_id: bigint;
-  gauge_id: bigint;
+  pool_id?: bigint;
+  gauge_id?: bigint;
   duration: DurationSDKType;
 }
 export interface PoolToGauges {
@@ -54,13 +54,13 @@ export interface PoolToGaugesSDKType {
 }
 function createBaseParams(): Params {
   return {
-    mintedDenom: ""
+    mintedDenom: undefined
   };
 }
 export const Params = {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintedDenom !== "") {
+    if (message.mintedDenom !== undefined) {
       writer.uint32(10).string(message.mintedDenom);
     }
     return writer;
@@ -94,7 +94,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.mintedDenom = object.mintedDenom ?? "";
+    message.mintedDenom = object.mintedDenom ?? undefined;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -104,7 +104,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : ""
+      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -114,7 +114,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      mintedDenom: object.minted_denom
+      mintedDenom: object?.minted_denom
     };
   },
   toAmino(message: Params): ParamsAmino {
@@ -369,14 +369,14 @@ export const DistrInfo = {
 };
 function createBaseDistrRecord(): DistrRecord {
   return {
-    gaugeId: BigInt(0),
+    gaugeId: undefined,
     weight: ""
   };
 }
 export const DistrRecord = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord",
   encode(message: DistrRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
     }
     if (message.weight !== "") {
@@ -412,7 +412,9 @@ export const DistrRecord = {
   },
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
+    if (message.gaugeId !== undefined) {
+      obj.gaugeId = message.gaugeId.toString();
+    }
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
@@ -432,7 +434,7 @@ export const DistrRecord = {
   },
   fromSDKJSON(object: any): DistrRecordSDKType {
     return {
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : undefined,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -444,7 +446,7 @@ export const DistrRecord = {
   },
   fromAmino(object: DistrRecordAmino): DistrRecord {
     return {
-      gaugeId: BigInt(object.gauge_id),
+      gaugeId: object?.gauge_id ? BigInt(object.gauge_id) : undefined,
       weight: object.weight
     };
   },
@@ -478,18 +480,18 @@ export const DistrRecord = {
 };
 function createBasePoolToGauge(): PoolToGauge {
   return {
-    poolId: BigInt(0),
-    gaugeId: BigInt(0),
+    poolId: undefined,
+    gaugeId: undefined,
     duration: Duration.fromPartial({})
   };
 }
 export const PoolToGauge = {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge",
   encode(message: PoolToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
@@ -529,8 +531,12 @@ export const PoolToGauge = {
   },
   toJSON(message: PoolToGauge): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
+    if (message.poolId !== undefined) {
+      obj.poolId = message.poolId.toString();
+    }
+    if (message.gaugeId !== undefined) {
+      obj.gaugeId = message.gaugeId.toString();
+    }
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
@@ -556,8 +562,8 @@ export const PoolToGauge = {
   },
   fromSDKJSON(object: any): PoolToGaugeSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : undefined,
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },
@@ -570,8 +576,8 @@ export const PoolToGauge = {
   },
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
     return {
-      poolId: BigInt(object.pool_id),
-      gaugeId: BigInt(object.gauge_id),
+      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined,
+      gaugeId: object?.gauge_id ? BigInt(object.gauge_id) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },

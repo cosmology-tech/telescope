@@ -371,7 +371,7 @@ export interface RoutingRule {
    * determines which Parameter gets used.
    * See the examples for more details.
    */
-  routingParameters: RoutingParameter[];
+  routingParameters?: RoutingParameter[];
 }
 /**
  * Specifies the routing information that should be sent along with the request
@@ -735,12 +735,12 @@ export interface RoutingRule {
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
 export interface RoutingRuleSDKType {
-  routing_parameters: RoutingParameterSDKType[];
+  routing_parameters?: RoutingParameterSDKType[];
 }
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameter {
   /** A request field to extract the header key-value pair from. */
-  field: string;
+  field?: string;
   /**
    * A pattern matching the key-value field. Optional.
    * If not specified, the whole field specified in the `field` field will be
@@ -797,16 +797,16 @@ export interface RoutingParameter {
    * 
    * See Example 1 for more details.
    */
-  pathTemplate: string;
+  pathTemplate?: string;
 }
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterSDKType {
-  field: string;
-  path_template: string;
+  field?: string;
+  path_template?: string;
 }
 function createBaseRoutingRule(): RoutingRule {
   return {
-    routingParameters: []
+    routingParameters: undefined
   };
 }
 export const RoutingRule = {
@@ -904,17 +904,17 @@ export const RoutingRule = {
 };
 function createBaseRoutingParameter(): RoutingParameter {
   return {
-    field: "",
-    pathTemplate: ""
+    field: undefined,
+    pathTemplate: undefined
   };
 }
 export const RoutingParameter = {
   typeUrl: "/google.api.RoutingParameter",
   encode(message: RoutingParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(10).string(message.field);
     }
-    if (message.pathTemplate !== "") {
+    if (message.pathTemplate !== undefined) {
       writer.uint32(18).string(message.pathTemplate);
     }
     return writer;
@@ -953,8 +953,8 @@ export const RoutingParameter = {
   },
   fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {
     const message = createBaseRoutingParameter();
-    message.field = object.field ?? "";
-    message.pathTemplate = object.pathTemplate ?? "";
+    message.field = object.field ?? undefined;
+    message.pathTemplate = object.pathTemplate ?? undefined;
     return message;
   },
   fromSDK(object: RoutingParameterSDKType): RoutingParameter {
@@ -965,8 +965,8 @@ export const RoutingParameter = {
   },
   fromSDKJSON(object: any): RoutingParameterSDKType {
     return {
-      field: isSet(object.field) ? String(object.field) : "",
-      path_template: isSet(object.path_template) ? String(object.path_template) : ""
+      field: isSet(object.field) ? String(object.field) : undefined,
+      path_template: isSet(object.path_template) ? String(object.path_template) : undefined
     };
   },
   toSDK(message: RoutingParameter): RoutingParameterSDKType {
@@ -977,8 +977,8 @@ export const RoutingParameter = {
   },
   fromAmino(object: RoutingParameterAmino): RoutingParameter {
     return {
-      field: object.field,
-      pathTemplate: object.path_template
+      field: object?.field,
+      pathTemplate: object?.path_template
     };
   },
   toAmino(message: RoutingParameter): RoutingParameterAmino {

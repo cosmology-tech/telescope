@@ -39,40 +39,40 @@ export interface GenesisState_GenMsgsSDKType {
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
-  codeId: bigint;
+  codeId?: bigint;
   codeInfo: CodeInfo;
-  codeBytes: Uint8Array;
+  codeBytes?: Uint8Array;
   /** Pinned to wasmvm cache */
-  pinned: boolean;
+  pinned?: boolean;
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
-  code_id: bigint;
+  code_id?: bigint;
   code_info: CodeInfoSDKType;
-  code_bytes: Uint8Array;
-  pinned: boolean;
+  code_bytes?: Uint8Array;
+  pinned?: boolean;
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
-  contractAddress: string;
+  contractAddress?: string;
   contractInfo: ContractInfo;
   contractState: Model[];
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractSDKType {
-  contract_address: string;
+  contract_address?: string;
   contract_info: ContractInfoSDKType;
   contract_state: ModelSDKType[];
 }
 /** Sequence key and value of an id generation counter */
 export interface Sequence {
-  idKey: Uint8Array;
-  value: bigint;
+  idKey?: Uint8Array;
+  value?: bigint;
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {
-  id_key: Uint8Array;
-  value: bigint;
+  id_key?: Uint8Array;
+  value?: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -406,25 +406,25 @@ export const GenesisState_GenMsgs = {
 };
 function createBaseCode(): Code {
   return {
-    codeId: BigInt(0),
+    codeId: undefined,
     codeInfo: CodeInfo.fromPartial({}),
-    codeBytes: new Uint8Array(),
-    pinned: false
+    codeBytes: undefined,
+    pinned: undefined
   };
 }
 export const Code = {
   typeUrl: "/cosmwasm.wasm.v1.Code",
   encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
       CodeInfo.encode(message.codeInfo, writer.uint32(18).fork()).ldelim();
     }
-    if (message.codeBytes.length !== 0) {
+    if (message.codeBytes !== undefined) {
       writer.uint32(26).bytes(message.codeBytes);
     }
-    if (message.pinned === true) {
+    if (message.pinned !== undefined) {
       writer.uint32(32).bool(message.pinned);
     }
     return writer;
@@ -465,9 +465,11 @@ export const Code = {
   },
   toJSON(message: Code): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
+    if (message.codeId !== undefined) {
+      obj.codeId = message.codeId.toString();
+    }
     message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfo.toJSON(message.codeInfo) : undefined);
-    message.codeBytes !== undefined && (obj.codeBytes = base64FromBytes(message.codeBytes !== undefined ? message.codeBytes : new Uint8Array()));
+    message.codeBytes !== undefined && (obj.codeBytes = message.codeBytes !== undefined ? base64FromBytes(message.codeBytes) : undefined);
     message.pinned !== undefined && (obj.pinned = message.pinned);
     return obj;
   },
@@ -479,8 +481,8 @@ export const Code = {
     if (object.codeInfo !== undefined && object.codeInfo !== null) {
       message.codeInfo = CodeInfo.fromPartial(object.codeInfo);
     }
-    message.codeBytes = object.codeBytes ?? new Uint8Array();
-    message.pinned = object.pinned ?? false;
+    message.codeBytes = object.codeBytes ?? undefined;
+    message.pinned = object.pinned ?? undefined;
     return message;
   },
   fromSDK(object: CodeSDKType): Code {
@@ -493,10 +495,10 @@ export const Code = {
   },
   fromSDKJSON(object: any): CodeSDKType {
     return {
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : undefined,
       code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
-      code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
-      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
+      code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : undefined,
+      pinned: isSet(object.pinned) ? Boolean(object.pinned) : undefined
     };
   },
   toSDK(message: Code): CodeSDKType {
@@ -509,10 +511,10 @@ export const Code = {
   },
   fromAmino(object: CodeAmino): Code {
     return {
-      codeId: BigInt(object.code_id),
+      codeId: object?.code_id ? BigInt(object.code_id) : undefined,
       codeInfo: object?.code_info ? CodeInfo.fromAmino(object.code_info) : undefined,
-      codeBytes: object.code_bytes,
-      pinned: object.pinned
+      codeBytes: object?.code_bytes,
+      pinned: object?.pinned
     };
   },
   toAmino(message: Code): CodeAmino {
@@ -547,7 +549,7 @@ export const Code = {
 };
 function createBaseContract(): Contract {
   return {
-    contractAddress: "",
+    contractAddress: undefined,
     contractInfo: ContractInfo.fromPartial({}),
     contractState: []
   };
@@ -555,7 +557,7 @@ function createBaseContract(): Contract {
 export const Contract = {
   typeUrl: "/cosmwasm.wasm.v1.Contract",
   encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     if (message.contractInfo !== undefined) {
@@ -609,7 +611,7 @@ export const Contract = {
   },
   fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
-    message.contractAddress = object.contractAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
     if (object.contractInfo !== undefined && object.contractInfo !== null) {
       message.contractInfo = ContractInfo.fromPartial(object.contractInfo);
     }
@@ -625,7 +627,7 @@ export const Contract = {
   },
   fromSDKJSON(object: any): ContractSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined,
       contract_info: isSet(object.contract_info) ? ContractInfo.fromSDKJSON(object.contract_info) : undefined,
       contract_state: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDKJSON(e)) : []
     };
@@ -643,7 +645,7 @@ export const Contract = {
   },
   fromAmino(object: ContractAmino): Contract {
     return {
-      contractAddress: object.contract_address,
+      contractAddress: object?.contract_address,
       contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : undefined,
       contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromAmino(e)) : []
     };
@@ -683,17 +685,17 @@ export const Contract = {
 };
 function createBaseSequence(): Sequence {
   return {
-    idKey: new Uint8Array(),
-    value: BigInt(0)
+    idKey: undefined,
+    value: undefined
   };
 }
 export const Sequence = {
   typeUrl: "/cosmwasm.wasm.v1.Sequence",
   encode(message: Sequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.idKey.length !== 0) {
+    if (message.idKey !== undefined) {
       writer.uint32(10).bytes(message.idKey);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).uint64(message.value);
     }
     return writer;
@@ -726,13 +728,15 @@ export const Sequence = {
   },
   toJSON(message: Sequence): unknown {
     const obj: any = {};
-    message.idKey !== undefined && (obj.idKey = base64FromBytes(message.idKey !== undefined ? message.idKey : new Uint8Array()));
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
+    message.idKey !== undefined && (obj.idKey = message.idKey !== undefined ? base64FromBytes(message.idKey) : undefined);
+    if (message.value !== undefined) {
+      obj.value = message.value.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
-    message.idKey = object.idKey ?? new Uint8Array();
+    message.idKey = object.idKey ?? undefined;
     if (object.value !== undefined && object.value !== null) {
       message.value = BigInt(object.value.toString());
     }
@@ -746,8 +750,8 @@ export const Sequence = {
   },
   fromSDKJSON(object: any): SequenceSDKType {
     return {
-      id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
+      id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : undefined,
+      value: isSet(object.value) ? BigInt(object.value.toString()) : undefined
     };
   },
   toSDK(message: Sequence): SequenceSDKType {
@@ -758,8 +762,8 @@ export const Sequence = {
   },
   fromAmino(object: SequenceAmino): Sequence {
     return {
-      idKey: object.id_key,
-      value: BigInt(object.value)
+      idKey: object?.id_key,
+      value: object?.value ? BigInt(object.value) : undefined
     };
   },
   toAmino(message: Sequence): SequenceAmino {

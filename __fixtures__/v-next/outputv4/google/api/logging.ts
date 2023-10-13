@@ -39,14 +39,14 @@ export interface Logging {
    * different monitored resource type. A log can be used in at most
    * one producer destination.
    */
-  producerDestinations: Logging_LoggingDestination[];
+  producerDestinations?: Logging_LoggingDestination[];
   /**
    * Logging configurations for sending logs to the consumer project.
    * There can be multiple consumer destinations, each one must have a
    * different monitored resource type. A log can be used in at most
    * one consumer destination.
    */
-  consumerDestinations: Logging_LoggingDestination[];
+  consumerDestinations?: Logging_LoggingDestination[];
 }
 /**
  * Logging configuration of the service.
@@ -80,8 +80,8 @@ export interface Logging {
  *         - activity_history
  */
 export interface LoggingSDKType {
-  producer_destinations: Logging_LoggingDestinationSDKType[];
-  consumer_destinations: Logging_LoggingDestinationSDKType[];
+  producer_destinations?: Logging_LoggingDestinationSDKType[];
+  consumer_destinations?: Logging_LoggingDestinationSDKType[];
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -92,27 +92,27 @@ export interface Logging_LoggingDestination {
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitoredResource: string;
+  monitoredResource?: string;
   /**
    * Names of the logs to be sent to this destination. Each name must
    * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
    * not a domain scoped name, it will be automatically prefixed with
    * the service name followed by "/".
    */
-  logs: string[];
+  logs?: string[];
 }
 /**
  * Configuration of a specific logging destination (the producer project
  * or the consumer project).
  */
 export interface Logging_LoggingDestinationSDKType {
-  monitored_resource: string;
-  logs: string[];
+  monitored_resource?: string;
+  logs?: string[];
 }
 function createBaseLogging(): Logging {
   return {
-    producerDestinations: [],
-    consumerDestinations: []
+    producerDestinations: undefined,
+    consumerDestinations: undefined
   };
 }
 export const Logging = {
@@ -236,14 +236,14 @@ export const Logging = {
 };
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
   return {
-    monitoredResource: "",
-    logs: []
+    monitoredResource: undefined,
+    logs: undefined
   };
 }
 export const Logging_LoggingDestination = {
   typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(26).string(message.monitoredResource);
     }
     for (const v of message.logs) {
@@ -289,7 +289,7 @@ export const Logging_LoggingDestination = {
   },
   fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {
     const message = createBaseLogging_LoggingDestination();
-    message.monitoredResource = object.monitoredResource ?? "";
+    message.monitoredResource = object.monitoredResource ?? undefined;
     message.logs = object.logs?.map(e => e) || [];
     return message;
   },
@@ -301,7 +301,7 @@ export const Logging_LoggingDestination = {
   },
   fromSDKJSON(object: any): Logging_LoggingDestinationSDKType {
     return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : undefined,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
     };
   },
@@ -317,7 +317,7 @@ export const Logging_LoggingDestination = {
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
     return {
-      monitoredResource: object.monitored_resource,
+      monitoredResource: object?.monitored_resource,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
     };
   },

@@ -20,39 +20,39 @@ export interface LogEntry {
    * Required. The log to which this log entry belongs. Examples: `"syslog"`,
    * `"book_log"`.
    */
-  name: string;
+  name?: string;
   /**
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp: Date;
+  timestamp?: Date;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
    */
-  severity: LogSeverity;
+  severity?: LogSeverity;
   /**
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  httpRequest: HttpRequest;
+  httpRequest?: HttpRequest;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
    * If this field contains a relative resource name, you can assume the name is
    * relative to `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
+  trace?: string;
   /**
    * A unique ID for the log entry used for deduplication. If omitted,
    * the implementation will generate one based on operation_id.
    */
-  insertId: string;
+  insertId?: string;
   /**
    * A set of user-defined (key, value) data that provides additional
    * information about the log entry.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -72,29 +72,29 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation: LogEntryOperation;
+  operation?: LogEntryOperation;
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
-  sourceLocation: LogEntrySourceLocation;
+  sourceLocation?: LogEntrySourceLocation;
 }
 /** An individual log entry. */
 export interface LogEntrySDKType {
-  name: string;
-  timestamp: Date;
-  severity: LogSeverity;
-  http_request: HttpRequestSDKType;
-  trace: string;
-  insert_id: string;
-  labels: {
+  name?: string;
+  timestamp?: Date;
+  severity?: LogSeverity;
+  http_request?: HttpRequestSDKType;
+  trace?: string;
+  insert_id?: string;
+  labels?: {
     [key: string]: string;
   };
   proto_payload?: AnySDKType;
   text_payload?: string;
   struct_payload?: StructSDKType;
-  operation: LogEntryOperationSDKType;
-  source_location: LogEntrySourceLocationSDKType;
+  operation?: LogEntryOperationSDKType;
+  source_location?: LogEntrySourceLocationSDKType;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -105,27 +105,27 @@ export interface LogEntryOperation {
    * Optional. An arbitrary operation identifier. Log entries with the
    * same identifier are assumed to be part of the same operation.
    */
-  id: string;
+  id?: string;
   /**
    * Optional. An arbitrary producer identifier. The combination of
    * `id` and `producer` must be globally unique.  Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
-  producer: string;
+  producer?: string;
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
+  first?: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
-  last: boolean;
+  last?: boolean;
 }
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
 export interface LogEntryOperationSDKType {
-  id: string;
-  producer: string;
-  first: boolean;
-  last: boolean;
+  id?: string;
+  producer?: string;
+  first?: boolean;
+  last?: boolean;
 }
 /**
  * Additional information about the source code location that produced the log
@@ -136,12 +136,12 @@ export interface LogEntrySourceLocation {
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
-  file: string;
+  file?: string;
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: bigint;
+  line?: bigint;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -150,16 +150,16 @@ export interface LogEntrySourceLocation {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
-  function: string;
+  function?: string;
 }
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
 export interface LogEntrySourceLocationSDKType {
-  file: string;
-  line: bigint;
-  function: string;
+  file?: string;
+  line?: bigint;
+  function?: string;
 }
 function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
   return {
@@ -257,39 +257,39 @@ export const LogEntry_LabelsEntry = {
 };
 function createBaseLogEntry(): LogEntry {
   return {
-    name: "",
-    timestamp: new Date(),
-    severity: 0,
-    httpRequest: HttpRequest.fromPartial({}),
-    trace: "",
-    insertId: "",
-    labels: {},
+    name: undefined,
+    timestamp: undefined,
+    severity: undefined,
+    httpRequest: undefined,
+    trace: undefined,
+    insertId: undefined,
+    labels: undefined,
     protoPayload: undefined,
     textPayload: undefined,
     structPayload: undefined,
-    operation: LogEntryOperation.fromPartial({}),
-    sourceLocation: LogEntrySourceLocation.fromPartial({})
+    operation: undefined,
+    sourceLocation: undefined
   };
 }
 export const LogEntry = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry",
   encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(82).string(message.name);
     }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(90).fork()).ldelim();
     }
-    if (message.severity !== 0) {
+    if (message.severity !== undefined) {
       writer.uint32(96).int32(message.severity);
     }
     if (message.httpRequest !== undefined) {
       HttpRequest.encode(message.httpRequest, writer.uint32(114).fork()).ldelim();
     }
-    if (message.trace !== "") {
+    if (message.trace !== undefined) {
       writer.uint32(122).string(message.trace);
     }
-    if (message.insertId !== "") {
+    if (message.insertId !== undefined) {
       writer.uint32(34).string(message.insertId);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -412,14 +412,14 @@ export const LogEntry = {
   },
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
-    message.name = object.name ?? "";
+    message.name = object.name ?? undefined;
     message.timestamp = object.timestamp ?? undefined;
-    message.severity = object.severity ?? 0;
+    message.severity = object.severity ?? undefined;
     if (object.httpRequest !== undefined && object.httpRequest !== null) {
       message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
     }
-    message.trace = object.trace ?? "";
-    message.insertId = object.insertId ?? "";
+    message.trace = object.trace ?? undefined;
+    message.insertId = object.insertId ?? undefined;
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -447,7 +447,7 @@ export const LogEntry = {
     return {
       name: object?.name,
       timestamp: object.timestamp ?? undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : undefined,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
@@ -466,12 +466,12 @@ export const LogEntry = {
   },
   fromSDKJSON(object: any): LogEntrySDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : undefined,
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
-      trace: isSet(object.trace) ? String(object.trace) : "",
-      insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
+      trace: isSet(object.trace) ? String(object.trace) : undefined,
+      insert_id: isSet(object.insert_id) ? String(object.insert_id) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -508,12 +508,12 @@ export const LogEntry = {
   },
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
-      name: object.name,
-      timestamp: object.timestamp,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      name: object?.name,
+      timestamp: object?.timestamp,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : undefined,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
-      trace: object.trace,
-      insertId: object.insert_id,
+      trace: object?.trace,
+      insertId: object?.insert_id,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -566,25 +566,25 @@ export const LogEntry = {
 };
 function createBaseLogEntryOperation(): LogEntryOperation {
   return {
-    id: "",
-    producer: "",
-    first: false,
-    last: false
+    id: undefined,
+    producer: undefined,
+    first: undefined,
+    last: undefined
   };
 }
 export const LogEntryOperation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
   encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.producer !== "") {
+    if (message.producer !== undefined) {
       writer.uint32(18).string(message.producer);
     }
-    if (message.first === true) {
+    if (message.first !== undefined) {
       writer.uint32(24).bool(message.first);
     }
-    if (message.last === true) {
+    if (message.last !== undefined) {
       writer.uint32(32).bool(message.last);
     }
     return writer;
@@ -633,10 +633,10 @@ export const LogEntryOperation = {
   },
   fromPartial(object: DeepPartial<LogEntryOperation>): LogEntryOperation {
     const message = createBaseLogEntryOperation();
-    message.id = object.id ?? "";
-    message.producer = object.producer ?? "";
-    message.first = object.first ?? false;
-    message.last = object.last ?? false;
+    message.id = object.id ?? undefined;
+    message.producer = object.producer ?? undefined;
+    message.first = object.first ?? undefined;
+    message.last = object.last ?? undefined;
     return message;
   },
   fromSDK(object: LogEntryOperationSDKType): LogEntryOperation {
@@ -649,10 +649,10 @@ export const LogEntryOperation = {
   },
   fromSDKJSON(object: any): LogEntryOperationSDKType {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      producer: isSet(object.producer) ? String(object.producer) : "",
-      first: isSet(object.first) ? Boolean(object.first) : false,
-      last: isSet(object.last) ? Boolean(object.last) : false
+      id: isSet(object.id) ? String(object.id) : undefined,
+      producer: isSet(object.producer) ? String(object.producer) : undefined,
+      first: isSet(object.first) ? Boolean(object.first) : undefined,
+      last: isSet(object.last) ? Boolean(object.last) : undefined
     };
   },
   toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
@@ -665,10 +665,10 @@ export const LogEntryOperation = {
   },
   fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
     return {
-      id: object.id,
-      producer: object.producer,
-      first: object.first,
-      last: object.last
+      id: object?.id,
+      producer: object?.producer,
+      first: object?.first,
+      last: object?.last
     };
   },
   toAmino(message: LogEntryOperation): LogEntryOperationAmino {
@@ -697,21 +697,21 @@ export const LogEntryOperation = {
 };
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
-    file: "",
-    line: BigInt(0),
-    function: ""
+    file: undefined,
+    line: undefined,
+    function: undefined
   };
 }
 export const LogEntrySourceLocation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
   encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.file !== "") {
+    if (message.file !== undefined) {
       writer.uint32(10).string(message.file);
     }
-    if (message.line !== BigInt(0)) {
+    if (message.line !== undefined) {
       writer.uint32(16).int64(message.line);
     }
-    if (message.function !== "") {
+    if (message.function !== undefined) {
       writer.uint32(26).string(message.function);
     }
     return writer;
@@ -749,17 +749,19 @@ export const LogEntrySourceLocation = {
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = (message.line || BigInt(0)).toString());
+    if (message.line !== undefined) {
+      obj.line = message.line.toString();
+    }
     message.function !== undefined && (obj.function = message.function);
     return obj;
   },
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
-    message.file = object.file ?? "";
+    message.file = object.file ?? undefined;
     if (object.line !== undefined && object.line !== null) {
       message.line = BigInt(object.line.toString());
     }
-    message.function = object.function ?? "";
+    message.function = object.function ?? undefined;
     return message;
   },
   fromSDK(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
@@ -771,9 +773,9 @@ export const LogEntrySourceLocation = {
   },
   fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
     return {
-      file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
-      function: isSet(object.function) ? String(object.function) : ""
+      file: isSet(object.file) ? String(object.file) : undefined,
+      line: isSet(object.line) ? BigInt(object.line.toString()) : undefined,
+      function: isSet(object.function) ? String(object.function) : undefined
     };
   },
   toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
@@ -785,9 +787,9 @@ export const LogEntrySourceLocation = {
   },
   fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
     return {
-      file: object.file,
-      line: BigInt(object.line),
-      function: object.function
+      file: object?.file,
+      line: object?.line ? BigInt(object.line) : undefined,
+      function: object?.function
     };
   },
   toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {

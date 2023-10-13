@@ -13,39 +13,39 @@ export interface CheckRequest {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  serviceName: string;
+  serviceName?: string;
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  serviceConfigId: string;
+  serviceConfigId?: string;
   /** Describes attributes about the operation being executed by the service. */
-  attributes: AttributeContext;
+  attributes?: AttributeContext;
   /** Describes the resources and the policies applied to each resource. */
-  resources: ResourceInfo[];
+  resources?: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
-  flags: string;
+  flags?: string;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
-  service_name: string;
-  service_config_id: string;
-  attributes: AttributeContextSDKType;
-  resources: ResourceInfoSDKType[];
-  flags: string;
+  service_name?: string;
+  service_config_id?: string;
+  attributes?: AttributeContextSDKType;
+  resources?: ResourceInfoSDKType[];
+  flags?: string;
 }
 /** Describes a resource referenced in the request. */
 export interface ResourceInfo {
   /** The name of the resource referenced in the request. */
-  name: string;
+  name?: string;
   /** The resource type in the format of "{service}/{kind}". */
-  type: string;
+  type?: string;
   /**
    * The resource permission needed for this request.
    * The format must be "{service}/{plural}.{verb}".
    */
-  permission: string;
+  permission?: string;
   /**
    * Optional. The identifier of the container of this resource. For Google
    * Cloud APIs, the resource container must be one of the following formats:
@@ -56,21 +56,21 @@ export interface ResourceInfo {
    * Policy check), this field takes precedence on the container extracted from
    * name when presents.
    */
-  container: string;
+  container?: string;
   /**
    * Optional. The location of the resource. The value must be a valid zone,
    * region or multiregion. For example: "europe-west4" or
    * "northamerica-northeast1-a"
    */
-  location: string;
+  location?: string;
 }
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
-  name: string;
-  type: string;
-  permission: string;
-  container: string;
-  location: string;
+  name?: string;
+  type?: string;
+  permission?: string;
+  container?: string;
+  location?: string;
 }
 export interface CheckResponse_HeadersEntry {
   key: string;
@@ -87,16 +87,16 @@ export interface CheckResponse {
    * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
    * would contain additional details about the denial.
    */
-  status: Status;
+  status?: Status;
   /** Returns a set of request contexts generated from the `CheckRequest`. */
-  headers: {
+  headers?: {
     [key: string]: string;
   };
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  status: StatusSDKType;
-  headers: {
+  status?: StatusSDKType;
+  headers?: {
     [key: string]: string;
   };
 }
@@ -110,25 +110,25 @@ export interface ReportRequest {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  serviceName: string;
+  serviceName?: string;
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  serviceConfigId: string;
+  serviceConfigId?: string;
   /**
    * Describes the list of operations to be reported. Each operation is
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
-  operations: AttributeContext[];
+  operations?: AttributeContext[];
 }
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
-  service_name: string;
-  service_config_id: string;
-  operations: AttributeContextSDKType[];
+  service_name?: string;
+  service_config_id?: string;
+  operations?: AttributeContextSDKType[];
 }
 /**
  * Response message for the Report method.
@@ -142,20 +142,20 @@ export interface ReportResponse {}
 export interface ReportResponseSDKType {}
 function createBaseCheckRequest(): CheckRequest {
   return {
-    serviceName: "",
-    serviceConfigId: "",
-    attributes: AttributeContext.fromPartial({}),
-    resources: [],
-    flags: ""
+    serviceName: undefined,
+    serviceConfigId: undefined,
+    attributes: undefined,
+    resources: undefined,
+    flags: undefined
   };
 }
 export const CheckRequest = {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(18).string(message.serviceConfigId);
     }
     if (message.attributes !== undefined) {
@@ -164,7 +164,7 @@ export const CheckRequest = {
     for (const v of message.resources) {
       ResourceInfo.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.flags !== "") {
+    if (message.flags !== undefined) {
       writer.uint32(42).string(message.flags);
     }
     return writer;
@@ -222,13 +222,13 @@ export const CheckRequest = {
   },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.serviceConfigId = object.serviceConfigId ?? "";
+    message.serviceName = object.serviceName ?? undefined;
+    message.serviceConfigId = object.serviceConfigId ?? undefined;
     if (object.attributes !== undefined && object.attributes !== null) {
       message.attributes = AttributeContext.fromPartial(object.attributes);
     }
     message.resources = object.resources?.map(e => ResourceInfo.fromPartial(e)) || [];
-    message.flags = object.flags ?? "";
+    message.flags = object.flags ?? undefined;
     return message;
   },
   fromSDK(object: CheckRequestSDKType): CheckRequest {
@@ -242,11 +242,11 @@ export const CheckRequest = {
   },
   fromSDKJSON(object: any): CheckRequestSDKType {
     return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_name: isSet(object.service_name) ? String(object.service_name) : undefined,
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : undefined,
       attributes: isSet(object.attributes) ? AttributeContext.fromSDKJSON(object.attributes) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDKJSON(e)) : [],
-      flags: isSet(object.flags) ? String(object.flags) : ""
+      flags: isSet(object.flags) ? String(object.flags) : undefined
     };
   },
   toSDK(message: CheckRequest): CheckRequestSDKType {
@@ -264,11 +264,11 @@ export const CheckRequest = {
   },
   fromAmino(object: CheckRequestAmino): CheckRequest {
     return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
+      serviceName: object?.service_name,
+      serviceConfigId: object?.service_config_id,
       attributes: object?.attributes ? AttributeContext.fromAmino(object.attributes) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
-      flags: object.flags
+      flags: object?.flags
     };
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
@@ -302,29 +302,29 @@ export const CheckRequest = {
 };
 function createBaseResourceInfo(): ResourceInfo {
   return {
-    name: "",
-    type: "",
-    permission: "",
-    container: "",
-    location: ""
+    name: undefined,
+    type: undefined,
+    permission: undefined,
+    container: undefined,
+    location: undefined
   };
 }
 export const ResourceInfo = {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(18).string(message.type);
     }
-    if (message.permission !== "") {
+    if (message.permission !== undefined) {
       writer.uint32(26).string(message.permission);
     }
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(34).string(message.container);
     }
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(42).string(message.location);
     }
     return writer;
@@ -378,11 +378,11 @@ export const ResourceInfo = {
   },
   fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
-    message.name = object.name ?? "";
-    message.type = object.type ?? "";
-    message.permission = object.permission ?? "";
-    message.container = object.container ?? "";
-    message.location = object.location ?? "";
+    message.name = object.name ?? undefined;
+    message.type = object.type ?? undefined;
+    message.permission = object.permission ?? undefined;
+    message.container = object.container ?? undefined;
+    message.location = object.location ?? undefined;
     return message;
   },
   fromSDK(object: ResourceInfoSDKType): ResourceInfo {
@@ -396,11 +396,11 @@ export const ResourceInfo = {
   },
   fromSDKJSON(object: any): ResourceInfoSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      permission: isSet(object.permission) ? String(object.permission) : "",
-      container: isSet(object.container) ? String(object.container) : "",
-      location: isSet(object.location) ? String(object.location) : ""
+      name: isSet(object.name) ? String(object.name) : undefined,
+      type: isSet(object.type) ? String(object.type) : undefined,
+      permission: isSet(object.permission) ? String(object.permission) : undefined,
+      container: isSet(object.container) ? String(object.container) : undefined,
+      location: isSet(object.location) ? String(object.location) : undefined
     };
   },
   toSDK(message: ResourceInfo): ResourceInfoSDKType {
@@ -414,11 +414,11 @@ export const ResourceInfo = {
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
     return {
-      name: object.name,
-      type: object.type,
-      permission: object.permission,
-      container: object.container,
-      location: object.location
+      name: object?.name,
+      type: object?.type,
+      permission: object?.permission,
+      container: object?.container,
+      location: object?.location
     };
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
@@ -542,8 +542,8 @@ export const CheckResponse_HeadersEntry = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    status: Status.fromPartial({}),
-    headers: {}
+    status: undefined,
+    headers: undefined
   };
 }
 export const CheckResponse = {
@@ -693,18 +693,18 @@ export const CheckResponse = {
 };
 function createBaseReportRequest(): ReportRequest {
   return {
-    serviceName: "",
-    serviceConfigId: "",
-    operations: []
+    serviceName: undefined,
+    serviceConfigId: undefined,
+    operations: undefined
   };
 }
 export const ReportRequest = {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
   encode(message: ReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(18).string(message.serviceConfigId);
     }
     for (const v of message.operations) {
@@ -755,8 +755,8 @@ export const ReportRequest = {
   },
   fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.serviceConfigId = object.serviceConfigId ?? "";
+    message.serviceName = object.serviceName ?? undefined;
+    message.serviceConfigId = object.serviceConfigId ?? undefined;
     message.operations = object.operations?.map(e => AttributeContext.fromPartial(e)) || [];
     return message;
   },
@@ -769,8 +769,8 @@ export const ReportRequest = {
   },
   fromSDKJSON(object: any): ReportRequestSDKType {
     return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_name: isSet(object.service_name) ? String(object.service_name) : undefined,
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : undefined,
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromSDKJSON(e)) : []
     };
   },
@@ -787,8 +787,8 @@ export const ReportRequest = {
   },
   fromAmino(object: ReportRequestAmino): ReportRequest {
     return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
+      serviceName: object?.service_name,
+      serviceConfigId: object?.service_config_id,
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
     };
   },

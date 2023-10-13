@@ -54,12 +54,12 @@ export const protobufPackage = "google.api";
  */
 export interface Quota {
   /** List of `QuotaLimit` definitions for the service. */
-  limits: QuotaLimit[];
+  limits?: QuotaLimit[];
   /**
    * List of `MetricRule` definitions, each one mapping a selected method to one
    * or more metrics.
    */
-  metricRules: MetricRule[];
+  metricRules?: MetricRule[];
 }
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -113,8 +113,8 @@ export interface Quota {
  *        value_type: INT64
  */
 export interface QuotaSDKType {
-  limits: QuotaLimitSDKType[];
-  metric_rules: MetricRuleSDKType[];
+  limits?: QuotaLimitSDKType[];
+  metric_rules?: MetricRuleSDKType[];
 }
 export interface MetricRule_MetricCostsEntry {
   key: string;
@@ -134,7 +134,7 @@ export interface MetricRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Metrics to update when the selected methods are called, and the associated
    * cost applied to each metric.
@@ -143,7 +143,7 @@ export interface MetricRule {
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
    */
-  metricCosts: {
+  metricCosts?: {
     [key: string]: bigint;
   };
 }
@@ -152,8 +152,8 @@ export interface MetricRule {
  * metric's configured quota behaviors to apply to the method call.
  */
 export interface MetricRuleSDKType {
-  selector: string;
-  metric_costs: {
+  selector?: string;
+  metric_costs?: {
     [key: string]: bigint;
   };
 }
@@ -179,13 +179,13 @@ export interface QuotaLimit {
    * 
    * The maximum length of the limit name is 64 characters.
    */
-  name: string;
+  name?: string;
   /**
    * Optional. User-visible, extended description for this quota limit.
    * Should be used only when more context is needed to understand this limit
    * than provided by the limit's display name (see: `display_name`).
    */
-  description: string;
+  description?: string;
   /**
    * Default number of tokens that can be consumed during the specified
    * duration. This is the number of tokens assigned when a client
@@ -198,7 +198,7 @@ export interface QuotaLimit {
    * 
    * Used by group-based quotas only.
    */
-  defaultLimit: bigint;
+  defaultLimit?: bigint;
   /**
    * Maximum number of tokens that can be consumed during the specified
    * duration. Client application developers can override the default limit up
@@ -210,7 +210,7 @@ export interface QuotaLimit {
    * 
    * Used by group-based quotas only.
    */
-  maxLimit: bigint;
+  maxLimit?: bigint;
   /**
    * Free tier value displayed in the Developers Console for this limit.
    * The free tier is the number of tokens that will be subtracted from the
@@ -221,19 +221,19 @@ export interface QuotaLimit {
    * 
    * Used by group-based quotas only.
    */
-  freeTier: bigint;
+  freeTier?: bigint;
   /**
    * Duration of this limit in textual notation. Must be "100s" or "1d".
    * 
    * Used by group-based quotas only.
    */
-  duration: string;
+  duration?: string;
   /**
    * The name of the metric this quota limit applies to. The quota limits with
    * the same metric will be checked together during runtime. The metric must be
    * defined within the service config.
    */
-  metric: string;
+  metric?: string;
   /**
    * Specify the unit of the quota limit. It uses the same syntax as
    * [Metric.unit][]. The supported unit kinds are determined by the quota
@@ -245,13 +245,13 @@ export interface QuotaLimit {
    * Note: the order of unit components is insignificant.
    * The "1" at the beginning is required to follow the metric unit syntax.
    */
-  unit: string;
+  unit?: string;
   /**
    * Tiered limit values. You must specify this as a key:value pair, with an
    * integer value that is the maximum number of requests allowed for the
    * specified unit. Currently only STANDARD is supported.
    */
-  values: {
+  values?: {
     [key: string]: bigint;
   };
   /**
@@ -260,7 +260,7 @@ export interface QuotaLimit {
    * the quota configuration. This field can be used to override the default
    * display name generated from the configuration.
    */
-  displayName: string;
+  displayName?: string;
 }
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
@@ -268,23 +268,23 @@ export interface QuotaLimit {
  * type combination defined within a `QuotaGroup`.
  */
 export interface QuotaLimitSDKType {
-  name: string;
-  description: string;
-  default_limit: bigint;
-  max_limit: bigint;
-  free_tier: bigint;
-  duration: string;
-  metric: string;
-  unit: string;
-  values: {
+  name?: string;
+  description?: string;
+  default_limit?: bigint;
+  max_limit?: bigint;
+  free_tier?: bigint;
+  duration?: string;
+  metric?: string;
+  unit?: string;
+  values?: {
     [key: string]: bigint;
   };
-  display_name: string;
+  display_name?: string;
 }
 function createBaseQuota(): Quota {
   return {
-    limits: [],
-    metricRules: []
+    limits: undefined,
+    metricRules: undefined
   };
 }
 export const Quota = {
@@ -504,14 +504,14 @@ export const MetricRule_MetricCostsEntry = {
 };
 function createBaseMetricRule(): MetricRule {
   return {
-    selector: "",
-    metricCosts: {}
+    selector: undefined,
+    metricCosts: undefined
   };
 }
 export const MetricRule = {
   typeUrl: "/google.api.MetricRule",
   encode(message: MetricRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     Object.entries(message.metricCosts).forEach(([key, value]) => {
@@ -569,7 +569,7 @@ export const MetricRule = {
   },
   fromPartial(object: DeepPartial<MetricRule>): MetricRule {
     const message = createBaseMetricRule();
-    message.selector = object.selector ?? "";
+    message.selector = object.selector ?? undefined;
     message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
       [key: string]: bigint;
     }>((acc, [key, value]) => {
@@ -593,7 +593,7 @@ export const MetricRule = {
   },
   fromSDKJSON(object: any): MetricRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
+      selector: isSet(object.selector) ? String(object.selector) : undefined,
       metric_costs: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
@@ -615,7 +615,7 @@ export const MetricRule = {
   },
   fromAmino(object: MetricRuleAmino): MetricRule {
     return {
-      selector: object.selector,
+      selector: object?.selector,
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
@@ -749,43 +749,43 @@ export const QuotaLimit_ValuesEntry = {
 };
 function createBaseQuotaLimit(): QuotaLimit {
   return {
-    name: "",
-    description: "",
-    defaultLimit: BigInt(0),
-    maxLimit: BigInt(0),
-    freeTier: BigInt(0),
-    duration: "",
-    metric: "",
-    unit: "",
-    values: {},
-    displayName: ""
+    name: undefined,
+    description: undefined,
+    defaultLimit: undefined,
+    maxLimit: undefined,
+    freeTier: undefined,
+    duration: undefined,
+    metric: undefined,
+    unit: undefined,
+    values: undefined,
+    displayName: undefined
   };
 }
 export const QuotaLimit = {
   typeUrl: "/google.api.QuotaLimit",
   encode(message: QuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(50).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.defaultLimit !== BigInt(0)) {
+    if (message.defaultLimit !== undefined) {
       writer.uint32(24).int64(message.defaultLimit);
     }
-    if (message.maxLimit !== BigInt(0)) {
+    if (message.maxLimit !== undefined) {
       writer.uint32(32).int64(message.maxLimit);
     }
-    if (message.freeTier !== BigInt(0)) {
+    if (message.freeTier !== undefined) {
       writer.uint32(56).int64(message.freeTier);
     }
-    if (message.duration !== "") {
+    if (message.duration !== undefined) {
       writer.uint32(42).string(message.duration);
     }
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(66).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(74).string(message.unit);
     }
     Object.entries(message.values).forEach(([key, value]) => {
@@ -794,7 +794,7 @@ export const QuotaLimit = {
         value
       }, writer.uint32(80).fork()).ldelim();
     });
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(98).string(message.displayName);
     }
     return writer;
@@ -869,9 +869,15 @@ export const QuotaLimit = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
-    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt(0)).toString());
-    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt(0)).toString());
+    if (message.defaultLimit !== undefined) {
+      obj.defaultLimit = message.defaultLimit.toString();
+    }
+    if (message.maxLimit !== undefined) {
+      obj.maxLimit = message.maxLimit.toString();
+    }
+    if (message.freeTier !== undefined) {
+      obj.freeTier = message.freeTier.toString();
+    }
     message.duration !== undefined && (obj.duration = message.duration);
     message.metric !== undefined && (obj.metric = message.metric);
     message.unit !== undefined && (obj.unit = message.unit);
@@ -886,8 +892,8 @@ export const QuotaLimit = {
   },
   fromPartial(object: DeepPartial<QuotaLimit>): QuotaLimit {
     const message = createBaseQuotaLimit();
-    message.name = object.name ?? "";
-    message.description = object.description ?? "";
+    message.name = object.name ?? undefined;
+    message.description = object.description ?? undefined;
     if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
       message.defaultLimit = BigInt(object.defaultLimit.toString());
     }
@@ -897,9 +903,9 @@ export const QuotaLimit = {
     if (object.freeTier !== undefined && object.freeTier !== null) {
       message.freeTier = BigInt(object.freeTier.toString());
     }
-    message.duration = object.duration ?? "";
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
+    message.duration = object.duration ?? undefined;
+    message.metric = object.metric ?? undefined;
+    message.unit = object.unit ?? undefined;
     message.values = Object.entries(object.values ?? {}).reduce<{
       [key: string]: bigint;
     }>((acc, [key, value]) => {
@@ -908,7 +914,7 @@ export const QuotaLimit = {
       }
       return acc;
     }, {});
-    message.displayName = object.displayName ?? "";
+    message.displayName = object.displayName ?? undefined;
     return message;
   },
   fromSDK(object: QuotaLimitSDKType): QuotaLimit {
@@ -932,21 +938,21 @@ export const QuotaLimit = {
   },
   fromSDKJSON(object: any): QuotaLimitSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt(0),
-      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt(0),
-      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt(0),
-      duration: isSet(object.duration) ? String(object.duration) : "",
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined,
+      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : undefined,
+      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : undefined,
+      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : undefined,
+      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      metric: isSet(object.metric) ? String(object.metric) : undefined,
+      unit: isSet(object.unit) ? String(object.unit) : undefined,
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
         acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {},
-      display_name: isSet(object.display_name) ? String(object.display_name) : ""
+      display_name: isSet(object.display_name) ? String(object.display_name) : undefined
     };
   },
   toSDK(message: QuotaLimit): QuotaLimitSDKType {
@@ -970,21 +976,21 @@ export const QuotaLimit = {
   },
   fromAmino(object: QuotaLimitAmino): QuotaLimit {
     return {
-      name: object.name,
-      description: object.description,
-      defaultLimit: BigInt(object.default_limit),
-      maxLimit: BigInt(object.max_limit),
-      freeTier: BigInt(object.free_tier),
-      duration: object.duration,
-      metric: object.metric,
-      unit: object.unit,
+      name: object?.name,
+      description: object?.description,
+      defaultLimit: object?.default_limit ? BigInt(object.default_limit) : undefined,
+      maxLimit: object?.max_limit ? BigInt(object.max_limit) : undefined,
+      freeTier: object?.free_tier ? BigInt(object.free_tier) : undefined,
+      duration: object?.duration,
+      metric: object?.metric,
+      unit: object?.unit,
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
         acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {},
-      displayName: object.display_name
+      displayName: object?.display_name
     };
   },
   toAmino(message: QuotaLimit): QuotaLimitAmino {

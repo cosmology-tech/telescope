@@ -12,19 +12,19 @@ export interface GenesisState {
    * reduction_started_epoch is the first epoch in which the reduction of mint
    * begins.
    */
-  reductionStartedEpoch: bigint;
+  reductionStartedEpoch?: bigint;
 }
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
   minter: MinterSDKType;
   params: ParamsSDKType;
-  reduction_started_epoch: bigint;
+  reduction_started_epoch?: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
     minter: Minter.fromPartial({}),
     params: Params.fromPartial({}),
-    reductionStartedEpoch: BigInt(0)
+    reductionStartedEpoch: undefined
   };
 }
 export const GenesisState = {
@@ -36,7 +36,7 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(18).fork()).ldelim();
     }
-    if (message.reductionStartedEpoch !== BigInt(0)) {
+    if (message.reductionStartedEpoch !== undefined) {
       writer.uint32(24).int64(message.reductionStartedEpoch);
     }
     return writer;
@@ -75,7 +75,9 @@ export const GenesisState = {
     const obj: any = {};
     message.minter !== undefined && (obj.minter = message.minter ? Minter.toJSON(message.minter) : undefined);
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.reductionStartedEpoch !== undefined && (obj.reductionStartedEpoch = (message.reductionStartedEpoch || BigInt(0)).toString());
+    if (message.reductionStartedEpoch !== undefined) {
+      obj.reductionStartedEpoch = message.reductionStartedEpoch.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -102,7 +104,7 @@ export const GenesisState = {
     return {
       minter: isSet(object.minter) ? Minter.fromSDKJSON(object.minter) : undefined,
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      reduction_started_epoch: isSet(object.reduction_started_epoch) ? BigInt(object.reduction_started_epoch.toString()) : BigInt(0)
+      reduction_started_epoch: isSet(object.reduction_started_epoch) ? BigInt(object.reduction_started_epoch.toString()) : undefined
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {
@@ -116,7 +118,7 @@ export const GenesisState = {
     return {
       minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
       params: object?.params ? Params.fromAmino(object.params) : undefined,
-      reductionStartedEpoch: BigInt(object.reduction_started_epoch)
+      reductionStartedEpoch: object?.reduction_started_epoch ? BigInt(object.reduction_started_epoch) : undefined
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

@@ -45,7 +45,7 @@ export interface Context {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: ContextRule[];
+  rules?: ContextRule[];
 }
 /**
  * `Context` defines which contexts an API requests.
@@ -86,7 +86,7 @@ export interface Context {
  * here.
  */
 export interface ContextSDKType {
-  rules: ContextRuleSDKType[];
+  rules?: ContextRuleSDKType[];
 }
 /**
  * A context rule provides information about the context for an individual API
@@ -98,36 +98,36 @@ export interface ContextRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /** A list of full type names of requested contexts. */
-  requested: string[];
+  requested?: string[];
   /** A list of full type names of provided contexts. */
-  provided: string[];
+  provided?: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from client to backend.
    */
-  allowedRequestExtensions: string[];
+  allowedRequestExtensions?: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from backend to client.
    */
-  allowedResponseExtensions: string[];
+  allowedResponseExtensions?: string[];
 }
 /**
  * A context rule provides information about the context for an individual API
  * element.
  */
 export interface ContextRuleSDKType {
-  selector: string;
-  requested: string[];
-  provided: string[];
-  allowed_request_extensions: string[];
-  allowed_response_extensions: string[];
+  selector?: string;
+  requested?: string[];
+  provided?: string[];
+  allowed_request_extensions?: string[];
+  allowed_response_extensions?: string[];
 }
 function createBaseContext(): Context {
   return {
-    rules: []
+    rules: undefined
   };
 }
 export const Context = {
@@ -225,17 +225,17 @@ export const Context = {
 };
 function createBaseContextRule(): ContextRule {
   return {
-    selector: "",
-    requested: [],
-    provided: [],
-    allowedRequestExtensions: [],
-    allowedResponseExtensions: []
+    selector: undefined,
+    requested: undefined,
+    provided: undefined,
+    allowedRequestExtensions: undefined,
+    allowedResponseExtensions: undefined
   };
 }
 export const ContextRule = {
   typeUrl: "/google.api.ContextRule",
   encode(message: ContextRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.requested) {
@@ -317,7 +317,7 @@ export const ContextRule = {
   },
   fromPartial(object: DeepPartial<ContextRule>): ContextRule {
     const message = createBaseContextRule();
-    message.selector = object.selector ?? "";
+    message.selector = object.selector ?? undefined;
     message.requested = object.requested?.map(e => e) || [];
     message.provided = object.provided?.map(e => e) || [];
     message.allowedRequestExtensions = object.allowedRequestExtensions?.map(e => e) || [];
@@ -335,7 +335,7 @@ export const ContextRule = {
   },
   fromSDKJSON(object: any): ContextRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
+      selector: isSet(object.selector) ? String(object.selector) : undefined,
       requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => String(e)) : [],
       provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => String(e)) : [],
       allowed_request_extensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => String(e)) : [],
@@ -369,7 +369,7 @@ export const ContextRule = {
   },
   fromAmino(object: ContextRuleAmino): ContextRule {
     return {
-      selector: object.selector,
+      selector: object?.selector,
       requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
       provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
       allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],

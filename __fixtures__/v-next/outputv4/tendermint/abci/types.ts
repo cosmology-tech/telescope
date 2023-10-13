@@ -231,92 +231,92 @@ export interface RequestSDKType {
   apply_snapshot_chunk?: RequestApplySnapshotChunkSDKType;
 }
 export interface RequestEcho {
-  message: string;
+  message?: string;
 }
 export interface RequestEchoSDKType {
-  message: string;
+  message?: string;
 }
 export interface RequestFlush {}
 export interface RequestFlushSDKType {}
 export interface RequestInfo {
-  version: string;
-  blockVersion: bigint;
-  p2pVersion: bigint;
+  version?: string;
+  blockVersion?: bigint;
+  p2pVersion?: bigint;
 }
 export interface RequestInfoSDKType {
-  version: string;
-  block_version: bigint;
-  p2p_version: bigint;
+  version?: string;
+  block_version?: bigint;
+  p2p_version?: bigint;
 }
 /** nondeterministic */
 export interface RequestSetOption {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /** nondeterministic */
 export interface RequestSetOptionSDKType {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface RequestInitChain {
   time: Date;
-  chainId: string;
-  consensusParams: ConsensusParams;
+  chainId?: string;
+  consensusParams?: ConsensusParams;
   validators: ValidatorUpdate[];
-  appStateBytes: Uint8Array;
-  initialHeight: bigint;
+  appStateBytes?: Uint8Array;
+  initialHeight?: bigint;
 }
 export interface RequestInitChainSDKType {
   time: Date;
-  chain_id: string;
-  consensus_params: ConsensusParamsSDKType;
+  chain_id?: string;
+  consensus_params?: ConsensusParamsSDKType;
   validators: ValidatorUpdateSDKType[];
-  app_state_bytes: Uint8Array;
-  initial_height: bigint;
+  app_state_bytes?: Uint8Array;
+  initial_height?: bigint;
 }
 export interface RequestQuery {
-  data: Uint8Array;
-  path: string;
-  height: bigint;
-  prove: boolean;
+  data?: Uint8Array;
+  path?: string;
+  height?: bigint;
+  prove?: boolean;
 }
 export interface RequestQuerySDKType {
-  data: Uint8Array;
-  path: string;
-  height: bigint;
-  prove: boolean;
+  data?: Uint8Array;
+  path?: string;
+  height?: bigint;
+  prove?: boolean;
 }
 export interface RequestBeginBlock {
-  hash: Uint8Array;
+  hash?: Uint8Array;
   header: Header;
   lastCommitInfo: LastCommitInfo;
   byzantineValidators: Evidence[];
 }
 export interface RequestBeginBlockSDKType {
-  hash: Uint8Array;
+  hash?: Uint8Array;
   header: HeaderSDKType;
   last_commit_info: LastCommitInfoSDKType;
   byzantine_validators: EvidenceSDKType[];
 }
 export interface RequestCheckTx {
-  tx: Uint8Array;
-  type: CheckTxType;
+  tx?: Uint8Array;
+  type?: CheckTxType;
 }
 export interface RequestCheckTxSDKType {
-  tx: Uint8Array;
-  type: CheckTxType;
+  tx?: Uint8Array;
+  type?: CheckTxType;
 }
 export interface RequestDeliverTx {
-  tx: Uint8Array;
+  tx?: Uint8Array;
 }
 export interface RequestDeliverTxSDKType {
-  tx: Uint8Array;
+  tx?: Uint8Array;
 }
 export interface RequestEndBlock {
-  height: bigint;
+  height?: bigint;
 }
 export interface RequestEndBlockSDKType {
-  height: bigint;
+  height?: bigint;
 }
 export interface RequestCommit {}
 export interface RequestCommitSDKType {}
@@ -327,38 +327,38 @@ export interface RequestListSnapshotsSDKType {}
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshot {
   /** snapshot offered by peers */
-  snapshot: Snapshot;
+  snapshot?: Snapshot;
   /** light client-verified app hash for snapshot height */
-  appHash: Uint8Array;
+  appHash?: Uint8Array;
 }
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshotSDKType {
-  snapshot: SnapshotSDKType;
-  app_hash: Uint8Array;
+  snapshot?: SnapshotSDKType;
+  app_hash?: Uint8Array;
 }
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunk {
-  height: bigint;
-  format: number;
-  chunk: number;
+  height?: bigint;
+  format?: number;
+  chunk?: number;
 }
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunkSDKType {
-  height: bigint;
-  format: number;
-  chunk: number;
+  height?: bigint;
+  format?: number;
+  chunk?: number;
 }
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunk {
-  index: number;
-  chunk: Uint8Array;
-  sender: string;
+  index?: number;
+  chunk?: Uint8Array;
+  sender?: string;
 }
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunkSDKType {
-  index: number;
-  chunk: Uint8Array;
-  sender: string;
+  index?: number;
+  chunk?: Uint8Array;
+  sender?: string;
 }
 export interface Response {
   exception?: ResponseException;
@@ -398,80 +398,80 @@ export interface ResponseSDKType {
 }
 /** nondeterministic */
 export interface ResponseException {
-  error: string;
+  error?: string;
 }
 /** nondeterministic */
 export interface ResponseExceptionSDKType {
-  error: string;
+  error?: string;
 }
 export interface ResponseEcho {
-  message: string;
+  message?: string;
 }
 export interface ResponseEchoSDKType {
-  message: string;
+  message?: string;
 }
 export interface ResponseFlush {}
 export interface ResponseFlushSDKType {}
 export interface ResponseInfo {
-  data: string;
-  version: string;
-  appVersion: bigint;
-  lastBlockHeight: bigint;
-  lastBlockAppHash: Uint8Array;
+  data?: string;
+  version?: string;
+  appVersion?: bigint;
+  lastBlockHeight?: bigint;
+  lastBlockAppHash?: Uint8Array;
 }
 export interface ResponseInfoSDKType {
-  data: string;
-  version: string;
-  app_version: bigint;
-  last_block_height: bigint;
-  last_block_app_hash: Uint8Array;
+  data?: string;
+  version?: string;
+  app_version?: bigint;
+  last_block_height?: bigint;
+  last_block_app_hash?: Uint8Array;
 }
 /** nondeterministic */
 export interface ResponseSetOption {
-  code: number;
+  code?: number;
   /** bytes data = 2; */
-  log: string;
-  info: string;
+  log?: string;
+  info?: string;
 }
 /** nondeterministic */
 export interface ResponseSetOptionSDKType {
-  code: number;
-  log: string;
-  info: string;
+  code?: number;
+  log?: string;
+  info?: string;
 }
 export interface ResponseInitChain {
-  consensusParams: ConsensusParams;
+  consensusParams?: ConsensusParams;
   validators: ValidatorUpdate[];
-  appHash: Uint8Array;
+  appHash?: Uint8Array;
 }
 export interface ResponseInitChainSDKType {
-  consensus_params: ConsensusParamsSDKType;
+  consensus_params?: ConsensusParamsSDKType;
   validators: ValidatorUpdateSDKType[];
-  app_hash: Uint8Array;
+  app_hash?: Uint8Array;
 }
 export interface ResponseQuery {
-  code: number;
+  code?: number;
   /** bytes data = 2; // use "value" instead. */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  index: bigint;
-  key: Uint8Array;
-  value: Uint8Array;
-  proofOps: ProofOps;
-  height: bigint;
-  codespace: string;
+  info?: string;
+  index?: bigint;
+  key?: Uint8Array;
+  value?: Uint8Array;
+  proofOps?: ProofOps;
+  height?: bigint;
+  codespace?: string;
 }
 export interface ResponseQuerySDKType {
-  code: number;
-  log: string;
-  info: string;
-  index: bigint;
-  key: Uint8Array;
-  value: Uint8Array;
-  proof_ops: ProofOpsSDKType;
-  height: bigint;
-  codespace: string;
+  code?: number;
+  log?: string;
+  info?: string;
+  index?: bigint;
+  key?: Uint8Array;
+  value?: Uint8Array;
+  proof_ops?: ProofOpsSDKType;
+  height?: bigint;
+  codespace?: string;
 }
 export interface ResponseBeginBlock {
   events: Event[];
@@ -480,136 +480,136 @@ export interface ResponseBeginBlockSDKType {
   events: EventSDKType[];
 }
 export interface ResponseCheckTx {
-  code: number;
-  data: Uint8Array;
+  code?: number;
+  data?: Uint8Array;
   /** nondeterministic */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  gasWanted: bigint;
-  gasUsed: bigint;
+  info?: string;
+  gasWanted?: bigint;
+  gasUsed?: bigint;
   events: Event[];
-  codespace: string;
+  codespace?: string;
 }
 export interface ResponseCheckTxSDKType {
-  code: number;
-  data: Uint8Array;
-  log: string;
-  info: string;
-  gas_wanted: bigint;
-  gas_used: bigint;
+  code?: number;
+  data?: Uint8Array;
+  log?: string;
+  info?: string;
+  gas_wanted?: bigint;
+  gas_used?: bigint;
   events: EventSDKType[];
-  codespace: string;
+  codespace?: string;
 }
 export interface ResponseDeliverTx {
-  code: number;
-  data: Uint8Array;
+  code?: number;
+  data?: Uint8Array;
   /** nondeterministic */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  gasWanted: bigint;
-  gasUsed: bigint;
+  info?: string;
+  gasWanted?: bigint;
+  gasUsed?: bigint;
   events: Event[];
-  codespace: string;
+  codespace?: string;
 }
 export interface ResponseDeliverTxSDKType {
-  code: number;
-  data: Uint8Array;
-  log: string;
-  info: string;
-  gas_wanted: bigint;
-  gas_used: bigint;
+  code?: number;
+  data?: Uint8Array;
+  log?: string;
+  info?: string;
+  gas_wanted?: bigint;
+  gas_used?: bigint;
   events: EventSDKType[];
-  codespace: string;
+  codespace?: string;
 }
 export interface ResponseEndBlock {
   validatorUpdates: ValidatorUpdate[];
-  consensusParamUpdates: ConsensusParams;
+  consensusParamUpdates?: ConsensusParams;
   events: Event[];
 }
 export interface ResponseEndBlockSDKType {
   validator_updates: ValidatorUpdateSDKType[];
-  consensus_param_updates: ConsensusParamsSDKType;
+  consensus_param_updates?: ConsensusParamsSDKType;
   events: EventSDKType[];
 }
 export interface ResponseCommit {
   /** reserve 1 */
-  data: Uint8Array;
-  retainHeight: bigint;
+  data?: Uint8Array;
+  retainHeight?: bigint;
 }
 export interface ResponseCommitSDKType {
-  data: Uint8Array;
-  retain_height: bigint;
+  data?: Uint8Array;
+  retain_height?: bigint;
 }
 export interface ResponseListSnapshots {
-  snapshots: Snapshot[];
+  snapshots?: Snapshot[];
 }
 export interface ResponseListSnapshotsSDKType {
-  snapshots: SnapshotSDKType[];
+  snapshots?: SnapshotSDKType[];
 }
 export interface ResponseOfferSnapshot {
-  result: ResponseOfferSnapshot_Result;
+  result?: ResponseOfferSnapshot_Result;
 }
 export interface ResponseOfferSnapshotSDKType {
-  result: ResponseOfferSnapshot_Result;
+  result?: ResponseOfferSnapshot_Result;
 }
 export interface ResponseLoadSnapshotChunk {
-  chunk: Uint8Array;
+  chunk?: Uint8Array;
 }
 export interface ResponseLoadSnapshotChunkSDKType {
-  chunk: Uint8Array;
+  chunk?: Uint8Array;
 }
 export interface ResponseApplySnapshotChunk {
-  result: ResponseApplySnapshotChunk_Result;
+  result?: ResponseApplySnapshotChunk_Result;
   /** Chunks to refetch and reapply */
-  refetchChunks: number[];
+  refetchChunks?: number[];
   /** Chunk senders to reject and ban */
-  rejectSenders: string[];
+  rejectSenders?: string[];
 }
 export interface ResponseApplySnapshotChunkSDKType {
-  result: ResponseApplySnapshotChunk_Result;
-  refetch_chunks: number[];
-  reject_senders: string[];
+  result?: ResponseApplySnapshotChunk_Result;
+  refetch_chunks?: number[];
+  reject_senders?: string[];
 }
 /**
  * ConsensusParams contains all consensus-relevant parameters
  * that can be adjusted by the abci app
  */
 export interface ConsensusParams {
-  block: BlockParams;
-  evidence: EvidenceParams;
-  validator: ValidatorParams;
-  version: VersionParams;
+  block?: BlockParams;
+  evidence?: EvidenceParams;
+  validator?: ValidatorParams;
+  version?: VersionParams;
 }
 /**
  * ConsensusParams contains all consensus-relevant parameters
  * that can be adjusted by the abci app
  */
 export interface ConsensusParamsSDKType {
-  block: BlockParamsSDKType;
-  evidence: EvidenceParamsSDKType;
-  validator: ValidatorParamsSDKType;
-  version: VersionParamsSDKType;
+  block?: BlockParamsSDKType;
+  evidence?: EvidenceParamsSDKType;
+  validator?: ValidatorParamsSDKType;
+  version?: VersionParamsSDKType;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParams {
   /** Note: must be greater than 0 */
-  maxBytes: bigint;
+  maxBytes?: bigint;
   /** Note: must be greater or equal to -1 */
-  maxGas: bigint;
+  maxGas?: bigint;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
-  max_bytes: bigint;
-  max_gas: bigint;
+  max_bytes?: bigint;
+  max_gas?: bigint;
 }
 export interface LastCommitInfo {
-  round: number;
+  round?: number;
   votes: VoteInfo[];
 }
 export interface LastCommitInfoSDKType {
-  round: number;
+  round?: number;
   votes: VoteInfoSDKType[];
 }
 /**
@@ -618,7 +618,7 @@ export interface LastCommitInfoSDKType {
  * Later, transactions may be queried using these events.
  */
 export interface Event {
-  type: string;
+  type?: string;
   attributes: EventAttribute[];
 }
 /**
@@ -627,21 +627,21 @@ export interface Event {
  * Later, transactions may be queried using these events.
  */
 export interface EventSDKType {
-  type: string;
+  type?: string;
   attributes: EventAttributeSDKType[];
 }
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttribute {
-  key: Uint8Array;
-  value: Uint8Array;
+  key?: Uint8Array;
+  value?: Uint8Array;
   /** nondeterministic */
-  index: boolean;
+  index?: boolean;
 }
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttributeSDKType {
-  key: Uint8Array;
-  value: Uint8Array;
-  index: boolean;
+  key?: Uint8Array;
+  value?: Uint8Array;
+  index?: boolean;
 }
 /**
  * TxResult contains results of executing the transaction.
@@ -649,9 +649,9 @@ export interface EventAttributeSDKType {
  * One usage is indexing transaction results.
  */
 export interface TxResult {
-  height: bigint;
-  index: number;
-  tx: Uint8Array;
+  height?: bigint;
+  index?: number;
+  tx?: Uint8Array;
   result: ResponseDeliverTx;
 }
 /**
@@ -660,9 +660,9 @@ export interface TxResult {
  * One usage is indexing transaction results.
  */
 export interface TxResultSDKType {
-  height: bigint;
-  index: number;
-  tx: Uint8Array;
+  height?: bigint;
+  index?: number;
+  tx?: Uint8Array;
   result: ResponseDeliverTxSDKType;
 }
 /** Validator */
@@ -671,41 +671,41 @@ export interface Validator {
    * The first 20 bytes of SHA256(public key)
    * PubKey pub_key = 2 [(gogoproto.nullable)=false];
    */
-  address: Uint8Array;
+  address?: Uint8Array;
   /** The voting power */
-  power: bigint;
+  power?: bigint;
 }
 /** Validator */
 export interface ValidatorSDKType {
-  address: Uint8Array;
-  power: bigint;
+  address?: Uint8Array;
+  power?: bigint;
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdate {
   pubKey: PublicKey;
-  power: bigint;
+  power?: bigint;
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdateSDKType {
   pub_key: PublicKeySDKType;
-  power: bigint;
+  power?: bigint;
 }
 /** VoteInfo */
 export interface VoteInfo {
   validator: Validator;
-  signedLastBlock: boolean;
+  signedLastBlock?: boolean;
 }
 /** VoteInfo */
 export interface VoteInfoSDKType {
   validator: ValidatorSDKType;
-  signed_last_block: boolean;
+  signed_last_block?: boolean;
 }
 export interface Evidence {
-  type: EvidenceType;
+  type?: EvidenceType;
   /** The offending validator */
   validator: Validator;
   /** The height when the offense occurred */
-  height: bigint;
+  height?: bigint;
   /** The corresponding time where the offense occurred */
   time: Date;
   /**
@@ -713,33 +713,33 @@ export interface Evidence {
    * not store historical validators.
    * https://github.com/tendermint/tendermint/issues/4581
    */
-  totalVotingPower: bigint;
+  totalVotingPower?: bigint;
 }
 export interface EvidenceSDKType {
-  type: EvidenceType;
+  type?: EvidenceType;
   validator: ValidatorSDKType;
-  height: bigint;
+  height?: bigint;
   time: Date;
-  total_voting_power: bigint;
+  total_voting_power?: bigint;
 }
 export interface Snapshot {
   /** The height at which the snapshot was taken */
-  height: bigint;
+  height?: bigint;
   /** The application-specific snapshot format */
-  format: number;
+  format?: number;
   /** Number of chunks in the snapshot */
-  chunks: number;
+  chunks?: number;
   /** Arbitrary snapshot hash, equal only if identical */
-  hash: Uint8Array;
+  hash?: Uint8Array;
   /** Arbitrary application metadata */
-  metadata: Uint8Array;
+  metadata?: Uint8Array;
 }
 export interface SnapshotSDKType {
-  height: bigint;
-  format: number;
-  chunks: number;
-  hash: Uint8Array;
-  metadata: Uint8Array;
+  height?: bigint;
+  format?: number;
+  chunks?: number;
+  hash?: Uint8Array;
+  metadata?: Uint8Array;
 }
 function createBaseRequest(): Request {
   return {
@@ -1069,13 +1069,13 @@ export const Request = {
 };
 function createBaseRequestEcho(): RequestEcho {
   return {
-    message: ""
+    message: undefined
   };
 }
 export const RequestEcho = {
   typeUrl: "/tendermint.abci.RequestEcho",
   encode(message: RequestEcho, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(10).string(message.message);
     }
     return writer;
@@ -1109,7 +1109,7 @@ export const RequestEcho = {
   },
   fromPartial(object: DeepPartial<RequestEcho>): RequestEcho {
     const message = createBaseRequestEcho();
-    message.message = object.message ?? "";
+    message.message = object.message ?? undefined;
     return message;
   },
   fromSDK(object: RequestEchoSDKType): RequestEcho {
@@ -1119,7 +1119,7 @@ export const RequestEcho = {
   },
   fromSDKJSON(object: any): RequestEchoSDKType {
     return {
-      message: isSet(object.message) ? String(object.message) : ""
+      message: isSet(object.message) ? String(object.message) : undefined
     };
   },
   toSDK(message: RequestEcho): RequestEchoSDKType {
@@ -1129,7 +1129,7 @@ export const RequestEcho = {
   },
   fromAmino(object: RequestEchoAmino): RequestEcho {
     return {
-      message: object.message
+      message: object?.message
     };
   },
   toAmino(message: RequestEcho): RequestEchoAmino {
@@ -1222,21 +1222,21 @@ export const RequestFlush = {
 };
 function createBaseRequestInfo(): RequestInfo {
   return {
-    version: "",
-    blockVersion: BigInt(0),
-    p2pVersion: BigInt(0)
+    version: undefined,
+    blockVersion: undefined,
+    p2pVersion: undefined
   };
 }
 export const RequestInfo = {
   typeUrl: "/tendermint.abci.RequestInfo",
   encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(10).string(message.version);
     }
-    if (message.blockVersion !== BigInt(0)) {
+    if (message.blockVersion !== undefined) {
       writer.uint32(16).uint64(message.blockVersion);
     }
-    if (message.p2pVersion !== BigInt(0)) {
+    if (message.p2pVersion !== undefined) {
       writer.uint32(24).uint64(message.p2pVersion);
     }
     return writer;
@@ -1274,13 +1274,17 @@ export const RequestInfo = {
   toJSON(message: RequestInfo): unknown {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
-    message.blockVersion !== undefined && (obj.blockVersion = (message.blockVersion || BigInt(0)).toString());
-    message.p2pVersion !== undefined && (obj.p2pVersion = (message.p2pVersion || BigInt(0)).toString());
+    if (message.blockVersion !== undefined) {
+      obj.blockVersion = message.blockVersion.toString();
+    }
+    if (message.p2pVersion !== undefined) {
+      obj.p2pVersion = message.p2pVersion.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
-    message.version = object.version ?? "";
+    message.version = object.version ?? undefined;
     if (object.blockVersion !== undefined && object.blockVersion !== null) {
       message.blockVersion = BigInt(object.blockVersion.toString());
     }
@@ -1298,9 +1302,9 @@ export const RequestInfo = {
   },
   fromSDKJSON(object: any): RequestInfoSDKType {
     return {
-      version: isSet(object.version) ? String(object.version) : "",
-      block_version: isSet(object.block_version) ? BigInt(object.block_version.toString()) : BigInt(0),
-      p2p_version: isSet(object.p2p_version) ? BigInt(object.p2p_version.toString()) : BigInt(0)
+      version: isSet(object.version) ? String(object.version) : undefined,
+      block_version: isSet(object.block_version) ? BigInt(object.block_version.toString()) : undefined,
+      p2p_version: isSet(object.p2p_version) ? BigInt(object.p2p_version.toString()) : undefined
     };
   },
   toSDK(message: RequestInfo): RequestInfoSDKType {
@@ -1312,9 +1316,9 @@ export const RequestInfo = {
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
     return {
-      version: object.version,
-      blockVersion: BigInt(object.block_version),
-      p2pVersion: BigInt(object.p2p_version)
+      version: object?.version,
+      blockVersion: object?.block_version ? BigInt(object.block_version) : undefined,
+      p2pVersion: object?.p2p_version ? BigInt(object.p2p_version) : undefined
     };
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
@@ -1342,17 +1346,17 @@ export const RequestInfo = {
 };
 function createBaseRequestSetOption(): RequestSetOption {
   return {
-    key: "",
-    value: ""
+    key: undefined,
+    value: undefined
   };
 }
 export const RequestSetOption = {
   typeUrl: "/tendermint.abci.RequestSetOption",
   encode(message: RequestSetOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1391,8 +1395,8 @@ export const RequestSetOption = {
   },
   fromPartial(object: DeepPartial<RequestSetOption>): RequestSetOption {
     const message = createBaseRequestSetOption();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
     return message;
   },
   fromSDK(object: RequestSetOptionSDKType): RequestSetOption {
@@ -1403,8 +1407,8 @@ export const RequestSetOption = {
   },
   fromSDKJSON(object: any): RequestSetOptionSDKType {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
+      key: isSet(object.key) ? String(object.key) : undefined,
+      value: isSet(object.value) ? String(object.value) : undefined
     };
   },
   toSDK(message: RequestSetOption): RequestSetOptionSDKType {
@@ -1415,8 +1419,8 @@ export const RequestSetOption = {
   },
   fromAmino(object: RequestSetOptionAmino): RequestSetOption {
     return {
-      key: object.key,
-      value: object.value
+      key: object?.key,
+      value: object?.value
     };
   },
   toAmino(message: RequestSetOption): RequestSetOptionAmino {
@@ -1444,11 +1448,11 @@ export const RequestSetOption = {
 function createBaseRequestInitChain(): RequestInitChain {
   return {
     time: new Date(),
-    chainId: "",
-    consensusParams: ConsensusParams.fromPartial({}),
+    chainId: undefined,
+    consensusParams: undefined,
     validators: [],
-    appStateBytes: new Uint8Array(),
-    initialHeight: BigInt(0)
+    appStateBytes: undefined,
+    initialHeight: undefined
   };
 }
 export const RequestInitChain = {
@@ -1457,7 +1461,7 @@ export const RequestInitChain = {
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
     }
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(18).string(message.chainId);
     }
     if (message.consensusParams !== undefined) {
@@ -1466,10 +1470,10 @@ export const RequestInitChain = {
     for (const v of message.validators) {
       ValidatorUpdate.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.appStateBytes.length !== 0) {
+    if (message.appStateBytes !== undefined) {
       writer.uint32(42).bytes(message.appStateBytes);
     }
-    if (message.initialHeight !== BigInt(0)) {
+    if (message.initialHeight !== undefined) {
       writer.uint32(48).int64(message.initialHeight);
     }
     return writer;
@@ -1526,19 +1530,21 @@ export const RequestInitChain = {
     } else {
       obj.validators = [];
     }
-    message.appStateBytes !== undefined && (obj.appStateBytes = base64FromBytes(message.appStateBytes !== undefined ? message.appStateBytes : new Uint8Array()));
-    message.initialHeight !== undefined && (obj.initialHeight = (message.initialHeight || BigInt(0)).toString());
+    message.appStateBytes !== undefined && (obj.appStateBytes = message.appStateBytes !== undefined ? base64FromBytes(message.appStateBytes) : undefined);
+    if (message.initialHeight !== undefined) {
+      obj.initialHeight = message.initialHeight.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<RequestInitChain>): RequestInitChain {
     const message = createBaseRequestInitChain();
     message.time = object.time ?? undefined;
-    message.chainId = object.chainId ?? "";
+    message.chainId = object.chainId ?? undefined;
     if (object.consensusParams !== undefined && object.consensusParams !== null) {
       message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
     }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
-    message.appStateBytes = object.appStateBytes ?? new Uint8Array();
+    message.appStateBytes = object.appStateBytes ?? undefined;
     if (object.initialHeight !== undefined && object.initialHeight !== null) {
       message.initialHeight = BigInt(object.initialHeight.toString());
     }
@@ -1557,11 +1563,11 @@ export const RequestInitChain = {
   fromSDKJSON(object: any): RequestInitChainSDKType {
     return {
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : undefined,
       consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
-      app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : new Uint8Array(),
-      initial_height: isSet(object.initial_height) ? BigInt(object.initial_height.toString()) : BigInt(0)
+      app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : undefined,
+      initial_height: isSet(object.initial_height) ? BigInt(object.initial_height.toString()) : undefined
     };
   },
   toSDK(message: RequestInitChain): RequestInitChainSDKType {
@@ -1581,11 +1587,11 @@ export const RequestInitChain = {
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
       time: object.time,
-      chainId: object.chain_id,
+      chainId: object?.chain_id,
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
-      appStateBytes: object.app_state_bytes,
-      initialHeight: BigInt(object.initial_height)
+      appStateBytes: object?.app_state_bytes,
+      initialHeight: object?.initial_height ? BigInt(object.initial_height) : undefined
     };
   },
   toAmino(message: RequestInitChain): RequestInitChainAmino {
@@ -1620,25 +1626,25 @@ export const RequestInitChain = {
 };
 function createBaseRequestQuery(): RequestQuery {
   return {
-    data: new Uint8Array(),
-    path: "",
-    height: BigInt(0),
-    prove: false
+    data: undefined,
+    path: undefined,
+    height: undefined,
+    prove: undefined
   };
 }
 export const RequestQuery = {
   typeUrl: "/tendermint.abci.RequestQuery",
   encode(message: RequestQuery, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(10).bytes(message.data);
     }
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(18).string(message.path);
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(24).int64(message.height);
     }
-    if (message.prove === true) {
+    if (message.prove !== undefined) {
       writer.uint32(32).bool(message.prove);
     }
     return writer;
@@ -1679,20 +1685,22 @@ export const RequestQuery = {
   },
   toJSON(message: RequestQuery): unknown {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
     message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     message.prove !== undefined && (obj.prove = message.prove);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestQuery>): RequestQuery {
     const message = createBaseRequestQuery();
-    message.data = object.data ?? new Uint8Array();
-    message.path = object.path ?? "";
+    message.data = object.data ?? undefined;
+    message.path = object.path ?? undefined;
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.prove = object.prove ?? false;
+    message.prove = object.prove ?? undefined;
     return message;
   },
   fromSDK(object: RequestQuerySDKType): RequestQuery {
@@ -1705,10 +1713,10 @@ export const RequestQuery = {
   },
   fromSDKJSON(object: any): RequestQuerySDKType {
     return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      prove: isSet(object.prove) ? Boolean(object.prove) : false
+      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
+      path: isSet(object.path) ? String(object.path) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      prove: isSet(object.prove) ? Boolean(object.prove) : undefined
     };
   },
   toSDK(message: RequestQuery): RequestQuerySDKType {
@@ -1721,10 +1729,10 @@ export const RequestQuery = {
   },
   fromAmino(object: RequestQueryAmino): RequestQuery {
     return {
-      data: object.data,
-      path: object.path,
-      height: BigInt(object.height),
-      prove: object.prove
+      data: object?.data,
+      path: object?.path,
+      height: object?.height ? BigInt(object.height) : undefined,
+      prove: object?.prove
     };
   },
   toAmino(message: RequestQuery): RequestQueryAmino {
@@ -1753,7 +1761,7 @@ export const RequestQuery = {
 };
 function createBaseRequestBeginBlock(): RequestBeginBlock {
   return {
-    hash: new Uint8Array(),
+    hash: undefined,
     header: Header.fromPartial({}),
     lastCommitInfo: LastCommitInfo.fromPartial({}),
     byzantineValidators: []
@@ -1762,7 +1770,7 @@ function createBaseRequestBeginBlock(): RequestBeginBlock {
 export const RequestBeginBlock = {
   typeUrl: "/tendermint.abci.RequestBeginBlock",
   encode(message: RequestBeginBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       writer.uint32(10).bytes(message.hash);
     }
     if (message.header !== undefined) {
@@ -1812,7 +1820,7 @@ export const RequestBeginBlock = {
   },
   toJSON(message: RequestBeginBlock): unknown {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
+    message.hash !== undefined && (obj.hash = message.hash !== undefined ? base64FromBytes(message.hash) : undefined);
     message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
     message.lastCommitInfo !== undefined && (obj.lastCommitInfo = message.lastCommitInfo ? LastCommitInfo.toJSON(message.lastCommitInfo) : undefined);
     if (message.byzantineValidators) {
@@ -1824,7 +1832,7 @@ export const RequestBeginBlock = {
   },
   fromPartial(object: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
-    message.hash = object.hash ?? new Uint8Array();
+    message.hash = object.hash ?? undefined;
     if (object.header !== undefined && object.header !== null) {
       message.header = Header.fromPartial(object.header);
     }
@@ -1844,7 +1852,7 @@ export const RequestBeginBlock = {
   },
   fromSDKJSON(object: any): RequestBeginBlockSDKType {
     return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : undefined,
       header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
       last_commit_info: isSet(object.last_commit_info) ? LastCommitInfo.fromSDKJSON(object.last_commit_info) : undefined,
       byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDKJSON(e)) : []
@@ -1864,7 +1872,7 @@ export const RequestBeginBlock = {
   },
   fromAmino(object: RequestBeginBlockAmino): RequestBeginBlock {
     return {
-      hash: object.hash,
+      hash: object?.hash,
       header: object?.header ? Header.fromAmino(object.header) : undefined,
       lastCommitInfo: object?.last_commit_info ? LastCommitInfo.fromAmino(object.last_commit_info) : undefined,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromAmino(e)) : []
@@ -1900,17 +1908,17 @@ export const RequestBeginBlock = {
 };
 function createBaseRequestCheckTx(): RequestCheckTx {
   return {
-    tx: new Uint8Array(),
-    type: 0
+    tx: undefined,
+    type: undefined
   };
 }
 export const RequestCheckTx = {
   typeUrl: "/tendermint.abci.RequestCheckTx",
   encode(message: RequestCheckTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tx.length !== 0) {
+    if (message.tx !== undefined) {
       writer.uint32(10).bytes(message.tx);
     }
-    if (message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(16).int32(message.type);
     }
     return writer;
@@ -1943,26 +1951,26 @@ export const RequestCheckTx = {
   },
   toJSON(message: RequestCheckTx): unknown {
     const obj: any = {};
-    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
+    message.tx !== undefined && (obj.tx = message.tx !== undefined ? base64FromBytes(message.tx) : undefined);
     message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
     return obj;
   },
   fromPartial(object: DeepPartial<RequestCheckTx>): RequestCheckTx {
     const message = createBaseRequestCheckTx();
-    message.tx = object.tx ?? new Uint8Array();
-    message.type = object.type ?? 0;
+    message.tx = object.tx ?? undefined;
+    message.type = object.type ?? undefined;
     return message;
   },
   fromSDK(object: RequestCheckTxSDKType): RequestCheckTx {
     return {
       tx: object?.tx,
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : undefined
     };
   },
   fromSDKJSON(object: any): RequestCheckTxSDKType {
     return {
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : undefined,
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : undefined
     };
   },
   toSDK(message: RequestCheckTx): RequestCheckTxSDKType {
@@ -1973,8 +1981,8 @@ export const RequestCheckTx = {
   },
   fromAmino(object: RequestCheckTxAmino): RequestCheckTx {
     return {
-      tx: object.tx,
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
+      tx: object?.tx,
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : undefined
     };
   },
   toAmino(message: RequestCheckTx): RequestCheckTxAmino {
@@ -2001,13 +2009,13 @@ export const RequestCheckTx = {
 };
 function createBaseRequestDeliverTx(): RequestDeliverTx {
   return {
-    tx: new Uint8Array()
+    tx: undefined
   };
 }
 export const RequestDeliverTx = {
   typeUrl: "/tendermint.abci.RequestDeliverTx",
   encode(message: RequestDeliverTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tx.length !== 0) {
+    if (message.tx !== undefined) {
       writer.uint32(10).bytes(message.tx);
     }
     return writer;
@@ -2036,12 +2044,12 @@ export const RequestDeliverTx = {
   },
   toJSON(message: RequestDeliverTx): unknown {
     const obj: any = {};
-    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
+    message.tx !== undefined && (obj.tx = message.tx !== undefined ? base64FromBytes(message.tx) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestDeliverTx>): RequestDeliverTx {
     const message = createBaseRequestDeliverTx();
-    message.tx = object.tx ?? new Uint8Array();
+    message.tx = object.tx ?? undefined;
     return message;
   },
   fromSDK(object: RequestDeliverTxSDKType): RequestDeliverTx {
@@ -2051,7 +2059,7 @@ export const RequestDeliverTx = {
   },
   fromSDKJSON(object: any): RequestDeliverTxSDKType {
     return {
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array()
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : undefined
     };
   },
   toSDK(message: RequestDeliverTx): RequestDeliverTxSDKType {
@@ -2061,7 +2069,7 @@ export const RequestDeliverTx = {
   },
   fromAmino(object: RequestDeliverTxAmino): RequestDeliverTx {
     return {
-      tx: object.tx
+      tx: object?.tx
     };
   },
   toAmino(message: RequestDeliverTx): RequestDeliverTxAmino {
@@ -2087,13 +2095,13 @@ export const RequestDeliverTx = {
 };
 function createBaseRequestEndBlock(): RequestEndBlock {
   return {
-    height: BigInt(0)
+    height: undefined
   };
 }
 export const RequestEndBlock = {
   typeUrl: "/tendermint.abci.RequestEndBlock",
   encode(message: RequestEndBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
     return writer;
@@ -2122,7 +2130,9 @@ export const RequestEndBlock = {
   },
   toJSON(message: RequestEndBlock): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
@@ -2139,7 +2149,7 @@ export const RequestEndBlock = {
   },
   fromSDKJSON(object: any): RequestEndBlockSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined
     };
   },
   toSDK(message: RequestEndBlock): RequestEndBlockSDKType {
@@ -2149,7 +2159,7 @@ export const RequestEndBlock = {
   },
   fromAmino(object: RequestEndBlockAmino): RequestEndBlock {
     return {
-      height: BigInt(object.height)
+      height: object?.height ? BigInt(object.height) : undefined
     };
   },
   toAmino(message: RequestEndBlock): RequestEndBlockAmino {
@@ -2309,8 +2319,8 @@ export const RequestListSnapshots = {
 };
 function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
   return {
-    snapshot: Snapshot.fromPartial({}),
-    appHash: new Uint8Array()
+    snapshot: undefined,
+    appHash: undefined
   };
 }
 export const RequestOfferSnapshot = {
@@ -2319,7 +2329,7 @@ export const RequestOfferSnapshot = {
     if (message.snapshot !== undefined) {
       Snapshot.encode(message.snapshot, writer.uint32(10).fork()).ldelim();
     }
-    if (message.appHash.length !== 0) {
+    if (message.appHash !== undefined) {
       writer.uint32(18).bytes(message.appHash);
     }
     return writer;
@@ -2353,7 +2363,7 @@ export const RequestOfferSnapshot = {
   toJSON(message: RequestOfferSnapshot): unknown {
     const obj: any = {};
     message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toJSON(message.snapshot) : undefined);
-    message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
+    message.appHash !== undefined && (obj.appHash = message.appHash !== undefined ? base64FromBytes(message.appHash) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
@@ -2361,7 +2371,7 @@ export const RequestOfferSnapshot = {
     if (object.snapshot !== undefined && object.snapshot !== null) {
       message.snapshot = Snapshot.fromPartial(object.snapshot);
     }
-    message.appHash = object.appHash ?? new Uint8Array();
+    message.appHash = object.appHash ?? undefined;
     return message;
   },
   fromSDK(object: RequestOfferSnapshotSDKType): RequestOfferSnapshot {
@@ -2373,7 +2383,7 @@ export const RequestOfferSnapshot = {
   fromSDKJSON(object: any): RequestOfferSnapshotSDKType {
     return {
       snapshot: isSet(object.snapshot) ? Snapshot.fromSDKJSON(object.snapshot) : undefined,
-      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : undefined
     };
   },
   toSDK(message: RequestOfferSnapshot): RequestOfferSnapshotSDKType {
@@ -2385,7 +2395,7 @@ export const RequestOfferSnapshot = {
   fromAmino(object: RequestOfferSnapshotAmino): RequestOfferSnapshot {
     return {
       snapshot: object?.snapshot ? Snapshot.fromAmino(object.snapshot) : undefined,
-      appHash: object.app_hash
+      appHash: object?.app_hash
     };
   },
   toAmino(message: RequestOfferSnapshot): RequestOfferSnapshotAmino {
@@ -2412,21 +2422,21 @@ export const RequestOfferSnapshot = {
 };
 function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
   return {
-    height: BigInt(0),
-    format: 0,
-    chunk: 0
+    height: undefined,
+    format: undefined,
+    chunk: undefined
   };
 }
 export const RequestLoadSnapshotChunk = {
   typeUrl: "/tendermint.abci.RequestLoadSnapshotChunk",
   encode(message: RequestLoadSnapshotChunk, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).uint64(message.height);
     }
-    if (message.format !== 0) {
+    if (message.format !== undefined) {
       writer.uint32(16).uint32(message.format);
     }
-    if (message.chunk !== 0) {
+    if (message.chunk !== undefined) {
       writer.uint32(24).uint32(message.chunk);
     }
     return writer;
@@ -2463,7 +2473,9 @@ export const RequestLoadSnapshotChunk = {
   },
   toJSON(message: RequestLoadSnapshotChunk): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     message.format !== undefined && (obj.format = Math.round(message.format));
     message.chunk !== undefined && (obj.chunk = Math.round(message.chunk));
     return obj;
@@ -2473,8 +2485,8 @@ export const RequestLoadSnapshotChunk = {
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.format = object.format ?? 0;
-    message.chunk = object.chunk ?? 0;
+    message.format = object.format ?? undefined;
+    message.chunk = object.chunk ?? undefined;
     return message;
   },
   fromSDK(object: RequestLoadSnapshotChunkSDKType): RequestLoadSnapshotChunk {
@@ -2486,9 +2498,9 @@ export const RequestLoadSnapshotChunk = {
   },
   fromSDKJSON(object: any): RequestLoadSnapshotChunkSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunk: isSet(object.chunk) ? Number(object.chunk) : 0
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      format: isSet(object.format) ? Number(object.format) : undefined,
+      chunk: isSet(object.chunk) ? Number(object.chunk) : undefined
     };
   },
   toSDK(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkSDKType {
@@ -2500,9 +2512,9 @@ export const RequestLoadSnapshotChunk = {
   },
   fromAmino(object: RequestLoadSnapshotChunkAmino): RequestLoadSnapshotChunk {
     return {
-      height: BigInt(object.height),
-      format: object.format,
-      chunk: object.chunk
+      height: object?.height ? BigInt(object.height) : undefined,
+      format: object?.format,
+      chunk: object?.chunk
     };
   },
   toAmino(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkAmino {
@@ -2530,21 +2542,21 @@ export const RequestLoadSnapshotChunk = {
 };
 function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
   return {
-    index: 0,
-    chunk: new Uint8Array(),
-    sender: ""
+    index: undefined,
+    chunk: undefined,
+    sender: undefined
   };
 }
 export const RequestApplySnapshotChunk = {
   typeUrl: "/tendermint.abci.RequestApplySnapshotChunk",
   encode(message: RequestApplySnapshotChunk, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint32(message.index);
     }
-    if (message.chunk.length !== 0) {
+    if (message.chunk !== undefined) {
       writer.uint32(18).bytes(message.chunk);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(26).string(message.sender);
     }
     return writer;
@@ -2582,15 +2594,15 @@ export const RequestApplySnapshotChunk = {
   toJSON(message: RequestApplySnapshotChunk): unknown {
     const obj: any = {};
     message.index !== undefined && (obj.index = Math.round(message.index));
-    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
+    message.chunk !== undefined && (obj.chunk = message.chunk !== undefined ? base64FromBytes(message.chunk) : undefined);
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestApplySnapshotChunk>): RequestApplySnapshotChunk {
     const message = createBaseRequestApplySnapshotChunk();
-    message.index = object.index ?? 0;
-    message.chunk = object.chunk ?? new Uint8Array();
-    message.sender = object.sender ?? "";
+    message.index = object.index ?? undefined;
+    message.chunk = object.chunk ?? undefined;
+    message.sender = object.sender ?? undefined;
     return message;
   },
   fromSDK(object: RequestApplySnapshotChunkSDKType): RequestApplySnapshotChunk {
@@ -2602,9 +2614,9 @@ export const RequestApplySnapshotChunk = {
   },
   fromSDKJSON(object: any): RequestApplySnapshotChunkSDKType {
     return {
-      index: isSet(object.index) ? Number(object.index) : 0,
-      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array(),
-      sender: isSet(object.sender) ? String(object.sender) : ""
+      index: isSet(object.index) ? Number(object.index) : undefined,
+      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : undefined
     };
   },
   toSDK(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkSDKType {
@@ -2616,9 +2628,9 @@ export const RequestApplySnapshotChunk = {
   },
   fromAmino(object: RequestApplySnapshotChunkAmino): RequestApplySnapshotChunk {
     return {
-      index: object.index,
-      chunk: object.chunk,
-      sender: object.sender
+      index: object?.index,
+      chunk: object?.chunk,
+      sender: object?.sender
     };
   },
   toAmino(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkAmino {
@@ -2989,13 +3001,13 @@ export const Response = {
 };
 function createBaseResponseException(): ResponseException {
   return {
-    error: ""
+    error: undefined
   };
 }
 export const ResponseException = {
   typeUrl: "/tendermint.abci.ResponseException",
   encode(message: ResponseException, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.error !== "") {
+    if (message.error !== undefined) {
       writer.uint32(10).string(message.error);
     }
     return writer;
@@ -3029,7 +3041,7 @@ export const ResponseException = {
   },
   fromPartial(object: DeepPartial<ResponseException>): ResponseException {
     const message = createBaseResponseException();
-    message.error = object.error ?? "";
+    message.error = object.error ?? undefined;
     return message;
   },
   fromSDK(object: ResponseExceptionSDKType): ResponseException {
@@ -3039,7 +3051,7 @@ export const ResponseException = {
   },
   fromSDKJSON(object: any): ResponseExceptionSDKType {
     return {
-      error: isSet(object.error) ? String(object.error) : ""
+      error: isSet(object.error) ? String(object.error) : undefined
     };
   },
   toSDK(message: ResponseException): ResponseExceptionSDKType {
@@ -3049,7 +3061,7 @@ export const ResponseException = {
   },
   fromAmino(object: ResponseExceptionAmino): ResponseException {
     return {
-      error: object.error
+      error: object?.error
     };
   },
   toAmino(message: ResponseException): ResponseExceptionAmino {
@@ -3075,13 +3087,13 @@ export const ResponseException = {
 };
 function createBaseResponseEcho(): ResponseEcho {
   return {
-    message: ""
+    message: undefined
   };
 }
 export const ResponseEcho = {
   typeUrl: "/tendermint.abci.ResponseEcho",
   encode(message: ResponseEcho, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(10).string(message.message);
     }
     return writer;
@@ -3115,7 +3127,7 @@ export const ResponseEcho = {
   },
   fromPartial(object: DeepPartial<ResponseEcho>): ResponseEcho {
     const message = createBaseResponseEcho();
-    message.message = object.message ?? "";
+    message.message = object.message ?? undefined;
     return message;
   },
   fromSDK(object: ResponseEchoSDKType): ResponseEcho {
@@ -3125,7 +3137,7 @@ export const ResponseEcho = {
   },
   fromSDKJSON(object: any): ResponseEchoSDKType {
     return {
-      message: isSet(object.message) ? String(object.message) : ""
+      message: isSet(object.message) ? String(object.message) : undefined
     };
   },
   toSDK(message: ResponseEcho): ResponseEchoSDKType {
@@ -3135,7 +3147,7 @@ export const ResponseEcho = {
   },
   fromAmino(object: ResponseEchoAmino): ResponseEcho {
     return {
-      message: object.message
+      message: object?.message
     };
   },
   toAmino(message: ResponseEcho): ResponseEchoAmino {
@@ -3228,29 +3240,29 @@ export const ResponseFlush = {
 };
 function createBaseResponseInfo(): ResponseInfo {
   return {
-    data: "",
-    version: "",
-    appVersion: BigInt(0),
-    lastBlockHeight: BigInt(0),
-    lastBlockAppHash: new Uint8Array()
+    data: undefined,
+    version: undefined,
+    appVersion: undefined,
+    lastBlockHeight: undefined,
+    lastBlockAppHash: undefined
   };
 }
 export const ResponseInfo = {
   typeUrl: "/tendermint.abci.ResponseInfo",
   encode(message: ResponseInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.data !== "") {
+    if (message.data !== undefined) {
       writer.uint32(10).string(message.data);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(18).string(message.version);
     }
-    if (message.appVersion !== BigInt(0)) {
+    if (message.appVersion !== undefined) {
       writer.uint32(24).uint64(message.appVersion);
     }
-    if (message.lastBlockHeight !== BigInt(0)) {
+    if (message.lastBlockHeight !== undefined) {
       writer.uint32(32).int64(message.lastBlockHeight);
     }
-    if (message.lastBlockAppHash.length !== 0) {
+    if (message.lastBlockAppHash !== undefined) {
       writer.uint32(42).bytes(message.lastBlockAppHash);
     }
     return writer;
@@ -3297,22 +3309,26 @@ export const ResponseInfo = {
     const obj: any = {};
     message.data !== undefined && (obj.data = message.data);
     message.version !== undefined && (obj.version = message.version);
-    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || BigInt(0)).toString());
-    message.lastBlockHeight !== undefined && (obj.lastBlockHeight = (message.lastBlockHeight || BigInt(0)).toString());
-    message.lastBlockAppHash !== undefined && (obj.lastBlockAppHash = base64FromBytes(message.lastBlockAppHash !== undefined ? message.lastBlockAppHash : new Uint8Array()));
+    if (message.appVersion !== undefined) {
+      obj.appVersion = message.appVersion.toString();
+    }
+    if (message.lastBlockHeight !== undefined) {
+      obj.lastBlockHeight = message.lastBlockHeight.toString();
+    }
+    message.lastBlockAppHash !== undefined && (obj.lastBlockAppHash = message.lastBlockAppHash !== undefined ? base64FromBytes(message.lastBlockAppHash) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseInfo>): ResponseInfo {
     const message = createBaseResponseInfo();
-    message.data = object.data ?? "";
-    message.version = object.version ?? "";
+    message.data = object.data ?? undefined;
+    message.version = object.version ?? undefined;
     if (object.appVersion !== undefined && object.appVersion !== null) {
       message.appVersion = BigInt(object.appVersion.toString());
     }
     if (object.lastBlockHeight !== undefined && object.lastBlockHeight !== null) {
       message.lastBlockHeight = BigInt(object.lastBlockHeight.toString());
     }
-    message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
+    message.lastBlockAppHash = object.lastBlockAppHash ?? undefined;
     return message;
   },
   fromSDK(object: ResponseInfoSDKType): ResponseInfo {
@@ -3326,11 +3342,11 @@ export const ResponseInfo = {
   },
   fromSDKJSON(object: any): ResponseInfoSDKType {
     return {
-      data: isSet(object.data) ? String(object.data) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      app_version: isSet(object.app_version) ? BigInt(object.app_version.toString()) : BigInt(0),
-      last_block_height: isSet(object.last_block_height) ? BigInt(object.last_block_height.toString()) : BigInt(0),
-      last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : new Uint8Array()
+      data: isSet(object.data) ? String(object.data) : undefined,
+      version: isSet(object.version) ? String(object.version) : undefined,
+      app_version: isSet(object.app_version) ? BigInt(object.app_version.toString()) : undefined,
+      last_block_height: isSet(object.last_block_height) ? BigInt(object.last_block_height.toString()) : undefined,
+      last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : undefined
     };
   },
   toSDK(message: ResponseInfo): ResponseInfoSDKType {
@@ -3344,11 +3360,11 @@ export const ResponseInfo = {
   },
   fromAmino(object: ResponseInfoAmino): ResponseInfo {
     return {
-      data: object.data,
-      version: object.version,
-      appVersion: BigInt(object.app_version),
-      lastBlockHeight: BigInt(object.last_block_height),
-      lastBlockAppHash: object.last_block_app_hash
+      data: object?.data,
+      version: object?.version,
+      appVersion: object?.app_version ? BigInt(object.app_version) : undefined,
+      lastBlockHeight: object?.last_block_height ? BigInt(object.last_block_height) : undefined,
+      lastBlockAppHash: object?.last_block_app_hash
     };
   },
   toAmino(message: ResponseInfo): ResponseInfoAmino {
@@ -3378,21 +3394,21 @@ export const ResponseInfo = {
 };
 function createBaseResponseSetOption(): ResponseSetOption {
   return {
-    code: 0,
-    log: "",
-    info: ""
+    code: undefined,
+    log: undefined,
+    info: undefined
   };
 }
 export const ResponseSetOption = {
   typeUrl: "/tendermint.abci.ResponseSetOption",
   encode(message: ResponseSetOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
     return writer;
@@ -3436,9 +3452,9 @@ export const ResponseSetOption = {
   },
   fromPartial(object: DeepPartial<ResponseSetOption>): ResponseSetOption {
     const message = createBaseResponseSetOption();
-    message.code = object.code ?? 0;
-    message.log = object.log ?? "";
-    message.info = object.info ?? "";
+    message.code = object.code ?? undefined;
+    message.log = object.log ?? undefined;
+    message.info = object.info ?? undefined;
     return message;
   },
   fromSDK(object: ResponseSetOptionSDKType): ResponseSetOption {
@@ -3450,9 +3466,9 @@ export const ResponseSetOption = {
   },
   fromSDKJSON(object: any): ResponseSetOptionSDKType {
     return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : ""
+      code: isSet(object.code) ? Number(object.code) : undefined,
+      log: isSet(object.log) ? String(object.log) : undefined,
+      info: isSet(object.info) ? String(object.info) : undefined
     };
   },
   toSDK(message: ResponseSetOption): ResponseSetOptionSDKType {
@@ -3464,9 +3480,9 @@ export const ResponseSetOption = {
   },
   fromAmino(object: ResponseSetOptionAmino): ResponseSetOption {
     return {
-      code: object.code,
-      log: object.log,
-      info: object.info
+      code: object?.code,
+      log: object?.log,
+      info: object?.info
     };
   },
   toAmino(message: ResponseSetOption): ResponseSetOptionAmino {
@@ -3494,9 +3510,9 @@ export const ResponseSetOption = {
 };
 function createBaseResponseInitChain(): ResponseInitChain {
   return {
-    consensusParams: ConsensusParams.fromPartial({}),
+    consensusParams: undefined,
     validators: [],
-    appHash: new Uint8Array()
+    appHash: undefined
   };
 }
 export const ResponseInitChain = {
@@ -3508,7 +3524,7 @@ export const ResponseInitChain = {
     for (const v of message.validators) {
       ValidatorUpdate.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.appHash.length !== 0) {
+    if (message.appHash !== undefined) {
       writer.uint32(26).bytes(message.appHash);
     }
     return writer;
@@ -3551,7 +3567,7 @@ export const ResponseInitChain = {
     } else {
       obj.validators = [];
     }
-    message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
+    message.appHash !== undefined && (obj.appHash = message.appHash !== undefined ? base64FromBytes(message.appHash) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseInitChain>): ResponseInitChain {
@@ -3560,7 +3576,7 @@ export const ResponseInitChain = {
       message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
     }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
-    message.appHash = object.appHash ?? new Uint8Array();
+    message.appHash = object.appHash ?? undefined;
     return message;
   },
   fromSDK(object: ResponseInitChainSDKType): ResponseInitChain {
@@ -3574,7 +3590,7 @@ export const ResponseInitChain = {
     return {
       consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
-      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : undefined
     };
   },
   toSDK(message: ResponseInitChain): ResponseInitChainSDKType {
@@ -3592,7 +3608,7 @@ export const ResponseInitChain = {
     return {
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
-      appHash: object.app_hash
+      appHash: object?.app_hash
     };
   },
   toAmino(message: ResponseInitChain): ResponseInitChainAmino {
@@ -3624,45 +3640,45 @@ export const ResponseInitChain = {
 };
 function createBaseResponseQuery(): ResponseQuery {
   return {
-    code: 0,
-    log: "",
-    info: "",
-    index: BigInt(0),
-    key: new Uint8Array(),
-    value: new Uint8Array(),
-    proofOps: ProofOps.fromPartial({}),
-    height: BigInt(0),
-    codespace: ""
+    code: undefined,
+    log: undefined,
+    info: undefined,
+    index: undefined,
+    key: undefined,
+    value: undefined,
+    proofOps: undefined,
+    height: undefined,
+    codespace: undefined
   };
 }
 export const ResponseQuery = {
   typeUrl: "/tendermint.abci.ResponseQuery",
   encode(message: ResponseQuery, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(40).int64(message.index);
     }
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(50).bytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(58).bytes(message.value);
     }
     if (message.proofOps !== undefined) {
       ProofOps.encode(message.proofOps, writer.uint32(66).fork()).ldelim();
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(72).int64(message.height);
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(82).string(message.codespace);
     }
     return writer;
@@ -3726,31 +3742,35 @@ export const ResponseQuery = {
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+    if (message.index !== undefined) {
+      obj.index = message.index.toString();
+    }
+    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
     message.proofOps !== undefined && (obj.proofOps = message.proofOps ? ProofOps.toJSON(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     message.codespace !== undefined && (obj.codespace = message.codespace);
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseQuery>): ResponseQuery {
     const message = createBaseResponseQuery();
-    message.code = object.code ?? 0;
-    message.log = object.log ?? "";
-    message.info = object.info ?? "";
+    message.code = object.code ?? undefined;
+    message.log = object.log ?? undefined;
+    message.info = object.info ?? undefined;
     if (object.index !== undefined && object.index !== null) {
       message.index = BigInt(object.index.toString());
     }
-    message.key = object.key ?? new Uint8Array();
-    message.value = object.value ?? new Uint8Array();
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
     if (object.proofOps !== undefined && object.proofOps !== null) {
       message.proofOps = ProofOps.fromPartial(object.proofOps);
     }
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.codespace = object.codespace ?? "";
+    message.codespace = object.codespace ?? undefined;
     return message;
   },
   fromSDK(object: ResponseQuerySDKType): ResponseQuery {
@@ -3768,15 +3788,15 @@ export const ResponseQuery = {
   },
   fromSDKJSON(object: any): ResponseQuerySDKType {
     return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      code: isSet(object.code) ? Number(object.code) : undefined,
+      log: isSet(object.log) ? String(object.log) : undefined,
+      info: isSet(object.info) ? String(object.info) : undefined,
+      index: isSet(object.index) ? BigInt(object.index.toString()) : undefined,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
+      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined,
       proof_ops: isSet(object.proof_ops) ? ProofOps.fromSDKJSON(object.proof_ops) : undefined,
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      codespace: isSet(object.codespace) ? String(object.codespace) : undefined
     };
   },
   toSDK(message: ResponseQuery): ResponseQuerySDKType {
@@ -3794,15 +3814,15 @@ export const ResponseQuery = {
   },
   fromAmino(object: ResponseQueryAmino): ResponseQuery {
     return {
-      code: object.code,
-      log: object.log,
-      info: object.info,
-      index: BigInt(object.index),
-      key: object.key,
-      value: object.value,
+      code: object?.code,
+      log: object?.log,
+      info: object?.info,
+      index: object?.index ? BigInt(object.index) : undefined,
+      key: object?.key,
+      value: object?.value,
       proofOps: object?.proof_ops ? ProofOps.fromAmino(object.proof_ops) : undefined,
-      height: BigInt(object.height),
-      codespace: object.codespace
+      height: object?.height ? BigInt(object.height) : undefined,
+      codespace: object?.codespace
     };
   },
   toAmino(message: ResponseQuery): ResponseQueryAmino {
@@ -3934,41 +3954,41 @@ export const ResponseBeginBlock = {
 };
 function createBaseResponseCheckTx(): ResponseCheckTx {
   return {
-    code: 0,
-    data: new Uint8Array(),
-    log: "",
-    info: "",
-    gasWanted: BigInt(0),
-    gasUsed: BigInt(0),
+    code: undefined,
+    data: undefined,
+    log: undefined,
+    info: undefined,
+    gasWanted: undefined,
+    gasUsed: undefined,
     events: [],
-    codespace: ""
+    codespace: undefined
   };
 }
 export const ResponseCheckTx = {
   typeUrl: "/tendermint.abci.ResponseCheckTx",
   encode(message: ResponseCheckTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(18).bytes(message.data);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
-    if (message.gasWanted !== BigInt(0)) {
+    if (message.gasWanted !== undefined) {
       writer.uint32(40).int64(message.gasWanted);
     }
-    if (message.gasUsed !== BigInt(0)) {
+    if (message.gasUsed !== undefined) {
       writer.uint32(48).int64(message.gasUsed);
     }
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(66).string(message.codespace);
     }
     return writer;
@@ -4026,11 +4046,15 @@ export const ResponseCheckTx = {
   toJSON(message: ResponseCheckTx): unknown {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt(0)).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt(0)).toString());
+    if (message.gasWanted !== undefined) {
+      obj.gas_wanted = message.gasWanted.toString();
+    }
+    if (message.gasUsed !== undefined) {
+      obj.gas_used = message.gasUsed.toString();
+    }
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
     } else {
@@ -4041,10 +4065,10 @@ export const ResponseCheckTx = {
   },
   fromPartial(object: DeepPartial<ResponseCheckTx>): ResponseCheckTx {
     const message = createBaseResponseCheckTx();
-    message.code = object.code ?? 0;
-    message.data = object.data ?? new Uint8Array();
-    message.log = object.log ?? "";
-    message.info = object.info ?? "";
+    message.code = object.code ?? undefined;
+    message.data = object.data ?? undefined;
+    message.log = object.log ?? undefined;
+    message.info = object.info ?? undefined;
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
       message.gasWanted = BigInt(object.gasWanted.toString());
     }
@@ -4052,7 +4076,7 @@ export const ResponseCheckTx = {
       message.gasUsed = BigInt(object.gasUsed.toString());
     }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
-    message.codespace = object.codespace ?? "";
+    message.codespace = object.codespace ?? undefined;
     return message;
   },
   fromSDK(object: ResponseCheckTxSDKType): ResponseCheckTx {
@@ -4069,14 +4093,14 @@ export const ResponseCheckTx = {
   },
   fromSDKJSON(object: any): ResponseCheckTxSDKType {
     return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
-      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
+      code: isSet(object.code) ? Number(object.code) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
+      log: isSet(object.log) ? String(object.log) : undefined,
+      info: isSet(object.info) ? String(object.info) : undefined,
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : undefined,
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+      codespace: isSet(object.codespace) ? String(object.codespace) : undefined
     };
   },
   toSDK(message: ResponseCheckTx): ResponseCheckTxSDKType {
@@ -4097,14 +4121,14 @@ export const ResponseCheckTx = {
   },
   fromAmino(object: ResponseCheckTxAmino): ResponseCheckTx {
     return {
-      code: object.code,
-      data: object.data,
-      log: object.log,
-      info: object.info,
-      gasWanted: BigInt(object.gas_wanted),
-      gasUsed: BigInt(object.gas_used),
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted ? BigInt(object.gas_wanted) : undefined,
+      gasUsed: object?.gas_used ? BigInt(object.gas_used) : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
-      codespace: object.codespace
+      codespace: object?.codespace
     };
   },
   toAmino(message: ResponseCheckTx): ResponseCheckTxAmino {
@@ -4141,41 +4165,41 @@ export const ResponseCheckTx = {
 };
 function createBaseResponseDeliverTx(): ResponseDeliverTx {
   return {
-    code: 0,
-    data: new Uint8Array(),
-    log: "",
-    info: "",
-    gasWanted: BigInt(0),
-    gasUsed: BigInt(0),
+    code: undefined,
+    data: undefined,
+    log: undefined,
+    info: undefined,
+    gasWanted: undefined,
+    gasUsed: undefined,
     events: [],
-    codespace: ""
+    codespace: undefined
   };
 }
 export const ResponseDeliverTx = {
   typeUrl: "/tendermint.abci.ResponseDeliverTx",
   encode(message: ResponseDeliverTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(18).bytes(message.data);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
-    if (message.gasWanted !== BigInt(0)) {
+    if (message.gasWanted !== undefined) {
       writer.uint32(40).int64(message.gasWanted);
     }
-    if (message.gasUsed !== BigInt(0)) {
+    if (message.gasUsed !== undefined) {
       writer.uint32(48).int64(message.gasUsed);
     }
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(66).string(message.codespace);
     }
     return writer;
@@ -4233,11 +4257,15 @@ export const ResponseDeliverTx = {
   toJSON(message: ResponseDeliverTx): unknown {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt(0)).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt(0)).toString());
+    if (message.gasWanted !== undefined) {
+      obj.gas_wanted = message.gasWanted.toString();
+    }
+    if (message.gasUsed !== undefined) {
+      obj.gas_used = message.gasUsed.toString();
+    }
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
     } else {
@@ -4248,10 +4276,10 @@ export const ResponseDeliverTx = {
   },
   fromPartial(object: DeepPartial<ResponseDeliverTx>): ResponseDeliverTx {
     const message = createBaseResponseDeliverTx();
-    message.code = object.code ?? 0;
-    message.data = object.data ?? new Uint8Array();
-    message.log = object.log ?? "";
-    message.info = object.info ?? "";
+    message.code = object.code ?? undefined;
+    message.data = object.data ?? undefined;
+    message.log = object.log ?? undefined;
+    message.info = object.info ?? undefined;
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
       message.gasWanted = BigInt(object.gasWanted.toString());
     }
@@ -4259,7 +4287,7 @@ export const ResponseDeliverTx = {
       message.gasUsed = BigInt(object.gasUsed.toString());
     }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
-    message.codespace = object.codespace ?? "";
+    message.codespace = object.codespace ?? undefined;
     return message;
   },
   fromSDK(object: ResponseDeliverTxSDKType): ResponseDeliverTx {
@@ -4276,14 +4304,14 @@ export const ResponseDeliverTx = {
   },
   fromSDKJSON(object: any): ResponseDeliverTxSDKType {
     return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
-      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
+      code: isSet(object.code) ? Number(object.code) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
+      log: isSet(object.log) ? String(object.log) : undefined,
+      info: isSet(object.info) ? String(object.info) : undefined,
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : undefined,
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+      codespace: isSet(object.codespace) ? String(object.codespace) : undefined
     };
   },
   toSDK(message: ResponseDeliverTx): ResponseDeliverTxSDKType {
@@ -4304,14 +4332,14 @@ export const ResponseDeliverTx = {
   },
   fromAmino(object: ResponseDeliverTxAmino): ResponseDeliverTx {
     return {
-      code: object.code,
-      data: object.data,
-      log: object.log,
-      info: object.info,
-      gasWanted: BigInt(object.gas_wanted),
-      gasUsed: BigInt(object.gas_used),
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted ? BigInt(object.gas_wanted) : undefined,
+      gasUsed: object?.gas_used ? BigInt(object.gas_used) : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
-      codespace: object.codespace
+      codespace: object?.codespace
     };
   },
   toAmino(message: ResponseDeliverTx): ResponseDeliverTxAmino {
@@ -4349,7 +4377,7 @@ export const ResponseDeliverTx = {
 function createBaseResponseEndBlock(): ResponseEndBlock {
   return {
     validatorUpdates: [],
-    consensusParamUpdates: ConsensusParams.fromPartial({}),
+    consensusParamUpdates: undefined,
     events: []
   };
 }
@@ -4490,17 +4518,17 @@ export const ResponseEndBlock = {
 };
 function createBaseResponseCommit(): ResponseCommit {
   return {
-    data: new Uint8Array(),
-    retainHeight: BigInt(0)
+    data: undefined,
+    retainHeight: undefined
   };
 }
 export const ResponseCommit = {
   typeUrl: "/tendermint.abci.ResponseCommit",
   encode(message: ResponseCommit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(18).bytes(message.data);
     }
-    if (message.retainHeight !== BigInt(0)) {
+    if (message.retainHeight !== undefined) {
       writer.uint32(24).int64(message.retainHeight);
     }
     return writer;
@@ -4533,13 +4561,15 @@ export const ResponseCommit = {
   },
   toJSON(message: ResponseCommit): unknown {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.retainHeight !== undefined && (obj.retainHeight = (message.retainHeight || BigInt(0)).toString());
+    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
+    if (message.retainHeight !== undefined) {
+      obj.retainHeight = message.retainHeight.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
-    message.data = object.data ?? new Uint8Array();
+    message.data = object.data ?? undefined;
     if (object.retainHeight !== undefined && object.retainHeight !== null) {
       message.retainHeight = BigInt(object.retainHeight.toString());
     }
@@ -4553,8 +4583,8 @@ export const ResponseCommit = {
   },
   fromSDKJSON(object: any): ResponseCommitSDKType {
     return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retain_height: isSet(object.retain_height) ? BigInt(object.retain_height.toString()) : BigInt(0)
+      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
+      retain_height: isSet(object.retain_height) ? BigInt(object.retain_height.toString()) : undefined
     };
   },
   toSDK(message: ResponseCommit): ResponseCommitSDKType {
@@ -4565,8 +4595,8 @@ export const ResponseCommit = {
   },
   fromAmino(object: ResponseCommitAmino): ResponseCommit {
     return {
-      data: object.data,
-      retainHeight: BigInt(object.retain_height)
+      data: object?.data,
+      retainHeight: object?.retain_height ? BigInt(object.retain_height) : undefined
     };
   },
   toAmino(message: ResponseCommit): ResponseCommitAmino {
@@ -4593,7 +4623,7 @@ export const ResponseCommit = {
 };
 function createBaseResponseListSnapshots(): ResponseListSnapshots {
   return {
-    snapshots: []
+    snapshots: undefined
   };
 }
 export const ResponseListSnapshots = {
@@ -4691,13 +4721,13 @@ export const ResponseListSnapshots = {
 };
 function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
   return {
-    result: 0
+    result: undefined
   };
 }
 export const ResponseOfferSnapshot = {
   typeUrl: "/tendermint.abci.ResponseOfferSnapshot",
   encode(message: ResponseOfferSnapshot, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.result !== 0) {
+    if (message.result !== undefined) {
       writer.uint32(8).int32(message.result);
     }
     return writer;
@@ -4731,17 +4761,17 @@ export const ResponseOfferSnapshot = {
   },
   fromPartial(object: DeepPartial<ResponseOfferSnapshot>): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
-    message.result = object.result ?? 0;
+    message.result = object.result ?? undefined;
     return message;
   },
   fromSDK(object: ResponseOfferSnapshotSDKType): ResponseOfferSnapshot {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : undefined
     };
   },
   fromSDKJSON(object: any): ResponseOfferSnapshotSDKType {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : undefined
     };
   },
   toSDK(message: ResponseOfferSnapshot): ResponseOfferSnapshotSDKType {
@@ -4751,7 +4781,7 @@ export const ResponseOfferSnapshot = {
   },
   fromAmino(object: ResponseOfferSnapshotAmino): ResponseOfferSnapshot {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : undefined
     };
   },
   toAmino(message: ResponseOfferSnapshot): ResponseOfferSnapshotAmino {
@@ -4777,13 +4807,13 @@ export const ResponseOfferSnapshot = {
 };
 function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
   return {
-    chunk: new Uint8Array()
+    chunk: undefined
   };
 }
 export const ResponseLoadSnapshotChunk = {
   typeUrl: "/tendermint.abci.ResponseLoadSnapshotChunk",
   encode(message: ResponseLoadSnapshotChunk, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.chunk.length !== 0) {
+    if (message.chunk !== undefined) {
       writer.uint32(10).bytes(message.chunk);
     }
     return writer;
@@ -4812,12 +4842,12 @@ export const ResponseLoadSnapshotChunk = {
   },
   toJSON(message: ResponseLoadSnapshotChunk): unknown {
     const obj: any = {};
-    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
+    message.chunk !== undefined && (obj.chunk = message.chunk !== undefined ? base64FromBytes(message.chunk) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseLoadSnapshotChunk>): ResponseLoadSnapshotChunk {
     const message = createBaseResponseLoadSnapshotChunk();
-    message.chunk = object.chunk ?? new Uint8Array();
+    message.chunk = object.chunk ?? undefined;
     return message;
   },
   fromSDK(object: ResponseLoadSnapshotChunkSDKType): ResponseLoadSnapshotChunk {
@@ -4827,7 +4857,7 @@ export const ResponseLoadSnapshotChunk = {
   },
   fromSDKJSON(object: any): ResponseLoadSnapshotChunkSDKType {
     return {
-      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array()
+      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : undefined
     };
   },
   toSDK(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkSDKType {
@@ -4837,7 +4867,7 @@ export const ResponseLoadSnapshotChunk = {
   },
   fromAmino(object: ResponseLoadSnapshotChunkAmino): ResponseLoadSnapshotChunk {
     return {
-      chunk: object.chunk
+      chunk: object?.chunk
     };
   },
   toAmino(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkAmino {
@@ -4863,15 +4893,15 @@ export const ResponseLoadSnapshotChunk = {
 };
 function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
   return {
-    result: 0,
-    refetchChunks: [],
-    rejectSenders: []
+    result: undefined,
+    refetchChunks: undefined,
+    rejectSenders: undefined
   };
 }
 export const ResponseApplySnapshotChunk = {
   typeUrl: "/tendermint.abci.ResponseApplySnapshotChunk",
   encode(message: ResponseApplySnapshotChunk, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.result !== 0) {
+    if (message.result !== undefined) {
       writer.uint32(8).int32(message.result);
     }
     writer.uint32(18).fork();
@@ -4938,21 +4968,21 @@ export const ResponseApplySnapshotChunk = {
   },
   fromPartial(object: DeepPartial<ResponseApplySnapshotChunk>): ResponseApplySnapshotChunk {
     const message = createBaseResponseApplySnapshotChunk();
-    message.result = object.result ?? 0;
+    message.result = object.result ?? undefined;
     message.refetchChunks = object.refetchChunks?.map(e => e) || [];
     message.rejectSenders = object.rejectSenders?.map(e => e) || [];
     return message;
   },
   fromSDK(object: ResponseApplySnapshotChunkSDKType): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : undefined,
       refetchChunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => e) : [],
       rejectSenders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): ResponseApplySnapshotChunkSDKType {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : undefined,
       refetch_chunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => Number(e)) : [],
       reject_senders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => String(e)) : []
     };
@@ -4974,7 +5004,7 @@ export const ResponseApplySnapshotChunk = {
   },
   fromAmino(object: ResponseApplySnapshotChunkAmino): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : undefined,
       refetchChunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => e) : [],
       rejectSenders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => e) : []
     };
@@ -5012,10 +5042,10 @@ export const ResponseApplySnapshotChunk = {
 };
 function createBaseConsensusParams(): ConsensusParams {
   return {
-    block: BlockParams.fromPartial({}),
-    evidence: EvidenceParams.fromPartial({}),
-    validator: ValidatorParams.fromPartial({}),
-    version: VersionParams.fromPartial({})
+    block: undefined,
+    evidence: undefined,
+    validator: undefined,
+    version: undefined
   };
 }
 export const ConsensusParams = {
@@ -5151,17 +5181,17 @@ export const ConsensusParams = {
 };
 function createBaseBlockParams(): BlockParams {
   return {
-    maxBytes: BigInt(0),
-    maxGas: BigInt(0)
+    maxBytes: undefined,
+    maxGas: undefined
   };
 }
 export const BlockParams = {
   typeUrl: "/tendermint.abci.BlockParams",
   encode(message: BlockParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.maxBytes !== BigInt(0)) {
+    if (message.maxBytes !== undefined) {
       writer.uint32(8).int64(message.maxBytes);
     }
-    if (message.maxGas !== BigInt(0)) {
+    if (message.maxGas !== undefined) {
       writer.uint32(16).int64(message.maxGas);
     }
     return writer;
@@ -5194,8 +5224,12 @@ export const BlockParams = {
   },
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
-    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || BigInt(0)).toString());
-    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || BigInt(0)).toString());
+    if (message.maxBytes !== undefined) {
+      obj.maxBytes = message.maxBytes.toString();
+    }
+    if (message.maxGas !== undefined) {
+      obj.maxGas = message.maxGas.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
@@ -5216,8 +5250,8 @@ export const BlockParams = {
   },
   fromSDKJSON(object: any): BlockParamsSDKType {
     return {
-      max_bytes: isSet(object.max_bytes) ? BigInt(object.max_bytes.toString()) : BigInt(0),
-      max_gas: isSet(object.max_gas) ? BigInt(object.max_gas.toString()) : BigInt(0)
+      max_bytes: isSet(object.max_bytes) ? BigInt(object.max_bytes.toString()) : undefined,
+      max_gas: isSet(object.max_gas) ? BigInt(object.max_gas.toString()) : undefined
     };
   },
   toSDK(message: BlockParams): BlockParamsSDKType {
@@ -5228,8 +5262,8 @@ export const BlockParams = {
   },
   fromAmino(object: BlockParamsAmino): BlockParams {
     return {
-      maxBytes: BigInt(object.max_bytes),
-      maxGas: BigInt(object.max_gas)
+      maxBytes: object?.max_bytes ? BigInt(object.max_bytes) : undefined,
+      maxGas: object?.max_gas ? BigInt(object.max_gas) : undefined
     };
   },
   toAmino(message: BlockParams): BlockParamsAmino {
@@ -5256,14 +5290,14 @@ export const BlockParams = {
 };
 function createBaseLastCommitInfo(): LastCommitInfo {
   return {
-    round: 0,
+    round: undefined,
     votes: []
   };
 }
 export const LastCommitInfo = {
   typeUrl: "/tendermint.abci.LastCommitInfo",
   encode(message: LastCommitInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       writer.uint32(8).int32(message.round);
     }
     for (const v of message.votes) {
@@ -5309,7 +5343,7 @@ export const LastCommitInfo = {
   },
   fromPartial(object: DeepPartial<LastCommitInfo>): LastCommitInfo {
     const message = createBaseLastCommitInfo();
-    message.round = object.round ?? 0;
+    message.round = object.round ?? undefined;
     message.votes = object.votes?.map(e => VoteInfo.fromPartial(e)) || [];
     return message;
   },
@@ -5321,7 +5355,7 @@ export const LastCommitInfo = {
   },
   fromSDKJSON(object: any): LastCommitInfoSDKType {
     return {
-      round: isSet(object.round) ? Number(object.round) : 0,
+      round: isSet(object.round) ? Number(object.round) : undefined,
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDKJSON(e)) : []
     };
   },
@@ -5337,7 +5371,7 @@ export const LastCommitInfo = {
   },
   fromAmino(object: LastCommitInfoAmino): LastCommitInfo {
     return {
-      round: object.round,
+      round: object?.round,
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromAmino(e)) : []
     };
   },
@@ -5369,14 +5403,14 @@ export const LastCommitInfo = {
 };
 function createBaseEvent(): Event {
   return {
-    type: "",
+    type: undefined,
     attributes: []
   };
 }
 export const Event = {
   typeUrl: "/tendermint.abci.Event",
   encode(message: Event, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.attributes) {
@@ -5422,7 +5456,7 @@ export const Event = {
   },
   fromPartial(object: DeepPartial<Event>): Event {
     const message = createBaseEvent();
-    message.type = object.type ?? "";
+    message.type = object.type ?? undefined;
     message.attributes = object.attributes?.map(e => EventAttribute.fromPartial(e)) || [];
     return message;
   },
@@ -5434,7 +5468,7 @@ export const Event = {
   },
   fromSDKJSON(object: any): EventSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : "",
+      type: isSet(object.type) ? String(object.type) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDKJSON(e)) : []
     };
   },
@@ -5450,7 +5484,7 @@ export const Event = {
   },
   fromAmino(object: EventAmino): Event {
     return {
-      type: object.type,
+      type: object?.type,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromAmino(e)) : []
     };
   },
@@ -5482,21 +5516,21 @@ export const Event = {
 };
 function createBaseEventAttribute(): EventAttribute {
   return {
-    key: new Uint8Array(),
-    value: new Uint8Array(),
-    index: false
+    key: undefined,
+    value: undefined,
+    index: undefined
   };
 }
 export const EventAttribute = {
   typeUrl: "/tendermint.abci.EventAttribute",
   encode(message: EventAttribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(18).bytes(message.value);
     }
-    if (message.index === true) {
+    if (message.index !== undefined) {
       writer.uint32(24).bool(message.index);
     }
     return writer;
@@ -5533,16 +5567,16 @@ export const EventAttribute = {
   },
   toJSON(message: EventAttribute): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
     message.index !== undefined && (obj.index = message.index);
     return obj;
   },
   fromPartial(object: DeepPartial<EventAttribute>): EventAttribute {
     const message = createBaseEventAttribute();
-    message.key = object.key ?? new Uint8Array();
-    message.value = object.value ?? new Uint8Array();
-    message.index = object.index ?? false;
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
+    message.index = object.index ?? undefined;
     return message;
   },
   fromSDK(object: EventAttributeSDKType): EventAttribute {
@@ -5554,9 +5588,9 @@ export const EventAttribute = {
   },
   fromSDKJSON(object: any): EventAttributeSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      index: isSet(object.index) ? Boolean(object.index) : false
+      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
+      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined,
+      index: isSet(object.index) ? Boolean(object.index) : undefined
     };
   },
   toSDK(message: EventAttribute): EventAttributeSDKType {
@@ -5568,9 +5602,9 @@ export const EventAttribute = {
   },
   fromAmino(object: EventAttributeAmino): EventAttribute {
     return {
-      key: object.key,
-      value: object.value,
-      index: object.index
+      key: object?.key,
+      value: object?.value,
+      index: object?.index
     };
   },
   toAmino(message: EventAttribute): EventAttributeAmino {
@@ -5598,22 +5632,22 @@ export const EventAttribute = {
 };
 function createBaseTxResult(): TxResult {
   return {
-    height: BigInt(0),
-    index: 0,
-    tx: new Uint8Array(),
+    height: undefined,
+    index: undefined,
+    tx: undefined,
     result: ResponseDeliverTx.fromPartial({})
   };
 }
 export const TxResult = {
   typeUrl: "/tendermint.abci.TxResult",
   encode(message: TxResult, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(16).uint32(message.index);
     }
-    if (message.tx.length !== 0) {
+    if (message.tx !== undefined) {
       writer.uint32(26).bytes(message.tx);
     }
     if (message.result !== undefined) {
@@ -5657,9 +5691,11 @@ export const TxResult = {
   },
   toJSON(message: TxResult): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     message.index !== undefined && (obj.index = Math.round(message.index));
-    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
+    message.tx !== undefined && (obj.tx = message.tx !== undefined ? base64FromBytes(message.tx) : undefined);
     message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toJSON(message.result) : undefined);
     return obj;
   },
@@ -5668,8 +5704,8 @@ export const TxResult = {
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.index = object.index ?? 0;
-    message.tx = object.tx ?? new Uint8Array();
+    message.index = object.index ?? undefined;
+    message.tx = object.tx ?? undefined;
     if (object.result !== undefined && object.result !== null) {
       message.result = ResponseDeliverTx.fromPartial(object.result);
     }
@@ -5685,9 +5721,9 @@ export const TxResult = {
   },
   fromSDKJSON(object: any): TxResultSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      index: isSet(object.index) ? Number(object.index) : 0,
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      index: isSet(object.index) ? Number(object.index) : undefined,
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : undefined,
       result: isSet(object.result) ? ResponseDeliverTx.fromSDKJSON(object.result) : undefined
     };
   },
@@ -5701,9 +5737,9 @@ export const TxResult = {
   },
   fromAmino(object: TxResultAmino): TxResult {
     return {
-      height: BigInt(object.height),
-      index: object.index,
-      tx: object.tx,
+      height: object?.height ? BigInt(object.height) : undefined,
+      index: object?.index,
+      tx: object?.tx,
       result: object?.result ? ResponseDeliverTx.fromAmino(object.result) : undefined
     };
   },
@@ -5733,17 +5769,17 @@ export const TxResult = {
 };
 function createBaseValidator(): Validator {
   return {
-    address: new Uint8Array(),
-    power: BigInt(0)
+    address: undefined,
+    power: undefined
   };
 }
 export const Validator = {
   typeUrl: "/tendermint.abci.Validator",
   encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address.length !== 0) {
+    if (message.address !== undefined) {
       writer.uint32(10).bytes(message.address);
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(24).int64(message.power);
     }
     return writer;
@@ -5776,13 +5812,15 @@ export const Validator = {
   },
   toJSON(message: Validator): unknown {
     const obj: any = {};
-    message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
-    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
+    message.address !== undefined && (obj.address = message.address !== undefined ? base64FromBytes(message.address) : undefined);
+    if (message.power !== undefined) {
+      obj.power = message.power.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
-    message.address = object.address ?? new Uint8Array();
+    message.address = object.address ?? undefined;
     if (object.power !== undefined && object.power !== null) {
       message.power = BigInt(object.power.toString());
     }
@@ -5796,8 +5834,8 @@ export const Validator = {
   },
   fromSDKJSON(object: any): ValidatorSDKType {
     return {
-      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
+      address: isSet(object.address) ? bytesFromBase64(object.address) : undefined,
+      power: isSet(object.power) ? BigInt(object.power.toString()) : undefined
     };
   },
   toSDK(message: Validator): ValidatorSDKType {
@@ -5808,8 +5846,8 @@ export const Validator = {
   },
   fromAmino(object: ValidatorAmino): Validator {
     return {
-      address: object.address,
-      power: BigInt(object.power)
+      address: object?.address,
+      power: object?.power ? BigInt(object.power) : undefined
     };
   },
   toAmino(message: Validator): ValidatorAmino {
@@ -5837,7 +5875,7 @@ export const Validator = {
 function createBaseValidatorUpdate(): ValidatorUpdate {
   return {
     pubKey: PublicKey.fromPartial({}),
-    power: BigInt(0)
+    power: undefined
   };
 }
 export const ValidatorUpdate = {
@@ -5846,7 +5884,7 @@ export const ValidatorUpdate = {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(16).int64(message.power);
     }
     return writer;
@@ -5880,7 +5918,9 @@ export const ValidatorUpdate = {
   toJSON(message: ValidatorUpdate): unknown {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
+    if (message.power !== undefined) {
+      obj.power = message.power.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
@@ -5902,7 +5942,7 @@ export const ValidatorUpdate = {
   fromSDKJSON(object: any): ValidatorUpdateSDKType {
     return {
       pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
+      power: isSet(object.power) ? BigInt(object.power.toString()) : undefined
     };
   },
   toSDK(message: ValidatorUpdate): ValidatorUpdateSDKType {
@@ -5914,7 +5954,7 @@ export const ValidatorUpdate = {
   fromAmino(object: ValidatorUpdateAmino): ValidatorUpdate {
     return {
       pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      power: BigInt(object.power)
+      power: object?.power ? BigInt(object.power) : undefined
     };
   },
   toAmino(message: ValidatorUpdate): ValidatorUpdateAmino {
@@ -5942,7 +5982,7 @@ export const ValidatorUpdate = {
 function createBaseVoteInfo(): VoteInfo {
   return {
     validator: Validator.fromPartial({}),
-    signedLastBlock: false
+    signedLastBlock: undefined
   };
 }
 export const VoteInfo = {
@@ -5951,7 +5991,7 @@ export const VoteInfo = {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
     }
-    if (message.signedLastBlock === true) {
+    if (message.signedLastBlock !== undefined) {
       writer.uint32(16).bool(message.signedLastBlock);
     }
     return writer;
@@ -5993,7 +6033,7 @@ export const VoteInfo = {
     if (object.validator !== undefined && object.validator !== null) {
       message.validator = Validator.fromPartial(object.validator);
     }
-    message.signedLastBlock = object.signedLastBlock ?? false;
+    message.signedLastBlock = object.signedLastBlock ?? undefined;
     return message;
   },
   fromSDK(object: VoteInfoSDKType): VoteInfo {
@@ -6005,7 +6045,7 @@ export const VoteInfo = {
   fromSDKJSON(object: any): VoteInfoSDKType {
     return {
       validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
-      signed_last_block: isSet(object.signed_last_block) ? Boolean(object.signed_last_block) : false
+      signed_last_block: isSet(object.signed_last_block) ? Boolean(object.signed_last_block) : undefined
     };
   },
   toSDK(message: VoteInfo): VoteInfoSDKType {
@@ -6017,7 +6057,7 @@ export const VoteInfo = {
   fromAmino(object: VoteInfoAmino): VoteInfo {
     return {
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
-      signedLastBlock: object.signed_last_block
+      signedLastBlock: object?.signed_last_block
     };
   },
   toAmino(message: VoteInfo): VoteInfoAmino {
@@ -6044,29 +6084,29 @@ export const VoteInfo = {
 };
 function createBaseEvidence(): Evidence {
   return {
-    type: 0,
+    type: undefined,
     validator: Validator.fromPartial({}),
-    height: BigInt(0),
+    height: undefined,
     time: new Date(),
-    totalVotingPower: BigInt(0)
+    totalVotingPower: undefined
   };
 }
 export const Evidence = {
   typeUrl: "/tendermint.abci.Evidence",
   encode(message: Evidence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(8).int32(message.type);
     }
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(18).fork()).ldelim();
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(24).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
     }
-    if (message.totalVotingPower !== BigInt(0)) {
+    if (message.totalVotingPower !== undefined) {
       writer.uint32(40).int64(message.totalVotingPower);
     }
     return writer;
@@ -6113,14 +6153,18 @@ export const Evidence = {
     const obj: any = {};
     message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
+    if (message.totalVotingPower !== undefined) {
+      obj.totalVotingPower = message.totalVotingPower.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     if (object.validator !== undefined && object.validator !== null) {
       message.validator = Validator.fromPartial(object.validator);
     }
@@ -6135,7 +6179,7 @@ export const Evidence = {
   },
   fromSDK(object: EvidenceSDKType): Evidence {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : undefined,
       validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
       height: object?.height,
       time: object.time ?? undefined,
@@ -6144,11 +6188,11 @@ export const Evidence = {
   },
   fromSDKJSON(object: any): EvidenceSDKType {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : undefined,
       validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt(0)
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : undefined
     };
   },
   toSDK(message: Evidence): EvidenceSDKType {
@@ -6162,11 +6206,11 @@ export const Evidence = {
   },
   fromAmino(object: EvidenceAmino): Evidence {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : undefined,
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
-      height: BigInt(object.height),
+      height: object?.height ? BigInt(object.height) : undefined,
       time: object.time,
-      totalVotingPower: BigInt(object.total_voting_power)
+      totalVotingPower: object?.total_voting_power ? BigInt(object.total_voting_power) : undefined
     };
   },
   toAmino(message: Evidence): EvidenceAmino {
@@ -6196,29 +6240,29 @@ export const Evidence = {
 };
 function createBaseSnapshot(): Snapshot {
   return {
-    height: BigInt(0),
-    format: 0,
-    chunks: 0,
-    hash: new Uint8Array(),
-    metadata: new Uint8Array()
+    height: undefined,
+    format: undefined,
+    chunks: undefined,
+    hash: undefined,
+    metadata: undefined
   };
 }
 export const Snapshot = {
   typeUrl: "/tendermint.abci.Snapshot",
   encode(message: Snapshot, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).uint64(message.height);
     }
-    if (message.format !== 0) {
+    if (message.format !== undefined) {
       writer.uint32(16).uint32(message.format);
     }
-    if (message.chunks !== 0) {
+    if (message.chunks !== undefined) {
       writer.uint32(24).uint32(message.chunks);
     }
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       writer.uint32(34).bytes(message.hash);
     }
-    if (message.metadata.length !== 0) {
+    if (message.metadata !== undefined) {
       writer.uint32(42).bytes(message.metadata);
     }
     return writer;
@@ -6263,11 +6307,13 @@ export const Snapshot = {
   },
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    if (message.height !== undefined) {
+      obj.height = message.height.toString();
+    }
     message.format !== undefined && (obj.format = Math.round(message.format));
     message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
-    message.metadata !== undefined && (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
+    message.hash !== undefined && (obj.hash = message.hash !== undefined ? base64FromBytes(message.hash) : undefined);
+    message.metadata !== undefined && (obj.metadata = message.metadata !== undefined ? base64FromBytes(message.metadata) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
@@ -6275,10 +6321,10 @@ export const Snapshot = {
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.format = object.format ?? 0;
-    message.chunks = object.chunks ?? 0;
-    message.hash = object.hash ?? new Uint8Array();
-    message.metadata = object.metadata ?? new Uint8Array();
+    message.format = object.format ?? undefined;
+    message.chunks = object.chunks ?? undefined;
+    message.hash = object.hash ?? undefined;
+    message.metadata = object.metadata ?? undefined;
     return message;
   },
   fromSDK(object: SnapshotSDKType): Snapshot {
@@ -6292,11 +6338,11 @@ export const Snapshot = {
   },
   fromSDKJSON(object: any): SnapshotSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array()
+      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      format: isSet(object.format) ? Number(object.format) : undefined,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : undefined,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : undefined,
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : undefined
     };
   },
   toSDK(message: Snapshot): SnapshotSDKType {
@@ -6310,11 +6356,11 @@ export const Snapshot = {
   },
   fromAmino(object: SnapshotAmino): Snapshot {
     return {
-      height: BigInt(object.height),
-      format: object.format,
-      chunks: object.chunks,
-      hash: object.hash,
-      metadata: object.metadata
+      height: object?.height ? BigInt(object.height) : undefined,
+      format: object?.format,
+      chunks: object?.chunks,
+      hash: object?.hash,
+      metadata: object?.metadata
     };
   },
   toAmino(message: Snapshot): SnapshotAmino {

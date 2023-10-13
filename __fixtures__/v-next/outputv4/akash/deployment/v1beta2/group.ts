@@ -61,23 +61,23 @@ export function group_StateToJSON(object: Group_State): string {
 /** Group stores group id, state and specifications of group */
 export interface Group {
   groupId: GroupID;
-  state: Group_State;
+  state?: Group_State;
   groupSpec: GroupSpec;
-  createdAt: bigint;
+  createdAt?: bigint;
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id: GroupIDSDKType;
-  state: Group_State;
+  state?: Group_State;
   group_spec: GroupSpecSDKType;
-  created_at: bigint;
+  created_at?: bigint;
 }
 function createBaseGroup(): Group {
   return {
     groupId: GroupID.fromPartial({}),
-    state: 0,
+    state: undefined,
     groupSpec: GroupSpec.fromPartial({}),
-    createdAt: BigInt(0)
+    createdAt: undefined
   };
 }
 export const Group = {
@@ -86,13 +86,13 @@ export const Group = {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(16).int32(message.state);
     }
     if (message.groupSpec !== undefined) {
       GroupSpec.encode(message.groupSpec, writer.uint32(26).fork()).ldelim();
     }
-    if (message.createdAt !== BigInt(0)) {
+    if (message.createdAt !== undefined) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
@@ -136,7 +136,9 @@ export const Group = {
     message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));
     message.groupSpec !== undefined && (obj.groupSpec = message.groupSpec ? GroupSpec.toJSON(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toString();
+    }
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
@@ -144,7 +146,7 @@ export const Group = {
     if (object.groupId !== undefined && object.groupId !== null) {
       message.groupId = GroupID.fromPartial(object.groupId);
     }
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     if (object.groupSpec !== undefined && object.groupSpec !== null) {
       message.groupSpec = GroupSpec.fromPartial(object.groupSpec);
     }
@@ -156,7 +158,7 @@ export const Group = {
   fromSDK(object: GroupSDKType): Group {
     return {
       groupId: object.group_id ? GroupID.fromSDK(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : undefined,
       groupSpec: object.group_spec ? GroupSpec.fromSDK(object.group_spec) : undefined,
       createdAt: object?.created_at
     };
@@ -164,9 +166,9 @@ export const Group = {
   fromSDKJSON(object: any): GroupSDKType {
     return {
       group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : undefined,
       group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : undefined
     };
   },
   toSDK(message: Group): GroupSDKType {
@@ -180,9 +182,9 @@ export const Group = {
   fromAmino(object: GroupAmino): Group {
     return {
       groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : undefined,
       groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
-      createdAt: BigInt(object.created_at)
+      createdAt: object?.created_at ? BigInt(object.created_at) : undefined
     };
   },
   toAmino(message: Group): GroupAmino {

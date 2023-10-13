@@ -5,80 +5,80 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
-  scope: string;
-  xid: string;
-  owner: string;
-  state: string;
-  pagination: PageRequest;
+  scope?: string;
+  xid?: string;
+  owner?: string;
+  state?: string;
+  pagination?: PageRequest;
 }
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestSDKType {
-  scope: string;
-  xid: string;
-  owner: string;
-  state: string;
-  pagination: PageRequestSDKType;
+  scope?: string;
+  xid?: string;
+  owner?: string;
+  state?: string;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponse {
   accounts: Account[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseSDKType {
   accounts: AccountSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequest {
-  scope: string;
-  xid: string;
-  id: string;
-  owner: string;
-  state: string;
-  pagination: PageRequest;
+  scope?: string;
+  xid?: string;
+  id?: string;
+  owner?: string;
+  state?: string;
+  pagination?: PageRequest;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestSDKType {
-  scope: string;
-  xid: string;
-  id: string;
-  owner: string;
-  state: string;
-  pagination: PageRequestSDKType;
+  scope?: string;
+  xid?: string;
+  id?: string;
+  owner?: string;
+  state?: string;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponse {
   payments: FractionalPayment[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseSDKType {
   payments: FractionalPaymentSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
-    scope: "",
-    xid: "",
-    owner: "",
-    state: "",
-    pagination: PageRequest.fromPartial({})
+    scope: undefined,
+    xid: undefined,
+    owner: undefined,
+    state: undefined,
+    pagination: undefined
   };
 }
 export const QueryAccountsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest",
   encode(message: QueryAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(34).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -135,10 +135,10 @@ export const QueryAccountsRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryAccountsRequest>, I>>(object: I): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
-    message.scope = object.scope ?? "";
-    message.xid = object.xid ?? "";
-    message.owner = object.owner ?? "";
-    message.state = object.state ?? "";
+    message.scope = object.scope ?? undefined;
+    message.xid = object.xid ?? undefined;
+    message.owner = object.owner ?? undefined;
+    message.state = object.state ?? undefined;
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -155,10 +155,10 @@ export const QueryAccountsRequest = {
   },
   fromSDKJSON(object: any): QueryAccountsRequestSDKType {
     return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? String(object.state) : "",
+      scope: isSet(object.scope) ? String(object.scope) : undefined,
+      xid: isSet(object.xid) ? String(object.xid) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      state: isSet(object.state) ? String(object.state) : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -173,10 +173,10 @@ export const QueryAccountsRequest = {
   },
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
     return {
-      scope: object.scope,
-      xid: object.xid,
-      owner: object.owner,
-      state: object.state,
+      scope: object?.scope,
+      xid: object?.xid,
+      owner: object?.owner,
+      state: object?.state,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -214,7 +214,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsResponse = {
@@ -334,30 +334,30 @@ export const QueryAccountsResponse = {
 };
 function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
   return {
-    scope: "",
-    xid: "",
-    id: "",
-    owner: "",
-    state: "",
-    pagination: PageRequest.fromPartial({})
+    scope: undefined,
+    xid: undefined,
+    id: undefined,
+    owner: undefined,
+    state: undefined,
+    pagination: undefined
   };
 }
 export const QueryPaymentsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest",
   encode(message: QueryPaymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(26).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(34).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(42).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -419,11 +419,11 @@ export const QueryPaymentsRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryPaymentsRequest>, I>>(object: I): QueryPaymentsRequest {
     const message = createBaseQueryPaymentsRequest();
-    message.scope = object.scope ?? "";
-    message.xid = object.xid ?? "";
-    message.id = object.id ?? "";
-    message.owner = object.owner ?? "";
-    message.state = object.state ?? "";
+    message.scope = object.scope ?? undefined;
+    message.xid = object.xid ?? undefined;
+    message.id = object.id ?? undefined;
+    message.owner = object.owner ?? undefined;
+    message.state = object.state ?? undefined;
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -441,11 +441,11 @@ export const QueryPaymentsRequest = {
   },
   fromSDKJSON(object: any): QueryPaymentsRequestSDKType {
     return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? String(object.state) : "",
+      scope: isSet(object.scope) ? String(object.scope) : undefined,
+      xid: isSet(object.xid) ? String(object.xid) : undefined,
+      id: isSet(object.id) ? String(object.id) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      state: isSet(object.state) ? String(object.state) : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -461,11 +461,11 @@ export const QueryPaymentsRequest = {
   },
   fromAmino(object: QueryPaymentsRequestAmino): QueryPaymentsRequest {
     return {
-      scope: object.scope,
-      xid: object.xid,
-      id: object.id,
-      owner: object.owner,
-      state: object.state,
+      scope: object?.scope,
+      xid: object?.xid,
+      id: object?.id,
+      owner: object?.owner,
+      state: object?.state,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -504,7 +504,7 @@ export const QueryPaymentsRequest = {
 function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
   return {
     payments: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryPaymentsResponse = {

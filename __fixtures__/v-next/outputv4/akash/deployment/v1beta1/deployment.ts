@@ -50,14 +50,14 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 export interface MsgCreateDeployment {
   id: DeploymentID | undefined;
   groups: GroupSpec[];
-  version: Uint8Array;
+  version?: Uint8Array;
   deposit: Coin | undefined;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
-  version: Uint8Array;
+  version?: Uint8Array;
   deposit: CoinSDKType | undefined;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
@@ -82,13 +82,13 @@ export interface MsgDepositDeploymentResponseSDKType {}
 export interface MsgUpdateDeployment {
   id: DeploymentID | undefined;
   groups: GroupSpec[];
-  version: Uint8Array;
+  version?: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
-  version: Uint8Array;
+  version?: Uint8Array;
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
@@ -108,45 +108,45 @@ export interface MsgCloseDeploymentResponse {}
 export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
-  owner: string;
-  dseq: bigint;
+  owner?: string;
+  dseq?: bigint;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
-  owner: string;
-  dseq: bigint;
+  owner?: string;
+  dseq?: bigint;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
   deploymentId: DeploymentID | undefined;
-  state: Deployment_State;
-  version: Uint8Array;
-  createdAt: bigint;
+  state?: Deployment_State;
+  version?: Uint8Array;
+  createdAt?: bigint;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType | undefined;
-  state: Deployment_State;
-  version: Uint8Array;
-  created_at: bigint;
+  state?: Deployment_State;
+  version?: Uint8Array;
+  created_at?: bigint;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFilters {
-  owner: string;
-  dseq: bigint;
-  state: string;
+  owner?: string;
+  dseq?: bigint;
+  state?: string;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
-  owner: string;
-  dseq: bigint;
-  state: string;
+  owner?: string;
+  dseq?: bigint;
+  state?: string;
 }
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   return {
     id: DeploymentID.fromPartial({}),
     groups: [],
-    version: new Uint8Array(),
+    version: undefined,
     deposit: Coin.fromPartial({})
   };
 }
@@ -159,7 +159,7 @@ export const MsgCreateDeployment = {
     for (const v of message.groups) {
       GroupSpec.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.version.length !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(26).bytes(message.version);
     }
     if (message.deposit !== undefined) {
@@ -209,7 +209,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
+    message.version !== undefined && (obj.version = message.version !== undefined ? base64FromBytes(message.version) : undefined);
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toJSON(message.deposit) : undefined);
     return obj;
   },
@@ -219,7 +219,7 @@ export const MsgCreateDeployment = {
       message.id = DeploymentID.fromPartial(object.id);
     }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
-    message.version = object.version ?? new Uint8Array();
+    message.version = object.version ?? undefined;
     if (object.deposit !== undefined && object.deposit !== null) {
       message.deposit = Coin.fromPartial(object.deposit);
     }
@@ -237,7 +237,7 @@ export const MsgCreateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      version: isSet(object.version) ? bytesFromBase64(object.version) : undefined,
       deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined
     };
   },
@@ -257,7 +257,7 @@ export const MsgCreateDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
+      version: object?.version,
       deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
     };
   },
@@ -556,7 +556,7 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
     id: DeploymentID.fromPartial({}),
     groups: [],
-    version: new Uint8Array()
+    version: undefined
   };
 }
 export const MsgUpdateDeployment = {
@@ -568,7 +568,7 @@ export const MsgUpdateDeployment = {
     for (const v of message.groups) {
       GroupSpec.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.version.length !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(26).bytes(message.version);
     }
     return writer;
@@ -611,7 +611,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
+    message.version !== undefined && (obj.version = message.version !== undefined ? base64FromBytes(message.version) : undefined);
     return obj;
   },
   fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
@@ -620,7 +620,7 @@ export const MsgUpdateDeployment = {
       message.id = DeploymentID.fromPartial(object.id);
     }
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
-    message.version = object.version ?? new Uint8Array();
+    message.version = object.version ?? undefined;
     return message;
   },
   fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
@@ -634,7 +634,7 @@ export const MsgUpdateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
+      version: isSet(object.version) ? bytesFromBase64(object.version) : undefined
     };
   },
   toSDK(message: MsgUpdateDeployment): MsgUpdateDeploymentSDKType {
@@ -652,7 +652,7 @@ export const MsgUpdateDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version
+      version: object?.version
     };
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
@@ -930,17 +930,17 @@ export const MsgCloseDeploymentResponse = {
 };
 function createBaseDeploymentID(): DeploymentID {
   return {
-    owner: "",
-    dseq: BigInt(0)
+    owner: undefined,
+    dseq: undefined
   };
 }
 export const DeploymentID = {
   typeUrl: "/akash.deployment.v1beta1.DeploymentID",
   encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
     return writer;
@@ -974,12 +974,14 @@ export const DeploymentID = {
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
+    if (message.dseq !== undefined) {
+      obj.dseq = message.dseq.toString();
+    }
     return obj;
   },
   fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
-    message.owner = object.owner ?? "";
+    message.owner = object.owner ?? undefined;
     if (object.dseq !== undefined && object.dseq !== null) {
       message.dseq = BigInt(object.dseq.toString());
     }
@@ -993,8 +995,8 @@ export const DeploymentID = {
   },
   fromSDKJSON(object: any): DeploymentIDSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0)
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : undefined
     };
   },
   toSDK(message: DeploymentID): DeploymentIDSDKType {
@@ -1005,8 +1007,8 @@ export const DeploymentID = {
   },
   fromAmino(object: DeploymentIDAmino): DeploymentID {
     return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq)
+      owner: object?.owner,
+      dseq: object?.dseq ? BigInt(object.dseq) : undefined
     };
   },
   toAmino(message: DeploymentID): DeploymentIDAmino {
@@ -1040,9 +1042,9 @@ export const DeploymentID = {
 function createBaseDeployment(): Deployment {
   return {
     deploymentId: DeploymentID.fromPartial({}),
-    state: 0,
-    version: new Uint8Array(),
-    createdAt: BigInt(0)
+    state: undefined,
+    version: undefined,
+    createdAt: undefined
   };
 }
 export const Deployment = {
@@ -1051,13 +1053,13 @@ export const Deployment = {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(16).int32(message.state);
     }
-    if (message.version.length !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(26).bytes(message.version);
     }
-    if (message.createdAt !== BigInt(0)) {
+    if (message.createdAt !== undefined) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
@@ -1100,8 +1102,10 @@ export const Deployment = {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
+    message.version !== undefined && (obj.version = message.version !== undefined ? base64FromBytes(message.version) : undefined);
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toString();
+    }
     return obj;
   },
   fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
@@ -1109,8 +1113,8 @@ export const Deployment = {
     if (object.deploymentId !== undefined && object.deploymentId !== null) {
       message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
     }
-    message.state = object.state ?? 0;
-    message.version = object.version ?? new Uint8Array();
+    message.state = object.state ?? undefined;
+    message.version = object.version ?? undefined;
     if (object.createdAt !== undefined && object.createdAt !== null) {
       message.createdAt = BigInt(object.createdAt.toString());
     }
@@ -1119,7 +1123,7 @@ export const Deployment = {
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
       deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : undefined,
       version: object?.version,
       createdAt: object?.created_at
     };
@@ -1127,9 +1131,9 @@ export const Deployment = {
   fromSDKJSON(object: any): DeploymentSDKType {
     return {
       deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : undefined,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : undefined,
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : undefined
     };
   },
   toSDK(message: Deployment): DeploymentSDKType {
@@ -1143,9 +1147,9 @@ export const Deployment = {
   fromAmino(object: DeploymentAmino): Deployment {
     return {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
-      createdAt: BigInt(object.created_at)
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : undefined,
+      version: object?.version,
+      createdAt: object?.created_at ? BigInt(object.created_at) : undefined
     };
   },
   toAmino(message: Deployment): DeploymentAmino {
@@ -1180,21 +1184,21 @@ export const Deployment = {
 };
 function createBaseDeploymentFilters(): DeploymentFilters {
   return {
-    owner: "",
-    dseq: BigInt(0),
-    state: ""
+    owner: undefined,
+    dseq: undefined,
+    state: undefined
   };
 }
 export const DeploymentFilters = {
   typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
   encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(26).string(message.state);
     }
     return writer;
@@ -1232,17 +1236,19 @@ export const DeploymentFilters = {
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
+    if (message.dseq !== undefined) {
+      obj.dseq = message.dseq.toString();
+    }
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
   fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
-    message.owner = object.owner ?? "";
+    message.owner = object.owner ?? undefined;
     if (object.dseq !== undefined && object.dseq !== null) {
       message.dseq = BigInt(object.dseq.toString());
     }
-    message.state = object.state ?? "";
+    message.state = object.state ?? undefined;
     return message;
   },
   fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
@@ -1254,9 +1260,9 @@ export const DeploymentFilters = {
   },
   fromSDKJSON(object: any): DeploymentFiltersSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      state: isSet(object.state) ? String(object.state) : ""
+      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : undefined,
+      state: isSet(object.state) ? String(object.state) : undefined
     };
   },
   toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
@@ -1268,9 +1274,9 @@ export const DeploymentFilters = {
   },
   fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
     return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      state: object.state
+      owner: object?.owner,
+      dseq: object?.dseq ? BigInt(object.dseq) : undefined,
+      state: object?.state
     };
   },
   toAmino(message: DeploymentFilters): DeploymentFiltersAmino {

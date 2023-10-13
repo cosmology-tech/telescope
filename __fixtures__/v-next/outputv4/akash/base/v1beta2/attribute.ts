@@ -3,13 +3,13 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
 export interface Attribute {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -19,9 +19,9 @@ export interface AttributeSDKType {
  */
 export interface SignedBy {
   /** all_of all keys in this list must have signed attributes */
-  allOf: string[];
+  allOf?: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  anyOf: string[];
+  anyOf?: string[];
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -30,8 +30,8 @@ export interface SignedBy {
  * this behaviour to be discussed
  */
 export interface SignedBySDKType {
-  all_of: string[];
-  any_of: string[];
+  all_of?: string[];
+  any_of?: string[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirements {
@@ -47,17 +47,17 @@ export interface PlacementRequirementsSDKType {
 }
 function createBaseAttribute(): Attribute {
   return {
-    key: "",
-    value: ""
+    key: undefined,
+    value: undefined
   };
 }
 export const Attribute = {
   typeUrl: "/akash.base.v1beta2.Attribute",
   encode(message: Attribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -96,8 +96,8 @@ export const Attribute = {
   },
   fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(object: I): Attribute {
     const message = createBaseAttribute();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
     return message;
   },
   fromSDK(object: AttributeSDKType): Attribute {
@@ -108,8 +108,8 @@ export const Attribute = {
   },
   fromSDKJSON(object: any): AttributeSDKType {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
+      key: isSet(object.key) ? String(object.key) : undefined,
+      value: isSet(object.value) ? String(object.value) : undefined
     };
   },
   toSDK(message: Attribute): AttributeSDKType {
@@ -120,8 +120,8 @@ export const Attribute = {
   },
   fromAmino(object: AttributeAmino): Attribute {
     return {
-      key: object.key,
-      value: object.value
+      key: object?.key,
+      value: object?.value
     };
   },
   toAmino(message: Attribute): AttributeAmino {
@@ -154,8 +154,8 @@ export const Attribute = {
 };
 function createBaseSignedBy(): SignedBy {
   return {
-    allOf: [],
-    anyOf: []
+    allOf: undefined,
+    anyOf: undefined
   };
 }
 export const SignedBy = {

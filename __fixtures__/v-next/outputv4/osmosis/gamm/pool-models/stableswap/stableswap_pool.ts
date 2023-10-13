@@ -25,8 +25,8 @@ export interface PoolParamsSDKType {
 }
 /** Pool is the stableswap Pool struct */
 export interface Pool {
-  address: string;
-  id: bigint;
+  address?: string;
+  id?: bigint;
   poolParams: PoolParams;
   /**
    * This string specifies who will govern the pool in the future.
@@ -38,26 +38,26 @@ export interface Pool {
    * a time specified as 0w,1w,2w, etc. which specifies how long the token
    * would need to be locked up to count in governance. 0w means no lockup.
    */
-  futurePoolGovernor: string;
+  futurePoolGovernor?: string;
   /** sum of all LP shares */
   totalShares: Coin;
   /** assets in the pool */
   poolLiquidity: Coin[];
   /** for calculation amognst assets with different precisions */
-  scalingFactors: bigint[];
+  scalingFactors?: bigint[];
   /** scaling_factor_controller is the address can adjust pool scaling factors */
-  scalingFactorController: string;
+  scalingFactorController?: string;
 }
 /** Pool is the stableswap Pool struct */
 export interface PoolSDKType {
-  address: string;
-  id: bigint;
+  address?: string;
+  id?: bigint;
   pool_params: PoolParamsSDKType;
-  future_pool_governor: string;
+  future_pool_governor?: string;
   total_shares: CoinSDKType;
   pool_liquidity: CoinSDKType[];
-  scaling_factors: bigint[];
-  scaling_factor_controller: string;
+  scaling_factors?: bigint[];
+  scaling_factor_controller?: string;
 }
 function createBasePoolParams(): PoolParams {
   return {
@@ -168,29 +168,29 @@ export const PoolParams = {
 };
 function createBasePool(): Pool {
   return {
-    address: "",
-    id: BigInt(0),
+    address: undefined,
+    id: undefined,
     poolParams: PoolParams.fromPartial({}),
-    futurePoolGovernor: "",
+    futurePoolGovernor: undefined,
     totalShares: Coin.fromPartial({}),
     poolLiquidity: [],
-    scalingFactors: [],
-    scalingFactorController: ""
+    scalingFactors: undefined,
+    scalingFactorController: undefined
   };
 }
 export const Pool = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     if (message.totalShares !== undefined) {
@@ -204,7 +204,7 @@ export const Pool = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.scalingFactorController !== "") {
+    if (message.scalingFactorController !== undefined) {
       writer.uint32(66).string(message.scalingFactorController);
     }
     return writer;
@@ -269,7 +269,9 @@ export const Pool = {
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
+    if (message.id !== undefined) {
+      obj.id = message.id.toString();
+    }
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
@@ -279,7 +281,7 @@ export const Pool = {
       obj.poolLiquidity = [];
     }
     if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt(0)).toString());
+      obj.scalingFactors = message.scalingFactors.map(e => (e || undefined).toString());
     } else {
       obj.scalingFactors = [];
     }
@@ -288,20 +290,20 @@ export const Pool = {
   },
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     if (object.id !== undefined && object.id !== null) {
       message.id = BigInt(object.id.toString());
     }
     if (object.poolParams !== undefined && object.poolParams !== null) {
       message.poolParams = PoolParams.fromPartial(object.poolParams);
     }
-    message.futurePoolGovernor = object.futurePoolGovernor ?? "";
+    message.futurePoolGovernor = object.futurePoolGovernor ?? undefined;
     if (object.totalShares !== undefined && object.totalShares !== null) {
       message.totalShares = Coin.fromPartial(object.totalShares);
     }
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
-    message.scalingFactorController = object.scalingFactorController ?? "";
+    message.scalingFactorController = object.scalingFactorController ?? undefined;
     return message;
   },
   fromSDK(object: PoolSDKType): Pool {
@@ -318,14 +320,14 @@ export const Pool = {
   },
   fromSDKJSON(object: any): PoolSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      address: isSet(object.address) ? String(object.address) : undefined,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined,
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : undefined,
       total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
       pool_liquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
       scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : [],
-      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
+      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : undefined
     };
   },
   toSDK(message: Pool): PoolSDKType {
@@ -350,14 +352,14 @@ export const Pool = {
   },
   fromAmino(object: PoolAmino): Pool {
     return {
-      address: object.address,
-      id: BigInt(object.id),
+      address: object?.address,
+      id: object?.id ? BigInt(object.id) : undefined,
       poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
+      futurePoolGovernor: object?.future_pool_governor,
       totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
       poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : [],
-      scalingFactorController: object.scaling_factor_controller
+      scalingFactorController: object?.scaling_factor_controller
     };
   },
   toAmino(message: Pool): PoolAmino {

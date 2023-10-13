@@ -3,14 +3,14 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   changes: ParamChange[];
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   changes: ParamChangeSDKType[];
 }
 /**
@@ -18,33 +18,33 @@ export interface ParameterChangeProposalSDKType {
  * ParameterChangeProposal.
  */
 export interface ParamChange {
-  subspace: string;
-  key: string;
-  value: string;
+  subspace?: string;
+  key?: string;
+  value?: string;
 }
 /**
  * ParamChange defines an individual parameter change, for use in
  * ParameterChangeProposal.
  */
 export interface ParamChangeSDKType {
-  subspace: string;
-  key: string;
-  value: string;
+  subspace?: string;
+  key?: string;
+  value?: string;
 }
 function createBaseParameterChangeProposal(): ParameterChangeProposal {
   return {
-    title: "",
-    description: "",
+    title: undefined,
+    description: undefined,
     changes: []
   };
 }
 export const ParameterChangeProposal = {
   typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal",
   encode(message: ParameterChangeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.changes) {
@@ -95,8 +95,8 @@ export const ParameterChangeProposal = {
   },
   fromPartial(object: DeepPartial<ParameterChangeProposal>): ParameterChangeProposal {
     const message = createBaseParameterChangeProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
+    message.title = object.title ?? undefined;
+    message.description = object.description ?? undefined;
     message.changes = object.changes?.map(e => ParamChange.fromPartial(e)) || [];
     return message;
   },
@@ -109,8 +109,8 @@ export const ParameterChangeProposal = {
   },
   fromSDKJSON(object: any): ParameterChangeProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      title: isSet(object.title) ? String(object.title) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined,
       changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromSDKJSON(e)) : []
     };
   },
@@ -127,8 +127,8 @@ export const ParameterChangeProposal = {
   },
   fromAmino(object: ParameterChangeProposalAmino): ParameterChangeProposal {
     return {
-      title: object.title,
-      description: object.description,
+      title: object?.title,
+      description: object?.description,
       changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromAmino(e)) : []
     };
   },
@@ -167,21 +167,21 @@ export const ParameterChangeProposal = {
 };
 function createBaseParamChange(): ParamChange {
   return {
-    subspace: "",
-    key: "",
-    value: ""
+    subspace: undefined,
+    key: undefined,
+    value: undefined
   };
 }
 export const ParamChange = {
   typeUrl: "/cosmos.params.v1beta1.ParamChange",
   encode(message: ParamChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
     }
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(18).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(26).string(message.value);
     }
     return writer;
@@ -225,9 +225,9 @@ export const ParamChange = {
   },
   fromPartial(object: DeepPartial<ParamChange>): ParamChange {
     const message = createBaseParamChange();
-    message.subspace = object.subspace ?? "";
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
+    message.subspace = object.subspace ?? undefined;
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
     return message;
   },
   fromSDK(object: ParamChangeSDKType): ParamChange {
@@ -239,9 +239,9 @@ export const ParamChange = {
   },
   fromSDKJSON(object: any): ParamChangeSDKType {
     return {
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
+      subspace: isSet(object.subspace) ? String(object.subspace) : undefined,
+      key: isSet(object.key) ? String(object.key) : undefined,
+      value: isSet(object.value) ? String(object.value) : undefined
     };
   },
   toSDK(message: ParamChange): ParamChangeSDKType {
@@ -253,9 +253,9 @@ export const ParamChange = {
   },
   fromAmino(object: ParamChangeAmino): ParamChange {
     return {
-      subspace: object.subspace,
-      key: object.key,
-      value: object.value
+      subspace: object?.subspace,
+      key: object?.key,
+      value: object?.value
     };
   },
   toAmino(message: ParamChange): ParamChangeAmino {

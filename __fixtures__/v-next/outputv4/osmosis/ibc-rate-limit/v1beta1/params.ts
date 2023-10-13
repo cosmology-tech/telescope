@@ -3,21 +3,21 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
-  contractAddress: string;
+  contractAddress?: string;
 }
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
-  contract_address: string;
+  contract_address?: string;
 }
 function createBaseParams(): Params {
   return {
-    contractAddress: ""
+    contractAddress: undefined
   };
 }
 export const Params = {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
@@ -51,7 +51,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.contractAddress = object.contractAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -61,7 +61,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -71,7 +71,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      contractAddress: object.contract_address
+      contractAddress: object?.contract_address
     };
   },
   toAmino(message: Params): ParamsAmino {

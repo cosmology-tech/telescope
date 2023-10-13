@@ -166,30 +166,30 @@ export interface Service {
    * A valid name would be:
    * - `projects/123/services/serviceusage.googleapis.com`
    */
-  name: string;
+  name?: string;
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - `projects/123`
    */
-  parent: string;
+  parent?: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config: ServiceConfig;
+  config?: ServiceConfig;
   /** Whether or not the service has been enabled for use by the consumer. */
-  state: State;
+  state?: State;
 }
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
-  name: string;
-  parent: string;
-  config: ServiceConfigSDKType;
-  state: State;
+  name?: string;
+  parent?: string;
+  config?: ServiceConfigSDKType;
+  state?: State;
 }
 /** The configuration of the service. */
 export interface ServiceConfig {
@@ -199,53 +199,53 @@ export interface ServiceConfig {
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis: Api[];
+  apis?: Api[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
-  documentation: Documentation;
+  documentation?: Documentation;
   /** Quota configuration. */
-  quota: Quota;
+  quota?: Quota;
   /** Auth configuration. Contains only the OAuth rules. */
-  authentication: Authentication;
+  authentication?: Authentication;
   /** Configuration controlling usage of this service. */
-  usage: Usage;
+  usage?: Usage;
   /**
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints: Endpoint[];
+  endpoints?: Endpoint[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitoredResources: MonitoredResourceDescriptor[];
+  monitoredResources?: MonitoredResourceDescriptor[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
-  monitoring: Monitoring;
+  monitoring?: Monitoring;
 }
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
-  name: string;
-  title: string;
-  apis: ApiSDKType[];
-  documentation: DocumentationSDKType;
-  quota: QuotaSDKType;
-  authentication: AuthenticationSDKType;
-  usage: UsageSDKType;
-  endpoints: EndpointSDKType[];
-  monitored_resources: MonitoredResourceDescriptorSDKType[];
-  monitoring: MonitoringSDKType;
+  name?: string;
+  title?: string;
+  apis?: ApiSDKType[];
+  documentation?: DocumentationSDKType;
+  quota?: QuotaSDKType;
+  authentication?: AuthenticationSDKType;
+  usage?: UsageSDKType;
+  endpoints?: EndpointSDKType[];
+  monitored_resources?: MonitoredResourceDescriptorSDKType[];
+  monitoring?: MonitoringSDKType;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadata {
@@ -253,11 +253,11 @@ export interface OperationMetadata {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resourceNames: string[];
+  resourceNames?: string[];
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
-  resource_names: string[];
+  resource_names?: string[];
 }
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetric {
@@ -270,23 +270,23 @@ export interface ConsumerQuotaMetric {
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
-  name: string;
+  name?: string;
   /**
    * The name of the metric.
    * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The display name of the metric.
    * 
    * An example name would be:
    * `CPUs`
    */
-  displayName: string;
+  displayName?: string;
   /** The consumer quota for each quota limit defined on the metric. */
-  consumerQuotaLimits: ConsumerQuotaLimit[];
+  consumerQuotaLimits?: ConsumerQuotaLimit[];
   /**
    * The quota limits targeting the descendant containers of the
    * consumer in request.
@@ -298,18 +298,18 @@ export interface ConsumerQuotaMetric {
    * The `quota_buckets` field of each descendant consumer quota limit will not
    * be populated.
    */
-  descendantConsumerQuotaLimits: ConsumerQuotaLimit[];
+  descendantConsumerQuotaLimits?: ConsumerQuotaLimit[];
   /** The units in which the metric value is reported. */
-  unit: string;
+  unit?: string;
 }
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetricSDKType {
-  name: string;
-  metric: string;
-  display_name: string;
-  consumer_quota_limits: ConsumerQuotaLimitSDKType[];
-  descendant_consumer_quota_limits: ConsumerQuotaLimitSDKType[];
-  unit: string;
+  name?: string;
+  metric?: string;
+  display_name?: string;
+  consumer_quota_limits?: ConsumerQuotaLimitSDKType[];
+  descendant_consumer_quota_limits?: ConsumerQuotaLimitSDKType[];
+  unit?: string;
 }
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimit {
@@ -322,14 +322,14 @@ export interface ConsumerQuotaLimit {
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
-  name: string;
+  name?: string;
   /**
    * The name of the parent metric of this limit.
    * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The limit unit.
    * 
@@ -338,26 +338,26 @@ export interface ConsumerQuotaLimit {
    * Note that `{project}` and `{region}` are not placeholders in this example;
    * the literal characters `{` and `}` occur in the string.
    */
-  unit: string;
+  unit?: string;
   /** Whether this limit is precise or imprecise. */
-  isPrecise: boolean;
+  isPrecise?: boolean;
   /** Whether admin overrides are allowed on this limit */
-  allowsAdminOverrides: boolean;
+  allowsAdminOverrides?: boolean;
   /**
    * Summary of the enforced quota buckets, organized by quota dimension,
    * ordered from least specific to most specific (for example, the global
    * default bucket, with no quota dimensions, will always appear first).
    */
-  quotaBuckets: QuotaBucket[];
+  quotaBuckets?: QuotaBucket[];
 }
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
-  name: string;
-  metric: string;
-  unit: string;
-  is_precise: boolean;
-  allows_admin_overrides: boolean;
-  quota_buckets: QuotaBucketSDKType[];
+  name?: string;
+  metric?: string;
+  unit?: string;
+  is_precise?: boolean;
+  allows_admin_overrides?: boolean;
+  quota_buckets?: QuotaBucketSDKType[];
 }
 export interface QuotaBucket_DimensionsEntry {
   key: string;
@@ -373,18 +373,18 @@ export interface QuotaBucket {
    * The effective limit of this quota bucket. Equal to default_limit if there
    * are no overrides.
    */
-  effectiveLimit: bigint;
+  effectiveLimit?: bigint;
   /**
    * The default limit of this quota bucket, as specified by the service
    * configuration.
    */
-  defaultLimit: bigint;
+  defaultLimit?: bigint;
   /** Producer override on this quota bucket. */
-  producerOverride: QuotaOverride;
+  producerOverride?: QuotaOverride;
   /** Consumer override on this quota bucket. */
-  consumerOverride: QuotaOverride;
+  consumerOverride?: QuotaOverride;
   /** Admin override on this quota bucket. */
-  adminOverride: QuotaOverride;
+  adminOverride?: QuotaOverride;
   /**
    * The dimensions of this quota bucket.
    * 
@@ -398,18 +398,18 @@ export interface QuotaBucket {
    * specified effective limit is only effective in that region, and the
    * specified overrides apply only in that region.
    */
-  dimensions: {
+  dimensions?: {
     [key: string]: string;
   };
 }
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
-  effective_limit: bigint;
-  default_limit: bigint;
-  producer_override: QuotaOverrideSDKType;
-  consumer_override: QuotaOverrideSDKType;
-  admin_override: QuotaOverrideSDKType;
-  dimensions: {
+  effective_limit?: bigint;
+  default_limit?: bigint;
+  producer_override?: QuotaOverrideSDKType;
+  consumer_override?: QuotaOverrideSDKType;
+  admin_override?: QuotaOverrideSDKType;
+  dimensions?: {
     [key: string]: string;
   };
 }
@@ -434,12 +434,12 @@ export interface QuotaOverride {
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
-  name: string;
+  name?: string;
   /**
    * The overriding quota limit value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  overrideValue: bigint;
+  overrideValue?: bigint;
   /**
    * If this map is nonempty, then this override applies only to specific values
    * for dimensions defined in the limit unit.
@@ -464,7 +464,7 @@ export interface QuotaOverride {
    *     all valid keys other than `region` or `zone` must also appear in the
    *     map.
    */
-  dimensions: {
+  dimensions?: {
     [key: string]: string;
   };
   /**
@@ -473,7 +473,7 @@ export interface QuotaOverride {
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The limit unit of the limit to which this override applies.
    * 
@@ -482,24 +482,24 @@ export interface QuotaOverride {
    * Note that `{project}` and `{region}` are not placeholders in this example;
    * the literal characters `{` and `}` occur in the string.
    */
-  unit: string;
+  unit?: string;
   /**
    * The resource name of the ancestor that requested the override. For example:
    * `organizations/12345` or `folders/67890`.
    * Used by admin overrides only.
    */
-  adminOverrideAncestor: string;
+  adminOverrideAncestor?: string;
 }
 /** A quota override */
 export interface QuotaOverrideSDKType {
-  name: string;
-  override_value: bigint;
-  dimensions: {
+  name?: string;
+  override_value?: bigint;
+  dimensions?: {
     [key: string]: string;
   };
-  metric: string;
-  unit: string;
-  admin_override_ancestor: string;
+  metric?: string;
+  unit?: string;
+  admin_override_ancestor?: string;
 }
 /** Import data embedded in the request message */
 export interface OverrideInlineSource {
@@ -509,11 +509,11 @@ export interface OverrideInlineSource {
    * which metric and which limit the override should be applied to.
    * The 'name' field of the override does not need to be set; it is ignored.
    */
-  overrides: QuotaOverride[];
+  overrides?: QuotaOverride[];
 }
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
-  overrides: QuotaOverrideSDKType[];
+  overrides?: QuotaOverrideSDKType[];
 }
 export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
@@ -532,12 +532,12 @@ export interface AdminQuotaPolicy {
    * Example names would be:
    * `organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * The quota policy value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  policyValue: bigint;
+  policyValue?: bigint;
   /**
    * If this map is nonempty, then this policy applies only to specific values
    * for dimensions defined in the limit unit.
@@ -552,7 +552,7 @@ export interface AdminQuotaPolicy {
    * *   If `zone` appears as a key, its value must be a valid Cloud zone.
    * *   Keys other than `region` or `zone` are not valid.
    */
-  dimensions: {
+  dimensions?: {
     [key: string]: string;
   };
   /**
@@ -561,7 +561,7 @@ export interface AdminQuotaPolicy {
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The limit unit of the limit to which this policy applies.
    * 
@@ -570,23 +570,23 @@ export interface AdminQuotaPolicy {
    * Note that `{project}` and `{region}` are not placeholders in this example;
    * the literal characters `{` and `}` occur in the string.
    */
-  unit: string;
+  unit?: string;
   /**
    * The cloud resource container at which the quota policy is created. The
    * format is `{container_type}/{container_number}`
    */
-  container: string;
+  container?: string;
 }
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
-  name: string;
-  policy_value: bigint;
-  dimensions: {
+  name?: string;
+  policy_value?: bigint;
+  dimensions?: {
     [key: string]: string;
   };
-  metric: string;
-  unit: string;
-  container: string;
+  metric?: string;
+  unit?: string;
+  container?: string;
 }
 /**
  * Service identity for a service. This is the identity that service producer
@@ -597,42 +597,42 @@ export interface ServiceIdentity {
    * The email address of the service account that a service producer would use
    * to access consumer resources.
    */
-  email: string;
+  email?: string;
   /**
    * The unique and stable id of the service account.
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
-  uniqueId: string;
+  uniqueId?: string;
 }
 /**
  * Service identity for a service. This is the identity that service producer
  * should use to access consumer resources.
  */
 export interface ServiceIdentitySDKType {
-  email: string;
-  unique_id: string;
+  email?: string;
+  unique_id?: string;
 }
 function createBaseService(): Service {
   return {
-    name: "",
-    parent: "",
-    config: ServiceConfig.fromPartial({}),
-    state: 0
+    name: undefined,
+    parent: undefined,
+    config: undefined,
+    state: undefined
   };
 }
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1beta1.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(42).string(message.parent);
     }
     if (message.config !== undefined) {
       ServiceConfig.encode(message.config, writer.uint32(18).fork()).ldelim();
     }
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(32).int32(message.state);
     }
     return writer;
@@ -681,12 +681,12 @@ export const Service = {
   },
   fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
-    message.name = object.name ?? "";
-    message.parent = object.parent ?? "";
+    message.name = object.name ?? undefined;
+    message.parent = object.parent ?? undefined;
     if (object.config !== undefined && object.config !== null) {
       message.config = ServiceConfig.fromPartial(object.config);
     }
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     return message;
   },
   fromSDK(object: ServiceSDKType): Service {
@@ -694,15 +694,15 @@ export const Service = {
       name: object?.name,
       parent: object?.parent,
       config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined
     };
   },
   fromSDKJSON(object: any): ServiceSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parent: isSet(object.parent) ? String(object.parent) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : undefined,
       config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined
     };
   },
   toSDK(message: Service): ServiceSDKType {
@@ -715,10 +715,10 @@ export const Service = {
   },
   fromAmino(object: ServiceAmino): Service {
     return {
-      name: object.name,
-      parent: object.parent,
+      name: object?.name,
+      parent: object?.parent,
       config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
+      state: isSet(object.state) ? stateFromJSON(object.state) : undefined
     };
   },
   toAmino(message: Service): ServiceAmino {
@@ -747,25 +747,25 @@ export const Service = {
 };
 function createBaseServiceConfig(): ServiceConfig {
   return {
-    name: "",
-    title: "",
-    apis: [],
-    documentation: Documentation.fromPartial({}),
-    quota: Quota.fromPartial({}),
-    authentication: Authentication.fromPartial({}),
-    usage: Usage.fromPartial({}),
-    endpoints: [],
-    monitoredResources: [],
-    monitoring: Monitoring.fromPartial({})
+    name: undefined,
+    title: undefined,
+    apis: undefined,
+    documentation: undefined,
+    quota: undefined,
+    authentication: undefined,
+    usage: undefined,
+    endpoints: undefined,
+    monitoredResources: undefined,
+    monitoring: undefined
   };
 }
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
   encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(18).string(message.title);
     }
     for (const v of message.apis) {
@@ -880,8 +880,8 @@ export const ServiceConfig = {
   },
   fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
     const message = createBaseServiceConfig();
-    message.name = object.name ?? "";
-    message.title = object.title ?? "";
+    message.name = object.name ?? undefined;
+    message.title = object.title ?? undefined;
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     if (object.documentation !== undefined && object.documentation !== null) {
       message.documentation = Documentation.fromPartial(object.documentation);
@@ -918,8 +918,8 @@ export const ServiceConfig = {
   },
   fromSDKJSON(object: any): ServiceConfigSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      title: isSet(object.title) ? String(object.title) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
+      title: isSet(object.title) ? String(object.title) : undefined,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
       documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
       quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
@@ -958,8 +958,8 @@ export const ServiceConfig = {
   },
   fromAmino(object: ServiceConfigAmino): ServiceConfig {
     return {
-      name: object.name,
-      title: object.title,
+      name: object?.name,
+      title: object?.title,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
       documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
       quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
@@ -1014,7 +1014,7 @@ export const ServiceConfig = {
 };
 function createBaseOperationMetadata(): OperationMetadata {
   return {
-    resourceNames: []
+    resourceNames: undefined
   };
 }
 export const OperationMetadata = {
@@ -1112,24 +1112,24 @@ export const OperationMetadata = {
 };
 function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
   return {
-    name: "",
-    metric: "",
-    displayName: "",
-    consumerQuotaLimits: [],
-    descendantConsumerQuotaLimits: [],
-    unit: ""
+    name: undefined,
+    metric: undefined,
+    displayName: undefined,
+    consumerQuotaLimits: undefined,
+    descendantConsumerQuotaLimits: undefined,
+    unit: undefined
   };
 }
 export const ConsumerQuotaMetric = {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
   encode(message: ConsumerQuotaMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(34).string(message.metric);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(18).string(message.displayName);
     }
     for (const v of message.consumerQuotaLimits) {
@@ -1138,7 +1138,7 @@ export const ConsumerQuotaMetric = {
     for (const v of message.descendantConsumerQuotaLimits) {
       ConsumerQuotaLimit.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
     return writer;
@@ -1205,12 +1205,12 @@ export const ConsumerQuotaMetric = {
   },
   fromPartial(object: DeepPartial<ConsumerQuotaMetric>): ConsumerQuotaMetric {
     const message = createBaseConsumerQuotaMetric();
-    message.name = object.name ?? "";
-    message.metric = object.metric ?? "";
-    message.displayName = object.displayName ?? "";
+    message.name = object.name ?? undefined;
+    message.metric = object.metric ?? undefined;
+    message.displayName = object.displayName ?? undefined;
     message.consumerQuotaLimits = object.consumerQuotaLimits?.map(e => ConsumerQuotaLimit.fromPartial(e)) || [];
     message.descendantConsumerQuotaLimits = object.descendantConsumerQuotaLimits?.map(e => ConsumerQuotaLimit.fromPartial(e)) || [];
-    message.unit = object.unit ?? "";
+    message.unit = object.unit ?? undefined;
     return message;
   },
   fromSDK(object: ConsumerQuotaMetricSDKType): ConsumerQuotaMetric {
@@ -1225,12 +1225,12 @@ export const ConsumerQuotaMetric = {
   },
   fromSDKJSON(object: any): ConsumerQuotaMetricSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      display_name: isSet(object.display_name) ? String(object.display_name) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
+      metric: isSet(object.metric) ? String(object.metric) : undefined,
+      display_name: isSet(object.display_name) ? String(object.display_name) : undefined,
       consumer_quota_limits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
       descendant_consumer_quota_limits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
-      unit: isSet(object.unit) ? String(object.unit) : ""
+      unit: isSet(object.unit) ? String(object.unit) : undefined
     };
   },
   toSDK(message: ConsumerQuotaMetric): ConsumerQuotaMetricSDKType {
@@ -1253,12 +1253,12 @@ export const ConsumerQuotaMetric = {
   },
   fromAmino(object: ConsumerQuotaMetricAmino): ConsumerQuotaMetric {
     return {
-      name: object.name,
-      metric: object.metric,
-      displayName: object.display_name,
+      name: object?.name,
+      metric: object?.metric,
+      displayName: object?.display_name,
       consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
       descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
-      unit: object.unit
+      unit: object?.unit
     };
   },
   toAmino(message: ConsumerQuotaMetric): ConsumerQuotaMetricAmino {
@@ -1297,30 +1297,30 @@ export const ConsumerQuotaMetric = {
 };
 function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
   return {
-    name: "",
-    metric: "",
-    unit: "",
-    isPrecise: false,
-    allowsAdminOverrides: false,
-    quotaBuckets: []
+    name: undefined,
+    metric: undefined,
+    unit: undefined,
+    isPrecise: undefined,
+    allowsAdminOverrides: undefined,
+    quotaBuckets: undefined
   };
 }
 export const ConsumerQuotaLimit = {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
   encode(message: ConsumerQuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(66).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(18).string(message.unit);
     }
-    if (message.isPrecise === true) {
+    if (message.isPrecise !== undefined) {
       writer.uint32(24).bool(message.isPrecise);
     }
-    if (message.allowsAdminOverrides === true) {
+    if (message.allowsAdminOverrides !== undefined) {
       writer.uint32(56).bool(message.allowsAdminOverrides);
     }
     for (const v of message.quotaBuckets) {
@@ -1386,11 +1386,11 @@ export const ConsumerQuotaLimit = {
   },
   fromPartial(object: DeepPartial<ConsumerQuotaLimit>): ConsumerQuotaLimit {
     const message = createBaseConsumerQuotaLimit();
-    message.name = object.name ?? "";
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.isPrecise = object.isPrecise ?? false;
-    message.allowsAdminOverrides = object.allowsAdminOverrides ?? false;
+    message.name = object.name ?? undefined;
+    message.metric = object.metric ?? undefined;
+    message.unit = object.unit ?? undefined;
+    message.isPrecise = object.isPrecise ?? undefined;
+    message.allowsAdminOverrides = object.allowsAdminOverrides ?? undefined;
     message.quotaBuckets = object.quotaBuckets?.map(e => QuotaBucket.fromPartial(e)) || [];
     return message;
   },
@@ -1406,11 +1406,11 @@ export const ConsumerQuotaLimit = {
   },
   fromSDKJSON(object: any): ConsumerQuotaLimitSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      is_precise: isSet(object.is_precise) ? Boolean(object.is_precise) : false,
-      allows_admin_overrides: isSet(object.allows_admin_overrides) ? Boolean(object.allows_admin_overrides) : false,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      metric: isSet(object.metric) ? String(object.metric) : undefined,
+      unit: isSet(object.unit) ? String(object.unit) : undefined,
+      is_precise: isSet(object.is_precise) ? Boolean(object.is_precise) : undefined,
+      allows_admin_overrides: isSet(object.allows_admin_overrides) ? Boolean(object.allows_admin_overrides) : undefined,
       quota_buckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDKJSON(e)) : []
     };
   },
@@ -1430,11 +1430,11 @@ export const ConsumerQuotaLimit = {
   },
   fromAmino(object: ConsumerQuotaLimitAmino): ConsumerQuotaLimit {
     return {
-      name: object.name,
-      metric: object.metric,
-      unit: object.unit,
-      isPrecise: object.is_precise,
-      allowsAdminOverrides: object.allows_admin_overrides,
+      name: object?.name,
+      metric: object?.metric,
+      unit: object?.unit,
+      isPrecise: object?.is_precise,
+      allowsAdminOverrides: object?.allows_admin_overrides,
       quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromAmino(e)) : []
     };
   },
@@ -1564,21 +1564,21 @@ export const QuotaBucket_DimensionsEntry = {
 };
 function createBaseQuotaBucket(): QuotaBucket {
   return {
-    effectiveLimit: BigInt(0),
-    defaultLimit: BigInt(0),
-    producerOverride: QuotaOverride.fromPartial({}),
-    consumerOverride: QuotaOverride.fromPartial({}),
-    adminOverride: QuotaOverride.fromPartial({}),
-    dimensions: {}
+    effectiveLimit: undefined,
+    defaultLimit: undefined,
+    producerOverride: undefined,
+    consumerOverride: undefined,
+    adminOverride: undefined,
+    dimensions: undefined
   };
 }
 export const QuotaBucket = {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
   encode(message: QuotaBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.effectiveLimit !== BigInt(0)) {
+    if (message.effectiveLimit !== undefined) {
       writer.uint32(8).int64(message.effectiveLimit);
     }
-    if (message.defaultLimit !== BigInt(0)) {
+    if (message.defaultLimit !== undefined) {
       writer.uint32(16).int64(message.defaultLimit);
     }
     if (message.producerOverride !== undefined) {
@@ -1650,8 +1650,12 @@ export const QuotaBucket = {
   },
   toJSON(message: QuotaBucket): unknown {
     const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt(0)).toString());
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
+    if (message.effectiveLimit !== undefined) {
+      obj.effectiveLimit = message.effectiveLimit.toString();
+    }
+    if (message.defaultLimit !== undefined) {
+      obj.defaultLimit = message.defaultLimit.toString();
+    }
     message.producerOverride !== undefined && (obj.producerOverride = message.producerOverride ? QuotaOverride.toJSON(message.producerOverride) : undefined);
     message.consumerOverride !== undefined && (obj.consumerOverride = message.consumerOverride ? QuotaOverride.toJSON(message.consumerOverride) : undefined);
     message.adminOverride !== undefined && (obj.adminOverride = message.adminOverride ? QuotaOverride.toJSON(message.adminOverride) : undefined);
@@ -1707,8 +1711,8 @@ export const QuotaBucket = {
   },
   fromSDKJSON(object: any): QuotaBucketSDKType {
     return {
-      effective_limit: isSet(object.effective_limit) ? BigInt(object.effective_limit.toString()) : BigInt(0),
-      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt(0),
+      effective_limit: isSet(object.effective_limit) ? BigInt(object.effective_limit.toString()) : undefined,
+      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : undefined,
       producer_override: isSet(object.producer_override) ? QuotaOverride.fromSDKJSON(object.producer_override) : undefined,
       consumer_override: isSet(object.consumer_override) ? QuotaOverride.fromSDKJSON(object.consumer_override) : undefined,
       admin_override: isSet(object.admin_override) ? QuotaOverride.fromSDKJSON(object.admin_override) : undefined,
@@ -1737,8 +1741,8 @@ export const QuotaBucket = {
   },
   fromAmino(object: QuotaBucketAmino): QuotaBucket {
     return {
-      effectiveLimit: BigInt(object.effective_limit),
-      defaultLimit: BigInt(object.default_limit),
+      effectiveLimit: object?.effective_limit ? BigInt(object.effective_limit) : undefined,
+      defaultLimit: object?.default_limit ? BigInt(object.default_limit) : undefined,
       producerOverride: object?.producer_override ? QuotaOverride.fromAmino(object.producer_override) : undefined,
       consumerOverride: object?.consumer_override ? QuotaOverride.fromAmino(object.consumer_override) : undefined,
       adminOverride: object?.admin_override ? QuotaOverride.fromAmino(object.admin_override) : undefined,
@@ -1877,21 +1881,21 @@ export const QuotaOverride_DimensionsEntry = {
 };
 function createBaseQuotaOverride(): QuotaOverride {
   return {
-    name: "",
-    overrideValue: BigInt(0),
-    dimensions: {},
-    metric: "",
-    unit: "",
-    adminOverrideAncestor: ""
+    name: undefined,
+    overrideValue: undefined,
+    dimensions: undefined,
+    metric: undefined,
+    unit: undefined,
+    adminOverrideAncestor: undefined
   };
 }
 export const QuotaOverride = {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
   encode(message: QuotaOverride, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.overrideValue !== BigInt(0)) {
+    if (message.overrideValue !== undefined) {
       writer.uint32(16).int64(message.overrideValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -1900,13 +1904,13 @@ export const QuotaOverride = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(34).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
-    if (message.adminOverrideAncestor !== "") {
+    if (message.adminOverrideAncestor !== undefined) {
       writer.uint32(50).string(message.adminOverrideAncestor);
     }
     return writer;
@@ -1964,7 +1968,9 @@ export const QuotaOverride = {
   toJSON(message: QuotaOverride): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt(0)).toString());
+    if (message.overrideValue !== undefined) {
+      obj.overrideValue = message.overrideValue.toString();
+    }
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
@@ -1978,7 +1984,7 @@ export const QuotaOverride = {
   },
   fromPartial(object: DeepPartial<QuotaOverride>): QuotaOverride {
     const message = createBaseQuotaOverride();
-    message.name = object.name ?? "";
+    message.name = object.name ?? undefined;
     if (object.overrideValue !== undefined && object.overrideValue !== null) {
       message.overrideValue = BigInt(object.overrideValue.toString());
     }
@@ -1990,9 +1996,9 @@ export const QuotaOverride = {
       }
       return acc;
     }, {});
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.adminOverrideAncestor = object.adminOverrideAncestor ?? "";
+    message.metric = object.metric ?? undefined;
+    message.unit = object.unit ?? undefined;
+    message.adminOverrideAncestor = object.adminOverrideAncestor ?? undefined;
     return message;
   },
   fromSDK(object: QuotaOverrideSDKType): QuotaOverride {
@@ -2012,17 +2018,17 @@ export const QuotaOverride = {
   },
   fromSDKJSON(object: any): QuotaOverrideSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      override_value: isSet(object.override_value) ? BigInt(object.override_value.toString()) : BigInt(0),
+      name: isSet(object.name) ? String(object.name) : undefined,
+      override_value: isSet(object.override_value) ? BigInt(object.override_value.toString()) : undefined,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      admin_override_ancestor: isSet(object.admin_override_ancestor) ? String(object.admin_override_ancestor) : ""
+      metric: isSet(object.metric) ? String(object.metric) : undefined,
+      unit: isSet(object.unit) ? String(object.unit) : undefined,
+      admin_override_ancestor: isSet(object.admin_override_ancestor) ? String(object.admin_override_ancestor) : undefined
     };
   },
   toSDK(message: QuotaOverride): QuotaOverrideSDKType {
@@ -2042,17 +2048,17 @@ export const QuotaOverride = {
   },
   fromAmino(object: QuotaOverrideAmino): QuotaOverride {
     return {
-      name: object.name,
-      overrideValue: BigInt(object.override_value),
+      name: object?.name,
+      overrideValue: object?.override_value ? BigInt(object.override_value) : undefined,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      metric: object.metric,
-      unit: object.unit,
-      adminOverrideAncestor: object.admin_override_ancestor
+      metric: object?.metric,
+      unit: object?.unit,
+      adminOverrideAncestor: object?.admin_override_ancestor
     };
   },
   toAmino(message: QuotaOverride): QuotaOverrideAmino {
@@ -2088,7 +2094,7 @@ export const QuotaOverride = {
 };
 function createBaseOverrideInlineSource(): OverrideInlineSource {
   return {
-    overrides: []
+    overrides: undefined
   };
 }
 export const OverrideInlineSource = {
@@ -2280,21 +2286,21 @@ export const AdminQuotaPolicy_DimensionsEntry = {
 };
 function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   return {
-    name: "",
-    policyValue: BigInt(0),
-    dimensions: {},
-    metric: "",
-    unit: "",
-    container: ""
+    name: undefined,
+    policyValue: undefined,
+    dimensions: undefined,
+    metric: undefined,
+    unit: undefined,
+    container: undefined
   };
 }
 export const AdminQuotaPolicy = {
   typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
   encode(message: AdminQuotaPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.policyValue !== BigInt(0)) {
+    if (message.policyValue !== undefined) {
       writer.uint32(16).int64(message.policyValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -2303,13 +2309,13 @@ export const AdminQuotaPolicy = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(34).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(50).string(message.container);
     }
     return writer;
@@ -2367,7 +2373,9 @@ export const AdminQuotaPolicy = {
   toJSON(message: AdminQuotaPolicy): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt(0)).toString());
+    if (message.policyValue !== undefined) {
+      obj.policyValue = message.policyValue.toString();
+    }
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
@@ -2381,7 +2389,7 @@ export const AdminQuotaPolicy = {
   },
   fromPartial(object: DeepPartial<AdminQuotaPolicy>): AdminQuotaPolicy {
     const message = createBaseAdminQuotaPolicy();
-    message.name = object.name ?? "";
+    message.name = object.name ?? undefined;
     if (object.policyValue !== undefined && object.policyValue !== null) {
       message.policyValue = BigInt(object.policyValue.toString());
     }
@@ -2393,9 +2401,9 @@ export const AdminQuotaPolicy = {
       }
       return acc;
     }, {});
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.container = object.container ?? "";
+    message.metric = object.metric ?? undefined;
+    message.unit = object.unit ?? undefined;
+    message.container = object.container ?? undefined;
     return message;
   },
   fromSDK(object: AdminQuotaPolicySDKType): AdminQuotaPolicy {
@@ -2415,17 +2423,17 @@ export const AdminQuotaPolicy = {
   },
   fromSDKJSON(object: any): AdminQuotaPolicySDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      policy_value: isSet(object.policy_value) ? BigInt(object.policy_value.toString()) : BigInt(0),
+      name: isSet(object.name) ? String(object.name) : undefined,
+      policy_value: isSet(object.policy_value) ? BigInt(object.policy_value.toString()) : undefined,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      container: isSet(object.container) ? String(object.container) : ""
+      metric: isSet(object.metric) ? String(object.metric) : undefined,
+      unit: isSet(object.unit) ? String(object.unit) : undefined,
+      container: isSet(object.container) ? String(object.container) : undefined
     };
   },
   toSDK(message: AdminQuotaPolicy): AdminQuotaPolicySDKType {
@@ -2445,17 +2453,17 @@ export const AdminQuotaPolicy = {
   },
   fromAmino(object: AdminQuotaPolicyAmino): AdminQuotaPolicy {
     return {
-      name: object.name,
-      policyValue: BigInt(object.policy_value),
+      name: object?.name,
+      policyValue: object?.policy_value ? BigInt(object.policy_value) : undefined,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      metric: object.metric,
-      unit: object.unit,
-      container: object.container
+      metric: object?.metric,
+      unit: object?.unit,
+      container: object?.container
     };
   },
   toAmino(message: AdminQuotaPolicy): AdminQuotaPolicyAmino {
@@ -2491,17 +2499,17 @@ export const AdminQuotaPolicy = {
 };
 function createBaseServiceIdentity(): ServiceIdentity {
   return {
-    email: "",
-    uniqueId: ""
+    email: undefined,
+    uniqueId: undefined
   };
 }
 export const ServiceIdentity = {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
   encode(message: ServiceIdentity, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.email !== "") {
+    if (message.email !== undefined) {
       writer.uint32(10).string(message.email);
     }
-    if (message.uniqueId !== "") {
+    if (message.uniqueId !== undefined) {
       writer.uint32(18).string(message.uniqueId);
     }
     return writer;
@@ -2540,8 +2548,8 @@ export const ServiceIdentity = {
   },
   fromPartial(object: DeepPartial<ServiceIdentity>): ServiceIdentity {
     const message = createBaseServiceIdentity();
-    message.email = object.email ?? "";
-    message.uniqueId = object.uniqueId ?? "";
+    message.email = object.email ?? undefined;
+    message.uniqueId = object.uniqueId ?? undefined;
     return message;
   },
   fromSDK(object: ServiceIdentitySDKType): ServiceIdentity {
@@ -2552,8 +2560,8 @@ export const ServiceIdentity = {
   },
   fromSDKJSON(object: any): ServiceIdentitySDKType {
     return {
-      email: isSet(object.email) ? String(object.email) : "",
-      unique_id: isSet(object.unique_id) ? String(object.unique_id) : ""
+      email: isSet(object.email) ? String(object.email) : undefined,
+      unique_id: isSet(object.unique_id) ? String(object.unique_id) : undefined
     };
   },
   toSDK(message: ServiceIdentity): ServiceIdentitySDKType {
@@ -2564,8 +2572,8 @@ export const ServiceIdentity = {
   },
   fromAmino(object: ServiceIdentityAmino): ServiceIdentity {
     return {
-      email: object.email,
-      uniqueId: object.unique_id
+      email: object?.email,
+      uniqueId: object?.unique_id
     };
   },
   toAmino(message: ServiceIdentity): ServiceIdentityAmino {

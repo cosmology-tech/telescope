@@ -13,7 +13,7 @@ export const protobufPackage = "ibc.lightclients.tendermint.v1";
  * and a possible frozen height.
  */
 export interface ClientState {
-  chainId: string;
+  chainId?: string;
   trustLevel: Fraction;
   /**
    * duration of the period since the LastestTimestamp during which the
@@ -29,7 +29,7 @@ export interface ClientState {
   /** Latest height the client was updated to */
   latestHeight: Height;
   /** Proof specifications used in verifying counterparty state */
-  proofSpecs: ProofSpec[];
+  proofSpecs?: ProofSpec[];
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -39,34 +39,34 @@ export interface ClientState {
    * the default upgrade module, upgrade_path should be []string{"upgrade",
    * "upgradedIBCState"}`
    */
-  upgradePath: string[];
+  upgradePath?: string[];
   /**
    * This flag, when set to true, will allow governance to recover a client
    * which has expired
    */
-  allowUpdateAfterExpiry: boolean;
+  allowUpdateAfterExpiry?: boolean;
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
    * whose chain has experienced a misbehaviour event
    */
-  allowUpdateAfterMisbehaviour: boolean;
+  allowUpdateAfterMisbehaviour?: boolean;
 }
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
  */
 export interface ClientStateSDKType {
-  chain_id: string;
+  chain_id?: string;
   trust_level: FractionSDKType;
   trusting_period: DurationSDKType;
   unbonding_period: DurationSDKType;
   max_clock_drift: DurationSDKType;
   frozen_height: HeightSDKType;
   latest_height: HeightSDKType;
-  proof_specs: ProofSpecSDKType[];
-  upgrade_path: string[];
-  allow_update_after_expiry: boolean;
-  allow_update_after_misbehaviour: boolean;
+  proof_specs?: ProofSpecSDKType[];
+  upgrade_path?: string[];
+  allow_update_after_expiry?: boolean;
+  allow_update_after_misbehaviour?: boolean;
 }
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusState {
@@ -77,31 +77,31 @@ export interface ConsensusState {
   timestamp: Date;
   /** commitment root (i.e app hash) */
   root: MerkleRoot;
-  nextValidatorsHash: Uint8Array;
+  nextValidatorsHash?: Uint8Array;
 }
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
   timestamp: Date;
   root: MerkleRootSDKType;
-  next_validators_hash: Uint8Array;
+  next_validators_hash?: Uint8Array;
 }
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
  * that implements Misbehaviour interface expected by ICS-02
  */
 export interface Misbehaviour {
-  clientId: string;
-  header1: Header;
-  header2: Header;
+  clientId?: string;
+  header1?: Header;
+  header2?: Header;
 }
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
  * that implements Misbehaviour interface expected by ICS-02
  */
 export interface MisbehaviourSDKType {
-  client_id: string;
-  header_1: HeaderSDKType;
-  header_2: HeaderSDKType;
+  client_id?: string;
+  header_1?: HeaderSDKType;
+  header_2?: HeaderSDKType;
 }
 /**
  * Header defines the Tendermint client consensus Header.
@@ -118,10 +118,10 @@ export interface MisbehaviourSDKType {
  * trusted validator set at the TrustedHeight.
  */
 export interface Header {
-  signedHeader: SignedHeader;
-  validatorSet: ValidatorSet;
+  signedHeader?: SignedHeader;
+  validatorSet?: ValidatorSet;
   trustedHeight: Height;
-  trustedValidators: ValidatorSet;
+  trustedValidators?: ValidatorSet;
 }
 /**
  * Header defines the Tendermint client consensus Header.
@@ -138,46 +138,46 @@ export interface Header {
  * trusted validator set at the TrustedHeight.
  */
 export interface HeaderSDKType {
-  signed_header: SignedHeaderSDKType;
-  validator_set: ValidatorSetSDKType;
+  signed_header?: SignedHeaderSDKType;
+  validator_set?: ValidatorSetSDKType;
   trusted_height: HeightSDKType;
-  trusted_validators: ValidatorSetSDKType;
+  trusted_validators?: ValidatorSetSDKType;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
  * supports positive values.
  */
 export interface Fraction {
-  numerator: bigint;
-  denominator: bigint;
+  numerator?: bigint;
+  denominator?: bigint;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
  * supports positive values.
  */
 export interface FractionSDKType {
-  numerator: bigint;
-  denominator: bigint;
+  numerator?: bigint;
+  denominator?: bigint;
 }
 function createBaseClientState(): ClientState {
   return {
-    chainId: "",
+    chainId: undefined,
     trustLevel: Fraction.fromPartial({}),
     trustingPeriod: Duration.fromPartial({}),
     unbondingPeriod: Duration.fromPartial({}),
     maxClockDrift: Duration.fromPartial({}),
     frozenHeight: Height.fromPartial({}),
     latestHeight: Height.fromPartial({}),
-    proofSpecs: [],
-    upgradePath: [],
-    allowUpdateAfterExpiry: false,
-    allowUpdateAfterMisbehaviour: false
+    proofSpecs: undefined,
+    upgradePath: undefined,
+    allowUpdateAfterExpiry: undefined,
+    allowUpdateAfterMisbehaviour: undefined
   };
 }
 export const ClientState = {
   typeUrl: "/ibc.lightclients.tendermint.v1.ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(10).string(message.chainId);
     }
     if (message.trustLevel !== undefined) {
@@ -204,10 +204,10 @@ export const ClientState = {
     for (const v of message.upgradePath) {
       writer.uint32(74).string(v!);
     }
-    if (message.allowUpdateAfterExpiry === true) {
+    if (message.allowUpdateAfterExpiry !== undefined) {
       writer.uint32(80).bool(message.allowUpdateAfterExpiry);
     }
-    if (message.allowUpdateAfterMisbehaviour === true) {
+    if (message.allowUpdateAfterMisbehaviour !== undefined) {
       writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
     }
     return writer;
@@ -299,7 +299,7 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.chainId = object.chainId ?? "";
+    message.chainId = object.chainId ?? undefined;
     if (object.trustLevel !== undefined && object.trustLevel !== null) {
       message.trustLevel = Fraction.fromPartial(object.trustLevel);
     }
@@ -320,8 +320,8 @@ export const ClientState = {
     }
     message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
     message.upgradePath = object.upgradePath?.map(e => e) || [];
-    message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
-    message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
+    message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? undefined;
+    message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? undefined;
     return message;
   },
   fromSDK(object: ClientStateSDKType): ClientState {
@@ -341,7 +341,7 @@ export const ClientState = {
   },
   fromSDKJSON(object: any): ClientStateSDKType {
     return {
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : undefined,
       trust_level: isSet(object.trust_level) ? Fraction.fromSDKJSON(object.trust_level) : undefined,
       trusting_period: isSet(object.trusting_period) ? Duration.fromSDKJSON(object.trusting_period) : undefined,
       unbonding_period: isSet(object.unbonding_period) ? Duration.fromSDKJSON(object.unbonding_period) : undefined,
@@ -350,8 +350,8 @@ export const ClientState = {
       latest_height: isSet(object.latest_height) ? Height.fromSDKJSON(object.latest_height) : undefined,
       proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDKJSON(e)) : [],
       upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
-      allow_update_after_expiry: isSet(object.allow_update_after_expiry) ? Boolean(object.allow_update_after_expiry) : false,
-      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour) ? Boolean(object.allow_update_after_misbehaviour) : false
+      allow_update_after_expiry: isSet(object.allow_update_after_expiry) ? Boolean(object.allow_update_after_expiry) : undefined,
+      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour) ? Boolean(object.allow_update_after_misbehaviour) : undefined
     };
   },
   toSDK(message: ClientState): ClientStateSDKType {
@@ -379,7 +379,7 @@ export const ClientState = {
   },
   fromAmino(object: ClientStateAmino): ClientState {
     return {
-      chainId: object.chain_id,
+      chainId: object?.chain_id,
       trustLevel: object?.trust_level ? Fraction.fromAmino(object.trust_level) : undefined,
       trustingPeriod: object?.trusting_period ? Duration.fromAmino(object.trusting_period) : undefined,
       unbondingPeriod: object?.unbonding_period ? Duration.fromAmino(object.unbonding_period) : undefined,
@@ -388,8 +388,8 @@ export const ClientState = {
       latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : undefined,
       proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromAmino(e)) : [],
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: object.allow_update_after_expiry,
-      allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
+      allowUpdateAfterExpiry: object?.allow_update_after_expiry,
+      allowUpdateAfterMisbehaviour: object?.allow_update_after_misbehaviour
     };
   },
   toAmino(message: ClientState): ClientStateAmino {
@@ -441,7 +441,7 @@ function createBaseConsensusState(): ConsensusState {
   return {
     timestamp: new Date(),
     root: MerkleRoot.fromPartial({}),
-    nextValidatorsHash: new Uint8Array()
+    nextValidatorsHash: undefined
   };
 }
 export const ConsensusState = {
@@ -453,7 +453,7 @@ export const ConsensusState = {
     if (message.root !== undefined) {
       MerkleRoot.encode(message.root, writer.uint32(18).fork()).ldelim();
     }
-    if (message.nextValidatorsHash.length !== 0) {
+    if (message.nextValidatorsHash !== undefined) {
       writer.uint32(26).bytes(message.nextValidatorsHash);
     }
     return writer;
@@ -492,7 +492,7 @@ export const ConsensusState = {
     const obj: any = {};
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
     message.root !== undefined && (obj.root = message.root ? MerkleRoot.toJSON(message.root) : undefined);
-    message.nextValidatorsHash !== undefined && (obj.nextValidatorsHash = base64FromBytes(message.nextValidatorsHash !== undefined ? message.nextValidatorsHash : new Uint8Array()));
+    message.nextValidatorsHash !== undefined && (obj.nextValidatorsHash = message.nextValidatorsHash !== undefined ? base64FromBytes(message.nextValidatorsHash) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
@@ -501,7 +501,7 @@ export const ConsensusState = {
     if (object.root !== undefined && object.root !== null) {
       message.root = MerkleRoot.fromPartial(object.root);
     }
-    message.nextValidatorsHash = object.nextValidatorsHash ?? new Uint8Array();
+    message.nextValidatorsHash = object.nextValidatorsHash ?? undefined;
     return message;
   },
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
@@ -515,7 +515,7 @@ export const ConsensusState = {
     return {
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       root: isSet(object.root) ? MerkleRoot.fromSDKJSON(object.root) : undefined,
-      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array()
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : undefined
     };
   },
   toSDK(message: ConsensusState): ConsensusStateSDKType {
@@ -529,7 +529,7 @@ export const ConsensusState = {
     return {
       timestamp: object.timestamp,
       root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
-      nextValidatorsHash: object.next_validators_hash
+      nextValidatorsHash: object?.next_validators_hash
     };
   },
   toAmino(message: ConsensusState): ConsensusStateAmino {
@@ -563,15 +563,15 @@ export const ConsensusState = {
 };
 function createBaseMisbehaviour(): Misbehaviour {
   return {
-    clientId: "",
-    header1: Header.fromPartial({}),
-    header2: Header.fromPartial({})
+    clientId: undefined,
+    header1: undefined,
+    header2: undefined
   };
 }
 export const Misbehaviour = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour",
   encode(message: Misbehaviour, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.header1 !== undefined) {
@@ -621,7 +621,7 @@ export const Misbehaviour = {
   },
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
-    message.clientId = object.clientId ?? "";
+    message.clientId = object.clientId ?? undefined;
     if (object.header1 !== undefined && object.header1 !== null) {
       message.header1 = Header.fromPartial(object.header1);
     }
@@ -639,7 +639,7 @@ export const Misbehaviour = {
   },
   fromSDKJSON(object: any): MisbehaviourSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
       header_1: isSet(object.header_1) ? Header.fromSDKJSON(object.header_1) : undefined,
       header_2: isSet(object.header_2) ? Header.fromSDKJSON(object.header_2) : undefined
     };
@@ -653,7 +653,7 @@ export const Misbehaviour = {
   },
   fromAmino(object: MisbehaviourAmino): Misbehaviour {
     return {
-      clientId: object.client_id,
+      clientId: object?.client_id,
       header1: object?.header_1 ? Header.fromAmino(object.header_1) : undefined,
       header2: object?.header_2 ? Header.fromAmino(object.header_2) : undefined
     };
@@ -689,10 +689,10 @@ export const Misbehaviour = {
 };
 function createBaseHeader(): Header {
   return {
-    signedHeader: SignedHeader.fromPartial({}),
-    validatorSet: ValidatorSet.fromPartial({}),
+    signedHeader: undefined,
+    validatorSet: undefined,
     trustedHeight: Height.fromPartial({}),
-    trustedValidators: ValidatorSet.fromPartial({})
+    trustedValidators: undefined
   };
 }
 export const Header = {
@@ -834,17 +834,17 @@ export const Header = {
 };
 function createBaseFraction(): Fraction {
   return {
-    numerator: BigInt(0),
-    denominator: BigInt(0)
+    numerator: undefined,
+    denominator: undefined
   };
 }
 export const Fraction = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Fraction",
   encode(message: Fraction, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numerator !== BigInt(0)) {
+    if (message.numerator !== undefined) {
       writer.uint32(8).uint64(message.numerator);
     }
-    if (message.denominator !== BigInt(0)) {
+    if (message.denominator !== undefined) {
       writer.uint32(16).uint64(message.denominator);
     }
     return writer;
@@ -877,8 +877,12 @@ export const Fraction = {
   },
   toJSON(message: Fraction): unknown {
     const obj: any = {};
-    message.numerator !== undefined && (obj.numerator = (message.numerator || BigInt(0)).toString());
-    message.denominator !== undefined && (obj.denominator = (message.denominator || BigInt(0)).toString());
+    if (message.numerator !== undefined) {
+      obj.numerator = message.numerator.toString();
+    }
+    if (message.denominator !== undefined) {
+      obj.denominator = message.denominator.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Fraction>): Fraction {
@@ -899,8 +903,8 @@ export const Fraction = {
   },
   fromSDKJSON(object: any): FractionSDKType {
     return {
-      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt(0),
-      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt(0)
+      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : undefined,
+      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : undefined
     };
   },
   toSDK(message: Fraction): FractionSDKType {
@@ -911,8 +915,8 @@ export const Fraction = {
   },
   fromAmino(object: FractionAmino): Fraction {
     return {
-      numerator: BigInt(object.numerator),
-      denominator: BigInt(object.denominator)
+      numerator: object?.numerator ? BigInt(object.numerator) : undefined,
+      denominator: object?.denominator ? BigInt(object.denominator) : undefined
     };
   },
   toAmino(message: Fraction): FractionAmino {

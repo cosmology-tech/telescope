@@ -6,19 +6,19 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
   resources: ResourceUnits;
-  count: number;
+  count?: number;
   price: DecCoin;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
   resources: ResourceUnitsSDKType;
-  count: number;
+  count?: number;
   price: DecCoinSDKType;
 }
 function createBaseResource(): Resource {
   return {
     resources: ResourceUnits.fromPartial({}),
-    count: 0,
+    count: undefined,
     price: DecCoin.fromPartial({})
   };
 }
@@ -28,7 +28,7 @@ export const Resource = {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();
     }
-    if (message.count !== 0) {
+    if (message.count !== undefined) {
       writer.uint32(16).uint32(message.count);
     }
     if (message.price !== undefined) {
@@ -78,7 +78,7 @@ export const Resource = {
     if (object.resources !== undefined && object.resources !== null) {
       message.resources = ResourceUnits.fromPartial(object.resources);
     }
-    message.count = object.count ?? 0;
+    message.count = object.count ?? undefined;
     if (object.price !== undefined && object.price !== null) {
       message.price = DecCoin.fromPartial(object.price);
     }
@@ -94,7 +94,7 @@ export const Resource = {
   fromSDKJSON(object: any): ResourceSDKType {
     return {
       resources: isSet(object.resources) ? ResourceUnits.fromSDKJSON(object.resources) : undefined,
-      count: isSet(object.count) ? Number(object.count) : 0,
+      count: isSet(object.count) ? Number(object.count) : undefined,
       price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined
     };
   },
@@ -108,7 +108,7 @@ export const Resource = {
   fromAmino(object: ResourceAmino): Resource {
     return {
       resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: object.count,
+      count: object?.count,
       price: object?.price ? DecCoin.fromAmino(object.price) : undefined
     };
   },

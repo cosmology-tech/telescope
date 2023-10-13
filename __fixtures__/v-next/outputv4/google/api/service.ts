@@ -52,18 +52,18 @@ export interface Service {
    * typically goes through DNS verification to make sure the owner
    * of the service also owns the DNS name.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /** The Google project that owns this service. */
-  producerProjectId: string;
+  producerProjectId?: string;
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-  id: string;
+  id?: string;
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -71,7 +71,7 @@ export interface Service {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-  apis: Api[];
+  apis?: Api[];
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
@@ -82,7 +82,7 @@ export interface Service {
    *     types:
    *     - name: google.protobuf.Int32
    */
-  types: Type[];
+  types?: Type[];
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
@@ -92,48 +92,48 @@ export interface Service {
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
-  enums: Enum[];
+  enums?: Enum[];
   /** Additional API documentation. */
-  documentation: Documentation;
+  documentation?: Documentation;
   /** API backend configuration. */
-  backend: Backend;
+  backend?: Backend;
   /** HTTP configuration. */
-  http: Http;
+  http?: Http;
   /** Quota configuration. */
-  quota: Quota;
+  quota?: Quota;
   /** Auth configuration. */
-  authentication: Authentication;
+  authentication?: Authentication;
   /** Context configuration. */
-  context: Context;
+  context?: Context;
   /** Configuration controlling usage of this service. */
-  usage: Usage;
+  usage?: Usage;
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
-  endpoints: Endpoint[];
+  endpoints?: Endpoint[];
   /** Configuration for the service control plane. */
-  control: Control;
+  control?: Control;
   /** Defines the logs used by this service. */
-  logs: LogDescriptor[];
+  logs?: LogDescriptor[];
   /** Defines the metrics used by this service. */
-  metrics: MetricDescriptor[];
+  metrics?: MetricDescriptor[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitoredResources: MonitoredResourceDescriptor[];
+  monitoredResources?: MonitoredResourceDescriptor[];
   /** Billing configuration. */
-  billing: Billing;
+  billing?: Billing;
   /** Logging configuration. */
-  logging: Logging;
+  logging?: Logging;
   /** Monitoring configuration. */
-  monitoring: Monitoring;
+  monitoring?: Monitoring;
   /** System parameter configuration. */
-  systemParameters: SystemParameters;
+  systemParameters?: SystemParameters;
   /** Output only. The source information for this configuration if available. */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
   /**
    * Obsolete. Do not use.
    * 
@@ -141,7 +141,7 @@ export interface Service {
    * sets this field to `3`.
    */
   /** @deprecated */
-  configVersion: UInt32Value;
+  configVersion?: UInt32Value;
 }
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -168,75 +168,75 @@ export interface Service {
  *           provider_id: google_calendar_auth
  */
 export interface ServiceSDKType {
-  name: string;
-  title: string;
-  producer_project_id: string;
-  id: string;
-  apis: ApiSDKType[];
-  types: TypeSDKType[];
-  enums: EnumSDKType[];
-  documentation: DocumentationSDKType;
-  backend: BackendSDKType;
-  http: HttpSDKType;
-  quota: QuotaSDKType;
-  authentication: AuthenticationSDKType;
-  context: ContextSDKType;
-  usage: UsageSDKType;
-  endpoints: EndpointSDKType[];
-  control: ControlSDKType;
-  logs: LogDescriptorSDKType[];
-  metrics: MetricDescriptorSDKType[];
-  monitored_resources: MonitoredResourceDescriptorSDKType[];
-  billing: BillingSDKType;
-  logging: LoggingSDKType;
-  monitoring: MonitoringSDKType;
-  system_parameters: SystemParametersSDKType;
-  source_info: SourceInfoSDKType;
+  name?: string;
+  title?: string;
+  producer_project_id?: string;
+  id?: string;
+  apis?: ApiSDKType[];
+  types?: TypeSDKType[];
+  enums?: EnumSDKType[];
+  documentation?: DocumentationSDKType;
+  backend?: BackendSDKType;
+  http?: HttpSDKType;
+  quota?: QuotaSDKType;
+  authentication?: AuthenticationSDKType;
+  context?: ContextSDKType;
+  usage?: UsageSDKType;
+  endpoints?: EndpointSDKType[];
+  control?: ControlSDKType;
+  logs?: LogDescriptorSDKType[];
+  metrics?: MetricDescriptorSDKType[];
+  monitored_resources?: MonitoredResourceDescriptorSDKType[];
+  billing?: BillingSDKType;
+  logging?: LoggingSDKType;
+  monitoring?: MonitoringSDKType;
+  system_parameters?: SystemParametersSDKType;
+  source_info?: SourceInfoSDKType;
   /** @deprecated */
-  config_version: UInt32ValueSDKType;
+  config_version?: UInt32ValueSDKType;
 }
 function createBaseService(): Service {
   return {
-    name: "",
-    title: "",
-    producerProjectId: "",
-    id: "",
-    apis: [],
-    types: [],
-    enums: [],
-    documentation: Documentation.fromPartial({}),
-    backend: Backend.fromPartial({}),
-    http: Http.fromPartial({}),
-    quota: Quota.fromPartial({}),
-    authentication: Authentication.fromPartial({}),
-    context: Context.fromPartial({}),
-    usage: Usage.fromPartial({}),
-    endpoints: [],
-    control: Control.fromPartial({}),
-    logs: [],
-    metrics: [],
-    monitoredResources: [],
-    billing: Billing.fromPartial({}),
-    logging: Logging.fromPartial({}),
-    monitoring: Monitoring.fromPartial({}),
-    systemParameters: SystemParameters.fromPartial({}),
-    sourceInfo: SourceInfo.fromPartial({}),
-    configVersion: UInt32Value.fromPartial({})
+    name: undefined,
+    title: undefined,
+    producerProjectId: undefined,
+    id: undefined,
+    apis: undefined,
+    types: undefined,
+    enums: undefined,
+    documentation: undefined,
+    backend: undefined,
+    http: undefined,
+    quota: undefined,
+    authentication: undefined,
+    context: undefined,
+    usage: undefined,
+    endpoints: undefined,
+    control: undefined,
+    logs: undefined,
+    metrics: undefined,
+    monitoredResources: undefined,
+    billing: undefined,
+    logging: undefined,
+    monitoring: undefined,
+    systemParameters: undefined,
+    sourceInfo: undefined,
+    configVersion: undefined
   };
 }
 export const Service = {
   typeUrl: "/google.api.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(18).string(message.title);
     }
-    if (message.producerProjectId !== "") {
+    if (message.producerProjectId !== undefined) {
       writer.uint32(178).string(message.producerProjectId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(266).string(message.id);
     }
     for (const v of message.apis) {
@@ -481,10 +481,10 @@ export const Service = {
   },
   fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
-    message.name = object.name ?? "";
-    message.title = object.title ?? "";
-    message.producerProjectId = object.producerProjectId ?? "";
-    message.id = object.id ?? "";
+    message.name = object.name ?? undefined;
+    message.title = object.title ?? undefined;
+    message.producerProjectId = object.producerProjectId ?? undefined;
+    message.id = object.id ?? undefined;
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     message.types = object.types?.map(e => Type.fromPartial(e)) || [];
     message.enums = object.enums?.map(e => Enum.fromPartial(e)) || [];
@@ -567,10 +567,10 @@ export const Service = {
   },
   fromSDKJSON(object: any): ServiceSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
+      title: isSet(object.title) ? String(object.title) : undefined,
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : undefined,
+      id: isSet(object.id) ? String(object.id) : undefined,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
       types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromSDKJSON(e)) : [],
       enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromSDKJSON(e)) : [],
@@ -653,10 +653,10 @@ export const Service = {
   },
   fromAmino(object: ServiceAmino): Service {
     return {
-      name: object.name,
-      title: object.title,
-      producerProjectId: object.producer_project_id,
-      id: object.id,
+      name: object?.name,
+      title: object?.title,
+      producerProjectId: object?.producer_project_id,
+      id: object?.id,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
       types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
       enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],

@@ -7,14 +7,14 @@ export const protobufPackage = "ibc.core.commitment.v1";
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
  */
 export interface MerkleRoot {
-  hash: Uint8Array;
+  hash?: Uint8Array;
 }
 /**
  * MerkleRoot defines a merkle root hash.
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
  */
 export interface MerkleRootSDKType {
-  hash: Uint8Array;
+  hash?: Uint8Array;
 }
 /**
  * MerklePrefix is merkle path prefixed to the key.
@@ -22,7 +22,7 @@ export interface MerkleRootSDKType {
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefix {
-  keyPrefix: Uint8Array;
+  keyPrefix?: Uint8Array;
 }
 /**
  * MerklePrefix is merkle path prefixed to the key.
@@ -30,7 +30,7 @@ export interface MerklePrefix {
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefixSDKType {
-  key_prefix: Uint8Array;
+  key_prefix?: Uint8Array;
 }
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -38,7 +38,7 @@ export interface MerklePrefixSDKType {
  * MerklePath is represented from root-to-leaf
  */
 export interface MerklePath {
-  keyPath: string[];
+  keyPath?: string[];
 }
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -46,7 +46,7 @@ export interface MerklePath {
  * MerklePath is represented from root-to-leaf
  */
 export interface MerklePathSDKType {
-  key_path: string[];
+  key_path?: string[];
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -56,7 +56,7 @@ export interface MerklePathSDKType {
  * MerkleProofs are ordered from leaf-to-root
  */
 export interface MerkleProof {
-  proofs: CommitmentProof[];
+  proofs?: CommitmentProof[];
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -66,17 +66,17 @@ export interface MerkleProof {
  * MerkleProofs are ordered from leaf-to-root
  */
 export interface MerkleProofSDKType {
-  proofs: CommitmentProofSDKType[];
+  proofs?: CommitmentProofSDKType[];
 }
 function createBaseMerkleRoot(): MerkleRoot {
   return {
-    hash: new Uint8Array()
+    hash: undefined
   };
 }
 export const MerkleRoot = {
   typeUrl: "/ibc.core.commitment.v1.MerkleRoot",
   encode(message: MerkleRoot, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       writer.uint32(10).bytes(message.hash);
     }
     return writer;
@@ -105,12 +105,12 @@ export const MerkleRoot = {
   },
   toJSON(message: MerkleRoot): unknown {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
+    message.hash !== undefined && (obj.hash = message.hash !== undefined ? base64FromBytes(message.hash) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MerkleRoot>): MerkleRoot {
     const message = createBaseMerkleRoot();
-    message.hash = object.hash ?? new Uint8Array();
+    message.hash = object.hash ?? undefined;
     return message;
   },
   fromSDK(object: MerkleRootSDKType): MerkleRoot {
@@ -120,7 +120,7 @@ export const MerkleRoot = {
   },
   fromSDKJSON(object: any): MerkleRootSDKType {
     return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : undefined
     };
   },
   toSDK(message: MerkleRoot): MerkleRootSDKType {
@@ -130,7 +130,7 @@ export const MerkleRoot = {
   },
   fromAmino(object: MerkleRootAmino): MerkleRoot {
     return {
-      hash: object.hash
+      hash: object?.hash
     };
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
@@ -162,13 +162,13 @@ export const MerkleRoot = {
 };
 function createBaseMerklePrefix(): MerklePrefix {
   return {
-    keyPrefix: new Uint8Array()
+    keyPrefix: undefined
   };
 }
 export const MerklePrefix = {
   typeUrl: "/ibc.core.commitment.v1.MerklePrefix",
   encode(message: MerklePrefix, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.keyPrefix.length !== 0) {
+    if (message.keyPrefix !== undefined) {
       writer.uint32(10).bytes(message.keyPrefix);
     }
     return writer;
@@ -197,12 +197,12 @@ export const MerklePrefix = {
   },
   toJSON(message: MerklePrefix): unknown {
     const obj: any = {};
-    message.keyPrefix !== undefined && (obj.keyPrefix = base64FromBytes(message.keyPrefix !== undefined ? message.keyPrefix : new Uint8Array()));
+    message.keyPrefix !== undefined && (obj.keyPrefix = message.keyPrefix !== undefined ? base64FromBytes(message.keyPrefix) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MerklePrefix>): MerklePrefix {
     const message = createBaseMerklePrefix();
-    message.keyPrefix = object.keyPrefix ?? new Uint8Array();
+    message.keyPrefix = object.keyPrefix ?? undefined;
     return message;
   },
   fromSDK(object: MerklePrefixSDKType): MerklePrefix {
@@ -212,7 +212,7 @@ export const MerklePrefix = {
   },
   fromSDKJSON(object: any): MerklePrefixSDKType {
     return {
-      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
+      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : undefined
     };
   },
   toSDK(message: MerklePrefix): MerklePrefixSDKType {
@@ -222,7 +222,7 @@ export const MerklePrefix = {
   },
   fromAmino(object: MerklePrefixAmino): MerklePrefix {
     return {
-      keyPrefix: object.key_prefix
+      keyPrefix: object?.key_prefix
     };
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
@@ -254,7 +254,7 @@ export const MerklePrefix = {
 };
 function createBaseMerklePath(): MerklePath {
   return {
-    keyPath: []
+    keyPath: undefined
   };
 }
 export const MerklePath = {
@@ -358,7 +358,7 @@ export const MerklePath = {
 };
 function createBaseMerkleProof(): MerkleProof {
   return {
-    proofs: []
+    proofs: undefined
   };
 }
 export const MerkleProof = {

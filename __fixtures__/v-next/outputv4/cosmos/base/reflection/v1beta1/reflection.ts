@@ -8,11 +8,11 @@ export interface ListAllInterfacesRequestSDKType {}
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
-  interfaceNames: string[];
+  interfaceNames?: string[];
 }
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponseSDKType {
-  interface_names: string[];
+  interface_names?: string[];
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
@@ -20,28 +20,28 @@ export interface ListAllInterfacesResponseSDKType {
  */
 export interface ListImplementationsRequest {
   /** interface_name defines the interface to query the implementations for. */
-  interfaceName: string;
+  interfaceName?: string;
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
  * RPC.
  */
 export interface ListImplementationsRequestSDKType {
-  interface_name: string;
+  interface_name?: string;
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
  * RPC.
  */
 export interface ListImplementationsResponse {
-  implementationMessageNames: string[];
+  implementationMessageNames?: string[];
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
  * RPC.
  */
 export interface ListImplementationsResponseSDKType {
-  implementation_message_names: string[];
+  implementation_message_names?: string[];
 }
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
   return {};
@@ -118,7 +118,7 @@ export const ListAllInterfacesRequest = {
 };
 function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
   return {
-    interfaceNames: []
+    interfaceNames: undefined
   };
 }
 export const ListAllInterfacesResponse = {
@@ -222,13 +222,13 @@ export const ListAllInterfacesResponse = {
 };
 function createBaseListImplementationsRequest(): ListImplementationsRequest {
   return {
-    interfaceName: ""
+    interfaceName: undefined
   };
 }
 export const ListImplementationsRequest = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
   encode(message: ListImplementationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.interfaceName !== "") {
+    if (message.interfaceName !== undefined) {
       writer.uint32(10).string(message.interfaceName);
     }
     return writer;
@@ -262,7 +262,7 @@ export const ListImplementationsRequest = {
   },
   fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
-    message.interfaceName = object.interfaceName ?? "";
+    message.interfaceName = object.interfaceName ?? undefined;
     return message;
   },
   fromSDK(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
@@ -272,7 +272,7 @@ export const ListImplementationsRequest = {
   },
   fromSDKJSON(object: any): ListImplementationsRequestSDKType {
     return {
-      interface_name: isSet(object.interface_name) ? String(object.interface_name) : ""
+      interface_name: isSet(object.interface_name) ? String(object.interface_name) : undefined
     };
   },
   toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
@@ -282,7 +282,7 @@ export const ListImplementationsRequest = {
   },
   fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
     return {
-      interfaceName: object.interface_name
+      interfaceName: object?.interface_name
     };
   },
   toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
@@ -314,7 +314,7 @@ export const ListImplementationsRequest = {
 };
 function createBaseListImplementationsResponse(): ListImplementationsResponse {
   return {
-    implementationMessageNames: []
+    implementationMessageNames: undefined
   };
 }
 export const ListImplementationsResponse = {

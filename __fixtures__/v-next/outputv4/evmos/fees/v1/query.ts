@@ -10,14 +10,14 @@ export const protobufPackage = "evmos.fees.v1";
  */
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
  * method.
  */
 export interface QueryDevFeeInfosRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -26,7 +26,7 @@ export interface QueryDevFeeInfosRequestSDKType {
 export interface QueryDevFeeInfosResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -34,7 +34,7 @@ export interface QueryDevFeeInfosResponse {
  */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -42,14 +42,14 @@ export interface QueryDevFeeInfosResponseSDKType {
  */
 export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
-  contractAddress: string;
+  contractAddress?: string;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
  * method.
  */
 export interface QueryDevFeeInfoRequestSDKType {
-  contract_address: string;
+  contract_address?: string;
 }
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
@@ -89,17 +89,17 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryDevFeeInfosPerDeployerRequest {
   /** deployer bech32 address */
-  deployerAddress: string;
+  deployerAddress?: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
  * Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
-  deployer_address: string;
-  pagination: PageRequestSDKType;
+  deployer_address?: string;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -108,7 +108,7 @@ export interface QueryDevFeeInfosPerDeployerRequestSDKType {
 export interface QueryDevFeeInfosPerDeployerResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -116,11 +116,11 @@ export interface QueryDevFeeInfosPerDeployerResponse {
  */
 export interface QueryDevFeeInfosPerDeployerResponseSDKType {
   fees: DevFeeInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosRequest = {
@@ -209,7 +209,7 @@ export const QueryDevFeeInfosRequest = {
 function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
   return {
     fees: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosResponse = {
@@ -323,13 +323,13 @@ export const QueryDevFeeInfosResponse = {
 };
 function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
   return {
-    contractAddress: ""
+    contractAddress: undefined
   };
 }
 export const QueryDevFeeInfoRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
   encode(message: QueryDevFeeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
@@ -363,7 +363,7 @@ export const QueryDevFeeInfoRequest = {
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
     const message = createBaseQueryDevFeeInfoRequest();
-    message.contractAddress = object.contractAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
     return message;
   },
   fromSDK(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
@@ -373,7 +373,7 @@ export const QueryDevFeeInfoRequest = {
   },
   fromSDKJSON(object: any): QueryDevFeeInfoRequestSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined
     };
   },
   toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
@@ -383,7 +383,7 @@ export const QueryDevFeeInfoRequest = {
   },
   fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
     return {
-      contractAddress: object.contract_address
+      contractAddress: object?.contract_address
     };
   },
   toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
@@ -652,14 +652,14 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDeployerRequest {
   return {
-    deployerAddress: "",
-    pagination: PageRequest.fromPartial({})
+    deployerAddress: undefined,
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
   encode(message: QueryDevFeeInfosPerDeployerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(10).string(message.deployerAddress);
     }
     if (message.pagination !== undefined) {
@@ -701,7 +701,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
     const message = createBaseQueryDevFeeInfosPerDeployerRequest();
-    message.deployerAddress = object.deployerAddress ?? "";
+    message.deployerAddress = object.deployerAddress ?? undefined;
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -715,7 +715,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerRequestSDKType {
     return {
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -727,7 +727,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
     return {
-      deployerAddress: object.deployer_address,
+      deployerAddress: object?.deployer_address,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -756,7 +756,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
 function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDeployerResponse {
   return {
     fees: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosPerDeployerResponse = {

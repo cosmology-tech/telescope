@@ -10,14 +10,14 @@ export const protobufPackage = "google.api.expr.v1beta1";
  */
 export interface EvalState {
   /** The unique values referenced in this message. */
-  values: ExprValue[];
+  values?: ExprValue[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results: EvalState_Result[];
+  results?: EvalState_Result[];
 }
 /**
  * The state of an evaluation.
@@ -25,20 +25,20 @@ export interface EvalState {
  * Can represent an initial, partial, or completed state of evaluation.
  */
 export interface EvalStateSDKType {
-  values: ExprValueSDKType[];
-  results: EvalState_ResultSDKType[];
+  values?: ExprValueSDKType[];
+  results?: EvalState_ResultSDKType[];
 }
 /** A single evaluation result. */
 export interface EvalState_Result {
   /** The expression this result is for. */
-  expr: IdRef;
+  expr?: IdRef;
   /** The index in `values` of the resulting value. */
-  value: number;
+  value?: number;
 }
 /** A single evaluation result. */
 export interface EvalState_ResultSDKType {
-  expr: IdRefSDKType;
-  value: number;
+  expr?: IdRefSDKType;
+  value?: number;
 }
 /** The value of an evaluated expression. */
 export interface ExprValue {
@@ -104,7 +104,7 @@ export interface ExprValueSDKType {
  */
 export interface ErrorSet {
   /** The errors in the set. */
-  errors: Status[];
+  errors?: Status[];
 }
 /**
  * A set of errors.
@@ -112,7 +112,7 @@ export interface ErrorSet {
  * The errors included depend on the context. See `ExprValue.error`.
  */
 export interface ErrorSetSDKType {
-  errors: StatusSDKType[];
+  errors?: StatusSDKType[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -121,7 +121,7 @@ export interface ErrorSetSDKType {
  */
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRef[];
+  exprs?: IdRef[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -129,21 +129,21 @@ export interface UnknownSet {
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
 export interface UnknownSetSDKType {
-  exprs: IdRefSDKType[];
+  exprs?: IdRefSDKType[];
 }
 /** A reference to an expression id. */
 export interface IdRef {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 /** A reference to an expression id. */
 export interface IdRefSDKType {
-  id: number;
+  id?: number;
 }
 function createBaseEvalState(): EvalState {
   return {
-    values: [],
-    results: []
+    values: undefined,
+    results: undefined
   };
 }
 export const EvalState = {
@@ -267,8 +267,8 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: IdRef.fromPartial({}),
-    value: 0
+    expr: undefined,
+    value: undefined
   };
 }
 export const EvalState_Result = {
@@ -277,7 +277,7 @@ export const EvalState_Result = {
     if (message.expr !== undefined) {
       IdRef.encode(message.expr, writer.uint32(10).fork()).ldelim();
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -319,7 +319,7 @@ export const EvalState_Result = {
     if (object.expr !== undefined && object.expr !== null) {
       message.expr = IdRef.fromPartial(object.expr);
     }
-    message.value = object.value ?? 0;
+    message.value = object.value ?? undefined;
     return message;
   },
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
@@ -331,7 +331,7 @@ export const EvalState_Result = {
   fromSDKJSON(object: any): EvalState_ResultSDKType {
     return {
       expr: isSet(object.expr) ? IdRef.fromSDKJSON(object.expr) : undefined,
-      value: isSet(object.value) ? Number(object.value) : 0
+      value: isSet(object.value) ? Number(object.value) : undefined
     };
   },
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
@@ -343,7 +343,7 @@ export const EvalState_Result = {
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
     return {
       expr: object?.expr ? IdRef.fromAmino(object.expr) : undefined,
-      value: object.value
+      value: object?.value
     };
   },
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
@@ -492,7 +492,7 @@ export const ExprValue = {
 };
 function createBaseErrorSet(): ErrorSet {
   return {
-    errors: []
+    errors: undefined
   };
 }
 export const ErrorSet = {
@@ -590,7 +590,7 @@ export const ErrorSet = {
 };
 function createBaseUnknownSet(): UnknownSet {
   return {
-    exprs: []
+    exprs: undefined
   };
 }
 export const UnknownSet = {
@@ -688,13 +688,13 @@ export const UnknownSet = {
 };
 function createBaseIdRef(): IdRef {
   return {
-    id: 0
+    id: undefined
   };
 }
 export const IdRef = {
   typeUrl: "/google.api.expr.v1beta1.IdRef",
   encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
     }
     return writer;
@@ -728,7 +728,7 @@ export const IdRef = {
   },
   fromPartial(object: DeepPartial<IdRef>): IdRef {
     const message = createBaseIdRef();
-    message.id = object.id ?? 0;
+    message.id = object.id ?? undefined;
     return message;
   },
   fromSDK(object: IdRefSDKType): IdRef {
@@ -738,7 +738,7 @@ export const IdRef = {
   },
   fromSDKJSON(object: any): IdRefSDKType {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0
+      id: isSet(object.id) ? Number(object.id) : undefined
     };
   },
   toSDK(message: IdRef): IdRefSDKType {
@@ -748,7 +748,7 @@ export const IdRef = {
   },
   fromAmino(object: IdRefAmino): IdRef {
     return {
-      id: object.id
+      id: object?.id
     };
   },
   toAmino(message: IdRef): IdRefAmino {

@@ -64,7 +64,7 @@ export interface Monitoring {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  producerDestinations: Monitoring_MonitoringDestination[];
+  producerDestinations?: Monitoring_MonitoringDestination[];
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -73,7 +73,7 @@ export interface Monitoring {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  consumerDestinations: Monitoring_MonitoringDestination[];
+  consumerDestinations?: Monitoring_MonitoringDestination[];
 }
 /**
  * Monitoring configuration of the service.
@@ -130,8 +130,8 @@ export interface Monitoring {
  *         - library.googleapis.com/book/num_overdue
  */
 export interface MonitoringSDKType {
-  producer_destinations: Monitoring_MonitoringDestinationSDKType[];
-  consumer_destinations: Monitoring_MonitoringDestinationSDKType[];
+  producer_destinations?: Monitoring_MonitoringDestinationSDKType[];
+  consumer_destinations?: Monitoring_MonitoringDestinationSDKType[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -142,25 +142,25 @@ export interface Monitoring_MonitoringDestination {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitoredResource: string;
+  monitoredResource?: string;
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
+  metrics?: string[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
 export interface Monitoring_MonitoringDestinationSDKType {
-  monitored_resource: string;
-  metrics: string[];
+  monitored_resource?: string;
+  metrics?: string[];
 }
 function createBaseMonitoring(): Monitoring {
   return {
-    producerDestinations: [],
-    consumerDestinations: []
+    producerDestinations: undefined,
+    consumerDestinations: undefined
   };
 }
 export const Monitoring = {
@@ -284,14 +284,14 @@ export const Monitoring = {
 };
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
   return {
-    monitoredResource: "",
-    metrics: []
+    monitoredResource: undefined,
+    metrics: undefined
   };
 }
 export const Monitoring_MonitoringDestination = {
   typeUrl: "/google.api.MonitoringDestination",
   encode(message: Monitoring_MonitoringDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -337,7 +337,7 @@ export const Monitoring_MonitoringDestination = {
   },
   fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
     const message = createBaseMonitoring_MonitoringDestination();
-    message.monitoredResource = object.monitoredResource ?? "";
+    message.monitoredResource = object.monitoredResource ?? undefined;
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
   },
@@ -349,7 +349,7 @@ export const Monitoring_MonitoringDestination = {
   },
   fromSDKJSON(object: any): Monitoring_MonitoringDestinationSDKType {
     return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : undefined,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
     };
   },
@@ -365,7 +365,7 @@ export const Monitoring_MonitoringDestination = {
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
     return {
-      monitoredResource: object.monitored_resource,
+      monitoredResource: object?.monitored_resource,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },

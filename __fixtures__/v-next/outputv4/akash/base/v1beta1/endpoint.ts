@@ -37,21 +37,21 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface Endpoint {
-  kind: Endpoint_Kind;
+  kind?: Endpoint_Kind;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
-  kind: Endpoint_Kind;
+  kind?: Endpoint_Kind;
 }
 function createBaseEndpoint(): Endpoint {
   return {
-    kind: 0
+    kind: undefined
   };
 }
 export const Endpoint = {
   typeUrl: "/akash.base.v1beta1.Endpoint",
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.kind !== 0) {
+    if (message.kind !== undefined) {
       writer.uint32(8).int32(message.kind);
     }
     return writer;
@@ -85,17 +85,17 @@ export const Endpoint = {
   },
   fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
     const message = createBaseEndpoint();
-    message.kind = object.kind ?? 0;
+    message.kind = object.kind ?? undefined;
     return message;
   },
   fromSDK(object: EndpointSDKType): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : undefined
     };
   },
   fromSDKJSON(object: any): EndpointSDKType {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : undefined
     };
   },
   toSDK(message: Endpoint): EndpointSDKType {
@@ -105,7 +105,7 @@ export const Endpoint = {
   },
   fromAmino(object: EndpointAmino): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : undefined
     };
   },
   toAmino(message: Endpoint): EndpointAmino {

@@ -44,27 +44,27 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface Endpoint {
-  kind: Endpoint_Kind;
-  sequenceNumber: number;
+  kind?: Endpoint_Kind;
+  sequenceNumber?: number;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
-  kind: Endpoint_Kind;
-  sequence_number: number;
+  kind?: Endpoint_Kind;
+  sequence_number?: number;
 }
 function createBaseEndpoint(): Endpoint {
   return {
-    kind: 0,
-    sequenceNumber: 0
+    kind: undefined,
+    sequenceNumber: undefined
   };
 }
 export const Endpoint = {
   typeUrl: "/akash.base.v1beta2.Endpoint",
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.kind !== 0) {
+    if (message.kind !== undefined) {
       writer.uint32(8).int32(message.kind);
     }
-    if (message.sequenceNumber !== 0) {
+    if (message.sequenceNumber !== undefined) {
       writer.uint32(16).uint32(message.sequenceNumber);
     }
     return writer;
@@ -103,20 +103,20 @@ export const Endpoint = {
   },
   fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
     const message = createBaseEndpoint();
-    message.kind = object.kind ?? 0;
-    message.sequenceNumber = object.sequenceNumber ?? 0;
+    message.kind = object.kind ?? undefined;
+    message.sequenceNumber = object.sequenceNumber ?? undefined;
     return message;
   },
   fromSDK(object: EndpointSDKType): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : undefined,
       sequenceNumber: object?.sequence_number
     };
   },
   fromSDKJSON(object: any): EndpointSDKType {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : 0
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : undefined,
+      sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : undefined
     };
   },
   toSDK(message: Endpoint): EndpointSDKType {
@@ -127,8 +127,8 @@ export const Endpoint = {
   },
   fromAmino(object: EndpointAmino): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequenceNumber: object.sequence_number
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : undefined,
+      sequenceNumber: object?.sequence_number
     };
   },
   toAmino(message: Endpoint): EndpointAmino {

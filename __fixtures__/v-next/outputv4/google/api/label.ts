@@ -45,35 +45,35 @@ export function labelDescriptor_ValueTypeToJSON(object: LabelDescriptor_ValueTyp
 /** A description of a label. */
 export interface LabelDescriptor {
   /** The label key. */
-  key: string;
+  key?: string;
   /** The type of data that can be assigned to the label. */
-  valueType: LabelDescriptor_ValueType;
+  valueType?: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
-  description: string;
+  description?: string;
 }
 /** A description of a label. */
 export interface LabelDescriptorSDKType {
-  key: string;
-  value_type: LabelDescriptor_ValueType;
-  description: string;
+  key?: string;
+  value_type?: LabelDescriptor_ValueType;
+  description?: string;
 }
 function createBaseLabelDescriptor(): LabelDescriptor {
   return {
-    key: "",
-    valueType: 0,
-    description: ""
+    key: undefined,
+    valueType: undefined,
+    description: undefined
   };
 }
 export const LabelDescriptor = {
   typeUrl: "/google.api.LabelDescriptor",
   encode(message: LabelDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.valueType !== 0) {
+    if (message.valueType !== undefined) {
       writer.uint32(16).int32(message.valueType);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -117,23 +117,23 @@ export const LabelDescriptor = {
   },
   fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {
     const message = createBaseLabelDescriptor();
-    message.key = object.key ?? "";
-    message.valueType = object.valueType ?? 0;
-    message.description = object.description ?? "";
+    message.key = object.key ?? undefined;
+    message.valueType = object.valueType ?? undefined;
+    message.description = object.description ?? undefined;
     return message;
   },
   fromSDK(object: LabelDescriptorSDKType): LabelDescriptor {
     return {
       key: object?.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : undefined,
       description: object?.description
     };
   },
   fromSDKJSON(object: any): LabelDescriptorSDKType {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: isSet(object.description) ? String(object.description) : ""
+      key: isSet(object.key) ? String(object.key) : undefined,
+      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : undefined,
+      description: isSet(object.description) ? String(object.description) : undefined
     };
   },
   toSDK(message: LabelDescriptor): LabelDescriptorSDKType {
@@ -145,9 +145,9 @@ export const LabelDescriptor = {
   },
   fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
     return {
-      key: object.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: object.description
+      key: object?.key,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : undefined,
+      description: object?.description
     };
   },
   toAmino(message: LabelDescriptor): LabelDescriptorAmino {

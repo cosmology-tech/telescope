@@ -4,27 +4,27 @@ export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfo {
   /** contract hex address */
-  contractAddress: string;
+  contractAddress?: string;
   /**
    * bech32 address of message sender, must be the same as the origin EOA
    * sending the transaction which deploys the contract
    */
-  deployerAddress: string;
+  deployerAddress?: string;
   /** bech32 address of account receiving the transaction fees */
-  withdrawAddress: string;
+  withdrawAddress?: string;
   /**
    * array of nonces from the address path, where the last nonce is
    * the nonce that determines the contract's address - it can be an EOA nonce
    * or a factory contract nonce
    */
-  nonces: bigint[];
+  nonces?: bigint[];
 }
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
-  contract_address: string;
-  deployer_address: string;
-  withdraw_address: string;
-  nonces: bigint[];
+  contract_address?: string;
+  deployer_address?: string;
+  withdraw_address?: string;
+  nonces?: bigint[];
 }
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -42,17 +42,17 @@ export interface MsgRegisterDevFeeInfoResponseSDKType {}
  */
 export interface MsgCancelDevFeeInfo {
   /** contract hex address */
-  contractAddress: string;
+  contractAddress?: string;
   /** deployer bech32 address */
-  deployerAddress: string;
+  deployerAddress?: string;
 }
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
  */
 export interface MsgCancelDevFeeInfoSDKType {
-  contract_address: string;
-  deployer_address: string;
+  contract_address?: string;
+  deployer_address?: string;
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
@@ -64,20 +64,20 @@ export interface MsgCancelDevFeeInfoResponseSDKType {}
  */
 export interface MsgUpdateDevFeeInfo {
   /** contract hex address */
-  contractAddress: string;
+  contractAddress?: string;
   /** deployer bech32 address */
-  deployerAddress: string;
+  deployerAddress?: string;
   /** new withdraw bech32 address for receiving the transaction fees */
-  withdrawAddress: string;
+  withdrawAddress?: string;
 }
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
  */
 export interface MsgUpdateDevFeeInfoSDKType {
-  contract_address: string;
-  deployer_address: string;
-  withdraw_address: string;
+  contract_address?: string;
+  deployer_address?: string;
+  withdraw_address?: string;
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
@@ -85,22 +85,22 @@ export interface MsgUpdateDevFeeInfoResponse {}
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
   return {
-    contractAddress: "",
-    deployerAddress: "",
-    withdrawAddress: "",
-    nonces: []
+    contractAddress: undefined,
+    deployerAddress: undefined,
+    withdrawAddress: undefined,
+    nonces: undefined
   };
 }
 export const MsgRegisterDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
   encode(message: MsgRegisterDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(18).string(message.deployerAddress);
     }
-    if (message.withdrawAddress !== "") {
+    if (message.withdrawAddress !== undefined) {
       writer.uint32(26).string(message.withdrawAddress);
     }
     writer.uint32(34).fork();
@@ -157,7 +157,7 @@ export const MsgRegisterDevFeeInfo = {
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || BigInt(0)).toString());
+      obj.nonces = message.nonces.map(e => (e || undefined).toString());
     } else {
       obj.nonces = [];
     }
@@ -165,9 +165,9 @@ export const MsgRegisterDevFeeInfo = {
   },
   fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
     const message = createBaseMsgRegisterDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
+    message.deployerAddress = object.deployerAddress ?? undefined;
+    message.withdrawAddress = object.withdrawAddress ?? undefined;
     message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
     return message;
   },
@@ -181,9 +181,9 @@ export const MsgRegisterDevFeeInfo = {
   },
   fromSDKJSON(object: any): MsgRegisterDevFeeInfoSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined,
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : undefined,
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : undefined,
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
     };
   },
@@ -201,9 +201,9 @@ export const MsgRegisterDevFeeInfo = {
   },
   fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
     return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address,
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address,
+      withdrawAddress: object?.withdraw_address,
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
     };
   },
@@ -304,17 +304,17 @@ export const MsgRegisterDevFeeInfoResponse = {
 };
 function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
   return {
-    contractAddress: "",
-    deployerAddress: ""
+    contractAddress: undefined,
+    deployerAddress: undefined
   };
 }
 export const MsgCancelDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
   encode(message: MsgCancelDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(18).string(message.deployerAddress);
     }
     return writer;
@@ -353,8 +353,8 @@ export const MsgCancelDevFeeInfo = {
   },
   fromPartial(object: DeepPartial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
     const message = createBaseMsgCancelDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
+    message.deployerAddress = object.deployerAddress ?? undefined;
     return message;
   },
   fromSDK(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
@@ -365,8 +365,8 @@ export const MsgCancelDevFeeInfo = {
   },
   fromSDKJSON(object: any): MsgCancelDevFeeInfoSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : ""
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined,
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : undefined
     };
   },
   toSDK(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
@@ -377,8 +377,8 @@ export const MsgCancelDevFeeInfo = {
   },
   fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
     return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address
     };
   },
   toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
@@ -472,21 +472,21 @@ export const MsgCancelDevFeeInfoResponse = {
 };
 function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
   return {
-    contractAddress: "",
-    deployerAddress: "",
-    withdrawAddress: ""
+    contractAddress: undefined,
+    deployerAddress: undefined,
+    withdrawAddress: undefined
   };
 }
 export const MsgUpdateDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
   encode(message: MsgUpdateDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(18).string(message.deployerAddress);
     }
-    if (message.withdrawAddress !== "") {
+    if (message.withdrawAddress !== undefined) {
       writer.uint32(26).string(message.withdrawAddress);
     }
     return writer;
@@ -530,9 +530,9 @@ export const MsgUpdateDevFeeInfo = {
   },
   fromPartial(object: DeepPartial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
     const message = createBaseMsgUpdateDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
+    message.contractAddress = object.contractAddress ?? undefined;
+    message.deployerAddress = object.deployerAddress ?? undefined;
+    message.withdrawAddress = object.withdrawAddress ?? undefined;
     return message;
   },
   fromSDK(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
@@ -544,9 +544,9 @@ export const MsgUpdateDevFeeInfo = {
   },
   fromSDKJSON(object: any): MsgUpdateDevFeeInfoSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined,
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : undefined,
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : undefined
     };
   },
   toSDK(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
@@ -558,9 +558,9 @@ export const MsgUpdateDevFeeInfo = {
   },
   fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
     return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address,
+      withdrawAddress: object?.withdraw_address
     };
   },
   toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {

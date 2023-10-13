@@ -5,19 +5,19 @@ export const protobufPackage = "cosmos.capability.v1beta1";
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwners {
   /** index is the index of the capability owner. */
-  index: bigint;
+  index?: bigint;
   /** index_owners are the owners at the given index. */
   indexOwners: CapabilityOwners;
 }
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
-  index: bigint;
+  index?: bigint;
   index_owners: CapabilityOwnersSDKType;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisState {
   /** index is the capability global index. */
-  index: bigint;
+  index?: bigint;
   /**
    * owners represents a map from index to owners of the capability index
    * index key is string to allow amino marshalling.
@@ -26,19 +26,19 @@ export interface GenesisState {
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisStateSDKType {
-  index: bigint;
+  index?: bigint;
   owners: GenesisOwnersSDKType[];
 }
 function createBaseGenesisOwners(): GenesisOwners {
   return {
-    index: BigInt(0),
+    index: undefined,
     indexOwners: CapabilityOwners.fromPartial({})
   };
 }
 export const GenesisOwners = {
   typeUrl: "/cosmos.capability.v1beta1.GenesisOwners",
   encode(message: GenesisOwners, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     if (message.indexOwners !== undefined) {
@@ -74,7 +74,9 @@ export const GenesisOwners = {
   },
   toJSON(message: GenesisOwners): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
+    if (message.index !== undefined) {
+      obj.index = message.index.toString();
+    }
     message.indexOwners !== undefined && (obj.indexOwners = message.indexOwners ? CapabilityOwners.toJSON(message.indexOwners) : undefined);
     return obj;
   },
@@ -96,7 +98,7 @@ export const GenesisOwners = {
   },
   fromSDKJSON(object: any): GenesisOwnersSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : undefined,
       index_owners: isSet(object.index_owners) ? CapabilityOwners.fromSDKJSON(object.index_owners) : undefined
     };
   },
@@ -108,7 +110,7 @@ export const GenesisOwners = {
   },
   fromAmino(object: GenesisOwnersAmino): GenesisOwners {
     return {
-      index: BigInt(object.index),
+      index: object?.index ? BigInt(object.index) : undefined,
       indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
     };
   },
@@ -142,14 +144,14 @@ export const GenesisOwners = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    index: BigInt(0),
+    index: undefined,
     owners: []
   };
 }
 export const GenesisState = {
   typeUrl: "/cosmos.capability.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     for (const v of message.owners) {
@@ -185,7 +187,9 @@ export const GenesisState = {
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
+    if (message.index !== undefined) {
+      obj.index = message.index.toString();
+    }
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toJSON(e) : undefined);
     } else {
@@ -209,7 +213,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : undefined,
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDKJSON(e)) : []
     };
   },
@@ -225,7 +229,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      index: BigInt(object.index),
+      index: object?.index ? BigInt(object.index) : undefined,
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
     };
   },

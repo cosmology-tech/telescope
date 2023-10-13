@@ -14,7 +14,7 @@ export interface Explain {
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
-  values: Value[];
+  values?: Value[];
   /**
    * List of steps.
    * 
@@ -22,7 +22,7 @@ export interface Explain {
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
-  exprSteps: Explain_ExprStep[];
+  exprSteps?: Explain_ExprStep[];
 }
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -30,25 +30,25 @@ export interface Explain {
  */
 /** @deprecated */
 export interface ExplainSDKType {
-  values: ValueSDKType[];
-  expr_steps: Explain_ExprStepSDKType[];
+  values?: ValueSDKType[];
+  expr_steps?: Explain_ExprStepSDKType[];
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
-  id: bigint;
+  id?: bigint;
   /** Index of the value in the values list. */
-  valueIndex: number;
+  valueIndex?: number;
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
-  id: bigint;
-  value_index: number;
+  id?: bigint;
+  value_index?: number;
 }
 function createBaseExplain(): Explain {
   return {
-    values: [],
-    exprSteps: []
+    values: undefined,
+    exprSteps: undefined
   };
 }
 export const Explain = {
@@ -172,17 +172,17 @@ export const Explain = {
 };
 function createBaseExplain_ExprStep(): Explain_ExprStep {
   return {
-    id: BigInt(0),
-    valueIndex: 0
+    id: undefined,
+    valueIndex: undefined
   };
 }
 export const Explain_ExprStep = {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep",
   encode(message: Explain_ExprStep, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(8).int64(message.id);
     }
-    if (message.valueIndex !== 0) {
+    if (message.valueIndex !== undefined) {
       writer.uint32(16).int32(message.valueIndex);
     }
     return writer;
@@ -215,7 +215,9 @@ export const Explain_ExprStep = {
   },
   toJSON(message: Explain_ExprStep): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
+    if (message.id !== undefined) {
+      obj.id = message.id.toString();
+    }
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));
     return obj;
   },
@@ -224,7 +226,7 @@ export const Explain_ExprStep = {
     if (object.id !== undefined && object.id !== null) {
       message.id = BigInt(object.id.toString());
     }
-    message.valueIndex = object.valueIndex ?? 0;
+    message.valueIndex = object.valueIndex ?? undefined;
     return message;
   },
   fromSDK(object: Explain_ExprStepSDKType): Explain_ExprStep {
@@ -235,8 +237,8 @@ export const Explain_ExprStep = {
   },
   fromSDKJSON(object: any): Explain_ExprStepSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      value_index: isSet(object.value_index) ? Number(object.value_index) : 0
+      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined,
+      value_index: isSet(object.value_index) ? Number(object.value_index) : undefined
     };
   },
   toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
@@ -247,8 +249,8 @@ export const Explain_ExprStep = {
   },
   fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
     return {
-      id: BigInt(object.id),
-      valueIndex: object.value_index
+      id: object?.id ? BigInt(object.id) : undefined,
+      valueIndex: object?.value_index
     };
   },
   toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {

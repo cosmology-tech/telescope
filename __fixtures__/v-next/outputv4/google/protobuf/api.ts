@@ -19,11 +19,11 @@ export interface Api {
    * The fully qualified name of this interface, including package name
    * followed by the interface's simple name.
    */
-  name: string;
+  name?: string;
   /** The methods of this interface, in unspecified order. */
-  methods: Method[];
+  methods?: Method[];
   /** Any metadata attached to the interface. */
-  options: Option[];
+  options?: Option[];
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -45,16 +45,16 @@ export interface Api {
    * be omitted. Zero major versions must only be used for
    * experimental, non-GA interfaces.
    */
-  version: string;
+  version?: string;
   /**
    * Source context for the protocol buffer service represented by this
    * message.
    */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
   /** Included interfaces. See [Mixin][]. */
-  mixins: Mixin[];
+  mixins?: Mixin[];
   /** The source syntax of the service. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -68,40 +68,40 @@ export interface Api {
  * detailed terminology.
  */
 export interface ApiSDKType {
-  name: string;
-  methods: MethodSDKType[];
-  options: OptionSDKType[];
-  version: string;
-  source_context: SourceContextSDKType;
-  mixins: MixinSDKType[];
-  syntax: Syntax;
+  name?: string;
+  methods?: MethodSDKType[];
+  options?: OptionSDKType[];
+  version?: string;
+  source_context?: SourceContextSDKType;
+  mixins?: MixinSDKType[];
+  syntax?: Syntax;
 }
 /** Method represents a method of an API interface. */
 export interface Method {
   /** The simple name of this method. */
-  name: string;
+  name?: string;
   /** A URL of the input message type. */
-  requestTypeUrl: string;
+  requestTypeUrl?: string;
   /** If true, the request is streamed. */
-  requestStreaming: boolean;
+  requestStreaming?: boolean;
   /** The URL of the output message type. */
-  responseTypeUrl: string;
+  responseTypeUrl?: string;
   /** If true, the response is streamed. */
-  responseStreaming: boolean;
+  responseStreaming?: boolean;
   /** Any metadata attached to the method. */
-  options: Option[];
+  options?: Option[];
   /** The source syntax of this method. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 /** Method represents a method of an API interface. */
 export interface MethodSDKType {
-  name: string;
-  request_type_url: string;
-  request_streaming: boolean;
-  response_type_url: string;
-  response_streaming: boolean;
-  options: OptionSDKType[];
-  syntax: Syntax;
+  name?: string;
+  request_type_url?: string;
+  request_streaming?: boolean;
+  response_type_url?: string;
+  response_streaming?: boolean;
+  options?: OptionSDKType[];
+  syntax?: Syntax;
 }
 /**
  * Declares an API Interface to be included in this interface. The including
@@ -185,12 +185,12 @@ export interface MethodSDKType {
  */
 export interface Mixin {
   /** The fully qualified name of the interface which is included. */
-  name: string;
+  name?: string;
   /**
    * If non-empty specifies a path under which inherited HTTP paths
    * are rooted.
    */
-  root: string;
+  root?: string;
 }
 /**
  * Declares an API Interface to be included in this interface. The including
@@ -273,24 +273,24 @@ export interface Mixin {
  *     }
  */
 export interface MixinSDKType {
-  name: string;
-  root: string;
+  name?: string;
+  root?: string;
 }
 function createBaseApi(): Api {
   return {
-    name: "",
-    methods: [],
-    options: [],
-    version: "",
-    sourceContext: SourceContext.fromPartial({}),
-    mixins: [],
-    syntax: 0
+    name: undefined,
+    methods: undefined,
+    options: undefined,
+    version: undefined,
+    sourceContext: undefined,
+    mixins: undefined,
+    syntax: undefined
   };
 }
 export const Api = {
   typeUrl: "/google.protobuf.Api",
   encode(message: Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.methods) {
@@ -299,7 +299,7 @@ export const Api = {
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(34).string(message.version);
     }
     if (message.sourceContext !== undefined) {
@@ -308,7 +308,7 @@ export const Api = {
     for (const v of message.mixins) {
       Mixin.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.syntax !== 0) {
+    if (message.syntax !== undefined) {
       writer.uint32(56).int32(message.syntax);
     }
     return writer;
@@ -384,15 +384,15 @@ export const Api = {
   },
   fromPartial(object: DeepPartial<Api>): Api {
     const message = createBaseApi();
-    message.name = object.name ?? "";
+    message.name = object.name ?? undefined;
     message.methods = object.methods?.map(e => Method.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.version = object.version ?? "";
+    message.version = object.version ?? undefined;
     if (object.sourceContext !== undefined && object.sourceContext !== null) {
       message.sourceContext = SourceContext.fromPartial(object.sourceContext);
     }
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
-    message.syntax = object.syntax ?? 0;
+    message.syntax = object.syntax ?? undefined;
     return message;
   },
   fromSDK(object: ApiSDKType): Api {
@@ -403,18 +403,18 @@ export const Api = {
       version: object?.version,
       sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDK(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : undefined
     };
   },
   fromSDKJSON(object: any): ApiSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : undefined,
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDKJSON(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
-      version: isSet(object.version) ? String(object.version) : "",
+      version: isSet(object.version) ? String(object.version) : undefined,
       source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDKJSON(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : undefined
     };
   },
   toSDK(message: Api): ApiSDKType {
@@ -442,13 +442,13 @@ export const Api = {
   },
   fromAmino(object: ApiAmino): Api {
     return {
-      name: object.name,
+      name: object?.name,
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromAmino(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      version: object.version,
+      version: object?.version,
       sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromAmino(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : undefined
     };
   },
   toAmino(message: Api): ApiAmino {
@@ -492,37 +492,37 @@ export const Api = {
 };
 function createBaseMethod(): Method {
   return {
-    name: "",
-    requestTypeUrl: "",
-    requestStreaming: false,
-    responseTypeUrl: "",
-    responseStreaming: false,
-    options: [],
-    syntax: 0
+    name: undefined,
+    requestTypeUrl: undefined,
+    requestStreaming: undefined,
+    responseTypeUrl: undefined,
+    responseStreaming: undefined,
+    options: undefined,
+    syntax: undefined
   };
 }
 export const Method = {
   typeUrl: "/google.protobuf.Method",
   encode(message: Method, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.requestTypeUrl !== "") {
+    if (message.requestTypeUrl !== undefined) {
       writer.uint32(18).string(message.requestTypeUrl);
     }
-    if (message.requestStreaming === true) {
+    if (message.requestStreaming !== undefined) {
       writer.uint32(24).bool(message.requestStreaming);
     }
-    if (message.responseTypeUrl !== "") {
+    if (message.responseTypeUrl !== undefined) {
       writer.uint32(34).string(message.responseTypeUrl);
     }
-    if (message.responseStreaming === true) {
+    if (message.responseStreaming !== undefined) {
       writer.uint32(40).bool(message.responseStreaming);
     }
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.syntax !== 0) {
+    if (message.syntax !== undefined) {
       writer.uint32(56).int32(message.syntax);
     }
     return writer;
@@ -590,13 +590,13 @@ export const Method = {
   },
   fromPartial(object: DeepPartial<Method>): Method {
     const message = createBaseMethod();
-    message.name = object.name ?? "";
-    message.requestTypeUrl = object.requestTypeUrl ?? "";
-    message.requestStreaming = object.requestStreaming ?? false;
-    message.responseTypeUrl = object.responseTypeUrl ?? "";
-    message.responseStreaming = object.responseStreaming ?? false;
+    message.name = object.name ?? undefined;
+    message.requestTypeUrl = object.requestTypeUrl ?? undefined;
+    message.requestStreaming = object.requestStreaming ?? undefined;
+    message.responseTypeUrl = object.responseTypeUrl ?? undefined;
+    message.responseStreaming = object.responseStreaming ?? undefined;
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.syntax = object.syntax ?? 0;
+    message.syntax = object.syntax ?? undefined;
     return message;
   },
   fromSDK(object: MethodSDKType): Method {
@@ -607,18 +607,18 @@ export const Method = {
       responseTypeUrl: object?.response_type_url,
       responseStreaming: object?.response_streaming,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : undefined
     };
   },
   fromSDKJSON(object: any): MethodSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      request_type_url: isSet(object.request_type_url) ? String(object.request_type_url) : "",
-      request_streaming: isSet(object.request_streaming) ? Boolean(object.request_streaming) : false,
-      response_type_url: isSet(object.response_type_url) ? String(object.response_type_url) : "",
-      response_streaming: isSet(object.response_streaming) ? Boolean(object.response_streaming) : false,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      request_type_url: isSet(object.request_type_url) ? String(object.request_type_url) : undefined,
+      request_streaming: isSet(object.request_streaming) ? Boolean(object.request_streaming) : undefined,
+      response_type_url: isSet(object.response_type_url) ? String(object.response_type_url) : undefined,
+      response_streaming: isSet(object.response_streaming) ? Boolean(object.response_streaming) : undefined,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : undefined
     };
   },
   toSDK(message: Method): MethodSDKType {
@@ -638,13 +638,13 @@ export const Method = {
   },
   fromAmino(object: MethodAmino): Method {
     return {
-      name: object.name,
-      requestTypeUrl: object.request_type_url,
-      requestStreaming: object.request_streaming,
-      responseTypeUrl: object.response_type_url,
-      responseStreaming: object.response_streaming,
+      name: object?.name,
+      requestTypeUrl: object?.request_type_url,
+      requestStreaming: object?.request_streaming,
+      responseTypeUrl: object?.response_type_url,
+      responseStreaming: object?.response_streaming,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : undefined
     };
   },
   toAmino(message: Method): MethodAmino {
@@ -680,17 +680,17 @@ export const Method = {
 };
 function createBaseMixin(): Mixin {
   return {
-    name: "",
-    root: ""
+    name: undefined,
+    root: undefined
   };
 }
 export const Mixin = {
   typeUrl: "/google.protobuf.Mixin",
   encode(message: Mixin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.root !== "") {
+    if (message.root !== undefined) {
       writer.uint32(18).string(message.root);
     }
     return writer;
@@ -729,8 +729,8 @@ export const Mixin = {
   },
   fromPartial(object: DeepPartial<Mixin>): Mixin {
     const message = createBaseMixin();
-    message.name = object.name ?? "";
-    message.root = object.root ?? "";
+    message.name = object.name ?? undefined;
+    message.root = object.root ?? undefined;
     return message;
   },
   fromSDK(object: MixinSDKType): Mixin {
@@ -741,8 +741,8 @@ export const Mixin = {
   },
   fromSDKJSON(object: any): MixinSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      root: isSet(object.root) ? String(object.root) : ""
+      name: isSet(object.name) ? String(object.name) : undefined,
+      root: isSet(object.root) ? String(object.root) : undefined
     };
   },
   toSDK(message: Mixin): MixinSDKType {
@@ -753,8 +753,8 @@ export const Mixin = {
   },
   fromAmino(object: MixinAmino): Mixin {
     return {
-      name: object.name,
-      root: object.root
+      name: object?.name,
+      root: object?.root
     };
   },
   toAmino(message: Mixin): MixinAmino {

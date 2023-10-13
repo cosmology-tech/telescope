@@ -21,19 +21,19 @@ export interface GenesisStateSDKType {
 /** Params defines the incentives module params */
 export interface Params {
   /** parameter to enable incentives */
-  enableIncentives: boolean;
+  enableIncentives?: boolean;
   /** maximum percentage an incentive can allocate per denomination */
   allocationLimit: string;
   /** identifier for the epochs module hooks */
-  incentivesEpochIdentifier: string;
+  incentivesEpochIdentifier?: string;
   /** scaling factor for capping rewards */
   rewardScaler: string;
 }
 /** Params defines the incentives module params */
 export interface ParamsSDKType {
-  enable_incentives: boolean;
+  enable_incentives?: boolean;
   allocation_limit: string;
-  incentives_epoch_identifier: string;
+  incentives_epoch_identifier?: string;
   reward_scaler: string;
 }
 function createBaseGenesisState(): GenesisState {
@@ -180,22 +180,22 @@ export const GenesisState = {
 };
 function createBaseParams(): Params {
   return {
-    enableIncentives: false,
+    enableIncentives: undefined,
     allocationLimit: "",
-    incentivesEpochIdentifier: "",
+    incentivesEpochIdentifier: undefined,
     rewardScaler: ""
   };
 }
 export const Params = {
   typeUrl: "/evmos.incentives.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableIncentives === true) {
+    if (message.enableIncentives !== undefined) {
       writer.uint32(8).bool(message.enableIncentives);
     }
     if (message.allocationLimit !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
     }
-    if (message.incentivesEpochIdentifier !== "") {
+    if (message.incentivesEpochIdentifier !== undefined) {
       writer.uint32(26).string(message.incentivesEpochIdentifier);
     }
     if (message.rewardScaler !== "") {
@@ -247,9 +247,9 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.enableIncentives = object.enableIncentives ?? false;
+    message.enableIncentives = object.enableIncentives ?? undefined;
     message.allocationLimit = object.allocationLimit ?? "";
-    message.incentivesEpochIdentifier = object.incentivesEpochIdentifier ?? "";
+    message.incentivesEpochIdentifier = object.incentivesEpochIdentifier ?? undefined;
     message.rewardScaler = object.rewardScaler ?? "";
     return message;
   },
@@ -263,9 +263,9 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      enable_incentives: isSet(object.enable_incentives) ? Boolean(object.enable_incentives) : false,
+      enable_incentives: isSet(object.enable_incentives) ? Boolean(object.enable_incentives) : undefined,
       allocation_limit: isSet(object.allocation_limit) ? String(object.allocation_limit) : "",
-      incentives_epoch_identifier: isSet(object.incentives_epoch_identifier) ? String(object.incentives_epoch_identifier) : "",
+      incentives_epoch_identifier: isSet(object.incentives_epoch_identifier) ? String(object.incentives_epoch_identifier) : undefined,
       reward_scaler: isSet(object.reward_scaler) ? String(object.reward_scaler) : ""
     };
   },
@@ -279,9 +279,9 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      enableIncentives: object.enable_incentives,
+      enableIncentives: object?.enable_incentives,
       allocationLimit: object.allocation_limit,
-      incentivesEpochIdentifier: object.incentives_epoch_identifier,
+      incentivesEpochIdentifier: object?.incentives_epoch_identifier,
       rewardScaler: object.reward_scaler
     };
   },

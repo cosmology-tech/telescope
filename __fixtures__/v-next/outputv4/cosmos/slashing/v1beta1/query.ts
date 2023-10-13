@@ -21,14 +21,14 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QuerySigningInfoRequest {
   /** cons_address is the address to query signing info of */
-  consAddress: string;
+  consAddress?: string;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
  * method
  */
 export interface QuerySigningInfoRequestSDKType {
-  cons_address: string;
+  cons_address?: string;
 }
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
@@ -50,14 +50,14 @@ export interface QuerySigningInfoResponseSDKType {
  * method
  */
 export interface QuerySigningInfosRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
  * method
  */
 export interface QuerySigningInfosRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -66,7 +66,7 @@ export interface QuerySigningInfosRequestSDKType {
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -74,7 +74,7 @@ export interface QuerySigningInfosResponse {
  */
 export interface QuerySigningInfosResponseSDKType {
   info: ValidatorSigningInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -245,13 +245,13 @@ export const QueryParamsResponse = {
 };
 function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
   return {
-    consAddress: ""
+    consAddress: undefined
   };
 }
 export const QuerySigningInfoRequest = {
   typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoRequest",
   encode(message: QuerySigningInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.consAddress !== "") {
+    if (message.consAddress !== undefined) {
       writer.uint32(10).string(message.consAddress);
     }
     return writer;
@@ -285,7 +285,7 @@ export const QuerySigningInfoRequest = {
   },
   fromPartial(object: DeepPartial<QuerySigningInfoRequest>): QuerySigningInfoRequest {
     const message = createBaseQuerySigningInfoRequest();
-    message.consAddress = object.consAddress ?? "";
+    message.consAddress = object.consAddress ?? undefined;
     return message;
   },
   fromSDK(object: QuerySigningInfoRequestSDKType): QuerySigningInfoRequest {
@@ -295,7 +295,7 @@ export const QuerySigningInfoRequest = {
   },
   fromSDKJSON(object: any): QuerySigningInfoRequestSDKType {
     return {
-      cons_address: isSet(object.cons_address) ? String(object.cons_address) : ""
+      cons_address: isSet(object.cons_address) ? String(object.cons_address) : undefined
     };
   },
   toSDK(message: QuerySigningInfoRequest): QuerySigningInfoRequestSDKType {
@@ -305,7 +305,7 @@ export const QuerySigningInfoRequest = {
   },
   fromAmino(object: QuerySigningInfoRequestAmino): QuerySigningInfoRequest {
     return {
-      consAddress: object.cons_address
+      consAddress: object?.cons_address
     };
   },
   toAmino(message: QuerySigningInfoRequest): QuerySigningInfoRequestAmino {
@@ -431,7 +431,7 @@ export const QuerySigningInfoResponse = {
 };
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySigningInfosRequest = {
@@ -526,7 +526,7 @@ export const QuerySigningInfosRequest = {
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   return {
     info: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySigningInfosResponse = {

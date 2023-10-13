@@ -31,10 +31,10 @@ export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
 export interface QueryClaimRecordRequest {
-  address: string;
+  address?: string;
 }
 export interface QueryClaimRecordRequestSDKType {
-  address: string;
+  address?: string;
 }
 export interface QueryClaimRecordResponse {
   claimRecord: ClaimRecord;
@@ -43,12 +43,12 @@ export interface QueryClaimRecordResponseSDKType {
   claim_record: ClaimRecordSDKType;
 }
 export interface QueryClaimableForActionRequest {
-  address: string;
-  action: Action;
+  address?: string;
+  action?: Action;
 }
 export interface QueryClaimableForActionRequestSDKType {
-  address: string;
-  action: Action;
+  address?: string;
+  action?: Action;
 }
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
@@ -57,10 +57,10 @@ export interface QueryClaimableForActionResponseSDKType {
   coins: CoinSDKType[];
 }
 export interface QueryTotalClaimableRequest {
-  address: string;
+  address?: string;
 }
 export interface QueryTotalClaimableRequestSDKType {
-  address: string;
+  address?: string;
 }
 export interface QueryTotalClaimableResponse {
   coins: Coin[];
@@ -414,13 +414,13 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
   return {
-    address: ""
+    address: undefined
   };
 }
 export const QueryClaimRecordRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
   encode(message: QueryClaimRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -454,7 +454,7 @@ export const QueryClaimRecordRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimRecordRequest>): QueryClaimRecordRequest {
     const message = createBaseQueryClaimRecordRequest();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     return message;
   },
   fromSDK(object: QueryClaimRecordRequestSDKType): QueryClaimRecordRequest {
@@ -464,7 +464,7 @@ export const QueryClaimRecordRequest = {
   },
   fromSDKJSON(object: any): QueryClaimRecordRequestSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : ""
+      address: isSet(object.address) ? String(object.address) : undefined
     };
   },
   toSDK(message: QueryClaimRecordRequest): QueryClaimRecordRequestSDKType {
@@ -474,7 +474,7 @@ export const QueryClaimRecordRequest = {
   },
   fromAmino(object: QueryClaimRecordRequestAmino): QueryClaimRecordRequest {
     return {
-      address: object.address
+      address: object?.address
     };
   },
   toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestAmino {
@@ -600,17 +600,17 @@ export const QueryClaimRecordResponse = {
 };
 function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequest {
   return {
-    address: "",
-    action: 0
+    address: undefined,
+    action: undefined
   };
 }
 export const QueryClaimableForActionRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
   encode(message: QueryClaimableForActionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.action !== 0) {
+    if (message.action !== undefined) {
       writer.uint32(16).int32(message.action);
     }
     return writer;
@@ -649,20 +649,20 @@ export const QueryClaimableForActionRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimableForActionRequest>): QueryClaimableForActionRequest {
     const message = createBaseQueryClaimableForActionRequest();
-    message.address = object.address ?? "";
-    message.action = object.action ?? 0;
+    message.address = object.address ?? undefined;
+    message.action = object.action ?? undefined;
     return message;
   },
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
       address: object?.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1
+      action: isSet(object.action) ? actionFromJSON(object.action) : undefined
     };
   },
   fromSDKJSON(object: any): QueryClaimableForActionRequestSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1
+      address: isSet(object.address) ? String(object.address) : undefined,
+      action: isSet(object.action) ? actionFromJSON(object.action) : undefined
     };
   },
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {
@@ -673,8 +673,8 @@ export const QueryClaimableForActionRequest = {
   },
   fromAmino(object: QueryClaimableForActionRequestAmino): QueryClaimableForActionRequest {
     return {
-      address: object.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1
+      address: object?.address,
+      action: isSet(object.action) ? actionFromJSON(object.action) : undefined
     };
   },
   toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
@@ -811,13 +811,13 @@ export const QueryClaimableForActionResponse = {
 };
 function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
   return {
-    address: ""
+    address: undefined
   };
 }
 export const QueryTotalClaimableRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
   encode(message: QueryTotalClaimableRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -851,7 +851,7 @@ export const QueryTotalClaimableRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalClaimableRequest>): QueryTotalClaimableRequest {
     const message = createBaseQueryTotalClaimableRequest();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     return message;
   },
   fromSDK(object: QueryTotalClaimableRequestSDKType): QueryTotalClaimableRequest {
@@ -861,7 +861,7 @@ export const QueryTotalClaimableRequest = {
   },
   fromSDKJSON(object: any): QueryTotalClaimableRequestSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : ""
+      address: isSet(object.address) ? String(object.address) : undefined
     };
   },
   toSDK(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestSDKType {
@@ -871,7 +871,7 @@ export const QueryTotalClaimableRequest = {
   },
   fromAmino(object: QueryTotalClaimableRequestAmino): QueryTotalClaimableRequest {
     return {
-      address: object.address
+      address: object?.address
     };
   },
   toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAmino {

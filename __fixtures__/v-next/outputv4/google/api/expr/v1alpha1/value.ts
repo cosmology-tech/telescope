@@ -58,14 +58,14 @@ export interface ValueSDKType {
 /** An enum value. */
 export interface EnumValue {
   /** The fully qualified name of the enum type. */
-  type: string;
+  type?: string;
   /** The value of the enum. */
-  value: number;
+  value?: number;
 }
 /** An enum value. */
 export interface EnumValueSDKType {
-  type: string;
-  value: number;
+  type?: string;
+  value?: number;
 }
 /**
  * A list.
@@ -75,7 +75,7 @@ export interface EnumValueSDKType {
  */
 export interface ListValue {
   /** The ordered values in the list. */
-  values: Value[];
+  values?: Value[];
 }
 /**
  * A list.
@@ -84,7 +84,7 @@ export interface ListValue {
  * required for use in a 'oneof'.
  */
 export interface ListValueSDKType {
-  values: ValueSDKType[];
+  values?: ValueSDKType[];
 }
 /**
  * A map.
@@ -99,7 +99,7 @@ export interface MapValue {
    * CEL has fewer restrictions on keys, so a protobuf map represenation
    * cannot be used.
    */
-  entries: MapValue_Entry[];
+  entries?: MapValue_Entry[];
 }
 /**
  * A map.
@@ -108,7 +108,7 @@ export interface MapValue {
  * required for use in a 'oneof'.
  */
 export interface MapValueSDKType {
-  entries: MapValue_EntrySDKType[];
+  entries?: MapValue_EntrySDKType[];
 }
 /** An entry in the map. */
 export interface MapValue_Entry {
@@ -118,14 +118,14 @@ export interface MapValue_Entry {
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
-  key: Value;
+  key?: Value;
   /** The value. */
-  value: Value;
+  value?: Value;
 }
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
-  key: ValueSDKType;
-  value: ValueSDKType;
+  key?: ValueSDKType;
+  value?: ValueSDKType;
 }
 function createBaseValue(): Value {
   return {
@@ -396,17 +396,17 @@ export const Value = {
 };
 function createBaseEnumValue(): EnumValue {
   return {
-    type: "",
-    value: 0
+    type: undefined,
+    value: undefined
   };
 }
 export const EnumValue = {
   typeUrl: "/google.api.expr.v1alpha1.EnumValue",
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -445,8 +445,8 @@ export const EnumValue = {
   },
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
-    message.type = object.type ?? "";
-    message.value = object.value ?? 0;
+    message.type = object.type ?? undefined;
+    message.value = object.value ?? undefined;
     return message;
   },
   fromSDK(object: EnumValueSDKType): EnumValue {
@@ -457,8 +457,8 @@ export const EnumValue = {
   },
   fromSDKJSON(object: any): EnumValueSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : "",
-      value: isSet(object.value) ? Number(object.value) : 0
+      type: isSet(object.type) ? String(object.type) : undefined,
+      value: isSet(object.value) ? Number(object.value) : undefined
     };
   },
   toSDK(message: EnumValue): EnumValueSDKType {
@@ -469,8 +469,8 @@ export const EnumValue = {
   },
   fromAmino(object: EnumValueAmino): EnumValue {
     return {
-      type: object.type,
-      value: object.value
+      type: object?.type,
+      value: object?.value
     };
   },
   toAmino(message: EnumValue): EnumValueAmino {
@@ -497,7 +497,7 @@ export const EnumValue = {
 };
 function createBaseListValue(): ListValue {
   return {
-    values: []
+    values: undefined
   };
 }
 export const ListValue = {
@@ -595,7 +595,7 @@ export const ListValue = {
 };
 function createBaseMapValue(): MapValue {
   return {
-    entries: []
+    entries: undefined
   };
 }
 export const MapValue = {
@@ -693,8 +693,8 @@ export const MapValue = {
 };
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {
-    key: Value.fromPartial({}),
-    value: Value.fromPartial({})
+    key: undefined,
+    value: undefined
   };
 }
 export const MapValue_Entry = {

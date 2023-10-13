@@ -41,7 +41,7 @@ export interface SystemParameters {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: SystemParameterRule[];
+  rules?: SystemParameterRule[];
 }
 /**
  * ### System parameter configuration
@@ -52,7 +52,7 @@ export interface SystemParameters {
  * change the names of the system parameters.
  */
 export interface SystemParametersSDKType {
-  rules: SystemParameterRuleSDKType[];
+  rules?: SystemParameterRuleSDKType[];
 }
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -65,7 +65,7 @@ export interface SystemParameterRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Define parameters. Multiple names may be defined for a parameter.
    * For a given method call, only one of them should be used. If multiple
@@ -73,15 +73,15 @@ export interface SystemParameterRule {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
-  parameters: SystemParameter[];
+  parameters?: SystemParameter[];
 }
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
  */
 export interface SystemParameterRuleSDKType {
-  selector: string;
-  parameters: SystemParameterSDKType[];
+  selector?: string;
+  parameters?: SystemParameterSDKType[];
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -90,17 +90,17 @@ export interface SystemParameterRuleSDKType {
  */
 export interface SystemParameter {
   /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
-  name: string;
+  name?: string;
   /**
    * Define the HTTP header name to use for the parameter. It is case
    * insensitive.
    */
-  httpHeader: string;
+  httpHeader?: string;
   /**
    * Define the URL query parameter name to use for the parameter. It is case
    * sensitive.
    */
-  urlQueryParameter: string;
+  urlQueryParameter?: string;
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -108,13 +108,13 @@ export interface SystemParameter {
  * is implementation-dependent.
  */
 export interface SystemParameterSDKType {
-  name: string;
-  http_header: string;
-  url_query_parameter: string;
+  name?: string;
+  http_header?: string;
+  url_query_parameter?: string;
 }
 function createBaseSystemParameters(): SystemParameters {
   return {
-    rules: []
+    rules: undefined
   };
 }
 export const SystemParameters = {
@@ -212,14 +212,14 @@ export const SystemParameters = {
 };
 function createBaseSystemParameterRule(): SystemParameterRule {
   return {
-    selector: "",
-    parameters: []
+    selector: undefined,
+    parameters: undefined
   };
 }
 export const SystemParameterRule = {
   typeUrl: "/google.api.SystemParameterRule",
   encode(message: SystemParameterRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.parameters) {
@@ -265,7 +265,7 @@ export const SystemParameterRule = {
   },
   fromPartial(object: DeepPartial<SystemParameterRule>): SystemParameterRule {
     const message = createBaseSystemParameterRule();
-    message.selector = object.selector ?? "";
+    message.selector = object.selector ?? undefined;
     message.parameters = object.parameters?.map(e => SystemParameter.fromPartial(e)) || [];
     return message;
   },
@@ -277,7 +277,7 @@ export const SystemParameterRule = {
   },
   fromSDKJSON(object: any): SystemParameterRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
+      selector: isSet(object.selector) ? String(object.selector) : undefined,
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDKJSON(e)) : []
     };
   },
@@ -293,7 +293,7 @@ export const SystemParameterRule = {
   },
   fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
     return {
-      selector: object.selector,
+      selector: object?.selector,
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
     };
   },
@@ -325,21 +325,21 @@ export const SystemParameterRule = {
 };
 function createBaseSystemParameter(): SystemParameter {
   return {
-    name: "",
-    httpHeader: "",
-    urlQueryParameter: ""
+    name: undefined,
+    httpHeader: undefined,
+    urlQueryParameter: undefined
   };
 }
 export const SystemParameter = {
   typeUrl: "/google.api.SystemParameter",
   encode(message: SystemParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.httpHeader !== "") {
+    if (message.httpHeader !== undefined) {
       writer.uint32(18).string(message.httpHeader);
     }
-    if (message.urlQueryParameter !== "") {
+    if (message.urlQueryParameter !== undefined) {
       writer.uint32(26).string(message.urlQueryParameter);
     }
     return writer;
@@ -383,9 +383,9 @@ export const SystemParameter = {
   },
   fromPartial(object: DeepPartial<SystemParameter>): SystemParameter {
     const message = createBaseSystemParameter();
-    message.name = object.name ?? "";
-    message.httpHeader = object.httpHeader ?? "";
-    message.urlQueryParameter = object.urlQueryParameter ?? "";
+    message.name = object.name ?? undefined;
+    message.httpHeader = object.httpHeader ?? undefined;
+    message.urlQueryParameter = object.urlQueryParameter ?? undefined;
     return message;
   },
   fromSDK(object: SystemParameterSDKType): SystemParameter {
@@ -397,9 +397,9 @@ export const SystemParameter = {
   },
   fromSDKJSON(object: any): SystemParameterSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      http_header: isSet(object.http_header) ? String(object.http_header) : "",
-      url_query_parameter: isSet(object.url_query_parameter) ? String(object.url_query_parameter) : ""
+      name: isSet(object.name) ? String(object.name) : undefined,
+      http_header: isSet(object.http_header) ? String(object.http_header) : undefined,
+      url_query_parameter: isSet(object.url_query_parameter) ? String(object.url_query_parameter) : undefined
     };
   },
   toSDK(message: SystemParameter): SystemParameterSDKType {
@@ -411,9 +411,9 @@ export const SystemParameter = {
   },
   fromAmino(object: SystemParameterAmino): SystemParameter {
     return {
-      name: object.name,
-      httpHeader: object.http_header,
-      urlQueryParameter: object.url_query_parameter
+      name: object?.name,
+      httpHeader: object?.http_header,
+      urlQueryParameter: object?.url_query_parameter
     };
   },
   toAmino(message: SystemParameter): SystemParameterAmino {

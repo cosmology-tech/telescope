@@ -8,43 +8,43 @@ export const protobufPackage = "cosmos.slashing.v1beta1";
  * liveness activity.
  */
 export interface ValidatorSigningInfo {
-  address: string;
+  address?: string;
   /** Height at which validator was first a candidate OR was unjailed */
-  startHeight: bigint;
+  startHeight?: bigint;
   /**
    * Index which is incremented each time the validator was a bonded
    * in a block and may have signed a precommit or not. This in conjunction with the
    * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
    */
-  indexOffset: bigint;
+  indexOffset?: bigint;
   /** Timestamp until which the validator is jailed due to liveness downtime. */
   jailedUntil: Date;
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
    * once the validator commits an equivocation or for any other configured misbehiavor.
    */
-  tombstoned: boolean;
+  tombstoned?: boolean;
   /**
    * A counter kept to avoid unnecessary array reads.
    * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
    */
-  missedBlocksCounter: bigint;
+  missedBlocksCounter?: bigint;
 }
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
  */
 export interface ValidatorSigningInfoSDKType {
-  address: string;
-  start_height: bigint;
-  index_offset: bigint;
+  address?: string;
+  start_height?: bigint;
+  index_offset?: bigint;
   jailed_until: Date;
-  tombstoned: boolean;
-  missed_blocks_counter: bigint;
+  tombstoned?: boolean;
+  missed_blocks_counter?: bigint;
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface Params {
-  signedBlocksWindow: bigint;
+  signedBlocksWindow?: bigint;
   minSignedPerWindow: Uint8Array;
   downtimeJailDuration: Duration;
   slashFractionDoubleSign: Uint8Array;
@@ -52,7 +52,7 @@ export interface Params {
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface ParamsSDKType {
-  signed_blocks_window: bigint;
+  signed_blocks_window?: bigint;
   min_signed_per_window: Uint8Array;
   downtime_jail_duration: DurationSDKType;
   slash_fraction_double_sign: Uint8Array;
@@ -60,33 +60,33 @@ export interface ParamsSDKType {
 }
 function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
   return {
-    address: "",
-    startHeight: BigInt(0),
-    indexOffset: BigInt(0),
+    address: undefined,
+    startHeight: undefined,
+    indexOffset: undefined,
     jailedUntil: new Date(),
-    tombstoned: false,
-    missedBlocksCounter: BigInt(0)
+    tombstoned: undefined,
+    missedBlocksCounter: undefined
   };
 }
 export const ValidatorSigningInfo = {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo",
   encode(message: ValidatorSigningInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.startHeight !== BigInt(0)) {
+    if (message.startHeight !== undefined) {
       writer.uint32(16).int64(message.startHeight);
     }
-    if (message.indexOffset !== BigInt(0)) {
+    if (message.indexOffset !== undefined) {
       writer.uint32(24).int64(message.indexOffset);
     }
     if (message.jailedUntil !== undefined) {
       Timestamp.encode(toTimestamp(message.jailedUntil), writer.uint32(34).fork()).ldelim();
     }
-    if (message.tombstoned === true) {
+    if (message.tombstoned !== undefined) {
       writer.uint32(40).bool(message.tombstoned);
     }
-    if (message.missedBlocksCounter !== BigInt(0)) {
+    if (message.missedBlocksCounter !== undefined) {
       writer.uint32(48).int64(message.missedBlocksCounter);
     }
     return writer;
@@ -136,16 +136,22 @@ export const ValidatorSigningInfo = {
   toJSON(message: ValidatorSigningInfo): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.startHeight !== undefined && (obj.startHeight = (message.startHeight || BigInt(0)).toString());
-    message.indexOffset !== undefined && (obj.indexOffset = (message.indexOffset || BigInt(0)).toString());
+    if (message.startHeight !== undefined) {
+      obj.startHeight = message.startHeight.toString();
+    }
+    if (message.indexOffset !== undefined) {
+      obj.indexOffset = message.indexOffset.toString();
+    }
     message.jailedUntil !== undefined && (obj.jailedUntil = message.jailedUntil.toISOString());
     message.tombstoned !== undefined && (obj.tombstoned = message.tombstoned);
-    message.missedBlocksCounter !== undefined && (obj.missedBlocksCounter = (message.missedBlocksCounter || BigInt(0)).toString());
+    if (message.missedBlocksCounter !== undefined) {
+      obj.missedBlocksCounter = message.missedBlocksCounter.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     const message = createBaseValidatorSigningInfo();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     if (object.startHeight !== undefined && object.startHeight !== null) {
       message.startHeight = BigInt(object.startHeight.toString());
     }
@@ -153,7 +159,7 @@ export const ValidatorSigningInfo = {
       message.indexOffset = BigInt(object.indexOffset.toString());
     }
     message.jailedUntil = object.jailedUntil ?? undefined;
-    message.tombstoned = object.tombstoned ?? false;
+    message.tombstoned = object.tombstoned ?? undefined;
     if (object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null) {
       message.missedBlocksCounter = BigInt(object.missedBlocksCounter.toString());
     }
@@ -171,12 +177,12 @@ export const ValidatorSigningInfo = {
   },
   fromSDKJSON(object: any): ValidatorSigningInfoSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      start_height: isSet(object.start_height) ? BigInt(object.start_height.toString()) : BigInt(0),
-      index_offset: isSet(object.index_offset) ? BigInt(object.index_offset.toString()) : BigInt(0),
+      address: isSet(object.address) ? String(object.address) : undefined,
+      start_height: isSet(object.start_height) ? BigInt(object.start_height.toString()) : undefined,
+      index_offset: isSet(object.index_offset) ? BigInt(object.index_offset.toString()) : undefined,
       jailed_until: isSet(object.jailed_until) ? new Date(object.jailed_until) : undefined,
-      tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
-      missed_blocks_counter: isSet(object.missed_blocks_counter) ? BigInt(object.missed_blocks_counter.toString()) : BigInt(0)
+      tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : undefined,
+      missed_blocks_counter: isSet(object.missed_blocks_counter) ? BigInt(object.missed_blocks_counter.toString()) : undefined
     };
   },
   toSDK(message: ValidatorSigningInfo): ValidatorSigningInfoSDKType {
@@ -191,12 +197,12 @@ export const ValidatorSigningInfo = {
   },
   fromAmino(object: ValidatorSigningInfoAmino): ValidatorSigningInfo {
     return {
-      address: object.address,
-      startHeight: BigInt(object.start_height),
-      indexOffset: BigInt(object.index_offset),
+      address: object?.address,
+      startHeight: object?.start_height ? BigInt(object.start_height) : undefined,
+      indexOffset: object?.index_offset ? BigInt(object.index_offset) : undefined,
       jailedUntil: object.jailed_until,
-      tombstoned: object.tombstoned,
-      missedBlocksCounter: BigInt(object.missed_blocks_counter)
+      tombstoned: object?.tombstoned,
+      missedBlocksCounter: object?.missed_blocks_counter ? BigInt(object.missed_blocks_counter) : undefined
     };
   },
   toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
@@ -233,7 +239,7 @@ export const ValidatorSigningInfo = {
 };
 function createBaseParams(): Params {
   return {
-    signedBlocksWindow: BigInt(0),
+    signedBlocksWindow: undefined,
     minSignedPerWindow: new Uint8Array(),
     downtimeJailDuration: Duration.fromPartial({}),
     slashFractionDoubleSign: new Uint8Array(),
@@ -243,7 +249,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/cosmos.slashing.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.signedBlocksWindow !== BigInt(0)) {
+    if (message.signedBlocksWindow !== undefined) {
       writer.uint32(8).int64(message.signedBlocksWindow);
     }
     if (message.minSignedPerWindow.length !== 0) {
@@ -300,7 +306,9 @@ export const Params = {
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.signedBlocksWindow !== undefined && (obj.signedBlocksWindow = (message.signedBlocksWindow || BigInt(0)).toString());
+    if (message.signedBlocksWindow !== undefined) {
+      obj.signedBlocksWindow = message.signedBlocksWindow.toString();
+    }
     message.minSignedPerWindow !== undefined && (obj.minSignedPerWindow = base64FromBytes(message.minSignedPerWindow !== undefined ? message.minSignedPerWindow : new Uint8Array()));
     message.downtimeJailDuration !== undefined && (obj.downtimeJailDuration = message.downtimeJailDuration ? Duration.toJSON(message.downtimeJailDuration) : undefined);
     message.slashFractionDoubleSign !== undefined && (obj.slashFractionDoubleSign = base64FromBytes(message.slashFractionDoubleSign !== undefined ? message.slashFractionDoubleSign : new Uint8Array()));
@@ -331,7 +339,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      signed_blocks_window: isSet(object.signed_blocks_window) ? BigInt(object.signed_blocks_window.toString()) : BigInt(0),
+      signed_blocks_window: isSet(object.signed_blocks_window) ? BigInt(object.signed_blocks_window.toString()) : undefined,
       min_signed_per_window: isSet(object.min_signed_per_window) ? bytesFromBase64(object.min_signed_per_window) : new Uint8Array(),
       downtime_jail_duration: isSet(object.downtime_jail_duration) ? Duration.fromSDKJSON(object.downtime_jail_duration) : undefined,
       slash_fraction_double_sign: isSet(object.slash_fraction_double_sign) ? bytesFromBase64(object.slash_fraction_double_sign) : new Uint8Array(),
@@ -349,7 +357,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      signedBlocksWindow: BigInt(object.signed_blocks_window),
+      signedBlocksWindow: object?.signed_blocks_window ? BigInt(object.signed_blocks_window) : undefined,
       minSignedPerWindow: object.min_signed_per_window,
       downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : undefined,
       slashFractionDoubleSign: object.slash_fraction_double_sign,

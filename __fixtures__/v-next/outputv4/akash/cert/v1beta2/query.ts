@@ -6,37 +6,37 @@ export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
   certificate: Certificate;
-  serial: string;
+  serial?: string;
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
   certificate: CertificateSDKType;
-  serial: string;
+  serial?: string;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
   filter: CertificateFilter;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter: CertificateFilterSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {
   certificates: CertificateResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
     certificate: Certificate.fromPartial({}),
-    serial: ""
+    serial: undefined
   };
 }
 export const CertificateResponse = {
@@ -45,7 +45,7 @@ export const CertificateResponse = {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
     }
-    if (message.serial !== "") {
+    if (message.serial !== undefined) {
       writer.uint32(18).string(message.serial);
     }
     return writer;
@@ -87,7 +87,7 @@ export const CertificateResponse = {
     if (object.certificate !== undefined && object.certificate !== null) {
       message.certificate = Certificate.fromPartial(object.certificate);
     }
-    message.serial = object.serial ?? "";
+    message.serial = object.serial ?? undefined;
     return message;
   },
   fromSDK(object: CertificateResponseSDKType): CertificateResponse {
@@ -99,7 +99,7 @@ export const CertificateResponse = {
   fromSDKJSON(object: any): CertificateResponseSDKType {
     return {
       certificate: isSet(object.certificate) ? Certificate.fromSDKJSON(object.certificate) : undefined,
-      serial: isSet(object.serial) ? String(object.serial) : ""
+      serial: isSet(object.serial) ? String(object.serial) : undefined
     };
   },
   toSDK(message: CertificateResponse): CertificateResponseSDKType {
@@ -111,7 +111,7 @@ export const CertificateResponse = {
   fromAmino(object: CertificateResponseAmino): CertificateResponse {
     return {
       certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined,
-      serial: object.serial
+      serial: object?.serial
     };
   },
   toAmino(message: CertificateResponse): CertificateResponseAmino {
@@ -145,7 +145,7 @@ export const CertificateResponse = {
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
   return {
     filter: CertificateFilter.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesRequest = {
@@ -256,7 +256,7 @@ export const QueryCertificatesRequest = {
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
   return {
     certificates: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesResponse = {

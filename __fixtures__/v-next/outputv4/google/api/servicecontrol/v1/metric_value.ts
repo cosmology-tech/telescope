@@ -19,7 +19,7 @@ export interface MetricValue {
    * the overriding relationship.
    * Note that this map must not contain monitored resource labels.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -29,13 +29,13 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime: Date;
+  startTime?: Date;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime: Date;
+  endTime?: Date;
   /** A boolean value. */
   boolValue?: boolean;
   /** A signed 64-bit integer value. */
@@ -49,11 +49,11 @@ export interface MetricValue {
 }
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
-  labels: {
+  labels?: {
     [key: string]: string;
   };
-  start_time: Date;
-  end_time: Date;
+  start_time?: Date;
+  end_time?: Date;
   bool_value?: boolean;
   int64_value?: bigint;
   double_value?: number;
@@ -67,9 +67,9 @@ export interface MetricValueSDKType {
  */
 export interface MetricValueSet {
   /** The metric name defined in the service configuration. */
-  metricName: string;
+  metricName?: string;
   /** The values in this metric. */
-  metricValues: MetricValue[];
+  metricValues?: MetricValue[];
 }
 /**
  * Represents a set of metric values in the same metric.
@@ -77,8 +77,8 @@ export interface MetricValueSet {
  * end time, and label values.
  */
 export interface MetricValueSetSDKType {
-  metric_name: string;
-  metric_values: MetricValueSDKType[];
+  metric_name?: string;
+  metric_values?: MetricValueSDKType[];
 }
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   return {
@@ -176,9 +176,9 @@ export const MetricValue_LabelsEntry = {
 };
 function createBaseMetricValue(): MetricValue {
   return {
-    labels: {},
-    startTime: new Date(),
-    endTime: new Date(),
+    labels: undefined,
+    startTime: undefined,
+    endTime: undefined,
     boolValue: undefined,
     int64Value: undefined,
     doubleValue: undefined,
@@ -377,8 +377,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: object.start_time,
-      endTime: object.end_time,
+      startTime: object?.start_time,
+      endTime: object?.end_time,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
       doubleValue: object?.double_value,
@@ -421,14 +421,14 @@ export const MetricValue = {
 };
 function createBaseMetricValueSet(): MetricValueSet {
   return {
-    metricName: "",
-    metricValues: []
+    metricName: undefined,
+    metricValues: undefined
   };
 }
 export const MetricValueSet = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
   encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== "") {
+    if (message.metricName !== undefined) {
       writer.uint32(10).string(message.metricName);
     }
     for (const v of message.metricValues) {
@@ -474,7 +474,7 @@ export const MetricValueSet = {
   },
   fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {
     const message = createBaseMetricValueSet();
-    message.metricName = object.metricName ?? "";
+    message.metricName = object.metricName ?? undefined;
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
     return message;
   },
@@ -486,7 +486,7 @@ export const MetricValueSet = {
   },
   fromSDKJSON(object: any): MetricValueSetSDKType {
     return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : undefined,
       metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
     };
   },
@@ -502,7 +502,7 @@ export const MetricValueSet = {
   },
   fromAmino(object: MetricValueSetAmino): MetricValueSet {
     return {
-      metricName: object.metric_name,
+      metricName: object?.metric_name,
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
     };
   },

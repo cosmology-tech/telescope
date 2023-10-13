@@ -17,7 +17,7 @@ export interface MinterSDKType {
  * tokens to be minted to the address.
  */
 export interface WeightedAddress {
-  address: string;
+  address?: string;
   weight: string;
 }
 /**
@@ -26,7 +26,7 @@ export interface WeightedAddress {
  * tokens to be minted to the address.
  */
 export interface WeightedAddressSDKType {
-  address: string;
+  address?: string;
   weight: string;
 }
 /**
@@ -70,16 +70,16 @@ export interface DistributionProportionsSDKType {
 /** Params holds parameters for the x/mint module. */
 export interface Params {
   /** mint_denom is the denom of the coin to mint. */
-  mintDenom: string;
+  mintDenom?: string;
   /** genesis_epoch_provisions epoch provisions from the first epoch. */
   genesisEpochProvisions: string;
   /** epoch_identifier mint epoch identifier e.g. (day, week). */
-  epochIdentifier: string;
+  epochIdentifier?: string;
   /**
    * reduction_period_in_epochs the number of epochs it takes
    * to reduce the rewards.
    */
-  reductionPeriodInEpochs: bigint;
+  reductionPeriodInEpochs?: bigint;
   /**
    * reduction_factor is the reduction multiplier to execute
    * at the end of each period set by reduction_period_in_epochs.
@@ -102,18 +102,18 @@ export interface Params {
    * minting_rewards_distribution_start_epoch start epoch to distribute minting
    * rewards
    */
-  mintingRewardsDistributionStartEpoch: bigint;
+  mintingRewardsDistributionStartEpoch?: bigint;
 }
 /** Params holds parameters for the x/mint module. */
 export interface ParamsSDKType {
-  mint_denom: string;
+  mint_denom?: string;
   genesis_epoch_provisions: string;
-  epoch_identifier: string;
-  reduction_period_in_epochs: bigint;
+  epoch_identifier?: string;
+  reduction_period_in_epochs?: bigint;
   reduction_factor: string;
   distribution_proportions: DistributionProportionsSDKType;
   weighted_developer_rewards_receivers: WeightedAddressSDKType[];
-  minting_rewards_distribution_start_epoch: bigint;
+  minting_rewards_distribution_start_epoch?: bigint;
 }
 function createBaseMinter(): Minter {
   return {
@@ -209,14 +209,14 @@ export const Minter = {
 };
 function createBaseWeightedAddress(): WeightedAddress {
   return {
-    address: "",
+    address: undefined,
     weight: ""
   };
 }
 export const WeightedAddress = {
   typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
   encode(message: WeightedAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.weight !== "") {
@@ -258,7 +258,7 @@ export const WeightedAddress = {
   },
   fromPartial(object: DeepPartial<WeightedAddress>): WeightedAddress {
     const message = createBaseWeightedAddress();
-    message.address = object.address ?? "";
+    message.address = object.address ?? undefined;
     message.weight = object.weight ?? "";
     return message;
   },
@@ -270,7 +270,7 @@ export const WeightedAddress = {
   },
   fromSDKJSON(object: any): WeightedAddressSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? String(object.address) : undefined,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -282,7 +282,7 @@ export const WeightedAddress = {
   },
   fromAmino(object: WeightedAddressAmino): WeightedAddress {
     return {
-      address: object.address,
+      address: object?.address,
       weight: object.weight
     };
   },
@@ -453,29 +453,29 @@ export const DistributionProportions = {
 };
 function createBaseParams(): Params {
   return {
-    mintDenom: "",
+    mintDenom: undefined,
     genesisEpochProvisions: "",
-    epochIdentifier: "",
-    reductionPeriodInEpochs: BigInt(0),
+    epochIdentifier: undefined,
+    reductionPeriodInEpochs: undefined,
     reductionFactor: "",
     distributionProportions: DistributionProportions.fromPartial({}),
     weightedDeveloperRewardsReceivers: [],
-    mintingRewardsDistributionStartEpoch: BigInt(0)
+    mintingRewardsDistributionStartEpoch: undefined
   };
 }
 export const Params = {
   typeUrl: "/osmosis.mint.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.genesisEpochProvisions !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.genesisEpochProvisions, 18).atomics);
     }
-    if (message.epochIdentifier !== "") {
+    if (message.epochIdentifier !== undefined) {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.reductionPeriodInEpochs !== BigInt(0)) {
+    if (message.reductionPeriodInEpochs !== undefined) {
       writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
     if (message.reductionFactor !== "") {
@@ -487,7 +487,7 @@ export const Params = {
     for (const v of message.weightedDeveloperRewardsReceivers) {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
+    if (message.mintingRewardsDistributionStartEpoch !== undefined) {
       writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
     return writer;
@@ -547,7 +547,9 @@ export const Params = {
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || BigInt(0)).toString());
+    if (message.reductionPeriodInEpochs !== undefined) {
+      obj.reductionPeriodInEpochs = message.reductionPeriodInEpochs.toString();
+    }
     message.reductionFactor !== undefined && (obj.reductionFactor = message.reductionFactor);
     message.distributionProportions !== undefined && (obj.distributionProportions = message.distributionProportions ? DistributionProportions.toJSON(message.distributionProportions) : undefined);
     if (message.weightedDeveloperRewardsReceivers) {
@@ -555,14 +557,16 @@ export const Params = {
     } else {
       obj.weightedDeveloperRewardsReceivers = [];
     }
-    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || BigInt(0)).toString());
+    if (message.mintingRewardsDistributionStartEpoch !== undefined) {
+      obj.mintingRewardsDistributionStartEpoch = message.mintingRewardsDistributionStartEpoch.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.mintDenom = object.mintDenom ?? "";
+    message.mintDenom = object.mintDenom ?? undefined;
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
-    message.epochIdentifier = object.epochIdentifier ?? "";
+    message.epochIdentifier = object.epochIdentifier ?? undefined;
     if (object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null) {
       message.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
     }
@@ -590,14 +594,14 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : undefined,
       genesis_epoch_provisions: isSet(object.genesis_epoch_provisions) ? String(object.genesis_epoch_provisions) : "",
-      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? BigInt(object.reduction_period_in_epochs.toString()) : BigInt(0),
+      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : undefined,
+      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? BigInt(object.reduction_period_in_epochs.toString()) : undefined,
       reduction_factor: isSet(object.reduction_factor) ? String(object.reduction_factor) : "",
       distribution_proportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDKJSON(object.distribution_proportions) : undefined,
       weighted_developer_rewards_receivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDKJSON(e)) : [],
-      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? BigInt(object.minting_rewards_distribution_start_epoch.toString()) : BigInt(0)
+      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? BigInt(object.minting_rewards_distribution_start_epoch.toString()) : undefined
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -618,14 +622,14 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      mintDenom: object.mint_denom,
+      mintDenom: object?.mint_denom,
       genesisEpochProvisions: object.genesis_epoch_provisions,
-      epochIdentifier: object.epoch_identifier,
-      reductionPeriodInEpochs: BigInt(object.reduction_period_in_epochs),
+      epochIdentifier: object?.epoch_identifier,
+      reductionPeriodInEpochs: object?.reduction_period_in_epochs ? BigInt(object.reduction_period_in_epochs) : undefined,
       reductionFactor: object.reduction_factor,
       distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
-      mintingRewardsDistributionStartEpoch: BigInt(object.minting_rewards_distribution_start_epoch)
+      mintingRewardsDistributionStartEpoch: object?.minting_rewards_distribution_start_epoch ? BigInt(object.minting_rewards_distribution_start_epoch) : undefined
     };
   },
   toAmino(message: Params): ParamsAmino {

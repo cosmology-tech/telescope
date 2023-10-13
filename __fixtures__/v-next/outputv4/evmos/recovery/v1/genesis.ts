@@ -14,13 +14,13 @@ export interface GenesisStateSDKType {
 /** Params holds parameters for the recovery module */
 export interface Params {
   /** enable recovery IBC middleware */
-  enableRecovery: boolean;
+  enableRecovery?: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration: Duration;
 }
 /** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
-  enable_recovery: boolean;
+  enable_recovery?: boolean;
   packet_timeout_duration: DurationSDKType;
 }
 function createBaseGenesisState(): GenesisState {
@@ -113,14 +113,14 @@ export const GenesisState = {
 };
 function createBaseParams(): Params {
   return {
-    enableRecovery: false,
+    enableRecovery: undefined,
     packetTimeoutDuration: Duration.fromPartial({})
   };
 }
 export const Params = {
   typeUrl: "/evmos.recovery.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableRecovery === true) {
+    if (message.enableRecovery !== undefined) {
       writer.uint32(8).bool(message.enableRecovery);
     }
     if (message.packetTimeoutDuration !== undefined) {
@@ -162,7 +162,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.enableRecovery = object.enableRecovery ?? false;
+    message.enableRecovery = object.enableRecovery ?? undefined;
     if (object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null) {
       message.packetTimeoutDuration = Duration.fromPartial(object.packetTimeoutDuration);
     }
@@ -176,7 +176,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      enable_recovery: isSet(object.enable_recovery) ? Boolean(object.enable_recovery) : false,
+      enable_recovery: isSet(object.enable_recovery) ? Boolean(object.enable_recovery) : undefined,
       packet_timeout_duration: isSet(object.packet_timeout_duration) ? Duration.fromSDKJSON(object.packet_timeout_duration) : undefined
     };
   },
@@ -188,7 +188,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      enableRecovery: object.enable_recovery,
+      enableRecovery: object?.enable_recovery,
       packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
     };
   },
