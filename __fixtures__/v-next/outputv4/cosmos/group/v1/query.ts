@@ -54,13 +54,13 @@ export interface QueryGroupMembersRequestSDKType {
 /** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
 export interface QueryGroupMembersResponse {
   /** members are the members of the group with given group_id. */
-  members?: GroupMember[];
+  members: GroupMember[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
 export interface QueryGroupMembersResponseSDKType {
-  members?: GroupMemberSDKType[];
+  members: GroupMemberSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryGroupsByAdminRequest is the Query/GroupsByAdmin request type. */
@@ -78,13 +78,13 @@ export interface QueryGroupsByAdminRequestSDKType {
 /** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
 export interface QueryGroupsByAdminResponse {
   /** groups are the groups info with the provided admin. */
-  groups?: GroupInfo[];
+  groups: GroupInfo[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
 export interface QueryGroupsByAdminResponseSDKType {
-  groups?: GroupInfoSDKType[];
+  groups: GroupInfoSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
@@ -102,13 +102,13 @@ export interface QueryGroupPoliciesByGroupRequestSDKType {
 /** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
 export interface QueryGroupPoliciesByGroupResponse {
   /** group_policies are the group policies info associated with the provided group. */
-  groupPolicies?: GroupPolicyInfo[];
+  groupPolicies: GroupPolicyInfo[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
 export interface QueryGroupPoliciesByGroupResponseSDKType {
-  group_policies?: GroupPolicyInfoSDKType[];
+  group_policies: GroupPolicyInfoSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryGroupPoliciesByAdminRequest is the Query/GroupPoliciesByAdmin request type. */
@@ -126,13 +126,13 @@ export interface QueryGroupPoliciesByAdminRequestSDKType {
 /** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
 export interface QueryGroupPoliciesByAdminResponse {
   /** group_policies are the group policies info with provided admin. */
-  groupPolicies?: GroupPolicyInfo[];
+  groupPolicies: GroupPolicyInfo[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
 export interface QueryGroupPoliciesByAdminResponseSDKType {
-  group_policies?: GroupPolicyInfoSDKType[];
+  group_policies: GroupPolicyInfoSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryProposalRequest is the Query/Proposal request type. */
@@ -168,13 +168,13 @@ export interface QueryProposalsByGroupPolicyRequestSDKType {
 /** QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type. */
 export interface QueryProposalsByGroupPolicyResponse {
   /** proposals are the proposals with given group policy. */
-  proposals?: Proposal[];
+  proposals: Proposal[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type. */
 export interface QueryProposalsByGroupPolicyResponseSDKType {
-  proposals?: ProposalSDKType[];
+  proposals: ProposalSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
@@ -213,13 +213,13 @@ export interface QueryVotesByProposalRequestSDKType {
 /** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
 export interface QueryVotesByProposalResponse {
   /** votes are the list of votes for given proposal_id. */
-  votes?: Vote[];
+  votes: Vote[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
 export interface QueryVotesByProposalResponseSDKType {
-  votes?: VoteSDKType[];
+  votes: VoteSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryVotesByVoterRequest is the Query/VotesByVoter request type. */
@@ -237,13 +237,13 @@ export interface QueryVotesByVoterRequestSDKType {
 /** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
 export interface QueryVotesByVoterResponse {
   /** votes are the list of votes by given voter. */
-  votes?: Vote[];
+  votes: Vote[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
 export interface QueryVotesByVoterResponseSDKType {
-  votes?: VoteSDKType[];
+  votes: VoteSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryGroupsByMemberRequest is the Query/GroupsByMember request type. */
@@ -261,13 +261,13 @@ export interface QueryGroupsByMemberRequestSDKType {
 /** QueryGroupsByMemberResponse is the Query/GroupsByMember response type. */
 export interface QueryGroupsByMemberResponse {
   /** groups are the groups info with the provided group member. */
-  groups?: GroupInfo[];
+  groups: GroupInfo[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryGroupsByMemberResponse is the Query/GroupsByMember response type. */
 export interface QueryGroupsByMemberResponseSDKType {
-  groups?: GroupInfoSDKType[];
+  groups: GroupInfoSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
@@ -779,7 +779,7 @@ export const QueryGroupMembersRequest = {
 };
 function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
   return {
-    members: undefined,
+    members: [],
     pagination: undefined
   };
 }
@@ -1009,7 +1009,7 @@ export const QueryGroupsByAdminRequest = {
 };
 function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
   return {
-    groups: undefined,
+    groups: [],
     pagination: undefined
   };
 }
@@ -1243,7 +1243,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 };
 function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGroupResponse {
   return {
-    groupPolicies: undefined,
+    groupPolicies: [],
     pagination: undefined
   };
 }
@@ -1473,7 +1473,7 @@ export const QueryGroupPoliciesByAdminRequest = {
 };
 function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdminResponse {
   return {
-    groupPolicies: undefined,
+    groupPolicies: [],
     pagination: undefined
   };
 }
@@ -1893,7 +1893,7 @@ export const QueryProposalsByGroupPolicyRequest = {
 };
 function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupPolicyResponse {
   return {
-    proposals: undefined,
+    proposals: [],
     pagination: undefined
   };
 }
@@ -2332,7 +2332,7 @@ export const QueryVotesByProposalRequest = {
 };
 function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse {
   return {
-    votes: undefined,
+    votes: [],
     pagination: undefined
   };
 }
@@ -2562,7 +2562,7 @@ export const QueryVotesByVoterRequest = {
 };
 function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
   return {
-    votes: undefined,
+    votes: [],
     pagination: undefined
   };
 }
@@ -2792,7 +2792,7 @@ export const QueryGroupsByMemberRequest = {
 };
 function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
   return {
-    groups: undefined,
+    groups: [],
     pagination: undefined
   };
 }

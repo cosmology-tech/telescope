@@ -76,7 +76,7 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
  */
 export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
-  properties?: Property[];
+  properties: Property[];
 }
 /**
  * A descriptor for defining project properties for a service. One service may
@@ -97,7 +97,7 @@ export interface ProjectProperties {
  *        type: INT64
  */
 export interface ProjectPropertiesSDKType {
-  properties?: PropertySDKType[];
+  properties: PropertySDKType[];
 }
 /**
  * Defines project properties.
@@ -138,7 +138,7 @@ export interface PropertySDKType {
 }
 function createBaseProjectProperties(): ProjectProperties {
   return {
-    properties: undefined
+    properties: []
   };
 }
 export const ProjectProperties = {

@@ -69,12 +69,12 @@ export interface QueryNFTsRequestSDKType {
 }
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponse {
-  nfts?: NFT[];
+  nfts: NFT[];
   pagination?: PageResponse;
 }
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponseSDKType {
-  nfts?: NFTSDKType[];
+  nfts: NFTSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
@@ -122,12 +122,12 @@ export interface QueryClassesRequestSDKType {
 }
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponse {
-  classes?: Class[];
+  classes: Class[];
   pagination?: PageResponse;
 }
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponseSDKType {
-  classes?: ClassSDKType[];
+  classes: ClassSDKType[];
   pagination?: PageResponseSDKType;
 }
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
@@ -846,7 +846,7 @@ export const QueryNFTsRequest = {
 };
 function createBaseQueryNFTsResponse(): QueryNFTsResponse {
   return {
-    nfts: undefined,
+    nfts: [],
     pagination: undefined
   };
 }
@@ -1448,7 +1448,7 @@ export const QueryClassesRequest = {
 };
 function createBaseQueryClassesResponse(): QueryClassesResponse {
   return {
-    classes: undefined,
+    classes: [],
     pagination: undefined
   };
 }

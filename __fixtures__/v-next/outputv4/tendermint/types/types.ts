@@ -175,11 +175,11 @@ export interface Data {
    * NOTE: not all txs here are valid.  We're just agreeing on the order first.
    * This means that block.AppHash does not include these txs.
    */
-  txs?: Uint8Array[];
+  txs: Uint8Array[];
 }
 /** Data contains the set of transactions included in the block */
 export interface DataSDKType {
-  txs?: Uint8Array[];
+  txs: Uint8Array[];
 }
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for
@@ -909,7 +909,7 @@ export const Header = {
 };
 function createBaseData(): Data {
   return {
-    txs: undefined
+    txs: []
   };
 }
 export const Data = {

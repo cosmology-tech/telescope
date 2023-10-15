@@ -29,7 +29,7 @@ export interface ClientState {
   /** Latest height the client was updated to */
   latestHeight: Height;
   /** Proof specifications used in verifying counterparty state */
-  proofSpecs?: ProofSpec[];
+  proofSpecs: ProofSpec[];
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -39,7 +39,7 @@ export interface ClientState {
    * the default upgrade module, upgrade_path should be []string{"upgrade",
    * "upgradedIBCState"}`
    */
-  upgradePath?: string[];
+  upgradePath: string[];
   /**
    * This flag, when set to true, will allow governance to recover a client
    * which has expired
@@ -63,8 +63,8 @@ export interface ClientStateSDKType {
   max_clock_drift: DurationSDKType;
   frozen_height: HeightSDKType;
   latest_height: HeightSDKType;
-  proof_specs?: ProofSpecSDKType[];
-  upgrade_path?: string[];
+  proof_specs: ProofSpecSDKType[];
+  upgrade_path: string[];
   allow_update_after_expiry?: boolean;
   allow_update_after_misbehaviour?: boolean;
 }
@@ -168,8 +168,8 @@ function createBaseClientState(): ClientState {
     maxClockDrift: Duration.fromPartial({}),
     frozenHeight: Height.fromPartial({}),
     latestHeight: Height.fromPartial({}),
-    proofSpecs: undefined,
-    upgradePath: undefined,
+    proofSpecs: [],
+    upgradePath: [],
     allowUpdateAfterExpiry: undefined,
     allowUpdateAfterMisbehaviour: undefined
   };

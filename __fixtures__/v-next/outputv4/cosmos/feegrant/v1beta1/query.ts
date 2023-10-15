@@ -38,13 +38,13 @@ export interface QueryAllowancesRequestSDKType {
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponse {
   /** allowances are allowance's granted for grantee by granter. */
-  allowances?: Grant[];
+  allowances: Grant[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponseSDKType {
-  allowances?: GrantSDKType[];
+  allowances: GrantSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
@@ -61,13 +61,13 @@ export interface QueryAllowancesByGranterRequestSDKType {
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterResponse {
   /** allowances that have been issued by the granter. */
-  allowances?: Grant[];
+  allowances: Grant[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterResponseSDKType {
-  allowances?: GrantSDKType[];
+  allowances: GrantSDKType[];
   pagination?: PageResponseSDKType;
 }
 function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
@@ -382,7 +382,7 @@ export const QueryAllowancesRequest = {
 };
 function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
   return {
-    allowances: undefined,
+    allowances: [],
     pagination: undefined
   };
 }
@@ -612,7 +612,7 @@ export const QueryAllowancesByGranterRequest = {
 };
 function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterResponse {
   return {
-    allowances: undefined,
+    allowances: [],
     pagination: undefined
   };
 }

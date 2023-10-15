@@ -47,7 +47,7 @@ export interface MonitoredResourceDescriptor {
    * resource type. For example, an individual Google Cloud SQL database is
    * identified by values for the labels `"database_id"` and `"zone"`.
    */
-  labels?: LabelDescriptor[];
+  labels: LabelDescriptor[];
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage?: LaunchStage;
 }
@@ -67,7 +67,7 @@ export interface MonitoredResourceDescriptorSDKType {
   type?: string;
   display_name?: string;
   description?: string;
-  labels?: LabelDescriptorSDKType[];
+  labels: LabelDescriptorSDKType[];
   launch_stage?: LaunchStage;
 }
 export interface MonitoredResource_LabelsEntry {
@@ -105,7 +105,7 @@ export interface MonitoredResource {
    * resource descriptor. For example, Compute Engine VM instances use the
    * labels `"project_id"`, `"instance_id"`, and `"zone"`.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
 }
@@ -126,7 +126,7 @@ export interface MonitoredResource {
  */
 export interface MonitoredResourceSDKType {
   type?: string;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
 }
@@ -161,7 +161,7 @@ export interface MonitoredResourceMetadata {
    */
   systemLabels?: Struct;
   /** Output only. A map of user-defined metadata labels. */
-  userLabels?: {
+  userLabels: {
     [key: string]: string;
   };
 }
@@ -175,7 +175,7 @@ export interface MonitoredResourceMetadata {
  */
 export interface MonitoredResourceMetadataSDKType {
   system_labels?: StructSDKType;
-  user_labels?: {
+  user_labels: {
     [key: string]: string;
   };
 }
@@ -185,7 +185,7 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
     type: undefined,
     displayName: undefined,
     description: undefined,
-    labels: undefined,
+    labels: [],
     launchStage: undefined
   };
 }
@@ -449,7 +449,7 @@ export const MonitoredResource_LabelsEntry = {
 function createBaseMonitoredResource(): MonitoredResource {
   return {
     type: undefined,
-    labels: undefined
+    labels: {}
   };
 }
 export const MonitoredResource = {
@@ -692,7 +692,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   return {
     systemLabels: undefined,
-    userLabels: undefined
+    userLabels: {}
   };
 }
 export const MonitoredResourceMetadata = {

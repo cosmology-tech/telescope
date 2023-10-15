@@ -27,9 +27,9 @@ export interface Authentication {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: AuthenticationRule[];
+  rules: AuthenticationRule[];
   /** Defines a set of authentication providers that a service supports. */
-  providers?: AuthProvider[];
+  providers: AuthProvider[];
 }
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -52,8 +52,8 @@ export interface Authentication {
  *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
  */
 export interface AuthenticationSDKType {
-  rules?: AuthenticationRuleSDKType[];
-  providers?: AuthProviderSDKType[];
+  rules: AuthenticationRuleSDKType[];
+  providers: AuthProviderSDKType[];
 }
 /**
  * Authentication rules for the service.
@@ -81,7 +81,7 @@ export interface AuthenticationRule {
    */
   allowWithoutCredential?: boolean;
   /** Requirements for additional authentication providers. */
-  requirements?: AuthRequirement[];
+  requirements: AuthRequirement[];
 }
 /**
  * Authentication rules for the service.
@@ -98,7 +98,7 @@ export interface AuthenticationRuleSDKType {
   selector?: string;
   oauth?: OAuthRequirementsSDKType;
   allow_without_credential?: boolean;
-  requirements?: AuthRequirementSDKType[];
+  requirements: AuthRequirementSDKType[];
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocation {
@@ -205,7 +205,7 @@ export interface AuthProvider {
    *    - header: x-goog-iap-jwt-assertion
    *    - query: access_token
    */
-  jwtLocations?: JwtLocation[];
+  jwtLocations: JwtLocation[];
 }
 /**
  * Configuration for an authentication provider, including support for
@@ -218,7 +218,7 @@ export interface AuthProviderSDKType {
   jwks_uri?: string;
   audiences?: string;
   authorization_url?: string;
-  jwt_locations?: JwtLocationSDKType[];
+  jwt_locations: JwtLocationSDKType[];
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -320,8 +320,8 @@ export interface AuthRequirementSDKType {
 }
 function createBaseAuthentication(): Authentication {
   return {
-    rules: undefined,
-    providers: undefined
+    rules: [],
+    providers: []
   };
 }
 export const Authentication = {
@@ -448,7 +448,7 @@ function createBaseAuthenticationRule(): AuthenticationRule {
     selector: undefined,
     oauth: undefined,
     allowWithoutCredential: undefined,
-    requirements: undefined
+    requirements: []
   };
 }
 export const AuthenticationRule = {
@@ -711,7 +711,7 @@ function createBaseAuthProvider(): AuthProvider {
     jwksUri: undefined,
     audiences: undefined,
     authorizationUrl: undefined,
-    jwtLocations: undefined
+    jwtLocations: []
   };
 }
 export const AuthProvider = {

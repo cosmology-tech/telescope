@@ -88,11 +88,11 @@ export interface StakeAuthorizationSDKType {
 }
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_Validators {
-  address?: string[];
+  address: string[];
 }
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_ValidatorsSDKType {
-  address?: string[];
+  address: string[];
 }
 function createBaseStakeAuthorization(): StakeAuthorization {
   return {
@@ -239,7 +239,7 @@ export const StakeAuthorization = {
 };
 function createBaseStakeAuthorization_Validators(): StakeAuthorization_Validators {
   return {
-    address: undefined
+    address: []
   };
 }
 export const StakeAuthorization_Validators = {

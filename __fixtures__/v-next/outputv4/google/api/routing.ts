@@ -371,7 +371,7 @@ export interface RoutingRule {
    * determines which Parameter gets used.
    * See the examples for more details.
    */
-  routingParameters?: RoutingParameter[];
+  routingParameters: RoutingParameter[];
 }
 /**
  * Specifies the routing information that should be sent along with the request
@@ -735,7 +735,7 @@ export interface RoutingRule {
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
 export interface RoutingRuleSDKType {
-  routing_parameters?: RoutingParameterSDKType[];
+  routing_parameters: RoutingParameterSDKType[];
 }
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameter {
@@ -806,7 +806,7 @@ export interface RoutingParameterSDKType {
 }
 function createBaseRoutingRule(): RoutingRule {
   return {
-    routingParameters: undefined
+    routingParameters: []
   };
 }
 export const RoutingRule = {

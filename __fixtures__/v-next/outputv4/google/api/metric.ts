@@ -164,7 +164,7 @@ export interface MetricDescriptor {
    * you can look at latencies for successful responses or just
    * for responses that failed.
    */
-  labels?: LabelDescriptor[];
+  labels: LabelDescriptor[];
   /**
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
@@ -300,7 +300,7 @@ export interface MetricDescriptor {
    * with this metric type can only be associated with one of the monitored
    * resource types listed here.
    */
-  monitoredResourceTypes?: string[];
+  monitoredResourceTypes: string[];
 }
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -310,7 +310,7 @@ export interface MetricDescriptor {
 export interface MetricDescriptorSDKType {
   name?: string;
   type?: string;
-  labels?: LabelDescriptorSDKType[];
+  labels: LabelDescriptorSDKType[];
   metric_kind?: MetricDescriptor_MetricKind;
   value_type?: MetricDescriptor_ValueType;
   unit?: string;
@@ -318,7 +318,7 @@ export interface MetricDescriptorSDKType {
   display_name?: string;
   metadata?: MetricDescriptor_MetricDescriptorMetadataSDKType;
   launch_stage?: LaunchStage;
-  monitored_resource_types?: string[];
+  monitored_resource_types: string[];
 }
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadata {
@@ -368,7 +368,7 @@ export interface Metric {
    * The set of label values that uniquely identify this metric. All
    * labels listed in the `MetricDescriptor` must be assigned values.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
 }
@@ -378,7 +378,7 @@ export interface Metric {
  */
 export interface MetricSDKType {
   type?: string;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
 }
@@ -386,7 +386,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
   return {
     name: undefined,
     type: undefined,
-    labels: undefined,
+    labels: [],
     metricKind: undefined,
     valueType: undefined,
     unit: undefined,
@@ -394,7 +394,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     displayName: undefined,
     metadata: undefined,
     launchStage: undefined,
-    monitoredResourceTypes: undefined
+    monitoredResourceTypes: []
   };
 }
 export const MetricDescriptor = {
@@ -861,7 +861,7 @@ export const Metric_LabelsEntry = {
 function createBaseMetric(): Metric {
   return {
     type: undefined,
-    labels: undefined
+    labels: {}
   };
 }
 export const Metric = {

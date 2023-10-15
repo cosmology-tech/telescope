@@ -14,13 +14,13 @@ export interface Usage {
    * "serviceusage.googleapis.com/tos/universal". Additional ToS can be
    * included based on the business needs.
    */
-  requirements?: string[];
+  requirements: string[];
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: UsageRule[];
+  rules: UsageRule[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -35,8 +35,8 @@ export interface Usage {
 }
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
-  requirements?: string[];
-  rules?: UsageRuleSDKType[];
+  requirements: string[];
+  rules: UsageRuleSDKType[];
   producer_notification_channel?: string;
 }
 /**
@@ -121,8 +121,8 @@ export interface UsageRuleSDKType {
 }
 function createBaseUsage(): Usage {
   return {
-    requirements: undefined,
-    rules: undefined,
+    requirements: [],
+    rules: [],
     producerNotificationChannel: undefined
   };
 }

@@ -10,14 +10,14 @@ export const protobufPackage = "google.api.expr.v1alpha1";
  */
 export interface EvalState {
   /** The unique values referenced in this message. */
-  values?: ExprValue[];
+  values: ExprValue[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results?: EvalState_Result[];
+  results: EvalState_Result[];
 }
 /**
  * The state of an evaluation.
@@ -25,8 +25,8 @@ export interface EvalState {
  * Can represent an inital, partial, or completed state of evaluation.
  */
 export interface EvalStateSDKType {
-  values?: ExprValueSDKType[];
-  results?: EvalState_ResultSDKType[];
+  values: ExprValueSDKType[];
+  results: EvalState_ResultSDKType[];
 }
 /** A single evalution result. */
 export interface EvalState_Result {
@@ -104,7 +104,7 @@ export interface ExprValueSDKType {
  */
 export interface ErrorSet {
   /** The errors in the set. */
-  errors?: Status[];
+  errors: Status[];
 }
 /**
  * A set of errors.
@@ -112,7 +112,7 @@ export interface ErrorSet {
  * The errors included depend on the context. See `ExprValue.error`.
  */
 export interface ErrorSetSDKType {
-  errors?: StatusSDKType[];
+  errors: StatusSDKType[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -121,7 +121,7 @@ export interface ErrorSetSDKType {
  */
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
-  exprs?: bigint[];
+  exprs: bigint[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -129,12 +129,12 @@ export interface UnknownSet {
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
 export interface UnknownSetSDKType {
-  exprs?: bigint[];
+  exprs: bigint[];
 }
 function createBaseEvalState(): EvalState {
   return {
-    values: undefined,
-    results: undefined
+    values: [],
+    results: []
   };
 }
 export const EvalState = {
@@ -489,7 +489,7 @@ export const ExprValue = {
 };
 function createBaseErrorSet(): ErrorSet {
   return {
-    errors: undefined
+    errors: []
   };
 }
 export const ErrorSet = {
@@ -587,7 +587,7 @@ export const ErrorSet = {
 };
 function createBaseUnknownSet(): UnknownSet {
   return {
-    exprs: undefined
+    exprs: []
   };
 }
 export const UnknownSet = {

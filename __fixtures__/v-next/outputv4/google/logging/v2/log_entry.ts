@@ -122,7 +122,7 @@ export interface LogEntry {
    * written. The truncation is indicated by an ellipsis at the
    * end of the character string.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -175,7 +175,7 @@ export interface LogEntrySDKType {
   severity?: LogSeverity;
   insert_id?: string;
   http_request?: HttpRequestSDKType;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   operation?: LogEntryOperationSDKType;
@@ -387,7 +387,7 @@ function createBaseLogEntry(): LogEntry {
     severity: undefined,
     insertId: undefined,
     httpRequest: undefined,
-    labels: undefined,
+    labels: {},
     operation: undefined,
     trace: undefined,
     spanId: undefined,

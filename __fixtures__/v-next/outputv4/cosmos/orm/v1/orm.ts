@@ -6,7 +6,7 @@ export interface TableDescriptor {
   /** primary_key defines the primary key for the table. */
   primaryKey?: PrimaryKeyDescriptor;
   /** index defines one or more secondary indexes. */
-  index?: SecondaryIndexDescriptor[];
+  index: SecondaryIndexDescriptor[];
   /**
    * id is a non-zero integer ID that must be unique within the
    * tables and singletons in this file. It may be deprecated in the future when this
@@ -17,7 +17,7 @@ export interface TableDescriptor {
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
   primary_key?: PrimaryKeyDescriptorSDKType;
-  index?: SecondaryIndexDescriptorSDKType[];
+  index: SecondaryIndexDescriptorSDKType[];
   id?: number;
 }
 /** PrimaryKeyDescriptor describes a table primary key. */
@@ -112,7 +112,7 @@ export interface SingletonDescriptorSDKType {
 function createBaseTableDescriptor(): TableDescriptor {
   return {
     primaryKey: undefined,
-    index: undefined,
+    index: [],
     id: undefined
   };
 }

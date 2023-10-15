@@ -5,15 +5,15 @@ export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
   /** All files used during config generation. */
-  sourceFiles?: Any[];
+  sourceFiles: Any[];
 }
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
-  source_files?: AnySDKType[];
+  source_files: AnySDKType[];
 }
 function createBaseSourceInfo(): SourceInfo {
   return {
-    sourceFiles: undefined
+    sourceFiles: []
   };
 }
 export const SourceInfo = {

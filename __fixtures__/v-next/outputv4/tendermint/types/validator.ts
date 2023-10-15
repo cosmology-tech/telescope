@@ -3,12 +3,12 @@ import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
-  validators?: Validator[];
+  validators: Validator[];
   proposer?: Validator;
   totalVotingPower?: bigint;
 }
 export interface ValidatorSetSDKType {
-  validators?: ValidatorSDKType[];
+  validators: ValidatorSDKType[];
   proposer?: ValidatorSDKType;
   total_voting_power?: bigint;
 }
@@ -34,7 +34,7 @@ export interface SimpleValidatorSDKType {
 }
 function createBaseValidatorSet(): ValidatorSet {
   return {
-    validators: undefined,
+    validators: [],
     proposer: undefined,
     totalVotingPower: undefined
   };

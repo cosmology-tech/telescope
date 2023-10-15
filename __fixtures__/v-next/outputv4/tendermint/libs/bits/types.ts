@@ -3,16 +3,16 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits?: bigint;
-  elems?: bigint[];
+  elems: bigint[];
 }
 export interface BitArraySDKType {
   bits?: bigint;
-  elems?: bigint[];
+  elems: bigint[];
 }
 function createBaseBitArray(): BitArray {
   return {
     bits: undefined,
-    elems: undefined
+    elems: []
   };
 }
 export const BitArray = {

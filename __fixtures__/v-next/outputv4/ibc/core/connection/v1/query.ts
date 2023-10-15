@@ -63,7 +63,7 @@ export interface QueryConnectionsRequestSDKType {
  */
 export interface QueryConnectionsResponse {
   /** list of stored connections of the chain. */
-  connections?: IdentifiedConnection[];
+  connections: IdentifiedConnection[];
   /** pagination response */
   pagination?: PageResponse;
   /** query block height */
@@ -74,7 +74,7 @@ export interface QueryConnectionsResponse {
  * method.
  */
 export interface QueryConnectionsResponseSDKType {
-  connections?: IdentifiedConnectionSDKType[];
+  connections: IdentifiedConnectionSDKType[];
   pagination?: PageResponseSDKType;
   height: HeightSDKType;
 }
@@ -99,7 +99,7 @@ export interface QueryClientConnectionsRequestSDKType {
  */
 export interface QueryClientConnectionsResponse {
   /** slice of all the connection paths associated with a client. */
-  connectionPaths?: string[];
+  connectionPaths: string[];
   /** merkle proof of existence */
   proof?: Uint8Array;
   /** height at which the proof was generated */
@@ -110,7 +110,7 @@ export interface QueryClientConnectionsResponse {
  * Query/ClientConnections RPC method
  */
 export interface QueryClientConnectionsResponseSDKType {
-  connection_paths?: string[];
+  connection_paths: string[];
   proof?: Uint8Array;
   proof_height: HeightSDKType;
 }
@@ -507,7 +507,7 @@ export const QueryConnectionsRequest = {
 };
 function createBaseQueryConnectionsResponse(): QueryConnectionsResponse {
   return {
-    connections: undefined,
+    connections: [],
     pagination: undefined,
     height: Height.fromPartial({})
   };
@@ -737,7 +737,7 @@ export const QueryClientConnectionsRequest = {
 };
 function createBaseQueryClientConnectionsResponse(): QueryClientConnectionsResponse {
   return {
-    connectionPaths: undefined,
+    connectionPaths: [],
     proof: undefined,
     proofHeight: Height.fromPartial({})
   };

@@ -27,7 +27,7 @@ export interface CodeGeneratorRequest {
    * code generator should generate code only for these files.  Each file's
    * descriptor will be included in proto_file, below.
    */
-  fileToGenerate?: string[];
+  fileToGenerate: string[];
   /** The generator parameter passed on the command-line. */
   parameter?: string;
   /**
@@ -46,15 +46,15 @@ export interface CodeGeneratorRequest {
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
-  protoFile?: FileDescriptorProto[];
+  protoFile: FileDescriptorProto[];
   /** The version number of protocol compiler. */
   compilerVersion?: Version;
 }
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestSDKType {
-  file_to_generate?: string[];
+  file_to_generate: string[];
   parameter?: string;
-  proto_file?: FileDescriptorProtoSDKType[];
+  proto_file: FileDescriptorProtoSDKType[];
   compiler_version?: VersionSDKType;
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
@@ -70,12 +70,12 @@ export interface CodeGeneratorResponse {
    * exiting with a non-zero status code.
    */
   error?: string;
-  file?: CodeGeneratorResponse_File[];
+  file: CodeGeneratorResponse_File[];
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseSDKType {
   error?: string;
-  file?: CodeGeneratorResponse_FileSDKType[];
+  file: CodeGeneratorResponse_FileSDKType[];
 }
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_File {
@@ -275,9 +275,9 @@ export const Version = {
 };
 function createBaseCodeGeneratorRequest(): CodeGeneratorRequest {
   return {
-    fileToGenerate: undefined,
+    fileToGenerate: [],
     parameter: undefined,
-    protoFile: undefined,
+    protoFile: [],
     compilerVersion: undefined
   };
 }
@@ -433,7 +433,7 @@ export const CodeGeneratorRequest = {
 function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
   return {
     error: undefined,
-    file: undefined
+    file: []
   };
 }
 export const CodeGeneratorResponse = {

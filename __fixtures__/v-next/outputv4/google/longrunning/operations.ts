@@ -83,13 +83,13 @@ export interface ListOperationsRequestSDKType {
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponse {
   /** A list of operations that matches the specified filter in the request. */
-  operations?: Operation[];
+  operations: Operation[];
   /** The standard List next-page token. */
   nextPageToken?: string;
 }
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
-  operations?: OperationSDKType[];
+  operations: OperationSDKType[];
   next_page_token?: string;
 }
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
@@ -550,7 +550,7 @@ export const ListOperationsRequest = {
 };
 function createBaseListOperationsResponse(): ListOperationsResponse {
   return {
-    operations: undefined,
+    operations: [],
     nextPageToken: undefined
   };
 }

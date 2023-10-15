@@ -109,7 +109,7 @@ export interface CheckResponse {
    * Otherwise the service should use the list of errors to determine the
    * appropriate action.
    */
-  checkErrors?: CheckError[];
+  checkErrors: CheckError[];
   /** The actual config id used to process the request. */
   serviceConfigId?: string;
   /** The current service rollout id used to process the request. */
@@ -120,7 +120,7 @@ export interface CheckResponse {
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   operation_id?: string;
-  check_errors?: CheckErrorSDKType[];
+  check_errors: CheckErrorSDKType[];
   service_config_id?: string;
   service_rollout_id?: string;
   check_info?: CheckResponse_CheckInfoSDKType;
@@ -132,13 +132,13 @@ export interface CheckResponse_CheckInfo {
    * The client doesn't need to send them for following requests to improve
    * performance and allow better aggregation.
    */
-  unusedArguments?: string[];
+  unusedArguments: string[];
   /** Consumer info of this check. */
   consumerInfo?: CheckResponse_ConsumerInfo;
 }
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoSDKType {
-  unused_arguments?: string[];
+  unused_arguments: string[];
   consumer_info?: CheckResponse_ConsumerInfoSDKType;
 }
 /** `ConsumerInfo` provides information about the consumer. */
@@ -193,7 +193,7 @@ export interface ReportRequest {
    * [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
    * for partial failure behavior.
    */
-  operations?: Operation[];
+  operations: Operation[];
   /**
    * Specifies which version of service config should be used to process the
    * request.
@@ -206,7 +206,7 @@ export interface ReportRequest {
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name?: string;
-  operations?: OperationSDKType[];
+  operations: OperationSDKType[];
   service_config_id?: string;
 }
 /** Response message for the Report method. */
@@ -227,7 +227,7 @@ export interface ReportResponse {
    *    When this happens, it's impossible to know which of the
    *    'Operations' in the request succeeded or failed.
    */
-  reportErrors?: ReportResponse_ReportError[];
+  reportErrors: ReportResponse_ReportError[];
   /** The actual config id used to process the request. */
   serviceConfigId?: string;
   /** The current service rollout id used to process the request. */
@@ -235,7 +235,7 @@ export interface ReportResponse {
 }
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
-  report_errors?: ReportResponse_ReportErrorSDKType[];
+  report_errors: ReportResponse_ReportErrorSDKType[];
   service_config_id?: string;
   service_rollout_id?: string;
 }
@@ -385,7 +385,7 @@ export const CheckRequest = {
 function createBaseCheckResponse(): CheckResponse {
   return {
     operationId: undefined,
-    checkErrors: undefined,
+    checkErrors: [],
     serviceConfigId: undefined,
     serviceRolloutId: undefined,
     checkInfo: undefined
@@ -544,7 +544,7 @@ export const CheckResponse = {
 };
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
   return {
-    unusedArguments: undefined,
+    unusedArguments: [],
     consumerInfo: undefined
   };
 }
@@ -784,7 +784,7 @@ export const CheckResponse_ConsumerInfo = {
 function createBaseReportRequest(): ReportRequest {
   return {
     serviceName: undefined,
-    operations: undefined,
+    operations: [],
     serviceConfigId: undefined
   };
 }
@@ -911,7 +911,7 @@ export const ReportRequest = {
 };
 function createBaseReportResponse(): ReportResponse {
   return {
-    reportErrors: undefined,
+    reportErrors: [],
     serviceConfigId: undefined,
     serviceRolloutId: undefined
   };

@@ -279,9 +279,9 @@ export interface OperationMetadata {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resourceNames?: string[];
+  resourceNames: string[];
   /** Detailed status information for each step. The order is undetermined. */
-  steps?: OperationMetadata_Step[];
+  steps: OperationMetadata_Step[];
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage?: number;
   /** The start time of the operation. */
@@ -289,8 +289,8 @@ export interface OperationMetadata {
 }
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
-  resource_names?: string[];
-  steps?: OperationMetadata_StepSDKType[];
+  resource_names: string[];
+  steps: OperationMetadata_StepSDKType[];
   progress_percentage?: number;
   start_time?: Date;
 }
@@ -336,7 +336,7 @@ export interface ConfigSource {
    * Set of source configuration files that are used to generate a service
    * configuration (`google.api.Service`).
    */
-  files?: ConfigFile[];
+  files: ConfigFile[];
 }
 /**
  * Represents a source file which is used to generate the service configuration
@@ -344,7 +344,7 @@ export interface ConfigSource {
  */
 export interface ConfigSourceSDKType {
   id?: string;
-  files?: ConfigFileSDKType[];
+  files: ConfigFileSDKType[];
 }
 /** Generic specification of a source configuration file */
 export interface ConfigFile {
@@ -387,7 +387,7 @@ export interface ChangeReport {
    * A ConfigChange identifier is a dot separated path to the configuration.
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
-  configChanges?: ConfigChange[];
+  configChanges: ConfigChange[];
 }
 /**
  * Change report associated with a particular service configuration.
@@ -396,7 +396,7 @@ export interface ChangeReport {
  * two service configurations.
  */
 export interface ChangeReportSDKType {
-  config_changes?: ConfigChangeSDKType[];
+  config_changes: ConfigChangeSDKType[];
 }
 /**
  * A rollout resource that defines how service configuration versions are pushed
@@ -498,7 +498,7 @@ export interface Rollout_TrafficPercentStrategy {
    * Key is the service configuration ID, Value is the traffic percentage
    * which must be greater than 0.0 and the sum must equal to 100.0.
    */
-  percentages?: {
+  percentages: {
     [key: string]: number;
   };
 }
@@ -535,7 +535,7 @@ export interface Rollout_TrafficPercentStrategy {
  *     }
  */
 export interface Rollout_TrafficPercentStrategySDKType {
-  percentages?: {
+  percentages: {
     [key: string]: number;
   };
 }
@@ -652,8 +652,8 @@ export const ManagedService = {
 };
 function createBaseOperationMetadata(): OperationMetadata {
   return {
-    resourceNames: undefined,
-    steps: undefined,
+    resourceNames: [],
+    steps: [],
     progressPercentage: undefined,
     startTime: undefined
   };
@@ -1025,7 +1025,7 @@ export const Diagnostic = {
 function createBaseConfigSource(): ConfigSource {
   return {
     id: undefined,
-    files: undefined
+    files: []
   };
 }
 export const ConfigSource = {
@@ -1339,7 +1339,7 @@ export const ConfigRef = {
 };
 function createBaseChangeReport(): ChangeReport {
   return {
-    configChanges: undefined
+    configChanges: []
   };
 }
 export const ChangeReport = {
@@ -1711,7 +1711,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
 };
 function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrategy {
   return {
-    percentages: undefined
+    percentages: {}
   };
 }
 export const Rollout_TrafficPercentStrategy = {

@@ -5,13 +5,13 @@ export interface Proof {
   total?: bigint;
   index?: bigint;
   leafHash?: Uint8Array;
-  aunts?: Uint8Array[];
+  aunts: Uint8Array[];
 }
 export interface ProofSDKType {
   total?: bigint;
   index?: bigint;
   leaf_hash?: Uint8Array;
-  aunts?: Uint8Array[];
+  aunts: Uint8Array[];
 }
 export interface ValueOp {
   /** Encoded in ProofOp.Key. */
@@ -66,7 +66,7 @@ function createBaseProof(): Proof {
     total: undefined,
     index: undefined,
     leafHash: undefined,
-    aunts: undefined
+    aunts: []
   };
 }
 export const Proof = {

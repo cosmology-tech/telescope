@@ -41,7 +41,7 @@ export interface SystemParameters {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: SystemParameterRule[];
+  rules: SystemParameterRule[];
 }
 /**
  * ### System parameter configuration
@@ -52,7 +52,7 @@ export interface SystemParameters {
  * change the names of the system parameters.
  */
 export interface SystemParametersSDKType {
-  rules?: SystemParameterRuleSDKType[];
+  rules: SystemParameterRuleSDKType[];
 }
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -73,7 +73,7 @@ export interface SystemParameterRule {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
-  parameters?: SystemParameter[];
+  parameters: SystemParameter[];
 }
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -81,7 +81,7 @@ export interface SystemParameterRule {
  */
 export interface SystemParameterRuleSDKType {
   selector?: string;
-  parameters?: SystemParameterSDKType[];
+  parameters: SystemParameterSDKType[];
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -114,7 +114,7 @@ export interface SystemParameterSDKType {
 }
 function createBaseSystemParameters(): SystemParameters {
   return {
-    rules: undefined
+    rules: []
   };
 }
 export const SystemParameters = {
@@ -213,7 +213,7 @@ export const SystemParameters = {
 function createBaseSystemParameterRule(): SystemParameterRule {
   return {
     selector: undefined,
-    parameters: undefined
+    parameters: []
   };
 }
 export const SystemParameterRule = {

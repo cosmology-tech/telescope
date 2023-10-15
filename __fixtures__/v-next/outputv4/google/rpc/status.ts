@@ -24,7 +24,7 @@ export interface Status {
    * A list of messages that carry the error details.  There is a common set of
    * message types for APIs to use.
    */
-  details?: Any[];
+  details: Any[];
 }
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -38,13 +38,13 @@ export interface Status {
 export interface StatusSDKType {
   code?: number;
   message?: string;
-  details?: AnySDKType[];
+  details: AnySDKType[];
 }
 function createBaseStatus(): Status {
   return {
     code: undefined,
     message: undefined,
-    details: undefined
+    details: []
   };
 }
 export const Status = {

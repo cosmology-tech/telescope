@@ -3,7 +3,7 @@ import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
   /** The ids of the expressions with unknown values. */
-  exprs?: IdRef[];
+  exprs: IdRef[];
 }
 export interface ExprValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprValue";
@@ -11,14 +11,14 @@ export interface ExprValueProtoMsg {
 }
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
-  exprs?: IdRefAmino[];
+  exprs: IdRefAmino[];
 }
 export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprValue";
   value: ExprValueAmino;
 }
 export interface ExprValueSDKType {
-  exprs?: IdRefSDKType[];
+  exprs: IdRefSDKType[];
 }
 export interface IdRef {
   /** The expression id. */
@@ -41,7 +41,7 @@ export interface IdRefSDKType {
 }
 function createBaseExprValue(): ExprValue {
   return {
-    exprs: undefined
+    exprs: []
   };
 }
 export const ExprValue = {
@@ -70,9 +70,9 @@ export const ExprValue = {
     return message;
   },
   fromJSON(object: any): ExprValue {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromJSON(e)) : []
-    };
+    const obj = createBaseExprValue();
+    if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => IdRef.fromJSON(e));
+    return obj;
   },
   toJSON(message: ExprValue): unknown {
     const obj: any = {};
@@ -168,9 +168,9 @@ export const IdRef = {
     return message;
   },
   fromJSON(object: any): IdRef {
-    return {
-      id: isSet(object.id) ? Number(object.id) : undefined
-    };
+    const obj = createBaseIdRef();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    return obj;
   },
   toJSON(message: IdRef): unknown {
     const obj: any = {};

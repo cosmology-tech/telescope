@@ -123,7 +123,7 @@ export interface RewardsEstRequest {
   /** Address that is being queried for future estimated rewards */
   owner?: string;
   /** Lock IDs included in future reward estimation */
-  lockIds?: bigint[];
+  lockIds: bigint[];
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
@@ -132,7 +132,7 @@ export interface RewardsEstRequest {
 }
 export interface RewardsEstRequestSDKType {
   owner?: string;
-  lock_ids?: bigint[];
+  lock_ids: bigint[];
   end_epoch?: bigint;
 }
 export interface RewardsEstResponse {
@@ -1629,7 +1629,7 @@ export const UpcomingGaugesPerDenomResponse = {
 function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
     owner: undefined,
-    lockIds: undefined,
+    lockIds: [],
     endEpoch: undefined
   };
 }

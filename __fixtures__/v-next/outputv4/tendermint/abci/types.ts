@@ -543,10 +543,10 @@ export interface ResponseCommitSDKType {
   retain_height?: bigint;
 }
 export interface ResponseListSnapshots {
-  snapshots?: Snapshot[];
+  snapshots: Snapshot[];
 }
 export interface ResponseListSnapshotsSDKType {
-  snapshots?: SnapshotSDKType[];
+  snapshots: SnapshotSDKType[];
 }
 export interface ResponseOfferSnapshot {
   result?: ResponseOfferSnapshot_Result;
@@ -563,14 +563,14 @@ export interface ResponseLoadSnapshotChunkSDKType {
 export interface ResponseApplySnapshotChunk {
   result?: ResponseApplySnapshotChunk_Result;
   /** Chunks to refetch and reapply */
-  refetchChunks?: number[];
+  refetchChunks: number[];
   /** Chunk senders to reject and ban */
-  rejectSenders?: string[];
+  rejectSenders: string[];
 }
 export interface ResponseApplySnapshotChunkSDKType {
   result?: ResponseApplySnapshotChunk_Result;
-  refetch_chunks?: number[];
-  reject_senders?: string[];
+  refetch_chunks: number[];
+  reject_senders: string[];
 }
 /**
  * ConsensusParams contains all consensus-relevant parameters
@@ -4623,7 +4623,7 @@ export const ResponseCommit = {
 };
 function createBaseResponseListSnapshots(): ResponseListSnapshots {
   return {
-    snapshots: undefined
+    snapshots: []
   };
 }
 export const ResponseListSnapshots = {
@@ -4894,8 +4894,8 @@ export const ResponseLoadSnapshotChunk = {
 function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
   return {
     result: undefined,
-    refetchChunks: undefined,
-    rejectSenders: undefined
+    refetchChunks: [],
+    rejectSenders: []
   };
 }
 export const ResponseApplySnapshotChunk = {

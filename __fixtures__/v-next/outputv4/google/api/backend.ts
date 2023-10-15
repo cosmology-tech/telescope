@@ -100,11 +100,11 @@ export interface Backend {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: BackendRule[];
+  rules: BackendRule[];
 }
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
-  rules?: BackendRuleSDKType[];
+  rules: BackendRuleSDKType[];
 }
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRule {
@@ -205,7 +205,7 @@ export interface BackendRuleSDKType {
 }
 function createBaseBackend(): Backend {
   return {
-    rules: undefined
+    rules: []
   };
 }
 export const Backend = {

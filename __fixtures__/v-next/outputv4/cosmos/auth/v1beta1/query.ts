@@ -28,7 +28,7 @@ export interface QueryAccountsRequestSDKType {
  */
 export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
-  accounts?: Any[];
+  accounts: Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
@@ -38,7 +38,7 @@ export interface QueryAccountsResponse {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsResponseSDKType {
-  accounts?: AnySDKType[];
+  accounts: AnySDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
@@ -78,11 +78,11 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
-  accounts?: Any[];
+  accounts: Any[];
 }
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseSDKType {
-  accounts?: AnySDKType[];
+  accounts: AnySDKType[];
 }
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequest {}
@@ -224,7 +224,7 @@ export const QueryAccountsRequest = {
 };
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
-    accounts: undefined,
+    accounts: [],
     pagination: undefined
   };
 }
@@ -771,7 +771,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
   return {
-    accounts: undefined
+    accounts: []
   };
 }
 export const QueryModuleAccountsResponse = {

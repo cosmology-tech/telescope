@@ -52,7 +52,7 @@ export interface LogEntry {
    * A set of user-defined (key, value) data that provides additional
    * information about the log entry.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -87,7 +87,7 @@ export interface LogEntrySDKType {
   http_request?: HttpRequestSDKType;
   trace?: string;
   insert_id?: string;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   proto_payload?: AnySDKType;
@@ -263,7 +263,7 @@ function createBaseLogEntry(): LogEntry {
     httpRequest: undefined,
     trace: undefined,
     insertId: undefined,
-    labels: undefined,
+    labels: {},
     protoPayload: undefined,
     textPayload: undefined,
     structPayload: undefined,

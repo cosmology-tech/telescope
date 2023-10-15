@@ -153,11 +153,11 @@ export interface HeightSDKType {
 /** Params defines the set of IBC light client parameters. */
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
-  allowedClients?: string[];
+  allowedClients: string[];
 }
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {
-  allowed_clients?: string[];
+  allowed_clients: string[];
 }
 function createBaseIdentifiedClientState(): IdentifiedClientState {
   return {
@@ -893,7 +893,7 @@ export const Height = {
 };
 function createBaseParams(): Params {
   return {
-    allowedClients: undefined
+    allowedClients: []
   };
 }
 export const Params = {

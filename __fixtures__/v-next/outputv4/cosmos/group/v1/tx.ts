@@ -257,11 +257,11 @@ export interface MsgSubmitProposal {
    * proposers are the account addresses of the proposers.
    * Proposers signatures will be counted as yes votes.
    */
-  proposers?: string[];
+  proposers: string[];
   /** metadata is any arbitrary metadata to attached to the proposal. */
   metadata?: string;
   /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
-  messages?: Any[];
+  messages: Any[];
   /**
    * exec defines the mode of execution of the proposal,
    * whether it should be executed immediately on creation or not.
@@ -272,9 +272,9 @@ export interface MsgSubmitProposal {
 /** MsgSubmitProposal is the Msg/SubmitProposal request type. */
 export interface MsgSubmitProposalSDKType {
   address?: string;
-  proposers?: string[];
+  proposers: string[];
   metadata?: string;
-  messages?: AnySDKType[];
+  messages: AnySDKType[];
   exec?: Exec;
 }
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
@@ -2318,9 +2318,9 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
     address: undefined,
-    proposers: undefined,
+    proposers: [],
     metadata: undefined,
-    messages: undefined,
+    messages: [],
     exec: undefined
   };
 }

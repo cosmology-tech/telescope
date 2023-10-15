@@ -10,47 +10,47 @@ export interface GenesisState {
    */
   groupSeq?: bigint;
   /** groups is the list of groups info. */
-  groups?: GroupInfo[];
+  groups: GroupInfo[];
   /** group_members is the list of groups members. */
-  groupMembers?: GroupMember[];
+  groupMembers: GroupMember[];
   /**
    * group_policy_seq is the group policy table orm.Sequence,
    * it is used to generate the next group policy account address.
    */
   groupPolicySeq?: bigint;
   /** group_policies is the list of group policies info. */
-  groupPolicies?: GroupPolicyInfo[];
+  groupPolicies: GroupPolicyInfo[];
   /**
    * proposal_seq is the proposal table orm.Sequence,
    * it is used to get the next proposal ID.
    */
   proposalSeq?: bigint;
   /** proposals is the list of proposals. */
-  proposals?: Proposal[];
+  proposals: Proposal[];
   /** votes is the list of votes. */
-  votes?: Vote[];
+  votes: Vote[];
 }
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisStateSDKType {
   group_seq?: bigint;
-  groups?: GroupInfoSDKType[];
-  group_members?: GroupMemberSDKType[];
+  groups: GroupInfoSDKType[];
+  group_members: GroupMemberSDKType[];
   group_policy_seq?: bigint;
-  group_policies?: GroupPolicyInfoSDKType[];
+  group_policies: GroupPolicyInfoSDKType[];
   proposal_seq?: bigint;
-  proposals?: ProposalSDKType[];
-  votes?: VoteSDKType[];
+  proposals: ProposalSDKType[];
+  votes: VoteSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
     groupSeq: undefined,
-    groups: undefined,
-    groupMembers: undefined,
+    groups: [],
+    groupMembers: [],
     groupPolicySeq: undefined,
-    groupPolicies: undefined,
+    groupPolicies: [],
     proposalSeq: undefined,
-    proposals: undefined,
-    votes: undefined
+    proposals: [],
+    votes: []
   };
 }
 export const GenesisState = {

@@ -65,13 +65,13 @@ export interface Documentation {
    */
   summary?: string;
   /** The top level pages for the documentation set. */
-  pages?: Page[];
+  pages: Page[];
   /**
    * A list of documentation rules that apply to individual API elements.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: DocumentationRule[];
+  rules: DocumentationRule[];
   /** The URL to the root of documentation. */
   documentationRootUrl?: string;
   /**
@@ -157,8 +157,8 @@ export interface Documentation {
  */
 export interface DocumentationSDKType {
   summary?: string;
-  pages?: PageSDKType[];
-  rules?: DocumentationRuleSDKType[];
+  pages: PageSDKType[];
+  rules: DocumentationRuleSDKType[];
   documentation_root_url?: string;
   service_root_url?: string;
   overview?: string;
@@ -219,7 +219,7 @@ export interface Page {
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
-  subpages?: Page[];
+  subpages: Page[];
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -228,13 +228,13 @@ export interface Page {
 export interface PageSDKType {
   name?: string;
   content?: string;
-  subpages?: PageSDKType[];
+  subpages: PageSDKType[];
 }
 function createBaseDocumentation(): Documentation {
   return {
     summary: undefined,
-    pages: undefined,
-    rules: undefined,
+    pages: [],
+    rules: [],
     documentationRootUrl: undefined,
     serviceRootUrl: undefined,
     overview: undefined
@@ -535,7 +535,7 @@ function createBasePage(): Page {
   return {
     name: undefined,
     content: undefined,
-    subpages: undefined
+    subpages: []
   };
 }
 export const Page = {

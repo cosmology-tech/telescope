@@ -97,7 +97,7 @@ export interface QueryContractsByCodeRequestSDKType {
  */
 export interface QueryContractsByCodeResponse {
   /** contracts are a set of contract addresses */
-  contracts?: string[];
+  contracts: string[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
@@ -106,7 +106,7 @@ export interface QueryContractsByCodeResponse {
  * Query/ContractsByCode RPC method
  */
 export interface QueryContractsByCodeResponseSDKType {
-  contracts?: string[];
+  contracts: string[];
   pagination?: PageResponseSDKType;
 }
 /**
@@ -838,7 +838,7 @@ export const QueryContractsByCodeRequest = {
 };
 function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse {
   return {
-    contracts: undefined,
+    contracts: [],
     pagination: undefined
   };
 }

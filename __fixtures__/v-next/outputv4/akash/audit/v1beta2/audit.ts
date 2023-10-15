@@ -36,13 +36,13 @@ export interface AttributesResponseSDKType {
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFilters {
-  auditors?: string[];
-  owners?: string[];
+  auditors: string[];
+  owners: string[];
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
-  auditors?: string[];
-  owners?: string[];
+  auditors: string[];
+  owners: string[];
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributes {
@@ -64,13 +64,13 @@ export interface MsgSignProviderAttributesResponseSDKType {}
 export interface MsgDeleteProviderAttributes {
   owner?: string;
   auditor?: string;
-  keys?: string[];
+  keys: string[];
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
   owner?: string;
   auditor?: string;
-  keys?: string[];
+  keys: string[];
 }
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponse {}
@@ -450,8 +450,8 @@ export const AttributesResponse = {
 };
 function createBaseAttributesFilters(): AttributesFilters {
   return {
-    auditors: undefined,
-    owners: undefined
+    auditors: [],
+    owners: []
   };
 }
 export const AttributesFilters = {
@@ -790,7 +790,7 @@ function createBaseMsgDeleteProviderAttributes(): MsgDeleteProviderAttributes {
   return {
     owner: undefined,
     auditor: undefined,
-    keys: undefined
+    keys: []
   };
 }
 export const MsgDeleteProviderAttributes = {

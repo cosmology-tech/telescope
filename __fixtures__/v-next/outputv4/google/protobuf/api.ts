@@ -21,9 +21,9 @@ export interface Api {
    */
   name?: string;
   /** The methods of this interface, in unspecified order. */
-  methods?: Method[];
+  methods: Method[];
   /** Any metadata attached to the interface. */
-  options?: Option[];
+  options: Option[];
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -52,7 +52,7 @@ export interface Api {
    */
   sourceContext?: SourceContext;
   /** Included interfaces. See [Mixin][]. */
-  mixins?: Mixin[];
+  mixins: Mixin[];
   /** The source syntax of the service. */
   syntax?: Syntax;
 }
@@ -69,11 +69,11 @@ export interface Api {
  */
 export interface ApiSDKType {
   name?: string;
-  methods?: MethodSDKType[];
-  options?: OptionSDKType[];
+  methods: MethodSDKType[];
+  options: OptionSDKType[];
   version?: string;
   source_context?: SourceContextSDKType;
-  mixins?: MixinSDKType[];
+  mixins: MixinSDKType[];
   syntax?: Syntax;
 }
 /** Method represents a method of an API interface. */
@@ -89,7 +89,7 @@ export interface Method {
   /** If true, the response is streamed. */
   responseStreaming?: boolean;
   /** Any metadata attached to the method. */
-  options?: Option[];
+  options: Option[];
   /** The source syntax of this method. */
   syntax?: Syntax;
 }
@@ -100,7 +100,7 @@ export interface MethodSDKType {
   request_streaming?: boolean;
   response_type_url?: string;
   response_streaming?: boolean;
-  options?: OptionSDKType[];
+  options: OptionSDKType[];
   syntax?: Syntax;
 }
 /**
@@ -279,11 +279,11 @@ export interface MixinSDKType {
 function createBaseApi(): Api {
   return {
     name: undefined,
-    methods: undefined,
-    options: undefined,
+    methods: [],
+    options: [],
     version: undefined,
     sourceContext: undefined,
-    mixins: undefined,
+    mixins: [],
     syntax: undefined
   };
 }
@@ -497,7 +497,7 @@ function createBaseMethod(): Method {
     requestStreaming: undefined,
     responseTypeUrl: undefined,
     responseStreaming: undefined,
-    options: undefined,
+    options: [],
     syntax: undefined
   };
 }

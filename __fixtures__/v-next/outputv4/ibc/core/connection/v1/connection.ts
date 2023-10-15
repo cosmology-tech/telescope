@@ -69,7 +69,7 @@ export interface ConnectionEnd {
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection.
    */
-  versions?: Version[];
+  versions: Version[];
   /** current state of the connection end. */
   state?: State;
   /** counterparty chain associated with this connection. */
@@ -89,7 +89,7 @@ export interface ConnectionEnd {
  */
 export interface ConnectionEndSDKType {
   client_id?: string;
-  versions?: VersionSDKType[];
+  versions: VersionSDKType[];
   state?: State;
   counterparty: CounterpartySDKType;
   delay_period?: bigint;
@@ -107,7 +107,7 @@ export interface IdentifiedConnection {
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection
    */
-  versions?: Version[];
+  versions: Version[];
   /** current state of the connection end. */
   state?: State;
   /** counterparty chain associated with this connection. */
@@ -122,7 +122,7 @@ export interface IdentifiedConnection {
 export interface IdentifiedConnectionSDKType {
   id?: string;
   client_id?: string;
-  versions?: VersionSDKType[];
+  versions: VersionSDKType[];
   state?: State;
   counterparty: CounterpartySDKType;
   delay_period?: bigint;
@@ -151,23 +151,23 @@ export interface CounterpartySDKType {
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPaths {
   /** list of connection paths */
-  paths?: string[];
+  paths: string[];
 }
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsSDKType {
-  paths?: string[];
+  paths: string[];
 }
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPaths {
   /** client state unique identifier */
   clientId?: string;
   /** list of connection paths */
-  paths?: string[];
+  paths: string[];
 }
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsSDKType {
   client_id?: string;
-  paths?: string[];
+  paths: string[];
 }
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
@@ -177,7 +177,7 @@ export interface Version {
   /** unique version identifier */
   identifier?: string;
   /** list of features compatible with the specified identifier */
-  features?: string[];
+  features: string[];
 }
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
@@ -185,7 +185,7 @@ export interface Version {
  */
 export interface VersionSDKType {
   identifier?: string;
-  features?: string[];
+  features: string[];
 }
 /** Params defines the set of Connection parameters. */
 export interface Params {
@@ -203,7 +203,7 @@ export interface ParamsSDKType {
 function createBaseConnectionEnd(): ConnectionEnd {
   return {
     clientId: undefined,
-    versions: undefined,
+    versions: [],
     state: undefined,
     counterparty: Counterparty.fromPartial({}),
     delayPeriod: undefined
@@ -374,7 +374,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
   return {
     id: undefined,
     clientId: undefined,
-    versions: undefined,
+    versions: [],
     state: undefined,
     counterparty: Counterparty.fromPartial({}),
     delayPeriod: undefined
@@ -681,7 +681,7 @@ export const Counterparty = {
 };
 function createBaseClientPaths(): ClientPaths {
   return {
-    paths: undefined
+    paths: []
   };
 }
 export const ClientPaths = {
@@ -786,7 +786,7 @@ export const ClientPaths = {
 function createBaseConnectionPaths(): ConnectionPaths {
   return {
     clientId: undefined,
-    paths: undefined
+    paths: []
   };
 }
 export const ConnectionPaths = {
@@ -905,7 +905,7 @@ export const ConnectionPaths = {
 function createBaseVersion(): Version {
   return {
     identifier: undefined,
-    features: undefined
+    features: []
   };
 }
 export const Version = {

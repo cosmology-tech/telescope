@@ -150,7 +150,7 @@ export interface Result {
    * 
    * Since: cosmos-sdk 0.46
    */
-  msgResponses?: Any[];
+  msgResponses: Any[];
 }
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface ResultSDKType {
@@ -158,7 +158,7 @@ export interface ResultSDKType {
   data?: Uint8Array;
   log?: string;
   events: EventSDKType[];
-  msg_responses?: AnySDKType[];
+  msg_responses: AnySDKType[];
 }
 /**
  * SimulationResponse defines the response generated when a transaction is
@@ -201,13 +201,13 @@ export interface MsgDataSDKType {
 export interface TxMsgData {
   /** data field is deprecated and not populated. */
   /** @deprecated */
-  data?: MsgData[];
+  data: MsgData[];
   /**
    * msg_responses contains the Msg handler responses packed into Anys.
    * 
    * Since: cosmos-sdk 0.46
    */
-  msgResponses?: Any[];
+  msgResponses: Any[];
 }
 /**
  * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
@@ -215,8 +215,8 @@ export interface TxMsgData {
  */
 export interface TxMsgDataSDKType {
   /** @deprecated */
-  data?: MsgDataSDKType[];
-  msg_responses?: AnySDKType[];
+  data: MsgDataSDKType[];
+  msg_responses: AnySDKType[];
 }
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResult {
@@ -231,7 +231,7 @@ export interface SearchTxsResult {
   /** Max count txs per page */
   limit?: bigint;
   /** List of txs in current page */
-  txs?: TxResponse[];
+  txs: TxResponse[];
 }
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResultSDKType {
@@ -240,7 +240,7 @@ export interface SearchTxsResultSDKType {
   page_number?: bigint;
   page_total?: bigint;
   limit?: bigint;
-  txs?: TxResponseSDKType[];
+  txs: TxResponseSDKType[];
 }
 function createBaseTxResponse(): TxResponse {
   return {
@@ -1032,7 +1032,7 @@ function createBaseResult(): Result {
     data: undefined,
     log: undefined,
     events: [],
-    msgResponses: undefined
+    msgResponses: []
   };
 }
 export const Result = {
@@ -1408,8 +1408,8 @@ export const MsgData = {
 };
 function createBaseTxMsgData(): TxMsgData {
   return {
-    data: undefined,
-    msgResponses: undefined
+    data: [],
+    msgResponses: []
   };
 }
 export const TxMsgData = {
@@ -1544,7 +1544,7 @@ function createBaseSearchTxsResult(): SearchTxsResult {
     pageNumber: undefined,
     pageTotal: undefined,
     limit: undefined,
-    txs: undefined
+    txs: []
   };
 }
 export const SearchTxsResult = {

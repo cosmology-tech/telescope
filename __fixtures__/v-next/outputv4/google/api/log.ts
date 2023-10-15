@@ -25,7 +25,7 @@ export interface LogDescriptor {
    * Runtime requests that contain labels not specified here are
    * considered invalid.
    */
-  labels?: LabelDescriptor[];
+  labels: LabelDescriptor[];
   /**
    * A human-readable description of this log. This information appears in
    * the documentation and can contain details.
@@ -49,14 +49,14 @@ export interface LogDescriptor {
  */
 export interface LogDescriptorSDKType {
   name?: string;
-  labels?: LabelDescriptorSDKType[];
+  labels: LabelDescriptorSDKType[];
   description?: string;
   display_name?: string;
 }
 function createBaseLogDescriptor(): LogDescriptor {
   return {
     name: undefined,
-    labels: undefined,
+    labels: [],
     description: undefined,
     displayName: undefined
   };

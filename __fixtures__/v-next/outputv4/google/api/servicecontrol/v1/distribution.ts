@@ -44,7 +44,7 @@ export interface Distribution {
    * 
    * Any suffix of trailing zeros may be omitted.
    */
-  bucketCounts?: bigint[];
+  bucketCounts: bigint[];
   /** Buckets with constant width. */
   linearBuckets?: Distribution_LinearBuckets;
   /** Buckets with exponentially growing width. */
@@ -52,7 +52,7 @@ export interface Distribution {
   /** Buckets with arbitrary user-provided width. */
   explicitBuckets?: Distribution_ExplicitBuckets;
   /** Example points. Must be in increasing order of `value` field. */
-  exemplars?: Distribution_Exemplar[];
+  exemplars: Distribution_Exemplar[];
 }
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -70,11 +70,11 @@ export interface DistributionSDKType {
   minimum?: number;
   maximum?: number;
   sum_of_squared_deviation?: number;
-  bucket_counts?: bigint[];
+  bucket_counts: bigint[];
   linear_buckets?: Distribution_LinearBucketsSDKType;
   exponential_buckets?: Distribution_ExponentialBucketsSDKType;
   explicit_buckets?: Distribution_ExplicitBucketsSDKType;
-  exemplars?: Distribution_ExemplarSDKType[];
+  exemplars: Distribution_ExemplarSDKType[];
 }
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBuckets {
@@ -152,11 +152,11 @@ export interface Distribution_ExplicitBuckets {
    *  0 < i < bound_size()            bound[i-1]     bound[i]
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
-  bounds?: number[];
+  bounds: number[];
 }
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBucketsSDKType {
-  bounds?: number[];
+  bounds: number[];
 }
 function createBaseDistribution(): Distribution {
   return {
@@ -165,11 +165,11 @@ function createBaseDistribution(): Distribution {
     minimum: undefined,
     maximum: undefined,
     sumOfSquaredDeviation: undefined,
-    bucketCounts: undefined,
+    bucketCounts: [],
     linearBuckets: undefined,
     exponentialBuckets: undefined,
     explicitBuckets: undefined,
-    exemplars: undefined
+    exemplars: []
   };
 }
 export const Distribution = {
@@ -656,7 +656,7 @@ export const Distribution_ExponentialBuckets = {
 };
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
   return {
-    bounds: undefined
+    bounds: []
   };
 }
 export const Distribution_ExplicitBuckets = {

@@ -185,7 +185,7 @@ export interface ListServicesRequestSDKType {
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
   /** The available services for the requested project. */
-  services?: Service[];
+  services: Service[];
   /**
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
@@ -194,7 +194,7 @@ export interface ListServicesResponse {
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
-  services?: ServiceSDKType[];
+  services: ServiceSDKType[];
   next_page_token?: string;
 }
 /** Request message for the `BatchEnableServices` method. */
@@ -221,12 +221,12 @@ export interface BatchEnableServicesRequest {
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
    */
-  serviceIds?: string[];
+  serviceIds: string[];
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
   parent?: string;
-  service_ids?: string[];
+  service_ids: string[];
 }
 /**
  * Response message for the `BatchEnableServices` method.
@@ -235,12 +235,12 @@ export interface BatchEnableServicesRequestSDKType {
  */
 export interface BatchEnableServicesResponse {
   /** The new state of the services after enabling. */
-  services?: Service[];
+  services: Service[];
   /**
    * If allow_partial_success is true, and one or more services could not be
    * enabled, this field contains the details about each failure.
    */
-  failures?: BatchEnableServicesResponse_EnableFailure[];
+  failures: BatchEnableServicesResponse_EnableFailure[];
 }
 /**
  * Response message for the `BatchEnableServices` method.
@@ -248,8 +248,8 @@ export interface BatchEnableServicesResponse {
  * Operation when that operation is done.
  */
 export interface BatchEnableServicesResponseSDKType {
-  services?: ServiceSDKType[];
-  failures?: BatchEnableServicesResponse_EnableFailureSDKType[];
+  services: ServiceSDKType[];
+  failures: BatchEnableServicesResponse_EnableFailureSDKType[];
 }
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailure {
@@ -281,21 +281,21 @@ export interface BatchGetServicesRequest {
    * project number.
    * A single request can get a maximum of 30 services at a time.
    */
-  names?: string[];
+  names: string[];
 }
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestSDKType {
   parent?: string;
-  names?: string[];
+  names: string[];
 }
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponse {
   /** The requested Service states. */
-  services?: Service[];
+  services: Service[];
 }
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponseSDKType {
-  services?: ServiceSDKType[];
+  services: ServiceSDKType[];
 }
 function createBaseEnableServiceRequest(): EnableServiceRequest {
   return {
@@ -894,7 +894,7 @@ export const ListServicesRequest = {
 };
 function createBaseListServicesResponse(): ListServicesResponse {
   return {
-    services: undefined,
+    services: [],
     nextPageToken: undefined
   };
 }
@@ -1008,7 +1008,7 @@ export const ListServicesResponse = {
 function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
   return {
     parent: undefined,
-    serviceIds: undefined
+    serviceIds: []
   };
 }
 export const BatchEnableServicesRequest = {
@@ -1120,8 +1120,8 @@ export const BatchEnableServicesRequest = {
 };
 function createBaseBatchEnableServicesResponse(): BatchEnableServicesResponse {
   return {
-    services: undefined,
-    failures: undefined
+    services: [],
+    failures: []
   };
 }
 export const BatchEnableServicesResponse = {
@@ -1347,7 +1347,7 @@ export const BatchEnableServicesResponse_EnableFailure = {
 function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
   return {
     parent: undefined,
-    names: undefined
+    names: []
   };
 }
 export const BatchGetServicesRequest = {
@@ -1459,7 +1459,7 @@ export const BatchGetServicesRequest = {
 };
 function createBaseBatchGetServicesResponse(): BatchGetServicesResponse {
   return {
-    services: undefined
+    services: []
   };
 }
 export const BatchGetServicesResponse = {

@@ -42,12 +42,12 @@ export interface NodeInfoOtherSDKType {
 }
 export interface PeerInfo {
   id?: string;
-  addressInfo?: PeerAddressInfo[];
+  addressInfo: PeerAddressInfo[];
   lastConnected?: Date;
 }
 export interface PeerInfoSDKType {
   id?: string;
-  address_info?: PeerAddressInfoSDKType[];
+  address_info: PeerAddressInfoSDKType[];
   last_connected?: Date;
 }
 export interface PeerAddressInfo {
@@ -489,7 +489,7 @@ export const NodeInfoOther = {
 function createBasePeerInfo(): PeerInfo {
   return {
     id: undefined,
-    addressInfo: undefined,
+    addressInfo: [],
     lastConnected: undefined
   };
 }

@@ -23,11 +23,11 @@ export interface MsgGrantSDKType {
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {
-  results?: Uint8Array[];
+  results: Uint8Array[];
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseSDKType {
-  results?: Uint8Array[];
+  results: Uint8Array[];
 }
 /**
  * MsgExec attempts to execute the provided messages using
@@ -41,7 +41,7 @@ export interface MsgExec {
    * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
    * triple and validate it.
    */
-  msgs?: Any[];
+  msgs: Any[];
 }
 /**
  * MsgExec attempts to execute the provided messages using
@@ -50,7 +50,7 @@ export interface MsgExec {
  */
 export interface MsgExecSDKType {
   grantee?: string;
-  msgs?: AnySDKType[];
+  msgs: AnySDKType[];
 }
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponse {}
@@ -204,7 +204,7 @@ export const MsgGrant = {
 };
 function createBaseMsgExecResponse(): MsgExecResponse {
   return {
-    results: undefined
+    results: []
   };
 }
 export const MsgExecResponse = {
@@ -309,7 +309,7 @@ export const MsgExecResponse = {
 function createBaseMsgExec(): MsgExec {
   return {
     grantee: undefined,
-    msgs: undefined
+    msgs: []
   };
 }
 export const MsgExec = {

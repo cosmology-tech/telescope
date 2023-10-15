@@ -19,9 +19,9 @@ export interface AttributeSDKType {
  */
 export interface SignedBy {
   /** all_of all keys in this list must have signed attributes */
-  allOf?: string[];
+  allOf: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  anyOf?: string[];
+  anyOf: string[];
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -30,8 +30,8 @@ export interface SignedBy {
  * this behaviour to be discussed
  */
 export interface SignedBySDKType {
-  all_of?: string[];
-  any_of?: string[];
+  all_of: string[];
+  any_of: string[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirements {
@@ -154,8 +154,8 @@ export const Attribute = {
 };
 function createBaseSignedBy(): SignedBy {
   return {
-    allOf: undefined,
-    anyOf: undefined
+    allOf: [],
+    anyOf: []
   };
 }
 export const SignedBy = {

@@ -179,7 +179,7 @@ export interface ResourceDescriptor {
    * the same component name (e.g. "project") refers to IDs of the same
    * type of resource.
    */
-  pattern?: string[];
+  pattern: string[];
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
@@ -225,7 +225,7 @@ export interface ResourceDescriptor {
    * These indicate that a resource is expected to conform to a given
    * style. See the specific style flags for additional information.
    */
-  style?: ResourceDescriptor_Style[];
+  style: ResourceDescriptor_Style[];
 }
 /**
  * A simple descriptor of a resource type.
@@ -278,12 +278,12 @@ export interface ResourceDescriptor {
  */
 export interface ResourceDescriptorSDKType {
   type?: string;
-  pattern?: string[];
+  pattern: string[];
   name_field?: string;
   history?: ResourceDescriptor_History;
   plural?: string;
   singular?: string;
-  style?: ResourceDescriptor_Style[];
+  style: ResourceDescriptor_Style[];
 }
 /**
  * Defines a proto annotation that describes a string field that refers to
@@ -339,12 +339,12 @@ export interface ResourceReferenceSDKType {
 function createBaseResourceDescriptor(): ResourceDescriptor {
   return {
     type: undefined,
-    pattern: undefined,
+    pattern: [],
     nameField: undefined,
     history: undefined,
     plural: undefined,
     singular: undefined,
-    style: undefined
+    style: []
   };
 }
 export const ResourceDescriptor = {

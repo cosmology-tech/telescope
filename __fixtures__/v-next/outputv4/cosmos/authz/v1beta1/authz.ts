@@ -62,11 +62,11 @@ export interface GrantAuthorizationSDKType {
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItem {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
-  msgTypeUrls?: string[];
+  msgTypeUrls: string[];
 }
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItemSDKType {
-  msg_type_urls?: string[];
+  msg_type_urls: string[];
 }
 function createBaseGenericAuthorization(): GenericAuthorization {
   return {
@@ -410,7 +410,7 @@ export const GrantAuthorization = {
 };
 function createBaseGrantQueueItem(): GrantQueueItem {
   return {
-    msgTypeUrls: undefined
+    msgTypeUrls: []
   };
 }
 export const GrantQueueItem = {

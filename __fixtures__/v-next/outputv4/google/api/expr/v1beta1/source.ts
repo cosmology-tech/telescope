@@ -26,20 +26,20 @@ export interface SourceInfo {
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
    */
-  lineOffsets?: number[];
+  lineOffsets: number[];
   /**
    * A map from the parse node id (e.g. `Expr.id`) to the character offset
    * within source.
    */
-  positions?: {
+  positions: {
     [key: number]: number;
   };
 }
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   location?: string;
-  line_offsets?: number[];
-  positions?: {
+  line_offsets: number[];
+  positions: {
     [key: number]: number;
   };
 }
@@ -164,8 +164,8 @@ export const SourceInfo_PositionsEntry = {
 function createBaseSourceInfo(): SourceInfo {
   return {
     location: undefined,
-    lineOffsets: undefined,
-    positions: undefined
+    lineOffsets: [],
+    positions: {}
   };
 }
 export const SourceInfo = {

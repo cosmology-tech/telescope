@@ -241,7 +241,7 @@ export interface QuotaOperation {
    */
   consumerId?: string;
   /** Labels describing the operation. */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -258,7 +258,7 @@ export interface QuotaOperation {
    * 
    * This field is mutually exclusive with method_name.
    */
-  quotaMetrics?: MetricValueSet[];
+  quotaMetrics: MetricValueSet[];
   /** Quota mode for this operation. */
   quotaMode?: QuotaOperation_QuotaMode;
 }
@@ -267,10 +267,10 @@ export interface QuotaOperationSDKType {
   operation_id?: string;
   method_name?: string;
   consumer_id?: string;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
-  quota_metrics?: MetricValueSetSDKType[];
+  quota_metrics: MetricValueSetSDKType[];
   quota_mode?: QuotaOperation_QuotaMode;
 }
 /** Response message for the AllocateQuota method. */
@@ -281,7 +281,7 @@ export interface AllocateQuotaResponse {
    */
   operationId?: string;
   /** Indicates the decision of the allocate. */
-  allocateErrors?: QuotaError[];
+  allocateErrors: QuotaError[];
   /**
    * Quota metrics to indicate the result of allocation. Depending on the
    * request, one or more of the following metrics will be included:
@@ -294,15 +294,15 @@ export interface AllocateQuotaResponse {
    * boolean metric :
    *   "serviceruntime.googleapis.com/quota/exceeded"
    */
-  quotaMetrics?: MetricValueSet[];
+  quotaMetrics: MetricValueSet[];
   /** ID of the actual config used to process the request. */
   serviceConfigId?: string;
 }
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseSDKType {
   operation_id?: string;
-  allocate_errors?: QuotaErrorSDKType[];
-  quota_metrics?: MetricValueSetSDKType[];
+  allocate_errors: QuotaErrorSDKType[];
+  quota_metrics: MetricValueSetSDKType[];
   service_config_id?: string;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
@@ -547,8 +547,8 @@ function createBaseQuotaOperation(): QuotaOperation {
     operationId: undefined,
     methodName: undefined,
     consumerId: undefined,
-    labels: undefined,
-    quotaMetrics: undefined,
+    labels: {},
+    quotaMetrics: [],
     quotaMode: undefined
   };
 }
@@ -766,8 +766,8 @@ export const QuotaOperation = {
 function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
   return {
     operationId: undefined,
-    allocateErrors: undefined,
-    quotaMetrics: undefined,
+    allocateErrors: [],
+    quotaMetrics: [],
     serviceConfigId: undefined
   };
 }

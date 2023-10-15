@@ -12,7 +12,7 @@ export interface Http {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: HttpRule[];
+  rules: HttpRule[];
   /**
    * When set to true, URL path parameters will be fully URI-decoded except in
    * cases of single segment matches in reserved expansion, where "%2F" will be
@@ -29,7 +29,7 @@ export interface Http {
  * to one or more HTTP REST API methods.
  */
 export interface HttpSDKType {
-  rules?: HttpRuleSDKType[];
+  rules: HttpRuleSDKType[];
   fully_decode_reserved_expansion?: boolean;
 }
 /**
@@ -353,7 +353,7 @@ export interface HttpRule {
    * not contain an `additional_bindings` field themselves (that is,
    * the nesting may only be one level deep).
    */
-  additionalBindings?: HttpRule[];
+  additionalBindings: HttpRule[];
 }
 /**
  * # gRPC Transcoding
@@ -636,7 +636,7 @@ export interface HttpRuleSDKType {
   custom?: CustomHttpPatternSDKType;
   body?: string;
   response_body?: string;
-  additional_bindings?: HttpRuleSDKType[];
+  additional_bindings: HttpRuleSDKType[];
 }
 /** A custom pattern is used for defining custom HTTP verb. */
 export interface CustomHttpPattern {
@@ -652,7 +652,7 @@ export interface CustomHttpPatternSDKType {
 }
 function createBaseHttp(): Http {
   return {
-    rules: undefined,
+    rules: [],
     fullyDecodeReservedExpansion: undefined
   };
 }
@@ -774,7 +774,7 @@ function createBaseHttpRule(): HttpRule {
     custom: undefined,
     body: undefined,
     responseBody: undefined,
-    additionalBindings: undefined
+    additionalBindings: []
   };
 }
 export const HttpRule = {

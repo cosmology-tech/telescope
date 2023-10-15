@@ -215,10 +215,10 @@ export interface QueryTotalDelegationByDelegatorResponseSDKType {
 export interface QueryUnpoolWhitelistRequest {}
 export interface QueryUnpoolWhitelistRequestSDKType {}
 export interface QueryUnpoolWhitelistResponse {
-  poolIds?: bigint[];
+  poolIds: bigint[];
 }
 export interface QueryUnpoolWhitelistResponseSDKType {
-  pool_ids?: bigint[];
+  pool_ids: bigint[];
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -3458,7 +3458,7 @@ export const QueryUnpoolWhitelistRequest = {
 };
 function createBaseQueryUnpoolWhitelistResponse(): QueryUnpoolWhitelistResponse {
   return {
-    poolIds: undefined
+    poolIds: []
   };
 }
 export const QueryUnpoolWhitelistResponse = {

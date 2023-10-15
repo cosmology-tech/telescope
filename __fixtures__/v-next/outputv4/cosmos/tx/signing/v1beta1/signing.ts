@@ -90,11 +90,11 @@ export function signModeToJSON(object: SignMode): string {
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptors {
   /** signatures are the signature descriptors */
-  signatures?: SignatureDescriptor[];
+  signatures: SignatureDescriptor[];
 }
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
-  signatures?: SignatureDescriptorSDKType[];
+  signatures: SignatureDescriptorSDKType[];
 }
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
@@ -153,16 +153,16 @@ export interface SignatureDescriptor_Data_Multi {
   /** bitarray specifies which keys within the multisig are signing */
   bitarray?: CompactBitArray;
   /** signatures is the signatures of the multi-signature */
-  signatures?: SignatureDescriptor_Data[];
+  signatures: SignatureDescriptor_Data[];
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
   bitarray?: CompactBitArraySDKType;
-  signatures?: SignatureDescriptor_DataSDKType[];
+  signatures: SignatureDescriptor_DataSDKType[];
 }
 function createBaseSignatureDescriptors(): SignatureDescriptors {
   return {
-    signatures: undefined
+    signatures: []
   };
 }
 export const SignatureDescriptors = {
@@ -615,7 +615,7 @@ export const SignatureDescriptor_Data_Single = {
 function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
   return {
     bitarray: undefined,
-    signatures: undefined
+    signatures: []
   };
 }
 export const SignatureDescriptor_Data_Multi = {

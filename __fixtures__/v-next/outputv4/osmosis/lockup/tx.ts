@@ -27,10 +27,10 @@ export interface MsgBeginUnlockingAllSDKType {
   owner?: string;
 }
 export interface MsgBeginUnlockingAllResponse {
-  unlocks?: PeriodLock[];
+  unlocks: PeriodLock[];
 }
 export interface MsgBeginUnlockingAllResponseSDKType {
-  unlocks?: PeriodLockSDKType[];
+  unlocks: PeriodLockSDKType[];
 }
 export interface MsgBeginUnlocking {
   owner?: string;
@@ -428,7 +428,7 @@ export const MsgBeginUnlockingAll = {
 };
 function createBaseMsgBeginUnlockingAllResponse(): MsgBeginUnlockingAllResponse {
   return {
-    unlocks: undefined
+    unlocks: []
   };
 }
 export const MsgBeginUnlockingAllResponse = {

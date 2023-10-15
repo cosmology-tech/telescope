@@ -13,14 +13,14 @@ export interface ParamsSDKType {
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisState {
-  pools?: Any[];
+  pools: Any[];
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber?: bigint;
   params: Params;
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
-  pools?: AnySDKType[];
+  pools: AnySDKType[];
   next_pool_number?: bigint;
   params: ParamsSDKType;
 }
@@ -130,7 +130,7 @@ export const Params = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    pools: undefined,
+    pools: [],
     nextPoolNumber: undefined,
     params: Params.fromPartial({})
   };

@@ -79,12 +79,12 @@ export interface ParseResponse {
   /** The parsed representation, or unset if parsing failed. */
   parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
-  issues?: Status[];
+  issues: Status[];
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
   parsed_expr?: ParsedExprSDKType;
-  issues?: StatusSDKType[];
+  issues: StatusSDKType[];
 }
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -95,7 +95,7 @@ export interface CheckRequest {
    * Required if program uses external variables or functions
    * not in the default environment.
    */
-  typeEnv?: Decl[];
+  typeEnv: Decl[];
   /**
    * The protocol buffer context.  See "Name Resolution" in the
    * Language Definition.
@@ -111,7 +111,7 @@ export interface CheckRequest {
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
-  type_env?: DeclSDKType[];
+  type_env: DeclSDKType[];
   container?: string;
   no_std_env?: boolean;
 }
@@ -120,12 +120,12 @@ export interface CheckResponse {
   /** The annotated representation, or unset if checking failed. */
   checkedExpr?: CheckedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
-  issues?: Status[];
+  issues: Status[];
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   checked_expr?: CheckedExprSDKType;
-  issues?: StatusSDKType[];
+  issues: StatusSDKType[];
 }
 export interface EvalRequest_BindingsEntry {
   key: string;
@@ -145,7 +145,7 @@ export interface EvalRequest {
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
-  bindings?: {
+  bindings: {
     [key: string]: ExprValue;
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
@@ -155,7 +155,7 @@ export interface EvalRequest {
 export interface EvalRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
   checked_expr?: CheckedExprSDKType;
-  bindings?: {
+  bindings: {
     [key: string]: ExprValueSDKType;
   };
   container?: string;
@@ -170,12 +170,12 @@ export interface EvalResponse {
    * Nevertheless, we'll allow out-of-band issues to be raised,
    * which also makes the replies more regular.
    */
-  issues?: Status[];
+  issues: Status[];
 }
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
   result?: ExprValueSDKType;
-  issues?: StatusSDKType[];
+  issues: StatusSDKType[];
 }
 /**
  * Warnings or errors in service execution are represented by
@@ -334,7 +334,7 @@ export const ParseRequest = {
 function createBaseParseResponse(): ParseResponse {
   return {
     parsedExpr: undefined,
-    issues: undefined
+    issues: []
   };
 }
 export const ParseResponse = {
@@ -449,7 +449,7 @@ export const ParseResponse = {
 function createBaseCheckRequest(): CheckRequest {
   return {
     parsedExpr: undefined,
-    typeEnv: undefined,
+    typeEnv: [],
     container: undefined,
     noStdEnv: undefined
   };
@@ -594,7 +594,7 @@ export const CheckRequest = {
 function createBaseCheckResponse(): CheckResponse {
   return {
     checkedExpr: undefined,
-    issues: undefined
+    issues: []
   };
 }
 export const CheckResponse = {
@@ -806,7 +806,7 @@ function createBaseEvalRequest(): EvalRequest {
   return {
     parsedExpr: undefined,
     checkedExpr: undefined,
-    bindings: undefined,
+    bindings: {},
     container: undefined
   };
 }
@@ -988,7 +988,7 @@ export const EvalRequest = {
 function createBaseEvalResponse(): EvalResponse {
   return {
     result: undefined,
-    issues: undefined
+    issues: []
   };
 }
 export const EvalResponse = {

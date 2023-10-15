@@ -253,6 +253,15 @@ export const HandleFieldsOptionalityDefaultTrue = (
     //  in these cases, false will be returned.
 
     //by default, gogoproto.nullable should be true
+
+    if (field.rule === 'repeated') {
+      return false;
+    }
+
+    if (field.keyType) {
+      return false;
+    }
+
     const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? true;
 
     return ( isOneOf || !useOptionalNullable || gogoprotoNullable ) && !field?.options?.['(telescope:map_entry_type_field)'];

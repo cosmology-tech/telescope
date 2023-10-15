@@ -8,7 +8,7 @@ export interface MsgCreateStableswapPool {
   sender?: string;
   poolParams?: PoolParams;
   initialPoolLiquidity: Coin[];
-  scalingFactors?: bigint[];
+  scalingFactors: bigint[];
   futurePoolGovernor?: string;
   scalingFactorController?: string;
 }
@@ -17,7 +17,7 @@ export interface MsgCreateStableswapPoolSDKType {
   sender?: string;
   pool_params?: PoolParamsSDKType;
   initial_pool_liquidity: CoinSDKType[];
-  scaling_factors?: bigint[];
+  scaling_factors: bigint[];
   future_pool_governor?: string;
   scaling_factor_controller?: string;
 }
@@ -36,7 +36,7 @@ export interface MsgCreateStableswapPoolResponseSDKType {
 export interface MsgStableSwapAdjustScalingFactors {
   sender?: string;
   poolId?: bigint;
-  scalingFactors?: bigint[];
+  scalingFactors: bigint[];
 }
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
@@ -45,7 +45,7 @@ export interface MsgStableSwapAdjustScalingFactors {
 export interface MsgStableSwapAdjustScalingFactorsSDKType {
   sender?: string;
   pool_id?: bigint;
-  scaling_factors?: bigint[];
+  scaling_factors: bigint[];
 }
 export interface MsgStableSwapAdjustScalingFactorsResponse {}
 export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
@@ -54,7 +54,7 @@ function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
     sender: undefined,
     poolParams: undefined,
     initialPoolLiquidity: [],
-    scalingFactors: undefined,
+    scalingFactors: [],
     futurePoolGovernor: undefined,
     scalingFactorController: undefined
   };
@@ -351,7 +351,7 @@ function createBaseMsgStableSwapAdjustScalingFactors(): MsgStableSwapAdjustScali
   return {
     sender: undefined,
     poolId: undefined,
-    scalingFactors: undefined
+    scalingFactors: []
   };
 }
 export const MsgStableSwapAdjustScalingFactors = {

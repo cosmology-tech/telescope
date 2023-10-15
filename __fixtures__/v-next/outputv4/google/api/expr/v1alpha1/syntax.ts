@@ -139,7 +139,7 @@ export interface Expr_Call {
   /** Required. The name of the function or method being called. */
   function?: string;
   /** The arguments. */
-  args?: Expr[];
+  args: Expr[];
 }
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -149,7 +149,7 @@ export interface Expr_Call {
 export interface Expr_CallSDKType {
   target?: ExprSDKType;
   function?: string;
-  args?: ExprSDKType[];
+  args: ExprSDKType[];
 }
 /**
  * A list creation expression.
@@ -159,7 +159,7 @@ export interface Expr_CallSDKType {
  */
 export interface Expr_CreateList {
   /** The elements part of the list. */
-  elements?: Expr[];
+  elements: Expr[];
 }
 /**
  * A list creation expression.
@@ -168,7 +168,7 @@ export interface Expr_CreateList {
  * `dyn([1, 'hello', 2.0])`
  */
 export interface Expr_CreateListSDKType {
-  elements?: ExprSDKType[];
+  elements: ExprSDKType[];
 }
 /**
  * A map or message creation expression.
@@ -184,7 +184,7 @@ export interface Expr_CreateStruct {
    */
   messageName?: string;
   /** The entries in the creation expression. */
-  entries?: Expr_CreateStruct_Entry[];
+  entries: Expr_CreateStruct_Entry[];
 }
 /**
  * A map or message creation expression.
@@ -195,7 +195,7 @@ export interface Expr_CreateStruct {
  */
 export interface Expr_CreateStructSDKType {
   message_name?: string;
-  entries?: Expr_CreateStruct_EntrySDKType[];
+  entries: Expr_CreateStruct_EntrySDKType[];
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_Entry {
@@ -422,12 +422,12 @@ export interface SourceInfo {
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
    */
-  lineOffsets?: number[];
+  lineOffsets: number[];
   /**
    * A map from the parse node id (e.g. `Expr.id`) to the code point offset
    * within the source.
    */
-  positions?: {
+  positions: {
     [key: bigint]: number;
   };
   /**
@@ -440,7 +440,7 @@ export interface SourceInfo {
    * in the map corresponds to the expression id of the expanded macro, and the
    * value is the call `Expr` that was replaced.
    */
-  macroCalls?: {
+  macroCalls: {
     [key: bigint]: Expr;
   };
 }
@@ -448,11 +448,11 @@ export interface SourceInfo {
 export interface SourceInfoSDKType {
   syntax_version?: string;
   location?: string;
-  line_offsets?: number[];
-  positions?: {
+  line_offsets: number[];
+  positions: {
     [key: bigint]: number;
   };
-  macro_calls?: {
+  macro_calls: {
     [key: bigint]: ExprSDKType;
   };
 }
@@ -1002,7 +1002,7 @@ function createBaseExpr_Call(): Expr_Call {
   return {
     target: undefined,
     function: undefined,
-    args: undefined
+    args: []
   };
 }
 export const Expr_Call = {
@@ -1130,7 +1130,7 @@ export const Expr_Call = {
 };
 function createBaseExpr_CreateList(): Expr_CreateList {
   return {
-    elements: undefined
+    elements: []
   };
 }
 export const Expr_CreateList = {
@@ -1229,7 +1229,7 @@ export const Expr_CreateList = {
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
   return {
     messageName: undefined,
-    entries: undefined
+    entries: []
   };
 }
 export const Expr_CreateStruct = {
@@ -2078,9 +2078,9 @@ function createBaseSourceInfo(): SourceInfo {
   return {
     syntaxVersion: undefined,
     location: undefined,
-    lineOffsets: undefined,
-    positions: undefined,
-    macroCalls: undefined
+    lineOffsets: [],
+    positions: {},
+    macroCalls: {}
   };
 }
 export const SourceInfo = {

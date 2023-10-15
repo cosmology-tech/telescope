@@ -174,7 +174,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap?: {
+  referenceMap: {
     [key: bigint]: Reference;
   };
   /**
@@ -184,7 +184,7 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap?: {
+  typeMap: {
     [key: bigint]: Type;
   };
   /**
@@ -210,10 +210,10 @@ export interface CheckedExpr {
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
-  reference_map?: {
+  reference_map: {
     [key: bigint]: ReferenceSDKType;
   };
-  type_map?: {
+  type_map: {
     [key: bigint]: TypeSDKType;
   };
   source_info?: SourceInfoSDKType;
@@ -313,24 +313,24 @@ export interface Type_FunctionType {
   /** Result type of the function. */
   resultType?: Type;
   /** Argument types of the function. */
-  argTypes?: Type[];
+  argTypes: Type[];
 }
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
   result_type?: TypeSDKType;
-  arg_types?: TypeSDKType[];
+  arg_types: TypeSDKType[];
 }
 /** Application defined abstract type. */
 export interface Type_AbstractType {
   /** The fully qualified name of this abstract type. */
   name?: string;
   /** Parameter types for this abstract type. */
-  parameterTypes?: Type[];
+  parameterTypes: Type[];
 }
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
   name?: string;
-  parameter_types?: TypeSDKType[];
+  parameter_types: TypeSDKType[];
 }
 /**
  * Represents a declaration of a named value or function.
@@ -407,7 +407,7 @@ export interface Decl_IdentDeclSDKType {
  */
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
-  overloads?: Decl_FunctionDecl_Overload[];
+  overloads: Decl_FunctionDecl_Overload[];
 }
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -417,7 +417,7 @@ export interface Decl_FunctionDecl {
  * logging which are not observable from CEL).
  */
 export interface Decl_FunctionDeclSDKType {
-  overloads?: Decl_FunctionDecl_OverloadSDKType[];
+  overloads: Decl_FunctionDecl_OverloadSDKType[];
 }
 /**
  * An overload indicates a function's parameter types and return type, and
@@ -452,14 +452,14 @@ export interface Decl_FunctionDecl_Overload {
    * When the `result_type` of a function is a generic type param, the
    * type param name also appears as the `type` of on at least one params.
    */
-  params?: Type[];
+  params: Type[];
   /**
    * The type param names associated with the function declaration.
    * 
    * For example, `function ex<K,V>(K key, map<K, V> map) : V` would yield
    * the type params of `K, V`.
    */
-  typeParams?: string[];
+  typeParams: string[];
   /**
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
@@ -490,8 +490,8 @@ export interface Decl_FunctionDecl_Overload {
  */
 export interface Decl_FunctionDecl_OverloadSDKType {
   overload_id?: string;
-  params?: TypeSDKType[];
-  type_params?: string[];
+  params: TypeSDKType[];
+  type_params: string[];
   result_type?: TypeSDKType;
   is_instance_function?: boolean;
   doc?: string;
@@ -510,7 +510,7 @@ export interface Reference {
    * 
    * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
    */
-  overloadId?: string[];
+  overloadId: string[];
   /**
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
@@ -520,7 +520,7 @@ export interface Reference {
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceSDKType {
   name?: string;
-  overload_id?: string[];
+  overload_id: string[];
   value?: ConstantSDKType;
 }
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
@@ -721,8 +721,8 @@ export const CheckedExpr_TypeMapEntry = {
 };
 function createBaseCheckedExpr(): CheckedExpr {
   return {
-    referenceMap: undefined,
-    typeMap: undefined,
+    referenceMap: {},
+    typeMap: {},
     sourceInfo: undefined,
     exprVersion: undefined,
     expr: undefined
@@ -1441,7 +1441,7 @@ export const Type_MapType = {
 function createBaseType_FunctionType(): Type_FunctionType {
   return {
     resultType: undefined,
-    argTypes: undefined
+    argTypes: []
   };
 }
 export const Type_FunctionType = {
@@ -1556,7 +1556,7 @@ export const Type_FunctionType = {
 function createBaseType_AbstractType(): Type_AbstractType {
   return {
     name: undefined,
-    parameterTypes: undefined
+    parameterTypes: []
   };
 }
 export const Type_AbstractType = {
@@ -1908,7 +1908,7 @@ export const Decl_IdentDecl = {
 };
 function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
   return {
-    overloads: undefined
+    overloads: []
   };
 }
 export const Decl_FunctionDecl = {
@@ -2007,8 +2007,8 @@ export const Decl_FunctionDecl = {
 function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
   return {
     overloadId: undefined,
-    params: undefined,
-    typeParams: undefined,
+    params: [],
+    typeParams: [],
     resultType: undefined,
     isInstanceFunction: undefined,
     doc: undefined
@@ -2194,7 +2194,7 @@ export const Decl_FunctionDecl_Overload = {
 function createBaseReference(): Reference {
   return {
     name: undefined,
-    overloadId: undefined,
+    overloadId: [],
     value: undefined
   };
 }

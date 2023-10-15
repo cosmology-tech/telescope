@@ -171,7 +171,7 @@ export interface ExistenceProof {
   key?: Uint8Array;
   value?: Uint8Array;
   leaf?: LeafOp;
-  path?: InnerOp[];
+  path: InnerOp[];
 }
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
@@ -198,7 +198,7 @@ export interface ExistenceProofSDKType {
   key?: Uint8Array;
   value?: Uint8Array;
   leaf?: LeafOpSDKType;
-  path?: InnerOpSDKType[];
+  path: InnerOpSDKType[];
 }
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
@@ -387,7 +387,7 @@ export interface InnerSpec {
    * iavl tree is [0, 1] (left then right)
    * merk is [0, 2, 1] (left, right, here)
    */
-  childOrder?: number[];
+  childOrder: number[];
   childSize?: number;
   minPrefixLength?: number;
   maxPrefixLength?: number;
@@ -407,7 +407,7 @@ export interface InnerSpec {
  * isLeftNeighbor(spec: InnerSpec, left: InnerOp, right: InnerOp)
  */
 export interface InnerSpecSDKType {
-  child_order?: number[];
+  child_order: number[];
   child_size?: number;
   min_prefix_length?: number;
   max_prefix_length?: number;
@@ -416,11 +416,11 @@ export interface InnerSpecSDKType {
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProof {
-  entries?: BatchEntry[];
+  entries: BatchEntry[];
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofSDKType {
-  entries?: BatchEntrySDKType[];
+  entries: BatchEntrySDKType[];
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface BatchEntry {
@@ -433,12 +433,12 @@ export interface BatchEntrySDKType {
   nonexist?: NonExistenceProofSDKType;
 }
 export interface CompressedBatchProof {
-  entries?: CompressedBatchEntry[];
-  lookupInners?: InnerOp[];
+  entries: CompressedBatchEntry[];
+  lookupInners: InnerOp[];
 }
 export interface CompressedBatchProofSDKType {
-  entries?: CompressedBatchEntrySDKType[];
-  lookup_inners?: InnerOpSDKType[];
+  entries: CompressedBatchEntrySDKType[];
+  lookup_inners: InnerOpSDKType[];
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface CompressedBatchEntry {
@@ -455,13 +455,13 @@ export interface CompressedExistenceProof {
   value?: Uint8Array;
   leaf?: LeafOp;
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
-  path?: number[];
+  path: number[];
 }
 export interface CompressedExistenceProofSDKType {
   key?: Uint8Array;
   value?: Uint8Array;
   leaf?: LeafOpSDKType;
-  path?: number[];
+  path: number[];
 }
 export interface CompressedNonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
@@ -479,7 +479,7 @@ function createBaseExistenceProof(): ExistenceProof {
     key: undefined,
     value: undefined,
     leaf: undefined,
-    path: undefined
+    path: []
   };
 }
 export const ExistenceProof = {
@@ -1277,7 +1277,7 @@ export const ProofSpec = {
 };
 function createBaseInnerSpec(): InnerSpec {
   return {
-    childOrder: undefined,
+    childOrder: [],
     childSize: undefined,
     minPrefixLength: undefined,
     maxPrefixLength: undefined,
@@ -1459,7 +1459,7 @@ export const InnerSpec = {
 };
 function createBaseBatchProof(): BatchProof {
   return {
-    entries: undefined
+    entries: []
   };
 }
 export const BatchProof = {
@@ -1662,8 +1662,8 @@ export const BatchEntry = {
 };
 function createBaseCompressedBatchProof(): CompressedBatchProof {
   return {
-    entries: undefined,
-    lookupInners: undefined
+    entries: [],
+    lookupInners: []
   };
 }
 export const CompressedBatchProof = {
@@ -1895,7 +1895,7 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
     key: undefined,
     value: undefined,
     leaf: undefined,
-    path: undefined
+    path: []
   };
 }
 export const CompressedExistenceProof = {

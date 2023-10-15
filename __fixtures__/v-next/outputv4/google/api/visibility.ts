@@ -31,7 +31,7 @@ export interface Visibility {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: VisibilityRule[];
+  rules: VisibilityRule[];
 }
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -58,7 +58,7 @@ export interface Visibility {
  * EnhancedSearch and Delegate.
  */
 export interface VisibilitySDKType {
-  rules?: VisibilityRuleSDKType[];
+  rules: VisibilityRuleSDKType[];
 }
 /**
  * A visibility rule provides visibility configuration for an individual API
@@ -100,7 +100,7 @@ export interface VisibilityRuleSDKType {
 }
 function createBaseVisibility(): Visibility {
   return {
-    rules: undefined
+    rules: []
   };
 }
 export const Visibility = {

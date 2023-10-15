@@ -130,7 +130,7 @@ export interface ListServicesRequestSDKType {
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
   /** The available services for the requested project. */
-  services?: Service[];
+  services: Service[];
   /**
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
@@ -139,7 +139,7 @@ export interface ListServicesResponse {
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
-  services?: ServiceSDKType[];
+  services: ServiceSDKType[];
   next_page_token?: string;
 }
 /** Request message for the `BatchEnableServices` method. */
@@ -170,12 +170,12 @@ export interface BatchEnableServicesRequest {
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
    */
-  serviceIds?: string[];
+  serviceIds: string[];
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
   parent?: string;
-  service_ids?: string[];
+  service_ids: string[];
 }
 /** Request message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsRequest {
@@ -208,7 +208,7 @@ export interface ListConsumerQuotaMetricsRequestSDKType {
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponse {
   /** Quota settings for the consumer, organized by quota metric. */
-  metrics?: ConsumerQuotaMetric[];
+  metrics: ConsumerQuotaMetric[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
@@ -217,7 +217,7 @@ export interface ListConsumerQuotaMetricsResponse {
 }
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponseSDKType {
-  metrics?: ConsumerQuotaMetricSDKType[];
+  metrics: ConsumerQuotaMetricSDKType[];
   next_page_token?: string;
 }
 /** Request message for GetConsumerQuotaMetric */
@@ -278,14 +278,14 @@ export interface CreateAdminOverrideRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for CreateAdminOverride. */
 export interface CreateAdminOverrideRequestSDKType {
   parent?: string;
   override?: QuotaOverrideSDKType;
   force?: boolean;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequest {
@@ -318,7 +318,7 @@ export interface UpdateAdminOverrideRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequestSDKType {
@@ -326,7 +326,7 @@ export interface UpdateAdminOverrideRequestSDKType {
   override?: QuotaOverrideSDKType;
   force?: boolean;
   update_mask?: FieldMaskSDKType;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequest {
@@ -349,13 +349,13 @@ export interface DeleteAdminOverrideRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequestSDKType {
   name?: string;
   force?: boolean;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Request message for ListAdminOverrides */
 export interface ListAdminOverridesRequest {
@@ -384,7 +384,7 @@ export interface ListAdminOverridesRequestSDKType {
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponse {
   /** Admin overrides on this limit. */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
@@ -393,17 +393,17 @@ export interface ListAdminOverridesResponse {
 }
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponseSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
   next_page_token?: string;
 }
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponse {
   /** The overrides that were created. */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
 }
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponseSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
 }
 /** Request message for ImportAdminOverrides */
 export interface ImportAdminOverridesRequest {
@@ -428,23 +428,23 @@ export interface ImportAdminOverridesRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for ImportAdminOverrides */
 export interface ImportAdminOverridesRequestSDKType {
   parent?: string;
   inline_source?: OverrideInlineSourceSDKType;
   force?: boolean;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponse {
   /** The overrides that were created from the imported data. */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
 }
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponseSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
 }
 /**
  * Metadata message that provides information such as progress,
@@ -482,14 +482,14 @@ export interface CreateConsumerOverrideRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequestSDKType {
   parent?: string;
   override?: QuotaOverrideSDKType;
   force?: boolean;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequest {
@@ -522,7 +522,7 @@ export interface UpdateConsumerOverrideRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequestSDKType {
@@ -530,7 +530,7 @@ export interface UpdateConsumerOverrideRequestSDKType {
   override?: QuotaOverrideSDKType;
   force?: boolean;
   update_mask?: FieldMaskSDKType;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequest {
@@ -553,13 +553,13 @@ export interface DeleteConsumerOverrideRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequestSDKType {
   name?: string;
   force?: boolean;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Request message for ListConsumerOverrides */
 export interface ListConsumerOverridesRequest {
@@ -588,7 +588,7 @@ export interface ListConsumerOverridesRequestSDKType {
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponse {
   /** Consumer overrides on this limit. */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
@@ -597,17 +597,17 @@ export interface ListConsumerOverridesResponse {
 }
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponseSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
   next_page_token?: string;
 }
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponse {
   /** The overrides that were created. */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
 }
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponseSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
 }
 /** Request message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesRequest {
@@ -632,23 +632,23 @@ export interface ImportConsumerOverridesRequest {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  forceOnly?: QuotaSafetyCheck[];
+  forceOnly: QuotaSafetyCheck[];
 }
 /** Request message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesRequestSDKType {
   parent?: string;
   inline_source?: OverrideInlineSourceSDKType;
   force?: boolean;
-  force_only?: QuotaSafetyCheck[];
+  force_only: QuotaSafetyCheck[];
 }
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponse {
   /** The overrides that were created from the imported data. */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
 }
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponseSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
 }
 /**
  * Metadata message that provides information such as progress,
@@ -665,11 +665,11 @@ export interface ImportConsumerOverridesMetadataSDKType {}
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponse {
   /** The policies that were created from the imported data. */
-  policies?: AdminQuotaPolicy[];
+  policies: AdminQuotaPolicy[];
 }
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponseSDKType {
-  policies?: AdminQuotaPolicySDKType[];
+  policies: AdminQuotaPolicySDKType[];
 }
 /**
  * Metadata message that provides information such as progress,
@@ -1147,7 +1147,7 @@ export const ListServicesRequest = {
 };
 function createBaseListServicesResponse(): ListServicesResponse {
   return {
-    services: undefined,
+    services: [],
     nextPageToken: undefined
   };
 }
@@ -1261,7 +1261,7 @@ export const ListServicesResponse = {
 function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
   return {
     parent: undefined,
-    serviceIds: undefined
+    serviceIds: []
   };
 }
 export const BatchEnableServicesRequest = {
@@ -1504,7 +1504,7 @@ export const ListConsumerQuotaMetricsRequest = {
 };
 function createBaseListConsumerQuotaMetricsResponse(): ListConsumerQuotaMetricsResponse {
   return {
-    metrics: undefined,
+    metrics: [],
     nextPageToken: undefined
   };
 }
@@ -1822,7 +1822,7 @@ function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
     parent: undefined,
     override: undefined,
     force: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const CreateAdminOverrideRequest = {
@@ -1977,7 +1977,7 @@ function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
     override: undefined,
     force: undefined,
     updateMask: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const UpdateAdminOverrideRequest = {
@@ -2146,7 +2146,7 @@ function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
   return {
     name: undefined,
     force: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const DeleteAdminOverrideRequest = {
@@ -2397,7 +2397,7 @@ export const ListAdminOverridesRequest = {
 };
 function createBaseListAdminOverridesResponse(): ListAdminOverridesResponse {
   return {
-    overrides: undefined,
+    overrides: [],
     nextPageToken: undefined
   };
 }
@@ -2510,7 +2510,7 @@ export const ListAdminOverridesResponse = {
 };
 function createBaseBatchCreateAdminOverridesResponse(): BatchCreateAdminOverridesResponse {
   return {
-    overrides: undefined
+    overrides: []
   };
 }
 export const BatchCreateAdminOverridesResponse = {
@@ -2611,7 +2611,7 @@ function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
     parent: undefined,
     inlineSource: undefined,
     force: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const ImportAdminOverridesRequest = {
@@ -2762,7 +2762,7 @@ export const ImportAdminOverridesRequest = {
 };
 function createBaseImportAdminOverridesResponse(): ImportAdminOverridesResponse {
   return {
-    overrides: undefined
+    overrides: []
   };
 }
 export const ImportAdminOverridesResponse = {
@@ -2930,7 +2930,7 @@ function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideReques
     parent: undefined,
     override: undefined,
     force: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const CreateConsumerOverrideRequest = {
@@ -3085,7 +3085,7 @@ function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideReques
     override: undefined,
     force: undefined,
     updateMask: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const UpdateConsumerOverrideRequest = {
@@ -3254,7 +3254,7 @@ function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideReques
   return {
     name: undefined,
     force: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const DeleteConsumerOverrideRequest = {
@@ -3505,7 +3505,7 @@ export const ListConsumerOverridesRequest = {
 };
 function createBaseListConsumerOverridesResponse(): ListConsumerOverridesResponse {
   return {
-    overrides: undefined,
+    overrides: [],
     nextPageToken: undefined
   };
 }
@@ -3618,7 +3618,7 @@ export const ListConsumerOverridesResponse = {
 };
 function createBaseBatchCreateConsumerOverridesResponse(): BatchCreateConsumerOverridesResponse {
   return {
-    overrides: undefined
+    overrides: []
   };
 }
 export const BatchCreateConsumerOverridesResponse = {
@@ -3719,7 +3719,7 @@ function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequ
     parent: undefined,
     inlineSource: undefined,
     force: undefined,
-    forceOnly: undefined
+    forceOnly: []
   };
 }
 export const ImportConsumerOverridesRequest = {
@@ -3870,7 +3870,7 @@ export const ImportConsumerOverridesRequest = {
 };
 function createBaseImportConsumerOverridesResponse(): ImportConsumerOverridesResponse {
   return {
-    overrides: undefined
+    overrides: []
   };
 }
 export const ImportConsumerOverridesResponse = {
@@ -4035,7 +4035,7 @@ export const ImportConsumerOverridesMetadata = {
 };
 function createBaseImportAdminQuotaPoliciesResponse(): ImportAdminQuotaPoliciesResponse {
   return {
-    policies: undefined
+    policies: []
   };
 }
 export const ImportAdminQuotaPoliciesResponse = {

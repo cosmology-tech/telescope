@@ -43,7 +43,7 @@ export interface QueryProposalsRequestSDKType {
  * method.
  */
 export interface QueryProposalsResponse {
-  proposals?: Proposal[];
+  proposals: Proposal[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
@@ -52,7 +52,7 @@ export interface QueryProposalsResponse {
  * method.
  */
 export interface QueryProposalsResponseSDKType {
-  proposals?: ProposalSDKType[];
+  proposals: ProposalSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
@@ -91,13 +91,13 @@ export interface QueryVotesRequestSDKType {
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponse {
   /** votes defined the queried votes. */
-  votes?: Vote[];
+  votes: Vote[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponseSDKType {
-  votes?: VoteSDKType[];
+  votes: VoteSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -162,13 +162,13 @@ export interface QueryDepositsRequestSDKType {
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponse {
-  deposits?: Deposit[];
+  deposits: Deposit[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponseSDKType {
-  deposits?: DepositSDKType[];
+  deposits: DepositSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
@@ -520,7 +520,7 @@ export const QueryProposalsRequest = {
 };
 function createBaseQueryProposalsResponse(): QueryProposalsResponse {
   return {
-    proposals: undefined,
+    proposals: [],
     pagination: undefined
   };
 }
@@ -959,7 +959,7 @@ export const QueryVotesRequest = {
 };
 function createBaseQueryVotesResponse(): QueryVotesResponse {
   return {
-    votes: undefined,
+    votes: [],
     pagination: undefined
   };
 }
@@ -1618,7 +1618,7 @@ export const QueryDepositsRequest = {
 };
 function createBaseQueryDepositsResponse(): QueryDepositsResponse {
   return {
-    deposits: undefined,
+    deposits: [],
     pagination: undefined
   };
 }

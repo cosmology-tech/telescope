@@ -83,14 +83,14 @@ export interface EvidenceParamsSDKType {
  * NOTE: uses ABCI pubkey naming, not Amino names.
  */
 export interface ValidatorParams {
-  pubKeyTypes?: string[];
+  pubKeyTypes: string[];
 }
 /**
  * ValidatorParams restrict the public key types validators can use.
  * NOTE: uses ABCI pubkey naming, not Amino names.
  */
 export interface ValidatorParamsSDKType {
-  pub_key_types?: string[];
+  pub_key_types: string[];
 }
 /** VersionParams contains the ABCI application version. */
 export interface VersionParams {
@@ -513,7 +513,7 @@ export const EvidenceParams = {
 };
 function createBaseValidatorParams(): ValidatorParams {
   return {
-    pubKeyTypes: undefined
+    pubKeyTypes: []
   };
 }
 export const ValidatorParams = {

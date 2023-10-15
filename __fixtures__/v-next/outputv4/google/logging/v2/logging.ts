@@ -124,7 +124,7 @@ export interface WriteLogEntriesRequest {
    * as a label in this parameter, then the log entry's label is not changed.
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -153,7 +153,7 @@ export interface WriteLogEntriesRequest {
    * `entries.write`, you should try to include several log entries in this
    * list, rather than calling this method for each individual log entry.
    */
-  entries?: LogEntry[];
+  entries: LogEntry[];
   /**
    * Optional. Whether valid entries should be written even if some other
    * entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -173,10 +173,10 @@ export interface WriteLogEntriesRequest {
 export interface WriteLogEntriesRequestSDKType {
   log_name?: string;
   resource?: MonitoredResourceSDKType;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
-  entries?: LogEntrySDKType[];
+  entries: LogEntrySDKType[];
   partial_success?: boolean;
   dry_run?: boolean;
 }
@@ -202,13 +202,13 @@ export interface WriteLogEntriesPartialErrors {
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
-  logEntryErrors?: {
+  logEntryErrors: {
     [key: number]: Status;
   };
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrorsSDKType {
-  log_entry_errors?: {
+  log_entry_errors: {
     [key: number]: StatusSDKType;
   };
 }
@@ -232,7 +232,7 @@ export interface ListLogEntriesRequest {
    * 
    * Projects listed in the `project_ids` field are added to this list.
    */
-  resourceNames?: string[];
+  resourceNames: string[];
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
@@ -269,7 +269,7 @@ export interface ListLogEntriesRequest {
 }
 /** The parameters to `ListLogEntries`. */
 export interface ListLogEntriesRequestSDKType {
-  resource_names?: string[];
+  resource_names: string[];
   filter?: string;
   order_by?: string;
   page_size?: number;
@@ -282,7 +282,7 @@ export interface ListLogEntriesResponse {
    * returned, indicating that more entries may exist.  See `nextPageToken` for
    * more information.
    */
-  entries?: LogEntry[];
+  entries: LogEntry[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -299,7 +299,7 @@ export interface ListLogEntriesResponse {
 }
 /** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponseSDKType {
-  entries?: LogEntrySDKType[];
+  entries: LogEntrySDKType[];
   next_page_token?: string;
 }
 /** The parameters to ListMonitoredResourceDescriptors */
@@ -326,7 +326,7 @@ export interface ListMonitoredResourceDescriptorsRequestSDKType {
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponse {
   /** A list of resource descriptors. */
-  resourceDescriptors?: MonitoredResourceDescriptor[];
+  resourceDescriptors: MonitoredResourceDescriptor[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -336,7 +336,7 @@ export interface ListMonitoredResourceDescriptorsResponse {
 }
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponseSDKType {
-  resource_descriptors?: MonitoredResourceDescriptorSDKType[];
+  resource_descriptors: MonitoredResourceDescriptorSDKType[];
   next_page_token?: string;
 }
 /** The parameters to ListLogs. */
@@ -378,14 +378,14 @@ export interface ListLogsRequest {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  resourceNames?: string[];
+  resourceNames: string[];
 }
 /** The parameters to ListLogs. */
 export interface ListLogsRequestSDKType {
   parent?: string;
   page_size?: number;
   page_token?: string;
-  resource_names?: string[];
+  resource_names: string[];
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponse {
@@ -394,7 +394,7 @@ export interface ListLogsResponse {
    * `"projects/my-project/logs/syslog"` or
    * `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
    */
-  logNames?: string[];
+  logNames: string[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -404,7 +404,7 @@ export interface ListLogsResponse {
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponseSDKType {
-  log_names?: string[];
+  log_names: string[];
   next_page_token?: string;
 }
 /** The parameters to `TailLogEntries`. */
@@ -424,7 +424,7 @@ export interface TailLogEntriesRequest {
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    */
-  resourceNames?: string[];
+  resourceNames: string[];
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -445,7 +445,7 @@ export interface TailLogEntriesRequest {
 }
 /** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequestSDKType {
-  resource_names?: string[];
+  resource_names: string[];
   filter?: string;
   buffer_window?: DurationSDKType;
 }
@@ -456,7 +456,7 @@ export interface TailLogEntriesResponse {
    * increasing values of `LogEntry.timestamp`. Ordering is not guaranteed
    * between separate responses.
    */
-  entries?: LogEntry[];
+  entries: LogEntry[];
   /**
    * If entries that otherwise would have been included in the session were not
    * sent back to the client, counts of relevant entries omitted from the
@@ -464,12 +464,12 @@ export interface TailLogEntriesResponse {
    * one of each reason per response. The counts represent the number of
    * suppressed entries since the last streamed response.
    */
-  suppressionInfo?: TailLogEntriesResponse_SuppressionInfo[];
+  suppressionInfo: TailLogEntriesResponse_SuppressionInfo[];
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponseSDKType {
-  entries?: LogEntrySDKType[];
-  suppression_info?: TailLogEntriesResponse_SuppressionInfoSDKType[];
+  entries: LogEntrySDKType[];
+  suppression_info: TailLogEntriesResponse_SuppressionInfoSDKType[];
 }
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfo {
@@ -667,8 +667,8 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
     logName: undefined,
     resource: undefined,
-    labels: undefined,
-    entries: undefined,
+    labels: {},
+    entries: [],
     partialSuccess: undefined,
     dryRun: undefined
   };
@@ -1051,7 +1051,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
 };
 function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors {
   return {
-    logEntryErrors: undefined
+    logEntryErrors: {}
   };
 }
 export const WriteLogEntriesPartialErrors = {
@@ -1185,7 +1185,7 @@ export const WriteLogEntriesPartialErrors = {
 };
 function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
   return {
-    resourceNames: undefined,
+    resourceNames: [],
     filter: undefined,
     orderBy: undefined,
     pageSize: undefined,
@@ -1343,7 +1343,7 @@ export const ListLogEntriesRequest = {
 };
 function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
   return {
-    entries: undefined,
+    entries: [],
     nextPageToken: undefined
   };
 }
@@ -1557,7 +1557,7 @@ export const ListMonitoredResourceDescriptorsRequest = {
 };
 function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredResourceDescriptorsResponse {
   return {
-    resourceDescriptors: undefined,
+    resourceDescriptors: [],
     nextPageToken: undefined
   };
 }
@@ -1673,7 +1673,7 @@ function createBaseListLogsRequest(): ListLogsRequest {
     parent: undefined,
     pageSize: undefined,
     pageToken: undefined,
-    resourceNames: undefined
+    resourceNames: []
   };
 }
 export const ListLogsRequest = {
@@ -1813,7 +1813,7 @@ export const ListLogsRequest = {
 };
 function createBaseListLogsResponse(): ListLogsResponse {
   return {
-    logNames: undefined,
+    logNames: [],
     nextPageToken: undefined
   };
 }
@@ -1926,7 +1926,7 @@ export const ListLogsResponse = {
 };
 function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
-    resourceNames: undefined,
+    resourceNames: [],
     filter: undefined,
     bufferWindow: undefined
   };
@@ -2056,8 +2056,8 @@ export const TailLogEntriesRequest = {
 };
 function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
   return {
-    entries: undefined,
-    suppressionInfo: undefined
+    entries: [],
+    suppressionInfo: []
   };
 }
 export const TailLogEntriesResponse = {

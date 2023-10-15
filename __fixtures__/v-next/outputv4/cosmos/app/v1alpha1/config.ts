@@ -13,7 +13,7 @@ export const protobufPackage = "cosmos.app.v1alpha1";
  */
 export interface Config {
   /** modules are the module configurations for the app. */
-  modules?: ModuleConfig[];
+  modules: ModuleConfig[];
 }
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -25,7 +25,7 @@ export interface Config {
  * their state machine with a config object alone.
  */
 export interface ConfigSDKType {
-  modules?: ModuleConfigSDKType[];
+  modules: ModuleConfigSDKType[];
 }
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfig {
@@ -55,7 +55,7 @@ export interface ModuleConfigSDKType {
 }
 function createBaseConfig(): Config {
   return {
-    modules: undefined
+    modules: []
   };
 }
 export const Config = {

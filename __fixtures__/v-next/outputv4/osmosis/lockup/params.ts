@@ -2,14 +2,14 @@ import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface Params {
-  forceUnlockAllowedAddresses?: string[];
+  forceUnlockAllowedAddresses: string[];
 }
 export interface ParamsSDKType {
-  force_unlock_allowed_addresses?: string[];
+  force_unlock_allowed_addresses: string[];
 }
 function createBaseParams(): Params {
   return {
-    forceUnlockAllowedAddresses: undefined
+    forceUnlockAllowedAddresses: []
   };
 }
 export const Params = {

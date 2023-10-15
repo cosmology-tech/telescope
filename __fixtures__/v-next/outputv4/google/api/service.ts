@@ -71,7 +71,7 @@ export interface Service {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-  apis?: Api[];
+  apis: Api[];
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
@@ -82,7 +82,7 @@ export interface Service {
    *     types:
    *     - name: google.protobuf.Int32
    */
-  types?: Type[];
+  types: Type[];
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
@@ -92,7 +92,7 @@ export interface Service {
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
-  enums?: Enum[];
+  enums: Enum[];
   /** Additional API documentation. */
   documentation?: Documentation;
   /** API backend configuration. */
@@ -112,18 +112,18 @@ export interface Service {
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
-  endpoints?: Endpoint[];
+  endpoints: Endpoint[];
   /** Configuration for the service control plane. */
   control?: Control;
   /** Defines the logs used by this service. */
-  logs?: LogDescriptor[];
+  logs: LogDescriptor[];
   /** Defines the metrics used by this service. */
-  metrics?: MetricDescriptor[];
+  metrics: MetricDescriptor[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitoredResources?: MonitoredResourceDescriptor[];
+  monitoredResources: MonitoredResourceDescriptor[];
   /** Billing configuration. */
   billing?: Billing;
   /** Logging configuration. */
@@ -172,9 +172,9 @@ export interface ServiceSDKType {
   title?: string;
   producer_project_id?: string;
   id?: string;
-  apis?: ApiSDKType[];
-  types?: TypeSDKType[];
-  enums?: EnumSDKType[];
+  apis: ApiSDKType[];
+  types: TypeSDKType[];
+  enums: EnumSDKType[];
   documentation?: DocumentationSDKType;
   backend?: BackendSDKType;
   http?: HttpSDKType;
@@ -182,11 +182,11 @@ export interface ServiceSDKType {
   authentication?: AuthenticationSDKType;
   context?: ContextSDKType;
   usage?: UsageSDKType;
-  endpoints?: EndpointSDKType[];
+  endpoints: EndpointSDKType[];
   control?: ControlSDKType;
-  logs?: LogDescriptorSDKType[];
-  metrics?: MetricDescriptorSDKType[];
-  monitored_resources?: MonitoredResourceDescriptorSDKType[];
+  logs: LogDescriptorSDKType[];
+  metrics: MetricDescriptorSDKType[];
+  monitored_resources: MonitoredResourceDescriptorSDKType[];
   billing?: BillingSDKType;
   logging?: LoggingSDKType;
   monitoring?: MonitoringSDKType;
@@ -201,9 +201,9 @@ function createBaseService(): Service {
     title: undefined,
     producerProjectId: undefined,
     id: undefined,
-    apis: undefined,
-    types: undefined,
-    enums: undefined,
+    apis: [],
+    types: [],
+    enums: [],
     documentation: undefined,
     backend: undefined,
     http: undefined,
@@ -211,11 +211,11 @@ function createBaseService(): Service {
     authentication: undefined,
     context: undefined,
     usage: undefined,
-    endpoints: undefined,
+    endpoints: [],
     control: undefined,
-    logs: undefined,
-    metrics: undefined,
-    monitoredResources: undefined,
+    logs: [],
+    metrics: [],
+    monitoredResources: [],
     billing: undefined,
     logging: undefined,
     monitoring: undefined,

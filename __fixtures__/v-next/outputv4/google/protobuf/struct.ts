@@ -53,7 +53,7 @@ export interface Struct_FieldsEntrySDKType {
  */
 export interface Struct {
   /** Unordered map of dynamically typed values. */
-  fields?: {
+  fields: {
     [key: string]: Value;
   };
 }
@@ -68,7 +68,7 @@ export interface Struct {
  * The JSON representation for `Struct` is JSON object.
  */
 export interface StructSDKType {
-  fields?: {
+  fields: {
     [key: string]: ValueSDKType;
   };
 }
@@ -117,7 +117,7 @@ export interface ValueSDKType {
  */
 export interface ListValue {
   /** Repeated field of dynamically typed values. */
-  values?: Value[];
+  values: Value[];
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -125,7 +125,7 @@ export interface ListValue {
  * The JSON representation for `ListValue` is JSON array.
  */
 export interface ListValueSDKType {
-  values?: ValueSDKType[];
+  values: ValueSDKType[];
 }
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
@@ -225,7 +225,7 @@ export const Struct_FieldsEntry = {
 };
 function createBaseStruct(): Struct {
   return {
-    fields: undefined
+    fields: {}
   };
 }
 export const Struct = {
@@ -524,7 +524,7 @@ export const Value = {
 };
 function createBaseListValue(): ListValue {
   return {
-    values: undefined
+    values: []
   };
 }
 export const ListValue = {

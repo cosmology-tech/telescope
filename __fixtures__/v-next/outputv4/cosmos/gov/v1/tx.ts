@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.gov.v1";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  messages?: Any[];
+  messages: Any[];
   initialDeposit: Coin[];
   proposer?: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
@@ -20,7 +20,7 @@ export interface MsgSubmitProposal {
  * proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
-  messages?: AnySDKType[];
+  messages: AnySDKType[];
   initial_deposit: CoinSDKType[];
   proposer?: string;
   metadata?: string;
@@ -77,14 +77,14 @@ export interface MsgVoteResponseSDKType {}
 export interface MsgVoteWeighted {
   proposalId?: bigint;
   voter?: string;
-  options?: WeightedVoteOption[];
+  options: WeightedVoteOption[];
   metadata?: string;
 }
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeightedSDKType {
   proposal_id?: bigint;
   voter?: string;
-  options?: WeightedVoteOptionSDKType[];
+  options: WeightedVoteOptionSDKType[];
   metadata?: string;
 }
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
@@ -109,7 +109,7 @@ export interface MsgDepositResponse {}
 export interface MsgDepositResponseSDKType {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
-    messages: undefined,
+    messages: [],
     initialDeposit: [],
     proposer: undefined,
     metadata: undefined
@@ -764,7 +764,7 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
   return {
     proposalId: undefined,
     voter: undefined,
-    options: undefined,
+    options: [],
     metadata: undefined
   };
 }

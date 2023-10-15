@@ -29,12 +29,12 @@ export interface QueryPoolsRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools?: Any[];
+  pools: Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 export interface QueryPoolsResponseSDKType {
-  pools?: AnySDKType[];
+  pools: AnySDKType[];
   pagination?: PageResponseSDKType;
 }
 /** =============================== NumPools */
@@ -186,12 +186,12 @@ export interface QueryPoolsWithFilterRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
-  pools?: Any[];
+  pools: Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 export interface QueryPoolsWithFilterResponseSDKType {
-  pools?: AnySDKType[];
+  pools: AnySDKType[];
   pagination?: PageResponseSDKType;
 }
 /**
@@ -547,7 +547,7 @@ export const QueryPoolsRequest = {
 };
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
-    pools: undefined,
+    pools: [],
     pagination: undefined
   };
 }
@@ -2566,7 +2566,7 @@ export const QueryPoolsWithFilterRequest = {
 };
 function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse {
   return {
-    pools: undefined,
+    pools: [],
     pagination: undefined
   };
 }

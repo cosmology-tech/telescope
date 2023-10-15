@@ -38,7 +38,7 @@ export interface MerklePrefixSDKType {
  * MerklePath is represented from root-to-leaf
  */
 export interface MerklePath {
-  keyPath?: string[];
+  keyPath: string[];
 }
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -46,7 +46,7 @@ export interface MerklePath {
  * MerklePath is represented from root-to-leaf
  */
 export interface MerklePathSDKType {
-  key_path?: string[];
+  key_path: string[];
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -56,7 +56,7 @@ export interface MerklePathSDKType {
  * MerkleProofs are ordered from leaf-to-root
  */
 export interface MerkleProof {
-  proofs?: CommitmentProof[];
+  proofs: CommitmentProof[];
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -66,7 +66,7 @@ export interface MerkleProof {
  * MerkleProofs are ordered from leaf-to-root
  */
 export interface MerkleProofSDKType {
-  proofs?: CommitmentProofSDKType[];
+  proofs: CommitmentProofSDKType[];
 }
 function createBaseMerkleRoot(): MerkleRoot {
   return {
@@ -254,7 +254,7 @@ export const MerklePrefix = {
 };
 function createBaseMerklePath(): MerklePath {
   return {
-    keyPath: undefined
+    keyPath: []
   };
 }
 export const MerklePath = {
@@ -358,7 +358,7 @@ export const MerklePath = {
 };
 function createBaseMerkleProof(): MerkleProof {
   return {
-    proofs: undefined
+    proofs: []
   };
 }
 export const MerkleProof = {

@@ -69,12 +69,12 @@ export interface AllowedMsgAllowance {
   /** allowance can be any of basic and periodic fee allowance. */
   allowance?: Any;
   /** allowed_messages are the messages for which the grantee has the access. */
-  allowedMessages?: string[];
+  allowedMessages: string[];
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
   allowance?: AnySDKType;
-  allowed_messages?: string[];
+  allowed_messages: string[];
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface Grant {
@@ -393,7 +393,7 @@ export const PeriodicAllowance = {
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
     allowance: undefined,
-    allowedMessages: undefined
+    allowedMessages: []
   };
 }
 export const AllowedMsgAllowance = {

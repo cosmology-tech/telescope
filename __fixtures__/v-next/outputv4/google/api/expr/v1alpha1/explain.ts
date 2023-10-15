@@ -14,7 +14,7 @@ export interface Explain {
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
-  values?: Value[];
+  values: Value[];
   /**
    * List of steps.
    * 
@@ -22,7 +22,7 @@ export interface Explain {
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
-  exprSteps?: Explain_ExprStep[];
+  exprSteps: Explain_ExprStep[];
 }
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -30,8 +30,8 @@ export interface Explain {
  */
 /** @deprecated */
 export interface ExplainSDKType {
-  values?: ValueSDKType[];
-  expr_steps?: Explain_ExprStepSDKType[];
+  values: ValueSDKType[];
+  expr_steps: Explain_ExprStepSDKType[];
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
@@ -47,8 +47,8 @@ export interface Explain_ExprStepSDKType {
 }
 function createBaseExplain(): Explain {
   return {
-    values: undefined,
-    exprSteps: undefined
+    values: [],
+    exprSteps: []
   };
 }
 export const Explain = {

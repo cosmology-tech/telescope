@@ -154,7 +154,7 @@ export interface LogMetric {
    * Note that there are upper bounds on the maximum number of labels and the
    * number of active time series that are allowed in a project.
    */
-  labelExtractors?: {
+  labelExtractors: {
     [key: string]: string;
   };
   /**
@@ -198,7 +198,7 @@ export interface LogMetricSDKType {
   disabled?: boolean;
   metric_descriptor?: MetricDescriptorSDKType;
   value_extractor?: string;
-  label_extractors?: {
+  label_extractors: {
     [key: string]: string;
   };
   bucket_options?: Distribution_BucketOptionsSDKType;
@@ -238,7 +238,7 @@ export interface ListLogMetricsRequestSDKType {
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponse {
   /** A list of logs-based metrics. */
-  metrics?: LogMetric[];
+  metrics: LogMetric[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call this
@@ -248,7 +248,7 @@ export interface ListLogMetricsResponse {
 }
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
-  metrics?: LogMetricSDKType[];
+  metrics: LogMetricSDKType[];
   next_page_token?: string;
 }
 /** The parameters to GetLogMetric. */
@@ -420,7 +420,7 @@ function createBaseLogMetric(): LogMetric {
     disabled: undefined,
     metricDescriptor: undefined,
     valueExtractor: undefined,
-    labelExtractors: undefined,
+    labelExtractors: {},
     bucketOptions: undefined,
     createTime: undefined,
     updateTime: undefined,
@@ -818,7 +818,7 @@ export const ListLogMetricsRequest = {
 };
 function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
   return {
-    metrics: undefined,
+    metrics: [],
     nextPageToken: undefined
   };
 }

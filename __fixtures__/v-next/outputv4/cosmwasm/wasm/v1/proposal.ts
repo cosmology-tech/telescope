@@ -179,7 +179,7 @@ export interface PinCodesProposal {
   /** Description is a human readable text */
   description?: string;
   /** CodeIDs references the new WASM codes */
-  codeIds?: bigint[];
+  codeIds: bigint[];
 }
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
@@ -188,7 +188,7 @@ export interface PinCodesProposal {
 export interface PinCodesProposalSDKType {
   title?: string;
   description?: string;
-  code_ids?: bigint[];
+  code_ids: bigint[];
 }
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
@@ -200,7 +200,7 @@ export interface UnpinCodesProposal {
   /** Description is a human readable text */
   description?: string;
   /** CodeIDs references the WASM codes */
-  codeIds?: bigint[];
+  codeIds: bigint[];
 }
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
@@ -209,7 +209,7 @@ export interface UnpinCodesProposal {
 export interface UnpinCodesProposalSDKType {
   title?: string;
   description?: string;
-  code_ids?: bigint[];
+  code_ids: bigint[];
 }
 function createBaseStoreCodeProposal(): StoreCodeProposal {
   return {
@@ -1313,7 +1313,7 @@ function createBasePinCodesProposal(): PinCodesProposal {
   return {
     title: undefined,
     description: undefined,
-    codeIds: undefined
+    codeIds: []
   };
 }
 export const PinCodesProposal = {
@@ -1456,7 +1456,7 @@ function createBaseUnpinCodesProposal(): UnpinCodesProposal {
   return {
     title: undefined,
     description: undefined,
-    codeIds: undefined
+    codeIds: []
   };
 }
 export const UnpinCodesProposal = {

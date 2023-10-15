@@ -4,12 +4,12 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** Params defines the parameters for the bank module. */
 export interface Params {
-  sendEnabled?: SendEnabled[];
+  sendEnabled: SendEnabled[];
   defaultSendEnabled?: boolean;
 }
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
-  send_enabled?: SendEnabledSDKType[];
+  send_enabled: SendEnabledSDKType[];
   default_send_enabled?: boolean;
 }
 /**
@@ -82,7 +82,7 @@ export interface DenomUnit {
    */
   exponent?: number;
   /** aliases is a list of string aliases for the given denom */
-  aliases?: string[];
+  aliases: string[];
 }
 /**
  * DenomUnit represents a struct that describes a given
@@ -91,7 +91,7 @@ export interface DenomUnit {
 export interface DenomUnitSDKType {
   denom?: string;
   exponent?: number;
-  aliases?: string[];
+  aliases: string[];
 }
 /**
  * Metadata represents a struct that describes
@@ -100,7 +100,7 @@ export interface DenomUnitSDKType {
 export interface Metadata {
   description?: string;
   /** denom_units represents the list of DenomUnit's for a given coin */
-  denomUnits?: DenomUnit[];
+  denomUnits: DenomUnit[];
   /** base represents the base denom (should be the DenomUnit with exponent = 0). */
   base?: string;
   /**
@@ -141,7 +141,7 @@ export interface Metadata {
  */
 export interface MetadataSDKType {
   description?: string;
-  denom_units?: DenomUnitSDKType[];
+  denom_units: DenomUnitSDKType[];
   base?: string;
   display?: string;
   name?: string;
@@ -151,7 +151,7 @@ export interface MetadataSDKType {
 }
 function createBaseParams(): Params {
   return {
-    sendEnabled: undefined,
+    sendEnabled: [],
     defaultSendEnabled: undefined
   };
 }
@@ -721,7 +721,7 @@ function createBaseDenomUnit(): DenomUnit {
   return {
     denom: undefined,
     exponent: undefined,
-    aliases: undefined
+    aliases: []
   };
 }
 export const DenomUnit = {
@@ -854,7 +854,7 @@ export const DenomUnit = {
 function createBaseMetadata(): Metadata {
   return {
     description: undefined,
-    denomUnits: undefined,
+    denomUnits: [],
     base: undefined,
     display: undefined,
     name: undefined,

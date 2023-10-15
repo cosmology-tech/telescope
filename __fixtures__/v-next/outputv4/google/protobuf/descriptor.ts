@@ -358,14 +358,14 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
  * files it parses.
  */
 export interface FileDescriptorSet {
-  file?: FileDescriptorProto[];
+  file: FileDescriptorProto[];
 }
 /**
  * The protocol compiler can output a FileDescriptorSet containing the .proto
  * files it parses.
  */
 export interface FileDescriptorSetSDKType {
-  file?: FileDescriptorProtoSDKType[];
+  file: FileDescriptorProtoSDKType[];
 }
 /** Describes a complete .proto file. */
 export interface FileDescriptorProto {
@@ -373,19 +373,19 @@ export interface FileDescriptorProto {
   name?: string;
   package?: string;
   /** Names of files imported by this file. */
-  dependency?: string[];
+  dependency: string[];
   /** Indexes of the public imported files in the dependency list above. */
-  publicDependency?: number[];
+  publicDependency: number[];
   /**
    * Indexes of the weak imported files in the dependency list.
    * For Google-internal migration only. Do not use.
    */
-  weakDependency?: number[];
+  weakDependency: number[];
   /** All top-level definitions in this file. */
-  messageType?: DescriptorProto[];
-  enumType?: EnumDescriptorProto[];
-  service?: ServiceDescriptorProto[];
-  extension?: FieldDescriptorProto[];
+  messageType: DescriptorProto[];
+  enumType: EnumDescriptorProto[];
+  service: ServiceDescriptorProto[];
+  extension: FieldDescriptorProto[];
   options?: FileOptions;
   /**
    * This field contains optional information about the original source code.
@@ -404,13 +404,13 @@ export interface FileDescriptorProto {
 export interface FileDescriptorProtoSDKType {
   name?: string;
   package?: string;
-  dependency?: string[];
-  public_dependency?: number[];
-  weak_dependency?: number[];
-  message_type?: DescriptorProtoSDKType[];
-  enum_type?: EnumDescriptorProtoSDKType[];
-  service?: ServiceDescriptorProtoSDKType[];
-  extension?: FieldDescriptorProtoSDKType[];
+  dependency: string[];
+  public_dependency: number[];
+  weak_dependency: number[];
+  message_type: DescriptorProtoSDKType[];
+  enum_type: EnumDescriptorProtoSDKType[];
+  service: ServiceDescriptorProtoSDKType[];
+  extension: FieldDescriptorProtoSDKType[];
   options?: FileOptionsSDKType;
   source_code_info?: SourceCodeInfoSDKType;
   syntax?: string;
@@ -418,32 +418,32 @@ export interface FileDescriptorProtoSDKType {
 /** Describes a message type. */
 export interface DescriptorProto {
   name?: string;
-  field?: FieldDescriptorProto[];
-  extension?: FieldDescriptorProto[];
-  nestedType?: DescriptorProto[];
-  enumType?: EnumDescriptorProto[];
-  extensionRange?: DescriptorProto_ExtensionRange[];
-  oneofDecl?: OneofDescriptorProto[];
+  field: FieldDescriptorProto[];
+  extension: FieldDescriptorProto[];
+  nestedType: DescriptorProto[];
+  enumType: EnumDescriptorProto[];
+  extensionRange: DescriptorProto_ExtensionRange[];
+  oneofDecl: OneofDescriptorProto[];
   options?: MessageOptions;
-  reservedRange?: DescriptorProto_ReservedRange[];
+  reservedRange: DescriptorProto_ReservedRange[];
   /**
    * Reserved field names, which may not be used by fields in the same message.
    * A given name may only be reserved once.
    */
-  reservedName?: string[];
+  reservedName: string[];
 }
 /** Describes a message type. */
 export interface DescriptorProtoSDKType {
   name?: string;
-  field?: FieldDescriptorProtoSDKType[];
-  extension?: FieldDescriptorProtoSDKType[];
-  nested_type?: DescriptorProtoSDKType[];
-  enum_type?: EnumDescriptorProtoSDKType[];
-  extension_range?: DescriptorProto_ExtensionRangeSDKType[];
-  oneof_decl?: OneofDescriptorProtoSDKType[];
+  field: FieldDescriptorProtoSDKType[];
+  extension: FieldDescriptorProtoSDKType[];
+  nested_type: DescriptorProtoSDKType[];
+  enum_type: EnumDescriptorProtoSDKType[];
+  extension_range: DescriptorProto_ExtensionRangeSDKType[];
+  oneof_decl: OneofDescriptorProtoSDKType[];
   options?: MessageOptionsSDKType;
-  reserved_range?: DescriptorProto_ReservedRangeSDKType[];
-  reserved_name?: string[];
+  reserved_range: DescriptorProto_ReservedRangeSDKType[];
+  reserved_name: string[];
 }
 export interface DescriptorProto_ExtensionRange {
   /** Inclusive. */
@@ -479,10 +479,10 @@ export interface DescriptorProto_ReservedRangeSDKType {
 }
 export interface ExtensionRangeOptions {
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface ExtensionRangeOptionsSDKType {
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 /** Describes a field within a message. */
 export interface FieldDescriptorProto {
@@ -555,27 +555,27 @@ export interface OneofDescriptorProtoSDKType {
 /** Describes an enum type. */
 export interface EnumDescriptorProto {
   name?: string;
-  value?: EnumValueDescriptorProto[];
+  value: EnumValueDescriptorProto[];
   options?: EnumOptions;
   /**
    * Range of reserved numeric values. Reserved numeric values may not be used
    * by enum values in the same enum declaration. Reserved ranges may not
    * overlap.
    */
-  reservedRange?: EnumDescriptorProto_EnumReservedRange[];
+  reservedRange: EnumDescriptorProto_EnumReservedRange[];
   /**
    * Reserved enum value names, which may not be reused. A given name may only
    * be reserved once.
    */
-  reservedName?: string[];
+  reservedName: string[];
 }
 /** Describes an enum type. */
 export interface EnumDescriptorProtoSDKType {
   name?: string;
-  value?: EnumValueDescriptorProtoSDKType[];
+  value: EnumValueDescriptorProtoSDKType[];
   options?: EnumOptionsSDKType;
-  reserved_range?: EnumDescriptorProto_EnumReservedRangeSDKType[];
-  reserved_name?: string[];
+  reserved_range: EnumDescriptorProto_EnumReservedRangeSDKType[];
+  reserved_name: string[];
 }
 /**
  * Range of reserved numeric values. Reserved values may not be used by
@@ -618,13 +618,13 @@ export interface EnumValueDescriptorProtoSDKType {
 /** Describes a service. */
 export interface ServiceDescriptorProto {
   name?: string;
-  method?: MethodDescriptorProto[];
+  method: MethodDescriptorProto[];
   options?: ServiceOptions;
 }
 /** Describes a service. */
 export interface ServiceDescriptorProtoSDKType {
   name?: string;
-  method?: MethodDescriptorProtoSDKType[];
+  method: MethodDescriptorProtoSDKType[];
   options?: ServiceOptionsSDKType;
 }
 /** Describes a method of a service. */
@@ -766,7 +766,7 @@ export interface FileOptions {
    * The parser stores options it doesn't recognize here.
    * See the documentation for the "Options" section above.
    */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface FileOptionsSDKType {
   java_package?: string;
@@ -790,7 +790,7 @@ export interface FileOptionsSDKType {
   php_namespace?: string;
   php_metadata_namespace?: string;
   ruby_package?: string;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface MessageOptions {
   /**
@@ -852,14 +852,14 @@ export interface MessageOptions {
    */
   mapEntry?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface MessageOptionsSDKType {
   message_set_wire_format?: boolean;
   no_standard_descriptor_accessor?: boolean;
   deprecated?: boolean;
   map_entry?: boolean;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface FieldOptions {
   /**
@@ -932,7 +932,7 @@ export interface FieldOptions {
   /** For Google-internal migration only. Do not use. */
   weak?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface FieldOptionsSDKType {
   ctype?: FieldOptions_CType;
@@ -941,14 +941,14 @@ export interface FieldOptionsSDKType {
   lazy?: boolean;
   deprecated?: boolean;
   weak?: boolean;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface OneofOptions {
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface OneofOptionsSDKType {
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface EnumOptions {
   /**
@@ -964,12 +964,12 @@ export interface EnumOptions {
    */
   deprecated?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface EnumOptionsSDKType {
   allow_alias?: boolean;
   deprecated?: boolean;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface EnumValueOptions {
   /**
@@ -980,11 +980,11 @@ export interface EnumValueOptions {
    */
   deprecated?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface EnumValueOptionsSDKType {
   deprecated?: boolean;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface ServiceOptions {
   /**
@@ -995,11 +995,11 @@ export interface ServiceOptions {
    */
   deprecated?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface ServiceOptionsSDKType {
   deprecated?: boolean;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 export interface MethodOptions {
   /**
@@ -1011,12 +1011,12 @@ export interface MethodOptions {
   deprecated?: boolean;
   idempotencyLevel?: MethodOptions_IdempotencyLevel;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpretedOption?: UninterpretedOption[];
+  uninterpretedOption: UninterpretedOption[];
 }
 export interface MethodOptionsSDKType {
   deprecated?: boolean;
   idempotency_level?: MethodOptions_IdempotencyLevel;
-  uninterpreted_option?: UninterpretedOptionSDKType[];
+  uninterpreted_option: UninterpretedOptionSDKType[];
 }
 /**
  * A message representing a option the parser does not recognize. This only
@@ -1027,7 +1027,7 @@ export interface MethodOptionsSDKType {
  * in them.
  */
 export interface UninterpretedOption {
-  name?: UninterpretedOption_NamePart[];
+  name: UninterpretedOption_NamePart[];
   /**
    * The value of the uninterpreted option, in whatever type the tokenizer
    * identified it as during parsing. Exactly one of these should be set.
@@ -1048,7 +1048,7 @@ export interface UninterpretedOption {
  * in them.
  */
 export interface UninterpretedOptionSDKType {
-  name?: UninterpretedOption_NamePartSDKType[];
+  name: UninterpretedOption_NamePartSDKType[];
   identifier_value?: string;
   positive_int_value?: bigint;
   negative_int_value?: bigint;
@@ -1128,14 +1128,14 @@ export interface SourceCodeInfo {
    *   ignore those that it doesn't understand, as more types of locations could
    *   be recorded in the future.
    */
-  location?: SourceCodeInfo_Location[];
+  location: SourceCodeInfo_Location[];
 }
 /**
  * Encapsulates information about the original source file from which a
  * FileDescriptorProto was generated.
  */
 export interface SourceCodeInfoSDKType {
-  location?: SourceCodeInfo_LocationSDKType[];
+  location: SourceCodeInfo_LocationSDKType[];
 }
 export interface SourceCodeInfo_Location {
   /**
@@ -1163,7 +1163,7 @@ export interface SourceCodeInfo_Location {
    * this path refers to the whole field declaration (from the beginning
    * of the label to the terminating semicolon).
    */
-  path?: number[];
+  path: number[];
   /**
    * Always has exactly three or four elements: start line, start column,
    * end line (optional, otherwise assumed same as start line), end column.
@@ -1171,7 +1171,7 @@ export interface SourceCodeInfo_Location {
    * and column numbers are zero-based -- typically you will want to add
    * 1 to each before displaying to a user.
    */
-  span?: number[];
+  span: number[];
   /**
    * If this SourceCodeInfo represents a complete declaration, these are any
    * comments appearing before and after the declaration which appear to be
@@ -1223,14 +1223,14 @@ export interface SourceCodeInfo_Location {
    */
   leadingComments?: string;
   trailingComments?: string;
-  leadingDetachedComments?: string[];
+  leadingDetachedComments: string[];
 }
 export interface SourceCodeInfo_LocationSDKType {
-  path?: number[];
-  span?: number[];
+  path: number[];
+  span: number[];
   leading_comments?: string;
   trailing_comments?: string;
-  leading_detached_comments?: string[];
+  leading_detached_comments: string[];
 }
 /**
  * Describes the relationship between generated code and its original source
@@ -1242,7 +1242,7 @@ export interface GeneratedCodeInfo {
    * An Annotation connects some span of text in generated code to an element
    * of its generating .proto file.
    */
-  annotation?: GeneratedCodeInfo_Annotation[];
+  annotation: GeneratedCodeInfo_Annotation[];
 }
 /**
  * Describes the relationship between generated code and its original source
@@ -1250,14 +1250,14 @@ export interface GeneratedCodeInfo {
  * source file, but may contain references to different source .proto files.
  */
 export interface GeneratedCodeInfoSDKType {
-  annotation?: GeneratedCodeInfo_AnnotationSDKType[];
+  annotation: GeneratedCodeInfo_AnnotationSDKType[];
 }
 export interface GeneratedCodeInfo_Annotation {
   /**
    * Identifies the element in the original source .proto file. This field
    * is formatted the same as SourceCodeInfo.Location.path.
    */
-  path?: number[];
+  path: number[];
   /** Identifies the filesystem path to the original source .proto. */
   sourceFile?: string;
   /**
@@ -1273,14 +1273,14 @@ export interface GeneratedCodeInfo_Annotation {
   end?: number;
 }
 export interface GeneratedCodeInfo_AnnotationSDKType {
-  path?: number[];
+  path: number[];
   source_file?: string;
   begin?: number;
   end?: number;
 }
 function createBaseFileDescriptorSet(): FileDescriptorSet {
   return {
-    file: undefined
+    file: []
   };
 }
 export const FileDescriptorSet = {
@@ -1380,13 +1380,13 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
   return {
     name: undefined,
     package: undefined,
-    dependency: undefined,
-    publicDependency: undefined,
-    weakDependency: undefined,
-    messageType: undefined,
-    enumType: undefined,
-    service: undefined,
-    extension: undefined,
+    dependency: [],
+    publicDependency: [],
+    weakDependency: [],
+    messageType: [],
+    enumType: [],
+    service: [],
+    extension: [],
     options: undefined,
     sourceCodeInfo: undefined,
     syntax: undefined
@@ -1736,15 +1736,15 @@ export const FileDescriptorProto = {
 function createBaseDescriptorProto(): DescriptorProto {
   return {
     name: undefined,
-    field: undefined,
-    extension: undefined,
-    nestedType: undefined,
-    enumType: undefined,
-    extensionRange: undefined,
-    oneofDecl: undefined,
+    field: [],
+    extension: [],
+    nestedType: [],
+    enumType: [],
+    extensionRange: [],
+    oneofDecl: [],
     options: undefined,
-    reservedRange: undefined,
-    reservedName: undefined
+    reservedRange: [],
+    reservedName: []
   };
 }
 export const DescriptorProto = {
@@ -2273,7 +2273,7 @@ export const DescriptorProto_ReservedRange = {
 };
 function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
   return {
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const ExtensionRangeOptions = {
@@ -2698,10 +2698,10 @@ export const OneofDescriptorProto = {
 function createBaseEnumDescriptorProto(): EnumDescriptorProto {
   return {
     name: undefined,
-    value: undefined,
+    value: [],
     options: undefined,
-    reservedRange: undefined,
-    reservedName: undefined
+    reservedRange: [],
+    reservedName: []
   };
 }
 export const EnumDescriptorProto = {
@@ -3101,7 +3101,7 @@ export const EnumValueDescriptorProto = {
 function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
   return {
     name: undefined,
-    method: undefined,
+    method: [],
     options: undefined
   };
 }
@@ -3413,7 +3413,7 @@ function createBaseFileOptions(): FileOptions {
     phpNamespace: undefined,
     phpMetadataNamespace: undefined,
     rubyPackage: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const FileOptions = {
@@ -3795,7 +3795,7 @@ function createBaseMessageOptions(): MessageOptions {
     noStandardDescriptorAccessor: undefined,
     deprecated: undefined,
     mapEntry: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const MessageOptions = {
@@ -3955,7 +3955,7 @@ function createBaseFieldOptions(): FieldOptions {
     lazy: undefined,
     deprecated: undefined,
     weak: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const FieldOptions = {
@@ -4137,7 +4137,7 @@ export const FieldOptions = {
 };
 function createBaseOneofOptions(): OneofOptions {
   return {
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const OneofOptions = {
@@ -4237,7 +4237,7 @@ function createBaseEnumOptions(): EnumOptions {
   return {
     allowAlias: undefined,
     deprecated: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const EnumOptions = {
@@ -4364,7 +4364,7 @@ export const EnumOptions = {
 function createBaseEnumValueOptions(): EnumValueOptions {
   return {
     deprecated: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const EnumValueOptions = {
@@ -4477,7 +4477,7 @@ export const EnumValueOptions = {
 function createBaseServiceOptions(): ServiceOptions {
   return {
     deprecated: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const ServiceOptions = {
@@ -4591,7 +4591,7 @@ function createBaseMethodOptions(): MethodOptions {
   return {
     deprecated: undefined,
     idempotencyLevel: undefined,
-    uninterpretedOption: undefined
+    uninterpretedOption: []
   };
 }
 export const MethodOptions = {
@@ -4717,7 +4717,7 @@ export const MethodOptions = {
 };
 function createBaseUninterpretedOption(): UninterpretedOption {
   return {
-    name: undefined,
+    name: [],
     identifierValue: undefined,
     positiveIntValue: undefined,
     negativeIntValue: undefined,
@@ -5014,7 +5014,7 @@ export const UninterpretedOption_NamePart = {
 };
 function createBaseSourceCodeInfo(): SourceCodeInfo {
   return {
-    location: undefined
+    location: []
   };
 }
 export const SourceCodeInfo = {
@@ -5112,11 +5112,11 @@ export const SourceCodeInfo = {
 };
 function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
   return {
-    path: undefined,
-    span: undefined,
+    path: [],
+    span: [],
     leadingComments: undefined,
     trailingComments: undefined,
-    leadingDetachedComments: undefined
+    leadingDetachedComments: []
   };
 }
 export const SourceCodeInfo_Location = {
@@ -5312,7 +5312,7 @@ export const SourceCodeInfo_Location = {
 };
 function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {
   return {
-    annotation: undefined
+    annotation: []
   };
 }
 export const GeneratedCodeInfo = {
@@ -5410,7 +5410,7 @@ export const GeneratedCodeInfo = {
 };
 function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation {
   return {
-    path: undefined,
+    path: [],
     sourceFile: undefined,
     begin: undefined,
     end: undefined

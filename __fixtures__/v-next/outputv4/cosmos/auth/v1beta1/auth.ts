@@ -28,13 +28,13 @@ export interface BaseAccountSDKType {
 export interface ModuleAccount {
   baseAccount?: BaseAccount;
   name?: string;
-  permissions?: string[];
+  permissions: string[];
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
   base_account?: BaseAccountSDKType;
   name?: string;
-  permissions?: string[];
+  permissions: string[];
 }
 /** Params defines the parameters for the auth module. */
 export interface Params {
@@ -203,7 +203,7 @@ function createBaseModuleAccount(): ModuleAccount {
   return {
     baseAccount: undefined,
     name: undefined,
-    permissions: undefined
+    permissions: []
   };
 }
 export const ModuleAccount = {

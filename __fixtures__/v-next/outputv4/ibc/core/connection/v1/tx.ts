@@ -50,7 +50,7 @@ export interface MsgConnectionOpenTry {
   clientState?: Any;
   counterparty: Counterparty;
   delayPeriod?: bigint;
-  counterpartyVersions?: Version[];
+  counterpartyVersions: Version[];
   proofHeight: Height;
   /**
    * proof of the initialization the connection on Chain A: `UNITIALIZED ->
@@ -74,7 +74,7 @@ export interface MsgConnectionOpenTrySDKType {
   client_state?: AnySDKType;
   counterparty: CounterpartySDKType;
   delay_period?: bigint;
-  counterparty_versions?: VersionSDKType[];
+  counterparty_versions: VersionSDKType[];
   proof_height: HeightSDKType;
   proof_init?: Uint8Array;
   proof_client?: Uint8Array;
@@ -399,7 +399,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
     clientState: undefined,
     counterparty: Counterparty.fromPartial({}),
     delayPeriod: undefined,
-    counterpartyVersions: undefined,
+    counterpartyVersions: [],
     proofHeight: Height.fromPartial({}),
     proofInit: undefined,
     proofClient: undefined,

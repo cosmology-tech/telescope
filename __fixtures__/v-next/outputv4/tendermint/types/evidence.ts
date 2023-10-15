@@ -32,7 +32,7 @@ export interface DuplicateVoteEvidenceSDKType {
 export interface LightClientAttackEvidence {
   conflictingBlock?: LightBlock;
   commonHeight?: bigint;
-  byzantineValidators?: Validator[];
+  byzantineValidators: Validator[];
   totalVotingPower?: bigint;
   timestamp: Date;
 }
@@ -40,7 +40,7 @@ export interface LightClientAttackEvidence {
 export interface LightClientAttackEvidenceSDKType {
   conflicting_block?: LightBlockSDKType;
   common_height?: bigint;
-  byzantine_validators?: ValidatorSDKType[];
+  byzantine_validators: ValidatorSDKType[];
   total_voting_power?: bigint;
   timestamp: Date;
 }
@@ -317,7 +317,7 @@ function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
     conflictingBlock: undefined,
     commonHeight: undefined,
-    byzantineValidators: undefined,
+    byzantineValidators: [],
     totalVotingPower: undefined,
     timestamp: new Date()
   };

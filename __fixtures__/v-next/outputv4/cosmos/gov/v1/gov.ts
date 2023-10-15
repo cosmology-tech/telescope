@@ -168,7 +168,7 @@ export interface DepositSDKType {
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   id?: bigint;
-  messages?: Any[];
+  messages: Any[];
   status?: ProposalStatus;
   /**
    * final_tally_result is the final tally result of the proposal. When
@@ -187,7 +187,7 @@ export interface Proposal {
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   id?: bigint;
-  messages?: AnySDKType[];
+  messages: AnySDKType[];
   status?: ProposalStatus;
   final_tally_result?: TallyResultSDKType;
   submit_time?: Date;
@@ -218,7 +218,7 @@ export interface TallyResultSDKType {
 export interface Vote {
   proposalId?: bigint;
   voter?: string;
-  options?: WeightedVoteOption[];
+  options: WeightedVoteOption[];
   /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata?: string;
 }
@@ -229,7 +229,7 @@ export interface Vote {
 export interface VoteSDKType {
   proposal_id?: bigint;
   voter?: string;
-  options?: WeightedVoteOptionSDKType[];
+  options: WeightedVoteOptionSDKType[];
   metadata?: string;
 }
 /** DepositParams defines the params for deposits on governance proposals. */
@@ -525,7 +525,7 @@ export const Deposit = {
 function createBaseProposal(): Proposal {
   return {
     id: undefined,
-    messages: undefined,
+    messages: [],
     status: undefined,
     finalTallyResult: undefined,
     submitTime: undefined,
@@ -920,7 +920,7 @@ function createBaseVote(): Vote {
   return {
     proposalId: undefined,
     voter: undefined,
-    options: undefined,
+    options: [],
     metadata: undefined
   };
 }

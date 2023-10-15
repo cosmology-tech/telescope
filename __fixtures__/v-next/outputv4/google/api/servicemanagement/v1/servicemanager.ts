@@ -77,13 +77,13 @@ export interface ListServicesRequestSDKType {
 /** Response message for `ListServices` method. */
 export interface ListServicesResponse {
   /** The returned services will only have the name field set. */
-  services?: ManagedService[];
+  services: ManagedService[];
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   nextPageToken?: string;
 }
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseSDKType {
-  services?: ManagedServiceSDKType[];
+  services: ManagedServiceSDKType[];
   next_page_token?: string;
 }
 /** Request message for `GetService` method. */
@@ -190,13 +190,13 @@ export interface ListServiceConfigsRequestSDKType {
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponse {
   /** The list of service configuration resources. */
-  serviceConfigs?: Service[];
+  serviceConfigs: Service[];
   /** The token of the next page of results. */
   nextPageToken?: string;
 }
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseSDKType {
-  service_configs?: ServiceSDKType[];
+  service_configs: ServiceSDKType[];
   next_page_token?: string;
 }
 /** Request message for CreateServiceConfig method. */
@@ -296,13 +296,13 @@ export interface ListServiceRolloutsRequestSDKType {
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponse {
   /** The list of rollout resources. */
-  rollouts?: Rollout[];
+  rollouts: Rollout[];
   /** The token of the next page of results. */
   nextPageToken?: string;
 }
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseSDKType {
-  rollouts?: RolloutSDKType[];
+  rollouts: RolloutSDKType[];
   next_page_token?: string;
 }
 /** Request message for GetServiceRollout method. */
@@ -354,20 +354,20 @@ export interface GenerateConfigReportResponse {
    * list of ChangeReport, each corresponding to comparison between two
    * service configurations.
    */
-  changeReports?: ChangeReport[];
+  changeReports: ChangeReport[];
   /**
    * Errors / Linter warnings associated with the service definition this
    * report
    * belongs to.
    */
-  diagnostics?: Diagnostic[];
+  diagnostics: Diagnostic[];
 }
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseSDKType {
   service_name?: string;
   id?: string;
-  change_reports?: ChangeReportSDKType[];
-  diagnostics?: DiagnosticSDKType[];
+  change_reports: ChangeReportSDKType[];
+  diagnostics: DiagnosticSDKType[];
 }
 function createBaseListServicesRequest(): ListServicesRequest {
   return {
@@ -502,7 +502,7 @@ export const ListServicesRequest = {
 };
 function createBaseListServicesResponse(): ListServicesResponse {
   return {
-    services: undefined,
+    services: [],
     nextPageToken: undefined
   };
 }
@@ -1281,7 +1281,7 @@ export const ListServiceConfigsRequest = {
 };
 function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
   return {
-    serviceConfigs: undefined,
+    serviceConfigs: [],
     nextPageToken: undefined
   };
 }
@@ -1937,7 +1937,7 @@ export const ListServiceRolloutsRequest = {
 };
 function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
   return {
-    rollouts: undefined,
+    rollouts: [],
     nextPageToken: undefined
   };
 }
@@ -2258,8 +2258,8 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
   return {
     serviceName: undefined,
     id: undefined,
-    changeReports: undefined,
-    diagnostics: undefined
+    changeReports: [],
+    diagnostics: []
   };
 }
 export const GenerateConfigReportResponse = {

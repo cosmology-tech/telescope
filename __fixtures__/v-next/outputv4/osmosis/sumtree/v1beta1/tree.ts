@@ -2,10 +2,10 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
-  children?: Child[];
+  children: Child[];
 }
 export interface NodeSDKType {
-  children?: ChildSDKType[];
+  children: ChildSDKType[];
 }
 export interface Child {
   index?: Uint8Array;
@@ -23,7 +23,7 @@ export interface LeafSDKType {
 }
 function createBaseNode(): Node {
   return {
-    children: undefined
+    children: []
   };
 }
 export const Node = {

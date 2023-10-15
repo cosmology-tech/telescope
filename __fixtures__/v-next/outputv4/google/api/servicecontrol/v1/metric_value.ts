@@ -19,7 +19,7 @@ export interface MetricValue {
    * the overriding relationship.
    * Note that this map must not contain monitored resource labels.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -49,7 +49,7 @@ export interface MetricValue {
 }
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   start_time?: Date;
@@ -69,7 +69,7 @@ export interface MetricValueSet {
   /** The metric name defined in the service configuration. */
   metricName?: string;
   /** The values in this metric. */
-  metricValues?: MetricValue[];
+  metricValues: MetricValue[];
 }
 /**
  * Represents a set of metric values in the same metric.
@@ -78,7 +78,7 @@ export interface MetricValueSet {
  */
 export interface MetricValueSetSDKType {
   metric_name?: string;
-  metric_values?: MetricValueSDKType[];
+  metric_values: MetricValueSDKType[];
 }
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   return {
@@ -176,7 +176,7 @@ export const MetricValue_LabelsEntry = {
 };
 function createBaseMetricValue(): MetricValue {
   return {
-    labels: undefined,
+    labels: {},
     startTime: undefined,
     endTime: undefined,
     boolValue: undefined,
@@ -422,7 +422,7 @@ export const MetricValue = {
 function createBaseMetricValueSet(): MetricValueSet {
   return {
     metricName: undefined,
-    metricValues: undefined
+    metricValues: []
   };
 }
 export const MetricValueSet = {

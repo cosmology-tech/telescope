@@ -5,30 +5,30 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
   /** class defines the class of the nft type. */
-  classes?: Class[];
-  entries?: Entry[];
+  classes: Class[];
+  entries: Entry[];
 }
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateSDKType {
-  classes?: ClassSDKType[];
-  entries?: EntrySDKType[];
+  classes: ClassSDKType[];
+  entries: EntrySDKType[];
 }
 /** Entry Defines all nft owned by a person */
 export interface Entry {
   /** owner is the owner address of the following nft */
   owner?: string;
   /** nfts is a group of nfts of the same owner */
-  nfts?: NFT[];
+  nfts: NFT[];
 }
 /** Entry Defines all nft owned by a person */
 export interface EntrySDKType {
   owner?: string;
-  nfts?: NFTSDKType[];
+  nfts: NFTSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    classes: undefined,
-    entries: undefined
+    classes: [],
+    entries: []
   };
 }
 export const GenesisState = {
@@ -159,7 +159,7 @@ export const GenesisState = {
 function createBaseEntry(): Entry {
   return {
     owner: undefined,
-    nfts: undefined
+    nfts: []
   };
 }
 export const Entry = {

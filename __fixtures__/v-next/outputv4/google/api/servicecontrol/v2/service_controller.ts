@@ -23,7 +23,7 @@ export interface CheckRequest {
   /** Describes attributes about the operation being executed by the service. */
   attributes?: AttributeContext;
   /** Describes the resources and the policies applied to each resource. */
-  resources?: ResourceInfo[];
+  resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
   flags?: string;
 }
@@ -32,7 +32,7 @@ export interface CheckRequestSDKType {
   service_name?: string;
   service_config_id?: string;
   attributes?: AttributeContextSDKType;
-  resources?: ResourceInfoSDKType[];
+  resources: ResourceInfoSDKType[];
   flags?: string;
 }
 /** Describes a resource referenced in the request. */
@@ -89,14 +89,14 @@ export interface CheckResponse {
    */
   status?: Status;
   /** Returns a set of request contexts generated from the `CheckRequest`. */
-  headers?: {
+  headers: {
     [key: string]: string;
   };
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   status?: StatusSDKType;
-  headers?: {
+  headers: {
     [key: string]: string;
   };
 }
@@ -122,13 +122,13 @@ export interface ReportRequest {
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
-  operations?: AttributeContext[];
+  operations: AttributeContext[];
 }
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name?: string;
   service_config_id?: string;
-  operations?: AttributeContextSDKType[];
+  operations: AttributeContextSDKType[];
 }
 /**
  * Response message for the Report method.
@@ -145,7 +145,7 @@ function createBaseCheckRequest(): CheckRequest {
     serviceName: undefined,
     serviceConfigId: undefined,
     attributes: undefined,
-    resources: undefined,
+    resources: [],
     flags: undefined
   };
 }
@@ -543,7 +543,7 @@ export const CheckResponse_HeadersEntry = {
 function createBaseCheckResponse(): CheckResponse {
   return {
     status: undefined,
-    headers: undefined
+    headers: {}
   };
 }
 export const CheckResponse = {
@@ -695,7 +695,7 @@ function createBaseReportRequest(): ReportRequest {
   return {
     serviceName: undefined,
     serviceConfigId: undefined,
-    operations: undefined
+    operations: []
   };
 }
 export const ReportRequest = {

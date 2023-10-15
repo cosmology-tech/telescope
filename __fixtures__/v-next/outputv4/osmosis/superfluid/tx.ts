@@ -89,10 +89,10 @@ export interface MsgUnPoolWhitelistedPoolSDKType {
   pool_id?: bigint;
 }
 export interface MsgUnPoolWhitelistedPoolResponse {
-  exitedLockIds?: bigint[];
+  exitedLockIds: bigint[];
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
-  exited_lock_ids?: bigint[];
+  exited_lock_ids: bigint[];
 }
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
   return {
@@ -1004,7 +1004,7 @@ export const MsgUnPoolWhitelistedPool = {
 };
 function createBaseMsgUnPoolWhitelistedPoolResponse(): MsgUnPoolWhitelistedPoolResponse {
   return {
-    exitedLockIds: undefined
+    exitedLockIds: []
   };
 }
 export const MsgUnPoolWhitelistedPoolResponse = {

@@ -17,14 +17,14 @@ export interface MsgRegisterDevFeeInfo {
    * the nonce that determines the contract's address - it can be an EOA nonce
    * or a factory contract nonce
    */
-  nonces?: bigint[];
+  nonces: bigint[];
 }
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address?: string;
   deployer_address?: string;
   withdraw_address?: string;
-  nonces?: bigint[];
+  nonces: bigint[];
 }
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -88,7 +88,7 @@ function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
     contractAddress: undefined,
     deployerAddress: undefined,
     withdrawAddress: undefined,
-    nonces: undefined
+    nonces: []
   };
 }
 export const MsgRegisterDevFeeInfo = {

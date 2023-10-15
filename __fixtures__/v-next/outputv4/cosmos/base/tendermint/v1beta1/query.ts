@@ -20,14 +20,14 @@ export interface GetValidatorSetByHeightRequestSDKType {
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
   blockHeight?: bigint;
-  validators?: Validator[];
+  validators: Validator[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponseSDKType {
   block_height?: bigint;
-  validators?: ValidatorSDKType[];
+  validators: ValidatorSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
@@ -42,14 +42,14 @@ export interface GetLatestValidatorSetRequestSDKType {
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
   blockHeight?: bigint;
-  validators?: Validator[];
+  validators: Validator[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponseSDKType {
   block_height?: bigint;
-  validators?: ValidatorSDKType[];
+  validators: ValidatorSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** Validator is the type for the validator-set. */
@@ -132,7 +132,7 @@ export interface VersionInfo {
   gitCommit?: string;
   buildTags?: string;
   goVersion?: string;
-  buildDeps?: Module[];
+  buildDeps: Module[];
   /** Since: cosmos-sdk 0.43 */
   cosmosSdkVersion?: string;
 }
@@ -144,7 +144,7 @@ export interface VersionInfoSDKType {
   git_commit?: string;
   build_tags?: string;
   go_version?: string;
-  build_deps?: ModuleSDKType[];
+  build_deps: ModuleSDKType[];
   cosmos_sdk_version?: string;
 }
 /** Module is the type for VersionInfo */
@@ -278,7 +278,7 @@ export const GetValidatorSetByHeightRequest = {
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return {
     blockHeight: undefined,
-    validators: undefined,
+    validators: [],
     pagination: undefined
   };
 }
@@ -512,7 +512,7 @@ export const GetLatestValidatorSetRequest = {
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return {
     blockHeight: undefined,
-    validators: undefined,
+    validators: [],
     pagination: undefined
   };
 }
@@ -1544,7 +1544,7 @@ function createBaseVersionInfo(): VersionInfo {
     gitCommit: undefined,
     buildTags: undefined,
     goVersion: undefined,
-    buildDeps: undefined,
+    buildDeps: [],
     cosmosSdkVersion: undefined
   };
 }

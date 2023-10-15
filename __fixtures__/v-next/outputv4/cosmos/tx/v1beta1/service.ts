@@ -110,7 +110,7 @@ export function broadcastModeToJSON(object: BroadcastMode): string {
  */
 export interface GetTxsEventRequest {
   /** events is the list of transaction event type. */
-  events?: string[];
+  events: string[];
   /** pagination defines a pagination for the request. */
   pagination?: PageRequest;
   orderBy?: OrderBy;
@@ -120,7 +120,7 @@ export interface GetTxsEventRequest {
  * RPC method.
  */
 export interface GetTxsEventRequestSDKType {
-  events?: string[];
+  events: string[];
   pagination?: PageRequestSDKType;
   order_by?: OrderBy;
 }
@@ -130,9 +130,9 @@ export interface GetTxsEventRequestSDKType {
  */
 export interface GetTxsEventResponse {
   /** txs is the list of queried transactions. */
-  txs?: Tx[];
+  txs: Tx[];
   /** tx_responses is the list of queried TxResponses. */
-  txResponses?: TxResponse[];
+  txResponses: TxResponse[];
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
 }
@@ -141,8 +141,8 @@ export interface GetTxsEventResponse {
  * RPC method.
  */
 export interface GetTxsEventResponseSDKType {
-  txs?: TxSDKType[];
-  tx_responses?: TxResponseSDKType[];
+  txs: TxSDKType[];
+  tx_responses: TxResponseSDKType[];
   pagination?: PageResponseSDKType;
 }
 /**
@@ -278,7 +278,7 @@ export interface GetBlockWithTxsRequestSDKType {
  */
 export interface GetBlockWithTxsResponse {
   /** txs are the transactions in the block. */
-  txs?: Tx[];
+  txs: Tx[];
   blockId?: BlockID;
   block?: Block;
   /** pagination defines a pagination for the response. */
@@ -290,14 +290,14 @@ export interface GetBlockWithTxsResponse {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponseSDKType {
-  txs?: TxSDKType[];
+  txs: TxSDKType[];
   block_id?: BlockIDSDKType;
   block?: BlockSDKType;
   pagination?: PageResponseSDKType;
 }
 function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return {
-    events: undefined,
+    events: [],
     pagination: undefined,
     orderBy: undefined
   };
@@ -433,8 +433,8 @@ export const GetTxsEventRequest = {
 };
 function createBaseGetTxsEventResponse(): GetTxsEventResponse {
   return {
-    txs: undefined,
-    txResponses: undefined,
+    txs: [],
+    txResponses: [],
     pagination: undefined
   };
 }
@@ -1318,7 +1318,7 @@ export const GetBlockWithTxsRequest = {
 };
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
   return {
-    txs: undefined,
+    txs: [],
     blockId: undefined,
     block: undefined,
     pagination: undefined

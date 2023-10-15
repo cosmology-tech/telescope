@@ -255,13 +255,13 @@ export interface DenomOwnerSDKType {
 }
 /** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
 export interface QueryDenomOwnersResponse {
-  denomOwners?: DenomOwner[];
+  denomOwners: DenomOwner[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 /** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
 export interface QueryDenomOwnersResponseSDKType {
-  denom_owners?: DenomOwnerSDKType[];
+  denom_owners: DenomOwnerSDKType[];
   pagination?: PageResponseSDKType;
 }
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
@@ -2114,7 +2114,7 @@ export const DenomOwner = {
 };
 function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
   return {
-    denomOwners: undefined,
+    denomOwners: [],
     pagination: undefined
   };
 }

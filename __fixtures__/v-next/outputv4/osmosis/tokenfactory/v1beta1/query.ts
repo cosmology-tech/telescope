@@ -63,14 +63,14 @@ export interface QueryDenomsFromCreatorRequestSDKType {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorResponse {
-  denoms?: string[];
+  denoms: string[];
 }
 /**
  * QueryDenomsFromCreatorRequest defines the response structure for the
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorResponseSDKType {
-  denoms?: string[];
+  denoms: string[];
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -519,7 +519,7 @@ export const QueryDenomsFromCreatorRequest = {
 };
 function createBaseQueryDenomsFromCreatorResponse(): QueryDenomsFromCreatorResponse {
   return {
-    denoms: undefined
+    denoms: []
   };
 }
 export const QueryDenomsFromCreatorResponse = {

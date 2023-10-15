@@ -243,11 +243,11 @@ export interface Type {
   /** The fully qualified message name. */
   name?: string;
   /** The list of fields. */
-  fields?: Field[];
+  fields: Field[];
   /** The list of types appearing in `oneof` definitions in this type. */
-  oneofs?: string[];
+  oneofs: string[];
   /** The protocol buffer options. */
-  options?: Option[];
+  options: Option[];
   /** The source context. */
   sourceContext?: SourceContext;
   /** The source syntax. */
@@ -256,9 +256,9 @@ export interface Type {
 /** A protocol buffer message type. */
 export interface TypeSDKType {
   name?: string;
-  fields?: FieldSDKType[];
-  oneofs?: string[];
-  options?: OptionSDKType[];
+  fields: FieldSDKType[];
+  oneofs: string[];
+  options: OptionSDKType[];
   source_context?: SourceContextSDKType;
   syntax?: Syntax;
 }
@@ -285,7 +285,7 @@ export interface Field {
   /** Whether to use alternative packed wire representation. */
   packed?: boolean;
   /** The protocol buffer options. */
-  options?: Option[];
+  options: Option[];
   /** The field JSON name. */
   jsonName?: string;
   /** The string value of the default value of this field. Proto2 syntax only. */
@@ -300,7 +300,7 @@ export interface FieldSDKType {
   type_url?: string;
   oneof_index?: number;
   packed?: boolean;
-  options?: OptionSDKType[];
+  options: OptionSDKType[];
   json_name?: string;
   default_value?: string;
 }
@@ -309,9 +309,9 @@ export interface Enum {
   /** Enum type name. */
   name?: string;
   /** Enum value definitions. */
-  enumvalue?: EnumValue[];
+  enumvalue: EnumValue[];
   /** Protocol buffer options. */
-  options?: Option[];
+  options: Option[];
   /** The source context. */
   sourceContext?: SourceContext;
   /** The source syntax. */
@@ -320,8 +320,8 @@ export interface Enum {
 /** Enum type definition. */
 export interface EnumSDKType {
   name?: string;
-  enumvalue?: EnumValueSDKType[];
-  options?: OptionSDKType[];
+  enumvalue: EnumValueSDKType[];
+  options: OptionSDKType[];
   source_context?: SourceContextSDKType;
   syntax?: Syntax;
 }
@@ -332,13 +332,13 @@ export interface EnumValue {
   /** Enum value number. */
   number?: number;
   /** Protocol buffer options. */
-  options?: Option[];
+  options: Option[];
 }
 /** Enum value definition. */
 export interface EnumValueSDKType {
   name?: string;
   number?: number;
-  options?: OptionSDKType[];
+  options: OptionSDKType[];
 }
 /**
  * A protocol buffer option, which can be attached to a message, field,
@@ -371,9 +371,9 @@ export interface OptionSDKType {
 function createBaseType(): Type {
   return {
     name: undefined,
-    fields: undefined,
-    oneofs: undefined,
-    options: undefined,
+    fields: [],
+    oneofs: [],
+    options: [],
     sourceContext: undefined,
     syntax: undefined
   };
@@ -576,7 +576,7 @@ function createBaseField(): Field {
     typeUrl: undefined,
     oneofIndex: undefined,
     packed: undefined,
-    options: undefined,
+    options: [],
     jsonName: undefined,
     defaultValue: undefined
   };
@@ -803,8 +803,8 @@ export const Field = {
 function createBaseEnum(): Enum {
   return {
     name: undefined,
-    enumvalue: undefined,
-    options: undefined,
+    enumvalue: [],
+    options: [],
     sourceContext: undefined,
     syntax: undefined
   };
@@ -976,7 +976,7 @@ function createBaseEnumValue(): EnumValue {
   return {
     name: undefined,
     number: undefined,
-    options: undefined
+    options: []
   };
 }
 export const EnumValue = {

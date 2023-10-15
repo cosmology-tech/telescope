@@ -56,7 +56,7 @@ export interface AttributeContext {
   /** Represents an API operation that is involved to a network activity. */
   api?: AttributeContext_Api;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
-  extensions?: Any[];
+  extensions: Any[];
 }
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -85,7 +85,7 @@ export interface AttributeContextSDKType {
   response?: AttributeContext_ResponseSDKType;
   resource?: AttributeContext_ResourceSDKType;
   api?: AttributeContext_ApiSDKType;
-  extensions?: AnySDKType[];
+  extensions: AnySDKType[];
 }
 export interface AttributeContext_Peer_LabelsEntry {
   key: string;
@@ -107,7 +107,7 @@ export interface AttributeContext_Peer {
   /** The network port of the peer. */
   port?: bigint;
   /** The labels associated with the peer. */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -132,7 +132,7 @@ export interface AttributeContext_Peer {
 export interface AttributeContext_PeerSDKType {
   ip?: string;
   port?: bigint;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   principal?: string;
@@ -208,7 +208,7 @@ export interface AttributeContext_Auth {
    * Consult the documentation for the credential issuer to determine the
    * information provided.
    */
-  audiences?: string[];
+  audiences: string[];
   /**
    * The authorized presenter of the credential. Reflects the optional
    * Authorized Presenter (`azp`) claim within a JWT or the
@@ -243,7 +243,7 @@ export interface AttributeContext_Auth {
    * Example:
    * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
    */
-  accessLevels?: string[];
+  accessLevels: string[];
 }
 /**
  * This message defines request authentication attributes. Terminology is
@@ -252,10 +252,10 @@ export interface AttributeContext_Auth {
  */
 export interface AttributeContext_AuthSDKType {
   principal?: string;
-  audiences?: string[];
+  audiences: string[];
   presenter?: string;
   claims?: StructSDKType;
-  access_levels?: string[];
+  access_levels: string[];
 }
 export interface AttributeContext_Request_HeadersEntry {
   key: string;
@@ -284,7 +284,7 @@ export interface AttributeContext_Request {
    * must be merged according to the HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
-  headers?: {
+  headers: {
     [key: string]: string;
   };
   /** The HTTP URL path. */
@@ -331,7 +331,7 @@ export interface AttributeContext_Request {
 export interface AttributeContext_RequestSDKType {
   id?: string;
   method?: string;
-  headers?: {
+  headers: {
     [key: string]: string;
   };
   path?: string;
@@ -366,7 +366,7 @@ export interface AttributeContext_Response {
    * must be merged according to HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
-  headers?: {
+  headers: {
     [key: string]: string;
   };
   /**
@@ -389,7 +389,7 @@ export interface AttributeContext_Response {
 export interface AttributeContext_ResponseSDKType {
   code?: bigint;
   size?: bigint;
-  headers?: {
+  headers: {
     [key: string]: string;
   };
   time?: Date;
@@ -449,7 +449,7 @@ export interface AttributeContext_Resource {
    * The labels or tags on the resource, such as AWS resource tags and
    * Kubernetes resource labels.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -467,7 +467,7 @@ export interface AttributeContext_Resource {
    * 
    * More info: https://kubernetes.io/docs/user-guide/annotations
    */
-  annotations?: {
+  annotations: {
     [key: string]: string;
   };
   /** Mutable. The display name set by clients. Must be <= 63 characters. */
@@ -515,11 +515,11 @@ export interface AttributeContext_ResourceSDKType {
   service?: string;
   name?: string;
   type?: string;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   uid?: string;
-  annotations?: {
+  annotations: {
     [key: string]: string;
   };
   display_name?: string;
@@ -538,7 +538,7 @@ function createBaseAttributeContext(): AttributeContext {
     response: undefined,
     resource: undefined,
     api: undefined,
-    extensions: undefined
+    extensions: []
   };
 }
 export const AttributeContext = {
@@ -844,7 +844,7 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
   return {
     ip: undefined,
     port: undefined,
-    labels: undefined,
+    labels: {},
     principal: undefined,
     regionCode: undefined
   };
@@ -1172,10 +1172,10 @@ export const AttributeContext_Api = {
 function createBaseAttributeContext_Auth(): AttributeContext_Auth {
   return {
     principal: undefined,
-    audiences: undefined,
+    audiences: [],
     presenter: undefined,
     claims: undefined,
-    accessLevels: undefined
+    accessLevels: []
   };
 }
 export const AttributeContext_Auth = {
@@ -1439,7 +1439,7 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
   return {
     id: undefined,
     method: undefined,
-    headers: undefined,
+    headers: {},
     path: undefined,
     host: undefined,
     scheme: undefined,
@@ -1838,7 +1838,7 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
   return {
     code: undefined,
     size: undefined,
-    headers: undefined,
+    headers: {},
     time: undefined,
     backendLatency: undefined
   };
@@ -2231,9 +2231,9 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
     service: undefined,
     name: undefined,
     type: undefined,
-    labels: undefined,
+    labels: {},
     uid: undefined,
-    annotations: undefined,
+    annotations: {},
     displayName: undefined,
     createTime: undefined,
     updateTime: undefined,

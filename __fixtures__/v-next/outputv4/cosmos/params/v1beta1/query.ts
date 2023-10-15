@@ -38,14 +38,14 @@ export interface QuerySubspacesRequestSDKType {}
  * registered subspaces and all keys for a subspace.
  */
 export interface QuerySubspacesResponse {
-  subspaces?: Subspace[];
+  subspaces: Subspace[];
 }
 /**
  * QuerySubspacesResponse defines the response types for querying for all
  * registered subspaces and all keys for a subspace.
  */
 export interface QuerySubspacesResponseSDKType {
-  subspaces?: SubspaceSDKType[];
+  subspaces: SubspaceSDKType[];
 }
 /**
  * Subspace defines a parameter subspace name and all the keys that exist for
@@ -53,7 +53,7 @@ export interface QuerySubspacesResponseSDKType {
  */
 export interface Subspace {
   subspace?: string;
-  keys?: string[];
+  keys: string[];
 }
 /**
  * Subspace defines a parameter subspace name and all the keys that exist for
@@ -61,7 +61,7 @@ export interface Subspace {
  */
 export interface SubspaceSDKType {
   subspace?: string;
-  keys?: string[];
+  keys: string[];
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {
@@ -339,7 +339,7 @@ export const QuerySubspacesRequest = {
 };
 function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
   return {
-    subspaces: undefined
+    subspaces: []
   };
 }
 export const QuerySubspacesResponse = {
@@ -444,7 +444,7 @@ export const QuerySubspacesResponse = {
 function createBaseSubspace(): Subspace {
   return {
     subspace: undefined,
-    keys: undefined
+    keys: []
   };
 }
 export const Subspace = {

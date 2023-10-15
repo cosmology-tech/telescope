@@ -105,7 +105,7 @@ export interface ServiceConfig {
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis?: Api[];
+  apis: Api[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
@@ -121,12 +121,12 @@ export interface ServiceConfig {
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints?: Endpoint[];
+  endpoints: Endpoint[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitoredResources?: MonitoredResourceDescriptor[];
+  monitoredResources: MonitoredResourceDescriptor[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
@@ -137,13 +137,13 @@ export interface ServiceConfig {
 export interface ServiceConfigSDKType {
   name?: string;
   title?: string;
-  apis?: ApiSDKType[];
+  apis: ApiSDKType[];
   documentation?: DocumentationSDKType;
   quota?: QuotaSDKType;
   authentication?: AuthenticationSDKType;
   usage?: UsageSDKType;
-  endpoints?: EndpointSDKType[];
-  monitored_resources?: MonitoredResourceDescriptorSDKType[];
+  endpoints: EndpointSDKType[];
+  monitored_resources: MonitoredResourceDescriptorSDKType[];
   monitoring?: MonitoringSDKType;
 }
 /** The operation metadata returned for the batchend services operation. */
@@ -152,11 +152,11 @@ export interface OperationMetadata {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resourceNames?: string[];
+  resourceNames: string[];
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
-  resource_names?: string[];
+  resource_names: string[];
 }
 function createBaseService(): Service {
   return {
@@ -295,13 +295,13 @@ function createBaseServiceConfig(): ServiceConfig {
   return {
     name: undefined,
     title: undefined,
-    apis: undefined,
+    apis: [],
     documentation: undefined,
     quota: undefined,
     authentication: undefined,
     usage: undefined,
-    endpoints: undefined,
-    monitoredResources: undefined,
+    endpoints: [],
+    monitoredResources: [],
     monitoring: undefined
   };
 }
@@ -560,7 +560,7 @@ export const ServiceConfig = {
 };
 function createBaseOperationMetadata(): OperationMetadata {
   return {
-    resourceNames: undefined
+    resourceNames: []
   };
 }
 export const OperationMetadata = {

@@ -45,7 +45,7 @@ export interface Context {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules?: ContextRule[];
+  rules: ContextRule[];
 }
 /**
  * `Context` defines which contexts an API requests.
@@ -86,7 +86,7 @@ export interface Context {
  * here.
  */
 export interface ContextSDKType {
-  rules?: ContextRuleSDKType[];
+  rules: ContextRuleSDKType[];
 }
 /**
  * A context rule provides information about the context for an individual API
@@ -100,19 +100,19 @@ export interface ContextRule {
    */
   selector?: string;
   /** A list of full type names of requested contexts. */
-  requested?: string[];
+  requested: string[];
   /** A list of full type names of provided contexts. */
-  provided?: string[];
+  provided: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from client to backend.
    */
-  allowedRequestExtensions?: string[];
+  allowedRequestExtensions: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from backend to client.
    */
-  allowedResponseExtensions?: string[];
+  allowedResponseExtensions: string[];
 }
 /**
  * A context rule provides information about the context for an individual API
@@ -120,14 +120,14 @@ export interface ContextRule {
  */
 export interface ContextRuleSDKType {
   selector?: string;
-  requested?: string[];
-  provided?: string[];
-  allowed_request_extensions?: string[];
-  allowed_response_extensions?: string[];
+  requested: string[];
+  provided: string[];
+  allowed_request_extensions: string[];
+  allowed_response_extensions: string[];
 }
 function createBaseContext(): Context {
   return {
-    rules: undefined
+    rules: []
   };
 }
 export const Context = {
@@ -226,10 +226,10 @@ export const Context = {
 function createBaseContextRule(): ContextRule {
   return {
     selector: undefined,
-    requested: undefined,
-    provided: undefined,
-    allowedRequestExtensions: undefined,
-    allowedResponseExtensions: undefined
+    requested: [],
+    provided: [],
+    allowedRequestExtensions: [],
+    allowedResponseExtensions: []
   };
 }
 export const ContextRule = {

@@ -87,7 +87,7 @@ export function storageTypeToJSON(object: StorageType): string {
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptor {
-  schemaFile?: ModuleSchemaDescriptor_FileEntry[];
+  schemaFile: ModuleSchemaDescriptor_FileEntry[];
   /**
    * prefix is an optional prefix that precedes all keys in this module's
    * store.
@@ -96,7 +96,7 @@ export interface ModuleSchemaDescriptor {
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorSDKType {
-  schema_file?: ModuleSchemaDescriptor_FileEntrySDKType[];
+  schema_file: ModuleSchemaDescriptor_FileEntrySDKType[];
   prefix?: Uint8Array;
 }
 /** FileEntry describes an ORM file used in a module. */
@@ -127,7 +127,7 @@ export interface ModuleSchemaDescriptor_FileEntrySDKType {
 }
 function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
   return {
-    schemaFile: undefined,
+    schemaFile: [],
     prefix: undefined
   };
 }

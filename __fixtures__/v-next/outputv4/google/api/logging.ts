@@ -39,14 +39,14 @@ export interface Logging {
    * different monitored resource type. A log can be used in at most
    * one producer destination.
    */
-  producerDestinations?: Logging_LoggingDestination[];
+  producerDestinations: Logging_LoggingDestination[];
   /**
    * Logging configurations for sending logs to the consumer project.
    * There can be multiple consumer destinations, each one must have a
    * different monitored resource type. A log can be used in at most
    * one consumer destination.
    */
-  consumerDestinations?: Logging_LoggingDestination[];
+  consumerDestinations: Logging_LoggingDestination[];
 }
 /**
  * Logging configuration of the service.
@@ -80,8 +80,8 @@ export interface Logging {
  *         - activity_history
  */
 export interface LoggingSDKType {
-  producer_destinations?: Logging_LoggingDestinationSDKType[];
-  consumer_destinations?: Logging_LoggingDestinationSDKType[];
+  producer_destinations: Logging_LoggingDestinationSDKType[];
+  consumer_destinations: Logging_LoggingDestinationSDKType[];
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -99,7 +99,7 @@ export interface Logging_LoggingDestination {
    * not a domain scoped name, it will be automatically prefixed with
    * the service name followed by "/".
    */
-  logs?: string[];
+  logs: string[];
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -107,12 +107,12 @@ export interface Logging_LoggingDestination {
  */
 export interface Logging_LoggingDestinationSDKType {
   monitored_resource?: string;
-  logs?: string[];
+  logs: string[];
 }
 function createBaseLogging(): Logging {
   return {
-    producerDestinations: undefined,
-    consumerDestinations: undefined
+    producerDestinations: [],
+    consumerDestinations: []
   };
 }
 export const Logging = {
@@ -237,7 +237,7 @@ export const Logging = {
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
   return {
     monitoredResource: undefined,
-    logs: undefined
+    logs: []
   };
 }
 export const Logging_LoggingDestination = {

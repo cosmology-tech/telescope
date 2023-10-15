@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
  * signed and with which modes.
  */
 export interface MultiSignature {
-  signatures?: Uint8Array[];
+  signatures: Uint8Array[];
 }
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -15,7 +15,7 @@ export interface MultiSignature {
  * signed and with which modes.
  */
 export interface MultiSignatureSDKType {
-  signatures?: Uint8Array[];
+  signatures: Uint8Array[];
 }
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -39,7 +39,7 @@ export interface CompactBitArraySDKType {
 }
 function createBaseMultiSignature(): MultiSignature {
   return {
-    signatures: undefined
+    signatures: []
   };
 }
 export const MultiSignature = {

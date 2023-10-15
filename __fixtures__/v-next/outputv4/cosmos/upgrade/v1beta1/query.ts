@@ -125,7 +125,7 @@ export interface QueryModuleVersionsRequestSDKType {
  */
 export interface QueryModuleVersionsResponse {
   /** module_versions is a list of module names with their consensus versions. */
-  moduleVersions?: ModuleVersion[];
+  moduleVersions: ModuleVersion[];
 }
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
@@ -134,7 +134,7 @@ export interface QueryModuleVersionsResponse {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponseSDKType {
-  module_versions?: ModuleVersionSDKType[];
+  module_versions: ModuleVersionSDKType[];
 }
 /**
  * QueryAuthorityRequest is the request type for Query/Authority
@@ -801,7 +801,7 @@ export const QueryModuleVersionsRequest = {
 };
 function createBaseQueryModuleVersionsResponse(): QueryModuleVersionsResponse {
   return {
-    moduleVersions: undefined
+    moduleVersions: []
   };
 }
 export const QueryModuleVersionsResponse = {

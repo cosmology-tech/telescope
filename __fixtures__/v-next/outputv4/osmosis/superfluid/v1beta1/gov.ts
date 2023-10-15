@@ -27,7 +27,7 @@ export interface SetSuperfluidAssetsProposalSDKType {
 export interface RemoveSuperfluidAssetsProposal {
   title?: string;
   description?: string;
-  superfluidAssetDenoms?: string[];
+  superfluidAssetDenoms: string[];
 }
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
@@ -36,7 +36,7 @@ export interface RemoveSuperfluidAssetsProposal {
 export interface RemoveSuperfluidAssetsProposalSDKType {
   title?: string;
   description?: string;
-  superfluid_asset_denoms?: string[];
+  superfluid_asset_denoms: string[];
 }
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the
@@ -45,7 +45,7 @@ export interface RemoveSuperfluidAssetsProposalSDKType {
 export interface UpdateUnpoolWhiteListProposal {
   title?: string;
   description?: string;
-  ids?: bigint[];
+  ids: bigint[];
   isOverwrite?: boolean;
 }
 /**
@@ -55,7 +55,7 @@ export interface UpdateUnpoolWhiteListProposal {
 export interface UpdateUnpoolWhiteListProposalSDKType {
   title?: string;
   description?: string;
-  ids?: bigint[];
+  ids: bigint[];
   is_overwrite?: boolean;
 }
 function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
@@ -196,7 +196,7 @@ function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsPropo
   return {
     title: undefined,
     description: undefined,
-    superfluidAssetDenoms: undefined
+    superfluidAssetDenoms: []
   };
 }
 export const RemoveSuperfluidAssetsProposal = {
@@ -330,7 +330,7 @@ function createBaseUpdateUnpoolWhiteListProposal(): UpdateUnpoolWhiteListProposa
   return {
     title: undefined,
     description: undefined,
-    ids: undefined,
+    ids: [],
     isOverwrite: undefined
   };
 }

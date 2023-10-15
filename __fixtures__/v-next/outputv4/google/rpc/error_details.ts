@@ -42,13 +42,13 @@ export interface RetryInfoSDKType {
 /** Describes additional debugging info. */
 export interface DebugInfo {
   /** The stack trace entries indicating where the error occurred. */
-  stackEntries?: string[];
+  stackEntries: string[];
   /** Additional debugging information provided by the server. */
   detail?: string;
 }
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
-  stack_entries?: string[];
+  stack_entries: string[];
   detail?: string;
 }
 /**
@@ -66,7 +66,7 @@ export interface DebugInfoSDKType {
  */
 export interface QuotaFailure {
   /** Describes all quota violations. */
-  violations?: QuotaFailure_Violation[];
+  violations: QuotaFailure_Violation[];
 }
 /**
  * Describes how a quota check failed.
@@ -82,7 +82,7 @@ export interface QuotaFailure {
  * quota failure.
  */
 export interface QuotaFailureSDKType {
-  violations?: QuotaFailure_ViolationSDKType[];
+  violations: QuotaFailure_ViolationSDKType[];
 }
 /**
  * A message type used to describe a single quota violation.  For example, a
@@ -175,7 +175,7 @@ export interface ErrorInfo {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
-  metadata?: {
+  metadata: {
     [key: string]: string;
   };
 }
@@ -208,7 +208,7 @@ export interface ErrorInfo {
 export interface ErrorInfoSDKType {
   reason?: string;
   domain?: string;
-  metadata?: {
+  metadata: {
     [key: string]: string;
   };
 }
@@ -221,7 +221,7 @@ export interface ErrorInfoSDKType {
  */
 export interface PreconditionFailure {
   /** Describes all precondition violations. */
-  violations?: PreconditionFailure_Violation[];
+  violations: PreconditionFailure_Violation[];
 }
 /**
  * Describes what preconditions have failed.
@@ -231,7 +231,7 @@ export interface PreconditionFailure {
  * PreconditionFailure message.
  */
 export interface PreconditionFailureSDKType {
-  violations?: PreconditionFailure_ViolationSDKType[];
+  violations: PreconditionFailure_ViolationSDKType[];
 }
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_Violation {
@@ -267,14 +267,14 @@ export interface PreconditionFailure_ViolationSDKType {
  */
 export interface BadRequest {
   /** Describes all violations in a client request. */
-  fieldViolations?: BadRequest_FieldViolation[];
+  fieldViolations: BadRequest_FieldViolation[];
 }
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
  */
 export interface BadRequestSDKType {
-  field_violations?: BadRequest_FieldViolationSDKType[];
+  field_violations: BadRequest_FieldViolationSDKType[];
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolation {
@@ -359,7 +359,7 @@ export interface ResourceInfoSDKType {
  */
 export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
-  links?: Help_Link[];
+  links: Help_Link[];
 }
 /**
  * Provides links to documentation or for performing an out of band action.
@@ -369,7 +369,7 @@ export interface Help {
  * directly to the right place in the developer console to flip the bit.
  */
 export interface HelpSDKType {
-  links?: Help_LinkSDKType[];
+  links: Help_LinkSDKType[];
 }
 /** Describes a URL link. */
 export interface Help_Link {
@@ -495,7 +495,7 @@ export const RetryInfo = {
 };
 function createBaseDebugInfo(): DebugInfo {
   return {
-    stackEntries: undefined,
+    stackEntries: [],
     detail: undefined
   };
 }
@@ -608,7 +608,7 @@ export const DebugInfo = {
 };
 function createBaseQuotaFailure(): QuotaFailure {
   return {
-    violations: undefined
+    violations: []
   };
 }
 export const QuotaFailure = {
@@ -903,7 +903,7 @@ function createBaseErrorInfo(): ErrorInfo {
   return {
     reason: undefined,
     domain: undefined,
-    metadata: undefined
+    metadata: {}
   };
 }
 export const ErrorInfo = {
@@ -1065,7 +1065,7 @@ export const ErrorInfo = {
 };
 function createBasePreconditionFailure(): PreconditionFailure {
   return {
-    violations: undefined
+    violations: []
   };
 }
 export const PreconditionFailure = {
@@ -1279,7 +1279,7 @@ export const PreconditionFailure_Violation = {
 };
 function createBaseBadRequest(): BadRequest {
   return {
-    fieldViolations: undefined
+    fieldViolations: []
   };
 }
 export const BadRequest = {
@@ -1710,7 +1710,7 @@ export const ResourceInfo = {
 };
 function createBaseHelp(): Help {
   return {
-    links: undefined
+    links: []
   };
 }
 export const Help = {

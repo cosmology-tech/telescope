@@ -218,7 +218,7 @@ export interface LogBucket {
    * Restricting a repeated field will restrict all values. Adding a parent will
    * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
    */
-  restrictedFields?: string[];
+  restrictedFields: string[];
   /**
    * The CMEK settings of the log bucket. If present, new log entries written to
    * this log bucket are encrypted using the CMEK key provided in this
@@ -237,7 +237,7 @@ export interface LogBucketSDKType {
   retention_days?: number;
   locked?: boolean;
   lifecycle_state?: LifecycleState;
-  restricted_fields?: string[];
+  restricted_fields: string[];
   cmek_settings?: CmekSettingsSDKType;
 }
 /** Describes a view over log entries in a bucket. */
@@ -341,7 +341,7 @@ export interface LogSink {
    * If a log entry is matched by both `filter` and one of `exclusion_filters`
    * it will not be exported.
    */
-  exclusions?: LogExclusion[];
+  exclusions: LogExclusion[];
   /** Deprecated. This field is unused. */
   /** @deprecated */
   outputVersionFormat?: LogSink_VersionFormat;
@@ -413,7 +413,7 @@ export interface LogSinkSDKType {
   filter?: string;
   description?: string;
   disabled?: boolean;
-  exclusions?: LogExclusionSDKType[];
+  exclusions: LogExclusionSDKType[];
   /** @deprecated */
   output_version_format?: LogSink_VersionFormat;
   writer_identity?: string;
@@ -489,7 +489,7 @@ export interface ListBucketsRequestSDKType {
 /** The response from ListBuckets. */
 export interface ListBucketsResponse {
   /** A list of buckets. */
-  buckets?: LogBucket[];
+  buckets: LogBucket[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -499,7 +499,7 @@ export interface ListBucketsResponse {
 }
 /** The response from ListBuckets. */
 export interface ListBucketsResponseSDKType {
-  buckets?: LogBucketSDKType[];
+  buckets: LogBucketSDKType[];
   next_page_token?: string;
 }
 /** The parameters to `CreateBucket`. */
@@ -660,7 +660,7 @@ export interface ListViewsRequestSDKType {
 /** The response from ListViews. */
 export interface ListViewsResponse {
   /** A list of views. */
-  views?: LogView[];
+  views: LogView[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -670,7 +670,7 @@ export interface ListViewsResponse {
 }
 /** The response from ListViews. */
 export interface ListViewsResponseSDKType {
-  views?: LogViewSDKType[];
+  views: LogViewSDKType[];
   next_page_token?: string;
 }
 /** The parameters to `CreateView`. */
@@ -796,7 +796,7 @@ export interface ListSinksRequestSDKType {
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponse {
   /** A list of sinks. */
-  sinks?: LogSink[];
+  sinks: LogSink[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -806,7 +806,7 @@ export interface ListSinksResponse {
 }
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseSDKType {
-  sinks?: LogSinkSDKType[];
+  sinks: LogSinkSDKType[];
   next_page_token?: string;
 }
 /** The parameters to `GetSink`. */
@@ -1053,7 +1053,7 @@ export interface ListExclusionsRequestSDKType {
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponse {
   /** A list of exclusions. */
-  exclusions?: LogExclusion[];
+  exclusions: LogExclusion[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -1063,7 +1063,7 @@ export interface ListExclusionsResponse {
 }
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseSDKType {
-  exclusions?: LogExclusionSDKType[];
+  exclusions: LogExclusionSDKType[];
   next_page_token?: string;
 }
 /** The parameters to `GetExclusion`. */
@@ -1594,7 +1594,7 @@ function createBaseLogBucket(): LogBucket {
     retentionDays: undefined,
     locked: undefined,
     lifecycleState: undefined,
-    restrictedFields: undefined,
+    restrictedFields: [],
     cmekSettings: undefined
   };
 }
@@ -1958,7 +1958,7 @@ function createBaseLogSink(): LogSink {
     filter: undefined,
     description: undefined,
     disabled: undefined,
-    exclusions: undefined,
+    exclusions: [],
     outputVersionFormat: undefined,
     writerIdentity: undefined,
     includeChildren: undefined,
@@ -2435,7 +2435,7 @@ export const ListBucketsRequest = {
 };
 function createBaseListBucketsResponse(): ListBucketsResponse {
   return {
-    buckets: undefined,
+    buckets: [],
     nextPageToken: undefined
   };
 }
@@ -3160,7 +3160,7 @@ export const ListViewsRequest = {
 };
 function createBaseListViewsResponse(): ListViewsResponse {
   return {
-    views: undefined,
+    views: [],
     nextPageToken: undefined
   };
 }
@@ -3799,7 +3799,7 @@ export const ListSinksRequest = {
 };
 function createBaseListSinksResponse(): ListSinksResponse {
   return {
-    sinks: undefined,
+    sinks: [],
     nextPageToken: undefined
   };
 }
@@ -4614,7 +4614,7 @@ export const ListExclusionsRequest = {
 };
 function createBaseListExclusionsResponse(): ListExclusionsResponse {
   return {
-    exclusions: undefined,
+    exclusions: [],
     nextPageToken: undefined
   };
 }

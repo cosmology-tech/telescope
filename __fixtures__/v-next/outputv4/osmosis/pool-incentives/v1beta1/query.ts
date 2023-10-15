@@ -11,10 +11,10 @@ export interface QueryGaugeIdsRequestSDKType {
   pool_id?: bigint;
 }
 export interface QueryGaugeIdsResponse {
-  gaugeIdsWithDuration?: QueryGaugeIdsResponse_GaugeIdWithDuration[];
+  gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
 }
 export interface QueryGaugeIdsResponseSDKType {
-  gauge_ids_with_duration?: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType[];
+  gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType[];
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   gaugeId?: bigint;
@@ -174,7 +174,7 @@ export const QueryGaugeIdsRequest = {
 };
 function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
   return {
-    gaugeIdsWithDuration: undefined
+    gaugeIdsWithDuration: []
   };
 }
 export const QueryGaugeIdsResponse = {

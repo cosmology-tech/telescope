@@ -47,10 +47,10 @@ export interface EvalRequest {
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
-  bindings?: {
+  bindings: {
     [key: string]: ExprValue;
   };
-  refs?: {
+  refs: {
     [key: string]: IdRef;
   };
   testNum?: number;
@@ -60,7 +60,7 @@ export interface EvalRequest {
   /** [(gogoproto.nullable) = false] wouldn't work in this case */
   id?: string;
   name?: string;
-  testArray?: string[];
+  testArray: string[];
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/misc.EvalRequest";
@@ -71,10 +71,10 @@ export interface EvalRequestAmino {
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
-  bindings?: {
+  bindings: {
     [key: string]: ExprValueAmino;
   };
-  refs?: {
+  refs: {
     [key: string]: IdRefAmino;
   };
   test_num?: number;
@@ -84,17 +84,17 @@ export interface EvalRequestAmino {
   /** [(gogoproto.nullable) = false] wouldn't work in this case */
   id?: string;
   name?: string;
-  test_array?: string[];
+  test_array: string[];
 }
 export interface EvalRequestAminoMsg {
   type: "/misc.EvalRequest";
   value: EvalRequestAmino;
 }
 export interface EvalRequestSDKType {
-  bindings?: {
+  bindings: {
     [key: string]: ExprValueSDKType;
   };
-  refs?: {
+  refs: {
     [key: string]: IdRefSDKType;
   };
   test_num?: number;
@@ -103,7 +103,7 @@ export interface EvalRequestSDKType {
   instantiate_permission?: AccessConfigSDKType;
   id?: string;
   name?: string;
-  test_array?: string[];
+  test_array: string[];
 }
 export interface AccessConfig {
   sender?: string;
@@ -159,10 +159,10 @@ export const EvalRequest_BindingsEntry = {
     return message;
   },
   fromJSON(object: any): EvalRequest_BindingsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? ExprValue.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseEvalRequest_BindingsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = ExprValue.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: EvalRequest_BindingsEntry): unknown {
     const obj: any = {};
@@ -173,7 +173,9 @@ export const EvalRequest_BindingsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : undefined;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = ExprValue.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
@@ -253,10 +255,10 @@ export const EvalRequest_RefsEntry = {
     return message;
   },
   fromJSON(object: any): EvalRequest_RefsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? IdRef.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseEvalRequest_RefsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = IdRef.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: EvalRequest_RefsEntry): unknown {
     const obj: any = {};
@@ -267,7 +269,9 @@ export const EvalRequest_RefsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_RefsEntry>): EvalRequest_RefsEntry {
     const message = createBaseEvalRequest_RefsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? IdRef.fromPartial(object.value) : undefined;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = IdRef.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: EvalRequest_RefsEntrySDKType): EvalRequest_RefsEntry {
@@ -312,15 +316,15 @@ export const EvalRequest_RefsEntry = {
 };
 function createBaseEvalRequest(): EvalRequest {
   return {
-    bindings: undefined,
-    refs: undefined,
+    bindings: {},
+    refs: {},
     testNum: undefined,
     testString: "",
     testBool: undefined,
     instantiatePermission: undefined,
     id: undefined,
     name: undefined,
-    testArray: undefined
+    testArray: []
   };
 }
 export const EvalRequest = {
@@ -409,27 +413,27 @@ export const EvalRequest = {
     return message;
   },
   fromJSON(object: any): EvalRequest {
-    return {
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
-        [key: string]: IdRef;
-      }>((acc, [key, value]) => {
-        acc[key] = IdRef.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      testNum: isSet(object.testNum) ? Number(object.testNum) : undefined,
-      testString: isSet(object.testString) ? String(object.testString) : "",
-      testBool: isSet(object.testBool) ? Boolean(object.testBool) : undefined,
-      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined,
-      id: isSet(object.id) ? String(object.id) : undefined,
-      name: isSet(object.name) ? String(object.name) : undefined,
-      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseEvalRequest();
+    if (isObject(object.bindings)) obj.bindings = Object.entries(object.bindings).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      acc[key] = ExprValue.fromJSON(value);
+      return acc;
+    }, {});
+    if (isObject(object.refs)) obj.refs = Object.entries(object.refs).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      acc[key] = IdRef.fromJSON(value);
+      return acc;
+    }, {});
+    if (isSet(object.testNum)) obj.testNum = Number(object.testNum);
+    if (isSet(object.testString)) obj.testString = String(object.testString);
+    if (isSet(object.testBool)) obj.testBool = Boolean(object.testBool);
+    if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.testArray)) obj.testArray = object.testArray.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: EvalRequest): unknown {
     const obj: any = {};
@@ -479,7 +483,9 @@ export const EvalRequest = {
     message.testNum = object.testNum ?? undefined;
     message.testString = object.testString ?? "";
     message.testBool = object.testBool ?? undefined;
-    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    if (object.instantiatePermission !== undefined && object.instantiatePermission !== null) {
+      message.instantiatePermission = AccessConfig.fromPartial(object.instantiatePermission);
+    }
     message.id = object.id ?? undefined;
     message.name = object.name ?? undefined;
     message.testArray = object.testArray?.map(e => e) || [];
@@ -655,9 +661,9 @@ export const AccessConfig = {
     return message;
   },
   fromJSON(object: any): AccessConfig {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : undefined
-    };
+    const obj = createBaseAccessConfig();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    return obj;
   },
   toJSON(message: AccessConfig): unknown {
     const obj: any = {};

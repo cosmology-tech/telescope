@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.crypto.multisig";
  */
 export interface LegacyAminoPubKey {
   threshold?: number;
-  publicKeys?: Any[];
+  publicKeys: Any[];
 }
 /**
  * LegacyAminoPubKey specifies a public key type
@@ -18,12 +18,12 @@ export interface LegacyAminoPubKey {
  */
 export interface LegacyAminoPubKeySDKType {
   threshold?: number;
-  public_keys?: AnySDKType[];
+  public_keys: AnySDKType[];
 }
 function createBaseLegacyAminoPubKey(): LegacyAminoPubKey {
   return {
     threshold: undefined,
-    publicKeys: undefined
+    publicKeys: []
   };
 }
 export const LegacyAminoPubKey = {

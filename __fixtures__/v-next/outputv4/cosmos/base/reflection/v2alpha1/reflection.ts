@@ -37,12 +37,12 @@ export interface TxDescriptor {
    */
   fullname?: string;
   /** msgs lists the accepted application messages (sdk.Msg) */
-  msgs?: MsgDescriptor[];
+  msgs: MsgDescriptor[];
 }
 /** TxDescriptor describes the accepted transaction type */
 export interface TxDescriptorSDKType {
   fullname?: string;
-  msgs?: MsgDescriptorSDKType[];
+  msgs: MsgDescriptorSDKType[];
 }
 /**
  * AuthnDescriptor provides information on how to sign transactions without relying
@@ -50,14 +50,14 @@ export interface TxDescriptorSDKType {
  */
 export interface AuthnDescriptor {
   /** sign_modes defines the supported signature algorithm */
-  signModes?: SigningModeDescriptor[];
+  signModes: SigningModeDescriptor[];
 }
 /**
  * AuthnDescriptor provides information on how to sign transactions without relying
  * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
  */
 export interface AuthnDescriptorSDKType {
-  sign_modes?: SigningModeDescriptorSDKType[];
+  sign_modes: SigningModeDescriptorSDKType[];
 }
 /**
  * SigningModeDescriptor provides information on a signing flow of the application
@@ -99,11 +99,11 @@ export interface ChainDescriptorSDKType {
 /** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
 export interface CodecDescriptor {
   /** interfaces is a list of the registerted interfaces descriptors */
-  interfaces?: InterfaceDescriptor[];
+  interfaces: InterfaceDescriptor[];
 }
 /** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
 export interface CodecDescriptorSDKType {
-  interfaces?: InterfaceDescriptorSDKType[];
+  interfaces: InterfaceDescriptorSDKType[];
 }
 /** InterfaceDescriptor describes the implementation of an interface */
 export interface InterfaceDescriptor {
@@ -113,15 +113,15 @@ export interface InterfaceDescriptor {
    * interface_accepting_messages contains information regarding the proto messages which contain the interface as
    * google.protobuf.Any field
    */
-  interfaceAcceptingMessages?: InterfaceAcceptingMessageDescriptor[];
+  interfaceAcceptingMessages: InterfaceAcceptingMessageDescriptor[];
   /** interface_implementers is a list of the descriptors of the interface implementers */
-  interfaceImplementers?: InterfaceImplementerDescriptor[];
+  interfaceImplementers: InterfaceImplementerDescriptor[];
 }
 /** InterfaceDescriptor describes the implementation of an interface */
 export interface InterfaceDescriptorSDKType {
   fullname?: string;
-  interface_accepting_messages?: InterfaceAcceptingMessageDescriptorSDKType[];
-  interface_implementers?: InterfaceImplementerDescriptorSDKType[];
+  interface_accepting_messages: InterfaceAcceptingMessageDescriptorSDKType[];
+  interface_implementers: InterfaceImplementerDescriptorSDKType[];
 }
 /** InterfaceImplementerDescriptor describes an interface implementer */
 export interface InterfaceImplementerDescriptor {
@@ -152,7 +152,7 @@ export interface InterfaceAcceptingMessageDescriptor {
    * which contains the interface as google.protobuf.Any (the interface is the same, but
    * it can be in multiple fields of the same proto message)
    */
-  fieldDescriptorNames?: string[];
+  fieldDescriptorNames: string[];
 }
 /**
  * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
@@ -160,7 +160,7 @@ export interface InterfaceAcceptingMessageDescriptor {
  */
 export interface InterfaceAcceptingMessageDescriptorSDKType {
   fullname?: string;
-  field_descriptor_names?: string[];
+  field_descriptor_names: string[];
 }
 /** ConfigurationDescriptor contains metadata information on the sdk.Config */
 export interface ConfigurationDescriptor {
@@ -264,11 +264,11 @@ export interface GetTxDescriptorResponseSDKType {
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptor {
   /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
-  queryServices?: QueryServiceDescriptor[];
+  queryServices: QueryServiceDescriptor[];
 }
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptorSDKType {
-  query_services?: QueryServiceDescriptorSDKType[];
+  query_services: QueryServiceDescriptorSDKType[];
 }
 /** QueryServiceDescriptor describes a cosmos-sdk queryable service */
 export interface QueryServiceDescriptor {
@@ -277,13 +277,13 @@ export interface QueryServiceDescriptor {
   /** is_module describes if this service is actually exposed by an application's module */
   isModule?: boolean;
   /** methods provides a list of query service methods */
-  methods?: QueryMethodDescriptor[];
+  methods: QueryMethodDescriptor[];
 }
 /** QueryServiceDescriptor describes a cosmos-sdk queryable service */
 export interface QueryServiceDescriptorSDKType {
   fullname?: string;
   is_module?: boolean;
-  methods?: QueryMethodDescriptorSDKType[];
+  methods: QueryMethodDescriptorSDKType[];
 }
 /**
  * QueryMethodDescriptor describes a queryable method of a query service
@@ -490,7 +490,7 @@ export const AppDescriptor = {
 function createBaseTxDescriptor(): TxDescriptor {
   return {
     fullname: undefined,
-    msgs: undefined
+    msgs: []
   };
 }
 export const TxDescriptor = {
@@ -608,7 +608,7 @@ export const TxDescriptor = {
 };
 function createBaseAuthnDescriptor(): AuthnDescriptor {
   return {
-    signModes: undefined
+    signModes: []
   };
 }
 export const AuthnDescriptor = {
@@ -926,7 +926,7 @@ export const ChainDescriptor = {
 };
 function createBaseCodecDescriptor(): CodecDescriptor {
   return {
-    interfaces: undefined
+    interfaces: []
   };
 }
 export const CodecDescriptor = {
@@ -1031,8 +1031,8 @@ export const CodecDescriptor = {
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
   return {
     fullname: undefined,
-    interfaceAcceptingMessages: undefined,
-    interfaceImplementers: undefined
+    interfaceAcceptingMessages: [],
+    interfaceImplementers: []
   };
 }
 export const InterfaceDescriptor = {
@@ -1284,7 +1284,7 @@ export const InterfaceImplementerDescriptor = {
 function createBaseInterfaceAcceptingMessageDescriptor(): InterfaceAcceptingMessageDescriptor {
   return {
     fullname: undefined,
-    fieldDescriptorNames: undefined
+    fieldDescriptorNames: []
   };
 }
 export const InterfaceAcceptingMessageDescriptor = {
@@ -2588,7 +2588,7 @@ export const GetTxDescriptorResponse = {
 };
 function createBaseQueryServicesDescriptor(): QueryServicesDescriptor {
   return {
-    queryServices: undefined
+    queryServices: []
   };
 }
 export const QueryServicesDescriptor = {
@@ -2694,7 +2694,7 @@ function createBaseQueryServiceDescriptor(): QueryServiceDescriptor {
   return {
     fullname: undefined,
     isModule: undefined,
-    methods: undefined
+    methods: []
   };
 }
 export const QueryServiceDescriptor = {

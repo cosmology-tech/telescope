@@ -204,7 +204,7 @@ export const protobufPackage = "google.protobuf";
  */
 export interface FieldMask {
   /** The set of field mask paths. */
-  paths?: string[];
+  paths: string[];
 }
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -408,11 +408,11 @@ export interface FieldMask {
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
 export interface FieldMaskSDKType {
-  paths?: string[];
+  paths: string[];
 }
 function createBaseFieldMask(): FieldMask {
   return {
-    paths: undefined
+    paths: []
   };
 }
 export const FieldMask = {

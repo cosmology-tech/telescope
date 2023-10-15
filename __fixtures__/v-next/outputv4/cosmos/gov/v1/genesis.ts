@@ -7,11 +7,11 @@ export interface GenesisState {
   /** starting_proposal_id is the ID of the starting proposal. */
   startingProposalId?: bigint;
   /** deposits defines all the deposits present at genesis. */
-  deposits?: Deposit[];
+  deposits: Deposit[];
   /** votes defines all the votes present at genesis. */
-  votes?: Vote[];
+  votes: Vote[];
   /** proposals defines all the proposals present at genesis. */
-  proposals?: Proposal[];
+  proposals: Proposal[];
   /** params defines all the paramaters of related to deposit. */
   depositParams?: DepositParams;
   /** params defines all the paramaters of related to voting. */
@@ -22,9 +22,9 @@ export interface GenesisState {
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateSDKType {
   starting_proposal_id?: bigint;
-  deposits?: DepositSDKType[];
-  votes?: VoteSDKType[];
-  proposals?: ProposalSDKType[];
+  deposits: DepositSDKType[];
+  votes: VoteSDKType[];
+  proposals: ProposalSDKType[];
   deposit_params?: DepositParamsSDKType;
   voting_params?: VotingParamsSDKType;
   tally_params?: TallyParamsSDKType;
@@ -32,9 +32,9 @@ export interface GenesisStateSDKType {
 function createBaseGenesisState(): GenesisState {
   return {
     startingProposalId: undefined,
-    deposits: undefined,
-    votes: undefined,
-    proposals: undefined,
+    deposits: [],
+    votes: [],
+    proposals: [],
     depositParams: undefined,
     votingParams: undefined,
     tallyParams: undefined

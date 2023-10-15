@@ -113,7 +113,7 @@ export interface Operation {
    *        where the API is served, such as App Engine, Compute Engine, or
    *        Kubernetes Engine.
    */
-  labels?: {
+  labels: {
     [key: string]: string;
   };
   /**
@@ -128,13 +128,13 @@ export interface Operation {
    * instances, the entire request is rejected with
    * an invalid argument error.
    */
-  metricValueSets?: MetricValueSet[];
+  metricValueSets: MetricValueSet[];
   /** Represents information to be logged. */
-  logEntries?: LogEntry[];
+  logEntries: LogEntry[];
   /** DO NOT USE. This is an experimental field. */
   importance?: Operation_Importance;
   /** Unimplemented. */
-  extensions?: Any[];
+  extensions: Any[];
 }
 /** Represents information regarding an operation. */
 export interface OperationSDKType {
@@ -143,13 +143,13 @@ export interface OperationSDKType {
   consumer_id?: string;
   start_time?: Date;
   end_time?: Date;
-  labels?: {
+  labels: {
     [key: string]: string;
   };
-  metric_value_sets?: MetricValueSetSDKType[];
-  log_entries?: LogEntrySDKType[];
+  metric_value_sets: MetricValueSetSDKType[];
+  log_entries: LogEntrySDKType[];
   importance?: Operation_Importance;
-  extensions?: AnySDKType[];
+  extensions: AnySDKType[];
 }
 function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   return {
@@ -252,11 +252,11 @@ function createBaseOperation(): Operation {
     consumerId: undefined,
     startTime: undefined,
     endTime: undefined,
-    labels: undefined,
-    metricValueSets: undefined,
-    logEntries: undefined,
+    labels: {},
+    metricValueSets: [],
+    logEntries: [],
     importance: undefined,
-    extensions: undefined
+    extensions: []
   };
 }
 export const Operation = {

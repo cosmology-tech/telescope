@@ -8,11 +8,11 @@ export interface ListAllInterfacesRequestSDKType {}
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
-  interfaceNames?: string[];
+  interfaceNames: string[];
 }
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponseSDKType {
-  interface_names?: string[];
+  interface_names: string[];
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
@@ -34,14 +34,14 @@ export interface ListImplementationsRequestSDKType {
  * RPC.
  */
 export interface ListImplementationsResponse {
-  implementationMessageNames?: string[];
+  implementationMessageNames: string[];
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
  * RPC.
  */
 export interface ListImplementationsResponseSDKType {
-  implementation_message_names?: string[];
+  implementation_message_names: string[];
 }
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
   return {};
@@ -118,7 +118,7 @@ export const ListAllInterfacesRequest = {
 };
 function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
   return {
-    interfaceNames: undefined
+    interfaceNames: []
   };
 }
 export const ListAllInterfacesResponse = {
@@ -314,7 +314,7 @@ export const ListImplementationsRequest = {
 };
 function createBaseListImplementationsResponse(): ListImplementationsResponse {
   return {
-    implementationMessageNames: undefined
+    implementationMessageNames: []
   };
 }
 export const ListImplementationsResponse = {

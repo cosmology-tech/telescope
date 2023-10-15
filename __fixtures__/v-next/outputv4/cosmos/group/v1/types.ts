@@ -382,7 +382,7 @@ export interface Proposal {
   /** metadata is any arbitrary metadata to attached to the proposal. */
   metadata?: string;
   /** proposers are the account addresses of the proposers. */
-  proposers?: string[];
+  proposers: string[];
   /** submit_time is a timestamp specifying when a proposal was submitted. */
   submitTime: Date;
   /**
@@ -420,7 +420,7 @@ export interface Proposal {
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executorResult?: ProposalExecutorResult;
   /** messages is a list of Msgs that will be executed if the proposal passes. */
-  messages?: Any[];
+  messages: Any[];
 }
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
@@ -432,7 +432,7 @@ export interface ProposalSDKType {
   id?: bigint;
   address?: string;
   metadata?: string;
-  proposers?: string[];
+  proposers: string[];
   submit_time: Date;
   group_version?: bigint;
   group_policy_version?: bigint;
@@ -441,7 +441,7 @@ export interface ProposalSDKType {
   final_tally_result: TallyResultSDKType;
   voting_period_end: Date;
   executor_result?: ProposalExecutorResult;
-  messages?: AnySDKType[];
+  messages: AnySDKType[];
 }
 /** TallyResult represents the sum of weighted votes for each vote option. */
 export interface TallyResult {
@@ -1537,7 +1537,7 @@ function createBaseProposal(): Proposal {
     id: undefined,
     address: undefined,
     metadata: undefined,
-    proposers: undefined,
+    proposers: [],
     submitTime: new Date(),
     groupVersion: undefined,
     groupPolicyVersion: undefined,
@@ -1546,7 +1546,7 @@ function createBaseProposal(): Proposal {
     finalTallyResult: TallyResult.fromPartial({}),
     votingPeriodEnd: new Date(),
     executorResult: undefined,
-    messages: undefined
+    messages: []
   };
 }
 export const Proposal = {

@@ -42,7 +42,7 @@ export interface QueryAllEvidenceRequestSDKType {
  */
 export interface QueryAllEvidenceResponse {
   /** evidence returns all evidences. */
-  evidence?: Any[];
+  evidence: Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
@@ -51,7 +51,7 @@ export interface QueryAllEvidenceResponse {
  * method.
  */
 export interface QueryAllEvidenceResponseSDKType {
-  evidence?: AnySDKType[];
+  evidence: AnySDKType[];
   pagination?: PageResponseSDKType;
 }
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
@@ -336,7 +336,7 @@ export const QueryAllEvidenceRequest = {
 };
 function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
   return {
-    evidence: undefined,
+    evidence: [],
     pagination: undefined
   };
 }

@@ -19,13 +19,13 @@ export interface Tx {
    * AuthInfo's signer_infos to allow connecting signature meta information like
    * public key and signing mode by position.
    */
-  signatures?: Uint8Array[];
+  signatures: Uint8Array[];
 }
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxSDKType {
   body?: TxBodySDKType;
   auth_info?: AuthInfoSDKType;
-  signatures?: Uint8Array[];
+  signatures: Uint8Array[];
 }
 /**
  * TxRaw is a variant of Tx that pins the signer's exact binary representation
@@ -50,7 +50,7 @@ export interface TxRaw {
    * AuthInfo's signer_infos to allow connecting signature meta information like
    * public key and signing mode by position.
    */
-  signatures?: Uint8Array[];
+  signatures: Uint8Array[];
 }
 /**
  * TxRaw is a variant of Tx that pins the signer's exact binary representation
@@ -62,7 +62,7 @@ export interface TxRaw {
 export interface TxRawSDKType {
   body_bytes?: Uint8Array;
   auth_info_bytes?: Uint8Array;
-  signatures?: Uint8Array[];
+  signatures: Uint8Array[];
 }
 /** SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT. */
 export interface SignDoc {
@@ -147,7 +147,7 @@ export interface TxBody {
    * is referred to as the primary signer and pays the fee for the whole
    * transaction.
    */
-  messages?: Any[];
+  messages: Any[];
   /**
    * memo is any arbitrary note/comment to be added to the transaction.
    * WARNING: in clients, any publicly exposed text should not be called memo,
@@ -164,21 +164,21 @@ export interface TxBody {
    * when the default options are not sufficient. If any of these are present
    * and can't be handled, the transaction will be rejected
    */
-  extensionOptions?: Any[];
+  extensionOptions: Any[];
   /**
    * extension_options are arbitrary options that can be added by chains
    * when the default options are not sufficient. If any of these are present
    * and can't be handled, they will be ignored
    */
-  nonCriticalExtensionOptions?: Any[];
+  nonCriticalExtensionOptions: Any[];
 }
 /** TxBody is the body of a transaction that all signers sign over. */
 export interface TxBodySDKType {
-  messages?: AnySDKType[];
+  messages: AnySDKType[];
   memo?: string;
   timeout_height?: bigint;
-  extension_options?: AnySDKType[];
-  non_critical_extension_options?: AnySDKType[];
+  extension_options: AnySDKType[];
+  non_critical_extension_options: AnySDKType[];
 }
 /**
  * AuthInfo describes the fee and signer modes that are used to sign a
@@ -191,7 +191,7 @@ export interface AuthInfo {
    * messages. The first element is the primary signer and the one which pays
    * the fee.
    */
-  signerInfos?: SignerInfo[];
+  signerInfos: SignerInfo[];
   /**
    * Fee is the fee and gas limit for the transaction. The first signer is the
    * primary signer and the one which pays the fee. The fee can be calculated
@@ -211,7 +211,7 @@ export interface AuthInfo {
  * transaction.
  */
 export interface AuthInfoSDKType {
-  signer_infos?: SignerInfoSDKType[];
+  signer_infos: SignerInfoSDKType[];
   fee?: FeeSDKType;
   tip?: TipSDKType;
 }
@@ -284,12 +284,12 @@ export interface ModeInfo_Multi {
    * mode_infos is the corresponding modes of the signers of the multisig
    * which could include nested multisig public keys
    */
-  modeInfos?: ModeInfo[];
+  modeInfos: ModeInfo[];
 }
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_MultiSDKType {
   bitarray?: CompactBitArraySDKType;
-  mode_infos?: ModeInfoSDKType[];
+  mode_infos: ModeInfoSDKType[];
 }
 /**
  * Fee includes the amount of coins paid in fees and the maximum
@@ -392,7 +392,7 @@ function createBaseTx(): Tx {
   return {
     body: undefined,
     authInfo: undefined,
-    signatures: undefined
+    signatures: []
   };
 }
 export const Tx = {
@@ -530,7 +530,7 @@ function createBaseTxRaw(): TxRaw {
   return {
     bodyBytes: undefined,
     authInfoBytes: undefined,
-    signatures: undefined
+    signatures: []
   };
 }
 export const TxRaw = {
@@ -982,11 +982,11 @@ export const SignDocDirectAux = {
 };
 function createBaseTxBody(): TxBody {
   return {
-    messages: undefined,
+    messages: [],
     memo: undefined,
     timeoutHeight: undefined,
-    extensionOptions: undefined,
-    nonCriticalExtensionOptions: undefined
+    extensionOptions: [],
+    nonCriticalExtensionOptions: []
   };
 }
 export const TxBody = {
@@ -1174,7 +1174,7 @@ export const TxBody = {
 };
 function createBaseAuthInfo(): AuthInfo {
   return {
-    signerInfos: undefined,
+    signerInfos: [],
     fee: undefined,
     tip: undefined
   };
@@ -1646,7 +1646,7 @@ export const ModeInfo_Single = {
 function createBaseModeInfo_Multi(): ModeInfo_Multi {
   return {
     bitarray: undefined,
-    modeInfos: undefined
+    modeInfos: []
   };
 }
 export const ModeInfo_Multi = {

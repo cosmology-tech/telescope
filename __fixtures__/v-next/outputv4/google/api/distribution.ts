@@ -70,9 +70,9 @@ export interface Distribution {
    * counts for the finite buckets (number 1 through N-2). The N'th value in
    * `bucket_counts` is the count for the overflow bucket (number N-1).
    */
-  bucketCounts?: bigint[];
+  bucketCounts: bigint[];
   /** Must be in increasing order of `value` field. */
-  exemplars?: Distribution_Exemplar[];
+  exemplars: Distribution_Exemplar[];
 }
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -96,8 +96,8 @@ export interface DistributionSDKType {
   sum_of_squared_deviation?: number;
   range?: Distribution_RangeSDKType;
   bucket_options?: Distribution_BucketOptionsSDKType;
-  bucket_counts?: bigint[];
-  exemplars?: Distribution_ExemplarSDKType[];
+  bucket_counts: bigint[];
+  exemplars: Distribution_ExemplarSDKType[];
 }
 /** The range of the population values. */
 export interface Distribution_Range {
@@ -243,7 +243,7 @@ export interface Distribution_BucketOptions_ExponentialSDKType {
  */
 export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
-  bounds?: number[];
+  bounds: number[];
 }
 /**
  * Specifies a set of buckets with arbitrary widths.
@@ -259,7 +259,7 @@ export interface Distribution_BucketOptions_Explicit {
  * element is the common boundary of the overflow and underflow buckets.
  */
 export interface Distribution_BucketOptions_ExplicitSDKType {
-  bounds?: number[];
+  bounds: number[];
 }
 /**
  * Exemplars are example points that may be used to annotate aggregated
@@ -289,7 +289,7 @@ export interface Distribution_Exemplar {
    * There may be only a single attachment of any given message type in a
    * single exemplar, and this is enforced by the system.
    */
-  attachments?: Any[];
+  attachments: Any[];
 }
 /**
  * Exemplars are example points that may be used to annotate aggregated
@@ -301,7 +301,7 @@ export interface Distribution_Exemplar {
 export interface Distribution_ExemplarSDKType {
   value?: number;
   timestamp?: Date;
-  attachments?: AnySDKType[];
+  attachments: AnySDKType[];
 }
 function createBaseDistribution(): Distribution {
   return {
@@ -310,8 +310,8 @@ function createBaseDistribution(): Distribution {
     sumOfSquaredDeviation: undefined,
     range: undefined,
     bucketOptions: undefined,
-    bucketCounts: undefined,
-    exemplars: undefined
+    bucketCounts: [],
+    exemplars: []
   };
 }
 export const Distribution = {
@@ -977,7 +977,7 @@ export const Distribution_BucketOptions_Exponential = {
 };
 function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOptions_Explicit {
   return {
-    bounds: undefined
+    bounds: []
   };
 }
 export const Distribution_BucketOptions_Explicit = {
@@ -1086,7 +1086,7 @@ function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: undefined,
     timestamp: undefined,
-    attachments: undefined
+    attachments: []
   };
 }
 export const Distribution_Exemplar = {

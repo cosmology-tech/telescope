@@ -55,19 +55,19 @@ export interface ClaimRecord {
    * true if action is completed
    * index of bool in array refers to action enum #
    */
-  actionCompleted?: boolean[];
+  actionCompleted: boolean[];
 }
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
   address?: string;
   initial_claimable_amount: CoinSDKType[];
-  action_completed?: boolean[];
+  action_completed: boolean[];
 }
 function createBaseClaimRecord(): ClaimRecord {
   return {
     address: undefined,
     initialClaimableAmount: [],
-    actionCompleted: undefined
+    actionCompleted: []
   };
 }
 export const ClaimRecord = {

@@ -93,7 +93,7 @@ export interface ScalarDescriptor {
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
-  fieldType?: ScalarType[];
+  fieldType: ScalarType[];
 }
 /**
  * ScalarDescriptor describes an scalar type to be used with
@@ -107,7 +107,7 @@ export interface ScalarDescriptor {
 export interface ScalarDescriptorSDKType {
   name?: string;
   description?: string;
-  field_type?: ScalarType[];
+  field_type: ScalarType[];
 }
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
   return {
@@ -214,7 +214,7 @@ function createBaseScalarDescriptor(): ScalarDescriptor {
   return {
     name: undefined,
     description: undefined,
-    fieldType: undefined
+    fieldType: []
   };
 }
 export const ScalarDescriptor = {

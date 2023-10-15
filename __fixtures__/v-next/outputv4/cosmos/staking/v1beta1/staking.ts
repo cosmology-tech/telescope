@@ -189,11 +189,11 @@ export interface ValidatorSDKType {
 }
 /** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddresses {
-  addresses?: string[];
+  addresses: string[];
 }
 /** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddressesSDKType {
-  addresses?: string[];
+  addresses: string[];
 }
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
@@ -1205,7 +1205,7 @@ export const Validator = {
 };
 function createBaseValAddresses(): ValAddresses {
   return {
-    addresses: undefined
+    addresses: []
   };
 }
 export const ValAddresses = {

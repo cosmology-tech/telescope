@@ -56,7 +56,7 @@ export interface HttpBody {
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
    */
-  extensions?: Any[];
+  extensions: Any[];
 }
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -106,13 +106,13 @@ export interface HttpBody {
 export interface HttpBodySDKType {
   content_type?: string;
   data?: Uint8Array;
-  extensions?: AnySDKType[];
+  extensions: AnySDKType[];
 }
 function createBaseHttpBody(): HttpBody {
   return {
     contentType: undefined,
     data: undefined,
-    extensions: undefined
+    extensions: []
   };
 }
 export const HttpBody = {

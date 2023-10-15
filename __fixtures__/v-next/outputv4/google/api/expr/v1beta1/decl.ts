@@ -38,7 +38,7 @@ export interface DeclType {
    * An ordered list of type parameters, e.g. `<string, int>`.
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
-  typeParams?: DeclType[];
+  typeParams: DeclType[];
 }
 /**
  * The declared type of a variable.
@@ -49,7 +49,7 @@ export interface DeclType {
 export interface DeclTypeSDKType {
   id?: number;
   type?: string;
-  type_params?: DeclTypeSDKType[];
+  type_params: DeclTypeSDKType[];
 }
 /** An identifier declaration. */
 export interface IdentDecl {
@@ -66,7 +66,7 @@ export interface IdentDeclSDKType {
 /** A function declaration. */
 export interface FunctionDecl {
   /** The function arguments. */
-  args?: IdentDecl[];
+  args: IdentDecl[];
   /** Optional declared return type. */
   returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
@@ -74,7 +74,7 @@ export interface FunctionDecl {
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {
-  args?: IdentDeclSDKType[];
+  args: IdentDeclSDKType[];
   return_type?: DeclTypeSDKType;
   receiver_function?: boolean;
 }
@@ -232,7 +232,7 @@ function createBaseDeclType(): DeclType {
   return {
     id: undefined,
     type: undefined,
-    typeParams: undefined
+    typeParams: []
   };
 }
 export const DeclType = {
@@ -463,7 +463,7 @@ export const IdentDecl = {
 };
 function createBaseFunctionDecl(): FunctionDecl {
   return {
-    args: undefined,
+    args: [],
     returnType: undefined,
     receiverFunction: undefined
   };

@@ -206,7 +206,7 @@ export interface ServiceConfig {
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis?: Api[];
+  apis: Api[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
@@ -222,12 +222,12 @@ export interface ServiceConfig {
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints?: Endpoint[];
+  endpoints: Endpoint[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitoredResources?: MonitoredResourceDescriptor[];
+  monitoredResources: MonitoredResourceDescriptor[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
@@ -238,13 +238,13 @@ export interface ServiceConfig {
 export interface ServiceConfigSDKType {
   name?: string;
   title?: string;
-  apis?: ApiSDKType[];
+  apis: ApiSDKType[];
   documentation?: DocumentationSDKType;
   quota?: QuotaSDKType;
   authentication?: AuthenticationSDKType;
   usage?: UsageSDKType;
-  endpoints?: EndpointSDKType[];
-  monitored_resources?: MonitoredResourceDescriptorSDKType[];
+  endpoints: EndpointSDKType[];
+  monitored_resources: MonitoredResourceDescriptorSDKType[];
   monitoring?: MonitoringSDKType;
 }
 /** The operation metadata returned for the batchend services operation. */
@@ -253,11 +253,11 @@ export interface OperationMetadata {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resourceNames?: string[];
+  resourceNames: string[];
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
-  resource_names?: string[];
+  resource_names: string[];
 }
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetric {
@@ -286,7 +286,7 @@ export interface ConsumerQuotaMetric {
    */
   displayName?: string;
   /** The consumer quota for each quota limit defined on the metric. */
-  consumerQuotaLimits?: ConsumerQuotaLimit[];
+  consumerQuotaLimits: ConsumerQuotaLimit[];
   /**
    * The quota limits targeting the descendant containers of the
    * consumer in request.
@@ -298,7 +298,7 @@ export interface ConsumerQuotaMetric {
    * The `quota_buckets` field of each descendant consumer quota limit will not
    * be populated.
    */
-  descendantConsumerQuotaLimits?: ConsumerQuotaLimit[];
+  descendantConsumerQuotaLimits: ConsumerQuotaLimit[];
   /** The units in which the metric value is reported. */
   unit?: string;
 }
@@ -307,8 +307,8 @@ export interface ConsumerQuotaMetricSDKType {
   name?: string;
   metric?: string;
   display_name?: string;
-  consumer_quota_limits?: ConsumerQuotaLimitSDKType[];
-  descendant_consumer_quota_limits?: ConsumerQuotaLimitSDKType[];
+  consumer_quota_limits: ConsumerQuotaLimitSDKType[];
+  descendant_consumer_quota_limits: ConsumerQuotaLimitSDKType[];
   unit?: string;
 }
 /** Consumer quota settings for a quota limit. */
@@ -348,7 +348,7 @@ export interface ConsumerQuotaLimit {
    * ordered from least specific to most specific (for example, the global
    * default bucket, with no quota dimensions, will always appear first).
    */
-  quotaBuckets?: QuotaBucket[];
+  quotaBuckets: QuotaBucket[];
 }
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
@@ -357,7 +357,7 @@ export interface ConsumerQuotaLimitSDKType {
   unit?: string;
   is_precise?: boolean;
   allows_admin_overrides?: boolean;
-  quota_buckets?: QuotaBucketSDKType[];
+  quota_buckets: QuotaBucketSDKType[];
 }
 export interface QuotaBucket_DimensionsEntry {
   key: string;
@@ -398,7 +398,7 @@ export interface QuotaBucket {
    * specified effective limit is only effective in that region, and the
    * specified overrides apply only in that region.
    */
-  dimensions?: {
+  dimensions: {
     [key: string]: string;
   };
 }
@@ -409,7 +409,7 @@ export interface QuotaBucketSDKType {
   producer_override?: QuotaOverrideSDKType;
   consumer_override?: QuotaOverrideSDKType;
   admin_override?: QuotaOverrideSDKType;
-  dimensions?: {
+  dimensions: {
     [key: string]: string;
   };
 }
@@ -464,7 +464,7 @@ export interface QuotaOverride {
    *     all valid keys other than `region` or `zone` must also appear in the
    *     map.
    */
-  dimensions?: {
+  dimensions: {
     [key: string]: string;
   };
   /**
@@ -494,7 +494,7 @@ export interface QuotaOverride {
 export interface QuotaOverrideSDKType {
   name?: string;
   override_value?: bigint;
-  dimensions?: {
+  dimensions: {
     [key: string]: string;
   };
   metric?: string;
@@ -509,11 +509,11 @@ export interface OverrideInlineSource {
    * which metric and which limit the override should be applied to.
    * The 'name' field of the override does not need to be set; it is ignored.
    */
-  overrides?: QuotaOverride[];
+  overrides: QuotaOverride[];
 }
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
-  overrides?: QuotaOverrideSDKType[];
+  overrides: QuotaOverrideSDKType[];
 }
 export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
@@ -552,7 +552,7 @@ export interface AdminQuotaPolicy {
    * *   If `zone` appears as a key, its value must be a valid Cloud zone.
    * *   Keys other than `region` or `zone` are not valid.
    */
-  dimensions?: {
+  dimensions: {
     [key: string]: string;
   };
   /**
@@ -581,7 +581,7 @@ export interface AdminQuotaPolicy {
 export interface AdminQuotaPolicySDKType {
   name?: string;
   policy_value?: bigint;
-  dimensions?: {
+  dimensions: {
     [key: string]: string;
   };
   metric?: string;
@@ -749,13 +749,13 @@ function createBaseServiceConfig(): ServiceConfig {
   return {
     name: undefined,
     title: undefined,
-    apis: undefined,
+    apis: [],
     documentation: undefined,
     quota: undefined,
     authentication: undefined,
     usage: undefined,
-    endpoints: undefined,
-    monitoredResources: undefined,
+    endpoints: [],
+    monitoredResources: [],
     monitoring: undefined
   };
 }
@@ -1014,7 +1014,7 @@ export const ServiceConfig = {
 };
 function createBaseOperationMetadata(): OperationMetadata {
   return {
-    resourceNames: undefined
+    resourceNames: []
   };
 }
 export const OperationMetadata = {
@@ -1115,8 +1115,8 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
     name: undefined,
     metric: undefined,
     displayName: undefined,
-    consumerQuotaLimits: undefined,
-    descendantConsumerQuotaLimits: undefined,
+    consumerQuotaLimits: [],
+    descendantConsumerQuotaLimits: [],
     unit: undefined
   };
 }
@@ -1302,7 +1302,7 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
     unit: undefined,
     isPrecise: undefined,
     allowsAdminOverrides: undefined,
-    quotaBuckets: undefined
+    quotaBuckets: []
   };
 }
 export const ConsumerQuotaLimit = {
@@ -1569,7 +1569,7 @@ function createBaseQuotaBucket(): QuotaBucket {
     producerOverride: undefined,
     consumerOverride: undefined,
     adminOverride: undefined,
-    dimensions: undefined
+    dimensions: {}
   };
 }
 export const QuotaBucket = {
@@ -1883,7 +1883,7 @@ function createBaseQuotaOverride(): QuotaOverride {
   return {
     name: undefined,
     overrideValue: undefined,
-    dimensions: undefined,
+    dimensions: {},
     metric: undefined,
     unit: undefined,
     adminOverrideAncestor: undefined
@@ -2094,7 +2094,7 @@ export const QuotaOverride = {
 };
 function createBaseOverrideInlineSource(): OverrideInlineSource {
   return {
-    overrides: undefined
+    overrides: []
   };
 }
 export const OverrideInlineSource = {
@@ -2288,7 +2288,7 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   return {
     name: undefined,
     policyValue: undefined,
-    dimensions: undefined,
+    dimensions: {},
     metric: undefined,
     unit: undefined,
     container: undefined

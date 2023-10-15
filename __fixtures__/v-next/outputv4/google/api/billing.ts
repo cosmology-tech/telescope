@@ -42,7 +42,7 @@ export interface Billing {
    * a different monitored resource type. A metric can be used in at most
    * one consumer destination.
    */
-  consumerDestinations?: Billing_BillingDestination[];
+  consumerDestinations: Billing_BillingDestination[];
 }
 /**
  * Billing related configuration of the service.
@@ -79,7 +79,7 @@ export interface Billing {
  *         - library.googleapis.com/book/borrowed_count
  */
 export interface BillingSDKType {
-  consumer_destinations?: Billing_BillingDestinationSDKType[];
+  consumer_destinations: Billing_BillingDestinationSDKType[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -95,7 +95,7 @@ export interface Billing_BillingDestination {
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics?: string[];
+  metrics: string[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -103,11 +103,11 @@ export interface Billing_BillingDestination {
  */
 export interface Billing_BillingDestinationSDKType {
   monitored_resource?: string;
-  metrics?: string[];
+  metrics: string[];
 }
 function createBaseBilling(): Billing {
   return {
-    consumerDestinations: undefined
+    consumerDestinations: []
   };
 }
 export const Billing = {
@@ -206,7 +206,7 @@ export const Billing = {
 function createBaseBilling_BillingDestination(): Billing_BillingDestination {
   return {
     monitoredResource: undefined,
-    metrics: undefined
+    metrics: []
   };
 }
 export const Billing_BillingDestination = {

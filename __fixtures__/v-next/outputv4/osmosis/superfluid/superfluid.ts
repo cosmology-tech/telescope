@@ -142,10 +142,10 @@ export interface LockIdIntermediaryAccountConnectionSDKType {
   intermediary_account?: string;
 }
 export interface UnpoolWhitelistedPools {
-  ids?: bigint[];
+  ids: bigint[];
 }
 export interface UnpoolWhitelistedPoolsSDKType {
-  ids?: bigint[];
+  ids: bigint[];
 }
 function createBaseSuperfluidAsset(): SuperfluidAsset {
   return {
@@ -760,7 +760,7 @@ export const LockIdIntermediaryAccountConnection = {
 };
 function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
   return {
-    ids: undefined
+    ids: []
   };
 }
 export const UnpoolWhitelistedPools = {

@@ -54,12 +54,12 @@ export const protobufPackage = "google.api";
  */
 export interface Quota {
   /** List of `QuotaLimit` definitions for the service. */
-  limits?: QuotaLimit[];
+  limits: QuotaLimit[];
   /**
    * List of `MetricRule` definitions, each one mapping a selected method to one
    * or more metrics.
    */
-  metricRules?: MetricRule[];
+  metricRules: MetricRule[];
 }
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -113,8 +113,8 @@ export interface Quota {
  *        value_type: INT64
  */
 export interface QuotaSDKType {
-  limits?: QuotaLimitSDKType[];
-  metric_rules?: MetricRuleSDKType[];
+  limits: QuotaLimitSDKType[];
+  metric_rules: MetricRuleSDKType[];
 }
 export interface MetricRule_MetricCostsEntry {
   key: string;
@@ -143,7 +143,7 @@ export interface MetricRule {
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
    */
-  metricCosts?: {
+  metricCosts: {
     [key: string]: bigint;
   };
 }
@@ -153,7 +153,7 @@ export interface MetricRule {
  */
 export interface MetricRuleSDKType {
   selector?: string;
-  metric_costs?: {
+  metric_costs: {
     [key: string]: bigint;
   };
 }
@@ -251,7 +251,7 @@ export interface QuotaLimit {
    * integer value that is the maximum number of requests allowed for the
    * specified unit. Currently only STANDARD is supported.
    */
-  values?: {
+  values: {
     [key: string]: bigint;
   };
   /**
@@ -276,15 +276,15 @@ export interface QuotaLimitSDKType {
   duration?: string;
   metric?: string;
   unit?: string;
-  values?: {
+  values: {
     [key: string]: bigint;
   };
   display_name?: string;
 }
 function createBaseQuota(): Quota {
   return {
-    limits: undefined,
-    metricRules: undefined
+    limits: [],
+    metricRules: []
   };
 }
 export const Quota = {
@@ -505,7 +505,7 @@ export const MetricRule_MetricCostsEntry = {
 function createBaseMetricRule(): MetricRule {
   return {
     selector: undefined,
-    metricCosts: undefined
+    metricCosts: {}
   };
 }
 export const MetricRule = {
@@ -757,7 +757,7 @@ function createBaseQuotaLimit(): QuotaLimit {
     duration: undefined,
     metric: undefined,
     unit: undefined,
-    values: undefined,
+    values: {},
     displayName: undefined
   };
 }

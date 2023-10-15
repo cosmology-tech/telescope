@@ -205,14 +205,14 @@ export interface QueryDelegatorValidatorsRequestSDKType {
  */
 export interface QueryDelegatorValidatorsResponse {
   /** validators defines the validators a delegator is delegating for. */
-  validators?: string[];
+  validators: string[];
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the
  * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsResponseSDKType {
-  validators?: string[];
+  validators: string[];
 }
 /**
  * QueryDelegatorWithdrawAddressRequest is the request type for the
@@ -1604,7 +1604,7 @@ export const QueryDelegatorValidatorsRequest = {
 };
 function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsResponse {
   return {
-    validators: undefined
+    validators: []
   };
 }
 export const QueryDelegatorValidatorsResponse = {

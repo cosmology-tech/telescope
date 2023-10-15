@@ -32,9 +32,9 @@ export interface Params {
    * list of authorized channel identifiers that can perform address
    * attestations via IBC.
    */
-  authorizedChannels?: string[];
+  authorizedChannels: string[];
   /** list of channel identifiers from EVM compatible chains */
-  evmChannels?: string[];
+  evmChannels: string[];
 }
 /** Params defines the claims module's parameters. */
 export interface ParamsSDKType {
@@ -43,8 +43,8 @@ export interface ParamsSDKType {
   duration_until_decay: DurationSDKType;
   duration_of_decay: DurationSDKType;
   claims_denom?: string;
-  authorized_channels?: string[];
-  evm_channels?: string[];
+  authorized_channels: string[];
+  evm_channels: string[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -168,8 +168,8 @@ function createBaseParams(): Params {
     durationUntilDecay: Duration.fromPartial({}),
     durationOfDecay: Duration.fromPartial({}),
     claimsDenom: undefined,
-    authorizedChannels: undefined,
-    evmChannels: undefined
+    authorizedChannels: [],
+    evmChannels: []
   };
 }
 export const Params = {

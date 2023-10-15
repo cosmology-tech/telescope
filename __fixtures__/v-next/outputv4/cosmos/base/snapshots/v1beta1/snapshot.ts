@@ -20,11 +20,11 @@ export interface SnapshotSDKType {
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface Metadata {
   /** SHA-256 chunk hashes */
-  chunkHashes?: Uint8Array[];
+  chunkHashes: Uint8Array[];
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataSDKType {
-  chunk_hashes?: Uint8Array[];
+  chunk_hashes: Uint8Array[];
 }
 /** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
 export interface SnapshotItem {
@@ -98,11 +98,11 @@ export interface SnapshotKVItemSDKType {
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchema {
-  keys?: Uint8Array[];
+  keys: Uint8Array[];
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaSDKType {
-  keys?: Uint8Array[];
+  keys: Uint8Array[];
 }
 function createBaseSnapshot(): Snapshot {
   return {
@@ -264,7 +264,7 @@ export const Snapshot = {
 };
 function createBaseMetadata(): Metadata {
   return {
-    chunkHashes: undefined
+    chunkHashes: []
   };
 }
 export const Metadata = {
@@ -1086,7 +1086,7 @@ export const SnapshotKVItem = {
 };
 function createBaseSnapshotSchema(): SnapshotSchema {
   return {
-    keys: undefined
+    keys: []
   };
 }
 export const SnapshotSchema = {

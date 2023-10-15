@@ -75,7 +75,7 @@ export interface EnumValueSDKType {
  */
 export interface ListValue {
   /** The ordered values in the list. */
-  values?: Value[];
+  values: Value[];
 }
 /**
  * A list.
@@ -84,7 +84,7 @@ export interface ListValue {
  * required for use in a 'oneof'.
  */
 export interface ListValueSDKType {
-  values?: ValueSDKType[];
+  values: ValueSDKType[];
 }
 /**
  * A map.
@@ -99,7 +99,7 @@ export interface MapValue {
    * CEL has fewer restrictions on keys, so a protobuf map represenation
    * cannot be used.
    */
-  entries?: MapValue_Entry[];
+  entries: MapValue_Entry[];
 }
 /**
  * A map.
@@ -108,7 +108,7 @@ export interface MapValue {
  * required for use in a 'oneof'.
  */
 export interface MapValueSDKType {
-  entries?: MapValue_EntrySDKType[];
+  entries: MapValue_EntrySDKType[];
 }
 /** An entry in the map. */
 export interface MapValue_Entry {
@@ -497,7 +497,7 @@ export const EnumValue = {
 };
 function createBaseListValue(): ListValue {
   return {
-    values: undefined
+    values: []
   };
 }
 export const ListValue = {
@@ -595,7 +595,7 @@ export const ListValue = {
 };
 function createBaseMapValue(): MapValue {
   return {
-    entries: undefined
+    entries: []
   };
 }
 export const MapValue = {

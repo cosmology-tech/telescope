@@ -126,7 +126,7 @@ export interface Channel {
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-  connectionHops?: string[];
+  connectionHops: string[];
   /** opaque channel version, which is agreed upon during the handshake */
   version?: string;
 }
@@ -139,7 +139,7 @@ export interface ChannelSDKType {
   state?: State;
   ordering?: Order;
   counterparty: CounterpartySDKType;
-  connection_hops?: string[];
+  connection_hops: string[];
   version?: string;
 }
 /**
@@ -157,7 +157,7 @@ export interface IdentifiedChannel {
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-  connectionHops?: string[];
+  connectionHops: string[];
   /** opaque channel version, which is agreed upon during the handshake */
   version?: string;
   /** port identifier */
@@ -173,7 +173,7 @@ export interface IdentifiedChannelSDKType {
   state?: State;
   ordering?: Order;
   counterparty: CounterpartySDKType;
-  connection_hops?: string[];
+  connection_hops: string[];
   version?: string;
   port_id?: string;
   channel_id?: string;
@@ -283,7 +283,7 @@ function createBaseChannel(): Channel {
     state: undefined,
     ordering: undefined,
     counterparty: Counterparty.fromPartial({}),
-    connectionHops: undefined,
+    connectionHops: [],
     version: undefined
   };
 }
@@ -449,7 +449,7 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
     state: undefined,
     ordering: undefined,
     counterparty: Counterparty.fromPartial({}),
-    connectionHops: undefined,
+    connectionHops: [],
     version: undefined,
     portId: undefined,
     channelId: undefined

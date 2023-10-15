@@ -84,13 +84,13 @@ export interface ClaimsRecordAddress {
   /** total initial claimable amount for the user */
   initialClaimableAmount: string;
   /** slice of the available actions completed */
-  actionsCompleted?: boolean[];
+  actionsCompleted: boolean[];
 }
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
   address?: string;
   initial_claimable_amount: string;
-  actions_completed?: boolean[];
+  actions_completed: boolean[];
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
@@ -100,7 +100,7 @@ export interface ClaimsRecord {
   /** total initial claimable amount for the user */
   initialClaimableAmount: string;
   /** slice of the available actions completed */
-  actionsCompleted?: boolean[];
+  actionsCompleted: boolean[];
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
@@ -108,7 +108,7 @@ export interface ClaimsRecord {
  */
 export interface ClaimsRecordSDKType {
   initial_claimable_amount: string;
-  actions_completed?: boolean[];
+  actions_completed: boolean[];
 }
 function createBaseClaim(): Claim {
   return {
@@ -230,7 +230,7 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
   return {
     address: undefined,
     initialClaimableAmount: "",
-    actionsCompleted: undefined
+    actionsCompleted: []
   };
 }
 export const ClaimsRecordAddress = {
@@ -366,7 +366,7 @@ export const ClaimsRecordAddress = {
 function createBaseClaimsRecord(): ClaimsRecord {
   return {
     initialClaimableAmount: "",
-    actionsCompleted: undefined
+    actionsCompleted: []
   };
 }
 export const ClaimsRecord = {

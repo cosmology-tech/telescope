@@ -32,7 +32,7 @@ export interface Endpoint {
    * Additional names that this endpoint will be hosted on.
    */
   /** @deprecated */
-  aliases?: string[];
+  aliases: string[];
   /**
    * The specification of an Internet routable address of API frontend that will
    * handle requests to this [API
@@ -72,14 +72,14 @@ export interface Endpoint {
 export interface EndpointSDKType {
   name?: string;
   /** @deprecated */
-  aliases?: string[];
+  aliases: string[];
   target?: string;
   allow_cors?: boolean;
 }
 function createBaseEndpoint(): Endpoint {
   return {
     name: undefined,
-    aliases: undefined,
+    aliases: [],
     target: undefined,
     allowCors: undefined
   };

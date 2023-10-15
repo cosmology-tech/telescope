@@ -98,7 +98,7 @@ export interface ConfigChange {
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
-  advices?: Advice[];
+  advices: Advice[];
 }
 /**
  * Output generated from semantically comparing two versions of a service
@@ -113,7 +113,7 @@ export interface ConfigChangeSDKType {
   old_value?: string;
   new_value?: string;
   change_type?: ChangeType;
-  advices?: AdviceSDKType[];
+  advices: AdviceSDKType[];
 }
 /**
  * Generated advice about this change, used for providing more
@@ -139,7 +139,7 @@ function createBaseConfigChange(): ConfigChange {
     oldValue: undefined,
     newValue: undefined,
     changeType: undefined,
-    advices: undefined
+    advices: []
   };
 }
 export const ConfigChange = {

@@ -22,13 +22,13 @@ export interface QueryGrantsRequestSDKType {
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponse {
   /** authorizations is a list of grants granted for grantee by granter. */
-  grants?: Grant[];
+  grants: Grant[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseSDKType {
-  grants?: GrantSDKType[];
+  grants: GrantSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
@@ -45,13 +45,13 @@ export interface QueryGranterGrantsRequestSDKType {
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponse {
   /** grants is a list of grants granted by the granter. */
-  grants?: GrantAuthorization[];
+  grants: GrantAuthorization[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseSDKType {
-  grants?: GrantAuthorizationSDKType[];
+  grants: GrantAuthorizationSDKType[];
   pagination?: PageResponseSDKType;
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
@@ -68,13 +68,13 @@ export interface QueryGranteeGrantsRequestSDKType {
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponse {
   /** grants is a list of grants granted to the grantee. */
-  grants?: GrantAuthorization[];
+  grants: GrantAuthorization[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseSDKType {
-  grants?: GrantAuthorizationSDKType[];
+  grants: GrantAuthorizationSDKType[];
   pagination?: PageResponseSDKType;
 }
 function createBaseQueryGrantsRequest(): QueryGrantsRequest {
@@ -218,7 +218,7 @@ export const QueryGrantsRequest = {
 };
 function createBaseQueryGrantsResponse(): QueryGrantsResponse {
   return {
-    grants: undefined,
+    grants: [],
     pagination: undefined
   };
 }
@@ -448,7 +448,7 @@ export const QueryGranterGrantsRequest = {
 };
 function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
   return {
-    grants: undefined,
+    grants: [],
     pagination: undefined
   };
 }
@@ -678,7 +678,7 @@ export const QueryGranteeGrantsRequest = {
 };
 function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
   return {
-    grants: undefined,
+    grants: [],
     pagination: undefined
   };
 }

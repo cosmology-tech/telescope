@@ -44,7 +44,7 @@ export interface Pool {
   /** assets in the pool */
   poolLiquidity: Coin[];
   /** for calculation amognst assets with different precisions */
-  scalingFactors?: bigint[];
+  scalingFactors: bigint[];
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController?: string;
 }
@@ -56,7 +56,7 @@ export interface PoolSDKType {
   future_pool_governor?: string;
   total_shares: CoinSDKType;
   pool_liquidity: CoinSDKType[];
-  scaling_factors?: bigint[];
+  scaling_factors: bigint[];
   scaling_factor_controller?: string;
 }
 function createBasePoolParams(): PoolParams {
@@ -174,7 +174,7 @@ function createBasePool(): Pool {
     futurePoolGovernor: undefined,
     totalShares: Coin.fromPartial({}),
     poolLiquidity: [],
-    scalingFactors: undefined,
+    scalingFactors: [],
     scalingFactorController: undefined
   };
 }

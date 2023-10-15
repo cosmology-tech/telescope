@@ -64,7 +64,7 @@ export interface Monitoring {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  producerDestinations?: Monitoring_MonitoringDestination[];
+  producerDestinations: Monitoring_MonitoringDestination[];
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -73,7 +73,7 @@ export interface Monitoring {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  consumerDestinations?: Monitoring_MonitoringDestination[];
+  consumerDestinations: Monitoring_MonitoringDestination[];
 }
 /**
  * Monitoring configuration of the service.
@@ -130,8 +130,8 @@ export interface Monitoring {
  *         - library.googleapis.com/book/num_overdue
  */
 export interface MonitoringSDKType {
-  producer_destinations?: Monitoring_MonitoringDestinationSDKType[];
-  consumer_destinations?: Monitoring_MonitoringDestinationSDKType[];
+  producer_destinations: Monitoring_MonitoringDestinationSDKType[];
+  consumer_destinations: Monitoring_MonitoringDestinationSDKType[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -147,7 +147,7 @@ export interface Monitoring_MonitoringDestination {
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics?: string[];
+  metrics: string[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -155,12 +155,12 @@ export interface Monitoring_MonitoringDestination {
  */
 export interface Monitoring_MonitoringDestinationSDKType {
   monitored_resource?: string;
-  metrics?: string[];
+  metrics: string[];
 }
 function createBaseMonitoring(): Monitoring {
   return {
-    producerDestinations: undefined,
-    consumerDestinations: undefined
+    producerDestinations: [],
+    consumerDestinations: []
   };
 }
 export const Monitoring = {
@@ -285,7 +285,7 @@ export const Monitoring = {
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
   return {
     monitoredResource: undefined,
-    metrics: undefined
+    metrics: []
   };
 }
 export const Monitoring_MonitoringDestination = {

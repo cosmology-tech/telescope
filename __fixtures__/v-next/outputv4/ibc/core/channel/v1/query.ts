@@ -52,7 +52,7 @@ export interface QueryChannelsRequestSDKType {
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponse {
   /** list of stored channels of the chain. */
-  channels?: IdentifiedChannel[];
+  channels: IdentifiedChannel[];
   /** pagination response */
   pagination?: PageResponse;
   /** query block height */
@@ -60,7 +60,7 @@ export interface QueryChannelsResponse {
 }
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponseSDKType {
-  channels?: IdentifiedChannelSDKType[];
+  channels: IdentifiedChannelSDKType[];
   pagination?: PageResponseSDKType;
   height: HeightSDKType;
 }
@@ -88,7 +88,7 @@ export interface QueryConnectionChannelsRequestSDKType {
  */
 export interface QueryConnectionChannelsResponse {
   /** list of channels associated with a connection. */
-  channels?: IdentifiedChannel[];
+  channels: IdentifiedChannel[];
   /** pagination response */
   pagination?: PageResponse;
   /** query block height */
@@ -99,7 +99,7 @@ export interface QueryConnectionChannelsResponse {
  * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsResponseSDKType {
-  channels?: IdentifiedChannelSDKType[];
+  channels: IdentifiedChannelSDKType[];
   pagination?: PageResponseSDKType;
   height: HeightSDKType;
 }
@@ -260,7 +260,7 @@ export interface QueryPacketCommitmentsRequestSDKType {
  * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsResponse {
-  commitments?: PacketState[];
+  commitments: PacketState[];
   /** pagination response */
   pagination?: PageResponse;
   /** query block height */
@@ -271,7 +271,7 @@ export interface QueryPacketCommitmentsResponse {
  * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsResponseSDKType {
-  commitments?: PacketStateSDKType[];
+  commitments: PacketStateSDKType[];
   pagination?: PageResponseSDKType;
   height: HeightSDKType;
 }
@@ -375,7 +375,7 @@ export interface QueryPacketAcknowledgementsRequest {
   /** pagination request */
   pagination?: PageRequest;
   /** list of packet sequences */
-  packetCommitmentSequences?: bigint[];
+  packetCommitmentSequences: bigint[];
 }
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
@@ -385,14 +385,14 @@ export interface QueryPacketAcknowledgementsRequestSDKType {
   port_id?: string;
   channel_id?: string;
   pagination?: PageRequestSDKType;
-  packet_commitment_sequences?: bigint[];
+  packet_commitment_sequences: bigint[];
 }
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
  * Query/QueryPacketAcknowledgements RPC method
  */
 export interface QueryPacketAcknowledgementsResponse {
-  acknowledgements?: PacketState[];
+  acknowledgements: PacketState[];
   /** pagination response */
   pagination?: PageResponse;
   /** query block height */
@@ -403,7 +403,7 @@ export interface QueryPacketAcknowledgementsResponse {
  * Query/QueryPacketAcknowledgements RPC method
  */
 export interface QueryPacketAcknowledgementsResponseSDKType {
-  acknowledgements?: PacketStateSDKType[];
+  acknowledgements: PacketStateSDKType[];
   pagination?: PageResponseSDKType;
   height: HeightSDKType;
 }
@@ -417,7 +417,7 @@ export interface QueryUnreceivedPacketsRequest {
   /** channel unique identifier */
   channelId?: string;
   /** list of packet sequences */
-  packetCommitmentSequences?: bigint[];
+  packetCommitmentSequences: bigint[];
 }
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
@@ -426,7 +426,7 @@ export interface QueryUnreceivedPacketsRequest {
 export interface QueryUnreceivedPacketsRequestSDKType {
   port_id?: string;
   channel_id?: string;
-  packet_commitment_sequences?: bigint[];
+  packet_commitment_sequences: bigint[];
 }
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
@@ -434,7 +434,7 @@ export interface QueryUnreceivedPacketsRequestSDKType {
  */
 export interface QueryUnreceivedPacketsResponse {
   /** list of unreceived packet sequences */
-  sequences?: bigint[];
+  sequences: bigint[];
   /** query block height */
   height: Height;
 }
@@ -443,7 +443,7 @@ export interface QueryUnreceivedPacketsResponse {
  * Query/UnreceivedPacketCommitments RPC method
  */
 export interface QueryUnreceivedPacketsResponseSDKType {
-  sequences?: bigint[];
+  sequences: bigint[];
   height: HeightSDKType;
 }
 /**
@@ -456,7 +456,7 @@ export interface QueryUnreceivedAcksRequest {
   /** channel unique identifier */
   channelId?: string;
   /** list of acknowledgement sequences */
-  packetAckSequences?: bigint[];
+  packetAckSequences: bigint[];
 }
 /**
  * QueryUnreceivedAcks is the request type for the
@@ -465,7 +465,7 @@ export interface QueryUnreceivedAcksRequest {
 export interface QueryUnreceivedAcksRequestSDKType {
   port_id?: string;
   channel_id?: string;
-  packet_ack_sequences?: bigint[];
+  packet_ack_sequences: bigint[];
 }
 /**
  * QueryUnreceivedAcksResponse is the response type for the
@@ -473,7 +473,7 @@ export interface QueryUnreceivedAcksRequestSDKType {
  */
 export interface QueryUnreceivedAcksResponse {
   /** list of unreceived acknowledgement sequences */
-  sequences?: bigint[];
+  sequences: bigint[];
   /** query block height */
   height: Height;
 }
@@ -482,7 +482,7 @@ export interface QueryUnreceivedAcksResponse {
  * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksResponseSDKType {
-  sequences?: bigint[];
+  sequences: bigint[];
   height: HeightSDKType;
 }
 /**
@@ -853,7 +853,7 @@ export const QueryChannelsRequest = {
 };
 function createBaseQueryChannelsResponse(): QueryChannelsResponse {
   return {
-    channels: undefined,
+    channels: [],
     pagination: undefined,
     height: Height.fromPartial({})
   };
@@ -1100,7 +1100,7 @@ export const QueryConnectionChannelsRequest = {
 };
 function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsResponse {
   return {
-    channels: undefined,
+    channels: [],
     pagination: undefined,
     height: Height.fromPartial({})
   };
@@ -2131,7 +2131,7 @@ export const QueryPacketCommitmentsRequest = {
 };
 function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsResponse {
   return {
-    commitments: undefined,
+    commitments: [],
     pagination: undefined,
     height: Height.fromPartial({})
   };
@@ -2772,7 +2772,7 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
     portId: undefined,
     channelId: undefined,
     pagination: undefined,
-    packetCommitmentSequences: undefined
+    packetCommitmentSequences: []
   };
 }
 export const QueryPacketAcknowledgementsRequest = {
@@ -2929,7 +2929,7 @@ export const QueryPacketAcknowledgementsRequest = {
 };
 function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledgementsResponse {
   return {
-    acknowledgements: undefined,
+    acknowledgements: [],
     pagination: undefined,
     height: Height.fromPartial({})
   };
@@ -3069,7 +3069,7 @@ function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsReques
   return {
     portId: undefined,
     channelId: undefined,
-    packetCommitmentSequences: undefined
+    packetCommitmentSequences: []
   };
 }
 export const QueryUnreceivedPacketsRequest = {
@@ -3210,7 +3210,7 @@ export const QueryUnreceivedPacketsRequest = {
 };
 function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsResponse {
   return {
-    sequences: undefined,
+    sequences: [],
     height: Height.fromPartial({})
   };
 }
@@ -3342,7 +3342,7 @@ function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
   return {
     portId: undefined,
     channelId: undefined,
-    packetAckSequences: undefined
+    packetAckSequences: []
   };
 }
 export const QueryUnreceivedAcksRequest = {
@@ -3483,7 +3483,7 @@ export const QueryUnreceivedAcksRequest = {
 };
 function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
   return {
-    sequences: undefined,
+    sequences: [],
     height: Height.fromPartial({})
   };
 }
