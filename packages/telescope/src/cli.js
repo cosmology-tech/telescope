@@ -4,7 +4,7 @@ import { Contracts as contracts } from './cmds';
 import * as pkg from '../package.json';
 
 export const cli = async (argv) => {
-  if (argv.v) {
+  if (argv.v || argv.version) {
     console.log(pkg.version);
     return;
   }
