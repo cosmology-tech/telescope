@@ -11,7 +11,7 @@ export const protobufPackage = "ibc.core.connection.v1";
 export interface MsgConnectionOpenInit {
   clientId: string;
   counterparty: Counterparty;
-  version: Version;
+  version?: Version;
   delayPeriod: bigint;
   signer: string;
 }
@@ -41,7 +41,7 @@ export interface MsgConnectionOpenInitAminoMsg {
 export interface MsgConnectionOpenInitSDKType {
   client_id: string;
   counterparty: CounterpartySDKType;
-  version: VersionSDKType;
+  version?: VersionSDKType;
   delay_period: bigint;
   signer: string;
 }
@@ -79,7 +79,7 @@ export interface MsgConnectionOpenTry {
    * the connection identifier of the previous connection in state INIT
    */
   previousConnectionId: string;
-  clientState: Any;
+  clientState?: Any;
   counterparty: Counterparty;
   delayPeriod: bigint;
   counterpartyVersions: Version[];
@@ -139,7 +139,7 @@ export interface MsgConnectionOpenTryAminoMsg {
 export interface MsgConnectionOpenTrySDKType {
   client_id: string;
   previous_connection_id: string;
-  client_state: AnySDKType;
+  client_state?: AnySDKType;
   counterparty: CounterpartySDKType;
   delay_period: bigint;
   counterparty_versions: VersionSDKType[];
@@ -171,8 +171,8 @@ export interface MsgConnectionOpenTryResponseSDKType {}
 export interface MsgConnectionOpenAck {
   connectionId: string;
   counterpartyConnectionId: string;
-  version: Version;
-  clientState: Any;
+  version?: Version;
+  clientState?: Any;
   proofHeight: Height;
   /**
    * proof of the initialization the connection on Chain B: `UNITIALIZED ->
@@ -223,8 +223,8 @@ export interface MsgConnectionOpenAckAminoMsg {
 export interface MsgConnectionOpenAckSDKType {
   connection_id: string;
   counterparty_connection_id: string;
-  version: VersionSDKType;
-  client_state: AnySDKType;
+  version?: VersionSDKType;
+  client_state?: AnySDKType;
   proof_height: HeightSDKType;
   proof_try: Uint8Array;
   proof_client: Uint8Array;
@@ -313,7 +313,7 @@ function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
   return {
     clientId: "",
     counterparty: Counterparty.fromPartial({}),
-    version: Version.fromPartial({}),
+    version: undefined,
     delayPeriod: BigInt(0),
     signer: ""
   };
@@ -534,7 +534,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
   return {
     clientId: "",
     previousConnectionId: "",
-    clientState: Any.fromPartial({}),
+    clientState: undefined,
     counterparty: Counterparty.fromPartial({}),
     delayPeriod: BigInt(0),
     counterpartyVersions: [],
@@ -869,8 +869,8 @@ function createBaseMsgConnectionOpenAck(): MsgConnectionOpenAck {
   return {
     connectionId: "",
     counterpartyConnectionId: "",
-    version: Version.fromPartial({}),
-    clientState: Any.fromPartial({}),
+    version: undefined,
+    clientState: undefined,
     proofHeight: Height.fromPartial({}),
     proofTry: new Uint8Array(),
     proofClient: new Uint8Array(),

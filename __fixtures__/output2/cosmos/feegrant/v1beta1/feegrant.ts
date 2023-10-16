@@ -19,7 +19,7 @@ export interface BasicAllowance {
    */
   spendLimit: Coin[];
   /** expiration specifies an optional time when this allowance expires */
-  expiration: Timestamp;
+  expiration?: Timestamp;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -50,7 +50,7 @@ export interface PeriodicAllowance {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
   /** allowance can be any of basic and filtered fee allowance. */
-  allowance: Any;
+  allowance?: Any;
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
@@ -61,12 +61,12 @@ export interface Grant {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic and filtered fee allowance. */
-  allowance: Any;
+  allowance?: Any;
 }
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     spendLimit: [],
-    expiration: Timestamp.fromPartial({})
+    expiration: undefined
   };
 }
 export const BasicAllowance = {
@@ -217,7 +217,7 @@ export const PeriodicAllowance = {
 };
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
-    allowance: Any.fromPartial({}),
+    allowance: undefined,
     allowedMessages: []
   };
 }
@@ -278,7 +278,7 @@ function createBaseGrant(): Grant {
   return {
     granter: "",
     grantee: "",
-    allowance: Any.fromPartial({})
+    allowance: undefined
   };
 }
 export const Grant = {

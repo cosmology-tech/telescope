@@ -5,7 +5,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryProvidersRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest";
@@ -21,12 +21,12 @@ export interface QueryProvidersRequestAminoMsg {
 }
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse";
@@ -44,7 +44,7 @@ export interface QueryProvidersResponseAminoMsg {
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
@@ -88,7 +88,7 @@ export interface QueryProviderResponseSDKType {
 }
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProvidersRequest = {
@@ -172,7 +172,7 @@ export const QueryProvidersRequest = {
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProvidersResponse = {

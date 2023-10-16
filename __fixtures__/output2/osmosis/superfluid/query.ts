@@ -28,7 +28,7 @@ export interface AssetMultiplierRequest {
   denom: string;
 }
 export interface AssetMultiplierResponse {
-  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
+  osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
 }
 export interface SuperfluidIntermediaryAccountInfo {
   denom: string;
@@ -37,17 +37,17 @@ export interface SuperfluidIntermediaryAccountInfo {
   address: string;
 }
 export interface AllIntermediaryAccountsRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface AllIntermediaryAccountsResponse {
   accounts: SuperfluidIntermediaryAccountInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface ConnectedIntermediaryAccountRequest {
   lockId: Long;
 }
 export interface ConnectedIntermediaryAccountResponse {
-  account: SuperfluidIntermediaryAccountInfo;
+  account?: SuperfluidIntermediaryAccountInfo;
 }
 export interface QueryTotalDelegationByValidatorForDenomRequest {
   denom: string;
@@ -413,7 +413,7 @@ export const AssetMultiplierRequest = {
 };
 function createBaseAssetMultiplierResponse(): AssetMultiplierResponse {
   return {
-    osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord.fromPartial({})
+    osmoEquivalentMultiplier: undefined
   };
 }
 export const AssetMultiplierResponse = {
@@ -533,7 +533,7 @@ export const SuperfluidIntermediaryAccountInfo = {
 };
 function createBaseAllIntermediaryAccountsRequest(): AllIntermediaryAccountsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const AllIntermediaryAccountsRequest = {
@@ -579,7 +579,7 @@ export const AllIntermediaryAccountsRequest = {
 function createBaseAllIntermediaryAccountsResponse(): AllIntermediaryAccountsResponse {
   return {
     accounts: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const AllIntermediaryAccountsResponse = {
@@ -682,7 +682,7 @@ export const ConnectedIntermediaryAccountRequest = {
 };
 function createBaseConnectedIntermediaryAccountResponse(): ConnectedIntermediaryAccountResponse {
   return {
-    account: SuperfluidIntermediaryAccountInfo.fromPartial({})
+    account: undefined
   };
 }
 export const ConnectedIntermediaryAccountResponse = {

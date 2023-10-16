@@ -101,11 +101,11 @@ export interface GetServiceRequestSDKType {
 /** Request message for CreateService method. */
 export interface CreateServiceRequest {
   /** Required. Initial values for the service resource. */
-  service: ManagedService;
+  service?: ManagedService;
 }
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
-  service: ManagedServiceSDKType;
+  service?: ManagedServiceSDKType;
 }
 /** Request message for DeleteService method. */
 export interface DeleteServiceRequest {
@@ -134,11 +134,11 @@ export interface UndeleteServiceRequestSDKType {
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponse {
   /** Revived service resource. */
-  service: ManagedService;
+  service?: ManagedService;
 }
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
-  service: ManagedServiceSDKType;
+  service?: ManagedServiceSDKType;
 }
 /** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequest {
@@ -207,12 +207,12 @@ export interface CreateServiceConfigRequest {
    */
   serviceName: string;
   /** Required. The service configuration resource. */
-  serviceConfig: Service;
+  serviceConfig?: Service;
 }
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestSDKType {
   service_name: string;
-  service_config: ServiceSDKType;
+  service_config?: ServiceSDKType;
 }
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequest {
@@ -222,7 +222,7 @@ export interface SubmitConfigSourceRequest {
    */
   serviceName: string;
   /** Required. The source configuration for the service. */
-  configSource: ConfigSource;
+  configSource?: ConfigSource;
   /**
    * Optional. If set, this will result in the generation of a
    * `google.api.Service` configuration based on the `ConfigSource` provided,
@@ -233,17 +233,17 @@ export interface SubmitConfigSourceRequest {
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
   service_name: string;
-  config_source: ConfigSourceSDKType;
+  config_source?: ConfigSourceSDKType;
   validate_only: boolean;
 }
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
-  serviceConfig: Service;
+  serviceConfig?: Service;
 }
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
-  service_config: ServiceSDKType;
+  service_config?: ServiceSDKType;
 }
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequest {
@@ -253,12 +253,12 @@ export interface CreateServiceRolloutRequest {
    */
   serviceName: string;
   /** Required. The rollout resource. The `service_name` field is output only. */
-  rollout: Rollout;
+  rollout?: Rollout;
 }
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestSDKType {
   service_name: string;
-  rollout: RolloutSDKType;
+  rollout?: RolloutSDKType;
 }
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequest {
@@ -329,7 +329,7 @@ export interface GenerateConfigReportRequest {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  newConfig: Any;
+  newConfig?: Any;
   /**
    * Optional. Service configuration against which the comparison will be done.
    * For this version of API, the supported types are
@@ -337,12 +337,12 @@ export interface GenerateConfigReportRequest {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  oldConfig: Any;
+  oldConfig?: Any;
 }
 /** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestSDKType {
-  new_config: AnySDKType;
-  old_config: AnySDKType;
+  new_config?: AnySDKType;
+  old_config?: AnySDKType;
 }
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponse {
@@ -592,7 +592,7 @@ export const GetServiceRequest = {
 };
 function createBaseCreateServiceRequest(): CreateServiceRequest {
   return {
-    service: ManagedService.fromPartial({})
+    service: undefined
   };
 }
 export const CreateServiceRequest = {
@@ -757,7 +757,7 @@ export const UndeleteServiceRequest = {
 };
 function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
   return {
-    service: ManagedService.fromPartial({})
+    service: undefined
   };
 }
 export const UndeleteServiceResponse = {
@@ -1046,7 +1046,7 @@ export const ListServiceConfigsResponse = {
 function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
   return {
     serviceName: "",
-    serviceConfig: Service.fromPartial({})
+    serviceConfig: undefined
   };
 }
 export const CreateServiceConfigRequest = {
@@ -1113,7 +1113,7 @@ export const CreateServiceConfigRequest = {
 function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
   return {
     serviceName: "",
-    configSource: ConfigSource.fromPartial({}),
+    configSource: undefined,
     validateOnly: false
   };
 }
@@ -1191,7 +1191,7 @@ export const SubmitConfigSourceRequest = {
 };
 function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
   return {
-    serviceConfig: Service.fromPartial({})
+    serviceConfig: undefined
   };
 }
 export const SubmitConfigSourceResponse = {
@@ -1247,7 +1247,7 @@ export const SubmitConfigSourceResponse = {
 function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
   return {
     serviceName: "",
-    rollout: Rollout.fromPartial({})
+    rollout: undefined
   };
 }
 export const CreateServiceRolloutRequest = {
@@ -1546,8 +1546,8 @@ export const GetServiceRolloutRequest = {
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
-    newConfig: Any.fromPartial({}),
-    oldConfig: Any.fromPartial({})
+    newConfig: undefined,
+    oldConfig: undefined
   };
 }
 export const GenerateConfigReportRequest = {

@@ -49,12 +49,12 @@ export interface Distribution {
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
    */
-  range: Distribution_Range;
+  range?: Distribution_Range;
   /**
    * Defines the histogram bucket boundaries. If the distribution does not
    * contain a histogram, then omit this field.
    */
-  bucketOptions: Distribution_BucketOptions;
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * The number of values in each bucket of the histogram, as described in
    * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -177,7 +177,7 @@ export interface Distribution_Exemplar {
    */
   value: number;
   /** The observation (sampling) time of the above value. */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
   /**
    * Contextual information about the example value. Examples are:
    * 
@@ -198,8 +198,8 @@ function createBaseDistribution(): Distribution {
     count: Long.ZERO,
     mean: 0,
     sumOfSquaredDeviation: 0,
-    range: Distribution_Range.fromPartial({}),
-    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    range: undefined,
+    bucketOptions: undefined,
     bucketCounts: [],
     exemplars: []
   };
@@ -626,7 +626,7 @@ export const Distribution_BucketOptions_Explicit = {
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: 0,
-    timestamp: Timestamp.fromPartial({}),
+    timestamp: undefined,
     attachments: []
   };
 }

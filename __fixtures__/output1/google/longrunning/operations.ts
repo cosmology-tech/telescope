@@ -21,7 +21,7 @@ export interface Operation {
    * Some services might not provide such metadata.  Any method that returns a
    * long-running operation should document the metadata type, if any.
    */
-  metadata: Any;
+  metadata?: Any;
   /**
    * If the value is `false`, it means the operation is still in progress.
    * If `true`, the operation is completed, and either `error` or `response` is
@@ -48,7 +48,7 @@ export interface Operation {
  */
 export interface OperationSDKType {
   name: string;
-  metadata: AnySDKType;
+  metadata?: AnySDKType;
   done: boolean;
   error?: StatusSDKType;
   response?: AnySDKType;
@@ -119,12 +119,12 @@ export interface WaitOperationRequest {
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
    * If RPC context deadline is also specified, the shorter one will be used.
    */
-  timeout: Duration;
+  timeout?: Duration;
 }
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestSDKType {
   name: string;
-  timeout: DurationSDKType;
+  timeout?: DurationSDKType;
 }
 /**
  * A message representing the message types used by a long-running operation.
@@ -182,7 +182,7 @@ export interface OperationInfoSDKType {
 function createBaseOperation(): Operation {
   return {
     name: "",
-    metadata: Any.fromPartial({}),
+    metadata: undefined,
     done: false,
     error: undefined,
     response: undefined
@@ -616,7 +616,7 @@ export const DeleteOperationRequest = {
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
     name: "",
-    timeout: Duration.fromPartial({})
+    timeout: undefined
   };
 }
 export const WaitOperationRequest = {

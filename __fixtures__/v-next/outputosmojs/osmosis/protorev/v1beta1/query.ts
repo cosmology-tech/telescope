@@ -63,14 +63,14 @@ export interface QueryGetProtoRevProfitsByDenomRequestSDKType {
  */
 export interface QueryGetProtoRevProfitsByDenomResponse {
   /** profit is the profits of the module by the selected denom */
-  profit: Coin;
+  profit?: Coin;
 }
 /**
  * QueryGetProtoRevProfitsByDenomResponse is response type for the
  * Query/GetProtoRevProfitsByDenom RPC method.
  */
 export interface QueryGetProtoRevProfitsByDenomResponseSDKType {
-  profit: CoinSDKType;
+  profit?: CoinSDKType;
 }
 /**
  * QueryGetProtoRevAllProfitsRequest is request type for the
@@ -789,7 +789,7 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
 };
 function createBaseQueryGetProtoRevProfitsByDenomResponse(): QueryGetProtoRevProfitsByDenomResponse {
   return {
-    profit: Coin.fromPartial({})
+    profit: undefined
   };
 }
 export const QueryGetProtoRevProfitsByDenomResponse = {

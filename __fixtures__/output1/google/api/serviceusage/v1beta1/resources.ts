@@ -180,7 +180,7 @@ export interface Service {
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config: ServiceConfig;
+  config?: ServiceConfig;
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
@@ -188,7 +188,7 @@ export interface Service {
 export interface ServiceSDKType {
   name: string;
   parent: string;
-  config: ServiceConfigSDKType;
+  config?: ServiceConfigSDKType;
   state: State;
 }
 /** The configuration of the service. */
@@ -211,13 +211,13 @@ export interface ServiceConfig {
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
-  documentation: Documentation;
+  documentation?: Documentation;
   /** Quota configuration. */
-  quota: Quota;
+  quota?: Quota;
   /** Auth configuration. Contains only the OAuth rules. */
-  authentication: Authentication;
+  authentication?: Authentication;
   /** Configuration controlling usage of this service. */
-  usage: Usage;
+  usage?: Usage;
   /**
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
@@ -232,20 +232,20 @@ export interface ServiceConfig {
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
-  monitoring: Monitoring;
+  monitoring?: Monitoring;
 }
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
   title: string;
   apis: ApiSDKType[];
-  documentation: DocumentationSDKType;
-  quota: QuotaSDKType;
-  authentication: AuthenticationSDKType;
-  usage: UsageSDKType;
+  documentation?: DocumentationSDKType;
+  quota?: QuotaSDKType;
+  authentication?: AuthenticationSDKType;
+  usage?: UsageSDKType;
   endpoints: EndpointSDKType[];
   monitored_resources: MonitoredResourceDescriptorSDKType[];
-  monitoring: MonitoringSDKType;
+  monitoring?: MonitoringSDKType;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadata {
@@ -380,11 +380,11 @@ export interface QuotaBucket {
    */
   defaultLimit: Long;
   /** Producer override on this quota bucket. */
-  producerOverride: QuotaOverride;
+  producerOverride?: QuotaOverride;
   /** Consumer override on this quota bucket. */
-  consumerOverride: QuotaOverride;
+  consumerOverride?: QuotaOverride;
   /** Admin override on this quota bucket. */
-  adminOverride: QuotaOverride;
+  adminOverride?: QuotaOverride;
   /**
    * The dimensions of this quota bucket.
    * 
@@ -406,9 +406,9 @@ export interface QuotaBucket {
 export interface QuotaBucketSDKType {
   effective_limit: Long;
   default_limit: Long;
-  producer_override: QuotaOverrideSDKType;
-  consumer_override: QuotaOverrideSDKType;
-  admin_override: QuotaOverrideSDKType;
+  producer_override?: QuotaOverrideSDKType;
+  consumer_override?: QuotaOverrideSDKType;
+  admin_override?: QuotaOverrideSDKType;
   dimensions: {
     [key: string]: string;
   };
@@ -616,7 +616,7 @@ function createBaseService(): Service {
   return {
     name: "",
     parent: "",
-    config: ServiceConfig.fromPartial({}),
+    config: undefined,
     state: 0
   };
 }
@@ -708,13 +708,13 @@ function createBaseServiceConfig(): ServiceConfig {
     name: "",
     title: "",
     apis: [],
-    documentation: Documentation.fromPartial({}),
-    quota: Quota.fromPartial({}),
-    authentication: Authentication.fromPartial({}),
-    usage: Usage.fromPartial({}),
+    documentation: undefined,
+    quota: undefined,
+    authentication: undefined,
+    usage: undefined,
     endpoints: [],
     monitoredResources: [],
-    monitoring: Monitoring.fromPartial({})
+    monitoring: undefined
   };
 }
 export const ServiceConfig = {
@@ -1278,9 +1278,9 @@ function createBaseQuotaBucket(): QuotaBucket {
   return {
     effectiveLimit: Long.ZERO,
     defaultLimit: Long.ZERO,
-    producerOverride: QuotaOverride.fromPartial({}),
-    consumerOverride: QuotaOverride.fromPartial({}),
-    adminOverride: QuotaOverride.fromPartial({}),
+    producerOverride: undefined,
+    consumerOverride: undefined,
+    adminOverride: undefined,
     dimensions: {}
   };
 }

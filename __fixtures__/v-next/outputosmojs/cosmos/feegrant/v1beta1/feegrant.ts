@@ -17,7 +17,7 @@ export interface BasicAllowance {
    */
   spendLimit: Coin[];
   /** expiration specifies an optional time when this allowance expires */
-  expiration: Date;
+  expiration?: Date;
 }
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -25,7 +25,7 @@ export interface BasicAllowance {
  */
 export interface BasicAllowanceSDKType {
   spend_limit: CoinSDKType[];
-  expiration: Date;
+  expiration?: Date;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -67,13 +67,13 @@ export interface PeriodicAllowanceSDKType {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
   /** allowance can be any of basic and periodic fee allowance. */
-  allowance: Any;
+  allowance?: Any;
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
-  allowance: AnySDKType;
+  allowance?: AnySDKType;
   allowed_messages: string[];
 }
 /** Grant is stored in the KVStore to record a grant with full context */
@@ -83,18 +83,18 @@ export interface Grant {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: Any;
+  allowance?: Any;
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantSDKType {
   granter: string;
   grantee: string;
-  allowance: AnySDKType;
+  allowance?: AnySDKType;
 }
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     spendLimit: [],
-    expiration: new Date()
+    expiration: undefined
   };
 }
 export const BasicAllowance = {
@@ -175,7 +175,7 @@ export const BasicAllowance = {
   fromAmino(object: BasicAllowanceAmino): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      expiration: object.expiration
+      expiration: object?.expiration
     };
   },
   toAmino(message: BasicAllowance): BasicAllowanceAmino {
@@ -388,7 +388,7 @@ export const PeriodicAllowance = {
 };
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
-    allowance: Any.fromPartial({}),
+    allowance: undefined,
     allowedMessages: []
   };
 }
@@ -509,7 +509,7 @@ function createBaseGrant(): Grant {
   return {
     granter: "",
     grantee: "",
-    allowance: Any.fromPartial({})
+    allowance: undefined
   };
 }
 export const Grant = {

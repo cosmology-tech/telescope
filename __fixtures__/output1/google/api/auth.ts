@@ -74,7 +74,7 @@ export interface AuthenticationRule {
    */
   selector: string;
   /** The requirements for OAuth credentials. */
-  oauth: OAuthRequirements;
+  oauth?: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
@@ -96,7 +96,7 @@ export interface AuthenticationRule {
  */
 export interface AuthenticationRuleSDKType {
   selector: string;
-  oauth: OAuthRequirementsSDKType;
+  oauth?: OAuthRequirementsSDKType;
   allow_without_credential: boolean;
   requirements: AuthRequirementSDKType[];
 }
@@ -404,7 +404,7 @@ export const Authentication = {
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
     selector: "",
-    oauth: OAuthRequirements.fromPartial({}),
+    oauth: undefined,
     allowWithoutCredential: false,
     requirements: []
   };

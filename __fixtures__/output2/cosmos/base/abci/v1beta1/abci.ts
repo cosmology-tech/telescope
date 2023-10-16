@@ -34,7 +34,7 @@ export interface TxResponse {
   /** Amount of gas consumed by transaction. */
   gasUsed: Long;
   /** The request transaction bytes. */
-  tx: Any;
+  tx?: Any;
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
    * the timestamps of the valid votes in the block.LastCommit. For height == 1,
@@ -105,7 +105,7 @@ export interface Result {
  */
 export interface SimulationResponse {
   gasInfo: GasInfo;
-  result: Result;
+  result?: Result;
 }
 /**
  * MsgData defines the data returned in a Result object during message
@@ -149,7 +149,7 @@ function createBaseTxResponse(): TxResponse {
     info: "",
     gasWanted: Long.ZERO,
     gasUsed: Long.ZERO,
-    tx: Any.fromPartial({}),
+    tx: undefined,
     timestamp: "",
     events: []
   };
@@ -620,7 +620,7 @@ export const Result = {
 function createBaseSimulationResponse(): SimulationResponse {
   return {
     gasInfo: GasInfo.fromPartial({}),
-    result: Result.fromPartial({})
+    result: undefined
   };
 }
 export const SimulationResponse = {

@@ -310,7 +310,7 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime: Date;
+  startTime?: Date;
 }
 export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
@@ -339,7 +339,7 @@ export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
   progress_percentage: number;
-  start_time: Date;
+  start_time?: Date;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
@@ -577,7 +577,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime: Date;
+  createTime?: Date;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**
@@ -654,7 +654,7 @@ export interface RolloutAminoMsg {
  */
 export interface RolloutSDKType {
   rollout_id: string;
-  create_time: Date;
+  create_time?: Date;
   created_by: string;
   status: Rollout_RolloutStatus;
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
@@ -933,7 +933,7 @@ function createBaseOperationMetadata(): OperationMetadata {
     resourceNames: [],
     steps: [],
     progressPercentage: 0,
-    startTime: new Date()
+    startTime: undefined
   };
 }
 export const OperationMetadata = {
@@ -1040,7 +1040,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
       progressPercentage: object.progress_percentage,
-      startTime: object.start_time
+      startTime: object?.start_time
     };
   },
   toAmino(message: OperationMetadata): OperationMetadataAmino {
@@ -1672,7 +1672,7 @@ export const ChangeReport = {
 function createBaseRollout(): Rollout {
   return {
     rolloutId: "",
-    createTime: new Date(),
+    createTime: undefined,
     createdBy: "",
     status: 0,
     trafficPercentStrategy: undefined,
@@ -1803,7 +1803,7 @@ export const Rollout = {
   fromAmino(object: RolloutAmino): Rollout {
     return {
       rolloutId: object.rollout_id,
-      createTime: object.create_time,
+      createTime: object?.create_time,
       createdBy: object.created_by,
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,

@@ -7,26 +7,26 @@ export interface AppDescriptor {
    * AuthnDescriptor provides information on how to authenticate transactions on the application
    * NOTE: experimental and subject to change in future releases.
    */
-  authn: AuthnDescriptor;
+  authn?: AuthnDescriptor;
   /** chain provides the chain descriptor */
-  chain: ChainDescriptor;
+  chain?: ChainDescriptor;
   /** codec provides metadata information regarding codec related types */
-  codec: CodecDescriptor;
+  codec?: CodecDescriptor;
   /** configuration provides metadata information regarding the sdk.Config type */
-  configuration: ConfigurationDescriptor;
+  configuration?: ConfigurationDescriptor;
   /** query_services provides metadata information regarding the available queriable endpoints */
-  queryServices: QueryServicesDescriptor;
+  queryServices?: QueryServicesDescriptor;
   /** tx provides metadata information regarding how to send transactions to the given application */
-  tx: TxDescriptor;
+  tx?: TxDescriptor;
 }
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptorSDKType {
-  authn: AuthnDescriptorSDKType;
-  chain: ChainDescriptorSDKType;
-  codec: CodecDescriptorSDKType;
-  configuration: ConfigurationDescriptorSDKType;
-  query_services: QueryServicesDescriptorSDKType;
-  tx: TxDescriptorSDKType;
+  authn?: AuthnDescriptorSDKType;
+  chain?: ChainDescriptorSDKType;
+  codec?: CodecDescriptorSDKType;
+  configuration?: ConfigurationDescriptorSDKType;
+  query_services?: QueryServicesDescriptorSDKType;
+  tx?: TxDescriptorSDKType;
 }
 /** TxDescriptor describes the accepted transaction type */
 export interface TxDescriptor {
@@ -187,11 +187,11 @@ export interface GetAuthnDescriptorRequestSDKType {}
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponse {
   /** authn describes how to authenticate to the application when sending transactions */
-  authn: AuthnDescriptor;
+  authn?: AuthnDescriptor;
 }
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponseSDKType {
-  authn: AuthnDescriptorSDKType;
+  authn?: AuthnDescriptorSDKType;
 }
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequest {}
@@ -200,11 +200,11 @@ export interface GetChainDescriptorRequestSDKType {}
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponse {
   /** chain describes application chain information */
-  chain: ChainDescriptor;
+  chain?: ChainDescriptor;
 }
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponseSDKType {
-  chain: ChainDescriptorSDKType;
+  chain?: ChainDescriptorSDKType;
 }
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequest {}
@@ -213,11 +213,11 @@ export interface GetCodecDescriptorRequestSDKType {}
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponse {
   /** codec describes the application codec such as registered interfaces and implementations */
-  codec: CodecDescriptor;
+  codec?: CodecDescriptor;
 }
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponseSDKType {
-  codec: CodecDescriptorSDKType;
+  codec?: CodecDescriptorSDKType;
 }
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequest {}
@@ -226,11 +226,11 @@ export interface GetConfigurationDescriptorRequestSDKType {}
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponse {
   /** config describes the application's sdk.Config */
-  config: ConfigurationDescriptor;
+  config?: ConfigurationDescriptor;
 }
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponseSDKType {
-  config: ConfigurationDescriptorSDKType;
+  config?: ConfigurationDescriptorSDKType;
 }
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequest {}
@@ -239,11 +239,11 @@ export interface GetQueryServicesDescriptorRequestSDKType {}
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponse {
   /** queries provides information on the available queryable services */
-  queries: QueryServicesDescriptor;
+  queries?: QueryServicesDescriptor;
 }
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponseSDKType {
-  queries: QueryServicesDescriptorSDKType;
+  queries?: QueryServicesDescriptorSDKType;
 }
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequest {}
@@ -255,11 +255,11 @@ export interface GetTxDescriptorResponse {
    * tx provides information on msgs that can be forwarded to the application
    * alongside the accepted transaction protobuf type
    */
-  tx: TxDescriptor;
+  tx?: TxDescriptor;
 }
 /** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
 export interface GetTxDescriptorResponseSDKType {
-  tx: TxDescriptorSDKType;
+  tx?: TxDescriptorSDKType;
 }
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptor {
@@ -310,12 +310,12 @@ export interface QueryMethodDescriptorSDKType {
 }
 function createBaseAppDescriptor(): AppDescriptor {
   return {
-    authn: AuthnDescriptor.fromPartial({}),
-    chain: ChainDescriptor.fromPartial({}),
-    codec: CodecDescriptor.fromPartial({}),
-    configuration: ConfigurationDescriptor.fromPartial({}),
-    queryServices: QueryServicesDescriptor.fromPartial({}),
-    tx: TxDescriptor.fromPartial({})
+    authn: undefined,
+    chain: undefined,
+    codec: undefined,
+    configuration: undefined,
+    queryServices: undefined,
+    tx: undefined
   };
 }
 export const AppDescriptor = {
@@ -1646,7 +1646,7 @@ export const GetAuthnDescriptorRequest = {
 };
 function createBaseGetAuthnDescriptorResponse(): GetAuthnDescriptorResponse {
   return {
-    authn: AuthnDescriptor.fromPartial({})
+    authn: undefined
   };
 }
 export const GetAuthnDescriptorResponse = {
@@ -1810,7 +1810,7 @@ export const GetChainDescriptorRequest = {
 };
 function createBaseGetChainDescriptorResponse(): GetChainDescriptorResponse {
   return {
-    chain: ChainDescriptor.fromPartial({})
+    chain: undefined
   };
 }
 export const GetChainDescriptorResponse = {
@@ -1974,7 +1974,7 @@ export const GetCodecDescriptorRequest = {
 };
 function createBaseGetCodecDescriptorResponse(): GetCodecDescriptorResponse {
   return {
-    codec: CodecDescriptor.fromPartial({})
+    codec: undefined
   };
 }
 export const GetCodecDescriptorResponse = {
@@ -2138,7 +2138,7 @@ export const GetConfigurationDescriptorRequest = {
 };
 function createBaseGetConfigurationDescriptorResponse(): GetConfigurationDescriptorResponse {
   return {
-    config: ConfigurationDescriptor.fromPartial({})
+    config: undefined
   };
 }
 export const GetConfigurationDescriptorResponse = {
@@ -2302,7 +2302,7 @@ export const GetQueryServicesDescriptorRequest = {
 };
 function createBaseGetQueryServicesDescriptorResponse(): GetQueryServicesDescriptorResponse {
   return {
-    queries: QueryServicesDescriptor.fromPartial({})
+    queries: undefined
   };
 }
 export const GetQueryServicesDescriptorResponse = {
@@ -2466,7 +2466,7 @@ export const GetTxDescriptorRequest = {
 };
 function createBaseGetTxDescriptorResponse(): GetTxDescriptorResponse {
   return {
-    tx: TxDescriptor.fromPartial({})
+    tx: undefined
   };
 }
 export const GetTxDescriptorResponse = {

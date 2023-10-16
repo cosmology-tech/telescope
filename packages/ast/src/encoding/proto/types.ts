@@ -208,7 +208,6 @@ export const getFieldOptionalityForDefaults = (
     isOneOf: boolean
 ) => {
     const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
-    const optionalNullableDefaultTrue = context.pluginValue('prototypes.optionalNullableDefaultTrue');
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
 
     if (isArrayField(field) || isEnumField(field) || isScalarField(field) || isMapField(field)) {
@@ -221,7 +220,7 @@ export const getFieldOptionalityForDefaults = (
         return false;
     }
 
-    const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? optionalNullableDefaultTrue;
+    const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? true;
 
     return isOneOf ||
         (

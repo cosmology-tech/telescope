@@ -41,13 +41,13 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime: Date;
+  startTime?: Date;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime: Date;
+  endTime?: Date;
   /** A boolean value. */
   boolValue?: boolean;
   /** A signed 64-bit integer value. */
@@ -108,8 +108,8 @@ export interface MetricValueSDKType {
   labels: {
     [key: string]: string;
   };
-  start_time: Date;
-  end_time: Date;
+  start_time?: Date;
+  end_time?: Date;
   bool_value?: boolean;
   int64_value?: bigint;
   double_value?: number;
@@ -246,8 +246,8 @@ export const MetricValue_LabelsEntry = {
 function createBaseMetricValue(): MetricValue {
   return {
     labels: {},
-    startTime: new Date(),
-    endTime: new Date(),
+    startTime: undefined,
+    endTime: undefined,
     boolValue: undefined,
     int64Value: undefined,
     doubleValue: undefined,
@@ -429,8 +429,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: object.start_time,
-      endTime: object.end_time,
+      startTime: object?.start_time,
+      endTime: object?.end_time,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
       doubleValue: object?.double_value,

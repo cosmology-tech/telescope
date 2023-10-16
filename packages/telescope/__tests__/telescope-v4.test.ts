@@ -58,7 +58,6 @@ const options: TelescopeOptions = {
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
-    optionalNullableDefaultTrue: true,
     allowUndefinedTypes: false,
     excluded: {
       packages: [

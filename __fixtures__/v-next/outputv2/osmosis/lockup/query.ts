@@ -370,7 +370,7 @@ export interface LockedRequestSDKType {
   lock_id: bigint;
 }
 export interface LockedResponse {
-  lock: PeriodLock;
+  lock?: PeriodLock;
 }
 export interface LockedResponseProtoMsg {
   typeUrl: "/osmosis.lockup.LockedResponse";
@@ -384,7 +384,7 @@ export interface LockedResponseAminoMsg {
   value: LockedResponseAmino;
 }
 export interface LockedResponseSDKType {
-  lock: PeriodLockSDKType;
+  lock?: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: bigint;
@@ -2611,7 +2611,7 @@ export const LockedRequest = {
 };
 function createBaseLockedResponse(): LockedResponse {
   return {
-    lock: PeriodLock.fromPartial({})
+    lock: undefined
   };
 }
 export const LockedResponse = {

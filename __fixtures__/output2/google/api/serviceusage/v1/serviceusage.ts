@@ -75,7 +75,7 @@ export interface EnableServiceRequest {
  */
 export interface EnableServiceResponse {
   /** The new state of the service after enabling. */
-  service: Service;
+  service?: Service;
 }
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequest {
@@ -107,7 +107,7 @@ export interface DisableServiceRequest {
  */
 export interface DisableServiceResponse {
   /** The new state of the service after disabling. */
-  service: Service;
+  service?: Service;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequest {
@@ -275,7 +275,7 @@ export const EnableServiceRequest = {
 };
 function createBaseEnableServiceResponse(): EnableServiceResponse {
   return {
-    service: Service.fromPartial({})
+    service: undefined
   };
 }
 export const EnableServiceResponse = {
@@ -385,7 +385,7 @@ export const DisableServiceRequest = {
 };
 function createBaseDisableServiceResponse(): DisableServiceResponse {
   return {
-    service: Service.fromPartial({})
+    service: undefined
   };
 }
 export const DisableServiceResponse = {

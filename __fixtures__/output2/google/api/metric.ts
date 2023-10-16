@@ -290,7 +290,7 @@ export interface MetricDescriptor {
    */
   displayName: string;
   /** Optional. Metadata which can be used to guide usage of the metric. */
-  metadata: MetricDescriptor_MetricDescriptorMetadata;
+  metadata?: MetricDescriptor_MetricDescriptorMetadata;
   /** Optional. The launch stage of the metric definition. */
   launchStage: LaunchStage;
   /**
@@ -313,13 +313,13 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  samplePeriod: Duration;
+  samplePeriod?: Duration;
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
-  ingestDelay: Duration;
+  ingestDelay?: Duration;
 }
 export interface Metric_LabelsEntry {
   key: string;
@@ -353,7 +353,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     unit: "",
     description: "",
     displayName: "",
-    metadata: MetricDescriptor_MetricDescriptorMetadata.fromPartial({}),
+    metadata: undefined,
     launchStage: 0,
     monitoredResourceTypes: []
   };
@@ -499,8 +499,8 @@ export const MetricDescriptor = {
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
     launchStage: 0,
-    samplePeriod: Duration.fromPartial({}),
-    ingestDelay: Duration.fromPartial({})
+    samplePeriod: undefined,
+    ingestDelay: undefined
   };
 }
 export const MetricDescriptor_MetricDescriptorMetadata = {

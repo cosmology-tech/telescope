@@ -89,10 +89,10 @@ export interface PoolRequestSDKType {
   pool_id: bigint;
 }
 export interface PoolResponse {
-  pool: Any;
+  pool?: Any;
 }
 export interface PoolResponseSDKType {
-  pool: AnySDKType;
+  pool?: AnySDKType;
 }
 /** =============================== AllPools */
 export interface AllPoolsRequest {
@@ -1259,7 +1259,7 @@ export const PoolRequest = {
 };
 function createBasePoolResponse(): PoolResponse {
   return {
-    pool: Any.fromPartial({})
+    pool: undefined
   };
 }
 export const PoolResponse = {

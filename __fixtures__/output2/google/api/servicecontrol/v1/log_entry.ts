@@ -23,7 +23,7 @@ export interface LogEntry {
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
@@ -33,7 +33,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  httpRequest: HttpRequest;
+  httpRequest?: HttpRequest;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
    * If this field contains a relative resource name, you can assume the name is
@@ -70,12 +70,12 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation: LogEntryOperation;
+  operation?: LogEntryOperation;
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
-  sourceLocation: LogEntrySourceLocation;
+  sourceLocation?: LogEntrySourceLocation;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -181,17 +181,17 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     name: "",
-    timestamp: Timestamp.fromPartial({}),
+    timestamp: undefined,
     severity: 0,
-    httpRequest: HttpRequest.fromPartial({}),
+    httpRequest: undefined,
     trace: "",
     insertId: "",
     labels: {},
     protoPayload: undefined,
     textPayload: undefined,
     structPayload: undefined,
-    operation: LogEntryOperation.fromPartial({}),
-    sourceLocation: LogEntrySourceLocation.fromPartial({})
+    operation: undefined,
+    sourceLocation: undefined
   };
 }
 export const LogEntry = {

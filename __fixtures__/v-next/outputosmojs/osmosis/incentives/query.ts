@@ -23,101 +23,101 @@ export interface GaugeByIDRequestSDKType {
 }
 export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
-  gauge: Gauge;
+  gauge?: Gauge;
 }
 export interface GaugeByIDResponseSDKType {
-  gauge: GaugeSDKType;
+  gauge?: GaugeSDKType;
 }
 export interface GaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface GaugesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface GaugesResponse {
   /** Upcoming and active gauges */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface GaugesResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface ActiveGaugesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesResponse {
   /** Active gagues only */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface ActiveGaugesResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesPerDenomRequest {
   /** Desired denom when querying active gagues */
   denom: string;
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomRequestSDKType {
   denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesPerDenomResponse {
   /** Active gagues that match denom in query */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface ActiveGaugesPerDenomResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface UpcomingGaugesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesResponse {
   /** Gauges whose distribution is upcoming */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface UpcomingGaugesResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesPerDenomRequest {
   /** Filter for upcoming gagues that match specific denom */
   denom: string;
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomRequestSDKType {
   denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesPerDenomResponse {
   /** Upcoming gagues that match denom in query */
   upcomingGauges: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface UpcomingGaugesPerDenomResponseSDKType {
   upcoming_gauges: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface RewardsEstRequest {
   /** Address that is being queried for future estimated rewards */
@@ -424,7 +424,7 @@ export const GaugeByIDRequest = {
 };
 function createBaseGaugeByIDResponse(): GaugeByIDResponse {
   return {
-    gauge: Gauge.fromPartial({})
+    gauge: undefined
   };
 }
 export const GaugeByIDResponse = {
@@ -516,7 +516,7 @@ export const GaugeByIDResponse = {
 };
 function createBaseGaugesRequest(): GaugesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const GaugesRequest = {
@@ -609,7 +609,7 @@ export const GaugesRequest = {
 function createBaseGaugesResponse(): GaugesResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GaugesResponse = {
@@ -727,7 +727,7 @@ export const GaugesResponse = {
 };
 function createBaseActiveGaugesRequest(): ActiveGaugesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesRequest = {
@@ -820,7 +820,7 @@ export const ActiveGaugesRequest = {
 function createBaseActiveGaugesResponse(): ActiveGaugesResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesResponse = {
@@ -939,7 +939,7 @@ export const ActiveGaugesResponse = {
 function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
   return {
     denom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesPerDenomRequest = {
@@ -1046,7 +1046,7 @@ export const ActiveGaugesPerDenomRequest = {
 function createBaseActiveGaugesPerDenomResponse(): ActiveGaugesPerDenomResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesPerDenomResponse = {
@@ -1164,7 +1164,7 @@ export const ActiveGaugesPerDenomResponse = {
 };
 function createBaseUpcomingGaugesRequest(): UpcomingGaugesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesRequest = {
@@ -1257,7 +1257,7 @@ export const UpcomingGaugesRequest = {
 function createBaseUpcomingGaugesResponse(): UpcomingGaugesResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesResponse = {
@@ -1376,7 +1376,7 @@ export const UpcomingGaugesResponse = {
 function createBaseUpcomingGaugesPerDenomRequest(): UpcomingGaugesPerDenomRequest {
   return {
     denom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesPerDenomRequest = {
@@ -1483,7 +1483,7 @@ export const UpcomingGaugesPerDenomRequest = {
 function createBaseUpcomingGaugesPerDenomResponse(): UpcomingGaugesPerDenomResponse {
   return {
     upcomingGauges: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesPerDenomResponse = {

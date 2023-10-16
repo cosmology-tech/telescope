@@ -4,12 +4,12 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
-  proposer: Validator;
+  proposer?: Validator;
   totalVotingPower: Long;
 }
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
-  proposer: ValidatorSDKType;
+  proposer?: ValidatorSDKType;
   total_voting_power: Long;
 }
 export interface Validator {
@@ -25,17 +25,17 @@ export interface ValidatorSDKType {
   proposer_priority: Long;
 }
 export interface SimpleValidator {
-  pubKey: PublicKey;
+  pubKey?: PublicKey;
   votingPower: Long;
 }
 export interface SimpleValidatorSDKType {
-  pub_key: PublicKeySDKType;
+  pub_key?: PublicKeySDKType;
   voting_power: Long;
 }
 function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
-    proposer: Validator.fromPartial({}),
+    proposer: undefined,
     totalVotingPower: Long.ZERO
   };
 }
@@ -212,7 +212,7 @@ export const Validator = {
 };
 function createBaseSimpleValidator(): SimpleValidator {
   return {
-    pubKey: PublicKey.fromPartial({}),
+    pubKey: undefined,
     votingPower: Long.ZERO
   };
 }
