@@ -16,13 +16,13 @@ export interface GenesisStateSDKType {
 /** Entry Defines all nft owned by a person */
 export interface Entry {
   /** owner is the owner address of the following nft */
-  owner?: string;
+  owner: string;
   /** nfts is a group of nfts of the same owner */
   nfts: NFT[];
 }
 /** Entry Defines all nft owned by a person */
 export interface EntrySDKType {
-  owner?: string;
+  owner: string;
   nfts: NFTSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
@@ -158,14 +158,14 @@ export const GenesisState = {
 };
 function createBaseEntry(): Entry {
   return {
-    owner: undefined,
+    owner: "",
     nfts: []
   };
 }
 export const Entry = {
   typeUrl: "/cosmos.nft.v1beta1.Entry",
   encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     for (const v of message.nfts) {
@@ -211,7 +211,7 @@ export const Entry = {
   },
   fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
     return message;
   },
@@ -223,7 +223,7 @@ export const Entry = {
   },
   fromSDKJSON(object: any): EntrySDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDKJSON(e)) : []
     };
   },
@@ -239,7 +239,7 @@ export const Entry = {
   },
   fromAmino(object: EntryAmino): Entry {
     return {
-      owner: object?.owner,
+      owner: object.owner,
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
     };
   },

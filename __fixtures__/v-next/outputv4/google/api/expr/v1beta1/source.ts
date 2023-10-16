@@ -18,7 +18,7 @@ export interface SourceInfo {
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
-  location?: string;
+  location: string;
   /**
    * Monotonically increasing list of character offsets where newlines appear.
    * 
@@ -37,7 +37,7 @@ export interface SourceInfo {
 }
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
-  location?: string;
+  location: string;
   line_offsets: number[];
   positions: {
     [key: number]: number;
@@ -46,26 +46,26 @@ export interface SourceInfoSDKType {
 /** A specific position in source. */
 export interface SourcePosition {
   /** The soucre location name (e.g. file name). */
-  location?: string;
+  location: string;
   /** The character offset. */
-  offset?: number;
+  offset: number;
   /**
    * The 1-based index of the starting line in the source text
    * where the issue occurs, or 0 if unknown.
    */
-  line?: number;
+  line: number;
   /**
    * The 0-based index of the starting position within the line of source text
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
-  column?: number;
+  column: number;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
-  location?: string;
-  offset?: number;
-  line?: number;
-  column?: number;
+  location: string;
+  offset: number;
+  line: number;
+  column: number;
 }
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
   return {
@@ -163,7 +163,7 @@ export const SourceInfo_PositionsEntry = {
 };
 function createBaseSourceInfo(): SourceInfo {
   return {
-    location: undefined,
+    location: "",
     lineOffsets: [],
     positions: {}
   };
@@ -171,7 +171,7 @@ function createBaseSourceInfo(): SourceInfo {
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1beta1.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== undefined) {
+    if (message.location !== "") {
       writer.uint32(18).string(message.location);
     }
     writer.uint32(26).fork();
@@ -250,7 +250,7 @@ export const SourceInfo = {
   },
   fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
-    message.location = object.location ?? undefined;
+    message.location = object.location ?? "";
     message.lineOffsets = object.lineOffsets?.map(e => e) || [];
     message.positions = Object.entries(object.positions ?? {}).reduce<{
       [key: number]: number;
@@ -276,7 +276,7 @@ export const SourceInfo = {
   },
   fromSDKJSON(object: any): SourceInfoSDKType {
     return {
-      location: isSet(object.location) ? String(object.location) : undefined,
+      location: isSet(object.location) ? String(object.location) : "",
       line_offsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => Number(e)) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: number]: number;
@@ -304,7 +304,7 @@ export const SourceInfo = {
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
     return {
-      location: object?.location,
+      location: object.location,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: number]: number;
@@ -348,25 +348,25 @@ export const SourceInfo = {
 };
 function createBaseSourcePosition(): SourcePosition {
   return {
-    location: undefined,
-    offset: undefined,
-    line: undefined,
-    column: undefined
+    location: "",
+    offset: 0,
+    line: 0,
+    column: 0
   };
 }
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition",
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== undefined) {
+    if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }
-    if (message.offset !== undefined) {
+    if (message.offset !== 0) {
       writer.uint32(16).int32(message.offset);
     }
-    if (message.line !== undefined) {
+    if (message.line !== 0) {
       writer.uint32(24).int32(message.line);
     }
-    if (message.column !== undefined) {
+    if (message.column !== 0) {
       writer.uint32(32).int32(message.column);
     }
     return writer;
@@ -415,10 +415,10 @@ export const SourcePosition = {
   },
   fromPartial(object: DeepPartial<SourcePosition>): SourcePosition {
     const message = createBaseSourcePosition();
-    message.location = object.location ?? undefined;
-    message.offset = object.offset ?? undefined;
-    message.line = object.line ?? undefined;
-    message.column = object.column ?? undefined;
+    message.location = object.location ?? "";
+    message.offset = object.offset ?? 0;
+    message.line = object.line ?? 0;
+    message.column = object.column ?? 0;
     return message;
   },
   fromSDK(object: SourcePositionSDKType): SourcePosition {
@@ -431,10 +431,10 @@ export const SourcePosition = {
   },
   fromSDKJSON(object: any): SourcePositionSDKType {
     return {
-      location: isSet(object.location) ? String(object.location) : undefined,
-      offset: isSet(object.offset) ? Number(object.offset) : undefined,
-      line: isSet(object.line) ? Number(object.line) : undefined,
-      column: isSet(object.column) ? Number(object.column) : undefined
+      location: isSet(object.location) ? String(object.location) : "",
+      offset: isSet(object.offset) ? Number(object.offset) : 0,
+      line: isSet(object.line) ? Number(object.line) : 0,
+      column: isSet(object.column) ? Number(object.column) : 0
     };
   },
   toSDK(message: SourcePosition): SourcePositionSDKType {
@@ -447,10 +447,10 @@ export const SourcePosition = {
   },
   fromAmino(object: SourcePositionAmino): SourcePosition {
     return {
-      location: object?.location,
-      offset: object?.offset,
-      line: object?.line,
-      column: object?.column
+      location: object.location,
+      offset: object.offset,
+      line: object.line,
+      column: object.column
     };
   },
   toAmino(message: SourcePosition): SourcePositionAmino {

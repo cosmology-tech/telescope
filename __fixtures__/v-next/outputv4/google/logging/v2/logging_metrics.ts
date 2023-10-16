@@ -71,12 +71,12 @@ export interface LogMetric {
    * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
    * `"nginx/requests"`.
    */
-  name?: string;
+  name: string;
   /**
    * Optional. A description of this metric, which is used in documentation.
    * The maximum length of the description is 8000 characters.
    */
-  description?: string;
+  description: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
@@ -86,12 +86,12 @@ export interface LogMetric {
    * 
    * The maximum length of the filter is 20000 characters.
    */
-  filter?: string;
+  filter: string;
   /**
    * Optional. If set to True, then this metric is disabled and it does not
    * generate any points.
    */
-  disabled?: boolean;
+  disabled: boolean;
   /**
    * Optional. The metric descriptor associated with the logs-based metric.
    * If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -137,7 +137,7 @@ export interface LogMetric {
    * 
    * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
    */
-  valueExtractor?: string;
+  valueExtractor: string;
   /**
    * Optional. A map from a label key string to an extractor expression which is
    * used to extract data from a log entry field and assign as the label value.
@@ -180,7 +180,7 @@ export interface LogMetric {
    * The v2 format is used by default and cannot be changed.
    */
   /** @deprecated */
-  version?: LogMetric_ApiVersion;
+  version: LogMetric_ApiVersion;
 }
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
@@ -192,12 +192,12 @@ export interface LogMetric {
  * by the bucket options.
  */
 export interface LogMetricSDKType {
-  name?: string;
-  description?: string;
-  filter?: string;
-  disabled?: boolean;
+  name: string;
+  description: string;
+  filter: string;
+  disabled: boolean;
   metric_descriptor?: MetricDescriptorSDKType;
-  value_extractor?: string;
+  value_extractor: string;
   label_extractors: {
     [key: string]: string;
   };
@@ -205,7 +205,7 @@ export interface LogMetricSDKType {
   create_time?: Date;
   update_time?: Date;
   /** @deprecated */
-  version?: LogMetric_ApiVersion;
+  version: LogMetric_ApiVersion;
 }
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequest {
@@ -214,26 +214,26 @@ export interface ListLogMetricsRequest {
    * 
    *     "projects/[PROJECT_ID]"
    */
-  parent?: string;
+  parent: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 }
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
-  parent?: string;
-  page_token?: string;
-  page_size?: number;
+  parent: string;
+  page_token: string;
+  page_size: number;
 }
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponse {
@@ -244,12 +244,12 @@ export interface ListLogMetricsResponse {
    * `nextPageToken` is included. To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
   metrics: LogMetricSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequest {
@@ -258,11 +258,11 @@ export interface GetLogMetricRequest {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metricName?: string;
+  metricName: string;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestSDKType {
-  metric_name?: string;
+  metric_name: string;
 }
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequest {
@@ -273,7 +273,7 @@ export interface CreateLogMetricRequest {
    * 
    * The new metric must be provided in the request.
    */
-  parent?: string;
+  parent: string;
   /**
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
@@ -282,7 +282,7 @@ export interface CreateLogMetricRequest {
 }
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestSDKType {
-  parent?: string;
+  parent: string;
   metric?: LogMetricSDKType;
 }
 /** The parameters to UpdateLogMetric. */
@@ -296,13 +296,13 @@ export interface UpdateLogMetricRequest {
    * `name` field must be the same as `[METRIC_ID]` If the metric
    * does not exist in `[PROJECT_ID]`, then a new metric is created.
    */
-  metricName?: string;
+  metricName: string;
   /** Required. The updated metric. */
   metric?: LogMetric;
 }
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
-  metric_name?: string;
+  metric_name: string;
   metric?: LogMetricSDKType;
 }
 /** The parameters to DeleteLogMetric. */
@@ -312,11 +312,11 @@ export interface DeleteLogMetricRequest {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metricName?: string;
+  metricName: string;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestSDKType {
-  metric_name?: string;
+  metric_name: string;
 }
 function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEntry {
   return {
@@ -414,38 +414,38 @@ export const LogMetric_LabelExtractorsEntry = {
 };
 function createBaseLogMetric(): LogMetric {
   return {
-    name: undefined,
-    description: undefined,
-    filter: undefined,
-    disabled: undefined,
+    name: "",
+    description: "",
+    filter: "",
+    disabled: false,
     metricDescriptor: undefined,
-    valueExtractor: undefined,
+    valueExtractor: "",
     labelExtractors: {},
     bucketOptions: undefined,
     createTime: undefined,
     updateTime: undefined,
-    version: undefined
+    version: 0
   };
 }
 export const LogMetric = {
   typeUrl: "/google.logging.v2.LogMetric",
   encode(message: LogMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(26).string(message.filter);
     }
-    if (message.disabled !== undefined) {
+    if (message.disabled === true) {
       writer.uint32(96).bool(message.disabled);
     }
     if (message.metricDescriptor !== undefined) {
       MetricDescriptor.encode(message.metricDescriptor, writer.uint32(42).fork()).ldelim();
     }
-    if (message.valueExtractor !== undefined) {
+    if (message.valueExtractor !== "") {
       writer.uint32(50).string(message.valueExtractor);
     }
     Object.entries(message.labelExtractors).forEach(([key, value]) => {
@@ -463,7 +463,7 @@ export const LogMetric = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(82).fork()).ldelim();
     }
-    if (message.version !== undefined) {
+    if (message.version !== 0) {
       writer.uint32(32).int32(message.version);
     }
     return writer;
@@ -560,14 +560,14 @@ export const LogMetric = {
   },
   fromPartial(object: DeepPartial<LogMetric>): LogMetric {
     const message = createBaseLogMetric();
-    message.name = object.name ?? undefined;
-    message.description = object.description ?? undefined;
-    message.filter = object.filter ?? undefined;
-    message.disabled = object.disabled ?? undefined;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
+    message.filter = object.filter ?? "";
+    message.disabled = object.disabled ?? false;
     if (object.metricDescriptor !== undefined && object.metricDescriptor !== null) {
       message.metricDescriptor = MetricDescriptor.fromPartial(object.metricDescriptor);
     }
-    message.valueExtractor = object.valueExtractor ?? undefined;
+    message.valueExtractor = object.valueExtractor ?? "";
     message.labelExtractors = Object.entries(object.labelExtractors ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -581,7 +581,7 @@ export const LogMetric = {
     }
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
-    message.version = object.version ?? undefined;
+    message.version = object.version ?? 0;
     return message;
   },
   fromSDK(object: LogMetricSDKType): LogMetric {
@@ -601,17 +601,17 @@ export const LogMetric = {
       bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       createTime: object.create_time ?? undefined,
       updateTime: object.update_time ?? undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : undefined
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   fromSDKJSON(object: any): LogMetricSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined,
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
       metric_descriptor: isSet(object.metric_descriptor) ? MetricDescriptor.fromSDKJSON(object.metric_descriptor) : undefined,
-      value_extractor: isSet(object.value_extractor) ? String(object.value_extractor) : undefined,
+      value_extractor: isSet(object.value_extractor) ? String(object.value_extractor) : "",
       label_extractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -621,7 +621,7 @@ export const LogMetric = {
       bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
       update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : undefined
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toSDK(message: LogMetric): LogMetricSDKType {
@@ -646,12 +646,12 @@ export const LogMetric = {
   },
   fromAmino(object: LogMetricAmino): LogMetric {
     return {
-      name: object?.name,
-      description: object?.description,
-      filter: object?.filter,
-      disabled: object?.disabled,
+      name: object.name,
+      description: object.description,
+      filter: object.filter,
+      disabled: object.disabled,
       metricDescriptor: object?.metric_descriptor ? MetricDescriptor.fromAmino(object.metric_descriptor) : undefined,
-      valueExtractor: object?.value_extractor,
+      valueExtractor: object.value_extractor,
       labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -661,7 +661,7 @@ export const LogMetric = {
       bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
       createTime: object?.create_time,
       updateTime: object?.update_time,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : undefined
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toAmino(message: LogMetric): LogMetricAmino {
@@ -702,21 +702,21 @@ export const LogMetric = {
 };
 function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
   return {
-    parent: undefined,
-    pageToken: undefined,
-    pageSize: undefined
+    parent: "",
+    pageToken: "",
+    pageSize: 0
   };
 }
 export const ListLogMetricsRequest = {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest",
   encode(message: ListLogMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -760,9 +760,9 @@ export const ListLogMetricsRequest = {
   },
   fromPartial(object: DeepPartial<ListLogMetricsRequest>): ListLogMetricsRequest {
     const message = createBaseListLogMetricsRequest();
-    message.parent = object.parent ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
+    message.parent = object.parent ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
     return message;
   },
   fromSDK(object: ListLogMetricsRequestSDKType): ListLogMetricsRequest {
@@ -774,9 +774,9 @@ export const ListLogMetricsRequest = {
   },
   fromSDKJSON(object: any): ListLogMetricsRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
     };
   },
   toSDK(message: ListLogMetricsRequest): ListLogMetricsRequestSDKType {
@@ -788,9 +788,9 @@ export const ListLogMetricsRequest = {
   },
   fromAmino(object: ListLogMetricsRequestAmino): ListLogMetricsRequest {
     return {
-      parent: object?.parent,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
     };
   },
   toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
@@ -819,7 +819,7 @@ export const ListLogMetricsRequest = {
 function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
   return {
     metrics: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListLogMetricsResponse = {
@@ -828,7 +828,7 @@ export const ListLogMetricsResponse = {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -872,7 +872,7 @@ export const ListLogMetricsResponse = {
   fromPartial(object: DeepPartial<ListLogMetricsResponse>): ListLogMetricsResponse {
     const message = createBaseListLogMetricsResponse();
     message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListLogMetricsResponseSDKType): ListLogMetricsResponse {
@@ -884,7 +884,7 @@ export const ListLogMetricsResponse = {
   fromSDKJSON(object: any): ListLogMetricsResponseSDKType {
     return {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListLogMetricsResponse): ListLogMetricsResponseSDKType {
@@ -900,7 +900,7 @@ export const ListLogMetricsResponse = {
   fromAmino(object: ListLogMetricsResponseAmino): ListLogMetricsResponse {
     return {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListLogMetricsResponse): ListLogMetricsResponseAmino {
@@ -931,13 +931,13 @@ export const ListLogMetricsResponse = {
 };
 function createBaseGetLogMetricRequest(): GetLogMetricRequest {
   return {
-    metricName: undefined
+    metricName: ""
   };
 }
 export const GetLogMetricRequest = {
   typeUrl: "/google.logging.v2.GetLogMetricRequest",
   encode(message: GetLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
@@ -971,7 +971,7 @@ export const GetLogMetricRequest = {
   },
   fromPartial(object: DeepPartial<GetLogMetricRequest>): GetLogMetricRequest {
     const message = createBaseGetLogMetricRequest();
-    message.metricName = object.metricName ?? undefined;
+    message.metricName = object.metricName ?? "";
     return message;
   },
   fromSDK(object: GetLogMetricRequestSDKType): GetLogMetricRequest {
@@ -981,7 +981,7 @@ export const GetLogMetricRequest = {
   },
   fromSDKJSON(object: any): GetLogMetricRequestSDKType {
     return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : undefined
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : ""
     };
   },
   toSDK(message: GetLogMetricRequest): GetLogMetricRequestSDKType {
@@ -991,7 +991,7 @@ export const GetLogMetricRequest = {
   },
   fromAmino(object: GetLogMetricRequestAmino): GetLogMetricRequest {
     return {
-      metricName: object?.metric_name
+      metricName: object.metric_name
     };
   },
   toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
@@ -1017,14 +1017,14 @@ export const GetLogMetricRequest = {
 };
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
-    parent: undefined,
+    parent: "",
     metric: undefined
   };
 }
 export const CreateLogMetricRequest = {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest",
   encode(message: CreateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.metric !== undefined) {
@@ -1066,7 +1066,7 @@ export const CreateLogMetricRequest = {
   },
   fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
     const message = createBaseCreateLogMetricRequest();
-    message.parent = object.parent ?? undefined;
+    message.parent = object.parent ?? "";
     if (object.metric !== undefined && object.metric !== null) {
       message.metric = LogMetric.fromPartial(object.metric);
     }
@@ -1080,7 +1080,7 @@ export const CreateLogMetricRequest = {
   },
   fromSDKJSON(object: any): CreateLogMetricRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
       metric: isSet(object.metric) ? LogMetric.fromSDKJSON(object.metric) : undefined
     };
   },
@@ -1092,7 +1092,7 @@ export const CreateLogMetricRequest = {
   },
   fromAmino(object: CreateLogMetricRequestAmino): CreateLogMetricRequest {
     return {
-      parent: object?.parent,
+      parent: object.parent,
       metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
     };
   },
@@ -1120,14 +1120,14 @@ export const CreateLogMetricRequest = {
 };
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
-    metricName: undefined,
+    metricName: "",
     metric: undefined
   };
 }
 export const UpdateLogMetricRequest = {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
   encode(message: UpdateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     if (message.metric !== undefined) {
@@ -1169,7 +1169,7 @@ export const UpdateLogMetricRequest = {
   },
   fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
-    message.metricName = object.metricName ?? undefined;
+    message.metricName = object.metricName ?? "";
     if (object.metric !== undefined && object.metric !== null) {
       message.metric = LogMetric.fromPartial(object.metric);
     }
@@ -1183,7 +1183,7 @@ export const UpdateLogMetricRequest = {
   },
   fromSDKJSON(object: any): UpdateLogMetricRequestSDKType {
     return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : undefined,
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
       metric: isSet(object.metric) ? LogMetric.fromSDKJSON(object.metric) : undefined
     };
   },
@@ -1195,7 +1195,7 @@ export const UpdateLogMetricRequest = {
   },
   fromAmino(object: UpdateLogMetricRequestAmino): UpdateLogMetricRequest {
     return {
-      metricName: object?.metric_name,
+      metricName: object.metric_name,
       metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
     };
   },
@@ -1223,13 +1223,13 @@ export const UpdateLogMetricRequest = {
 };
 function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
   return {
-    metricName: undefined
+    metricName: ""
   };
 }
 export const DeleteLogMetricRequest = {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
   encode(message: DeleteLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
@@ -1263,7 +1263,7 @@ export const DeleteLogMetricRequest = {
   },
   fromPartial(object: DeepPartial<DeleteLogMetricRequest>): DeleteLogMetricRequest {
     const message = createBaseDeleteLogMetricRequest();
-    message.metricName = object.metricName ?? undefined;
+    message.metricName = object.metricName ?? "";
     return message;
   },
   fromSDK(object: DeleteLogMetricRequestSDKType): DeleteLogMetricRequest {
@@ -1273,7 +1273,7 @@ export const DeleteLogMetricRequest = {
   },
   fromSDKJSON(object: any): DeleteLogMetricRequestSDKType {
     return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : undefined
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : ""
     };
   },
   toSDK(message: DeleteLogMetricRequest): DeleteLogMetricRequestSDKType {
@@ -1283,7 +1283,7 @@ export const DeleteLogMetricRequest = {
   },
   fromAmino(object: DeleteLogMetricRequestAmino): DeleteLogMetricRequest {
     return {
-      metricName: object?.metric_name
+      metricName: object.metric_name
     };
   },
   toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {

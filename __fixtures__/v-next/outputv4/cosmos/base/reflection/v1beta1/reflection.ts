@@ -20,14 +20,14 @@ export interface ListAllInterfacesResponseSDKType {
  */
 export interface ListImplementationsRequest {
   /** interface_name defines the interface to query the implementations for. */
-  interfaceName?: string;
+  interfaceName: string;
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
  * RPC.
  */
 export interface ListImplementationsRequestSDKType {
-  interface_name?: string;
+  interface_name: string;
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
@@ -222,13 +222,13 @@ export const ListAllInterfacesResponse = {
 };
 function createBaseListImplementationsRequest(): ListImplementationsRequest {
   return {
-    interfaceName: undefined
+    interfaceName: ""
   };
 }
 export const ListImplementationsRequest = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
   encode(message: ListImplementationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.interfaceName !== undefined) {
+    if (message.interfaceName !== "") {
       writer.uint32(10).string(message.interfaceName);
     }
     return writer;
@@ -262,7 +262,7 @@ export const ListImplementationsRequest = {
   },
   fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
-    message.interfaceName = object.interfaceName ?? undefined;
+    message.interfaceName = object.interfaceName ?? "";
     return message;
   },
   fromSDK(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
@@ -272,7 +272,7 @@ export const ListImplementationsRequest = {
   },
   fromSDKJSON(object: any): ListImplementationsRequestSDKType {
     return {
-      interface_name: isSet(object.interface_name) ? String(object.interface_name) : undefined
+      interface_name: isSet(object.interface_name) ? String(object.interface_name) : ""
     };
   },
   toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
@@ -282,7 +282,7 @@ export const ListImplementationsRequest = {
   },
   fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
     return {
-      interfaceName: object?.interface_name
+      interfaceName: object.interface_name
     };
   },
   toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {

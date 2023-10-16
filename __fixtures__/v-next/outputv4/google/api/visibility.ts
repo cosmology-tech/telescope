@@ -70,7 +70,7 @@ export interface VisibilityRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector?: string;
+  selector: string;
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -88,15 +88,15 @@ export interface VisibilityRule {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
-  restriction?: string;
+  restriction: string;
 }
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
 export interface VisibilityRuleSDKType {
-  selector?: string;
-  restriction?: string;
+  selector: string;
+  restriction: string;
 }
 function createBaseVisibility(): Visibility {
   return {
@@ -198,17 +198,17 @@ export const Visibility = {
 };
 function createBaseVisibilityRule(): VisibilityRule {
   return {
-    selector: undefined,
-    restriction: undefined
+    selector: "",
+    restriction: ""
   };
 }
 export const VisibilityRule = {
   typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-    if (message.restriction !== undefined) {
+    if (message.restriction !== "") {
       writer.uint32(18).string(message.restriction);
     }
     return writer;
@@ -247,8 +247,8 @@ export const VisibilityRule = {
   },
   fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
     const message = createBaseVisibilityRule();
-    message.selector = object.selector ?? undefined;
-    message.restriction = object.restriction ?? undefined;
+    message.selector = object.selector ?? "";
+    message.restriction = object.restriction ?? "";
     return message;
   },
   fromSDK(object: VisibilityRuleSDKType): VisibilityRule {
@@ -259,8 +259,8 @@ export const VisibilityRule = {
   },
   fromSDKJSON(object: any): VisibilityRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : undefined,
-      restriction: isSet(object.restriction) ? String(object.restriction) : undefined
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      restriction: isSet(object.restriction) ? String(object.restriction) : ""
     };
   },
   toSDK(message: VisibilityRule): VisibilityRuleSDKType {
@@ -271,8 +271,8 @@ export const VisibilityRule = {
   },
   fromAmino(object: VisibilityRuleAmino): VisibilityRule {
     return {
-      selector: object?.selector,
-      restriction: object?.restriction
+      selector: object.selector,
+      restriction: object.restriction
     };
   },
   toAmino(message: VisibilityRule): VisibilityRuleAmino {

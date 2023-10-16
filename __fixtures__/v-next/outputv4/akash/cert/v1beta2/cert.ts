@@ -44,49 +44,49 @@ export function certificate_StateToJSON(object: Certificate_State): string {
 }
 /** CertificateID stores owner and sequence number */
 export interface CertificateID {
-  owner?: string;
-  serial?: string;
+  owner: string;
+  serial: string;
 }
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDSDKType {
-  owner?: string;
-  serial?: string;
+  owner: string;
+  serial: string;
 }
 /** Certificate stores state, certificate and it's public key */
 export interface Certificate {
-  state?: Certificate_State;
-  cert?: Uint8Array;
-  pubkey?: Uint8Array;
+  state: Certificate_State;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
-  state?: Certificate_State;
-  cert?: Uint8Array;
-  pubkey?: Uint8Array;
+  state: Certificate_State;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
 }
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilter {
-  owner?: string;
-  serial?: string;
-  state?: string;
+  owner: string;
+  serial: string;
+  state: string;
 }
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterSDKType {
-  owner?: string;
-  serial?: string;
-  state?: string;
+  owner: string;
+  serial: string;
+  state: string;
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificate {
-  owner?: string;
-  cert?: Uint8Array;
-  pubkey?: Uint8Array;
+  owner: string;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateSDKType {
-  owner?: string;
-  cert?: Uint8Array;
-  pubkey?: Uint8Array;
+  owner: string;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
 }
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponse {}
@@ -106,17 +106,17 @@ export interface MsgRevokeCertificateResponse {}
 export interface MsgRevokeCertificateResponseSDKType {}
 function createBaseCertificateID(): CertificateID {
   return {
-    owner: undefined,
-    serial: undefined
+    owner: "",
+    serial: ""
   };
 }
 export const CertificateID = {
   typeUrl: "/akash.cert.v1beta2.CertificateID",
   encode(message: CertificateID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.serial !== undefined) {
+    if (message.serial !== "") {
       writer.uint32(18).string(message.serial);
     }
     return writer;
@@ -155,8 +155,8 @@ export const CertificateID = {
   },
   fromPartial<I extends Exact<DeepPartial<CertificateID>, I>>(object: I): CertificateID {
     const message = createBaseCertificateID();
-    message.owner = object.owner ?? undefined;
-    message.serial = object.serial ?? undefined;
+    message.owner = object.owner ?? "";
+    message.serial = object.serial ?? "";
     return message;
   },
   fromSDK(object: CertificateIDSDKType): CertificateID {
@@ -167,8 +167,8 @@ export const CertificateID = {
   },
   fromSDKJSON(object: any): CertificateIDSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      serial: isSet(object.serial) ? String(object.serial) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      serial: isSet(object.serial) ? String(object.serial) : ""
     };
   },
   toSDK(message: CertificateID): CertificateIDSDKType {
@@ -179,8 +179,8 @@ export const CertificateID = {
   },
   fromAmino(object: CertificateIDAmino): CertificateID {
     return {
-      owner: object?.owner,
-      serial: object?.serial
+      owner: object.owner,
+      serial: object.serial
     };
   },
   toAmino(message: CertificateID): CertificateIDAmino {
@@ -213,21 +213,21 @@ export const CertificateID = {
 };
 function createBaseCertificate(): Certificate {
   return {
-    state: undefined,
-    cert: undefined,
-    pubkey: undefined
+    state: 0,
+    cert: new Uint8Array(),
+    pubkey: new Uint8Array()
   };
 }
 export const Certificate = {
   typeUrl: "/akash.cert.v1beta2.Certificate",
   encode(message: Certificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       writer.uint32(16).int32(message.state);
     }
-    if (message.cert !== undefined) {
+    if (message.cert.length !== 0) {
       writer.uint32(26).bytes(message.cert);
     }
-    if (message.pubkey !== undefined) {
+    if (message.pubkey.length !== 0) {
       writer.uint32(34).bytes(message.pubkey);
     }
     return writer;
@@ -265,29 +265,29 @@ export const Certificate = {
   toJSON(message: Certificate): unknown {
     const obj: any = {};
     message.state !== undefined && (obj.state = certificate_StateToJSON(message.state));
-    message.cert !== undefined && (obj.cert = message.cert !== undefined ? base64FromBytes(message.cert) : undefined);
-    message.pubkey !== undefined && (obj.pubkey = message.pubkey !== undefined ? base64FromBytes(message.pubkey) : undefined);
+    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert !== undefined ? message.cert : new Uint8Array()));
+    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey !== undefined ? message.pubkey : new Uint8Array()));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Certificate>, I>>(object: I): Certificate {
     const message = createBaseCertificate();
-    message.state = object.state ?? undefined;
-    message.cert = object.cert ?? undefined;
-    message.pubkey = object.pubkey ?? undefined;
+    message.state = object.state ?? 0;
+    message.cert = object.cert ?? new Uint8Array();
+    message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
   },
   fromSDK(object: CertificateSDKType): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: object?.cert,
       pubkey: object?.pubkey
     };
   },
   fromSDKJSON(object: any): CertificateSDKType {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : undefined,
-      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : undefined,
-      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : undefined
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
   },
   toSDK(message: Certificate): CertificateSDKType {
@@ -299,9 +299,9 @@ export const Certificate = {
   },
   fromAmino(object: CertificateAmino): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : undefined,
-      cert: object?.cert,
-      pubkey: object?.pubkey
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
+      cert: object.cert,
+      pubkey: object.pubkey
     };
   },
   toAmino(message: Certificate): CertificateAmino {
@@ -335,21 +335,21 @@ export const Certificate = {
 };
 function createBaseCertificateFilter(): CertificateFilter {
   return {
-    owner: undefined,
-    serial: undefined,
-    state: undefined
+    owner: "",
+    serial: "",
+    state: ""
   };
 }
 export const CertificateFilter = {
   typeUrl: "/akash.cert.v1beta2.CertificateFilter",
   encode(message: CertificateFilter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.serial !== undefined) {
+    if (message.serial !== "") {
       writer.uint32(18).string(message.serial);
     }
-    if (message.state !== undefined) {
+    if (message.state !== "") {
       writer.uint32(26).string(message.state);
     }
     return writer;
@@ -393,9 +393,9 @@ export const CertificateFilter = {
   },
   fromPartial<I extends Exact<DeepPartial<CertificateFilter>, I>>(object: I): CertificateFilter {
     const message = createBaseCertificateFilter();
-    message.owner = object.owner ?? undefined;
-    message.serial = object.serial ?? undefined;
-    message.state = object.state ?? undefined;
+    message.owner = object.owner ?? "";
+    message.serial = object.serial ?? "";
+    message.state = object.state ?? "";
     return message;
   },
   fromSDK(object: CertificateFilterSDKType): CertificateFilter {
@@ -407,9 +407,9 @@ export const CertificateFilter = {
   },
   fromSDKJSON(object: any): CertificateFilterSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      serial: isSet(object.serial) ? String(object.serial) : undefined,
-      state: isSet(object.state) ? String(object.state) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      serial: isSet(object.serial) ? String(object.serial) : "",
+      state: isSet(object.state) ? String(object.state) : ""
     };
   },
   toSDK(message: CertificateFilter): CertificateFilterSDKType {
@@ -421,9 +421,9 @@ export const CertificateFilter = {
   },
   fromAmino(object: CertificateFilterAmino): CertificateFilter {
     return {
-      owner: object?.owner,
-      serial: object?.serial,
-      state: object?.state
+      owner: object.owner,
+      serial: object.serial,
+      state: object.state
     };
   },
   toAmino(message: CertificateFilter): CertificateFilterAmino {
@@ -457,21 +457,21 @@ export const CertificateFilter = {
 };
 function createBaseMsgCreateCertificate(): MsgCreateCertificate {
   return {
-    owner: undefined,
-    cert: undefined,
-    pubkey: undefined
+    owner: "",
+    cert: new Uint8Array(),
+    pubkey: new Uint8Array()
   };
 }
 export const MsgCreateCertificate = {
   typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate",
   encode(message: MsgCreateCertificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.cert !== undefined) {
+    if (message.cert.length !== 0) {
       writer.uint32(18).bytes(message.cert);
     }
-    if (message.pubkey !== undefined) {
+    if (message.pubkey.length !== 0) {
       writer.uint32(26).bytes(message.pubkey);
     }
     return writer;
@@ -509,15 +509,15 @@ export const MsgCreateCertificate = {
   toJSON(message: MsgCreateCertificate): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.cert !== undefined && (obj.cert = message.cert !== undefined ? base64FromBytes(message.cert) : undefined);
-    message.pubkey !== undefined && (obj.pubkey = message.pubkey !== undefined ? base64FromBytes(message.pubkey) : undefined);
+    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert !== undefined ? message.cert : new Uint8Array()));
+    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey !== undefined ? message.pubkey : new Uint8Array()));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateCertificate>, I>>(object: I): MsgCreateCertificate {
     const message = createBaseMsgCreateCertificate();
-    message.owner = object.owner ?? undefined;
-    message.cert = object.cert ?? undefined;
-    message.pubkey = object.pubkey ?? undefined;
+    message.owner = object.owner ?? "";
+    message.cert = object.cert ?? new Uint8Array();
+    message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
   },
   fromSDK(object: MsgCreateCertificateSDKType): MsgCreateCertificate {
@@ -529,9 +529,9 @@ export const MsgCreateCertificate = {
   },
   fromSDKJSON(object: any): MsgCreateCertificateSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : undefined,
-      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
   },
   toSDK(message: MsgCreateCertificate): MsgCreateCertificateSDKType {
@@ -543,9 +543,9 @@ export const MsgCreateCertificate = {
   },
   fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
     return {
-      owner: object?.owner,
-      cert: object?.cert,
-      pubkey: object?.pubkey
+      owner: object.owner,
+      cert: object.cert,
+      pubkey: object.pubkey
     };
   },
   toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {

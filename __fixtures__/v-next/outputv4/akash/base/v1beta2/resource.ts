@@ -25,13 +25,13 @@ export interface MemorySDKType {
 }
 /** Storage stores resource quantity and storage attributes */
 export interface Storage {
-  name?: string;
+  name: string;
   quantity: ResourceValue;
   attributes: Attribute[];
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
-  name?: string;
+  name: string;
   quantity: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
@@ -279,7 +279,7 @@ export const Memory = {
 };
 function createBaseStorage(): Storage {
   return {
-    name: undefined,
+    name: "",
     quantity: ResourceValue.fromPartial({}),
     attributes: []
   };
@@ -287,7 +287,7 @@ function createBaseStorage(): Storage {
 export const Storage = {
   typeUrl: "/akash.base.v1beta2.Storage",
   encode(message: Storage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.quantity !== undefined) {
@@ -341,7 +341,7 @@ export const Storage = {
   },
   fromPartial<I extends Exact<DeepPartial<Storage>, I>>(object: I): Storage {
     const message = createBaseStorage();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.quantity !== undefined && object.quantity !== null) {
       message.quantity = ResourceValue.fromPartial(object.quantity);
     }
@@ -357,7 +357,7 @@ export const Storage = {
   },
   fromSDKJSON(object: any): StorageSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
     };
@@ -375,7 +375,7 @@ export const Storage = {
   },
   fromAmino(object: StorageAmino): Storage {
     return {
-      name: object?.name,
+      name: object.name,
       quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };

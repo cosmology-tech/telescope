@@ -144,7 +144,7 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
  * Since: cosmos-sdk 0.43
  */
 export interface WeightedVoteOption {
-  option?: VoteOption;
+  option: VoteOption;
   weight: string;
 }
 /**
@@ -153,7 +153,7 @@ export interface WeightedVoteOption {
  * Since: cosmos-sdk 0.43
  */
 export interface WeightedVoteOptionSDKType {
-  option?: VoteOption;
+  option: VoteOption;
   weight: string;
 }
 /**
@@ -161,24 +161,24 @@ export interface WeightedVoteOptionSDKType {
  * manually updated in case of approval.
  */
 export interface TextProposal {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 }
 /**
  * TextProposal defines a standard text proposal whose changes need to be
  * manually updated in case of approval.
  */
 export interface TextProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active
  * proposal.
  */
 export interface Deposit {
-  proposalId?: bigint;
-  depositor?: string;
+  proposalId: bigint;
+  depositor: string;
   amount: Coin[];
 }
 /**
@@ -186,15 +186,15 @@ export interface Deposit {
  * proposal.
  */
 export interface DepositSDKType {
-  proposal_id?: bigint;
-  depositor?: string;
+  proposal_id: bigint;
+  depositor: string;
   amount: CoinSDKType[];
 }
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
-  proposalId?: bigint;
+  proposalId: bigint;
   content?: Any;
-  status?: ProposalStatus;
+  status: ProposalStatus;
   /**
    * final_tally_result is the final tally result of the proposal. When
    * querying a proposal via gRPC, this field is not populated until the
@@ -209,9 +209,9 @@ export interface Proposal {
 }
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
-  proposal_id?: bigint;
+  proposal_id: bigint;
   content?: AnySDKType;
-  status?: ProposalStatus;
+  status: ProposalStatus;
   final_tally_result: TallyResultSDKType;
   submit_time: Date;
   deposit_end_time: Date;
@@ -238,15 +238,15 @@ export interface TallyResultSDKType {
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
-  proposalId?: bigint;
-  voter?: string;
+  proposalId: bigint;
+  voter: string;
   /**
    * Deprecated: Prefer to use `options` instead. This field is set in queries
    * if and only if `len(options) == 1` and that option has weight 1. In all
    * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
    */
   /** @deprecated */
-  option?: VoteOption;
+  option: VoteOption;
   /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
@@ -255,10 +255,10 @@ export interface Vote {
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface VoteSDKType {
-  proposal_id?: bigint;
-  voter?: string;
+  proposal_id: bigint;
+  voter: string;
   /** @deprecated */
-  option?: VoteOption;
+  option: VoteOption;
   options: WeightedVoteOptionSDKType[];
 }
 /** DepositParams defines the params for deposits on governance proposals. */
@@ -308,14 +308,14 @@ export interface TallyParamsSDKType {
 }
 function createBaseWeightedVoteOption(): WeightedVoteOption {
   return {
-    option: undefined,
+    option: 0,
     weight: ""
   };
 }
 export const WeightedVoteOption = {
   typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption",
   encode(message: WeightedVoteOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.option !== undefined) {
+    if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
     }
     if (message.weight !== "") {
@@ -357,19 +357,19 @@ export const WeightedVoteOption = {
   },
   fromPartial(object: DeepPartial<WeightedVoteOption>): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
-    message.option = object.option ?? undefined;
+    message.option = object.option ?? 0;
     message.weight = object.weight ?? "";
     return message;
   },
   fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : undefined,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: object?.weight
     };
   },
   fromSDKJSON(object: any): WeightedVoteOptionSDKType {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : undefined,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -381,7 +381,7 @@ export const WeightedVoteOption = {
   },
   fromAmino(object: WeightedVoteOptionAmino): WeightedVoteOption {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : undefined,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: object.weight
     };
   },
@@ -415,17 +415,17 @@ export const WeightedVoteOption = {
 };
 function createBaseTextProposal(): TextProposal {
   return {
-    title: undefined,
-    description: undefined
+    title: "",
+    description: ""
   };
 }
 export const TextProposal = {
   typeUrl: "/cosmos.gov.v1beta1.TextProposal",
   encode(message: TextProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -464,8 +464,8 @@ export const TextProposal = {
   },
   fromPartial(object: DeepPartial<TextProposal>): TextProposal {
     const message = createBaseTextProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     return message;
   },
   fromSDK(object: TextProposalSDKType): TextProposal {
@@ -476,8 +476,8 @@ export const TextProposal = {
   },
   fromSDKJSON(object: any): TextProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
     };
   },
   toSDK(message: TextProposal): TextProposalSDKType {
@@ -488,8 +488,8 @@ export const TextProposal = {
   },
   fromAmino(object: TextProposalAmino): TextProposal {
     return {
-      title: object?.title,
-      description: object?.description
+      title: object.title,
+      description: object.description
     };
   },
   toAmino(message: TextProposal): TextProposalAmino {
@@ -522,18 +522,18 @@ export const TextProposal = {
 };
 function createBaseDeposit(): Deposit {
   return {
-    proposalId: undefined,
-    depositor: undefined,
+    proposalId: BigInt(0),
+    depositor: "",
     amount: []
   };
 }
 export const Deposit = {
   typeUrl: "/cosmos.gov.v1beta1.Deposit",
   encode(message: Deposit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
     }
     for (const v of message.amount) {
@@ -573,9 +573,7 @@ export const Deposit = {
   },
   toJSON(message: Deposit): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -589,7 +587,7 @@ export const Deposit = {
     if (object.proposalId !== undefined && object.proposalId !== null) {
       message.proposalId = BigInt(object.proposalId.toString());
     }
-    message.depositor = object.depositor ?? undefined;
+    message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -602,8 +600,8 @@ export const Deposit = {
   },
   fromSDKJSON(object: any): DepositSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
-      depositor: isSet(object.depositor) ? String(object.depositor) : undefined,
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -620,8 +618,8 @@ export const Deposit = {
   },
   fromAmino(object: DepositAmino): Deposit {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
-      depositor: object?.depositor,
+      proposalId: BigInt(object.proposal_id),
+      depositor: object.depositor,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -660,9 +658,9 @@ export const Deposit = {
 };
 function createBaseProposal(): Proposal {
   return {
-    proposalId: undefined,
+    proposalId: BigInt(0),
     content: undefined,
-    status: undefined,
+    status: 0,
     finalTallyResult: TallyResult.fromPartial({}),
     submitTime: new Date(),
     depositEndTime: new Date(),
@@ -674,13 +672,13 @@ function createBaseProposal(): Proposal {
 export const Proposal = {
   typeUrl: "/cosmos.gov.v1beta1.Proposal",
   encode(message: Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(18).fork()).ldelim();
     }
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       writer.uint32(24).int32(message.status);
     }
     if (message.finalTallyResult !== undefined) {
@@ -759,9 +757,7 @@ export const Proposal = {
   },
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
     message.finalTallyResult !== undefined && (obj.finalTallyResult = message.finalTallyResult ? TallyResult.toJSON(message.finalTallyResult) : undefined);
@@ -784,7 +780,7 @@ export const Proposal = {
     if (object.content !== undefined && object.content !== null) {
       message.content = Any.fromPartial(object.content);
     }
-    message.status = object.status ?? undefined;
+    message.status = object.status ?? 0;
     if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
       message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
     }
@@ -799,7 +795,7 @@ export const Proposal = {
     return {
       proposalId: object?.proposal_id,
       content: object.content ? Any.fromSDK(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : undefined,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
       submitTime: object.submit_time ?? undefined,
       depositEndTime: object.deposit_end_time ?? undefined,
@@ -810,9 +806,9 @@ export const Proposal = {
   },
   fromSDKJSON(object: any): ProposalSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : undefined,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
       deposit_end_time: isSet(object.deposit_end_time) ? new Date(object.deposit_end_time) : undefined,
@@ -840,9 +836,9 @@ export const Proposal = {
   },
   fromAmino(object: ProposalAmino): Proposal {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
+      proposalId: BigInt(object.proposal_id),
       content: object?.content ? Any.fromAmino(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : undefined,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
       submitTime: object.submit_time,
       depositEndTime: object.deposit_end_time,
@@ -1029,22 +1025,22 @@ export const TallyResult = {
 };
 function createBaseVote(): Vote {
   return {
-    proposalId: undefined,
-    voter: undefined,
-    option: undefined,
+    proposalId: BigInt(0),
+    voter: "",
+    option: 0,
     options: []
   };
 }
 export const Vote = {
   typeUrl: "/cosmos.gov.v1beta1.Vote",
   encode(message: Vote, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
-    if (message.option !== undefined) {
+    if (message.option !== 0) {
       writer.uint32(24).int32(message.option);
     }
     for (const v of message.options) {
@@ -1088,9 +1084,7 @@ export const Vote = {
   },
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     if (message.options) {
@@ -1105,8 +1099,8 @@ export const Vote = {
     if (object.proposalId !== undefined && object.proposalId !== null) {
       message.proposalId = BigInt(object.proposalId.toString());
     }
-    message.voter = object.voter ?? undefined;
-    message.option = object.option ?? undefined;
+    message.voter = object.voter ?? "";
+    message.option = object.option ?? 0;
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
   },
@@ -1114,15 +1108,15 @@ export const Vote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : undefined,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
     };
   },
   fromSDKJSON(object: any): VoteSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
-      voter: isSet(object.voter) ? String(object.voter) : undefined,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : undefined,
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
     };
   },
@@ -1140,9 +1134,9 @@ export const Vote = {
   },
   fromAmino(object: VoteAmino): Vote {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
-      voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : undefined,
+      proposalId: BigInt(object.proposal_id),
+      voter: object.voter,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : []
     };
   },

@@ -49,9 +49,9 @@ export const protobufPackage = "google.api";
  */
 export interface HttpBody {
   /** The HTTP Content-Type header value specifying the content type of the body. */
-  contentType?: string;
+  contentType: string;
   /** The HTTP request/response body as raw binary. */
-  data?: Uint8Array;
+  data: Uint8Array;
   /**
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
@@ -104,24 +104,24 @@ export interface HttpBody {
  * handled, all other features will continue to work unchanged.
  */
 export interface HttpBodySDKType {
-  content_type?: string;
-  data?: Uint8Array;
+  content_type: string;
+  data: Uint8Array;
   extensions: AnySDKType[];
 }
 function createBaseHttpBody(): HttpBody {
   return {
-    contentType: undefined,
-    data: undefined,
+    contentType: "",
+    data: new Uint8Array(),
     extensions: []
   };
 }
 export const HttpBody = {
   typeUrl: "/google.api.HttpBody",
   encode(message: HttpBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contentType !== undefined) {
+    if (message.contentType !== "") {
       writer.uint32(10).string(message.contentType);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
     }
     for (const v of message.extensions) {
@@ -162,7 +162,7 @@ export const HttpBody = {
   toJSON(message: HttpBody): unknown {
     const obj: any = {};
     message.contentType !== undefined && (obj.contentType = message.contentType);
-    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
     } else {
@@ -172,8 +172,8 @@ export const HttpBody = {
   },
   fromPartial(object: DeepPartial<HttpBody>): HttpBody {
     const message = createBaseHttpBody();
-    message.contentType = object.contentType ?? undefined;
-    message.data = object.data ?? undefined;
+    message.contentType = object.contentType ?? "";
+    message.data = object.data ?? new Uint8Array();
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -186,8 +186,8 @@ export const HttpBody = {
   },
   fromSDKJSON(object: any): HttpBodySDKType {
     return {
-      content_type: isSet(object.content_type) ? String(object.content_type) : undefined,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
+      content_type: isSet(object.content_type) ? String(object.content_type) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
@@ -204,8 +204,8 @@ export const HttpBody = {
   },
   fromAmino(object: HttpBodyAmino): HttpBody {
     return {
-      contentType: object?.content_type,
-      data: object?.data,
+      contentType: object.content_type,
+      data: object.data,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },

@@ -73,7 +73,7 @@ export interface StakeAuthorization {
   /** deny_list specifies list of validator addresses to whom grantee can not delegate tokens. */
   denyList?: StakeAuthorization_Validators;
   /** authorization_type defines one of AuthorizationType. */
-  authorizationType?: AuthorizationType;
+  authorizationType: AuthorizationType;
 }
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
@@ -84,7 +84,7 @@ export interface StakeAuthorizationSDKType {
   max_tokens?: CoinSDKType;
   allow_list?: StakeAuthorization_ValidatorsSDKType;
   deny_list?: StakeAuthorization_ValidatorsSDKType;
-  authorization_type?: AuthorizationType;
+  authorization_type: AuthorizationType;
 }
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_Validators {
@@ -99,7 +99,7 @@ function createBaseStakeAuthorization(): StakeAuthorization {
     maxTokens: undefined,
     allowList: undefined,
     denyList: undefined,
-    authorizationType: undefined
+    authorizationType: 0
   };
 }
 export const StakeAuthorization = {
@@ -114,7 +114,7 @@ export const StakeAuthorization = {
     if (message.denyList !== undefined) {
       StakeAuthorization_Validators.encode(message.denyList, writer.uint32(26).fork()).ldelim();
     }
-    if (message.authorizationType !== undefined) {
+    if (message.authorizationType !== 0) {
       writer.uint32(32).int32(message.authorizationType);
     }
     return writer;
@@ -172,7 +172,7 @@ export const StakeAuthorization = {
     if (object.denyList !== undefined && object.denyList !== null) {
       message.denyList = StakeAuthorization_Validators.fromPartial(object.denyList);
     }
-    message.authorizationType = object.authorizationType ?? undefined;
+    message.authorizationType = object.authorizationType ?? 0;
     return message;
   },
   fromSDK(object: StakeAuthorizationSDKType): StakeAuthorization {
@@ -180,7 +180,7 @@ export const StakeAuthorization = {
       maxTokens: object.max_tokens ? Coin.fromSDK(object.max_tokens) : undefined,
       allowList: object.allow_list ? StakeAuthorization_Validators.fromSDK(object.allow_list) : undefined,
       denyList: object.deny_list ? StakeAuthorization_Validators.fromSDK(object.deny_list) : undefined,
-      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : undefined
+      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : -1
     };
   },
   fromSDKJSON(object: any): StakeAuthorizationSDKType {
@@ -188,7 +188,7 @@ export const StakeAuthorization = {
       max_tokens: isSet(object.max_tokens) ? Coin.fromSDKJSON(object.max_tokens) : undefined,
       allow_list: isSet(object.allow_list) ? StakeAuthorization_Validators.fromSDKJSON(object.allow_list) : undefined,
       deny_list: isSet(object.deny_list) ? StakeAuthorization_Validators.fromSDKJSON(object.deny_list) : undefined,
-      authorization_type: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : undefined
+      authorization_type: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : -1
     };
   },
   toSDK(message: StakeAuthorization): StakeAuthorizationSDKType {
@@ -204,7 +204,7 @@ export const StakeAuthorization = {
       maxTokens: object?.max_tokens ? Coin.fromAmino(object.max_tokens) : undefined,
       allowList: object?.allow_list ? StakeAuthorization_Validators.fromAmino(object.allow_list) : undefined,
       denyList: object?.deny_list ? StakeAuthorization_Validators.fromAmino(object.deny_list) : undefined,
-      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : undefined
+      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : -1
     };
   },
   toAmino(message: StakeAuthorization): StakeAuthorizationAmino {

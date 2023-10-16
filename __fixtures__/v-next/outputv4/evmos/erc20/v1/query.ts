@@ -42,11 +42,11 @@ export interface QueryTokenPairRequest {
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token?: string;
+  token: string;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
-  token?: string;
+  token: string;
 }
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
@@ -285,13 +285,13 @@ export const QueryTokenPairsResponse = {
 };
 function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
   return {
-    token: undefined
+    token: ""
   };
 }
 export const QueryTokenPairRequest = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
   encode(message: QueryTokenPairRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.token !== undefined) {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -325,7 +325,7 @@ export const QueryTokenPairRequest = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairRequest>): QueryTokenPairRequest {
     const message = createBaseQueryTokenPairRequest();
-    message.token = object.token ?? undefined;
+    message.token = object.token ?? "";
     return message;
   },
   fromSDK(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
@@ -335,7 +335,7 @@ export const QueryTokenPairRequest = {
   },
   fromSDKJSON(object: any): QueryTokenPairRequestSDKType {
     return {
-      token: isSet(object.token) ? String(object.token) : undefined
+      token: isSet(object.token) ? String(object.token) : ""
     };
   },
   toSDK(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
@@ -345,7 +345,7 @@ export const QueryTokenPairRequest = {
   },
   fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
     return {
-      token: object?.token
+      token: object.token
     };
   },
   toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {

@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidence {
-  submitter?: string;
+  submitter: string;
   evidence?: Any;
 }
 /**
@@ -15,28 +15,28 @@ export interface MsgSubmitEvidence {
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidenceSDKType {
-  submitter?: string;
+  submitter: string;
   evidence?: AnySDKType;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {
   /** hash defines the hash of the evidence. */
-  hash?: Uint8Array;
+  hash: Uint8Array;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
-  hash?: Uint8Array;
+  hash: Uint8Array;
 }
 function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
   return {
-    submitter: undefined,
+    submitter: "",
     evidence: undefined
   };
 }
 export const MsgSubmitEvidence = {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
   encode(message: MsgSubmitEvidence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.submitter !== undefined) {
+    if (message.submitter !== "") {
       writer.uint32(10).string(message.submitter);
     }
     if (message.evidence !== undefined) {
@@ -78,7 +78,7 @@ export const MsgSubmitEvidence = {
   },
   fromPartial(object: DeepPartial<MsgSubmitEvidence>): MsgSubmitEvidence {
     const message = createBaseMsgSubmitEvidence();
-    message.submitter = object.submitter ?? undefined;
+    message.submitter = object.submitter ?? "";
     if (object.evidence !== undefined && object.evidence !== null) {
       message.evidence = Any.fromPartial(object.evidence);
     }
@@ -92,7 +92,7 @@ export const MsgSubmitEvidence = {
   },
   fromSDKJSON(object: any): MsgSubmitEvidenceSDKType {
     return {
-      submitter: isSet(object.submitter) ? String(object.submitter) : undefined,
+      submitter: isSet(object.submitter) ? String(object.submitter) : "",
       evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
     };
   },
@@ -104,7 +104,7 @@ export const MsgSubmitEvidence = {
   },
   fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
     return {
-      submitter: object?.submitter,
+      submitter: object.submitter,
       evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
     };
   },
@@ -138,13 +138,13 @@ export const MsgSubmitEvidence = {
 };
 function createBaseMsgSubmitEvidenceResponse(): MsgSubmitEvidenceResponse {
   return {
-    hash: undefined
+    hash: new Uint8Array()
   };
 }
 export const MsgSubmitEvidenceResponse = {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse",
   encode(message: MsgSubmitEvidenceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       writer.uint32(34).bytes(message.hash);
     }
     return writer;
@@ -173,12 +173,12 @@ export const MsgSubmitEvidenceResponse = {
   },
   toJSON(message: MsgSubmitEvidenceResponse): unknown {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash !== undefined ? base64FromBytes(message.hash) : undefined);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSubmitEvidenceResponse>): MsgSubmitEvidenceResponse {
     const message = createBaseMsgSubmitEvidenceResponse();
-    message.hash = object.hash ?? undefined;
+    message.hash = object.hash ?? new Uint8Array();
     return message;
   },
   fromSDK(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
@@ -188,7 +188,7 @@ export const MsgSubmitEvidenceResponse = {
   },
   fromSDKJSON(object: any): MsgSubmitEvidenceResponseSDKType {
     return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : undefined
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toSDK(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseSDKType {
@@ -198,7 +198,7 @@ export const MsgSubmitEvidenceResponse = {
   },
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
     return {
-      hash: object?.hash
+      hash: object.hash
     };
   },
   toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {

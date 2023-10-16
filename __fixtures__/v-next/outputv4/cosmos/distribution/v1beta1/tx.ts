@@ -7,16 +7,16 @@ export const protobufPackage = "cosmos.distribution.v1beta1";
  * a delegator (or validator self-delegation).
  */
 export interface MsgSetWithdrawAddress {
-  delegatorAddress?: string;
-  withdrawAddress?: string;
+  delegatorAddress: string;
+  withdrawAddress: string;
 }
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
  * a delegator (or validator self-delegation).
  */
 export interface MsgSetWithdrawAddressSDKType {
-  delegator_address?: string;
-  withdraw_address?: string;
+  delegator_address: string;
+  withdraw_address: string;
 }
 /** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
 export interface MsgSetWithdrawAddressResponse {}
@@ -27,16 +27,16 @@ export interface MsgSetWithdrawAddressResponseSDKType {}
  * from a single validator.
  */
 export interface MsgWithdrawDelegatorReward {
-  delegatorAddress?: string;
-  validatorAddress?: string;
+  delegatorAddress: string;
+  validatorAddress: string;
 }
 /**
  * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
  * from a single validator.
  */
 export interface MsgWithdrawDelegatorRewardSDKType {
-  delegator_address?: string;
-  validator_address?: string;
+  delegator_address: string;
+  validator_address: string;
 }
 /** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 export interface MsgWithdrawDelegatorRewardResponse {
@@ -51,14 +51,14 @@ export interface MsgWithdrawDelegatorRewardResponseSDKType {
  * address.
  */
 export interface MsgWithdrawValidatorCommission {
-  validatorAddress?: string;
+  validatorAddress: string;
 }
 /**
  * MsgWithdrawValidatorCommission withdraws the full commission to the validator
  * address.
  */
 export interface MsgWithdrawValidatorCommissionSDKType {
-  validator_address?: string;
+  validator_address: string;
 }
 /** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 export interface MsgWithdrawValidatorCommissionResponse {
@@ -74,7 +74,7 @@ export interface MsgWithdrawValidatorCommissionResponseSDKType {
  */
 export interface MsgFundCommunityPool {
   amount: Coin[];
-  depositor?: string;
+  depositor: string;
 }
 /**
  * MsgFundCommunityPool allows an account to directly
@@ -82,7 +82,7 @@ export interface MsgFundCommunityPool {
  */
 export interface MsgFundCommunityPoolSDKType {
   amount: CoinSDKType[];
-  depositor?: string;
+  depositor: string;
 }
 /** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
 export interface MsgFundCommunityPoolResponse {}
@@ -90,17 +90,17 @@ export interface MsgFundCommunityPoolResponse {}
 export interface MsgFundCommunityPoolResponseSDKType {}
 function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
   return {
-    delegatorAddress: undefined,
-    withdrawAddress: undefined
+    delegatorAddress: "",
+    withdrawAddress: ""
   };
 }
 export const MsgSetWithdrawAddress = {
   typeUrl: "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
   encode(message: MsgSetWithdrawAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.withdrawAddress !== undefined) {
+    if (message.withdrawAddress !== "") {
       writer.uint32(18).string(message.withdrawAddress);
     }
     return writer;
@@ -139,8 +139,8 @@ export const MsgSetWithdrawAddress = {
   },
   fromPartial(object: DeepPartial<MsgSetWithdrawAddress>): MsgSetWithdrawAddress {
     const message = createBaseMsgSetWithdrawAddress();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.withdrawAddress = object.withdrawAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
   },
   fromSDK(object: MsgSetWithdrawAddressSDKType): MsgSetWithdrawAddress {
@@ -151,8 +151,8 @@ export const MsgSetWithdrawAddress = {
   },
   fromSDKJSON(object: any): MsgSetWithdrawAddressSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : undefined
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
     };
   },
   toSDK(message: MsgSetWithdrawAddress): MsgSetWithdrawAddressSDKType {
@@ -163,8 +163,8 @@ export const MsgSetWithdrawAddress = {
   },
   fromAmino(object: MsgSetWithdrawAddressAmino): MsgSetWithdrawAddress {
     return {
-      delegatorAddress: object?.delegator_address,
-      withdrawAddress: object?.withdraw_address
+      delegatorAddress: object.delegator_address,
+      withdrawAddress: object.withdraw_address
     };
   },
   toAmino(message: MsgSetWithdrawAddress): MsgSetWithdrawAddressAmino {
@@ -270,17 +270,17 @@ export const MsgSetWithdrawAddressResponse = {
 };
 function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
   return {
-    delegatorAddress: undefined,
-    validatorAddress: undefined
+    delegatorAddress: "",
+    validatorAddress: ""
   };
 }
 export const MsgWithdrawDelegatorReward = {
   typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
   encode(message: MsgWithdrawDelegatorReward, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
     return writer;
@@ -319,8 +319,8 @@ export const MsgWithdrawDelegatorReward = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawDelegatorReward>): MsgWithdrawDelegatorReward {
     const message = createBaseMsgWithdrawDelegatorReward();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.validatorAddress = object.validatorAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorAddress = object.validatorAddress ?? "";
     return message;
   },
   fromSDK(object: MsgWithdrawDelegatorRewardSDKType): MsgWithdrawDelegatorReward {
@@ -331,8 +331,8 @@ export const MsgWithdrawDelegatorReward = {
   },
   fromSDKJSON(object: any): MsgWithdrawDelegatorRewardSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : undefined
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
     };
   },
   toSDK(message: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardSDKType {
@@ -343,8 +343,8 @@ export const MsgWithdrawDelegatorReward = {
   },
   fromAmino(object: MsgWithdrawDelegatorRewardAmino): MsgWithdrawDelegatorReward {
     return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address
     };
   },
   toAmino(message: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardAmino {
@@ -481,13 +481,13 @@ export const MsgWithdrawDelegatorRewardResponse = {
 };
 function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommission {
   return {
-    validatorAddress: undefined
+    validatorAddress: ""
   };
 }
 export const MsgWithdrawValidatorCommission = {
   typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
   encode(message: MsgWithdrawValidatorCommission, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
     return writer;
@@ -521,7 +521,7 @@ export const MsgWithdrawValidatorCommission = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawValidatorCommission>): MsgWithdrawValidatorCommission {
     const message = createBaseMsgWithdrawValidatorCommission();
-    message.validatorAddress = object.validatorAddress ?? undefined;
+    message.validatorAddress = object.validatorAddress ?? "";
     return message;
   },
   fromSDK(object: MsgWithdrawValidatorCommissionSDKType): MsgWithdrawValidatorCommission {
@@ -531,7 +531,7 @@ export const MsgWithdrawValidatorCommission = {
   },
   fromSDKJSON(object: any): MsgWithdrawValidatorCommissionSDKType {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : undefined
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
     };
   },
   toSDK(message: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionSDKType {
@@ -541,7 +541,7 @@ export const MsgWithdrawValidatorCommission = {
   },
   fromAmino(object: MsgWithdrawValidatorCommissionAmino): MsgWithdrawValidatorCommission {
     return {
-      validatorAddress: object?.validator_address
+      validatorAddress: object.validator_address
     };
   },
   toAmino(message: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionAmino {
@@ -678,7 +678,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
 function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
   return {
     amount: [],
-    depositor: undefined
+    depositor: ""
   };
 }
 export const MsgFundCommunityPool = {
@@ -687,7 +687,7 @@ export const MsgFundCommunityPool = {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
     }
     return writer;
@@ -731,7 +731,7 @@ export const MsgFundCommunityPool = {
   fromPartial(object: DeepPartial<MsgFundCommunityPool>): MsgFundCommunityPool {
     const message = createBaseMsgFundCommunityPool();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    message.depositor = object.depositor ?? undefined;
+    message.depositor = object.depositor ?? "";
     return message;
   },
   fromSDK(object: MsgFundCommunityPoolSDKType): MsgFundCommunityPool {
@@ -743,7 +743,7 @@ export const MsgFundCommunityPool = {
   fromSDKJSON(object: any): MsgFundCommunityPoolSDKType {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      depositor: isSet(object.depositor) ? String(object.depositor) : undefined
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
     };
   },
   toSDK(message: MsgFundCommunityPool): MsgFundCommunityPoolSDKType {
@@ -759,7 +759,7 @@ export const MsgFundCommunityPool = {
   fromAmino(object: MsgFundCommunityPoolAmino): MsgFundCommunityPool {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      depositor: object?.depositor
+      depositor: object.depositor
     };
   },
   toAmino(message: MsgFundCommunityPool): MsgFundCommunityPoolAmino {

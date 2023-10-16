@@ -10,14 +10,14 @@ export const protobufPackage = "ibc.core.client.v1";
  */
 export interface QueryClientStateRequest {
   /** client state unique identifier */
-  clientId?: string;
+  clientId: string;
 }
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
  * method
  */
 export interface QueryClientStateRequestSDKType {
-  client_id?: string;
+  client_id: string;
 }
 /**
  * QueryClientStateResponse is the response type for the Query/ClientState RPC
@@ -28,7 +28,7 @@ export interface QueryClientStateResponse {
   /** client state associated with the request identifier */
   clientState?: Any;
   /** merkle proof of existence */
-  proof?: Uint8Array;
+  proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
@@ -39,7 +39,7 @@ export interface QueryClientStateResponse {
  */
 export interface QueryClientStateResponseSDKType {
   client_state?: AnySDKType;
-  proof?: Uint8Array;
+  proof: Uint8Array;
   proof_height: HeightSDKType;
 }
 /**
@@ -82,16 +82,16 @@ export interface QueryClientStatesResponseSDKType {
  */
 export interface QueryConsensusStateRequest {
   /** client identifier */
-  clientId?: string;
+  clientId: string;
   /** consensus state revision number */
-  revisionNumber?: bigint;
+  revisionNumber: bigint;
   /** consensus state revision height */
-  revisionHeight?: bigint;
+  revisionHeight: bigint;
   /**
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
    */
-  latestHeight?: boolean;
+  latestHeight: boolean;
 }
 /**
  * QueryConsensusStateRequest is the request type for the Query/ConsensusState
@@ -99,10 +99,10 @@ export interface QueryConsensusStateRequest {
  * from which the proof was retrieved.
  */
 export interface QueryConsensusStateRequestSDKType {
-  client_id?: string;
-  revision_number?: bigint;
-  revision_height?: bigint;
-  latest_height?: boolean;
+  client_id: string;
+  revision_number: bigint;
+  revision_height: bigint;
+  latest_height: boolean;
 }
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
@@ -112,7 +112,7 @@ export interface QueryConsensusStateResponse {
   /** consensus state associated with the client identifier at the given height */
   consensusState?: Any;
   /** merkle proof of existence */
-  proof?: Uint8Array;
+  proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
@@ -122,7 +122,7 @@ export interface QueryConsensusStateResponse {
  */
 export interface QueryConsensusStateResponseSDKType {
   consensus_state?: AnySDKType;
-  proof?: Uint8Array;
+  proof: Uint8Array;
   proof_height: HeightSDKType;
 }
 /**
@@ -131,7 +131,7 @@ export interface QueryConsensusStateResponseSDKType {
  */
 export interface QueryConsensusStatesRequest {
   /** client identifier */
-  clientId?: string;
+  clientId: string;
   /** pagination request */
   pagination?: PageRequest;
 }
@@ -140,7 +140,7 @@ export interface QueryConsensusStatesRequest {
  * RPC method.
  */
 export interface QueryConsensusStatesRequestSDKType {
-  client_id?: string;
+  client_id: string;
   pagination?: PageRequestSDKType;
 }
 /**
@@ -167,28 +167,28 @@ export interface QueryConsensusStatesResponseSDKType {
  */
 export interface QueryClientStatusRequest {
   /** client unique identifier */
-  clientId?: string;
+  clientId: string;
 }
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
 export interface QueryClientStatusRequestSDKType {
-  client_id?: string;
+  client_id: string;
 }
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
  */
 export interface QueryClientStatusResponse {
-  status?: string;
+  status: string;
 }
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
  */
 export interface QueryClientStatusResponseSDKType {
-  status?: string;
+  status: string;
 }
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
@@ -267,13 +267,13 @@ export interface QueryUpgradedConsensusStateResponseSDKType {
 }
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {
   return {
-    clientId: undefined
+    clientId: ""
   };
 }
 export const QueryClientStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
   encode(message: QueryClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== undefined) {
+    if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
     return writer;
@@ -307,7 +307,7 @@ export const QueryClientStateRequest = {
   },
   fromPartial(object: DeepPartial<QueryClientStateRequest>): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
-    message.clientId = object.clientId ?? undefined;
+    message.clientId = object.clientId ?? "";
     return message;
   },
   fromSDK(object: QueryClientStateRequestSDKType): QueryClientStateRequest {
@@ -317,7 +317,7 @@ export const QueryClientStateRequest = {
   },
   fromSDKJSON(object: any): QueryClientStateRequestSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : undefined
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
     };
   },
   toSDK(message: QueryClientStateRequest): QueryClientStateRequestSDKType {
@@ -327,7 +327,7 @@ export const QueryClientStateRequest = {
   },
   fromAmino(object: QueryClientStateRequestAmino): QueryClientStateRequest {
     return {
-      clientId: object?.client_id
+      clientId: object.client_id
     };
   },
   toAmino(message: QueryClientStateRequest): QueryClientStateRequestAmino {
@@ -360,7 +360,7 @@ export const QueryClientStateRequest = {
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
   return {
     clientState: undefined,
-    proof: undefined,
+    proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})
   };
 }
@@ -370,7 +370,7 @@ export const QueryClientStateResponse = {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       writer.uint32(18).bytes(message.proof);
     }
     if (message.proofHeight !== undefined) {
@@ -411,7 +411,7 @@ export const QueryClientStateResponse = {
   toJSON(message: QueryClientStateResponse): unknown {
     const obj: any = {};
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof !== undefined ? base64FromBytes(message.proof) : undefined);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
     message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
     return obj;
   },
@@ -420,7 +420,7 @@ export const QueryClientStateResponse = {
     if (object.clientState !== undefined && object.clientState !== null) {
       message.clientState = Any.fromPartial(object.clientState);
     }
-    message.proof = object.proof ?? undefined;
+    message.proof = object.proof ?? new Uint8Array();
     if (object.proofHeight !== undefined && object.proofHeight !== null) {
       message.proofHeight = Height.fromPartial(object.proofHeight);
     }
@@ -436,7 +436,7 @@ export const QueryClientStateResponse = {
   fromSDKJSON(object: any): QueryClientStateResponseSDKType {
     return {
       client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
     };
   },
@@ -450,7 +450,7 @@ export const QueryClientStateResponse = {
   fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
     return {
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      proof: object?.proof,
+      proof: object.proof,
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
@@ -700,25 +700,25 @@ export const QueryClientStatesResponse = {
 };
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
   return {
-    clientId: undefined,
-    revisionNumber: undefined,
-    revisionHeight: undefined,
-    latestHeight: undefined
+    clientId: "",
+    revisionNumber: BigInt(0),
+    revisionHeight: BigInt(0),
+    latestHeight: false
   };
 }
 export const QueryConsensusStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
   encode(message: QueryConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== undefined) {
+    if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
-    if (message.revisionNumber !== undefined) {
+    if (message.revisionNumber !== BigInt(0)) {
       writer.uint32(16).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== undefined) {
+    if (message.revisionHeight !== BigInt(0)) {
       writer.uint32(24).uint64(message.revisionHeight);
     }
-    if (message.latestHeight !== undefined) {
+    if (message.latestHeight === true) {
       writer.uint32(32).bool(message.latestHeight);
     }
     return writer;
@@ -760,25 +760,21 @@ export const QueryConsensusStateRequest = {
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.revisionNumber !== undefined) {
-      obj.revisionNumber = message.revisionNumber.toString();
-    }
-    if (message.revisionHeight !== undefined) {
-      obj.revisionHeight = message.revisionHeight.toString();
-    }
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
-    message.clientId = object.clientId ?? undefined;
+    message.clientId = object.clientId ?? "";
     if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
       message.revisionNumber = BigInt(object.revisionNumber.toString());
     }
     if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
       message.revisionHeight = BigInt(object.revisionHeight.toString());
     }
-    message.latestHeight = object.latestHeight ?? undefined;
+    message.latestHeight = object.latestHeight ?? false;
     return message;
   },
   fromSDK(object: QueryConsensusStateRequestSDKType): QueryConsensusStateRequest {
@@ -791,10 +787,10 @@ export const QueryConsensusStateRequest = {
   },
   fromSDKJSON(object: any): QueryConsensusStateRequestSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
-      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : undefined,
-      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : undefined,
-      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : undefined
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0),
+      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false
     };
   },
   toSDK(message: QueryConsensusStateRequest): QueryConsensusStateRequestSDKType {
@@ -807,10 +803,10 @@ export const QueryConsensusStateRequest = {
   },
   fromAmino(object: QueryConsensusStateRequestAmino): QueryConsensusStateRequest {
     return {
-      clientId: object?.client_id,
-      revisionNumber: object?.revision_number ? BigInt(object.revision_number) : undefined,
-      revisionHeight: object?.revision_height ? BigInt(object.revision_height) : undefined,
-      latestHeight: object?.latest_height
+      clientId: object.client_id,
+      revisionNumber: BigInt(object.revision_number),
+      revisionHeight: BigInt(object.revision_height),
+      latestHeight: object.latest_height
     };
   },
   toAmino(message: QueryConsensusStateRequest): QueryConsensusStateRequestAmino {
@@ -846,7 +842,7 @@ export const QueryConsensusStateRequest = {
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
   return {
     consensusState: undefined,
-    proof: undefined,
+    proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})
   };
 }
@@ -856,7 +852,7 @@ export const QueryConsensusStateResponse = {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       writer.uint32(18).bytes(message.proof);
     }
     if (message.proofHeight !== undefined) {
@@ -897,7 +893,7 @@ export const QueryConsensusStateResponse = {
   toJSON(message: QueryConsensusStateResponse): unknown {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof !== undefined ? base64FromBytes(message.proof) : undefined);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
     message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
     return obj;
   },
@@ -906,7 +902,7 @@ export const QueryConsensusStateResponse = {
     if (object.consensusState !== undefined && object.consensusState !== null) {
       message.consensusState = Any.fromPartial(object.consensusState);
     }
-    message.proof = object.proof ?? undefined;
+    message.proof = object.proof ?? new Uint8Array();
     if (object.proofHeight !== undefined && object.proofHeight !== null) {
       message.proofHeight = Height.fromPartial(object.proofHeight);
     }
@@ -922,7 +918,7 @@ export const QueryConsensusStateResponse = {
   fromSDKJSON(object: any): QueryConsensusStateResponseSDKType {
     return {
       consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
     };
   },
@@ -936,7 +932,7 @@ export const QueryConsensusStateResponse = {
   fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      proof: object?.proof,
+      proof: object.proof,
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
@@ -971,14 +967,14 @@ export const QueryConsensusStateResponse = {
 };
 function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
   return {
-    clientId: undefined,
+    clientId: "",
     pagination: undefined
   };
 }
 export const QueryConsensusStatesRequest = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
   encode(message: QueryConsensusStatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== undefined) {
+    if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
     if (message.pagination !== undefined) {
@@ -1020,7 +1016,7 @@ export const QueryConsensusStatesRequest = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
-    message.clientId = object.clientId ?? undefined;
+    message.clientId = object.clientId ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -1034,7 +1030,7 @@ export const QueryConsensusStatesRequest = {
   },
   fromSDKJSON(object: any): QueryConsensusStatesRequestSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1046,7 +1042,7 @@ export const QueryConsensusStatesRequest = {
   },
   fromAmino(object: QueryConsensusStatesRequestAmino): QueryConsensusStatesRequest {
     return {
-      clientId: object?.client_id,
+      clientId: object.client_id,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -1201,13 +1197,13 @@ export const QueryConsensusStatesResponse = {
 };
 function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
   return {
-    clientId: undefined
+    clientId: ""
   };
 }
 export const QueryClientStatusRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
   encode(message: QueryClientStatusRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== undefined) {
+    if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
     return writer;
@@ -1241,7 +1237,7 @@ export const QueryClientStatusRequest = {
   },
   fromPartial(object: DeepPartial<QueryClientStatusRequest>): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
-    message.clientId = object.clientId ?? undefined;
+    message.clientId = object.clientId ?? "";
     return message;
   },
   fromSDK(object: QueryClientStatusRequestSDKType): QueryClientStatusRequest {
@@ -1251,7 +1247,7 @@ export const QueryClientStatusRequest = {
   },
   fromSDKJSON(object: any): QueryClientStatusRequestSDKType {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : undefined
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
     };
   },
   toSDK(message: QueryClientStatusRequest): QueryClientStatusRequestSDKType {
@@ -1261,7 +1257,7 @@ export const QueryClientStatusRequest = {
   },
   fromAmino(object: QueryClientStatusRequestAmino): QueryClientStatusRequest {
     return {
-      clientId: object?.client_id
+      clientId: object.client_id
     };
   },
   toAmino(message: QueryClientStatusRequest): QueryClientStatusRequestAmino {
@@ -1293,13 +1289,13 @@ export const QueryClientStatusRequest = {
 };
 function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
   return {
-    status: undefined
+    status: ""
   };
 }
 export const QueryClientStatusResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
   encode(message: QueryClientStatusResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.status !== undefined) {
+    if (message.status !== "") {
       writer.uint32(10).string(message.status);
     }
     return writer;
@@ -1333,7 +1329,7 @@ export const QueryClientStatusResponse = {
   },
   fromPartial(object: DeepPartial<QueryClientStatusResponse>): QueryClientStatusResponse {
     const message = createBaseQueryClientStatusResponse();
-    message.status = object.status ?? undefined;
+    message.status = object.status ?? "";
     return message;
   },
   fromSDK(object: QueryClientStatusResponseSDKType): QueryClientStatusResponse {
@@ -1343,7 +1339,7 @@ export const QueryClientStatusResponse = {
   },
   fromSDKJSON(object: any): QueryClientStatusResponseSDKType {
     return {
-      status: isSet(object.status) ? String(object.status) : undefined
+      status: isSet(object.status) ? String(object.status) : ""
     };
   },
   toSDK(message: QueryClientStatusResponse): QueryClientStatusResponseSDKType {
@@ -1353,7 +1349,7 @@ export const QueryClientStatusResponse = {
   },
   fromAmino(object: QueryClientStatusResponseAmino): QueryClientStatusResponse {
     return {
-      status: object?.status
+      status: object.status
     };
   },
   toAmino(message: QueryClientStatusResponse): QueryClientStatusResponseAmino {

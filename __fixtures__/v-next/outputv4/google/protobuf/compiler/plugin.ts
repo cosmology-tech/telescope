@@ -4,21 +4,21 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
-  major?: number;
-  minor?: number;
-  patch?: number;
+  major: number;
+  minor: number;
+  patch: number;
   /**
    * A suffix for alpha, beta or rc release, e.g., "alpha-1", "rc2". It should
    * be empty for mainline stable releases.
    */
-  suffix?: string;
+  suffix: string;
 }
 /** The version number of protocol compiler. */
 export interface VersionSDKType {
-  major?: number;
-  minor?: number;
-  patch?: number;
-  suffix?: string;
+  major: number;
+  minor: number;
+  patch: number;
+  suffix: string;
 }
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequest {
@@ -29,7 +29,7 @@ export interface CodeGeneratorRequest {
    */
   fileToGenerate: string[];
   /** The generator parameter passed on the command-line. */
-  parameter?: string;
+  parameter: string;
   /**
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
@@ -53,7 +53,7 @@ export interface CodeGeneratorRequest {
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestSDKType {
   file_to_generate: string[];
-  parameter?: string;
+  parameter: string;
   proto_file: FileDescriptorProtoSDKType[];
   compiler_version?: VersionSDKType;
 }
@@ -69,12 +69,12 @@ export interface CodeGeneratorResponse {
    * unparseable -- should be reported by writing a message to stderr and
    * exiting with a non-zero status code.
    */
-  error?: string;
+  error: string;
   file: CodeGeneratorResponse_File[];
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseSDKType {
-  error?: string;
+  error: string;
   file: CodeGeneratorResponse_FileSDKType[];
 }
 /** Represents a single generated file. */
@@ -92,7 +92,7 @@ export interface CodeGeneratorResponse_File {
    * this writing protoc does not optimize for this -- it will read the entire
    * CodeGeneratorResponse before writing files to disk.
    */
-  name?: string;
+  name: string;
   /**
    * If non-empty, indicates that the named file should already exist, and the
    * content here is to be inserted into that file at a defined insertion
@@ -132,37 +132,37 @@ export interface CodeGeneratorResponse_File {
    * 
    * If |insertion_point| is present, |name| must also be present.
    */
-  insertionPoint?: string;
+  insertionPoint: string;
   /** The file contents. */
-  content?: string;
+  content: string;
 }
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_FileSDKType {
-  name?: string;
-  insertion_point?: string;
-  content?: string;
+  name: string;
+  insertion_point: string;
+  content: string;
 }
 function createBaseVersion(): Version {
   return {
-    major: undefined,
-    minor: undefined,
-    patch: undefined,
-    suffix: undefined
+    major: 0,
+    minor: 0,
+    patch: 0,
+    suffix: ""
   };
 }
 export const Version = {
   typeUrl: "/google.protobuf.compiler.Version",
   encode(message: Version, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.major !== undefined) {
+    if (message.major !== 0) {
       writer.uint32(8).int32(message.major);
     }
-    if (message.minor !== undefined) {
+    if (message.minor !== 0) {
       writer.uint32(16).int32(message.minor);
     }
-    if (message.patch !== undefined) {
+    if (message.patch !== 0) {
       writer.uint32(24).int32(message.patch);
     }
-    if (message.suffix !== undefined) {
+    if (message.suffix !== "") {
       writer.uint32(34).string(message.suffix);
     }
     return writer;
@@ -211,10 +211,10 @@ export const Version = {
   },
   fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
-    message.major = object.major ?? undefined;
-    message.minor = object.minor ?? undefined;
-    message.patch = object.patch ?? undefined;
-    message.suffix = object.suffix ?? undefined;
+    message.major = object.major ?? 0;
+    message.minor = object.minor ?? 0;
+    message.patch = object.patch ?? 0;
+    message.suffix = object.suffix ?? "";
     return message;
   },
   fromSDK(object: VersionSDKType): Version {
@@ -227,10 +227,10 @@ export const Version = {
   },
   fromSDKJSON(object: any): VersionSDKType {
     return {
-      major: isSet(object.major) ? Number(object.major) : undefined,
-      minor: isSet(object.minor) ? Number(object.minor) : undefined,
-      patch: isSet(object.patch) ? Number(object.patch) : undefined,
-      suffix: isSet(object.suffix) ? String(object.suffix) : undefined
+      major: isSet(object.major) ? Number(object.major) : 0,
+      minor: isSet(object.minor) ? Number(object.minor) : 0,
+      patch: isSet(object.patch) ? Number(object.patch) : 0,
+      suffix: isSet(object.suffix) ? String(object.suffix) : ""
     };
   },
   toSDK(message: Version): VersionSDKType {
@@ -243,10 +243,10 @@ export const Version = {
   },
   fromAmino(object: VersionAmino): Version {
     return {
-      major: object?.major,
-      minor: object?.minor,
-      patch: object?.patch,
-      suffix: object?.suffix
+      major: object.major,
+      minor: object.minor,
+      patch: object.patch,
+      suffix: object.suffix
     };
   },
   toAmino(message: Version): VersionAmino {
@@ -276,7 +276,7 @@ export const Version = {
 function createBaseCodeGeneratorRequest(): CodeGeneratorRequest {
   return {
     fileToGenerate: [],
-    parameter: undefined,
+    parameter: "",
     protoFile: [],
     compilerVersion: undefined
   };
@@ -287,7 +287,7 @@ export const CodeGeneratorRequest = {
     for (const v of message.fileToGenerate) {
       writer.uint32(10).string(v!);
     }
-    if (message.parameter !== undefined) {
+    if (message.parameter !== "") {
       writer.uint32(18).string(message.parameter);
     }
     for (const v of message.protoFile) {
@@ -351,7 +351,7 @@ export const CodeGeneratorRequest = {
   fromPartial(object: DeepPartial<CodeGeneratorRequest>): CodeGeneratorRequest {
     const message = createBaseCodeGeneratorRequest();
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
-    message.parameter = object.parameter ?? undefined;
+    message.parameter = object.parameter ?? "";
     message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
     if (object.compilerVersion !== undefined && object.compilerVersion !== null) {
       message.compilerVersion = Version.fromPartial(object.compilerVersion);
@@ -369,7 +369,7 @@ export const CodeGeneratorRequest = {
   fromSDKJSON(object: any): CodeGeneratorRequestSDKType {
     return {
       file_to_generate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => String(e)) : [],
-      parameter: isSet(object.parameter) ? String(object.parameter) : undefined,
+      parameter: isSet(object.parameter) ? String(object.parameter) : "",
       proto_file: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDKJSON(e)) : [],
       compiler_version: isSet(object.compiler_version) ? Version.fromSDKJSON(object.compiler_version) : undefined
     };
@@ -393,7 +393,7 @@ export const CodeGeneratorRequest = {
   fromAmino(object: CodeGeneratorRequestAmino): CodeGeneratorRequest {
     return {
       fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
-      parameter: object?.parameter,
+      parameter: object.parameter,
       protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromAmino(e)) : [],
       compilerVersion: object?.compiler_version ? Version.fromAmino(object.compiler_version) : undefined
     };
@@ -432,14 +432,14 @@ export const CodeGeneratorRequest = {
 };
 function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
   return {
-    error: undefined,
+    error: "",
     file: []
   };
 }
 export const CodeGeneratorResponse = {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse",
   encode(message: CodeGeneratorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.error !== undefined) {
+    if (message.error !== "") {
       writer.uint32(10).string(message.error);
     }
     for (const v of message.file) {
@@ -485,7 +485,7 @@ export const CodeGeneratorResponse = {
   },
   fromPartial(object: DeepPartial<CodeGeneratorResponse>): CodeGeneratorResponse {
     const message = createBaseCodeGeneratorResponse();
-    message.error = object.error ?? undefined;
+    message.error = object.error ?? "";
     message.file = object.file?.map(e => CodeGeneratorResponse_File.fromPartial(e)) || [];
     return message;
   },
@@ -497,7 +497,7 @@ export const CodeGeneratorResponse = {
   },
   fromSDKJSON(object: any): CodeGeneratorResponseSDKType {
     return {
-      error: isSet(object.error) ? String(object.error) : undefined,
+      error: isSet(object.error) ? String(object.error) : "",
       file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromSDKJSON(e)) : []
     };
   },
@@ -513,7 +513,7 @@ export const CodeGeneratorResponse = {
   },
   fromAmino(object: CodeGeneratorResponseAmino): CodeGeneratorResponse {
     return {
-      error: object?.error,
+      error: object.error,
       file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromAmino(e)) : []
     };
   },
@@ -545,21 +545,21 @@ export const CodeGeneratorResponse = {
 };
 function createBaseCodeGeneratorResponse_File(): CodeGeneratorResponse_File {
   return {
-    name: undefined,
-    insertionPoint: undefined,
-    content: undefined
+    name: "",
+    insertionPoint: "",
+    content: ""
   };
 }
 export const CodeGeneratorResponse_File = {
   typeUrl: "/google.protobuf.compiler.File",
   encode(message: CodeGeneratorResponse_File, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.insertionPoint !== undefined) {
+    if (message.insertionPoint !== "") {
       writer.uint32(18).string(message.insertionPoint);
     }
-    if (message.content !== undefined) {
+    if (message.content !== "") {
       writer.uint32(122).string(message.content);
     }
     return writer;
@@ -603,9 +603,9 @@ export const CodeGeneratorResponse_File = {
   },
   fromPartial(object: DeepPartial<CodeGeneratorResponse_File>): CodeGeneratorResponse_File {
     const message = createBaseCodeGeneratorResponse_File();
-    message.name = object.name ?? undefined;
-    message.insertionPoint = object.insertionPoint ?? undefined;
-    message.content = object.content ?? undefined;
+    message.name = object.name ?? "";
+    message.insertionPoint = object.insertionPoint ?? "";
+    message.content = object.content ?? "";
     return message;
   },
   fromSDK(object: CodeGeneratorResponse_FileSDKType): CodeGeneratorResponse_File {
@@ -617,9 +617,9 @@ export const CodeGeneratorResponse_File = {
   },
   fromSDKJSON(object: any): CodeGeneratorResponse_FileSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      insertion_point: isSet(object.insertion_point) ? String(object.insertion_point) : undefined,
-      content: isSet(object.content) ? String(object.content) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      insertion_point: isSet(object.insertion_point) ? String(object.insertion_point) : "",
+      content: isSet(object.content) ? String(object.content) : ""
     };
   },
   toSDK(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileSDKType {
@@ -631,9 +631,9 @@ export const CodeGeneratorResponse_File = {
   },
   fromAmino(object: CodeGeneratorResponse_FileAmino): CodeGeneratorResponse_File {
     return {
-      name: object?.name,
-      insertionPoint: object?.insertion_point,
-      content: object?.content
+      name: object.name,
+      insertionPoint: object.insertion_point,
+      content: object.content
     };
   },
   toAmino(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileAmino {

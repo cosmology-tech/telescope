@@ -11,16 +11,16 @@ export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
 }
 export interface QueryCurrentEpochRequest {
-  identifier?: string;
+  identifier: string;
 }
 export interface QueryCurrentEpochRequestSDKType {
-  identifier?: string;
+  identifier: string;
 }
 export interface QueryCurrentEpochResponse {
-  currentEpoch?: bigint;
+  currentEpoch: bigint;
 }
 export interface QueryCurrentEpochResponseSDKType {
-  current_epoch?: bigint;
+  current_epoch: bigint;
 }
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
   return {};
@@ -201,13 +201,13 @@ export const QueryEpochsInfoResponse = {
 };
 function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
   return {
-    identifier: undefined
+    identifier: ""
   };
 }
 export const QueryCurrentEpochRequest = {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest",
   encode(message: QueryCurrentEpochRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== undefined) {
+    if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
     }
     return writer;
@@ -241,7 +241,7 @@ export const QueryCurrentEpochRequest = {
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochRequest>): QueryCurrentEpochRequest {
     const message = createBaseQueryCurrentEpochRequest();
-    message.identifier = object.identifier ?? undefined;
+    message.identifier = object.identifier ?? "";
     return message;
   },
   fromSDK(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
@@ -251,7 +251,7 @@ export const QueryCurrentEpochRequest = {
   },
   fromSDKJSON(object: any): QueryCurrentEpochRequestSDKType {
     return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : undefined
+      identifier: isSet(object.identifier) ? String(object.identifier) : ""
     };
   },
   toSDK(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
@@ -261,7 +261,7 @@ export const QueryCurrentEpochRequest = {
   },
   fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
     return {
-      identifier: object?.identifier
+      identifier: object.identifier
     };
   },
   toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
@@ -293,13 +293,13 @@ export const QueryCurrentEpochRequest = {
 };
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   return {
-    currentEpoch: undefined
+    currentEpoch: BigInt(0)
   };
 }
 export const QueryCurrentEpochResponse = {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse",
   encode(message: QueryCurrentEpochResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.currentEpoch !== undefined) {
+    if (message.currentEpoch !== BigInt(0)) {
       writer.uint32(8).int64(message.currentEpoch);
     }
     return writer;
@@ -328,9 +328,7 @@ export const QueryCurrentEpochResponse = {
   },
   toJSON(message: QueryCurrentEpochResponse): unknown {
     const obj: any = {};
-    if (message.currentEpoch !== undefined) {
-      obj.currentEpoch = message.currentEpoch.toString();
-    }
+    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
@@ -347,7 +345,7 @@ export const QueryCurrentEpochResponse = {
   },
   fromSDKJSON(object: any): QueryCurrentEpochResponseSDKType {
     return {
-      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : undefined
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
@@ -357,7 +355,7 @@ export const QueryCurrentEpochResponse = {
   },
   fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
     return {
-      currentEpoch: object?.current_epoch ? BigInt(object.current_epoch) : undefined
+      currentEpoch: BigInt(object.current_epoch)
     };
   },
   toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {

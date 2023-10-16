@@ -21,14 +21,14 @@ export interface QueryParamsResponseSDKType {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataRequest {
-  denom?: string;
+  denom: string;
 }
 /**
  * QueryDenomAuthorityMetadataRequest defines the request structure for the
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataRequestSDKType {
-  denom?: string;
+  denom: string;
 }
 /**
  * QueryDenomAuthorityMetadataResponse defines the response structure for the
@@ -49,14 +49,14 @@ export interface QueryDenomAuthorityMetadataResponseSDKType {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorRequest {
-  creator?: string;
+  creator: string;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorRequestSDKType {
-  creator?: string;
+  creator: string;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the response structure for the
@@ -241,13 +241,13 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryDenomAuthorityMetadataRequest(): QueryDenomAuthorityMetadataRequest {
   return {
-    denom: undefined
+    denom: ""
   };
 }
 export const QueryDenomAuthorityMetadataRequest = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest",
   encode(message: QueryDenomAuthorityMetadataRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
@@ -281,7 +281,7 @@ export const QueryDenomAuthorityMetadataRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataRequest>): QueryDenomAuthorityMetadataRequest {
     const message = createBaseQueryDenomAuthorityMetadataRequest();
-    message.denom = object.denom ?? undefined;
+    message.denom = object.denom ?? "";
     return message;
   },
   fromSDK(object: QueryDenomAuthorityMetadataRequestSDKType): QueryDenomAuthorityMetadataRequest {
@@ -291,7 +291,7 @@ export const QueryDenomAuthorityMetadataRequest = {
   },
   fromSDKJSON(object: any): QueryDenomAuthorityMetadataRequestSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : undefined
+      denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
   toSDK(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestSDKType {
@@ -301,7 +301,7 @@ export const QueryDenomAuthorityMetadataRequest = {
   },
   fromAmino(object: QueryDenomAuthorityMetadataRequestAmino): QueryDenomAuthorityMetadataRequest {
     return {
-      denom: object?.denom
+      denom: object.denom
     };
   },
   toAmino(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestAmino {
@@ -427,13 +427,13 @@ export const QueryDenomAuthorityMetadataResponse = {
 };
 function createBaseQueryDenomsFromCreatorRequest(): QueryDenomsFromCreatorRequest {
   return {
-    creator: undefined
+    creator: ""
   };
 }
 export const QueryDenomsFromCreatorRequest = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest",
   encode(message: QueryDenomsFromCreatorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.creator !== undefined) {
+    if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
     return writer;
@@ -467,7 +467,7 @@ export const QueryDenomsFromCreatorRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomsFromCreatorRequest>): QueryDenomsFromCreatorRequest {
     const message = createBaseQueryDenomsFromCreatorRequest();
-    message.creator = object.creator ?? undefined;
+    message.creator = object.creator ?? "";
     return message;
   },
   fromSDK(object: QueryDenomsFromCreatorRequestSDKType): QueryDenomsFromCreatorRequest {
@@ -477,7 +477,7 @@ export const QueryDenomsFromCreatorRequest = {
   },
   fromSDKJSON(object: any): QueryDenomsFromCreatorRequestSDKType {
     return {
-      creator: isSet(object.creator) ? String(object.creator) : undefined
+      creator: isSet(object.creator) ? String(object.creator) : ""
     };
   },
   toSDK(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestSDKType {
@@ -487,7 +487,7 @@ export const QueryDenomsFromCreatorRequest = {
   },
   fromAmino(object: QueryDenomsFromCreatorRequestAmino): QueryDenomsFromCreatorRequest {
     return {
-      creator: object?.creator
+      creator: object.creator
     };
   },
   toAmino(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestAmino {

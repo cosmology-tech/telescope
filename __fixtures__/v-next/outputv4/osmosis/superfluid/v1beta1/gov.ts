@@ -7,8 +7,8 @@ export const protobufPackage = "osmosis.superfluid.v1beta1";
  * assets
  */
 export interface SetSuperfluidAssetsProposal {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   assets: SuperfluidAsset[];
 }
 /**
@@ -16,8 +16,8 @@ export interface SetSuperfluidAssetsProposal {
  * assets
  */
 export interface SetSuperfluidAssetsProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   assets: SuperfluidAssetSDKType[];
 }
 /**
@@ -25,8 +25,8 @@ export interface SetSuperfluidAssetsProposalSDKType {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposal {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   superfluidAssetDenoms: string[];
 }
 /**
@@ -34,8 +34,8 @@ export interface RemoveSuperfluidAssetsProposal {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   superfluid_asset_denoms: string[];
 }
 /**
@@ -43,35 +43,35 @@ export interface RemoveSuperfluidAssetsProposalSDKType {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposal {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   ids: bigint[];
-  isOverwrite?: boolean;
+  isOverwrite: boolean;
 }
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   ids: bigint[];
-  is_overwrite?: boolean;
+  is_overwrite: boolean;
 }
 function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
   return {
-    title: undefined,
-    description: undefined,
+    title: "",
+    description: "",
     assets: []
   };
 }
 export const SetSuperfluidAssetsProposal = {
   typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
   encode(message: SetSuperfluidAssetsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.assets) {
@@ -122,8 +122,8 @@ export const SetSuperfluidAssetsProposal = {
   },
   fromPartial(object: DeepPartial<SetSuperfluidAssetsProposal>): SetSuperfluidAssetsProposal {
     const message = createBaseSetSuperfluidAssetsProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     message.assets = object.assets?.map(e => SuperfluidAsset.fromPartial(e)) || [];
     return message;
   },
@@ -136,8 +136,8 @@ export const SetSuperfluidAssetsProposal = {
   },
   fromSDKJSON(object: any): SetSuperfluidAssetsProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDKJSON(e)) : []
     };
   },
@@ -154,8 +154,8 @@ export const SetSuperfluidAssetsProposal = {
   },
   fromAmino(object: SetSuperfluidAssetsProposalAmino): SetSuperfluidAssetsProposal {
     return {
-      title: object?.title,
-      description: object?.description,
+      title: object.title,
+      description: object.description,
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
     };
   },
@@ -194,18 +194,18 @@ export const SetSuperfluidAssetsProposal = {
 };
 function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsProposal {
   return {
-    title: undefined,
-    description: undefined,
+    title: "",
+    description: "",
     superfluidAssetDenoms: []
   };
 }
 export const RemoveSuperfluidAssetsProposal = {
   typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
   encode(message: RemoveSuperfluidAssetsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.superfluidAssetDenoms) {
@@ -256,8 +256,8 @@ export const RemoveSuperfluidAssetsProposal = {
   },
   fromPartial(object: DeepPartial<RemoveSuperfluidAssetsProposal>): RemoveSuperfluidAssetsProposal {
     const message = createBaseRemoveSuperfluidAssetsProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     message.superfluidAssetDenoms = object.superfluidAssetDenoms?.map(e => e) || [];
     return message;
   },
@@ -270,8 +270,8 @@ export const RemoveSuperfluidAssetsProposal = {
   },
   fromSDKJSON(object: any): RemoveSuperfluidAssetsProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       superfluid_asset_denoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => String(e)) : []
     };
   },
@@ -288,8 +288,8 @@ export const RemoveSuperfluidAssetsProposal = {
   },
   fromAmino(object: RemoveSuperfluidAssetsProposalAmino): RemoveSuperfluidAssetsProposal {
     return {
-      title: object?.title,
-      description: object?.description,
+      title: object.title,
+      description: object.description,
       superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
     };
   },
@@ -328,19 +328,19 @@ export const RemoveSuperfluidAssetsProposal = {
 };
 function createBaseUpdateUnpoolWhiteListProposal(): UpdateUnpoolWhiteListProposal {
   return {
-    title: undefined,
-    description: undefined,
+    title: "",
+    description: "",
     ids: [],
-    isOverwrite: undefined
+    isOverwrite: false
   };
 }
 export const UpdateUnpoolWhiteListProposal = {
   typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal",
   encode(message: UpdateUnpoolWhiteListProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     writer.uint32(26).fork();
@@ -348,7 +348,7 @@ export const UpdateUnpoolWhiteListProposal = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.isOverwrite !== undefined) {
+    if (message.isOverwrite === true) {
       writer.uint32(32).bool(message.isOverwrite);
     }
     return writer;
@@ -399,7 +399,7 @@ export const UpdateUnpoolWhiteListProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     if (message.ids) {
-      obj.ids = message.ids.map(e => (e || undefined).toString());
+      obj.ids = message.ids.map(e => (e || BigInt(0)).toString());
     } else {
       obj.ids = [];
     }
@@ -408,10 +408,10 @@ export const UpdateUnpoolWhiteListProposal = {
   },
   fromPartial(object: DeepPartial<UpdateUnpoolWhiteListProposal>): UpdateUnpoolWhiteListProposal {
     const message = createBaseUpdateUnpoolWhiteListProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     message.ids = object.ids?.map(e => BigInt(e.toString())) || [];
-    message.isOverwrite = object.isOverwrite ?? undefined;
+    message.isOverwrite = object.isOverwrite ?? false;
     return message;
   },
   fromSDK(object: UpdateUnpoolWhiteListProposalSDKType): UpdateUnpoolWhiteListProposal {
@@ -424,10 +424,10 @@ export const UpdateUnpoolWhiteListProposal = {
   },
   fromSDKJSON(object: any): UpdateUnpoolWhiteListProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : [],
-      is_overwrite: isSet(object.is_overwrite) ? Boolean(object.is_overwrite) : undefined
+      is_overwrite: isSet(object.is_overwrite) ? Boolean(object.is_overwrite) : false
     };
   },
   toSDK(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalSDKType {
@@ -444,10 +444,10 @@ export const UpdateUnpoolWhiteListProposal = {
   },
   fromAmino(object: UpdateUnpoolWhiteListProposalAmino): UpdateUnpoolWhiteListProposal {
     return {
-      title: object?.title,
-      description: object?.description,
+      title: object.title,
+      description: object.description,
       ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e)) : [],
-      isOverwrite: object?.is_overwrite
+      isOverwrite: object.is_overwrite
     };
   },
   toAmino(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAmino {

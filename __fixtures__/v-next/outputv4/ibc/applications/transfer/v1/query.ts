@@ -9,14 +9,14 @@ export const protobufPackage = "ibc.applications.transfer.v1";
  */
 export interface QueryDenomTraceRequest {
   /** hash (in hex format) of the denomination trace information. */
-  hash?: string;
+  hash: string;
 }
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
  * method
  */
 export interface QueryDenomTraceRequestSDKType {
-  hash?: string;
+  hash: string;
 }
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
@@ -81,13 +81,13 @@ export interface QueryParamsResponseSDKType {
 }
 function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
   return {
-    hash: undefined
+    hash: ""
   };
 }
 export const QueryDenomTraceRequest = {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
   encode(message: QueryDenomTraceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash !== undefined) {
+    if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
     }
     return writer;
@@ -121,7 +121,7 @@ export const QueryDenomTraceRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomTraceRequest>): QueryDenomTraceRequest {
     const message = createBaseQueryDenomTraceRequest();
-    message.hash = object.hash ?? undefined;
+    message.hash = object.hash ?? "";
     return message;
   },
   fromSDK(object: QueryDenomTraceRequestSDKType): QueryDenomTraceRequest {
@@ -131,7 +131,7 @@ export const QueryDenomTraceRequest = {
   },
   fromSDKJSON(object: any): QueryDenomTraceRequestSDKType {
     return {
-      hash: isSet(object.hash) ? String(object.hash) : undefined
+      hash: isSet(object.hash) ? String(object.hash) : ""
     };
   },
   toSDK(message: QueryDenomTraceRequest): QueryDenomTraceRequestSDKType {
@@ -141,7 +141,7 @@ export const QueryDenomTraceRequest = {
   },
   fromAmino(object: QueryDenomTraceRequestAmino): QueryDenomTraceRequest {
     return {
-      hash: object?.hash
+      hash: object.hash
     };
   },
   toAmino(message: QueryDenomTraceRequest): QueryDenomTraceRequestAmino {

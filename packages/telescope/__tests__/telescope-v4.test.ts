@@ -56,8 +56,9 @@ const options: TelescopeOptions = {
     strictNullCheckForPrototypeMethods: true,
     paginationDefaultFromPartial: true,
     includePackageVar: true,
-    fieldDefaultIsOptional: true,
+    fieldDefaultIsOptional: false,
     useOptionalNullable: true,
+    optionalNullableDefaultTrue: true,
     allowUndefinedTypes: false,
     excluded: {
       packages: [

@@ -42,14 +42,14 @@ export interface QueryDevFeeInfosResponseSDKType {
  */
 export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
-  contractAddress?: string;
+  contractAddress: string;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
  * method.
  */
 export interface QueryDevFeeInfoRequestSDKType {
-  contract_address?: string;
+  contract_address: string;
 }
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
@@ -89,7 +89,7 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryDevFeeInfosPerDeployerRequest {
   /** deployer bech32 address */
-  deployerAddress?: string;
+  deployerAddress: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
@@ -98,7 +98,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
  * Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
-  deployer_address?: string;
+  deployer_address: string;
   pagination?: PageRequestSDKType;
 }
 /**
@@ -323,13 +323,13 @@ export const QueryDevFeeInfosResponse = {
 };
 function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
   return {
-    contractAddress: undefined
+    contractAddress: ""
   };
 }
 export const QueryDevFeeInfoRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
   encode(message: QueryDevFeeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== undefined) {
+    if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
@@ -363,7 +363,7 @@ export const QueryDevFeeInfoRequest = {
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
     const message = createBaseQueryDevFeeInfoRequest();
-    message.contractAddress = object.contractAddress ?? undefined;
+    message.contractAddress = object.contractAddress ?? "";
     return message;
   },
   fromSDK(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
@@ -373,7 +373,7 @@ export const QueryDevFeeInfoRequest = {
   },
   fromSDKJSON(object: any): QueryDevFeeInfoRequestSDKType {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : undefined
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
     };
   },
   toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
@@ -383,7 +383,7 @@ export const QueryDevFeeInfoRequest = {
   },
   fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
     return {
-      contractAddress: object?.contract_address
+      contractAddress: object.contract_address
     };
   },
   toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
@@ -652,14 +652,14 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDeployerRequest {
   return {
-    deployerAddress: undefined,
+    deployerAddress: "",
     pagination: undefined
   };
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
   encode(message: QueryDevFeeInfosPerDeployerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.deployerAddress !== undefined) {
+    if (message.deployerAddress !== "") {
       writer.uint32(10).string(message.deployerAddress);
     }
     if (message.pagination !== undefined) {
@@ -701,7 +701,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
     const message = createBaseQueryDevFeeInfosPerDeployerRequest();
-    message.deployerAddress = object.deployerAddress ?? undefined;
+    message.deployerAddress = object.deployerAddress ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -715,7 +715,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerRequestSDKType {
     return {
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : undefined,
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -727,7 +727,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
     return {
-      deployerAddress: object?.deployer_address,
+      deployerAddress: object.deployer_address,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },

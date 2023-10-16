@@ -157,7 +157,7 @@ export interface ResourceDescriptor {
    * should use PascalCase (UpperCamelCase). The maximum number of
    * characters allowed for the `resource_type_kind` is 100.
    */
-  type?: string;
+  type: string;
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -184,7 +184,7 @@ export interface ResourceDescriptor {
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
-  nameField?: string;
+  nameField: string;
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -202,7 +202,7 @@ export interface ResourceDescriptor {
    *       };
    *     }
    */
-  history?: ResourceDescriptor_History;
+  history: ResourceDescriptor_History;
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -213,13 +213,13 @@ export interface ResourceDescriptor {
    * Note: The plural form is required even for singleton resources. See
    * https://aip.dev/156
    */
-  plural?: string;
+  plural: string;
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
-  singular?: string;
+  singular: string;
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
@@ -277,12 +277,12 @@ export interface ResourceDescriptor {
  *       pattern: "billingAccounts/{billing_account}/logs/{log}"
  */
 export interface ResourceDescriptorSDKType {
-  type?: string;
+  type: string;
   pattern: string[];
-  name_field?: string;
-  history?: ResourceDescriptor_History;
-  plural?: string;
-  singular?: string;
+  name_field: string;
+  history: ResourceDescriptor_History;
+  plural: string;
+  singular: string;
   style: ResourceDescriptor_Style[];
 }
 /**
@@ -312,7 +312,7 @@ export interface ResourceReference {
    *       }];
    *     }
    */
-  type?: string;
+  type: string;
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -326,46 +326,46 @@ export interface ResourceReference {
    *       };
    *     }
    */
-  childType?: string;
+  childType: string;
 }
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
  */
 export interface ResourceReferenceSDKType {
-  type?: string;
-  child_type?: string;
+  type: string;
+  child_type: string;
 }
 function createBaseResourceDescriptor(): ResourceDescriptor {
   return {
-    type: undefined,
+    type: "",
     pattern: [],
-    nameField: undefined,
-    history: undefined,
-    plural: undefined,
-    singular: undefined,
+    nameField: "",
+    history: 0,
+    plural: "",
+    singular: "",
     style: []
   };
 }
 export const ResourceDescriptor = {
   typeUrl: "/google.api.ResourceDescriptor",
   encode(message: ResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.pattern) {
       writer.uint32(18).string(v!);
     }
-    if (message.nameField !== undefined) {
+    if (message.nameField !== "") {
       writer.uint32(26).string(message.nameField);
     }
-    if (message.history !== undefined) {
+    if (message.history !== 0) {
       writer.uint32(32).int32(message.history);
     }
-    if (message.plural !== undefined) {
+    if (message.plural !== "") {
       writer.uint32(42).string(message.plural);
     }
-    if (message.singular !== undefined) {
+    if (message.singular !== "") {
       writer.uint32(50).string(message.singular);
     }
     writer.uint32(82).fork();
@@ -449,12 +449,12 @@ export const ResourceDescriptor = {
   },
   fromPartial(object: DeepPartial<ResourceDescriptor>): ResourceDescriptor {
     const message = createBaseResourceDescriptor();
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? "";
     message.pattern = object.pattern?.map(e => e) || [];
-    message.nameField = object.nameField ?? undefined;
-    message.history = object.history ?? undefined;
-    message.plural = object.plural ?? undefined;
-    message.singular = object.singular ?? undefined;
+    message.nameField = object.nameField ?? "";
+    message.history = object.history ?? 0;
+    message.plural = object.plural ?? "";
+    message.singular = object.singular ?? "";
     message.style = object.style?.map(e => e) || [];
     return message;
   },
@@ -463,7 +463,7 @@ export const ResourceDescriptor = {
       type: object?.type,
       pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
       nameField: object?.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : undefined,
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
       plural: object?.plural,
       singular: object?.singular,
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
@@ -471,12 +471,12 @@ export const ResourceDescriptor = {
   },
   fromSDKJSON(object: any): ResourceDescriptorSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : undefined,
+      type: isSet(object.type) ? String(object.type) : "",
       pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => String(e)) : [],
-      name_field: isSet(object.name_field) ? String(object.name_field) : undefined,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : undefined,
-      plural: isSet(object.plural) ? String(object.plural) : undefined,
-      singular: isSet(object.singular) ? String(object.singular) : undefined,
+      name_field: isSet(object.name_field) ? String(object.name_field) : "",
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
+      plural: isSet(object.plural) ? String(object.plural) : "",
+      singular: isSet(object.singular) ? String(object.singular) : "",
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
@@ -501,12 +501,12 @@ export const ResourceDescriptor = {
   },
   fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
     return {
-      type: object?.type,
+      type: object.type,
       pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: object?.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : undefined,
-      plural: object?.plural,
-      singular: object?.singular,
+      nameField: object.name_field,
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
+      plural: object.plural,
+      singular: object.singular,
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
@@ -547,17 +547,17 @@ export const ResourceDescriptor = {
 };
 function createBaseResourceReference(): ResourceReference {
   return {
-    type: undefined,
-    childType: undefined
+    type: "",
+    childType: ""
   };
 }
 export const ResourceReference = {
   typeUrl: "/google.api.ResourceReference",
   encode(message: ResourceReference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-    if (message.childType !== undefined) {
+    if (message.childType !== "") {
       writer.uint32(18).string(message.childType);
     }
     return writer;
@@ -596,8 +596,8 @@ export const ResourceReference = {
   },
   fromPartial(object: DeepPartial<ResourceReference>): ResourceReference {
     const message = createBaseResourceReference();
-    message.type = object.type ?? undefined;
-    message.childType = object.childType ?? undefined;
+    message.type = object.type ?? "";
+    message.childType = object.childType ?? "";
     return message;
   },
   fromSDK(object: ResourceReferenceSDKType): ResourceReference {
@@ -608,8 +608,8 @@ export const ResourceReference = {
   },
   fromSDKJSON(object: any): ResourceReferenceSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : undefined,
-      child_type: isSet(object.child_type) ? String(object.child_type) : undefined
+      type: isSet(object.type) ? String(object.type) : "",
+      child_type: isSet(object.child_type) ? String(object.child_type) : ""
     };
   },
   toSDK(message: ResourceReference): ResourceReferenceSDKType {
@@ -620,8 +620,8 @@ export const ResourceReference = {
   },
   fromAmino(object: ResourceReferenceAmino): ResourceReference {
     return {
-      type: object?.type,
-      childType: object?.child_type
+      type: object.type,
+      childType: object.child_type
     };
   },
   toAmino(message: ResourceReference): ResourceReferenceAmino {

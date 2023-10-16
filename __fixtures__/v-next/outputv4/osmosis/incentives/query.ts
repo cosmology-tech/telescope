@@ -16,10 +16,10 @@ export interface ModuleToDistributeCoinsResponseSDKType {
 }
 export interface GaugeByIDRequest {
   /** Gague ID being queried */
-  id?: bigint;
+  id: bigint;
 }
 export interface GaugeByIDRequestSDKType {
-  id?: bigint;
+  id: bigint;
 }
 export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
@@ -64,12 +64,12 @@ export interface ActiveGaugesResponseSDKType {
 }
 export interface ActiveGaugesPerDenomRequest {
   /** Desired denom when querying active gagues */
-  denom?: string;
+  denom: string;
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomRequestSDKType {
-  denom?: string;
+  denom: string;
   pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesPerDenomResponse {
@@ -101,12 +101,12 @@ export interface UpcomingGaugesResponseSDKType {
 }
 export interface UpcomingGaugesPerDenomRequest {
   /** Filter for upcoming gagues that match specific denom */
-  denom?: string;
+  denom: string;
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomRequestSDKType {
-  denom?: string;
+  denom: string;
   pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesPerDenomResponse {
@@ -121,19 +121,19 @@ export interface UpcomingGaugesPerDenomResponseSDKType {
 }
 export interface RewardsEstRequest {
   /** Address that is being queried for future estimated rewards */
-  owner?: string;
+  owner: string;
   /** Lock IDs included in future reward estimation */
   lockIds: bigint[];
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
-  endEpoch?: bigint;
+  endEpoch: bigint;
 }
 export interface RewardsEstRequestSDKType {
-  owner?: string;
+  owner: string;
   lock_ids: bigint[];
-  end_epoch?: bigint;
+  end_epoch: bigint;
 }
 export interface RewardsEstResponse {
   /**
@@ -333,13 +333,13 @@ export const ModuleToDistributeCoinsResponse = {
 };
 function createBaseGaugeByIDRequest(): GaugeByIDRequest {
   return {
-    id: undefined
+    id: BigInt(0)
   };
 }
 export const GaugeByIDRequest = {
   typeUrl: "/osmosis.incentives.GaugeByIDRequest",
   encode(message: GaugeByIDRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     return writer;
@@ -368,9 +368,7 @@ export const GaugeByIDRequest = {
   },
   toJSON(message: GaugeByIDRequest): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
-      obj.id = message.id.toString();
-    }
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
@@ -387,7 +385,7 @@ export const GaugeByIDRequest = {
   },
   fromSDKJSON(object: any): GaugeByIDRequestSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toSDK(message: GaugeByIDRequest): GaugeByIDRequestSDKType {
@@ -397,7 +395,7 @@ export const GaugeByIDRequest = {
   },
   fromAmino(object: GaugeByIDRequestAmino): GaugeByIDRequest {
     return {
-      id: object?.id ? BigInt(object.id) : undefined
+      id: BigInt(object.id)
     };
   },
   toAmino(message: GaugeByIDRequest): GaugeByIDRequestAmino {
@@ -953,14 +951,14 @@ export const ActiveGaugesResponse = {
 };
 function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
   return {
-    denom: undefined,
+    denom: "",
     pagination: undefined
   };
 }
 export const ActiveGaugesPerDenomRequest = {
   typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomRequest",
   encode(message: ActiveGaugesPerDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.pagination !== undefined) {
@@ -1002,7 +1000,7 @@ export const ActiveGaugesPerDenomRequest = {
   },
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomRequest>): ActiveGaugesPerDenomRequest {
     const message = createBaseActiveGaugesPerDenomRequest();
-    message.denom = object.denom ?? undefined;
+    message.denom = object.denom ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -1016,7 +1014,7 @@ export const ActiveGaugesPerDenomRequest = {
   },
   fromSDKJSON(object: any): ActiveGaugesPerDenomRequestSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1028,7 +1026,7 @@ export const ActiveGaugesPerDenomRequest = {
   },
   fromAmino(object: ActiveGaugesPerDenomRequestAmino): ActiveGaugesPerDenomRequest {
     return {
-      denom: object?.denom,
+      denom: object.denom,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -1398,14 +1396,14 @@ export const UpcomingGaugesResponse = {
 };
 function createBaseUpcomingGaugesPerDenomRequest(): UpcomingGaugesPerDenomRequest {
   return {
-    denom: undefined,
+    denom: "",
     pagination: undefined
   };
 }
 export const UpcomingGaugesPerDenomRequest = {
   typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomRequest",
   encode(message: UpcomingGaugesPerDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.pagination !== undefined) {
@@ -1447,7 +1445,7 @@ export const UpcomingGaugesPerDenomRequest = {
   },
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomRequest>): UpcomingGaugesPerDenomRequest {
     const message = createBaseUpcomingGaugesPerDenomRequest();
-    message.denom = object.denom ?? undefined;
+    message.denom = object.denom ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -1461,7 +1459,7 @@ export const UpcomingGaugesPerDenomRequest = {
   },
   fromSDKJSON(object: any): UpcomingGaugesPerDenomRequestSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1473,7 +1471,7 @@ export const UpcomingGaugesPerDenomRequest = {
   },
   fromAmino(object: UpcomingGaugesPerDenomRequestAmino): UpcomingGaugesPerDenomRequest {
     return {
-      denom: object?.denom,
+      denom: object.denom,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -1628,15 +1626,15 @@ export const UpcomingGaugesPerDenomResponse = {
 };
 function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
-    owner: undefined,
+    owner: "",
     lockIds: [],
-    endEpoch: undefined
+    endEpoch: BigInt(0)
   };
 }
 export const RewardsEstRequest = {
   typeUrl: "/osmosis.incentives.RewardsEstRequest",
   encode(message: RewardsEstRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     writer.uint32(18).fork();
@@ -1644,7 +1642,7 @@ export const RewardsEstRequest = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.endEpoch !== undefined) {
+    if (message.endEpoch !== BigInt(0)) {
       writer.uint32(24).int64(message.endEpoch);
     }
     return writer;
@@ -1690,18 +1688,16 @@ export const RewardsEstRequest = {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     if (message.lockIds) {
-      obj.lockIds = message.lockIds.map(e => (e || undefined).toString());
+      obj.lockIds = message.lockIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.lockIds = [];
     }
-    if (message.endEpoch !== undefined) {
-      obj.endEpoch = message.endEpoch.toString();
-    }
+    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<RewardsEstRequest>): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     message.lockIds = object.lockIds?.map(e => BigInt(e.toString())) || [];
     if (object.endEpoch !== undefined && object.endEpoch !== null) {
       message.endEpoch = BigInt(object.endEpoch.toString());
@@ -1717,9 +1713,9 @@ export const RewardsEstRequest = {
   },
   fromSDKJSON(object: any): RewardsEstRequestSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
       lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => BigInt(e.toString())) : [],
-      end_epoch: isSet(object.end_epoch) ? BigInt(object.end_epoch.toString()) : undefined
+      end_epoch: isSet(object.end_epoch) ? BigInt(object.end_epoch.toString()) : BigInt(0)
     };
   },
   toSDK(message: RewardsEstRequest): RewardsEstRequestSDKType {
@@ -1735,9 +1731,9 @@ export const RewardsEstRequest = {
   },
   fromAmino(object: RewardsEstRequestAmino): RewardsEstRequest {
     return {
-      owner: object?.owner,
+      owner: object.owner,
       lockIds: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => BigInt(e)) : [],
-      endEpoch: object?.end_epoch ? BigInt(object.end_epoch) : undefined
+      endEpoch: BigInt(object.end_epoch)
     };
   },
   toAmino(message: RewardsEstRequest): RewardsEstRequestAmino {

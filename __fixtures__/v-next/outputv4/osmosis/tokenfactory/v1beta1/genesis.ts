@@ -20,7 +20,7 @@ export interface GenesisStateSDKType {
  * denom's admin.
  */
 export interface GenesisDenom {
-  denom?: string;
+  denom: string;
   authorityMetadata: DenomAuthorityMetadata;
 }
 /**
@@ -29,7 +29,7 @@ export interface GenesisDenom {
  * denom's admin.
  */
 export interface GenesisDenomSDKType {
-  denom?: string;
+  denom: string;
   authority_metadata: DenomAuthorityMetadataSDKType;
 }
 function createBaseGenesisState(): GenesisState {
@@ -155,14 +155,14 @@ export const GenesisState = {
 };
 function createBaseGenesisDenom(): GenesisDenom {
   return {
-    denom: undefined,
+    denom: "",
     authorityMetadata: DenomAuthorityMetadata.fromPartial({})
   };
 }
 export const GenesisDenom = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom",
   encode(message: GenesisDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.authorityMetadata !== undefined) {
@@ -204,7 +204,7 @@ export const GenesisDenom = {
   },
   fromPartial(object: DeepPartial<GenesisDenom>): GenesisDenom {
     const message = createBaseGenesisDenom();
-    message.denom = object.denom ?? undefined;
+    message.denom = object.denom ?? "";
     if (object.authorityMetadata !== undefined && object.authorityMetadata !== null) {
       message.authorityMetadata = DenomAuthorityMetadata.fromPartial(object.authorityMetadata);
     }
@@ -218,7 +218,7 @@ export const GenesisDenom = {
   },
   fromSDKJSON(object: any): GenesisDenomSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : "",
       authority_metadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDKJSON(object.authority_metadata) : undefined
     };
   },
@@ -230,7 +230,7 @@ export const GenesisDenom = {
   },
   fromAmino(object: GenesisDenomAmino): GenesisDenom {
     return {
-      denom: object?.denom,
+      denom: object.denom,
       authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
     };
   },

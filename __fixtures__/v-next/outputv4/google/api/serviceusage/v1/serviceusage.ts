@@ -65,11 +65,11 @@ export interface EnableServiceRequest {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name?: string;
+  name: string;
 }
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
-  name?: string;
+  name: string;
 }
 /**
  * Response message for the `EnableService` method.
@@ -99,7 +99,7 @@ export interface DisableServiceRequest {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name?: string;
+  name: string;
   /**
    * Indicates if services that are enabled and which depend on this service
    * should also be disabled. If not set, an error will be generated if any
@@ -107,15 +107,15 @@ export interface DisableServiceRequest {
    * service, and any enabled services that depend on it, will be disabled
    * together.
    */
-  disableDependentServices?: boolean;
+  disableDependentServices: boolean;
   /** Defines the behavior for checking service usage when disabling a service. */
-  checkIfServiceHasUsage?: DisableServiceRequest_CheckIfServiceHasUsage;
+  checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
-  name?: string;
-  disable_dependent_services?: boolean;
-  check_if_service_has_usage?: DisableServiceRequest_CheckIfServiceHasUsage;
+  name: string;
+  disable_dependent_services: boolean;
+  check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 /**
  * Response message for the `DisableService` method.
@@ -143,11 +143,11 @@ export interface GetServiceRequest {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name?: string;
+  name: string;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequest {
@@ -157,30 +157,30 @@ export interface ListServicesRequest {
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
-  parent?: string;
+  parent: string;
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    * If not set, the default page size is 50.
    */
-  pageSize?: number;
+  pageSize: number;
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  pageToken?: string;
+  pageToken: string;
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter?: string;
+  filter: string;
 }
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
-  parent?: string;
-  page_size?: number;
-  page_token?: string;
-  filter?: string;
+  parent: string;
+  page_size: number;
+  page_token: string;
+  filter: string;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
@@ -190,12 +190,12 @@ export interface ListServicesResponse {
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
    */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
   services: ServiceSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequest {
@@ -207,7 +207,7 @@ export interface BatchEnableServicesRequest {
    * 
    * The `BatchEnableServices` method currently only supports projects.
    */
-  parent?: string;
+  parent: string;
   /**
    * The identifiers of the services to enable on the project.
    * 
@@ -225,7 +225,7 @@ export interface BatchEnableServicesRequest {
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
-  parent?: string;
+  parent: string;
   service_ids: string[];
 }
 /**
@@ -254,14 +254,14 @@ export interface BatchEnableServicesResponseSDKType {
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailure {
   /** The service id of a service that could not be enabled. */
-  serviceId?: string;
+  serviceId: string;
   /** An error message describing why the service could not be enabled. */
-  errorMessage?: string;
+  errorMessage: string;
 }
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailureSDKType {
-  service_id?: string;
-  error_message?: string;
+  service_id: string;
+  error_message: string;
 }
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequest {
@@ -272,7 +272,7 @@ export interface BatchGetServicesRequest {
    * the project number. The `BatchGetServices` method currently only supports
    * projects.
    */
-  parent?: string;
+  parent: string;
   /**
    * Names of the services to retrieve.
    * 
@@ -285,7 +285,7 @@ export interface BatchGetServicesRequest {
 }
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestSDKType {
-  parent?: string;
+  parent: string;
   names: string[];
 }
 /** Response message for the `BatchGetServices` method. */
@@ -299,13 +299,13 @@ export interface BatchGetServicesResponseSDKType {
 }
 function createBaseEnableServiceRequest(): EnableServiceRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -339,7 +339,7 @@ export const EnableServiceRequest = {
   },
   fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
@@ -349,7 +349,7 @@ export const EnableServiceRequest = {
   },
   fromSDKJSON(object: any): EnableServiceRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
@@ -359,7 +359,7 @@ export const EnableServiceRequest = {
   },
   fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
@@ -473,21 +473,21 @@ export const EnableServiceResponse = {
 };
 function createBaseDisableServiceRequest(): DisableServiceRequest {
   return {
-    name: undefined,
-    disableDependentServices: undefined,
-    checkIfServiceHasUsage: undefined
+    name: "",
+    disableDependentServices: false,
+    checkIfServiceHasUsage: 0
   };
 }
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.disableDependentServices !== undefined) {
+    if (message.disableDependentServices === true) {
       writer.uint32(16).bool(message.disableDependentServices);
     }
-    if (message.checkIfServiceHasUsage !== undefined) {
+    if (message.checkIfServiceHasUsage !== 0) {
       writer.uint32(24).int32(message.checkIfServiceHasUsage);
     }
     return writer;
@@ -531,23 +531,23 @@ export const DisableServiceRequest = {
   },
   fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
-    message.name = object.name ?? undefined;
-    message.disableDependentServices = object.disableDependentServices ?? undefined;
-    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? undefined;
+    message.name = object.name ?? "";
+    message.disableDependentServices = object.disableDependentServices ?? false;
+    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? 0;
     return message;
   },
   fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
     return {
       name: object?.name,
       disableDependentServices: object?.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : undefined
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   fromSDKJSON(object: any): DisableServiceRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : undefined,
-      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
+      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
@@ -559,9 +559,9 @@ export const DisableServiceRequest = {
   },
   fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
     return {
-      name: object?.name,
-      disableDependentServices: object?.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : undefined
+      name: object.name,
+      disableDependentServices: object.disable_dependent_services,
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
@@ -677,13 +677,13 @@ export const DisableServiceResponse = {
 };
 function createBaseGetServiceRequest(): GetServiceRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -717,7 +717,7 @@ export const GetServiceRequest = {
   },
   fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
     const message = createBaseGetServiceRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
@@ -727,7 +727,7 @@ export const GetServiceRequest = {
   },
   fromSDKJSON(object: any): GetServiceRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
@@ -737,7 +737,7 @@ export const GetServiceRequest = {
   },
   fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetServiceRequest): GetServiceRequestAmino {
@@ -763,25 +763,25 @@ export const GetServiceRequest = {
 };
 function createBaseListServicesRequest(): ListServicesRequest {
   return {
-    parent: undefined,
-    pageSize: undefined,
-    pageToken: undefined,
-    filter: undefined
+    parent: "",
+    pageSize: 0,
+    pageToken: "",
+    filter: ""
   };
 }
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -830,10 +830,10 @@ export const ListServicesRequest = {
   },
   fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
     const message = createBaseListServicesRequest();
-    message.parent = object.parent ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
-    message.filter = object.filter ?? undefined;
+    message.parent = object.parent ?? "";
+    message.pageSize = object.pageSize ?? 0;
+    message.pageToken = object.pageToken ?? "";
+    message.filter = object.filter ?? "";
     return message;
   },
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
@@ -846,10 +846,10 @@ export const ListServicesRequest = {
   },
   fromSDKJSON(object: any): ListServicesRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
   toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
@@ -862,10 +862,10 @@ export const ListServicesRequest = {
   },
   fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
     return {
-      parent: object?.parent,
-      pageSize: object?.page_size,
-      pageToken: object?.page_token,
-      filter: object?.filter
+      parent: object.parent,
+      pageSize: object.page_size,
+      pageToken: object.page_token,
+      filter: object.filter
     };
   },
   toAmino(message: ListServicesRequest): ListServicesRequestAmino {
@@ -895,7 +895,7 @@ export const ListServicesRequest = {
 function createBaseListServicesResponse(): ListServicesResponse {
   return {
     services: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListServicesResponse = {
@@ -904,7 +904,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -948,7 +948,7 @@ export const ListServicesResponse = {
   fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
@@ -960,7 +960,7 @@ export const ListServicesResponse = {
   fromSDKJSON(object: any): ListServicesResponseSDKType {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
@@ -976,7 +976,7 @@ export const ListServicesResponse = {
   fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListServicesResponse): ListServicesResponseAmino {
@@ -1007,14 +1007,14 @@ export const ListServicesResponse = {
 };
 function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
   return {
-    parent: undefined,
+    parent: "",
     serviceIds: []
   };
 }
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.serviceIds) {
@@ -1060,7 +1060,7 @@ export const BatchEnableServicesRequest = {
   },
   fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
-    message.parent = object.parent ?? undefined;
+    message.parent = object.parent ?? "";
     message.serviceIds = object.serviceIds?.map(e => e) || [];
     return message;
   },
@@ -1072,7 +1072,7 @@ export const BatchEnableServicesRequest = {
   },
   fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
       service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
     };
   },
@@ -1088,7 +1088,7 @@ export const BatchEnableServicesRequest = {
   },
   fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
     return {
-      parent: object?.parent,
+      parent: object.parent,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
     };
   },
@@ -1245,17 +1245,17 @@ export const BatchEnableServicesResponse = {
 };
 function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServicesResponse_EnableFailure {
   return {
-    serviceId: undefined,
-    errorMessage: undefined
+    serviceId: "",
+    errorMessage: ""
   };
 }
 export const BatchEnableServicesResponse_EnableFailure = {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure",
   encode(message: BatchEnableServicesResponse_EnableFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceId !== undefined) {
+    if (message.serviceId !== "") {
       writer.uint32(10).string(message.serviceId);
     }
-    if (message.errorMessage !== undefined) {
+    if (message.errorMessage !== "") {
       writer.uint32(18).string(message.errorMessage);
     }
     return writer;
@@ -1294,8 +1294,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
   },
   fromPartial(object: DeepPartial<BatchEnableServicesResponse_EnableFailure>): BatchEnableServicesResponse_EnableFailure {
     const message = createBaseBatchEnableServicesResponse_EnableFailure();
-    message.serviceId = object.serviceId ?? undefined;
-    message.errorMessage = object.errorMessage ?? undefined;
+    message.serviceId = object.serviceId ?? "";
+    message.errorMessage = object.errorMessage ?? "";
     return message;
   },
   fromSDK(object: BatchEnableServicesResponse_EnableFailureSDKType): BatchEnableServicesResponse_EnableFailure {
@@ -1306,8 +1306,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
   },
   fromSDKJSON(object: any): BatchEnableServicesResponse_EnableFailureSDKType {
     return {
-      service_id: isSet(object.service_id) ? String(object.service_id) : undefined,
-      error_message: isSet(object.error_message) ? String(object.error_message) : undefined
+      service_id: isSet(object.service_id) ? String(object.service_id) : "",
+      error_message: isSet(object.error_message) ? String(object.error_message) : ""
     };
   },
   toSDK(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
@@ -1318,8 +1318,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
   },
   fromAmino(object: BatchEnableServicesResponse_EnableFailureAmino): BatchEnableServicesResponse_EnableFailure {
     return {
-      serviceId: object?.service_id,
-      errorMessage: object?.error_message
+      serviceId: object.service_id,
+      errorMessage: object.error_message
     };
   },
   toAmino(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureAmino {
@@ -1346,14 +1346,14 @@ export const BatchEnableServicesResponse_EnableFailure = {
 };
 function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
   return {
-    parent: undefined,
+    parent: "",
     names: []
   };
 }
 export const BatchGetServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
   encode(message: BatchGetServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.names) {
@@ -1399,7 +1399,7 @@ export const BatchGetServicesRequest = {
   },
   fromPartial(object: DeepPartial<BatchGetServicesRequest>): BatchGetServicesRequest {
     const message = createBaseBatchGetServicesRequest();
-    message.parent = object.parent ?? undefined;
+    message.parent = object.parent ?? "";
     message.names = object.names?.map(e => e) || [];
     return message;
   },
@@ -1411,7 +1411,7 @@ export const BatchGetServicesRequest = {
   },
   fromSDKJSON(object: any): BatchGetServicesRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
       names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
     };
   },
@@ -1427,7 +1427,7 @@ export const BatchGetServicesRequest = {
   },
   fromAmino(object: BatchGetServicesRequestAmino): BatchGetServicesRequest {
     return {
-      parent: object?.parent,
+      parent: object.parent,
       names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
     };
   },

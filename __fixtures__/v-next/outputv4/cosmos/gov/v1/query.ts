@@ -6,11 +6,11 @@ export const protobufPackage = "cosmos.gov.v1";
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId?: bigint;
+  proposalId: bigint;
 }
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequestSDKType {
-  proposal_id?: bigint;
+  proposal_id: bigint;
 }
 /** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponse {
@@ -23,19 +23,19 @@ export interface QueryProposalResponseSDKType {
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequest {
   /** proposal_status defines the status of the proposals. */
-  proposalStatus?: ProposalStatus;
+  proposalStatus: ProposalStatus;
   /** voter defines the voter address for the proposals. */
-  voter?: string;
+  voter: string;
   /** depositor defines the deposit addresses from the proposals. */
-  depositor?: string;
+  depositor: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestSDKType {
-  proposal_status?: ProposalStatus;
-  voter?: string;
-  depositor?: string;
+  proposal_status: ProposalStatus;
+  voter: string;
+  depositor: string;
   pagination?: PageRequestSDKType;
 }
 /**
@@ -58,14 +58,14 @@ export interface QueryProposalsResponseSDKType {
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequest {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId?: bigint;
+  proposalId: bigint;
   /** voter defines the oter address for the proposals. */
-  voter?: string;
+  voter: string;
 }
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequestSDKType {
-  proposal_id?: bigint;
-  voter?: string;
+  proposal_id: bigint;
+  voter: string;
 }
 /** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 export interface QueryVoteResponse {
@@ -79,13 +79,13 @@ export interface QueryVoteResponseSDKType {
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequest {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId?: bigint;
+  proposalId: bigint;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequestSDKType {
-  proposal_id?: bigint;
+  proposal_id: bigint;
   pagination?: PageRequestSDKType;
 }
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
@@ -106,11 +106,11 @@ export interface QueryParamsRequest {
    * params_type defines which parameters to query for, can be one of "voting",
    * "tallying" or "deposit".
    */
-  paramsType?: string;
+  paramsType: string;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {
-  params_type?: string;
+  params_type: string;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
@@ -130,14 +130,14 @@ export interface QueryParamsResponseSDKType {
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequest {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId?: bigint;
+  proposalId: bigint;
   /** depositor defines the deposit addresses from the proposals. */
-  depositor?: string;
+  depositor: string;
 }
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequestSDKType {
-  proposal_id?: bigint;
-  depositor?: string;
+  proposal_id: bigint;
+  depositor: string;
 }
 /** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 export interface QueryDepositResponse {
@@ -151,13 +151,13 @@ export interface QueryDepositResponseSDKType {
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequest {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId?: bigint;
+  proposalId: bigint;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequestSDKType {
-  proposal_id?: bigint;
+  proposal_id: bigint;
   pagination?: PageRequestSDKType;
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
@@ -174,11 +174,11 @@ export interface QueryDepositsResponseSDKType {
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequest {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId?: bigint;
+  proposalId: bigint;
 }
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequestSDKType {
-  proposal_id?: bigint;
+  proposal_id: bigint;
 }
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponse {
@@ -191,13 +191,13 @@ export interface QueryTallyResultResponseSDKType {
 }
 function createBaseQueryProposalRequest(): QueryProposalRequest {
   return {
-    proposalId: undefined
+    proposalId: BigInt(0)
   };
 }
 export const QueryProposalRequest = {
   typeUrl: "/cosmos.gov.v1.QueryProposalRequest",
   encode(message: QueryProposalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
@@ -226,9 +226,7 @@ export const QueryProposalRequest = {
   },
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
@@ -245,7 +243,7 @@ export const QueryProposalRequest = {
   },
   fromSDKJSON(object: any): QueryProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
@@ -255,7 +253,7 @@ export const QueryProposalRequest = {
   },
   fromAmino(object: QueryProposalRequestAmino): QueryProposalRequest {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined
+      proposalId: BigInt(object.proposal_id)
     };
   },
   toAmino(message: QueryProposalRequest): QueryProposalRequestAmino {
@@ -381,22 +379,22 @@ export const QueryProposalResponse = {
 };
 function createBaseQueryProposalsRequest(): QueryProposalsRequest {
   return {
-    proposalStatus: undefined,
-    voter: undefined,
-    depositor: undefined,
+    proposalStatus: 0,
+    voter: "",
+    depositor: "",
     pagination: undefined
   };
 }
 export const QueryProposalsRequest = {
   typeUrl: "/cosmos.gov.v1.QueryProposalsRequest",
   encode(message: QueryProposalsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalStatus !== undefined) {
+    if (message.proposalStatus !== 0) {
       writer.uint32(8).int32(message.proposalStatus);
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       writer.uint32(26).string(message.depositor);
     }
     if (message.pagination !== undefined) {
@@ -448,9 +446,9 @@ export const QueryProposalsRequest = {
   },
   fromPartial(object: DeepPartial<QueryProposalsRequest>): QueryProposalsRequest {
     const message = createBaseQueryProposalsRequest();
-    message.proposalStatus = object.proposalStatus ?? undefined;
-    message.voter = object.voter ?? undefined;
-    message.depositor = object.depositor ?? undefined;
+    message.proposalStatus = object.proposalStatus ?? 0;
+    message.voter = object.voter ?? "";
+    message.depositor = object.depositor ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -458,7 +456,7 @@ export const QueryProposalsRequest = {
   },
   fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : undefined,
+      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
       voter: object?.voter,
       depositor: object?.depositor,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
@@ -466,9 +464,9 @@ export const QueryProposalsRequest = {
   },
   fromSDKJSON(object: any): QueryProposalsRequestSDKType {
     return {
-      proposal_status: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : undefined,
-      voter: isSet(object.voter) ? String(object.voter) : undefined,
-      depositor: isSet(object.depositor) ? String(object.depositor) : undefined,
+      proposal_status: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -482,9 +480,9 @@ export const QueryProposalsRequest = {
   },
   fromAmino(object: QueryProposalsRequestAmino): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : undefined,
-      voter: object?.voter,
-      depositor: object?.depositor,
+      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
+      voter: object.voter,
+      depositor: object.depositor,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -641,17 +639,17 @@ export const QueryProposalsResponse = {
 };
 function createBaseQueryVoteRequest(): QueryVoteRequest {
   return {
-    proposalId: undefined,
-    voter: undefined
+    proposalId: BigInt(0),
+    voter: ""
   };
 }
 export const QueryVoteRequest = {
   typeUrl: "/cosmos.gov.v1.QueryVoteRequest",
   encode(message: QueryVoteRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     return writer;
@@ -684,9 +682,7 @@ export const QueryVoteRequest = {
   },
   toJSON(message: QueryVoteRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     return obj;
   },
@@ -695,7 +691,7 @@ export const QueryVoteRequest = {
     if (object.proposalId !== undefined && object.proposalId !== null) {
       message.proposalId = BigInt(object.proposalId.toString());
     }
-    message.voter = object.voter ?? undefined;
+    message.voter = object.voter ?? "";
     return message;
   },
   fromSDK(object: QueryVoteRequestSDKType): QueryVoteRequest {
@@ -706,8 +702,8 @@ export const QueryVoteRequest = {
   },
   fromSDKJSON(object: any): QueryVoteRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
-      voter: isSet(object.voter) ? String(object.voter) : undefined
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
+      voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
   toSDK(message: QueryVoteRequest): QueryVoteRequestSDKType {
@@ -718,8 +714,8 @@ export const QueryVoteRequest = {
   },
   fromAmino(object: QueryVoteRequestAmino): QueryVoteRequest {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
-      voter: object?.voter
+      proposalId: BigInt(object.proposal_id),
+      voter: object.voter
     };
   },
   toAmino(message: QueryVoteRequest): QueryVoteRequestAmino {
@@ -846,14 +842,14 @@ export const QueryVoteResponse = {
 };
 function createBaseQueryVotesRequest(): QueryVotesRequest {
   return {
-    proposalId: undefined,
+    proposalId: BigInt(0),
     pagination: undefined
   };
 }
 export const QueryVotesRequest = {
   typeUrl: "/cosmos.gov.v1.QueryVotesRequest",
   encode(message: QueryVotesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
     if (message.pagination !== undefined) {
@@ -889,9 +885,7 @@ export const QueryVotesRequest = {
   },
   toJSON(message: QueryVotesRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -913,7 +907,7 @@ export const QueryVotesRequest = {
   },
   fromSDKJSON(object: any): QueryVotesRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -925,7 +919,7 @@ export const QueryVotesRequest = {
   },
   fromAmino(object: QueryVotesRequestAmino): QueryVotesRequest {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
+      proposalId: BigInt(object.proposal_id),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -1080,13 +1074,13 @@ export const QueryVotesResponse = {
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {
-    paramsType: undefined
+    paramsType: ""
   };
 }
 export const QueryParamsRequest = {
   typeUrl: "/cosmos.gov.v1.QueryParamsRequest",
   encode(message: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.paramsType !== undefined) {
+    if (message.paramsType !== "") {
       writer.uint32(10).string(message.paramsType);
     }
     return writer;
@@ -1120,7 +1114,7 @@ export const QueryParamsRequest = {
   },
   fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
-    message.paramsType = object.paramsType ?? undefined;
+    message.paramsType = object.paramsType ?? "";
     return message;
   },
   fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
@@ -1130,7 +1124,7 @@ export const QueryParamsRequest = {
   },
   fromSDKJSON(object: any): QueryParamsRequestSDKType {
     return {
-      params_type: isSet(object.params_type) ? String(object.params_type) : undefined
+      params_type: isSet(object.params_type) ? String(object.params_type) : ""
     };
   },
   toSDK(message: QueryParamsRequest): QueryParamsRequestSDKType {
@@ -1140,7 +1134,7 @@ export const QueryParamsRequest = {
   },
   fromAmino(object: QueryParamsRequestAmino): QueryParamsRequest {
     return {
-      paramsType: object?.params_type
+      paramsType: object.params_type
     };
   },
   toAmino(message: QueryParamsRequest): QueryParamsRequestAmino {
@@ -1300,17 +1294,17 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryDepositRequest(): QueryDepositRequest {
   return {
-    proposalId: undefined,
-    depositor: undefined
+    proposalId: BigInt(0),
+    depositor: ""
   };
 }
 export const QueryDepositRequest = {
   typeUrl: "/cosmos.gov.v1.QueryDepositRequest",
   encode(message: QueryDepositRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
     }
     return writer;
@@ -1343,9 +1337,7 @@ export const QueryDepositRequest = {
   },
   toJSON(message: QueryDepositRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     return obj;
   },
@@ -1354,7 +1346,7 @@ export const QueryDepositRequest = {
     if (object.proposalId !== undefined && object.proposalId !== null) {
       message.proposalId = BigInt(object.proposalId.toString());
     }
-    message.depositor = object.depositor ?? undefined;
+    message.depositor = object.depositor ?? "";
     return message;
   },
   fromSDK(object: QueryDepositRequestSDKType): QueryDepositRequest {
@@ -1365,8 +1357,8 @@ export const QueryDepositRequest = {
   },
   fromSDKJSON(object: any): QueryDepositRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
-      depositor: isSet(object.depositor) ? String(object.depositor) : undefined
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
     };
   },
   toSDK(message: QueryDepositRequest): QueryDepositRequestSDKType {
@@ -1377,8 +1369,8 @@ export const QueryDepositRequest = {
   },
   fromAmino(object: QueryDepositRequestAmino): QueryDepositRequest {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
-      depositor: object?.depositor
+      proposalId: BigInt(object.proposal_id),
+      depositor: object.depositor
     };
   },
   toAmino(message: QueryDepositRequest): QueryDepositRequestAmino {
@@ -1505,14 +1497,14 @@ export const QueryDepositResponse = {
 };
 function createBaseQueryDepositsRequest(): QueryDepositsRequest {
   return {
-    proposalId: undefined,
+    proposalId: BigInt(0),
     pagination: undefined
   };
 }
 export const QueryDepositsRequest = {
   typeUrl: "/cosmos.gov.v1.QueryDepositsRequest",
   encode(message: QueryDepositsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
     if (message.pagination !== undefined) {
@@ -1548,9 +1540,7 @@ export const QueryDepositsRequest = {
   },
   toJSON(message: QueryDepositsRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -1572,7 +1562,7 @@ export const QueryDepositsRequest = {
   },
   fromSDKJSON(object: any): QueryDepositsRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined,
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1584,7 +1574,7 @@ export const QueryDepositsRequest = {
   },
   fromAmino(object: QueryDepositsRequestAmino): QueryDepositsRequest {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined,
+      proposalId: BigInt(object.proposal_id),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -1739,13 +1729,13 @@ export const QueryDepositsResponse = {
 };
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
   return {
-    proposalId: undefined
+    proposalId: BigInt(0)
   };
 }
 export const QueryTallyResultRequest = {
   typeUrl: "/cosmos.gov.v1.QueryTallyResultRequest",
   encode(message: QueryTallyResultRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
@@ -1774,9 +1764,7 @@ export const QueryTallyResultRequest = {
   },
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== undefined) {
-      obj.proposalId = message.proposalId.toString();
-    }
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
@@ -1793,7 +1781,7 @@ export const QueryTallyResultRequest = {
   },
   fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : undefined
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
@@ -1803,7 +1791,7 @@ export const QueryTallyResultRequest = {
   },
   fromAmino(object: QueryTallyResultRequestAmino): QueryTallyResultRequest {
     return {
-      proposalId: object?.proposal_id ? BigInt(object.proposal_id) : undefined
+      proposalId: BigInt(object.proposal_id)
     };
   },
   toAmino(message: QueryTallyResultRequest): QueryTallyResultRequestAmino {

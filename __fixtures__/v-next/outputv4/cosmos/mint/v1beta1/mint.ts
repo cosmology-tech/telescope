@@ -17,7 +17,7 @@ export interface MinterSDKType {
 /** Params holds parameters for the mint module. */
 export interface Params {
   /** type of coin to mint */
-  mintDenom?: string;
+  mintDenom: string;
   /** maximum annual change in inflation rate */
   inflationRateChange: string;
   /** maximum inflation rate */
@@ -27,16 +27,16 @@ export interface Params {
   /** goal of percent bonded atoms */
   goalBonded: string;
   /** expected blocks per year */
-  blocksPerYear?: bigint;
+  blocksPerYear: bigint;
 }
 /** Params holds parameters for the mint module. */
 export interface ParamsSDKType {
-  mint_denom?: string;
+  mint_denom: string;
   inflation_rate_change: string;
   inflation_max: string;
   inflation_min: string;
   goal_bonded: string;
-  blocks_per_year?: bigint;
+  blocks_per_year: bigint;
 }
 function createBaseMinter(): Minter {
   return {
@@ -147,18 +147,18 @@ export const Minter = {
 };
 function createBaseParams(): Params {
   return {
-    mintDenom: undefined,
+    mintDenom: "",
     inflationRateChange: "",
     inflationMax: "",
     inflationMin: "",
     goalBonded: "",
-    blocksPerYear: undefined
+    blocksPerYear: BigInt(0)
   };
 }
 export const Params = {
   typeUrl: "/cosmos.mint.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== undefined) {
+    if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.inflationRateChange !== "") {
@@ -173,7 +173,7 @@ export const Params = {
     if (message.goalBonded !== "") {
       writer.uint32(42).string(Decimal.fromUserInput(message.goalBonded, 18).atomics);
     }
-    if (message.blocksPerYear !== undefined) {
+    if (message.blocksPerYear !== BigInt(0)) {
       writer.uint32(48).uint64(message.blocksPerYear);
     }
     return writer;
@@ -227,14 +227,12 @@ export const Params = {
     message.inflationMax !== undefined && (obj.inflationMax = message.inflationMax);
     message.inflationMin !== undefined && (obj.inflationMin = message.inflationMin);
     message.goalBonded !== undefined && (obj.goalBonded = message.goalBonded);
-    if (message.blocksPerYear !== undefined) {
-      obj.blocksPerYear = message.blocksPerYear.toString();
-    }
+    message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.mintDenom = object.mintDenom ?? undefined;
+    message.mintDenom = object.mintDenom ?? "";
     message.inflationRateChange = object.inflationRateChange ?? "";
     message.inflationMax = object.inflationMax ?? "";
     message.inflationMin = object.inflationMin ?? "";
@@ -256,12 +254,12 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : undefined,
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
       inflation_rate_change: isSet(object.inflation_rate_change) ? String(object.inflation_rate_change) : "",
       inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
       inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
       goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
-      blocks_per_year: isSet(object.blocks_per_year) ? BigInt(object.blocks_per_year.toString()) : undefined
+      blocks_per_year: isSet(object.blocks_per_year) ? BigInt(object.blocks_per_year.toString()) : BigInt(0)
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -276,12 +274,12 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      mintDenom: object?.mint_denom,
+      mintDenom: object.mint_denom,
       inflationRateChange: object.inflation_rate_change,
       inflationMax: object.inflation_max,
       inflationMin: object.inflation_min,
       goalBonded: object.goal_bonded,
-      blocksPerYear: object?.blocks_per_year ? BigInt(object.blocks_per_year) : undefined
+      blocksPerYear: BigInt(object.blocks_per_year)
     };
   },
   toAmino(message: Params): ParamsAmino {

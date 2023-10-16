@@ -63,7 +63,7 @@ export interface Documentation {
    * A short summary of what the service does. Can only be provided by
    * plain text.
    */
-  summary?: string;
+  summary: string;
   /** The top level pages for the documentation set. */
   pages: Page[];
   /**
@@ -73,14 +73,14 @@ export interface Documentation {
    */
   rules: DocumentationRule[];
   /** The URL to the root of documentation. */
-  documentationRootUrl?: string;
+  documentationRootUrl: string;
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
    * specified service urls as well as sections that show a base that other
    * urls are relative to.
    */
-  serviceRootUrl?: string;
+  serviceRootUrl: string;
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
@@ -96,7 +96,7 @@ export interface Documentation {
    * </code></pre>
    * Note: you cannot specify both `overview` field and `pages` field.
    */
-  overview?: string;
+  overview: string;
 }
 /**
  * `Documentation` provides the information for describing a service.
@@ -156,12 +156,12 @@ export interface Documentation {
  * and is documented together with service config validation.
  */
 export interface DocumentationSDKType {
-  summary?: string;
+  summary: string;
   pages: PageSDKType[];
   rules: DocumentationRuleSDKType[];
-  documentation_root_url?: string;
-  service_root_url?: string;
-  overview?: string;
+  documentation_root_url: string;
+  service_root_url: string;
+  overview: string;
 }
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRule {
@@ -173,20 +173,20 @@ export interface DocumentationRule {
    * wildcard will match one or more components. To specify a default for all
    * applicable elements, the whole pattern "*" is used.
    */
-  selector?: string;
+  selector: string;
   /** Description of the selected API(s). */
-  description?: string;
+  description: string;
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
-  deprecationDescription?: string;
+  deprecationDescription: string;
 }
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
-  selector?: string;
-  description?: string;
-  deprecation_description?: string;
+  selector: string;
+  description: string;
+  deprecation_description: string;
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -209,12 +209,12 @@ export interface Page {
    * You can reference `Java` page using Markdown reference link syntax:
    * `[Java][Tutorial.Java]`.
    */
-  name?: string;
+  name: string;
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
-  content?: string;
+  content: string;
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
@@ -226,24 +226,24 @@ export interface Page {
  * nested documentation set structure.
  */
 export interface PageSDKType {
-  name?: string;
-  content?: string;
+  name: string;
+  content: string;
   subpages: PageSDKType[];
 }
 function createBaseDocumentation(): Documentation {
   return {
-    summary: undefined,
+    summary: "",
     pages: [],
     rules: [],
-    documentationRootUrl: undefined,
-    serviceRootUrl: undefined,
-    overview: undefined
+    documentationRootUrl: "",
+    serviceRootUrl: "",
+    overview: ""
   };
 }
 export const Documentation = {
   typeUrl: "/google.api.Documentation",
   encode(message: Documentation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.summary !== undefined) {
+    if (message.summary !== "") {
       writer.uint32(10).string(message.summary);
     }
     for (const v of message.pages) {
@@ -252,13 +252,13 @@ export const Documentation = {
     for (const v of message.rules) {
       DocumentationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.documentationRootUrl !== undefined) {
+    if (message.documentationRootUrl !== "") {
       writer.uint32(34).string(message.documentationRootUrl);
     }
-    if (message.serviceRootUrl !== undefined) {
+    if (message.serviceRootUrl !== "") {
       writer.uint32(50).string(message.serviceRootUrl);
     }
-    if (message.overview !== undefined) {
+    if (message.overview !== "") {
       writer.uint32(18).string(message.overview);
     }
     return writer;
@@ -325,12 +325,12 @@ export const Documentation = {
   },
   fromPartial(object: DeepPartial<Documentation>): Documentation {
     const message = createBaseDocumentation();
-    message.summary = object.summary ?? undefined;
+    message.summary = object.summary ?? "";
     message.pages = object.pages?.map(e => Page.fromPartial(e)) || [];
     message.rules = object.rules?.map(e => DocumentationRule.fromPartial(e)) || [];
-    message.documentationRootUrl = object.documentationRootUrl ?? undefined;
-    message.serviceRootUrl = object.serviceRootUrl ?? undefined;
-    message.overview = object.overview ?? undefined;
+    message.documentationRootUrl = object.documentationRootUrl ?? "";
+    message.serviceRootUrl = object.serviceRootUrl ?? "";
+    message.overview = object.overview ?? "";
     return message;
   },
   fromSDK(object: DocumentationSDKType): Documentation {
@@ -345,12 +345,12 @@ export const Documentation = {
   },
   fromSDKJSON(object: any): DocumentationSDKType {
     return {
-      summary: isSet(object.summary) ? String(object.summary) : undefined,
+      summary: isSet(object.summary) ? String(object.summary) : "",
       pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDKJSON(e)) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDKJSON(e)) : [],
-      documentation_root_url: isSet(object.documentation_root_url) ? String(object.documentation_root_url) : undefined,
-      service_root_url: isSet(object.service_root_url) ? String(object.service_root_url) : undefined,
-      overview: isSet(object.overview) ? String(object.overview) : undefined
+      documentation_root_url: isSet(object.documentation_root_url) ? String(object.documentation_root_url) : "",
+      service_root_url: isSet(object.service_root_url) ? String(object.service_root_url) : "",
+      overview: isSet(object.overview) ? String(object.overview) : ""
     };
   },
   toSDK(message: Documentation): DocumentationSDKType {
@@ -373,12 +373,12 @@ export const Documentation = {
   },
   fromAmino(object: DocumentationAmino): Documentation {
     return {
-      summary: object?.summary,
+      summary: object.summary,
       pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromAmino(e)) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromAmino(e)) : [],
-      documentationRootUrl: object?.documentation_root_url,
-      serviceRootUrl: object?.service_root_url,
-      overview: object?.overview
+      documentationRootUrl: object.documentation_root_url,
+      serviceRootUrl: object.service_root_url,
+      overview: object.overview
     };
   },
   toAmino(message: Documentation): DocumentationAmino {
@@ -417,21 +417,21 @@ export const Documentation = {
 };
 function createBaseDocumentationRule(): DocumentationRule {
   return {
-    selector: undefined,
-    description: undefined,
-    deprecationDescription: undefined
+    selector: "",
+    description: "",
+    deprecationDescription: ""
   };
 }
 export const DocumentationRule = {
   typeUrl: "/google.api.DocumentationRule",
   encode(message: DocumentationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.deprecationDescription !== undefined) {
+    if (message.deprecationDescription !== "") {
       writer.uint32(26).string(message.deprecationDescription);
     }
     return writer;
@@ -475,9 +475,9 @@ export const DocumentationRule = {
   },
   fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
     const message = createBaseDocumentationRule();
-    message.selector = object.selector ?? undefined;
-    message.description = object.description ?? undefined;
-    message.deprecationDescription = object.deprecationDescription ?? undefined;
+    message.selector = object.selector ?? "";
+    message.description = object.description ?? "";
+    message.deprecationDescription = object.deprecationDescription ?? "";
     return message;
   },
   fromSDK(object: DocumentationRuleSDKType): DocumentationRule {
@@ -489,9 +489,9 @@ export const DocumentationRule = {
   },
   fromSDKJSON(object: any): DocumentationRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      deprecation_description: isSet(object.deprecation_description) ? String(object.deprecation_description) : undefined
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      deprecation_description: isSet(object.deprecation_description) ? String(object.deprecation_description) : ""
     };
   },
   toSDK(message: DocumentationRule): DocumentationRuleSDKType {
@@ -503,9 +503,9 @@ export const DocumentationRule = {
   },
   fromAmino(object: DocumentationRuleAmino): DocumentationRule {
     return {
-      selector: object?.selector,
-      description: object?.description,
-      deprecationDescription: object?.deprecation_description
+      selector: object.selector,
+      description: object.description,
+      deprecationDescription: object.deprecation_description
     };
   },
   toAmino(message: DocumentationRule): DocumentationRuleAmino {
@@ -533,18 +533,18 @@ export const DocumentationRule = {
 };
 function createBasePage(): Page {
   return {
-    name: undefined,
-    content: undefined,
+    name: "",
+    content: "",
     subpages: []
   };
 }
 export const Page = {
   typeUrl: "/google.api.Page",
   encode(message: Page, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.content !== undefined) {
+    if (message.content !== "") {
       writer.uint32(18).string(message.content);
     }
     for (const v of message.subpages) {
@@ -595,8 +595,8 @@ export const Page = {
   },
   fromPartial(object: DeepPartial<Page>): Page {
     const message = createBasePage();
-    message.name = object.name ?? undefined;
-    message.content = object.content ?? undefined;
+    message.name = object.name ?? "";
+    message.content = object.content ?? "";
     message.subpages = object.subpages?.map(e => Page.fromPartial(e)) || [];
     return message;
   },
@@ -609,8 +609,8 @@ export const Page = {
   },
   fromSDKJSON(object: any): PageSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      content: isSet(object.content) ? String(object.content) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      content: isSet(object.content) ? String(object.content) : "",
       subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDKJSON(e)) : []
     };
   },
@@ -627,8 +627,8 @@ export const Page = {
   },
   fromAmino(object: PageAmino): Page {
     return {
-      name: object?.name,
-      content: object?.content,
+      name: object.name,
+      content: object.content,
       subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
     };
   },

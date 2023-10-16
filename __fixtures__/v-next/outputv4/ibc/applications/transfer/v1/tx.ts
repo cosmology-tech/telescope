@@ -10,15 +10,15 @@ export const protobufPackage = "ibc.applications.transfer.v1";
  */
 export interface MsgTransfer {
   /** the port on which the packet will be sent */
-  sourcePort?: string;
+  sourcePort: string;
   /** the channel by which the packet will be sent */
-  sourceChannel?: string;
+  sourceChannel: string;
   /** the tokens to be transferred */
   token: Coin;
   /** the sender address */
-  sender?: string;
+  sender: string;
   /** the recipient address on the destination chain */
-  receiver?: string;
+  receiver: string;
   /**
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
@@ -28,7 +28,7 @@ export interface MsgTransfer {
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
-  timeoutTimestamp?: bigint;
+  timeoutTimestamp: bigint;
 }
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -36,13 +36,13 @@ export interface MsgTransfer {
  * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface MsgTransferSDKType {
-  source_port?: string;
-  source_channel?: string;
+  source_port: string;
+  source_channel: string;
   token: CoinSDKType;
-  sender?: string;
-  receiver?: string;
+  sender: string;
+  receiver: string;
   timeout_height: HeightSDKType;
-  timeout_timestamp?: bigint;
+  timeout_timestamp: bigint;
 }
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
@@ -50,37 +50,37 @@ export interface MsgTransferResponse {}
 export interface MsgTransferResponseSDKType {}
 function createBaseMsgTransfer(): MsgTransfer {
   return {
-    sourcePort: undefined,
-    sourceChannel: undefined,
+    sourcePort: "",
+    sourceChannel: "",
     token: Coin.fromPartial({}),
-    sender: undefined,
-    receiver: undefined,
+    sender: "",
+    receiver: "",
     timeoutHeight: Height.fromPartial({}),
-    timeoutTimestamp: undefined
+    timeoutTimestamp: BigInt(0)
   };
 }
 export const MsgTransfer = {
   typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
   encode(message: MsgTransfer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sourcePort !== undefined) {
+    if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
     }
-    if (message.sourceChannel !== undefined) {
+    if (message.sourceChannel !== "") {
       writer.uint32(18).string(message.sourceChannel);
     }
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(26).fork()).ldelim();
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       writer.uint32(34).string(message.sender);
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       writer.uint32(42).string(message.receiver);
     }
     if (message.timeoutHeight !== undefined) {
       Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
     }
-    if (message.timeoutTimestamp !== undefined) {
+    if (message.timeoutTimestamp !== BigInt(0)) {
       writer.uint32(56).uint64(message.timeoutTimestamp);
     }
     return writer;
@@ -139,20 +139,18 @@ export const MsgTransfer = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    if (message.timeoutTimestamp !== undefined) {
-      obj.timeoutTimestamp = message.timeoutTimestamp.toString();
-    }
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
     const message = createBaseMsgTransfer();
-    message.sourcePort = object.sourcePort ?? undefined;
-    message.sourceChannel = object.sourceChannel ?? undefined;
+    message.sourcePort = object.sourcePort ?? "";
+    message.sourceChannel = object.sourceChannel ?? "";
     if (object.token !== undefined && object.token !== null) {
       message.token = Coin.fromPartial(object.token);
     }
-    message.sender = object.sender ?? undefined;
-    message.receiver = object.receiver ?? undefined;
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
     if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
       message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
     }
@@ -174,13 +172,13 @@ export const MsgTransfer = {
   },
   fromSDKJSON(object: any): MsgTransferSDKType {
     return {
-      source_port: isSet(object.source_port) ? String(object.source_port) : undefined,
-      source_channel: isSet(object.source_channel) ? String(object.source_channel) : undefined,
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
       token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : undefined,
-      receiver: isSet(object.receiver) ? String(object.receiver) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : undefined
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgTransfer): MsgTransferSDKType {
@@ -196,13 +194,13 @@ export const MsgTransfer = {
   },
   fromAmino(object: MsgTransferAmino): MsgTransfer {
     return {
-      sourcePort: object?.source_port,
-      sourceChannel: object?.source_channel,
+      sourcePort: object.source_port,
+      sourceChannel: object.source_channel,
       token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      sender: object?.sender,
-      receiver: object?.receiver,
+      sender: object.sender,
+      receiver: object.receiver,
       timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: object?.timeout_timestamp ? BigInt(object.timeout_timestamp) : undefined
+      timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },
   toAmino(message: MsgTransfer): MsgTransferAmino {

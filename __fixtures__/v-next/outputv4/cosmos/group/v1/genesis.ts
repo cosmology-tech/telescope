@@ -8,7 +8,7 @@ export interface GenesisState {
    * group_seq is the group table orm.Sequence,
    * it is used to get the next group ID.
    */
-  groupSeq?: bigint;
+  groupSeq: bigint;
   /** groups is the list of groups info. */
   groups: GroupInfo[];
   /** group_members is the list of groups members. */
@@ -17,14 +17,14 @@ export interface GenesisState {
    * group_policy_seq is the group policy table orm.Sequence,
    * it is used to generate the next group policy account address.
    */
-  groupPolicySeq?: bigint;
+  groupPolicySeq: bigint;
   /** group_policies is the list of group policies info. */
   groupPolicies: GroupPolicyInfo[];
   /**
    * proposal_seq is the proposal table orm.Sequence,
    * it is used to get the next proposal ID.
    */
-  proposalSeq?: bigint;
+  proposalSeq: bigint;
   /** proposals is the list of proposals. */
   proposals: Proposal[];
   /** votes is the list of votes. */
@@ -32,23 +32,23 @@ export interface GenesisState {
 }
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisStateSDKType {
-  group_seq?: bigint;
+  group_seq: bigint;
   groups: GroupInfoSDKType[];
   group_members: GroupMemberSDKType[];
-  group_policy_seq?: bigint;
+  group_policy_seq: bigint;
   group_policies: GroupPolicyInfoSDKType[];
-  proposal_seq?: bigint;
+  proposal_seq: bigint;
   proposals: ProposalSDKType[];
   votes: VoteSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    groupSeq: undefined,
+    groupSeq: BigInt(0),
     groups: [],
     groupMembers: [],
-    groupPolicySeq: undefined,
+    groupPolicySeq: BigInt(0),
     groupPolicies: [],
-    proposalSeq: undefined,
+    proposalSeq: BigInt(0),
     proposals: [],
     votes: []
   };
@@ -56,7 +56,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/cosmos.group.v1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.groupSeq !== undefined) {
+    if (message.groupSeq !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupSeq);
     }
     for (const v of message.groups) {
@@ -65,13 +65,13 @@ export const GenesisState = {
     for (const v of message.groupMembers) {
       GroupMember.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.groupPolicySeq !== undefined) {
+    if (message.groupPolicySeq !== BigInt(0)) {
       writer.uint32(32).uint64(message.groupPolicySeq);
     }
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-    if (message.proposalSeq !== undefined) {
+    if (message.proposalSeq !== BigInt(0)) {
       writer.uint32(48).uint64(message.proposalSeq);
     }
     for (const v of message.proposals) {
@@ -134,9 +134,7 @@ export const GenesisState = {
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.groupSeq !== undefined) {
-      obj.groupSeq = message.groupSeq.toString();
-    }
+    message.groupSeq !== undefined && (obj.groupSeq = (message.groupSeq || BigInt(0)).toString());
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
     } else {
@@ -147,17 +145,13 @@ export const GenesisState = {
     } else {
       obj.groupMembers = [];
     }
-    if (message.groupPolicySeq !== undefined) {
-      obj.groupPolicySeq = message.groupPolicySeq.toString();
-    }
+    message.groupPolicySeq !== undefined && (obj.groupPolicySeq = (message.groupPolicySeq || BigInt(0)).toString());
     if (message.groupPolicies) {
       obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
     } else {
       obj.groupPolicies = [];
     }
-    if (message.proposalSeq !== undefined) {
-      obj.proposalSeq = message.proposalSeq.toString();
-    }
+    message.proposalSeq !== undefined && (obj.proposalSeq = (message.proposalSeq || BigInt(0)).toString());
     if (message.proposals) {
       obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
     } else {
@@ -202,12 +196,12 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      group_seq: isSet(object.group_seq) ? BigInt(object.group_seq.toString()) : undefined,
+      group_seq: isSet(object.group_seq) ? BigInt(object.group_seq.toString()) : BigInt(0),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDKJSON(e)) : [],
       group_members: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromSDKJSON(e)) : [],
-      group_policy_seq: isSet(object.group_policy_seq) ? BigInt(object.group_policy_seq.toString()) : undefined,
+      group_policy_seq: isSet(object.group_policy_seq) ? BigInt(object.group_policy_seq.toString()) : BigInt(0),
       group_policies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDKJSON(e)) : [],
-      proposal_seq: isSet(object.proposal_seq) ? BigInt(object.proposal_seq.toString()) : undefined,
+      proposal_seq: isSet(object.proposal_seq) ? BigInt(object.proposal_seq.toString()) : BigInt(0),
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDKJSON(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : []
     };
@@ -246,12 +240,12 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      groupSeq: object?.group_seq ? BigInt(object.group_seq) : undefined,
+      groupSeq: BigInt(object.group_seq),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
       groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromAmino(e)) : [],
-      groupPolicySeq: object?.group_policy_seq ? BigInt(object.group_policy_seq) : undefined,
+      groupPolicySeq: BigInt(object.group_policy_seq),
       groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
-      proposalSeq: object?.proposal_seq ? BigInt(object.proposal_seq) : undefined,
+      proposalSeq: BigInt(object.proposal_seq),
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : []
     };

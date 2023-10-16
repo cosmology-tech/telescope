@@ -5,17 +5,17 @@ export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
   bidMinDeposit: Coin;
-  orderMaxBids?: number;
+  orderMaxBids: number;
 }
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
   bid_min_deposit: CoinSDKType;
-  order_max_bids?: number;
+  order_max_bids: number;
 }
 function createBaseParams(): Params {
   return {
     bidMinDeposit: Coin.fromPartial({}),
-    orderMaxBids: undefined
+    orderMaxBids: 0
   };
 }
 export const Params = {
@@ -24,7 +24,7 @@ export const Params = {
     if (message.bidMinDeposit !== undefined) {
       Coin.encode(message.bidMinDeposit, writer.uint32(10).fork()).ldelim();
     }
-    if (message.orderMaxBids !== undefined) {
+    if (message.orderMaxBids !== 0) {
       writer.uint32(16).uint32(message.orderMaxBids);
     }
     return writer;
@@ -66,7 +66,7 @@ export const Params = {
     if (object.bidMinDeposit !== undefined && object.bidMinDeposit !== null) {
       message.bidMinDeposit = Coin.fromPartial(object.bidMinDeposit);
     }
-    message.orderMaxBids = object.orderMaxBids ?? undefined;
+    message.orderMaxBids = object.orderMaxBids ?? 0;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -78,7 +78,7 @@ export const Params = {
   fromSDKJSON(object: any): ParamsSDKType {
     return {
       bid_min_deposit: isSet(object.bid_min_deposit) ? Coin.fromSDKJSON(object.bid_min_deposit) : undefined,
-      order_max_bids: isSet(object.order_max_bids) ? Number(object.order_max_bids) : undefined
+      order_max_bids: isSet(object.order_max_bids) ? Number(object.order_max_bids) : 0
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -90,7 +90,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
-      orderMaxBids: object?.order_max_bids
+      orderMaxBids: object.order_max_bids
     };
   },
   toAmino(message: Params): ParamsAmino {

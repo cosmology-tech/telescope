@@ -5,12 +5,12 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {
-  pruneEpochIdentifier?: string;
+  pruneEpochIdentifier: string;
   recordHistoryKeepPeriod: Duration;
 }
 /** Params holds parameters for the twap module */
 export interface ParamsSDKType {
-  prune_epoch_identifier?: string;
+  prune_epoch_identifier: string;
   record_history_keep_period: DurationSDKType;
 }
 /** GenesisState defines the twap module's genesis state. */
@@ -27,14 +27,14 @@ export interface GenesisStateSDKType {
 }
 function createBaseParams(): Params {
   return {
-    pruneEpochIdentifier: undefined,
+    pruneEpochIdentifier: "",
     recordHistoryKeepPeriod: Duration.fromPartial({})
   };
 }
 export const Params = {
   typeUrl: "/osmosis.twap.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.pruneEpochIdentifier !== undefined) {
+    if (message.pruneEpochIdentifier !== "") {
       writer.uint32(10).string(message.pruneEpochIdentifier);
     }
     if (message.recordHistoryKeepPeriod !== undefined) {
@@ -76,7 +76,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.pruneEpochIdentifier = object.pruneEpochIdentifier ?? undefined;
+    message.pruneEpochIdentifier = object.pruneEpochIdentifier ?? "";
     if (object.recordHistoryKeepPeriod !== undefined && object.recordHistoryKeepPeriod !== null) {
       message.recordHistoryKeepPeriod = Duration.fromPartial(object.recordHistoryKeepPeriod);
     }
@@ -90,7 +90,7 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      prune_epoch_identifier: isSet(object.prune_epoch_identifier) ? String(object.prune_epoch_identifier) : undefined,
+      prune_epoch_identifier: isSet(object.prune_epoch_identifier) ? String(object.prune_epoch_identifier) : "",
       record_history_keep_period: isSet(object.record_history_keep_period) ? Duration.fromSDKJSON(object.record_history_keep_period) : undefined
     };
   },
@@ -102,7 +102,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      pruneEpochIdentifier: object?.prune_epoch_identifier,
+      pruneEpochIdentifier: object.prune_epoch_identifier,
       recordHistoryKeepPeriod: object?.record_history_keep_period ? Duration.fromAmino(object.record_history_keep_period) : undefined
     };
   },

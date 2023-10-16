@@ -7,8 +7,8 @@ export const protobufPackage = "tendermint.version";
  * updated in ResponseEndBlock.
  */
 export interface App {
-  protocol?: bigint;
-  software?: string;
+  protocol: bigint;
+  software: string;
 }
 /**
  * App includes the protocol and software version for the application.
@@ -16,8 +16,8 @@ export interface App {
  * updated in ResponseEndBlock.
  */
 export interface AppSDKType {
-  protocol?: bigint;
-  software?: string;
+  protocol: bigint;
+  software: string;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
@@ -25,8 +25,8 @@ export interface AppSDKType {
  * state transition machine.
  */
 export interface Consensus {
-  block?: bigint;
-  app?: bigint;
+  block: bigint;
+  app: bigint;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
@@ -34,22 +34,22 @@ export interface Consensus {
  * state transition machine.
  */
 export interface ConsensusSDKType {
-  block?: bigint;
-  app?: bigint;
+  block: bigint;
+  app: bigint;
 }
 function createBaseApp(): App {
   return {
-    protocol: undefined,
-    software: undefined
+    protocol: BigInt(0),
+    software: ""
   };
 }
 export const App = {
   typeUrl: "/tendermint.version.App",
   encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.protocol !== undefined) {
+    if (message.protocol !== BigInt(0)) {
       writer.uint32(8).uint64(message.protocol);
     }
-    if (message.software !== undefined) {
+    if (message.software !== "") {
       writer.uint32(18).string(message.software);
     }
     return writer;
@@ -82,9 +82,7 @@ export const App = {
   },
   toJSON(message: App): unknown {
     const obj: any = {};
-    if (message.protocol !== undefined) {
-      obj.protocol = message.protocol.toString();
-    }
+    message.protocol !== undefined && (obj.protocol = (message.protocol || BigInt(0)).toString());
     message.software !== undefined && (obj.software = message.software);
     return obj;
   },
@@ -93,7 +91,7 @@ export const App = {
     if (object.protocol !== undefined && object.protocol !== null) {
       message.protocol = BigInt(object.protocol.toString());
     }
-    message.software = object.software ?? undefined;
+    message.software = object.software ?? "";
     return message;
   },
   fromSDK(object: AppSDKType): App {
@@ -104,8 +102,8 @@ export const App = {
   },
   fromSDKJSON(object: any): AppSDKType {
     return {
-      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : undefined,
-      software: isSet(object.software) ? String(object.software) : undefined
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
+      software: isSet(object.software) ? String(object.software) : ""
     };
   },
   toSDK(message: App): AppSDKType {
@@ -116,8 +114,8 @@ export const App = {
   },
   fromAmino(object: AppAmino): App {
     return {
-      protocol: object?.protocol ? BigInt(object.protocol) : undefined,
-      software: object?.software
+      protocol: BigInt(object.protocol),
+      software: object.software
     };
   },
   toAmino(message: App): AppAmino {
@@ -144,17 +142,17 @@ export const App = {
 };
 function createBaseConsensus(): Consensus {
   return {
-    block: undefined,
-    app: undefined
+    block: BigInt(0),
+    app: BigInt(0)
   };
 }
 export const Consensus = {
   typeUrl: "/tendermint.version.Consensus",
   encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.block !== undefined) {
+    if (message.block !== BigInt(0)) {
       writer.uint32(8).uint64(message.block);
     }
-    if (message.app !== undefined) {
+    if (message.app !== BigInt(0)) {
       writer.uint32(16).uint64(message.app);
     }
     return writer;
@@ -187,12 +185,8 @@ export const Consensus = {
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};
-    if (message.block !== undefined) {
-      obj.block = message.block.toString();
-    }
-    if (message.app !== undefined) {
-      obj.app = message.app.toString();
-    }
+    message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
+    message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
@@ -213,8 +207,8 @@ export const Consensus = {
   },
   fromSDKJSON(object: any): ConsensusSDKType {
     return {
-      block: isSet(object.block) ? BigInt(object.block.toString()) : undefined,
-      app: isSet(object.app) ? BigInt(object.app.toString()) : undefined
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toSDK(message: Consensus): ConsensusSDKType {
@@ -225,8 +219,8 @@ export const Consensus = {
   },
   fromAmino(object: ConsensusAmino): Consensus {
     return {
-      block: object?.block ? BigInt(object.block) : undefined,
-      app: object?.app ? BigInt(object.app) : undefined
+      block: BigInt(object.block),
+      app: BigInt(object.app)
     };
   },
   toAmino(message: Consensus): ConsensusAmino {

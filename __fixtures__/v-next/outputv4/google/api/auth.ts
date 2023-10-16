@@ -72,14 +72,14 @@ export interface AuthenticationRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector?: string;
+  selector: string;
   /** The requirements for OAuth credentials. */
   oauth?: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
-  allowWithoutCredential?: boolean;
+  allowWithoutCredential: boolean;
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
@@ -95,9 +95,9 @@ export interface AuthenticationRule {
  * ignored.
  */
 export interface AuthenticationRuleSDKType {
-  selector?: string;
+  selector: string;
   oauth?: OAuthRequirementsSDKType;
-  allow_without_credential?: boolean;
+  allow_without_credential: boolean;
   requirements: AuthRequirementSDKType[];
 }
 /** Specifies a location to extract JWT from an API request. */
@@ -116,13 +116,13 @@ export interface JwtLocation {
    * For example, for "Authorization: Bearer {JWT}",
    * value_prefix="Bearer " with a space at the end.
    */
-  valuePrefix?: string;
+  valuePrefix: string;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
   header?: string;
   query?: string;
-  value_prefix?: string;
+  value_prefix: string;
 }
 /**
  * Configuration for an authentication provider, including support for
@@ -136,7 +136,7 @@ export interface AuthProvider {
    * 
    * Example: "bookstore_auth".
    */
-  id?: string;
+  id: string;
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -145,7 +145,7 @@ export interface AuthProvider {
    * Example: https://securetoken.google.com
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
-  issuer?: string;
+  issuer: string;
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -160,7 +160,7 @@ export interface AuthProvider {
    * 
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
-  jwksUri?: string;
+  jwksUri: string;
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -180,12 +180,12 @@ export interface AuthProvider {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences?: string;
+  audiences: string;
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
-  authorizationUrl?: string;
+  authorizationUrl: string;
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -213,11 +213,11 @@ export interface AuthProvider {
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
 export interface AuthProviderSDKType {
-  id?: string;
-  issuer?: string;
-  jwks_uri?: string;
-  audiences?: string;
-  authorization_url?: string;
+  id: string;
+  issuer: string;
+  jwks_uri: string;
+  audiences: string;
+  authorization_url: string;
   jwt_locations: JwtLocationSDKType[];
 }
 /**
@@ -250,7 +250,7 @@ export interface OAuthRequirements {
    *      canonical_scopes: https://www.googleapis.com/auth/calendar,
    *                        https://www.googleapis.com/auth/calendar.read
    */
-  canonicalScopes?: string;
+  canonicalScopes: string;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -273,7 +273,7 @@ export interface OAuthRequirements {
  * due to the backend requiring additional scopes or permissions.
  */
 export interface OAuthRequirementsSDKType {
-  canonical_scopes?: string;
+  canonical_scopes: string;
 }
 /**
  * User-defined authentication requirements, including support for
@@ -288,7 +288,7 @@ export interface AuthRequirement {
    * 
    *     provider_id: bookstore_auth
    */
-  providerId?: string;
+  providerId: string;
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -307,7 +307,7 @@ export interface AuthRequirement {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences?: string;
+  audiences: string;
 }
 /**
  * User-defined authentication requirements, including support for
@@ -315,8 +315,8 @@ export interface AuthRequirement {
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
 export interface AuthRequirementSDKType {
-  provider_id?: string;
-  audiences?: string;
+  provider_id: string;
+  audiences: string;
 }
 function createBaseAuthentication(): Authentication {
   return {
@@ -445,22 +445,22 @@ export const Authentication = {
 };
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
-    selector: undefined,
+    selector: "",
     oauth: undefined,
-    allowWithoutCredential: undefined,
+    allowWithoutCredential: false,
     requirements: []
   };
 }
 export const AuthenticationRule = {
   typeUrl: "/google.api.AuthenticationRule",
   encode(message: AuthenticationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
     if (message.oauth !== undefined) {
       OAuthRequirements.encode(message.oauth, writer.uint32(18).fork()).ldelim();
     }
-    if (message.allowWithoutCredential !== undefined) {
+    if (message.allowWithoutCredential === true) {
       writer.uint32(40).bool(message.allowWithoutCredential);
     }
     for (const v of message.requirements) {
@@ -516,11 +516,11 @@ export const AuthenticationRule = {
   },
   fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
     const message = createBaseAuthenticationRule();
-    message.selector = object.selector ?? undefined;
+    message.selector = object.selector ?? "";
     if (object.oauth !== undefined && object.oauth !== null) {
       message.oauth = OAuthRequirements.fromPartial(object.oauth);
     }
-    message.allowWithoutCredential = object.allowWithoutCredential ?? undefined;
+    message.allowWithoutCredential = object.allowWithoutCredential ?? false;
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;
   },
@@ -534,9 +534,9 @@ export const AuthenticationRule = {
   },
   fromSDKJSON(object: any): AuthenticationRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : undefined,
+      selector: isSet(object.selector) ? String(object.selector) : "",
       oauth: isSet(object.oauth) ? OAuthRequirements.fromSDKJSON(object.oauth) : undefined,
-      allow_without_credential: isSet(object.allow_without_credential) ? Boolean(object.allow_without_credential) : undefined,
+      allow_without_credential: isSet(object.allow_without_credential) ? Boolean(object.allow_without_credential) : false,
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDKJSON(e)) : []
     };
   },
@@ -554,9 +554,9 @@ export const AuthenticationRule = {
   },
   fromAmino(object: AuthenticationRuleAmino): AuthenticationRule {
     return {
-      selector: object?.selector,
+      selector: object.selector,
       oauth: object?.oauth ? OAuthRequirements.fromAmino(object.oauth) : undefined,
-      allowWithoutCredential: object?.allow_without_credential,
+      allowWithoutCredential: object.allow_without_credential,
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromAmino(e)) : []
     };
   },
@@ -592,7 +592,7 @@ function createBaseJwtLocation(): JwtLocation {
   return {
     header: undefined,
     query: undefined,
-    valuePrefix: undefined
+    valuePrefix: ""
   };
 }
 export const JwtLocation = {
@@ -604,7 +604,7 @@ export const JwtLocation = {
     if (message.query !== undefined) {
       writer.uint32(18).string(message.query);
     }
-    if (message.valuePrefix !== undefined) {
+    if (message.valuePrefix !== "") {
       writer.uint32(26).string(message.valuePrefix);
     }
     return writer;
@@ -650,7 +650,7 @@ export const JwtLocation = {
     const message = createBaseJwtLocation();
     message.header = object.header ?? undefined;
     message.query = object.query ?? undefined;
-    message.valuePrefix = object.valuePrefix ?? undefined;
+    message.valuePrefix = object.valuePrefix ?? "";
     return message;
   },
   fromSDK(object: JwtLocationSDKType): JwtLocation {
@@ -664,7 +664,7 @@ export const JwtLocation = {
     return {
       header: isSet(object.header) ? String(object.header) : undefined,
       query: isSet(object.query) ? String(object.query) : undefined,
-      value_prefix: isSet(object.value_prefix) ? String(object.value_prefix) : undefined
+      value_prefix: isSet(object.value_prefix) ? String(object.value_prefix) : ""
     };
   },
   toSDK(message: JwtLocation): JwtLocationSDKType {
@@ -678,7 +678,7 @@ export const JwtLocation = {
     return {
       header: object?.header,
       query: object?.query,
-      valuePrefix: object?.value_prefix
+      valuePrefix: object.value_prefix
     };
   },
   toAmino(message: JwtLocation): JwtLocationAmino {
@@ -706,30 +706,30 @@ export const JwtLocation = {
 };
 function createBaseAuthProvider(): AuthProvider {
   return {
-    id: undefined,
-    issuer: undefined,
-    jwksUri: undefined,
-    audiences: undefined,
-    authorizationUrl: undefined,
+    id: "",
+    issuer: "",
+    jwksUri: "",
+    audiences: "",
+    authorizationUrl: "",
     jwtLocations: []
   };
 }
 export const AuthProvider = {
   typeUrl: "/google.api.AuthProvider",
   encode(message: AuthProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-    if (message.issuer !== undefined) {
+    if (message.issuer !== "") {
       writer.uint32(18).string(message.issuer);
     }
-    if (message.jwksUri !== undefined) {
+    if (message.jwksUri !== "") {
       writer.uint32(26).string(message.jwksUri);
     }
-    if (message.audiences !== undefined) {
+    if (message.audiences !== "") {
       writer.uint32(34).string(message.audiences);
     }
-    if (message.authorizationUrl !== undefined) {
+    if (message.authorizationUrl !== "") {
       writer.uint32(42).string(message.authorizationUrl);
     }
     for (const v of message.jwtLocations) {
@@ -795,11 +795,11 @@ export const AuthProvider = {
   },
   fromPartial(object: DeepPartial<AuthProvider>): AuthProvider {
     const message = createBaseAuthProvider();
-    message.id = object.id ?? undefined;
-    message.issuer = object.issuer ?? undefined;
-    message.jwksUri = object.jwksUri ?? undefined;
-    message.audiences = object.audiences ?? undefined;
-    message.authorizationUrl = object.authorizationUrl ?? undefined;
+    message.id = object.id ?? "";
+    message.issuer = object.issuer ?? "";
+    message.jwksUri = object.jwksUri ?? "";
+    message.audiences = object.audiences ?? "";
+    message.authorizationUrl = object.authorizationUrl ?? "";
     message.jwtLocations = object.jwtLocations?.map(e => JwtLocation.fromPartial(e)) || [];
     return message;
   },
@@ -815,11 +815,11 @@ export const AuthProvider = {
   },
   fromSDKJSON(object: any): AuthProviderSDKType {
     return {
-      id: isSet(object.id) ? String(object.id) : undefined,
-      issuer: isSet(object.issuer) ? String(object.issuer) : undefined,
-      jwks_uri: isSet(object.jwks_uri) ? String(object.jwks_uri) : undefined,
-      audiences: isSet(object.audiences) ? String(object.audiences) : undefined,
-      authorization_url: isSet(object.authorization_url) ? String(object.authorization_url) : undefined,
+      id: isSet(object.id) ? String(object.id) : "",
+      issuer: isSet(object.issuer) ? String(object.issuer) : "",
+      jwks_uri: isSet(object.jwks_uri) ? String(object.jwks_uri) : "",
+      audiences: isSet(object.audiences) ? String(object.audiences) : "",
+      authorization_url: isSet(object.authorization_url) ? String(object.authorization_url) : "",
       jwt_locations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDKJSON(e)) : []
     };
   },
@@ -839,11 +839,11 @@ export const AuthProvider = {
   },
   fromAmino(object: AuthProviderAmino): AuthProvider {
     return {
-      id: object?.id,
-      issuer: object?.issuer,
-      jwksUri: object?.jwks_uri,
-      audiences: object?.audiences,
-      authorizationUrl: object?.authorization_url,
+      id: object.id,
+      issuer: object.issuer,
+      jwksUri: object.jwks_uri,
+      audiences: object.audiences,
+      authorizationUrl: object.authorization_url,
       jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromAmino(e)) : []
     };
   },
@@ -879,13 +879,13 @@ export const AuthProvider = {
 };
 function createBaseOAuthRequirements(): OAuthRequirements {
   return {
-    canonicalScopes: undefined
+    canonicalScopes: ""
   };
 }
 export const OAuthRequirements = {
   typeUrl: "/google.api.OAuthRequirements",
   encode(message: OAuthRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.canonicalScopes !== undefined) {
+    if (message.canonicalScopes !== "") {
       writer.uint32(10).string(message.canonicalScopes);
     }
     return writer;
@@ -919,7 +919,7 @@ export const OAuthRequirements = {
   },
   fromPartial(object: DeepPartial<OAuthRequirements>): OAuthRequirements {
     const message = createBaseOAuthRequirements();
-    message.canonicalScopes = object.canonicalScopes ?? undefined;
+    message.canonicalScopes = object.canonicalScopes ?? "";
     return message;
   },
   fromSDK(object: OAuthRequirementsSDKType): OAuthRequirements {
@@ -929,7 +929,7 @@ export const OAuthRequirements = {
   },
   fromSDKJSON(object: any): OAuthRequirementsSDKType {
     return {
-      canonical_scopes: isSet(object.canonical_scopes) ? String(object.canonical_scopes) : undefined
+      canonical_scopes: isSet(object.canonical_scopes) ? String(object.canonical_scopes) : ""
     };
   },
   toSDK(message: OAuthRequirements): OAuthRequirementsSDKType {
@@ -939,7 +939,7 @@ export const OAuthRequirements = {
   },
   fromAmino(object: OAuthRequirementsAmino): OAuthRequirements {
     return {
-      canonicalScopes: object?.canonical_scopes
+      canonicalScopes: object.canonical_scopes
     };
   },
   toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
@@ -965,17 +965,17 @@ export const OAuthRequirements = {
 };
 function createBaseAuthRequirement(): AuthRequirement {
   return {
-    providerId: undefined,
-    audiences: undefined
+    providerId: "",
+    audiences: ""
   };
 }
 export const AuthRequirement = {
   typeUrl: "/google.api.AuthRequirement",
   encode(message: AuthRequirement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.providerId !== undefined) {
+    if (message.providerId !== "") {
       writer.uint32(10).string(message.providerId);
     }
-    if (message.audiences !== undefined) {
+    if (message.audiences !== "") {
       writer.uint32(18).string(message.audiences);
     }
     return writer;
@@ -1014,8 +1014,8 @@ export const AuthRequirement = {
   },
   fromPartial(object: DeepPartial<AuthRequirement>): AuthRequirement {
     const message = createBaseAuthRequirement();
-    message.providerId = object.providerId ?? undefined;
-    message.audiences = object.audiences ?? undefined;
+    message.providerId = object.providerId ?? "";
+    message.audiences = object.audiences ?? "";
     return message;
   },
   fromSDK(object: AuthRequirementSDKType): AuthRequirement {
@@ -1026,8 +1026,8 @@ export const AuthRequirement = {
   },
   fromSDKJSON(object: any): AuthRequirementSDKType {
     return {
-      provider_id: isSet(object.provider_id) ? String(object.provider_id) : undefined,
-      audiences: isSet(object.audiences) ? String(object.audiences) : undefined
+      provider_id: isSet(object.provider_id) ? String(object.provider_id) : "",
+      audiences: isSet(object.audiences) ? String(object.audiences) : ""
     };
   },
   toSDK(message: AuthRequirement): AuthRequirementSDKType {
@@ -1038,8 +1038,8 @@ export const AuthRequirement = {
   },
   fromAmino(object: AuthRequirementAmino): AuthRequirement {
     return {
-      providerId: object?.provider_id,
-      audiences: object?.audiences
+      providerId: object.provider_id,
+      audiences: object.audiences
     };
   },
   toAmino(message: AuthRequirement): AuthRequirementAmino {

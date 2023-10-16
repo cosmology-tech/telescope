@@ -36,14 +36,14 @@ export interface ExplainSDKType {
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
-  id?: bigint;
+  id: bigint;
   /** Index of the value in the values list. */
-  valueIndex?: number;
+  valueIndex: number;
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
-  id?: bigint;
-  value_index?: number;
+  id: bigint;
+  value_index: number;
 }
 function createBaseExplain(): Explain {
   return {
@@ -172,17 +172,17 @@ export const Explain = {
 };
 function createBaseExplain_ExprStep(): Explain_ExprStep {
   return {
-    id: undefined,
-    valueIndex: undefined
+    id: BigInt(0),
+    valueIndex: 0
   };
 }
 export const Explain_ExprStep = {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep",
   encode(message: Explain_ExprStep, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).int64(message.id);
     }
-    if (message.valueIndex !== undefined) {
+    if (message.valueIndex !== 0) {
       writer.uint32(16).int32(message.valueIndex);
     }
     return writer;
@@ -215,9 +215,7 @@ export const Explain_ExprStep = {
   },
   toJSON(message: Explain_ExprStep): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
-      obj.id = message.id.toString();
-    }
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));
     return obj;
   },
@@ -226,7 +224,7 @@ export const Explain_ExprStep = {
     if (object.id !== undefined && object.id !== null) {
       message.id = BigInt(object.id.toString());
     }
-    message.valueIndex = object.valueIndex ?? undefined;
+    message.valueIndex = object.valueIndex ?? 0;
     return message;
   },
   fromSDK(object: Explain_ExprStepSDKType): Explain_ExprStep {
@@ -237,8 +235,8 @@ export const Explain_ExprStep = {
   },
   fromSDKJSON(object: any): Explain_ExprStepSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined,
-      value_index: isSet(object.value_index) ? Number(object.value_index) : undefined
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      value_index: isSet(object.value_index) ? Number(object.value_index) : 0
     };
   },
   toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
@@ -249,8 +247,8 @@ export const Explain_ExprStep = {
   },
   fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
     return {
-      id: object?.id ? BigInt(object.id) : undefined,
-      valueIndex: object?.value_index
+      id: BigInt(object.id),
+      valueIndex: object.value_index
     };
   },
   toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {

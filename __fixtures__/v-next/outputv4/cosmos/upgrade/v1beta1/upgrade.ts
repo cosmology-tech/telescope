@@ -14,7 +14,7 @@ export interface Plan {
    * assumed that the software is out-of-date when the upgrade Time or Height is
    * reached and the software will exit.
    */
-  name?: string;
+  name: string;
   /**
    * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
    * has been removed from the SDK.
@@ -26,12 +26,12 @@ export interface Plan {
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
    */
-  height?: bigint;
+  height: bigint;
   /**
    * Any application specific upgrade info to be included on-chain
    * such as a git commit that validators could automatically upgrade to
    */
-  info?: string;
+  info: string;
   /**
    * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
    * moved to the IBC module in the sub module 02-client.
@@ -42,11 +42,11 @@ export interface Plan {
 }
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface PlanSDKType {
-  name?: string;
+  name: string;
   /** @deprecated */
   time: Date;
-  height?: bigint;
-  info?: string;
+  height: bigint;
+  info: string;
   /** @deprecated */
   upgraded_client_state?: AnySDKType;
 }
@@ -58,8 +58,8 @@ export interface PlanSDKType {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposal {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   plan: Plan;
 }
 /**
@@ -70,8 +70,8 @@ export interface SoftwareUpgradeProposal {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   plan: PlanSDKType;
 }
 /**
@@ -82,8 +82,8 @@ export interface SoftwareUpgradeProposalSDKType {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposal {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 }
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
@@ -93,8 +93,8 @@ export interface CancelSoftwareUpgradeProposal {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 }
 /**
  * ModuleVersion specifies a module and its consensus version.
@@ -103,9 +103,9 @@ export interface CancelSoftwareUpgradeProposalSDKType {
  */
 export interface ModuleVersion {
   /** name of the app module */
-  name?: string;
+  name: string;
   /** consensus version of the app module */
-  version?: bigint;
+  version: bigint;
 }
 /**
  * ModuleVersion specifies a module and its consensus version.
@@ -113,31 +113,31 @@ export interface ModuleVersion {
  * Since: cosmos-sdk 0.43
  */
 export interface ModuleVersionSDKType {
-  name?: string;
-  version?: bigint;
+  name: string;
+  version: bigint;
 }
 function createBasePlan(): Plan {
   return {
-    name: undefined,
+    name: "",
     time: new Date(),
-    height: undefined,
-    info: undefined,
+    height: BigInt(0),
+    info: "",
     upgradedClientState: undefined
   };
 }
 export const Plan = {
   typeUrl: "/cosmos.upgrade.v1beta1.Plan",
   encode(message: Plan, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(24).int64(message.height);
     }
-    if (message.info !== undefined) {
+    if (message.info !== "") {
       writer.uint32(34).string(message.info);
     }
     if (message.upgradedClientState !== undefined) {
@@ -187,21 +187,19 @@ export const Plan = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.time !== undefined && (obj.time = message.time.toISOString());
-    if (message.height !== undefined) {
-      obj.height = message.height.toString();
-    }
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.info !== undefined && (obj.info = message.info);
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Plan>): Plan {
     const message = createBasePlan();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     message.time = object.time ?? undefined;
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.info = object.info ?? undefined;
+    message.info = object.info ?? "";
     if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
       message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
     }
@@ -218,10 +216,10 @@ export const Plan = {
   },
   fromSDKJSON(object: any): PlanSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
-      info: isSet(object.info) ? String(object.info) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      info: isSet(object.info) ? String(object.info) : "",
       upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
     };
   },
@@ -236,10 +234,10 @@ export const Plan = {
   },
   fromAmino(object: PlanAmino): Plan {
     return {
-      name: object?.name,
+      name: object.name,
       time: object.time,
-      height: object?.height ? BigInt(object.height) : undefined,
-      info: object?.info,
+      height: BigInt(object.height),
+      info: object.info,
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
   },
@@ -276,18 +274,18 @@ export const Plan = {
 };
 function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
   return {
-    title: undefined,
-    description: undefined,
+    title: "",
+    description: "",
     plan: Plan.fromPartial({})
   };
 }
 export const SoftwareUpgradeProposal = {
   typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
   encode(message: SoftwareUpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     if (message.plan !== undefined) {
@@ -334,8 +332,8 @@ export const SoftwareUpgradeProposal = {
   },
   fromPartial(object: DeepPartial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal {
     const message = createBaseSoftwareUpgradeProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     if (object.plan !== undefined && object.plan !== null) {
       message.plan = Plan.fromPartial(object.plan);
     }
@@ -350,8 +348,8 @@ export const SoftwareUpgradeProposal = {
   },
   fromSDKJSON(object: any): SoftwareUpgradeProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
     };
   },
@@ -364,8 +362,8 @@ export const SoftwareUpgradeProposal = {
   },
   fromAmino(object: SoftwareUpgradeProposalAmino): SoftwareUpgradeProposal {
     return {
-      title: object?.title,
-      description: object?.description,
+      title: object.title,
+      description: object.description,
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
@@ -400,17 +398,17 @@ export const SoftwareUpgradeProposal = {
 };
 function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposal {
   return {
-    title: undefined,
-    description: undefined
+    title: "",
+    description: ""
   };
 }
 export const CancelSoftwareUpgradeProposal = {
   typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
   encode(message: CancelSoftwareUpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -449,8 +447,8 @@ export const CancelSoftwareUpgradeProposal = {
   },
   fromPartial(object: DeepPartial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal {
     const message = createBaseCancelSoftwareUpgradeProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     return message;
   },
   fromSDK(object: CancelSoftwareUpgradeProposalSDKType): CancelSoftwareUpgradeProposal {
@@ -461,8 +459,8 @@ export const CancelSoftwareUpgradeProposal = {
   },
   fromSDKJSON(object: any): CancelSoftwareUpgradeProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
     };
   },
   toSDK(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalSDKType {
@@ -473,8 +471,8 @@ export const CancelSoftwareUpgradeProposal = {
   },
   fromAmino(object: CancelSoftwareUpgradeProposalAmino): CancelSoftwareUpgradeProposal {
     return {
-      title: object?.title,
-      description: object?.description
+      title: object.title,
+      description: object.description
     };
   },
   toAmino(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalAmino {
@@ -507,17 +505,17 @@ export const CancelSoftwareUpgradeProposal = {
 };
 function createBaseModuleVersion(): ModuleVersion {
   return {
-    name: undefined,
-    version: undefined
+    name: "",
+    version: BigInt(0)
   };
 }
 export const ModuleVersion = {
   typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion",
   encode(message: ModuleVersion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.version !== undefined) {
+    if (message.version !== BigInt(0)) {
       writer.uint32(16).uint64(message.version);
     }
     return writer;
@@ -551,14 +549,12 @@ export const ModuleVersion = {
   toJSON(message: ModuleVersion): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    if (message.version !== undefined) {
-      obj.version = message.version.toString();
-    }
+    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.version !== undefined && object.version !== null) {
       message.version = BigInt(object.version.toString());
     }
@@ -572,8 +568,8 @@ export const ModuleVersion = {
   },
   fromSDKJSON(object: any): ModuleVersionSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      version: isSet(object.version) ? BigInt(object.version.toString()) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0)
     };
   },
   toSDK(message: ModuleVersion): ModuleVersionSDKType {
@@ -584,8 +580,8 @@ export const ModuleVersion = {
   },
   fromAmino(object: ModuleVersionAmino): ModuleVersion {
     return {
-      name: object?.name,
-      version: object?.version ? BigInt(object.version) : undefined
+      name: object.name,
+      version: BigInt(object.version)
     };
   },
   toAmino(message: ModuleVersion): ModuleVersionAmino {

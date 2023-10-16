@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.crypto.multisig";
  * it uses legacy amino address rules.
  */
 export interface LegacyAminoPubKey {
-  threshold?: number;
+  threshold: number;
   publicKeys: Any[];
 }
 /**
@@ -17,19 +17,19 @@ export interface LegacyAminoPubKey {
  * it uses legacy amino address rules.
  */
 export interface LegacyAminoPubKeySDKType {
-  threshold?: number;
+  threshold: number;
   public_keys: AnySDKType[];
 }
 function createBaseLegacyAminoPubKey(): LegacyAminoPubKey {
   return {
-    threshold: undefined,
+    threshold: 0,
     publicKeys: []
   };
 }
 export const LegacyAminoPubKey = {
   typeUrl: "/cosmos.crypto.multisig.LegacyAminoPubKey",
   encode(message: LegacyAminoPubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.threshold !== undefined) {
+    if (message.threshold !== 0) {
       writer.uint32(8).uint32(message.threshold);
     }
     for (const v of message.publicKeys) {
@@ -75,7 +75,7 @@ export const LegacyAminoPubKey = {
   },
   fromPartial(object: DeepPartial<LegacyAminoPubKey>): LegacyAminoPubKey {
     const message = createBaseLegacyAminoPubKey();
-    message.threshold = object.threshold ?? undefined;
+    message.threshold = object.threshold ?? 0;
     message.publicKeys = object.publicKeys?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -87,7 +87,7 @@ export const LegacyAminoPubKey = {
   },
   fromSDKJSON(object: any): LegacyAminoPubKeySDKType {
     return {
-      threshold: isSet(object.threshold) ? Number(object.threshold) : undefined,
+      threshold: isSet(object.threshold) ? Number(object.threshold) : 0,
       public_keys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
@@ -103,7 +103,7 @@ export const LegacyAminoPubKey = {
   },
   fromAmino(object: LegacyAminoPubKeyAmino): LegacyAminoPubKey {
     return {
-      threshold: object?.threshold,
+      threshold: object.threshold,
       publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
     };
   },

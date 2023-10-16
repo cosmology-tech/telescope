@@ -168,8 +168,8 @@ export function lengthOpToJSON(object: LengthOp): string {
  * length-prefix the data before hashing it.
  */
 export interface ExistenceProof {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
   leaf?: LeafOp;
   path: InnerOp[];
 }
@@ -195,8 +195,8 @@ export interface ExistenceProof {
  * length-prefix the data before hashing it.
  */
 export interface ExistenceProofSDKType {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
   leaf?: LeafOpSDKType;
   path: InnerOpSDKType[];
 }
@@ -207,7 +207,7 @@ export interface ExistenceProofSDKType {
  */
 export interface NonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
-  key?: Uint8Array;
+  key: Uint8Array;
   left?: ExistenceProof;
   right?: ExistenceProof;
 }
@@ -217,7 +217,7 @@ export interface NonExistenceProof {
  * then there is no valid proof for the given key.
  */
 export interface NonExistenceProofSDKType {
-  key?: Uint8Array;
+  key: Uint8Array;
   left?: ExistenceProofSDKType;
   right?: ExistenceProofSDKType;
 }
@@ -252,15 +252,15 @@ export interface CommitmentProofSDKType {
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
  */
 export interface LeafOp {
-  hash?: HashOp;
-  prehashKey?: HashOp;
-  prehashValue?: HashOp;
-  length?: LengthOp;
+  hash: HashOp;
+  prehashKey: HashOp;
+  prehashValue: HashOp;
+  length: LengthOp;
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
    * a leaf node from an inner node.
    */
-  prefix?: Uint8Array;
+  prefix: Uint8Array;
 }
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
@@ -279,11 +279,11 @@ export interface LeafOp {
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
  */
 export interface LeafOpSDKType {
-  hash?: HashOp;
-  prehash_key?: HashOp;
-  prehash_value?: HashOp;
-  length?: LengthOp;
-  prefix?: Uint8Array;
+  hash: HashOp;
+  prehash_key: HashOp;
+  prehash_value: HashOp;
+  length: LengthOp;
+  prefix: Uint8Array;
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
@@ -303,9 +303,9 @@ export interface LeafOpSDKType {
  * If either of prefix or suffix is empty, we just treat it as an empty string
  */
 export interface InnerOp {
-  hash?: HashOp;
-  prefix?: Uint8Array;
-  suffix?: Uint8Array;
+  hash: HashOp;
+  prefix: Uint8Array;
+  suffix: Uint8Array;
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
@@ -325,9 +325,9 @@ export interface InnerOp {
  * If either of prefix or suffix is empty, we just treat it as an empty string
  */
 export interface InnerOpSDKType {
-  hash?: HashOp;
-  prefix?: Uint8Array;
-  suffix?: Uint8Array;
+  hash: HashOp;
+  prefix: Uint8Array;
+  suffix: Uint8Array;
 }
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
@@ -349,9 +349,9 @@ export interface ProofSpec {
   leafSpec?: LeafOp;
   innerSpec?: InnerSpec;
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
-  maxDepth?: number;
+  maxDepth: number;
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
-  minDepth?: number;
+  minDepth: number;
 }
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
@@ -368,8 +368,8 @@ export interface ProofSpec {
 export interface ProofSpecSDKType {
   leaf_spec?: LeafOpSDKType;
   inner_spec?: InnerSpecSDKType;
-  max_depth?: number;
-  min_depth?: number;
+  max_depth: number;
+  min_depth: number;
 }
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
@@ -388,13 +388,13 @@ export interface InnerSpec {
    * merk is [0, 2, 1] (left, right, here)
    */
   childOrder: number[];
-  childSize?: number;
-  minPrefixLength?: number;
-  maxPrefixLength?: number;
+  childSize: number;
+  minPrefixLength: number;
+  maxPrefixLength: number;
   /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
-  emptyChild?: Uint8Array;
+  emptyChild: Uint8Array;
   /** hash is the algorithm that must be used for each InnerOp */
-  hash?: HashOp;
+  hash: HashOp;
 }
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
@@ -408,11 +408,11 @@ export interface InnerSpec {
  */
 export interface InnerSpecSDKType {
   child_order: number[];
-  child_size?: number;
-  min_prefix_length?: number;
-  max_prefix_length?: number;
-  empty_child?: Uint8Array;
-  hash?: HashOp;
+  child_size: number;
+  min_prefix_length: number;
+  max_prefix_length: number;
+  empty_child: Uint8Array;
+  hash: HashOp;
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProof {
@@ -451,33 +451,33 @@ export interface CompressedBatchEntrySDKType {
   nonexist?: CompressedNonExistenceProofSDKType;
 }
 export interface CompressedExistenceProof {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
   leaf?: LeafOp;
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
 export interface CompressedExistenceProofSDKType {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
   leaf?: LeafOpSDKType;
   path: number[];
 }
 export interface CompressedNonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
-  key?: Uint8Array;
+  key: Uint8Array;
   left?: CompressedExistenceProof;
   right?: CompressedExistenceProof;
 }
 export interface CompressedNonExistenceProofSDKType {
-  key?: Uint8Array;
+  key: Uint8Array;
   left?: CompressedExistenceProofSDKType;
   right?: CompressedExistenceProofSDKType;
 }
 function createBaseExistenceProof(): ExistenceProof {
   return {
-    key: undefined,
-    value: undefined,
+    key: new Uint8Array(),
+    value: new Uint8Array(),
     leaf: undefined,
     path: []
   };
@@ -485,10 +485,10 @@ function createBaseExistenceProof(): ExistenceProof {
 export const ExistenceProof = {
   typeUrl: "/ics23.ExistenceProof",
   encode(message: ExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       writer.uint32(18).bytes(message.value);
     }
     if (message.leaf !== undefined) {
@@ -535,8 +535,8 @@ export const ExistenceProof = {
   },
   toJSON(message: ExistenceProof): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
-    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     message.leaf !== undefined && (obj.leaf = message.leaf ? LeafOp.toJSON(message.leaf) : undefined);
     if (message.path) {
       obj.path = message.path.map(e => e ? InnerOp.toJSON(e) : undefined);
@@ -547,8 +547,8 @@ export const ExistenceProof = {
   },
   fromPartial(object: DeepPartial<ExistenceProof>): ExistenceProof {
     const message = createBaseExistenceProof();
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.key = object.key ?? new Uint8Array();
+    message.value = object.value ?? new Uint8Array();
     if (object.leaf !== undefined && object.leaf !== null) {
       message.leaf = LeafOp.fromPartial(object.leaf);
     }
@@ -565,8 +565,8 @@ export const ExistenceProof = {
   },
   fromSDKJSON(object: any): ExistenceProofSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
-      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       leaf: isSet(object.leaf) ? LeafOp.fromSDKJSON(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromSDKJSON(e)) : []
     };
@@ -585,8 +585,8 @@ export const ExistenceProof = {
   },
   fromAmino(object: ExistenceProofAmino): ExistenceProof {
     return {
-      key: object?.key,
-      value: object?.value,
+      key: object.key,
+      value: object.value,
       leaf: object?.leaf ? LeafOp.fromAmino(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromAmino(e)) : []
     };
@@ -621,7 +621,7 @@ export const ExistenceProof = {
 };
 function createBaseNonExistenceProof(): NonExistenceProof {
   return {
-    key: undefined,
+    key: new Uint8Array(),
     left: undefined,
     right: undefined
   };
@@ -629,7 +629,7 @@ function createBaseNonExistenceProof(): NonExistenceProof {
 export const NonExistenceProof = {
   typeUrl: "/ics23.NonExistenceProof",
   encode(message: NonExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
     if (message.left !== undefined) {
@@ -672,14 +672,14 @@ export const NonExistenceProof = {
   },
   toJSON(message: NonExistenceProof): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.left !== undefined && (obj.left = message.left ? ExistenceProof.toJSON(message.left) : undefined);
     message.right !== undefined && (obj.right = message.right ? ExistenceProof.toJSON(message.right) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<NonExistenceProof>): NonExistenceProof {
     const message = createBaseNonExistenceProof();
-    message.key = object.key ?? undefined;
+    message.key = object.key ?? new Uint8Array();
     if (object.left !== undefined && object.left !== null) {
       message.left = ExistenceProof.fromPartial(object.left);
     }
@@ -697,7 +697,7 @@ export const NonExistenceProof = {
   },
   fromSDKJSON(object: any): NonExistenceProofSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       left: isSet(object.left) ? ExistenceProof.fromSDKJSON(object.left) : undefined,
       right: isSet(object.right) ? ExistenceProof.fromSDKJSON(object.right) : undefined
     };
@@ -711,7 +711,7 @@ export const NonExistenceProof = {
   },
   fromAmino(object: NonExistenceProofAmino): NonExistenceProof {
     return {
-      key: object?.key,
+      key: object.key,
       left: object?.left ? ExistenceProof.fromAmino(object.left) : undefined,
       right: object?.right ? ExistenceProof.fromAmino(object.right) : undefined
     };
@@ -880,29 +880,29 @@ export const CommitmentProof = {
 };
 function createBaseLeafOp(): LeafOp {
   return {
-    hash: undefined,
-    prehashKey: undefined,
-    prehashValue: undefined,
-    length: undefined,
-    prefix: undefined
+    hash: 0,
+    prehashKey: 0,
+    prehashValue: 0,
+    length: 0,
+    prefix: new Uint8Array()
   };
 }
 export const LeafOp = {
   typeUrl: "/ics23.LeafOp",
   encode(message: LeafOp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash !== undefined) {
+    if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
     }
-    if (message.prehashKey !== undefined) {
+    if (message.prehashKey !== 0) {
       writer.uint32(16).int32(message.prehashKey);
     }
-    if (message.prehashValue !== undefined) {
+    if (message.prehashValue !== 0) {
       writer.uint32(24).int32(message.prehashValue);
     }
-    if (message.length !== undefined) {
+    if (message.length !== 0) {
       writer.uint32(32).int32(message.length);
     }
-    if (message.prefix !== undefined) {
+    if (message.prefix.length !== 0) {
       writer.uint32(42).bytes(message.prefix);
     }
     return writer;
@@ -951,34 +951,34 @@ export const LeafOp = {
     message.prehashKey !== undefined && (obj.prehashKey = hashOpToJSON(message.prehashKey));
     message.prehashValue !== undefined && (obj.prehashValue = hashOpToJSON(message.prehashValue));
     message.length !== undefined && (obj.length = lengthOpToJSON(message.length));
-    message.prefix !== undefined && (obj.prefix = message.prefix !== undefined ? base64FromBytes(message.prefix) : undefined);
+    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<LeafOp>): LeafOp {
     const message = createBaseLeafOp();
-    message.hash = object.hash ?? undefined;
-    message.prehashKey = object.prehashKey ?? undefined;
-    message.prehashValue = object.prehashValue ?? undefined;
-    message.length = object.length ?? undefined;
-    message.prefix = object.prefix ?? undefined;
+    message.hash = object.hash ?? 0;
+    message.prehashKey = object.prehashKey ?? 0;
+    message.prehashValue = object.prehashValue ?? 0;
+    message.length = object.length ?? 0;
+    message.prefix = object.prefix ?? new Uint8Array();
     return message;
   },
   fromSDK(object: LeafOpSDKType): LeafOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : undefined,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : undefined,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : undefined,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
       prefix: object?.prefix
     };
   },
   fromSDKJSON(object: any): LeafOpSDKType {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined,
-      prehash_key: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : undefined,
-      prehash_value: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : undefined,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : undefined,
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : undefined
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehash_key: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehash_value: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
     };
   },
   toSDK(message: LeafOp): LeafOpSDKType {
@@ -992,11 +992,11 @@ export const LeafOp = {
   },
   fromAmino(object: LeafOpAmino): LeafOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : undefined,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : undefined,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : undefined,
-      prefix: object?.prefix
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
+      prefix: object.prefix
     };
   },
   toAmino(message: LeafOp): LeafOpAmino {
@@ -1026,21 +1026,21 @@ export const LeafOp = {
 };
 function createBaseInnerOp(): InnerOp {
   return {
-    hash: undefined,
-    prefix: undefined,
-    suffix: undefined
+    hash: 0,
+    prefix: new Uint8Array(),
+    suffix: new Uint8Array()
   };
 }
 export const InnerOp = {
   typeUrl: "/ics23.InnerOp",
   encode(message: InnerOp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash !== undefined) {
+    if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
     }
-    if (message.prefix !== undefined) {
+    if (message.prefix.length !== 0) {
       writer.uint32(18).bytes(message.prefix);
     }
-    if (message.suffix !== undefined) {
+    if (message.suffix.length !== 0) {
       writer.uint32(26).bytes(message.suffix);
     }
     return writer;
@@ -1078,29 +1078,29 @@ export const InnerOp = {
   toJSON(message: InnerOp): unknown {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
-    message.prefix !== undefined && (obj.prefix = message.prefix !== undefined ? base64FromBytes(message.prefix) : undefined);
-    message.suffix !== undefined && (obj.suffix = message.suffix !== undefined ? base64FromBytes(message.suffix) : undefined);
+    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array()));
+    message.suffix !== undefined && (obj.suffix = base64FromBytes(message.suffix !== undefined ? message.suffix : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<InnerOp>): InnerOp {
     const message = createBaseInnerOp();
-    message.hash = object.hash ?? undefined;
-    message.prefix = object.prefix ?? undefined;
-    message.suffix = object.suffix ?? undefined;
+    message.hash = object.hash ?? 0;
+    message.prefix = object.prefix ?? new Uint8Array();
+    message.suffix = object.suffix ?? new Uint8Array();
     return message;
   },
   fromSDK(object: InnerOpSDKType): InnerOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
       prefix: object?.prefix,
       suffix: object?.suffix
     };
   },
   fromSDKJSON(object: any): InnerOpSDKType {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined,
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : undefined,
-      suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : undefined
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(),
+      suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : new Uint8Array()
     };
   },
   toSDK(message: InnerOp): InnerOpSDKType {
@@ -1112,9 +1112,9 @@ export const InnerOp = {
   },
   fromAmino(object: InnerOpAmino): InnerOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined,
-      prefix: object?.prefix,
-      suffix: object?.suffix
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prefix: object.prefix,
+      suffix: object.suffix
     };
   },
   toAmino(message: InnerOp): InnerOpAmino {
@@ -1144,8 +1144,8 @@ function createBaseProofSpec(): ProofSpec {
   return {
     leafSpec: undefined,
     innerSpec: undefined,
-    maxDepth: undefined,
-    minDepth: undefined
+    maxDepth: 0,
+    minDepth: 0
   };
 }
 export const ProofSpec = {
@@ -1157,10 +1157,10 @@ export const ProofSpec = {
     if (message.innerSpec !== undefined) {
       InnerSpec.encode(message.innerSpec, writer.uint32(18).fork()).ldelim();
     }
-    if (message.maxDepth !== undefined) {
+    if (message.maxDepth !== 0) {
       writer.uint32(24).int32(message.maxDepth);
     }
-    if (message.minDepth !== undefined) {
+    if (message.minDepth !== 0) {
       writer.uint32(32).int32(message.minDepth);
     }
     return writer;
@@ -1215,8 +1215,8 @@ export const ProofSpec = {
     if (object.innerSpec !== undefined && object.innerSpec !== null) {
       message.innerSpec = InnerSpec.fromPartial(object.innerSpec);
     }
-    message.maxDepth = object.maxDepth ?? undefined;
-    message.minDepth = object.minDepth ?? undefined;
+    message.maxDepth = object.maxDepth ?? 0;
+    message.minDepth = object.minDepth ?? 0;
     return message;
   },
   fromSDK(object: ProofSpecSDKType): ProofSpec {
@@ -1231,8 +1231,8 @@ export const ProofSpec = {
     return {
       leaf_spec: isSet(object.leaf_spec) ? LeafOp.fromSDKJSON(object.leaf_spec) : undefined,
       inner_spec: isSet(object.inner_spec) ? InnerSpec.fromSDKJSON(object.inner_spec) : undefined,
-      max_depth: isSet(object.max_depth) ? Number(object.max_depth) : undefined,
-      min_depth: isSet(object.min_depth) ? Number(object.min_depth) : undefined
+      max_depth: isSet(object.max_depth) ? Number(object.max_depth) : 0,
+      min_depth: isSet(object.min_depth) ? Number(object.min_depth) : 0
     };
   },
   toSDK(message: ProofSpec): ProofSpecSDKType {
@@ -1247,8 +1247,8 @@ export const ProofSpec = {
     return {
       leafSpec: object?.leaf_spec ? LeafOp.fromAmino(object.leaf_spec) : undefined,
       innerSpec: object?.inner_spec ? InnerSpec.fromAmino(object.inner_spec) : undefined,
-      maxDepth: object?.max_depth,
-      minDepth: object?.min_depth
+      maxDepth: object.max_depth,
+      minDepth: object.min_depth
     };
   },
   toAmino(message: ProofSpec): ProofSpecAmino {
@@ -1278,11 +1278,11 @@ export const ProofSpec = {
 function createBaseInnerSpec(): InnerSpec {
   return {
     childOrder: [],
-    childSize: undefined,
-    minPrefixLength: undefined,
-    maxPrefixLength: undefined,
-    emptyChild: undefined,
-    hash: undefined
+    childSize: 0,
+    minPrefixLength: 0,
+    maxPrefixLength: 0,
+    emptyChild: new Uint8Array(),
+    hash: 0
   };
 }
 export const InnerSpec = {
@@ -1293,19 +1293,19 @@ export const InnerSpec = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.childSize !== undefined) {
+    if (message.childSize !== 0) {
       writer.uint32(16).int32(message.childSize);
     }
-    if (message.minPrefixLength !== undefined) {
+    if (message.minPrefixLength !== 0) {
       writer.uint32(24).int32(message.minPrefixLength);
     }
-    if (message.maxPrefixLength !== undefined) {
+    if (message.maxPrefixLength !== 0) {
       writer.uint32(32).int32(message.maxPrefixLength);
     }
-    if (message.emptyChild !== undefined) {
+    if (message.emptyChild.length !== 0) {
       writer.uint32(42).bytes(message.emptyChild);
     }
-    if (message.hash !== undefined) {
+    if (message.hash !== 0) {
       writer.uint32(48).int32(message.hash);
     }
     return writer;
@@ -1369,18 +1369,18 @@ export const InnerSpec = {
     message.childSize !== undefined && (obj.childSize = Math.round(message.childSize));
     message.minPrefixLength !== undefined && (obj.minPrefixLength = Math.round(message.minPrefixLength));
     message.maxPrefixLength !== undefined && (obj.maxPrefixLength = Math.round(message.maxPrefixLength));
-    message.emptyChild !== undefined && (obj.emptyChild = message.emptyChild !== undefined ? base64FromBytes(message.emptyChild) : undefined);
+    message.emptyChild !== undefined && (obj.emptyChild = base64FromBytes(message.emptyChild !== undefined ? message.emptyChild : new Uint8Array()));
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     return obj;
   },
   fromPartial(object: DeepPartial<InnerSpec>): InnerSpec {
     const message = createBaseInnerSpec();
     message.childOrder = object.childOrder?.map(e => e) || [];
-    message.childSize = object.childSize ?? undefined;
-    message.minPrefixLength = object.minPrefixLength ?? undefined;
-    message.maxPrefixLength = object.maxPrefixLength ?? undefined;
-    message.emptyChild = object.emptyChild ?? undefined;
-    message.hash = object.hash ?? undefined;
+    message.childSize = object.childSize ?? 0;
+    message.minPrefixLength = object.minPrefixLength ?? 0;
+    message.maxPrefixLength = object.maxPrefixLength ?? 0;
+    message.emptyChild = object.emptyChild ?? new Uint8Array();
+    message.hash = object.hash ?? 0;
     return message;
   },
   fromSDK(object: InnerSpecSDKType): InnerSpec {
@@ -1390,17 +1390,17 @@ export const InnerSpec = {
       minPrefixLength: object?.min_prefix_length,
       maxPrefixLength: object?.max_prefix_length,
       emptyChild: object?.empty_child,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   fromSDKJSON(object: any): InnerSpecSDKType {
     return {
       child_order: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => Number(e)) : [],
-      child_size: isSet(object.child_size) ? Number(object.child_size) : undefined,
-      min_prefix_length: isSet(object.min_prefix_length) ? Number(object.min_prefix_length) : undefined,
-      max_prefix_length: isSet(object.max_prefix_length) ? Number(object.max_prefix_length) : undefined,
-      empty_child: isSet(object.empty_child) ? bytesFromBase64(object.empty_child) : undefined,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined
+      child_size: isSet(object.child_size) ? Number(object.child_size) : 0,
+      min_prefix_length: isSet(object.min_prefix_length) ? Number(object.min_prefix_length) : 0,
+      max_prefix_length: isSet(object.max_prefix_length) ? Number(object.max_prefix_length) : 0,
+      empty_child: isSet(object.empty_child) ? bytesFromBase64(object.empty_child) : new Uint8Array(),
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   toSDK(message: InnerSpec): InnerSpecSDKType {
@@ -1420,11 +1420,11 @@ export const InnerSpec = {
   fromAmino(object: InnerSpecAmino): InnerSpec {
     return {
       childOrder: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => e) : [],
-      childSize: object?.child_size,
-      minPrefixLength: object?.min_prefix_length,
-      maxPrefixLength: object?.max_prefix_length,
-      emptyChild: object?.empty_child,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : undefined
+      childSize: object.child_size,
+      minPrefixLength: object.min_prefix_length,
+      maxPrefixLength: object.max_prefix_length,
+      emptyChild: object.empty_child,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   toAmino(message: InnerSpec): InnerSpecAmino {
@@ -1892,8 +1892,8 @@ export const CompressedBatchEntry = {
 };
 function createBaseCompressedExistenceProof(): CompressedExistenceProof {
   return {
-    key: undefined,
-    value: undefined,
+    key: new Uint8Array(),
+    value: new Uint8Array(),
     leaf: undefined,
     path: []
   };
@@ -1901,10 +1901,10 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
 export const CompressedExistenceProof = {
   typeUrl: "/ics23.CompressedExistenceProof",
   encode(message: CompressedExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       writer.uint32(18).bytes(message.value);
     }
     if (message.leaf !== undefined) {
@@ -1960,8 +1960,8 @@ export const CompressedExistenceProof = {
   },
   toJSON(message: CompressedExistenceProof): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
-    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     message.leaf !== undefined && (obj.leaf = message.leaf ? LeafOp.toJSON(message.leaf) : undefined);
     if (message.path) {
       obj.path = message.path.map(e => Math.round(e));
@@ -1972,8 +1972,8 @@ export const CompressedExistenceProof = {
   },
   fromPartial(object: DeepPartial<CompressedExistenceProof>): CompressedExistenceProof {
     const message = createBaseCompressedExistenceProof();
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.key = object.key ?? new Uint8Array();
+    message.value = object.value ?? new Uint8Array();
     if (object.leaf !== undefined && object.leaf !== null) {
       message.leaf = LeafOp.fromPartial(object.leaf);
     }
@@ -1990,8 +1990,8 @@ export const CompressedExistenceProof = {
   },
   fromSDKJSON(object: any): CompressedExistenceProofSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
-      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       leaf: isSet(object.leaf) ? LeafOp.fromSDKJSON(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : []
     };
@@ -2010,8 +2010,8 @@ export const CompressedExistenceProof = {
   },
   fromAmino(object: CompressedExistenceProofAmino): CompressedExistenceProof {
     return {
-      key: object?.key,
-      value: object?.value,
+      key: object.key,
+      value: object.value,
       leaf: object?.leaf ? LeafOp.fromAmino(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : []
     };
@@ -2046,7 +2046,7 @@ export const CompressedExistenceProof = {
 };
 function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
   return {
-    key: undefined,
+    key: new Uint8Array(),
     left: undefined,
     right: undefined
   };
@@ -2054,7 +2054,7 @@ function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
 export const CompressedNonExistenceProof = {
   typeUrl: "/ics23.CompressedNonExistenceProof",
   encode(message: CompressedNonExistenceProof, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
     if (message.left !== undefined) {
@@ -2097,14 +2097,14 @@ export const CompressedNonExistenceProof = {
   },
   toJSON(message: CompressedNonExistenceProof): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.left !== undefined && (obj.left = message.left ? CompressedExistenceProof.toJSON(message.left) : undefined);
     message.right !== undefined && (obj.right = message.right ? CompressedExistenceProof.toJSON(message.right) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CompressedNonExistenceProof>): CompressedNonExistenceProof {
     const message = createBaseCompressedNonExistenceProof();
-    message.key = object.key ?? undefined;
+    message.key = object.key ?? new Uint8Array();
     if (object.left !== undefined && object.left !== null) {
       message.left = CompressedExistenceProof.fromPartial(object.left);
     }
@@ -2122,7 +2122,7 @@ export const CompressedNonExistenceProof = {
   },
   fromSDKJSON(object: any): CompressedNonExistenceProofSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       left: isSet(object.left) ? CompressedExistenceProof.fromSDKJSON(object.left) : undefined,
       right: isSet(object.right) ? CompressedExistenceProof.fromSDKJSON(object.right) : undefined
     };
@@ -2136,7 +2136,7 @@ export const CompressedNonExistenceProof = {
   },
   fromAmino(object: CompressedNonExistenceProofAmino): CompressedNonExistenceProof {
     return {
-      key: object?.key,
+      key: object.key,
       left: object?.left ? CompressedExistenceProof.fromAmino(object.left) : undefined,
       right: object?.right ? CompressedExistenceProof.fromAmino(object.right) : undefined
     };

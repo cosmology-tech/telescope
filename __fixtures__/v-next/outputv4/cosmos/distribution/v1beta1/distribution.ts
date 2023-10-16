@@ -8,14 +8,14 @@ export interface Params {
   communityTax: string;
   baseProposerReward: string;
   bonusProposerReward: string;
-  withdrawAddrEnabled?: boolean;
+  withdrawAddrEnabled: boolean;
 }
 /** Params defines the set of params for the distribution module. */
 export interface ParamsSDKType {
   community_tax: string;
   base_proposer_reward: string;
   bonus_proposer_reward: string;
-  withdraw_addr_enabled?: boolean;
+  withdraw_addr_enabled: boolean;
 }
 /**
  * ValidatorHistoricalRewards represents historical rewards for a validator.
@@ -33,7 +33,7 @@ export interface ParamsSDKType {
  */
 export interface ValidatorHistoricalRewards {
   cumulativeRewardRatio: DecCoin[];
-  referenceCount?: number;
+  referenceCount: number;
 }
 /**
  * ValidatorHistoricalRewards represents historical rewards for a validator.
@@ -51,7 +51,7 @@ export interface ValidatorHistoricalRewards {
  */
 export interface ValidatorHistoricalRewardsSDKType {
   cumulative_reward_ratio: DecCoinSDKType[];
-  reference_count?: number;
+  reference_count: number;
 }
 /**
  * ValidatorCurrentRewards represents current rewards and current
@@ -60,7 +60,7 @@ export interface ValidatorHistoricalRewardsSDKType {
  */
 export interface ValidatorCurrentRewards {
   rewards: DecCoin[];
-  period?: bigint;
+  period: bigint;
 }
 /**
  * ValidatorCurrentRewards represents current rewards and current
@@ -69,7 +69,7 @@ export interface ValidatorCurrentRewards {
  */
 export interface ValidatorCurrentRewardsSDKType {
   rewards: DecCoinSDKType[];
-  period?: bigint;
+  period: bigint;
 }
 /**
  * ValidatorAccumulatedCommission represents accumulated commission
@@ -106,7 +106,7 @@ export interface ValidatorOutstandingRewardsSDKType {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEvent {
-  validatorPeriod?: bigint;
+  validatorPeriod: bigint;
   fraction: string;
 }
 /**
@@ -116,7 +116,7 @@ export interface ValidatorSlashEvent {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEventSDKType {
-  validator_period?: bigint;
+  validator_period: bigint;
   fraction: string;
 }
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
@@ -141,9 +141,9 @@ export interface FeePoolSDKType {
  * recipient account.
  */
 export interface CommunityPoolSpendProposal {
-  title?: string;
-  description?: string;
-  recipient?: string;
+  title: string;
+  description: string;
+  recipient: string;
   amount: Coin[];
 }
 /**
@@ -152,9 +152,9 @@ export interface CommunityPoolSpendProposal {
  * recipient account.
  */
 export interface CommunityPoolSpendProposalSDKType {
-  title?: string;
-  description?: string;
-  recipient?: string;
+  title: string;
+  description: string;
+  recipient: string;
   amount: CoinSDKType[];
 }
 /**
@@ -166,9 +166,9 @@ export interface CommunityPoolSpendProposalSDKType {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfo {
-  previousPeriod?: bigint;
+  previousPeriod: bigint;
   stake: string;
-  height?: bigint;
+  height: bigint;
 }
 /**
  * DelegatorStartingInfo represents the starting info for a delegator reward
@@ -179,16 +179,16 @@ export interface DelegatorStartingInfo {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfoSDKType {
-  previous_period?: bigint;
+  previous_period: bigint;
   stake: string;
-  height?: bigint;
+  height: bigint;
 }
 /**
  * DelegationDelegatorReward represents the properties
  * of a delegator's delegation reward.
  */
 export interface DelegationDelegatorReward {
-  validatorAddress?: string;
+  validatorAddress: string;
   reward: DecCoin[];
 }
 /**
@@ -196,7 +196,7 @@ export interface DelegationDelegatorReward {
  * of a delegator's delegation reward.
  */
 export interface DelegationDelegatorRewardSDKType {
-  validator_address?: string;
+  validator_address: string;
   reward: DecCoinSDKType[];
 }
 /**
@@ -204,29 +204,29 @@ export interface DelegationDelegatorRewardSDKType {
  * with a deposit
  */
 export interface CommunityPoolSpendProposalWithDeposit {
-  title?: string;
-  description?: string;
-  recipient?: string;
-  amount?: string;
-  deposit?: string;
+  title: string;
+  description: string;
+  recipient: string;
+  amount: string;
+  deposit: string;
 }
 /**
  * CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
  * with a deposit
  */
 export interface CommunityPoolSpendProposalWithDepositSDKType {
-  title?: string;
-  description?: string;
-  recipient?: string;
-  amount?: string;
-  deposit?: string;
+  title: string;
+  description: string;
+  recipient: string;
+  amount: string;
+  deposit: string;
 }
 function createBaseParams(): Params {
   return {
     communityTax: "",
     baseProposerReward: "",
     bonusProposerReward: "",
-    withdrawAddrEnabled: undefined
+    withdrawAddrEnabled: false
   };
 }
 export const Params = {
@@ -241,7 +241,7 @@ export const Params = {
     if (message.bonusProposerReward !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.bonusProposerReward, 18).atomics);
     }
-    if (message.withdrawAddrEnabled !== undefined) {
+    if (message.withdrawAddrEnabled === true) {
       writer.uint32(32).bool(message.withdrawAddrEnabled);
     }
     return writer;
@@ -293,7 +293,7 @@ export const Params = {
     message.communityTax = object.communityTax ?? "";
     message.baseProposerReward = object.baseProposerReward ?? "";
     message.bonusProposerReward = object.bonusProposerReward ?? "";
-    message.withdrawAddrEnabled = object.withdrawAddrEnabled ?? undefined;
+    message.withdrawAddrEnabled = object.withdrawAddrEnabled ?? false;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -309,7 +309,7 @@ export const Params = {
       community_tax: isSet(object.community_tax) ? String(object.community_tax) : "",
       base_proposer_reward: isSet(object.base_proposer_reward) ? String(object.base_proposer_reward) : "",
       bonus_proposer_reward: isSet(object.bonus_proposer_reward) ? String(object.bonus_proposer_reward) : "",
-      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled) ? Boolean(object.withdraw_addr_enabled) : undefined
+      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled) ? Boolean(object.withdraw_addr_enabled) : false
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -325,7 +325,7 @@ export const Params = {
       communityTax: object.community_tax,
       baseProposerReward: object.base_proposer_reward,
       bonusProposerReward: object.bonus_proposer_reward,
-      withdrawAddrEnabled: object?.withdraw_addr_enabled
+      withdrawAddrEnabled: object.withdraw_addr_enabled
     };
   },
   toAmino(message: Params): ParamsAmino {
@@ -361,7 +361,7 @@ export const Params = {
 function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
   return {
     cumulativeRewardRatio: [],
-    referenceCount: undefined
+    referenceCount: 0
   };
 }
 export const ValidatorHistoricalRewards = {
@@ -370,7 +370,7 @@ export const ValidatorHistoricalRewards = {
     for (const v of message.cumulativeRewardRatio) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.referenceCount !== undefined) {
+    if (message.referenceCount !== 0) {
       writer.uint32(16).uint32(message.referenceCount);
     }
     return writer;
@@ -414,7 +414,7 @@ export const ValidatorHistoricalRewards = {
   fromPartial(object: DeepPartial<ValidatorHistoricalRewards>): ValidatorHistoricalRewards {
     const message = createBaseValidatorHistoricalRewards();
     message.cumulativeRewardRatio = object.cumulativeRewardRatio?.map(e => DecCoin.fromPartial(e)) || [];
-    message.referenceCount = object.referenceCount ?? undefined;
+    message.referenceCount = object.referenceCount ?? 0;
     return message;
   },
   fromSDK(object: ValidatorHistoricalRewardsSDKType): ValidatorHistoricalRewards {
@@ -426,7 +426,7 @@ export const ValidatorHistoricalRewards = {
   fromSDKJSON(object: any): ValidatorHistoricalRewardsSDKType {
     return {
       cumulative_reward_ratio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      reference_count: isSet(object.reference_count) ? Number(object.reference_count) : undefined
+      reference_count: isSet(object.reference_count) ? Number(object.reference_count) : 0
     };
   },
   toSDK(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsSDKType {
@@ -442,7 +442,7 @@ export const ValidatorHistoricalRewards = {
   fromAmino(object: ValidatorHistoricalRewardsAmino): ValidatorHistoricalRewards {
     return {
       cumulativeRewardRatio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromAmino(e)) : [],
-      referenceCount: object?.reference_count
+      referenceCount: object.reference_count
     };
   },
   toAmino(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsAmino {
@@ -480,7 +480,7 @@ export const ValidatorHistoricalRewards = {
 function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
   return {
     rewards: [],
-    period: undefined
+    period: BigInt(0)
   };
 }
 export const ValidatorCurrentRewards = {
@@ -489,7 +489,7 @@ export const ValidatorCurrentRewards = {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.period !== undefined) {
+    if (message.period !== BigInt(0)) {
       writer.uint32(16).uint64(message.period);
     }
     return writer;
@@ -527,9 +527,7 @@ export const ValidatorCurrentRewards = {
     } else {
       obj.rewards = [];
     }
-    if (message.period !== undefined) {
-      obj.period = message.period.toString();
-    }
+    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
@@ -549,7 +547,7 @@ export const ValidatorCurrentRewards = {
   fromSDKJSON(object: any): ValidatorCurrentRewardsSDKType {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      period: isSet(object.period) ? BigInt(object.period.toString()) : undefined
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
     };
   },
   toSDK(message: ValidatorCurrentRewards): ValidatorCurrentRewardsSDKType {
@@ -565,7 +563,7 @@ export const ValidatorCurrentRewards = {
   fromAmino(object: ValidatorCurrentRewardsAmino): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : [],
-      period: object?.period ? BigInt(object.period) : undefined
+      period: BigInt(object.period)
     };
   },
   toAmino(message: ValidatorCurrentRewards): ValidatorCurrentRewardsAmino {
@@ -810,14 +808,14 @@ export const ValidatorOutstandingRewards = {
 };
 function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
   return {
-    validatorPeriod: undefined,
+    validatorPeriod: BigInt(0),
     fraction: ""
   };
 }
 export const ValidatorSlashEvent = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEvent",
   encode(message: ValidatorSlashEvent, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorPeriod !== undefined) {
+    if (message.validatorPeriod !== BigInt(0)) {
       writer.uint32(8).uint64(message.validatorPeriod);
     }
     if (message.fraction !== "") {
@@ -853,9 +851,7 @@ export const ValidatorSlashEvent = {
   },
   toJSON(message: ValidatorSlashEvent): unknown {
     const obj: any = {};
-    if (message.validatorPeriod !== undefined) {
-      obj.validatorPeriod = message.validatorPeriod.toString();
-    }
+    message.validatorPeriod !== undefined && (obj.validatorPeriod = (message.validatorPeriod || BigInt(0)).toString());
     message.fraction !== undefined && (obj.fraction = message.fraction);
     return obj;
   },
@@ -875,7 +871,7 @@ export const ValidatorSlashEvent = {
   },
   fromSDKJSON(object: any): ValidatorSlashEventSDKType {
     return {
-      validator_period: isSet(object.validator_period) ? BigInt(object.validator_period.toString()) : undefined,
+      validator_period: isSet(object.validator_period) ? BigInt(object.validator_period.toString()) : BigInt(0),
       fraction: isSet(object.fraction) ? String(object.fraction) : ""
     };
   },
@@ -887,7 +883,7 @@ export const ValidatorSlashEvent = {
   },
   fromAmino(object: ValidatorSlashEventAmino): ValidatorSlashEvent {
     return {
-      validatorPeriod: object?.validator_period ? BigInt(object.validator_period) : undefined,
+      validatorPeriod: BigInt(object.validator_period),
       fraction: object.fraction
     };
   },
@@ -1129,22 +1125,22 @@ export const FeePool = {
 };
 function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
   return {
-    title: undefined,
-    description: undefined,
-    recipient: undefined,
+    title: "",
+    description: "",
+    recipient: "",
     amount: []
   };
 }
 export const CommunityPoolSpendProposal = {
   typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal",
   encode(message: CommunityPoolSpendProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.recipient !== undefined) {
+    if (message.recipient !== "") {
       writer.uint32(26).string(message.recipient);
     }
     for (const v of message.amount) {
@@ -1200,9 +1196,9 @@ export const CommunityPoolSpendProposal = {
   },
   fromPartial(object: DeepPartial<CommunityPoolSpendProposal>): CommunityPoolSpendProposal {
     const message = createBaseCommunityPoolSpendProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
-    message.recipient = object.recipient ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.recipient = object.recipient ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -1216,9 +1212,9 @@ export const CommunityPoolSpendProposal = {
   },
   fromSDKJSON(object: any): CommunityPoolSpendProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      recipient: isSet(object.recipient) ? String(object.recipient) : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -1236,9 +1232,9 @@ export const CommunityPoolSpendProposal = {
   },
   fromAmino(object: CommunityPoolSpendProposalAmino): CommunityPoolSpendProposal {
     return {
-      title: object?.title,
-      description: object?.description,
-      recipient: object?.recipient,
+      title: object.title,
+      description: object.description,
+      recipient: object.recipient,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -1278,21 +1274,21 @@ export const CommunityPoolSpendProposal = {
 };
 function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
   return {
-    previousPeriod: undefined,
+    previousPeriod: BigInt(0),
     stake: "",
-    height: undefined
+    height: BigInt(0)
   };
 }
 export const DelegatorStartingInfo = {
   typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfo",
   encode(message: DelegatorStartingInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.previousPeriod !== undefined) {
+    if (message.previousPeriod !== BigInt(0)) {
       writer.uint32(8).uint64(message.previousPeriod);
     }
     if (message.stake !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.stake, 18).atomics);
     }
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(24).uint64(message.height);
     }
     return writer;
@@ -1329,13 +1325,9 @@ export const DelegatorStartingInfo = {
   },
   toJSON(message: DelegatorStartingInfo): unknown {
     const obj: any = {};
-    if (message.previousPeriod !== undefined) {
-      obj.previousPeriod = message.previousPeriod.toString();
-    }
+    message.previousPeriod !== undefined && (obj.previousPeriod = (message.previousPeriod || BigInt(0)).toString());
     message.stake !== undefined && (obj.stake = message.stake);
-    if (message.height !== undefined) {
-      obj.height = message.height.toString();
-    }
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
@@ -1358,9 +1350,9 @@ export const DelegatorStartingInfo = {
   },
   fromSDKJSON(object: any): DelegatorStartingInfoSDKType {
     return {
-      previous_period: isSet(object.previous_period) ? BigInt(object.previous_period.toString()) : undefined,
+      previous_period: isSet(object.previous_period) ? BigInt(object.previous_period.toString()) : BigInt(0),
       stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
     };
   },
   toSDK(message: DelegatorStartingInfo): DelegatorStartingInfoSDKType {
@@ -1372,9 +1364,9 @@ export const DelegatorStartingInfo = {
   },
   fromAmino(object: DelegatorStartingInfoAmino): DelegatorStartingInfo {
     return {
-      previousPeriod: object?.previous_period ? BigInt(object.previous_period) : undefined,
+      previousPeriod: BigInt(object.previous_period),
       stake: object.stake,
-      height: object?.height ? BigInt(object.height) : undefined
+      height: BigInt(object.height)
     };
   },
   toAmino(message: DelegatorStartingInfo): DelegatorStartingInfoAmino {
@@ -1408,14 +1400,14 @@ export const DelegatorStartingInfo = {
 };
 function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
   return {
-    validatorAddress: undefined,
+    validatorAddress: "",
     reward: []
   };
 }
 export const DelegationDelegatorReward = {
   typeUrl: "/cosmos.distribution.v1beta1.DelegationDelegatorReward",
   encode(message: DelegationDelegatorReward, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
     for (const v of message.reward) {
@@ -1461,7 +1453,7 @@ export const DelegationDelegatorReward = {
   },
   fromPartial(object: DeepPartial<DelegationDelegatorReward>): DelegationDelegatorReward {
     const message = createBaseDelegationDelegatorReward();
-    message.validatorAddress = object.validatorAddress ?? undefined;
+    message.validatorAddress = object.validatorAddress ?? "";
     message.reward = object.reward?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
   },
@@ -1473,7 +1465,7 @@ export const DelegationDelegatorReward = {
   },
   fromSDKJSON(object: any): DelegationDelegatorRewardSDKType {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : undefined,
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDKJSON(e)) : []
     };
   },
@@ -1489,7 +1481,7 @@ export const DelegationDelegatorReward = {
   },
   fromAmino(object: DelegationDelegatorRewardAmino): DelegationDelegatorReward {
     return {
-      validatorAddress: object?.validator_address,
+      validatorAddress: object.validator_address,
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
@@ -1527,29 +1519,29 @@ export const DelegationDelegatorReward = {
 };
 function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendProposalWithDeposit {
   return {
-    title: undefined,
-    description: undefined,
-    recipient: undefined,
-    amount: undefined,
-    deposit: undefined
+    title: "",
+    description: "",
+    recipient: "",
+    amount: "",
+    deposit: ""
   };
 }
 export const CommunityPoolSpendProposalWithDeposit = {
   typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit",
   encode(message: CommunityPoolSpendProposalWithDeposit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.recipient !== undefined) {
+    if (message.recipient !== "") {
       writer.uint32(26).string(message.recipient);
     }
-    if (message.amount !== undefined) {
+    if (message.amount !== "") {
       writer.uint32(34).string(message.amount);
     }
-    if (message.deposit !== undefined) {
+    if (message.deposit !== "") {
       writer.uint32(42).string(message.deposit);
     }
     return writer;
@@ -1603,11 +1595,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
   fromPartial(object: DeepPartial<CommunityPoolSpendProposalWithDeposit>): CommunityPoolSpendProposalWithDeposit {
     const message = createBaseCommunityPoolSpendProposalWithDeposit();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
-    message.recipient = object.recipient ?? undefined;
-    message.amount = object.amount ?? undefined;
-    message.deposit = object.deposit ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.recipient = object.recipient ?? "";
+    message.amount = object.amount ?? "";
+    message.deposit = object.deposit ?? "";
     return message;
   },
   fromSDK(object: CommunityPoolSpendProposalWithDepositSDKType): CommunityPoolSpendProposalWithDeposit {
@@ -1621,11 +1613,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
   fromSDKJSON(object: any): CommunityPoolSpendProposalWithDepositSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      recipient: isSet(object.recipient) ? String(object.recipient) : undefined,
-      amount: isSet(object.amount) ? String(object.amount) : undefined,
-      deposit: isSet(object.deposit) ? String(object.deposit) : undefined
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      deposit: isSet(object.deposit) ? String(object.deposit) : ""
     };
   },
   toSDK(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositSDKType {
@@ -1639,11 +1631,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
   fromAmino(object: CommunityPoolSpendProposalWithDepositAmino): CommunityPoolSpendProposalWithDeposit {
     return {
-      title: object?.title,
-      description: object?.description,
-      recipient: object?.recipient,
-      amount: object?.amount,
-      deposit: object?.deposit
+      title: object.title,
+      description: object.description,
+      recipient: object.recipient,
+      amount: object.amount,
+      deposit: object.deposit
     };
   },
   toAmino(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositAmino {

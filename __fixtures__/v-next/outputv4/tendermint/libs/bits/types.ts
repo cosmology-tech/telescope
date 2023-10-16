@@ -2,23 +2,23 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
-  bits?: bigint;
+  bits: bigint;
   elems: bigint[];
 }
 export interface BitArraySDKType {
-  bits?: bigint;
+  bits: bigint;
   elems: bigint[];
 }
 function createBaseBitArray(): BitArray {
   return {
-    bits: undefined,
+    bits: BigInt(0),
     elems: []
   };
 }
 export const BitArray = {
   typeUrl: "/tendermint.libs.bits.BitArray",
   encode(message: BitArray, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.bits !== undefined) {
+    if (message.bits !== BigInt(0)) {
       writer.uint32(8).int64(message.bits);
     }
     writer.uint32(18).fork();
@@ -63,11 +63,9 @@ export const BitArray = {
   },
   toJSON(message: BitArray): unknown {
     const obj: any = {};
-    if (message.bits !== undefined) {
-      obj.bits = message.bits.toString();
-    }
+    message.bits !== undefined && (obj.bits = (message.bits || BigInt(0)).toString());
     if (message.elems) {
-      obj.elems = message.elems.map(e => (e || undefined).toString());
+      obj.elems = message.elems.map(e => (e || BigInt(0)).toString());
     } else {
       obj.elems = [];
     }
@@ -89,7 +87,7 @@ export const BitArray = {
   },
   fromSDKJSON(object: any): BitArraySDKType {
     return {
-      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : undefined,
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt(0),
       elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
     };
   },
@@ -105,7 +103,7 @@ export const BitArray = {
   },
   fromAmino(object: BitArrayAmino): BitArray {
     return {
-      bits: object?.bits ? BigInt(object.bits) : undefined,
+      bits: BigInt(object.bits),
       elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e)) : []
     };
   },

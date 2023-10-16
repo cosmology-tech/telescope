@@ -100,34 +100,34 @@ export function fractionalPayment_StateToJSON(object: FractionalPayment_State): 
 }
 /** AccountID is the account identifier */
 export interface AccountID {
-  scope?: string;
-  xid?: string;
+  scope: string;
+  xid: string;
 }
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
-  scope?: string;
-  xid?: string;
+  scope: string;
+  xid: string;
 }
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
   id: AccountID;
   /** bech32 encoded account address of the owner of this escrow account */
-  owner?: string;
+  owner: string;
   /** current state of this escrow account */
-  state?: Account_State;
+  state: Account_State;
   /** unspent coins received from the owner's wallet */
   balance: DecCoin;
   /** total coins spent by this account */
   transferred: DecCoin;
   /** block height at which this account was last settled */
-  settledAt?: bigint;
+  settledAt: bigint;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
    * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
-  depositor?: string;
+  depositor: string;
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
@@ -137,20 +137,20 @@ export interface Account {
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
-  owner?: string;
-  state?: Account_State;
+  owner: string;
+  state: Account_State;
   balance: DecCoinSDKType;
   transferred: DecCoinSDKType;
-  settled_at?: bigint;
-  depositor?: string;
+  settled_at: bigint;
+  depositor: string;
   funds: DecCoinSDKType;
 }
 /** Payment stores state for a payment */
 export interface FractionalPayment {
   accountId: AccountID;
-  paymentId?: string;
-  owner?: string;
-  state?: FractionalPayment_State;
+  paymentId: string;
+  owner: string;
+  state: FractionalPayment_State;
   rate: DecCoin;
   balance: DecCoin;
   withdrawn: Coin;
@@ -158,26 +158,26 @@ export interface FractionalPayment {
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
   account_id: AccountIDSDKType;
-  payment_id?: string;
-  owner?: string;
-  state?: FractionalPayment_State;
+  payment_id: string;
+  owner: string;
+  state: FractionalPayment_State;
   rate: DecCoinSDKType;
   balance: DecCoinSDKType;
   withdrawn: CoinSDKType;
 }
 function createBaseAccountID(): AccountID {
   return {
-    scope: undefined,
-    xid: undefined
+    scope: "",
+    xid: ""
   };
 }
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta2.AccountID",
   encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== undefined) {
+    if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== undefined) {
+    if (message.xid !== "") {
       writer.uint32(18).string(message.xid);
     }
     return writer;
@@ -216,8 +216,8 @@ export const AccountID = {
   },
   fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
     const message = createBaseAccountID();
-    message.scope = object.scope ?? undefined;
-    message.xid = object.xid ?? undefined;
+    message.scope = object.scope ?? "";
+    message.xid = object.xid ?? "";
     return message;
   },
   fromSDK(object: AccountIDSDKType): AccountID {
@@ -228,8 +228,8 @@ export const AccountID = {
   },
   fromSDKJSON(object: any): AccountIDSDKType {
     return {
-      scope: isSet(object.scope) ? String(object.scope) : undefined,
-      xid: isSet(object.xid) ? String(object.xid) : undefined
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : ""
     };
   },
   toSDK(message: AccountID): AccountIDSDKType {
@@ -240,8 +240,8 @@ export const AccountID = {
   },
   fromAmino(object: AccountIDAmino): AccountID {
     return {
-      scope: object?.scope,
-      xid: object?.xid
+      scope: object.scope,
+      xid: object.xid
     };
   },
   toAmino(message: AccountID): AccountIDAmino {
@@ -275,12 +275,12 @@ export const AccountID = {
 function createBaseAccount(): Account {
   return {
     id: AccountID.fromPartial({}),
-    owner: undefined,
-    state: undefined,
+    owner: "",
+    state: 0,
     balance: DecCoin.fromPartial({}),
     transferred: DecCoin.fromPartial({}),
-    settledAt: undefined,
-    depositor: undefined,
+    settledAt: BigInt(0),
+    depositor: "",
     funds: DecCoin.fromPartial({})
   };
 }
@@ -290,10 +290,10 @@ export const Account = {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       writer.uint32(24).int32(message.state);
     }
     if (message.balance !== undefined) {
@@ -302,10 +302,10 @@ export const Account = {
     if (message.transferred !== undefined) {
       DecCoin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
-    if (message.settledAt !== undefined) {
+    if (message.settledAt !== BigInt(0)) {
       writer.uint32(48).int64(message.settledAt);
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       writer.uint32(58).string(message.depositor);
     }
     if (message.funds !== undefined) {
@@ -370,9 +370,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toJSON(message.transferred) : undefined);
-    if (message.settledAt !== undefined) {
-      obj.settledAt = message.settledAt.toString();
-    }
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toJSON(message.funds) : undefined);
     return obj;
@@ -382,8 +380,8 @@ export const Account = {
     if (object.id !== undefined && object.id !== null) {
       message.id = AccountID.fromPartial(object.id);
     }
-    message.owner = object.owner ?? undefined;
-    message.state = object.state ?? undefined;
+    message.owner = object.owner ?? "";
+    message.state = object.state ?? 0;
     if (object.balance !== undefined && object.balance !== null) {
       message.balance = DecCoin.fromPartial(object.balance);
     }
@@ -393,7 +391,7 @@ export const Account = {
     if (object.settledAt !== undefined && object.settledAt !== null) {
       message.settledAt = BigInt(object.settledAt.toString());
     }
-    message.depositor = object.depositor ?? undefined;
+    message.depositor = object.depositor ?? "";
     if (object.funds !== undefined && object.funds !== null) {
       message.funds = DecCoin.fromPartial(object.funds);
     }
@@ -403,7 +401,7 @@ export const Account = {
     return {
       id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? DecCoin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at,
@@ -414,12 +412,12 @@ export const Account = {
   fromSDKJSON(object: any): AccountSDKType {
     return {
       id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : undefined,
-      depositor: isSet(object.depositor) ? String(object.depositor) : undefined,
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0),
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
       funds: isSet(object.funds) ? DecCoin.fromSDKJSON(object.funds) : undefined
     };
   },
@@ -438,12 +436,12 @@ export const Account = {
   fromAmino(object: AccountAmino): Account {
     return {
       id: object?.id ? AccountID.fromAmino(object.id) : undefined,
-      owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : undefined,
+      owner: object.owner,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
       transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
-      settledAt: object?.settled_at ? BigInt(object.settled_at) : undefined,
-      depositor: object?.depositor,
+      settledAt: BigInt(object.settled_at),
+      depositor: object.depositor,
       funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
     };
   },
@@ -484,9 +482,9 @@ export const Account = {
 function createBaseFractionalPayment(): FractionalPayment {
   return {
     accountId: AccountID.fromPartial({}),
-    paymentId: undefined,
-    owner: undefined,
-    state: undefined,
+    paymentId: "",
+    owner: "",
+    state: 0,
     rate: DecCoin.fromPartial({}),
     balance: DecCoin.fromPartial({}),
     withdrawn: Coin.fromPartial({})
@@ -498,13 +496,13 @@ export const FractionalPayment = {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.paymentId !== undefined) {
+    if (message.paymentId !== "") {
       writer.uint32(18).string(message.paymentId);
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(26).string(message.owner);
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       writer.uint32(32).int32(message.state);
     }
     if (message.rate !== undefined) {
@@ -580,9 +578,9 @@ export const FractionalPayment = {
     if (object.accountId !== undefined && object.accountId !== null) {
       message.accountId = AccountID.fromPartial(object.accountId);
     }
-    message.paymentId = object.paymentId ?? undefined;
-    message.owner = object.owner ?? undefined;
-    message.state = object.state ?? undefined;
+    message.paymentId = object.paymentId ?? "";
+    message.owner = object.owner ?? "";
+    message.state = object.state ?? 0;
     if (object.rate !== undefined && object.rate !== null) {
       message.rate = DecCoin.fromPartial(object.rate);
     }
@@ -599,7 +597,7 @@ export const FractionalPayment = {
       accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: object.rate ? DecCoin.fromSDK(object.rate) : undefined,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
@@ -608,9 +606,9 @@ export const FractionalPayment = {
   fromSDKJSON(object: any): FractionalPaymentSDKType {
     return {
       account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
-      payment_id: isSet(object.payment_id) ? String(object.payment_id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : undefined,
+      payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? DecCoin.fromSDKJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined
@@ -630,9 +628,9 @@ export const FractionalPayment = {
   fromAmino(object: FractionalPaymentAmino): FractionalPayment {
     return {
       accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
-      paymentId: object?.payment_id,
-      owner: object?.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : undefined,
+      paymentId: object.payment_id,
+      owner: object.owner,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: object?.rate ? DecCoin.fromAmino(object.rate) : undefined,
       balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
       withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined

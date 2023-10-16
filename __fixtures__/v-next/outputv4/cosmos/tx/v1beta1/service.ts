@@ -113,7 +113,7 @@ export interface GetTxsEventRequest {
   events: string[];
   /** pagination defines a pagination for the request. */
   pagination?: PageRequest;
-  orderBy?: OrderBy;
+  orderBy: OrderBy;
 }
 /**
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
@@ -122,7 +122,7 @@ export interface GetTxsEventRequest {
 export interface GetTxsEventRequestSDKType {
   events: string[];
   pagination?: PageRequestSDKType;
-  order_by?: OrderBy;
+  order_by: OrderBy;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
@@ -151,16 +151,16 @@ export interface GetTxsEventResponseSDKType {
  */
 export interface BroadcastTxRequest {
   /** tx_bytes is the raw transaction. */
-  txBytes?: Uint8Array;
-  mode?: BroadcastMode;
+  txBytes: Uint8Array;
+  mode: BroadcastMode;
 }
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
  * RPC method.
  */
 export interface BroadcastTxRequestSDKType {
-  tx_bytes?: Uint8Array;
-  mode?: BroadcastMode;
+  tx_bytes: Uint8Array;
+  mode: BroadcastMode;
 }
 /**
  * BroadcastTxResponse is the response type for the
@@ -193,7 +193,7 @@ export interface SimulateRequest {
    * 
    * Since: cosmos-sdk 0.43
    */
-  txBytes?: Uint8Array;
+  txBytes: Uint8Array;
 }
 /**
  * SimulateRequest is the request type for the Service.Simulate
@@ -202,7 +202,7 @@ export interface SimulateRequest {
 export interface SimulateRequestSDKType {
   /** @deprecated */
   tx?: TxSDKType;
-  tx_bytes?: Uint8Array;
+  tx_bytes: Uint8Array;
 }
 /**
  * SimulateResponse is the response type for the
@@ -228,14 +228,14 @@ export interface SimulateResponseSDKType {
  */
 export interface GetTxRequest {
   /** hash is the tx hash to query, encoded as a hex string. */
-  hash?: string;
+  hash: string;
 }
 /**
  * GetTxRequest is the request type for the Service.GetTx
  * RPC method.
  */
 export interface GetTxRequestSDKType {
-  hash?: string;
+  hash: string;
 }
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
@@ -257,7 +257,7 @@ export interface GetTxResponseSDKType {
  */
 export interface GetBlockWithTxsRequest {
   /** height is the height of the block to query. */
-  height?: bigint;
+  height: bigint;
   /** pagination defines a pagination for the request. */
   pagination?: PageRequest;
 }
@@ -268,7 +268,7 @@ export interface GetBlockWithTxsRequest {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequestSDKType {
-  height?: bigint;
+  height: bigint;
   pagination?: PageRequestSDKType;
 }
 /**
@@ -299,7 +299,7 @@ function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return {
     events: [],
     pagination: undefined,
-    orderBy: undefined
+    orderBy: 0
   };
 }
 export const GetTxsEventRequest = {
@@ -311,7 +311,7 @@ export const GetTxsEventRequest = {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
-    if (message.orderBy !== undefined) {
+    if (message.orderBy !== 0) {
       writer.uint32(24).int32(message.orderBy);
     }
     return writer;
@@ -363,21 +363,21 @@ export const GetTxsEventRequest = {
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
-    message.orderBy = object.orderBy ?? undefined;
+    message.orderBy = object.orderBy ?? 0;
     return message;
   },
   fromSDK(object: GetTxsEventRequestSDKType): GetTxsEventRequest {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => e) : [],
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined,
-      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : undefined
+      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : -1
     };
   },
   fromSDKJSON(object: any): GetTxsEventRequestSDKType {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => String(e)) : [],
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
-      order_by: isSet(object.order_by) ? orderByFromJSON(object.order_by) : undefined
+      order_by: isSet(object.order_by) ? orderByFromJSON(object.order_by) : -1
     };
   },
   toSDK(message: GetTxsEventRequest): GetTxsEventRequestSDKType {
@@ -395,7 +395,7 @@ export const GetTxsEventRequest = {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => e) : [],
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : undefined
+      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : -1
     };
   },
   toAmino(message: GetTxsEventRequest): GetTxsEventRequestAmino {
@@ -581,17 +581,17 @@ export const GetTxsEventResponse = {
 };
 function createBaseBroadcastTxRequest(): BroadcastTxRequest {
   return {
-    txBytes: undefined,
-    mode: undefined
+    txBytes: new Uint8Array(),
+    mode: 0
   };
 }
 export const BroadcastTxRequest = {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest",
   encode(message: BroadcastTxRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.txBytes !== undefined) {
+    if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
     }
-    if (message.mode !== undefined) {
+    if (message.mode !== 0) {
       writer.uint32(16).int32(message.mode);
     }
     return writer;
@@ -624,26 +624,26 @@ export const BroadcastTxRequest = {
   },
   toJSON(message: BroadcastTxRequest): unknown {
     const obj: any = {};
-    message.txBytes !== undefined && (obj.txBytes = message.txBytes !== undefined ? base64FromBytes(message.txBytes) : undefined);
+    message.txBytes !== undefined && (obj.txBytes = base64FromBytes(message.txBytes !== undefined ? message.txBytes : new Uint8Array()));
     message.mode !== undefined && (obj.mode = broadcastModeToJSON(message.mode));
     return obj;
   },
   fromPartial(object: DeepPartial<BroadcastTxRequest>): BroadcastTxRequest {
     const message = createBaseBroadcastTxRequest();
-    message.txBytes = object.txBytes ?? undefined;
-    message.mode = object.mode ?? undefined;
+    message.txBytes = object.txBytes ?? new Uint8Array();
+    message.mode = object.mode ?? 0;
     return message;
   },
   fromSDK(object: BroadcastTxRequestSDKType): BroadcastTxRequest {
     return {
       txBytes: object?.tx_bytes,
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : undefined
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   fromSDKJSON(object: any): BroadcastTxRequestSDKType {
     return {
-      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : undefined,
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : undefined
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array(),
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   toSDK(message: BroadcastTxRequest): BroadcastTxRequestSDKType {
@@ -654,8 +654,8 @@ export const BroadcastTxRequest = {
   },
   fromAmino(object: BroadcastTxRequestAmino): BroadcastTxRequest {
     return {
-      txBytes: object?.tx_bytes,
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : undefined
+      txBytes: object.tx_bytes,
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   toAmino(message: BroadcastTxRequest): BroadcastTxRequestAmino {
@@ -783,7 +783,7 @@ export const BroadcastTxResponse = {
 function createBaseSimulateRequest(): SimulateRequest {
   return {
     tx: undefined,
-    txBytes: undefined
+    txBytes: new Uint8Array()
   };
 }
 export const SimulateRequest = {
@@ -792,7 +792,7 @@ export const SimulateRequest = {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
     }
-    if (message.txBytes !== undefined) {
+    if (message.txBytes.length !== 0) {
       writer.uint32(18).bytes(message.txBytes);
     }
     return writer;
@@ -826,7 +826,7 @@ export const SimulateRequest = {
   toJSON(message: SimulateRequest): unknown {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toJSON(message.tx) : undefined);
-    message.txBytes !== undefined && (obj.txBytes = message.txBytes !== undefined ? base64FromBytes(message.txBytes) : undefined);
+    message.txBytes !== undefined && (obj.txBytes = base64FromBytes(message.txBytes !== undefined ? message.txBytes : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<SimulateRequest>): SimulateRequest {
@@ -834,7 +834,7 @@ export const SimulateRequest = {
     if (object.tx !== undefined && object.tx !== null) {
       message.tx = Tx.fromPartial(object.tx);
     }
-    message.txBytes = object.txBytes ?? undefined;
+    message.txBytes = object.txBytes ?? new Uint8Array();
     return message;
   },
   fromSDK(object: SimulateRequestSDKType): SimulateRequest {
@@ -846,7 +846,7 @@ export const SimulateRequest = {
   fromSDKJSON(object: any): SimulateRequestSDKType {
     return {
       tx: isSet(object.tx) ? Tx.fromSDKJSON(object.tx) : undefined,
-      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : undefined
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array()
     };
   },
   toSDK(message: SimulateRequest): SimulateRequestSDKType {
@@ -858,7 +858,7 @@ export const SimulateRequest = {
   fromAmino(object: SimulateRequestAmino): SimulateRequest {
     return {
       tx: object?.tx ? Tx.fromAmino(object.tx) : undefined,
-      txBytes: object?.tx_bytes
+      txBytes: object.tx_bytes
     };
   },
   toAmino(message: SimulateRequest): SimulateRequestAmino {
@@ -1002,13 +1002,13 @@ export const SimulateResponse = {
 };
 function createBaseGetTxRequest(): GetTxRequest {
   return {
-    hash: undefined
+    hash: ""
   };
 }
 export const GetTxRequest = {
   typeUrl: "/cosmos.tx.v1beta1.GetTxRequest",
   encode(message: GetTxRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash !== undefined) {
+    if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
     }
     return writer;
@@ -1042,7 +1042,7 @@ export const GetTxRequest = {
   },
   fromPartial(object: DeepPartial<GetTxRequest>): GetTxRequest {
     const message = createBaseGetTxRequest();
-    message.hash = object.hash ?? undefined;
+    message.hash = object.hash ?? "";
     return message;
   },
   fromSDK(object: GetTxRequestSDKType): GetTxRequest {
@@ -1052,7 +1052,7 @@ export const GetTxRequest = {
   },
   fromSDKJSON(object: any): GetTxRequestSDKType {
     return {
-      hash: isSet(object.hash) ? String(object.hash) : undefined
+      hash: isSet(object.hash) ? String(object.hash) : ""
     };
   },
   toSDK(message: GetTxRequest): GetTxRequestSDKType {
@@ -1062,7 +1062,7 @@ export const GetTxRequest = {
   },
   fromAmino(object: GetTxRequestAmino): GetTxRequest {
     return {
-      hash: object?.hash
+      hash: object.hash
     };
   },
   toAmino(message: GetTxRequest): GetTxRequestAmino {
@@ -1205,14 +1205,14 @@ export const GetTxResponse = {
 };
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
   return {
-    height: undefined,
+    height: BigInt(0),
     pagination: undefined
   };
 }
 export const GetBlockWithTxsRequest = {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest",
   encode(message: GetBlockWithTxsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(8).int64(message.height);
     }
     if (message.pagination !== undefined) {
@@ -1248,9 +1248,7 @@ export const GetBlockWithTxsRequest = {
   },
   toJSON(message: GetBlockWithTxsRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
-      obj.height = message.height.toString();
-    }
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -1272,7 +1270,7 @@ export const GetBlockWithTxsRequest = {
   },
   fromSDKJSON(object: any): GetBlockWithTxsRequestSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1284,7 +1282,7 @@ export const GetBlockWithTxsRequest = {
   },
   fromAmino(object: GetBlockWithTxsRequestAmino): GetBlockWithTxsRequest {
     return {
-      height: object?.height ? BigInt(object.height) : undefined,
+      height: BigInt(object.height),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },

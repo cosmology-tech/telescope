@@ -6,11 +6,11 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
   /** evidence_hash defines the hash of the requested evidence. */
-  evidenceHash?: Uint8Array;
+  evidenceHash: Uint8Array;
 }
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestSDKType {
-  evidence_hash?: Uint8Array;
+  evidence_hash: Uint8Array;
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponse {
@@ -56,13 +56,13 @@ export interface QueryAllEvidenceResponseSDKType {
 }
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
   return {
-    evidenceHash: undefined
+    evidenceHash: new Uint8Array()
   };
 }
 export const QueryEvidenceRequest = {
   typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest",
   encode(message: QueryEvidenceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.evidenceHash !== undefined) {
+    if (message.evidenceHash.length !== 0) {
       writer.uint32(10).bytes(message.evidenceHash);
     }
     return writer;
@@ -91,12 +91,12 @@ export const QueryEvidenceRequest = {
   },
   toJSON(message: QueryEvidenceRequest): unknown {
     const obj: any = {};
-    message.evidenceHash !== undefined && (obj.evidenceHash = message.evidenceHash !== undefined ? base64FromBytes(message.evidenceHash) : undefined);
+    message.evidenceHash !== undefined && (obj.evidenceHash = base64FromBytes(message.evidenceHash !== undefined ? message.evidenceHash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<QueryEvidenceRequest>): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
-    message.evidenceHash = object.evidenceHash ?? undefined;
+    message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     return message;
   },
   fromSDK(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
@@ -106,7 +106,7 @@ export const QueryEvidenceRequest = {
   },
   fromSDKJSON(object: any): QueryEvidenceRequestSDKType {
     return {
-      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : undefined
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
     };
   },
   toSDK(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
@@ -116,7 +116,7 @@ export const QueryEvidenceRequest = {
   },
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
     return {
-      evidenceHash: object?.evidence_hash
+      evidenceHash: object.evidence_hash
     };
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {

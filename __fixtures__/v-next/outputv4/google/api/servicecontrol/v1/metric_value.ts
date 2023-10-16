@@ -67,7 +67,7 @@ export interface MetricValueSDKType {
  */
 export interface MetricValueSet {
   /** The metric name defined in the service configuration. */
-  metricName?: string;
+  metricName: string;
   /** The values in this metric. */
   metricValues: MetricValue[];
 }
@@ -77,7 +77,7 @@ export interface MetricValueSet {
  * end time, and label values.
  */
 export interface MetricValueSetSDKType {
-  metric_name?: string;
+  metric_name: string;
   metric_values: MetricValueSDKType[];
 }
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
@@ -421,14 +421,14 @@ export const MetricValue = {
 };
 function createBaseMetricValueSet(): MetricValueSet {
   return {
-    metricName: undefined,
+    metricName: "",
     metricValues: []
   };
 }
 export const MetricValueSet = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
   encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     for (const v of message.metricValues) {
@@ -474,7 +474,7 @@ export const MetricValueSet = {
   },
   fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {
     const message = createBaseMetricValueSet();
-    message.metricName = object.metricName ?? undefined;
+    message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
     return message;
   },
@@ -486,7 +486,7 @@ export const MetricValueSet = {
   },
   fromSDKJSON(object: any): MetricValueSetSDKType {
     return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : undefined,
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
       metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
     };
   },
@@ -502,7 +502,7 @@ export const MetricValueSet = {
   },
   fromAmino(object: MetricValueSetAmino): MetricValueSet {
     return {
-      metricName: object?.metric_name,
+      metricName: object.metric_name,
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
     };
   },

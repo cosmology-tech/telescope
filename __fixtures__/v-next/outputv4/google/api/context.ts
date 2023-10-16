@@ -98,7 +98,7 @@ export interface ContextRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector?: string;
+  selector: string;
   /** A list of full type names of requested contexts. */
   requested: string[];
   /** A list of full type names of provided contexts. */
@@ -119,7 +119,7 @@ export interface ContextRule {
  * element.
  */
 export interface ContextRuleSDKType {
-  selector?: string;
+  selector: string;
   requested: string[];
   provided: string[];
   allowed_request_extensions: string[];
@@ -225,7 +225,7 @@ export const Context = {
 };
 function createBaseContextRule(): ContextRule {
   return {
-    selector: undefined,
+    selector: "",
     requested: [],
     provided: [],
     allowedRequestExtensions: [],
@@ -235,7 +235,7 @@ function createBaseContextRule(): ContextRule {
 export const ContextRule = {
   typeUrl: "/google.api.ContextRule",
   encode(message: ContextRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.requested) {
@@ -317,7 +317,7 @@ export const ContextRule = {
   },
   fromPartial(object: DeepPartial<ContextRule>): ContextRule {
     const message = createBaseContextRule();
-    message.selector = object.selector ?? undefined;
+    message.selector = object.selector ?? "";
     message.requested = object.requested?.map(e => e) || [];
     message.provided = object.provided?.map(e => e) || [];
     message.allowedRequestExtensions = object.allowedRequestExtensions?.map(e => e) || [];
@@ -335,7 +335,7 @@ export const ContextRule = {
   },
   fromSDKJSON(object: any): ContextRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : undefined,
+      selector: isSet(object.selector) ? String(object.selector) : "",
       requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => String(e)) : [],
       provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => String(e)) : [],
       allowed_request_extensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => String(e)) : [],
@@ -369,7 +369,7 @@ export const ContextRule = {
   },
   fromAmino(object: ContextRuleAmino): ContextRule {
     return {
-      selector: object?.selector,
+      selector: object.selector,
       requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
       provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
       allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],

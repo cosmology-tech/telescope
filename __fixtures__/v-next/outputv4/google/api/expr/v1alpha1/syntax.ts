@@ -39,7 +39,7 @@ export interface Expr {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id?: bigint;
+  id: bigint;
   /** A literal expression. */
   constExpr?: Constant;
   /** An identifier expression. */
@@ -73,7 +73,7 @@ export interface Expr {
  * the function declaration `startsWith`.
  */
 export interface ExprSDKType {
-  id?: bigint;
+  id: bigint;
   const_expr?: ConstantSDKType;
   ident_expr?: Expr_IdentSDKType;
   select_expr?: Expr_SelectSDKType;
@@ -90,11 +90,11 @@ export interface Expr_Ident {
    * 
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
    */
-  name?: string;
+  name: string;
 }
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
-  name?: string;
+  name: string;
 }
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_Select {
@@ -111,19 +111,19 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `auth` portion
    * of the expression would be the `field`.
    */
-  field?: string;
+  field: string;
   /**
    * Whether the select is to be interpreted as a field presence test.
    * 
    * This results from the macro `has(request.auth)`.
    */
-  testOnly?: boolean;
+  testOnly: boolean;
 }
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
-  field?: string;
-  test_only?: boolean;
+  field: string;
+  test_only: boolean;
 }
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -137,7 +137,7 @@ export interface Expr_Call {
    */
   target?: Expr;
   /** Required. The name of the function or method being called. */
-  function?: string;
+  function: string;
   /** The arguments. */
   args: Expr[];
 }
@@ -148,7 +148,7 @@ export interface Expr_Call {
  */
 export interface Expr_CallSDKType {
   target?: ExprSDKType;
-  function?: string;
+  function: string;
   args: ExprSDKType[];
 }
 /**
@@ -182,7 +182,7 @@ export interface Expr_CreateStruct {
    * The type name of the message to be created, empty when creating map
    * literals.
    */
-  messageName?: string;
+  messageName: string;
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
@@ -194,7 +194,7 @@ export interface Expr_CreateStruct {
  * `types.MyType{field_id: 'value'}`.
  */
 export interface Expr_CreateStructSDKType {
-  message_name?: string;
+  message_name: string;
   entries: Expr_CreateStruct_EntrySDKType[];
 }
 /** Represents an entry. */
@@ -204,7 +204,7 @@ export interface Expr_CreateStruct_Entry {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id?: bigint;
+  id: bigint;
   /** The field key for a message creator statement. */
   fieldKey?: string;
   /** The key expression for a map creation statement. */
@@ -214,7 +214,7 @@ export interface Expr_CreateStruct_Entry {
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
-  id?: bigint;
+  id: bigint;
   field_key?: string;
   map_key?: ExprSDKType;
   value?: ExprSDKType;
@@ -249,11 +249,11 @@ export interface Expr_CreateStruct_EntrySDKType {
  */
 export interface Expr_Comprehension {
   /** The name of the iteration variable. */
-  iterVar?: string;
+  iterVar: string;
   /** The range over which var iterates. */
   iterRange?: Expr;
   /** The name of the variable used for accumulation of the result. */
-  accuVar?: string;
+  accuVar: string;
   /** The initial value of the accumulator. */
   accuInit?: Expr;
   /**
@@ -305,9 +305,9 @@ export interface Expr_Comprehension {
  * types, the macro tests whether the property `x` is defined on `m`.
  */
 export interface Expr_ComprehensionSDKType {
-  iter_var?: string;
+  iter_var: string;
   iter_range?: ExprSDKType;
-  accu_var?: string;
+  accu_var: string;
   accu_init?: ExprSDKType;
   loop_condition?: ExprSDKType;
   loop_step?: ExprSDKType;
@@ -396,16 +396,16 @@ export interface SourceInfo_PositionsEntrySDKType {
 }
 export interface SourceInfo_MacroCallsEntry {
   key: bigint;
-  value: Expr;
+  value?: Expr;
 }
 export interface SourceInfo_MacroCallsEntrySDKType {
   key: bigint;
-  value: ExprSDKType;
+  value?: ExprSDKType;
 }
 /** Source information collected at parse time. */
 export interface SourceInfo {
   /** The syntax version of the source, e.g. `cel1`. */
-  syntaxVersion?: string;
+  syntaxVersion: string;
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
@@ -413,7 +413,7 @@ export interface SourceInfo {
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
-  location?: string;
+  location: string;
   /**
    * Monotonically increasing list of code point offsets where newlines
    * `\n` appear.
@@ -446,8 +446,8 @@ export interface SourceInfo {
 }
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
-  syntax_version?: string;
-  location?: string;
+  syntax_version: string;
+  location: string;
   line_offsets: number[];
   positions: {
     [key: bigint]: number;
@@ -459,26 +459,26 @@ export interface SourceInfoSDKType {
 /** A specific position in source. */
 export interface SourcePosition {
   /** The soucre location name (e.g. file name). */
-  location?: string;
+  location: string;
   /** The UTF-8 code unit offset. */
-  offset?: number;
+  offset: number;
   /**
    * The 1-based index of the starting line in the source text
    * where the issue occurs, or 0 if unknown.
    */
-  line?: number;
+  line: number;
   /**
    * The 0-based index of the starting position within the line of source text
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
-  column?: number;
+  column: number;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
-  location?: string;
-  offset?: number;
-  line?: number;
-  column?: number;
+  location: string;
+  offset: number;
+  line: number;
+  column: number;
 }
 function createBaseParsedExpr(): ParsedExpr {
   return {
@@ -587,7 +587,7 @@ export const ParsedExpr = {
 };
 function createBaseExpr(): Expr {
   return {
-    id: undefined,
+    id: BigInt(0),
     constExpr: undefined,
     identExpr: undefined,
     selectExpr: undefined,
@@ -600,7 +600,7 @@ function createBaseExpr(): Expr {
 export const Expr = {
   typeUrl: "/google.api.expr.v1alpha1.Expr",
   encode(message: Expr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(16).int64(message.id);
     }
     if (message.constExpr !== undefined) {
@@ -678,9 +678,7 @@ export const Expr = {
   },
   toJSON(message: Expr): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
-      obj.id = message.id.toString();
-    }
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.constExpr !== undefined && (obj.constExpr = message.constExpr ? Constant.toJSON(message.constExpr) : undefined);
     message.identExpr !== undefined && (obj.identExpr = message.identExpr ? Expr_Ident.toJSON(message.identExpr) : undefined);
     message.selectExpr !== undefined && (obj.selectExpr = message.selectExpr ? Expr_Select.toJSON(message.selectExpr) : undefined);
@@ -732,7 +730,7 @@ export const Expr = {
   },
   fromSDKJSON(object: any): ExprSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       const_expr: isSet(object.const_expr) ? Constant.fromSDKJSON(object.const_expr) : undefined,
       ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
       select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
@@ -756,7 +754,7 @@ export const Expr = {
   },
   fromAmino(object: ExprAmino): Expr {
     return {
-      id: object?.id ? BigInt(object.id) : undefined,
+      id: BigInt(object.id),
       constExpr: object?.const_expr ? Constant.fromAmino(object.const_expr) : undefined,
       identExpr: object?.ident_expr ? Expr_Ident.fromAmino(object.ident_expr) : undefined,
       selectExpr: object?.select_expr ? Expr_Select.fromAmino(object.select_expr) : undefined,
@@ -796,13 +794,13 @@ export const Expr = {
 };
 function createBaseExpr_Ident(): Expr_Ident {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const Expr_Ident = {
   typeUrl: "/google.api.expr.v1alpha1.Ident",
   encode(message: Expr_Ident, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -836,7 +834,7 @@ export const Expr_Ident = {
   },
   fromPartial(object: DeepPartial<Expr_Ident>): Expr_Ident {
     const message = createBaseExpr_Ident();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: Expr_IdentSDKType): Expr_Ident {
@@ -846,7 +844,7 @@ export const Expr_Ident = {
   },
   fromSDKJSON(object: any): Expr_IdentSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: Expr_Ident): Expr_IdentSDKType {
@@ -856,7 +854,7 @@ export const Expr_Ident = {
   },
   fromAmino(object: Expr_IdentAmino): Expr_Ident {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: Expr_Ident): Expr_IdentAmino {
@@ -883,8 +881,8 @@ export const Expr_Ident = {
 function createBaseExpr_Select(): Expr_Select {
   return {
     operand: undefined,
-    field: undefined,
-    testOnly: undefined
+    field: "",
+    testOnly: false
   };
 }
 export const Expr_Select = {
@@ -893,10 +891,10 @@ export const Expr_Select = {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
     }
-    if (message.field !== undefined) {
+    if (message.field !== "") {
       writer.uint32(18).string(message.field);
     }
-    if (message.testOnly !== undefined) {
+    if (message.testOnly === true) {
       writer.uint32(24).bool(message.testOnly);
     }
     return writer;
@@ -943,8 +941,8 @@ export const Expr_Select = {
     if (object.operand !== undefined && object.operand !== null) {
       message.operand = Expr.fromPartial(object.operand);
     }
-    message.field = object.field ?? undefined;
-    message.testOnly = object.testOnly ?? undefined;
+    message.field = object.field ?? "";
+    message.testOnly = object.testOnly ?? false;
     return message;
   },
   fromSDK(object: Expr_SelectSDKType): Expr_Select {
@@ -957,8 +955,8 @@ export const Expr_Select = {
   fromSDKJSON(object: any): Expr_SelectSDKType {
     return {
       operand: isSet(object.operand) ? Expr.fromSDKJSON(object.operand) : undefined,
-      field: isSet(object.field) ? String(object.field) : undefined,
-      test_only: isSet(object.test_only) ? Boolean(object.test_only) : undefined
+      field: isSet(object.field) ? String(object.field) : "",
+      test_only: isSet(object.test_only) ? Boolean(object.test_only) : false
     };
   },
   toSDK(message: Expr_Select): Expr_SelectSDKType {
@@ -971,8 +969,8 @@ export const Expr_Select = {
   fromAmino(object: Expr_SelectAmino): Expr_Select {
     return {
       operand: object?.operand ? Expr.fromAmino(object.operand) : undefined,
-      field: object?.field,
-      testOnly: object?.test_only
+      field: object.field,
+      testOnly: object.test_only
     };
   },
   toAmino(message: Expr_Select): Expr_SelectAmino {
@@ -1001,7 +999,7 @@ export const Expr_Select = {
 function createBaseExpr_Call(): Expr_Call {
   return {
     target: undefined,
-    function: undefined,
+    function: "",
     args: []
   };
 }
@@ -1011,7 +1009,7 @@ export const Expr_Call = {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
     }
-    if (message.function !== undefined) {
+    if (message.function !== "") {
       writer.uint32(18).string(message.function);
     }
     for (const v of message.args) {
@@ -1065,7 +1063,7 @@ export const Expr_Call = {
     if (object.target !== undefined && object.target !== null) {
       message.target = Expr.fromPartial(object.target);
     }
-    message.function = object.function ?? undefined;
+    message.function = object.function ?? "";
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
   },
@@ -1079,7 +1077,7 @@ export const Expr_Call = {
   fromSDKJSON(object: any): Expr_CallSDKType {
     return {
       target: isSet(object.target) ? Expr.fromSDKJSON(object.target) : undefined,
-      function: isSet(object.function) ? String(object.function) : undefined,
+      function: isSet(object.function) ? String(object.function) : "",
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDKJSON(e)) : []
     };
   },
@@ -1097,7 +1095,7 @@ export const Expr_Call = {
   fromAmino(object: Expr_CallAmino): Expr_Call {
     return {
       target: object?.target ? Expr.fromAmino(object.target) : undefined,
-      function: object?.function,
+      function: object.function,
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromAmino(e)) : []
     };
   },
@@ -1228,14 +1226,14 @@ export const Expr_CreateList = {
 };
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
   return {
-    messageName: undefined,
+    messageName: "",
     entries: []
   };
 }
 export const Expr_CreateStruct = {
   typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
   encode(message: Expr_CreateStruct, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.messageName !== undefined) {
+    if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
     }
     for (const v of message.entries) {
@@ -1281,7 +1279,7 @@ export const Expr_CreateStruct = {
   },
   fromPartial(object: DeepPartial<Expr_CreateStruct>): Expr_CreateStruct {
     const message = createBaseExpr_CreateStruct();
-    message.messageName = object.messageName ?? undefined;
+    message.messageName = object.messageName ?? "";
     message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
     return message;
   },
@@ -1293,7 +1291,7 @@ export const Expr_CreateStruct = {
   },
   fromSDKJSON(object: any): Expr_CreateStructSDKType {
     return {
-      message_name: isSet(object.message_name) ? String(object.message_name) : undefined,
+      message_name: isSet(object.message_name) ? String(object.message_name) : "",
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDKJSON(e)) : []
     };
   },
@@ -1309,7 +1307,7 @@ export const Expr_CreateStruct = {
   },
   fromAmino(object: Expr_CreateStructAmino): Expr_CreateStruct {
     return {
-      messageName: object?.message_name,
+      messageName: object.message_name,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromAmino(e)) : []
     };
   },
@@ -1341,7 +1339,7 @@ export const Expr_CreateStruct = {
 };
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
-    id: undefined,
+    id: BigInt(0),
     fieldKey: undefined,
     mapKey: undefined,
     value: undefined
@@ -1350,7 +1348,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 export const Expr_CreateStruct_Entry = {
   typeUrl: "/google.api.expr.v1alpha1.Entry",
   encode(message: Expr_CreateStruct_Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).int64(message.id);
     }
     if (message.fieldKey !== undefined) {
@@ -1400,9 +1398,7 @@ export const Expr_CreateStruct_Entry = {
   },
   toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
-      obj.id = message.id.toString();
-    }
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
     message.mapKey !== undefined && (obj.mapKey = message.mapKey ? Expr.toJSON(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
@@ -1432,7 +1428,7 @@ export const Expr_CreateStruct_Entry = {
   },
   fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
       map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
       value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
@@ -1448,7 +1444,7 @@ export const Expr_CreateStruct_Entry = {
   },
   fromAmino(object: Expr_CreateStruct_EntryAmino): Expr_CreateStruct_Entry {
     return {
-      id: object?.id ? BigInt(object.id) : undefined,
+      id: BigInt(object.id),
       fieldKey: object?.field_key,
       mapKey: object?.map_key ? Expr.fromAmino(object.map_key) : undefined,
       value: object?.value ? Expr.fromAmino(object.value) : undefined
@@ -1480,9 +1476,9 @@ export const Expr_CreateStruct_Entry = {
 };
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
-    iterVar: undefined,
+    iterVar: "",
     iterRange: undefined,
-    accuVar: undefined,
+    accuVar: "",
     accuInit: undefined,
     loopCondition: undefined,
     loopStep: undefined,
@@ -1492,13 +1488,13 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 export const Expr_Comprehension = {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension",
   encode(message: Expr_Comprehension, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.iterVar !== undefined) {
+    if (message.iterVar !== "") {
       writer.uint32(10).string(message.iterVar);
     }
     if (message.iterRange !== undefined) {
       Expr.encode(message.iterRange, writer.uint32(18).fork()).ldelim();
     }
-    if (message.accuVar !== undefined) {
+    if (message.accuVar !== "") {
       writer.uint32(26).string(message.accuVar);
     }
     if (message.accuInit !== undefined) {
@@ -1574,11 +1570,11 @@ export const Expr_Comprehension = {
   },
   fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
     const message = createBaseExpr_Comprehension();
-    message.iterVar = object.iterVar ?? undefined;
+    message.iterVar = object.iterVar ?? "";
     if (object.iterRange !== undefined && object.iterRange !== null) {
       message.iterRange = Expr.fromPartial(object.iterRange);
     }
-    message.accuVar = object.accuVar ?? undefined;
+    message.accuVar = object.accuVar ?? "";
     if (object.accuInit !== undefined && object.accuInit !== null) {
       message.accuInit = Expr.fromPartial(object.accuInit);
     }
@@ -1606,9 +1602,9 @@ export const Expr_Comprehension = {
   },
   fromSDKJSON(object: any): Expr_ComprehensionSDKType {
     return {
-      iter_var: isSet(object.iter_var) ? String(object.iter_var) : undefined,
+      iter_var: isSet(object.iter_var) ? String(object.iter_var) : "",
       iter_range: isSet(object.iter_range) ? Expr.fromSDKJSON(object.iter_range) : undefined,
-      accu_var: isSet(object.accu_var) ? String(object.accu_var) : undefined,
+      accu_var: isSet(object.accu_var) ? String(object.accu_var) : "",
       accu_init: isSet(object.accu_init) ? Expr.fromSDKJSON(object.accu_init) : undefined,
       loop_condition: isSet(object.loop_condition) ? Expr.fromSDKJSON(object.loop_condition) : undefined,
       loop_step: isSet(object.loop_step) ? Expr.fromSDKJSON(object.loop_step) : undefined,
@@ -1628,9 +1624,9 @@ export const Expr_Comprehension = {
   },
   fromAmino(object: Expr_ComprehensionAmino): Expr_Comprehension {
     return {
-      iterVar: object?.iter_var,
+      iterVar: object.iter_var,
       iterRange: object?.iter_range ? Expr.fromAmino(object.iter_range) : undefined,
-      accuVar: object?.accu_var,
+      accuVar: object.accu_var,
       accuInit: object?.accu_init ? Expr.fromAmino(object.accu_init) : undefined,
       loopCondition: object?.loop_condition ? Expr.fromAmino(object.loop_condition) : undefined,
       loopStep: object?.loop_step ? Expr.fromAmino(object.loop_step) : undefined,
@@ -1979,7 +1975,7 @@ export const SourceInfo_PositionsEntry = {
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
   return {
     key: BigInt(0),
-    value: Expr.fromPartial({})
+    value: undefined
   };
 }
 export const SourceInfo_MacroCallsEntry = {
@@ -2076,8 +2072,8 @@ export const SourceInfo_MacroCallsEntry = {
 };
 function createBaseSourceInfo(): SourceInfo {
   return {
-    syntaxVersion: undefined,
-    location: undefined,
+    syntaxVersion: "",
+    location: "",
     lineOffsets: [],
     positions: {},
     macroCalls: {}
@@ -2086,10 +2082,10 @@ function createBaseSourceInfo(): SourceInfo {
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.syntaxVersion !== undefined) {
+    if (message.syntaxVersion !== "") {
       writer.uint32(10).string(message.syntaxVersion);
     }
-    if (message.location !== undefined) {
+    if (message.location !== "") {
       writer.uint32(18).string(message.location);
     }
     writer.uint32(26).fork();
@@ -2197,8 +2193,8 @@ export const SourceInfo = {
   },
   fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
-    message.syntaxVersion = object.syntaxVersion ?? undefined;
-    message.location = object.location ?? undefined;
+    message.syntaxVersion = object.syntaxVersion ?? "";
+    message.location = object.location ?? "";
     message.lineOffsets = object.lineOffsets?.map(e => e) || [];
     message.positions = Object.entries(object.positions ?? {}).reduce<{
       [key: bigint]: number;
@@ -2239,8 +2235,8 @@ export const SourceInfo = {
   },
   fromSDKJSON(object: any): SourceInfoSDKType {
     return {
-      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : undefined,
-      location: isSet(object.location) ? String(object.location) : undefined,
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
+      location: isSet(object.location) ? String(object.location) : "",
       line_offsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => Number(e)) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: bigint]: number;
@@ -2281,8 +2277,8 @@ export const SourceInfo = {
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
     return {
-      syntaxVersion: object?.syntax_version,
-      location: object?.location,
+      syntaxVersion: object.syntax_version,
+      location: object.location,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: bigint]: number;
@@ -2339,25 +2335,25 @@ export const SourceInfo = {
 };
 function createBaseSourcePosition(): SourcePosition {
   return {
-    location: undefined,
-    offset: undefined,
-    line: undefined,
-    column: undefined
+    location: "",
+    offset: 0,
+    line: 0,
+    column: 0
   };
 }
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== undefined) {
+    if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }
-    if (message.offset !== undefined) {
+    if (message.offset !== 0) {
       writer.uint32(16).int32(message.offset);
     }
-    if (message.line !== undefined) {
+    if (message.line !== 0) {
       writer.uint32(24).int32(message.line);
     }
-    if (message.column !== undefined) {
+    if (message.column !== 0) {
       writer.uint32(32).int32(message.column);
     }
     return writer;
@@ -2406,10 +2402,10 @@ export const SourcePosition = {
   },
   fromPartial(object: DeepPartial<SourcePosition>): SourcePosition {
     const message = createBaseSourcePosition();
-    message.location = object.location ?? undefined;
-    message.offset = object.offset ?? undefined;
-    message.line = object.line ?? undefined;
-    message.column = object.column ?? undefined;
+    message.location = object.location ?? "";
+    message.offset = object.offset ?? 0;
+    message.line = object.line ?? 0;
+    message.column = object.column ?? 0;
     return message;
   },
   fromSDK(object: SourcePositionSDKType): SourcePosition {
@@ -2422,10 +2418,10 @@ export const SourcePosition = {
   },
   fromSDKJSON(object: any): SourcePositionSDKType {
     return {
-      location: isSet(object.location) ? String(object.location) : undefined,
-      offset: isSet(object.offset) ? Number(object.offset) : undefined,
-      line: isSet(object.line) ? Number(object.line) : undefined,
-      column: isSet(object.column) ? Number(object.column) : undefined
+      location: isSet(object.location) ? String(object.location) : "",
+      offset: isSet(object.offset) ? Number(object.offset) : 0,
+      line: isSet(object.line) ? Number(object.line) : 0,
+      column: isSet(object.column) ? Number(object.column) : 0
     };
   },
   toSDK(message: SourcePosition): SourcePositionSDKType {
@@ -2438,10 +2434,10 @@ export const SourcePosition = {
   },
   fromAmino(object: SourcePositionAmino): SourcePosition {
     return {
-      location: object?.location,
-      offset: object?.offset,
-      line: object?.line,
-      column: object?.column
+      location: object.location,
+      offset: object.offset,
+      line: object.line,
+      column: object.column
     };
   },
   toAmino(message: SourcePosition): SourcePositionAmino {

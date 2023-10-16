@@ -5,11 +5,11 @@ export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
   /** The id of the declaration. */
-  id?: number;
+  id: number;
   /** The name of the declaration. */
-  name?: string;
+  name: string;
   /** The documentation string for the declaration. */
-  doc?: string;
+  doc: string;
   /** An identifier declaration. */
   ident?: IdentDecl;
   /** A function declaration. */
@@ -17,9 +17,9 @@ export interface Decl {
 }
 /** A declaration. */
 export interface DeclSDKType {
-  id?: number;
-  name?: string;
-  doc?: string;
+  id: number;
+  name: string;
+  doc: string;
   ident?: IdentDeclSDKType;
   function?: FunctionDeclSDKType;
 }
@@ -31,9 +31,9 @@ export interface DeclSDKType {
  */
 export interface DeclType {
   /** The expression id of the declared type, if applicable. */
-  id?: number;
+  id: number;
   /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
-  type?: string;
+  type: string;
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
    * Only applies to a subset of types, e.g. `map`, `list`.
@@ -47,8 +47,8 @@ export interface DeclType {
  * and dispatching.
  */
 export interface DeclTypeSDKType {
-  id?: number;
-  type?: string;
+  id: number;
+  type: string;
   type_params: DeclTypeSDKType[];
 }
 /** An identifier declaration. */
@@ -70,19 +70,19 @@ export interface FunctionDecl {
   /** Optional declared return type. */
   returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
-  receiverFunction?: boolean;
+  receiverFunction: boolean;
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {
   args: IdentDeclSDKType[];
   return_type?: DeclTypeSDKType;
-  receiver_function?: boolean;
+  receiver_function: boolean;
 }
 function createBaseDecl(): Decl {
   return {
-    id: undefined,
-    name: undefined,
-    doc: undefined,
+    id: 0,
+    name: "",
+    doc: "",
     ident: undefined,
     function: undefined
   };
@@ -90,13 +90,13 @@ function createBaseDecl(): Decl {
 export const Decl = {
   typeUrl: "/google.api.expr.v1beta1.Decl",
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.doc !== undefined) {
+    if (message.doc !== "") {
       writer.uint32(26).string(message.doc);
     }
     if (message.ident !== undefined) {
@@ -156,9 +156,9 @@ export const Decl = {
   },
   fromPartial(object: DeepPartial<Decl>): Decl {
     const message = createBaseDecl();
-    message.id = object.id ?? undefined;
-    message.name = object.name ?? undefined;
-    message.doc = object.doc ?? undefined;
+    message.id = object.id ?? 0;
+    message.name = object.name ?? "";
+    message.doc = object.doc ?? "";
     if (object.ident !== undefined && object.ident !== null) {
       message.ident = IdentDecl.fromPartial(object.ident);
     }
@@ -178,9 +178,9 @@ export const Decl = {
   },
   fromSDKJSON(object: any): DeclSDKType {
     return {
-      id: isSet(object.id) ? Number(object.id) : undefined,
-      name: isSet(object.name) ? String(object.name) : undefined,
-      doc: isSet(object.doc) ? String(object.doc) : undefined,
+      id: isSet(object.id) ? Number(object.id) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      doc: isSet(object.doc) ? String(object.doc) : "",
       ident: isSet(object.ident) ? IdentDecl.fromSDKJSON(object.ident) : undefined,
       function: isSet(object.function) ? FunctionDecl.fromSDKJSON(object.function) : undefined
     };
@@ -196,9 +196,9 @@ export const Decl = {
   },
   fromAmino(object: DeclAmino): Decl {
     return {
-      id: object?.id,
-      name: object?.name,
-      doc: object?.doc,
+      id: object.id,
+      name: object.name,
+      doc: object.doc,
       ident: object?.ident ? IdentDecl.fromAmino(object.ident) : undefined,
       function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
     };
@@ -230,18 +230,18 @@ export const Decl = {
 };
 function createBaseDeclType(): DeclType {
   return {
-    id: undefined,
-    type: undefined,
+    id: 0,
+    type: "",
     typeParams: []
   };
 }
 export const DeclType = {
   typeUrl: "/google.api.expr.v1beta1.DeclType",
   encode(message: DeclType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(18).string(message.type);
     }
     for (const v of message.typeParams) {
@@ -292,8 +292,8 @@ export const DeclType = {
   },
   fromPartial(object: DeepPartial<DeclType>): DeclType {
     const message = createBaseDeclType();
-    message.id = object.id ?? undefined;
-    message.type = object.type ?? undefined;
+    message.id = object.id ?? 0;
+    message.type = object.type ?? "";
     message.typeParams = object.typeParams?.map(e => DeclType.fromPartial(e)) || [];
     return message;
   },
@@ -306,8 +306,8 @@ export const DeclType = {
   },
   fromSDKJSON(object: any): DeclTypeSDKType {
     return {
-      id: isSet(object.id) ? Number(object.id) : undefined,
-      type: isSet(object.type) ? String(object.type) : undefined,
+      id: isSet(object.id) ? Number(object.id) : 0,
+      type: isSet(object.type) ? String(object.type) : "",
       type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDKJSON(e)) : []
     };
   },
@@ -324,8 +324,8 @@ export const DeclType = {
   },
   fromAmino(object: DeclTypeAmino): DeclType {
     return {
-      id: object?.id,
-      type: object?.type,
+      id: object.id,
+      type: object.type,
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
     };
   },
@@ -465,7 +465,7 @@ function createBaseFunctionDecl(): FunctionDecl {
   return {
     args: [],
     returnType: undefined,
-    receiverFunction: undefined
+    receiverFunction: false
   };
 }
 export const FunctionDecl = {
@@ -477,7 +477,7 @@ export const FunctionDecl = {
     if (message.returnType !== undefined) {
       DeclType.encode(message.returnType, writer.uint32(18).fork()).ldelim();
     }
-    if (message.receiverFunction !== undefined) {
+    if (message.receiverFunction === true) {
       writer.uint32(24).bool(message.receiverFunction);
     }
     return writer;
@@ -529,7 +529,7 @@ export const FunctionDecl = {
     if (object.returnType !== undefined && object.returnType !== null) {
       message.returnType = DeclType.fromPartial(object.returnType);
     }
-    message.receiverFunction = object.receiverFunction ?? undefined;
+    message.receiverFunction = object.receiverFunction ?? false;
     return message;
   },
   fromSDK(object: FunctionDeclSDKType): FunctionDecl {
@@ -543,7 +543,7 @@ export const FunctionDecl = {
     return {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDKJSON(e)) : [],
       return_type: isSet(object.return_type) ? DeclType.fromSDKJSON(object.return_type) : undefined,
-      receiver_function: isSet(object.receiver_function) ? Boolean(object.receiver_function) : undefined
+      receiver_function: isSet(object.receiver_function) ? Boolean(object.receiver_function) : false
     };
   },
   toSDK(message: FunctionDecl): FunctionDeclSDKType {
@@ -561,7 +561,7 @@ export const FunctionDecl = {
     return {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
       returnType: object?.return_type ? DeclType.fromAmino(object.return_type) : undefined,
-      receiverFunction: object?.receiver_function
+      receiverFunction: object.receiver_function
     };
   },
   toAmino(message: FunctionDecl): FunctionDeclAmino {

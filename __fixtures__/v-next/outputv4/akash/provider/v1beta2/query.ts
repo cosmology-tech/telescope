@@ -23,11 +23,11 @@ export interface QueryProvidersResponseSDKType {
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
-  owner?: string;
+  owner: string;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestSDKType {
-  owner?: string;
+  owner: string;
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
@@ -254,13 +254,13 @@ export const QueryProvidersResponse = {
 };
 function createBaseQueryProviderRequest(): QueryProviderRequest {
   return {
-    owner: undefined
+    owner: ""
   };
 }
 export const QueryProviderRequest = {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest",
   encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -294,7 +294,7 @@ export const QueryProviderRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryProviderRequest>, I>>(object: I): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     return message;
   },
   fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
@@ -304,7 +304,7 @@ export const QueryProviderRequest = {
   },
   fromSDKJSON(object: any): QueryProviderRequestSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
   toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
@@ -314,7 +314,7 @@ export const QueryProviderRequest = {
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
     return {
-      owner: object?.owner
+      owner: object.owner
     };
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {

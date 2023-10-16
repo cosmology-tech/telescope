@@ -3,11 +3,11 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
-  validatorAddr?: string;
+  validatorAddr: string;
 }
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailSDKType {
-  validator_addr?: string;
+  validator_addr: string;
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
@@ -15,13 +15,13 @@ export interface MsgUnjailResponse {}
 export interface MsgUnjailResponseSDKType {}
 function createBaseMsgUnjail(): MsgUnjail {
   return {
-    validatorAddr: undefined
+    validatorAddr: ""
   };
 }
 export const MsgUnjail = {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
   encode(message: MsgUnjail, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== undefined) {
+    if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
     }
     return writer;
@@ -55,7 +55,7 @@ export const MsgUnjail = {
   },
   fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
-    message.validatorAddr = object.validatorAddr ?? undefined;
+    message.validatorAddr = object.validatorAddr ?? "";
     return message;
   },
   fromSDK(object: MsgUnjailSDKType): MsgUnjail {
@@ -65,7 +65,7 @@ export const MsgUnjail = {
   },
   fromSDKJSON(object: any): MsgUnjailSDKType {
     return {
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : undefined
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
     };
   },
   toSDK(message: MsgUnjail): MsgUnjailSDKType {
@@ -75,7 +75,7 @@ export const MsgUnjail = {
   },
   fromAmino(object: MsgUnjailAmino): MsgUnjail {
     return {
-      validatorAddr: object?.validator_addr
+      validatorAddr: object.validator_addr
     };
   },
   toAmino(message: MsgUnjail): MsgUnjailAmino {

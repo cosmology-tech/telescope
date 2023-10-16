@@ -16,32 +16,32 @@ export interface EvidenceSDKType {
 export interface DuplicateVoteEvidence {
   voteA?: Vote;
   voteB?: Vote;
-  totalVotingPower?: bigint;
-  validatorPower?: bigint;
+  totalVotingPower: bigint;
+  validatorPower: bigint;
   timestamp: Date;
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
   vote_a?: VoteSDKType;
   vote_b?: VoteSDKType;
-  total_voting_power?: bigint;
-  validator_power?: bigint;
+  total_voting_power: bigint;
+  validator_power: bigint;
   timestamp: Date;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
   conflictingBlock?: LightBlock;
-  commonHeight?: bigint;
+  commonHeight: bigint;
   byzantineValidators: Validator[];
-  totalVotingPower?: bigint;
+  totalVotingPower: bigint;
   timestamp: Date;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
   conflicting_block?: LightBlockSDKType;
-  common_height?: bigint;
+  common_height: bigint;
   byzantine_validators: ValidatorSDKType[];
-  total_voting_power?: bigint;
+  total_voting_power: bigint;
   timestamp: Date;
 }
 export interface EvidenceList {
@@ -159,8 +159,8 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
     voteA: undefined,
     voteB: undefined,
-    totalVotingPower: undefined,
-    validatorPower: undefined,
+    totalVotingPower: BigInt(0),
+    validatorPower: BigInt(0),
     timestamp: new Date()
   };
 }
@@ -173,10 +173,10 @@ export const DuplicateVoteEvidence = {
     if (message.voteB !== undefined) {
       Vote.encode(message.voteB, writer.uint32(18).fork()).ldelim();
     }
-    if (message.totalVotingPower !== undefined) {
+    if (message.totalVotingPower !== BigInt(0)) {
       writer.uint32(24).int64(message.totalVotingPower);
     }
-    if (message.validatorPower !== undefined) {
+    if (message.validatorPower !== BigInt(0)) {
       writer.uint32(32).int64(message.validatorPower);
     }
     if (message.timestamp !== undefined) {
@@ -226,12 +226,8 @@ export const DuplicateVoteEvidence = {
     const obj: any = {};
     message.voteA !== undefined && (obj.voteA = message.voteA ? Vote.toJSON(message.voteA) : undefined);
     message.voteB !== undefined && (obj.voteB = message.voteB ? Vote.toJSON(message.voteB) : undefined);
-    if (message.totalVotingPower !== undefined) {
-      obj.totalVotingPower = message.totalVotingPower.toString();
-    }
-    if (message.validatorPower !== undefined) {
-      obj.validatorPower = message.validatorPower.toString();
-    }
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
+    message.validatorPower !== undefined && (obj.validatorPower = (message.validatorPower || BigInt(0)).toString());
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
     return obj;
   },
@@ -265,8 +261,8 @@ export const DuplicateVoteEvidence = {
     return {
       vote_a: isSet(object.vote_a) ? Vote.fromSDKJSON(object.vote_a) : undefined,
       vote_b: isSet(object.vote_b) ? Vote.fromSDKJSON(object.vote_b) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : undefined,
-      validator_power: isSet(object.validator_power) ? BigInt(object.validator_power.toString()) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt(0),
+      validator_power: isSet(object.validator_power) ? BigInt(object.validator_power.toString()) : BigInt(0),
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
@@ -283,8 +279,8 @@ export const DuplicateVoteEvidence = {
     return {
       voteA: object?.vote_a ? Vote.fromAmino(object.vote_a) : undefined,
       voteB: object?.vote_b ? Vote.fromAmino(object.vote_b) : undefined,
-      totalVotingPower: object?.total_voting_power ? BigInt(object.total_voting_power) : undefined,
-      validatorPower: object?.validator_power ? BigInt(object.validator_power) : undefined,
+      totalVotingPower: BigInt(object.total_voting_power),
+      validatorPower: BigInt(object.validator_power),
       timestamp: object.timestamp
     };
   },
@@ -316,9 +312,9 @@ export const DuplicateVoteEvidence = {
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
     conflictingBlock: undefined,
-    commonHeight: undefined,
+    commonHeight: BigInt(0),
     byzantineValidators: [],
-    totalVotingPower: undefined,
+    totalVotingPower: BigInt(0),
     timestamp: new Date()
   };
 }
@@ -328,13 +324,13 @@ export const LightClientAttackEvidence = {
     if (message.conflictingBlock !== undefined) {
       LightBlock.encode(message.conflictingBlock, writer.uint32(10).fork()).ldelim();
     }
-    if (message.commonHeight !== undefined) {
+    if (message.commonHeight !== BigInt(0)) {
       writer.uint32(16).int64(message.commonHeight);
     }
     for (const v of message.byzantineValidators) {
       Validator.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.totalVotingPower !== undefined) {
+    if (message.totalVotingPower !== BigInt(0)) {
       writer.uint32(32).int64(message.totalVotingPower);
     }
     if (message.timestamp !== undefined) {
@@ -383,17 +379,13 @@ export const LightClientAttackEvidence = {
   toJSON(message: LightClientAttackEvidence): unknown {
     const obj: any = {};
     message.conflictingBlock !== undefined && (obj.conflictingBlock = message.conflictingBlock ? LightBlock.toJSON(message.conflictingBlock) : undefined);
-    if (message.commonHeight !== undefined) {
-      obj.commonHeight = message.commonHeight.toString();
-    }
+    message.commonHeight !== undefined && (obj.commonHeight = (message.commonHeight || BigInt(0)).toString());
     if (message.byzantineValidators) {
       obj.byzantineValidators = message.byzantineValidators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
       obj.byzantineValidators = [];
     }
-    if (message.totalVotingPower !== undefined) {
-      obj.totalVotingPower = message.totalVotingPower.toString();
-    }
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
     return obj;
   },
@@ -424,9 +416,9 @@ export const LightClientAttackEvidence = {
   fromSDKJSON(object: any): LightClientAttackEvidenceSDKType {
     return {
       conflicting_block: isSet(object.conflicting_block) ? LightBlock.fromSDKJSON(object.conflicting_block) : undefined,
-      common_height: isSet(object.common_height) ? BigInt(object.common_height.toString()) : undefined,
+      common_height: isSet(object.common_height) ? BigInt(object.common_height.toString()) : BigInt(0),
       byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt(0),
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
@@ -446,9 +438,9 @@ export const LightClientAttackEvidence = {
   fromAmino(object: LightClientAttackEvidenceAmino): LightClientAttackEvidence {
     return {
       conflictingBlock: object?.conflicting_block ? LightBlock.fromAmino(object.conflicting_block) : undefined,
-      commonHeight: object?.common_height ? BigInt(object.common_height) : undefined,
+      commonHeight: BigInt(object.common_height),
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
-      totalVotingPower: object?.total_voting_power ? BigInt(object.total_voting_power) : undefined,
+      totalVotingPower: BigInt(object.total_voting_power),
       timestamp: object.timestamp
     };
   },

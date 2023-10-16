@@ -13,13 +13,13 @@ export const protobufPackage = "google.rpc";
  */
 export interface Status {
   /** The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]. */
-  code?: number;
+  code: number;
   /**
    * A developer-facing error message, which should be in English. Any
    * user-facing error message should be localized and sent in the
    * [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
    */
-  message?: string;
+  message: string;
   /**
    * A list of messages that carry the error details.  There is a common set of
    * message types for APIs to use.
@@ -36,24 +36,24 @@ export interface Status {
  * [API Design Guide](https://cloud.google.com/apis/design/errors).
  */
 export interface StatusSDKType {
-  code?: number;
-  message?: string;
+  code: number;
+  message: string;
   details: AnySDKType[];
 }
 function createBaseStatus(): Status {
   return {
-    code: undefined,
-    message: undefined,
+    code: 0,
+    message: "",
     details: []
   };
 }
 export const Status = {
   typeUrl: "/google.rpc.Status",
   encode(message: Status, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== undefined) {
+    if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.message !== undefined) {
+    if (message.message !== "") {
       writer.uint32(18).string(message.message);
     }
     for (const v of message.details) {
@@ -104,8 +104,8 @@ export const Status = {
   },
   fromPartial(object: DeepPartial<Status>): Status {
     const message = createBaseStatus();
-    message.code = object.code ?? undefined;
-    message.message = object.message ?? undefined;
+    message.code = object.code ?? 0;
+    message.message = object.message ?? "";
     message.details = object.details?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -118,8 +118,8 @@ export const Status = {
   },
   fromSDKJSON(object: any): StatusSDKType {
     return {
-      code: isSet(object.code) ? Number(object.code) : undefined,
-      message: isSet(object.message) ? String(object.message) : undefined,
+      code: isSet(object.code) ? Number(object.code) : 0,
+      message: isSet(object.message) ? String(object.message) : "",
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
@@ -136,8 +136,8 @@ export const Status = {
   },
   fromAmino(object: StatusAmino): Status {
     return {
-      code: object?.code,
-      message: object?.message,
+      code: object.code,
+      message: object.message,
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
     };
   },

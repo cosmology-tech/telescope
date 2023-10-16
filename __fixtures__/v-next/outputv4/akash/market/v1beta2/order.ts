@@ -52,69 +52,69 @@ export function order_StateToJSON(object: Order_State): string {
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderID {
-  owner?: string;
-  dseq?: bigint;
-  gseq?: number;
-  oseq?: number;
+  owner: string;
+  dseq: bigint;
+  gseq: number;
+  oseq: number;
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
-  owner?: string;
-  dseq?: bigint;
-  gseq?: number;
-  oseq?: number;
+  owner: string;
+  dseq: bigint;
+  gseq: number;
+  oseq: number;
 }
 /** Order stores orderID, state of order and other details */
 export interface Order {
   orderId: OrderID;
-  state?: Order_State;
+  state: Order_State;
   spec: GroupSpec;
-  createdAt?: bigint;
+  createdAt: bigint;
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
   order_id: OrderIDSDKType;
-  state?: Order_State;
+  state: Order_State;
   spec: GroupSpecSDKType;
-  created_at?: bigint;
+  created_at: bigint;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFilters {
-  owner?: string;
-  dseq?: bigint;
-  gseq?: number;
-  oseq?: number;
-  state?: string;
+  owner: string;
+  dseq: bigint;
+  gseq: number;
+  oseq: number;
+  state: string;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
-  owner?: string;
-  dseq?: bigint;
-  gseq?: number;
-  oseq?: number;
-  state?: string;
+  owner: string;
+  dseq: bigint;
+  gseq: number;
+  oseq: number;
+  state: string;
 }
 function createBaseOrderID(): OrderID {
   return {
-    owner: undefined,
-    dseq: undefined,
-    gseq: undefined,
-    oseq: undefined
+    owner: "",
+    dseq: BigInt(0),
+    gseq: 0,
+    oseq: 0
   };
 }
 export const OrderID = {
   typeUrl: "/akash.market.v1beta2.OrderID",
   encode(message: OrderID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== undefined) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== undefined) {
+    if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
     }
-    if (message.oseq !== undefined) {
+    if (message.oseq !== 0) {
       writer.uint32(32).uint32(message.oseq);
     }
     return writer;
@@ -156,21 +156,19 @@ export const OrderID = {
   toJSON(message: OrderID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    if (message.dseq !== undefined) {
-      obj.dseq = message.dseq.toString();
-    }
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
     const message = createBaseOrderID();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
       message.dseq = BigInt(object.dseq.toString());
     }
-    message.gseq = object.gseq ?? undefined;
-    message.oseq = object.oseq ?? undefined;
+    message.gseq = object.gseq ?? 0;
+    message.oseq = object.oseq ?? 0;
     return message;
   },
   fromSDK(object: OrderIDSDKType): OrderID {
@@ -183,10 +181,10 @@ export const OrderID = {
   },
   fromSDKJSON(object: any): OrderIDSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : undefined,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : undefined,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
   },
   toSDK(message: OrderID): OrderIDSDKType {
@@ -199,10 +197,10 @@ export const OrderID = {
   },
   fromAmino(object: OrderIDAmino): OrderID {
     return {
-      owner: object?.owner,
-      dseq: object?.dseq ? BigInt(object.dseq) : undefined,
-      gseq: object?.gseq,
-      oseq: object?.oseq
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq
     };
   },
   toAmino(message: OrderID): OrderIDAmino {
@@ -238,9 +236,9 @@ export const OrderID = {
 function createBaseOrder(): Order {
   return {
     orderId: OrderID.fromPartial({}),
-    state: undefined,
+    state: 0,
     spec: GroupSpec.fromPartial({}),
-    createdAt: undefined
+    createdAt: BigInt(0)
   };
 }
 export const Order = {
@@ -249,13 +247,13 @@ export const Order = {
     if (message.orderId !== undefined) {
       OrderID.encode(message.orderId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       writer.uint32(16).int32(message.state);
     }
     if (message.spec !== undefined) {
       GroupSpec.encode(message.spec, writer.uint32(26).fork()).ldelim();
     }
-    if (message.createdAt !== undefined) {
+    if (message.createdAt !== BigInt(0)) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
@@ -299,9 +297,7 @@ export const Order = {
     message.orderId !== undefined && (obj.orderId = message.orderId ? OrderID.toJSON(message.orderId) : undefined);
     message.state !== undefined && (obj.state = order_StateToJSON(message.state));
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toJSON(message.spec) : undefined);
-    if (message.createdAt !== undefined) {
-      obj.createdAt = message.createdAt.toString();
-    }
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
@@ -309,7 +305,7 @@ export const Order = {
     if (object.orderId !== undefined && object.orderId !== null) {
       message.orderId = OrderID.fromPartial(object.orderId);
     }
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     if (object.spec !== undefined && object.spec !== null) {
       message.spec = GroupSpec.fromPartial(object.spec);
     }
@@ -321,7 +317,7 @@ export const Order = {
   fromSDK(object: OrderSDKType): Order {
     return {
       orderId: object.order_id ? OrderID.fromSDK(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: object.spec ? GroupSpec.fromSDK(object.spec) : undefined,
       createdAt: object?.created_at
     };
@@ -329,9 +325,9 @@ export const Order = {
   fromSDKJSON(object: any): OrderSDKType {
     return {
       order_id: isSet(object.order_id) ? OrderID.fromSDKJSON(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: isSet(object.spec) ? GroupSpec.fromSDKJSON(object.spec) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : undefined
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };
   },
   toSDK(message: Order): OrderSDKType {
@@ -345,9 +341,9 @@ export const Order = {
   fromAmino(object: OrderAmino): Order {
     return {
       orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
-      createdAt: object?.created_at ? BigInt(object.created_at) : undefined
+      createdAt: BigInt(object.created_at)
     };
   },
   toAmino(message: Order): OrderAmino {
@@ -382,29 +378,29 @@ export const Order = {
 };
 function createBaseOrderFilters(): OrderFilters {
   return {
-    owner: undefined,
-    dseq: undefined,
-    gseq: undefined,
-    oseq: undefined,
-    state: undefined
+    owner: "",
+    dseq: BigInt(0),
+    gseq: 0,
+    oseq: 0,
+    state: ""
   };
 }
 export const OrderFilters = {
   typeUrl: "/akash.market.v1beta2.OrderFilters",
   encode(message: OrderFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== undefined) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== undefined) {
+    if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
     }
-    if (message.oseq !== undefined) {
+    if (message.oseq !== 0) {
       writer.uint32(32).uint32(message.oseq);
     }
-    if (message.state !== undefined) {
+    if (message.state !== "") {
       writer.uint32(42).string(message.state);
     }
     return writer;
@@ -450,9 +446,7 @@ export const OrderFilters = {
   toJSON(message: OrderFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    if (message.dseq !== undefined) {
-      obj.dseq = message.dseq.toString();
-    }
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.state !== undefined && (obj.state = message.state);
@@ -460,13 +454,13 @@ export const OrderFilters = {
   },
   fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
     const message = createBaseOrderFilters();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.dseq !== undefined && object.dseq !== null) {
       message.dseq = BigInt(object.dseq.toString());
     }
-    message.gseq = object.gseq ?? undefined;
-    message.oseq = object.oseq ?? undefined;
-    message.state = object.state ?? undefined;
+    message.gseq = object.gseq ?? 0;
+    message.oseq = object.oseq ?? 0;
+    message.state = object.state ?? "";
     return message;
   },
   fromSDK(object: OrderFiltersSDKType): OrderFilters {
@@ -480,11 +474,11 @@ export const OrderFilters = {
   },
   fromSDKJSON(object: any): OrderFiltersSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : undefined,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : undefined,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : undefined,
-      state: isSet(object.state) ? String(object.state) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      state: isSet(object.state) ? String(object.state) : ""
     };
   },
   toSDK(message: OrderFilters): OrderFiltersSDKType {
@@ -498,11 +492,11 @@ export const OrderFilters = {
   },
   fromAmino(object: OrderFiltersAmino): OrderFilters {
     return {
-      owner: object?.owner,
-      dseq: object?.dseq ? BigInt(object.dseq) : undefined,
-      gseq: object?.gseq,
-      oseq: object?.oseq,
-      state: object?.state
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      state: object.state
     };
   },
   toAmino(message: OrderFilters): OrderFiltersAmino {

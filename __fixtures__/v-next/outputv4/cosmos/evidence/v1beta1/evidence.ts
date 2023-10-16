@@ -7,42 +7,42 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  * signing misbehavior.
  */
 export interface Equivocation {
-  height?: bigint;
+  height: bigint;
   time: Date;
-  power?: bigint;
-  consensusAddress?: string;
+  power: bigint;
+  consensusAddress: string;
 }
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
  */
 export interface EquivocationSDKType {
-  height?: bigint;
+  height: bigint;
   time: Date;
-  power?: bigint;
-  consensus_address?: string;
+  power: bigint;
+  consensus_address: string;
 }
 function createBaseEquivocation(): Equivocation {
   return {
-    height: undefined,
+    height: BigInt(0),
     time: new Date(),
-    power: undefined,
-    consensusAddress: undefined
+    power: BigInt(0),
+    consensusAddress: ""
   };
 }
 export const Equivocation = {
   typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
   encode(message: Equivocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(8).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
-    if (message.power !== undefined) {
+    if (message.power !== BigInt(0)) {
       writer.uint32(24).int64(message.power);
     }
-    if (message.consensusAddress !== undefined) {
+    if (message.consensusAddress !== "") {
       writer.uint32(34).string(message.consensusAddress);
     }
     return writer;
@@ -83,13 +83,9 @@ export const Equivocation = {
   },
   toJSON(message: Equivocation): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
-      obj.height = message.height.toString();
-    }
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
-    if (message.power !== undefined) {
-      obj.power = message.power.toString();
-    }
+    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
     message.consensusAddress !== undefined && (obj.consensusAddress = message.consensusAddress);
     return obj;
   },
@@ -102,7 +98,7 @@ export const Equivocation = {
     if (object.power !== undefined && object.power !== null) {
       message.power = BigInt(object.power.toString());
     }
-    message.consensusAddress = object.consensusAddress ?? undefined;
+    message.consensusAddress = object.consensusAddress ?? "";
     return message;
   },
   fromSDK(object: EquivocationSDKType): Equivocation {
@@ -115,10 +111,10 @@ export const Equivocation = {
   },
   fromSDKJSON(object: any): EquivocationSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? BigInt(object.power.toString()) : undefined,
-      consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : undefined
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0),
+      consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
     };
   },
   toSDK(message: Equivocation): EquivocationSDKType {
@@ -131,10 +127,10 @@ export const Equivocation = {
   },
   fromAmino(object: EquivocationAmino): Equivocation {
     return {
-      height: object?.height ? BigInt(object.height) : undefined,
+      height: BigInt(object.height),
       time: object.time,
-      power: object?.power ? BigInt(object.power) : undefined,
-      consensusAddress: object?.consensus_address
+      power: BigInt(object.power),
+      consensusAddress: object.consensus_address
     };
   },
   toAmino(message: Equivocation): EquivocationAmino {

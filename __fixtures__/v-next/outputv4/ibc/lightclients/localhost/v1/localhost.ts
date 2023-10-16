@@ -8,7 +8,7 @@ export const protobufPackage = "ibc.lightclients.localhost.v1";
  */
 export interface ClientState {
   /** self chain ID */
-  chainId?: string;
+  chainId: string;
   /** self latest block height */
   height: Height;
 }
@@ -17,19 +17,19 @@ export interface ClientState {
  * access to keys outside the client prefix.
  */
 export interface ClientStateSDKType {
-  chain_id?: string;
+  chain_id: string;
   height: HeightSDKType;
 }
 function createBaseClientState(): ClientState {
   return {
-    chainId: undefined,
+    chainId: "",
     height: Height.fromPartial({})
   };
 }
 export const ClientState = {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.chainId !== undefined) {
+    if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }
     if (message.height !== undefined) {
@@ -71,7 +71,7 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.chainId = object.chainId ?? undefined;
+    message.chainId = object.chainId ?? "";
     if (object.height !== undefined && object.height !== null) {
       message.height = Height.fromPartial(object.height);
     }
@@ -85,7 +85,7 @@ export const ClientState = {
   },
   fromSDKJSON(object: any): ClientStateSDKType {
     return {
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : undefined,
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
       height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
     };
   },
@@ -97,7 +97,7 @@ export const ClientState = {
   },
   fromAmino(object: ClientStateAmino): ClientState {
     return {
-      chainId: object?.chain_id,
+      chainId: object.chain_id,
       height: object?.height ? Height.fromAmino(object.height) : undefined
     };
   },

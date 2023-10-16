@@ -183,9 +183,9 @@ export interface LogBucket {
    * 
    * After a bucket has been created, the location cannot be changed.
    */
-  name?: string;
+  name: string;
   /** Describes this bucket. */
-  description?: string;
+  description: string;
   /**
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
@@ -199,16 +199,16 @@ export interface LogBucket {
    * this value is set to zero at bucket creation time, the default time of 30
    * days will be used.
    */
-  retentionDays?: number;
+  retentionDays: number;
   /**
    * Whether the bucket is locked.
    * 
    * The retention period on a locked bucket cannot be changed. Locked buckets
    * may only be deleted if they are empty.
    */
-  locked?: boolean;
+  locked: boolean;
   /** Output only. The bucket lifecycle state. */
-  lifecycleState?: LifecycleState;
+  lifecycleState: LifecycleState;
   /**
    * Log entry field paths that are denied access in this bucket.
    * 
@@ -230,13 +230,13 @@ export interface LogBucket {
 }
 /** Describes a repository in which log entries are stored. */
 export interface LogBucketSDKType {
-  name?: string;
-  description?: string;
+  name: string;
+  description: string;
   create_time?: Date;
   update_time?: Date;
-  retention_days?: number;
-  locked?: boolean;
-  lifecycle_state?: LifecycleState;
+  retention_days: number;
+  locked: boolean;
+  lifecycle_state: LifecycleState;
   restricted_fields: string[];
   cmek_settings?: CmekSettingsSDKType;
 }
@@ -249,9 +249,9 @@ export interface LogView {
    * 
    *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
    */
-  name?: string;
+  name: string;
   /** Describes this view. */
-  description?: string;
+  description: string;
   /** Output only. The creation timestamp of the view. */
   createTime?: Date;
   /** Output only. The last update timestamp of the view. */
@@ -272,15 +272,15 @@ export interface LogView {
    *   SOURCE("projects/myproject") AND resource.type = "gce_instance"
    *                                AND LOG_ID("stdout")
    */
-  filter?: string;
+  filter: string;
 }
 /** Describes a view over log entries in a bucket. */
 export interface LogViewSDKType {
-  name?: string;
-  description?: string;
+  name: string;
+  description: string;
   create_time?: Date;
   update_time?: Date;
-  filter?: string;
+  filter: string;
 }
 /**
  * Describes a sink used to export log entries to one of the following
@@ -298,7 +298,7 @@ export interface LogSink {
    * lower-case alphanumeric characters, underscores, hyphens, and periods.
    * First character has to be alphanumeric.
    */
-  name?: string;
+  name: string;
   /**
    * Required. The export destination:
    * 
@@ -312,7 +312,7 @@ export interface LogSink {
    * [Exporting Logs with
    * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    */
-  destination?: string;
+  destination: string;
   /**
    * Optional. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
@@ -323,18 +323,18 @@ export interface LogSink {
    * 
    *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
    */
-  filter?: string;
+  filter: string;
   /**
    * Optional. A description of this sink.
    * 
    * The maximum length of the description is 8000 characters.
    */
-  description?: string;
+  description: string;
   /**
    * Optional. If set to true, then this sink is disabled and it does not export any log
    * entries.
    */
-  disabled?: boolean;
+  disabled: boolean;
   /**
    * Optional. Log entries that match any of these exclusion filters will not be exported.
    * 
@@ -344,7 +344,7 @@ export interface LogSink {
   exclusions: LogExclusion[];
   /** Deprecated. This field is unused. */
   /** @deprecated */
-  outputVersionFormat?: LogSink_VersionFormat;
+  outputVersionFormat: LogSink_VersionFormat;
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
    * Logging writes the exported log entries to the sink's destination. This
@@ -364,7 +364,7 @@ export interface LogSink {
    * the sink do not have a writer_identity and no additional permissions are
    * required.
    */
-  writerIdentity?: string;
+  writerIdentity: string;
   /**
    * Optional. This field applies only to sinks owned by organizations and folders. If the
    * field is false, the default, only the logs owned by the sink's parent
@@ -384,7 +384,7 @@ export interface LogSink {
    *   logName:("projects/test-project1/" OR "projects/test-project2/") AND
    *   resource.type=gce_instance
    */
-  includeChildren?: boolean;
+  includeChildren: boolean;
   /** Optional. Options that affect sinks exporting data to BigQuery. */
   bigqueryOptions?: BigQueryOptions;
   /**
@@ -408,16 +408,16 @@ export interface LogSink {
  * organization, billing account, or folder.
  */
 export interface LogSinkSDKType {
-  name?: string;
-  destination?: string;
-  filter?: string;
-  description?: string;
-  disabled?: boolean;
+  name: string;
+  destination: string;
+  filter: string;
+  description: string;
+  disabled: boolean;
   exclusions: LogExclusionSDKType[];
   /** @deprecated */
-  output_version_format?: LogSink_VersionFormat;
-  writer_identity?: string;
-  include_children?: boolean;
+  output_version_format: LogSink_VersionFormat;
+  writer_identity: string;
+  include_children: boolean;
   bigquery_options?: BigQueryOptionsSDKType;
   create_time?: Date;
   update_time?: Date;
@@ -434,7 +434,7 @@ export interface BigQueryOptions {
    * has to be used instead. In both cases, tables are sharded based on UTC
    * timezone.
    */
-  usePartitionedTables?: boolean;
+  usePartitionedTables: boolean;
   /**
    * Output only. True if new timestamp column based partitioning is in use, false if legacy
    * ingestion-time partitioning is in use.
@@ -444,12 +444,12 @@ export interface BigQueryOptions {
    * meaning and will be false. Legacy sinks using partitioned tables will have
    * this field set to false.
    */
-  usesTimestampColumnPartitioning?: boolean;
+  usesTimestampColumnPartitioning: boolean;
 }
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptionsSDKType {
-  use_partitioned_tables?: boolean;
-  uses_timestamp_column_partitioning?: boolean;
+  use_partitioned_tables: boolean;
+  uses_timestamp_column_partitioning: boolean;
 }
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequest {
@@ -465,26 +465,26 @@ export interface ListBucketsRequest {
    * supplying the character `-` in place of [LOCATION_ID] will return all
    * buckets.
    */
-  parent?: string;
+  parent: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
    * indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 }
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequestSDKType {
-  parent?: string;
-  page_token?: string;
-  page_size?: number;
+  parent: string;
+  page_token: string;
+  page_size: number;
 }
 /** The response from ListBuckets. */
 export interface ListBucketsResponse {
@@ -495,12 +495,12 @@ export interface ListBucketsResponse {
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** The response from ListBuckets. */
 export interface ListBucketsResponseSDKType {
   buckets: LogBucketSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** The parameters to `CreateBucket`. */
 export interface CreateBucketRequest {
@@ -513,13 +513,13 @@ export interface CreateBucketRequest {
    * 
    *   `"projects/my-project/locations/global"`
    */
-  parent?: string;
+  parent: string;
   /**
    * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
    * to 100 characters and can include only letters, digits, underscores,
    * hyphens, and periods.
    */
-  bucketId?: string;
+  bucketId: string;
   /**
    * Required. The new bucket. The region specified in the new bucket must be compliant
    * with any Location Restriction Org Policy. The name field in the bucket is
@@ -529,8 +529,8 @@ export interface CreateBucketRequest {
 }
 /** The parameters to `CreateBucket`. */
 export interface CreateBucketRequestSDKType {
-  parent?: string;
-  bucket_id?: string;
+  parent: string;
+  bucket_id: string;
   bucket?: LogBucketSDKType;
 }
 /** The parameters to `UpdateBucket`. */
@@ -547,7 +547,7 @@ export interface UpdateBucketRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name?: string;
+  name: string;
   /** Required. The updated bucket. */
   bucket?: LogBucket;
   /**
@@ -564,7 +564,7 @@ export interface UpdateBucketRequest {
 }
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequestSDKType {
-  name?: string;
+  name: string;
   bucket?: LogBucketSDKType;
   update_mask?: FieldMaskSDKType;
 }
@@ -582,11 +582,11 @@ export interface GetBucketRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequest {
@@ -602,11 +602,11 @@ export interface DeleteBucketRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequest {
@@ -622,11 +622,11 @@ export interface UndeleteBucketRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The parameters to `ListViews`. */
 export interface ListViewsRequest {
@@ -635,27 +635,27 @@ export interface ListViewsRequest {
    * 
    *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
-  parent?: string;
+  parent: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * 
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 }
 /** The parameters to `ListViews`. */
 export interface ListViewsRequestSDKType {
-  parent?: string;
-  page_token?: string;
-  page_size?: number;
+  parent: string;
+  page_token: string;
+  page_size: number;
 }
 /** The response from ListViews. */
 export interface ListViewsResponse {
@@ -666,12 +666,12 @@ export interface ListViewsResponse {
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** The response from ListViews. */
 export interface ListViewsResponseSDKType {
   views: LogViewSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** The parameters to `CreateView`. */
 export interface CreateViewRequest {
@@ -684,16 +684,16 @@ export interface CreateViewRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  parent?: string;
+  parent: string;
   /** Required. The id to use for this view. */
-  viewId?: string;
+  viewId: string;
   /** Required. The new view. */
   view?: LogView;
 }
 /** The parameters to `CreateView`. */
 export interface CreateViewRequestSDKType {
-  parent?: string;
-  view_id?: string;
+  parent: string;
+  view_id: string;
   view?: LogViewSDKType;
 }
 /** The parameters to `UpdateView`. */
@@ -707,7 +707,7 @@ export interface UpdateViewRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name?: string;
+  name: string;
   /** Required. The updated view. */
   view?: LogView;
   /**
@@ -724,7 +724,7 @@ export interface UpdateViewRequest {
 }
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequestSDKType {
-  name?: string;
+  name: string;
   view?: LogViewSDKType;
   update_mask?: FieldMaskSDKType;
 }
@@ -739,11 +739,11 @@ export interface GetViewRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `GetView`. */
 export interface GetViewRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequest {
@@ -756,11 +756,11 @@ export interface DeleteViewRequest {
    * 
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The parameters to `ListSinks`. */
 export interface ListSinksRequest {
@@ -772,26 +772,26 @@ export interface ListSinksRequest {
    *     "billingAccounts/[BILLING_ACCOUNT_ID]"
    *     "folders/[FOLDER_ID]"
    */
-  parent?: string;
+  parent: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 }
 /** The parameters to `ListSinks`. */
 export interface ListSinksRequestSDKType {
-  parent?: string;
-  page_token?: string;
-  page_size?: number;
+  parent: string;
+  page_token: string;
+  page_size: number;
 }
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponse {
@@ -802,12 +802,12 @@ export interface ListSinksResponse {
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseSDKType {
   sinks: LogSinkSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** The parameters to `GetSink`. */
 export interface GetSinkRequest {
@@ -823,11 +823,11 @@ export interface GetSinkRequest {
    * 
    *   `"projects/my-project/sinks/my-sink"`
    */
-  sinkName?: string;
+  sinkName: string;
 }
 /** The parameters to `GetSink`. */
 export interface GetSinkRequestSDKType {
-  sink_name?: string;
+  sink_name: string;
 }
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequest {
@@ -844,7 +844,7 @@ export interface CreateSinkRequest {
    *   `"projects/my-project"`
    *   `"organizations/123456789"`
    */
-  parent?: string;
+  parent: string;
   /**
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
@@ -863,13 +863,13 @@ export interface CreateSinkRequest {
    * be a unique service account used only for exports from the new sink. For
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
-  uniqueWriterIdentity?: boolean;
+  uniqueWriterIdentity: boolean;
 }
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequestSDKType {
-  parent?: string;
+  parent: string;
   sink?: LogSinkSDKType;
-  unique_writer_identity?: boolean;
+  unique_writer_identity: boolean;
 }
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequest {
@@ -886,7 +886,7 @@ export interface UpdateSinkRequest {
    * 
    *   `"projects/my-project/sinks/my-sink"`
    */
-  sinkName?: string;
+  sinkName: string;
   /**
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
@@ -905,7 +905,7 @@ export interface UpdateSinkRequest {
    * +   It is an error if the old value is true and the new value is
    *     set to false or defaulted to false.
    */
-  uniqueWriterIdentity?: boolean;
+  uniqueWriterIdentity: boolean;
   /**
    * Optional. Field mask that specifies the fields in `sink` that need
    * an update. A sink field will be overwritten if, and only if, it is
@@ -928,9 +928,9 @@ export interface UpdateSinkRequest {
 }
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequestSDKType {
-  sink_name?: string;
+  sink_name: string;
   sink?: LogSinkSDKType;
-  unique_writer_identity?: boolean;
+  unique_writer_identity: boolean;
   update_mask?: FieldMaskSDKType;
 }
 /** The parameters to `DeleteSink`. */
@@ -948,11 +948,11 @@ export interface DeleteSinkRequest {
    * 
    *   `"projects/my-project/sinks/my-sink"`
    */
-  sinkName?: string;
+  sinkName: string;
 }
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequestSDKType {
-  sink_name?: string;
+  sink_name: string;
 }
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
@@ -968,9 +968,9 @@ export interface LogExclusion {
    * digits, underscores, hyphens, and periods. First character has to be
    * alphanumeric.
    */
-  name?: string;
+  name: string;
   /** Optional. A description of this exclusion. */
-  description?: string;
+  description: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
@@ -983,14 +983,14 @@ export interface LogExclusion {
    * 
    *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
    */
-  filter?: string;
+  filter: string;
   /**
    * Optional. If set to True, then this exclusion is disabled and it does not
    * exclude any log entries. You can [update an
    * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
    * value of this field.
    */
-  disabled?: boolean;
+  disabled: boolean;
   /**
    * Output only. The creation timestamp of the exclusion.
    * 
@@ -1012,10 +1012,10 @@ export interface LogExclusion {
  * Note also that you cannot modify the _Required sink or exclude logs from it.
  */
 export interface LogExclusionSDKType {
-  name?: string;
-  description?: string;
-  filter?: string;
-  disabled?: boolean;
+  name: string;
+  description: string;
+  filter: string;
+  disabled: boolean;
   create_time?: Date;
   update_time?: Date;
 }
@@ -1029,26 +1029,26 @@ export interface ListExclusionsRequest {
    *     "billingAccounts/[BILLING_ACCOUNT_ID]"
    *     "folders/[FOLDER_ID]"
    */
-  parent?: string;
+  parent: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 }
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequestSDKType {
-  parent?: string;
-  page_token?: string;
-  page_size?: number;
+  parent: string;
+  page_token: string;
+  page_size: number;
 }
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponse {
@@ -1059,12 +1059,12 @@ export interface ListExclusionsResponse {
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseSDKType {
   exclusions: LogExclusionSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequest {
@@ -1080,11 +1080,11 @@ export interface GetExclusionRequest {
    * 
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequest {
@@ -1101,7 +1101,7 @@ export interface CreateExclusionRequest {
    *   `"projects/my-logging-project"`
    *   `"organizations/123456789"`
    */
-  parent?: string;
+  parent: string;
   /**
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
@@ -1110,7 +1110,7 @@ export interface CreateExclusionRequest {
 }
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequestSDKType {
-  parent?: string;
+  parent: string;
   exclusion?: LogExclusionSDKType;
 }
 /** The parameters to `UpdateExclusion`. */
@@ -1127,7 +1127,7 @@ export interface UpdateExclusionRequest {
    * 
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
-  name?: string;
+  name: string;
   /**
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
@@ -1146,7 +1146,7 @@ export interface UpdateExclusionRequest {
 }
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequestSDKType {
-  name?: string;
+  name: string;
   exclusion?: LogExclusionSDKType;
   update_mask?: FieldMaskSDKType;
 }
@@ -1164,11 +1164,11 @@ export interface DeleteExclusionRequest {
    * 
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
-  name?: string;
+  name: string;
 }
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequestSDKType {
-  name?: string;
+  name: string;
 }
 /**
  * The parameters to
@@ -1196,7 +1196,7 @@ export interface GetCmekSettingsRequest {
    * organization, it applies to all projects and folders in the Google Cloud
    * organization.
    */
-  name?: string;
+  name: string;
 }
 /**
  * The parameters to
@@ -1207,7 +1207,7 @@ export interface GetCmekSettingsRequest {
  * more information.
  */
 export interface GetCmekSettingsRequestSDKType {
-  name?: string;
+  name: string;
 }
 /**
  * The parameters to
@@ -1234,7 +1234,7 @@ export interface UpdateCmekSettingsRequest {
    * Cloud organizations. Once configured, it applies to all projects and
    * folders in the Google Cloud organization.
    */
-  name?: string;
+  name: string;
   /**
    * Required. The CMEK settings to update.
    * 
@@ -1263,7 +1263,7 @@ export interface UpdateCmekSettingsRequest {
  * more information.
  */
 export interface UpdateCmekSettingsRequestSDKType {
-  name?: string;
+  name: string;
   cmek_settings?: CmekSettingsSDKType;
   update_mask?: FieldMaskSDKType;
 }
@@ -1281,7 +1281,7 @@ export interface UpdateCmekSettingsRequestSDKType {
  */
 export interface CmekSettings {
   /** Output only. The resource name of the CMEK settings. */
-  name?: string;
+  name: string;
   /**
    * The resource name for the configured Cloud KMS key.
    * 
@@ -1312,7 +1312,7 @@ export interface CmekSettings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kmsKeyName?: string;
+  kmsKeyName: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -1327,7 +1327,7 @@ export interface CmekSettings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  serviceAccountId?: string;
+  serviceAccountId: string;
 }
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
@@ -1342,9 +1342,9 @@ export interface CmekSettings {
  * more information.
  */
 export interface CmekSettingsSDKType {
-  name?: string;
-  kms_key_name?: string;
-  service_account_id?: string;
+  name: string;
+  kms_key_name: string;
+  service_account_id: string;
 }
 /**
  * The parameters to
@@ -1372,7 +1372,7 @@ export interface GetSettingsRequest {
    * configured for organizations. Once configured for an organization, it
    * applies to all projects and folders in the Google Cloud organization.
    */
-  name?: string;
+  name: string;
 }
 /**
  * The parameters to
@@ -1383,7 +1383,7 @@ export interface GetSettingsRequest {
  * more information.
  */
 export interface GetSettingsRequestSDKType {
-  name?: string;
+  name: string;
 }
 /**
  * The parameters to
@@ -1407,7 +1407,7 @@ export interface UpdateSettingsRequest {
    * Google Cloud organizations. Once configured, it applies to all projects and
    * folders in the Google Cloud organization.
    */
-  name?: string;
+  name: string;
   /**
    * Required. The settings to update.
    * 
@@ -1436,7 +1436,7 @@ export interface UpdateSettingsRequest {
  * more information.
  */
 export interface UpdateSettingsRequestSDKType {
-  name?: string;
+  name: string;
   settings?: SettingsSDKType;
   update_mask?: FieldMaskSDKType;
 }
@@ -1446,7 +1446,7 @@ export interface UpdateSettingsRequestSDKType {
  */
 export interface Settings {
   /** Output only. The resource name of the settings. */
-  name?: string;
+  name: string;
   /**
    * Optional. The resource name for the configured Cloud KMS key.
    * 
@@ -1476,7 +1476,7 @@ export interface Settings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kmsKeyName?: string;
+  kmsKeyName: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -1491,31 +1491,31 @@ export interface Settings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kmsServiceAccountId?: string;
+  kmsServiceAccountId: string;
   /**
    * Optional. The Cloud region that will be used for _Default and _Required log buckets
    * for newly created projects and folders. For example `europe-west1`.
    * This setting does not affect the location of custom log buckets.
    */
-  storageLocation?: string;
+  storageLocation: string;
   /**
    * Optional. If set to true, the _Default sink in newly created projects and folders
    * will created in a disabled state. This can be used to automatically disable
    * log ingestion if there is already an aggregated sink configured in the
    * hierarchy. The _Default sink can be re-enabled manually if needed.
    */
-  disableDefaultSink?: boolean;
+  disableDefaultSink: boolean;
 }
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
  */
 export interface SettingsSDKType {
-  name?: string;
-  kms_key_name?: string;
-  kms_service_account_id?: string;
-  storage_location?: string;
-  disable_default_sink?: boolean;
+  name: string;
+  kms_key_name: string;
+  kms_service_account_id: string;
+  storage_location: string;
+  disable_default_sink: boolean;
 }
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequest {
@@ -1526,20 +1526,20 @@ export interface CopyLogEntriesRequest {
    * 
    *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
    */
-  name?: string;
+  name: string;
   /**
    * Optional. A filter specifying which log entries to copy. The filter must be no more
    * than 20k characters. An empty filter matches all log entries.
    */
-  filter?: string;
+  filter: string;
   /** Required. Destination to which to copy log entries. */
-  destination?: string;
+  destination: string;
 }
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequestSDKType {
-  name?: string;
-  filter?: string;
-  destination?: string;
+  name: string;
+  filter: string;
+  destination: string;
 }
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadata {
@@ -1548,13 +1548,13 @@ export interface CopyLogEntriesMetadata {
   /** The end time of an operation. */
   endTime?: Date;
   /** State of an operation. */
-  state?: OperationState;
+  state: OperationState;
   /** Identifies whether the user has requested cancellation of the operation. */
-  cancellationRequested?: boolean;
+  cancellationRequested: boolean;
   /** CopyLogEntries RPC request. */
   request?: CopyLogEntriesRequest;
   /** Estimated progress of the operation (0 - 100%). */
-  progress?: number;
+  progress: number;
   /**
    * The IAM identity of a service account that must be granted access to the
    * destination.
@@ -1564,36 +1564,36 @@ export interface CopyLogEntriesMetadata {
    * 
    * For example: `"serviceAccount:foo@bar.com"`
    */
-  writerIdentity?: string;
+  writerIdentity: string;
 }
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataSDKType {
   start_time?: Date;
   end_time?: Date;
-  state?: OperationState;
-  cancellation_requested?: boolean;
+  state: OperationState;
+  cancellation_requested: boolean;
   request?: CopyLogEntriesRequestSDKType;
-  progress?: number;
-  writer_identity?: string;
+  progress: number;
+  writer_identity: string;
 }
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
-  logEntriesCopiedCount?: bigint;
+  logEntriesCopiedCount: bigint;
 }
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseSDKType {
-  log_entries_copied_count?: bigint;
+  log_entries_copied_count: bigint;
 }
 function createBaseLogBucket(): LogBucket {
   return {
-    name: undefined,
-    description: undefined,
+    name: "",
+    description: "",
     createTime: undefined,
     updateTime: undefined,
-    retentionDays: undefined,
-    locked: undefined,
-    lifecycleState: undefined,
+    retentionDays: 0,
+    locked: false,
+    lifecycleState: 0,
     restrictedFields: [],
     cmekSettings: undefined
   };
@@ -1601,10 +1601,10 @@ function createBaseLogBucket(): LogBucket {
 export const LogBucket = {
   typeUrl: "/google.logging.v2.LogBucket",
   encode(message: LogBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     if (message.createTime !== undefined) {
@@ -1613,13 +1613,13 @@ export const LogBucket = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.retentionDays !== undefined) {
+    if (message.retentionDays !== 0) {
       writer.uint32(88).int32(message.retentionDays);
     }
-    if (message.locked !== undefined) {
+    if (message.locked === true) {
       writer.uint32(72).bool(message.locked);
     }
-    if (message.lifecycleState !== undefined) {
+    if (message.lifecycleState !== 0) {
       writer.uint32(96).int32(message.lifecycleState);
     }
     for (const v of message.restrictedFields) {
@@ -1703,13 +1703,13 @@ export const LogBucket = {
   },
   fromPartial(object: DeepPartial<LogBucket>): LogBucket {
     const message = createBaseLogBucket();
-    message.name = object.name ?? undefined;
-    message.description = object.description ?? undefined;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
-    message.retentionDays = object.retentionDays ?? undefined;
-    message.locked = object.locked ?? undefined;
-    message.lifecycleState = object.lifecycleState ?? undefined;
+    message.retentionDays = object.retentionDays ?? 0;
+    message.locked = object.locked ?? false;
+    message.lifecycleState = object.lifecycleState ?? 0;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
     if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
       message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
@@ -1724,20 +1724,20 @@ export const LogBucket = {
       updateTime: object.update_time ?? undefined,
       retentionDays: object?.retention_days,
       locked: object?.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : undefined,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
       cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined
     };
   },
   fromSDKJSON(object: any): LogBucketSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
       update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      retention_days: isSet(object.retention_days) ? Number(object.retention_days) : undefined,
-      locked: isSet(object.locked) ? Boolean(object.locked) : undefined,
-      lifecycle_state: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : undefined,
+      retention_days: isSet(object.retention_days) ? Number(object.retention_days) : 0,
+      locked: isSet(object.locked) ? Boolean(object.locked) : false,
+      lifecycle_state: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
       restricted_fields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => String(e)) : [],
       cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined
     };
@@ -1761,13 +1761,13 @@ export const LogBucket = {
   },
   fromAmino(object: LogBucketAmino): LogBucket {
     return {
-      name: object?.name,
-      description: object?.description,
+      name: object.name,
+      description: object.description,
       createTime: object?.create_time,
       updateTime: object?.update_time,
-      retentionDays: object?.retention_days,
-      locked: object?.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : undefined,
+      retentionDays: object.retention_days,
+      locked: object.locked,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
       cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined
     };
@@ -1807,20 +1807,20 @@ export const LogBucket = {
 };
 function createBaseLogView(): LogView {
   return {
-    name: undefined,
-    description: undefined,
+    name: "",
+    description: "",
     createTime: undefined,
     updateTime: undefined,
-    filter: undefined
+    filter: ""
   };
 }
 export const LogView = {
   typeUrl: "/google.logging.v2.LogView",
   encode(message: LogView, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     if (message.createTime !== undefined) {
@@ -1829,7 +1829,7 @@ export const LogView = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(58).string(message.filter);
     }
     return writer;
@@ -1883,11 +1883,11 @@ export const LogView = {
   },
   fromPartial(object: DeepPartial<LogView>): LogView {
     const message = createBaseLogView();
-    message.name = object.name ?? undefined;
-    message.description = object.description ?? undefined;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
-    message.filter = object.filter ?? undefined;
+    message.filter = object.filter ?? "";
     return message;
   },
   fromSDK(object: LogViewSDKType): LogView {
@@ -1901,11 +1901,11 @@ export const LogView = {
   },
   fromSDKJSON(object: any): LogViewSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
       update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined
+      filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
   toSDK(message: LogView): LogViewSDKType {
@@ -1919,11 +1919,11 @@ export const LogView = {
   },
   fromAmino(object: LogViewAmino): LogView {
     return {
-      name: object?.name,
-      description: object?.description,
+      name: object.name,
+      description: object.description,
       createTime: object?.create_time,
       updateTime: object?.update_time,
-      filter: object?.filter
+      filter: object.filter
     };
   },
   toAmino(message: LogView): LogViewAmino {
@@ -1953,15 +1953,15 @@ export const LogView = {
 };
 function createBaseLogSink(): LogSink {
   return {
-    name: undefined,
-    destination: undefined,
-    filter: undefined,
-    description: undefined,
-    disabled: undefined,
+    name: "",
+    destination: "",
+    filter: "",
+    description: "",
+    disabled: false,
     exclusions: [],
-    outputVersionFormat: undefined,
-    writerIdentity: undefined,
-    includeChildren: undefined,
+    outputVersionFormat: 0,
+    writerIdentity: "",
+    includeChildren: false,
     bigqueryOptions: undefined,
     createTime: undefined,
     updateTime: undefined
@@ -1970,31 +1970,31 @@ function createBaseLogSink(): LogSink {
 export const LogSink = {
   typeUrl: "/google.logging.v2.LogSink",
   encode(message: LogSink, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.destination !== undefined) {
+    if (message.destination !== "") {
       writer.uint32(26).string(message.destination);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(42).string(message.filter);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(146).string(message.description);
     }
-    if (message.disabled !== undefined) {
+    if (message.disabled === true) {
       writer.uint32(152).bool(message.disabled);
     }
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(130).fork()).ldelim();
     }
-    if (message.outputVersionFormat !== undefined) {
+    if (message.outputVersionFormat !== 0) {
       writer.uint32(48).int32(message.outputVersionFormat);
     }
-    if (message.writerIdentity !== undefined) {
+    if (message.writerIdentity !== "") {
       writer.uint32(66).string(message.writerIdentity);
     }
-    if (message.includeChildren !== undefined) {
+    if (message.includeChildren === true) {
       writer.uint32(72).bool(message.includeChildren);
     }
     if (message.bigqueryOptions !== undefined) {
@@ -2096,15 +2096,15 @@ export const LogSink = {
   },
   fromPartial(object: DeepPartial<LogSink>): LogSink {
     const message = createBaseLogSink();
-    message.name = object.name ?? undefined;
-    message.destination = object.destination ?? undefined;
-    message.filter = object.filter ?? undefined;
-    message.description = object.description ?? undefined;
-    message.disabled = object.disabled ?? undefined;
+    message.name = object.name ?? "";
+    message.destination = object.destination ?? "";
+    message.filter = object.filter ?? "";
+    message.description = object.description ?? "";
+    message.disabled = object.disabled ?? false;
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
-    message.outputVersionFormat = object.outputVersionFormat ?? undefined;
-    message.writerIdentity = object.writerIdentity ?? undefined;
-    message.includeChildren = object.includeChildren ?? undefined;
+    message.outputVersionFormat = object.outputVersionFormat ?? 0;
+    message.writerIdentity = object.writerIdentity ?? "";
+    message.includeChildren = object.includeChildren ?? false;
     if (object.bigqueryOptions !== undefined && object.bigqueryOptions !== null) {
       message.bigqueryOptions = BigQueryOptions.fromPartial(object.bigqueryOptions);
     }
@@ -2120,7 +2120,7 @@ export const LogSink = {
       description: object?.description,
       disabled: object?.disabled,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : undefined,
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
       writerIdentity: object?.writer_identity,
       includeChildren: object?.include_children,
       bigqueryOptions: object.bigquery_options ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
@@ -2130,15 +2130,15 @@ export const LogSink = {
   },
   fromSDKJSON(object: any): LogSinkSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      destination: isSet(object.destination) ? String(object.destination) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      destination: isSet(object.destination) ? String(object.destination) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
-      output_version_format: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : undefined,
-      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : undefined,
-      include_children: isSet(object.include_children) ? Boolean(object.include_children) : undefined,
+      output_version_format: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
+      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : "",
+      include_children: isSet(object.include_children) ? Boolean(object.include_children) : false,
       bigquery_options: isSet(object.bigquery_options) ? BigQueryOptions.fromSDKJSON(object.bigquery_options) : undefined,
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
       update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
@@ -2166,15 +2166,15 @@ export const LogSink = {
   },
   fromAmino(object: LogSinkAmino): LogSink {
     return {
-      name: object?.name,
-      destination: object?.destination,
-      filter: object?.filter,
-      description: object?.description,
-      disabled: object?.disabled,
+      name: object.name,
+      destination: object.destination,
+      filter: object.filter,
+      description: object.description,
+      disabled: object.disabled,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : undefined,
-      writerIdentity: object?.writer_identity,
-      includeChildren: object?.include_children,
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
+      writerIdentity: object.writer_identity,
+      includeChildren: object.include_children,
       bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
       createTime: object?.create_time,
       updateTime: object?.update_time
@@ -2218,17 +2218,17 @@ export const LogSink = {
 };
 function createBaseBigQueryOptions(): BigQueryOptions {
   return {
-    usePartitionedTables: undefined,
-    usesTimestampColumnPartitioning: undefined
+    usePartitionedTables: false,
+    usesTimestampColumnPartitioning: false
   };
 }
 export const BigQueryOptions = {
   typeUrl: "/google.logging.v2.BigQueryOptions",
   encode(message: BigQueryOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.usePartitionedTables !== undefined) {
+    if (message.usePartitionedTables === true) {
       writer.uint32(8).bool(message.usePartitionedTables);
     }
-    if (message.usesTimestampColumnPartitioning !== undefined) {
+    if (message.usesTimestampColumnPartitioning === true) {
       writer.uint32(24).bool(message.usesTimestampColumnPartitioning);
     }
     return writer;
@@ -2267,8 +2267,8 @@ export const BigQueryOptions = {
   },
   fromPartial(object: DeepPartial<BigQueryOptions>): BigQueryOptions {
     const message = createBaseBigQueryOptions();
-    message.usePartitionedTables = object.usePartitionedTables ?? undefined;
-    message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? undefined;
+    message.usePartitionedTables = object.usePartitionedTables ?? false;
+    message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? false;
     return message;
   },
   fromSDK(object: BigQueryOptionsSDKType): BigQueryOptions {
@@ -2279,8 +2279,8 @@ export const BigQueryOptions = {
   },
   fromSDKJSON(object: any): BigQueryOptionsSDKType {
     return {
-      use_partitioned_tables: isSet(object.use_partitioned_tables) ? Boolean(object.use_partitioned_tables) : undefined,
-      uses_timestamp_column_partitioning: isSet(object.uses_timestamp_column_partitioning) ? Boolean(object.uses_timestamp_column_partitioning) : undefined
+      use_partitioned_tables: isSet(object.use_partitioned_tables) ? Boolean(object.use_partitioned_tables) : false,
+      uses_timestamp_column_partitioning: isSet(object.uses_timestamp_column_partitioning) ? Boolean(object.uses_timestamp_column_partitioning) : false
     };
   },
   toSDK(message: BigQueryOptions): BigQueryOptionsSDKType {
@@ -2291,8 +2291,8 @@ export const BigQueryOptions = {
   },
   fromAmino(object: BigQueryOptionsAmino): BigQueryOptions {
     return {
-      usePartitionedTables: object?.use_partitioned_tables,
-      usesTimestampColumnPartitioning: object?.uses_timestamp_column_partitioning
+      usePartitionedTables: object.use_partitioned_tables,
+      usesTimestampColumnPartitioning: object.uses_timestamp_column_partitioning
     };
   },
   toAmino(message: BigQueryOptions): BigQueryOptionsAmino {
@@ -2319,21 +2319,21 @@ export const BigQueryOptions = {
 };
 function createBaseListBucketsRequest(): ListBucketsRequest {
   return {
-    parent: undefined,
-    pageToken: undefined,
-    pageSize: undefined
+    parent: "",
+    pageToken: "",
+    pageSize: 0
   };
 }
 export const ListBucketsRequest = {
   typeUrl: "/google.logging.v2.ListBucketsRequest",
   encode(message: ListBucketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -2377,9 +2377,9 @@ export const ListBucketsRequest = {
   },
   fromPartial(object: DeepPartial<ListBucketsRequest>): ListBucketsRequest {
     const message = createBaseListBucketsRequest();
-    message.parent = object.parent ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
+    message.parent = object.parent ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
     return message;
   },
   fromSDK(object: ListBucketsRequestSDKType): ListBucketsRequest {
@@ -2391,9 +2391,9 @@ export const ListBucketsRequest = {
   },
   fromSDKJSON(object: any): ListBucketsRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
     };
   },
   toSDK(message: ListBucketsRequest): ListBucketsRequestSDKType {
@@ -2405,9 +2405,9 @@ export const ListBucketsRequest = {
   },
   fromAmino(object: ListBucketsRequestAmino): ListBucketsRequest {
     return {
-      parent: object?.parent,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
     };
   },
   toAmino(message: ListBucketsRequest): ListBucketsRequestAmino {
@@ -2436,7 +2436,7 @@ export const ListBucketsRequest = {
 function createBaseListBucketsResponse(): ListBucketsResponse {
   return {
     buckets: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListBucketsResponse = {
@@ -2445,7 +2445,7 @@ export const ListBucketsResponse = {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2489,7 +2489,7 @@ export const ListBucketsResponse = {
   fromPartial(object: DeepPartial<ListBucketsResponse>): ListBucketsResponse {
     const message = createBaseListBucketsResponse();
     message.buckets = object.buckets?.map(e => LogBucket.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListBucketsResponseSDKType): ListBucketsResponse {
@@ -2501,7 +2501,7 @@ export const ListBucketsResponse = {
   fromSDKJSON(object: any): ListBucketsResponseSDKType {
     return {
       buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListBucketsResponse): ListBucketsResponseSDKType {
@@ -2517,7 +2517,7 @@ export const ListBucketsResponse = {
   fromAmino(object: ListBucketsResponseAmino): ListBucketsResponse {
     return {
       buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListBucketsResponse): ListBucketsResponseAmino {
@@ -2548,18 +2548,18 @@ export const ListBucketsResponse = {
 };
 function createBaseCreateBucketRequest(): CreateBucketRequest {
   return {
-    parent: undefined,
-    bucketId: undefined,
+    parent: "",
+    bucketId: "",
     bucket: undefined
   };
 }
 export const CreateBucketRequest = {
   typeUrl: "/google.logging.v2.CreateBucketRequest",
   encode(message: CreateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.bucketId !== undefined) {
+    if (message.bucketId !== "") {
       writer.uint32(18).string(message.bucketId);
     }
     if (message.bucket !== undefined) {
@@ -2606,8 +2606,8 @@ export const CreateBucketRequest = {
   },
   fromPartial(object: DeepPartial<CreateBucketRequest>): CreateBucketRequest {
     const message = createBaseCreateBucketRequest();
-    message.parent = object.parent ?? undefined;
-    message.bucketId = object.bucketId ?? undefined;
+    message.parent = object.parent ?? "";
+    message.bucketId = object.bucketId ?? "";
     if (object.bucket !== undefined && object.bucket !== null) {
       message.bucket = LogBucket.fromPartial(object.bucket);
     }
@@ -2622,8 +2622,8 @@ export const CreateBucketRequest = {
   },
   fromSDKJSON(object: any): CreateBucketRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      bucket_id: isSet(object.bucket_id) ? String(object.bucket_id) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      bucket_id: isSet(object.bucket_id) ? String(object.bucket_id) : "",
       bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined
     };
   },
@@ -2636,8 +2636,8 @@ export const CreateBucketRequest = {
   },
   fromAmino(object: CreateBucketRequestAmino): CreateBucketRequest {
     return {
-      parent: object?.parent,
-      bucketId: object?.bucket_id,
+      parent: object.parent,
+      bucketId: object.bucket_id,
       bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined
     };
   },
@@ -2666,7 +2666,7 @@ export const CreateBucketRequest = {
 };
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
   return {
-    name: undefined,
+    name: "",
     bucket: undefined,
     updateMask: undefined
   };
@@ -2674,7 +2674,7 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
 export const UpdateBucketRequest = {
   typeUrl: "/google.logging.v2.UpdateBucketRequest",
   encode(message: UpdateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.bucket !== undefined) {
@@ -2724,7 +2724,7 @@ export const UpdateBucketRequest = {
   },
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.bucket !== undefined && object.bucket !== null) {
       message.bucket = LogBucket.fromPartial(object.bucket);
     }
@@ -2742,7 +2742,7 @@ export const UpdateBucketRequest = {
   },
   fromSDKJSON(object: any): UpdateBucketRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined,
       update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
@@ -2756,7 +2756,7 @@ export const UpdateBucketRequest = {
   },
   fromAmino(object: UpdateBucketRequestAmino): UpdateBucketRequest {
     return {
-      name: object?.name,
+      name: object.name,
       bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined,
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
@@ -2786,13 +2786,13 @@ export const UpdateBucketRequest = {
 };
 function createBaseGetBucketRequest(): GetBucketRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetBucketRequest = {
   typeUrl: "/google.logging.v2.GetBucketRequest",
   encode(message: GetBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -2826,7 +2826,7 @@ export const GetBucketRequest = {
   },
   fromPartial(object: DeepPartial<GetBucketRequest>): GetBucketRequest {
     const message = createBaseGetBucketRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetBucketRequestSDKType): GetBucketRequest {
@@ -2836,7 +2836,7 @@ export const GetBucketRequest = {
   },
   fromSDKJSON(object: any): GetBucketRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetBucketRequest): GetBucketRequestSDKType {
@@ -2846,7 +2846,7 @@ export const GetBucketRequest = {
   },
   fromAmino(object: GetBucketRequestAmino): GetBucketRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetBucketRequest): GetBucketRequestAmino {
@@ -2872,13 +2872,13 @@ export const GetBucketRequest = {
 };
 function createBaseDeleteBucketRequest(): DeleteBucketRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const DeleteBucketRequest = {
   typeUrl: "/google.logging.v2.DeleteBucketRequest",
   encode(message: DeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -2912,7 +2912,7 @@ export const DeleteBucketRequest = {
   },
   fromPartial(object: DeepPartial<DeleteBucketRequest>): DeleteBucketRequest {
     const message = createBaseDeleteBucketRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: DeleteBucketRequestSDKType): DeleteBucketRequest {
@@ -2922,7 +2922,7 @@ export const DeleteBucketRequest = {
   },
   fromSDKJSON(object: any): DeleteBucketRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: DeleteBucketRequest): DeleteBucketRequestSDKType {
@@ -2932,7 +2932,7 @@ export const DeleteBucketRequest = {
   },
   fromAmino(object: DeleteBucketRequestAmino): DeleteBucketRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: DeleteBucketRequest): DeleteBucketRequestAmino {
@@ -2958,13 +2958,13 @@ export const DeleteBucketRequest = {
 };
 function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const UndeleteBucketRequest = {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest",
   encode(message: UndeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -2998,7 +2998,7 @@ export const UndeleteBucketRequest = {
   },
   fromPartial(object: DeepPartial<UndeleteBucketRequest>): UndeleteBucketRequest {
     const message = createBaseUndeleteBucketRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: UndeleteBucketRequestSDKType): UndeleteBucketRequest {
@@ -3008,7 +3008,7 @@ export const UndeleteBucketRequest = {
   },
   fromSDKJSON(object: any): UndeleteBucketRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: UndeleteBucketRequest): UndeleteBucketRequestSDKType {
@@ -3018,7 +3018,7 @@ export const UndeleteBucketRequest = {
   },
   fromAmino(object: UndeleteBucketRequestAmino): UndeleteBucketRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestAmino {
@@ -3044,21 +3044,21 @@ export const UndeleteBucketRequest = {
 };
 function createBaseListViewsRequest(): ListViewsRequest {
   return {
-    parent: undefined,
-    pageToken: undefined,
-    pageSize: undefined
+    parent: "",
+    pageToken: "",
+    pageSize: 0
   };
 }
 export const ListViewsRequest = {
   typeUrl: "/google.logging.v2.ListViewsRequest",
   encode(message: ListViewsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -3102,9 +3102,9 @@ export const ListViewsRequest = {
   },
   fromPartial(object: DeepPartial<ListViewsRequest>): ListViewsRequest {
     const message = createBaseListViewsRequest();
-    message.parent = object.parent ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
+    message.parent = object.parent ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
     return message;
   },
   fromSDK(object: ListViewsRequestSDKType): ListViewsRequest {
@@ -3116,9 +3116,9 @@ export const ListViewsRequest = {
   },
   fromSDKJSON(object: any): ListViewsRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
     };
   },
   toSDK(message: ListViewsRequest): ListViewsRequestSDKType {
@@ -3130,9 +3130,9 @@ export const ListViewsRequest = {
   },
   fromAmino(object: ListViewsRequestAmino): ListViewsRequest {
     return {
-      parent: object?.parent,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
     };
   },
   toAmino(message: ListViewsRequest): ListViewsRequestAmino {
@@ -3161,7 +3161,7 @@ export const ListViewsRequest = {
 function createBaseListViewsResponse(): ListViewsResponse {
   return {
     views: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListViewsResponse = {
@@ -3170,7 +3170,7 @@ export const ListViewsResponse = {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -3214,7 +3214,7 @@ export const ListViewsResponse = {
   fromPartial(object: DeepPartial<ListViewsResponse>): ListViewsResponse {
     const message = createBaseListViewsResponse();
     message.views = object.views?.map(e => LogView.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListViewsResponseSDKType): ListViewsResponse {
@@ -3226,7 +3226,7 @@ export const ListViewsResponse = {
   fromSDKJSON(object: any): ListViewsResponseSDKType {
     return {
       views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListViewsResponse): ListViewsResponseSDKType {
@@ -3242,7 +3242,7 @@ export const ListViewsResponse = {
   fromAmino(object: ListViewsResponseAmino): ListViewsResponse {
     return {
       views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListViewsResponse): ListViewsResponseAmino {
@@ -3273,18 +3273,18 @@ export const ListViewsResponse = {
 };
 function createBaseCreateViewRequest(): CreateViewRequest {
   return {
-    parent: undefined,
-    viewId: undefined,
+    parent: "",
+    viewId: "",
     view: undefined
   };
 }
 export const CreateViewRequest = {
   typeUrl: "/google.logging.v2.CreateViewRequest",
   encode(message: CreateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.viewId !== undefined) {
+    if (message.viewId !== "") {
       writer.uint32(18).string(message.viewId);
     }
     if (message.view !== undefined) {
@@ -3331,8 +3331,8 @@ export const CreateViewRequest = {
   },
   fromPartial(object: DeepPartial<CreateViewRequest>): CreateViewRequest {
     const message = createBaseCreateViewRequest();
-    message.parent = object.parent ?? undefined;
-    message.viewId = object.viewId ?? undefined;
+    message.parent = object.parent ?? "";
+    message.viewId = object.viewId ?? "";
     if (object.view !== undefined && object.view !== null) {
       message.view = LogView.fromPartial(object.view);
     }
@@ -3347,8 +3347,8 @@ export const CreateViewRequest = {
   },
   fromSDKJSON(object: any): CreateViewRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      view_id: isSet(object.view_id) ? String(object.view_id) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      view_id: isSet(object.view_id) ? String(object.view_id) : "",
       view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined
     };
   },
@@ -3361,8 +3361,8 @@ export const CreateViewRequest = {
   },
   fromAmino(object: CreateViewRequestAmino): CreateViewRequest {
     return {
-      parent: object?.parent,
-      viewId: object?.view_id,
+      parent: object.parent,
+      viewId: object.view_id,
       view: object?.view ? LogView.fromAmino(object.view) : undefined
     };
   },
@@ -3391,7 +3391,7 @@ export const CreateViewRequest = {
 };
 function createBaseUpdateViewRequest(): UpdateViewRequest {
   return {
-    name: undefined,
+    name: "",
     view: undefined,
     updateMask: undefined
   };
@@ -3399,7 +3399,7 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
 export const UpdateViewRequest = {
   typeUrl: "/google.logging.v2.UpdateViewRequest",
   encode(message: UpdateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== undefined) {
@@ -3449,7 +3449,7 @@ export const UpdateViewRequest = {
   },
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.view !== undefined && object.view !== null) {
       message.view = LogView.fromPartial(object.view);
     }
@@ -3467,7 +3467,7 @@ export const UpdateViewRequest = {
   },
   fromSDKJSON(object: any): UpdateViewRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined,
       update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
@@ -3481,7 +3481,7 @@ export const UpdateViewRequest = {
   },
   fromAmino(object: UpdateViewRequestAmino): UpdateViewRequest {
     return {
-      name: object?.name,
+      name: object.name,
       view: object?.view ? LogView.fromAmino(object.view) : undefined,
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
@@ -3511,13 +3511,13 @@ export const UpdateViewRequest = {
 };
 function createBaseGetViewRequest(): GetViewRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetViewRequest = {
   typeUrl: "/google.logging.v2.GetViewRequest",
   encode(message: GetViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3551,7 +3551,7 @@ export const GetViewRequest = {
   },
   fromPartial(object: DeepPartial<GetViewRequest>): GetViewRequest {
     const message = createBaseGetViewRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetViewRequestSDKType): GetViewRequest {
@@ -3561,7 +3561,7 @@ export const GetViewRequest = {
   },
   fromSDKJSON(object: any): GetViewRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetViewRequest): GetViewRequestSDKType {
@@ -3571,7 +3571,7 @@ export const GetViewRequest = {
   },
   fromAmino(object: GetViewRequestAmino): GetViewRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetViewRequest): GetViewRequestAmino {
@@ -3597,13 +3597,13 @@ export const GetViewRequest = {
 };
 function createBaseDeleteViewRequest(): DeleteViewRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const DeleteViewRequest = {
   typeUrl: "/google.logging.v2.DeleteViewRequest",
   encode(message: DeleteViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3637,7 +3637,7 @@ export const DeleteViewRequest = {
   },
   fromPartial(object: DeepPartial<DeleteViewRequest>): DeleteViewRequest {
     const message = createBaseDeleteViewRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: DeleteViewRequestSDKType): DeleteViewRequest {
@@ -3647,7 +3647,7 @@ export const DeleteViewRequest = {
   },
   fromSDKJSON(object: any): DeleteViewRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: DeleteViewRequest): DeleteViewRequestSDKType {
@@ -3657,7 +3657,7 @@ export const DeleteViewRequest = {
   },
   fromAmino(object: DeleteViewRequestAmino): DeleteViewRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: DeleteViewRequest): DeleteViewRequestAmino {
@@ -3683,21 +3683,21 @@ export const DeleteViewRequest = {
 };
 function createBaseListSinksRequest(): ListSinksRequest {
   return {
-    parent: undefined,
-    pageToken: undefined,
-    pageSize: undefined
+    parent: "",
+    pageToken: "",
+    pageSize: 0
   };
 }
 export const ListSinksRequest = {
   typeUrl: "/google.logging.v2.ListSinksRequest",
   encode(message: ListSinksRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -3741,9 +3741,9 @@ export const ListSinksRequest = {
   },
   fromPartial(object: DeepPartial<ListSinksRequest>): ListSinksRequest {
     const message = createBaseListSinksRequest();
-    message.parent = object.parent ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
+    message.parent = object.parent ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
     return message;
   },
   fromSDK(object: ListSinksRequestSDKType): ListSinksRequest {
@@ -3755,9 +3755,9 @@ export const ListSinksRequest = {
   },
   fromSDKJSON(object: any): ListSinksRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
     };
   },
   toSDK(message: ListSinksRequest): ListSinksRequestSDKType {
@@ -3769,9 +3769,9 @@ export const ListSinksRequest = {
   },
   fromAmino(object: ListSinksRequestAmino): ListSinksRequest {
     return {
-      parent: object?.parent,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
     };
   },
   toAmino(message: ListSinksRequest): ListSinksRequestAmino {
@@ -3800,7 +3800,7 @@ export const ListSinksRequest = {
 function createBaseListSinksResponse(): ListSinksResponse {
   return {
     sinks: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListSinksResponse = {
@@ -3809,7 +3809,7 @@ export const ListSinksResponse = {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -3853,7 +3853,7 @@ export const ListSinksResponse = {
   fromPartial(object: DeepPartial<ListSinksResponse>): ListSinksResponse {
     const message = createBaseListSinksResponse();
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListSinksResponseSDKType): ListSinksResponse {
@@ -3865,7 +3865,7 @@ export const ListSinksResponse = {
   fromSDKJSON(object: any): ListSinksResponseSDKType {
     return {
       sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListSinksResponse): ListSinksResponseSDKType {
@@ -3881,7 +3881,7 @@ export const ListSinksResponse = {
   fromAmino(object: ListSinksResponseAmino): ListSinksResponse {
     return {
       sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListSinksResponse): ListSinksResponseAmino {
@@ -3912,13 +3912,13 @@ export const ListSinksResponse = {
 };
 function createBaseGetSinkRequest(): GetSinkRequest {
   return {
-    sinkName: undefined
+    sinkName: ""
   };
 }
 export const GetSinkRequest = {
   typeUrl: "/google.logging.v2.GetSinkRequest",
   encode(message: GetSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== undefined) {
+    if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
@@ -3952,7 +3952,7 @@ export const GetSinkRequest = {
   },
   fromPartial(object: DeepPartial<GetSinkRequest>): GetSinkRequest {
     const message = createBaseGetSinkRequest();
-    message.sinkName = object.sinkName ?? undefined;
+    message.sinkName = object.sinkName ?? "";
     return message;
   },
   fromSDK(object: GetSinkRequestSDKType): GetSinkRequest {
@@ -3962,7 +3962,7 @@ export const GetSinkRequest = {
   },
   fromSDKJSON(object: any): GetSinkRequestSDKType {
     return {
-      sink_name: isSet(object.sink_name) ? String(object.sink_name) : undefined
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
     };
   },
   toSDK(message: GetSinkRequest): GetSinkRequestSDKType {
@@ -3972,7 +3972,7 @@ export const GetSinkRequest = {
   },
   fromAmino(object: GetSinkRequestAmino): GetSinkRequest {
     return {
-      sinkName: object?.sink_name
+      sinkName: object.sink_name
     };
   },
   toAmino(message: GetSinkRequest): GetSinkRequestAmino {
@@ -3998,21 +3998,21 @@ export const GetSinkRequest = {
 };
 function createBaseCreateSinkRequest(): CreateSinkRequest {
   return {
-    parent: undefined,
+    parent: "",
     sink: undefined,
-    uniqueWriterIdentity: undefined
+    uniqueWriterIdentity: false
   };
 }
 export const CreateSinkRequest = {
   typeUrl: "/google.logging.v2.CreateSinkRequest",
   encode(message: CreateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-    if (message.uniqueWriterIdentity !== undefined) {
+    if (message.uniqueWriterIdentity === true) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
     return writer;
@@ -4056,11 +4056,11 @@ export const CreateSinkRequest = {
   },
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
-    message.parent = object.parent ?? undefined;
+    message.parent = object.parent ?? "";
     if (object.sink !== undefined && object.sink !== null) {
       message.sink = LogSink.fromPartial(object.sink);
     }
-    message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? undefined;
+    message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
   },
   fromSDK(object: CreateSinkRequestSDKType): CreateSinkRequest {
@@ -4072,9 +4072,9 @@ export const CreateSinkRequest = {
   },
   fromSDKJSON(object: any): CreateSinkRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
       sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
-      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : undefined
+      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false
     };
   },
   toSDK(message: CreateSinkRequest): CreateSinkRequestSDKType {
@@ -4086,9 +4086,9 @@ export const CreateSinkRequest = {
   },
   fromAmino(object: CreateSinkRequestAmino): CreateSinkRequest {
     return {
-      parent: object?.parent,
+      parent: object.parent,
       sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: object?.unique_writer_identity
+      uniqueWriterIdentity: object.unique_writer_identity
     };
   },
   toAmino(message: CreateSinkRequest): CreateSinkRequestAmino {
@@ -4116,22 +4116,22 @@ export const CreateSinkRequest = {
 };
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
   return {
-    sinkName: undefined,
+    sinkName: "",
     sink: undefined,
-    uniqueWriterIdentity: undefined,
+    uniqueWriterIdentity: false,
     updateMask: undefined
   };
 }
 export const UpdateSinkRequest = {
   typeUrl: "/google.logging.v2.UpdateSinkRequest",
   encode(message: UpdateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== undefined) {
+    if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-    if (message.uniqueWriterIdentity !== undefined) {
+    if (message.uniqueWriterIdentity === true) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
     if (message.updateMask !== undefined) {
@@ -4183,11 +4183,11 @@ export const UpdateSinkRequest = {
   },
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
-    message.sinkName = object.sinkName ?? undefined;
+    message.sinkName = object.sinkName ?? "";
     if (object.sink !== undefined && object.sink !== null) {
       message.sink = LogSink.fromPartial(object.sink);
     }
-    message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? undefined;
+    message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     if (object.updateMask !== undefined && object.updateMask !== null) {
       message.updateMask = FieldMask.fromPartial(object.updateMask);
     }
@@ -4203,9 +4203,9 @@ export const UpdateSinkRequest = {
   },
   fromSDKJSON(object: any): UpdateSinkRequestSDKType {
     return {
-      sink_name: isSet(object.sink_name) ? String(object.sink_name) : undefined,
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : "",
       sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
-      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : undefined,
+      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false,
       update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
   },
@@ -4219,9 +4219,9 @@ export const UpdateSinkRequest = {
   },
   fromAmino(object: UpdateSinkRequestAmino): UpdateSinkRequest {
     return {
-      sinkName: object?.sink_name,
+      sinkName: object.sink_name,
       sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: object?.unique_writer_identity,
+      uniqueWriterIdentity: object.unique_writer_identity,
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
@@ -4251,13 +4251,13 @@ export const UpdateSinkRequest = {
 };
 function createBaseDeleteSinkRequest(): DeleteSinkRequest {
   return {
-    sinkName: undefined
+    sinkName: ""
   };
 }
 export const DeleteSinkRequest = {
   typeUrl: "/google.logging.v2.DeleteSinkRequest",
   encode(message: DeleteSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== undefined) {
+    if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
@@ -4291,7 +4291,7 @@ export const DeleteSinkRequest = {
   },
   fromPartial(object: DeepPartial<DeleteSinkRequest>): DeleteSinkRequest {
     const message = createBaseDeleteSinkRequest();
-    message.sinkName = object.sinkName ?? undefined;
+    message.sinkName = object.sinkName ?? "";
     return message;
   },
   fromSDK(object: DeleteSinkRequestSDKType): DeleteSinkRequest {
@@ -4301,7 +4301,7 @@ export const DeleteSinkRequest = {
   },
   fromSDKJSON(object: any): DeleteSinkRequestSDKType {
     return {
-      sink_name: isSet(object.sink_name) ? String(object.sink_name) : undefined
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
     };
   },
   toSDK(message: DeleteSinkRequest): DeleteSinkRequestSDKType {
@@ -4311,7 +4311,7 @@ export const DeleteSinkRequest = {
   },
   fromAmino(object: DeleteSinkRequestAmino): DeleteSinkRequest {
     return {
-      sinkName: object?.sink_name
+      sinkName: object.sink_name
     };
   },
   toAmino(message: DeleteSinkRequest): DeleteSinkRequestAmino {
@@ -4337,10 +4337,10 @@ export const DeleteSinkRequest = {
 };
 function createBaseLogExclusion(): LogExclusion {
   return {
-    name: undefined,
-    description: undefined,
-    filter: undefined,
-    disabled: undefined,
+    name: "",
+    description: "",
+    filter: "",
+    disabled: false,
     createTime: undefined,
     updateTime: undefined
   };
@@ -4348,16 +4348,16 @@ function createBaseLogExclusion(): LogExclusion {
 export const LogExclusion = {
   typeUrl: "/google.logging.v2.LogExclusion",
   encode(message: LogExclusion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(26).string(message.filter);
     }
-    if (message.disabled !== undefined) {
+    if (message.disabled === true) {
       writer.uint32(32).bool(message.disabled);
     }
     if (message.createTime !== undefined) {
@@ -4422,10 +4422,10 @@ export const LogExclusion = {
   },
   fromPartial(object: DeepPartial<LogExclusion>): LogExclusion {
     const message = createBaseLogExclusion();
-    message.name = object.name ?? undefined;
-    message.description = object.description ?? undefined;
-    message.filter = object.filter ?? undefined;
-    message.disabled = object.disabled ?? undefined;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
+    message.filter = object.filter ?? "";
+    message.disabled = object.disabled ?? false;
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
@@ -4442,10 +4442,10 @@ export const LogExclusion = {
   },
   fromSDKJSON(object: any): LogExclusionSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined,
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
       update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
     };
@@ -4462,10 +4462,10 @@ export const LogExclusion = {
   },
   fromAmino(object: LogExclusionAmino): LogExclusion {
     return {
-      name: object?.name,
-      description: object?.description,
-      filter: object?.filter,
-      disabled: object?.disabled,
+      name: object.name,
+      description: object.description,
+      filter: object.filter,
+      disabled: object.disabled,
       createTime: object?.create_time,
       updateTime: object?.update_time
     };
@@ -4498,21 +4498,21 @@ export const LogExclusion = {
 };
 function createBaseListExclusionsRequest(): ListExclusionsRequest {
   return {
-    parent: undefined,
-    pageToken: undefined,
-    pageSize: undefined
+    parent: "",
+    pageToken: "",
+    pageSize: 0
   };
 }
 export const ListExclusionsRequest = {
   typeUrl: "/google.logging.v2.ListExclusionsRequest",
   encode(message: ListExclusionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -4556,9 +4556,9 @@ export const ListExclusionsRequest = {
   },
   fromPartial(object: DeepPartial<ListExclusionsRequest>): ListExclusionsRequest {
     const message = createBaseListExclusionsRequest();
-    message.parent = object.parent ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
+    message.parent = object.parent ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
     return message;
   },
   fromSDK(object: ListExclusionsRequestSDKType): ListExclusionsRequest {
@@ -4570,9 +4570,9 @@ export const ListExclusionsRequest = {
   },
   fromSDKJSON(object: any): ListExclusionsRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
     };
   },
   toSDK(message: ListExclusionsRequest): ListExclusionsRequestSDKType {
@@ -4584,9 +4584,9 @@ export const ListExclusionsRequest = {
   },
   fromAmino(object: ListExclusionsRequestAmino): ListExclusionsRequest {
     return {
-      parent: object?.parent,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
     };
   },
   toAmino(message: ListExclusionsRequest): ListExclusionsRequestAmino {
@@ -4615,7 +4615,7 @@ export const ListExclusionsRequest = {
 function createBaseListExclusionsResponse(): ListExclusionsResponse {
   return {
     exclusions: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListExclusionsResponse = {
@@ -4624,7 +4624,7 @@ export const ListExclusionsResponse = {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -4668,7 +4668,7 @@ export const ListExclusionsResponse = {
   fromPartial(object: DeepPartial<ListExclusionsResponse>): ListExclusionsResponse {
     const message = createBaseListExclusionsResponse();
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListExclusionsResponseSDKType): ListExclusionsResponse {
@@ -4680,7 +4680,7 @@ export const ListExclusionsResponse = {
   fromSDKJSON(object: any): ListExclusionsResponseSDKType {
     return {
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListExclusionsResponse): ListExclusionsResponseSDKType {
@@ -4696,7 +4696,7 @@ export const ListExclusionsResponse = {
   fromAmino(object: ListExclusionsResponseAmino): ListExclusionsResponse {
     return {
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListExclusionsResponse): ListExclusionsResponseAmino {
@@ -4727,13 +4727,13 @@ export const ListExclusionsResponse = {
 };
 function createBaseGetExclusionRequest(): GetExclusionRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetExclusionRequest = {
   typeUrl: "/google.logging.v2.GetExclusionRequest",
   encode(message: GetExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -4767,7 +4767,7 @@ export const GetExclusionRequest = {
   },
   fromPartial(object: DeepPartial<GetExclusionRequest>): GetExclusionRequest {
     const message = createBaseGetExclusionRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetExclusionRequestSDKType): GetExclusionRequest {
@@ -4777,7 +4777,7 @@ export const GetExclusionRequest = {
   },
   fromSDKJSON(object: any): GetExclusionRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetExclusionRequest): GetExclusionRequestSDKType {
@@ -4787,7 +4787,7 @@ export const GetExclusionRequest = {
   },
   fromAmino(object: GetExclusionRequestAmino): GetExclusionRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetExclusionRequest): GetExclusionRequestAmino {
@@ -4813,14 +4813,14 @@ export const GetExclusionRequest = {
 };
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
   return {
-    parent: undefined,
+    parent: "",
     exclusion: undefined
   };
 }
 export const CreateExclusionRequest = {
   typeUrl: "/google.logging.v2.CreateExclusionRequest",
   encode(message: CreateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.exclusion !== undefined) {
@@ -4862,7 +4862,7 @@ export const CreateExclusionRequest = {
   },
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
-    message.parent = object.parent ?? undefined;
+    message.parent = object.parent ?? "";
     if (object.exclusion !== undefined && object.exclusion !== null) {
       message.exclusion = LogExclusion.fromPartial(object.exclusion);
     }
@@ -4876,7 +4876,7 @@ export const CreateExclusionRequest = {
   },
   fromSDKJSON(object: any): CreateExclusionRequestSDKType {
     return {
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      parent: isSet(object.parent) ? String(object.parent) : "",
       exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined
     };
   },
@@ -4888,7 +4888,7 @@ export const CreateExclusionRequest = {
   },
   fromAmino(object: CreateExclusionRequestAmino): CreateExclusionRequest {
     return {
-      parent: object?.parent,
+      parent: object.parent,
       exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined
     };
   },
@@ -4916,7 +4916,7 @@ export const CreateExclusionRequest = {
 };
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
   return {
-    name: undefined,
+    name: "",
     exclusion: undefined,
     updateMask: undefined
   };
@@ -4924,7 +4924,7 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
 export const UpdateExclusionRequest = {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest",
   encode(message: UpdateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.exclusion !== undefined) {
@@ -4974,7 +4974,7 @@ export const UpdateExclusionRequest = {
   },
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.exclusion !== undefined && object.exclusion !== null) {
       message.exclusion = LogExclusion.fromPartial(object.exclusion);
     }
@@ -4992,7 +4992,7 @@ export const UpdateExclusionRequest = {
   },
   fromSDKJSON(object: any): UpdateExclusionRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined,
       update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
@@ -5006,7 +5006,7 @@ export const UpdateExclusionRequest = {
   },
   fromAmino(object: UpdateExclusionRequestAmino): UpdateExclusionRequest {
     return {
-      name: object?.name,
+      name: object.name,
       exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined,
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
@@ -5036,13 +5036,13 @@ export const UpdateExclusionRequest = {
 };
 function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const DeleteExclusionRequest = {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest",
   encode(message: DeleteExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5076,7 +5076,7 @@ export const DeleteExclusionRequest = {
   },
   fromPartial(object: DeepPartial<DeleteExclusionRequest>): DeleteExclusionRequest {
     const message = createBaseDeleteExclusionRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: DeleteExclusionRequestSDKType): DeleteExclusionRequest {
@@ -5086,7 +5086,7 @@ export const DeleteExclusionRequest = {
   },
   fromSDKJSON(object: any): DeleteExclusionRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: DeleteExclusionRequest): DeleteExclusionRequestSDKType {
@@ -5096,7 +5096,7 @@ export const DeleteExclusionRequest = {
   },
   fromAmino(object: DeleteExclusionRequestAmino): DeleteExclusionRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestAmino {
@@ -5122,13 +5122,13 @@ export const DeleteExclusionRequest = {
 };
 function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
   encode(message: GetCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5162,7 +5162,7 @@ export const GetCmekSettingsRequest = {
   },
   fromPartial(object: DeepPartial<GetCmekSettingsRequest>): GetCmekSettingsRequest {
     const message = createBaseGetCmekSettingsRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetCmekSettingsRequestSDKType): GetCmekSettingsRequest {
@@ -5172,7 +5172,7 @@ export const GetCmekSettingsRequest = {
   },
   fromSDKJSON(object: any): GetCmekSettingsRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetCmekSettingsRequest): GetCmekSettingsRequestSDKType {
@@ -5182,7 +5182,7 @@ export const GetCmekSettingsRequest = {
   },
   fromAmino(object: GetCmekSettingsRequestAmino): GetCmekSettingsRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestAmino {
@@ -5208,7 +5208,7 @@ export const GetCmekSettingsRequest = {
 };
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
   return {
-    name: undefined,
+    name: "",
     cmekSettings: undefined,
     updateMask: undefined
   };
@@ -5216,7 +5216,7 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
 export const UpdateCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
   encode(message: UpdateCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.cmekSettings !== undefined) {
@@ -5266,7 +5266,7 @@ export const UpdateCmekSettingsRequest = {
   },
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
       message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
     }
@@ -5284,7 +5284,7 @@ export const UpdateCmekSettingsRequest = {
   },
   fromSDKJSON(object: any): UpdateCmekSettingsRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined,
       update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
@@ -5298,7 +5298,7 @@ export const UpdateCmekSettingsRequest = {
   },
   fromAmino(object: UpdateCmekSettingsRequestAmino): UpdateCmekSettingsRequest {
     return {
-      name: object?.name,
+      name: object.name,
       cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined,
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
@@ -5328,21 +5328,21 @@ export const UpdateCmekSettingsRequest = {
 };
 function createBaseCmekSettings(): CmekSettings {
   return {
-    name: undefined,
-    kmsKeyName: undefined,
-    serviceAccountId: undefined
+    name: "",
+    kmsKeyName: "",
+    serviceAccountId: ""
   };
 }
 export const CmekSettings = {
   typeUrl: "/google.logging.v2.CmekSettings",
   encode(message: CmekSettings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.kmsKeyName !== undefined) {
+    if (message.kmsKeyName !== "") {
       writer.uint32(18).string(message.kmsKeyName);
     }
-    if (message.serviceAccountId !== undefined) {
+    if (message.serviceAccountId !== "") {
       writer.uint32(26).string(message.serviceAccountId);
     }
     return writer;
@@ -5386,9 +5386,9 @@ export const CmekSettings = {
   },
   fromPartial(object: DeepPartial<CmekSettings>): CmekSettings {
     const message = createBaseCmekSettings();
-    message.name = object.name ?? undefined;
-    message.kmsKeyName = object.kmsKeyName ?? undefined;
-    message.serviceAccountId = object.serviceAccountId ?? undefined;
+    message.name = object.name ?? "";
+    message.kmsKeyName = object.kmsKeyName ?? "";
+    message.serviceAccountId = object.serviceAccountId ?? "";
     return message;
   },
   fromSDK(object: CmekSettingsSDKType): CmekSettings {
@@ -5400,9 +5400,9 @@ export const CmekSettings = {
   },
   fromSDKJSON(object: any): CmekSettingsSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : undefined,
-      service_account_id: isSet(object.service_account_id) ? String(object.service_account_id) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
+      service_account_id: isSet(object.service_account_id) ? String(object.service_account_id) : ""
     };
   },
   toSDK(message: CmekSettings): CmekSettingsSDKType {
@@ -5414,9 +5414,9 @@ export const CmekSettings = {
   },
   fromAmino(object: CmekSettingsAmino): CmekSettings {
     return {
-      name: object?.name,
-      kmsKeyName: object?.kms_key_name,
-      serviceAccountId: object?.service_account_id
+      name: object.name,
+      kmsKeyName: object.kms_key_name,
+      serviceAccountId: object.service_account_id
     };
   },
   toAmino(message: CmekSettings): CmekSettingsAmino {
@@ -5444,13 +5444,13 @@ export const CmekSettings = {
 };
 function createBaseGetSettingsRequest(): GetSettingsRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetSettingsRequest = {
   typeUrl: "/google.logging.v2.GetSettingsRequest",
   encode(message: GetSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5484,7 +5484,7 @@ export const GetSettingsRequest = {
   },
   fromPartial(object: DeepPartial<GetSettingsRequest>): GetSettingsRequest {
     const message = createBaseGetSettingsRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetSettingsRequestSDKType): GetSettingsRequest {
@@ -5494,7 +5494,7 @@ export const GetSettingsRequest = {
   },
   fromSDKJSON(object: any): GetSettingsRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetSettingsRequest): GetSettingsRequestSDKType {
@@ -5504,7 +5504,7 @@ export const GetSettingsRequest = {
   },
   fromAmino(object: GetSettingsRequestAmino): GetSettingsRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetSettingsRequest): GetSettingsRequestAmino {
@@ -5530,7 +5530,7 @@ export const GetSettingsRequest = {
 };
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
   return {
-    name: undefined,
+    name: "",
     settings: undefined,
     updateMask: undefined
   };
@@ -5538,7 +5538,7 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
 export const UpdateSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest",
   encode(message: UpdateSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.settings !== undefined) {
@@ -5588,7 +5588,7 @@ export const UpdateSettingsRequest = {
   },
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.settings !== undefined && object.settings !== null) {
       message.settings = Settings.fromPartial(object.settings);
     }
@@ -5606,7 +5606,7 @@ export const UpdateSettingsRequest = {
   },
   fromSDKJSON(object: any): UpdateSettingsRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       settings: isSet(object.settings) ? Settings.fromSDKJSON(object.settings) : undefined,
       update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
@@ -5620,7 +5620,7 @@ export const UpdateSettingsRequest = {
   },
   fromAmino(object: UpdateSettingsRequestAmino): UpdateSettingsRequest {
     return {
-      name: object?.name,
+      name: object.name,
       settings: object?.settings ? Settings.fromAmino(object.settings) : undefined,
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
@@ -5650,29 +5650,29 @@ export const UpdateSettingsRequest = {
 };
 function createBaseSettings(): Settings {
   return {
-    name: undefined,
-    kmsKeyName: undefined,
-    kmsServiceAccountId: undefined,
-    storageLocation: undefined,
-    disableDefaultSink: undefined
+    name: "",
+    kmsKeyName: "",
+    kmsServiceAccountId: "",
+    storageLocation: "",
+    disableDefaultSink: false
   };
 }
 export const Settings = {
   typeUrl: "/google.logging.v2.Settings",
   encode(message: Settings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.kmsKeyName !== undefined) {
+    if (message.kmsKeyName !== "") {
       writer.uint32(18).string(message.kmsKeyName);
     }
-    if (message.kmsServiceAccountId !== undefined) {
+    if (message.kmsServiceAccountId !== "") {
       writer.uint32(26).string(message.kmsServiceAccountId);
     }
-    if (message.storageLocation !== undefined) {
+    if (message.storageLocation !== "") {
       writer.uint32(34).string(message.storageLocation);
     }
-    if (message.disableDefaultSink !== undefined) {
+    if (message.disableDefaultSink === true) {
       writer.uint32(40).bool(message.disableDefaultSink);
     }
     return writer;
@@ -5726,11 +5726,11 @@ export const Settings = {
   },
   fromPartial(object: DeepPartial<Settings>): Settings {
     const message = createBaseSettings();
-    message.name = object.name ?? undefined;
-    message.kmsKeyName = object.kmsKeyName ?? undefined;
-    message.kmsServiceAccountId = object.kmsServiceAccountId ?? undefined;
-    message.storageLocation = object.storageLocation ?? undefined;
-    message.disableDefaultSink = object.disableDefaultSink ?? undefined;
+    message.name = object.name ?? "";
+    message.kmsKeyName = object.kmsKeyName ?? "";
+    message.kmsServiceAccountId = object.kmsServiceAccountId ?? "";
+    message.storageLocation = object.storageLocation ?? "";
+    message.disableDefaultSink = object.disableDefaultSink ?? false;
     return message;
   },
   fromSDK(object: SettingsSDKType): Settings {
@@ -5744,11 +5744,11 @@ export const Settings = {
   },
   fromSDKJSON(object: any): SettingsSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : undefined,
-      kms_service_account_id: isSet(object.kms_service_account_id) ? String(object.kms_service_account_id) : undefined,
-      storage_location: isSet(object.storage_location) ? String(object.storage_location) : undefined,
-      disable_default_sink: isSet(object.disable_default_sink) ? Boolean(object.disable_default_sink) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
+      kms_service_account_id: isSet(object.kms_service_account_id) ? String(object.kms_service_account_id) : "",
+      storage_location: isSet(object.storage_location) ? String(object.storage_location) : "",
+      disable_default_sink: isSet(object.disable_default_sink) ? Boolean(object.disable_default_sink) : false
     };
   },
   toSDK(message: Settings): SettingsSDKType {
@@ -5762,11 +5762,11 @@ export const Settings = {
   },
   fromAmino(object: SettingsAmino): Settings {
     return {
-      name: object?.name,
-      kmsKeyName: object?.kms_key_name,
-      kmsServiceAccountId: object?.kms_service_account_id,
-      storageLocation: object?.storage_location,
-      disableDefaultSink: object?.disable_default_sink
+      name: object.name,
+      kmsKeyName: object.kms_key_name,
+      kmsServiceAccountId: object.kms_service_account_id,
+      storageLocation: object.storage_location,
+      disableDefaultSink: object.disable_default_sink
     };
   },
   toAmino(message: Settings): SettingsAmino {
@@ -5796,21 +5796,21 @@ export const Settings = {
 };
 function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
   return {
-    name: undefined,
-    filter: undefined,
-    destination: undefined
+    name: "",
+    filter: "",
+    destination: ""
   };
 }
 export const CopyLogEntriesRequest = {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
   encode(message: CopyLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(26).string(message.filter);
     }
-    if (message.destination !== undefined) {
+    if (message.destination !== "") {
       writer.uint32(34).string(message.destination);
     }
     return writer;
@@ -5854,9 +5854,9 @@ export const CopyLogEntriesRequest = {
   },
   fromPartial(object: DeepPartial<CopyLogEntriesRequest>): CopyLogEntriesRequest {
     const message = createBaseCopyLogEntriesRequest();
-    message.name = object.name ?? undefined;
-    message.filter = object.filter ?? undefined;
-    message.destination = object.destination ?? undefined;
+    message.name = object.name ?? "";
+    message.filter = object.filter ?? "";
+    message.destination = object.destination ?? "";
     return message;
   },
   fromSDK(object: CopyLogEntriesRequestSDKType): CopyLogEntriesRequest {
@@ -5868,9 +5868,9 @@ export const CopyLogEntriesRequest = {
   },
   fromSDKJSON(object: any): CopyLogEntriesRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined,
-      destination: isSet(object.destination) ? String(object.destination) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      destination: isSet(object.destination) ? String(object.destination) : ""
     };
   },
   toSDK(message: CopyLogEntriesRequest): CopyLogEntriesRequestSDKType {
@@ -5882,9 +5882,9 @@ export const CopyLogEntriesRequest = {
   },
   fromAmino(object: CopyLogEntriesRequestAmino): CopyLogEntriesRequest {
     return {
-      name: object?.name,
-      filter: object?.filter,
-      destination: object?.destination
+      name: object.name,
+      filter: object.filter,
+      destination: object.destination
     };
   },
   toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestAmino {
@@ -5914,11 +5914,11 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   return {
     startTime: undefined,
     endTime: undefined,
-    state: undefined,
-    cancellationRequested: undefined,
+    state: 0,
+    cancellationRequested: false,
     request: undefined,
-    progress: undefined,
-    writerIdentity: undefined
+    progress: 0,
+    writerIdentity: ""
   };
 }
 export const CopyLogEntriesMetadata = {
@@ -5930,19 +5930,19 @@ export const CopyLogEntriesMetadata = {
     if (message.endTime !== undefined) {
       Timestamp.encode(toTimestamp(message.endTime), writer.uint32(18).fork()).ldelim();
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       writer.uint32(24).int32(message.state);
     }
-    if (message.cancellationRequested !== undefined) {
+    if (message.cancellationRequested === true) {
       writer.uint32(32).bool(message.cancellationRequested);
     }
     if (message.request !== undefined) {
       CopyLogEntriesRequest.encode(message.request, writer.uint32(42).fork()).ldelim();
     }
-    if (message.progress !== undefined) {
+    if (message.progress !== 0) {
       writer.uint32(48).int32(message.progress);
     }
-    if (message.writerIdentity !== undefined) {
+    if (message.writerIdentity !== "") {
       writer.uint32(58).string(message.writerIdentity);
     }
     return writer;
@@ -6008,20 +6008,20 @@ export const CopyLogEntriesMetadata = {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
-    message.state = object.state ?? undefined;
-    message.cancellationRequested = object.cancellationRequested ?? undefined;
+    message.state = object.state ?? 0;
+    message.cancellationRequested = object.cancellationRequested ?? false;
     if (object.request !== undefined && object.request !== null) {
       message.request = CopyLogEntriesRequest.fromPartial(object.request);
     }
-    message.progress = object.progress ?? undefined;
-    message.writerIdentity = object.writerIdentity ?? undefined;
+    message.progress = object.progress ?? 0;
+    message.writerIdentity = object.writerIdentity ?? "";
     return message;
   },
   fromSDK(object: CopyLogEntriesMetadataSDKType): CopyLogEntriesMetadata {
     return {
       startTime: object.start_time ?? undefined,
       endTime: object.end_time ?? undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : undefined,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object?.cancellation_requested,
       request: object.request ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
       progress: object?.progress,
@@ -6032,11 +6032,11 @@ export const CopyLogEntriesMetadata = {
     return {
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : undefined,
-      cancellation_requested: isSet(object.cancellation_requested) ? Boolean(object.cancellation_requested) : undefined,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
+      cancellation_requested: isSet(object.cancellation_requested) ? Boolean(object.cancellation_requested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromSDKJSON(object.request) : undefined,
-      progress: isSet(object.progress) ? Number(object.progress) : undefined,
-      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : undefined
+      progress: isSet(object.progress) ? Number(object.progress) : 0,
+      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : ""
     };
   },
   toSDK(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataSDKType {
@@ -6054,11 +6054,11 @@ export const CopyLogEntriesMetadata = {
     return {
       startTime: object?.start_time,
       endTime: object?.end_time,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : undefined,
-      cancellationRequested: object?.cancellation_requested,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
+      cancellationRequested: object.cancellation_requested,
       request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
-      progress: object?.progress,
-      writerIdentity: object?.writer_identity
+      progress: object.progress,
+      writerIdentity: object.writer_identity
     };
   },
   toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
@@ -6090,13 +6090,13 @@ export const CopyLogEntriesMetadata = {
 };
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   return {
-    logEntriesCopiedCount: undefined
+    logEntriesCopiedCount: BigInt(0)
   };
 }
 export const CopyLogEntriesResponse = {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
   encode(message: CopyLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logEntriesCopiedCount !== undefined) {
+    if (message.logEntriesCopiedCount !== BigInt(0)) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }
     return writer;
@@ -6125,9 +6125,7 @@ export const CopyLogEntriesResponse = {
   },
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
-    if (message.logEntriesCopiedCount !== undefined) {
-      obj.logEntriesCopiedCount = message.logEntriesCopiedCount.toString();
-    }
+    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
@@ -6144,7 +6142,7 @@ export const CopyLogEntriesResponse = {
   },
   fromSDKJSON(object: any): CopyLogEntriesResponseSDKType {
     return {
-      log_entries_copied_count: isSet(object.log_entries_copied_count) ? BigInt(object.log_entries_copied_count.toString()) : undefined
+      log_entries_copied_count: isSet(object.log_entries_copied_count) ? BigInt(object.log_entries_copied_count.toString()) : BigInt(0)
     };
   },
   toSDK(message: CopyLogEntriesResponse): CopyLogEntriesResponseSDKType {
@@ -6154,7 +6152,7 @@ export const CopyLogEntriesResponse = {
   },
   fromAmino(object: CopyLogEntriesResponseAmino): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: object?.log_entries_copied_count ? BigInt(object.log_entries_copied_count) : undefined
+      logEntriesCopiedCount: BigInt(object.log_entries_copied_count)
     };
   },
   toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {

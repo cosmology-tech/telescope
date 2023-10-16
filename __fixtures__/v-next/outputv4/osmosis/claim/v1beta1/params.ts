@@ -9,21 +9,21 @@ export interface Params {
   durationUntilDecay: Duration;
   durationOfDecay: Duration;
   /** denom of claimable asset */
-  claimDenom?: string;
+  claimDenom: string;
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
   airdrop_start_time: Date;
   duration_until_decay: DurationSDKType;
   duration_of_decay: DurationSDKType;
-  claim_denom?: string;
+  claim_denom: string;
 }
 function createBaseParams(): Params {
   return {
     airdropStartTime: new Date(),
     durationUntilDecay: Duration.fromPartial({}),
     durationOfDecay: Duration.fromPartial({}),
-    claimDenom: undefined
+    claimDenom: ""
   };
 }
 export const Params = {
@@ -38,7 +38,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(26).fork()).ldelim();
     }
-    if (message.claimDenom !== undefined) {
+    if (message.claimDenom !== "") {
       writer.uint32(34).string(message.claimDenom);
     }
     return writer;
@@ -94,7 +94,7 @@ export const Params = {
     if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
       message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
     }
-    message.claimDenom = object.claimDenom ?? undefined;
+    message.claimDenom = object.claimDenom ?? "";
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -110,7 +110,7 @@ export const Params = {
       airdrop_start_time: isSet(object.airdrop_start_time) ? new Date(object.airdrop_start_time) : undefined,
       duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
       duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
-      claim_denom: isSet(object.claim_denom) ? String(object.claim_denom) : undefined
+      claim_denom: isSet(object.claim_denom) ? String(object.claim_denom) : ""
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -126,7 +126,7 @@ export const Params = {
       airdropStartTime: object.airdrop_start_time,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
-      claimDenom: object?.claim_denom
+      claimDenom: object.claim_denom
     };
   },
   toAmino(message: Params): ParamsAmino {

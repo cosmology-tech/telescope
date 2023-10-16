@@ -8,7 +8,7 @@ export const protobufPackage = "google.protobuf";
  */
 export interface DoubleValue {
   /** The double value. */
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `double`.
@@ -16,7 +16,7 @@ export interface DoubleValue {
  * The JSON representation for `DoubleValue` is JSON number.
  */
 export interface DoubleValueSDKType {
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `float`.
@@ -25,7 +25,7 @@ export interface DoubleValueSDKType {
  */
 export interface FloatValue {
   /** The float value. */
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `float`.
@@ -33,7 +33,7 @@ export interface FloatValue {
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValueSDKType {
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `int64`.
@@ -42,7 +42,7 @@ export interface FloatValueSDKType {
  */
 export interface Int64Value {
   /** The int64 value. */
-  value?: bigint;
+  value: bigint;
 }
 /**
  * Wrapper message for `int64`.
@@ -50,7 +50,7 @@ export interface Int64Value {
  * The JSON representation for `Int64Value` is JSON string.
  */
 export interface Int64ValueSDKType {
-  value?: bigint;
+  value: bigint;
 }
 /**
  * Wrapper message for `uint64`.
@@ -59,7 +59,7 @@ export interface Int64ValueSDKType {
  */
 export interface UInt64Value {
   /** The uint64 value. */
-  value?: bigint;
+  value: bigint;
 }
 /**
  * Wrapper message for `uint64`.
@@ -67,7 +67,7 @@ export interface UInt64Value {
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64ValueSDKType {
-  value?: bigint;
+  value: bigint;
 }
 /**
  * Wrapper message for `int32`.
@@ -76,7 +76,7 @@ export interface UInt64ValueSDKType {
  */
 export interface Int32Value {
   /** The int32 value. */
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `int32`.
@@ -84,7 +84,7 @@ export interface Int32Value {
  * The JSON representation for `Int32Value` is JSON number.
  */
 export interface Int32ValueSDKType {
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `uint32`.
@@ -93,7 +93,7 @@ export interface Int32ValueSDKType {
  */
 export interface UInt32Value {
   /** The uint32 value. */
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `uint32`.
@@ -101,7 +101,7 @@ export interface UInt32Value {
  * The JSON representation for `UInt32Value` is JSON number.
  */
 export interface UInt32ValueSDKType {
-  value?: number;
+  value: number;
 }
 /**
  * Wrapper message for `bool`.
@@ -110,7 +110,7 @@ export interface UInt32ValueSDKType {
  */
 export interface BoolValue {
   /** The bool value. */
-  value?: boolean;
+  value: boolean;
 }
 /**
  * Wrapper message for `bool`.
@@ -118,7 +118,7 @@ export interface BoolValue {
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
 export interface BoolValueSDKType {
-  value?: boolean;
+  value: boolean;
 }
 /**
  * Wrapper message for `string`.
@@ -127,7 +127,7 @@ export interface BoolValueSDKType {
  */
 export interface StringValue {
   /** The string value. */
-  value?: string;
+  value: string;
 }
 /**
  * Wrapper message for `string`.
@@ -135,7 +135,7 @@ export interface StringValue {
  * The JSON representation for `StringValue` is JSON string.
  */
 export interface StringValueSDKType {
-  value?: string;
+  value: string;
 }
 /**
  * Wrapper message for `bytes`.
@@ -144,7 +144,7 @@ export interface StringValueSDKType {
  */
 export interface BytesValue {
   /** The bytes value. */
-  value?: Uint8Array;
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `bytes`.
@@ -152,17 +152,17 @@ export interface BytesValue {
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValueSDKType {
-  value?: Uint8Array;
+  value: Uint8Array;
 }
 function createBaseDoubleValue(): DoubleValue {
   return {
-    value: undefined
+    value: 0
   };
 }
 export const DoubleValue = {
   typeUrl: "/google.protobuf.DoubleValue",
   encode(message: DoubleValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }
     return writer;
@@ -196,7 +196,7 @@ export const DoubleValue = {
   },
   fromPartial(object: DeepPartial<DoubleValue>): DoubleValue {
     const message = createBaseDoubleValue();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? 0;
     return message;
   },
   fromSDK(object: DoubleValueSDKType): DoubleValue {
@@ -206,7 +206,7 @@ export const DoubleValue = {
   },
   fromSDKJSON(object: any): DoubleValueSDKType {
     return {
-      value: isSet(object.value) ? Number(object.value) : undefined
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
   toSDK(message: DoubleValue): DoubleValueSDKType {
@@ -216,7 +216,7 @@ export const DoubleValue = {
   },
   fromAmino(object: DoubleValueAmino): DoubleValue {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: DoubleValue): DoubleValueAmino {
@@ -242,13 +242,13 @@ export const DoubleValue = {
 };
 function createBaseFloatValue(): FloatValue {
   return {
-    value: undefined
+    value: 0
   };
 }
 export const FloatValue = {
   typeUrl: "/google.protobuf.FloatValue",
   encode(message: FloatValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== 0) {
       writer.uint32(13).float(message.value);
     }
     return writer;
@@ -282,7 +282,7 @@ export const FloatValue = {
   },
   fromPartial(object: DeepPartial<FloatValue>): FloatValue {
     const message = createBaseFloatValue();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? 0;
     return message;
   },
   fromSDK(object: FloatValueSDKType): FloatValue {
@@ -292,7 +292,7 @@ export const FloatValue = {
   },
   fromSDKJSON(object: any): FloatValueSDKType {
     return {
-      value: isSet(object.value) ? Number(object.value) : undefined
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
   toSDK(message: FloatValue): FloatValueSDKType {
@@ -302,7 +302,7 @@ export const FloatValue = {
   },
   fromAmino(object: FloatValueAmino): FloatValue {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: FloatValue): FloatValueAmino {
@@ -328,13 +328,13 @@ export const FloatValue = {
 };
 function createBaseInt64Value(): Int64Value {
   return {
-    value: undefined
+    value: BigInt(0)
   };
 }
 export const Int64Value = {
   typeUrl: "/google.protobuf.Int64Value",
   encode(message: Int64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== BigInt(0)) {
       writer.uint32(8).int64(message.value);
     }
     return writer;
@@ -363,9 +363,7 @@ export const Int64Value = {
   },
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
-    if (message.value !== undefined) {
-      obj.value = message.value.toString();
-    }
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
@@ -382,7 +380,7 @@ export const Int64Value = {
   },
   fromSDKJSON(object: any): Int64ValueSDKType {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : undefined
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: Int64Value): Int64ValueSDKType {
@@ -392,7 +390,7 @@ export const Int64Value = {
   },
   fromAmino(object: Int64ValueAmino): Int64Value {
     return {
-      value: object?.value ? BigInt(object.value) : undefined
+      value: BigInt(object.value)
     };
   },
   toAmino(message: Int64Value): Int64ValueAmino {
@@ -418,13 +416,13 @@ export const Int64Value = {
 };
 function createBaseUInt64Value(): UInt64Value {
   return {
-    value: undefined
+    value: BigInt(0)
   };
 }
 export const UInt64Value = {
   typeUrl: "/google.protobuf.UInt64Value",
   encode(message: UInt64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== BigInt(0)) {
       writer.uint32(8).uint64(message.value);
     }
     return writer;
@@ -453,9 +451,7 @@ export const UInt64Value = {
   },
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
-    if (message.value !== undefined) {
-      obj.value = message.value.toString();
-    }
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
@@ -472,7 +468,7 @@ export const UInt64Value = {
   },
   fromSDKJSON(object: any): UInt64ValueSDKType {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : undefined
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: UInt64Value): UInt64ValueSDKType {
@@ -482,7 +478,7 @@ export const UInt64Value = {
   },
   fromAmino(object: UInt64ValueAmino): UInt64Value {
     return {
-      value: object?.value ? BigInt(object.value) : undefined
+      value: BigInt(object.value)
     };
   },
   toAmino(message: UInt64Value): UInt64ValueAmino {
@@ -508,13 +504,13 @@ export const UInt64Value = {
 };
 function createBaseInt32Value(): Int32Value {
   return {
-    value: undefined
+    value: 0
   };
 }
 export const Int32Value = {
   typeUrl: "/google.protobuf.Int32Value",
   encode(message: Int32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
@@ -548,7 +544,7 @@ export const Int32Value = {
   },
   fromPartial(object: DeepPartial<Int32Value>): Int32Value {
     const message = createBaseInt32Value();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? 0;
     return message;
   },
   fromSDK(object: Int32ValueSDKType): Int32Value {
@@ -558,7 +554,7 @@ export const Int32Value = {
   },
   fromSDKJSON(object: any): Int32ValueSDKType {
     return {
-      value: isSet(object.value) ? Number(object.value) : undefined
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
   toSDK(message: Int32Value): Int32ValueSDKType {
@@ -568,7 +564,7 @@ export const Int32Value = {
   },
   fromAmino(object: Int32ValueAmino): Int32Value {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: Int32Value): Int32ValueAmino {
@@ -594,13 +590,13 @@ export const Int32Value = {
 };
 function createBaseUInt32Value(): UInt32Value {
   return {
-    value: undefined
+    value: 0
   };
 }
 export const UInt32Value = {
   typeUrl: "/google.protobuf.UInt32Value",
   encode(message: UInt32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== 0) {
       writer.uint32(8).uint32(message.value);
     }
     return writer;
@@ -634,7 +630,7 @@ export const UInt32Value = {
   },
   fromPartial(object: DeepPartial<UInt32Value>): UInt32Value {
     const message = createBaseUInt32Value();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? 0;
     return message;
   },
   fromSDK(object: UInt32ValueSDKType): UInt32Value {
@@ -644,7 +640,7 @@ export const UInt32Value = {
   },
   fromSDKJSON(object: any): UInt32ValueSDKType {
     return {
-      value: isSet(object.value) ? Number(object.value) : undefined
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
   toSDK(message: UInt32Value): UInt32ValueSDKType {
@@ -654,7 +650,7 @@ export const UInt32Value = {
   },
   fromAmino(object: UInt32ValueAmino): UInt32Value {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: UInt32Value): UInt32ValueAmino {
@@ -680,13 +676,13 @@ export const UInt32Value = {
 };
 function createBaseBoolValue(): BoolValue {
   return {
-    value: undefined
+    value: false
   };
 }
 export const BoolValue = {
   typeUrl: "/google.protobuf.BoolValue",
   encode(message: BoolValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value === true) {
       writer.uint32(8).bool(message.value);
     }
     return writer;
@@ -720,7 +716,7 @@ export const BoolValue = {
   },
   fromPartial(object: DeepPartial<BoolValue>): BoolValue {
     const message = createBaseBoolValue();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? false;
     return message;
   },
   fromSDK(object: BoolValueSDKType): BoolValue {
@@ -730,7 +726,7 @@ export const BoolValue = {
   },
   fromSDKJSON(object: any): BoolValueSDKType {
     return {
-      value: isSet(object.value) ? Boolean(object.value) : undefined
+      value: isSet(object.value) ? Boolean(object.value) : false
     };
   },
   toSDK(message: BoolValue): BoolValueSDKType {
@@ -740,7 +736,7 @@ export const BoolValue = {
   },
   fromAmino(object: BoolValueAmino): BoolValue {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: BoolValue): BoolValueAmino {
@@ -766,13 +762,13 @@ export const BoolValue = {
 };
 function createBaseStringValue(): StringValue {
   return {
-    value: undefined
+    value: ""
   };
 }
 export const StringValue = {
   typeUrl: "/google.protobuf.StringValue",
   encode(message: StringValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(10).string(message.value);
     }
     return writer;
@@ -806,7 +802,7 @@ export const StringValue = {
   },
   fromPartial(object: DeepPartial<StringValue>): StringValue {
     const message = createBaseStringValue();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? "";
     return message;
   },
   fromSDK(object: StringValueSDKType): StringValue {
@@ -816,7 +812,7 @@ export const StringValue = {
   },
   fromSDKJSON(object: any): StringValueSDKType {
     return {
-      value: isSet(object.value) ? String(object.value) : undefined
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
   toSDK(message: StringValue): StringValueSDKType {
@@ -826,7 +822,7 @@ export const StringValue = {
   },
   fromAmino(object: StringValueAmino): StringValue {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: StringValue): StringValueAmino {
@@ -852,13 +848,13 @@ export const StringValue = {
 };
 function createBaseBytesValue(): BytesValue {
   return {
-    value: undefined
+    value: new Uint8Array()
   };
 }
 export const BytesValue = {
   typeUrl: "/google.protobuf.BytesValue",
   encode(message: BytesValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       writer.uint32(10).bytes(message.value);
     }
     return writer;
@@ -887,12 +883,12 @@ export const BytesValue = {
   },
   toJSON(message: BytesValue): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<BytesValue>): BytesValue {
     const message = createBaseBytesValue();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? new Uint8Array();
     return message;
   },
   fromSDK(object: BytesValueSDKType): BytesValue {
@@ -902,7 +898,7 @@ export const BytesValue = {
   },
   fromSDKJSON(object: any): BytesValueSDKType {
     return {
-      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toSDK(message: BytesValue): BytesValueSDKType {
@@ -912,7 +908,7 @@ export const BytesValue = {
   },
   fromAmino(object: BytesValueAmino): BytesValue {
     return {
-      value: object?.value
+      value: object.value
     };
   },
   toAmino(message: BytesValue): BytesValueAmino {

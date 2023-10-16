@@ -81,19 +81,19 @@ export interface ConfigChange {
    * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
    * - logging.producer_destinations[0]
    */
-  element?: string;
+  element: string;
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-  oldValue?: string;
+  oldValue: string;
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
-  newValue?: string;
+  newValue: string;
   /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
-  changeType?: ChangeType;
+  changeType: ChangeType;
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
@@ -109,10 +109,10 @@ export interface ConfigChange {
  * backwards-incompatibility.
  */
 export interface ConfigChangeSDKType {
-  element?: string;
-  old_value?: string;
-  new_value?: string;
-  change_type?: ChangeType;
+  element: string;
+  old_value: string;
+  new_value: string;
+  change_type: ChangeType;
   advices: AdviceSDKType[];
 }
 /**
@@ -124,37 +124,37 @@ export interface Advice {
    * Useful description for why this advice was applied and what actions should
    * be taken to mitigate any implied risks.
    */
-  description?: string;
+  description: string;
 }
 /**
  * Generated advice about this change, used for providing more
  * information about how a change will affect the existing service.
  */
 export interface AdviceSDKType {
-  description?: string;
+  description: string;
 }
 function createBaseConfigChange(): ConfigChange {
   return {
-    element: undefined,
-    oldValue: undefined,
-    newValue: undefined,
-    changeType: undefined,
+    element: "",
+    oldValue: "",
+    newValue: "",
+    changeType: 0,
     advices: []
   };
 }
 export const ConfigChange = {
   typeUrl: "/google.api.ConfigChange",
   encode(message: ConfigChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.element !== undefined) {
+    if (message.element !== "") {
       writer.uint32(10).string(message.element);
     }
-    if (message.oldValue !== undefined) {
+    if (message.oldValue !== "") {
       writer.uint32(18).string(message.oldValue);
     }
-    if (message.newValue !== undefined) {
+    if (message.newValue !== "") {
       writer.uint32(26).string(message.newValue);
     }
-    if (message.changeType !== undefined) {
+    if (message.changeType !== 0) {
       writer.uint32(32).int32(message.changeType);
     }
     for (const v of message.advices) {
@@ -215,10 +215,10 @@ export const ConfigChange = {
   },
   fromPartial(object: DeepPartial<ConfigChange>): ConfigChange {
     const message = createBaseConfigChange();
-    message.element = object.element ?? undefined;
-    message.oldValue = object.oldValue ?? undefined;
-    message.newValue = object.newValue ?? undefined;
-    message.changeType = object.changeType ?? undefined;
+    message.element = object.element ?? "";
+    message.oldValue = object.oldValue ?? "";
+    message.newValue = object.newValue ?? "";
+    message.changeType = object.changeType ?? 0;
     message.advices = object.advices?.map(e => Advice.fromPartial(e)) || [];
     return message;
   },
@@ -227,16 +227,16 @@ export const ConfigChange = {
       element: object?.element,
       oldValue: object?.old_value,
       newValue: object?.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : undefined,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromSDK(e)) : []
     };
   },
   fromSDKJSON(object: any): ConfigChangeSDKType {
     return {
-      element: isSet(object.element) ? String(object.element) : undefined,
-      old_value: isSet(object.old_value) ? String(object.old_value) : undefined,
-      new_value: isSet(object.new_value) ? String(object.new_value) : undefined,
-      change_type: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : undefined,
+      element: isSet(object.element) ? String(object.element) : "",
+      old_value: isSet(object.old_value) ? String(object.old_value) : "",
+      new_value: isSet(object.new_value) ? String(object.new_value) : "",
+      change_type: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromSDKJSON(e)) : []
     };
   },
@@ -255,10 +255,10 @@ export const ConfigChange = {
   },
   fromAmino(object: ConfigChangeAmino): ConfigChange {
     return {
-      element: object?.element,
-      oldValue: object?.old_value,
-      newValue: object?.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : undefined,
+      element: object.element,
+      oldValue: object.old_value,
+      newValue: object.new_value,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
     };
   },
@@ -293,13 +293,13 @@ export const ConfigChange = {
 };
 function createBaseAdvice(): Advice {
   return {
-    description: undefined
+    description: ""
   };
 }
 export const Advice = {
   typeUrl: "/google.api.Advice",
   encode(message: Advice, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -333,7 +333,7 @@ export const Advice = {
   },
   fromPartial(object: DeepPartial<Advice>): Advice {
     const message = createBaseAdvice();
-    message.description = object.description ?? undefined;
+    message.description = object.description ?? "";
     return message;
   },
   fromSDK(object: AdviceSDKType): Advice {
@@ -343,7 +343,7 @@ export const Advice = {
   },
   fromSDKJSON(object: any): AdviceSDKType {
     return {
-      description: isSet(object.description) ? String(object.description) : undefined
+      description: isSet(object.description) ? String(object.description) : ""
     };
   },
   toSDK(message: Advice): AdviceSDKType {
@@ -353,7 +353,7 @@ export const Advice = {
   },
   fromAmino(object: AdviceAmino): Advice {
     return {
-      description: object?.description
+      description: object.description
     };
   },
   toAmino(message: Advice): AdviceAmino {

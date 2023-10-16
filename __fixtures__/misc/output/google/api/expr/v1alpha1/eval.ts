@@ -22,7 +22,7 @@ export interface ExprValueSDKType {
 }
 export interface IdRef {
   /** The expression id. */
-  id?: number;
+  id: number;
 }
 export interface IdRefProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.IdRef";
@@ -30,14 +30,14 @@ export interface IdRefProtoMsg {
 }
 export interface IdRefAmino {
   /** The expression id. */
-  id?: number;
+  id: number;
 }
 export interface IdRefAminoMsg {
   type: "/google.api.expr.v1alpha1.IdRef";
   value: IdRefAmino;
 }
 export interface IdRefSDKType {
-  id?: number;
+  id: number;
 }
 function createBaseExprValue(): ExprValue {
   return {
@@ -139,13 +139,13 @@ export const ExprValue = {
 };
 function createBaseIdRef(): IdRef {
   return {
-    id: undefined
+    id: 0
   };
 }
 export const IdRef = {
   typeUrl: "/google.api.expr.v1alpha1.IdRef",
   encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
     return writer;
@@ -179,7 +179,7 @@ export const IdRef = {
   },
   fromPartial(object: DeepPartial<IdRef>): IdRef {
     const message = createBaseIdRef();
-    message.id = object.id ?? undefined;
+    message.id = object.id ?? 0;
     return message;
   },
   fromSDK(object: IdRefSDKType): IdRef {
@@ -189,7 +189,7 @@ export const IdRef = {
   },
   fromSDKJSON(object: any): IdRefSDKType {
     return {
-      id: isSet(object.id) ? Number(object.id) : undefined
+      id: isSet(object.id) ? Number(object.id) : 0
     };
   },
   toSDK(message: IdRef): IdRefSDKType {
@@ -199,7 +199,7 @@ export const IdRef = {
   },
   fromAmino(object: IdRefAmino): IdRef {
     return {
-      id: object?.id
+      id: object.id
     };
   },
   toAmino(message: IdRef): IdRefAmino {

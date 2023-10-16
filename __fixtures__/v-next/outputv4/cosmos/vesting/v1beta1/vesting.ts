@@ -12,7 +12,7 @@ export interface BaseVestingAccount {
   originalVesting: Coin[];
   delegatedFree: Coin[];
   delegatedVesting: Coin[];
-  endTime?: bigint;
+  endTime: bigint;
 }
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
@@ -23,7 +23,7 @@ export interface BaseVestingAccountSDKType {
   original_vesting: CoinSDKType[];
   delegated_free: CoinSDKType[];
   delegated_vesting: CoinSDKType[];
-  end_time?: bigint;
+  end_time: bigint;
 }
 /**
  * ContinuousVestingAccount implements the VestingAccount interface. It
@@ -31,7 +31,7 @@ export interface BaseVestingAccountSDKType {
  */
 export interface ContinuousVestingAccount {
   baseVestingAccount?: BaseVestingAccount;
-  startTime?: bigint;
+  startTime: bigint;
 }
 /**
  * ContinuousVestingAccount implements the VestingAccount interface. It
@@ -39,7 +39,7 @@ export interface ContinuousVestingAccount {
  */
 export interface ContinuousVestingAccountSDKType {
   base_vesting_account?: BaseVestingAccountSDKType;
-  start_time?: bigint;
+  start_time: bigint;
 }
 /**
  * DelayedVestingAccount implements the VestingAccount interface. It vests all
@@ -59,12 +59,12 @@ export interface DelayedVestingAccountSDKType {
 }
 /** Period defines a length of time and amount of coins that will vest. */
 export interface Period {
-  length?: bigint;
+  length: bigint;
   amount: Coin[];
 }
 /** Period defines a length of time and amount of coins that will vest. */
 export interface PeriodSDKType {
-  length?: bigint;
+  length: bigint;
   amount: CoinSDKType[];
 }
 /**
@@ -73,7 +73,7 @@ export interface PeriodSDKType {
  */
 export interface PeriodicVestingAccount {
   baseVestingAccount?: BaseVestingAccount;
-  startTime?: bigint;
+  startTime: bigint;
   vestingPeriods: Period[];
 }
 /**
@@ -82,7 +82,7 @@ export interface PeriodicVestingAccount {
  */
 export interface PeriodicVestingAccountSDKType {
   base_vesting_account?: BaseVestingAccountSDKType;
-  start_time?: bigint;
+  start_time: bigint;
   vesting_periods: PeriodSDKType[];
 }
 /**
@@ -111,7 +111,7 @@ function createBaseBaseVestingAccount(): BaseVestingAccount {
     originalVesting: [],
     delegatedFree: [],
     delegatedVesting: [],
-    endTime: undefined
+    endTime: BigInt(0)
   };
 }
 export const BaseVestingAccount = {
@@ -129,7 +129,7 @@ export const BaseVestingAccount = {
     for (const v of message.delegatedVesting) {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.endTime !== undefined) {
+    if (message.endTime !== BigInt(0)) {
       writer.uint32(40).int64(message.endTime);
     }
     return writer;
@@ -190,9 +190,7 @@ export const BaseVestingAccount = {
     } else {
       obj.delegatedVesting = [];
     }
-    if (message.endTime !== undefined) {
-      obj.endTime = message.endTime.toString();
-    }
+    message.endTime !== undefined && (obj.endTime = (message.endTime || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<BaseVestingAccount>): BaseVestingAccount {
@@ -223,7 +221,7 @@ export const BaseVestingAccount = {
       original_vesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
       delegated_free: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDKJSON(e)) : [],
       delegated_vesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      end_time: isSet(object.end_time) ? BigInt(object.end_time.toString()) : undefined
+      end_time: isSet(object.end_time) ? BigInt(object.end_time.toString()) : BigInt(0)
     };
   },
   toSDK(message: BaseVestingAccount): BaseVestingAccountSDKType {
@@ -253,7 +251,7 @@ export const BaseVestingAccount = {
       originalVesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromAmino(e)) : [],
       delegatedFree: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromAmino(e)) : [],
       delegatedVesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromAmino(e)) : [],
-      endTime: object?.end_time ? BigInt(object.end_time) : undefined
+      endTime: BigInt(object.end_time)
     };
   },
   toAmino(message: BaseVestingAccount): BaseVestingAccountAmino {
@@ -302,7 +300,7 @@ export const BaseVestingAccount = {
 function createBaseContinuousVestingAccount(): ContinuousVestingAccount {
   return {
     baseVestingAccount: undefined,
-    startTime: undefined
+    startTime: BigInt(0)
   };
 }
 export const ContinuousVestingAccount = {
@@ -311,7 +309,7 @@ export const ContinuousVestingAccount = {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.startTime !== undefined) {
+    if (message.startTime !== BigInt(0)) {
       writer.uint32(16).int64(message.startTime);
     }
     return writer;
@@ -345,9 +343,7 @@ export const ContinuousVestingAccount = {
   toJSON(message: ContinuousVestingAccount): unknown {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
-    if (message.startTime !== undefined) {
-      obj.startTime = message.startTime.toString();
-    }
+    message.startTime !== undefined && (obj.startTime = (message.startTime || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ContinuousVestingAccount>): ContinuousVestingAccount {
@@ -369,7 +365,7 @@ export const ContinuousVestingAccount = {
   fromSDKJSON(object: any): ContinuousVestingAccountSDKType {
     return {
       base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
-      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : undefined
+      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : BigInt(0)
     };
   },
   toSDK(message: ContinuousVestingAccount): ContinuousVestingAccountSDKType {
@@ -381,7 +377,7 @@ export const ContinuousVestingAccount = {
   fromAmino(object: ContinuousVestingAccountAmino): ContinuousVestingAccount {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
-      startTime: object?.start_time ? BigInt(object.start_time) : undefined
+      startTime: BigInt(object.start_time)
     };
   },
   toAmino(message: ContinuousVestingAccount): ContinuousVestingAccountAmino {
@@ -508,14 +504,14 @@ export const DelayedVestingAccount = {
 };
 function createBasePeriod(): Period {
   return {
-    length: undefined,
+    length: BigInt(0),
     amount: []
   };
 }
 export const Period = {
   typeUrl: "/cosmos.vesting.v1beta1.Period",
   encode(message: Period, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.length !== undefined) {
+    if (message.length !== BigInt(0)) {
       writer.uint32(8).int64(message.length);
     }
     for (const v of message.amount) {
@@ -551,9 +547,7 @@ export const Period = {
   },
   toJSON(message: Period): unknown {
     const obj: any = {};
-    if (message.length !== undefined) {
-      obj.length = message.length.toString();
-    }
+    message.length !== undefined && (obj.length = (message.length || BigInt(0)).toString());
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -577,7 +571,7 @@ export const Period = {
   },
   fromSDKJSON(object: any): PeriodSDKType {
     return {
-      length: isSet(object.length) ? BigInt(object.length.toString()) : undefined,
+      length: isSet(object.length) ? BigInt(object.length.toString()) : BigInt(0),
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -593,7 +587,7 @@ export const Period = {
   },
   fromAmino(object: PeriodAmino): Period {
     return {
-      length: object?.length ? BigInt(object.length) : undefined,
+      length: BigInt(object.length),
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -632,7 +626,7 @@ export const Period = {
 function createBasePeriodicVestingAccount(): PeriodicVestingAccount {
   return {
     baseVestingAccount: undefined,
-    startTime: undefined,
+    startTime: BigInt(0),
     vestingPeriods: []
   };
 }
@@ -642,7 +636,7 @@ export const PeriodicVestingAccount = {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.startTime !== undefined) {
+    if (message.startTime !== BigInt(0)) {
       writer.uint32(16).int64(message.startTime);
     }
     for (const v of message.vestingPeriods) {
@@ -683,9 +677,7 @@ export const PeriodicVestingAccount = {
   toJSON(message: PeriodicVestingAccount): unknown {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
-    if (message.startTime !== undefined) {
-      obj.startTime = message.startTime.toString();
-    }
+    message.startTime !== undefined && (obj.startTime = (message.startTime || BigInt(0)).toString());
     if (message.vestingPeriods) {
       obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
     } else {
@@ -714,7 +706,7 @@ export const PeriodicVestingAccount = {
   fromSDKJSON(object: any): PeriodicVestingAccountSDKType {
     return {
       base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
-      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : undefined,
+      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : BigInt(0),
       vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
     };
   },
@@ -732,7 +724,7 @@ export const PeriodicVestingAccount = {
   fromAmino(object: PeriodicVestingAccountAmino): PeriodicVestingAccount {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
-      startTime: object?.start_time ? BigInt(object.start_time) : undefined,
+      startTime: BigInt(object.start_time),
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
   },

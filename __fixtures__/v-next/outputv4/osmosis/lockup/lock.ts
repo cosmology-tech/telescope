@@ -52,12 +52,12 @@ export interface PeriodLock {
    * The ID of the lock is decided upon lock creation, incrementing by 1 for
    * every lock.
    */
-  ID?: bigint;
+  ID: bigint;
   /**
    * Owner is the account address of the lock owner.
    * Only the owner can modify the state of the lock.
    */
-  owner?: string;
+  owner: string;
   /**
    * Duration is the time needed for a lock to mature after unlocking has
    * started.
@@ -80,8 +80,8 @@ export interface PeriodLock {
  * the `duration` has passed since unbonding started.
  */
 export interface PeriodLockSDKType {
-  ID?: bigint;
-  owner?: string;
+  ID: bigint;
+  owner: string;
   duration: DurationSDKType;
   end_time: Date;
   coins: CoinSDKType[];
@@ -93,9 +93,9 @@ export interface PeriodLockSDKType {
  */
 export interface QueryCondition {
   /** LockQueryType is a type of lock query, ByLockDuration | ByLockTime */
-  lockQueryType?: LockQueryType;
+  lockQueryType: LockQueryType;
   /** Denom represents the token denomination we are looking to lock up */
-  denom?: string;
+  denom: string;
   /**
    * Duration is used to query locks with longer duration than the specified
    * duration. Duration field must not be nil when the lock query type is
@@ -115,8 +115,8 @@ export interface QueryCondition {
  * LockQueryType.
  */
 export interface QueryConditionSDKType {
-  lock_query_type?: LockQueryType;
-  denom?: string;
+  lock_query_type: LockQueryType;
+  denom: string;
   duration: DurationSDKType;
   timestamp: Date;
 }
@@ -131,12 +131,12 @@ export interface SyntheticLock {
    * Underlying Lock ID is the underlying native lock's id for this synthetic
    * lockup. A synthetic lock MUST have an underlying lock.
    */
-  underlyingLockId?: bigint;
+  underlyingLockId: bigint;
   /**
    * SynthDenom is the synthetic denom that is a combination of
    * gamm share + bonding status + validator address.
    */
-  synthDenom?: string;
+  synthDenom: string;
   /**
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value
@@ -155,15 +155,15 @@ export interface SyntheticLock {
  * they can query as freely as native lockup.
  */
 export interface SyntheticLockSDKType {
-  underlying_lock_id?: bigint;
-  synth_denom?: string;
+  underlying_lock_id: bigint;
+  synth_denom: string;
   end_time: Date;
   duration: DurationSDKType;
 }
 function createBasePeriodLock(): PeriodLock {
   return {
-    ID: undefined,
-    owner: undefined,
+    ID: BigInt(0),
+    owner: "",
     duration: Duration.fromPartial({}),
     endTime: new Date(),
     coins: []
@@ -172,10 +172,10 @@ function createBasePeriodLock(): PeriodLock {
 export const PeriodLock = {
   typeUrl: "/osmosis.lockup.PeriodLock",
   encode(message: PeriodLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ID !== undefined) {
+    if (message.ID !== BigInt(0)) {
       writer.uint32(8).uint64(message.ID);
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -229,9 +229,7 @@ export const PeriodLock = {
   },
   toJSON(message: PeriodLock): unknown {
     const obj: any = {};
-    if (message.ID !== undefined) {
-      obj.ID = message.ID.toString();
-    }
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
@@ -247,7 +245,7 @@ export const PeriodLock = {
     if (object.ID !== undefined && object.ID !== null) {
       message.ID = BigInt(object.ID.toString());
     }
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.duration !== undefined && object.duration !== null) {
       message.duration = Duration.fromPartial(object.duration);
     }
@@ -266,8 +264,8 @@ export const PeriodLock = {
   },
   fromSDKJSON(object: any): PeriodLockSDKType {
     return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
+      owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
@@ -288,8 +286,8 @@ export const PeriodLock = {
   },
   fromAmino(object: PeriodLockAmino): PeriodLock {
     return {
-      ID: object?.ID ? BigInt(object.ID) : undefined,
-      owner: object?.owner,
+      ID: BigInt(object.ID),
+      owner: object.owner,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       endTime: object.end_time,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -332,8 +330,8 @@ export const PeriodLock = {
 };
 function createBaseQueryCondition(): QueryCondition {
   return {
-    lockQueryType: undefined,
-    denom: undefined,
+    lockQueryType: 0,
+    denom: "",
     duration: Duration.fromPartial({}),
     timestamp: new Date()
   };
@@ -341,10 +339,10 @@ function createBaseQueryCondition(): QueryCondition {
 export const QueryCondition = {
   typeUrl: "/osmosis.lockup.QueryCondition",
   encode(message: QueryCondition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.lockQueryType !== undefined) {
+    if (message.lockQueryType !== 0) {
       writer.uint32(8).int32(message.lockQueryType);
     }
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(18).string(message.denom);
     }
     if (message.duration !== undefined) {
@@ -399,8 +397,8 @@ export const QueryCondition = {
   },
   fromPartial(object: DeepPartial<QueryCondition>): QueryCondition {
     const message = createBaseQueryCondition();
-    message.lockQueryType = object.lockQueryType ?? undefined;
-    message.denom = object.denom ?? undefined;
+    message.lockQueryType = object.lockQueryType ?? 0;
+    message.denom = object.denom ?? "";
     if (object.duration !== undefined && object.duration !== null) {
       message.duration = Duration.fromPartial(object.duration);
     }
@@ -409,7 +407,7 @@ export const QueryCondition = {
   },
   fromSDK(object: QueryConditionSDKType): QueryCondition {
     return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : undefined,
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object?.denom,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       timestamp: object.timestamp ?? undefined
@@ -417,8 +415,8 @@ export const QueryCondition = {
   },
   fromSDKJSON(object: any): QueryConditionSDKType {
     return {
-      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : undefined,
-      denom: isSet(object.denom) ? String(object.denom) : undefined,
+      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
+      denom: isSet(object.denom) ? String(object.denom) : "",
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
@@ -433,8 +431,8 @@ export const QueryCondition = {
   },
   fromAmino(object: QueryConditionAmino): QueryCondition {
     return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : undefined,
-      denom: object?.denom,
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
+      denom: object.denom,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       timestamp: object.timestamp
     };
@@ -471,8 +469,8 @@ export const QueryCondition = {
 };
 function createBaseSyntheticLock(): SyntheticLock {
   return {
-    underlyingLockId: undefined,
-    synthDenom: undefined,
+    underlyingLockId: BigInt(0),
+    synthDenom: "",
     endTime: new Date(),
     duration: Duration.fromPartial({})
   };
@@ -480,10 +478,10 @@ function createBaseSyntheticLock(): SyntheticLock {
 export const SyntheticLock = {
   typeUrl: "/osmosis.lockup.SyntheticLock",
   encode(message: SyntheticLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.underlyingLockId !== undefined) {
+    if (message.underlyingLockId !== BigInt(0)) {
       writer.uint32(8).uint64(message.underlyingLockId);
     }
-    if (message.synthDenom !== undefined) {
+    if (message.synthDenom !== "") {
       writer.uint32(18).string(message.synthDenom);
     }
     if (message.endTime !== undefined) {
@@ -530,9 +528,7 @@ export const SyntheticLock = {
   },
   toJSON(message: SyntheticLock): unknown {
     const obj: any = {};
-    if (message.underlyingLockId !== undefined) {
-      obj.underlyingLockId = message.underlyingLockId.toString();
-    }
+    message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || BigInt(0)).toString());
     message.synthDenom !== undefined && (obj.synthDenom = message.synthDenom);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -543,7 +539,7 @@ export const SyntheticLock = {
     if (object.underlyingLockId !== undefined && object.underlyingLockId !== null) {
       message.underlyingLockId = BigInt(object.underlyingLockId.toString());
     }
-    message.synthDenom = object.synthDenom ?? undefined;
+    message.synthDenom = object.synthDenom ?? "";
     message.endTime = object.endTime ?? undefined;
     if (object.duration !== undefined && object.duration !== null) {
       message.duration = Duration.fromPartial(object.duration);
@@ -560,8 +556,8 @@ export const SyntheticLock = {
   },
   fromSDKJSON(object: any): SyntheticLockSDKType {
     return {
-      underlying_lock_id: isSet(object.underlying_lock_id) ? BigInt(object.underlying_lock_id.toString()) : undefined,
-      synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : undefined,
+      underlying_lock_id: isSet(object.underlying_lock_id) ? BigInt(object.underlying_lock_id.toString()) : BigInt(0),
+      synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : "",
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
@@ -576,8 +572,8 @@ export const SyntheticLock = {
   },
   fromAmino(object: SyntheticLockAmino): SyntheticLock {
     return {
-      underlyingLockId: object?.underlying_lock_id ? BigInt(object.underlying_lock_id) : undefined,
-      synthDenom: object?.synth_denom,
+      underlyingLockId: BigInt(object.underlying_lock_id),
+      synthDenom: object.synth_denom,
       endTime: object.end_time,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };

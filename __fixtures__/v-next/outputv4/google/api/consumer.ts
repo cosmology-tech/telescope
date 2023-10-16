@@ -113,11 +113,11 @@ export interface ProjectPropertiesSDKType {
  */
 export interface Property {
   /** The name of the property (a.k.a key). */
-  name?: string;
+  name: string;
   /** The type of this property. */
-  type?: Property_PropertyType;
+  type: Property_PropertyType;
   /** The description of the property */
-  description?: string;
+  description: string;
 }
 /**
  * Defines project properties.
@@ -132,9 +132,9 @@ export interface Property {
  * define and set these properties.
  */
 export interface PropertySDKType {
-  name?: string;
-  type?: Property_PropertyType;
-  description?: string;
+  name: string;
+  type: Property_PropertyType;
+  description: string;
 }
 function createBaseProjectProperties(): ProjectProperties {
   return {
@@ -236,21 +236,21 @@ export const ProjectProperties = {
 };
 function createBaseProperty(): Property {
   return {
-    name: undefined,
-    type: undefined,
-    description: undefined
+    name: "",
+    type: 0,
+    description: ""
   };
 }
 export const Property = {
   typeUrl: "/google.api.Property",
   encode(message: Property, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== undefined) {
+    if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -294,23 +294,23 @@ export const Property = {
   },
   fromPartial(object: DeepPartial<Property>): Property {
     const message = createBaseProperty();
-    message.name = object.name ?? undefined;
-    message.type = object.type ?? undefined;
-    message.description = object.description ?? undefined;
+    message.name = object.name ?? "";
+    message.type = object.type ?? 0;
+    message.description = object.description ?? "";
     return message;
   },
   fromSDK(object: PropertySDKType): Property {
     return {
       name: object?.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : undefined,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
       description: object?.description
     };
   },
   fromSDKJSON(object: any): PropertySDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      description: isSet(object.description) ? String(object.description) : ""
     };
   },
   toSDK(message: Property): PropertySDKType {
@@ -322,9 +322,9 @@ export const Property = {
   },
   fromAmino(object: PropertyAmino): Property {
     return {
-      name: object?.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : undefined,
-      description: object?.description
+      name: object.name,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      description: object.description
     };
   },
   toAmino(message: Property): PropertyAmino {

@@ -14,7 +14,7 @@ export interface Operation {
    * originally returns it. If you use the default HTTP mapping, the
    * `name` should be a resource name ending with `operations/{unique_id}`.
    */
-  name?: string;
+  name: string;
   /**
    * Service-specific metadata associated with the operation.  It typically
    * contains progress information and common metadata such as create time.
@@ -27,7 +27,7 @@ export interface Operation {
    * If `true`, the operation is completed, and either `error` or `response` is
    * available.
    */
-  done?: boolean;
+  done: boolean;
   /** The error result of the operation in case of failure or cancellation. */
   error?: Status;
   /**
@@ -47,73 +47,73 @@ export interface Operation {
  * network API call.
  */
 export interface OperationSDKType {
-  name?: string;
+  name: string;
   metadata?: AnySDKType;
-  done?: boolean;
+  done: boolean;
   error?: StatusSDKType;
   response?: AnySDKType;
 }
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequest {
   /** The name of the operation resource. */
-  name?: string;
+  name: string;
 }
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequest {
   /** The name of the operation's parent resource. */
-  name?: string;
+  name: string;
   /** The standard list filter. */
-  filter?: string;
+  filter: string;
   /** The standard list page size. */
-  pageSize?: number;
+  pageSize: number;
   /** The standard list page token. */
-  pageToken?: string;
+  pageToken: string;
 }
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
-  name?: string;
-  filter?: string;
-  page_size?: number;
-  page_token?: string;
+  name: string;
+  filter: string;
+  page_size: number;
+  page_token: string;
 }
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponse {
   /** A list of operations that matches the specified filter in the request. */
   operations: Operation[];
   /** The standard List next-page token. */
-  nextPageToken?: string;
+  nextPageToken: string;
 }
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
   operations: OperationSDKType[];
-  next_page_token?: string;
+  next_page_token: string;
 }
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
-  name?: string;
+  name: string;
 }
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequest {
   /** The name of the operation resource to be deleted. */
-  name?: string;
+  name: string;
 }
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequestSDKType {
-  name?: string;
+  name: string;
 }
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequest {
   /** The name of the operation resource to wait on. */
-  name?: string;
+  name: string;
   /**
    * The maximum duration to wait before timing out. If left blank, the wait
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
@@ -123,7 +123,7 @@ export interface WaitOperationRequest {
 }
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestSDKType {
-  name?: string;
+  name: string;
   timeout?: DurationSDKType;
 }
 /**
@@ -150,7 +150,7 @@ export interface OperationInfo {
    * 
    * Note: Altering this value constitutes a breaking change.
    */
-  responseType?: string;
+  responseType: string;
   /**
    * Required. The message name of the metadata type for this long-running
    * operation.
@@ -160,7 +160,7 @@ export interface OperationInfo {
    * 
    * Note: Altering this value constitutes a breaking change.
    */
-  metadataType?: string;
+  metadataType: string;
 }
 /**
  * A message representing the message types used by a long-running operation.
@@ -176,14 +176,14 @@ export interface OperationInfo {
  *   }
  */
 export interface OperationInfoSDKType {
-  response_type?: string;
-  metadata_type?: string;
+  response_type: string;
+  metadata_type: string;
 }
 function createBaseOperation(): Operation {
   return {
-    name: undefined,
+    name: "",
     metadata: undefined,
-    done: undefined,
+    done: false,
     error: undefined,
     response: undefined
   };
@@ -191,13 +191,13 @@ function createBaseOperation(): Operation {
 export const Operation = {
   typeUrl: "/google.longrunning.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.metadata !== undefined) {
       Any.encode(message.metadata, writer.uint32(18).fork()).ldelim();
     }
-    if (message.done !== undefined) {
+    if (message.done === true) {
       writer.uint32(24).bool(message.done);
     }
     if (message.error !== undefined) {
@@ -257,11 +257,11 @@ export const Operation = {
   },
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.metadata !== undefined && object.metadata !== null) {
       message.metadata = Any.fromPartial(object.metadata);
     }
-    message.done = object.done ?? undefined;
+    message.done = object.done ?? false;
     if (object.error !== undefined && object.error !== null) {
       message.error = Status.fromPartial(object.error);
     }
@@ -281,9 +281,9 @@ export const Operation = {
   },
   fromSDKJSON(object: any): OperationSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       metadata: isSet(object.metadata) ? Any.fromSDKJSON(object.metadata) : undefined,
-      done: isSet(object.done) ? Boolean(object.done) : undefined,
+      done: isSet(object.done) ? Boolean(object.done) : false,
       error: isSet(object.error) ? Status.fromSDKJSON(object.error) : undefined,
       response: isSet(object.response) ? Any.fromSDKJSON(object.response) : undefined
     };
@@ -299,9 +299,9 @@ export const Operation = {
   },
   fromAmino(object: OperationAmino): Operation {
     return {
-      name: object?.name,
+      name: object.name,
       metadata: object?.metadata ? Any.fromAmino(object.metadata) : undefined,
-      done: object?.done,
+      done: object.done,
       error: object?.error ? Status.fromAmino(object.error) : undefined,
       response: object?.response ? Any.fromAmino(object.response) : undefined
     };
@@ -333,13 +333,13 @@ export const Operation = {
 };
 function createBaseGetOperationRequest(): GetOperationRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const GetOperationRequest = {
   typeUrl: "/google.longrunning.GetOperationRequest",
   encode(message: GetOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -373,7 +373,7 @@ export const GetOperationRequest = {
   },
   fromPartial(object: DeepPartial<GetOperationRequest>): GetOperationRequest {
     const message = createBaseGetOperationRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: GetOperationRequestSDKType): GetOperationRequest {
@@ -383,7 +383,7 @@ export const GetOperationRequest = {
   },
   fromSDKJSON(object: any): GetOperationRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: GetOperationRequest): GetOperationRequestSDKType {
@@ -393,7 +393,7 @@ export const GetOperationRequest = {
   },
   fromAmino(object: GetOperationRequestAmino): GetOperationRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: GetOperationRequest): GetOperationRequestAmino {
@@ -419,25 +419,25 @@ export const GetOperationRequest = {
 };
 function createBaseListOperationsRequest(): ListOperationsRequest {
   return {
-    name: undefined,
-    filter: undefined,
-    pageSize: undefined,
-    pageToken: undefined
+    name: "",
+    filter: "",
+    pageSize: 0,
+    pageToken: ""
   };
 }
 export const ListOperationsRequest = {
   typeUrl: "/google.longrunning.ListOperationsRequest",
   encode(message: ListOperationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(34).string(message.name);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(10).string(message.filter);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -486,10 +486,10 @@ export const ListOperationsRequest = {
   },
   fromPartial(object: DeepPartial<ListOperationsRequest>): ListOperationsRequest {
     const message = createBaseListOperationsRequest();
-    message.name = object.name ?? undefined;
-    message.filter = object.filter ?? undefined;
-    message.pageSize = object.pageSize ?? undefined;
-    message.pageToken = object.pageToken ?? undefined;
+    message.name = object.name ?? "";
+    message.filter = object.filter ?? "";
+    message.pageSize = object.pageSize ?? 0;
+    message.pageToken = object.pageToken ?? "";
     return message;
   },
   fromSDK(object: ListOperationsRequestSDKType): ListOperationsRequest {
@@ -502,10 +502,10 @@ export const ListOperationsRequest = {
   },
   fromSDKJSON(object: any): ListOperationsRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : undefined,
-      page_size: isSet(object.page_size) ? Number(object.page_size) : undefined,
-      page_token: isSet(object.page_token) ? String(object.page_token) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
     };
   },
   toSDK(message: ListOperationsRequest): ListOperationsRequestSDKType {
@@ -518,10 +518,10 @@ export const ListOperationsRequest = {
   },
   fromAmino(object: ListOperationsRequestAmino): ListOperationsRequest {
     return {
-      name: object?.name,
-      filter: object?.filter,
-      pageSize: object?.page_size,
-      pageToken: object?.page_token
+      name: object.name,
+      filter: object.filter,
+      pageSize: object.page_size,
+      pageToken: object.page_token
     };
   },
   toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
@@ -551,7 +551,7 @@ export const ListOperationsRequest = {
 function createBaseListOperationsResponse(): ListOperationsResponse {
   return {
     operations: [],
-    nextPageToken: undefined
+    nextPageToken: ""
   };
 }
 export const ListOperationsResponse = {
@@ -560,7 +560,7 @@ export const ListOperationsResponse = {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -604,7 +604,7 @@ export const ListOperationsResponse = {
   fromPartial(object: DeepPartial<ListOperationsResponse>): ListOperationsResponse {
     const message = createBaseListOperationsResponse();
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? undefined;
+    message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
   fromSDK(object: ListOperationsResponseSDKType): ListOperationsResponse {
@@ -616,7 +616,7 @@ export const ListOperationsResponse = {
   fromSDKJSON(object: any): ListOperationsResponseSDKType {
     return {
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : undefined
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
   toSDK(message: ListOperationsResponse): ListOperationsResponseSDKType {
@@ -632,7 +632,7 @@ export const ListOperationsResponse = {
   fromAmino(object: ListOperationsResponseAmino): ListOperationsResponse {
     return {
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
-      nextPageToken: object?.next_page_token
+      nextPageToken: object.next_page_token
     };
   },
   toAmino(message: ListOperationsResponse): ListOperationsResponseAmino {
@@ -663,13 +663,13 @@ export const ListOperationsResponse = {
 };
 function createBaseCancelOperationRequest(): CancelOperationRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const CancelOperationRequest = {
   typeUrl: "/google.longrunning.CancelOperationRequest",
   encode(message: CancelOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -703,7 +703,7 @@ export const CancelOperationRequest = {
   },
   fromPartial(object: DeepPartial<CancelOperationRequest>): CancelOperationRequest {
     const message = createBaseCancelOperationRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: CancelOperationRequestSDKType): CancelOperationRequest {
@@ -713,7 +713,7 @@ export const CancelOperationRequest = {
   },
   fromSDKJSON(object: any): CancelOperationRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: CancelOperationRequest): CancelOperationRequestSDKType {
@@ -723,7 +723,7 @@ export const CancelOperationRequest = {
   },
   fromAmino(object: CancelOperationRequestAmino): CancelOperationRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
@@ -749,13 +749,13 @@ export const CancelOperationRequest = {
 };
 function createBaseDeleteOperationRequest(): DeleteOperationRequest {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const DeleteOperationRequest = {
   typeUrl: "/google.longrunning.DeleteOperationRequest",
   encode(message: DeleteOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -789,7 +789,7 @@ export const DeleteOperationRequest = {
   },
   fromPartial(object: DeepPartial<DeleteOperationRequest>): DeleteOperationRequest {
     const message = createBaseDeleteOperationRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: DeleteOperationRequestSDKType): DeleteOperationRequest {
@@ -799,7 +799,7 @@ export const DeleteOperationRequest = {
   },
   fromSDKJSON(object: any): DeleteOperationRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: DeleteOperationRequest): DeleteOperationRequestSDKType {
@@ -809,7 +809,7 @@ export const DeleteOperationRequest = {
   },
   fromAmino(object: DeleteOperationRequestAmino): DeleteOperationRequest {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
@@ -835,14 +835,14 @@ export const DeleteOperationRequest = {
 };
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
-    name: undefined,
+    name: "",
     timeout: undefined
   };
 }
 export const WaitOperationRequest = {
   typeUrl: "/google.longrunning.WaitOperationRequest",
   encode(message: WaitOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.timeout !== undefined) {
@@ -884,7 +884,7 @@ export const WaitOperationRequest = {
   },
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.timeout !== undefined && object.timeout !== null) {
       message.timeout = Duration.fromPartial(object.timeout);
     }
@@ -898,7 +898,7 @@ export const WaitOperationRequest = {
   },
   fromSDKJSON(object: any): WaitOperationRequestSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       timeout: isSet(object.timeout) ? Duration.fromSDKJSON(object.timeout) : undefined
     };
   },
@@ -910,7 +910,7 @@ export const WaitOperationRequest = {
   },
   fromAmino(object: WaitOperationRequestAmino): WaitOperationRequest {
     return {
-      name: object?.name,
+      name: object.name,
       timeout: object?.timeout ? Duration.fromAmino(object.timeout) : undefined
     };
   },
@@ -938,17 +938,17 @@ export const WaitOperationRequest = {
 };
 function createBaseOperationInfo(): OperationInfo {
   return {
-    responseType: undefined,
-    metadataType: undefined
+    responseType: "",
+    metadataType: ""
   };
 }
 export const OperationInfo = {
   typeUrl: "/google.longrunning.OperationInfo",
   encode(message: OperationInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.responseType !== undefined) {
+    if (message.responseType !== "") {
       writer.uint32(10).string(message.responseType);
     }
-    if (message.metadataType !== undefined) {
+    if (message.metadataType !== "") {
       writer.uint32(18).string(message.metadataType);
     }
     return writer;
@@ -987,8 +987,8 @@ export const OperationInfo = {
   },
   fromPartial(object: DeepPartial<OperationInfo>): OperationInfo {
     const message = createBaseOperationInfo();
-    message.responseType = object.responseType ?? undefined;
-    message.metadataType = object.metadataType ?? undefined;
+    message.responseType = object.responseType ?? "";
+    message.metadataType = object.metadataType ?? "";
     return message;
   },
   fromSDK(object: OperationInfoSDKType): OperationInfo {
@@ -999,8 +999,8 @@ export const OperationInfo = {
   },
   fromSDKJSON(object: any): OperationInfoSDKType {
     return {
-      response_type: isSet(object.response_type) ? String(object.response_type) : undefined,
-      metadata_type: isSet(object.metadata_type) ? String(object.metadata_type) : undefined
+      response_type: isSet(object.response_type) ? String(object.response_type) : "",
+      metadata_type: isSet(object.metadata_type) ? String(object.metadata_type) : ""
     };
   },
   toSDK(message: OperationInfo): OperationInfoSDKType {
@@ -1011,8 +1011,8 @@ export const OperationInfo = {
   },
   fromAmino(object: OperationInfoAmino): OperationInfo {
     return {
-      responseType: object?.response_type,
-      metadataType: object?.metadata_type
+      responseType: object.response_type,
+      metadataType: object.metadata_type
     };
   },
   toAmino(message: OperationInfo): OperationInfoAmino {

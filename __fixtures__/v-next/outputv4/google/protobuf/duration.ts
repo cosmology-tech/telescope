@@ -67,7 +67,7 @@ export interface Duration {
    * to +315,576,000,000 inclusive. Note: these bounds are computed from:
    * 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
-  seconds?: bigint;
+  seconds: bigint;
   /**
    * Signed fractions of a second at nanosecond resolution of the span
    * of time. Durations less than one second are represented with a 0
@@ -76,7 +76,7 @@ export interface Duration {
    * of the same sign as the `seconds` field. Must be from -999,999,999
    * to +999,999,999 inclusive.
    */
-  nanos?: number;
+  nanos: number;
 }
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -139,22 +139,22 @@ export interface Duration {
  * microsecond should be expressed in JSON format as "3.000001s".
  */
 export interface DurationSDKType {
-  seconds?: bigint;
-  nanos?: number;
+  seconds: bigint;
+  nanos: number;
 }
 function createBaseDuration(): Duration {
   return {
-    seconds: undefined,
-    nanos: undefined
+    seconds: BigInt(0),
+    nanos: 0
   };
 }
 export const Duration = {
   typeUrl: "/google.protobuf.Duration",
   encode(message: Duration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.seconds !== undefined) {
+    if (message.seconds !== BigInt(0)) {
       writer.uint32(8).int64(message.seconds);
     }
-    if (message.nanos !== undefined) {
+    if (message.nanos !== 0) {
       writer.uint32(16).int32(message.nanos);
     }
     return writer;
@@ -187,9 +187,7 @@ export const Duration = {
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    if (message.seconds !== undefined) {
-      obj.seconds = message.seconds.toString();
-    }
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
@@ -198,7 +196,7 @@ export const Duration = {
     if (object.seconds !== undefined && object.seconds !== null) {
       message.seconds = BigInt(object.seconds.toString());
     }
-    message.nanos = object.nanos ?? undefined;
+    message.nanos = object.nanos ?? 0;
     return message;
   },
   fromSDK(object: DurationSDKType): Duration {
@@ -209,8 +207,8 @@ export const Duration = {
   },
   fromSDKJSON(object: any): DurationSDKType {
     return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : undefined,
-      nanos: isSet(object.nanos) ? Number(object.nanos) : undefined
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
   toSDK(message: Duration): DurationSDKType {

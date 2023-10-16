@@ -79,16 +79,16 @@ export interface AllowedMsgAllowanceSDKType {
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface Grant {
   /** granter is the address of the user granting an allowance of their funds. */
-  granter?: string;
+  granter: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
-  grantee?: string;
+  grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: Any;
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantSDKType {
-  granter?: string;
-  grantee?: string;
+  granter: string;
+  grantee: string;
   allowance?: AnySDKType;
 }
 function createBaseBasicAllowance(): BasicAllowance {
@@ -513,18 +513,18 @@ export const AllowedMsgAllowance = {
 };
 function createBaseGrant(): Grant {
   return {
-    granter: undefined,
-    grantee: undefined,
+    granter: "",
+    grantee: "",
     allowance: undefined
   };
 }
 export const Grant = {
   typeUrl: "/cosmos.feegrant.v1beta1.Grant",
   encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       writer.uint32(18).string(message.grantee);
     }
     if (message.allowance !== undefined) {
@@ -571,8 +571,8 @@ export const Grant = {
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
-    message.granter = object.granter ?? undefined;
-    message.grantee = object.grantee ?? undefined;
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
     if (object.allowance !== undefined && object.allowance !== null) {
       message.allowance = Any.fromPartial(object.allowance);
     }
@@ -587,8 +587,8 @@ export const Grant = {
   },
   fromSDKJSON(object: any): GrantSDKType {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : undefined,
-      grantee: isSet(object.grantee) ? String(object.grantee) : undefined,
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
       allowance: isSet(object.allowance) ? Any.fromSDKJSON(object.allowance) : undefined
     };
   },
@@ -601,8 +601,8 @@ export const Grant = {
   },
   fromAmino(object: GrantAmino): Grant {
     return {
-      granter: object?.granter,
-      grantee: object?.grantee,
+      granter: object.granter,
+      grantee: object.grantee,
       allowance: object?.allowance ? Any.fromAmino(object.allowance) : undefined
     };
   },

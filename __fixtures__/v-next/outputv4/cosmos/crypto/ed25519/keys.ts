@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.crypto.ed25519";
  * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKey {
-  key?: Uint8Array;
+  key: Uint8Array;
 }
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
@@ -19,31 +19,31 @@ export interface PubKey {
  * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKeySDKType {
-  key?: Uint8Array;
+  key: Uint8Array;
 }
 /**
  * Deprecated: PrivKey defines a ed25519 private key.
  * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
 export interface PrivKey {
-  key?: Uint8Array;
+  key: Uint8Array;
 }
 /**
  * Deprecated: PrivKey defines a ed25519 private key.
  * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
 export interface PrivKeySDKType {
-  key?: Uint8Array;
+  key: Uint8Array;
 }
 function createBasePubKey(): PubKey {
   return {
-    key: undefined
+    key: new Uint8Array()
   };
 }
 export const PubKey = {
   typeUrl: "/cosmos.crypto.ed25519.PubKey",
   encode(message: PubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
     return writer;
@@ -72,12 +72,12 @@ export const PubKey = {
   },
   toJSON(message: PubKey): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<PubKey>): PubKey {
     const message = createBasePubKey();
-    message.key = object.key ?? undefined;
+    message.key = object.key ?? new Uint8Array();
     return message;
   },
   fromSDK(object: PubKeySDKType): PubKey {
@@ -87,7 +87,7 @@ export const PubKey = {
   },
   fromSDKJSON(object: any): PubKeySDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toSDK(message: PubKey): PubKeySDKType {
@@ -97,7 +97,7 @@ export const PubKey = {
   },
   fromAmino(object: PubKeyAmino): PubKey {
     return {
-      key: object?.key
+      key: object.key
     };
   },
   toAmino(message: PubKey): PubKeyAmino {
@@ -129,13 +129,13 @@ export const PubKey = {
 };
 function createBasePrivKey(): PrivKey {
   return {
-    key: undefined
+    key: new Uint8Array()
   };
 }
 export const PrivKey = {
   typeUrl: "/cosmos.crypto.ed25519.PrivKey",
   encode(message: PrivKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
     return writer;
@@ -164,12 +164,12 @@ export const PrivKey = {
   },
   toJSON(message: PrivKey): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<PrivKey>): PrivKey {
     const message = createBasePrivKey();
-    message.key = object.key ?? undefined;
+    message.key = object.key ?? new Uint8Array();
     return message;
   },
   fromSDK(object: PrivKeySDKType): PrivKey {
@@ -179,7 +179,7 @@ export const PrivKey = {
   },
   fromSDKJSON(object: any): PrivKeySDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toSDK(message: PrivKey): PrivKeySDKType {
@@ -189,7 +189,7 @@ export const PrivKey = {
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     return {
-      key: object?.key
+      key: object.key
     };
   },
   toAmino(message: PrivKey): PrivKeyAmino {

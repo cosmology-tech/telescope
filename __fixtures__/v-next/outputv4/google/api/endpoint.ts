@@ -21,7 +21,7 @@ export const protobufPackage = "google.api";
  */
 export interface Endpoint {
   /** The canonical name of this endpoint. */
-  name?: string;
+  name: string;
   /**
    * Unimplemented. Dot not use.
    * 
@@ -40,7 +40,7 @@ export interface Endpoint {
    * either a valid IPv4 address or a fully-qualified domain name. For example,
    * "8.8.8.8" or "myservice.appspot.com".
    */
-  target?: string;
+  target: string;
   /**
    * Allowing
    * [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), aka
@@ -49,7 +49,7 @@ export interface Endpoint {
    * the browser to determine whether the subsequent cross-origin request is
    * allowed to proceed.
    */
-  allowCors?: boolean;
+  allowCors: boolean;
 }
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -70,33 +70,33 @@ export interface Endpoint {
  *       allow_cors: true
  */
 export interface EndpointSDKType {
-  name?: string;
+  name: string;
   /** @deprecated */
   aliases: string[];
-  target?: string;
-  allow_cors?: boolean;
+  target: string;
+  allow_cors: boolean;
 }
 function createBaseEndpoint(): Endpoint {
   return {
-    name: undefined,
+    name: "",
     aliases: [],
-    target: undefined,
-    allowCors: undefined
+    target: "",
+    allowCors: false
   };
 }
 export const Endpoint = {
   typeUrl: "/google.api.Endpoint",
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.aliases) {
       writer.uint32(18).string(v!);
     }
-    if (message.target !== undefined) {
+    if (message.target !== "") {
       writer.uint32(810).string(message.target);
     }
-    if (message.allowCors !== undefined) {
+    if (message.allowCors === true) {
       writer.uint32(40).bool(message.allowCors);
     }
     return writer;
@@ -149,10 +149,10 @@ export const Endpoint = {
   },
   fromPartial(object: DeepPartial<Endpoint>): Endpoint {
     const message = createBaseEndpoint();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     message.aliases = object.aliases?.map(e => e) || [];
-    message.target = object.target ?? undefined;
-    message.allowCors = object.allowCors ?? undefined;
+    message.target = object.target ?? "";
+    message.allowCors = object.allowCors ?? false;
     return message;
   },
   fromSDK(object: EndpointSDKType): Endpoint {
@@ -165,10 +165,10 @@ export const Endpoint = {
   },
   fromSDKJSON(object: any): EndpointSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
-      target: isSet(object.target) ? String(object.target) : undefined,
-      allow_cors: isSet(object.allow_cors) ? Boolean(object.allow_cors) : undefined
+      target: isSet(object.target) ? String(object.target) : "",
+      allow_cors: isSet(object.allow_cors) ? Boolean(object.allow_cors) : false
     };
   },
   toSDK(message: Endpoint): EndpointSDKType {
@@ -185,10 +185,10 @@ export const Endpoint = {
   },
   fromAmino(object: EndpointAmino): Endpoint {
     return {
-      name: object?.name,
+      name: object.name,
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: object?.target,
-      allowCors: object?.allow_cors
+      target: object.target,
+      allowCors: object.allow_cors
     };
   },
   toAmino(message: Endpoint): EndpointAmino {

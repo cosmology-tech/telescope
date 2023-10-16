@@ -111,7 +111,7 @@ export interface SignatureDescriptor {
    * number of committed transactions signed by a given address. It is used to prevent
    * replay attacks.
    */
-  sequence?: bigint;
+  sequence: bigint;
 }
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
@@ -122,7 +122,7 @@ export interface SignatureDescriptor {
 export interface SignatureDescriptorSDKType {
   public_key?: AnySDKType;
   data?: SignatureDescriptor_DataSDKType;
-  sequence?: bigint;
+  sequence: bigint;
 }
 /** Data represents signature data */
 export interface SignatureDescriptor_Data {
@@ -139,14 +139,14 @@ export interface SignatureDescriptor_DataSDKType {
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_Single {
   /** mode is the signing mode of the single signer */
-  mode?: SignMode;
+  mode: SignMode;
   /** signature is the raw signature bytes */
-  signature?: Uint8Array;
+  signature: Uint8Array;
 }
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
-  mode?: SignMode;
-  signature?: Uint8Array;
+  mode: SignMode;
+  signature: Uint8Array;
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
@@ -268,7 +268,7 @@ function createBaseSignatureDescriptor(): SignatureDescriptor {
   return {
     publicKey: undefined,
     data: undefined,
-    sequence: undefined
+    sequence: BigInt(0)
   };
 }
 export const SignatureDescriptor = {
@@ -280,7 +280,7 @@ export const SignatureDescriptor = {
     if (message.data !== undefined) {
       SignatureDescriptor_Data.encode(message.data, writer.uint32(18).fork()).ldelim();
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== BigInt(0)) {
       writer.uint32(24).uint64(message.sequence);
     }
     return writer;
@@ -319,9 +319,7 @@ export const SignatureDescriptor = {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
-    if (message.sequence !== undefined) {
-      obj.sequence = message.sequence.toString();
-    }
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
@@ -348,7 +346,7 @@ export const SignatureDescriptor = {
     return {
       public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromSDKJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : undefined
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
   toSDK(message: SignatureDescriptor): SignatureDescriptorSDKType {
@@ -362,7 +360,7 @@ export const SignatureDescriptor = {
     return {
       publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
       data: object?.data ? SignatureDescriptor_Data.fromAmino(object.data) : undefined,
-      sequence: object?.sequence ? BigInt(object.sequence) : undefined
+      sequence: BigInt(object.sequence)
     };
   },
   toAmino(message: SignatureDescriptor): SignatureDescriptorAmino {
@@ -507,17 +505,17 @@ export const SignatureDescriptor_Data = {
 };
 function createBaseSignatureDescriptor_Data_Single(): SignatureDescriptor_Data_Single {
   return {
-    mode: undefined,
-    signature: undefined
+    mode: 0,
+    signature: new Uint8Array()
   };
 }
 export const SignatureDescriptor_Data_Single = {
   typeUrl: "/cosmos.tx.signing.v1beta1.Single",
   encode(message: SignatureDescriptor_Data_Single, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mode !== undefined) {
+    if (message.mode !== 0) {
       writer.uint32(8).int32(message.mode);
     }
-    if (message.signature !== undefined) {
+    if (message.signature.length !== 0) {
       writer.uint32(18).bytes(message.signature);
     }
     return writer;
@@ -551,25 +549,25 @@ export const SignatureDescriptor_Data_Single = {
   toJSON(message: SignatureDescriptor_Data_Single): unknown {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.signature !== undefined && (obj.signature = message.signature !== undefined ? base64FromBytes(message.signature) : undefined);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<SignatureDescriptor_Data_Single>): SignatureDescriptor_Data_Single {
     const message = createBaseSignatureDescriptor_Data_Single();
-    message.mode = object.mode ?? undefined;
-    message.signature = object.signature ?? undefined;
+    message.mode = object.mode ?? 0;
+    message.signature = object.signature ?? new Uint8Array();
     return message;
   },
   fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: object?.signature
     };
   },
   fromSDKJSON(object: any): SignatureDescriptor_Data_SingleSDKType {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : undefined,
-      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : undefined
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
   toSDK(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleSDKType {
@@ -580,8 +578,8 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : undefined,
-      signature: object?.signature
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      signature: object.signature
     };
   },
   toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {

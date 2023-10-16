@@ -3,18 +3,18 @@ import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../.
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
-  height?: bigint;
-  format?: number;
-  chunks?: number;
-  hash?: Uint8Array;
+  height: bigint;
+  format: number;
+  chunks: number;
+  hash: Uint8Array;
   metadata: Metadata;
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotSDKType {
-  height?: bigint;
-  format?: number;
-  chunks?: number;
-  hash?: Uint8Array;
+  height: bigint;
+  format: number;
+  chunks: number;
+  hash: Uint8Array;
   metadata: MetadataSDKType;
 }
 /** Metadata contains SDK-specific snapshot metadata. */
@@ -46,55 +46,55 @@ export interface SnapshotItemSDKType {
 }
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItem {
-  name?: string;
+  name: string;
 }
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItemSDKType {
-  name?: string;
+  name: string;
 }
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItem {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
   /** version is block height */
-  version?: bigint;
+  version: bigint;
   /** height is depth of the tree. */
-  height?: number;
+  height: number;
 }
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItemSDKType {
-  key?: Uint8Array;
-  value?: Uint8Array;
-  version?: bigint;
-  height?: number;
+  key: Uint8Array;
+  value: Uint8Array;
+  version: bigint;
+  height: number;
 }
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMeta {
-  name?: string;
-  format?: number;
+  name: string;
+  format: number;
 }
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMetaSDKType {
-  name?: string;
-  format?: number;
+  name: string;
+  format: number;
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayload {
-  payload?: Uint8Array;
+  payload: Uint8Array;
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadSDKType {
-  payload?: Uint8Array;
+  payload: Uint8Array;
 }
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItem {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
 }
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemSDKType {
-  key?: Uint8Array;
-  value?: Uint8Array;
+  key: Uint8Array;
+  value: Uint8Array;
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchema {
@@ -106,26 +106,26 @@ export interface SnapshotSchemaSDKType {
 }
 function createBaseSnapshot(): Snapshot {
   return {
-    height: undefined,
-    format: undefined,
-    chunks: undefined,
-    hash: undefined,
+    height: BigInt(0),
+    format: 0,
+    chunks: 0,
+    hash: new Uint8Array(),
     metadata: Metadata.fromPartial({})
   };
 }
 export const Snapshot = {
   typeUrl: "/cosmos.base.snapshots.v1beta1.Snapshot",
   encode(message: Snapshot, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(8).uint64(message.height);
     }
-    if (message.format !== undefined) {
+    if (message.format !== 0) {
       writer.uint32(16).uint32(message.format);
     }
-    if (message.chunks !== undefined) {
+    if (message.chunks !== 0) {
       writer.uint32(24).uint32(message.chunks);
     }
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       writer.uint32(34).bytes(message.hash);
     }
     if (message.metadata !== undefined) {
@@ -173,12 +173,10 @@ export const Snapshot = {
   },
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
-      obj.height = message.height.toString();
-    }
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));
     message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
-    message.hash !== undefined && (obj.hash = message.hash !== undefined ? base64FromBytes(message.hash) : undefined);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
     return obj;
   },
@@ -187,9 +185,9 @@ export const Snapshot = {
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.format = object.format ?? undefined;
-    message.chunks = object.chunks ?? undefined;
-    message.hash = object.hash ?? undefined;
+    message.format = object.format ?? 0;
+    message.chunks = object.chunks ?? 0;
+    message.hash = object.hash ?? new Uint8Array();
     if (object.metadata !== undefined && object.metadata !== null) {
       message.metadata = Metadata.fromPartial(object.metadata);
     }
@@ -206,10 +204,10 @@ export const Snapshot = {
   },
   fromSDKJSON(object: any): SnapshotSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
-      format: isSet(object.format) ? Number(object.format) : undefined,
-      chunks: isSet(object.chunks) ? Number(object.chunks) : undefined,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
       metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
     };
   },
@@ -224,10 +222,10 @@ export const Snapshot = {
   },
   fromAmino(object: SnapshotAmino): Snapshot {
     return {
-      height: object?.height ? BigInt(object.height) : undefined,
-      format: object?.format,
-      chunks: object?.chunks,
-      hash: object?.hash,
+      height: BigInt(object.height),
+      format: object.format,
+      chunks: object.chunks,
+      hash: object.hash,
       metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
     };
   },
@@ -300,7 +298,7 @@ export const Metadata = {
   toJSON(message: Metadata): unknown {
     const obj: any = {};
     if (message.chunkHashes) {
-      obj.chunkHashes = message.chunkHashes.map(e => base64FromBytes(e !== undefined ? e : undefined));
+      obj.chunkHashes = message.chunkHashes.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
     } else {
       obj.chunkHashes = [];
     }
@@ -547,13 +545,13 @@ export const SnapshotItem = {
 };
 function createBaseSnapshotStoreItem(): SnapshotStoreItem {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const SnapshotStoreItem = {
   typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotStoreItem",
   encode(message: SnapshotStoreItem, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -587,7 +585,7 @@ export const SnapshotStoreItem = {
   },
   fromPartial(object: DeepPartial<SnapshotStoreItem>): SnapshotStoreItem {
     const message = createBaseSnapshotStoreItem();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: SnapshotStoreItemSDKType): SnapshotStoreItem {
@@ -597,7 +595,7 @@ export const SnapshotStoreItem = {
   },
   fromSDKJSON(object: any): SnapshotStoreItemSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: SnapshotStoreItem): SnapshotStoreItemSDKType {
@@ -607,7 +605,7 @@ export const SnapshotStoreItem = {
   },
   fromAmino(object: SnapshotStoreItemAmino): SnapshotStoreItem {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: SnapshotStoreItem): SnapshotStoreItemAmino {
@@ -639,25 +637,25 @@ export const SnapshotStoreItem = {
 };
 function createBaseSnapshotIAVLItem(): SnapshotIAVLItem {
   return {
-    key: undefined,
-    value: undefined,
-    version: undefined,
-    height: undefined
+    key: new Uint8Array(),
+    value: new Uint8Array(),
+    version: BigInt(0),
+    height: 0
   };
 }
 export const SnapshotIAVLItem = {
   typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotIAVLItem",
   encode(message: SnapshotIAVLItem, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       writer.uint32(18).bytes(message.value);
     }
-    if (message.version !== undefined) {
+    if (message.version !== BigInt(0)) {
       writer.uint32(24).int64(message.version);
     }
-    if (message.height !== undefined) {
+    if (message.height !== 0) {
       writer.uint32(32).int32(message.height);
     }
     return writer;
@@ -698,22 +696,20 @@ export const SnapshotIAVLItem = {
   },
   toJSON(message: SnapshotIAVLItem): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
-    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
-    if (message.version !== undefined) {
-      obj.version = message.version.toString();
-    }
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
     message.height !== undefined && (obj.height = Math.round(message.height));
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotIAVLItem>): SnapshotIAVLItem {
     const message = createBaseSnapshotIAVLItem();
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.key = object.key ?? new Uint8Array();
+    message.value = object.value ?? new Uint8Array();
     if (object.version !== undefined && object.version !== null) {
       message.version = BigInt(object.version.toString());
     }
-    message.height = object.height ?? undefined;
+    message.height = object.height ?? 0;
     return message;
   },
   fromSDK(object: SnapshotIAVLItemSDKType): SnapshotIAVLItem {
@@ -726,10 +722,10 @@ export const SnapshotIAVLItem = {
   },
   fromSDKJSON(object: any): SnapshotIAVLItemSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
-      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined,
-      version: isSet(object.version) ? BigInt(object.version.toString()) : undefined,
-      height: isSet(object.height) ? Number(object.height) : undefined
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0),
+      height: isSet(object.height) ? Number(object.height) : 0
     };
   },
   toSDK(message: SnapshotIAVLItem): SnapshotIAVLItemSDKType {
@@ -742,10 +738,10 @@ export const SnapshotIAVLItem = {
   },
   fromAmino(object: SnapshotIAVLItemAmino): SnapshotIAVLItem {
     return {
-      key: object?.key,
-      value: object?.value,
-      version: object?.version ? BigInt(object.version) : undefined,
-      height: object?.height
+      key: object.key,
+      value: object.value,
+      version: BigInt(object.version),
+      height: object.height
     };
   },
   toAmino(message: SnapshotIAVLItem): SnapshotIAVLItemAmino {
@@ -780,17 +776,17 @@ export const SnapshotIAVLItem = {
 };
 function createBaseSnapshotExtensionMeta(): SnapshotExtensionMeta {
   return {
-    name: undefined,
-    format: undefined
+    name: "",
+    format: 0
   };
 }
 export const SnapshotExtensionMeta = {
   typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotExtensionMeta",
   encode(message: SnapshotExtensionMeta, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.format !== undefined) {
+    if (message.format !== 0) {
       writer.uint32(16).uint32(message.format);
     }
     return writer;
@@ -829,8 +825,8 @@ export const SnapshotExtensionMeta = {
   },
   fromPartial(object: DeepPartial<SnapshotExtensionMeta>): SnapshotExtensionMeta {
     const message = createBaseSnapshotExtensionMeta();
-    message.name = object.name ?? undefined;
-    message.format = object.format ?? undefined;
+    message.name = object.name ?? "";
+    message.format = object.format ?? 0;
     return message;
   },
   fromSDK(object: SnapshotExtensionMetaSDKType): SnapshotExtensionMeta {
@@ -841,8 +837,8 @@ export const SnapshotExtensionMeta = {
   },
   fromSDKJSON(object: any): SnapshotExtensionMetaSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      format: isSet(object.format) ? Number(object.format) : undefined
+      name: isSet(object.name) ? String(object.name) : "",
+      format: isSet(object.format) ? Number(object.format) : 0
     };
   },
   toSDK(message: SnapshotExtensionMeta): SnapshotExtensionMetaSDKType {
@@ -853,8 +849,8 @@ export const SnapshotExtensionMeta = {
   },
   fromAmino(object: SnapshotExtensionMetaAmino): SnapshotExtensionMeta {
     return {
-      name: object?.name,
-      format: object?.format
+      name: object.name,
+      format: object.format
     };
   },
   toAmino(message: SnapshotExtensionMeta): SnapshotExtensionMetaAmino {
@@ -887,13 +883,13 @@ export const SnapshotExtensionMeta = {
 };
 function createBaseSnapshotExtensionPayload(): SnapshotExtensionPayload {
   return {
-    payload: undefined
+    payload: new Uint8Array()
   };
 }
 export const SnapshotExtensionPayload = {
   typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotExtensionPayload",
   encode(message: SnapshotExtensionPayload, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.payload !== undefined) {
+    if (message.payload.length !== 0) {
       writer.uint32(10).bytes(message.payload);
     }
     return writer;
@@ -922,12 +918,12 @@ export const SnapshotExtensionPayload = {
   },
   toJSON(message: SnapshotExtensionPayload): unknown {
     const obj: any = {};
-    message.payload !== undefined && (obj.payload = message.payload !== undefined ? base64FromBytes(message.payload) : undefined);
+    message.payload !== undefined && (obj.payload = base64FromBytes(message.payload !== undefined ? message.payload : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotExtensionPayload>): SnapshotExtensionPayload {
     const message = createBaseSnapshotExtensionPayload();
-    message.payload = object.payload ?? undefined;
+    message.payload = object.payload ?? new Uint8Array();
     return message;
   },
   fromSDK(object: SnapshotExtensionPayloadSDKType): SnapshotExtensionPayload {
@@ -937,7 +933,7 @@ export const SnapshotExtensionPayload = {
   },
   fromSDKJSON(object: any): SnapshotExtensionPayloadSDKType {
     return {
-      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : undefined
+      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
     };
   },
   toSDK(message: SnapshotExtensionPayload): SnapshotExtensionPayloadSDKType {
@@ -947,7 +943,7 @@ export const SnapshotExtensionPayload = {
   },
   fromAmino(object: SnapshotExtensionPayloadAmino): SnapshotExtensionPayload {
     return {
-      payload: object?.payload
+      payload: object.payload
     };
   },
   toAmino(message: SnapshotExtensionPayload): SnapshotExtensionPayloadAmino {
@@ -979,17 +975,17 @@ export const SnapshotExtensionPayload = {
 };
 function createBaseSnapshotKVItem(): SnapshotKVItem {
   return {
-    key: undefined,
-    value: undefined
+    key: new Uint8Array(),
+    value: new Uint8Array()
   };
 }
 export const SnapshotKVItem = {
   typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotKVItem",
   encode(message: SnapshotKVItem, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       writer.uint32(18).bytes(message.value);
     }
     return writer;
@@ -1022,14 +1018,14 @@ export const SnapshotKVItem = {
   },
   toJSON(message: SnapshotKVItem): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
-    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotKVItem>): SnapshotKVItem {
     const message = createBaseSnapshotKVItem();
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.key = object.key ?? new Uint8Array();
+    message.value = object.value ?? new Uint8Array();
     return message;
   },
   fromSDK(object: SnapshotKVItemSDKType): SnapshotKVItem {
@@ -1040,8 +1036,8 @@ export const SnapshotKVItem = {
   },
   fromSDKJSON(object: any): SnapshotKVItemSDKType {
     return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
-      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toSDK(message: SnapshotKVItem): SnapshotKVItemSDKType {
@@ -1052,8 +1048,8 @@ export const SnapshotKVItem = {
   },
   fromAmino(object: SnapshotKVItemAmino): SnapshotKVItem {
     return {
-      key: object?.key,
-      value: object?.value
+      key: object.key,
+      value: object.value
     };
   },
   toAmino(message: SnapshotKVItem): SnapshotKVItemAmino {
@@ -1122,7 +1118,7 @@ export const SnapshotSchema = {
   toJSON(message: SnapshotSchema): unknown {
     const obj: any = {};
     if (message.keys) {
-      obj.keys = message.keys.map(e => base64FromBytes(e !== undefined ? e : undefined));
+      obj.keys = message.keys.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
     } else {
       obj.keys = [];
     }

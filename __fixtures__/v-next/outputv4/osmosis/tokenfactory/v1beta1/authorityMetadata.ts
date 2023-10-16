@@ -8,7 +8,7 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
  */
 export interface DenomAuthorityMetadata {
   /** Can be empty for no admin, or a valid osmosis address */
-  admin?: string;
+  admin: string;
 }
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -16,17 +16,17 @@ export interface DenomAuthorityMetadata {
  * permission, but is planned to be extended to the future.
  */
 export interface DenomAuthorityMetadataSDKType {
-  admin?: string;
+  admin: string;
 }
 function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
   return {
-    admin: undefined
+    admin: ""
   };
 }
 export const DenomAuthorityMetadata = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
   encode(message: DenomAuthorityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     return writer;
@@ -60,7 +60,7 @@ export const DenomAuthorityMetadata = {
   },
   fromPartial(object: DeepPartial<DenomAuthorityMetadata>): DenomAuthorityMetadata {
     const message = createBaseDenomAuthorityMetadata();
-    message.admin = object.admin ?? undefined;
+    message.admin = object.admin ?? "";
     return message;
   },
   fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
@@ -70,7 +70,7 @@ export const DenomAuthorityMetadata = {
   },
   fromSDKJSON(object: any): DenomAuthorityMetadataSDKType {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : undefined
+      admin: isSet(object.admin) ? String(object.admin) : ""
     };
   },
   toSDK(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
@@ -80,7 +80,7 @@ export const DenomAuthorityMetadata = {
   },
   fromAmino(object: DenomAuthorityMetadataAmino): DenomAuthorityMetadata {
     return {
-      admin: object?.admin
+      admin: object.admin
     };
   },
   toAmino(message: DenomAuthorityMetadata): DenomAuthorityMetadataAmino {

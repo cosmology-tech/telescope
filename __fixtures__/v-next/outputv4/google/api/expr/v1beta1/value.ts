@@ -58,14 +58,14 @@ export interface ValueSDKType {
 /** An enum value. */
 export interface EnumValue {
   /** The fully qualified name of the enum type. */
-  type?: string;
+  type: string;
   /** The value of the enum. */
-  value?: number;
+  value: number;
 }
 /** An enum value. */
 export interface EnumValueSDKType {
-  type?: string;
-  value?: number;
+  type: string;
+  value: number;
 }
 /**
  * A list.
@@ -396,17 +396,17 @@ export const Value = {
 };
 function createBaseEnumValue(): EnumValue {
   return {
-    type: undefined,
-    value: undefined
+    type: "",
+    value: 0
   };
 }
 export const EnumValue = {
   typeUrl: "/google.api.expr.v1beta1.EnumValue",
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-    if (message.value !== undefined) {
+    if (message.value !== 0) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -445,8 +445,8 @@ export const EnumValue = {
   },
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
-    message.type = object.type ?? undefined;
-    message.value = object.value ?? undefined;
+    message.type = object.type ?? "";
+    message.value = object.value ?? 0;
     return message;
   },
   fromSDK(object: EnumValueSDKType): EnumValue {
@@ -457,8 +457,8 @@ export const EnumValue = {
   },
   fromSDKJSON(object: any): EnumValueSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : undefined,
-      value: isSet(object.value) ? Number(object.value) : undefined
+      type: isSet(object.type) ? String(object.type) : "",
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
   toSDK(message: EnumValue): EnumValueSDKType {
@@ -469,8 +469,8 @@ export const EnumValue = {
   },
   fromAmino(object: EnumValueAmino): EnumValue {
     return {
-      type: object?.type,
-      value: object?.value
+      type: object.type,
+      value: object.value
     };
   },
   toAmino(message: EnumValue): EnumValueAmino {

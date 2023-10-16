@@ -6,12 +6,12 @@ export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
   certificate: Certificate;
-  serial?: string;
+  serial: string;
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
   certificate: CertificateSDKType;
-  serial?: string;
+  serial: string;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
@@ -36,7 +36,7 @@ export interface QueryCertificatesResponseSDKType {
 function createBaseCertificateResponse(): CertificateResponse {
   return {
     certificate: Certificate.fromPartial({}),
-    serial: undefined
+    serial: ""
   };
 }
 export const CertificateResponse = {
@@ -45,7 +45,7 @@ export const CertificateResponse = {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
     }
-    if (message.serial !== undefined) {
+    if (message.serial !== "") {
       writer.uint32(18).string(message.serial);
     }
     return writer;
@@ -87,7 +87,7 @@ export const CertificateResponse = {
     if (object.certificate !== undefined && object.certificate !== null) {
       message.certificate = Certificate.fromPartial(object.certificate);
     }
-    message.serial = object.serial ?? undefined;
+    message.serial = object.serial ?? "";
     return message;
   },
   fromSDK(object: CertificateResponseSDKType): CertificateResponse {
@@ -99,7 +99,7 @@ export const CertificateResponse = {
   fromSDKJSON(object: any): CertificateResponseSDKType {
     return {
       certificate: isSet(object.certificate) ? Certificate.fromSDKJSON(object.certificate) : undefined,
-      serial: isSet(object.serial) ? String(object.serial) : undefined
+      serial: isSet(object.serial) ? String(object.serial) : ""
     };
   },
   toSDK(message: CertificateResponse): CertificateResponseSDKType {
@@ -111,7 +111,7 @@ export const CertificateResponse = {
   fromAmino(object: CertificateResponseAmino): CertificateResponse {
     return {
       certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined,
-      serial: object?.serial
+      serial: object.serial
     };
   },
   toAmino(message: CertificateResponse): CertificateResponseAmino {

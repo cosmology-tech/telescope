@@ -9,28 +9,28 @@ export const protobufPackage = "cosmos.base.abci.v1beta1";
  */
 export interface TxResponse {
   /** The block height */
-  height?: bigint;
+  height: bigint;
   /** The transaction hash. */
-  txhash?: string;
+  txhash: string;
   /** Namespace for the Code */
-  codespace?: string;
+  codespace: string;
   /** Response code. */
-  code?: number;
+  code: number;
   /** Result bytes, if any. */
-  data?: string;
+  data: string;
   /**
    * The output of the application's logger (raw string). May be
    * non-deterministic.
    */
-  rawLog?: string;
+  rawLog: string;
   /** The output of the application's logger (typed). May be non-deterministic. */
   logs: ABCIMessageLog[];
   /** Additional information. May be non-deterministic. */
-  info?: string;
+  info: string;
   /** Amount of gas requested for transaction. */
-  gasWanted?: bigint;
+  gasWanted: bigint;
   /** Amount of gas consumed by transaction. */
-  gasUsed?: bigint;
+  gasUsed: bigint;
   /** The request transaction bytes. */
   tx?: Any;
   /**
@@ -38,7 +38,7 @@ export interface TxResponse {
    * the timestamps of the valid votes in the block.LastCommit. For height == 1,
    * it's genesis time.
    */
-  timestamp?: string;
+  timestamp: string;
   /**
    * Events defines all the events emitted by processing a transaction. Note,
    * these events include those emitted by processing all the messages and those
@@ -54,24 +54,24 @@ export interface TxResponse {
  * tags are stringified and the log is JSON decoded.
  */
 export interface TxResponseSDKType {
-  height?: bigint;
-  txhash?: string;
-  codespace?: string;
-  code?: number;
-  data?: string;
-  raw_log?: string;
+  height: bigint;
+  txhash: string;
+  codespace: string;
+  code: number;
+  data: string;
+  raw_log: string;
   logs: ABCIMessageLogSDKType[];
-  info?: string;
-  gas_wanted?: bigint;
-  gas_used?: bigint;
+  info: string;
+  gas_wanted: bigint;
+  gas_used: bigint;
   tx?: AnySDKType;
-  timestamp?: string;
+  timestamp: string;
   events: EventSDKType[];
 }
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLog {
-  msgIndex?: number;
-  log?: string;
+  msgIndex: number;
+  log: string;
   /**
    * Events contains a slice of Event objects that were emitted during some
    * execution.
@@ -80,8 +80,8 @@ export interface ABCIMessageLog {
 }
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLogSDKType {
-  msg_index?: number;
-  log?: string;
+  msg_index: number;
+  log: string;
   events: StringEventSDKType[];
 }
 /**
@@ -89,7 +89,7 @@ export interface ABCIMessageLogSDKType {
  * contain key/value pairs that are strings instead of raw bytes.
  */
 export interface StringEvent {
-  type?: string;
+  type: string;
   attributes: Attribute[];
 }
 /**
@@ -97,7 +97,7 @@ export interface StringEvent {
  * contain key/value pairs that are strings instead of raw bytes.
  */
 export interface StringEventSDKType {
-  type?: string;
+  type: string;
   attributes: AttributeSDKType[];
 }
 /**
@@ -105,28 +105,28 @@ export interface StringEventSDKType {
  * strings instead of raw bytes.
  */
 export interface Attribute {
-  key?: string;
-  value?: string;
+  key: string;
+  value: string;
 }
 /**
  * Attribute defines an attribute wrapper where the key and value are
  * strings instead of raw bytes.
  */
 export interface AttributeSDKType {
-  key?: string;
-  value?: string;
+  key: string;
+  value: string;
 }
 /** GasInfo defines tx execution gas context. */
 export interface GasInfo {
   /** GasWanted is the maximum units of work we allow this tx to perform. */
-  gasWanted?: bigint;
+  gasWanted: bigint;
   /** GasUsed is the amount of gas actually consumed. */
-  gasUsed?: bigint;
+  gasUsed: bigint;
 }
 /** GasInfo defines tx execution gas context. */
 export interface GasInfoSDKType {
-  gas_wanted?: bigint;
-  gas_used?: bigint;
+  gas_wanted: bigint;
+  gas_used: bigint;
 }
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface Result {
@@ -137,9 +137,9 @@ export interface Result {
    * because it also contains the Msg response typeURL.
    */
   /** @deprecated */
-  data?: Uint8Array;
+  data: Uint8Array;
   /** Log contains the log information from message or handler execution. */
-  log?: string;
+  log: string;
   /**
    * Events contains a slice of Event objects that were emitted during message
    * or handler execution.
@@ -155,8 +155,8 @@ export interface Result {
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface ResultSDKType {
   /** @deprecated */
-  data?: Uint8Array;
-  log?: string;
+  data: Uint8Array;
+  log: string;
   events: EventSDKType[];
   msg_responses: AnySDKType[];
 }
@@ -182,8 +182,8 @@ export interface SimulationResponseSDKType {
  */
 /** @deprecated */
 export interface MsgData {
-  msgType?: string;
-  data?: Uint8Array;
+  msgType: string;
+  data: Uint8Array;
 }
 /**
  * MsgData defines the data returned in a Result object during message
@@ -191,8 +191,8 @@ export interface MsgData {
  */
 /** @deprecated */
 export interface MsgDataSDKType {
-  msg_type?: string;
-  data?: Uint8Array;
+  msg_type: string;
+  data: Uint8Array;
 }
 /**
  * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
@@ -221,81 +221,81 @@ export interface TxMsgDataSDKType {
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResult {
   /** Count of all txs */
-  totalCount?: bigint;
+  totalCount: bigint;
   /** Count of txs in current page */
-  count?: bigint;
+  count: bigint;
   /** Index of current page, start from 1 */
-  pageNumber?: bigint;
+  pageNumber: bigint;
   /** Count of total pages */
-  pageTotal?: bigint;
+  pageTotal: bigint;
   /** Max count txs per page */
-  limit?: bigint;
+  limit: bigint;
   /** List of txs in current page */
   txs: TxResponse[];
 }
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResultSDKType {
-  total_count?: bigint;
-  count?: bigint;
-  page_number?: bigint;
-  page_total?: bigint;
-  limit?: bigint;
+  total_count: bigint;
+  count: bigint;
+  page_number: bigint;
+  page_total: bigint;
+  limit: bigint;
   txs: TxResponseSDKType[];
 }
 function createBaseTxResponse(): TxResponse {
   return {
-    height: undefined,
-    txhash: undefined,
-    codespace: undefined,
-    code: undefined,
-    data: undefined,
-    rawLog: undefined,
+    height: BigInt(0),
+    txhash: "",
+    codespace: "",
+    code: 0,
+    data: "",
+    rawLog: "",
     logs: [],
-    info: undefined,
-    gasWanted: undefined,
-    gasUsed: undefined,
+    info: "",
+    gasWanted: BigInt(0),
+    gasUsed: BigInt(0),
     tx: undefined,
-    timestamp: undefined,
+    timestamp: "",
     events: []
   };
 }
 export const TxResponse = {
   typeUrl: "/cosmos.base.abci.v1beta1.TxResponse",
   encode(message: TxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(8).int64(message.height);
     }
-    if (message.txhash !== undefined) {
+    if (message.txhash !== "") {
       writer.uint32(18).string(message.txhash);
     }
-    if (message.codespace !== undefined) {
+    if (message.codespace !== "") {
       writer.uint32(26).string(message.codespace);
     }
-    if (message.code !== undefined) {
+    if (message.code !== 0) {
       writer.uint32(32).uint32(message.code);
     }
-    if (message.data !== undefined) {
+    if (message.data !== "") {
       writer.uint32(42).string(message.data);
     }
-    if (message.rawLog !== undefined) {
+    if (message.rawLog !== "") {
       writer.uint32(50).string(message.rawLog);
     }
     for (const v of message.logs) {
       ABCIMessageLog.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.info !== undefined) {
+    if (message.info !== "") {
       writer.uint32(66).string(message.info);
     }
-    if (message.gasWanted !== undefined) {
+    if (message.gasWanted !== BigInt(0)) {
       writer.uint32(72).int64(message.gasWanted);
     }
-    if (message.gasUsed !== undefined) {
+    if (message.gasUsed !== BigInt(0)) {
       writer.uint32(80).int64(message.gasUsed);
     }
     if (message.tx !== undefined) {
       Any.encode(message.tx, writer.uint32(90).fork()).ldelim();
     }
-    if (message.timestamp !== undefined) {
+    if (message.timestamp !== "") {
       writer.uint32(98).string(message.timestamp);
     }
     for (const v of message.events) {
@@ -375,9 +375,7 @@ export const TxResponse = {
   },
   toJSON(message: TxResponse): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
-      obj.height = message.height.toString();
-    }
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.txhash !== undefined && (obj.txhash = message.txhash);
     message.codespace !== undefined && (obj.codespace = message.codespace);
     message.code !== undefined && (obj.code = Math.round(message.code));
@@ -389,12 +387,8 @@ export const TxResponse = {
       obj.logs = [];
     }
     message.info !== undefined && (obj.info = message.info);
-    if (message.gasWanted !== undefined) {
-      obj.gasWanted = message.gasWanted.toString();
-    }
-    if (message.gasUsed !== undefined) {
-      obj.gasUsed = message.gasUsed.toString();
-    }
+    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || BigInt(0)).toString());
+    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || BigInt(0)).toString());
     message.tx !== undefined && (obj.tx = message.tx ? Any.toJSON(message.tx) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
     if (message.events) {
@@ -409,13 +403,13 @@ export const TxResponse = {
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height.toString());
     }
-    message.txhash = object.txhash ?? undefined;
-    message.codespace = object.codespace ?? undefined;
-    message.code = object.code ?? undefined;
-    message.data = object.data ?? undefined;
-    message.rawLog = object.rawLog ?? undefined;
+    message.txhash = object.txhash ?? "";
+    message.codespace = object.codespace ?? "";
+    message.code = object.code ?? 0;
+    message.data = object.data ?? "";
+    message.rawLog = object.rawLog ?? "";
     message.logs = object.logs?.map(e => ABCIMessageLog.fromPartial(e)) || [];
-    message.info = object.info ?? undefined;
+    message.info = object.info ?? "";
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
       message.gasWanted = BigInt(object.gasWanted.toString());
     }
@@ -425,7 +419,7 @@ export const TxResponse = {
     if (object.tx !== undefined && object.tx !== null) {
       message.tx = Any.fromPartial(object.tx);
     }
-    message.timestamp = object.timestamp ?? undefined;
+    message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
   },
@@ -448,18 +442,18 @@ export const TxResponse = {
   },
   fromSDKJSON(object: any): TxResponseSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : undefined,
-      txhash: isSet(object.txhash) ? String(object.txhash) : undefined,
-      codespace: isSet(object.codespace) ? String(object.codespace) : undefined,
-      code: isSet(object.code) ? Number(object.code) : undefined,
-      data: isSet(object.data) ? String(object.data) : undefined,
-      raw_log: isSet(object.raw_log) ? String(object.raw_log) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      txhash: isSet(object.txhash) ? String(object.txhash) : "",
+      codespace: isSet(object.codespace) ? String(object.codespace) : "",
+      code: isSet(object.code) ? Number(object.code) : 0,
+      data: isSet(object.data) ? String(object.data) : "",
+      raw_log: isSet(object.raw_log) ? String(object.raw_log) : "",
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? String(object.info) : undefined,
-      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : undefined,
-      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : undefined,
+      info: isSet(object.info) ? String(object.info) : "",
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
       tx: isSet(object.tx) ? Any.fromSDKJSON(object.tx) : undefined,
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
     };
   },
@@ -490,18 +484,18 @@ export const TxResponse = {
   },
   fromAmino(object: TxResponseAmino): TxResponse {
     return {
-      height: object?.height ? BigInt(object.height) : undefined,
-      txhash: object?.txhash,
-      codespace: object?.codespace,
-      code: object?.code,
-      data: object?.data,
-      rawLog: object?.raw_log,
+      height: BigInt(object.height),
+      txhash: object.txhash,
+      codespace: object.codespace,
+      code: object.code,
+      data: object.data,
+      rawLog: object.raw_log,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromAmino(e)) : [],
-      info: object?.info,
-      gasWanted: object?.gas_wanted ? BigInt(object.gas_wanted) : undefined,
-      gasUsed: object?.gas_used ? BigInt(object.gas_used) : undefined,
+      info: object.info,
+      gasWanted: BigInt(object.gas_wanted),
+      gasUsed: BigInt(object.gas_used),
       tx: object?.tx ? Any.fromAmino(object.tx) : undefined,
-      timestamp: object?.timestamp,
+      timestamp: object.timestamp,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : []
     };
   },
@@ -554,18 +548,18 @@ export const TxResponse = {
 };
 function createBaseABCIMessageLog(): ABCIMessageLog {
   return {
-    msgIndex: undefined,
-    log: undefined,
+    msgIndex: 0,
+    log: "",
     events: []
   };
 }
 export const ABCIMessageLog = {
   typeUrl: "/cosmos.base.abci.v1beta1.ABCIMessageLog",
   encode(message: ABCIMessageLog, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.msgIndex !== undefined) {
+    if (message.msgIndex !== 0) {
       writer.uint32(8).uint32(message.msgIndex);
     }
-    if (message.log !== undefined) {
+    if (message.log !== "") {
       writer.uint32(18).string(message.log);
     }
     for (const v of message.events) {
@@ -616,8 +610,8 @@ export const ABCIMessageLog = {
   },
   fromPartial(object: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
-    message.msgIndex = object.msgIndex ?? undefined;
-    message.log = object.log ?? undefined;
+    message.msgIndex = object.msgIndex ?? 0;
+    message.log = object.log ?? "";
     message.events = object.events?.map(e => StringEvent.fromPartial(e)) || [];
     return message;
   },
@@ -630,8 +624,8 @@ export const ABCIMessageLog = {
   },
   fromSDKJSON(object: any): ABCIMessageLogSDKType {
     return {
-      msg_index: isSet(object.msg_index) ? Number(object.msg_index) : undefined,
-      log: isSet(object.log) ? String(object.log) : undefined,
+      msg_index: isSet(object.msg_index) ? Number(object.msg_index) : 0,
+      log: isSet(object.log) ? String(object.log) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromSDKJSON(e)) : []
     };
   },
@@ -648,8 +642,8 @@ export const ABCIMessageLog = {
   },
   fromAmino(object: ABCIMessageLogAmino): ABCIMessageLog {
     return {
-      msgIndex: object?.msg_index,
-      log: object?.log,
+      msgIndex: object.msg_index,
+      log: object.log,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromAmino(e)) : []
     };
   },
@@ -688,14 +682,14 @@ export const ABCIMessageLog = {
 };
 function createBaseStringEvent(): StringEvent {
   return {
-    type: undefined,
+    type: "",
     attributes: []
   };
 }
 export const StringEvent = {
   typeUrl: "/cosmos.base.abci.v1beta1.StringEvent",
   encode(message: StringEvent, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.attributes) {
@@ -741,7 +735,7 @@ export const StringEvent = {
   },
   fromPartial(object: DeepPartial<StringEvent>): StringEvent {
     const message = createBaseStringEvent();
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   },
@@ -753,7 +747,7 @@ export const StringEvent = {
   },
   fromSDKJSON(object: any): StringEventSDKType {
     return {
-      type: isSet(object.type) ? String(object.type) : undefined,
+      type: isSet(object.type) ? String(object.type) : "",
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
     };
   },
@@ -769,7 +763,7 @@ export const StringEvent = {
   },
   fromAmino(object: StringEventAmino): StringEvent {
     return {
-      type: object?.type,
+      type: object.type,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
@@ -807,17 +801,17 @@ export const StringEvent = {
 };
 function createBaseAttribute(): Attribute {
   return {
-    key: undefined,
-    value: undefined
+    key: "",
+    value: ""
   };
 }
 export const Attribute = {
   typeUrl: "/cosmos.base.abci.v1beta1.Attribute",
   encode(message: Attribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -856,8 +850,8 @@ export const Attribute = {
   },
   fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
     return message;
   },
   fromSDK(object: AttributeSDKType): Attribute {
@@ -868,8 +862,8 @@ export const Attribute = {
   },
   fromSDKJSON(object: any): AttributeSDKType {
     return {
-      key: isSet(object.key) ? String(object.key) : undefined,
-      value: isSet(object.value) ? String(object.value) : undefined
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
   toSDK(message: Attribute): AttributeSDKType {
@@ -880,8 +874,8 @@ export const Attribute = {
   },
   fromAmino(object: AttributeAmino): Attribute {
     return {
-      key: object?.key,
-      value: object?.value
+      key: object.key,
+      value: object.value
     };
   },
   toAmino(message: Attribute): AttributeAmino {
@@ -914,17 +908,17 @@ export const Attribute = {
 };
 function createBaseGasInfo(): GasInfo {
   return {
-    gasWanted: undefined,
-    gasUsed: undefined
+    gasWanted: BigInt(0),
+    gasUsed: BigInt(0)
   };
 }
 export const GasInfo = {
   typeUrl: "/cosmos.base.abci.v1beta1.GasInfo",
   encode(message: GasInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gasWanted !== undefined) {
+    if (message.gasWanted !== BigInt(0)) {
       writer.uint32(8).uint64(message.gasWanted);
     }
-    if (message.gasUsed !== undefined) {
+    if (message.gasUsed !== BigInt(0)) {
       writer.uint32(16).uint64(message.gasUsed);
     }
     return writer;
@@ -957,12 +951,8 @@ export const GasInfo = {
   },
   toJSON(message: GasInfo): unknown {
     const obj: any = {};
-    if (message.gasWanted !== undefined) {
-      obj.gasWanted = message.gasWanted.toString();
-    }
-    if (message.gasUsed !== undefined) {
-      obj.gasUsed = message.gasUsed.toString();
-    }
+    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || BigInt(0)).toString());
+    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
@@ -983,8 +973,8 @@ export const GasInfo = {
   },
   fromSDKJSON(object: any): GasInfoSDKType {
     return {
-      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : undefined,
-      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : undefined
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0)
     };
   },
   toSDK(message: GasInfo): GasInfoSDKType {
@@ -995,8 +985,8 @@ export const GasInfo = {
   },
   fromAmino(object: GasInfoAmino): GasInfo {
     return {
-      gasWanted: object?.gas_wanted ? BigInt(object.gas_wanted) : undefined,
-      gasUsed: object?.gas_used ? BigInt(object.gas_used) : undefined
+      gasWanted: BigInt(object.gas_wanted),
+      gasUsed: BigInt(object.gas_used)
     };
   },
   toAmino(message: GasInfo): GasInfoAmino {
@@ -1029,8 +1019,8 @@ export const GasInfo = {
 };
 function createBaseResult(): Result {
   return {
-    data: undefined,
-    log: undefined,
+    data: new Uint8Array(),
+    log: "",
     events: [],
     msgResponses: []
   };
@@ -1038,10 +1028,10 @@ function createBaseResult(): Result {
 export const Result = {
   typeUrl: "/cosmos.base.abci.v1beta1.Result",
   encode(message: Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
-    if (message.log !== undefined) {
+    if (message.log !== "") {
       writer.uint32(18).string(message.log);
     }
     for (const v of message.events) {
@@ -1088,7 +1078,7 @@ export const Result = {
   },
   toJSON(message: Result): unknown {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.log !== undefined && (obj.log = message.log);
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
@@ -1104,8 +1094,8 @@ export const Result = {
   },
   fromPartial(object: DeepPartial<Result>): Result {
     const message = createBaseResult();
-    message.data = object.data ?? undefined;
-    message.log = object.log ?? undefined;
+    message.data = object.data ?? new Uint8Array();
+    message.log = object.log ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.msgResponses = object.msgResponses?.map(e => Any.fromPartial(e)) || [];
     return message;
@@ -1120,8 +1110,8 @@ export const Result = {
   },
   fromSDKJSON(object: any): ResultSDKType {
     return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined,
-      log: isSet(object.log) ? String(object.log) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      log: isSet(object.log) ? String(object.log) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
       msg_responses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromSDKJSON(e)) : []
     };
@@ -1144,8 +1134,8 @@ export const Result = {
   },
   fromAmino(object: ResultAmino): Result {
     return {
-      data: object?.data,
-      log: object?.log,
+      data: object.data,
+      log: object.log,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromAmino(e)) : []
     };
@@ -1301,17 +1291,17 @@ export const SimulationResponse = {
 };
 function createBaseMsgData(): MsgData {
   return {
-    msgType: undefined,
-    data: undefined
+    msgType: "",
+    data: new Uint8Array()
   };
 }
 export const MsgData = {
   typeUrl: "/cosmos.base.abci.v1beta1.MsgData",
   encode(message: MsgData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.msgType !== undefined) {
+    if (message.msgType !== "") {
       writer.uint32(10).string(message.msgType);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
     }
     return writer;
@@ -1345,13 +1335,13 @@ export const MsgData = {
   toJSON(message: MsgData): unknown {
     const obj: any = {};
     message.msgType !== undefined && (obj.msgType = message.msgType);
-    message.data !== undefined && (obj.data = message.data !== undefined ? base64FromBytes(message.data) : undefined);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<MsgData>): MsgData {
     const message = createBaseMsgData();
-    message.msgType = object.msgType ?? undefined;
-    message.data = object.data ?? undefined;
+    message.msgType = object.msgType ?? "";
+    message.data = object.data ?? new Uint8Array();
     return message;
   },
   fromSDK(object: MsgDataSDKType): MsgData {
@@ -1362,8 +1352,8 @@ export const MsgData = {
   },
   fromSDKJSON(object: any): MsgDataSDKType {
     return {
-      msg_type: isSet(object.msg_type) ? String(object.msg_type) : undefined,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : undefined
+      msg_type: isSet(object.msg_type) ? String(object.msg_type) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toSDK(message: MsgData): MsgDataSDKType {
@@ -1374,8 +1364,8 @@ export const MsgData = {
   },
   fromAmino(object: MsgDataAmino): MsgData {
     return {
-      msgType: object?.msg_type,
-      data: object?.data
+      msgType: object.msg_type,
+      data: object.data
     };
   },
   toAmino(message: MsgData): MsgDataAmino {
@@ -1539,30 +1529,30 @@ export const TxMsgData = {
 };
 function createBaseSearchTxsResult(): SearchTxsResult {
   return {
-    totalCount: undefined,
-    count: undefined,
-    pageNumber: undefined,
-    pageTotal: undefined,
-    limit: undefined,
+    totalCount: BigInt(0),
+    count: BigInt(0),
+    pageNumber: BigInt(0),
+    pageTotal: BigInt(0),
+    limit: BigInt(0),
     txs: []
   };
 }
 export const SearchTxsResult = {
   typeUrl: "/cosmos.base.abci.v1beta1.SearchTxsResult",
   encode(message: SearchTxsResult, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.totalCount !== undefined) {
+    if (message.totalCount !== BigInt(0)) {
       writer.uint32(8).uint64(message.totalCount);
     }
-    if (message.count !== undefined) {
+    if (message.count !== BigInt(0)) {
       writer.uint32(16).uint64(message.count);
     }
-    if (message.pageNumber !== undefined) {
+    if (message.pageNumber !== BigInt(0)) {
       writer.uint32(24).uint64(message.pageNumber);
     }
-    if (message.pageTotal !== undefined) {
+    if (message.pageTotal !== BigInt(0)) {
       writer.uint32(32).uint64(message.pageTotal);
     }
-    if (message.limit !== undefined) {
+    if (message.limit !== BigInt(0)) {
       writer.uint32(40).uint64(message.limit);
     }
     for (const v of message.txs) {
@@ -1614,21 +1604,11 @@ export const SearchTxsResult = {
   },
   toJSON(message: SearchTxsResult): unknown {
     const obj: any = {};
-    if (message.totalCount !== undefined) {
-      obj.totalCount = message.totalCount.toString();
-    }
-    if (message.count !== undefined) {
-      obj.count = message.count.toString();
-    }
-    if (message.pageNumber !== undefined) {
-      obj.pageNumber = message.pageNumber.toString();
-    }
-    if (message.pageTotal !== undefined) {
-      obj.pageTotal = message.pageTotal.toString();
-    }
-    if (message.limit !== undefined) {
-      obj.limit = message.limit.toString();
-    }
+    message.totalCount !== undefined && (obj.totalCount = (message.totalCount || BigInt(0)).toString());
+    message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());
+    message.pageNumber !== undefined && (obj.pageNumber = (message.pageNumber || BigInt(0)).toString());
+    message.pageTotal !== undefined && (obj.pageTotal = (message.pageTotal || BigInt(0)).toString());
+    message.limit !== undefined && (obj.limit = (message.limit || BigInt(0)).toString());
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? TxResponse.toJSON(e) : undefined);
     } else {
@@ -1668,11 +1648,11 @@ export const SearchTxsResult = {
   },
   fromSDKJSON(object: any): SearchTxsResultSDKType {
     return {
-      total_count: isSet(object.total_count) ? BigInt(object.total_count.toString()) : undefined,
-      count: isSet(object.count) ? BigInt(object.count.toString()) : undefined,
-      page_number: isSet(object.page_number) ? BigInt(object.page_number.toString()) : undefined,
-      page_total: isSet(object.page_total) ? BigInt(object.page_total.toString()) : undefined,
-      limit: isSet(object.limit) ? BigInt(object.limit.toString()) : undefined,
+      total_count: isSet(object.total_count) ? BigInt(object.total_count.toString()) : BigInt(0),
+      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt(0),
+      page_number: isSet(object.page_number) ? BigInt(object.page_number.toString()) : BigInt(0),
+      page_total: isSet(object.page_total) ? BigInt(object.page_total.toString()) : BigInt(0),
+      limit: isSet(object.limit) ? BigInt(object.limit.toString()) : BigInt(0),
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromSDKJSON(e)) : []
     };
   },
@@ -1692,11 +1672,11 @@ export const SearchTxsResult = {
   },
   fromAmino(object: SearchTxsResultAmino): SearchTxsResult {
     return {
-      totalCount: object?.total_count ? BigInt(object.total_count) : undefined,
-      count: object?.count ? BigInt(object.count) : undefined,
-      pageNumber: object?.page_number ? BigInt(object.page_number) : undefined,
-      pageTotal: object?.page_total ? BigInt(object.page_total) : undefined,
-      limit: object?.limit ? BigInt(object.limit) : undefined,
+      totalCount: BigInt(object.total_count),
+      count: BigInt(object.count),
+      pageNumber: BigInt(object.page_number),
+      pageTotal: BigInt(object.page_total),
+      limit: BigInt(object.limit),
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromAmino(e)) : []
     };
   },

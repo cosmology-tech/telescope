@@ -5,26 +5,26 @@ import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
-  owner?: string;
+  owner: string;
   duration: Duration;
   coins: Coin[];
 }
 export interface MsgLockTokensSDKType {
-  owner?: string;
+  owner: string;
   duration: DurationSDKType;
   coins: CoinSDKType[];
 }
 export interface MsgLockTokensResponse {
-  ID?: bigint;
+  ID: bigint;
 }
 export interface MsgLockTokensResponseSDKType {
-  ID?: bigint;
+  ID: bigint;
 }
 export interface MsgBeginUnlockingAll {
-  owner?: string;
+  owner: string;
 }
 export interface MsgBeginUnlockingAllSDKType {
-  owner?: string;
+  owner: string;
 }
 export interface MsgBeginUnlockingAllResponse {
   unlocks: PeriodLock[];
@@ -33,29 +33,29 @@ export interface MsgBeginUnlockingAllResponseSDKType {
   unlocks: PeriodLockSDKType[];
 }
 export interface MsgBeginUnlocking {
-  owner?: string;
-  ID?: bigint;
+  owner: string;
+  ID: bigint;
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
 export interface MsgBeginUnlockingSDKType {
-  owner?: string;
-  ID?: bigint;
+  owner: string;
+  ID: bigint;
   coins: CoinSDKType[];
 }
 export interface MsgBeginUnlockingResponse {
-  success?: boolean;
+  success: boolean;
 }
 export interface MsgBeginUnlockingResponseSDKType {
-  success?: boolean;
+  success: boolean;
 }
 /**
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
  */
 export interface MsgExtendLockup {
-  owner?: string;
-  ID?: bigint;
+  owner: string;
+  ID: bigint;
   /**
    * duration to be set. fails if lower than the current duration, or is
    * unlocking
@@ -67,23 +67,23 @@ export interface MsgExtendLockup {
  * The new duration is longer than the original.
  */
 export interface MsgExtendLockupSDKType {
-  owner?: string;
-  ID?: bigint;
+  owner: string;
+  ID: bigint;
   duration: DurationSDKType;
 }
 export interface MsgExtendLockupResponse {
-  success?: boolean;
+  success: boolean;
 }
 export interface MsgExtendLockupResponseSDKType {
-  success?: boolean;
+  success: boolean;
 }
 /**
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
  */
 export interface MsgForceUnlock {
-  owner?: string;
-  ID?: bigint;
+  owner: string;
+  ID: bigint;
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
@@ -92,19 +92,19 @@ export interface MsgForceUnlock {
  * addresses registered via governance.
  */
 export interface MsgForceUnlockSDKType {
-  owner?: string;
-  ID?: bigint;
+  owner: string;
+  ID: bigint;
   coins: CoinSDKType[];
 }
 export interface MsgForceUnlockResponse {
-  success?: boolean;
+  success: boolean;
 }
 export interface MsgForceUnlockResponseSDKType {
-  success?: boolean;
+  success: boolean;
 }
 function createBaseMsgLockTokens(): MsgLockTokens {
   return {
-    owner: undefined,
+    owner: "",
     duration: Duration.fromPartial({}),
     coins: []
   };
@@ -112,7 +112,7 @@ function createBaseMsgLockTokens(): MsgLockTokens {
 export const MsgLockTokens = {
   typeUrl: "/osmosis.lockup.MsgLockTokens",
   encode(message: MsgLockTokens, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -166,7 +166,7 @@ export const MsgLockTokens = {
   },
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.duration !== undefined && object.duration !== null) {
       message.duration = Duration.fromPartial(object.duration);
     }
@@ -182,7 +182,7 @@ export const MsgLockTokens = {
   },
   fromSDKJSON(object: any): MsgLockTokensSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
@@ -200,7 +200,7 @@ export const MsgLockTokens = {
   },
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
     return {
-      owner: object?.owner,
+      owner: object.owner,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
@@ -240,13 +240,13 @@ export const MsgLockTokens = {
 };
 function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
   return {
-    ID: undefined
+    ID: BigInt(0)
   };
 }
 export const MsgLockTokensResponse = {
   typeUrl: "/osmosis.lockup.MsgLockTokensResponse",
   encode(message: MsgLockTokensResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ID !== undefined) {
+    if (message.ID !== BigInt(0)) {
       writer.uint32(8).uint64(message.ID);
     }
     return writer;
@@ -275,9 +275,7 @@ export const MsgLockTokensResponse = {
   },
   toJSON(message: MsgLockTokensResponse): unknown {
     const obj: any = {};
-    if (message.ID !== undefined) {
-      obj.ID = message.ID.toString();
-    }
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
@@ -294,7 +292,7 @@ export const MsgLockTokensResponse = {
   },
   fromSDKJSON(object: any): MsgLockTokensResponseSDKType {
     return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : undefined
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgLockTokensResponse): MsgLockTokensResponseSDKType {
@@ -304,7 +302,7 @@ export const MsgLockTokensResponse = {
   },
   fromAmino(object: MsgLockTokensResponseAmino): MsgLockTokensResponse {
     return {
-      ID: object?.ID ? BigInt(object.ID) : undefined
+      ID: BigInt(object.ID)
     };
   },
   toAmino(message: MsgLockTokensResponse): MsgLockTokensResponseAmino {
@@ -336,13 +334,13 @@ export const MsgLockTokensResponse = {
 };
 function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
   return {
-    owner: undefined
+    owner: ""
   };
 }
 export const MsgBeginUnlockingAll = {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
   encode(message: MsgBeginUnlockingAll, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -376,7 +374,7 @@ export const MsgBeginUnlockingAll = {
   },
   fromPartial(object: DeepPartial<MsgBeginUnlockingAll>): MsgBeginUnlockingAll {
     const message = createBaseMsgBeginUnlockingAll();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     return message;
   },
   fromSDK(object: MsgBeginUnlockingAllSDKType): MsgBeginUnlockingAll {
@@ -386,7 +384,7 @@ export const MsgBeginUnlockingAll = {
   },
   fromSDKJSON(object: any): MsgBeginUnlockingAllSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
   toSDK(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllSDKType {
@@ -396,7 +394,7 @@ export const MsgBeginUnlockingAll = {
   },
   fromAmino(object: MsgBeginUnlockingAllAmino): MsgBeginUnlockingAll {
     return {
-      owner: object?.owner
+      owner: object.owner
     };
   },
   toAmino(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAmino {
@@ -532,18 +530,18 @@ export const MsgBeginUnlockingAllResponse = {
 };
 function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
   return {
-    owner: undefined,
-    ID: undefined,
+    owner: "",
+    ID: BigInt(0),
     coins: []
   };
 }
 export const MsgBeginUnlocking = {
   typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
   encode(message: MsgBeginUnlocking, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.ID !== undefined) {
+    if (message.ID !== BigInt(0)) {
       writer.uint32(16).uint64(message.ID);
     }
     for (const v of message.coins) {
@@ -584,9 +582,7 @@ export const MsgBeginUnlocking = {
   toJSON(message: MsgBeginUnlocking): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    if (message.ID !== undefined) {
-      obj.ID = message.ID.toString();
-    }
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -596,7 +592,7 @@ export const MsgBeginUnlocking = {
   },
   fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.ID !== undefined && object.ID !== null) {
       message.ID = BigInt(object.ID.toString());
     }
@@ -612,8 +608,8 @@ export const MsgBeginUnlocking = {
   },
   fromSDKJSON(object: any): MsgBeginUnlockingSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -630,8 +626,8 @@ export const MsgBeginUnlocking = {
   },
   fromAmino(object: MsgBeginUnlockingAmino): MsgBeginUnlocking {
     return {
-      owner: object?.owner,
-      ID: object?.ID ? BigInt(object.ID) : undefined,
+      owner: object.owner,
+      ID: BigInt(object.ID),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -670,13 +666,13 @@ export const MsgBeginUnlocking = {
 };
 function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
   return {
-    success: undefined
+    success: false
   };
 }
 export const MsgBeginUnlockingResponse = {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse",
   encode(message: MsgBeginUnlockingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.success !== undefined) {
+    if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -710,7 +706,7 @@ export const MsgBeginUnlockingResponse = {
   },
   fromPartial(object: DeepPartial<MsgBeginUnlockingResponse>): MsgBeginUnlockingResponse {
     const message = createBaseMsgBeginUnlockingResponse();
-    message.success = object.success ?? undefined;
+    message.success = object.success ?? false;
     return message;
   },
   fromSDK(object: MsgBeginUnlockingResponseSDKType): MsgBeginUnlockingResponse {
@@ -720,7 +716,7 @@ export const MsgBeginUnlockingResponse = {
   },
   fromSDKJSON(object: any): MsgBeginUnlockingResponseSDKType {
     return {
-      success: isSet(object.success) ? Boolean(object.success) : undefined
+      success: isSet(object.success) ? Boolean(object.success) : false
     };
   },
   toSDK(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseSDKType {
@@ -730,7 +726,7 @@ export const MsgBeginUnlockingResponse = {
   },
   fromAmino(object: MsgBeginUnlockingResponseAmino): MsgBeginUnlockingResponse {
     return {
-      success: object?.success
+      success: object.success
     };
   },
   toAmino(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAmino {
@@ -762,18 +758,18 @@ export const MsgBeginUnlockingResponse = {
 };
 function createBaseMsgExtendLockup(): MsgExtendLockup {
   return {
-    owner: undefined,
-    ID: undefined,
+    owner: "",
+    ID: BigInt(0),
     duration: Duration.fromPartial({})
   };
 }
 export const MsgExtendLockup = {
   typeUrl: "/osmosis.lockup.MsgExtendLockup",
   encode(message: MsgExtendLockup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.ID !== undefined) {
+    if (message.ID !== BigInt(0)) {
       writer.uint32(16).uint64(message.ID);
     }
     if (message.duration !== undefined) {
@@ -814,15 +810,13 @@ export const MsgExtendLockup = {
   toJSON(message: MsgExtendLockup): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    if (message.ID !== undefined) {
-      obj.ID = message.ID.toString();
-    }
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgExtendLockup>): MsgExtendLockup {
     const message = createBaseMsgExtendLockup();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.ID !== undefined && object.ID !== null) {
       message.ID = BigInt(object.ID.toString());
     }
@@ -840,8 +834,8 @@ export const MsgExtendLockup = {
   },
   fromSDKJSON(object: any): MsgExtendLockupSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },
@@ -854,8 +848,8 @@ export const MsgExtendLockup = {
   },
   fromAmino(object: MsgExtendLockupAmino): MsgExtendLockup {
     return {
-      owner: object?.owner,
-      ID: object?.ID ? BigInt(object.ID) : undefined,
+      owner: object.owner,
+      ID: BigInt(object.ID),
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
@@ -890,13 +884,13 @@ export const MsgExtendLockup = {
 };
 function createBaseMsgExtendLockupResponse(): MsgExtendLockupResponse {
   return {
-    success: undefined
+    success: false
   };
 }
 export const MsgExtendLockupResponse = {
   typeUrl: "/osmosis.lockup.MsgExtendLockupResponse",
   encode(message: MsgExtendLockupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.success !== undefined) {
+    if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -930,7 +924,7 @@ export const MsgExtendLockupResponse = {
   },
   fromPartial(object: DeepPartial<MsgExtendLockupResponse>): MsgExtendLockupResponse {
     const message = createBaseMsgExtendLockupResponse();
-    message.success = object.success ?? undefined;
+    message.success = object.success ?? false;
     return message;
   },
   fromSDK(object: MsgExtendLockupResponseSDKType): MsgExtendLockupResponse {
@@ -940,7 +934,7 @@ export const MsgExtendLockupResponse = {
   },
   fromSDKJSON(object: any): MsgExtendLockupResponseSDKType {
     return {
-      success: isSet(object.success) ? Boolean(object.success) : undefined
+      success: isSet(object.success) ? Boolean(object.success) : false
     };
   },
   toSDK(message: MsgExtendLockupResponse): MsgExtendLockupResponseSDKType {
@@ -950,7 +944,7 @@ export const MsgExtendLockupResponse = {
   },
   fromAmino(object: MsgExtendLockupResponseAmino): MsgExtendLockupResponse {
     return {
-      success: object?.success
+      success: object.success
     };
   },
   toAmino(message: MsgExtendLockupResponse): MsgExtendLockupResponseAmino {
@@ -982,18 +976,18 @@ export const MsgExtendLockupResponse = {
 };
 function createBaseMsgForceUnlock(): MsgForceUnlock {
   return {
-    owner: undefined,
-    ID: undefined,
+    owner: "",
+    ID: BigInt(0),
     coins: []
   };
 }
 export const MsgForceUnlock = {
   typeUrl: "/osmosis.lockup.MsgForceUnlock",
   encode(message: MsgForceUnlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.ID !== undefined) {
+    if (message.ID !== BigInt(0)) {
       writer.uint32(16).uint64(message.ID);
     }
     for (const v of message.coins) {
@@ -1034,9 +1028,7 @@ export const MsgForceUnlock = {
   toJSON(message: MsgForceUnlock): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    if (message.ID !== undefined) {
-      obj.ID = message.ID.toString();
-    }
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -1046,7 +1038,7 @@ export const MsgForceUnlock = {
   },
   fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
     const message = createBaseMsgForceUnlock();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     if (object.ID !== undefined && object.ID !== null) {
       message.ID = BigInt(object.ID.toString());
     }
@@ -1062,8 +1054,8 @@ export const MsgForceUnlock = {
   },
   fromSDKJSON(object: any): MsgForceUnlockSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -1080,8 +1072,8 @@ export const MsgForceUnlock = {
   },
   fromAmino(object: MsgForceUnlockAmino): MsgForceUnlock {
     return {
-      owner: object?.owner,
-      ID: object?.ID ? BigInt(object.ID) : undefined,
+      owner: object.owner,
+      ID: BigInt(object.ID),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -1120,13 +1112,13 @@ export const MsgForceUnlock = {
 };
 function createBaseMsgForceUnlockResponse(): MsgForceUnlockResponse {
   return {
-    success: undefined
+    success: false
   };
 }
 export const MsgForceUnlockResponse = {
   typeUrl: "/osmosis.lockup.MsgForceUnlockResponse",
   encode(message: MsgForceUnlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.success !== undefined) {
+    if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -1160,7 +1152,7 @@ export const MsgForceUnlockResponse = {
   },
   fromPartial(object: DeepPartial<MsgForceUnlockResponse>): MsgForceUnlockResponse {
     const message = createBaseMsgForceUnlockResponse();
-    message.success = object.success ?? undefined;
+    message.success = object.success ?? false;
     return message;
   },
   fromSDK(object: MsgForceUnlockResponseSDKType): MsgForceUnlockResponse {
@@ -1170,7 +1162,7 @@ export const MsgForceUnlockResponse = {
   },
   fromSDKJSON(object: any): MsgForceUnlockResponseSDKType {
     return {
-      success: isSet(object.success) ? Boolean(object.success) : undefined
+      success: isSet(object.success) ? Boolean(object.success) : false
     };
   },
   toSDK(message: MsgForceUnlockResponse): MsgForceUnlockResponseSDKType {
@@ -1180,7 +1172,7 @@ export const MsgForceUnlockResponse = {
   },
   fromAmino(object: MsgForceUnlockResponseAmino): MsgForceUnlockResponse {
     return {
-      success: object?.success
+      success: object.success
     };
   },
   toAmino(message: MsgForceUnlockResponse): MsgForceUnlockResponseAmino {

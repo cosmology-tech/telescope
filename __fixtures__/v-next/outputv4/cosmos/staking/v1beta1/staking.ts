@@ -112,23 +112,23 @@ export interface CommissionSDKType {
 /** Description defines a validator description. */
 export interface Description {
   /** moniker defines a human-readable name for the validator. */
-  moniker?: string;
+  moniker: string;
   /** identity defines an optional identity signature (ex. UPort or Keybase). */
-  identity?: string;
+  identity: string;
   /** website defines an optional website link. */
-  website?: string;
+  website: string;
   /** security_contact defines an optional email for security contact. */
-  securityContact?: string;
+  securityContact: string;
   /** details define other optional details. */
-  details?: string;
+  details: string;
 }
 /** Description defines a validator description. */
 export interface DescriptionSDKType {
-  moniker?: string;
-  identity?: string;
-  website?: string;
-  security_contact?: string;
-  details?: string;
+  moniker: string;
+  identity: string;
+  website: string;
+  security_contact: string;
+  details: string;
 }
 /**
  * Validator defines a validator, together with the total amount of the
@@ -142,13 +142,13 @@ export interface DescriptionSDKType {
  */
 export interface Validator {
   /** operator_address defines the address of the validator's operator; bech encoded in JSON. */
-  operatorAddress?: string;
+  operatorAddress: string;
   /** consensus_pubkey is the consensus public key of the validator, as a Protobuf Any. */
   consensusPubkey?: Any;
   /** jailed defined whether the validator has been jailed from bonded status or not. */
-  jailed?: boolean;
+  jailed: boolean;
   /** status is the validator status (bonded/unbonding/unbonded). */
-  status?: BondStatus;
+  status: BondStatus;
   /** tokens define the delegated tokens (incl. self-delegation). */
   tokens: string;
   /** delegator_shares defines total shares issued to a validator's delegators. */
@@ -156,7 +156,7 @@ export interface Validator {
   /** description defines the description terms for the validator. */
   description: Description;
   /** unbonding_height defines, if unbonding, the height at which this validator has begun unbonding. */
-  unbondingHeight?: bigint;
+  unbondingHeight: bigint;
   /** unbonding_time defines, if unbonding, the min time for the validator to complete unbonding. */
   unbondingTime: Date;
   /** commission defines the commission parameters. */
@@ -175,14 +175,14 @@ export interface Validator {
  * multiplied by exchange rate.
  */
 export interface ValidatorSDKType {
-  operator_address?: string;
+  operator_address: string;
   consensus_pubkey?: AnySDKType;
-  jailed?: boolean;
-  status?: BondStatus;
+  jailed: boolean;
+  status: BondStatus;
   tokens: string;
   delegator_shares: string;
   description: DescriptionSDKType;
-  unbonding_height?: bigint;
+  unbonding_height: bigint;
   unbonding_time: Date;
   commission: CommissionSDKType;
   min_self_delegation: string;
@@ -201,8 +201,8 @@ export interface ValAddressesSDKType {
  * be used to construct the key to getting an UnbondingDelegation from state.
  */
 export interface DVPair {
-  delegatorAddress?: string;
-  validatorAddress?: string;
+  delegatorAddress: string;
+  validatorAddress: string;
 }
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
@@ -210,8 +210,8 @@ export interface DVPair {
  * be used to construct the key to getting an UnbondingDelegation from state.
  */
 export interface DVPairSDKType {
-  delegator_address?: string;
-  validator_address?: string;
+  delegator_address: string;
+  validator_address: string;
 }
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairs {
@@ -228,9 +228,9 @@ export interface DVPairsSDKType {
  * Redelegation from state.
  */
 export interface DVVTriplet {
-  delegatorAddress?: string;
-  validatorSrcAddress?: string;
-  validatorDstAddress?: string;
+  delegatorAddress: string;
+  validatorSrcAddress: string;
+  validatorDstAddress: string;
 }
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
@@ -239,9 +239,9 @@ export interface DVVTriplet {
  * Redelegation from state.
  */
 export interface DVVTripletSDKType {
-  delegator_address?: string;
-  validator_src_address?: string;
-  validator_dst_address?: string;
+  delegator_address: string;
+  validator_src_address: string;
+  validator_dst_address: string;
 }
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTriplets {
@@ -258,9 +258,9 @@ export interface DVVTripletsSDKType {
  */
 export interface Delegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
-  delegatorAddress?: string;
+  delegatorAddress: string;
   /** validator_address is the bech32-encoded address of the validator. */
-  validatorAddress?: string;
+  validatorAddress: string;
   /** shares define the delegation shares received. */
   shares: string;
 }
@@ -270,8 +270,8 @@ export interface Delegation {
  * validator.
  */
 export interface DelegationSDKType {
-  delegator_address?: string;
-  validator_address?: string;
+  delegator_address: string;
+  validator_address: string;
   shares: string;
 }
 /**
@@ -280,9 +280,9 @@ export interface DelegationSDKType {
  */
 export interface UnbondingDelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
-  delegatorAddress?: string;
+  delegatorAddress: string;
   /** validator_address is the bech32-encoded address of the validator. */
-  validatorAddress?: string;
+  validatorAddress: string;
   /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntry[];
 }
@@ -291,14 +291,14 @@ export interface UnbondingDelegation {
  * for a single validator in an time-ordered list.
  */
 export interface UnbondingDelegationSDKType {
-  delegator_address?: string;
-  validator_address?: string;
+  delegator_address: string;
+  validator_address: string;
   entries: UnbondingDelegationEntrySDKType[];
 }
 /** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntry {
   /** creation_height is the height which the unbonding took place. */
-  creationHeight?: bigint;
+  creationHeight: bigint;
   /** completion_time is the unix time for unbonding completion. */
   completionTime: Date;
   /** initial_balance defines the tokens initially scheduled to receive at completion. */
@@ -308,7 +308,7 @@ export interface UnbondingDelegationEntry {
 }
 /** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntrySDKType {
-  creation_height?: bigint;
+  creation_height: bigint;
   completion_time: Date;
   initial_balance: string;
   balance: string;
@@ -316,7 +316,7 @@ export interface UnbondingDelegationEntrySDKType {
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntry {
   /** creation_height  defines the height which the redelegation took place. */
-  creationHeight?: bigint;
+  creationHeight: bigint;
   /** completion_time defines the unix time for redelegation completion. */
   completionTime: Date;
   /** initial_balance defines the initial balance when redelegation started. */
@@ -326,7 +326,7 @@ export interface RedelegationEntry {
 }
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntrySDKType {
-  creation_height?: bigint;
+  creation_height: bigint;
   completion_time: Date;
   initial_balance: string;
   shares_dst: string;
@@ -337,11 +337,11 @@ export interface RedelegationEntrySDKType {
  */
 export interface Redelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
-  delegatorAddress?: string;
+  delegatorAddress: string;
   /** validator_src_address is the validator redelegation source operator address. */
-  validatorSrcAddress?: string;
+  validatorSrcAddress: string;
   /** validator_dst_address is the validator redelegation destination operator address. */
-  validatorDstAddress?: string;
+  validatorDstAddress: string;
   /** entries are the redelegation entries. */
   entries: RedelegationEntry[];
 }
@@ -350,9 +350,9 @@ export interface Redelegation {
  * from a particular source validator to a particular destination validator.
  */
 export interface RedelegationSDKType {
-  delegator_address?: string;
-  validator_src_address?: string;
-  validator_dst_address?: string;
+  delegator_address: string;
+  validator_src_address: string;
+  validator_dst_address: string;
   entries: RedelegationEntrySDKType[];
 }
 /** Params defines the parameters for the staking module. */
@@ -360,23 +360,23 @@ export interface Params {
   /** unbonding_time is the time duration of unbonding. */
   unbondingTime: Duration;
   /** max_validators is the maximum number of validators. */
-  maxValidators?: number;
+  maxValidators: number;
   /** max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio). */
-  maxEntries?: number;
+  maxEntries: number;
   /** historical_entries is the number of historical entries to persist. */
-  historicalEntries?: number;
+  historicalEntries: number;
   /** bond_denom defines the bondable coin denomination. */
-  bondDenom?: string;
+  bondDenom: string;
   /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
   minCommissionRate: string;
 }
 /** Params defines the parameters for the staking module. */
 export interface ParamsSDKType {
   unbonding_time: DurationSDKType;
-  max_validators?: number;
-  max_entries?: number;
-  historical_entries?: number;
-  bond_denom?: string;
+  max_validators: number;
+  max_entries: number;
+  historical_entries: number;
+  bond_denom: string;
   min_commission_rate: string;
 }
 /**
@@ -801,29 +801,29 @@ export const Commission = {
 };
 function createBaseDescription(): Description {
   return {
-    moniker: undefined,
-    identity: undefined,
-    website: undefined,
-    securityContact: undefined,
-    details: undefined
+    moniker: "",
+    identity: "",
+    website: "",
+    securityContact: "",
+    details: ""
   };
 }
 export const Description = {
   typeUrl: "/cosmos.staking.v1beta1.Description",
   encode(message: Description, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.moniker !== undefined) {
+    if (message.moniker !== "") {
       writer.uint32(10).string(message.moniker);
     }
-    if (message.identity !== undefined) {
+    if (message.identity !== "") {
       writer.uint32(18).string(message.identity);
     }
-    if (message.website !== undefined) {
+    if (message.website !== "") {
       writer.uint32(26).string(message.website);
     }
-    if (message.securityContact !== undefined) {
+    if (message.securityContact !== "") {
       writer.uint32(34).string(message.securityContact);
     }
-    if (message.details !== undefined) {
+    if (message.details !== "") {
       writer.uint32(42).string(message.details);
     }
     return writer;
@@ -877,11 +877,11 @@ export const Description = {
   },
   fromPartial(object: DeepPartial<Description>): Description {
     const message = createBaseDescription();
-    message.moniker = object.moniker ?? undefined;
-    message.identity = object.identity ?? undefined;
-    message.website = object.website ?? undefined;
-    message.securityContact = object.securityContact ?? undefined;
-    message.details = object.details ?? undefined;
+    message.moniker = object.moniker ?? "";
+    message.identity = object.identity ?? "";
+    message.website = object.website ?? "";
+    message.securityContact = object.securityContact ?? "";
+    message.details = object.details ?? "";
     return message;
   },
   fromSDK(object: DescriptionSDKType): Description {
@@ -895,11 +895,11 @@ export const Description = {
   },
   fromSDKJSON(object: any): DescriptionSDKType {
     return {
-      moniker: isSet(object.moniker) ? String(object.moniker) : undefined,
-      identity: isSet(object.identity) ? String(object.identity) : undefined,
-      website: isSet(object.website) ? String(object.website) : undefined,
-      security_contact: isSet(object.security_contact) ? String(object.security_contact) : undefined,
-      details: isSet(object.details) ? String(object.details) : undefined
+      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      identity: isSet(object.identity) ? String(object.identity) : "",
+      website: isSet(object.website) ? String(object.website) : "",
+      security_contact: isSet(object.security_contact) ? String(object.security_contact) : "",
+      details: isSet(object.details) ? String(object.details) : ""
     };
   },
   toSDK(message: Description): DescriptionSDKType {
@@ -913,11 +913,11 @@ export const Description = {
   },
   fromAmino(object: DescriptionAmino): Description {
     return {
-      moniker: object?.moniker,
-      identity: object?.identity,
-      website: object?.website,
-      securityContact: object?.security_contact,
-      details: object?.details
+      moniker: object.moniker,
+      identity: object.identity,
+      website: object.website,
+      securityContact: object.security_contact,
+      details: object.details
     };
   },
   toAmino(message: Description): DescriptionAmino {
@@ -953,14 +953,14 @@ export const Description = {
 };
 function createBaseValidator(): Validator {
   return {
-    operatorAddress: undefined,
+    operatorAddress: "",
     consensusPubkey: undefined,
-    jailed: undefined,
-    status: undefined,
+    jailed: false,
+    status: 0,
     tokens: "",
     delegatorShares: "",
     description: Description.fromPartial({}),
-    unbondingHeight: undefined,
+    unbondingHeight: BigInt(0),
     unbondingTime: new Date(),
     commission: Commission.fromPartial({}),
     minSelfDelegation: ""
@@ -969,16 +969,16 @@ function createBaseValidator(): Validator {
 export const Validator = {
   typeUrl: "/cosmos.staking.v1beta1.Validator",
   encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operatorAddress !== undefined) {
+    if (message.operatorAddress !== "") {
       writer.uint32(10).string(message.operatorAddress);
     }
     if (message.consensusPubkey !== undefined) {
       Any.encode(message.consensusPubkey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.jailed !== undefined) {
+    if (message.jailed === true) {
       writer.uint32(24).bool(message.jailed);
     }
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
     if (message.tokens !== "") {
@@ -990,7 +990,7 @@ export const Validator = {
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(58).fork()).ldelim();
     }
-    if (message.unbondingHeight !== undefined) {
+    if (message.unbondingHeight !== BigInt(0)) {
       writer.uint32(64).int64(message.unbondingHeight);
     }
     if (message.unbondingTime !== undefined) {
@@ -1075,9 +1075,7 @@ export const Validator = {
     message.tokens !== undefined && (obj.tokens = message.tokens);
     message.delegatorShares !== undefined && (obj.delegatorShares = message.delegatorShares);
     message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
-    if (message.unbondingHeight !== undefined) {
-      obj.unbondingHeight = message.unbondingHeight.toString();
-    }
+    message.unbondingHeight !== undefined && (obj.unbondingHeight = (message.unbondingHeight || BigInt(0)).toString());
     message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime.toISOString());
     message.commission !== undefined && (obj.commission = message.commission ? Commission.toJSON(message.commission) : undefined);
     message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
@@ -1085,12 +1083,12 @@ export const Validator = {
   },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
-    message.operatorAddress = object.operatorAddress ?? undefined;
+    message.operatorAddress = object.operatorAddress ?? "";
     if (object.consensusPubkey !== undefined && object.consensusPubkey !== null) {
       message.consensusPubkey = Any.fromPartial(object.consensusPubkey);
     }
-    message.jailed = object.jailed ?? undefined;
-    message.status = object.status ?? undefined;
+    message.jailed = object.jailed ?? false;
+    message.status = object.status ?? 0;
     message.tokens = object.tokens ?? "";
     message.delegatorShares = object.delegatorShares ?? "";
     if (object.description !== undefined && object.description !== null) {
@@ -1111,7 +1109,7 @@ export const Validator = {
       operatorAddress: object?.operator_address,
       consensusPubkey: object.consensus_pubkey ? Any.fromSDK(object.consensus_pubkey) : undefined,
       jailed: object?.jailed,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : undefined,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: object?.tokens,
       delegatorShares: object?.delegator_shares,
       description: object.description ? Description.fromSDK(object.description) : undefined,
@@ -1123,14 +1121,14 @@ export const Validator = {
   },
   fromSDKJSON(object: any): ValidatorSDKType {
     return {
-      operator_address: isSet(object.operator_address) ? String(object.operator_address) : undefined,
+      operator_address: isSet(object.operator_address) ? String(object.operator_address) : "",
       consensus_pubkey: isSet(object.consensus_pubkey) ? Any.fromSDKJSON(object.consensus_pubkey) : undefined,
-      jailed: isSet(object.jailed) ? Boolean(object.jailed) : undefined,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : undefined,
+      jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegator_shares: isSet(object.delegator_shares) ? String(object.delegator_shares) : "",
       description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
-      unbonding_height: isSet(object.unbonding_height) ? BigInt(object.unbonding_height.toString()) : undefined,
+      unbonding_height: isSet(object.unbonding_height) ? BigInt(object.unbonding_height.toString()) : BigInt(0),
       unbonding_time: isSet(object.unbonding_time) ? new Date(object.unbonding_time) : undefined,
       commission: isSet(object.commission) ? Commission.fromSDKJSON(object.commission) : undefined,
       min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : ""
@@ -1153,14 +1151,14 @@ export const Validator = {
   },
   fromAmino(object: ValidatorAmino): Validator {
     return {
-      operatorAddress: object?.operator_address,
+      operatorAddress: object.operator_address,
       consensusPubkey: object?.consensus_pubkey ? encodePubkey(object.consensus_pubkey) : undefined,
-      jailed: object?.jailed,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : undefined,
+      jailed: object.jailed,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: object.tokens,
       delegatorShares: object.delegator_shares,
       description: object?.description ? Description.fromAmino(object.description) : undefined,
-      unbondingHeight: object?.unbonding_height ? BigInt(object.unbonding_height) : undefined,
+      unbondingHeight: BigInt(object.unbonding_height),
       unbondingTime: object.unbonding_time,
       commission: object?.commission ? Commission.fromAmino(object.commission) : undefined,
       minSelfDelegation: object.min_self_delegation
@@ -1309,17 +1307,17 @@ export const ValAddresses = {
 };
 function createBaseDVPair(): DVPair {
   return {
-    delegatorAddress: undefined,
-    validatorAddress: undefined
+    delegatorAddress: "",
+    validatorAddress: ""
   };
 }
 export const DVPair = {
   typeUrl: "/cosmos.staking.v1beta1.DVPair",
   encode(message: DVPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
     return writer;
@@ -1358,8 +1356,8 @@ export const DVPair = {
   },
   fromPartial(object: DeepPartial<DVPair>): DVPair {
     const message = createBaseDVPair();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.validatorAddress = object.validatorAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorAddress = object.validatorAddress ?? "";
     return message;
   },
   fromSDK(object: DVPairSDKType): DVPair {
@@ -1370,8 +1368,8 @@ export const DVPair = {
   },
   fromSDKJSON(object: any): DVPairSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : undefined
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
     };
   },
   toSDK(message: DVPair): DVPairSDKType {
@@ -1382,8 +1380,8 @@ export const DVPair = {
   },
   fromAmino(object: DVPairAmino): DVPair {
     return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address
     };
   },
   toAmino(message: DVPair): DVPairAmino {
@@ -1520,21 +1518,21 @@ export const DVPairs = {
 };
 function createBaseDVVTriplet(): DVVTriplet {
   return {
-    delegatorAddress: undefined,
-    validatorSrcAddress: undefined,
-    validatorDstAddress: undefined
+    delegatorAddress: "",
+    validatorSrcAddress: "",
+    validatorDstAddress: ""
   };
 }
 export const DVVTriplet = {
   typeUrl: "/cosmos.staking.v1beta1.DVVTriplet",
   encode(message: DVVTriplet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorSrcAddress !== undefined) {
+    if (message.validatorSrcAddress !== "") {
       writer.uint32(18).string(message.validatorSrcAddress);
     }
-    if (message.validatorDstAddress !== undefined) {
+    if (message.validatorDstAddress !== "") {
       writer.uint32(26).string(message.validatorDstAddress);
     }
     return writer;
@@ -1578,9 +1576,9 @@ export const DVVTriplet = {
   },
   fromPartial(object: DeepPartial<DVVTriplet>): DVVTriplet {
     const message = createBaseDVVTriplet();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.validatorSrcAddress = object.validatorSrcAddress ?? undefined;
-    message.validatorDstAddress = object.validatorDstAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorSrcAddress = object.validatorSrcAddress ?? "";
+    message.validatorDstAddress = object.validatorDstAddress ?? "";
     return message;
   },
   fromSDK(object: DVVTripletSDKType): DVVTriplet {
@@ -1592,9 +1590,9 @@ export const DVVTriplet = {
   },
   fromSDKJSON(object: any): DVVTripletSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : undefined,
-      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : undefined
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : ""
     };
   },
   toSDK(message: DVVTriplet): DVVTripletSDKType {
@@ -1606,9 +1604,9 @@ export const DVVTriplet = {
   },
   fromAmino(object: DVVTripletAmino): DVVTriplet {
     return {
-      delegatorAddress: object?.delegator_address,
-      validatorSrcAddress: object?.validator_src_address,
-      validatorDstAddress: object?.validator_dst_address
+      delegatorAddress: object.delegator_address,
+      validatorSrcAddress: object.validator_src_address,
+      validatorDstAddress: object.validator_dst_address
     };
   },
   toAmino(message: DVVTriplet): DVVTripletAmino {
@@ -1746,18 +1744,18 @@ export const DVVTriplets = {
 };
 function createBaseDelegation(): Delegation {
   return {
-    delegatorAddress: undefined,
-    validatorAddress: undefined,
+    delegatorAddress: "",
+    validatorAddress: "",
     shares: ""
   };
 }
 export const Delegation = {
   typeUrl: "/cosmos.staking.v1beta1.Delegation",
   encode(message: Delegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
     if (message.shares !== "") {
@@ -1804,8 +1802,8 @@ export const Delegation = {
   },
   fromPartial(object: DeepPartial<Delegation>): Delegation {
     const message = createBaseDelegation();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.validatorAddress = object.validatorAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorAddress = object.validatorAddress ?? "";
     message.shares = object.shares ?? "";
     return message;
   },
@@ -1818,8 +1816,8 @@ export const Delegation = {
   },
   fromSDKJSON(object: any): DelegationSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : undefined,
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
       shares: isSet(object.shares) ? String(object.shares) : ""
     };
   },
@@ -1832,8 +1830,8 @@ export const Delegation = {
   },
   fromAmino(object: DelegationAmino): Delegation {
     return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address,
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address,
       shares: object.shares
     };
   },
@@ -1868,18 +1866,18 @@ export const Delegation = {
 };
 function createBaseUnbondingDelegation(): UnbondingDelegation {
   return {
-    delegatorAddress: undefined,
-    validatorAddress: undefined,
+    delegatorAddress: "",
+    validatorAddress: "",
     entries: []
   };
 }
 export const UnbondingDelegation = {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegation",
   encode(message: UnbondingDelegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
     for (const v of message.entries) {
@@ -1930,8 +1928,8 @@ export const UnbondingDelegation = {
   },
   fromPartial(object: DeepPartial<UnbondingDelegation>): UnbondingDelegation {
     const message = createBaseUnbondingDelegation();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.validatorAddress = object.validatorAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorAddress = object.validatorAddress ?? "";
     message.entries = object.entries?.map(e => UnbondingDelegationEntry.fromPartial(e)) || [];
     return message;
   },
@@ -1944,8 +1942,8 @@ export const UnbondingDelegation = {
   },
   fromSDKJSON(object: any): UnbondingDelegationSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : undefined,
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromSDKJSON(e)) : []
     };
   },
@@ -1962,8 +1960,8 @@ export const UnbondingDelegation = {
   },
   fromAmino(object: UnbondingDelegationAmino): UnbondingDelegation {
     return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address,
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromAmino(e)) : []
     };
   },
@@ -2002,7 +2000,7 @@ export const UnbondingDelegation = {
 };
 function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
-    creationHeight: undefined,
+    creationHeight: BigInt(0),
     completionTime: new Date(),
     initialBalance: "",
     balance: ""
@@ -2011,7 +2009,7 @@ function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
 export const UnbondingDelegationEntry = {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegationEntry",
   encode(message: UnbondingDelegationEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.creationHeight !== undefined) {
+    if (message.creationHeight !== BigInt(0)) {
       writer.uint32(8).int64(message.creationHeight);
     }
     if (message.completionTime !== undefined) {
@@ -2061,9 +2059,7 @@ export const UnbondingDelegationEntry = {
   },
   toJSON(message: UnbondingDelegationEntry): unknown {
     const obj: any = {};
-    if (message.creationHeight !== undefined) {
-      obj.creationHeight = message.creationHeight.toString();
-    }
+    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
     message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
     message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
     message.balance !== undefined && (obj.balance = message.balance);
@@ -2089,7 +2085,7 @@ export const UnbondingDelegationEntry = {
   },
   fromSDKJSON(object: any): UnbondingDelegationEntrySDKType {
     return {
-      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : undefined,
+      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : BigInt(0),
       completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
       initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
@@ -2105,7 +2101,7 @@ export const UnbondingDelegationEntry = {
   },
   fromAmino(object: UnbondingDelegationEntryAmino): UnbondingDelegationEntry {
     return {
-      creationHeight: object?.creation_height ? BigInt(object.creation_height) : undefined,
+      creationHeight: BigInt(object.creation_height),
       completionTime: object.completion_time,
       initialBalance: object.initial_balance,
       balance: object.balance
@@ -2143,7 +2139,7 @@ export const UnbondingDelegationEntry = {
 };
 function createBaseRedelegationEntry(): RedelegationEntry {
   return {
-    creationHeight: undefined,
+    creationHeight: BigInt(0),
     completionTime: new Date(),
     initialBalance: "",
     sharesDst: ""
@@ -2152,7 +2148,7 @@ function createBaseRedelegationEntry(): RedelegationEntry {
 export const RedelegationEntry = {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationEntry",
   encode(message: RedelegationEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.creationHeight !== undefined) {
+    if (message.creationHeight !== BigInt(0)) {
       writer.uint32(8).int64(message.creationHeight);
     }
     if (message.completionTime !== undefined) {
@@ -2202,9 +2198,7 @@ export const RedelegationEntry = {
   },
   toJSON(message: RedelegationEntry): unknown {
     const obj: any = {};
-    if (message.creationHeight !== undefined) {
-      obj.creationHeight = message.creationHeight.toString();
-    }
+    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
     message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
     message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
     message.sharesDst !== undefined && (obj.sharesDst = message.sharesDst);
@@ -2230,7 +2224,7 @@ export const RedelegationEntry = {
   },
   fromSDKJSON(object: any): RedelegationEntrySDKType {
     return {
-      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : undefined,
+      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : BigInt(0),
       completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
       initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       shares_dst: isSet(object.shares_dst) ? String(object.shares_dst) : ""
@@ -2246,7 +2240,7 @@ export const RedelegationEntry = {
   },
   fromAmino(object: RedelegationEntryAmino): RedelegationEntry {
     return {
-      creationHeight: object?.creation_height ? BigInt(object.creation_height) : undefined,
+      creationHeight: BigInt(object.creation_height),
       completionTime: object.completion_time,
       initialBalance: object.initial_balance,
       sharesDst: object.shares_dst
@@ -2284,22 +2278,22 @@ export const RedelegationEntry = {
 };
 function createBaseRedelegation(): Redelegation {
   return {
-    delegatorAddress: undefined,
-    validatorSrcAddress: undefined,
-    validatorDstAddress: undefined,
+    delegatorAddress: "",
+    validatorSrcAddress: "",
+    validatorDstAddress: "",
     entries: []
   };
 }
 export const Redelegation = {
   typeUrl: "/cosmos.staking.v1beta1.Redelegation",
   encode(message: Redelegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorSrcAddress !== undefined) {
+    if (message.validatorSrcAddress !== "") {
       writer.uint32(18).string(message.validatorSrcAddress);
     }
-    if (message.validatorDstAddress !== undefined) {
+    if (message.validatorDstAddress !== "") {
       writer.uint32(26).string(message.validatorDstAddress);
     }
     for (const v of message.entries) {
@@ -2355,9 +2349,9 @@ export const Redelegation = {
   },
   fromPartial(object: DeepPartial<Redelegation>): Redelegation {
     const message = createBaseRedelegation();
-    message.delegatorAddress = object.delegatorAddress ?? undefined;
-    message.validatorSrcAddress = object.validatorSrcAddress ?? undefined;
-    message.validatorDstAddress = object.validatorDstAddress ?? undefined;
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorSrcAddress = object.validatorSrcAddress ?? "";
+    message.validatorDstAddress = object.validatorDstAddress ?? "";
     message.entries = object.entries?.map(e => RedelegationEntry.fromPartial(e)) || [];
     return message;
   },
@@ -2371,9 +2365,9 @@ export const Redelegation = {
   },
   fromSDKJSON(object: any): RedelegationSDKType {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : undefined,
-      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : undefined,
-      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : undefined,
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromSDKJSON(e)) : []
     };
   },
@@ -2391,9 +2385,9 @@ export const Redelegation = {
   },
   fromAmino(object: RedelegationAmino): Redelegation {
     return {
-      delegatorAddress: object?.delegator_address,
-      validatorSrcAddress: object?.validator_src_address,
-      validatorDstAddress: object?.validator_dst_address,
+      delegatorAddress: object.delegator_address,
+      validatorSrcAddress: object.validator_src_address,
+      validatorDstAddress: object.validator_dst_address,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromAmino(e)) : []
     };
   },
@@ -2434,10 +2428,10 @@ export const Redelegation = {
 function createBaseParams(): Params {
   return {
     unbondingTime: Duration.fromPartial({}),
-    maxValidators: undefined,
-    maxEntries: undefined,
-    historicalEntries: undefined,
-    bondDenom: undefined,
+    maxValidators: 0,
+    maxEntries: 0,
+    historicalEntries: 0,
+    bondDenom: "",
     minCommissionRate: ""
   };
 }
@@ -2447,16 +2441,16 @@ export const Params = {
     if (message.unbondingTime !== undefined) {
       Duration.encode(message.unbondingTime, writer.uint32(10).fork()).ldelim();
     }
-    if (message.maxValidators !== undefined) {
+    if (message.maxValidators !== 0) {
       writer.uint32(16).uint32(message.maxValidators);
     }
-    if (message.maxEntries !== undefined) {
+    if (message.maxEntries !== 0) {
       writer.uint32(24).uint32(message.maxEntries);
     }
-    if (message.historicalEntries !== undefined) {
+    if (message.historicalEntries !== 0) {
       writer.uint32(32).uint32(message.historicalEntries);
     }
-    if (message.bondDenom !== undefined) {
+    if (message.bondDenom !== "") {
       writer.uint32(42).string(message.bondDenom);
     }
     if (message.minCommissionRate !== "") {
@@ -2521,10 +2515,10 @@ export const Params = {
     if (object.unbondingTime !== undefined && object.unbondingTime !== null) {
       message.unbondingTime = Duration.fromPartial(object.unbondingTime);
     }
-    message.maxValidators = object.maxValidators ?? undefined;
-    message.maxEntries = object.maxEntries ?? undefined;
-    message.historicalEntries = object.historicalEntries ?? undefined;
-    message.bondDenom = object.bondDenom ?? undefined;
+    message.maxValidators = object.maxValidators ?? 0;
+    message.maxEntries = object.maxEntries ?? 0;
+    message.historicalEntries = object.historicalEntries ?? 0;
+    message.bondDenom = object.bondDenom ?? "";
     message.minCommissionRate = object.minCommissionRate ?? "";
     return message;
   },
@@ -2541,10 +2535,10 @@ export const Params = {
   fromSDKJSON(object: any): ParamsSDKType {
     return {
       unbonding_time: isSet(object.unbonding_time) ? Duration.fromSDKJSON(object.unbonding_time) : undefined,
-      max_validators: isSet(object.max_validators) ? Number(object.max_validators) : undefined,
-      max_entries: isSet(object.max_entries) ? Number(object.max_entries) : undefined,
-      historical_entries: isSet(object.historical_entries) ? Number(object.historical_entries) : undefined,
-      bond_denom: isSet(object.bond_denom) ? String(object.bond_denom) : undefined,
+      max_validators: isSet(object.max_validators) ? Number(object.max_validators) : 0,
+      max_entries: isSet(object.max_entries) ? Number(object.max_entries) : 0,
+      historical_entries: isSet(object.historical_entries) ? Number(object.historical_entries) : 0,
+      bond_denom: isSet(object.bond_denom) ? String(object.bond_denom) : "",
       min_commission_rate: isSet(object.min_commission_rate) ? String(object.min_commission_rate) : ""
     };
   },
@@ -2561,10 +2555,10 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       unbondingTime: object?.unbonding_time ? Duration.fromAmino(object.unbonding_time) : undefined,
-      maxValidators: object?.max_validators,
-      maxEntries: object?.max_entries,
-      historicalEntries: object?.historical_entries,
-      bondDenom: object?.bond_denom,
+      maxValidators: object.max_validators,
+      maxEntries: object.max_entries,
+      historicalEntries: object.historical_entries,
+      bondDenom: object.bond_denom,
       minCommissionRate: object.min_commission_rate
     };
   },

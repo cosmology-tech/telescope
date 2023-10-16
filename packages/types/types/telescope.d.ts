@@ -44,6 +44,7 @@ interface TelescopeOpts {
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
+        optionalNullableDefaultTrue?: boolean;
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;

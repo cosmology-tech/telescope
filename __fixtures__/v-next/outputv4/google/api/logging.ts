@@ -92,7 +92,7 @@ export interface Logging_LoggingDestination {
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitoredResource?: string;
+  monitoredResource: string;
   /**
    * Names of the logs to be sent to this destination. Each name must
    * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
@@ -106,7 +106,7 @@ export interface Logging_LoggingDestination {
  * or the consumer project).
  */
 export interface Logging_LoggingDestinationSDKType {
-  monitored_resource?: string;
+  monitored_resource: string;
   logs: string[];
 }
 function createBaseLogging(): Logging {
@@ -236,14 +236,14 @@ export const Logging = {
 };
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
   return {
-    monitoredResource: undefined,
+    monitoredResource: "",
     logs: []
   };
 }
 export const Logging_LoggingDestination = {
   typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== undefined) {
+    if (message.monitoredResource !== "") {
       writer.uint32(26).string(message.monitoredResource);
     }
     for (const v of message.logs) {
@@ -289,7 +289,7 @@ export const Logging_LoggingDestination = {
   },
   fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {
     const message = createBaseLogging_LoggingDestination();
-    message.monitoredResource = object.monitoredResource ?? undefined;
+    message.monitoredResource = object.monitoredResource ?? "";
     message.logs = object.logs?.map(e => e) || [];
     return message;
   },
@@ -301,7 +301,7 @@ export const Logging_LoggingDestination = {
   },
   fromSDKJSON(object: any): Logging_LoggingDestinationSDKType {
     return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : undefined,
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
     };
   },
@@ -317,7 +317,7 @@ export const Logging_LoggingDestination = {
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
     return {
-      monitoredResource: object?.monitored_resource,
+      monitoredResource: object.monitored_resource,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
     };
   },

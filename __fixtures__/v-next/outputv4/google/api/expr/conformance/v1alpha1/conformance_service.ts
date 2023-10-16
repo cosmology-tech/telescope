@@ -59,20 +59,20 @@ export function issueDetails_SeverityToJSON(object: IssueDetails_Severity): stri
 /** Request message for the Parse method. */
 export interface ParseRequest {
   /** Required. Source text in CEL syntax. */
-  celSource?: string;
+  celSource: string;
   /** Tag for version of CEL syntax, for future use. */
-  syntaxVersion?: string;
+  syntaxVersion: string;
   /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
-  sourceLocation?: string;
+  sourceLocation: string;
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
-  disableMacros?: boolean;
+  disableMacros: boolean;
 }
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
-  cel_source?: string;
-  syntax_version?: string;
-  source_location?: string;
-  disable_macros?: boolean;
+  cel_source: string;
+  syntax_version: string;
+  source_location: string;
+  disable_macros: boolean;
 }
 /** Response message for the Parse method. */
 export interface ParseResponse {
@@ -100,20 +100,20 @@ export interface CheckRequest {
    * The protocol buffer context.  See "Name Resolution" in the
    * Language Definition.
    */
-  container?: string;
+  container: string;
   /**
    * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
    * add declarations for the standard definitions to the type environment.  See
    * "Standard Definitions" in the Language Definition.
    */
-  noStdEnv?: boolean;
+  noStdEnv: boolean;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
   type_env: DeclSDKType[];
-  container?: string;
-  no_std_env?: boolean;
+  container: string;
+  no_std_env: boolean;
 }
 /** Response message for the Check method. */
 export interface CheckResponse {
@@ -129,11 +129,11 @@ export interface CheckResponseSDKType {
 }
 export interface EvalRequest_BindingsEntry {
   key: string;
-  value: ExprValue;
+  value?: ExprValue;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
-  value: ExprValueSDKType;
+  value?: ExprValueSDKType;
 }
 /** Request message for the Eval method. */
 export interface EvalRequest {
@@ -149,7 +149,7 @@ export interface EvalRequest {
     [key: string]: ExprValue;
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
-  container?: string;
+  container: string;
 }
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
@@ -158,7 +158,7 @@ export interface EvalRequestSDKType {
   bindings: {
     [key: string]: ExprValueSDKType;
   };
-  container?: string;
+  container: string;
 }
 /** Response message for the Eval method. */
 export interface EvalResponse {
@@ -184,11 +184,11 @@ export interface EvalResponseSDKType {
  */
 export interface IssueDetails {
   /** The severity of the issue. */
-  severity?: IssueDetails_Severity;
+  severity: IssueDetails_Severity;
   /** Position in the source, if known. */
   position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
-  id?: bigint;
+  id: bigint;
 }
 /**
  * Warnings or errors in service execution are represented by
@@ -196,31 +196,31 @@ export interface IssueDetails {
  * in the details field.
  */
 export interface IssueDetailsSDKType {
-  severity?: IssueDetails_Severity;
+  severity: IssueDetails_Severity;
   position?: SourcePositionSDKType;
-  id?: bigint;
+  id: bigint;
 }
 function createBaseParseRequest(): ParseRequest {
   return {
-    celSource: undefined,
-    syntaxVersion: undefined,
-    sourceLocation: undefined,
-    disableMacros: undefined
+    celSource: "",
+    syntaxVersion: "",
+    sourceLocation: "",
+    disableMacros: false
   };
 }
 export const ParseRequest = {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
   encode(message: ParseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.celSource !== undefined) {
+    if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
     }
-    if (message.syntaxVersion !== undefined) {
+    if (message.syntaxVersion !== "") {
       writer.uint32(18).string(message.syntaxVersion);
     }
-    if (message.sourceLocation !== undefined) {
+    if (message.sourceLocation !== "") {
       writer.uint32(26).string(message.sourceLocation);
     }
-    if (message.disableMacros !== undefined) {
+    if (message.disableMacros === true) {
       writer.uint32(32).bool(message.disableMacros);
     }
     return writer;
@@ -269,10 +269,10 @@ export const ParseRequest = {
   },
   fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
     const message = createBaseParseRequest();
-    message.celSource = object.celSource ?? undefined;
-    message.syntaxVersion = object.syntaxVersion ?? undefined;
-    message.sourceLocation = object.sourceLocation ?? undefined;
-    message.disableMacros = object.disableMacros ?? undefined;
+    message.celSource = object.celSource ?? "";
+    message.syntaxVersion = object.syntaxVersion ?? "";
+    message.sourceLocation = object.sourceLocation ?? "";
+    message.disableMacros = object.disableMacros ?? false;
     return message;
   },
   fromSDK(object: ParseRequestSDKType): ParseRequest {
@@ -285,10 +285,10 @@ export const ParseRequest = {
   },
   fromSDKJSON(object: any): ParseRequestSDKType {
     return {
-      cel_source: isSet(object.cel_source) ? String(object.cel_source) : undefined,
-      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : undefined,
-      source_location: isSet(object.source_location) ? String(object.source_location) : undefined,
-      disable_macros: isSet(object.disable_macros) ? Boolean(object.disable_macros) : undefined
+      cel_source: isSet(object.cel_source) ? String(object.cel_source) : "",
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
+      source_location: isSet(object.source_location) ? String(object.source_location) : "",
+      disable_macros: isSet(object.disable_macros) ? Boolean(object.disable_macros) : false
     };
   },
   toSDK(message: ParseRequest): ParseRequestSDKType {
@@ -301,10 +301,10 @@ export const ParseRequest = {
   },
   fromAmino(object: ParseRequestAmino): ParseRequest {
     return {
-      celSource: object?.cel_source,
-      syntaxVersion: object?.syntax_version,
-      sourceLocation: object?.source_location,
-      disableMacros: object?.disable_macros
+      celSource: object.cel_source,
+      syntaxVersion: object.syntax_version,
+      sourceLocation: object.source_location,
+      disableMacros: object.disable_macros
     };
   },
   toAmino(message: ParseRequest): ParseRequestAmino {
@@ -450,8 +450,8 @@ function createBaseCheckRequest(): CheckRequest {
   return {
     parsedExpr: undefined,
     typeEnv: [],
-    container: undefined,
-    noStdEnv: undefined
+    container: "",
+    noStdEnv: false
   };
 }
 export const CheckRequest = {
@@ -463,10 +463,10 @@ export const CheckRequest = {
     for (const v of message.typeEnv) {
       Decl.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.container !== undefined) {
+    if (message.container !== "") {
       writer.uint32(26).string(message.container);
     }
-    if (message.noStdEnv !== undefined) {
+    if (message.noStdEnv === true) {
       writer.uint32(32).bool(message.noStdEnv);
     }
     return writer;
@@ -523,8 +523,8 @@ export const CheckRequest = {
       message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
     }
     message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
-    message.container = object.container ?? undefined;
-    message.noStdEnv = object.noStdEnv ?? undefined;
+    message.container = object.container ?? "";
+    message.noStdEnv = object.noStdEnv ?? false;
     return message;
   },
   fromSDK(object: CheckRequestSDKType): CheckRequest {
@@ -539,8 +539,8 @@ export const CheckRequest = {
     return {
       parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
       type_env: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDKJSON(e)) : [],
-      container: isSet(object.container) ? String(object.container) : undefined,
-      no_std_env: isSet(object.no_std_env) ? Boolean(object.no_std_env) : undefined
+      container: isSet(object.container) ? String(object.container) : "",
+      no_std_env: isSet(object.no_std_env) ? Boolean(object.no_std_env) : false
     };
   },
   toSDK(message: CheckRequest): CheckRequestSDKType {
@@ -559,8 +559,8 @@ export const CheckRequest = {
     return {
       parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
       typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromAmino(e)) : [],
-      container: object?.container,
-      noStdEnv: object?.no_std_env
+      container: object.container,
+      noStdEnv: object.no_std_env
     };
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
@@ -709,7 +709,7 @@ export const CheckResponse = {
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
     key: "",
-    value: ExprValue.fromPartial({})
+    value: undefined
   };
 }
 export const EvalRequest_BindingsEntry = {
@@ -807,7 +807,7 @@ function createBaseEvalRequest(): EvalRequest {
     parsedExpr: undefined,
     checkedExpr: undefined,
     bindings: {},
-    container: undefined
+    container: ""
   };
 }
 export const EvalRequest = {
@@ -825,7 +825,7 @@ export const EvalRequest = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.container !== undefined) {
+    if (message.container !== "") {
       writer.uint32(34).string(message.container);
     }
     return writer;
@@ -901,7 +901,7 @@ export const EvalRequest = {
       }
       return acc;
     }, {});
-    message.container = object.container ?? undefined;
+    message.container = object.container ?? "";
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -927,7 +927,7 @@ export const EvalRequest = {
         acc[key] = ExprValue.fromSDKJSON(value);
         return acc;
       }, {}) : {},
-      container: isSet(object.container) ? String(object.container) : undefined
+      container: isSet(object.container) ? String(object.container) : ""
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -953,7 +953,7 @@ export const EvalRequest = {
         acc[key] = ExprValue.fromAmino(value);
         return acc;
       }, {}) : {},
-      container: object?.container
+      container: object.container
     };
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -1102,21 +1102,21 @@ export const EvalResponse = {
 };
 function createBaseIssueDetails(): IssueDetails {
   return {
-    severity: undefined,
+    severity: 0,
     position: undefined,
-    id: undefined
+    id: BigInt(0)
   };
 }
 export const IssueDetails = {
   typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails",
   encode(message: IssueDetails, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.severity !== undefined) {
+    if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);
     }
     if (message.position !== undefined) {
       SourcePosition.encode(message.position, writer.uint32(18).fork()).ldelim();
     }
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(24).int64(message.id);
     }
     return writer;
@@ -1155,14 +1155,12 @@ export const IssueDetails = {
     const obj: any = {};
     message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);
-    if (message.id !== undefined) {
-      obj.id = message.id.toString();
-    }
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
     const message = createBaseIssueDetails();
-    message.severity = object.severity ?? undefined;
+    message.severity = object.severity ?? 0;
     if (object.position !== undefined && object.position !== null) {
       message.position = SourcePosition.fromPartial(object.position);
     }
@@ -1173,16 +1171,16 @@ export const IssueDetails = {
   },
   fromSDK(object: IssueDetailsSDKType): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : undefined,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: object.position ? SourcePosition.fromSDK(object.position) : undefined,
       id: object?.id
     };
   },
   fromSDKJSON(object: any): IssueDetailsSDKType {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : undefined,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
-      id: isSet(object.id) ? BigInt(object.id.toString()) : undefined
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toSDK(message: IssueDetails): IssueDetailsSDKType {
@@ -1194,9 +1192,9 @@ export const IssueDetails = {
   },
   fromAmino(object: IssueDetailsAmino): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : undefined,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: object?.position ? SourcePosition.fromAmino(object.position) : undefined,
-      id: object?.id ? BigInt(object.id) : undefined
+      id: BigInt(object.id)
     };
   },
   toAmino(message: IssueDetails): IssueDetailsAmino {

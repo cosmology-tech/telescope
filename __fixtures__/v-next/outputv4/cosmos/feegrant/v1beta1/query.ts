@@ -6,14 +6,14 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
   /** granter is the address of the user granting an allowance of their funds. */
-  granter?: string;
+  granter: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
-  grantee?: string;
+  grantee: string;
 }
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequestSDKType {
-  granter?: string;
-  grantee?: string;
+  granter: string;
+  grantee: string;
 }
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponse {
@@ -26,13 +26,13 @@ export interface QueryAllowanceResponseSDKType {
 }
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequest {
-  grantee?: string;
+  grantee: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
 }
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequestSDKType {
-  grantee?: string;
+  grantee: string;
   pagination?: PageRequestSDKType;
 }
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
@@ -49,13 +49,13 @@ export interface QueryAllowancesResponseSDKType {
 }
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequest {
-  granter?: string;
+  granter: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
 }
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequestSDKType {
-  granter?: string;
+  granter: string;
   pagination?: PageRequestSDKType;
 }
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
@@ -72,17 +72,17 @@ export interface QueryAllowancesByGranterResponseSDKType {
 }
 function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
   return {
-    granter: undefined,
-    grantee: undefined
+    granter: "",
+    grantee: ""
   };
 }
 export const QueryAllowanceRequest = {
   typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowanceRequest",
   encode(message: QueryAllowanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       writer.uint32(18).string(message.grantee);
     }
     return writer;
@@ -121,8 +121,8 @@ export const QueryAllowanceRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllowanceRequest>): QueryAllowanceRequest {
     const message = createBaseQueryAllowanceRequest();
-    message.granter = object.granter ?? undefined;
-    message.grantee = object.grantee ?? undefined;
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
     return message;
   },
   fromSDK(object: QueryAllowanceRequestSDKType): QueryAllowanceRequest {
@@ -133,8 +133,8 @@ export const QueryAllowanceRequest = {
   },
   fromSDKJSON(object: any): QueryAllowanceRequestSDKType {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : undefined,
-      grantee: isSet(object.grantee) ? String(object.grantee) : undefined
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : ""
     };
   },
   toSDK(message: QueryAllowanceRequest): QueryAllowanceRequestSDKType {
@@ -145,8 +145,8 @@ export const QueryAllowanceRequest = {
   },
   fromAmino(object: QueryAllowanceRequestAmino): QueryAllowanceRequest {
     return {
-      granter: object?.granter,
-      grantee: object?.grantee
+      granter: object.granter,
+      grantee: object.grantee
     };
   },
   toAmino(message: QueryAllowanceRequest): QueryAllowanceRequestAmino {
@@ -273,14 +273,14 @@ export const QueryAllowanceResponse = {
 };
 function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
   return {
-    grantee: undefined,
+    grantee: "",
     pagination: undefined
   };
 }
 export const QueryAllowancesRequest = {
   typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesRequest",
   encode(message: QueryAllowancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
     }
     if (message.pagination !== undefined) {
@@ -322,7 +322,7 @@ export const QueryAllowancesRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllowancesRequest>): QueryAllowancesRequest {
     const message = createBaseQueryAllowancesRequest();
-    message.grantee = object.grantee ?? undefined;
+    message.grantee = object.grantee ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -336,7 +336,7 @@ export const QueryAllowancesRequest = {
   },
   fromSDKJSON(object: any): QueryAllowancesRequestSDKType {
     return {
-      grantee: isSet(object.grantee) ? String(object.grantee) : undefined,
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -348,7 +348,7 @@ export const QueryAllowancesRequest = {
   },
   fromAmino(object: QueryAllowancesRequestAmino): QueryAllowancesRequest {
     return {
-      grantee: object?.grantee,
+      grantee: object.grantee,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -503,14 +503,14 @@ export const QueryAllowancesResponse = {
 };
 function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRequest {
   return {
-    granter: undefined,
+    granter: "",
     pagination: undefined
   };
 }
 export const QueryAllowancesByGranterRequest = {
   typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest",
   encode(message: QueryAllowancesByGranterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
     if (message.pagination !== undefined) {
@@ -552,7 +552,7 @@ export const QueryAllowancesByGranterRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest {
     const message = createBaseQueryAllowancesByGranterRequest();
-    message.granter = object.granter ?? undefined;
+    message.granter = object.granter ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -566,7 +566,7 @@ export const QueryAllowancesByGranterRequest = {
   },
   fromSDKJSON(object: any): QueryAllowancesByGranterRequestSDKType {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : undefined,
+      granter: isSet(object.granter) ? String(object.granter) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -578,7 +578,7 @@ export const QueryAllowancesByGranterRequest = {
   },
   fromAmino(object: QueryAllowancesByGranterRequestAmino): QueryAllowancesByGranterRequest {
     return {
-      granter: object?.granter,
+      granter: object.granter,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },

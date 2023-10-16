@@ -113,7 +113,7 @@ export interface BackendRule {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector?: string;
+  selector: string;
   /**
    * The address of the API backend.
    * 
@@ -136,23 +136,23 @@ export interface BackendRule {
    * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
    * to specify the protocol version.
    */
-  address?: string;
+  address: string;
   /**
    * The number of seconds to wait for a response from a request. The default
    * varies based on the request protocol and deployment environment.
    */
-  deadline?: number;
+  deadline: number;
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
    * value lower than this will be rejected.
    */
-  minDeadline?: number;
+  minDeadline: number;
   /**
    * The number of seconds to wait for the completion of a long running
    * operation. The default is no deadline.
    */
-  operationDeadline?: number;
-  pathTranslation?: BackendRule_PathTranslation;
+  operationDeadline: number;
+  pathTranslation: BackendRule_PathTranslation;
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
    * This ID token will be added in the HTTP "authorization" header, and sent
@@ -189,19 +189,19 @@ export interface BackendRule {
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for more details on the supported values.
    */
-  protocol?: string;
+  protocol: string;
 }
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleSDKType {
-  selector?: string;
-  address?: string;
-  deadline?: number;
-  min_deadline?: number;
-  operation_deadline?: number;
-  path_translation?: BackendRule_PathTranslation;
+  selector: string;
+  address: string;
+  deadline: number;
+  min_deadline: number;
+  operation_deadline: number;
+  path_translation: BackendRule_PathTranslation;
   jwt_audience?: string;
   disable_auth?: boolean;
-  protocol?: string;
+  protocol: string;
 }
 function createBaseBackend(): Backend {
   return {
@@ -303,36 +303,36 @@ export const Backend = {
 };
 function createBaseBackendRule(): BackendRule {
   return {
-    selector: undefined,
-    address: undefined,
-    deadline: undefined,
-    minDeadline: undefined,
-    operationDeadline: undefined,
-    pathTranslation: undefined,
+    selector: "",
+    address: "",
+    deadline: 0,
+    minDeadline: 0,
+    operationDeadline: 0,
+    pathTranslation: 0,
     jwtAudience: undefined,
     disableAuth: undefined,
-    protocol: undefined
+    protocol: ""
   };
 }
 export const BackendRule = {
   typeUrl: "/google.api.BackendRule",
   encode(message: BackendRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
-    if (message.deadline !== undefined) {
+    if (message.deadline !== 0) {
       writer.uint32(25).double(message.deadline);
     }
-    if (message.minDeadline !== undefined) {
+    if (message.minDeadline !== 0) {
       writer.uint32(33).double(message.minDeadline);
     }
-    if (message.operationDeadline !== undefined) {
+    if (message.operationDeadline !== 0) {
       writer.uint32(41).double(message.operationDeadline);
     }
-    if (message.pathTranslation !== undefined) {
+    if (message.pathTranslation !== 0) {
       writer.uint32(48).int32(message.pathTranslation);
     }
     if (message.jwtAudience !== undefined) {
@@ -341,7 +341,7 @@ export const BackendRule = {
     if (message.disableAuth !== undefined) {
       writer.uint32(64).bool(message.disableAuth);
     }
-    if (message.protocol !== undefined) {
+    if (message.protocol !== "") {
       writer.uint32(74).string(message.protocol);
     }
     return writer;
@@ -415,15 +415,15 @@ export const BackendRule = {
   },
   fromPartial(object: DeepPartial<BackendRule>): BackendRule {
     const message = createBaseBackendRule();
-    message.selector = object.selector ?? undefined;
-    message.address = object.address ?? undefined;
-    message.deadline = object.deadline ?? undefined;
-    message.minDeadline = object.minDeadline ?? undefined;
-    message.operationDeadline = object.operationDeadline ?? undefined;
-    message.pathTranslation = object.pathTranslation ?? undefined;
+    message.selector = object.selector ?? "";
+    message.address = object.address ?? "";
+    message.deadline = object.deadline ?? 0;
+    message.minDeadline = object.minDeadline ?? 0;
+    message.operationDeadline = object.operationDeadline ?? 0;
+    message.pathTranslation = object.pathTranslation ?? 0;
     message.jwtAudience = object.jwtAudience ?? undefined;
     message.disableAuth = object.disableAuth ?? undefined;
-    message.protocol = object.protocol ?? undefined;
+    message.protocol = object.protocol ?? "";
     return message;
   },
   fromSDK(object: BackendRuleSDKType): BackendRule {
@@ -433,7 +433,7 @@ export const BackendRule = {
       deadline: object?.deadline,
       minDeadline: object?.min_deadline,
       operationDeadline: object?.operation_deadline,
-      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : undefined,
+      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
       jwtAudience: object?.jwt_audience,
       disableAuth: object?.disable_auth,
       protocol: object?.protocol
@@ -441,15 +441,15 @@ export const BackendRule = {
   },
   fromSDKJSON(object: any): BackendRuleSDKType {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : undefined,
-      address: isSet(object.address) ? String(object.address) : undefined,
-      deadline: isSet(object.deadline) ? Number(object.deadline) : undefined,
-      min_deadline: isSet(object.min_deadline) ? Number(object.min_deadline) : undefined,
-      operation_deadline: isSet(object.operation_deadline) ? Number(object.operation_deadline) : undefined,
-      path_translation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : undefined,
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      deadline: isSet(object.deadline) ? Number(object.deadline) : 0,
+      min_deadline: isSet(object.min_deadline) ? Number(object.min_deadline) : 0,
+      operation_deadline: isSet(object.operation_deadline) ? Number(object.operation_deadline) : 0,
+      path_translation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
       jwt_audience: isSet(object.jwt_audience) ? String(object.jwt_audience) : undefined,
       disable_auth: isSet(object.disable_auth) ? Boolean(object.disable_auth) : undefined,
-      protocol: isSet(object.protocol) ? String(object.protocol) : undefined
+      protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
   toSDK(message: BackendRule): BackendRuleSDKType {
@@ -467,15 +467,15 @@ export const BackendRule = {
   },
   fromAmino(object: BackendRuleAmino): BackendRule {
     return {
-      selector: object?.selector,
-      address: object?.address,
-      deadline: object?.deadline,
-      minDeadline: object?.min_deadline,
-      operationDeadline: object?.operation_deadline,
-      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : undefined,
+      selector: object.selector,
+      address: object.address,
+      deadline: object.deadline,
+      minDeadline: object.min_deadline,
+      operationDeadline: object.operation_deadline,
+      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
       jwtAudience: object?.jwt_audience,
       disableAuth: object?.disable_auth,
-      protocol: object?.protocol
+      protocol: object.protocol
     };
   },
   toAmino(message: BackendRule): BackendRuleAmino {

@@ -76,7 +76,7 @@ export interface CheckRequest {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  serviceName?: string;
+  serviceName: string;
   /** The operation to be checked. */
   operation?: Operation;
   /**
@@ -86,13 +86,13 @@ export interface CheckRequest {
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
-  serviceConfigId?: string;
+  serviceConfigId: string;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
-  service_name?: string;
+  service_name: string;
   operation?: OperationSDKType;
-  service_config_id?: string;
+  service_config_id: string;
 }
 /** Response message for the Check method. */
 export interface CheckResponse {
@@ -101,7 +101,7 @@ export interface CheckResponse {
    * [CheckRequest][google.api.servicecontrol.v1.CheckRequest]. Used for logging
    * and diagnostics purposes.
    */
-  operationId?: string;
+  operationId: string;
   /**
    * Indicate the decision of the check.
    * 
@@ -111,18 +111,18 @@ export interface CheckResponse {
    */
   checkErrors: CheckError[];
   /** The actual config id used to process the request. */
-  serviceConfigId?: string;
+  serviceConfigId: string;
   /** The current service rollout id used to process the request. */
-  serviceRolloutId?: string;
+  serviceRolloutId: string;
   /** Feedback data returned from the server during processing a Check request. */
   checkInfo?: CheckResponse_CheckInfo;
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  operation_id?: string;
+  operation_id: string;
   check_errors: CheckErrorSDKType[];
-  service_config_id?: string;
-  service_rollout_id?: string;
+  service_config_id: string;
+  service_rollout_id: string;
   check_info?: CheckResponse_CheckInfoSDKType;
 }
 /** Contains additional information about the check operation. */
@@ -150,24 +150,24 @@ export interface CheckResponse_ConsumerInfo {
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
-  projectNumber?: bigint;
+  projectNumber: bigint;
   /**
    * The type of the consumer which should have been defined in
    * [Google Resource Manager](https://cloud.google.com/resource-manager/).
    */
-  type?: CheckResponse_ConsumerInfo_ConsumerType;
+  type: CheckResponse_ConsumerInfo_ConsumerType;
   /**
    * The consumer identity number, can be Google cloud project number, folder
    * number or organization number e.g. 1234567890. A value of 0 indicates no
    * consumer number is found.
    */
-  consumerNumber?: bigint;
+  consumerNumber: bigint;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoSDKType {
-  project_number?: bigint;
-  type?: CheckResponse_ConsumerInfo_ConsumerType;
-  consumer_number?: bigint;
+  project_number: bigint;
+  type: CheckResponse_ConsumerInfo_ConsumerType;
+  consumer_number: bigint;
 }
 /** Request message for the Report method. */
 export interface ReportRequest {
@@ -179,7 +179,7 @@ export interface ReportRequest {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  serviceName?: string;
+  serviceName: string;
   /**
    * Operations to be reported.
    * 
@@ -201,13 +201,13 @@ export interface ReportRequest {
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
-  serviceConfigId?: string;
+  serviceConfigId: string;
 }
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
-  service_name?: string;
+  service_name: string;
   operations: OperationSDKType[];
-  service_config_id?: string;
+  service_config_id: string;
 }
 /** Response message for the Report method. */
 export interface ReportResponse {
@@ -229,15 +229,15 @@ export interface ReportResponse {
    */
   reportErrors: ReportResponse_ReportError[];
   /** The actual config id used to process the request. */
-  serviceConfigId?: string;
+  serviceConfigId: string;
   /** The current service rollout id used to process the request. */
-  serviceRolloutId?: string;
+  serviceRolloutId: string;
 }
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
   report_errors: ReportResponse_ReportErrorSDKType[];
-  service_config_id?: string;
-  service_rollout_id?: string;
+  service_config_id: string;
+  service_rollout_id: string;
 }
 /**
  * Represents the processing error of one
@@ -249,7 +249,7 @@ export interface ReportResponse_ReportError {
    * [Operation.operation_id][google.api.servicecontrol.v1.Operation.operation_id]
    * value from the request.
    */
-  operationId?: string;
+  operationId: string;
   /**
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].
@@ -261,26 +261,26 @@ export interface ReportResponse_ReportError {
  * [Operation][google.api.servicecontrol.v1.Operation] in the request.
  */
 export interface ReportResponse_ReportErrorSDKType {
-  operation_id?: string;
+  operation_id: string;
   status?: StatusSDKType;
 }
 function createBaseCheckRequest(): CheckRequest {
   return {
-    serviceName: undefined,
+    serviceName: "",
     operation: undefined,
-    serviceConfigId: undefined
+    serviceConfigId: ""
   };
 }
 export const CheckRequest = {
   typeUrl: "/google.api.servicecontrol.v1.CheckRequest",
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.operation !== undefined) {
       Operation.encode(message.operation, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== undefined) {
+    if (message.serviceConfigId !== "") {
       writer.uint32(34).string(message.serviceConfigId);
     }
     return writer;
@@ -324,11 +324,11 @@ export const CheckRequest = {
   },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
-    message.serviceName = object.serviceName ?? undefined;
+    message.serviceName = object.serviceName ?? "";
     if (object.operation !== undefined && object.operation !== null) {
       message.operation = Operation.fromPartial(object.operation);
     }
-    message.serviceConfigId = object.serviceConfigId ?? undefined;
+    message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   },
   fromSDK(object: CheckRequestSDKType): CheckRequest {
@@ -340,9 +340,9 @@ export const CheckRequest = {
   },
   fromSDKJSON(object: any): CheckRequestSDKType {
     return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : undefined,
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
       operation: isSet(object.operation) ? Operation.fromSDKJSON(object.operation) : undefined,
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : undefined
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
     };
   },
   toSDK(message: CheckRequest): CheckRequestSDKType {
@@ -354,9 +354,9 @@ export const CheckRequest = {
   },
   fromAmino(object: CheckRequestAmino): CheckRequest {
     return {
-      serviceName: object?.service_name,
+      serviceName: object.service_name,
       operation: object?.operation ? Operation.fromAmino(object.operation) : undefined,
-      serviceConfigId: object?.service_config_id
+      serviceConfigId: object.service_config_id
     };
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
@@ -384,26 +384,26 @@ export const CheckRequest = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    operationId: undefined,
+    operationId: "",
     checkErrors: [],
-    serviceConfigId: undefined,
-    serviceRolloutId: undefined,
+    serviceConfigId: "",
+    serviceRolloutId: "",
     checkInfo: undefined
   };
 }
 export const CheckResponse = {
   typeUrl: "/google.api.servicecontrol.v1.CheckResponse",
   encode(message: CheckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== undefined) {
+    if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }
     for (const v of message.checkErrors) {
       CheckError.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== undefined) {
+    if (message.serviceConfigId !== "") {
       writer.uint32(42).string(message.serviceConfigId);
     }
-    if (message.serviceRolloutId !== undefined) {
+    if (message.serviceRolloutId !== "") {
       writer.uint32(90).string(message.serviceRolloutId);
     }
     if (message.checkInfo !== undefined) {
@@ -464,10 +464,10 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    message.operationId = object.operationId ?? undefined;
+    message.operationId = object.operationId ?? "";
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? undefined;
-    message.serviceRolloutId = object.serviceRolloutId ?? undefined;
+    message.serviceConfigId = object.serviceConfigId ?? "";
+    message.serviceRolloutId = object.serviceRolloutId ?? "";
     if (object.checkInfo !== undefined && object.checkInfo !== null) {
       message.checkInfo = CheckResponse_CheckInfo.fromPartial(object.checkInfo);
     }
@@ -484,10 +484,10 @@ export const CheckResponse = {
   },
   fromSDKJSON(object: any): CheckResponseSDKType {
     return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : undefined,
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
       check_errors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : undefined,
-      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : undefined,
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : "",
       check_info: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDKJSON(object.check_info) : undefined
     };
   },
@@ -506,10 +506,10 @@ export const CheckResponse = {
   },
   fromAmino(object: CheckResponseAmino): CheckResponse {
     return {
-      operationId: object?.operation_id,
+      operationId: object.operation_id,
       checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromAmino(e)) : [],
-      serviceConfigId: object?.service_config_id,
-      serviceRolloutId: object?.service_rollout_id,
+      serviceConfigId: object.service_config_id,
+      serviceRolloutId: object.service_rollout_id,
       checkInfo: object?.check_info ? CheckResponse_CheckInfo.fromAmino(object.check_info) : undefined
     };
   },
@@ -659,21 +659,21 @@ export const CheckResponse_CheckInfo = {
 };
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   return {
-    projectNumber: undefined,
-    type: undefined,
-    consumerNumber: undefined
+    projectNumber: BigInt(0),
+    type: 0,
+    consumerNumber: BigInt(0)
   };
 }
 export const CheckResponse_ConsumerInfo = {
   typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo",
   encode(message: CheckResponse_ConsumerInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.projectNumber !== undefined) {
+    if (message.projectNumber !== BigInt(0)) {
       writer.uint32(8).int64(message.projectNumber);
     }
-    if (message.type !== undefined) {
+    if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.consumerNumber !== undefined) {
+    if (message.consumerNumber !== BigInt(0)) {
       writer.uint32(24).int64(message.consumerNumber);
     }
     return writer;
@@ -710,13 +710,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
-    if (message.projectNumber !== undefined) {
-      obj.projectNumber = message.projectNumber.toString();
-    }
+    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt(0)).toString());
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    if (message.consumerNumber !== undefined) {
-      obj.consumerNumber = message.consumerNumber.toString();
-    }
+    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
@@ -724,7 +720,7 @@ export const CheckResponse_ConsumerInfo = {
     if (object.projectNumber !== undefined && object.projectNumber !== null) {
       message.projectNumber = BigInt(object.projectNumber.toString());
     }
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? 0;
     if (object.consumerNumber !== undefined && object.consumerNumber !== null) {
       message.consumerNumber = BigInt(object.consumerNumber.toString());
     }
@@ -733,15 +729,15 @@ export const CheckResponse_ConsumerInfo = {
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
     return {
       projectNumber: object?.project_number,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : undefined,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: object?.consumer_number
     };
   },
   fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
     return {
-      project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : undefined,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : undefined,
-      consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : undefined
+      project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : BigInt(0),
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
+      consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : BigInt(0)
     };
   },
   toSDK(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {
@@ -753,9 +749,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   fromAmino(object: CheckResponse_ConsumerInfoAmino): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: object?.project_number ? BigInt(object.project_number) : undefined,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : undefined,
-      consumerNumber: object?.consumer_number ? BigInt(object.consumer_number) : undefined
+      projectNumber: BigInt(object.project_number),
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
+      consumerNumber: BigInt(object.consumer_number)
     };
   },
   toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
@@ -783,21 +779,21 @@ export const CheckResponse_ConsumerInfo = {
 };
 function createBaseReportRequest(): ReportRequest {
   return {
-    serviceName: undefined,
+    serviceName: "",
     operations: [],
-    serviceConfigId: undefined
+    serviceConfigId: ""
   };
 }
 export const ReportRequest = {
   typeUrl: "/google.api.servicecontrol.v1.ReportRequest",
   encode(message: ReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== undefined) {
+    if (message.serviceConfigId !== "") {
       writer.uint32(26).string(message.serviceConfigId);
     }
     return writer;
@@ -845,9 +841,9 @@ export const ReportRequest = {
   },
   fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
-    message.serviceName = object.serviceName ?? undefined;
+    message.serviceName = object.serviceName ?? "";
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? undefined;
+    message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   },
   fromSDK(object: ReportRequestSDKType): ReportRequest {
@@ -859,9 +855,9 @@ export const ReportRequest = {
   },
   fromSDKJSON(object: any): ReportRequestSDKType {
     return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : undefined,
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : undefined
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
     };
   },
   toSDK(message: ReportRequest): ReportRequestSDKType {
@@ -877,9 +873,9 @@ export const ReportRequest = {
   },
   fromAmino(object: ReportRequestAmino): ReportRequest {
     return {
-      serviceName: object?.service_name,
+      serviceName: object.service_name,
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
-      serviceConfigId: object?.service_config_id
+      serviceConfigId: object.service_config_id
     };
   },
   toAmino(message: ReportRequest): ReportRequestAmino {
@@ -912,8 +908,8 @@ export const ReportRequest = {
 function createBaseReportResponse(): ReportResponse {
   return {
     reportErrors: [],
-    serviceConfigId: undefined,
-    serviceRolloutId: undefined
+    serviceConfigId: "",
+    serviceRolloutId: ""
   };
 }
 export const ReportResponse = {
@@ -922,10 +918,10 @@ export const ReportResponse = {
     for (const v of message.reportErrors) {
       ReportResponse_ReportError.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.serviceConfigId !== undefined) {
+    if (message.serviceConfigId !== "") {
       writer.uint32(18).string(message.serviceConfigId);
     }
-    if (message.serviceRolloutId !== undefined) {
+    if (message.serviceRolloutId !== "") {
       writer.uint32(34).string(message.serviceRolloutId);
     }
     return writer;
@@ -974,8 +970,8 @@ export const ReportResponse = {
   fromPartial(object: DeepPartial<ReportResponse>): ReportResponse {
     const message = createBaseReportResponse();
     message.reportErrors = object.reportErrors?.map(e => ReportResponse_ReportError.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? undefined;
-    message.serviceRolloutId = object.serviceRolloutId ?? undefined;
+    message.serviceConfigId = object.serviceConfigId ?? "";
+    message.serviceRolloutId = object.serviceRolloutId ?? "";
     return message;
   },
   fromSDK(object: ReportResponseSDKType): ReportResponse {
@@ -988,8 +984,8 @@ export const ReportResponse = {
   fromSDKJSON(object: any): ReportResponseSDKType {
     return {
       report_errors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : undefined,
-      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : undefined
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : ""
     };
   },
   toSDK(message: ReportResponse): ReportResponseSDKType {
@@ -1006,8 +1002,8 @@ export const ReportResponse = {
   fromAmino(object: ReportResponseAmino): ReportResponse {
     return {
       reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromAmino(e)) : [],
-      serviceConfigId: object?.service_config_id,
-      serviceRolloutId: object?.service_rollout_id
+      serviceConfigId: object.service_config_id,
+      serviceRolloutId: object.service_rollout_id
     };
   },
   toAmino(message: ReportResponse): ReportResponseAmino {
@@ -1039,14 +1035,14 @@ export const ReportResponse = {
 };
 function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
   return {
-    operationId: undefined,
+    operationId: "",
     status: undefined
   };
 }
 export const ReportResponse_ReportError = {
   typeUrl: "/google.api.servicecontrol.v1.ReportError",
   encode(message: ReportResponse_ReportError, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== undefined) {
+    if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }
     if (message.status !== undefined) {
@@ -1088,7 +1084,7 @@ export const ReportResponse_ReportError = {
   },
   fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
-    message.operationId = object.operationId ?? undefined;
+    message.operationId = object.operationId ?? "";
     if (object.status !== undefined && object.status !== null) {
       message.status = Status.fromPartial(object.status);
     }
@@ -1102,7 +1098,7 @@ export const ReportResponse_ReportError = {
   },
   fromSDKJSON(object: any): ReportResponse_ReportErrorSDKType {
     return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : undefined,
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
       status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
     };
   },
@@ -1114,7 +1110,7 @@ export const ReportResponse_ReportError = {
   },
   fromAmino(object: ReportResponse_ReportErrorAmino): ReportResponse_ReportError {
     return {
-      operationId: object?.operation_id,
+      operationId: object.operation_id,
       status: object?.status ? Status.fromAmino(object.status) : undefined
     };
   },

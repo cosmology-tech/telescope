@@ -30,7 +30,7 @@ export interface GenesisStateSDKType {
  */
 export interface Balance {
   /** address is the address of the balance holder. */
-  address?: string;
+  address: string;
   /** coins defines the different coins this balance holds. */
   coins: Coin[];
 }
@@ -39,7 +39,7 @@ export interface Balance {
  * genesis state.
  */
 export interface BalanceSDKType {
-  address?: string;
+  address: string;
   coins: CoinSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
@@ -219,14 +219,14 @@ export const GenesisState = {
 };
 function createBaseBalance(): Balance {
   return {
-    address: undefined,
+    address: "",
     coins: []
   };
 }
 export const Balance = {
   typeUrl: "/cosmos.bank.v1beta1.Balance",
   encode(message: Balance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.coins) {
@@ -272,7 +272,7 @@ export const Balance = {
   },
   fromPartial(object: DeepPartial<Balance>): Balance {
     const message = createBaseBalance();
-    message.address = object.address ?? undefined;
+    message.address = object.address ?? "";
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -284,7 +284,7 @@ export const Balance = {
   },
   fromSDKJSON(object: any): BalanceSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : undefined,
+      address: isSet(object.address) ? String(object.address) : "",
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -300,7 +300,7 @@ export const Balance = {
   },
   fromAmino(object: BalanceAmino): Balance {
     return {
-      address: object?.address,
+      address: object.address,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },

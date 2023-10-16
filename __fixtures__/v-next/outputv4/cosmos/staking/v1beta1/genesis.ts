@@ -24,7 +24,7 @@ export interface GenesisState {
   unbondingDelegations: UnbondingDelegation[];
   /** redelegations defines the redelegations active at genesis. */
   redelegations: Redelegation[];
-  exported?: boolean;
+  exported: boolean;
 }
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateSDKType {
@@ -35,19 +35,19 @@ export interface GenesisStateSDKType {
   delegations: DelegationSDKType[];
   unbonding_delegations: UnbondingDelegationSDKType[];
   redelegations: RedelegationSDKType[];
-  exported?: boolean;
+  exported: boolean;
 }
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPower {
   /** address is the address of the validator. */
-  address?: string;
+  address: string;
   /** power defines the power of the validator. */
-  power?: bigint;
+  power: bigint;
 }
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
-  address?: string;
-  power?: bigint;
+  address: string;
+  power: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -58,7 +58,7 @@ function createBaseGenesisState(): GenesisState {
     delegations: [],
     unbondingDelegations: [],
     redelegations: [],
-    exported: undefined
+    exported: false
   };
 }
 export const GenesisState = {
@@ -85,7 +85,7 @@ export const GenesisState = {
     for (const v of message.redelegations) {
       Redelegation.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.exported !== undefined) {
+    if (message.exported === true) {
       writer.uint32(64).bool(message.exported);
     }
     return writer;
@@ -183,7 +183,7 @@ export const GenesisState = {
     message.delegations = object.delegations?.map(e => Delegation.fromPartial(e)) || [];
     message.unbondingDelegations = object.unbondingDelegations?.map(e => UnbondingDelegation.fromPartial(e)) || [];
     message.redelegations = object.redelegations?.map(e => Redelegation.fromPartial(e)) || [];
-    message.exported = object.exported ?? undefined;
+    message.exported = object.exported ?? false;
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -207,7 +207,7 @@ export const GenesisState = {
       delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromSDKJSON(e)) : [],
       unbonding_delegations: Array.isArray(object?.unbonding_delegations) ? object.unbonding_delegations.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
       redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromSDKJSON(e)) : [],
-      exported: isSet(object.exported) ? Boolean(object.exported) : undefined
+      exported: isSet(object.exported) ? Boolean(object.exported) : false
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {
@@ -251,7 +251,7 @@ export const GenesisState = {
       delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromAmino(e)) : [],
       unbondingDelegations: Array.isArray(object?.unbonding_delegations) ? object.unbonding_delegations.map((e: any) => UnbondingDelegation.fromAmino(e)) : [],
       redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromAmino(e)) : [],
-      exported: object?.exported
+      exported: object.exported
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -310,17 +310,17 @@ export const GenesisState = {
 };
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {
-    address: undefined,
-    power: undefined
+    address: "",
+    power: BigInt(0)
   };
 }
 export const LastValidatorPower = {
   typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower",
   encode(message: LastValidatorPower, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.power !== undefined) {
+    if (message.power !== BigInt(0)) {
       writer.uint32(16).int64(message.power);
     }
     return writer;
@@ -354,14 +354,12 @@ export const LastValidatorPower = {
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    if (message.power !== undefined) {
-      obj.power = message.power.toString();
-    }
+    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
-    message.address = object.address ?? undefined;
+    message.address = object.address ?? "";
     if (object.power !== undefined && object.power !== null) {
       message.power = BigInt(object.power.toString());
     }
@@ -375,8 +373,8 @@ export const LastValidatorPower = {
   },
   fromSDKJSON(object: any): LastValidatorPowerSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : undefined,
-      power: isSet(object.power) ? BigInt(object.power.toString()) : undefined
+      address: isSet(object.address) ? String(object.address) : "",
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
     };
   },
   toSDK(message: LastValidatorPower): LastValidatorPowerSDKType {
@@ -387,8 +385,8 @@ export const LastValidatorPower = {
   },
   fromAmino(object: LastValidatorPowerAmino): LastValidatorPower {
     return {
-      address: object?.address,
-      power: object?.power ? BigInt(object.power) : undefined
+      address: object.address,
+      power: BigInt(object.power)
     };
   },
   toAmino(message: LastValidatorPower): LastValidatorPowerAmino {

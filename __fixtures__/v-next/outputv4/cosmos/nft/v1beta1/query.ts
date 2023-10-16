@@ -5,66 +5,66 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
-  classId?: string;
-  owner?: string;
+  classId: string;
+  owner: string;
 }
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequestSDKType {
-  class_id?: string;
-  owner?: string;
+  class_id: string;
+  owner: string;
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponse {
-  amount?: bigint;
+  amount: bigint;
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponseSDKType {
-  amount?: bigint;
+  amount: bigint;
 }
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequest {
-  classId?: string;
-  id?: string;
+  classId: string;
+  id: string;
 }
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequestSDKType {
-  class_id?: string;
-  id?: string;
+  class_id: string;
+  id: string;
 }
 /** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponse {
-  owner?: string;
+  owner: string;
 }
 /** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponseSDKType {
-  owner?: string;
+  owner: string;
 }
 /** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequest {
-  classId?: string;
+  classId: string;
 }
 /** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequestSDKType {
-  class_id?: string;
+  class_id: string;
 }
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponse {
-  amount?: bigint;
+  amount: bigint;
 }
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponseSDKType {
-  amount?: bigint;
+  amount: bigint;
 }
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequest {
-  classId?: string;
-  owner?: string;
+  classId: string;
+  owner: string;
   pagination?: PageRequest;
 }
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequestSDKType {
-  class_id?: string;
-  owner?: string;
+  class_id: string;
+  owner: string;
   pagination?: PageRequestSDKType;
 }
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
@@ -79,13 +79,13 @@ export interface QueryNFTsResponseSDKType {
 }
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
-  classId?: string;
-  id?: string;
+  classId: string;
+  id: string;
 }
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequestSDKType {
-  class_id?: string;
-  id?: string;
+  class_id: string;
+  id: string;
 }
 /** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponse {
@@ -97,11 +97,11 @@ export interface QueryNFTResponseSDKType {
 }
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
-  classId?: string;
+  classId: string;
 }
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequestSDKType {
-  class_id?: string;
+  class_id: string;
 }
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponse {
@@ -132,17 +132,17 @@ export interface QueryClassesResponseSDKType {
 }
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   return {
-    classId: undefined,
-    owner: undefined
+    classId: "",
+    owner: ""
   };
 }
 export const QueryBalanceRequest = {
   typeUrl: "/cosmos.nft.v1beta1.QueryBalanceRequest",
   encode(message: QueryBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
     }
     return writer;
@@ -181,8 +181,8 @@ export const QueryBalanceRequest = {
   },
   fromPartial(object: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     const message = createBaseQueryBalanceRequest();
-    message.classId = object.classId ?? undefined;
-    message.owner = object.owner ?? undefined;
+    message.classId = object.classId ?? "";
+    message.owner = object.owner ?? "";
     return message;
   },
   fromSDK(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
@@ -193,8 +193,8 @@ export const QueryBalanceRequest = {
   },
   fromSDKJSON(object: any): QueryBalanceRequestSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : undefined
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
   toSDK(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
@@ -205,8 +205,8 @@ export const QueryBalanceRequest = {
   },
   fromAmino(object: QueryBalanceRequestAmino): QueryBalanceRequest {
     return {
-      classId: object?.class_id,
-      owner: object?.owner
+      classId: object.class_id,
+      owner: object.owner
     };
   },
   toAmino(message: QueryBalanceRequest): QueryBalanceRequestAmino {
@@ -239,13 +239,13 @@ export const QueryBalanceRequest = {
 };
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   return {
-    amount: undefined
+    amount: BigInt(0)
   };
 }
 export const QueryBalanceResponse = {
   typeUrl: "/cosmos.nft.v1beta1.QueryBalanceResponse",
   encode(message: QueryBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.amount !== undefined) {
+    if (message.amount !== BigInt(0)) {
       writer.uint32(8).uint64(message.amount);
     }
     return writer;
@@ -274,9 +274,7 @@ export const QueryBalanceResponse = {
   },
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    if (message.amount !== undefined) {
-      obj.amount = message.amount.toString();
-    }
+    message.amount !== undefined && (obj.amount = (message.amount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
@@ -293,7 +291,7 @@ export const QueryBalanceResponse = {
   },
   fromSDKJSON(object: any): QueryBalanceResponseSDKType {
     return {
-      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : undefined
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
@@ -303,7 +301,7 @@ export const QueryBalanceResponse = {
   },
   fromAmino(object: QueryBalanceResponseAmino): QueryBalanceResponse {
     return {
-      amount: object?.amount ? BigInt(object.amount) : undefined
+      amount: BigInt(object.amount)
     };
   },
   toAmino(message: QueryBalanceResponse): QueryBalanceResponseAmino {
@@ -335,17 +333,17 @@ export const QueryBalanceResponse = {
 };
 function createBaseQueryOwnerRequest(): QueryOwnerRequest {
   return {
-    classId: undefined,
-    id: undefined
+    classId: "",
+    id: ""
   };
 }
 export const QueryOwnerRequest = {
   typeUrl: "/cosmos.nft.v1beta1.QueryOwnerRequest",
   encode(message: QueryOwnerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
     return writer;
@@ -384,8 +382,8 @@ export const QueryOwnerRequest = {
   },
   fromPartial(object: DeepPartial<QueryOwnerRequest>): QueryOwnerRequest {
     const message = createBaseQueryOwnerRequest();
-    message.classId = object.classId ?? undefined;
-    message.id = object.id ?? undefined;
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
     return message;
   },
   fromSDK(object: QueryOwnerRequestSDKType): QueryOwnerRequest {
@@ -396,8 +394,8 @@ export const QueryOwnerRequest = {
   },
   fromSDKJSON(object: any): QueryOwnerRequestSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined,
-      id: isSet(object.id) ? String(object.id) : undefined
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : ""
     };
   },
   toSDK(message: QueryOwnerRequest): QueryOwnerRequestSDKType {
@@ -408,8 +406,8 @@ export const QueryOwnerRequest = {
   },
   fromAmino(object: QueryOwnerRequestAmino): QueryOwnerRequest {
     return {
-      classId: object?.class_id,
-      id: object?.id
+      classId: object.class_id,
+      id: object.id
     };
   },
   toAmino(message: QueryOwnerRequest): QueryOwnerRequestAmino {
@@ -442,13 +440,13 @@ export const QueryOwnerRequest = {
 };
 function createBaseQueryOwnerResponse(): QueryOwnerResponse {
   return {
-    owner: undefined
+    owner: ""
   };
 }
 export const QueryOwnerResponse = {
   typeUrl: "/cosmos.nft.v1beta1.QueryOwnerResponse",
   encode(message: QueryOwnerResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -482,7 +480,7 @@ export const QueryOwnerResponse = {
   },
   fromPartial(object: DeepPartial<QueryOwnerResponse>): QueryOwnerResponse {
     const message = createBaseQueryOwnerResponse();
-    message.owner = object.owner ?? undefined;
+    message.owner = object.owner ?? "";
     return message;
   },
   fromSDK(object: QueryOwnerResponseSDKType): QueryOwnerResponse {
@@ -492,7 +490,7 @@ export const QueryOwnerResponse = {
   },
   fromSDKJSON(object: any): QueryOwnerResponseSDKType {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : undefined
+      owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
   toSDK(message: QueryOwnerResponse): QueryOwnerResponseSDKType {
@@ -502,7 +500,7 @@ export const QueryOwnerResponse = {
   },
   fromAmino(object: QueryOwnerResponseAmino): QueryOwnerResponse {
     return {
-      owner: object?.owner
+      owner: object.owner
     };
   },
   toAmino(message: QueryOwnerResponse): QueryOwnerResponseAmino {
@@ -534,13 +532,13 @@ export const QueryOwnerResponse = {
 };
 function createBaseQuerySupplyRequest(): QuerySupplyRequest {
   return {
-    classId: undefined
+    classId: ""
   };
 }
 export const QuerySupplyRequest = {
   typeUrl: "/cosmos.nft.v1beta1.QuerySupplyRequest",
   encode(message: QuerySupplyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
@@ -574,7 +572,7 @@ export const QuerySupplyRequest = {
   },
   fromPartial(object: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest {
     const message = createBaseQuerySupplyRequest();
-    message.classId = object.classId ?? undefined;
+    message.classId = object.classId ?? "";
     return message;
   },
   fromSDK(object: QuerySupplyRequestSDKType): QuerySupplyRequest {
@@ -584,7 +582,7 @@ export const QuerySupplyRequest = {
   },
   fromSDKJSON(object: any): QuerySupplyRequestSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined
+      class_id: isSet(object.class_id) ? String(object.class_id) : ""
     };
   },
   toSDK(message: QuerySupplyRequest): QuerySupplyRequestSDKType {
@@ -594,7 +592,7 @@ export const QuerySupplyRequest = {
   },
   fromAmino(object: QuerySupplyRequestAmino): QuerySupplyRequest {
     return {
-      classId: object?.class_id
+      classId: object.class_id
     };
   },
   toAmino(message: QuerySupplyRequest): QuerySupplyRequestAmino {
@@ -626,13 +624,13 @@ export const QuerySupplyRequest = {
 };
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   return {
-    amount: undefined
+    amount: BigInt(0)
   };
 }
 export const QuerySupplyResponse = {
   typeUrl: "/cosmos.nft.v1beta1.QuerySupplyResponse",
   encode(message: QuerySupplyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.amount !== undefined) {
+    if (message.amount !== BigInt(0)) {
       writer.uint32(8).uint64(message.amount);
     }
     return writer;
@@ -661,9 +659,7 @@ export const QuerySupplyResponse = {
   },
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    if (message.amount !== undefined) {
-      obj.amount = message.amount.toString();
-    }
+    message.amount !== undefined && (obj.amount = (message.amount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
@@ -680,7 +676,7 @@ export const QuerySupplyResponse = {
   },
   fromSDKJSON(object: any): QuerySupplyResponseSDKType {
     return {
-      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : undefined
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt(0)
     };
   },
   toSDK(message: QuerySupplyResponse): QuerySupplyResponseSDKType {
@@ -690,7 +686,7 @@ export const QuerySupplyResponse = {
   },
   fromAmino(object: QuerySupplyResponseAmino): QuerySupplyResponse {
     return {
-      amount: object?.amount ? BigInt(object.amount) : undefined
+      amount: BigInt(object.amount)
     };
   },
   toAmino(message: QuerySupplyResponse): QuerySupplyResponseAmino {
@@ -722,18 +718,18 @@ export const QuerySupplyResponse = {
 };
 function createBaseQueryNFTsRequest(): QueryNFTsRequest {
   return {
-    classId: undefined,
-    owner: undefined,
+    classId: "",
+    owner: "",
     pagination: undefined
   };
 }
 export const QueryNFTsRequest = {
   typeUrl: "/cosmos.nft.v1beta1.QueryNFTsRequest",
   encode(message: QueryNFTsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
     }
     if (message.pagination !== undefined) {
@@ -780,8 +776,8 @@ export const QueryNFTsRequest = {
   },
   fromPartial(object: DeepPartial<QueryNFTsRequest>): QueryNFTsRequest {
     const message = createBaseQueryNFTsRequest();
-    message.classId = object.classId ?? undefined;
-    message.owner = object.owner ?? undefined;
+    message.classId = object.classId ?? "";
+    message.owner = object.owner ?? "";
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     }
@@ -796,8 +792,8 @@ export const QueryNFTsRequest = {
   },
   fromSDKJSON(object: any): QueryNFTsRequestSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : undefined,
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -810,8 +806,8 @@ export const QueryNFTsRequest = {
   },
   fromAmino(object: QueryNFTsRequestAmino): QueryNFTsRequest {
     return {
-      classId: object?.class_id,
-      owner: object?.owner,
+      classId: object.class_id,
+      owner: object.owner,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -967,17 +963,17 @@ export const QueryNFTsResponse = {
 };
 function createBaseQueryNFTRequest(): QueryNFTRequest {
   return {
-    classId: undefined,
-    id: undefined
+    classId: "",
+    id: ""
   };
 }
 export const QueryNFTRequest = {
   typeUrl: "/cosmos.nft.v1beta1.QueryNFTRequest",
   encode(message: QueryNFTRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
     return writer;
@@ -1016,8 +1012,8 @@ export const QueryNFTRequest = {
   },
   fromPartial(object: DeepPartial<QueryNFTRequest>): QueryNFTRequest {
     const message = createBaseQueryNFTRequest();
-    message.classId = object.classId ?? undefined;
-    message.id = object.id ?? undefined;
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
     return message;
   },
   fromSDK(object: QueryNFTRequestSDKType): QueryNFTRequest {
@@ -1028,8 +1024,8 @@ export const QueryNFTRequest = {
   },
   fromSDKJSON(object: any): QueryNFTRequestSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined,
-      id: isSet(object.id) ? String(object.id) : undefined
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : ""
     };
   },
   toSDK(message: QueryNFTRequest): QueryNFTRequestSDKType {
@@ -1040,8 +1036,8 @@ export const QueryNFTRequest = {
   },
   fromAmino(object: QueryNFTRequestAmino): QueryNFTRequest {
     return {
-      classId: object?.class_id,
-      id: object?.id
+      classId: object.class_id,
+      id: object.id
     };
   },
   toAmino(message: QueryNFTRequest): QueryNFTRequestAmino {
@@ -1168,13 +1164,13 @@ export const QueryNFTResponse = {
 };
 function createBaseQueryClassRequest(): QueryClassRequest {
   return {
-    classId: undefined
+    classId: ""
   };
 }
 export const QueryClassRequest = {
   typeUrl: "/cosmos.nft.v1beta1.QueryClassRequest",
   encode(message: QueryClassRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
@@ -1208,7 +1204,7 @@ export const QueryClassRequest = {
   },
   fromPartial(object: DeepPartial<QueryClassRequest>): QueryClassRequest {
     const message = createBaseQueryClassRequest();
-    message.classId = object.classId ?? undefined;
+    message.classId = object.classId ?? "";
     return message;
   },
   fromSDK(object: QueryClassRequestSDKType): QueryClassRequest {
@@ -1218,7 +1214,7 @@ export const QueryClassRequest = {
   },
   fromSDKJSON(object: any): QueryClassRequestSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined
+      class_id: isSet(object.class_id) ? String(object.class_id) : ""
     };
   },
   toSDK(message: QueryClassRequest): QueryClassRequestSDKType {
@@ -1228,7 +1224,7 @@ export const QueryClassRequest = {
   },
   fromAmino(object: QueryClassRequestAmino): QueryClassRequest {
     return {
-      classId: object?.class_id
+      classId: object.class_id
     };
   },
   toAmino(message: QueryClassRequest): QueryClassRequestAmino {

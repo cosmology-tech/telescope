@@ -31,14 +31,14 @@ export interface EvalStateSDKType {
 /** A single evalution result. */
 export interface EvalState_Result {
   /** The id of the expression this result if for. */
-  expr?: bigint;
+  expr: bigint;
   /** The index in `values` of the resulting value. */
-  value?: bigint;
+  value: bigint;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
-  expr?: bigint;
-  value?: bigint;
+  expr: bigint;
+  value: bigint;
 }
 /** The value of an evaluated expression. */
 export interface ExprValue {
@@ -258,17 +258,17 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: undefined,
-    value: undefined
+    expr: BigInt(0),
+    value: BigInt(0)
   };
 }
 export const EvalState_Result = {
   typeUrl: "/google.api.expr.v1alpha1.Result",
   encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.expr !== undefined) {
+    if (message.expr !== BigInt(0)) {
       writer.uint32(8).int64(message.expr);
     }
-    if (message.value !== undefined) {
+    if (message.value !== BigInt(0)) {
       writer.uint32(16).int64(message.value);
     }
     return writer;
@@ -301,12 +301,8 @@ export const EvalState_Result = {
   },
   toJSON(message: EvalState_Result): unknown {
     const obj: any = {};
-    if (message.expr !== undefined) {
-      obj.expr = message.expr.toString();
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value.toString();
-    }
+    message.expr !== undefined && (obj.expr = (message.expr || BigInt(0)).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
@@ -327,8 +323,8 @@ export const EvalState_Result = {
   },
   fromSDKJSON(object: any): EvalState_ResultSDKType {
     return {
-      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : undefined,
-      value: isSet(object.value) ? BigInt(object.value.toString()) : undefined
+      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt(0),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
@@ -339,8 +335,8 @@ export const EvalState_Result = {
   },
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
     return {
-      expr: object?.expr ? BigInt(object.expr) : undefined,
-      value: object?.value ? BigInt(object.value) : undefined
+      expr: BigInt(object.expr),
+      value: BigInt(object.value)
     };
   },
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
@@ -632,7 +628,7 @@ export const UnknownSet = {
   toJSON(message: UnknownSet): unknown {
     const obj: any = {};
     if (message.exprs) {
-      obj.exprs = message.exprs.map(e => (e || undefined).toString());
+      obj.exprs = message.exprs.map(e => (e || BigInt(0)).toString());
     } else {
       obj.exprs = [];
     }

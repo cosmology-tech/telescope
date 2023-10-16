@@ -3,13 +3,13 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** Attribute represents key value pair */
 export interface Attribute {
-  key?: string;
-  value?: string;
+  key: string;
+  value: string;
 }
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
-  key?: string;
-  value?: string;
+  key: string;
+  value: string;
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -47,17 +47,17 @@ export interface PlacementRequirementsSDKType {
 }
 function createBaseAttribute(): Attribute {
   return {
-    key: undefined,
-    value: undefined
+    key: "",
+    value: ""
   };
 }
 export const Attribute = {
   typeUrl: "/akash.base.v1beta1.Attribute",
   encode(message: Attribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -96,8 +96,8 @@ export const Attribute = {
   },
   fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(object: I): Attribute {
     const message = createBaseAttribute();
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
     return message;
   },
   fromSDK(object: AttributeSDKType): Attribute {
@@ -108,8 +108,8 @@ export const Attribute = {
   },
   fromSDKJSON(object: any): AttributeSDKType {
     return {
-      key: isSet(object.key) ? String(object.key) : undefined,
-      value: isSet(object.value) ? String(object.value) : undefined
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
   toSDK(message: Attribute): AttributeSDKType {
@@ -120,8 +120,8 @@ export const Attribute = {
   },
   fromAmino(object: AttributeAmino): Attribute {
     return {
-      key: object?.key,
-      value: object?.value
+      key: object.key,
+      value: object.value
     };
   },
   toAmino(message: Attribute): AttributeAmino {

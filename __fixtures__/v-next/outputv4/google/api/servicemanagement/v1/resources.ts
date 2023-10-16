@@ -261,17 +261,17 @@ export interface ManagedService {
    * The name of the service. See the [overview](/service-management/overview)
    * for naming requirements.
    */
-  serviceName?: string;
+  serviceName: string;
   /** ID of the project that produces and owns this service. */
-  producerProjectId?: string;
+  producerProjectId: string;
 }
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
  */
 export interface ManagedServiceSDKType {
-  service_name?: string;
-  producer_project_id?: string;
+  service_name: string;
+  producer_project_id: string;
 }
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadata {
@@ -283,7 +283,7 @@ export interface OperationMetadata {
   /** Detailed status information for each step. The order is undetermined. */
   steps: OperationMetadata_Step[];
   /** Percentage of completion of this operation, ranging from 0 to 100. */
-  progressPercentage?: number;
+  progressPercentage: number;
   /** The start time of the operation. */
   startTime?: Date;
 }
@@ -291,35 +291,35 @@ export interface OperationMetadata {
 export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
-  progress_percentage?: number;
+  progress_percentage: number;
   start_time?: Date;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
   /** The short description of the step. */
-  description?: string;
+  description: string;
   /** The status code. */
-  status?: OperationMetadata_Status;
+  status: OperationMetadata_Status;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepSDKType {
-  description?: string;
-  status?: OperationMetadata_Status;
+  description: string;
+  status: OperationMetadata_Status;
 }
 /** Represents a diagnostic message (error or warning) */
 export interface Diagnostic {
   /** File name and line number of the error or warning. */
-  location?: string;
+  location: string;
   /** The kind of diagnostic information provided. */
-  kind?: Diagnostic_Kind;
+  kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
-  message?: string;
+  message: string;
 }
 /** Represents a diagnostic message (error or warning) */
 export interface DiagnosticSDKType {
-  location?: string;
-  kind?: Diagnostic_Kind;
-  message?: string;
+  location: string;
+  kind: Diagnostic_Kind;
+  message: string;
 }
 /**
  * Represents a source file which is used to generate the service configuration
@@ -331,7 +331,7 @@ export interface ConfigSource {
    * by the client for tracking purpose. If empty, the server may choose to
    * generate one instead.
    */
-  id?: string;
+  id: string;
   /**
    * Set of source configuration files that are used to generate a service
    * configuration (`google.api.Service`).
@@ -343,23 +343,23 @@ export interface ConfigSource {
  * defined by `google.api.Service`.
  */
 export interface ConfigSourceSDKType {
-  id?: string;
+  id: string;
   files: ConfigFileSDKType[];
 }
 /** Generic specification of a source configuration file */
 export interface ConfigFile {
   /** The file name of the configuration file (full or relative path). */
-  filePath?: string;
+  filePath: string;
   /** The bytes that constitute the file. */
-  fileContents?: Uint8Array;
+  fileContents: Uint8Array;
   /** The type of configuration file this represents. */
-  fileType?: ConfigFile_FileType;
+  fileType: ConfigFile_FileType;
 }
 /** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
-  file_path?: string;
-  file_contents?: Uint8Array;
-  file_type?: ConfigFile_FileType;
+  file_path: string;
+  file_contents: Uint8Array;
+  file_type: ConfigFile_FileType;
 }
 /** Represents a service configuration with its name and id. */
 export interface ConfigRef {
@@ -367,11 +367,11 @@ export interface ConfigRef {
    * Resource name of a service config. It must have the following
    * format: "services/{service name}/configs/{config id}".
    */
-  name?: string;
+  name: string;
 }
 /** Represents a service configuration with its name and id. */
 export interface ConfigRefSDKType {
-  name?: string;
+  name: string;
 }
 /**
  * Change report associated with a particular service configuration.
@@ -414,17 +414,17 @@ export interface Rollout {
    * positive number that is reset every day for each service.
    * An example of the generated rollout_id is '2016-02-16r1'
    */
-  rolloutId?: string;
+  rolloutId: string;
   /** Creation time of the rollout. Readonly. */
   createTime?: Date;
   /** The user who created the Rollout. Readonly. */
-  createdBy?: string;
+  createdBy: string;
   /**
    * The status of this rollout. Readonly. In case of a failed rollout,
    * the system will automatically rollback to the current Rollout
    * version. Readonly.
    */
-  status?: Rollout_RolloutStatus;
+  status: Rollout_RolloutStatus;
   /**
    * Google Service Control selects service configurations based on
    * traffic percentage.
@@ -436,7 +436,7 @@ export interface Rollout {
    */
   deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
   /** The name of the service associated with this Rollout. */
-  serviceName?: string;
+  serviceName: string;
 }
 /**
  * A rollout resource that defines how service configuration versions are pushed
@@ -444,13 +444,13 @@ export interface Rollout {
  * service config, and then create a Rollout to push the service config.
  */
 export interface RolloutSDKType {
-  rollout_id?: string;
+  rollout_id: string;
   create_time?: Date;
-  created_by?: string;
-  status?: Rollout_RolloutStatus;
+  created_by: string;
+  status: Rollout_RolloutStatus;
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
   delete_service_strategy?: Rollout_DeleteServiceStrategySDKType;
-  service_name?: string;
+  service_name: string;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   key: string;
@@ -551,17 +551,17 @@ export interface Rollout_DeleteServiceStrategy {}
 export interface Rollout_DeleteServiceStrategySDKType {}
 function createBaseManagedService(): ManagedService {
   return {
-    serviceName: undefined,
-    producerProjectId: undefined
+    serviceName: "",
+    producerProjectId: ""
   };
 }
 export const ManagedService = {
   typeUrl: "/google.api.servicemanagement.v1.ManagedService",
   encode(message: ManagedService, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(18).string(message.serviceName);
     }
-    if (message.producerProjectId !== undefined) {
+    if (message.producerProjectId !== "") {
       writer.uint32(26).string(message.producerProjectId);
     }
     return writer;
@@ -600,8 +600,8 @@ export const ManagedService = {
   },
   fromPartial(object: DeepPartial<ManagedService>): ManagedService {
     const message = createBaseManagedService();
-    message.serviceName = object.serviceName ?? undefined;
-    message.producerProjectId = object.producerProjectId ?? undefined;
+    message.serviceName = object.serviceName ?? "";
+    message.producerProjectId = object.producerProjectId ?? "";
     return message;
   },
   fromSDK(object: ManagedServiceSDKType): ManagedService {
@@ -612,8 +612,8 @@ export const ManagedService = {
   },
   fromSDKJSON(object: any): ManagedServiceSDKType {
     return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : undefined,
-      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : undefined
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : ""
     };
   },
   toSDK(message: ManagedService): ManagedServiceSDKType {
@@ -624,8 +624,8 @@ export const ManagedService = {
   },
   fromAmino(object: ManagedServiceAmino): ManagedService {
     return {
-      serviceName: object?.service_name,
-      producerProjectId: object?.producer_project_id
+      serviceName: object.service_name,
+      producerProjectId: object.producer_project_id
     };
   },
   toAmino(message: ManagedService): ManagedServiceAmino {
@@ -654,7 +654,7 @@ function createBaseOperationMetadata(): OperationMetadata {
   return {
     resourceNames: [],
     steps: [],
-    progressPercentage: undefined,
+    progressPercentage: 0,
     startTime: undefined
   };
 }
@@ -667,7 +667,7 @@ export const OperationMetadata = {
     for (const v of message.steps) {
       OperationMetadata_Step.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.progressPercentage !== undefined) {
+    if (message.progressPercentage !== 0) {
       writer.uint32(24).int32(message.progressPercentage);
     }
     if (message.startTime !== undefined) {
@@ -729,7 +729,7 @@ export const OperationMetadata = {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
-    message.progressPercentage = object.progressPercentage ?? undefined;
+    message.progressPercentage = object.progressPercentage ?? 0;
     message.startTime = object.startTime ?? undefined;
     return message;
   },
@@ -745,7 +745,7 @@ export const OperationMetadata = {
     return {
       resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromSDKJSON(e)) : [],
-      progress_percentage: isSet(object.progress_percentage) ? Number(object.progress_percentage) : undefined,
+      progress_percentage: isSet(object.progress_percentage) ? Number(object.progress_percentage) : 0,
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined
     };
   },
@@ -769,7 +769,7 @@ export const OperationMetadata = {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
-      progressPercentage: object?.progress_percentage,
+      progressPercentage: object.progress_percentage,
       startTime: object?.start_time
     };
   },
@@ -807,17 +807,17 @@ export const OperationMetadata = {
 };
 function createBaseOperationMetadata_Step(): OperationMetadata_Step {
   return {
-    description: undefined,
-    status: undefined
+    description: "",
+    status: 0
   };
 }
 export const OperationMetadata_Step = {
   typeUrl: "/google.api.servicemanagement.v1.Step",
   encode(message: OperationMetadata_Step, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
     return writer;
@@ -856,20 +856,20 @@ export const OperationMetadata_Step = {
   },
   fromPartial(object: DeepPartial<OperationMetadata_Step>): OperationMetadata_Step {
     const message = createBaseOperationMetadata_Step();
-    message.description = object.description ?? undefined;
-    message.status = object.status ?? undefined;
+    message.description = object.description ?? "";
+    message.status = object.status ?? 0;
     return message;
   },
   fromSDK(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
     return {
       description: object?.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : undefined
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   fromSDKJSON(object: any): OperationMetadata_StepSDKType {
     return {
-      description: isSet(object.description) ? String(object.description) : undefined,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : undefined
+      description: isSet(object.description) ? String(object.description) : "",
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toSDK(message: OperationMetadata_Step): OperationMetadata_StepSDKType {
@@ -880,8 +880,8 @@ export const OperationMetadata_Step = {
   },
   fromAmino(object: OperationMetadata_StepAmino): OperationMetadata_Step {
     return {
-      description: object?.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : undefined
+      description: object.description,
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
@@ -908,21 +908,21 @@ export const OperationMetadata_Step = {
 };
 function createBaseDiagnostic(): Diagnostic {
   return {
-    location: undefined,
-    kind: undefined,
-    message: undefined
+    location: "",
+    kind: 0,
+    message: ""
   };
 }
 export const Diagnostic = {
   typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
   encode(message: Diagnostic, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== undefined) {
+    if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }
-    if (message.kind !== undefined) {
+    if (message.kind !== 0) {
       writer.uint32(16).int32(message.kind);
     }
-    if (message.message !== undefined) {
+    if (message.message !== "") {
       writer.uint32(26).string(message.message);
     }
     return writer;
@@ -966,23 +966,23 @@ export const Diagnostic = {
   },
   fromPartial(object: DeepPartial<Diagnostic>): Diagnostic {
     const message = createBaseDiagnostic();
-    message.location = object.location ?? undefined;
-    message.kind = object.kind ?? undefined;
-    message.message = object.message ?? undefined;
+    message.location = object.location ?? "";
+    message.kind = object.kind ?? 0;
+    message.message = object.message ?? "";
     return message;
   },
   fromSDK(object: DiagnosticSDKType): Diagnostic {
     return {
       location: object?.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : undefined,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: object?.message
     };
   },
   fromSDKJSON(object: any): DiagnosticSDKType {
     return {
-      location: isSet(object.location) ? String(object.location) : undefined,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : undefined,
-      message: isSet(object.message) ? String(object.message) : undefined
+      location: isSet(object.location) ? String(object.location) : "",
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
+      message: isSet(object.message) ? String(object.message) : ""
     };
   },
   toSDK(message: Diagnostic): DiagnosticSDKType {
@@ -994,9 +994,9 @@ export const Diagnostic = {
   },
   fromAmino(object: DiagnosticAmino): Diagnostic {
     return {
-      location: object?.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : undefined,
-      message: object?.message
+      location: object.location,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
+      message: object.message
     };
   },
   toAmino(message: Diagnostic): DiagnosticAmino {
@@ -1024,14 +1024,14 @@ export const Diagnostic = {
 };
 function createBaseConfigSource(): ConfigSource {
   return {
-    id: undefined,
+    id: "",
     files: []
   };
 }
 export const ConfigSource = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
   encode(message: ConfigSource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(42).string(message.id);
     }
     for (const v of message.files) {
@@ -1077,7 +1077,7 @@ export const ConfigSource = {
   },
   fromPartial(object: DeepPartial<ConfigSource>): ConfigSource {
     const message = createBaseConfigSource();
-    message.id = object.id ?? undefined;
+    message.id = object.id ?? "";
     message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
     return message;
   },
@@ -1089,7 +1089,7 @@ export const ConfigSource = {
   },
   fromSDKJSON(object: any): ConfigSourceSDKType {
     return {
-      id: isSet(object.id) ? String(object.id) : undefined,
+      id: isSet(object.id) ? String(object.id) : "",
       files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromSDKJSON(e)) : []
     };
   },
@@ -1105,7 +1105,7 @@ export const ConfigSource = {
   },
   fromAmino(object: ConfigSourceAmino): ConfigSource {
     return {
-      id: object?.id,
+      id: object.id,
       files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromAmino(e)) : []
     };
   },
@@ -1137,21 +1137,21 @@ export const ConfigSource = {
 };
 function createBaseConfigFile(): ConfigFile {
   return {
-    filePath: undefined,
-    fileContents: undefined,
-    fileType: undefined
+    filePath: "",
+    fileContents: new Uint8Array(),
+    fileType: 0
   };
 }
 export const ConfigFile = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
   encode(message: ConfigFile, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.filePath !== undefined) {
+    if (message.filePath !== "") {
       writer.uint32(10).string(message.filePath);
     }
-    if (message.fileContents !== undefined) {
+    if (message.fileContents.length !== 0) {
       writer.uint32(26).bytes(message.fileContents);
     }
-    if (message.fileType !== undefined) {
+    if (message.fileType !== 0) {
       writer.uint32(32).int32(message.fileType);
     }
     return writer;
@@ -1189,29 +1189,29 @@ export const ConfigFile = {
   toJSON(message: ConfigFile): unknown {
     const obj: any = {};
     message.filePath !== undefined && (obj.filePath = message.filePath);
-    message.fileContents !== undefined && (obj.fileContents = message.fileContents !== undefined ? base64FromBytes(message.fileContents) : undefined);
+    message.fileContents !== undefined && (obj.fileContents = base64FromBytes(message.fileContents !== undefined ? message.fileContents : new Uint8Array()));
     message.fileType !== undefined && (obj.fileType = configFile_FileTypeToJSON(message.fileType));
     return obj;
   },
   fromPartial(object: DeepPartial<ConfigFile>): ConfigFile {
     const message = createBaseConfigFile();
-    message.filePath = object.filePath ?? undefined;
-    message.fileContents = object.fileContents ?? undefined;
-    message.fileType = object.fileType ?? undefined;
+    message.filePath = object.filePath ?? "";
+    message.fileContents = object.fileContents ?? new Uint8Array();
+    message.fileType = object.fileType ?? 0;
     return message;
   },
   fromSDK(object: ConfigFileSDKType): ConfigFile {
     return {
       filePath: object?.file_path,
       fileContents: object?.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : undefined
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   fromSDKJSON(object: any): ConfigFileSDKType {
     return {
-      file_path: isSet(object.file_path) ? String(object.file_path) : undefined,
-      file_contents: isSet(object.file_contents) ? bytesFromBase64(object.file_contents) : undefined,
-      file_type: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : undefined
+      file_path: isSet(object.file_path) ? String(object.file_path) : "",
+      file_contents: isSet(object.file_contents) ? bytesFromBase64(object.file_contents) : new Uint8Array(),
+      file_type: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toSDK(message: ConfigFile): ConfigFileSDKType {
@@ -1223,9 +1223,9 @@ export const ConfigFile = {
   },
   fromAmino(object: ConfigFileAmino): ConfigFile {
     return {
-      filePath: object?.file_path,
-      fileContents: object?.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : undefined
+      filePath: object.file_path,
+      fileContents: object.file_contents,
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toAmino(message: ConfigFile): ConfigFileAmino {
@@ -1253,13 +1253,13 @@ export const ConfigFile = {
 };
 function createBaseConfigRef(): ConfigRef {
   return {
-    name: undefined
+    name: ""
   };
 }
 export const ConfigRef = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
   encode(message: ConfigRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1293,7 +1293,7 @@ export const ConfigRef = {
   },
   fromPartial(object: DeepPartial<ConfigRef>): ConfigRef {
     const message = createBaseConfigRef();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     return message;
   },
   fromSDK(object: ConfigRefSDKType): ConfigRef {
@@ -1303,7 +1303,7 @@ export const ConfigRef = {
   },
   fromSDKJSON(object: any): ConfigRefSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
   toSDK(message: ConfigRef): ConfigRefSDKType {
@@ -1313,7 +1313,7 @@ export const ConfigRef = {
   },
   fromAmino(object: ConfigRefAmino): ConfigRef {
     return {
-      name: object?.name
+      name: object.name
     };
   },
   toAmino(message: ConfigRef): ConfigRefAmino {
@@ -1437,28 +1437,28 @@ export const ChangeReport = {
 };
 function createBaseRollout(): Rollout {
   return {
-    rolloutId: undefined,
+    rolloutId: "",
     createTime: undefined,
-    createdBy: undefined,
-    status: undefined,
+    createdBy: "",
+    status: 0,
     trafficPercentStrategy: undefined,
     deleteServiceStrategy: undefined,
-    serviceName: undefined
+    serviceName: ""
   };
 }
 export const Rollout = {
   typeUrl: "/google.api.servicemanagement.v1.Rollout",
   encode(message: Rollout, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.rolloutId !== undefined) {
+    if (message.rolloutId !== "") {
       writer.uint32(10).string(message.rolloutId);
     }
     if (message.createTime !== undefined) {
       Timestamp.encode(toTimestamp(message.createTime), writer.uint32(18).fork()).ldelim();
     }
-    if (message.createdBy !== undefined) {
+    if (message.createdBy !== "") {
       writer.uint32(26).string(message.createdBy);
     }
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
     if (message.trafficPercentStrategy !== undefined) {
@@ -1467,7 +1467,7 @@ export const Rollout = {
     if (message.deleteServiceStrategy !== undefined) {
       Rollout_DeleteServiceStrategy.encode(message.deleteServiceStrategy, writer.uint32(1602).fork()).ldelim();
     }
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(66).string(message.serviceName);
     }
     return writer;
@@ -1531,17 +1531,17 @@ export const Rollout = {
   },
   fromPartial(object: DeepPartial<Rollout>): Rollout {
     const message = createBaseRollout();
-    message.rolloutId = object.rolloutId ?? undefined;
+    message.rolloutId = object.rolloutId ?? "";
     message.createTime = object.createTime ?? undefined;
-    message.createdBy = object.createdBy ?? undefined;
-    message.status = object.status ?? undefined;
+    message.createdBy = object.createdBy ?? "";
+    message.status = object.status ?? 0;
     if (object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null) {
       message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy);
     }
     if (object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null) {
       message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy);
     }
-    message.serviceName = object.serviceName ?? undefined;
+    message.serviceName = object.serviceName ?? "";
     return message;
   },
   fromSDK(object: RolloutSDKType): Rollout {
@@ -1549,7 +1549,7 @@ export const Rollout = {
       rolloutId: object?.rollout_id,
       createTime: object.create_time ?? undefined,
       createdBy: object?.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : undefined,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: object.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromSDK(object.delete_service_strategy) : undefined,
       serviceName: object?.service_name
@@ -1557,13 +1557,13 @@ export const Rollout = {
   },
   fromSDKJSON(object: any): RolloutSDKType {
     return {
-      rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : undefined,
+      rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : "",
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      created_by: isSet(object.created_by) ? String(object.created_by) : undefined,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : undefined,
+      created_by: isSet(object.created_by) ? String(object.created_by) : "",
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       traffic_percent_strategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromSDKJSON(object.traffic_percent_strategy) : undefined,
       delete_service_strategy: isSet(object.delete_service_strategy) ? Rollout_DeleteServiceStrategy.fromSDKJSON(object.delete_service_strategy) : undefined,
-      service_name: isSet(object.service_name) ? String(object.service_name) : undefined
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
     };
   },
   toSDK(message: Rollout): RolloutSDKType {
@@ -1579,13 +1579,13 @@ export const Rollout = {
   },
   fromAmino(object: RolloutAmino): Rollout {
     return {
-      rolloutId: object?.rollout_id,
+      rolloutId: object.rollout_id,
       createTime: object?.create_time,
-      createdBy: object?.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : undefined,
+      createdBy: object.created_by,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: object?.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy) : undefined,
-      serviceName: object?.service_name
+      serviceName: object.service_name
     };
   },
   toAmino(message: Rollout): RolloutAmino {

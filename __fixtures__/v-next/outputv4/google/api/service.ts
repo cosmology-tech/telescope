@@ -52,18 +52,18 @@ export interface Service {
    * typically goes through DNS verification to make sure the owner
    * of the service also owns the DNS name.
    */
-  name?: string;
+  name: string;
   /** The product title for this service. */
-  title?: string;
+  title: string;
   /** The Google project that owns this service. */
-  producerProjectId?: string;
+  producerProjectId: string;
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-  id?: string;
+  id: string;
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -168,10 +168,10 @@ export interface Service {
  *           provider_id: google_calendar_auth
  */
 export interface ServiceSDKType {
-  name?: string;
-  title?: string;
-  producer_project_id?: string;
-  id?: string;
+  name: string;
+  title: string;
+  producer_project_id: string;
+  id: string;
   apis: ApiSDKType[];
   types: TypeSDKType[];
   enums: EnumSDKType[];
@@ -197,10 +197,10 @@ export interface ServiceSDKType {
 }
 function createBaseService(): Service {
   return {
-    name: undefined,
-    title: undefined,
-    producerProjectId: undefined,
-    id: undefined,
+    name: "",
+    title: "",
+    producerProjectId: "",
+    id: "",
     apis: [],
     types: [],
     enums: [],
@@ -227,16 +227,16 @@ function createBaseService(): Service {
 export const Service = {
   typeUrl: "/google.api.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
-    if (message.producerProjectId !== undefined) {
+    if (message.producerProjectId !== "") {
       writer.uint32(178).string(message.producerProjectId);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(266).string(message.id);
     }
     for (const v of message.apis) {
@@ -481,10 +481,10 @@ export const Service = {
   },
   fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
-    message.name = object.name ?? undefined;
-    message.title = object.title ?? undefined;
-    message.producerProjectId = object.producerProjectId ?? undefined;
-    message.id = object.id ?? undefined;
+    message.name = object.name ?? "";
+    message.title = object.title ?? "";
+    message.producerProjectId = object.producerProjectId ?? "";
+    message.id = object.id ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     message.types = object.types?.map(e => Type.fromPartial(e)) || [];
     message.enums = object.enums?.map(e => Enum.fromPartial(e)) || [];
@@ -567,10 +567,10 @@ export const Service = {
   },
   fromSDKJSON(object: any): ServiceSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      title: isSet(object.title) ? String(object.title) : undefined,
-      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : undefined,
-      id: isSet(object.id) ? String(object.id) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
       types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromSDKJSON(e)) : [],
       enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromSDKJSON(e)) : [],
@@ -653,10 +653,10 @@ export const Service = {
   },
   fromAmino(object: ServiceAmino): Service {
     return {
-      name: object?.name,
-      title: object?.title,
-      producerProjectId: object?.producer_project_id,
-      id: object?.id,
+      name: object.name,
+      title: object.title,
+      producerProjectId: object.producer_project_id,
+      id: object.id,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
       types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
       enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],

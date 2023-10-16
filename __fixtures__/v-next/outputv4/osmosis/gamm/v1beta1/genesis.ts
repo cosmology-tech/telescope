@@ -15,13 +15,13 @@ export interface ParamsSDKType {
 export interface GenesisState {
   pools: Any[];
   /** will be renamed to next_pool_id in an upcoming version */
-  nextPoolNumber?: bigint;
+  nextPoolNumber: bigint;
   params: Params;
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
   pools: AnySDKType[];
-  next_pool_number?: bigint;
+  next_pool_number: bigint;
   params: ParamsSDKType;
 }
 function createBaseParams(): Params {
@@ -131,7 +131,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     pools: [],
-    nextPoolNumber: undefined,
+    nextPoolNumber: BigInt(0),
     params: Params.fromPartial({})
   };
 }
@@ -141,7 +141,7 @@ export const GenesisState = {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPoolNumber !== undefined) {
+    if (message.nextPoolNumber !== BigInt(0)) {
       writer.uint32(16).uint64(message.nextPoolNumber);
     }
     if (message.params !== undefined) {
@@ -186,9 +186,7 @@ export const GenesisState = {
     } else {
       obj.pools = [];
     }
-    if (message.nextPoolNumber !== undefined) {
-      obj.nextPoolNumber = message.nextPoolNumber.toString();
-    }
+    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || BigInt(0)).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
@@ -213,7 +211,7 @@ export const GenesisState = {
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
-      next_pool_number: isSet(object.next_pool_number) ? BigInt(object.next_pool_number.toString()) : undefined,
+      next_pool_number: isSet(object.next_pool_number) ? BigInt(object.next_pool_number.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
@@ -231,7 +229,7 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : [],
-      nextPoolNumber: object?.next_pool_number ? BigInt(object.next_pool_number) : undefined,
+      nextPoolNumber: BigInt(object.next_pool_number),
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },

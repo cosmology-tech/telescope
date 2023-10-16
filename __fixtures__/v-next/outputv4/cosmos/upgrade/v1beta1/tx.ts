@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.upgrade.v1beta1";
  */
 export interface MsgSoftwareUpgrade {
   /** authority is the address of the governance account. */
-  authority?: string;
+  authority: string;
   /** plan is the upgrade plan. */
   plan: Plan;
 }
@@ -19,7 +19,7 @@ export interface MsgSoftwareUpgrade {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgradeSDKType {
-  authority?: string;
+  authority: string;
   plan: PlanSDKType;
 }
 /**
@@ -41,7 +41,7 @@ export interface MsgSoftwareUpgradeResponseSDKType {}
  */
 export interface MsgCancelUpgrade {
   /** authority is the address of the governance account. */
-  authority?: string;
+  authority: string;
 }
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
@@ -49,7 +49,7 @@ export interface MsgCancelUpgrade {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeSDKType {
-  authority?: string;
+  authority: string;
 }
 /**
  * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
@@ -65,14 +65,14 @@ export interface MsgCancelUpgradeResponse {}
 export interface MsgCancelUpgradeResponseSDKType {}
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
   return {
-    authority: undefined,
+    authority: "",
     plan: Plan.fromPartial({})
   };
 }
 export const MsgSoftwareUpgrade = {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
   encode(message: MsgSoftwareUpgrade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
     if (message.plan !== undefined) {
@@ -114,7 +114,7 @@ export const MsgSoftwareUpgrade = {
   },
   fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
-    message.authority = object.authority ?? undefined;
+    message.authority = object.authority ?? "";
     if (object.plan !== undefined && object.plan !== null) {
       message.plan = Plan.fromPartial(object.plan);
     }
@@ -128,7 +128,7 @@ export const MsgSoftwareUpgrade = {
   },
   fromSDKJSON(object: any): MsgSoftwareUpgradeSDKType {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : undefined,
+      authority: isSet(object.authority) ? String(object.authority) : "",
       plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
     };
   },
@@ -140,7 +140,7 @@ export const MsgSoftwareUpgrade = {
   },
   fromAmino(object: MsgSoftwareUpgradeAmino): MsgSoftwareUpgrade {
     return {
-      authority: object?.authority,
+      authority: object.authority,
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
@@ -247,13 +247,13 @@ export const MsgSoftwareUpgradeResponse = {
 };
 function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
   return {
-    authority: undefined
+    authority: ""
   };
 }
 export const MsgCancelUpgrade = {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
   encode(message: MsgCancelUpgrade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
     return writer;
@@ -287,7 +287,7 @@ export const MsgCancelUpgrade = {
   },
   fromPartial(object: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
-    message.authority = object.authority ?? undefined;
+    message.authority = object.authority ?? "";
     return message;
   },
   fromSDK(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
@@ -297,7 +297,7 @@ export const MsgCancelUpgrade = {
   },
   fromSDKJSON(object: any): MsgCancelUpgradeSDKType {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : undefined
+      authority: isSet(object.authority) ? String(object.authority) : ""
     };
   },
   toSDK(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
@@ -307,7 +307,7 @@ export const MsgCancelUpgrade = {
   },
   fromAmino(object: MsgCancelUpgradeAmino): MsgCancelUpgrade {
     return {
-      authority: object?.authority
+      authority: object.authority
     };
   },
   toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeAmino {

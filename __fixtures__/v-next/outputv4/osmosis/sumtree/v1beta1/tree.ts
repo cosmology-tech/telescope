@@ -8,11 +8,11 @@ export interface NodeSDKType {
   children: ChildSDKType[];
 }
 export interface Child {
-  index?: Uint8Array;
+  index: Uint8Array;
   accumulation: string;
 }
 export interface ChildSDKType {
-  index?: Uint8Array;
+  index: Uint8Array;
   accumulation: string;
 }
 export interface Leaf {
@@ -127,14 +127,14 @@ export const Node = {
 };
 function createBaseChild(): Child {
   return {
-    index: undefined,
+    index: new Uint8Array(),
     accumulation: ""
   };
 }
 export const Child = {
   typeUrl: "/osmosis.store.v1beta1.Child",
   encode(message: Child, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== undefined) {
+    if (message.index.length !== 0) {
       writer.uint32(10).bytes(message.index);
     }
     if (message.accumulation !== "") {
@@ -170,13 +170,13 @@ export const Child = {
   },
   toJSON(message: Child): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index !== undefined ? base64FromBytes(message.index) : undefined);
+    message.index !== undefined && (obj.index = base64FromBytes(message.index !== undefined ? message.index : new Uint8Array()));
     message.accumulation !== undefined && (obj.accumulation = message.accumulation);
     return obj;
   },
   fromPartial(object: DeepPartial<Child>): Child {
     const message = createBaseChild();
-    message.index = object.index ?? undefined;
+    message.index = object.index ?? new Uint8Array();
     message.accumulation = object.accumulation ?? "";
     return message;
   },
@@ -188,7 +188,7 @@ export const Child = {
   },
   fromSDKJSON(object: any): ChildSDKType {
     return {
-      index: isSet(object.index) ? bytesFromBase64(object.index) : undefined,
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
       accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
     };
   },
@@ -200,7 +200,7 @@ export const Child = {
   },
   fromAmino(object: ChildAmino): Child {
     return {
-      index: object?.index,
+      index: object.index,
       accumulation: object.accumulation
     };
   },

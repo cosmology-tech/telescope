@@ -142,7 +142,7 @@ export interface Monitoring_MonitoringDestination {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitoredResource?: string;
+  monitoredResource: string;
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
@@ -154,7 +154,7 @@ export interface Monitoring_MonitoringDestination {
  * or the consumer project).
  */
 export interface Monitoring_MonitoringDestinationSDKType {
-  monitored_resource?: string;
+  monitored_resource: string;
   metrics: string[];
 }
 function createBaseMonitoring(): Monitoring {
@@ -284,14 +284,14 @@ export const Monitoring = {
 };
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
   return {
-    monitoredResource: undefined,
+    monitoredResource: "",
     metrics: []
   };
 }
 export const Monitoring_MonitoringDestination = {
   typeUrl: "/google.api.MonitoringDestination",
   encode(message: Monitoring_MonitoringDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== undefined) {
+    if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -337,7 +337,7 @@ export const Monitoring_MonitoringDestination = {
   },
   fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
     const message = createBaseMonitoring_MonitoringDestination();
-    message.monitoredResource = object.monitoredResource ?? undefined;
+    message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
   },
@@ -349,7 +349,7 @@ export const Monitoring_MonitoringDestination = {
   },
   fromSDKJSON(object: any): Monitoring_MonitoringDestinationSDKType {
     return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : undefined,
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
     };
   },
@@ -365,7 +365,7 @@ export const Monitoring_MonitoringDestination = {
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
     return {
-      monitoredResource: object?.monitored_resource,
+      monitoredResource: object.monitored_resource,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },

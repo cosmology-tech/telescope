@@ -49,23 +49,23 @@ export function ownerToJSON(object: Owner): string {
  */
 export interface TokenPair {
   /** address of ERC20 contract token */
-  erc20Address?: string;
+  erc20Address: string;
   /** cosmos base denomination to be mapped to */
-  denom?: string;
+  denom: string;
   /** shows token mapping enable status */
-  enabled?: boolean;
+  enabled: boolean;
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
-  contractOwner?: Owner;
+  contractOwner: Owner;
 }
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
  *  Cosmos Coin and an ERC20 token address.
  */
 export interface TokenPairSDKType {
-  erc20_address?: string;
-  denom?: string;
-  enabled?: boolean;
-  contract_owner?: Owner;
+  erc20_address: string;
+  denom: string;
+  enabled: boolean;
+  contract_owner: Owner;
 }
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
@@ -73,9 +73,9 @@ export interface TokenPairSDKType {
  */
 export interface RegisterCoinProposal {
   /** title of the proposal */
-  title?: string;
+  title: string;
   /** proposal description */
-  description?: string;
+  description: string;
   /** metadata of the native Cosmos coin */
   metadata: Metadata;
 }
@@ -84,8 +84,8 @@ export interface RegisterCoinProposal {
  * native Cosmos coin.
  */
 export interface RegisterCoinProposalSDKType {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   metadata: MetadataSDKType;
 }
 /**
@@ -94,20 +94,20 @@ export interface RegisterCoinProposalSDKType {
  */
 export interface RegisterERC20Proposal {
   /** title of the proposal */
-  title?: string;
+  title: string;
   /** proposal description */
-  description?: string;
+  description: string;
   /** contract address of ERC20 token */
-  erc20address?: string;
+  erc20address: string;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
  * ERC20 token
  */
 export interface RegisterERC20ProposalSDKType {
-  title?: string;
-  description?: string;
-  erc20address?: string;
+  title: string;
+  description: string;
+  erc20address: string;
 }
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
@@ -115,45 +115,45 @@ export interface RegisterERC20ProposalSDKType {
  */
 export interface ToggleTokenConversionProposal {
   /** title of the proposal */
-  title?: string;
+  title: string;
   /** proposal description */
-  description?: string;
+  description: string;
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token?: string;
+  token: string;
 }
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
  * of a token pair.
  */
 export interface ToggleTokenConversionProposalSDKType {
-  title?: string;
-  description?: string;
-  token?: string;
+  title: string;
+  description: string;
+  token: string;
 }
 function createBaseTokenPair(): TokenPair {
   return {
-    erc20Address: undefined,
-    denom: undefined,
-    enabled: undefined,
-    contractOwner: undefined
+    erc20Address: "",
+    denom: "",
+    enabled: false,
+    contractOwner: 0
   };
 }
 export const TokenPair = {
   typeUrl: "/evmos.erc20.v1.TokenPair",
   encode(message: TokenPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.erc20Address !== undefined) {
+    if (message.erc20Address !== "") {
       writer.uint32(10).string(message.erc20Address);
     }
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(18).string(message.denom);
     }
-    if (message.enabled !== undefined) {
+    if (message.enabled === true) {
       writer.uint32(24).bool(message.enabled);
     }
-    if (message.contractOwner !== undefined) {
+    if (message.contractOwner !== 0) {
       writer.uint32(32).int32(message.contractOwner);
     }
     return writer;
@@ -202,10 +202,10 @@ export const TokenPair = {
   },
   fromPartial(object: DeepPartial<TokenPair>): TokenPair {
     const message = createBaseTokenPair();
-    message.erc20Address = object.erc20Address ?? undefined;
-    message.denom = object.denom ?? undefined;
-    message.enabled = object.enabled ?? undefined;
-    message.contractOwner = object.contractOwner ?? undefined;
+    message.erc20Address = object.erc20Address ?? "";
+    message.denom = object.denom ?? "";
+    message.enabled = object.enabled ?? false;
+    message.contractOwner = object.contractOwner ?? 0;
     return message;
   },
   fromSDK(object: TokenPairSDKType): TokenPair {
@@ -213,15 +213,15 @@ export const TokenPair = {
       erc20Address: object?.erc20_address,
       denom: object?.denom,
       enabled: object?.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : undefined
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
   fromSDKJSON(object: any): TokenPairSDKType {
     return {
-      erc20_address: isSet(object.erc20_address) ? String(object.erc20_address) : undefined,
-      denom: isSet(object.denom) ? String(object.denom) : undefined,
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : undefined,
-      contract_owner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : undefined
+      erc20_address: isSet(object.erc20_address) ? String(object.erc20_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      contract_owner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
   toSDK(message: TokenPair): TokenPairSDKType {
@@ -234,10 +234,10 @@ export const TokenPair = {
   },
   fromAmino(object: TokenPairAmino): TokenPair {
     return {
-      erc20Address: object?.erc20_address,
-      denom: object?.denom,
-      enabled: object?.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : undefined
+      erc20Address: object.erc20_address,
+      denom: object.denom,
+      enabled: object.enabled,
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
   toAmino(message: TokenPair): TokenPairAmino {
@@ -266,18 +266,18 @@ export const TokenPair = {
 };
 function createBaseRegisterCoinProposal(): RegisterCoinProposal {
   return {
-    title: undefined,
-    description: undefined,
+    title: "",
+    description: "",
     metadata: Metadata.fromPartial({})
   };
 }
 export const RegisterCoinProposal = {
   typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
   encode(message: RegisterCoinProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     if (message.metadata !== undefined) {
@@ -324,8 +324,8 @@ export const RegisterCoinProposal = {
   },
   fromPartial(object: DeepPartial<RegisterCoinProposal>): RegisterCoinProposal {
     const message = createBaseRegisterCoinProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     if (object.metadata !== undefined && object.metadata !== null) {
       message.metadata = Metadata.fromPartial(object.metadata);
     }
@@ -340,8 +340,8 @@ export const RegisterCoinProposal = {
   },
   fromSDKJSON(object: any): RegisterCoinProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
       metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
     };
   },
@@ -354,8 +354,8 @@ export const RegisterCoinProposal = {
   },
   fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
     return {
-      title: object?.title,
-      description: object?.description,
+      title: object.title,
+      description: object.description,
       metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
     };
   },
@@ -384,21 +384,21 @@ export const RegisterCoinProposal = {
 };
 function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
   return {
-    title: undefined,
-    description: undefined,
-    erc20address: undefined
+    title: "",
+    description: "",
+    erc20address: ""
   };
 }
 export const RegisterERC20Proposal = {
   typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
   encode(message: RegisterERC20Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.erc20address !== undefined) {
+    if (message.erc20address !== "") {
       writer.uint32(26).string(message.erc20address);
     }
     return writer;
@@ -442,9 +442,9 @@ export const RegisterERC20Proposal = {
   },
   fromPartial(object: DeepPartial<RegisterERC20Proposal>): RegisterERC20Proposal {
     const message = createBaseRegisterERC20Proposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
-    message.erc20address = object.erc20address ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.erc20address = object.erc20address ?? "";
     return message;
   },
   fromSDK(object: RegisterERC20ProposalSDKType): RegisterERC20Proposal {
@@ -456,9 +456,9 @@ export const RegisterERC20Proposal = {
   },
   fromSDKJSON(object: any): RegisterERC20ProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      erc20address: isSet(object.erc20address) ? String(object.erc20address) : undefined
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
     };
   },
   toSDK(message: RegisterERC20Proposal): RegisterERC20ProposalSDKType {
@@ -470,9 +470,9 @@ export const RegisterERC20Proposal = {
   },
   fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
     return {
-      title: object?.title,
-      description: object?.description,
-      erc20address: object?.erc20address
+      title: object.title,
+      description: object.description,
+      erc20address: object.erc20address
     };
   },
   toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
@@ -500,21 +500,21 @@ export const RegisterERC20Proposal = {
 };
 function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposal {
   return {
-    title: undefined,
-    description: undefined,
-    token: undefined
+    title: "",
+    description: "",
+    token: ""
   };
 }
 export const ToggleTokenConversionProposal = {
   typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
   encode(message: ToggleTokenConversionProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.token !== undefined) {
+    if (message.token !== "") {
       writer.uint32(26).string(message.token);
     }
     return writer;
@@ -558,9 +558,9 @@ export const ToggleTokenConversionProposal = {
   },
   fromPartial(object: DeepPartial<ToggleTokenConversionProposal>): ToggleTokenConversionProposal {
     const message = createBaseToggleTokenConversionProposal();
-    message.title = object.title ?? undefined;
-    message.description = object.description ?? undefined;
-    message.token = object.token ?? undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.token = object.token ?? "";
     return message;
   },
   fromSDK(object: ToggleTokenConversionProposalSDKType): ToggleTokenConversionProposal {
@@ -572,9 +572,9 @@ export const ToggleTokenConversionProposal = {
   },
   fromSDKJSON(object: any): ToggleTokenConversionProposalSDKType {
     return {
-      title: isSet(object.title) ? String(object.title) : undefined,
-      description: isSet(object.description) ? String(object.description) : undefined,
-      token: isSet(object.token) ? String(object.token) : undefined
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      token: isSet(object.token) ? String(object.token) : ""
     };
   },
   toSDK(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalSDKType {
@@ -586,9 +586,9 @@ export const ToggleTokenConversionProposal = {
   },
   fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {
     return {
-      title: object?.title,
-      description: object?.description,
-      token: object?.token
+      title: object.title,
+      description: object.description,
+      token: object.token
     };
   },
   toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {

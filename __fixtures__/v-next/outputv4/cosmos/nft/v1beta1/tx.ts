@@ -4,20 +4,20 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId?: string;
+  classId: string;
   /** id defines the unique identification of nft */
-  id?: string;
+  id: string;
   /** sender is the address of the owner of nft */
-  sender?: string;
+  sender: string;
   /** receiver is the receiver address of nft */
-  receiver?: string;
+  receiver: string;
 }
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendSDKType {
-  class_id?: string;
-  id?: string;
-  sender?: string;
-  receiver?: string;
+  class_id: string;
+  id: string;
+  sender: string;
+  receiver: string;
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
@@ -25,25 +25,25 @@ export interface MsgSendResponse {}
 export interface MsgSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
   return {
-    classId: undefined,
-    id: undefined,
-    sender: undefined,
-    receiver: undefined
+    classId: "",
+    id: "",
+    sender: "",
+    receiver: ""
   };
 }
 export const MsgSend = {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend",
   encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -92,10 +92,10 @@ export const MsgSend = {
   },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
-    message.classId = object.classId ?? undefined;
-    message.id = object.id ?? undefined;
-    message.sender = object.sender ?? undefined;
-    message.receiver = object.receiver ?? undefined;
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
     return message;
   },
   fromSDK(object: MsgSendSDKType): MsgSend {
@@ -108,10 +108,10 @@ export const MsgSend = {
   },
   fromSDKJSON(object: any): MsgSendSDKType {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : undefined,
-      id: isSet(object.id) ? String(object.id) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : undefined,
-      receiver: isSet(object.receiver) ? String(object.receiver) : undefined
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
     };
   },
   toSDK(message: MsgSend): MsgSendSDKType {
@@ -124,10 +124,10 @@ export const MsgSend = {
   },
   fromAmino(object: MsgSendAmino): MsgSend {
     return {
-      classId: object?.class_id,
-      id: object?.id,
-      sender: object?.sender,
-      receiver: object?.receiver
+      classId: object.class_id,
+      id: object.id,
+      sender: object.sender,
+      receiver: object.receiver
     };
   },
   toAmino(message: MsgSend): MsgSendAmino {

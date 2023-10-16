@@ -4,24 +4,24 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
-  basedenom?: string;
+  basedenom: string;
   feetokens: FeeToken[];
 }
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateSDKType {
-  basedenom?: string;
+  basedenom: string;
   feetokens: FeeTokenSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    basedenom: undefined,
+    basedenom: "",
     feetokens: []
   };
 }
 export const GenesisState = {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.basedenom !== undefined) {
+    if (message.basedenom !== "") {
       writer.uint32(10).string(message.basedenom);
     }
     for (const v of message.feetokens) {
@@ -67,7 +67,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.basedenom = object.basedenom ?? undefined;
+    message.basedenom = object.basedenom ?? "";
     message.feetokens = object.feetokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
   },
@@ -79,7 +79,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      basedenom: isSet(object.basedenom) ? String(object.basedenom) : undefined,
+      basedenom: isSet(object.basedenom) ? String(object.basedenom) : "",
       feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
     };
   },
@@ -95,7 +95,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      basedenom: object?.basedenom,
+      basedenom: object.basedenom,
       feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromAmino(e)) : []
     };
   },

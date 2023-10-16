@@ -82,14 +82,14 @@ export interface QueryClaimsRecordsResponseSDKType {
  */
 export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
-  address?: string;
+  address: string;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
  * method.
  */
 export interface QueryClaimsRecordRequestSDKType {
-  address?: string;
+  address: string;
 }
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
@@ -634,13 +634,13 @@ export const QueryClaimsRecordsResponse = {
 };
 function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
   return {
-    address: undefined
+    address: ""
   };
 }
 export const QueryClaimsRecordRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
   encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -674,7 +674,7 @@ export const QueryClaimsRecordRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimsRecordRequest>): QueryClaimsRecordRequest {
     const message = createBaseQueryClaimsRecordRequest();
-    message.address = object.address ?? undefined;
+    message.address = object.address ?? "";
     return message;
   },
   fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
@@ -684,7 +684,7 @@ export const QueryClaimsRecordRequest = {
   },
   fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
     return {
-      address: isSet(object.address) ? String(object.address) : undefined
+      address: isSet(object.address) ? String(object.address) : ""
     };
   },
   toSDK(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestSDKType {
@@ -694,7 +694,7 @@ export const QueryClaimsRecordRequest = {
   },
   fromAmino(object: QueryClaimsRecordRequestAmino): QueryClaimsRecordRequest {
     return {
-      address: object?.address
+      address: object.address
     };
   },
   toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {

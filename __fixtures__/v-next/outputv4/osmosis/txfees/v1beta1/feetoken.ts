@@ -8,8 +8,8 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeToken {
-  denom?: string;
-  poolID?: bigint;
+  denom: string;
+  poolID: bigint;
 }
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -18,22 +18,22 @@ export interface FeeToken {
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeTokenSDKType {
-  denom?: string;
-  poolID?: bigint;
+  denom: string;
+  poolID: bigint;
 }
 function createBaseFeeToken(): FeeToken {
   return {
-    denom: undefined,
-    poolID: undefined
+    denom: "",
+    poolID: BigInt(0)
   };
 }
 export const FeeToken = {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
   encode(message: FeeToken, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
-    if (message.poolID !== undefined) {
+    if (message.poolID !== BigInt(0)) {
       writer.uint32(16).uint64(message.poolID);
     }
     return writer;
@@ -67,14 +67,12 @@ export const FeeToken = {
   toJSON(message: FeeToken): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
-    if (message.poolID !== undefined) {
-      obj.poolID = message.poolID.toString();
-    }
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
-    message.denom = object.denom ?? undefined;
+    message.denom = object.denom ?? "";
     if (object.poolID !== undefined && object.poolID !== null) {
       message.poolID = BigInt(object.poolID.toString());
     }
@@ -88,8 +86,8 @@ export const FeeToken = {
   },
   fromSDKJSON(object: any): FeeTokenSDKType {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : undefined,
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : undefined
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
     };
   },
   toSDK(message: FeeToken): FeeTokenSDKType {
@@ -100,8 +98,8 @@ export const FeeToken = {
   },
   fromAmino(object: FeeTokenAmino): FeeToken {
     return {
-      denom: object?.denom,
-      poolID: object?.poolID ? BigInt(object.poolID) : undefined
+      denom: object.denom,
+      poolID: BigInt(object.poolID)
     };
   },
   toAmino(message: FeeToken): FeeTokenAmino {

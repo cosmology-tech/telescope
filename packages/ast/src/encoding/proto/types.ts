@@ -167,22 +167,15 @@ export const getFieldOptionality = (
     field: ProtoField,
     isOneOf: boolean
 ) => {
-    const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
-    const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
-
-    if(fieldDefaultIsOptional){
-      return HandleFieldsOptionalityDefaultTrue(useOptionalNullable, field, isOneOf);
-    } else {
-      if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
-          // these field types are required by default!
-          if (isOneOf) {
-              return true;
-          }
-          return false;
-      }
-
-      return true;
+    if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
+        // these field types are required by default!
+        if (isOneOf) {
+            return true;
+        }
+        return false;
     }
+
+    return true;
 };
 
 export const isScalarField = (
@@ -203,69 +196,47 @@ export const isEnumField = (
     return field.parsedType?.type === 'Enum'
 };
 
+export const isMapField = (
+  field: ProtoField
+) => {
+  return field.keyType;
+};
+
 export const getFieldOptionalityForDefaults = (
     context: ProtoParseContext | AminoParseContext,
     field: ProtoField,
     isOneOf: boolean
 ) => {
     const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
+    const optionalNullableDefaultTrue = context.pluginValue('prototypes.optionalNullableDefaultTrue');
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
 
-    if(fieldDefaultIsOptional){
-      return HandleFieldsOptionalityDefaultTrue(useOptionalNullable, field, isOneOf);
-    } else {
-      if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
-          // these field types are required by default!
+    if (isArrayField(field) || isEnumField(field) || isScalarField(field) || isMapField(field)) {
+        // these field types are required by default!
 
-          if (isOneOf || (useOptionalNullable &&
-              field?.options?.['(gogoproto.nullable)'])) {
-              return true;
-          }
-          return false;
-      }
-
-      return isOneOf ||
-          (
-              useOptionalNullable &&
-              field?.options?.['(gogoproto.nullable)']
-          )
-          ||
-          (
-              // this would only happen if previous predicate is false,
-              // so lets ensure not to override required properties when gogoproto.nullable=false
-              !useOptionalNullable &&
-              fieldDefaultIsOptional
-          );
+        if (isOneOf || (useOptionalNullable &&
+            field?.options?.['(gogoproto.nullable)'])) {
+            return true;
+        }
+        return false;
     }
+
+    const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? optionalNullableDefaultTrue;
+
+    return isOneOf ||
+        (
+            useOptionalNullable &&
+            gogoprotoNullable
+        )
+        ||
+        (
+            // this would only happen if previous predicate is false,
+            // so lets ensure not to override required properties when gogoproto.nullable=false
+            !useOptionalNullable &&
+            fieldDefaultIsOptional
+        );
 };
 
-export const HandleFieldsOptionalityDefaultTrue = (
-  useOptionalNullable: boolean,
-  field: ProtoField,
-  isOneOf: boolean
-) => {
-    //Handle fields optionality default to true
-    //All fields will be set to optional(return true), only if:
-    //  when (telescope:map_entry_type_field) == true
-    //  when useOptionalNullable == true
-    //    and (gogoproto.nullable) == false
-    //    and it's not inside oneof block,
-    //  in these cases, false will be returned.
-
-    //by default, gogoproto.nullable should be true
-
-    if (field.rule === 'repeated') {
-      return false;
-    }
-
-    if (field.keyType) {
-      return false;
-    }
-
-    const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? true;
-
-    return ( isOneOf || !useOptionalNullable || gogoprotoNullable ) && !field?.options?.['(telescope:map_entry_type_field)'];
-};
 
 
 

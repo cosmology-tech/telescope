@@ -43,8 +43,9 @@ const options: TelescopeOptions = {
     },
     strictNullCheckForPrototypeMethods: true,
     includePackageVar: true,
-    fieldDefaultIsOptional: true,
+    fieldDefaultIsOptional: false,
     useOptionalNullable: true,
+    optionalNullableDefaultTrue: true,
     allowUndefinedTypes: false,
     typingsFormat: {
       customTypes: {

@@ -48,7 +48,7 @@ export const GenesisState = {
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     if (message.genTxs) {
-      obj.genTxs = message.genTxs.map(e => base64FromBytes(e !== undefined ? e : undefined));
+      obj.genTxs = message.genTxs.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
     } else {
       obj.genTxs = [];
     }

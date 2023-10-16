@@ -19,7 +19,7 @@ export interface GenesisStateSDKType {
 /** Params defines the claims module's parameters. */
 export interface Params {
   /** enable claiming process */
-  enableClaims?: boolean;
+  enableClaims: boolean;
   /** timestamp of the airdrop start */
   airdropStartTime: Date;
   /** duration until decay of claimable tokens begin */
@@ -27,7 +27,7 @@ export interface Params {
   /** duration of the token claim decay period */
   durationOfDecay: Duration;
   /** denom of claimable coin */
-  claimsDenom?: string;
+  claimsDenom: string;
   /**
    * list of authorized channel identifiers that can perform address
    * attestations via IBC.
@@ -38,11 +38,11 @@ export interface Params {
 }
 /** Params defines the claims module's parameters. */
 export interface ParamsSDKType {
-  enable_claims?: boolean;
+  enable_claims: boolean;
   airdrop_start_time: Date;
   duration_until_decay: DurationSDKType;
   duration_of_decay: DurationSDKType;
-  claims_denom?: string;
+  claims_denom: string;
   authorized_channels: string[];
   evm_channels: string[];
 }
@@ -163,11 +163,11 @@ export const GenesisState = {
 };
 function createBaseParams(): Params {
   return {
-    enableClaims: undefined,
+    enableClaims: false,
     airdropStartTime: new Date(),
     durationUntilDecay: Duration.fromPartial({}),
     durationOfDecay: Duration.fromPartial({}),
-    claimsDenom: undefined,
+    claimsDenom: "",
     authorizedChannels: [],
     evmChannels: []
   };
@@ -175,7 +175,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.claims.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableClaims !== undefined) {
+    if (message.enableClaims === true) {
       writer.uint32(8).bool(message.enableClaims);
     }
     if (message.airdropStartTime !== undefined) {
@@ -187,7 +187,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(34).fork()).ldelim();
     }
-    if (message.claimsDenom !== undefined) {
+    if (message.claimsDenom !== "") {
       writer.uint32(42).string(message.claimsDenom);
     }
     for (const v of message.authorizedChannels) {
@@ -265,7 +265,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.enableClaims = object.enableClaims ?? undefined;
+    message.enableClaims = object.enableClaims ?? false;
     message.airdropStartTime = object.airdropStartTime ?? undefined;
     if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
       message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
@@ -273,7 +273,7 @@ export const Params = {
     if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
       message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
     }
-    message.claimsDenom = object.claimsDenom ?? undefined;
+    message.claimsDenom = object.claimsDenom ?? "";
     message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
     message.evmChannels = object.evmChannels?.map(e => e) || [];
     return message;
@@ -291,11 +291,11 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      enable_claims: isSet(object.enable_claims) ? Boolean(object.enable_claims) : undefined,
+      enable_claims: isSet(object.enable_claims) ? Boolean(object.enable_claims) : false,
       airdrop_start_time: isSet(object.airdrop_start_time) ? new Date(object.airdrop_start_time) : undefined,
       duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
       duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
-      claims_denom: isSet(object.claims_denom) ? String(object.claims_denom) : undefined,
+      claims_denom: isSet(object.claims_denom) ? String(object.claims_denom) : "",
       authorized_channels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => String(e)) : [],
       evm_channels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => String(e)) : []
     };
@@ -321,11 +321,11 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      enableClaims: object?.enable_claims,
+      enableClaims: object.enable_claims,
       airdropStartTime: object.airdrop_start_time,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
-      claimsDenom: object?.claims_denom,
+      claimsDenom: object.claims_denom,
       authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
       evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
     };

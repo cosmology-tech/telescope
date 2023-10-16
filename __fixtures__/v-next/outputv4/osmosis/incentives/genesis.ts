@@ -22,7 +22,7 @@ export interface GenesisState {
    * last_gauge_id is what the gauge number will increment from when creating
    * the next gauge after genesis
    */
-  lastGaugeId?: bigint;
+  lastGaugeId: bigint;
 }
 /**
  * GenesisState defines the incentives module's various parameters when first
@@ -32,14 +32,14 @@ export interface GenesisStateSDKType {
   params: ParamsSDKType;
   gauges: GaugeSDKType[];
   lockable_durations: DurationSDKType[];
-  last_gauge_id?: bigint;
+  last_gauge_id: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
     params: Params.fromPartial({}),
     gauges: [],
     lockableDurations: [],
-    lastGaugeId: undefined
+    lastGaugeId: BigInt(0)
   };
 }
 export const GenesisState = {
@@ -54,7 +54,7 @@ export const GenesisState = {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.lastGaugeId !== undefined) {
+    if (message.lastGaugeId !== BigInt(0)) {
       writer.uint32(32).uint64(message.lastGaugeId);
     }
     return writer;
@@ -106,9 +106,7 @@ export const GenesisState = {
     } else {
       obj.lockableDurations = [];
     }
-    if (message.lastGaugeId !== undefined) {
-      obj.lastGaugeId = message.lastGaugeId.toString();
-    }
+    message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -136,7 +134,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
       lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
-      last_gauge_id: isSet(object.last_gauge_id) ? BigInt(object.last_gauge_id.toString()) : undefined
+      last_gauge_id: isSet(object.last_gauge_id) ? BigInt(object.last_gauge_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {
@@ -160,7 +158,7 @@ export const GenesisState = {
       params: object?.params ? Params.fromAmino(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromAmino(e)) : [],
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
-      lastGaugeId: object?.last_gauge_id ? BigInt(object.last_gauge_id) : undefined
+      lastGaugeId: BigInt(object.last_gauge_id)
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

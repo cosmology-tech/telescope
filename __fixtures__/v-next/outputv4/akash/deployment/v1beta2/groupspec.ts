@@ -5,19 +5,19 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
-  name?: string;
+  name: string;
   requirements: PlacementRequirements;
   resources: Resource[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
-  name?: string;
+  name: string;
   requirements: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
 function createBaseGroupSpec(): GroupSpec {
   return {
-    name: undefined,
+    name: "",
     requirements: PlacementRequirements.fromPartial({}),
     resources: []
   };
@@ -25,7 +25,7 @@ function createBaseGroupSpec(): GroupSpec {
 export const GroupSpec = {
   typeUrl: "/akash.deployment.v1beta2.GroupSpec",
   encode(message: GroupSpec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.requirements !== undefined) {
@@ -79,7 +79,7 @@ export const GroupSpec = {
   },
   fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
     const message = createBaseGroupSpec();
-    message.name = object.name ?? undefined;
+    message.name = object.name ?? "";
     if (object.requirements !== undefined && object.requirements !== null) {
       message.requirements = PlacementRequirements.fromPartial(object.requirements);
     }
@@ -95,7 +95,7 @@ export const GroupSpec = {
   },
   fromSDKJSON(object: any): GroupSpecSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
       requirements: isSet(object.requirements) ? PlacementRequirements.fromSDKJSON(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDKJSON(e)) : []
     };
@@ -113,7 +113,7 @@ export const GroupSpec = {
   },
   fromAmino(object: GroupSpecAmino): GroupSpec {
     return {
-      name: object?.name,
+      name: object.name,
       requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
     };

@@ -10,11 +10,11 @@ export const protobufPackage = "cosmos.base.store.v1beta1";
  */
 export interface StoreKVPair {
   /** the store key for the KVStore this pair originates from */
-  storeKey?: string;
+  storeKey: string;
   /** true indicates a delete operation, false indicates a set operation */
-  delete?: boolean;
-  key?: Uint8Array;
-  value?: Uint8Array;
+  delete: boolean;
+  key: Uint8Array;
+  value: Uint8Array;
 }
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -24,32 +24,32 @@ export interface StoreKVPair {
  * Since: cosmos-sdk 0.43
  */
 export interface StoreKVPairSDKType {
-  store_key?: string;
-  delete?: boolean;
-  key?: Uint8Array;
-  value?: Uint8Array;
+  store_key: string;
+  delete: boolean;
+  key: Uint8Array;
+  value: Uint8Array;
 }
 function createBaseStoreKVPair(): StoreKVPair {
   return {
-    storeKey: undefined,
-    delete: undefined,
-    key: undefined,
-    value: undefined
+    storeKey: "",
+    delete: false,
+    key: new Uint8Array(),
+    value: new Uint8Array()
   };
 }
 export const StoreKVPair = {
   typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair",
   encode(message: StoreKVPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.storeKey !== undefined) {
+    if (message.storeKey !== "") {
       writer.uint32(10).string(message.storeKey);
     }
-    if (message.delete !== undefined) {
+    if (message.delete === true) {
       writer.uint32(16).bool(message.delete);
     }
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       writer.uint32(26).bytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       writer.uint32(34).bytes(message.value);
     }
     return writer;
@@ -92,16 +92,16 @@ export const StoreKVPair = {
     const obj: any = {};
     message.storeKey !== undefined && (obj.storeKey = message.storeKey);
     message.delete !== undefined && (obj.delete = message.delete);
-    message.key !== undefined && (obj.key = message.key !== undefined ? base64FromBytes(message.key) : undefined);
-    message.value !== undefined && (obj.value = message.value !== undefined ? base64FromBytes(message.value) : undefined);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<StoreKVPair>): StoreKVPair {
     const message = createBaseStoreKVPair();
-    message.storeKey = object.storeKey ?? undefined;
-    message.delete = object.delete ?? undefined;
-    message.key = object.key ?? undefined;
-    message.value = object.value ?? undefined;
+    message.storeKey = object.storeKey ?? "";
+    message.delete = object.delete ?? false;
+    message.key = object.key ?? new Uint8Array();
+    message.value = object.value ?? new Uint8Array();
     return message;
   },
   fromSDK(object: StoreKVPairSDKType): StoreKVPair {
@@ -114,10 +114,10 @@ export const StoreKVPair = {
   },
   fromSDKJSON(object: any): StoreKVPairSDKType {
     return {
-      store_key: isSet(object.store_key) ? String(object.store_key) : undefined,
-      delete: isSet(object.delete) ? Boolean(object.delete) : undefined,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : undefined,
-      value: isSet(object.value) ? bytesFromBase64(object.value) : undefined
+      store_key: isSet(object.store_key) ? String(object.store_key) : "",
+      delete: isSet(object.delete) ? Boolean(object.delete) : false,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toSDK(message: StoreKVPair): StoreKVPairSDKType {
@@ -130,10 +130,10 @@ export const StoreKVPair = {
   },
   fromAmino(object: StoreKVPairAmino): StoreKVPair {
     return {
-      storeKey: object?.store_key,
-      delete: object?.delete,
-      key: object?.key,
-      value: object?.value
+      storeKey: object.store_key,
+      delete: object.delete,
+      key: object.key,
+      value: object.value
     };
   },
   toAmino(message: StoreKVPair): StoreKVPairAmino {

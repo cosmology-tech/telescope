@@ -21,14 +21,14 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QuerySigningInfoRequest {
   /** cons_address is the address to query signing info of */
-  consAddress?: string;
+  consAddress: string;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
  * method
  */
 export interface QuerySigningInfoRequestSDKType {
-  cons_address?: string;
+  cons_address: string;
 }
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
@@ -245,13 +245,13 @@ export const QueryParamsResponse = {
 };
 function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
   return {
-    consAddress: undefined
+    consAddress: ""
   };
 }
 export const QuerySigningInfoRequest = {
   typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoRequest",
   encode(message: QuerySigningInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.consAddress !== undefined) {
+    if (message.consAddress !== "") {
       writer.uint32(10).string(message.consAddress);
     }
     return writer;
@@ -285,7 +285,7 @@ export const QuerySigningInfoRequest = {
   },
   fromPartial(object: DeepPartial<QuerySigningInfoRequest>): QuerySigningInfoRequest {
     const message = createBaseQuerySigningInfoRequest();
-    message.consAddress = object.consAddress ?? undefined;
+    message.consAddress = object.consAddress ?? "";
     return message;
   },
   fromSDK(object: QuerySigningInfoRequestSDKType): QuerySigningInfoRequest {
@@ -295,7 +295,7 @@ export const QuerySigningInfoRequest = {
   },
   fromSDKJSON(object: any): QuerySigningInfoRequestSDKType {
     return {
-      cons_address: isSet(object.cons_address) ? String(object.cons_address) : undefined
+      cons_address: isSet(object.cons_address) ? String(object.cons_address) : ""
     };
   },
   toSDK(message: QuerySigningInfoRequest): QuerySigningInfoRequestSDKType {
@@ -305,7 +305,7 @@ export const QuerySigningInfoRequest = {
   },
   fromAmino(object: QuerySigningInfoRequestAmino): QuerySigningInfoRequest {
     return {
-      consAddress: object?.cons_address
+      consAddress: object.cons_address
     };
   },
   toAmino(message: QuerySigningInfoRequest): QuerySigningInfoRequestAmino {

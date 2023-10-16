@@ -17,18 +17,18 @@ export interface GenesisStateSDKType {
 /** Params defines the erc20 module params */
 export interface Params {
   /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
-  enableErc20?: boolean;
+  enableErc20: boolean;
   /**
    * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
    * Coin by transferring the Tokens through a MsgEthereumTx to the
    * ModuleAddress Ethereum address.
    */
-  enableEvmHook?: boolean;
+  enableEvmHook: boolean;
 }
 /** Params defines the erc20 module params */
 export interface ParamsSDKType {
-  enable_erc20?: boolean;
-  enable_evm_hook?: boolean;
+  enable_erc20: boolean;
+  enable_evm_hook: boolean;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -147,17 +147,17 @@ export const GenesisState = {
 };
 function createBaseParams(): Params {
   return {
-    enableErc20: undefined,
-    enableEvmHook: undefined
+    enableErc20: false,
+    enableEvmHook: false
   };
 }
 export const Params = {
   typeUrl: "/evmos.erc20.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableErc20 !== undefined) {
+    if (message.enableErc20 === true) {
       writer.uint32(8).bool(message.enableErc20);
     }
-    if (message.enableEvmHook !== undefined) {
+    if (message.enableEvmHook === true) {
       writer.uint32(16).bool(message.enableEvmHook);
     }
     return writer;
@@ -196,8 +196,8 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.enableErc20 = object.enableErc20 ?? undefined;
-    message.enableEvmHook = object.enableEvmHook ?? undefined;
+    message.enableErc20 = object.enableErc20 ?? false;
+    message.enableEvmHook = object.enableEvmHook ?? false;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -208,8 +208,8 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      enable_erc20: isSet(object.enable_erc20) ? Boolean(object.enable_erc20) : undefined,
-      enable_evm_hook: isSet(object.enable_evm_hook) ? Boolean(object.enable_evm_hook) : undefined
+      enable_erc20: isSet(object.enable_erc20) ? Boolean(object.enable_erc20) : false,
+      enable_evm_hook: isSet(object.enable_evm_hook) ? Boolean(object.enable_evm_hook) : false
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -220,8 +220,8 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      enableErc20: object?.enable_erc20,
-      enableEvmHook: object?.enable_evm_hook
+      enableErc20: object.enable_erc20,
+      enableEvmHook: object.enable_evm_hook
     };
   },
   toAmino(message: Params): ParamsAmino {

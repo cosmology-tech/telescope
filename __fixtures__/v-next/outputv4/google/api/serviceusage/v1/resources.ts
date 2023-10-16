@@ -65,14 +65,14 @@ export interface Service {
    * A valid name would be:
    * - projects/123/services/serviceusage.googleapis.com
    */
-  name?: string;
+  name: string;
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - projects/123
    */
-  parent?: string;
+  parent: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
@@ -81,14 +81,14 @@ export interface Service {
    */
   config?: ServiceConfig;
   /** Whether or not the service has been enabled for use by the consumer. */
-  state?: State;
+  state: State;
 }
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
-  name?: string;
-  parent?: string;
+  name: string;
+  parent: string;
   config?: ServiceConfigSDKType;
-  state?: State;
+  state: State;
 }
 /** The configuration of the service. */
 export interface ServiceConfig {
@@ -98,9 +98,9 @@ export interface ServiceConfig {
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
-  name?: string;
+  name: string;
   /** The product title for this service. */
-  title?: string;
+  title: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
@@ -135,8 +135,8 @@ export interface ServiceConfig {
 }
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
-  name?: string;
-  title?: string;
+  name: string;
+  title: string;
   apis: ApiSDKType[];
   documentation?: DocumentationSDKType;
   quota?: QuotaSDKType;
@@ -160,25 +160,25 @@ export interface OperationMetadataSDKType {
 }
 function createBaseService(): Service {
   return {
-    name: undefined,
-    parent: undefined,
+    name: "",
+    parent: "",
     config: undefined,
-    state: undefined
+    state: 0
   };
 }
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(42).string(message.parent);
     }
     if (message.config !== undefined) {
       ServiceConfig.encode(message.config, writer.uint32(18).fork()).ldelim();
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       writer.uint32(32).int32(message.state);
     }
     return writer;
@@ -227,12 +227,12 @@ export const Service = {
   },
   fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
-    message.name = object.name ?? undefined;
-    message.parent = object.parent ?? undefined;
+    message.name = object.name ?? "";
+    message.parent = object.parent ?? "";
     if (object.config !== undefined && object.config !== null) {
       message.config = ServiceConfig.fromPartial(object.config);
     }
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     return message;
   },
   fromSDK(object: ServiceSDKType): Service {
@@ -240,15 +240,15 @@ export const Service = {
       name: object?.name,
       parent: object?.parent,
       config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : undefined
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   fromSDKJSON(object: any): ServiceSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      parent: isSet(object.parent) ? String(object.parent) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      parent: isSet(object.parent) ? String(object.parent) : "",
       config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : undefined
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toSDK(message: Service): ServiceSDKType {
@@ -261,10 +261,10 @@ export const Service = {
   },
   fromAmino(object: ServiceAmino): Service {
     return {
-      name: object?.name,
-      parent: object?.parent,
+      name: object.name,
+      parent: object.parent,
       config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : undefined
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toAmino(message: Service): ServiceAmino {
@@ -293,8 +293,8 @@ export const Service = {
 };
 function createBaseServiceConfig(): ServiceConfig {
   return {
-    name: undefined,
-    title: undefined,
+    name: "",
+    title: "",
     apis: [],
     documentation: undefined,
     quota: undefined,
@@ -308,10 +308,10 @@ function createBaseServiceConfig(): ServiceConfig {
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
   encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
     for (const v of message.apis) {
@@ -426,8 +426,8 @@ export const ServiceConfig = {
   },
   fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
     const message = createBaseServiceConfig();
-    message.name = object.name ?? undefined;
-    message.title = object.title ?? undefined;
+    message.name = object.name ?? "";
+    message.title = object.title ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     if (object.documentation !== undefined && object.documentation !== null) {
       message.documentation = Documentation.fromPartial(object.documentation);
@@ -464,8 +464,8 @@ export const ServiceConfig = {
   },
   fromSDKJSON(object: any): ServiceConfigSDKType {
     return {
-      name: isSet(object.name) ? String(object.name) : undefined,
-      title: isSet(object.title) ? String(object.title) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
       documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
       quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
@@ -504,8 +504,8 @@ export const ServiceConfig = {
   },
   fromAmino(object: ServiceConfigAmino): ServiceConfig {
     return {
-      name: object?.name,
-      title: object?.title,
+      name: object.name,
+      title: object.title,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
       documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
       quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
