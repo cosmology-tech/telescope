@@ -17,7 +17,7 @@ export interface Class {
   /** uri_hash is a hash of the document pointed by uri. Optional */
   uriHash: string;
   /** data is the app specific metadata of the NFT class. Optional */
-  data: Any;
+  data?: Any;
 }
 /** Class defines the class of the nft type. */
 export interface ClassSDKType {
@@ -27,7 +27,7 @@ export interface ClassSDKType {
   description: string;
   uri: string;
   uri_hash: string;
-  data: AnySDKType;
+  data?: AnySDKType;
 }
 /** NFT defines the NFT. */
 export interface NFT {
@@ -40,7 +40,7 @@ export interface NFT {
   /** uri_hash is a hash of the document pointed by uri */
   uriHash: string;
   /** data is an app specific data of the NFT. Optional */
-  data: Any;
+  data?: Any;
 }
 /** NFT defines the NFT. */
 export interface NFTSDKType {
@@ -48,7 +48,7 @@ export interface NFTSDKType {
   id: string;
   uri: string;
   uri_hash: string;
-  data: AnySDKType;
+  data?: AnySDKType;
 }
 function createBaseClass(): Class {
   return {
@@ -58,7 +58,7 @@ function createBaseClass(): Class {
     description: "",
     uri: "",
     uriHash: "",
-    data: Any.fromPartial({})
+    data: undefined
   };
 }
 export const Class = {
@@ -240,7 +240,7 @@ function createBaseNFT(): NFT {
     id: "",
     uri: "",
     uriHash: "",
-    data: Any.fromPartial({})
+    data: undefined
   };
 }
 export const NFT = {

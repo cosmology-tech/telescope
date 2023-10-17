@@ -26,8 +26,8 @@ export interface EvidenceSDKType {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidence {
-  voteA: Vote;
-  voteB: Vote;
+  voteA?: Vote;
+  voteB?: Vote;
   totalVotingPower: bigint;
   validatorPower: bigint;
   timestamp: Date;
@@ -50,15 +50,15 @@ export interface DuplicateVoteEvidenceAminoMsg {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
-  vote_a: VoteSDKType;
-  vote_b: VoteSDKType;
+  vote_a?: VoteSDKType;
+  vote_b?: VoteSDKType;
   total_voting_power: bigint;
   validator_power: bigint;
   timestamp: Date;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
-  conflictingBlock: LightBlock;
+  conflictingBlock?: LightBlock;
   commonHeight: bigint;
   byzantineValidators: Validator[];
   totalVotingPower: bigint;
@@ -82,7 +82,7 @@ export interface LightClientAttackEvidenceAminoMsg {
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
-  conflicting_block: LightBlockSDKType;
+  conflicting_block?: LightBlockSDKType;
   common_height: bigint;
   byzantine_validators: ValidatorSDKType[];
   total_voting_power: bigint;
@@ -206,8 +206,8 @@ export const Evidence = {
 };
 function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
-    voteA: Vote.fromPartial({}),
-    voteB: Vote.fromPartial({}),
+    voteA: undefined,
+    voteB: undefined,
     totalVotingPower: BigInt(0),
     validatorPower: BigInt(0),
     timestamp: new Date()
@@ -351,7 +351,7 @@ export const DuplicateVoteEvidence = {
 };
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
-    conflictingBlock: LightBlock.fromPartial({}),
+    conflictingBlock: undefined,
     commonHeight: BigInt(0),
     byzantineValidators: [],
     totalVotingPower: BigInt(0),

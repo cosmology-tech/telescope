@@ -30,31 +30,31 @@ export interface AttributeContext {
    * the origin represents the sender of the first hop. For the first hop,
    * the `source` and the `origin` must have the same content.
    */
-  origin: AttributeContext_Peer;
+  origin?: AttributeContext_Peer;
   /**
    * The source of a network activity, such as starting a TCP connection.
    * In a multi hop network activity, the source represents the sender of the
    * last hop.
    */
-  source: AttributeContext_Peer;
+  source?: AttributeContext_Peer;
   /**
    * The destination of a network activity, such as accepting a TCP connection.
    * In a multi hop network activity, the destination represents the receiver of
    * the last hop.
    */
-  destination: AttributeContext_Peer;
+  destination?: AttributeContext_Peer;
   /** Represents a network request, such as an HTTP request. */
-  request: AttributeContext_Request;
+  request?: AttributeContext_Request;
   /** Represents a network response, such as an HTTP response. */
-  response: AttributeContext_Response;
+  response?: AttributeContext_Response;
   /**
    * Represents a target resource that is involved with a network activity.
    * If multiple resources are involved with an activity, this must be the
    * primary one.
    */
-  resource: AttributeContext_Resource;
+  resource?: AttributeContext_Resource;
   /** Represents an API operation that is involved to a network activity. */
-  api: AttributeContext_Api;
+  api?: AttributeContext_Api;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
@@ -78,13 +78,13 @@ export interface AttributeContext {
  * a system.
  */
 export interface AttributeContextSDKType {
-  origin: AttributeContext_PeerSDKType;
-  source: AttributeContext_PeerSDKType;
-  destination: AttributeContext_PeerSDKType;
-  request: AttributeContext_RequestSDKType;
-  response: AttributeContext_ResponseSDKType;
-  resource: AttributeContext_ResourceSDKType;
-  api: AttributeContext_ApiSDKType;
+  origin?: AttributeContext_PeerSDKType;
+  source?: AttributeContext_PeerSDKType;
+  destination?: AttributeContext_PeerSDKType;
+  request?: AttributeContext_RequestSDKType;
+  response?: AttributeContext_ResponseSDKType;
+  resource?: AttributeContext_ResourceSDKType;
+  api?: AttributeContext_ApiSDKType;
   extensions: AnySDKType[];
 }
 export interface AttributeContext_Peer_LabelsEntry {
@@ -233,7 +233,7 @@ export interface AttributeContext_Auth {
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
-  claims: Struct;
+  claims?: Struct;
   /**
    * A list of access level resource names that allow resources to be
    * accessed by authenticated requester. It is part of Secure GCP processing
@@ -254,7 +254,7 @@ export interface AttributeContext_AuthSDKType {
   principal: string;
   audiences: string[];
   presenter: string;
-  claims: StructSDKType;
+  claims?: StructSDKType;
   access_levels: string[];
 }
 export interface AttributeContext_Request_HeadersEntry {
@@ -302,7 +302,7 @@ export interface AttributeContext_Request {
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
-  time: Date;
+  time?: Date;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
   size: Long;
   /**
@@ -321,7 +321,7 @@ export interface AttributeContext_Request {
    * The request authentication. May be absent for unauthenticated requests.
    * Derived from the HTTP request `Authorization` header or equivalent.
    */
-  auth: AttributeContext_Auth;
+  auth?: AttributeContext_Auth;
 }
 /**
  * This message defines attributes for an HTTP request. If the actual
@@ -338,11 +338,11 @@ export interface AttributeContext_RequestSDKType {
   host: string;
   scheme: string;
   query: string;
-  time: Date;
+  time?: Date;
   size: Long;
   protocol: string;
   reason: string;
-  auth: AttributeContext_AuthSDKType;
+  auth?: AttributeContext_AuthSDKType;
 }
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
@@ -373,14 +373,14 @@ export interface AttributeContext_Response {
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time: Date;
+  time?: Date;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
-  backendLatency: Duration;
+  backendLatency?: Duration;
 }
 /**
  * This message defines attributes for a typical network response. It
@@ -392,8 +392,8 @@ export interface AttributeContext_ResponseSDKType {
   headers: {
     [key: string]: string;
   };
-  time: Date;
-  backend_latency: DurationSDKType;
+  time?: Date;
+  backend_latency?: DurationSDKType;
 }
 export interface AttributeContext_Resource_LabelsEntry {
   key: string;
@@ -476,18 +476,18 @@ export interface AttributeContext_Resource {
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  createTime: Date;
+  createTime?: Date;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  updateTime: Date;
+  updateTime?: Date;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  deleteTime: Date;
+  deleteTime?: Date;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client
@@ -523,21 +523,21 @@ export interface AttributeContext_ResourceSDKType {
     [key: string]: string;
   };
   display_name: string;
-  create_time: Date;
-  update_time: Date;
-  delete_time: Date;
+  create_time?: Date;
+  update_time?: Date;
+  delete_time?: Date;
   etag: string;
   location: string;
 }
 function createBaseAttributeContext(): AttributeContext {
   return {
-    origin: AttributeContext_Peer.fromPartial({}),
-    source: AttributeContext_Peer.fromPartial({}),
-    destination: AttributeContext_Peer.fromPartial({}),
-    request: AttributeContext_Request.fromPartial({}),
-    response: AttributeContext_Response.fromPartial({}),
-    resource: AttributeContext_Resource.fromPartial({}),
-    api: AttributeContext_Api.fromPartial({}),
+    origin: undefined,
+    source: undefined,
+    destination: undefined,
+    request: undefined,
+    response: undefined,
+    resource: undefined,
+    api: undefined,
     extensions: []
   };
 }
@@ -975,7 +975,7 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
     principal: "",
     audiences: [],
     presenter: "",
-    claims: Struct.fromPartial({}),
+    claims: undefined,
     accessLevels: []
   };
 }
@@ -1165,11 +1165,11 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     host: "",
     scheme: "",
     query: "",
-    time: new Date(),
+    time: undefined,
     size: Long.ZERO,
     protocol: "",
     reason: "",
-    auth: AttributeContext_Auth.fromPartial({})
+    auth: undefined
   };
 }
 export const AttributeContext_Request = {
@@ -1448,8 +1448,8 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
     code: Long.ZERO,
     size: Long.ZERO,
     headers: {},
-    time: new Date(),
-    backendLatency: Duration.fromPartial({})
+    time: undefined,
+    backendLatency: undefined
   };
 }
 export const AttributeContext_Response = {
@@ -1722,9 +1722,9 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
     uid: "",
     annotations: {},
     displayName: "",
-    createTime: new Date(),
-    updateTime: new Date(),
-    deleteTime: new Date(),
+    createTime: undefined,
+    updateTime: undefined,
+    deleteTime: undefined,
     etag: "",
     location: ""
   };

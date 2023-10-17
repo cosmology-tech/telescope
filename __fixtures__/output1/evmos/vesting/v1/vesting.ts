@@ -14,7 +14,7 @@ export interface ClawbackVestingAccount {
    * base_vesting_account implements the VestingAccount interface. It contains
    * all the necessary fields needed for any vesting account implementation
    */
-  baseVestingAccount: BaseVestingAccount;
+  baseVestingAccount?: BaseVestingAccount;
   /** funder_address specifies the account which can perform clawback */
   funderAddress: string;
   /** start_time defines the time at which the vesting period begins */
@@ -31,7 +31,7 @@ export interface ClawbackVestingAccount {
  * of unvested tokens, or a combination (tokens vest, but are still locked).
  */
 export interface ClawbackVestingAccountSDKType {
-  base_vesting_account: BaseVestingAccountSDKType;
+  base_vesting_account?: BaseVestingAccountSDKType;
   funder_address: string;
   start_time: Date;
   lockup_periods: PeriodSDKType[];
@@ -39,7 +39,7 @@ export interface ClawbackVestingAccountSDKType {
 }
 function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
   return {
-    baseVestingAccount: BaseVestingAccount.fromPartial({}),
+    baseVestingAccount: undefined,
     funderAddress: "",
     startTime: new Date(),
     lockupPeriods: [],

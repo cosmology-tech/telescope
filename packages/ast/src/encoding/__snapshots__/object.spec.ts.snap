@@ -2760,7 +2760,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,

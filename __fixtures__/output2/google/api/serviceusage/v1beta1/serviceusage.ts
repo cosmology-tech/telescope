@@ -215,7 +215,7 @@ export interface CreateAdminOverrideRequest {
    */
   parent: string;
   /** The admin override to create. */
-  override: QuotaOverride;
+  override?: QuotaOverride;
   /**
    * Whether to force the creation of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -243,7 +243,7 @@ export interface UpdateAdminOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override: QuotaOverride;
+  override?: QuotaOverride;
   /**
    * Whether to force the update of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -254,7 +254,7 @@ export interface UpdateAdminOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
@@ -366,7 +366,7 @@ export interface CreateConsumerOverrideRequest {
    */
   parent: string;
   /** The override to create. */
-  override: QuotaOverride;
+  override?: QuotaOverride;
   /**
    * Whether to force the creation of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -394,7 +394,7 @@ export interface UpdateConsumerOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override: QuotaOverride;
+  override?: QuotaOverride;
   /**
    * Whether to force the update of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -405,7 +405,7 @@ export interface UpdateConsumerOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
@@ -555,7 +555,7 @@ export interface GetServiceIdentityResponse {
    * resources. If exists is true, it contains email and unique_id. If exists is
    * false, it contains pre-constructed email and empty unique_id.
    */
-  identity: ServiceIdentity;
+  identity?: ServiceIdentity;
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
@@ -1136,7 +1136,7 @@ export const GetConsumerQuotaLimitRequest = {
 function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
   return {
     parent: "",
-    override: QuotaOverride.fromPartial({}),
+    override: undefined,
     force: false,
     forceOnly: []
   };
@@ -1224,9 +1224,9 @@ export const CreateAdminOverrideRequest = {
 function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
   return {
     name: "",
-    override: QuotaOverride.fromPartial({}),
+    override: undefined,
     force: false,
-    updateMask: FieldMask.fromPartial({}),
+    updateMask: undefined,
     forceOnly: []
   };
 }
@@ -1743,7 +1743,7 @@ export const ImportAdminOverridesMetadata = {
 function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideRequest {
   return {
     parent: "",
-    override: QuotaOverride.fromPartial({}),
+    override: undefined,
     force: false,
     forceOnly: []
   };
@@ -1831,9 +1831,9 @@ export const CreateConsumerOverrideRequest = {
 function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideRequest {
   return {
     name: "",
-    override: QuotaOverride.fromPartial({}),
+    override: undefined,
     force: false,
-    updateMask: FieldMask.fromPartial({}),
+    updateMask: undefined,
     forceOnly: []
   };
 }
@@ -2575,7 +2575,7 @@ export const GenerateServiceIdentityRequest = {
 };
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
   return {
-    identity: ServiceIdentity.fromPartial({}),
+    identity: undefined,
     state: 0
   };
 }

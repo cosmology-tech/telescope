@@ -18,7 +18,7 @@ export interface GenericAuthorization {
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization: Any;
+  authorization?: Any;
   expiration: Timestamp;
 }
 /**
@@ -30,7 +30,7 @@ export interface Grant {
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
-  authorization: Any;
+  authorization?: Any;
   expiration: Timestamp;
 }
 function createBaseGenericAuthorization(): GenericAuthorization {
@@ -80,7 +80,7 @@ export const GenericAuthorization = {
 };
 function createBaseGrant(): Grant {
   return {
-    authorization: Any.fromPartial({}),
+    authorization: undefined,
     expiration: Timestamp.fromPartial({})
   };
 }
@@ -137,7 +137,7 @@ function createBaseGrantAuthorization(): GrantAuthorization {
   return {
     granter: "",
     grantee: "",
-    authorization: Any.fromPartial({}),
+    authorization: undefined,
     expiration: Timestamp.fromPartial({})
   };
 }

@@ -36,7 +36,7 @@ export function nullValueToJSON(object: NullValue): string {
 }
 export interface Struct_FieldsEntry {
   key: string;
-  value: Value;
+  value?: Value;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -88,7 +88,7 @@ export interface ListValue {
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
     key: "",
-    value: Value.fromPartial({})
+    value: undefined
   };
 }
 export const Struct_FieldsEntry = {

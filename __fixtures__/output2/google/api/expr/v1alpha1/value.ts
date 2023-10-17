@@ -77,9 +77,9 @@ export interface MapValue_Entry {
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
-  key: Value;
+  key?: Value;
   /** The value. */
-  value: Value;
+  value?: Value;
 }
 function createBaseValue(): Value {
   return {
@@ -395,8 +395,8 @@ export const MapValue = {
 };
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {
-    key: Value.fromPartial({}),
-    value: Value.fromPartial({})
+    key: undefined,
+    value: undefined
   };
 }
 export const MapValue_Entry = {

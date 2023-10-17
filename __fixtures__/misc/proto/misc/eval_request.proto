@@ -10,4 +10,25 @@ message EvalRequest {
   map<string, google.api.expr.v1alpha1.ExprValue> bindings = 1;
 
   map<string, google.api.expr.v1alpha1.IdRef> refs = 2;
+
+  uint32 test_num = 3;
+  string test_string = 4[(gogoproto.nullable) = false];
+  bool test_bool = 5;
+
+  // Used in v1beta1
+  reserved 6, 7, 9 to 11;
+
+  AccessConfig instantiate_permission = 8;
+
+  oneof test_oneof {
+    // [(gogoproto.nullable) = false] wouldn't work in this case
+    string id = 12[(gogoproto.nullable) = false];
+    string name = 13;
+  }
+
+  repeated string test_array = 14;
+}
+
+message AccessConfig {
+  string sender = 1;
 }

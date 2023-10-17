@@ -112,7 +112,7 @@ export interface GetTxsEventRequest {
   /** events is the list of transaction event type. */
   events: string[];
   /** pagination defines a pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
   orderBy: OrderBy;
 }
 /**
@@ -121,7 +121,7 @@ export interface GetTxsEventRequest {
  */
 export interface GetTxsEventRequestSDKType {
   events: string[];
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
   order_by: OrderBy;
 }
 /**
@@ -134,7 +134,7 @@ export interface GetTxsEventResponse {
   /** tx_responses is the list of queried TxResponses. */
   txResponses: TxResponse[];
   /** pagination defines a pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
@@ -143,7 +143,7 @@ export interface GetTxsEventResponse {
 export interface GetTxsEventResponseSDKType {
   txs: TxSDKType[];
   tx_responses: TxResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
@@ -168,14 +168,14 @@ export interface BroadcastTxRequestSDKType {
  */
 export interface BroadcastTxResponse {
   /** tx_response is the queried TxResponses. */
-  txResponse: TxResponse;
+  txResponse?: TxResponse;
 }
 /**
  * BroadcastTxResponse is the response type for the
  * Service.BroadcastTx method.
  */
 export interface BroadcastTxResponseSDKType {
-  tx_response: TxResponseSDKType;
+  tx_response?: TxResponseSDKType;
 }
 /**
  * SimulateRequest is the request type for the Service.Simulate
@@ -187,7 +187,7 @@ export interface SimulateRequest {
    * Deprecated. Send raw tx bytes instead.
    */
   /** @deprecated */
-  tx: Tx;
+  tx?: Tx;
   /**
    * tx_bytes is the raw transaction.
    * 
@@ -201,7 +201,7 @@ export interface SimulateRequest {
  */
 export interface SimulateRequestSDKType {
   /** @deprecated */
-  tx: TxSDKType;
+  tx?: TxSDKType;
   tx_bytes: Uint8Array;
 }
 /**
@@ -210,17 +210,17 @@ export interface SimulateRequestSDKType {
  */
 export interface SimulateResponse {
   /** gas_info is the information about gas used in the simulation. */
-  gasInfo: GasInfo;
+  gasInfo?: GasInfo;
   /** result is the result of the simulation. */
-  result: Result;
+  result?: Result;
 }
 /**
  * SimulateResponse is the response type for the
  * Service.SimulateRPC method.
  */
 export interface SimulateResponseSDKType {
-  gas_info: GasInfoSDKType;
-  result: ResultSDKType;
+  gas_info?: GasInfoSDKType;
+  result?: ResultSDKType;
 }
 /**
  * GetTxRequest is the request type for the Service.GetTx
@@ -240,14 +240,14 @@ export interface GetTxRequestSDKType {
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
   /** tx is the queried transaction. */
-  tx: Tx;
+  tx?: Tx;
   /** tx_response is the queried TxResponses. */
-  txResponse: TxResponse;
+  txResponse?: TxResponse;
 }
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseSDKType {
-  tx: TxSDKType;
-  tx_response: TxResponseSDKType;
+  tx?: TxSDKType;
+  tx_response?: TxResponseSDKType;
 }
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
@@ -259,7 +259,7 @@ export interface GetBlockWithTxsRequest {
   /** height is the height of the block to query. */
   height: Long;
   /** pagination defines a pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
@@ -269,7 +269,7 @@ export interface GetBlockWithTxsRequest {
  */
 export interface GetBlockWithTxsRequestSDKType {
   height: Long;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
@@ -279,10 +279,10 @@ export interface GetBlockWithTxsRequestSDKType {
 export interface GetBlockWithTxsResponse {
   /** txs are the transactions in the block. */
   txs: Tx[];
-  blockId: BlockID;
-  block: Block;
+  blockId?: BlockID;
+  block?: Block;
   /** pagination defines a pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
@@ -291,14 +291,14 @@ export interface GetBlockWithTxsResponse {
  */
 export interface GetBlockWithTxsResponseSDKType {
   txs: TxSDKType[];
-  block_id: BlockIDSDKType;
-  block: BlockSDKType;
-  pagination: PageResponseSDKType;
+  block_id?: BlockIDSDKType;
+  block?: BlockSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return {
     events: [],
-    pagination: PageRequest.fromPartial({}),
+    pagination: undefined,
     orderBy: 0
   };
 }
@@ -386,7 +386,7 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
   return {
     txs: [],
     txResponses: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetTxsEventResponse = {
@@ -546,7 +546,7 @@ export const BroadcastTxRequest = {
 };
 function createBaseBroadcastTxResponse(): BroadcastTxResponse {
   return {
-    txResponse: TxResponse.fromPartial({})
+    txResponse: undefined
   };
 }
 export const BroadcastTxResponse = {
@@ -601,7 +601,7 @@ export const BroadcastTxResponse = {
 };
 function createBaseSimulateRequest(): SimulateRequest {
   return {
-    tx: Tx.fromPartial({}),
+    tx: undefined,
     txBytes: new Uint8Array()
   };
 }
@@ -668,8 +668,8 @@ export const SimulateRequest = {
 };
 function createBaseSimulateResponse(): SimulateResponse {
   return {
-    gasInfo: GasInfo.fromPartial({}),
-    result: Result.fromPartial({})
+    gasInfo: undefined,
+    result: undefined
   };
 }
 export const SimulateResponse = {
@@ -790,8 +790,8 @@ export const GetTxRequest = {
 };
 function createBaseGetTxResponse(): GetTxResponse {
   return {
-    tx: Tx.fromPartial({}),
-    txResponse: TxResponse.fromPartial({})
+    tx: undefined,
+    txResponse: undefined
   };
 }
 export const GetTxResponse = {
@@ -858,7 +858,7 @@ export const GetTxResponse = {
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
   return {
     height: Long.ZERO,
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetBlockWithTxsRequest = {
@@ -925,9 +925,9 @@ export const GetBlockWithTxsRequest = {
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
   return {
     txs: [],
-    blockId: BlockID.fromPartial({}),
-    block: Block.fromPartial({}),
-    pagination: PageResponse.fromPartial({})
+    blockId: undefined,
+    block: undefined,
+    pagination: undefined
   };
 }
 export const GetBlockWithTxsResponse = {

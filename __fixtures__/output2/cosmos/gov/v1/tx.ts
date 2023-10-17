@@ -27,7 +27,7 @@ export interface MsgSubmitProposalResponse {
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
-  content: Any;
+  content?: Any;
   /** authority must be the gov module address. */
   authority: string;
 }
@@ -189,7 +189,7 @@ export const MsgSubmitProposalResponse = {
 };
 function createBaseMsgExecLegacyContent(): MsgExecLegacyContent {
   return {
-    content: Any.fromPartial({}),
+    content: undefined,
     authority: ""
   };
 }

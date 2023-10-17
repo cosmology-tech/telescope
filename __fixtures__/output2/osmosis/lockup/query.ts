@@ -74,7 +74,7 @@ export interface LockedRequest {
   lockId: Long;
 }
 export interface LockedResponse {
-  lock: PeriodLock;
+  lock?: PeriodLock;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: Long;
@@ -1134,7 +1134,7 @@ export const LockedRequest = {
 };
 function createBaseLockedResponse(): LockedResponse {
   return {
-    lock: PeriodLock.fromPartial({})
+    lock: undefined
   };
 }
 export const LockedResponse = {

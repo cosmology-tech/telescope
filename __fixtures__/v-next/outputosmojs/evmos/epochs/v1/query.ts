@@ -4,18 +4,18 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryEpochsInfoRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface QueryCurrentEpochRequest {
   identifier: string;
@@ -31,7 +31,7 @@ export interface QueryCurrentEpochResponseSDKType {
 }
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryEpochsInfoRequest = {
@@ -118,7 +118,7 @@ export const QueryEpochsInfoRequest = {
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
   return {
     epochs: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryEpochsInfoResponse = {

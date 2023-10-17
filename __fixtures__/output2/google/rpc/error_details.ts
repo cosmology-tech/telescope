@@ -21,7 +21,7 @@ export const protobufPackage = "google.rpc";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: Duration;
+  retryDelay?: Duration;
 }
 /** Describes additional debugging info. */
 export interface DebugInfo {
@@ -259,7 +259,7 @@ export interface LocalizedMessage {
 }
 function createBaseRetryInfo(): RetryInfo {
   return {
-    retryDelay: Duration.fromPartial({})
+    retryDelay: undefined
   };
 }
 export const RetryInfo = {

@@ -10,7 +10,7 @@ export const protobufPackage = "cosmos.auth.v1beta1";
 export interface BaseAccount {
   $typeUrl?: string;
   address: string;
-  pubKey: Any;
+  pubKey?: Any;
   accountNumber: bigint;
   sequence: bigint;
 }
@@ -41,14 +41,14 @@ export interface BaseAccountAminoMsg {
 export interface BaseAccountSDKType {
   $typeUrl?: string;
   address: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   account_number: bigint;
   sequence: bigint;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
   $typeUrl?: string;
-  baseAccount: BaseAccount;
+  baseAccount?: BaseAccount;
   name: string;
   permissions: string[];
 }
@@ -69,7 +69,7 @@ export interface ModuleAccountAminoMsg {
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
   $typeUrl?: string;
-  base_account: BaseAccountSDKType;
+  base_account?: BaseAccountSDKType;
   name: string;
   permissions: string[];
 }
@@ -109,7 +109,7 @@ function createBaseBaseAccount(): BaseAccount {
   return {
     $typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
     address: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     accountNumber: BigInt(0),
     sequence: BigInt(0)
   };
@@ -245,7 +245,7 @@ export const BaseAccount = {
 function createBaseModuleAccount(): ModuleAccount {
   return {
     $typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
-    baseAccount: BaseAccount.fromPartial({}),
+    baseAccount: undefined,
     name: "",
     permissions: []
   };

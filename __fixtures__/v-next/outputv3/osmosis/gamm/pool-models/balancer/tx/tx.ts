@@ -5,7 +5,7 @@ export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
   sender: string;
-  poolParams: PoolParams;
+  poolParams?: PoolParams;
   poolAssets: PoolAsset[];
   futurePoolGovernor: string;
 }
@@ -27,7 +27,7 @@ export interface MsgCreateBalancerPoolAminoMsg {
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolSDKType {
   sender: string;
-  pool_params: PoolParamsSDKType;
+  pool_params?: PoolParamsSDKType;
   pool_assets: PoolAssetSDKType[];
   future_pool_governor: string;
 }
@@ -54,7 +54,7 @@ export interface MsgCreateBalancerPoolResponseSDKType {
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
   return {
     sender: "",
-    poolParams: PoolParams.fromPartial({}),
+    poolParams: undefined,
     poolAssets: [],
     futurePoolGovernor: ""
   };

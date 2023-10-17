@@ -192,7 +192,7 @@ export interface DepositSDKType {
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: Long;
-  content: Any;
+  content?: Any;
   status: ProposalStatus;
   /**
    * final_tally_result is the final tally result of the proposal. When
@@ -209,7 +209,7 @@ export interface Proposal {
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   proposal_id: Long;
-  content: AnySDKType;
+  content?: AnySDKType;
   status: ProposalStatus;
   final_tally_result: TallyResultSDKType;
   submit_time: Date;
@@ -529,7 +529,7 @@ export const Deposit = {
 function createBaseProposal(): Proposal {
   return {
     proposalId: Long.UZERO,
-    content: Any.fromPartial({}),
+    content: undefined,
     status: 0,
     finalTallyResult: TallyResult.fromPartial({}),
     submitTime: new Date(),

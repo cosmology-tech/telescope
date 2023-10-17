@@ -88,4 +88,5 @@ export declare const getFieldOptionality: (context: ProtoParseContext | AminoPar
 export declare const isScalarField: (field: ProtoField) => boolean;
 export declare const isArrayField: (field: ProtoField) => boolean;
 export declare const isEnumField: (field: ProtoField) => boolean;
+export declare const isMapField: (field: ProtoField) => string;
 export declare const getFieldOptionalityForDefaults: (context: ProtoParseContext | AminoParseContext, field: ProtoField, isOneOf: boolean) => any;

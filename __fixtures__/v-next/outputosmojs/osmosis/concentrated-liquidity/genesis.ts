@@ -34,7 +34,7 @@ export interface FullTickSDKType {
  */
 export interface PoolData {
   /** pool struct */
-  pool: Any;
+  pool?: Any;
   /** pool's ticks */
   ticks: FullTick[];
   feeAccumulator: AccumObject;
@@ -47,7 +47,7 @@ export interface PoolData {
  * for genesis state.
  */
 export interface PoolDataSDKType {
-  pool: AnySDKType;
+  pool?: AnySDKType;
   ticks: FullTickSDKType[];
   fee_accumulator: AccumObjectSDKType;
   incentives_accumulators: AccumObjectSDKType[];
@@ -72,11 +72,11 @@ export interface GenesisStateSDKType {
 export interface AccumObject {
   /** Accumulator's name (pulled from AccumulatorContent) */
   name: string;
-  accumContent: AccumulatorContent;
+  accumContent?: AccumulatorContent;
 }
 export interface AccumObjectSDKType {
   name: string;
-  accum_content: AccumulatorContentSDKType;
+  accum_content?: AccumulatorContentSDKType;
 }
 function createBaseFullTick(): FullTick {
   return {
@@ -202,7 +202,7 @@ export const FullTick = {
 };
 function createBasePoolData(): PoolData {
   return {
-    pool: Any.fromPartial({}),
+    pool: undefined,
     ticks: [],
     feeAccumulator: AccumObject.fromPartial({}),
     incentivesAccumulators: [],
@@ -552,7 +552,7 @@ export const GenesisState = {
 function createBaseAccumObject(): AccumObject {
   return {
     name: "",
-    accumContent: AccumulatorContent.fromPartial({})
+    accumContent: undefined
   };
 }
 export const AccumObject = {

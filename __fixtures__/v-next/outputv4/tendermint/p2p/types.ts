@@ -43,23 +43,23 @@ export interface NodeInfoOtherSDKType {
 export interface PeerInfo {
   id: string;
   addressInfo: PeerAddressInfo[];
-  lastConnected: Date;
+  lastConnected?: Date;
 }
 export interface PeerInfoSDKType {
   id: string;
   address_info: PeerAddressInfoSDKType[];
-  last_connected: Date;
+  last_connected?: Date;
 }
 export interface PeerAddressInfo {
   address: string;
-  lastDialSuccess: Date;
-  lastDialFailure: Date;
+  lastDialSuccess?: Date;
+  lastDialFailure?: Date;
   dialFailures: number;
 }
 export interface PeerAddressInfoSDKType {
   address: string;
-  last_dial_success: Date;
-  last_dial_failure: Date;
+  last_dial_success?: Date;
+  last_dial_failure?: Date;
   dial_failures: number;
 }
 function createBaseProtocolVersion(): ProtocolVersion {
@@ -484,7 +484,7 @@ function createBasePeerInfo(): PeerInfo {
   return {
     id: "",
     addressInfo: [],
-    lastConnected: new Date()
+    lastConnected: undefined
   };
 }
 export const PeerInfo = {
@@ -578,7 +578,7 @@ export const PeerInfo = {
     return {
       id: object.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
-      lastConnected: object.last_connected
+      lastConnected: object?.last_connected
     };
   },
   toAmino(message: PeerInfo): PeerInfoAmino {
@@ -611,8 +611,8 @@ export const PeerInfo = {
 function createBasePeerAddressInfo(): PeerAddressInfo {
   return {
     address: "",
-    lastDialSuccess: new Date(),
-    lastDialFailure: new Date(),
+    lastDialSuccess: undefined,
+    lastDialFailure: undefined,
     dialFailures: 0
   };
 }
@@ -710,8 +710,8 @@ export const PeerAddressInfo = {
   fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {
     return {
       address: object.address,
-      lastDialSuccess: object.last_dial_success,
-      lastDialFailure: object.last_dial_failure,
+      lastDialSuccess: object?.last_dial_success,
+      lastDialFailure: object?.last_dial_failure,
       dialFailures: object.dial_failures
     };
   },

@@ -47,12 +47,12 @@ export interface Distribution {
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
    */
-  range: Distribution_Range;
+  range?: Distribution_Range;
   /**
    * Defines the histogram bucket boundaries. If the distribution does not
    * contain a histogram, then omit this field.
    */
-  bucketOptions: Distribution_BucketOptions;
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * The number of values in each bucket of the histogram, as described in
    * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -94,8 +94,8 @@ export interface DistributionSDKType {
   count: bigint;
   mean: number;
   sum_of_squared_deviation: number;
-  range: Distribution_RangeSDKType;
-  bucket_options: Distribution_BucketOptionsSDKType;
+  range?: Distribution_RangeSDKType;
+  bucket_options?: Distribution_BucketOptionsSDKType;
   bucket_counts: bigint[];
   exemplars: Distribution_ExemplarSDKType[];
 }
@@ -275,7 +275,7 @@ export interface Distribution_Exemplar {
    */
   value: number;
   /** The observation (sampling) time of the above value. */
-  timestamp: Date;
+  timestamp?: Date;
   /**
    * Contextual information about the example value. Examples are:
    * 
@@ -300,7 +300,7 @@ export interface Distribution_Exemplar {
  */
 export interface Distribution_ExemplarSDKType {
   value: number;
-  timestamp: Date;
+  timestamp?: Date;
   attachments: AnySDKType[];
 }
 function createBaseDistribution(): Distribution {
@@ -308,8 +308,8 @@ function createBaseDistribution(): Distribution {
     count: BigInt(0),
     mean: 0,
     sumOfSquaredDeviation: 0,
-    range: Distribution_Range.fromPartial({}),
-    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    range: undefined,
+    bucketOptions: undefined,
     bucketCounts: [],
     exemplars: []
   };
@@ -1083,7 +1083,7 @@ export const Distribution_BucketOptions_Explicit = {
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: 0,
-    timestamp: new Date(),
+    timestamp: undefined,
     attachments: []
   };
 }
@@ -1177,7 +1177,7 @@ export const Distribution_Exemplar = {
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
     return {
       value: object.value,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
     };
   },

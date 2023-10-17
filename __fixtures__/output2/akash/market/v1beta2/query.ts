@@ -11,12 +11,12 @@ export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
   filters: OrderFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponse {
   orders: Order[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
@@ -29,12 +29,12 @@ export interface QueryOrderResponse {
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequest {
   filters: BidFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponse {
   bids: QueryBidResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequest {
@@ -48,12 +48,12 @@ export interface QueryBidResponse {
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequest {
   filters: LeaseFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequest {
@@ -67,7 +67,7 @@ export interface QueryLeaseResponse {
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   return {
     filters: OrderFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryOrdersRequest = {
@@ -122,7 +122,7 @@ export const QueryOrdersRequest = {
 function createBaseQueryOrdersResponse(): QueryOrdersResponse {
   return {
     orders: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryOrdersResponse = {
@@ -271,7 +271,7 @@ export const QueryOrderResponse = {
 function createBaseQueryBidsRequest(): QueryBidsRequest {
   return {
     filters: BidFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBidsRequest = {
@@ -326,7 +326,7 @@ export const QueryBidsRequest = {
 function createBaseQueryBidsResponse(): QueryBidsResponse {
   return {
     bids: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBidsResponse = {
@@ -485,7 +485,7 @@ export const QueryBidResponse = {
 function createBaseQueryLeasesRequest(): QueryLeasesRequest {
   return {
     filters: LeaseFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryLeasesRequest = {
@@ -540,7 +540,7 @@ export const QueryLeasesRequest = {
 function createBaseQueryLeasesResponse(): QueryLeasesResponse {
   return {
     leases: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryLeasesResponse = {

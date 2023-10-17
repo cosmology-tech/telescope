@@ -403,16 +403,16 @@ export const getDefaultTSTypeFromProtoType = (
 
     const setDefaultCustomTypesToUndefined = context.pluginValue('prototypes.typingsFormat.setDefaultCustomTypesToUndefined');
 
-    if (isOptional) {
-        return t.identifier('undefined');
-    }
-
     if (field.rule === 'repeated') {
         return t.arrayExpression([]);
     }
 
     if (field.keyType) {
         return t.objectExpression([])
+    }
+
+    if (isOptional) {
+        return t.identifier('undefined');
     }
 
     if (field.parsedType?.type === 'Enum') {

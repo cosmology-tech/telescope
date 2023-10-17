@@ -37,7 +37,7 @@ exports[`authz 1`] = `
  * the provide method with expiration time.
  */
 export interface authz {
-  authorization: Any;
+  authorization?: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -50,7 +50,7 @@ export interface authz {
 exports[`createCreateProtoType Grant 1`] = `
 "function createBaseGrant(): Grant {
   return {
-    authorization: Any.fromPartial({}),
+    authorization: undefined,
     expiration: undefined
   };
 }"
@@ -179,7 +179,7 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-  config: Any;
+  config?: Any;
 }"
 `;
 
@@ -220,7 +220,7 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed \`expr\` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
   /**
    * The expr version indicates the major / minor version number of the \`expr\`
    * representation.
@@ -235,7 +235,7 @@ export interface CheckedExpr {
    * The checked expression. Semantically equivalent to the parsed \`expr\`, but
    * may have structural differences.
    */
-  expr: Expr;
+  expr?: Expr;
 }"
 `;
 
@@ -259,7 +259,7 @@ export interface Reference {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value: Constant;
+  value?: Constant;
 }"
 `;
 

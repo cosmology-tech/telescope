@@ -8,7 +8,7 @@ export interface Record {
   /** name represents a name of Record */
   name: string;
   /** pub_key represents a public key in any format */
-  pubKey: Any;
+  pubKey?: Any;
   /** local stores the public information about a locally stored key */
   local?: Record_Local;
   /** ledger stores the public information about a Ledger key */
@@ -44,7 +44,7 @@ export interface RecordAminoMsg {
 /** Record is used for representing a key in the keyring. */
 export interface RecordSDKType {
   name: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   local?: Record_LocalSDKType;
   ledger?: Record_LedgerSDKType;
   multi?: Record_MultiSDKType;
@@ -55,7 +55,7 @@ export interface RecordSDKType {
  * Local item
  */
 export interface Record_Local {
-  privKey: Any;
+  privKey?: Any;
   privKeyType: string;
 }
 export interface Record_LocalProtoMsg {
@@ -79,12 +79,12 @@ export interface Record_LocalAminoMsg {
  * Local item
  */
 export interface Record_LocalSDKType {
-  priv_key: AnySDKType;
+  priv_key?: AnySDKType;
   priv_key_type: string;
 }
 /** Ledger item */
 export interface Record_Ledger {
-  path: BIP44Params;
+  path?: BIP44Params;
 }
 export interface Record_LedgerProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Ledger";
@@ -100,7 +100,7 @@ export interface Record_LedgerAminoMsg {
 }
 /** Ledger item */
 export interface Record_LedgerSDKType {
-  path: BIP44ParamsSDKType;
+  path?: BIP44ParamsSDKType;
 }
 /** Multi item */
 export interface Record_Multi {}
@@ -133,7 +133,7 @@ export interface Record_OfflineSDKType {}
 function createBaseRecord(): Record {
   return {
     name: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     local: undefined,
     ledger: undefined,
     multi: undefined,
@@ -300,7 +300,7 @@ export const Record = {
 };
 function createBaseRecord_Local(): Record_Local {
   return {
-    privKey: Any.fromPartial({}),
+    privKey: undefined,
     privKeyType: ""
   };
 }
@@ -404,7 +404,7 @@ export const Record_Local = {
 };
 function createBaseRecord_Ledger(): Record_Ledger {
   return {
-    path: BIP44Params.fromPartial({})
+    path: undefined
   };
 }
 export const Record_Ledger = {

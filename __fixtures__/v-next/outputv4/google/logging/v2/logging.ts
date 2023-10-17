@@ -117,7 +117,7 @@ export interface WriteLogEntriesRequest {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource: MonitoredResource;
+  resource?: MonitoredResource;
   /**
    * Optional. Default labels that are added to the `labels` field of all log
    * entries in `entries`. If a log entry already has a label with the same key
@@ -172,7 +172,7 @@ export interface WriteLogEntriesRequest {
 /** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequestSDKType {
   log_name: string;
-  resource: MonitoredResourceSDKType;
+  resource?: MonitoredResourceSDKType;
   labels: {
     [key: string]: string;
   };
@@ -186,11 +186,11 @@ export interface WriteLogEntriesResponse {}
 export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
-  value: Status;
+  value?: Status;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
   key: number;
-  value: StatusSDKType;
+  value?: StatusSDKType;
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrors {
@@ -441,13 +441,13 @@ export interface TailLogEntriesRequest {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  bufferWindow: Duration;
+  bufferWindow?: Duration;
 }
 /** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequestSDKType {
   resource_names: string[];
   filter: string;
-  buffer_window: DurationSDKType;
+  buffer_window?: DurationSDKType;
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponse {
@@ -666,7 +666,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
     logName: "",
-    resource: MonitoredResource.fromPartial({}),
+    resource: undefined,
     labels: {},
     entries: [],
     partialSuccess: false,
@@ -956,7 +956,7 @@ export const WriteLogEntriesResponse = {
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   return {
     key: 0,
-    value: Status.fromPartial({})
+    value: undefined
   };
 }
 export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
@@ -1928,7 +1928,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
     resourceNames: [],
     filter: "",
-    bufferWindow: Duration.fromPartial({})
+    bufferWindow: undefined
   };
 }
 export const TailLogEntriesRequest = {

@@ -18,7 +18,7 @@ export interface BasicAllowance {
    */
   spendLimit: Coin[];
   /** expiration specifies an optional time when this allowance expires */
-  expiration: Date;
+  expiration?: Date;
 }
 export interface BasicAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
@@ -49,7 +49,7 @@ export interface BasicAllowanceAminoMsg {
 export interface BasicAllowanceSDKType {
   $typeUrl?: string;
   spend_limit: CoinSDKType[];
-  expiration: Date;
+  expiration?: Date;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -128,7 +128,7 @@ export interface PeriodicAllowanceSDKType {
 export interface AllowedMsgAllowance {
   $typeUrl?: string;
   /** allowance can be any of basic and periodic fee allowance. */
-  allowance: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
+  allowance?: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
@@ -153,7 +153,7 @@ export interface AllowedMsgAllowanceAminoMsg {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
   $typeUrl?: string;
-  allowance: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
+  allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
   allowed_messages: string[];
 }
 /** Grant is stored in the KVStore to record a grant with full context */
@@ -163,7 +163,7 @@ export interface Grant {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
+  allowance?: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
 }
 export interface GrantProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.Grant";
@@ -189,13 +189,13 @@ export interface GrantAminoMsg {
 export interface GrantSDKType {
   granter: string;
   grantee: string;
-  allowance: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
+  allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
 }
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     $typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance",
     spendLimit: [],
-    expiration: new Date()
+    expiration: undefined
   };
 }
 export const BasicAllowance = {
@@ -271,7 +271,7 @@ export const BasicAllowance = {
   fromAmino(object: BasicAllowanceAmino): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      expiration: object.expiration
+      expiration: object?.expiration
     };
   },
   toAmino(message: BasicAllowance): BasicAllowanceAmino {
@@ -482,7 +482,7 @@ export const PeriodicAllowance = {
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
     $typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance",
-    allowance: Any.fromPartial({}),
+    allowance: undefined,
     allowedMessages: []
   };
 }
@@ -600,7 +600,7 @@ function createBaseGrant(): Grant {
   return {
     granter: "",
     grantee: "",
-    allowance: Any.fromPartial({})
+    allowance: undefined
   };
 }
 export const Grant = {

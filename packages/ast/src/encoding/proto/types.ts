@@ -167,11 +167,6 @@ export const getFieldOptionality = (
     field: ProtoField,
     isOneOf: boolean
 ) => {
-
-    // const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
-    // const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
-    // const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
-
     if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
         // these field types are required by default!
         if (isOneOf) {
@@ -201,6 +196,12 @@ export const isEnumField = (
     return field.parsedType?.type === 'Enum'
 };
 
+export const isMapField = (
+  field: ProtoField
+) => {
+  return field.keyType;
+};
+
 export const getFieldOptionalityForDefaults = (
     context: ProtoParseContext | AminoParseContext,
     field: ProtoField,
@@ -209,7 +210,7 @@ export const getFieldOptionalityForDefaults = (
     const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
 
-    if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
+    if (isArrayField(field) || isEnumField(field) || isScalarField(field) || isMapField(field)) {
         // these field types are required by default!
 
         if (isOneOf || (useOptionalNullable &&
@@ -219,10 +220,12 @@ export const getFieldOptionalityForDefaults = (
         return false;
     }
 
+    const gogoprotoNullable = field?.options?.['(gogoproto.nullable)'] ?? true;
+
     return isOneOf ||
         (
             useOptionalNullable &&
-            field?.options?.['(gogoproto.nullable)']
+            gogoprotoNullable
         )
         ||
         (
@@ -232,4 +235,7 @@ export const getFieldOptionalityForDefaults = (
             fieldDefaultIsOptional
         );
 };
+
+
+
 

@@ -23,7 +23,7 @@ export interface Operation {
    * Some services might not provide such metadata.  Any method that returns a
    * long-running operation should document the metadata type, if any.
    */
-  metadata: Any;
+  metadata?: Any;
   /**
    * If the value is `false`, it means the operation is still in progress.
    * If `true`, the operation is completed, and either `error` or `response` is
@@ -86,7 +86,7 @@ export interface WaitOperationRequest {
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
    * If RPC context deadline is also specified, the shorter one will be used.
    */
-  timeout: Duration;
+  timeout?: Duration;
 }
 /**
  * A message representing the message types used by a long-running operation.
@@ -127,7 +127,7 @@ export interface OperationInfo {
 function createBaseOperation(): Operation {
   return {
     name: "",
-    metadata: Any.fromPartial({}),
+    metadata: undefined,
     done: false,
     error: undefined,
     response: undefined
@@ -481,7 +481,7 @@ export const DeleteOperationRequest = {
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
     name: "",
-    timeout: Duration.fromPartial({})
+    timeout: undefined
   };
 }
 export const WaitOperationRequest = {

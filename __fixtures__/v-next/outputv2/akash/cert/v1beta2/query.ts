@@ -29,7 +29,7 @@ export interface CertificateResponseSDKType {
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
   filter: CertificateFilter;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryCertificatesRequestProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
@@ -47,12 +47,12 @@ export interface QueryCertificatesRequestAminoMsg {
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter: CertificateFilterSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryCertificatesResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
@@ -70,7 +70,7 @@ export interface QueryCertificatesResponseAminoMsg {
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {
   certificates: CertificateResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
@@ -172,7 +172,7 @@ export const CertificateResponse = {
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
   return {
     filter: CertificateFilter.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesRequest = {
@@ -271,7 +271,7 @@ export const QueryCertificatesRequest = {
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
   return {
     certificates: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesResponse = {

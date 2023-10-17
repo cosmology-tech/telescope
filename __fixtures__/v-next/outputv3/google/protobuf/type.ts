@@ -252,7 +252,7 @@ export interface Type {
   /** The protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -285,7 +285,7 @@ export interface TypeSDKType {
   fields: FieldSDKType[];
   oneofs: string[];
   options: OptionSDKType[];
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
   syntax: Syntax;
 }
 /** A single field of a message type. */
@@ -376,7 +376,7 @@ export interface Enum {
   /** Protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -406,7 +406,7 @@ export interface EnumSDKType {
   name: string;
   enumvalue: EnumValueSDKType[];
   options: OptionSDKType[];
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
   syntax: Syntax;
 }
 /** Enum value definition. */
@@ -459,7 +459,7 @@ export interface Option {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value: Any;
+  value?: Any;
 }
 export interface OptionProtoMsg {
   typeUrl: "/google.protobuf.Option";
@@ -495,7 +495,7 @@ export interface OptionAminoMsg {
  */
 export interface OptionSDKType {
   name: string;
-  value: AnySDKType;
+  value?: AnySDKType;
 }
 function createBaseType(): Type {
   return {
@@ -503,7 +503,7 @@ function createBaseType(): Type {
     fields: [],
     oneofs: [],
     options: [],
-    sourceContext: SourceContext.fromPartial({}),
+    sourceContext: undefined,
     syntax: 0
   };
 }
@@ -910,7 +910,7 @@ function createBaseEnum(): Enum {
     name: "",
     enumvalue: [],
     options: [],
-    sourceContext: SourceContext.fromPartial({}),
+    sourceContext: undefined,
     syntax: 0
   };
 }
@@ -1192,7 +1192,7 @@ export const EnumValue = {
 function createBaseOption(): Option {
   return {
     name: "",
-    value: Any.fromPartial({})
+    value: undefined
   };
 }
 export const Option = {

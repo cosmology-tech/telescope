@@ -77,19 +77,19 @@ export interface ParseRequestSDKType {
 /** Response message for the Parse method. */
 export interface ParseResponse {
   /** The parsed representation, or unset if parsing failed. */
-  parsedExpr: ParsedExpr;
+  parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
-  parsed_expr: ParsedExprSDKType;
+  parsed_expr?: ParsedExprSDKType;
   issues: StatusSDKType[];
 }
 /** Request message for the Check method. */
 export interface CheckRequest {
   /** Required. The parsed representation of the CEL program. */
-  parsedExpr: ParsedExpr;
+  parsedExpr?: ParsedExpr;
   /**
    * Declarations of types for external variables and functions.
    * Required if program uses external variables or functions
@@ -110,7 +110,7 @@ export interface CheckRequest {
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
-  parsed_expr: ParsedExprSDKType;
+  parsed_expr?: ParsedExprSDKType;
   type_env: DeclSDKType[];
   container: string;
   no_std_env: boolean;
@@ -118,22 +118,22 @@ export interface CheckRequestSDKType {
 /** Response message for the Check method. */
 export interface CheckResponse {
   /** The annotated representation, or unset if checking failed. */
-  checkedExpr: CheckedExpr;
+  checkedExpr?: CheckedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  checked_expr: CheckedExprSDKType;
+  checked_expr?: CheckedExprSDKType;
   issues: StatusSDKType[];
 }
 export interface EvalRequest_BindingsEntry {
   key: string;
-  value: ExprValue;
+  value?: ExprValue;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
-  value: ExprValueSDKType;
+  value?: ExprValueSDKType;
 }
 /** Request message for the Eval method. */
 export interface EvalRequest {
@@ -163,7 +163,7 @@ export interface EvalRequestSDKType {
 /** Response message for the Eval method. */
 export interface EvalResponse {
   /** The execution result, or unset if execution couldn't start. */
-  result: ExprValue;
+  result?: ExprValue;
   /**
    * Any number of issues with [StatusDetails][] as the details.
    * Note that CEL execution errors are reified into [ExprValue][].
@@ -174,7 +174,7 @@ export interface EvalResponse {
 }
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
-  result: ExprValueSDKType;
+  result?: ExprValueSDKType;
   issues: StatusSDKType[];
 }
 /**
@@ -186,7 +186,7 @@ export interface IssueDetails {
   /** The severity of the issue. */
   severity: IssueDetails_Severity;
   /** Position in the source, if known. */
-  position: SourcePosition;
+  position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: bigint;
 }
@@ -197,7 +197,7 @@ export interface IssueDetails {
  */
 export interface IssueDetailsSDKType {
   severity: IssueDetails_Severity;
-  position: SourcePositionSDKType;
+  position?: SourcePositionSDKType;
   id: bigint;
 }
 function createBaseParseRequest(): ParseRequest {
@@ -333,7 +333,7 @@ export const ParseRequest = {
 };
 function createBaseParseResponse(): ParseResponse {
   return {
-    parsedExpr: ParsedExpr.fromPartial({}),
+    parsedExpr: undefined,
     issues: []
   };
 }
@@ -448,7 +448,7 @@ export const ParseResponse = {
 };
 function createBaseCheckRequest(): CheckRequest {
   return {
-    parsedExpr: ParsedExpr.fromPartial({}),
+    parsedExpr: undefined,
     typeEnv: [],
     container: "",
     noStdEnv: false
@@ -593,7 +593,7 @@ export const CheckRequest = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    checkedExpr: CheckedExpr.fromPartial({}),
+    checkedExpr: undefined,
     issues: []
   };
 }
@@ -709,7 +709,7 @@ export const CheckResponse = {
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
     key: "",
-    value: ExprValue.fromPartial({})
+    value: undefined
   };
 }
 export const EvalRequest_BindingsEntry = {
@@ -987,7 +987,7 @@ export const EvalRequest = {
 };
 function createBaseEvalResponse(): EvalResponse {
   return {
-    result: ExprValue.fromPartial({}),
+    result: undefined,
     issues: []
   };
 }
@@ -1103,7 +1103,7 @@ export const EvalResponse = {
 function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
-    position: SourcePosition.fromPartial({}),
+    position: undefined,
     id: BigInt(0)
   };
 }
