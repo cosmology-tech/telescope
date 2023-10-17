@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/ast@1.0.3...@cosmology/ast@1.0.4) (2023-10-17)
+
+**Note:** Version bump only for package @cosmology/ast
+
 ## [1.0.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/ast@1.0.2...@cosmology/ast@1.0.3) (2023-10-02)
 
 **Note:** Version bump only for package @cosmology/ast
