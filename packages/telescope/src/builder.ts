@@ -157,5 +157,7 @@ export class TelescopeBuilder {
 
     // finally, write one index file with all files, exported
     createIndex(this);
+
+    console.log(`✨ files transpiled under '${this.outPath}'`);
   }
 }
