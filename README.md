@@ -287,6 +287,8 @@ telescope({
 | `prototypes.addTypeUrlToDecoders`         | add $typeUrl field to generated interfaces          | `true`    |
 | `prototypes.addAminoTypeToObjects`         | add aminoType field to generated Decoders          | `false`    |
 | `prototypes.addTypeUrlToObjects`         | add typeUrl field to generated Decoders          | `true`    |
+| `prototypes.enableRegistryLoader`         |    generate Registry loader to *.registry.ts files       | `true`    |
+| `prototypes.enableMessageComposer`         |    generate MessageComposer to *.registry.ts files       | `true`    |
 
 ### Prototypes Methods
 
@@ -369,6 +371,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | ----------------------------------------- | --------------------------------------------------------------  | --------- |
 | `prototypes.typingsFormat.customTypes.useCosmosSDKDec` | enable handling "prototypes.typingsFormat.customTypes.useCosmosSDKDec" proto custom type. Used to show decimal fields with the custom type correctly. Highly recommend set to true.    | `true`    |
 | `prototypes.typingsFormat.num64` | 'long' or 'bigint', the way of generating int64 proto types, set to 'bigint' to enable using more stable built-in type   | `bigint`    |
+| `prototypes.typingsFormat.useTelescopeGeneratedType` |  Discard GeneratedType from cosmjs, use TelescopeGeneratedType instead inside *.registry.ts files  | `false`    |
 | `prototypes.typingsFormat.useDeepPartial` | defaults to true, but if disabled uses the `Partial` TS type    | `false`    |
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
