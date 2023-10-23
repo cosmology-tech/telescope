@@ -284,9 +284,9 @@ telescope({
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
 | `prototypes.optionalQueryParams`          | boolean value setting queryParams to be optional                | `false`    |
 | `prototypes.optionalPageRequests`         | boolean value setting `PageRequest` fields to optional          | `false`    |
-| `prototypes.addTypeUrlToObjects`         | add $typeUrl field to generated interfaces          | `true`    |
+| `prototypes.addTypeUrlToDecoders`         | add $typeUrl field to generated interfaces          | `true`    |
 | `prototypes.addAminoTypeToObjects`         | add aminoType field to generated Decoders          | `false`    |
-| `prototypes.addTypeUrlToDecoders`         | add typeUrl field to generated Decoders          | `true`    |
+| `prototypes.addTypeUrlToObjects`         | add typeUrl field to generated Decoders          | `true`    |
 | `prototypes.enableRegistryLoader`         |    generate Registry loader to *.registry.ts files       | `true`    |
 | `prototypes.enableMessageComposer`         |    generate MessageComposer to *.registry.ts files       | `true`    |
 
