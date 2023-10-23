@@ -42,9 +42,9 @@ export declare const defaultTelescopeOptions: {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
-        addTypeUrlToObjects?: boolean;
-        addAminoTypeToObjects?: boolean;
         addTypeUrlToDecoders?: boolean;
+        addAminoTypeToObjects?: boolean;
+        addTypeUrlToObjects?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];

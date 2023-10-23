@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
   address: string;
   pubKey?: Any;
   accountNumber: bigint;
@@ -39,7 +39,7 @@ export interface BaseAccountAminoMsg {
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
   address: string;
   pub_key?: AnySDKType;
   account_number: bigint;
@@ -47,7 +47,7 @@ export interface BaseAccountSDKType {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
   baseAccount?: BaseAccount;
   name: string;
   permissions: string[];
@@ -68,7 +68,7 @@ export interface ModuleAccountAminoMsg {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
   base_account?: BaseAccountSDKType;
   name: string;
   permissions: string[];

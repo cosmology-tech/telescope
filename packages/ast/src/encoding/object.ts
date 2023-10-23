@@ -19,7 +19,7 @@ export const createObjectWithMethods = (
 ) => {
 
     const methodsAndProps = [
-        context.pluginValue('prototypes.addTypeUrlToObjects') && createTypeUrlProperty(context, proto),
+        context.pluginValue('prototypes.addTypeUrlToDecoders') && createTypeUrlProperty(context, proto),
         context.pluginValue('prototypes.addAminoTypeToObjects') && createAminoTypeProperty(context, proto),
         context.pluginValue('prototypes.methods.encode') && encodeMethod(context, name, proto),
         context.pluginValue('prototypes.methods.decode') && decodeMethod(context, name, proto),

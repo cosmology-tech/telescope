@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.bank.v1beta1";
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spendLimit: Coin[];
 }
 export interface SendAuthorizationProtoMsg {
@@ -36,7 +36,7 @@ export interface SendAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spend_limit: CoinSDKType[];
 }
 function createBaseSendAuthorization(): SendAuthorization {

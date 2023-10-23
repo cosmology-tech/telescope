@@ -7,7 +7,7 @@ export const protobufPackage = "osmosis.superfluid.v1beta1";
  * assets
  */
 export interface SetSuperfluidAssetsProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   title: string;
   description: string;
   assets: SuperfluidAsset[];
@@ -34,7 +34,7 @@ export interface SetSuperfluidAssetsProposalAminoMsg {
  * assets
  */
 export interface SetSuperfluidAssetsProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   title: string;
   description: string;
   assets: SuperfluidAssetSDKType[];
@@ -44,7 +44,7 @@ export interface SetSuperfluidAssetsProposalSDKType {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
@@ -71,7 +71,7 @@ export interface RemoveSuperfluidAssetsProposalAminoMsg {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   title: string;
   description: string;
   superfluid_asset_denoms: string[];
@@ -81,7 +81,7 @@ export interface RemoveSuperfluidAssetsProposalSDKType {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
   title: string;
   description: string;
   ids: bigint[];
@@ -110,7 +110,7 @@ export interface UpdateUnpoolWhiteListProposalAminoMsg {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
   title: string;
   description: string;
   ids: bigint[];

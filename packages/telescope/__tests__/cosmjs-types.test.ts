@@ -27,8 +27,8 @@ const options: TelescopeOptions = {
     },
     prototypes: {
         includePackageVar: true,
-        addTypeUrlToObjects: false,
         addTypeUrlToDecoders: false,
+        addTypeUrlToObjects: false,
         excluded: {
             protos: [
                 'cosmos/authz/v1beta1/event.proto',

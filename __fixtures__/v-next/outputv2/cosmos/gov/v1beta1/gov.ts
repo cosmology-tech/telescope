@@ -185,7 +185,7 @@ export interface WeightedVoteOptionSDKType {
  * manually updated in case of approval.
  */
 export interface TextProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.gov.v1beta1.TextProposal";
   title: string;
   description: string;
 }
@@ -210,7 +210,7 @@ export interface TextProposalAminoMsg {
  * manually updated in case of approval.
  */
 export interface TextProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.gov.v1beta1.TextProposal";
   title: string;
   description: string;
 }
