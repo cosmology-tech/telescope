@@ -62,6 +62,9 @@ interface TelescopeOpts {
         // add typeUrl field to Decoders
         addTypeUrlToDecoders?: boolean;
 
+        enableRegistryLoader?: boolean;
+        enableMessageComposer?: boolean;
+
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -87,6 +90,8 @@ interface TelescopeOpts {
 
             // temporary field to avoid breaking changes
             updatedDuration?: boolean
+
+            useTelescopeGeneratedType?: boolean
         };
     };
 
@@ -269,6 +274,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         addTypeUrlToObjects: true,
         addAminoTypeToObjects: false,
         addTypeUrlToDecoders: true,
+
+        enableRegistryLoader: true,
+        enableMessageComposer: true,
 
         optionalQueryParams: false,
         optionalPageRequests: false,

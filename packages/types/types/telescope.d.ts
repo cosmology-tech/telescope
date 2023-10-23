@@ -50,6 +50,8 @@ interface TelescopeOpts {
         addTypeUrlToObjects?: boolean;
         addAminoTypeToObjects?: boolean;
         addTypeUrlToDecoders?: boolean;
+        enableRegistryLoader?: boolean;
+        enableMessageComposer?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -71,6 +73,7 @@ interface TelescopeOpts {
             setDefaultEnumToUnrecognized?: boolean;
             setDefaultCustomTypesToUndefined?: boolean;
             updatedDuration?: boolean;
+            useTelescopeGeneratedType?: boolean;
         };
     };
     tsDisable?: {

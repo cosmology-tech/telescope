@@ -73,6 +73,7 @@ export declare const UTILS: {
     UnaryMethodDefinitionish: string;
     BinaryReader: string;
     BinaryWriter: string;
+    TelescopeGeneratedType: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {
