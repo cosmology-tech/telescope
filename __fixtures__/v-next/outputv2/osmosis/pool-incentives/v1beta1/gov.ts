@@ -12,7 +12,7 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -49,7 +49,7 @@ export interface ReplacePoolIncentivesProposalAminoMsg {
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecordSDKType[];
@@ -64,7 +64,7 @@ export interface ReplacePoolIncentivesProposalSDKType {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -101,7 +101,7 @@ export interface UpdatePoolIncentivesProposalAminoMsg {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecordSDKType[];

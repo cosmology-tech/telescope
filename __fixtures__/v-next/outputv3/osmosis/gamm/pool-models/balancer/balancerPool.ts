@@ -198,7 +198,7 @@ export interface PoolAssetSDKType {
   weight: string;
 }
 export interface Pool {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.gamm.v1beta1.Pool";
   address: string;
   id: bigint;
   poolParams: PoolParams;
@@ -259,7 +259,7 @@ export interface PoolAminoMsg {
   value: PoolAmino;
 }
 export interface PoolSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.gamm.v1beta1.Pool";
   address: string;
   id: bigint;
   pool_params: PoolParamsSDKType;

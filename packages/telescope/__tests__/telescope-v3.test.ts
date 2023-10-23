@@ -49,8 +49,10 @@ const options: TelescopeOptions = {
         parser: {
             keepCase: false
         },
-        addAminoTypeToObjects: true,
+
         addTypeUrlToObjects: true,
+        addAminoTypeToObjects: true,
+        addTypeUrlToDecoders: true,
 
         methods: {
             encode: true,

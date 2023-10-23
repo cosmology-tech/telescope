@@ -88,7 +88,7 @@ export interface GasMeterSDKType {
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/evmos.incentives.v1.RegisterIncentiveProposal";
   /** title of the proposal */
   title: string;
   /** proposal description */
@@ -123,7 +123,7 @@ export interface RegisterIncentiveProposalAminoMsg {
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/evmos.incentives.v1.RegisterIncentiveProposal";
   title: string;
   description: string;
   contract: string;

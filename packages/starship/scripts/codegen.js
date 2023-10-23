@@ -19,7 +19,7 @@ telescope({
       useUnionTypes: false
     },
     prototypes: {
-      addTypeUrlToDecoders: true,
+      addTypeUrlToObjects: true,
       excluded: {
         packages: [
           'ibc.applications.fee.v1', // issue with parsing protos (LCD routes with nested objects in params)

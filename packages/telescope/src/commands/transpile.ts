@@ -44,8 +44,8 @@ export default async (argv: {
           fromProto: true,
           toProto: true
         },
-        addTypeUrlToDecoders: true,
         addTypeUrlToObjects: true,
+        addTypeUrlToDecoders: true,
 
         typingsFormat: {
           duration: 'duration',

@@ -10,7 +10,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
   title: string;
   description: string;
   feetoken: FeeToken;
@@ -43,7 +43,7 @@ export interface UpdateFeeTokenProposalAminoMsg {
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
   title: string;
   description: string;
   feetoken: FeeTokenSDKType;

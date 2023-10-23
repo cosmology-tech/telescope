@@ -55,8 +55,11 @@ interface TelescopeOpts {
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
 
+        // add $typeUrl field to interfaces
         addTypeUrlToObjects?: boolean;
+        // add aminoType field to Decoders
         addAminoTypeToObjects?: boolean;
+        // add typeUrl field to Decoders
         addTypeUrlToDecoders?: boolean;
 
         excluded?: {

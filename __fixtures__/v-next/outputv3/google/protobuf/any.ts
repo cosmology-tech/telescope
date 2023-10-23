@@ -83,7 +83,7 @@ export const protobufPackage = "google.protobuf";
  *     }
  */
 export interface Any {
-  $typeUrl?: string;
+  $typeUrl?: "/google.protobuf.Any";
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
    * protocol buffer message. This string must contain at least
@@ -322,7 +322,7 @@ export interface AnyAminoMsg {
  *     }
  */
 export interface AnySDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/google.protobuf.Any";
   type_url: string;
   value: Uint8Array;
 }
