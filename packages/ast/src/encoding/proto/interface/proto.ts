@@ -109,7 +109,7 @@ export const createProtoType = (
     const fields = [];
 
     if (
-        context.pluginValue('prototypes.addTypeUrlToObjects') &&
+        context.pluginValue('prototypes.addTypeUrlToDecoders') &&
         ((
             context.pluginValue('interfaces.enabled') &&
             proto.options?.['(cosmos_proto.implements_interface)']
@@ -373,7 +373,7 @@ export const createCreateProtoType = (
     const fields = [];
 
     if (
-        context.pluginValue('prototypes.addTypeUrlToObjects') &&
+        context.pluginValue('prototypes.addTypeUrlToDecoders') &&
         ((
             context.pluginValue('interfaces.enabled') &&
             proto.options?.['(cosmos_proto.implements_interface)']

@@ -8,7 +8,7 @@ import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 describe('Cast', () => {
     const implementsStore = getTestProtoStore();
     implementsStore.options.aminoEncoding.useLegacyInlineEncoding = false;
-    implementsStore.options.prototypes.addTypeUrlToObjects = true;
+    implementsStore.options.prototypes.addTypeUrlToDecoders = true;
     implementsStore.options.interfaces.enabled = true;
     implementsStore.traverseAll();
 
@@ -31,7 +31,7 @@ describe('Cast', () => {
 describe('Any', () => {
     const standardStore = getTestProtoStore();
     standardStore.options.aminoEncoding.useLegacyInlineEncoding = true;
-    standardStore.options.prototypes.addTypeUrlToObjects = false;
+    standardStore.options.prototypes.addTypeUrlToDecoders = false;
     standardStore.options.interfaces.enabled = false;
     standardStore.traverseAll();
 

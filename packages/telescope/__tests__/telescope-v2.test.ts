@@ -50,7 +50,6 @@ const options: TelescopeOptions = {
       keepCase: false
     },
     addAminoTypeToObjects: true,
-    addTypeUrlToDecoders: true,
 
     methods: {
       encode: true,
