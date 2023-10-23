@@ -200,6 +200,10 @@ export class TelescopeParseContext implements TelescopeParseContext {
         this.body.push(createTypeRegistry(this.amino, getMutations(this.mutations)));
     }
     buildRegistryLoader() {
+        if (!this.options?.prototypes?.enableRegistryLoader) {
+          return
+        }
+
         this.body.push(createRegistryLoader(this.amino));
     }
     buildAminoInterfaces() {
@@ -222,6 +226,9 @@ export class TelescopeParseContext implements TelescopeParseContext {
         }));
     }
     buildHelperObject() {
+        if (!this.options?.prototypes?.enableMessageComposer) {
+          return
+        }
         // add methods
         this.body.push(createHelperObject({
             context: this.amino,

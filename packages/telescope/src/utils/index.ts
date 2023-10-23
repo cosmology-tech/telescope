@@ -74,7 +74,8 @@ export const UTILS = {
   UnaryMethodDefinitionishR: '__grpc-web__',
   UnaryMethodDefinitionish: '__grpc-web__',
   BinaryReader: '__binary__',
-  BinaryWriter: '__binary__'
+  BinaryWriter: '__binary__',
+  TelescopeGeneratedType: '__types__',
 };
 
 export const UTIL_HELPERS = [
@@ -85,7 +86,8 @@ export const UTIL_HELPERS = [
   '__binary__',
   '__pinia-endpoint__',
   '__grpc-gateway__',
-  '__grpc-web__'
+  '__grpc-web__',
+  '__types__'
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
