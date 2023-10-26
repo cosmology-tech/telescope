@@ -4,6 +4,7 @@ import { writeFileSync, readFileSync } from 'fs';
 import { defaultTelescopeOptions } from '@cosmology/types';
 import * as path from 'path'
 import * as dotty from 'dotty';
+import deepmerge from 'deepmerge';
 
 export default async (argv: {
   [key: string]: string | string[]
@@ -103,17 +104,24 @@ export default async (argv: {
 
   if (argv.config) {
     const { config } = argv;
-    const inputConfigFullPath = path.resolve(Array.isArray(config) ? config[0] : config);
-    let configJson = null;
+    const configs = Array.isArray(config) ? config : [config];
+    const inputConfigFullPaths = configs.map(c=>path.resolve(c));
+    let configJson;
 
-    try {
-      const configText = readFileSync(inputConfigFullPath, {
-        encoding: 'utf8'
-      })
-      configJson = JSON.parse(configText);
-    } catch (ex) {
-      console.log(ex);
-      throw new Error("Must provide a .json file for --config.");
+    for (const inputConfigPath of inputConfigFullPaths) {
+      try {
+        const configText = readFileSync(inputConfigPath, {
+          encoding: 'utf8'
+        })
+        if(configJson){
+          configJson = deepmerge(configJson, JSON.parse(configText));
+        } else {
+          configJson = JSON.parse(configText);
+        }
+      } catch (ex) {
+        console.log(ex);
+        throw new Error("Must provide a .json file for --config.");
+      }
     }
 
     // append protoDirs in config to argv.protoDirs
