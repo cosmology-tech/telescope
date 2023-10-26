@@ -155,6 +155,11 @@ telescope transpile --protoDirs ../../__fixtures__/chain1 --outPath gen/src --us
 telescope transpile --protoDirs ../../__fixtures__/chain1 --config .telescope.json
 ```
 
+```sh
+# Telescope takes more than one config. The config afterward will override those in front. In this case values in .telescope-ext.json will override those in .telescope.json.
+telescope transpile --config .telescope.json --config .telescope-ext.json
+```
+
 ```json
 //.telescope.json
 {
