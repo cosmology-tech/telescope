@@ -16,6 +16,10 @@ export interface MsgChannelOpenInitProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit";
   value: Uint8Array;
 }
+export interface MsgChannelOpenInitProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit";
+  value: Uint8Array;
+}
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
  * is called by a relayer on Chain A.
@@ -44,6 +48,10 @@ export interface MsgChannelOpenInitResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInitResponse";
   value: Uint8Array;
 }
+export interface MsgChannelOpenInitResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInitResponse";
+  value: Uint8Array;
+}
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponseAmino {}
 export interface MsgChannelOpenInitResponseAminoMsg {
@@ -68,6 +76,10 @@ export interface MsgChannelOpenTry {
   proofInit: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelOpenTryProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry";
+  value: Uint8Array;
 }
 export interface MsgChannelOpenTryProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry";
@@ -113,6 +125,10 @@ export interface MsgChannelOpenTryResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTryResponse";
   value: Uint8Array;
 }
+export interface MsgChannelOpenTryResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTryResponse";
+  value: Uint8Array;
+}
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponseAmino {}
 export interface MsgChannelOpenTryResponseAminoMsg {
@@ -133,6 +149,10 @@ export interface MsgChannelOpenAck {
   proofTry: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelOpenAckProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck";
+  value: Uint8Array;
 }
 export interface MsgChannelOpenAckProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck";
@@ -174,6 +194,10 @@ export interface MsgChannelOpenAckResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAckResponse";
   value: Uint8Array;
 }
+export interface MsgChannelOpenAckResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAckResponse";
+  value: Uint8Array;
+}
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponseAmino {}
 export interface MsgChannelOpenAckResponseAminoMsg {
@@ -192,6 +216,10 @@ export interface MsgChannelOpenConfirm {
   proofAck: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelOpenConfirmProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm";
+  value: Uint8Array;
 }
 export interface MsgChannelOpenConfirmProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm";
@@ -232,6 +260,10 @@ export interface MsgChannelOpenConfirmResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirmResponse";
   value: Uint8Array;
 }
+export interface MsgChannelOpenConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirmResponse";
+  value: Uint8Array;
+}
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
  * type.
@@ -254,6 +286,10 @@ export interface MsgChannelCloseInit {
   portId: string;
   channelId: string;
   signer: string;
+}
+export interface MsgChannelCloseInitProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit";
+  value: Uint8Array;
 }
 export interface MsgChannelCloseInitProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit";
@@ -287,6 +323,10 @@ export interface MsgChannelCloseInitResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInitResponse";
   value: Uint8Array;
 }
+export interface MsgChannelCloseInitResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInitResponse";
+  value: Uint8Array;
+}
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponseAmino {}
 export interface MsgChannelCloseInitResponseAminoMsg {
@@ -305,6 +345,10 @@ export interface MsgChannelCloseConfirm {
   proofInit: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelCloseConfirmProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm";
+  value: Uint8Array;
 }
 export interface MsgChannelCloseConfirmProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm";
@@ -345,6 +389,10 @@ export interface MsgChannelCloseConfirmResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirmResponse";
   value: Uint8Array;
 }
+export interface MsgChannelCloseConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirmResponse";
+  value: Uint8Array;
+}
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
  * type.
@@ -365,6 +413,10 @@ export interface MsgRecvPacket {
   proofCommitment: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgRecvPacketProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacket";
+  value: Uint8Array;
 }
 export interface MsgRecvPacketProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgRecvPacket";
@@ -394,6 +446,10 @@ export interface MsgRecvPacketResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgRecvPacketResponse";
   value: Uint8Array;
 }
+export interface MsgRecvPacketResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacketResponse";
+  value: Uint8Array;
+}
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponseAmino {}
 export interface MsgRecvPacketResponseAminoMsg {
@@ -409,6 +465,10 @@ export interface MsgTimeout {
   proofHeight: Height;
   nextSequenceRecv: bigint;
   signer: string;
+}
+export interface MsgTimeoutProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeout";
+  value: Uint8Array;
 }
 export interface MsgTimeoutProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgTimeout";
@@ -440,6 +500,10 @@ export interface MsgTimeoutResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgTimeoutResponse";
   value: Uint8Array;
 }
+export interface MsgTimeoutResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutResponse";
+  value: Uint8Array;
+}
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponseAmino {}
 export interface MsgTimeoutResponseAminoMsg {
@@ -456,6 +520,10 @@ export interface MsgTimeoutOnClose {
   proofHeight: Height;
   nextSequenceRecv: bigint;
   signer: string;
+}
+export interface MsgTimeoutOnCloseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose";
+  value: Uint8Array;
 }
 export interface MsgTimeoutOnCloseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose";
@@ -489,6 +557,10 @@ export interface MsgTimeoutOnCloseResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnCloseResponse";
   value: Uint8Array;
 }
+export interface MsgTimeoutOnCloseResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnCloseResponse";
+  value: Uint8Array;
+}
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponseAmino {}
 export interface MsgTimeoutOnCloseResponseAminoMsg {
@@ -504,6 +576,10 @@ export interface MsgAcknowledgement {
   proofAcked: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgAcknowledgementProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement";
+  value: Uint8Array;
 }
 export interface MsgAcknowledgementProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement";
@@ -531,6 +607,10 @@ export interface MsgAcknowledgementSDKType {
 }
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponse {}
+export interface MsgAcknowledgementResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgementResponse";
+  value: Uint8Array;
+}
 export interface MsgAcknowledgementResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.MsgAcknowledgementResponse";
   value: Uint8Array;

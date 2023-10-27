@@ -1,8 +1,7 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./gov";
+import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType } from "./gov";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -14,6 +13,10 @@ export interface MsgSubmitProposal {
   proposer: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
+}
+export interface MsgSubmitProposalProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposal";
+  value: Uint8Array;
 }
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -29,6 +32,10 @@ export interface MsgSubmitProposalSDKType {
 export interface MsgSubmitProposalResponse {
   proposalId: bigint;
 }
+export interface MsgSubmitProposalResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse";
+  value: Uint8Array;
+}
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseSDKType {
   proposal_id: bigint;
@@ -43,6 +50,10 @@ export interface MsgExecLegacyContent {
   /** authority must be the gov module address. */
   authority: string;
 }
+export interface MsgExecLegacyContentProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent";
+  value: Uint8Array;
+}
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
@@ -53,6 +64,10 @@ export interface MsgExecLegacyContentSDKType {
 }
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponse {}
+export interface MsgExecLegacyContentResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse";
+  value: Uint8Array;
+}
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponseSDKType {}
 /** MsgVote defines a message to cast a vote. */
@@ -61,6 +76,10 @@ export interface MsgVote {
   voter: string;
   option: VoteOption;
   metadata: string;
+}
+export interface MsgVoteProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVote";
+  value: Uint8Array;
 }
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteSDKType {
@@ -71,6 +90,10 @@ export interface MsgVoteSDKType {
 }
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+export interface MsgVoteResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVoteResponse";
+  value: Uint8Array;
+}
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseSDKType {}
 /** MsgVoteWeighted defines a message to cast a vote. */
@@ -79,6 +102,10 @@ export interface MsgVoteWeighted {
   voter: string;
   options: WeightedVoteOption[];
   metadata: string;
+}
+export interface MsgVoteWeightedProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeighted";
+  value: Uint8Array;
 }
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeightedSDKType {
@@ -89,6 +116,10 @@ export interface MsgVoteWeightedSDKType {
 }
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponse {}
+export interface MsgVoteWeightedResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse";
+  value: Uint8Array;
+}
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponseSDKType {}
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
@@ -96,6 +127,10 @@ export interface MsgDeposit {
   proposalId: bigint;
   depositor: string;
   amount: Coin[];
+}
+export interface MsgDepositProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgDeposit";
+  value: Uint8Array;
 }
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositSDKType {
@@ -105,6 +140,10 @@ export interface MsgDepositSDKType {
 }
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
+export interface MsgDepositResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgDepositResponse";
+  value: Uint8Array;
+}
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseSDKType {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
@@ -158,103 +197,6 @@ export const MsgSubmitProposal = {
     }
     return message;
   },
-  fromJSON(object: any): MsgSubmitProposal {
-    const obj = createBaseMsgSubmitProposal();
-    if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
-    if (Array.isArray(object?.initialDeposit)) obj.initialDeposit = object.initialDeposit.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.proposer)) obj.proposer = String(object.proposer);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
-  },
-  toJSON(message: MsgSubmitProposal): unknown {
-    const obj: any = {};
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-    if (message.initialDeposit) {
-      obj.initialDeposit = message.initialDeposit.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.initialDeposit = [];
-    }
-    message.proposer !== undefined && (obj.proposer = message.proposer);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
-    const message = createBaseMsgSubmitProposal();
-    message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
-    message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.proposer = object.proposer ?? "";
-    message.metadata = object.metadata ?? "";
-    return message;
-  },
-  fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
-      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      proposer: object?.proposer,
-      metadata: object?.metadata
-    };
-  },
-  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
-      initial_deposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      proposer: isSet(object.proposer) ? String(object.proposer) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : ""
-    };
-  },
-  toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
-    const obj: any = {};
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-    if (message.initialDeposit) {
-      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.initial_deposit = [];
-    }
-    obj.proposer = message.proposer;
-    obj.metadata = message.metadata;
-    return obj;
-  },
-  fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
-      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      proposer: object.proposer,
-      metadata: object.metadata
-    };
-  },
-  toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
-    const obj: any = {};
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-    if (message.initialDeposit) {
-      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.initial_deposit = [];
-    }
-    obj.proposer = message.proposer;
-    obj.metadata = message.metadata;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
-    return MsgSubmitProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgSubmitProposal",
-      value: MsgSubmitProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
     return MsgSubmitProposal.decode(message.value);
   },
@@ -297,57 +239,6 @@ export const MsgSubmitProposalResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MsgSubmitProposalResponse {
-    const obj = createBaseMsgSubmitProposalResponse();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    return obj;
-  },
-  toJSON(message: MsgSubmitProposalResponse): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
-    const message = createBaseMsgSubmitProposalResponse();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    return message;
-  },
-  fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
-    return {
-      proposalId: object?.proposal_id
-    };
-  },
-  fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    return obj;
-  },
-  fromAmino(object: MsgSubmitProposalResponseAmino): MsgSubmitProposalResponse {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
-  },
-  toAmino(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
-    return MsgSubmitProposalResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgSubmitProposalResponse",
-      value: MsgSubmitProposalResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.decode(message.value);
@@ -399,65 +290,6 @@ export const MsgExecLegacyContent = {
     }
     return message;
   },
-  fromJSON(object: any): MsgExecLegacyContent {
-    const obj = createBaseMsgExecLegacyContent();
-    if (isSet(object.content)) obj.content = Any.fromJSON(object.content);
-    if (isSet(object.authority)) obj.authority = String(object.authority);
-    return obj;
-  },
-  toJSON(message: MsgExecLegacyContent): unknown {
-    const obj: any = {};
-    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
-    message.authority !== undefined && (obj.authority = message.authority);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgExecLegacyContent>): MsgExecLegacyContent {
-    const message = createBaseMsgExecLegacyContent();
-    if (object.content !== undefined && object.content !== null) {
-      message.content = Any.fromPartial(object.content);
-    }
-    message.authority = object.authority ?? "";
-    return message;
-  },
-  fromSDK(object: MsgExecLegacyContentSDKType): MsgExecLegacyContent {
-    return {
-      content: object.content ? Any.fromSDK(object.content) : undefined,
-      authority: object?.authority
-    };
-  },
-  fromSDKJSON(object: any): MsgExecLegacyContentSDKType {
-    return {
-      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      authority: isSet(object.authority) ? String(object.authority) : ""
-    };
-  },
-  toSDK(message: MsgExecLegacyContent): MsgExecLegacyContentSDKType {
-    const obj: any = {};
-    message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
-    obj.authority = message.authority;
-    return obj;
-  },
-  fromAmino(object: MsgExecLegacyContentAmino): MsgExecLegacyContent {
-    return {
-      content: object?.content ? Any.fromAmino(object.content) : undefined,
-      authority: object.authority
-    };
-  },
-  toAmino(message: MsgExecLegacyContent): MsgExecLegacyContentAmino {
-    const obj: any = {};
-    obj.content = message.content ? Any.toAmino(message.content) : undefined;
-    obj.authority = message.authority;
-    return obj;
-  },
-  fromAminoMsg(object: MsgExecLegacyContentAminoMsg): MsgExecLegacyContent {
-    return MsgExecLegacyContent.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgExecLegacyContent): MsgExecLegacyContentAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgExecLegacyContent",
-      value: MsgExecLegacyContent.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgExecLegacyContentProtoMsg): MsgExecLegacyContent {
     return MsgExecLegacyContent.decode(message.value);
   },
@@ -492,44 +324,6 @@ export const MsgExecLegacyContentResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgExecLegacyContentResponse {
-    const obj = createBaseMsgExecLegacyContentResponse();
-    return obj;
-  },
-  toJSON(_: MsgExecLegacyContentResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgExecLegacyContentResponse>): MsgExecLegacyContentResponse {
-    const message = createBaseMsgExecLegacyContentResponse();
-    return message;
-  },
-  fromSDK(_: MsgExecLegacyContentResponseSDKType): MsgExecLegacyContentResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgExecLegacyContentResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgExecLegacyContentResponseAmino): MsgExecLegacyContentResponse {
-    return {};
-  },
-  toAmino(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgExecLegacyContentResponseAminoMsg): MsgExecLegacyContentResponse {
-    return MsgExecLegacyContentResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgExecLegacyContentResponse",
-      value: MsgExecLegacyContentResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgExecLegacyContentResponseProtoMsg): MsgExecLegacyContentResponse {
     return MsgExecLegacyContentResponse.decode(message.value);
@@ -595,81 +389,6 @@ export const MsgVote = {
     }
     return message;
   },
-  fromJSON(object: any): MsgVote {
-    const obj = createBaseMsgVote();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
-  },
-  toJSON(message: MsgVote): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgVote>): MsgVote {
-    const message = createBaseMsgVote();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    message.voter = object.voter ?? "";
-    message.option = object.option ?? 0;
-    message.metadata = object.metadata ?? "";
-    return message;
-  },
-  fromSDK(object: MsgVoteSDKType): MsgVote {
-    return {
-      proposalId: object?.proposal_id,
-      voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      metadata: object?.metadata
-    };
-  },
-  fromSDKJSON(object: any): MsgVoteSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      metadata: isSet(object.metadata) ? String(object.metadata) : ""
-    };
-  },
-  toSDK(message: MsgVote): MsgVoteSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.voter = message.voter;
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    obj.metadata = message.metadata;
-    return obj;
-  },
-  fromAmino(object: MsgVoteAmino): MsgVote {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      metadata: object.metadata
-    };
-  },
-  toAmino(message: MsgVote): MsgVoteAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    obj.option = message.option;
-    obj.metadata = message.metadata;
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
-    return MsgVote.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVote): MsgVoteAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgVote",
-      value: MsgVote.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgVoteProtoMsg): MsgVote {
     return MsgVote.decode(message.value);
   },
@@ -704,44 +423,6 @@ export const MsgVoteResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgVoteResponse {
-    const obj = createBaseMsgVoteResponse();
-    return obj;
-  },
-  toJSON(_: MsgVoteResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
-    const message = createBaseMsgVoteResponse();
-    return message;
-  },
-  fromSDK(_: MsgVoteResponseSDKType): MsgVoteResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgVoteResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
-    return {};
-  },
-  toAmino(_: MsgVoteResponse): MsgVoteResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteResponseAminoMsg): MsgVoteResponse {
-    return MsgVoteResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVoteResponse): MsgVoteResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgVoteResponse",
-      value: MsgVoteResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgVoteResponseProtoMsg): MsgVoteResponse {
     return MsgVoteResponse.decode(message.value);
@@ -807,93 +488,6 @@ export const MsgVoteWeighted = {
     }
     return message;
   },
-  fromJSON(object: any): MsgVoteWeighted {
-    const obj = createBaseMsgVoteWeighted();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
-  },
-  toJSON(message: MsgVoteWeighted): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
-    const message = createBaseMsgVoteWeighted();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    message.voter = object.voter ?? "";
-    message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
-    message.metadata = object.metadata ?? "";
-    return message;
-  },
-  fromSDK(object: MsgVoteWeightedSDKType): MsgVoteWeighted {
-    return {
-      proposalId: object?.proposal_id,
-      voter: object?.voter,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : [],
-      metadata: object?.metadata
-    };
-  },
-  fromSDKJSON(object: any): MsgVoteWeightedSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : ""
-    };
-  },
-  toSDK(message: MsgVoteWeighted): MsgVoteWeightedSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.voter = message.voter;
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toSDK(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    obj.metadata = message.metadata;
-    return obj;
-  },
-  fromAmino(object: MsgVoteWeightedAmino): MsgVoteWeighted {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : [],
-      metadata: object.metadata
-    };
-  },
-  toAmino(message: MsgVoteWeighted): MsgVoteWeightedAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    obj.metadata = message.metadata;
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteWeightedAminoMsg): MsgVoteWeighted {
-    return MsgVoteWeighted.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVoteWeighted): MsgVoteWeightedAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgVoteWeighted",
-      value: MsgVoteWeighted.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgVoteWeightedProtoMsg): MsgVoteWeighted {
     return MsgVoteWeighted.decode(message.value);
   },
@@ -928,44 +522,6 @@ export const MsgVoteWeightedResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgVoteWeightedResponse {
-    const obj = createBaseMsgVoteWeightedResponse();
-    return obj;
-  },
-  toJSON(_: MsgVoteWeightedResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
-    const message = createBaseMsgVoteWeightedResponse();
-    return message;
-  },
-  fromSDK(_: MsgVoteWeightedResponseSDKType): MsgVoteWeightedResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgVoteWeightedResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgVoteWeightedResponseAmino): MsgVoteWeightedResponse {
-    return {};
-  },
-  toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgVoteWeightedResponseAminoMsg): MsgVoteWeightedResponse {
-    return MsgVoteWeightedResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgVoteWeightedResponse",
-      value: MsgVoteWeightedResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg): MsgVoteWeightedResponse {
     return MsgVoteWeightedResponse.decode(message.value);
@@ -1024,85 +580,6 @@ export const MsgDeposit = {
     }
     return message;
   },
-  fromJSON(object: any): MsgDeposit {
-    const obj = createBaseMsgDeposit();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgDeposit): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
-    const message = createBaseMsgDeposit();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    message.depositor = object.depositor ?? "";
-    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: MsgDepositSDKType): MsgDeposit {
-    return {
-      proposalId: object?.proposal_id,
-      depositor: object?.depositor,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): MsgDepositSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: MsgDeposit): MsgDepositSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.depositor = message.depositor;
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MsgDepositAmino): MsgDeposit {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      depositor: object.depositor,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MsgDeposit): MsgDepositAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.depositor = message.depositor;
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgDepositAminoMsg): MsgDeposit {
-    return MsgDeposit.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDeposit): MsgDepositAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgDeposit",
-      value: MsgDeposit.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgDepositProtoMsg): MsgDeposit {
     return MsgDeposit.decode(message.value);
   },
@@ -1137,44 +614,6 @@ export const MsgDepositResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgDepositResponse {
-    const obj = createBaseMsgDepositResponse();
-    return obj;
-  },
-  toJSON(_: MsgDepositResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
-    const message = createBaseMsgDepositResponse();
-    return message;
-  },
-  fromSDK(_: MsgDepositResponseSDKType): MsgDepositResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgDepositResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgDepositResponseAmino): MsgDepositResponse {
-    return {};
-  },
-  toAmino(_: MsgDepositResponse): MsgDepositResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgDepositResponseAminoMsg): MsgDepositResponse {
-    return MsgDepositResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDepositResponse): MsgDepositResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/MsgDepositResponse",
-      value: MsgDepositResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgDepositResponseProtoMsg): MsgDepositResponse {
     return MsgDepositResponse.decode(message.value);

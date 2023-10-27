@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v2";
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
@@ -15,6 +14,10 @@ export interface FungibleTokenPacketData {
   sender: string;
   /** the recipient address on the destination chain */
   receiver: string;
+}
+export interface FungibleTokenPacketDataProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData";
+  value: Uint8Array;
 }
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
@@ -77,79 +80,6 @@ export const FungibleTokenPacketData = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): FungibleTokenPacketData {
-    const obj = createBaseFungibleTokenPacketData();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.amount)) obj.amount = String(object.amount);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    return obj;
-  },
-  toJSON(message: FungibleTokenPacketData): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<FungibleTokenPacketData>): FungibleTokenPacketData {
-    const message = createBaseFungibleTokenPacketData();
-    message.denom = object.denom ?? "";
-    message.amount = object.amount ?? "";
-    message.sender = object.sender ?? "";
-    message.receiver = object.receiver ?? "";
-    return message;
-  },
-  fromSDK(object: FungibleTokenPacketDataSDKType): FungibleTokenPacketData {
-    return {
-      denom: object?.denom,
-      amount: object?.amount,
-      sender: object?.sender,
-      receiver: object?.receiver
-    };
-  },
-  fromSDKJSON(object: any): FungibleTokenPacketDataSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : ""
-    };
-  },
-  toSDK(message: FungibleTokenPacketData): FungibleTokenPacketDataSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
-    return obj;
-  },
-  fromAmino(object: FungibleTokenPacketDataAmino): FungibleTokenPacketData {
-    return {
-      denom: object.denom,
-      amount: object.amount,
-      sender: object.sender,
-      receiver: object.receiver
-    };
-  },
-  toAmino(message: FungibleTokenPacketData): FungibleTokenPacketDataAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
-    return obj;
-  },
-  fromAminoMsg(object: FungibleTokenPacketDataAminoMsg): FungibleTokenPacketData {
-    return FungibleTokenPacketData.fromAmino(object.value);
-  },
-  toAminoMsg(message: FungibleTokenPacketData): FungibleTokenPacketDataAminoMsg {
-    return {
-      type: "cosmos-sdk/FungibleTokenPacketData",
-      value: FungibleTokenPacketData.toAmino(message)
-    };
   },
   fromProtoMsg(message: FungibleTokenPacketDataProtoMsg): FungibleTokenPacketData {
     return FungibleTokenPacketData.decode(message.value);

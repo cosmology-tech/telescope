@@ -13,6 +13,10 @@ export interface MsgRegisterPayee {
   /** the payee address */
   payee: string;
 }
+export interface MsgRegisterPayeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgRegisterPayee";
+  value: Uint8Array;
+}
 /** MsgRegisterPayee defines the request type for the RegisterPayee rpc */
 export interface MsgRegisterPayeeSDKType {
   port_id: string;
@@ -22,6 +26,10 @@ export interface MsgRegisterPayeeSDKType {
 }
 /** MsgRegisterPayeeResponse defines the response type for the RegisterPayee rpc */
 export interface MsgRegisterPayeeResponse {}
+export interface MsgRegisterPayeeResponseProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgRegisterPayeeResponse";
+  value: Uint8Array;
+}
 /** MsgRegisterPayeeResponse defines the response type for the RegisterPayee rpc */
 export interface MsgRegisterPayeeResponseSDKType {}
 /** MsgRegisterCounterpartyPayee defines the request type for the RegisterCounterpartyPayee rpc */
@@ -35,6 +43,10 @@ export interface MsgRegisterCounterpartyPayee {
   /** the counterparty payee address */
   counterpartyPayee: string;
 }
+export interface MsgRegisterCounterpartyPayeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgRegisterCounterpartyPayee";
+  value: Uint8Array;
+}
 /** MsgRegisterCounterpartyPayee defines the request type for the RegisterCounterpartyPayee rpc */
 export interface MsgRegisterCounterpartyPayeeSDKType {
   port_id: string;
@@ -44,6 +56,10 @@ export interface MsgRegisterCounterpartyPayeeSDKType {
 }
 /** MsgRegisterCounterpartyPayeeResponse defines the response type for the RegisterCounterpartyPayee rpc */
 export interface MsgRegisterCounterpartyPayeeResponse {}
+export interface MsgRegisterCounterpartyPayeeResponseProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgRegisterCounterpartyPayeeResponse";
+  value: Uint8Array;
+}
 /** MsgRegisterCounterpartyPayeeResponse defines the response type for the RegisterCounterpartyPayee rpc */
 export interface MsgRegisterCounterpartyPayeeResponseSDKType {}
 /**
@@ -63,6 +79,10 @@ export interface MsgPayPacketFee {
   /** optional list of relayers permitted to the receive packet fees */
   relayers: string[];
 }
+export interface MsgPayPacketFeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgPayPacketFee";
+  value: Uint8Array;
+}
 /**
  * MsgPayPacketFee defines the request type for the PayPacketFee rpc
  * This Msg can be used to pay for a packet at the next sequence send & should be combined with the Msg that will be
@@ -77,6 +97,10 @@ export interface MsgPayPacketFeeSDKType {
 }
 /** MsgPayPacketFeeResponse defines the response type for the PayPacketFee rpc */
 export interface MsgPayPacketFeeResponse {}
+export interface MsgPayPacketFeeResponseProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgPayPacketFeeResponse";
+  value: Uint8Array;
+}
 /** MsgPayPacketFeeResponse defines the response type for the PayPacketFee rpc */
 export interface MsgPayPacketFeeResponseSDKType {}
 /**
@@ -87,6 +111,10 @@ export interface MsgPayPacketFeeAsync {
   /** the packet fee associated with a particular IBC packet */
   packetFee: PacketFee;
 }
+export interface MsgPayPacketFeeAsyncProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgPayPacketFeeAsync";
+  value: Uint8Array;
+}
 /**
  * MsgPayPacketFeeAsync defines the request type for the PayPacketFeeAsync rpc
  * This Msg can be used to pay for a packet at a specified sequence (instead of the next sequence send)
@@ -96,6 +124,10 @@ export interface MsgPayPacketFeeAsyncSDKType {
 }
 /** MsgPayPacketFeeAsyncResponse defines the response type for the PayPacketFeeAsync rpc */
 export interface MsgPayPacketFeeAsyncResponse {}
+export interface MsgPayPacketFeeAsyncResponseProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.MsgPayPacketFeeAsyncResponse";
+  value: Uint8Array;
+}
 /** MsgPayPacketFeeAsyncResponse defines the response type for the PayPacketFeeAsync rpc */
 export interface MsgPayPacketFeeAsyncResponseSDKType {}
 function createBaseMsgRegisterPayee(): MsgRegisterPayee {

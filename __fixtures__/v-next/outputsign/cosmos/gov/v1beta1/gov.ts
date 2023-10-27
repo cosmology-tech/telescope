@@ -4,7 +4,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -147,6 +147,10 @@ export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
 }
+export interface WeightedVoteOptionProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption";
+  value: Uint8Array;
+}
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
  * 
@@ -164,6 +168,10 @@ export interface TextProposal {
   title: string;
   description: string;
 }
+export interface TextProposalProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.TextProposal";
+  value: Uint8Array;
+}
 /**
  * TextProposal defines a standard text proposal whose changes need to be
  * manually updated in case of approval.
@@ -180,6 +188,10 @@ export interface Deposit {
   proposalId: bigint;
   depositor: string;
   amount: Coin[];
+}
+export interface DepositProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.Deposit";
+  value: Uint8Array;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active
@@ -207,6 +219,10 @@ export interface Proposal {
   votingStartTime: Date;
   votingEndTime: Date;
 }
+export interface ProposalProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.Proposal";
+  value: Uint8Array;
+}
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   proposal_id: bigint;
@@ -225,6 +241,10 @@ export interface TallyResult {
   abstain: string;
   no: string;
   noWithVeto: string;
+}
+export interface TallyResultProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.TallyResult";
+  value: Uint8Array;
 }
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultSDKType {
@@ -250,6 +270,10 @@ export interface Vote {
   /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
+export interface VoteProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.Vote";
+  value: Uint8Array;
+}
 /**
  * Vote defines a vote on a governance proposal.
  * A Vote consists of a proposal ID, the voter, and the vote option.
@@ -271,6 +295,10 @@ export interface DepositParams {
    */
   maxDepositPeriod: Duration;
 }
+export interface DepositParamsProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.DepositParams";
+  value: Uint8Array;
+}
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
   min_deposit: CoinSDKType[];
@@ -280,6 +308,10 @@ export interface DepositParamsSDKType {
 export interface VotingParams {
   /** Length of the voting period. */
   votingPeriod: Duration;
+}
+export interface VotingParamsProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.VotingParams";
+  value: Uint8Array;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
@@ -299,6 +331,10 @@ export interface TallyParams {
    *  vetoed. Default value: 1/3.
    */
   vetoThreshold: Uint8Array;
+}
+export interface TallyParamsProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.TallyParams";
+  value: Uint8Array;
 }
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParamsSDKType {
@@ -342,63 +378,6 @@ export const WeightedVoteOption = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): WeightedVoteOption {
-    const obj = createBaseWeightedVoteOption();
-    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
-  },
-  toJSON(message: WeightedVoteOption): unknown {
-    const obj: any = {};
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.weight !== undefined && (obj.weight = message.weight);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<WeightedVoteOption>): WeightedVoteOption {
-    const message = createBaseWeightedVoteOption();
-    message.option = object.option ?? 0;
-    message.weight = object.weight ?? "";
-    return message;
-  },
-  fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
-    return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      weight: object?.weight
-    };
-  },
-  fromSDKJSON(object: any): WeightedVoteOptionSDKType {
-    return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
-  },
-  toSDK(message: WeightedVoteOption): WeightedVoteOptionSDKType {
-    const obj: any = {};
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAmino(object: WeightedVoteOptionAmino): WeightedVoteOption {
-    return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      weight: object.weight
-    };
-  },
-  toAmino(message: WeightedVoteOption): WeightedVoteOptionAmino {
-    const obj: any = {};
-    obj.option = message.option;
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAminoMsg(object: WeightedVoteOptionAminoMsg): WeightedVoteOption {
-    return WeightedVoteOption.fromAmino(object.value);
-  },
-  toAminoMsg(message: WeightedVoteOption): WeightedVoteOptionAminoMsg {
-    return {
-      type: "cosmos-sdk/WeightedVoteOption",
-      value: WeightedVoteOption.toAmino(message)
-    };
   },
   fromProtoMsg(message: WeightedVoteOptionProtoMsg): WeightedVoteOption {
     return WeightedVoteOption.decode(message.value);
@@ -449,63 +428,6 @@ export const TextProposal = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): TextProposal {
-    const obj = createBaseTextProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: TextProposal): unknown {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<TextProposal>): TextProposal {
-    const message = createBaseTextProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: TextProposalSDKType): TextProposal {
-    return {
-      title: object?.title,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): TextProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: TextProposal): TextProposalSDKType {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: TextProposalAmino): TextProposal {
-    return {
-      title: object.title,
-      description: object.description
-    };
-  },
-  toAmino(message: TextProposal): TextProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: TextProposalAminoMsg): TextProposal {
-    return TextProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: TextProposal): TextProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/TextProposal",
-      value: TextProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: TextProposalProtoMsg): TextProposal {
     return TextProposal.decode(message.value);
@@ -563,85 +485,6 @@ export const Deposit = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Deposit {
-    const obj = createBaseDeposit();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
-    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Deposit): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Deposit>): Deposit {
-    const message = createBaseDeposit();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    message.depositor = object.depositor ?? "";
-    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: DepositSDKType): Deposit {
-    return {
-      proposalId: object?.proposal_id,
-      depositor: object?.depositor,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): DepositSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Deposit): DepositSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.depositor = message.depositor;
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DepositAmino): Deposit {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      depositor: object.depositor,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Deposit): DepositAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.depositor = message.depositor;
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DepositAminoMsg): Deposit {
-    return Deposit.fromAmino(object.value);
-  },
-  toAminoMsg(message: Deposit): DepositAminoMsg {
-    return {
-      type: "cosmos-sdk/Deposit",
-      value: Deposit.toAmino(message)
-    };
   },
   fromProtoMsg(message: DepositProtoMsg): Deposit {
     return Deposit.decode(message.value);
@@ -742,137 +585,6 @@ export const Proposal = {
     }
     return message;
   },
-  fromJSON(object: any): Proposal {
-    const obj = createBaseProposal();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.content)) obj.content = Any.fromJSON(object.content);
-    if (isSet(object.status)) obj.status = proposalStatusFromJSON(object.status);
-    if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
-    if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
-    if (isSet(object.depositEndTime)) obj.depositEndTime = new Date(object.depositEndTime);
-    if (Array.isArray(object?.totalDeposit)) obj.totalDeposit = object.totalDeposit.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.votingStartTime)) obj.votingStartTime = new Date(object.votingStartTime);
-    if (isSet(object.votingEndTime)) obj.votingEndTime = new Date(object.votingEndTime);
-    return obj;
-  },
-  toJSON(message: Proposal): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
-    message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
-    message.finalTallyResult !== undefined && (obj.finalTallyResult = message.finalTallyResult ? TallyResult.toJSON(message.finalTallyResult) : undefined);
-    message.submitTime !== undefined && (obj.submitTime = message.submitTime.toISOString());
-    message.depositEndTime !== undefined && (obj.depositEndTime = message.depositEndTime.toISOString());
-    if (message.totalDeposit) {
-      obj.totalDeposit = message.totalDeposit.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.totalDeposit = [];
-    }
-    message.votingStartTime !== undefined && (obj.votingStartTime = message.votingStartTime.toISOString());
-    message.votingEndTime !== undefined && (obj.votingEndTime = message.votingEndTime.toISOString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Proposal>): Proposal {
-    const message = createBaseProposal();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    if (object.content !== undefined && object.content !== null) {
-      message.content = Any.fromPartial(object.content);
-    }
-    message.status = object.status ?? 0;
-    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
-      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
-    }
-    message.submitTime = object.submitTime ?? undefined;
-    message.depositEndTime = object.depositEndTime ?? undefined;
-    message.totalDeposit = object.totalDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.votingStartTime = object.votingStartTime ?? undefined;
-    message.votingEndTime = object.votingEndTime ?? undefined;
-    return message;
-  },
-  fromSDK(object: ProposalSDKType): Proposal {
-    return {
-      proposalId: object?.proposal_id,
-      content: object.content ? Any.fromSDK(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
-      finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
-      submitTime: object.submit_time ?? undefined,
-      depositEndTime: object.deposit_end_time ?? undefined,
-      totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      votingStartTime: object.voting_start_time ?? undefined,
-      votingEndTime: object.voting_end_time ?? undefined
-    };
-  },
-  fromSDKJSON(object: any): ProposalSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
-      final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
-      submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
-      deposit_end_time: isSet(object.deposit_end_time) ? new Date(object.deposit_end_time) : undefined,
-      total_deposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      voting_start_time: isSet(object.voting_start_time) ? new Date(object.voting_start_time) : undefined,
-      voting_end_time: isSet(object.voting_end_time) ? new Date(object.voting_end_time) : undefined
-    };
-  },
-  toSDK(message: Proposal): ProposalSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
-    message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
-    message.finalTallyResult !== undefined && (obj.final_tally_result = message.finalTallyResult ? TallyResult.toSDK(message.finalTallyResult) : undefined);
-    message.submitTime !== undefined && (obj.submit_time = message.submitTime ?? undefined);
-    message.depositEndTime !== undefined && (obj.deposit_end_time = message.depositEndTime ?? undefined);
-    if (message.totalDeposit) {
-      obj.total_deposit = message.totalDeposit.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total_deposit = [];
-    }
-    message.votingStartTime !== undefined && (obj.voting_start_time = message.votingStartTime ?? undefined);
-    message.votingEndTime !== undefined && (obj.voting_end_time = message.votingEndTime ?? undefined);
-    return obj;
-  },
-  fromAmino(object: ProposalAmino): Proposal {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      content: object?.content ? Any.fromAmino(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
-      finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      submitTime: object.submit_time,
-      depositEndTime: object.deposit_end_time,
-      totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      votingStartTime: object.voting_start_time,
-      votingEndTime: object.voting_end_time
-    };
-  },
-  toAmino(message: Proposal): ProposalAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.content = message.content ? Any.toAmino(message.content) : undefined;
-    obj.status = message.status;
-    obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
-    obj.submit_time = message.submitTime;
-    obj.deposit_end_time = message.depositEndTime;
-    if (message.totalDeposit) {
-      obj.total_deposit = message.totalDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total_deposit = [];
-    }
-    obj.voting_start_time = message.votingStartTime;
-    obj.voting_end_time = message.votingEndTime;
-    return obj;
-  },
-  fromAminoMsg(object: ProposalAminoMsg): Proposal {
-    return Proposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: Proposal): ProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/Proposal",
-      value: Proposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ProposalProtoMsg): Proposal {
     return Proposal.decode(message.value);
   },
@@ -936,79 +648,6 @@ export const TallyResult = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): TallyResult {
-    const obj = createBaseTallyResult();
-    if (isSet(object.yes)) obj.yes = String(object.yes);
-    if (isSet(object.abstain)) obj.abstain = String(object.abstain);
-    if (isSet(object.no)) obj.no = String(object.no);
-    if (isSet(object.noWithVeto)) obj.noWithVeto = String(object.noWithVeto);
-    return obj;
-  },
-  toJSON(message: TallyResult): unknown {
-    const obj: any = {};
-    message.yes !== undefined && (obj.yes = message.yes);
-    message.abstain !== undefined && (obj.abstain = message.abstain);
-    message.no !== undefined && (obj.no = message.no);
-    message.noWithVeto !== undefined && (obj.noWithVeto = message.noWithVeto);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<TallyResult>): TallyResult {
-    const message = createBaseTallyResult();
-    message.yes = object.yes ?? "";
-    message.abstain = object.abstain ?? "";
-    message.no = object.no ?? "";
-    message.noWithVeto = object.noWithVeto ?? "";
-    return message;
-  },
-  fromSDK(object: TallyResultSDKType): TallyResult {
-    return {
-      yes: object?.yes,
-      abstain: object?.abstain,
-      no: object?.no,
-      noWithVeto: object?.no_with_veto
-    };
-  },
-  fromSDKJSON(object: any): TallyResultSDKType {
-    return {
-      yes: isSet(object.yes) ? String(object.yes) : "",
-      abstain: isSet(object.abstain) ? String(object.abstain) : "",
-      no: isSet(object.no) ? String(object.no) : "",
-      no_with_veto: isSet(object.no_with_veto) ? String(object.no_with_veto) : ""
-    };
-  },
-  toSDK(message: TallyResult): TallyResultSDKType {
-    const obj: any = {};
-    obj.yes = message.yes;
-    obj.abstain = message.abstain;
-    obj.no = message.no;
-    obj.no_with_veto = message.noWithVeto;
-    return obj;
-  },
-  fromAmino(object: TallyResultAmino): TallyResult {
-    return {
-      yes: object.yes,
-      abstain: object.abstain,
-      no: object.no,
-      noWithVeto: object.no_with_veto
-    };
-  },
-  toAmino(message: TallyResult): TallyResultAmino {
-    const obj: any = {};
-    obj.yes = message.yes;
-    obj.abstain = message.abstain;
-    obj.no = message.no;
-    obj.no_with_veto = message.noWithVeto;
-    return obj;
-  },
-  fromAminoMsg(object: TallyResultAminoMsg): TallyResult {
-    return TallyResult.fromAmino(object.value);
-  },
-  toAminoMsg(message: TallyResult): TallyResultAminoMsg {
-    return {
-      type: "cosmos-sdk/TallyResult",
-      value: TallyResult.toAmino(message)
-    };
   },
   fromProtoMsg(message: TallyResultProtoMsg): TallyResult {
     return TallyResult.decode(message.value);
@@ -1074,93 +713,6 @@ export const Vote = {
     }
     return message;
   },
-  fromJSON(object: any): Vote {
-    const obj = createBaseVote();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Vote): unknown {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Vote>): Vote {
-    const message = createBaseVote();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
-    message.voter = object.voter ?? "";
-    message.option = object.option ?? 0;
-    message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: VoteSDKType): Vote {
-    return {
-      proposalId: object?.proposal_id,
-      voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): VoteSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Vote): VoteSDKType {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.voter = message.voter;
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toSDK(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    return obj;
-  },
-  fromAmino(object: VoteAmino): Vote {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Vote): VoteAmino {
-    const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    obj.option = message.option;
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: VoteAminoMsg): Vote {
-    return Vote.fromAmino(object.value);
-  },
-  toAminoMsg(message: Vote): VoteAminoMsg {
-    return {
-      type: "cosmos-sdk/Vote",
-      value: Vote.toAmino(message)
-    };
-  },
   fromProtoMsg(message: VoteProtoMsg): Vote {
     return Vote.decode(message.value);
   },
@@ -1211,77 +763,6 @@ export const DepositParams = {
     }
     return message;
   },
-  fromJSON(object: any): DepositParams {
-    const obj = createBaseDepositParams();
-    if (Array.isArray(object?.minDeposit)) obj.minDeposit = object.minDeposit.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.maxDepositPeriod)) obj.maxDepositPeriod = Duration.fromJSON(object.maxDepositPeriod);
-    return obj;
-  },
-  toJSON(message: DepositParams): unknown {
-    const obj: any = {};
-    if (message.minDeposit) {
-      obj.minDeposit = message.minDeposit.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.minDeposit = [];
-    }
-    message.maxDepositPeriod !== undefined && (obj.maxDepositPeriod = message.maxDepositPeriod ? Duration.toJSON(message.maxDepositPeriod) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DepositParams>): DepositParams {
-    const message = createBaseDepositParams();
-    message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
-    if (object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null) {
-      message.maxDepositPeriod = Duration.fromPartial(object.maxDepositPeriod);
-    }
-    return message;
-  },
-  fromSDK(object: DepositParamsSDKType): DepositParams {
-    return {
-      minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      maxDepositPeriod: object.max_deposit_period ? Duration.fromSDK(object.max_deposit_period) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DepositParamsSDKType {
-    return {
-      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      max_deposit_period: isSet(object.max_deposit_period) ? Duration.fromSDKJSON(object.max_deposit_period) : undefined
-    };
-  },
-  toSDK(message: DepositParams): DepositParamsSDKType {
-    const obj: any = {};
-    if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.min_deposit = [];
-    }
-    message.maxDepositPeriod !== undefined && (obj.max_deposit_period = message.maxDepositPeriod ? Duration.toSDK(message.maxDepositPeriod) : undefined);
-    return obj;
-  },
-  fromAmino(object: DepositParamsAmino): DepositParams {
-    return {
-      minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
-    };
-  },
-  toAmino(message: DepositParams): DepositParamsAmino {
-    const obj: any = {};
-    if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.min_deposit = [];
-    }
-    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
-    return DepositParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/DepositParams",
-      value: DepositParams.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
     return DepositParams.decode(message.value);
   },
@@ -1324,57 +805,6 @@ export const VotingParams = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): VotingParams {
-    const obj = createBaseVotingParams();
-    if (isSet(object.votingPeriod)) obj.votingPeriod = Duration.fromJSON(object.votingPeriod);
-    return obj;
-  },
-  toJSON(message: VotingParams): unknown {
-    const obj: any = {};
-    message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<VotingParams>): VotingParams {
-    const message = createBaseVotingParams();
-    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
-      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
-    }
-    return message;
-  },
-  fromSDK(object: VotingParamsSDKType): VotingParams {
-    return {
-      votingPeriod: object.voting_period ? Duration.fromSDK(object.voting_period) : undefined
-    };
-  },
-  fromSDKJSON(object: any): VotingParamsSDKType {
-    return {
-      voting_period: isSet(object.voting_period) ? Duration.fromSDKJSON(object.voting_period) : undefined
-    };
-  },
-  toSDK(message: VotingParams): VotingParamsSDKType {
-    const obj: any = {};
-    message.votingPeriod !== undefined && (obj.voting_period = message.votingPeriod ? Duration.toSDK(message.votingPeriod) : undefined);
-    return obj;
-  },
-  fromAmino(object: VotingParamsAmino): VotingParams {
-    return {
-      votingPeriod: object?.voting_period ? Duration.fromAmino(object.voting_period) : undefined
-    };
-  },
-  toAmino(message: VotingParams): VotingParamsAmino {
-    const obj: any = {};
-    obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: VotingParamsAminoMsg): VotingParams {
-    return VotingParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: VotingParams): VotingParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/VotingParams",
-      value: VotingParams.toAmino(message)
-    };
   },
   fromProtoMsg(message: VotingParamsProtoMsg): VotingParams {
     return VotingParams.decode(message.value);
@@ -1432,71 +862,6 @@ export const TallyParams = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): TallyParams {
-    const obj = createBaseTallyParams();
-    if (isSet(object.quorum)) obj.quorum = bytesFromBase64(object.quorum);
-    if (isSet(object.threshold)) obj.threshold = bytesFromBase64(object.threshold);
-    if (isSet(object.vetoThreshold)) obj.vetoThreshold = bytesFromBase64(object.vetoThreshold);
-    return obj;
-  },
-  toJSON(message: TallyParams): unknown {
-    const obj: any = {};
-    message.quorum !== undefined && (obj.quorum = base64FromBytes(message.quorum !== undefined ? message.quorum : new Uint8Array()));
-    message.threshold !== undefined && (obj.threshold = base64FromBytes(message.threshold !== undefined ? message.threshold : new Uint8Array()));
-    message.vetoThreshold !== undefined && (obj.vetoThreshold = base64FromBytes(message.vetoThreshold !== undefined ? message.vetoThreshold : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<TallyParams>): TallyParams {
-    const message = createBaseTallyParams();
-    message.quorum = object.quorum ?? new Uint8Array();
-    message.threshold = object.threshold ?? new Uint8Array();
-    message.vetoThreshold = object.vetoThreshold ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: TallyParamsSDKType): TallyParams {
-    return {
-      quorum: object?.quorum,
-      threshold: object?.threshold,
-      vetoThreshold: object?.veto_threshold
-    };
-  },
-  fromSDKJSON(object: any): TallyParamsSDKType {
-    return {
-      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
-      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
-      veto_threshold: isSet(object.veto_threshold) ? bytesFromBase64(object.veto_threshold) : new Uint8Array()
-    };
-  },
-  toSDK(message: TallyParams): TallyParamsSDKType {
-    const obj: any = {};
-    obj.quorum = message.quorum;
-    obj.threshold = message.threshold;
-    obj.veto_threshold = message.vetoThreshold;
-    return obj;
-  },
-  fromAmino(object: TallyParamsAmino): TallyParams {
-    return {
-      quorum: object.quorum,
-      threshold: object.threshold,
-      vetoThreshold: object.veto_threshold
-    };
-  },
-  toAmino(message: TallyParams): TallyParamsAmino {
-    const obj: any = {};
-    obj.quorum = message.quorum;
-    obj.threshold = message.threshold;
-    obj.veto_threshold = message.vetoThreshold;
-    return obj;
-  },
-  fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {
-    return TallyParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: TallyParams): TallyParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/TallyParams",
-      value: TallyParams.toAmino(message)
-    };
   },
   fromProtoMsg(message: TallyParamsProtoMsg): TallyParams {
     return TallyParams.decode(message.value);

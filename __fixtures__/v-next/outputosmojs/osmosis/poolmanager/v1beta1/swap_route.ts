@@ -5,6 +5,10 @@ export interface SwapAmountInRoute {
   poolId: bigint;
   tokenOutDenom: string;
 }
+export interface SwapAmountInRouteProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SwapAmountInRoute";
+  value: Uint8Array;
+}
 export interface SwapAmountInRouteSDKType {
   pool_id: bigint;
   token_out_denom: string;
@@ -12,6 +16,10 @@ export interface SwapAmountInRouteSDKType {
 export interface SwapAmountOutRoute {
   poolId: bigint;
   tokenInDenom: string;
+}
+export interface SwapAmountOutRouteProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SwapAmountOutRoute";
+  value: Uint8Array;
 }
 export interface SwapAmountOutRouteSDKType {
   pool_id: bigint;

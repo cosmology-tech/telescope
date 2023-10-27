@@ -7,6 +7,10 @@ export interface ClientState {
   /** the latest block height */
   latestHeight: Height;
 }
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.localhost.v2.ClientState";
+  value: Uint8Array;
+}
 /** ClientState defines the 09-localhost client state */
 export interface ClientStateSDKType {
   latest_height: HeightSDKType;

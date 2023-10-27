@@ -1,17 +1,24 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination";
 import { Params, ParamsSDKType } from "./params";
-import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidDelegationRecord, SuperfluidDelegationRecordSDKType, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "./superfluid";
+import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidDelegationRecord, SuperfluidDelegationRecordSDKType } from "./superfluid";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryParamsRequest";
+  value: Uint8Array;
+}
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryParamsResponse";
+  value: Uint8Array;
 }
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
@@ -19,19 +26,35 @@ export interface QueryParamsResponseSDKType {
 export interface AssetTypeRequest {
   denom: string;
 }
+export interface AssetTypeRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.AssetTypeRequest";
+  value: Uint8Array;
+}
 export interface AssetTypeRequestSDKType {
   denom: string;
 }
 export interface AssetTypeResponse {
   assetType: SuperfluidAssetType;
 }
+export interface AssetTypeResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.AssetTypeResponse";
+  value: Uint8Array;
+}
 export interface AssetTypeResponseSDKType {
   asset_type: SuperfluidAssetType;
 }
 export interface AllAssetsRequest {}
+export interface AllAssetsRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.AllAssetsRequest";
+  value: Uint8Array;
+}
 export interface AllAssetsRequestSDKType {}
 export interface AllAssetsResponse {
   assets: SuperfluidAsset[];
+}
+export interface AllAssetsResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.AllAssetsResponse";
+  value: Uint8Array;
 }
 export interface AllAssetsResponseSDKType {
   assets: SuperfluidAssetSDKType[];
@@ -39,11 +62,19 @@ export interface AllAssetsResponseSDKType {
 export interface AssetMultiplierRequest {
   denom: string;
 }
+export interface AssetMultiplierRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.AssetMultiplierRequest";
+  value: Uint8Array;
+}
 export interface AssetMultiplierRequestSDKType {
   denom: string;
 }
 export interface AssetMultiplierResponse {
   osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
+}
+export interface AssetMultiplierResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.AssetMultiplierResponse";
+  value: Uint8Array;
 }
 export interface AssetMultiplierResponseSDKType {
   osmo_equivalent_multiplier?: OsmoEquivalentMultiplierRecordSDKType;
@@ -54,6 +85,10 @@ export interface SuperfluidIntermediaryAccountInfo {
   gaugeId: bigint;
   address: string;
 }
+export interface SuperfluidIntermediaryAccountInfoProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccountInfo";
+  value: Uint8Array;
+}
 export interface SuperfluidIntermediaryAccountInfoSDKType {
   denom: string;
   val_addr: string;
@@ -63,12 +98,20 @@ export interface SuperfluidIntermediaryAccountInfoSDKType {
 export interface AllIntermediaryAccountsRequest {
   pagination?: PageRequest;
 }
+export interface AllIntermediaryAccountsRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsRequest";
+  value: Uint8Array;
+}
 export interface AllIntermediaryAccountsRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface AllIntermediaryAccountsResponse {
   accounts: SuperfluidIntermediaryAccountInfo[];
   pagination?: PageResponse;
+}
+export interface AllIntermediaryAccountsResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsResponse";
+  value: Uint8Array;
 }
 export interface AllIntermediaryAccountsResponseSDKType {
   accounts: SuperfluidIntermediaryAccountInfoSDKType[];
@@ -77,11 +120,19 @@ export interface AllIntermediaryAccountsResponseSDKType {
 export interface ConnectedIntermediaryAccountRequest {
   lockId: bigint;
 }
+export interface ConnectedIntermediaryAccountRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountRequest";
+  value: Uint8Array;
+}
 export interface ConnectedIntermediaryAccountRequestSDKType {
   lock_id: bigint;
 }
 export interface ConnectedIntermediaryAccountResponse {
   account?: SuperfluidIntermediaryAccountInfo;
+}
+export interface ConnectedIntermediaryAccountResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountResponse";
+  value: Uint8Array;
 }
 export interface ConnectedIntermediaryAccountResponseSDKType {
   account?: SuperfluidIntermediaryAccountInfoSDKType;
@@ -89,11 +140,19 @@ export interface ConnectedIntermediaryAccountResponseSDKType {
 export interface QueryTotalDelegationByValidatorForDenomRequest {
   denom: string;
 }
+export interface QueryTotalDelegationByValidatorForDenomRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByValidatorForDenomRequest";
+  value: Uint8Array;
+}
 export interface QueryTotalDelegationByValidatorForDenomRequestSDKType {
   denom: string;
 }
 export interface QueryTotalDelegationByValidatorForDenomResponse {
   assets: Delegations[];
+}
+export interface QueryTotalDelegationByValidatorForDenomResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByValidatorForDenomResponse";
+  value: Uint8Array;
 }
 export interface QueryTotalDelegationByValidatorForDenomResponseSDKType {
   assets: DelegationsSDKType[];
@@ -103,15 +162,27 @@ export interface Delegations {
   amountSfsd: string;
   osmoEquivalent: string;
 }
+export interface DelegationsProtoMsg {
+  typeUrl: "/osmosis.superfluid.Delegations";
+  value: Uint8Array;
+}
 export interface DelegationsSDKType {
   val_addr: string;
   amount_sfsd: string;
   osmo_equivalent: string;
 }
 export interface TotalSuperfluidDelegationsRequest {}
+export interface TotalSuperfluidDelegationsRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.TotalSuperfluidDelegationsRequest";
+  value: Uint8Array;
+}
 export interface TotalSuperfluidDelegationsRequestSDKType {}
 export interface TotalSuperfluidDelegationsResponse {
   totalDelegations: string;
+}
+export interface TotalSuperfluidDelegationsResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.TotalSuperfluidDelegationsResponse";
+  value: Uint8Array;
 }
 export interface TotalSuperfluidDelegationsResponseSDKType {
   total_delegations: string;
@@ -121,6 +192,10 @@ export interface SuperfluidDelegationAmountRequest {
   validatorAddress: string;
   denom: string;
 }
+export interface SuperfluidDelegationAmountRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationAmountRequest";
+  value: Uint8Array;
+}
 export interface SuperfluidDelegationAmountRequestSDKType {
   delegator_address: string;
   validator_address: string;
@@ -129,11 +204,19 @@ export interface SuperfluidDelegationAmountRequestSDKType {
 export interface SuperfluidDelegationAmountResponse {
   amount: Coin[];
 }
+export interface SuperfluidDelegationAmountResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationAmountResponse";
+  value: Uint8Array;
+}
 export interface SuperfluidDelegationAmountResponseSDKType {
   amount: CoinSDKType[];
 }
 export interface SuperfluidDelegationsByDelegatorRequest {
   delegatorAddress: string;
+}
+export interface SuperfluidDelegationsByDelegatorRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest";
+  value: Uint8Array;
 }
 export interface SuperfluidDelegationsByDelegatorRequestSDKType {
   delegator_address: string;
@@ -142,6 +225,10 @@ export interface SuperfluidDelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
   totalEquivalentStakedAmount: Coin;
+}
+export interface SuperfluidDelegationsByDelegatorResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse";
+  value: Uint8Array;
 }
 export interface SuperfluidDelegationsByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
@@ -152,6 +239,10 @@ export interface SuperfluidUndelegationsByDelegatorRequest {
   delegatorAddress: string;
   denom: string;
 }
+export interface SuperfluidUndelegationsByDelegatorRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest";
+  value: Uint8Array;
+}
 export interface SuperfluidUndelegationsByDelegatorRequestSDKType {
   delegator_address: string;
   denom: string;
@@ -160,6 +251,10 @@ export interface SuperfluidUndelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalUndelegatedCoins: Coin[];
   syntheticLocks: SyntheticLock[];
+}
+export interface SuperfluidUndelegationsByDelegatorResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse";
+  value: Uint8Array;
 }
 export interface SuperfluidUndelegationsByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
@@ -170,12 +265,20 @@ export interface SuperfluidDelegationsByValidatorDenomRequest {
   validatorAddress: string;
   denom: string;
 }
+export interface SuperfluidDelegationsByValidatorDenomRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest";
+  value: Uint8Array;
+}
 export interface SuperfluidDelegationsByValidatorDenomRequestSDKType {
   validator_address: string;
   denom: string;
 }
 export interface SuperfluidDelegationsByValidatorDenomResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
+}
+export interface SuperfluidDelegationsByValidatorDenomResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse";
+  value: Uint8Array;
 }
 export interface SuperfluidDelegationsByValidatorDenomResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
@@ -184,6 +287,10 @@ export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
   validatorAddress: string;
   denom: string;
 }
+export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest";
+  value: Uint8Array;
+}
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType {
   validator_address: string;
   denom: string;
@@ -191,11 +298,19 @@ export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
   totalDelegatedCoins: Coin[];
 }
+export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse";
+  value: Uint8Array;
+}
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType {
   total_delegated_coins: CoinSDKType[];
 }
 export interface QueryTotalDelegationByDelegatorRequest {
   delegatorAddress: string;
+}
+export interface QueryTotalDelegationByDelegatorRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorRequest";
+  value: Uint8Array;
 }
 export interface QueryTotalDelegationByDelegatorRequestSDKType {
   delegator_address: string;
@@ -206,6 +321,10 @@ export interface QueryTotalDelegationByDelegatorResponse {
   totalDelegatedCoins: Coin[];
   totalEquivalentStakedAmount: Coin;
 }
+export interface QueryTotalDelegationByDelegatorResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorResponse";
+  value: Uint8Array;
+}
 export interface QueryTotalDelegationByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
   delegation_response: DelegationResponseSDKType[];
@@ -213,9 +332,17 @@ export interface QueryTotalDelegationByDelegatorResponseSDKType {
   total_equivalent_staked_amount: CoinSDKType;
 }
 export interface QueryUnpoolWhitelistRequest {}
+export interface QueryUnpoolWhitelistRequestProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryUnpoolWhitelistRequest";
+  value: Uint8Array;
+}
 export interface QueryUnpoolWhitelistRequestSDKType {}
 export interface QueryUnpoolWhitelistResponse {
   poolIds: bigint[];
+}
+export interface QueryUnpoolWhitelistResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.QueryUnpoolWhitelistResponse";
+  value: Uint8Array;
 }
 export interface QueryUnpoolWhitelistResponseSDKType {
   pool_ids: bigint[];
@@ -241,44 +368,6 @@ export const QueryParamsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
-  },
-  toJSON(_: QueryParamsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
-    const message = createBaseQueryParamsRequest();
-    return message;
-  },
-  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "osmosis/query-params-request",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -323,57 +412,6 @@ export const QueryParamsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
-    const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    return message;
-  },
-  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "osmosis/query-params-response",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -416,55 +454,6 @@ export const AssetTypeRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AssetTypeRequest {
-    const obj = createBaseAssetTypeRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: AssetTypeRequest): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AssetTypeRequest>): AssetTypeRequest {
-    const message = createBaseAssetTypeRequest();
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: AssetTypeRequestSDKType): AssetTypeRequest {
-    return {
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): AssetTypeRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: AssetTypeRequest): AssetTypeRequestSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: AssetTypeRequestAmino): AssetTypeRequest {
-    return {
-      denom: object.denom
-    };
-  },
-  toAmino(message: AssetTypeRequest): AssetTypeRequestAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: AssetTypeRequestAminoMsg): AssetTypeRequest {
-    return AssetTypeRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: AssetTypeRequest): AssetTypeRequestAminoMsg {
-    return {
-      type: "osmosis/asset-type-request",
-      value: AssetTypeRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: AssetTypeRequestProtoMsg): AssetTypeRequest {
     return AssetTypeRequest.decode(message.value);
@@ -509,55 +498,6 @@ export const AssetTypeResponse = {
     }
     return message;
   },
-  fromJSON(object: any): AssetTypeResponse {
-    const obj = createBaseAssetTypeResponse();
-    if (isSet(object.assetType)) obj.assetType = superfluidAssetTypeFromJSON(object.assetType);
-    return obj;
-  },
-  toJSON(message: AssetTypeResponse): unknown {
-    const obj: any = {};
-    message.assetType !== undefined && (obj.assetType = superfluidAssetTypeToJSON(message.assetType));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AssetTypeResponse>): AssetTypeResponse {
-    const message = createBaseAssetTypeResponse();
-    message.assetType = object.assetType ?? 0;
-    return message;
-  },
-  fromSDK(object: AssetTypeResponseSDKType): AssetTypeResponse {
-    return {
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
-    };
-  },
-  fromSDKJSON(object: any): AssetTypeResponseSDKType {
-    return {
-      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
-    };
-  },
-  toSDK(message: AssetTypeResponse): AssetTypeResponseSDKType {
-    const obj: any = {};
-    message.assetType !== undefined && (obj.asset_type = superfluidAssetTypeToJSON(message.assetType));
-    return obj;
-  },
-  fromAmino(object: AssetTypeResponseAmino): AssetTypeResponse {
-    return {
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
-    };
-  },
-  toAmino(message: AssetTypeResponse): AssetTypeResponseAmino {
-    const obj: any = {};
-    obj.asset_type = message.assetType;
-    return obj;
-  },
-  fromAminoMsg(object: AssetTypeResponseAminoMsg): AssetTypeResponse {
-    return AssetTypeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AssetTypeResponse): AssetTypeResponseAminoMsg {
-    return {
-      type: "osmosis/asset-type-response",
-      value: AssetTypeResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: AssetTypeResponseProtoMsg): AssetTypeResponse {
     return AssetTypeResponse.decode(message.value);
   },
@@ -592,44 +532,6 @@ export const AllAssetsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): AllAssetsRequest {
-    const obj = createBaseAllAssetsRequest();
-    return obj;
-  },
-  toJSON(_: AllAssetsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<AllAssetsRequest>): AllAssetsRequest {
-    const message = createBaseAllAssetsRequest();
-    return message;
-  },
-  fromSDK(_: AllAssetsRequestSDKType): AllAssetsRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): AllAssetsRequestSDKType {
-    return {};
-  },
-  toSDK(_: AllAssetsRequest): AllAssetsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: AllAssetsRequestAmino): AllAssetsRequest {
-    return {};
-  },
-  toAmino(_: AllAssetsRequest): AllAssetsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: AllAssetsRequestAminoMsg): AllAssetsRequest {
-    return AllAssetsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: AllAssetsRequest): AllAssetsRequestAminoMsg {
-    return {
-      type: "osmosis/all-assets-request",
-      value: AllAssetsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: AllAssetsRequestProtoMsg): AllAssetsRequest {
     return AllAssetsRequest.decode(message.value);
@@ -674,67 +576,6 @@ export const AllAssetsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): AllAssetsResponse {
-    const obj = createBaseAllAssetsResponse();
-    if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AllAssetsResponse): unknown {
-    const obj: any = {};
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toJSON(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AllAssetsResponse>): AllAssetsResponse {
-    const message = createBaseAllAssetsResponse();
-    message.assets = object.assets?.map(e => SuperfluidAsset.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AllAssetsResponseSDKType): AllAssetsResponse {
-    return {
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AllAssetsResponseSDKType {
-    return {
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: AllAssetsResponse): AllAssetsResponseSDKType {
-    const obj: any = {};
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toSDK(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AllAssetsResponseAmino): AllAssetsResponse {
-    return {
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AllAssetsResponse): AllAssetsResponseAmino {
-    const obj: any = {};
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AllAssetsResponseAminoMsg): AllAssetsResponse {
-    return AllAssetsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AllAssetsResponse): AllAssetsResponseAminoMsg {
-    return {
-      type: "osmosis/all-assets-response",
-      value: AllAssetsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: AllAssetsResponseProtoMsg): AllAssetsResponse {
     return AllAssetsResponse.decode(message.value);
   },
@@ -778,55 +619,6 @@ export const AssetMultiplierRequest = {
     }
     return message;
   },
-  fromJSON(object: any): AssetMultiplierRequest {
-    const obj = createBaseAssetMultiplierRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: AssetMultiplierRequest): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AssetMultiplierRequest>): AssetMultiplierRequest {
-    const message = createBaseAssetMultiplierRequest();
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: AssetMultiplierRequestSDKType): AssetMultiplierRequest {
-    return {
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): AssetMultiplierRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: AssetMultiplierRequest): AssetMultiplierRequestSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: AssetMultiplierRequestAmino): AssetMultiplierRequest {
-    return {
-      denom: object.denom
-    };
-  },
-  toAmino(message: AssetMultiplierRequest): AssetMultiplierRequestAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: AssetMultiplierRequestAminoMsg): AssetMultiplierRequest {
-    return AssetMultiplierRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: AssetMultiplierRequest): AssetMultiplierRequestAminoMsg {
-    return {
-      type: "osmosis/asset-multiplier-request",
-      value: AssetMultiplierRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: AssetMultiplierRequestProtoMsg): AssetMultiplierRequest {
     return AssetMultiplierRequest.decode(message.value);
   },
@@ -869,57 +661,6 @@ export const AssetMultiplierResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AssetMultiplierResponse {
-    const obj = createBaseAssetMultiplierResponse();
-    if (isSet(object.osmoEquivalentMultiplier)) obj.osmoEquivalentMultiplier = OsmoEquivalentMultiplierRecord.fromJSON(object.osmoEquivalentMultiplier);
-    return obj;
-  },
-  toJSON(message: AssetMultiplierResponse): unknown {
-    const obj: any = {};
-    message.osmoEquivalentMultiplier !== undefined && (obj.osmoEquivalentMultiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toJSON(message.osmoEquivalentMultiplier) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AssetMultiplierResponse>): AssetMultiplierResponse {
-    const message = createBaseAssetMultiplierResponse();
-    if (object.osmoEquivalentMultiplier !== undefined && object.osmoEquivalentMultiplier !== null) {
-      message.osmoEquivalentMultiplier = OsmoEquivalentMultiplierRecord.fromPartial(object.osmoEquivalentMultiplier);
-    }
-    return message;
-  },
-  fromSDK(object: AssetMultiplierResponseSDKType): AssetMultiplierResponse {
-    return {
-      osmoEquivalentMultiplier: object.osmo_equivalent_multiplier ? OsmoEquivalentMultiplierRecord.fromSDK(object.osmo_equivalent_multiplier) : undefined
-    };
-  },
-  fromSDKJSON(object: any): AssetMultiplierResponseSDKType {
-    return {
-      osmo_equivalent_multiplier: isSet(object.osmo_equivalent_multiplier) ? OsmoEquivalentMultiplierRecord.fromSDKJSON(object.osmo_equivalent_multiplier) : undefined
-    };
-  },
-  toSDK(message: AssetMultiplierResponse): AssetMultiplierResponseSDKType {
-    const obj: any = {};
-    message.osmoEquivalentMultiplier !== undefined && (obj.osmo_equivalent_multiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toSDK(message.osmoEquivalentMultiplier) : undefined);
-    return obj;
-  },
-  fromAmino(object: AssetMultiplierResponseAmino): AssetMultiplierResponse {
-    return {
-      osmoEquivalentMultiplier: object?.osmo_equivalent_multiplier ? OsmoEquivalentMultiplierRecord.fromAmino(object.osmo_equivalent_multiplier) : undefined
-    };
-  },
-  toAmino(message: AssetMultiplierResponse): AssetMultiplierResponseAmino {
-    const obj: any = {};
-    obj.osmo_equivalent_multiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toAmino(message.osmoEquivalentMultiplier) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AssetMultiplierResponseAminoMsg): AssetMultiplierResponse {
-    return AssetMultiplierResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AssetMultiplierResponse): AssetMultiplierResponseAminoMsg {
-    return {
-      type: "osmosis/asset-multiplier-response",
-      value: AssetMultiplierResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: AssetMultiplierResponseProtoMsg): AssetMultiplierResponse {
     return AssetMultiplierResponse.decode(message.value);
@@ -985,81 +726,6 @@ export const SuperfluidIntermediaryAccountInfo = {
     }
     return message;
   },
-  fromJSON(object: any): SuperfluidIntermediaryAccountInfo {
-    const obj = createBaseSuperfluidIntermediaryAccountInfo();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
-    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
-  },
-  toJSON(message: SuperfluidIntermediaryAccountInfo): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidIntermediaryAccountInfo>): SuperfluidIntermediaryAccountInfo {
-    const message = createBaseSuperfluidIntermediaryAccountInfo();
-    message.denom = object.denom ?? "";
-    message.valAddr = object.valAddr ?? "";
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = BigInt(object.gaugeId.toString());
-    }
-    message.address = object.address ?? "";
-    return message;
-  },
-  fromSDK(object: SuperfluidIntermediaryAccountInfoSDKType): SuperfluidIntermediaryAccountInfo {
-    return {
-      denom: object?.denom,
-      valAddr: object?.val_addr,
-      gaugeId: object?.gauge_id,
-      address: object?.address
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidIntermediaryAccountInfoSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
-      address: isSet(object.address) ? String(object.address) : ""
-    };
-  },
-  toSDK(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.val_addr = message.valAddr;
-    obj.gauge_id = message.gaugeId;
-    obj.address = message.address;
-    return obj;
-  },
-  fromAmino(object: SuperfluidIntermediaryAccountInfoAmino): SuperfluidIntermediaryAccountInfo {
-    return {
-      denom: object.denom,
-      valAddr: object.val_addr,
-      gaugeId: BigInt(object.gauge_id),
-      address: object.address
-    };
-  },
-  toAmino(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.val_addr = message.valAddr;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidIntermediaryAccountInfoAminoMsg): SuperfluidIntermediaryAccountInfo {
-    return SuperfluidIntermediaryAccountInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoAminoMsg {
-    return {
-      type: "osmosis/superfluid-intermediary-account-info",
-      value: SuperfluidIntermediaryAccountInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidIntermediaryAccountInfoProtoMsg): SuperfluidIntermediaryAccountInfo {
     return SuperfluidIntermediaryAccountInfo.decode(message.value);
   },
@@ -1102,57 +768,6 @@ export const AllIntermediaryAccountsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AllIntermediaryAccountsRequest {
-    const obj = createBaseAllIntermediaryAccountsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: AllIntermediaryAccountsRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AllIntermediaryAccountsRequest>): AllIntermediaryAccountsRequest {
-    const message = createBaseAllIntermediaryAccountsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: AllIntermediaryAccountsRequestSDKType): AllIntermediaryAccountsRequest {
-    return {
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): AllIntermediaryAccountsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: AllIntermediaryAccountsRequest): AllIntermediaryAccountsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: AllIntermediaryAccountsRequestAmino): AllIntermediaryAccountsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: AllIntermediaryAccountsRequest): AllIntermediaryAccountsRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AllIntermediaryAccountsRequestAminoMsg): AllIntermediaryAccountsRequest {
-    return AllIntermediaryAccountsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: AllIntermediaryAccountsRequest): AllIntermediaryAccountsRequestAminoMsg {
-    return {
-      type: "osmosis/all-intermediary-accounts-request",
-      value: AllIntermediaryAccountsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: AllIntermediaryAccountsRequestProtoMsg): AllIntermediaryAccountsRequest {
     return AllIntermediaryAccountsRequest.decode(message.value);
@@ -1204,77 +819,6 @@ export const AllIntermediaryAccountsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): AllIntermediaryAccountsResponse {
-    const obj = createBaseAllIntermediaryAccountsResponse();
-    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: AllIntermediaryAccountsResponse): unknown {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? SuperfluidIntermediaryAccountInfo.toJSON(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AllIntermediaryAccountsResponse>): AllIntermediaryAccountsResponse {
-    const message = createBaseAllIntermediaryAccountsResponse();
-    message.accounts = object.accounts?.map(e => SuperfluidIntermediaryAccountInfo.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: AllIntermediaryAccountsResponseSDKType): AllIntermediaryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): AllIntermediaryAccountsResponseSDKType {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: AllIntermediaryAccountsResponse): AllIntermediaryAccountsResponseSDKType {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? SuperfluidIntermediaryAccountInfo.toSDK(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: AllIntermediaryAccountsResponseAmino): AllIntermediaryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: AllIntermediaryAccountsResponse): AllIntermediaryAccountsResponseAmino {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? SuperfluidIntermediaryAccountInfo.toAmino(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AllIntermediaryAccountsResponseAminoMsg): AllIntermediaryAccountsResponse {
-    return AllIntermediaryAccountsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AllIntermediaryAccountsResponse): AllIntermediaryAccountsResponseAminoMsg {
-    return {
-      type: "osmosis/all-intermediary-accounts-response",
-      value: AllIntermediaryAccountsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: AllIntermediaryAccountsResponseProtoMsg): AllIntermediaryAccountsResponse {
     return AllIntermediaryAccountsResponse.decode(message.value);
   },
@@ -1317,57 +861,6 @@ export const ConnectedIntermediaryAccountRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ConnectedIntermediaryAccountRequest {
-    const obj = createBaseConnectedIntermediaryAccountRequest();
-    if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
-    return obj;
-  },
-  toJSON(message: ConnectedIntermediaryAccountRequest): unknown {
-    const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ConnectedIntermediaryAccountRequest>): ConnectedIntermediaryAccountRequest {
-    const message = createBaseConnectedIntermediaryAccountRequest();
-    if (object.lockId !== undefined && object.lockId !== null) {
-      message.lockId = BigInt(object.lockId.toString());
-    }
-    return message;
-  },
-  fromSDK(object: ConnectedIntermediaryAccountRequestSDKType): ConnectedIntermediaryAccountRequest {
-    return {
-      lockId: object?.lock_id
-    };
-  },
-  fromSDKJSON(object: any): ConnectedIntermediaryAccountRequestSDKType {
-    return {
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestSDKType {
-    const obj: any = {};
-    obj.lock_id = message.lockId;
-    return obj;
-  },
-  fromAmino(object: ConnectedIntermediaryAccountRequestAmino): ConnectedIntermediaryAccountRequest {
-    return {
-      lockId: BigInt(object.lock_id)
-    };
-  },
-  toAmino(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestAmino {
-    const obj: any = {};
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ConnectedIntermediaryAccountRequestAminoMsg): ConnectedIntermediaryAccountRequest {
-    return ConnectedIntermediaryAccountRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestAminoMsg {
-    return {
-      type: "osmosis/connected-intermediary-account-request",
-      value: ConnectedIntermediaryAccountRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: ConnectedIntermediaryAccountRequestProtoMsg): ConnectedIntermediaryAccountRequest {
     return ConnectedIntermediaryAccountRequest.decode(message.value);
@@ -1412,57 +905,6 @@ export const ConnectedIntermediaryAccountResponse = {
     }
     return message;
   },
-  fromJSON(object: any): ConnectedIntermediaryAccountResponse {
-    const obj = createBaseConnectedIntermediaryAccountResponse();
-    if (isSet(object.account)) obj.account = SuperfluidIntermediaryAccountInfo.fromJSON(object.account);
-    return obj;
-  },
-  toJSON(message: ConnectedIntermediaryAccountResponse): unknown {
-    const obj: any = {};
-    message.account !== undefined && (obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toJSON(message.account) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ConnectedIntermediaryAccountResponse>): ConnectedIntermediaryAccountResponse {
-    const message = createBaseConnectedIntermediaryAccountResponse();
-    if (object.account !== undefined && object.account !== null) {
-      message.account = SuperfluidIntermediaryAccountInfo.fromPartial(object.account);
-    }
-    return message;
-  },
-  fromSDK(object: ConnectedIntermediaryAccountResponseSDKType): ConnectedIntermediaryAccountResponse {
-    return {
-      account: object.account ? SuperfluidIntermediaryAccountInfo.fromSDK(object.account) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ConnectedIntermediaryAccountResponseSDKType {
-    return {
-      account: isSet(object.account) ? SuperfluidIntermediaryAccountInfo.fromSDKJSON(object.account) : undefined
-    };
-  },
-  toSDK(message: ConnectedIntermediaryAccountResponse): ConnectedIntermediaryAccountResponseSDKType {
-    const obj: any = {};
-    message.account !== undefined && (obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toSDK(message.account) : undefined);
-    return obj;
-  },
-  fromAmino(object: ConnectedIntermediaryAccountResponseAmino): ConnectedIntermediaryAccountResponse {
-    return {
-      account: object?.account ? SuperfluidIntermediaryAccountInfo.fromAmino(object.account) : undefined
-    };
-  },
-  toAmino(message: ConnectedIntermediaryAccountResponse): ConnectedIntermediaryAccountResponseAmino {
-    const obj: any = {};
-    obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toAmino(message.account) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ConnectedIntermediaryAccountResponseAminoMsg): ConnectedIntermediaryAccountResponse {
-    return ConnectedIntermediaryAccountResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConnectedIntermediaryAccountResponse): ConnectedIntermediaryAccountResponseAminoMsg {
-    return {
-      type: "osmosis/connected-intermediary-account-response",
-      value: ConnectedIntermediaryAccountResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ConnectedIntermediaryAccountResponseProtoMsg): ConnectedIntermediaryAccountResponse {
     return ConnectedIntermediaryAccountResponse.decode(message.value);
   },
@@ -1506,55 +948,6 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryTotalDelegationByValidatorForDenomRequest {
-    const obj = createBaseQueryTotalDelegationByValidatorForDenomRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: QueryTotalDelegationByValidatorForDenomRequest): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>): QueryTotalDelegationByValidatorForDenomRequest {
-    const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: QueryTotalDelegationByValidatorForDenomRequestSDKType): QueryTotalDelegationByValidatorForDenomRequest {
-    return {
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): QueryTotalDelegationByValidatorForDenomRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: QueryTotalDelegationByValidatorForDenomRequestAmino): QueryTotalDelegationByValidatorForDenomRequest {
-    return {
-      denom: object.denom
-    };
-  },
-  toAmino(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalDelegationByValidatorForDenomRequestAminoMsg): QueryTotalDelegationByValidatorForDenomRequest {
-    return QueryTotalDelegationByValidatorForDenomRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestAminoMsg {
-    return {
-      type: "osmosis/query-total-delegation-by-validator-for-denom-request",
-      value: QueryTotalDelegationByValidatorForDenomRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryTotalDelegationByValidatorForDenomRequestProtoMsg): QueryTotalDelegationByValidatorForDenomRequest {
     return QueryTotalDelegationByValidatorForDenomRequest.decode(message.value);
   },
@@ -1597,67 +990,6 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryTotalDelegationByValidatorForDenomResponse {
-    const obj = createBaseQueryTotalDelegationByValidatorForDenomResponse();
-    if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => Delegations.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryTotalDelegationByValidatorForDenomResponse): unknown {
-    const obj: any = {};
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? Delegations.toJSON(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomResponse>): QueryTotalDelegationByValidatorForDenomResponse {
-    const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
-    message.assets = object.assets?.map(e => Delegations.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: QueryTotalDelegationByValidatorForDenomResponseSDKType): QueryTotalDelegationByValidatorForDenomResponse {
-    return {
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): QueryTotalDelegationByValidatorForDenomResponseSDKType {
-    return {
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: QueryTotalDelegationByValidatorForDenomResponse): QueryTotalDelegationByValidatorForDenomResponseSDKType {
-    const obj: any = {};
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? Delegations.toSDK(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QueryTotalDelegationByValidatorForDenomResponseAmino): QueryTotalDelegationByValidatorForDenomResponse {
-    return {
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryTotalDelegationByValidatorForDenomResponse): QueryTotalDelegationByValidatorForDenomResponseAmino {
-    const obj: any = {};
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? Delegations.toAmino(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalDelegationByValidatorForDenomResponseAminoMsg): QueryTotalDelegationByValidatorForDenomResponse {
-    return QueryTotalDelegationByValidatorForDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalDelegationByValidatorForDenomResponse): QueryTotalDelegationByValidatorForDenomResponseAminoMsg {
-    return {
-      type: "osmosis/query-total-delegation-by-validator-for-denom-response",
-      value: QueryTotalDelegationByValidatorForDenomResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryTotalDelegationByValidatorForDenomResponseProtoMsg): QueryTotalDelegationByValidatorForDenomResponse {
     return QueryTotalDelegationByValidatorForDenomResponse.decode(message.value);
@@ -1716,71 +1048,6 @@ export const Delegations = {
     }
     return message;
   },
-  fromJSON(object: any): Delegations {
-    const obj = createBaseDelegations();
-    if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
-    if (isSet(object.amountSfsd)) obj.amountSfsd = String(object.amountSfsd);
-    if (isSet(object.osmoEquivalent)) obj.osmoEquivalent = String(object.osmoEquivalent);
-    return obj;
-  },
-  toJSON(message: Delegations): unknown {
-    const obj: any = {};
-    message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.amountSfsd !== undefined && (obj.amountSfsd = message.amountSfsd);
-    message.osmoEquivalent !== undefined && (obj.osmoEquivalent = message.osmoEquivalent);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Delegations>): Delegations {
-    const message = createBaseDelegations();
-    message.valAddr = object.valAddr ?? "";
-    message.amountSfsd = object.amountSfsd ?? "";
-    message.osmoEquivalent = object.osmoEquivalent ?? "";
-    return message;
-  },
-  fromSDK(object: DelegationsSDKType): Delegations {
-    return {
-      valAddr: object?.val_addr,
-      amountSfsd: object?.amount_sfsd,
-      osmoEquivalent: object?.osmo_equivalent
-    };
-  },
-  fromSDKJSON(object: any): DelegationsSDKType {
-    return {
-      val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      amount_sfsd: isSet(object.amount_sfsd) ? String(object.amount_sfsd) : "",
-      osmo_equivalent: isSet(object.osmo_equivalent) ? String(object.osmo_equivalent) : ""
-    };
-  },
-  toSDK(message: Delegations): DelegationsSDKType {
-    const obj: any = {};
-    obj.val_addr = message.valAddr;
-    obj.amount_sfsd = message.amountSfsd;
-    obj.osmo_equivalent = message.osmoEquivalent;
-    return obj;
-  },
-  fromAmino(object: DelegationsAmino): Delegations {
-    return {
-      valAddr: object.val_addr,
-      amountSfsd: object.amount_sfsd,
-      osmoEquivalent: object.osmo_equivalent
-    };
-  },
-  toAmino(message: Delegations): DelegationsAmino {
-    const obj: any = {};
-    obj.val_addr = message.valAddr;
-    obj.amount_sfsd = message.amountSfsd;
-    obj.osmo_equivalent = message.osmoEquivalent;
-    return obj;
-  },
-  fromAminoMsg(object: DelegationsAminoMsg): Delegations {
-    return Delegations.fromAmino(object.value);
-  },
-  toAminoMsg(message: Delegations): DelegationsAminoMsg {
-    return {
-      type: "osmosis/delegations",
-      value: Delegations.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DelegationsProtoMsg): Delegations {
     return Delegations.decode(message.value);
   },
@@ -1815,44 +1082,6 @@ export const TotalSuperfluidDelegationsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): TotalSuperfluidDelegationsRequest {
-    const obj = createBaseTotalSuperfluidDelegationsRequest();
-    return obj;
-  },
-  toJSON(_: TotalSuperfluidDelegationsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<TotalSuperfluidDelegationsRequest>): TotalSuperfluidDelegationsRequest {
-    const message = createBaseTotalSuperfluidDelegationsRequest();
-    return message;
-  },
-  fromSDK(_: TotalSuperfluidDelegationsRequestSDKType): TotalSuperfluidDelegationsRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): TotalSuperfluidDelegationsRequestSDKType {
-    return {};
-  },
-  toSDK(_: TotalSuperfluidDelegationsRequest): TotalSuperfluidDelegationsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: TotalSuperfluidDelegationsRequestAmino): TotalSuperfluidDelegationsRequest {
-    return {};
-  },
-  toAmino(_: TotalSuperfluidDelegationsRequest): TotalSuperfluidDelegationsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: TotalSuperfluidDelegationsRequestAminoMsg): TotalSuperfluidDelegationsRequest {
-    return TotalSuperfluidDelegationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: TotalSuperfluidDelegationsRequest): TotalSuperfluidDelegationsRequestAminoMsg {
-    return {
-      type: "osmosis/total-superfluid-delegations-request",
-      value: TotalSuperfluidDelegationsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: TotalSuperfluidDelegationsRequestProtoMsg): TotalSuperfluidDelegationsRequest {
     return TotalSuperfluidDelegationsRequest.decode(message.value);
@@ -1896,55 +1125,6 @@ export const TotalSuperfluidDelegationsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): TotalSuperfluidDelegationsResponse {
-    const obj = createBaseTotalSuperfluidDelegationsResponse();
-    if (isSet(object.totalDelegations)) obj.totalDelegations = String(object.totalDelegations);
-    return obj;
-  },
-  toJSON(message: TotalSuperfluidDelegationsResponse): unknown {
-    const obj: any = {};
-    message.totalDelegations !== undefined && (obj.totalDelegations = message.totalDelegations);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<TotalSuperfluidDelegationsResponse>): TotalSuperfluidDelegationsResponse {
-    const message = createBaseTotalSuperfluidDelegationsResponse();
-    message.totalDelegations = object.totalDelegations ?? "";
-    return message;
-  },
-  fromSDK(object: TotalSuperfluidDelegationsResponseSDKType): TotalSuperfluidDelegationsResponse {
-    return {
-      totalDelegations: object?.total_delegations
-    };
-  },
-  fromSDKJSON(object: any): TotalSuperfluidDelegationsResponseSDKType {
-    return {
-      total_delegations: isSet(object.total_delegations) ? String(object.total_delegations) : ""
-    };
-  },
-  toSDK(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseSDKType {
-    const obj: any = {};
-    obj.total_delegations = message.totalDelegations;
-    return obj;
-  },
-  fromAmino(object: TotalSuperfluidDelegationsResponseAmino): TotalSuperfluidDelegationsResponse {
-    return {
-      totalDelegations: object.total_delegations
-    };
-  },
-  toAmino(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseAmino {
-    const obj: any = {};
-    obj.total_delegations = message.totalDelegations;
-    return obj;
-  },
-  fromAminoMsg(object: TotalSuperfluidDelegationsResponseAminoMsg): TotalSuperfluidDelegationsResponse {
-    return TotalSuperfluidDelegationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseAminoMsg {
-    return {
-      type: "osmosis/total-superfluid-delegations-response",
-      value: TotalSuperfluidDelegationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: TotalSuperfluidDelegationsResponseProtoMsg): TotalSuperfluidDelegationsResponse {
     return TotalSuperfluidDelegationsResponse.decode(message.value);
@@ -2003,71 +1183,6 @@ export const SuperfluidDelegationAmountRequest = {
     }
     return message;
   },
-  fromJSON(object: any): SuperfluidDelegationAmountRequest {
-    const obj = createBaseSuperfluidDelegationAmountRequest();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: SuperfluidDelegationAmountRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidDelegationAmountRequest>): SuperfluidDelegationAmountRequest {
-    const message = createBaseSuperfluidDelegationAmountRequest();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: SuperfluidDelegationAmountRequestSDKType): SuperfluidDelegationAmountRequest {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address,
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidDelegationAmountRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: SuperfluidDelegationAmountRequestAmino): SuperfluidDelegationAmountRequest {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorAddress: object.validator_address,
-      denom: object.denom
-    };
-  },
-  toAmino(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidDelegationAmountRequestAminoMsg): SuperfluidDelegationAmountRequest {
-    return SuperfluidDelegationAmountRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegation-amount-request",
-      value: SuperfluidDelegationAmountRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidDelegationAmountRequestProtoMsg): SuperfluidDelegationAmountRequest {
     return SuperfluidDelegationAmountRequest.decode(message.value);
   },
@@ -2111,67 +1226,6 @@ export const SuperfluidDelegationAmountResponse = {
     }
     return message;
   },
-  fromJSON(object: any): SuperfluidDelegationAmountResponse {
-    const obj = createBaseSuperfluidDelegationAmountResponse();
-    if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SuperfluidDelegationAmountResponse): unknown {
-    const obj: any = {};
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidDelegationAmountResponse>): SuperfluidDelegationAmountResponse {
-    const message = createBaseSuperfluidDelegationAmountResponse();
-    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SuperfluidDelegationAmountResponseSDKType): SuperfluidDelegationAmountResponse {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidDelegationAmountResponseSDKType {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SuperfluidDelegationAmountResponse): SuperfluidDelegationAmountResponseSDKType {
-    const obj: any = {};
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SuperfluidDelegationAmountResponseAmino): SuperfluidDelegationAmountResponse {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SuperfluidDelegationAmountResponse): SuperfluidDelegationAmountResponseAmino {
-    const obj: any = {};
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidDelegationAmountResponseAminoMsg): SuperfluidDelegationAmountResponse {
-    return SuperfluidDelegationAmountResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationAmountResponse): SuperfluidDelegationAmountResponseAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegation-amount-response",
-      value: SuperfluidDelegationAmountResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidDelegationAmountResponseProtoMsg): SuperfluidDelegationAmountResponse {
     return SuperfluidDelegationAmountResponse.decode(message.value);
   },
@@ -2214,55 +1268,6 @@ export const SuperfluidDelegationsByDelegatorRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SuperfluidDelegationsByDelegatorRequest {
-    const obj = createBaseSuperfluidDelegationsByDelegatorRequest();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    return obj;
-  },
-  toJSON(message: SuperfluidDelegationsByDelegatorRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidDelegationsByDelegatorRequest>): SuperfluidDelegationsByDelegatorRequest {
-    const message = createBaseSuperfluidDelegationsByDelegatorRequest();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    return message;
-  },
-  fromSDK(object: SuperfluidDelegationsByDelegatorRequestSDKType): SuperfluidDelegationsByDelegatorRequest {
-    return {
-      delegatorAddress: object?.delegator_address
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidDelegationsByDelegatorRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
-    };
-  },
-  toSDK(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    return obj;
-  },
-  fromAmino(object: SuperfluidDelegationsByDelegatorRequestAmino): SuperfluidDelegationsByDelegatorRequest {
-    return {
-      delegatorAddress: object.delegator_address
-    };
-  },
-  toAmino(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidDelegationsByDelegatorRequestAminoMsg): SuperfluidDelegationsByDelegatorRequest {
-    return SuperfluidDelegationsByDelegatorRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegations-by-delegator-request",
-      value: SuperfluidDelegationsByDelegatorRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: SuperfluidDelegationsByDelegatorRequestProtoMsg): SuperfluidDelegationsByDelegatorRequest {
     return SuperfluidDelegationsByDelegatorRequest.decode(message.value);
@@ -2321,97 +1326,6 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     }
     return message;
   },
-  fromJSON(object: any): SuperfluidDelegationsByDelegatorResponse {
-    const obj = createBaseSuperfluidDelegationsByDelegatorResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.totalEquivalentStakedAmount)) obj.totalEquivalentStakedAmount = Coin.fromJSON(object.totalEquivalentStakedAmount);
-    return obj;
-  },
-  toJSON(message: SuperfluidDelegationsByDelegatorResponse): unknown {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
-    } else {
-      obj.superfluidDelegationRecords = [];
-    }
-    if (message.totalDelegatedCoins) {
-      obj.totalDelegatedCoins = message.totalDelegatedCoins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.totalDelegatedCoins = [];
-    }
-    message.totalEquivalentStakedAmount !== undefined && (obj.totalEquivalentStakedAmount = message.totalEquivalentStakedAmount ? Coin.toJSON(message.totalEquivalentStakedAmount) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidDelegationsByDelegatorResponse>): SuperfluidDelegationsByDelegatorResponse {
-    const message = createBaseSuperfluidDelegationsByDelegatorResponse();
-    message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
-    message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
-    if (object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null) {
-      message.totalEquivalentStakedAmount = Coin.fromPartial(object.totalEquivalentStakedAmount);
-    }
-    return message;
-  },
-  fromSDK(object: SuperfluidDelegationsByDelegatorResponseSDKType): SuperfluidDelegationsByDelegatorResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
-      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      totalEquivalentStakedAmount: object.total_equivalent_staked_amount ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidDelegationsByDelegatorResponseSDKType {
-    return {
-      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : [],
-      total_delegated_coins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      total_equivalent_staked_amount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDKJSON(object.total_equivalent_staked_amount) : undefined
-    };
-  },
-  toSDK(message: SuperfluidDelegationsByDelegatorResponse): SuperfluidDelegationsByDelegatorResponseSDKType {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toSDK(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total_delegated_coins = [];
-    }
-    message.totalEquivalentStakedAmount !== undefined && (obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toSDK(message.totalEquivalentStakedAmount) : undefined);
-    return obj;
-  },
-  fromAmino(object: SuperfluidDelegationsByDelegatorResponseAmino): SuperfluidDelegationsByDelegatorResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : [],
-      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromAmino(e)) : [],
-      totalEquivalentStakedAmount: object?.total_equivalent_staked_amount ? Coin.fromAmino(object.total_equivalent_staked_amount) : undefined
-    };
-  },
-  toAmino(message: SuperfluidDelegationsByDelegatorResponse): SuperfluidDelegationsByDelegatorResponseAmino {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total_delegated_coins = [];
-    }
-    obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toAmino(message.totalEquivalentStakedAmount) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidDelegationsByDelegatorResponseAminoMsg): SuperfluidDelegationsByDelegatorResponse {
-    return SuperfluidDelegationsByDelegatorResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationsByDelegatorResponse): SuperfluidDelegationsByDelegatorResponseAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegations-by-delegator-response",
-      value: SuperfluidDelegationsByDelegatorResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidDelegationsByDelegatorResponseProtoMsg): SuperfluidDelegationsByDelegatorResponse {
     return SuperfluidDelegationsByDelegatorResponse.decode(message.value);
   },
@@ -2461,63 +1375,6 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SuperfluidUndelegationsByDelegatorRequest {
-    const obj = createBaseSuperfluidUndelegationsByDelegatorRequest();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: SuperfluidUndelegationsByDelegatorRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>): SuperfluidUndelegationsByDelegatorRequest {
-    const message = createBaseSuperfluidUndelegationsByDelegatorRequest();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: SuperfluidUndelegationsByDelegatorRequestSDKType): SuperfluidUndelegationsByDelegatorRequest {
-    return {
-      delegatorAddress: object?.delegator_address,
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidUndelegationsByDelegatorRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: SuperfluidUndelegationsByDelegatorRequestAmino): SuperfluidUndelegationsByDelegatorRequest {
-    return {
-      delegatorAddress: object.delegator_address,
-      denom: object.denom
-    };
-  },
-  toAmino(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidUndelegationsByDelegatorRequestAminoMsg): SuperfluidUndelegationsByDelegatorRequest {
-    return SuperfluidUndelegationsByDelegatorRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestAminoMsg {
-    return {
-      type: "osmosis/superfluid-undelegations-by-delegator-request",
-      value: SuperfluidUndelegationsByDelegatorRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: SuperfluidUndelegationsByDelegatorRequestProtoMsg): SuperfluidUndelegationsByDelegatorRequest {
     return SuperfluidUndelegationsByDelegatorRequest.decode(message.value);
@@ -2576,107 +1433,6 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     }
     return message;
   },
-  fromJSON(object: any): SuperfluidUndelegationsByDelegatorResponse {
-    const obj = createBaseSuperfluidUndelegationsByDelegatorResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    if (Array.isArray(object?.totalUndelegatedCoins)) obj.totalUndelegatedCoins = object.totalUndelegatedCoins.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SuperfluidUndelegationsByDelegatorResponse): unknown {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
-    } else {
-      obj.superfluidDelegationRecords = [];
-    }
-    if (message.totalUndelegatedCoins) {
-      obj.totalUndelegatedCoins = message.totalUndelegatedCoins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.totalUndelegatedCoins = [];
-    }
-    if (message.syntheticLocks) {
-      obj.syntheticLocks = message.syntheticLocks.map(e => e ? SyntheticLock.toJSON(e) : undefined);
-    } else {
-      obj.syntheticLocks = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidUndelegationsByDelegatorResponse>): SuperfluidUndelegationsByDelegatorResponse {
-    const message = createBaseSuperfluidUndelegationsByDelegatorResponse();
-    message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
-    message.totalUndelegatedCoins = object.totalUndelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
-    message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SuperfluidUndelegationsByDelegatorResponseSDKType): SuperfluidUndelegationsByDelegatorResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
-      totalUndelegatedCoins: Array.isArray(object?.total_undelegated_coins) ? object.total_undelegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidUndelegationsByDelegatorResponseSDKType {
-    return {
-      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : [],
-      total_undelegated_coins: Array.isArray(object?.total_undelegated_coins) ? object.total_undelegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SuperfluidUndelegationsByDelegatorResponse): SuperfluidUndelegationsByDelegatorResponseSDKType {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toSDK(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    if (message.totalUndelegatedCoins) {
-      obj.total_undelegated_coins = message.totalUndelegatedCoins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total_undelegated_coins = [];
-    }
-    if (message.syntheticLocks) {
-      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toSDK(e) : undefined);
-    } else {
-      obj.synthetic_locks = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SuperfluidUndelegationsByDelegatorResponseAmino): SuperfluidUndelegationsByDelegatorResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : [],
-      totalUndelegatedCoins: Array.isArray(object?.total_undelegated_coins) ? object.total_undelegated_coins.map((e: any) => Coin.fromAmino(e)) : [],
-      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SuperfluidUndelegationsByDelegatorResponse): SuperfluidUndelegationsByDelegatorResponseAmino {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    if (message.totalUndelegatedCoins) {
-      obj.total_undelegated_coins = message.totalUndelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total_undelegated_coins = [];
-    }
-    if (message.syntheticLocks) {
-      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
-    } else {
-      obj.synthetic_locks = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidUndelegationsByDelegatorResponseAminoMsg): SuperfluidUndelegationsByDelegatorResponse {
-    return SuperfluidUndelegationsByDelegatorResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidUndelegationsByDelegatorResponse): SuperfluidUndelegationsByDelegatorResponseAminoMsg {
-    return {
-      type: "osmosis/superfluid-undelegations-by-delegator-response",
-      value: SuperfluidUndelegationsByDelegatorResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidUndelegationsByDelegatorResponseProtoMsg): SuperfluidUndelegationsByDelegatorResponse {
     return SuperfluidUndelegationsByDelegatorResponse.decode(message.value);
   },
@@ -2727,63 +1483,6 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     }
     return message;
   },
-  fromJSON(object: any): SuperfluidDelegationsByValidatorDenomRequest {
-    const obj = createBaseSuperfluidDelegationsByValidatorDenomRequest();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: SuperfluidDelegationsByValidatorDenomRequest): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>): SuperfluidDelegationsByValidatorDenomRequest {
-    const message = createBaseSuperfluidDelegationsByValidatorDenomRequest();
-    message.validatorAddress = object.validatorAddress ?? "";
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: SuperfluidDelegationsByValidatorDenomRequestSDKType): SuperfluidDelegationsByValidatorDenomRequest {
-    return {
-      validatorAddress: object?.validator_address,
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidDelegationsByValidatorDenomRequestSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: SuperfluidDelegationsByValidatorDenomRequestAmino): SuperfluidDelegationsByValidatorDenomRequest {
-    return {
-      validatorAddress: object.validator_address,
-      denom: object.denom
-    };
-  },
-  toAmino(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidDelegationsByValidatorDenomRequestAminoMsg): SuperfluidDelegationsByValidatorDenomRequest {
-    return SuperfluidDelegationsByValidatorDenomRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegations-by-validator-denom-request",
-      value: SuperfluidDelegationsByValidatorDenomRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidDelegationsByValidatorDenomRequestProtoMsg): SuperfluidDelegationsByValidatorDenomRequest {
     return SuperfluidDelegationsByValidatorDenomRequest.decode(message.value);
   },
@@ -2826,67 +1525,6 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SuperfluidDelegationsByValidatorDenomResponse {
-    const obj = createBaseSuperfluidDelegationsByValidatorDenomResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SuperfluidDelegationsByValidatorDenomResponse): unknown {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
-    } else {
-      obj.superfluidDelegationRecords = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SuperfluidDelegationsByValidatorDenomResponse>): SuperfluidDelegationsByValidatorDenomResponse {
-    const message = createBaseSuperfluidDelegationsByValidatorDenomResponse();
-    message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SuperfluidDelegationsByValidatorDenomResponseSDKType): SuperfluidDelegationsByValidatorDenomResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SuperfluidDelegationsByValidatorDenomResponseSDKType {
-    return {
-      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SuperfluidDelegationsByValidatorDenomResponse): SuperfluidDelegationsByValidatorDenomResponseSDKType {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toSDK(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SuperfluidDelegationsByValidatorDenomResponseAmino): SuperfluidDelegationsByValidatorDenomResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SuperfluidDelegationsByValidatorDenomResponse): SuperfluidDelegationsByValidatorDenomResponseAmino {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SuperfluidDelegationsByValidatorDenomResponseAminoMsg): SuperfluidDelegationsByValidatorDenomResponse {
-    return SuperfluidDelegationsByValidatorDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationsByValidatorDenomResponse): SuperfluidDelegationsByValidatorDenomResponseAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegations-by-validator-denom-response",
-      value: SuperfluidDelegationsByValidatorDenomResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: SuperfluidDelegationsByValidatorDenomResponseProtoMsg): SuperfluidDelegationsByValidatorDenomResponse {
     return SuperfluidDelegationsByValidatorDenomResponse.decode(message.value);
@@ -2938,63 +1576,6 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     }
     return message;
   },
-  fromJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-    const obj = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
-  },
-  toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-    const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest();
-    message.validatorAddress = object.validatorAddress ?? "";
-    message.denom = object.denom ?? "";
-    return message;
-  },
-  fromSDK(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-    return {
-      validatorAddress: object?.validator_address,
-      denom: object?.denom
-    };
-  },
-  fromSDKJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-  toSDK(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAmino(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAmino): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-    return {
-      validatorAddress: object.validator_address,
-      denom: object.denom
-    };
-  },
-  toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
-    return obj;
-  },
-  fromAminoMsg(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAminoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-    return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAminoMsg {
-    return {
-      type: "osmosis/estimate-superfluid-delegated-amount-by-validator-denom-request",
-      value: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestProtoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.decode(message.value);
   },
@@ -3038,67 +1619,6 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     }
     return message;
   },
-  fromJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-    const obj = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();
-    if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): unknown {
-    const obj: any = {};
-    if (message.totalDelegatedCoins) {
-      obj.totalDelegatedCoins = message.totalDelegatedCoins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.totalDelegatedCoins = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-    const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();
-    message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-    return {
-      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType {
-    return {
-      total_delegated_coins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType {
-    const obj: any = {};
-    if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total_delegated_coins = [];
-    }
-    return obj;
-  },
-  fromAmino(object: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAmino): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-    return {
-      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAmino {
-    const obj: any = {};
-    if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total_delegated_coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAminoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-    return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAminoMsg {
-    return {
-      type: "osmosis/estimate-superfluid-delegated-amount-by-validator-denom-response",
-      value: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseProtoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode(message.value);
   },
@@ -3141,55 +1661,6 @@ export const QueryTotalDelegationByDelegatorRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryTotalDelegationByDelegatorRequest {
-    const obj = createBaseQueryTotalDelegationByDelegatorRequest();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    return obj;
-  },
-  toJSON(message: QueryTotalDelegationByDelegatorRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryTotalDelegationByDelegatorRequest>): QueryTotalDelegationByDelegatorRequest {
-    const message = createBaseQueryTotalDelegationByDelegatorRequest();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    return message;
-  },
-  fromSDK(object: QueryTotalDelegationByDelegatorRequestSDKType): QueryTotalDelegationByDelegatorRequest {
-    return {
-      delegatorAddress: object?.delegator_address
-    };
-  },
-  fromSDKJSON(object: any): QueryTotalDelegationByDelegatorRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
-    };
-  },
-  toSDK(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    return obj;
-  },
-  fromAmino(object: QueryTotalDelegationByDelegatorRequestAmino): QueryTotalDelegationByDelegatorRequest {
-    return {
-      delegatorAddress: object.delegator_address
-    };
-  },
-  toAmino(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalDelegationByDelegatorRequestAminoMsg): QueryTotalDelegationByDelegatorRequest {
-    return QueryTotalDelegationByDelegatorRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestAminoMsg {
-    return {
-      type: "osmosis/query-total-delegation-by-delegator-request",
-      value: QueryTotalDelegationByDelegatorRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryTotalDelegationByDelegatorRequestProtoMsg): QueryTotalDelegationByDelegatorRequest {
     return QueryTotalDelegationByDelegatorRequest.decode(message.value);
@@ -3255,117 +1726,6 @@ export const QueryTotalDelegationByDelegatorResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryTotalDelegationByDelegatorResponse {
-    const obj = createBaseQueryTotalDelegationByDelegatorResponse();
-    if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
-    if (Array.isArray(object?.delegationResponse)) obj.delegationResponse = object.delegationResponse.map((e: any) => DelegationResponse.fromJSON(e));
-    if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.totalEquivalentStakedAmount)) obj.totalEquivalentStakedAmount = Coin.fromJSON(object.totalEquivalentStakedAmount);
-    return obj;
-  },
-  toJSON(message: QueryTotalDelegationByDelegatorResponse): unknown {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
-    } else {
-      obj.superfluidDelegationRecords = [];
-    }
-    if (message.delegationResponse) {
-      obj.delegationResponse = message.delegationResponse.map(e => e ? DelegationResponse.toJSON(e) : undefined);
-    } else {
-      obj.delegationResponse = [];
-    }
-    if (message.totalDelegatedCoins) {
-      obj.totalDelegatedCoins = message.totalDelegatedCoins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.totalDelegatedCoins = [];
-    }
-    message.totalEquivalentStakedAmount !== undefined && (obj.totalEquivalentStakedAmount = message.totalEquivalentStakedAmount ? Coin.toJSON(message.totalEquivalentStakedAmount) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryTotalDelegationByDelegatorResponse>): QueryTotalDelegationByDelegatorResponse {
-    const message = createBaseQueryTotalDelegationByDelegatorResponse();
-    message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
-    message.delegationResponse = object.delegationResponse?.map(e => DelegationResponse.fromPartial(e)) || [];
-    message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
-    if (object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null) {
-      message.totalEquivalentStakedAmount = Coin.fromPartial(object.totalEquivalentStakedAmount);
-    }
-    return message;
-  },
-  fromSDK(object: QueryTotalDelegationByDelegatorResponseSDKType): QueryTotalDelegationByDelegatorResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
-      delegationResponse: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromSDK(e)) : [],
-      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      totalEquivalentStakedAmount: object.total_equivalent_staked_amount ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryTotalDelegationByDelegatorResponseSDKType {
-    return {
-      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : [],
-      delegation_response: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
-      total_delegated_coins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      total_equivalent_staked_amount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDKJSON(object.total_equivalent_staked_amount) : undefined
-    };
-  },
-  toSDK(message: QueryTotalDelegationByDelegatorResponse): QueryTotalDelegationByDelegatorResponseSDKType {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toSDK(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    if (message.delegationResponse) {
-      obj.delegation_response = message.delegationResponse.map(e => e ? DelegationResponse.toSDK(e) : undefined);
-    } else {
-      obj.delegation_response = [];
-    }
-    if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total_delegated_coins = [];
-    }
-    message.totalEquivalentStakedAmount !== undefined && (obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toSDK(message.totalEquivalentStakedAmount) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryTotalDelegationByDelegatorResponseAmino): QueryTotalDelegationByDelegatorResponse {
-    return {
-      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : [],
-      delegationResponse: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromAmino(e)) : [],
-      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromAmino(e)) : [],
-      totalEquivalentStakedAmount: object?.total_equivalent_staked_amount ? Coin.fromAmino(object.total_equivalent_staked_amount) : undefined
-    };
-  },
-  toAmino(message: QueryTotalDelegationByDelegatorResponse): QueryTotalDelegationByDelegatorResponseAmino {
-    const obj: any = {};
-    if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
-    } else {
-      obj.superfluid_delegation_records = [];
-    }
-    if (message.delegationResponse) {
-      obj.delegation_response = message.delegationResponse.map(e => e ? DelegationResponse.toAmino(e) : undefined);
-    } else {
-      obj.delegation_response = [];
-    }
-    if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total_delegated_coins = [];
-    }
-    obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toAmino(message.totalEquivalentStakedAmount) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalDelegationByDelegatorResponseAminoMsg): QueryTotalDelegationByDelegatorResponse {
-    return QueryTotalDelegationByDelegatorResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalDelegationByDelegatorResponse): QueryTotalDelegationByDelegatorResponseAminoMsg {
-    return {
-      type: "osmosis/query-total-delegation-by-delegator-response",
-      value: QueryTotalDelegationByDelegatorResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryTotalDelegationByDelegatorResponseProtoMsg): QueryTotalDelegationByDelegatorResponse {
     return QueryTotalDelegationByDelegatorResponse.decode(message.value);
   },
@@ -3400,44 +1760,6 @@ export const QueryUnpoolWhitelistRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryUnpoolWhitelistRequest {
-    const obj = createBaseQueryUnpoolWhitelistRequest();
-    return obj;
-  },
-  toJSON(_: QueryUnpoolWhitelistRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryUnpoolWhitelistRequest>): QueryUnpoolWhitelistRequest {
-    const message = createBaseQueryUnpoolWhitelistRequest();
-    return message;
-  },
-  fromSDK(_: QueryUnpoolWhitelistRequestSDKType): QueryUnpoolWhitelistRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryUnpoolWhitelistRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryUnpoolWhitelistRequestAmino): QueryUnpoolWhitelistRequest {
-    return {};
-  },
-  toAmino(_: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryUnpoolWhitelistRequestAminoMsg): QueryUnpoolWhitelistRequest {
-    return QueryUnpoolWhitelistRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestAminoMsg {
-    return {
-      type: "osmosis/query-unpool-whitelist-request",
-      value: QueryUnpoolWhitelistRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryUnpoolWhitelistRequestProtoMsg): QueryUnpoolWhitelistRequest {
     return QueryUnpoolWhitelistRequest.decode(message.value);
@@ -3490,67 +1812,6 @@ export const QueryUnpoolWhitelistResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryUnpoolWhitelistResponse {
-    const obj = createBaseQueryUnpoolWhitelistResponse();
-    if (Array.isArray(object?.poolIds)) obj.poolIds = object.poolIds.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: QueryUnpoolWhitelistResponse): unknown {
-    const obj: any = {};
-    if (message.poolIds) {
-      obj.poolIds = message.poolIds.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.poolIds = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryUnpoolWhitelistResponse>): QueryUnpoolWhitelistResponse {
-    const message = createBaseQueryUnpoolWhitelistResponse();
-    message.poolIds = object.poolIds?.map(e => BigInt(e.toString())) || [];
-    return message;
-  },
-  fromSDK(object: QueryUnpoolWhitelistResponseSDKType): QueryUnpoolWhitelistResponse {
-    return {
-      poolIds: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): QueryUnpoolWhitelistResponseSDKType {
-    return {
-      pool_ids: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => BigInt(e.toString())) : []
-    };
-  },
-  toSDK(message: QueryUnpoolWhitelistResponse): QueryUnpoolWhitelistResponseSDKType {
-    const obj: any = {};
-    if (message.poolIds) {
-      obj.pool_ids = message.poolIds.map(e => e);
-    } else {
-      obj.pool_ids = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QueryUnpoolWhitelistResponseAmino): QueryUnpoolWhitelistResponse {
-    return {
-      poolIds: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => BigInt(e)) : []
-    };
-  },
-  toAmino(message: QueryUnpoolWhitelistResponse): QueryUnpoolWhitelistResponseAmino {
-    const obj: any = {};
-    if (message.poolIds) {
-      obj.pool_ids = message.poolIds.map(e => e.toString());
-    } else {
-      obj.pool_ids = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryUnpoolWhitelistResponseAminoMsg): QueryUnpoolWhitelistResponse {
-    return QueryUnpoolWhitelistResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUnpoolWhitelistResponse): QueryUnpoolWhitelistResponseAminoMsg {
-    return {
-      type: "osmosis/query-unpool-whitelist-response",
-      value: QueryUnpoolWhitelistResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryUnpoolWhitelistResponseProtoMsg): QueryUnpoolWhitelistResponse {
     return QueryUnpoolWhitelistResponse.decode(message.value);

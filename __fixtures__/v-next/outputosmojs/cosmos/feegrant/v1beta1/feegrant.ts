@@ -19,6 +19,10 @@ export interface BasicAllowance {
   /** expiration specifies an optional time when this allowance expires */
   expiration?: Date;
 }
+export interface BasicAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
+  value: Uint8Array;
+}
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
@@ -53,6 +57,10 @@ export interface PeriodicAllowance {
    */
   periodReset: Date;
 }
+export interface PeriodicAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance";
+  value: Uint8Array;
+}
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
  * as well as a limit per time period.
@@ -71,6 +79,10 @@ export interface AllowedMsgAllowance {
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
+export interface AllowedMsgAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
+  value: Uint8Array;
+}
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
   allowance?: AnySDKType;
@@ -84,6 +96,10 @@ export interface Grant {
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: Any;
+}
+export interface GrantProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.Grant";
+  value: Uint8Array;
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantSDKType {

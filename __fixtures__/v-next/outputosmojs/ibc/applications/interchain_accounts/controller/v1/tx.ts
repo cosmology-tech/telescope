@@ -8,6 +8,10 @@ export interface MsgRegisterInterchainAccount {
   connectionId: string;
   version: string;
 }
+export interface MsgRegisterInterchainAccountProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount";
+  value: Uint8Array;
+}
 /** MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccountSDKType {
   owner: string;
@@ -18,6 +22,10 @@ export interface MsgRegisterInterchainAccountSDKType {
 export interface MsgRegisterInterchainAccountResponse {
   channelId: string;
   portId: string;
+}
+export interface MsgRegisterInterchainAccountResponseProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse";
+  value: Uint8Array;
 }
 /** MsgRegisterInterchainAccountResponse defines the response for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccountResponseSDKType {
@@ -35,6 +43,10 @@ export interface MsgSendTx {
    */
   relativeTimeout: bigint;
 }
+export interface MsgSendTxProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgSendTx";
+  value: Uint8Array;
+}
 /** MsgSendTx defines the payload for Msg/SendTx */
 export interface MsgSendTxSDKType {
   owner: string;
@@ -45,6 +57,10 @@ export interface MsgSendTxSDKType {
 /** MsgSendTxResponse defines the response for MsgSendTx */
 export interface MsgSendTxResponse {
   sequence: bigint;
+}
+export interface MsgSendTxResponseProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.MsgSendTxResponse";
+  value: Uint8Array;
 }
 /** MsgSendTxResponse defines the response for MsgSendTx */
 export interface MsgSendTxResponseSDKType {

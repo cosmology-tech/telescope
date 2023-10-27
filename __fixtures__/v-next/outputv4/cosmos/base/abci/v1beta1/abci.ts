@@ -49,6 +49,10 @@ export interface TxResponse {
    */
   events: Event[];
 }
+export interface TxResponseProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.TxResponse";
+  value: Uint8Array;
+}
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
  * tags are stringified and the log is JSON decoded.
@@ -78,6 +82,10 @@ export interface ABCIMessageLog {
    */
   events: StringEvent[];
 }
+export interface ABCIMessageLogProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.ABCIMessageLog";
+  value: Uint8Array;
+}
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLogSDKType {
   msg_index: number;
@@ -91,6 +99,10 @@ export interface ABCIMessageLogSDKType {
 export interface StringEvent {
   type: string;
   attributes: Attribute[];
+}
+export interface StringEventProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.StringEvent";
+  value: Uint8Array;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes
@@ -108,6 +120,10 @@ export interface Attribute {
   key: string;
   value: string;
 }
+export interface AttributeProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.Attribute";
+  value: Uint8Array;
+}
 /**
  * Attribute defines an attribute wrapper where the key and value are
  * strings instead of raw bytes.
@@ -122,6 +138,10 @@ export interface GasInfo {
   gasWanted: bigint;
   /** GasUsed is the amount of gas actually consumed. */
   gasUsed: bigint;
+}
+export interface GasInfoProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.GasInfo";
+  value: Uint8Array;
 }
 /** GasInfo defines tx execution gas context. */
 export interface GasInfoSDKType {
@@ -152,6 +172,10 @@ export interface Result {
    */
   msgResponses: Any[];
 }
+export interface ResultProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.Result";
+  value: Uint8Array;
+}
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface ResultSDKType {
   /** @deprecated */
@@ -167,6 +191,10 @@ export interface ResultSDKType {
 export interface SimulationResponse {
   gasInfo: GasInfo;
   result?: Result;
+}
+export interface SimulationResponseProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.SimulationResponse";
+  value: Uint8Array;
 }
 /**
  * SimulationResponse defines the response generated when a transaction is
@@ -184,6 +212,10 @@ export interface SimulationResponseSDKType {
 export interface MsgData {
   msgType: string;
   data: Uint8Array;
+}
+export interface MsgDataProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.MsgData";
+  value: Uint8Array;
 }
 /**
  * MsgData defines the data returned in a Result object during message
@@ -209,6 +241,10 @@ export interface TxMsgData {
    */
   msgResponses: Any[];
 }
+export interface TxMsgDataProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.TxMsgData";
+  value: Uint8Array;
+}
 /**
  * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
  * for each message.
@@ -232,6 +268,10 @@ export interface SearchTxsResult {
   limit: bigint;
   /** List of txs in current page */
   txs: TxResponse[];
+}
+export interface SearchTxsResultProtoMsg {
+  typeUrl: "/cosmos.base.abci.v1beta1.SearchTxsResult";
+  value: Uint8Array;
 }
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResultSDKType {

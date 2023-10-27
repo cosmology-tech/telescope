@@ -1,7 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Validator, ValidatorSDKType, DelegationResponse, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoSDKType, Pool, PoolSDKType, Params, ParamsSDKType } from "./staking";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** QueryValidatorsRequest is request type for Query/Validators RPC method. */
 export interface QueryValidatorsRequest {
@@ -9,6 +8,10 @@ export interface QueryValidatorsRequest {
   status: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryValidatorsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsRequest";
+  value: Uint8Array;
 }
 /** QueryValidatorsRequest is request type for Query/Validators RPC method. */
 export interface QueryValidatorsRequestSDKType {
@@ -22,6 +25,10 @@ export interface QueryValidatorsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryValidatorsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsResponse";
+  value: Uint8Array;
+}
 /** QueryValidatorsResponse is response type for the Query/Validators RPC method */
 export interface QueryValidatorsResponseSDKType {
   validators: ValidatorSDKType[];
@@ -32,6 +39,10 @@ export interface QueryValidatorRequest {
   /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
+export interface QueryValidatorRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorRequest";
+  value: Uint8Array;
+}
 /** QueryValidatorRequest is response type for the Query/Validator RPC method */
 export interface QueryValidatorRequestSDKType {
   validator_addr: string;
@@ -40,6 +51,10 @@ export interface QueryValidatorRequestSDKType {
 export interface QueryValidatorResponse {
   /** validator defines the the validator info. */
   validator: Validator;
+}
+export interface QueryValidatorResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorResponse";
+  value: Uint8Array;
 }
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponseSDKType {
@@ -54,6 +69,10 @@ export interface QueryValidatorDelegationsRequest {
   validatorAddr: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryValidatorDelegationsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryValidatorDelegationsRequest is request type for the
@@ -71,6 +90,10 @@ export interface QueryValidatorDelegationsResponse {
   delegationResponses: DelegationResponse[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryValidatorDelegationsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryValidatorDelegationsResponse is response type for the
@@ -90,6 +113,10 @@ export interface QueryValidatorUnbondingDelegationsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryValidatorUnbondingDelegationsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryValidatorUnbondingDelegationsRequest is required type for the
  * Query/ValidatorUnbondingDelegations RPC method
@@ -107,6 +134,10 @@ export interface QueryValidatorUnbondingDelegationsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryValidatorUnbondingDelegationsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the
  * Query/ValidatorUnbondingDelegations RPC method.
@@ -122,6 +153,10 @@ export interface QueryDelegationRequest {
   /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
+export interface QueryDelegationRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegationRequest";
+  value: Uint8Array;
+}
 /** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
 export interface QueryDelegationRequestSDKType {
   delegator_addr: string;
@@ -131,6 +166,10 @@ export interface QueryDelegationRequestSDKType {
 export interface QueryDelegationResponse {
   /** delegation_responses defines the delegation info of a delegation. */
   delegationResponse?: DelegationResponse;
+}
+export interface QueryDelegationResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegationResponse";
+  value: Uint8Array;
 }
 /** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
 export interface QueryDelegationResponseSDKType {
@@ -145,6 +184,10 @@ export interface QueryUnbondingDelegationRequest {
   delegatorAddr: string;
   /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
+}
+export interface QueryUnbondingDelegationRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationRequest";
+  value: Uint8Array;
 }
 /**
  * QueryUnbondingDelegationRequest is request type for the
@@ -162,6 +205,10 @@ export interface QueryUnbondingDelegationResponse {
   /** unbond defines the unbonding information of a delegation. */
   unbond: UnbondingDelegation;
 }
+export interface QueryUnbondingDelegationResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation
  * RPC method.
@@ -178,6 +225,10 @@ export interface QueryDelegatorDelegationsRequest {
   delegatorAddr: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryDelegatorDelegationsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDelegatorDelegationsRequest is request type for the
@@ -197,6 +248,10 @@ export interface QueryDelegatorDelegationsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryDelegatorDelegationsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDelegatorDelegationsResponse is response type for the
  * Query/DelegatorDelegations RPC method.
@@ -215,6 +270,10 @@ export interface QueryDelegatorUnbondingDelegationsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryDelegatorUnbondingDelegationsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryDelegatorUnbondingDelegationsRequest is request type for the
  * Query/DelegatorUnbondingDelegations RPC method.
@@ -231,6 +290,10 @@ export interface QueryDelegatorUnbondingDelegationsResponse {
   unbondingResponses: UnbondingDelegation[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryDelegatorUnbondingDelegationsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the
@@ -254,6 +317,10 @@ export interface QueryRedelegationsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryRedelegationsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
  * method.
@@ -273,6 +340,10 @@ export interface QueryRedelegationsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryRedelegationsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
  * method.
@@ -290,6 +361,10 @@ export interface QueryDelegatorValidatorsRequest {
   delegatorAddr: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryDelegatorValidatorsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDelegatorValidatorsRequest is request type for the
@@ -309,6 +384,10 @@ export interface QueryDelegatorValidatorsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryDelegatorValidatorsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDelegatorValidatorsResponse is response type for the
  * Query/DelegatorValidators RPC method.
@@ -327,6 +406,10 @@ export interface QueryDelegatorValidatorRequest {
   /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
+export interface QueryDelegatorValidatorRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorRequest";
+  value: Uint8Array;
+}
 /**
  * QueryDelegatorValidatorRequest is request type for the
  * Query/DelegatorValidator RPC method.
@@ -343,6 +426,10 @@ export interface QueryDelegatorValidatorResponse {
   /** validator defines the the validator info. */
   validator: Validator;
 }
+export interface QueryDelegatorValidatorResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDelegatorValidatorResponse response type for the
  * Query/DelegatorValidator RPC method.
@@ -357,6 +444,10 @@ export interface QueryDelegatorValidatorResponseSDKType {
 export interface QueryHistoricalInfoRequest {
   /** height defines at which height to query the historical info. */
   height: bigint;
+}
+export interface QueryHistoricalInfoRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoRequest";
+  value: Uint8Array;
 }
 /**
  * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
@@ -373,6 +464,10 @@ export interface QueryHistoricalInfoResponse {
   /** hist defines the historical info at the given height. */
   hist?: HistoricalInfo;
 }
+export interface QueryHistoricalInfoResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoResponse";
+  value: Uint8Array;
+}
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
  * method.
@@ -382,6 +477,10 @@ export interface QueryHistoricalInfoResponseSDKType {
 }
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequest {}
+export interface QueryPoolRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryPoolRequest";
+  value: Uint8Array;
+}
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequestSDKType {}
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
@@ -389,18 +488,30 @@ export interface QueryPoolResponse {
   /** pool defines the pool info. */
   pool: Pool;
 }
+export interface QueryPoolResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryPoolResponse";
+  value: Uint8Array;
+}
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponseSDKType {
   pool: PoolSDKType;
 }
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -442,65 +553,6 @@ export const QueryValidatorsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryValidatorsRequest {
-    const obj = createBaseQueryValidatorsRequest();
-    if (isSet(object.status)) obj.status = String(object.status);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorsRequest): unknown {
-    const obj: any = {};
-    message.status !== undefined && (obj.status = message.status);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorsRequest>): QueryValidatorsRequest {
-    const message = createBaseQueryValidatorsRequest();
-    message.status = object.status ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorsRequestSDKType): QueryValidatorsRequest {
-    return {
-      status: object?.status,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorsRequestSDKType {
-    return {
-      status: isSet(object.status) ? String(object.status) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorsRequest): QueryValidatorsRequestSDKType {
-    const obj: any = {};
-    obj.status = message.status;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorsRequestAmino): QueryValidatorsRequest {
-    return {
-      status: object.status,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorsRequest): QueryValidatorsRequestAmino {
-    const obj: any = {};
-    obj.status = message.status;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorsRequestAminoMsg): QueryValidatorsRequest {
-    return QueryValidatorsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorsRequest): QueryValidatorsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorsRequest",
-      value: QueryValidatorsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorsRequestProtoMsg): QueryValidatorsRequest {
     return QueryValidatorsRequest.decode(message.value);
@@ -552,77 +604,6 @@ export const QueryValidatorsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryValidatorsResponse {
-    const obj = createBaseQueryValidatorsResponse();
-    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorsResponse): unknown {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorsResponse>): QueryValidatorsResponse {
-    const message = createBaseQueryValidatorsResponse();
-    message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorsResponseSDKType): QueryValidatorsResponse {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorsResponseSDKType {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorsResponse): QueryValidatorsResponseSDKType {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorsResponseAmino): QueryValidatorsResponse {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorsResponse): QueryValidatorsResponseAmino {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorsResponseAminoMsg): QueryValidatorsResponse {
-    return QueryValidatorsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorsResponse): QueryValidatorsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorsResponse",
-      value: QueryValidatorsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorsResponseProtoMsg): QueryValidatorsResponse {
     return QueryValidatorsResponse.decode(message.value);
   },
@@ -666,55 +647,6 @@ export const QueryValidatorRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryValidatorRequest {
-    const obj = createBaseQueryValidatorRequest();
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
-  },
-  toJSON(message: QueryValidatorRequest): unknown {
-    const obj: any = {};
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorRequest>): QueryValidatorRequest {
-    const message = createBaseQueryValidatorRequest();
-    message.validatorAddr = object.validatorAddr ?? "";
-    return message;
-  },
-  fromSDK(object: QueryValidatorRequestSDKType): QueryValidatorRequest {
-    return {
-      validatorAddr: object?.validator_addr
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorRequestSDKType {
-    return {
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
-    };
-  },
-  toSDK(message: QueryValidatorRequest): QueryValidatorRequestSDKType {
-    const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAmino(object: QueryValidatorRequestAmino): QueryValidatorRequest {
-    return {
-      validatorAddr: object.validator_addr
-    };
-  },
-  toAmino(message: QueryValidatorRequest): QueryValidatorRequestAmino {
-    const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorRequestAminoMsg): QueryValidatorRequest {
-    return QueryValidatorRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorRequest): QueryValidatorRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorRequest",
-      value: QueryValidatorRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorRequestProtoMsg): QueryValidatorRequest {
     return QueryValidatorRequest.decode(message.value);
   },
@@ -757,57 +689,6 @@ export const QueryValidatorResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryValidatorResponse {
-    const obj = createBaseQueryValidatorResponse();
-    if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
-    return obj;
-  },
-  toJSON(message: QueryValidatorResponse): unknown {
-    const obj: any = {};
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorResponse>): QueryValidatorResponse {
-    const message = createBaseQueryValidatorResponse();
-    if (object.validator !== undefined && object.validator !== null) {
-      message.validator = Validator.fromPartial(object.validator);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorResponseSDKType): QueryValidatorResponse {
-    return {
-      validator: object.validator ? Validator.fromSDK(object.validator) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorResponseSDKType {
-    return {
-      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorResponse): QueryValidatorResponseSDKType {
-    const obj: any = {};
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorResponseAmino): QueryValidatorResponse {
-    return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorResponse): QueryValidatorResponseAmino {
-    const obj: any = {};
-    obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorResponseAminoMsg): QueryValidatorResponse {
-    return QueryValidatorResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorResponse): QueryValidatorResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorResponse",
-      value: QueryValidatorResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorResponseProtoMsg): QueryValidatorResponse {
     return QueryValidatorResponse.decode(message.value);
@@ -859,65 +740,6 @@ export const QueryValidatorDelegationsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryValidatorDelegationsRequest {
-    const obj = createBaseQueryValidatorDelegationsRequest();
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorDelegationsRequest): unknown {
-    const obj: any = {};
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorDelegationsRequest>): QueryValidatorDelegationsRequest {
-    const message = createBaseQueryValidatorDelegationsRequest();
-    message.validatorAddr = object.validatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorDelegationsRequestSDKType): QueryValidatorDelegationsRequest {
-    return {
-      validatorAddr: object?.validator_addr,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorDelegationsRequestSDKType {
-    return {
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestSDKType {
-    const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorDelegationsRequestAmino): QueryValidatorDelegationsRequest {
-    return {
-      validatorAddr: object.validator_addr,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestAmino {
-    const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorDelegationsRequestAminoMsg): QueryValidatorDelegationsRequest {
-    return QueryValidatorDelegationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorDelegationsRequest",
-      value: QueryValidatorDelegationsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorDelegationsRequestProtoMsg): QueryValidatorDelegationsRequest {
     return QueryValidatorDelegationsRequest.decode(message.value);
   },
@@ -967,77 +789,6 @@ export const QueryValidatorDelegationsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryValidatorDelegationsResponse {
-    const obj = createBaseQueryValidatorDelegationsResponse();
-    if (Array.isArray(object?.delegationResponses)) obj.delegationResponses = object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorDelegationsResponse): unknown {
-    const obj: any = {};
-    if (message.delegationResponses) {
-      obj.delegationResponses = message.delegationResponses.map(e => e ? DelegationResponse.toJSON(e) : undefined);
-    } else {
-      obj.delegationResponses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorDelegationsResponse>): QueryValidatorDelegationsResponse {
-    const message = createBaseQueryValidatorDelegationsResponse();
-    message.delegationResponses = object.delegationResponses?.map(e => DelegationResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorDelegationsResponseSDKType): QueryValidatorDelegationsResponse {
-    return {
-      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorDelegationsResponseSDKType {
-    return {
-      delegation_responses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseSDKType {
-    const obj: any = {};
-    if (message.delegationResponses) {
-      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toSDK(e) : undefined);
-    } else {
-      obj.delegation_responses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorDelegationsResponseAmino): QueryValidatorDelegationsResponse {
-    return {
-      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseAmino {
-    const obj: any = {};
-    if (message.delegationResponses) {
-      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
-    } else {
-      obj.delegation_responses = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorDelegationsResponseAminoMsg): QueryValidatorDelegationsResponse {
-    return QueryValidatorDelegationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorDelegationsResponse",
-      value: QueryValidatorDelegationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorDelegationsResponseProtoMsg): QueryValidatorDelegationsResponse {
     return QueryValidatorDelegationsResponse.decode(message.value);
@@ -1089,65 +840,6 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryValidatorUnbondingDelegationsRequest {
-    const obj = createBaseQueryValidatorUnbondingDelegationsRequest();
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorUnbondingDelegationsRequest): unknown {
-    const obj: any = {};
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorUnbondingDelegationsRequest>): QueryValidatorUnbondingDelegationsRequest {
-    const message = createBaseQueryValidatorUnbondingDelegationsRequest();
-    message.validatorAddr = object.validatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorUnbondingDelegationsRequestSDKType): QueryValidatorUnbondingDelegationsRequest {
-    return {
-      validatorAddr: object?.validator_addr,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorUnbondingDelegationsRequestSDKType {
-    return {
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestSDKType {
-    const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorUnbondingDelegationsRequestAmino): QueryValidatorUnbondingDelegationsRequest {
-    return {
-      validatorAddr: object.validator_addr,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestAmino {
-    const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorUnbondingDelegationsRequestAminoMsg): QueryValidatorUnbondingDelegationsRequest {
-    return QueryValidatorUnbondingDelegationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorUnbondingDelegationsRequest",
-      value: QueryValidatorUnbondingDelegationsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorUnbondingDelegationsRequestProtoMsg): QueryValidatorUnbondingDelegationsRequest {
     return QueryValidatorUnbondingDelegationsRequest.decode(message.value);
   },
@@ -1197,77 +889,6 @@ export const QueryValidatorUnbondingDelegationsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryValidatorUnbondingDelegationsResponse {
-    const obj = createBaseQueryValidatorUnbondingDelegationsResponse();
-    if (Array.isArray(object?.unbondingResponses)) obj.unbondingResponses = object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorUnbondingDelegationsResponse): unknown {
-    const obj: any = {};
-    if (message.unbondingResponses) {
-      obj.unbondingResponses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toJSON(e) : undefined);
-    } else {
-      obj.unbondingResponses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryValidatorUnbondingDelegationsResponse>): QueryValidatorUnbondingDelegationsResponse {
-    const message = createBaseQueryValidatorUnbondingDelegationsResponse();
-    message.unbondingResponses = object.unbondingResponses?.map(e => UnbondingDelegation.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryValidatorUnbondingDelegationsResponseSDKType): QueryValidatorUnbondingDelegationsResponse {
-    return {
-      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryValidatorUnbondingDelegationsResponseSDKType {
-    return {
-      unbonding_responses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseSDKType {
-    const obj: any = {};
-    if (message.unbondingResponses) {
-      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toSDK(e) : undefined);
-    } else {
-      obj.unbonding_responses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryValidatorUnbondingDelegationsResponseAmino): QueryValidatorUnbondingDelegationsResponse {
-    return {
-      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseAmino {
-    const obj: any = {};
-    if (message.unbondingResponses) {
-      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
-    } else {
-      obj.unbonding_responses = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryValidatorUnbondingDelegationsResponseAminoMsg): QueryValidatorUnbondingDelegationsResponse {
-    return QueryValidatorUnbondingDelegationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorUnbondingDelegationsResponse",
-      value: QueryValidatorUnbondingDelegationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorUnbondingDelegationsResponseProtoMsg): QueryValidatorUnbondingDelegationsResponse {
     return QueryValidatorUnbondingDelegationsResponse.decode(message.value);
@@ -1319,63 +940,6 @@ export const QueryDelegationRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDelegationRequest {
-    const obj = createBaseQueryDelegationRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
-  },
-  toJSON(message: QueryDelegationRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegationRequest>): QueryDelegationRequest {
-    const message = createBaseQueryDelegationRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    message.validatorAddr = object.validatorAddr ?? "";
-    return message;
-  },
-  fromSDK(object: QueryDelegationRequestSDKType): QueryDelegationRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      validatorAddr: object?.validator_addr
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegationRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
-    };
-  },
-  toSDK(message: QueryDelegationRequest): QueryDelegationRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAmino(object: QueryDelegationRequestAmino): QueryDelegationRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      validatorAddr: object.validator_addr
-    };
-  },
-  toAmino(message: QueryDelegationRequest): QueryDelegationRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegationRequestAminoMsg): QueryDelegationRequest {
-    return QueryDelegationRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegationRequest): QueryDelegationRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegationRequest",
-      value: QueryDelegationRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegationRequestProtoMsg): QueryDelegationRequest {
     return QueryDelegationRequest.decode(message.value);
   },
@@ -1418,57 +982,6 @@ export const QueryDelegationResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDelegationResponse {
-    const obj = createBaseQueryDelegationResponse();
-    if (isSet(object.delegationResponse)) obj.delegationResponse = DelegationResponse.fromJSON(object.delegationResponse);
-    return obj;
-  },
-  toJSON(message: QueryDelegationResponse): unknown {
-    const obj: any = {};
-    message.delegationResponse !== undefined && (obj.delegationResponse = message.delegationResponse ? DelegationResponse.toJSON(message.delegationResponse) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegationResponse>): QueryDelegationResponse {
-    const message = createBaseQueryDelegationResponse();
-    if (object.delegationResponse !== undefined && object.delegationResponse !== null) {
-      message.delegationResponse = DelegationResponse.fromPartial(object.delegationResponse);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegationResponseSDKType): QueryDelegationResponse {
-    return {
-      delegationResponse: object.delegation_response ? DelegationResponse.fromSDK(object.delegation_response) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegationResponseSDKType {
-    return {
-      delegation_response: isSet(object.delegation_response) ? DelegationResponse.fromSDKJSON(object.delegation_response) : undefined
-    };
-  },
-  toSDK(message: QueryDelegationResponse): QueryDelegationResponseSDKType {
-    const obj: any = {};
-    message.delegationResponse !== undefined && (obj.delegation_response = message.delegationResponse ? DelegationResponse.toSDK(message.delegationResponse) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegationResponseAmino): QueryDelegationResponse {
-    return {
-      delegationResponse: object?.delegation_response ? DelegationResponse.fromAmino(object.delegation_response) : undefined
-    };
-  },
-  toAmino(message: QueryDelegationResponse): QueryDelegationResponseAmino {
-    const obj: any = {};
-    obj.delegation_response = message.delegationResponse ? DelegationResponse.toAmino(message.delegationResponse) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegationResponseAminoMsg): QueryDelegationResponse {
-    return QueryDelegationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegationResponse): QueryDelegationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegationResponse",
-      value: QueryDelegationResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegationResponseProtoMsg): QueryDelegationResponse {
     return QueryDelegationResponse.decode(message.value);
@@ -1520,63 +1033,6 @@ export const QueryUnbondingDelegationRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryUnbondingDelegationRequest {
-    const obj = createBaseQueryUnbondingDelegationRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
-  },
-  toJSON(message: QueryUnbondingDelegationRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryUnbondingDelegationRequest>): QueryUnbondingDelegationRequest {
-    const message = createBaseQueryUnbondingDelegationRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    message.validatorAddr = object.validatorAddr ?? "";
-    return message;
-  },
-  fromSDK(object: QueryUnbondingDelegationRequestSDKType): QueryUnbondingDelegationRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      validatorAddr: object?.validator_addr
-    };
-  },
-  fromSDKJSON(object: any): QueryUnbondingDelegationRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
-    };
-  },
-  toSDK(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAmino(object: QueryUnbondingDelegationRequestAmino): QueryUnbondingDelegationRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      validatorAddr: object.validator_addr
-    };
-  },
-  toAmino(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAminoMsg(object: QueryUnbondingDelegationRequestAminoMsg): QueryUnbondingDelegationRequest {
-    return QueryUnbondingDelegationRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryUnbondingDelegationRequest",
-      value: QueryUnbondingDelegationRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryUnbondingDelegationRequestProtoMsg): QueryUnbondingDelegationRequest {
     return QueryUnbondingDelegationRequest.decode(message.value);
   },
@@ -1619,57 +1075,6 @@ export const QueryUnbondingDelegationResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryUnbondingDelegationResponse {
-    const obj = createBaseQueryUnbondingDelegationResponse();
-    if (isSet(object.unbond)) obj.unbond = UnbondingDelegation.fromJSON(object.unbond);
-    return obj;
-  },
-  toJSON(message: QueryUnbondingDelegationResponse): unknown {
-    const obj: any = {};
-    message.unbond !== undefined && (obj.unbond = message.unbond ? UnbondingDelegation.toJSON(message.unbond) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryUnbondingDelegationResponse>): QueryUnbondingDelegationResponse {
-    const message = createBaseQueryUnbondingDelegationResponse();
-    if (object.unbond !== undefined && object.unbond !== null) {
-      message.unbond = UnbondingDelegation.fromPartial(object.unbond);
-    }
-    return message;
-  },
-  fromSDK(object: QueryUnbondingDelegationResponseSDKType): QueryUnbondingDelegationResponse {
-    return {
-      unbond: object.unbond ? UnbondingDelegation.fromSDK(object.unbond) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryUnbondingDelegationResponseSDKType {
-    return {
-      unbond: isSet(object.unbond) ? UnbondingDelegation.fromSDKJSON(object.unbond) : undefined
-    };
-  },
-  toSDK(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseSDKType {
-    const obj: any = {};
-    message.unbond !== undefined && (obj.unbond = message.unbond ? UnbondingDelegation.toSDK(message.unbond) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryUnbondingDelegationResponseAmino): QueryUnbondingDelegationResponse {
-    return {
-      unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : undefined
-    };
-  },
-  toAmino(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseAmino {
-    const obj: any = {};
-    obj.unbond = message.unbond ? UnbondingDelegation.toAmino(message.unbond) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryUnbondingDelegationResponseAminoMsg): QueryUnbondingDelegationResponse {
-    return QueryUnbondingDelegationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryUnbondingDelegationResponse",
-      value: QueryUnbondingDelegationResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryUnbondingDelegationResponseProtoMsg): QueryUnbondingDelegationResponse {
     return QueryUnbondingDelegationResponse.decode(message.value);
@@ -1721,65 +1126,6 @@ export const QueryDelegatorDelegationsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDelegatorDelegationsRequest {
-    const obj = createBaseQueryDelegatorDelegationsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorDelegationsRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorDelegationsRequest>): QueryDelegatorDelegationsRequest {
-    const message = createBaseQueryDelegatorDelegationsRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorDelegationsRequestSDKType): QueryDelegatorDelegationsRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorDelegationsRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorDelegationsRequestAmino): QueryDelegatorDelegationsRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorDelegationsRequestAminoMsg): QueryDelegatorDelegationsRequest {
-    return QueryDelegatorDelegationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorDelegationsRequest",
-      value: QueryDelegatorDelegationsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegatorDelegationsRequestProtoMsg): QueryDelegatorDelegationsRequest {
     return QueryDelegatorDelegationsRequest.decode(message.value);
   },
@@ -1829,77 +1175,6 @@ export const QueryDelegatorDelegationsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDelegatorDelegationsResponse {
-    const obj = createBaseQueryDelegatorDelegationsResponse();
-    if (Array.isArray(object?.delegationResponses)) obj.delegationResponses = object.delegationResponses.map((e: any) => DelegationResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorDelegationsResponse): unknown {
-    const obj: any = {};
-    if (message.delegationResponses) {
-      obj.delegationResponses = message.delegationResponses.map(e => e ? DelegationResponse.toJSON(e) : undefined);
-    } else {
-      obj.delegationResponses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorDelegationsResponse>): QueryDelegatorDelegationsResponse {
-    const message = createBaseQueryDelegatorDelegationsResponse();
-    message.delegationResponses = object.delegationResponses?.map(e => DelegationResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorDelegationsResponseSDKType): QueryDelegatorDelegationsResponse {
-    return {
-      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorDelegationsResponseSDKType {
-    return {
-      delegation_responses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseSDKType {
-    const obj: any = {};
-    if (message.delegationResponses) {
-      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toSDK(e) : undefined);
-    } else {
-      obj.delegation_responses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorDelegationsResponseAmino): QueryDelegatorDelegationsResponse {
-    return {
-      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseAmino {
-    const obj: any = {};
-    if (message.delegationResponses) {
-      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
-    } else {
-      obj.delegation_responses = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorDelegationsResponseAminoMsg): QueryDelegatorDelegationsResponse {
-    return QueryDelegatorDelegationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorDelegationsResponse",
-      value: QueryDelegatorDelegationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegatorDelegationsResponseProtoMsg): QueryDelegatorDelegationsResponse {
     return QueryDelegatorDelegationsResponse.decode(message.value);
@@ -1951,65 +1226,6 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDelegatorUnbondingDelegationsRequest {
-    const obj = createBaseQueryDelegatorUnbondingDelegationsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorUnbondingDelegationsRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>): QueryDelegatorUnbondingDelegationsRequest {
-    const message = createBaseQueryDelegatorUnbondingDelegationsRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorUnbondingDelegationsRequestSDKType): QueryDelegatorUnbondingDelegationsRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorUnbondingDelegationsRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorUnbondingDelegationsRequestAmino): QueryDelegatorUnbondingDelegationsRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorUnbondingDelegationsRequestAminoMsg): QueryDelegatorUnbondingDelegationsRequest {
-    return QueryDelegatorUnbondingDelegationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorUnbondingDelegationsRequest",
-      value: QueryDelegatorUnbondingDelegationsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegatorUnbondingDelegationsRequestProtoMsg): QueryDelegatorUnbondingDelegationsRequest {
     return QueryDelegatorUnbondingDelegationsRequest.decode(message.value);
   },
@@ -2059,77 +1275,6 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDelegatorUnbondingDelegationsResponse {
-    const obj = createBaseQueryDelegatorUnbondingDelegationsResponse();
-    if (Array.isArray(object?.unbondingResponses)) obj.unbondingResponses = object.unbondingResponses.map((e: any) => UnbondingDelegation.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorUnbondingDelegationsResponse): unknown {
-    const obj: any = {};
-    if (message.unbondingResponses) {
-      obj.unbondingResponses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toJSON(e) : undefined);
-    } else {
-      obj.unbondingResponses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorUnbondingDelegationsResponse>): QueryDelegatorUnbondingDelegationsResponse {
-    const message = createBaseQueryDelegatorUnbondingDelegationsResponse();
-    message.unbondingResponses = object.unbondingResponses?.map(e => UnbondingDelegation.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorUnbondingDelegationsResponseSDKType): QueryDelegatorUnbondingDelegationsResponse {
-    return {
-      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorUnbondingDelegationsResponseSDKType {
-    return {
-      unbonding_responses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseSDKType {
-    const obj: any = {};
-    if (message.unbondingResponses) {
-      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toSDK(e) : undefined);
-    } else {
-      obj.unbonding_responses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorUnbondingDelegationsResponseAmino): QueryDelegatorUnbondingDelegationsResponse {
-    return {
-      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseAmino {
-    const obj: any = {};
-    if (message.unbondingResponses) {
-      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
-    } else {
-      obj.unbonding_responses = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorUnbondingDelegationsResponseAminoMsg): QueryDelegatorUnbondingDelegationsResponse {
-    return QueryDelegatorUnbondingDelegationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorUnbondingDelegationsResponse",
-      value: QueryDelegatorUnbondingDelegationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegatorUnbondingDelegationsResponseProtoMsg): QueryDelegatorUnbondingDelegationsResponse {
     return QueryDelegatorUnbondingDelegationsResponse.decode(message.value);
@@ -2195,81 +1340,6 @@ export const QueryRedelegationsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryRedelegationsRequest {
-    const obj = createBaseQueryRedelegationsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.srcValidatorAddr)) obj.srcValidatorAddr = String(object.srcValidatorAddr);
-    if (isSet(object.dstValidatorAddr)) obj.dstValidatorAddr = String(object.dstValidatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryRedelegationsRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.srcValidatorAddr !== undefined && (obj.srcValidatorAddr = message.srcValidatorAddr);
-    message.dstValidatorAddr !== undefined && (obj.dstValidatorAddr = message.dstValidatorAddr);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryRedelegationsRequest>): QueryRedelegationsRequest {
-    const message = createBaseQueryRedelegationsRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    message.srcValidatorAddr = object.srcValidatorAddr ?? "";
-    message.dstValidatorAddr = object.dstValidatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryRedelegationsRequestSDKType): QueryRedelegationsRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      srcValidatorAddr: object?.src_validator_addr,
-      dstValidatorAddr: object?.dst_validator_addr,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryRedelegationsRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      src_validator_addr: isSet(object.src_validator_addr) ? String(object.src_validator_addr) : "",
-      dst_validator_addr: isSet(object.dst_validator_addr) ? String(object.dst_validator_addr) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryRedelegationsRequest): QueryRedelegationsRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.src_validator_addr = message.srcValidatorAddr;
-    obj.dst_validator_addr = message.dstValidatorAddr;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryRedelegationsRequestAmino): QueryRedelegationsRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      srcValidatorAddr: object.src_validator_addr,
-      dstValidatorAddr: object.dst_validator_addr,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryRedelegationsRequest): QueryRedelegationsRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.src_validator_addr = message.srcValidatorAddr;
-    obj.dst_validator_addr = message.dstValidatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryRedelegationsRequestAminoMsg): QueryRedelegationsRequest {
-    return QueryRedelegationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryRedelegationsRequest): QueryRedelegationsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryRedelegationsRequest",
-      value: QueryRedelegationsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryRedelegationsRequestProtoMsg): QueryRedelegationsRequest {
     return QueryRedelegationsRequest.decode(message.value);
   },
@@ -2319,77 +1389,6 @@ export const QueryRedelegationsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryRedelegationsResponse {
-    const obj = createBaseQueryRedelegationsResponse();
-    if (Array.isArray(object?.redelegationResponses)) obj.redelegationResponses = object.redelegationResponses.map((e: any) => RedelegationResponse.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryRedelegationsResponse): unknown {
-    const obj: any = {};
-    if (message.redelegationResponses) {
-      obj.redelegationResponses = message.redelegationResponses.map(e => e ? RedelegationResponse.toJSON(e) : undefined);
-    } else {
-      obj.redelegationResponses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryRedelegationsResponse>): QueryRedelegationsResponse {
-    const message = createBaseQueryRedelegationsResponse();
-    message.redelegationResponses = object.redelegationResponses?.map(e => RedelegationResponse.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryRedelegationsResponseSDKType): QueryRedelegationsResponse {
-    return {
-      redelegationResponses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryRedelegationsResponseSDKType {
-    return {
-      redelegation_responses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryRedelegationsResponse): QueryRedelegationsResponseSDKType {
-    const obj: any = {};
-    if (message.redelegationResponses) {
-      obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toSDK(e) : undefined);
-    } else {
-      obj.redelegation_responses = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryRedelegationsResponseAmino): QueryRedelegationsResponse {
-    return {
-      redelegationResponses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryRedelegationsResponse): QueryRedelegationsResponseAmino {
-    const obj: any = {};
-    if (message.redelegationResponses) {
-      obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toAmino(e) : undefined);
-    } else {
-      obj.redelegation_responses = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryRedelegationsResponseAminoMsg): QueryRedelegationsResponse {
-    return QueryRedelegationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryRedelegationsResponse): QueryRedelegationsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryRedelegationsResponse",
-      value: QueryRedelegationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryRedelegationsResponseProtoMsg): QueryRedelegationsResponse {
     return QueryRedelegationsResponse.decode(message.value);
@@ -2441,65 +1440,6 @@ export const QueryDelegatorValidatorsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDelegatorValidatorsRequest {
-    const obj = createBaseQueryDelegatorValidatorsRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorValidatorsRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
-    const message = createBaseQueryDelegatorValidatorsRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorValidatorsRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorValidatorsRequestAmino): QueryDelegatorValidatorsRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorValidatorsRequestAminoMsg): QueryDelegatorValidatorsRequest {
-    return QueryDelegatorValidatorsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorValidatorsRequest",
-      value: QueryDelegatorValidatorsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegatorValidatorsRequestProtoMsg): QueryDelegatorValidatorsRequest {
     return QueryDelegatorValidatorsRequest.decode(message.value);
   },
@@ -2549,77 +1489,6 @@ export const QueryDelegatorValidatorsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDelegatorValidatorsResponse {
-    const obj = createBaseQueryDelegatorValidatorsResponse();
-    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorValidatorsResponse): unknown {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
-    const message = createBaseQueryDelegatorValidatorsResponse();
-    message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorValidatorsResponseSDKType): QueryDelegatorValidatorsResponse {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorValidatorsResponseSDKType {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseSDKType {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorValidatorsResponseAmino): QueryDelegatorValidatorsResponse {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseAmino {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorValidatorsResponseAminoMsg): QueryDelegatorValidatorsResponse {
-    return QueryDelegatorValidatorsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorValidatorsResponse",
-      value: QueryDelegatorValidatorsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegatorValidatorsResponseProtoMsg): QueryDelegatorValidatorsResponse {
     return QueryDelegatorValidatorsResponse.decode(message.value);
@@ -2671,63 +1540,6 @@ export const QueryDelegatorValidatorRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDelegatorValidatorRequest {
-    const obj = createBaseQueryDelegatorValidatorRequest();
-    if (isSet(object.delegatorAddr)) obj.delegatorAddr = String(object.delegatorAddr);
-    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorValidatorRequest): unknown {
-    const obj: any = {};
-    message.delegatorAddr !== undefined && (obj.delegatorAddr = message.delegatorAddr);
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorValidatorRequest>): QueryDelegatorValidatorRequest {
-    const message = createBaseQueryDelegatorValidatorRequest();
-    message.delegatorAddr = object.delegatorAddr ?? "";
-    message.validatorAddr = object.validatorAddr ?? "";
-    return message;
-  },
-  fromSDK(object: QueryDelegatorValidatorRequestSDKType): QueryDelegatorValidatorRequest {
-    return {
-      delegatorAddr: object?.delegator_addr,
-      validatorAddr: object?.validator_addr
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorValidatorRequestSDKType {
-    return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
-    };
-  },
-  toSDK(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestSDKType {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorValidatorRequestAmino): QueryDelegatorValidatorRequest {
-    return {
-      delegatorAddr: object.delegator_addr,
-      validatorAddr: object.validator_addr
-    };
-  },
-  toAmino(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestAmino {
-    const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorValidatorRequestAminoMsg): QueryDelegatorValidatorRequest {
-    return QueryDelegatorValidatorRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorValidatorRequest",
-      value: QueryDelegatorValidatorRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegatorValidatorRequestProtoMsg): QueryDelegatorValidatorRequest {
     return QueryDelegatorValidatorRequest.decode(message.value);
   },
@@ -2770,57 +1582,6 @@ export const QueryDelegatorValidatorResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDelegatorValidatorResponse {
-    const obj = createBaseQueryDelegatorValidatorResponse();
-    if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
-    return obj;
-  },
-  toJSON(message: QueryDelegatorValidatorResponse): unknown {
-    const obj: any = {};
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDelegatorValidatorResponse>): QueryDelegatorValidatorResponse {
-    const message = createBaseQueryDelegatorValidatorResponse();
-    if (object.validator !== undefined && object.validator !== null) {
-      message.validator = Validator.fromPartial(object.validator);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDelegatorValidatorResponseSDKType): QueryDelegatorValidatorResponse {
-    return {
-      validator: object.validator ? Validator.fromSDK(object.validator) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDelegatorValidatorResponseSDKType {
-    return {
-      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined
-    };
-  },
-  toSDK(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseSDKType {
-    const obj: any = {};
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDelegatorValidatorResponseAmino): QueryDelegatorValidatorResponse {
-    return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
-    };
-  },
-  toAmino(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseAmino {
-    const obj: any = {};
-    obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorValidatorResponseAminoMsg): QueryDelegatorValidatorResponse {
-    return QueryDelegatorValidatorResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorValidatorResponse",
-      value: QueryDelegatorValidatorResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegatorValidatorResponseProtoMsg): QueryDelegatorValidatorResponse {
     return QueryDelegatorValidatorResponse.decode(message.value);
@@ -2865,57 +1626,6 @@ export const QueryHistoricalInfoRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryHistoricalInfoRequest {
-    const obj = createBaseQueryHistoricalInfoRequest();
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    return obj;
-  },
-  toJSON(message: QueryHistoricalInfoRequest): unknown {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
-    const message = createBaseQueryHistoricalInfoRequest();
-    if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
-    }
-    return message;
-  },
-  fromSDK(object: QueryHistoricalInfoRequestSDKType): QueryHistoricalInfoRequest {
-    return {
-      height: object?.height
-    };
-  },
-  fromSDKJSON(object: any): QueryHistoricalInfoRequestSDKType {
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestSDKType {
-    const obj: any = {};
-    obj.height = message.height;
-    return obj;
-  },
-  fromAmino(object: QueryHistoricalInfoRequestAmino): QueryHistoricalInfoRequest {
-    return {
-      height: BigInt(object.height)
-    };
-  },
-  toAmino(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestAmino {
-    const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryHistoricalInfoRequestAminoMsg): QueryHistoricalInfoRequest {
-    return QueryHistoricalInfoRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryHistoricalInfoRequest",
-      value: QueryHistoricalInfoRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryHistoricalInfoRequestProtoMsg): QueryHistoricalInfoRequest {
     return QueryHistoricalInfoRequest.decode(message.value);
   },
@@ -2959,57 +1669,6 @@ export const QueryHistoricalInfoResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryHistoricalInfoResponse {
-    const obj = createBaseQueryHistoricalInfoResponse();
-    if (isSet(object.hist)) obj.hist = HistoricalInfo.fromJSON(object.hist);
-    return obj;
-  },
-  toJSON(message: QueryHistoricalInfoResponse): unknown {
-    const obj: any = {};
-    message.hist !== undefined && (obj.hist = message.hist ? HistoricalInfo.toJSON(message.hist) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryHistoricalInfoResponse>): QueryHistoricalInfoResponse {
-    const message = createBaseQueryHistoricalInfoResponse();
-    if (object.hist !== undefined && object.hist !== null) {
-      message.hist = HistoricalInfo.fromPartial(object.hist);
-    }
-    return message;
-  },
-  fromSDK(object: QueryHistoricalInfoResponseSDKType): QueryHistoricalInfoResponse {
-    return {
-      hist: object.hist ? HistoricalInfo.fromSDK(object.hist) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryHistoricalInfoResponseSDKType {
-    return {
-      hist: isSet(object.hist) ? HistoricalInfo.fromSDKJSON(object.hist) : undefined
-    };
-  },
-  toSDK(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseSDKType {
-    const obj: any = {};
-    message.hist !== undefined && (obj.hist = message.hist ? HistoricalInfo.toSDK(message.hist) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryHistoricalInfoResponseAmino): QueryHistoricalInfoResponse {
-    return {
-      hist: object?.hist ? HistoricalInfo.fromAmino(object.hist) : undefined
-    };
-  },
-  toAmino(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseAmino {
-    const obj: any = {};
-    obj.hist = message.hist ? HistoricalInfo.toAmino(message.hist) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryHistoricalInfoResponseAminoMsg): QueryHistoricalInfoResponse {
-    return QueryHistoricalInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryHistoricalInfoResponse",
-      value: QueryHistoricalInfoResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryHistoricalInfoResponseProtoMsg): QueryHistoricalInfoResponse {
     return QueryHistoricalInfoResponse.decode(message.value);
   },
@@ -3044,44 +1703,6 @@ export const QueryPoolRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryPoolRequest {
-    const obj = createBaseQueryPoolRequest();
-    return obj;
-  },
-  toJSON(_: QueryPoolRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
-    const message = createBaseQueryPoolRequest();
-    return message;
-  },
-  fromSDK(_: QueryPoolRequestSDKType): QueryPoolRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryPoolRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryPoolRequest): QueryPoolRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryPoolRequestAmino): QueryPoolRequest {
-    return {};
-  },
-  toAmino(_: QueryPoolRequest): QueryPoolRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryPoolRequestAminoMsg): QueryPoolRequest {
-    return QueryPoolRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryPoolRequest): QueryPoolRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryPoolRequest",
-      value: QueryPoolRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryPoolRequestProtoMsg): QueryPoolRequest {
     return QueryPoolRequest.decode(message.value);
@@ -3126,57 +1747,6 @@ export const QueryPoolResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryPoolResponse {
-    const obj = createBaseQueryPoolResponse();
-    if (isSet(object.pool)) obj.pool = Pool.fromJSON(object.pool);
-    return obj;
-  },
-  toJSON(message: QueryPoolResponse): unknown {
-    const obj: any = {};
-    message.pool !== undefined && (obj.pool = message.pool ? Pool.toJSON(message.pool) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
-    const message = createBaseQueryPoolResponse();
-    if (object.pool !== undefined && object.pool !== null) {
-      message.pool = Pool.fromPartial(object.pool);
-    }
-    return message;
-  },
-  fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
-    return {
-      pool: object.pool ? Pool.fromSDK(object.pool) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryPoolResponseSDKType {
-    return {
-      pool: isSet(object.pool) ? Pool.fromSDKJSON(object.pool) : undefined
-    };
-  },
-  toSDK(message: QueryPoolResponse): QueryPoolResponseSDKType {
-    const obj: any = {};
-    message.pool !== undefined && (obj.pool = message.pool ? Pool.toSDK(message.pool) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
-    return {
-      pool: object?.pool ? Pool.fromAmino(object.pool) : undefined
-    };
-  },
-  toAmino(message: QueryPoolResponse): QueryPoolResponseAmino {
-    const obj: any = {};
-    obj.pool = message.pool ? Pool.toAmino(message.pool) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryPoolResponseAminoMsg): QueryPoolResponse {
-    return QueryPoolResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryPoolResponse): QueryPoolResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryPoolResponse",
-      value: QueryPoolResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryPoolResponseProtoMsg): QueryPoolResponse {
     return QueryPoolResponse.decode(message.value);
   },
@@ -3211,44 +1781,6 @@ export const QueryParamsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
-  },
-  toJSON(_: QueryParamsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
-    const message = createBaseQueryParamsRequest();
-    return message;
-  },
-  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -3292,57 +1824,6 @@ export const QueryParamsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
-    const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    return message;
-  },
-  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);

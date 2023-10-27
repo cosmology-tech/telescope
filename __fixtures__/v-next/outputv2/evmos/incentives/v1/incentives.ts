@@ -23,6 +23,10 @@ export interface IncentiveProtoMsg {
   typeUrl: "/evmos.incentives.v1.Incentive";
   value: Uint8Array;
 }
+export interface IncentiveProtoMsg {
+  typeUrl: "/evmos.incentives.v1.Incentive";
+  value: Uint8Array;
+}
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
@@ -67,6 +71,10 @@ export interface GasMeterProtoMsg {
   typeUrl: "/evmos.incentives.v1.GasMeter";
   value: Uint8Array;
 }
+export interface GasMeterProtoMsg {
+  typeUrl: "/evmos.incentives.v1.GasMeter";
+  value: Uint8Array;
+}
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterAmino {
   /** hex address of the incentivized contract */
@@ -99,6 +107,10 @@ export interface RegisterIncentiveProposal {
   allocations: DecCoin[];
   /** number of remaining epochs */
   epochs: number;
+}
+export interface RegisterIncentiveProposalProtoMsg {
+  typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal";
+  value: Uint8Array;
 }
 export interface RegisterIncentiveProposalProtoMsg {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal";
@@ -138,6 +150,10 @@ export interface CancelIncentiveProposal {
   description: string;
   /** contract address */
   contract: string;
+}
+export interface CancelIncentiveProposalProtoMsg {
+  typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal";
+  value: Uint8Array;
 }
 export interface CancelIncentiveProposalProtoMsg {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal";

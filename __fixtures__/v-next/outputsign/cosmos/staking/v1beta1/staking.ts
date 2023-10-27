@@ -4,9 +4,8 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
-import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** BondStatus is the status of a validator. */
 export enum BondStatus {
@@ -66,6 +65,10 @@ export interface HistoricalInfo {
   header: Header;
   valset: Validator[];
 }
+export interface HistoricalInfoProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.HistoricalInfo";
+  value: Uint8Array;
+}
 /**
  * HistoricalInfo contains header and validator information for a given block.
  * It is stored as part of staking module's state, which persists the `n` most
@@ -88,6 +91,10 @@ export interface CommissionRates {
   /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
   maxChangeRate: string;
 }
+export interface CommissionRatesProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.CommissionRates";
+  value: Uint8Array;
+}
 /**
  * CommissionRates defines the initial commission rates to be used for creating
  * a validator.
@@ -103,6 +110,10 @@ export interface Commission {
   commissionRates: CommissionRates;
   /** update_time is the last time the commission rate was changed. */
   updateTime: Date;
+}
+export interface CommissionProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Commission";
+  value: Uint8Array;
 }
 /** Commission defines commission parameters for a given validator. */
 export interface CommissionSDKType {
@@ -121,6 +132,10 @@ export interface Description {
   securityContact: string;
   /** details define other optional details. */
   details: string;
+}
+export interface DescriptionProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Description";
+  value: Uint8Array;
 }
 /** Description defines a validator description. */
 export interface DescriptionSDKType {
@@ -164,6 +179,10 @@ export interface Validator {
   /** min_self_delegation is the validator's self declared minimum self delegation. */
   minSelfDelegation: string;
 }
+export interface ValidatorProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Validator";
+  value: Uint8Array;
+}
 /**
  * Validator defines a validator, together with the total amount of the
  * Validator's bond shares and their exchange rate to coins. Slashing results in
@@ -191,6 +210,10 @@ export interface ValidatorSDKType {
 export interface ValAddresses {
   addresses: string[];
 }
+export interface ValAddressesProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.ValAddresses";
+  value: Uint8Array;
+}
 /** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddressesSDKType {
   addresses: string[];
@@ -204,6 +227,10 @@ export interface DVPair {
   delegatorAddress: string;
   validatorAddress: string;
 }
+export interface DVPairProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVPair";
+  value: Uint8Array;
+}
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
  * It is intended to be used as a marshalable pointer. For example, a DVPair can
@@ -216,6 +243,10 @@ export interface DVPairSDKType {
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairs {
   pairs: DVPair[];
+}
+export interface DVPairsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVPairs";
+  value: Uint8Array;
 }
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairsSDKType {
@@ -232,6 +263,10 @@ export interface DVVTriplet {
   validatorSrcAddress: string;
   validatorDstAddress: string;
 }
+export interface DVVTripletProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVVTriplet";
+  value: Uint8Array;
+}
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
  * with no other data. It is intended to be used as a marshalable pointer. For
@@ -246,6 +281,10 @@ export interface DVVTripletSDKType {
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTriplets {
   triplets: DVVTriplet[];
+}
+export interface DVVTripletsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVVTriplets";
+  value: Uint8Array;
 }
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTripletsSDKType {
@@ -263,6 +302,10 @@ export interface Delegation {
   validatorAddress: string;
   /** shares define the delegation shares received. */
   shares: string;
+}
+export interface DelegationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Delegation";
+  value: Uint8Array;
 }
 /**
  * Delegation represents the bond with tokens held by an account. It is
@@ -286,6 +329,10 @@ export interface UnbondingDelegation {
   /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntry[];
 }
+export interface UnbondingDelegationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegation";
+  value: Uint8Array;
+}
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
  * for a single validator in an time-ordered list.
@@ -306,6 +353,10 @@ export interface UnbondingDelegationEntry {
   /** balance defines the tokens to receive at completion. */
   balance: string;
 }
+export interface UnbondingDelegationEntryProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegationEntry";
+  value: Uint8Array;
+}
 /** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntrySDKType {
   creation_height: bigint;
@@ -323,6 +374,10 @@ export interface RedelegationEntry {
   initialBalance: string;
   /** shares_dst is the amount of destination-validator shares created by redelegation. */
   sharesDst: string;
+}
+export interface RedelegationEntryProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.RedelegationEntry";
+  value: Uint8Array;
 }
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntrySDKType {
@@ -344,6 +399,10 @@ export interface Redelegation {
   validatorDstAddress: string;
   /** entries are the redelegation entries. */
   entries: RedelegationEntry[];
+}
+export interface RedelegationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Redelegation";
+  value: Uint8Array;
 }
 /**
  * Redelegation contains the list of a particular delegator's redelegating bonds
@@ -370,6 +429,10 @@ export interface Params {
   /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
   minCommissionRate: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the staking module. */
 export interface ParamsSDKType {
   unbonding_time: DurationSDKType;
@@ -387,6 +450,10 @@ export interface DelegationResponse {
   delegation: Delegation;
   balance: Coin;
 }
+export interface DelegationResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DelegationResponse";
+  value: Uint8Array;
+}
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a
  * balance in addition to shares which is more suitable for client responses.
@@ -403,6 +470,10 @@ export interface DelegationResponseSDKType {
 export interface RedelegationEntryResponse {
   redelegationEntry: RedelegationEntry;
   balance: string;
+}
+export interface RedelegationEntryResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.RedelegationEntryResponse";
+  value: Uint8Array;
 }
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
@@ -422,6 +493,10 @@ export interface RedelegationResponse {
   redelegation: Redelegation;
   entries: RedelegationEntryResponse[];
 }
+export interface RedelegationResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.RedelegationResponse";
+  value: Uint8Array;
+}
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
  * contain a balance in addition to shares which is more suitable for client
@@ -438,6 +513,10 @@ export interface RedelegationResponseSDKType {
 export interface Pool {
   notBondedTokens: string;
   bondedTokens: string;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Pool";
+  value: Uint8Array;
 }
 /**
  * Pool is used for tracking bonded and not-bonded token supply of the bond
@@ -483,77 +562,6 @@ export const HistoricalInfo = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): HistoricalInfo {
-    const obj = createBaseHistoricalInfo();
-    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
-    if (Array.isArray(object?.valset)) obj.valset = object.valset.map((e: any) => Validator.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: HistoricalInfo): unknown {
-    const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    if (message.valset) {
-      obj.valset = message.valset.map(e => e ? Validator.toJSON(e) : undefined);
-    } else {
-      obj.valset = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<HistoricalInfo>): HistoricalInfo {
-    const message = createBaseHistoricalInfo();
-    if (object.header !== undefined && object.header !== null) {
-      message.header = Header.fromPartial(object.header);
-    }
-    message.valset = object.valset?.map(e => Validator.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: HistoricalInfoSDKType): HistoricalInfo {
-    return {
-      header: object.header ? Header.fromSDK(object.header) : undefined,
-      valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): HistoricalInfoSDKType {
-    return {
-      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
-      valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: HistoricalInfo): HistoricalInfoSDKType {
-    const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
-    if (message.valset) {
-      obj.valset = message.valset.map(e => e ? Validator.toSDK(e) : undefined);
-    } else {
-      obj.valset = [];
-    }
-    return obj;
-  },
-  fromAmino(object: HistoricalInfoAmino): HistoricalInfo {
-    return {
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
-      valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: HistoricalInfo): HistoricalInfoAmino {
-    const obj: any = {};
-    obj.header = message.header ? Header.toAmino(message.header) : undefined;
-    if (message.valset) {
-      obj.valset = message.valset.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.valset = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: HistoricalInfoAminoMsg): HistoricalInfo {
-    return HistoricalInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: HistoricalInfo): HistoricalInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/HistoricalInfo",
-      value: HistoricalInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: HistoricalInfoProtoMsg): HistoricalInfo {
     return HistoricalInfo.decode(message.value);
@@ -612,71 +620,6 @@ export const CommissionRates = {
     }
     return message;
   },
-  fromJSON(object: any): CommissionRates {
-    const obj = createBaseCommissionRates();
-    if (isSet(object.rate)) obj.rate = String(object.rate);
-    if (isSet(object.maxRate)) obj.maxRate = String(object.maxRate);
-    if (isSet(object.maxChangeRate)) obj.maxChangeRate = String(object.maxChangeRate);
-    return obj;
-  },
-  toJSON(message: CommissionRates): unknown {
-    const obj: any = {};
-    message.rate !== undefined && (obj.rate = message.rate);
-    message.maxRate !== undefined && (obj.maxRate = message.maxRate);
-    message.maxChangeRate !== undefined && (obj.maxChangeRate = message.maxChangeRate);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CommissionRates>): CommissionRates {
-    const message = createBaseCommissionRates();
-    message.rate = object.rate ?? "";
-    message.maxRate = object.maxRate ?? "";
-    message.maxChangeRate = object.maxChangeRate ?? "";
-    return message;
-  },
-  fromSDK(object: CommissionRatesSDKType): CommissionRates {
-    return {
-      rate: object?.rate,
-      maxRate: object?.max_rate,
-      maxChangeRate: object?.max_change_rate
-    };
-  },
-  fromSDKJSON(object: any): CommissionRatesSDKType {
-    return {
-      rate: isSet(object.rate) ? String(object.rate) : "",
-      max_rate: isSet(object.max_rate) ? String(object.max_rate) : "",
-      max_change_rate: isSet(object.max_change_rate) ? String(object.max_change_rate) : ""
-    };
-  },
-  toSDK(message: CommissionRates): CommissionRatesSDKType {
-    const obj: any = {};
-    obj.rate = message.rate;
-    obj.max_rate = message.maxRate;
-    obj.max_change_rate = message.maxChangeRate;
-    return obj;
-  },
-  fromAmino(object: CommissionRatesAmino): CommissionRates {
-    return {
-      rate: object.rate,
-      maxRate: object.max_rate,
-      maxChangeRate: object.max_change_rate
-    };
-  },
-  toAmino(message: CommissionRates): CommissionRatesAmino {
-    const obj: any = {};
-    obj.rate = message.rate;
-    obj.max_rate = message.maxRate;
-    obj.max_change_rate = message.maxChangeRate;
-    return obj;
-  },
-  fromAminoMsg(object: CommissionRatesAminoMsg): CommissionRates {
-    return CommissionRates.fromAmino(object.value);
-  },
-  toAminoMsg(message: CommissionRates): CommissionRatesAminoMsg {
-    return {
-      type: "cosmos-sdk/CommissionRates",
-      value: CommissionRates.toAmino(message)
-    };
-  },
   fromProtoMsg(message: CommissionRatesProtoMsg): CommissionRates {
     return CommissionRates.decode(message.value);
   },
@@ -726,65 +669,6 @@ export const Commission = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Commission {
-    const obj = createBaseCommission();
-    if (isSet(object.commissionRates)) obj.commissionRates = CommissionRates.fromJSON(object.commissionRates);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    return obj;
-  },
-  toJSON(message: Commission): unknown {
-    const obj: any = {};
-    message.commissionRates !== undefined && (obj.commissionRates = message.commissionRates ? CommissionRates.toJSON(message.commissionRates) : undefined);
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Commission>): Commission {
-    const message = createBaseCommission();
-    if (object.commissionRates !== undefined && object.commissionRates !== null) {
-      message.commissionRates = CommissionRates.fromPartial(object.commissionRates);
-    }
-    message.updateTime = object.updateTime ?? undefined;
-    return message;
-  },
-  fromSDK(object: CommissionSDKType): Commission {
-    return {
-      commissionRates: object.commission_rates ? CommissionRates.fromSDK(object.commission_rates) : undefined,
-      updateTime: object.update_time ?? undefined
-    };
-  },
-  fromSDKJSON(object: any): CommissionSDKType {
-    return {
-      commission_rates: isSet(object.commission_rates) ? CommissionRates.fromSDKJSON(object.commission_rates) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
-    };
-  },
-  toSDK(message: Commission): CommissionSDKType {
-    const obj: any = {};
-    message.commissionRates !== undefined && (obj.commission_rates = message.commissionRates ? CommissionRates.toSDK(message.commissionRates) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
-    return obj;
-  },
-  fromAmino(object: CommissionAmino): Commission {
-    return {
-      commissionRates: object?.commission_rates ? CommissionRates.fromAmino(object.commission_rates) : undefined,
-      updateTime: object.update_time
-    };
-  },
-  toAmino(message: Commission): CommissionAmino {
-    const obj: any = {};
-    obj.commission_rates = message.commissionRates ? CommissionRates.toAmino(message.commissionRates) : undefined;
-    obj.update_time = message.updateTime;
-    return obj;
-  },
-  fromAminoMsg(object: CommissionAminoMsg): Commission {
-    return Commission.fromAmino(object.value);
-  },
-  toAminoMsg(message: Commission): CommissionAminoMsg {
-    return {
-      type: "cosmos-sdk/Commission",
-      value: Commission.toAmino(message)
-    };
   },
   fromProtoMsg(message: CommissionProtoMsg): Commission {
     return Commission.decode(message.value);
@@ -856,87 +740,6 @@ export const Description = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Description {
-    const obj = createBaseDescription();
-    if (isSet(object.moniker)) obj.moniker = String(object.moniker);
-    if (isSet(object.identity)) obj.identity = String(object.identity);
-    if (isSet(object.website)) obj.website = String(object.website);
-    if (isSet(object.securityContact)) obj.securityContact = String(object.securityContact);
-    if (isSet(object.details)) obj.details = String(object.details);
-    return obj;
-  },
-  toJSON(message: Description): unknown {
-    const obj: any = {};
-    message.moniker !== undefined && (obj.moniker = message.moniker);
-    message.identity !== undefined && (obj.identity = message.identity);
-    message.website !== undefined && (obj.website = message.website);
-    message.securityContact !== undefined && (obj.securityContact = message.securityContact);
-    message.details !== undefined && (obj.details = message.details);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Description>): Description {
-    const message = createBaseDescription();
-    message.moniker = object.moniker ?? "";
-    message.identity = object.identity ?? "";
-    message.website = object.website ?? "";
-    message.securityContact = object.securityContact ?? "";
-    message.details = object.details ?? "";
-    return message;
-  },
-  fromSDK(object: DescriptionSDKType): Description {
-    return {
-      moniker: object?.moniker,
-      identity: object?.identity,
-      website: object?.website,
-      securityContact: object?.security_contact,
-      details: object?.details
-    };
-  },
-  fromSDKJSON(object: any): DescriptionSDKType {
-    return {
-      moniker: isSet(object.moniker) ? String(object.moniker) : "",
-      identity: isSet(object.identity) ? String(object.identity) : "",
-      website: isSet(object.website) ? String(object.website) : "",
-      security_contact: isSet(object.security_contact) ? String(object.security_contact) : "",
-      details: isSet(object.details) ? String(object.details) : ""
-    };
-  },
-  toSDK(message: Description): DescriptionSDKType {
-    const obj: any = {};
-    obj.moniker = message.moniker;
-    obj.identity = message.identity;
-    obj.website = message.website;
-    obj.security_contact = message.securityContact;
-    obj.details = message.details;
-    return obj;
-  },
-  fromAmino(object: DescriptionAmino): Description {
-    return {
-      moniker: object.moniker,
-      identity: object.identity,
-      website: object.website,
-      securityContact: object.security_contact,
-      details: object.details
-    };
-  },
-  toAmino(message: Description): DescriptionAmino {
-    const obj: any = {};
-    obj.moniker = message.moniker;
-    obj.identity = message.identity;
-    obj.website = message.website;
-    obj.security_contact = message.securityContact;
-    obj.details = message.details;
-    return obj;
-  },
-  fromAminoMsg(object: DescriptionAminoMsg): Description {
-    return Description.fromAmino(object.value);
-  },
-  toAminoMsg(message: Description): DescriptionAminoMsg {
-    return {
-      type: "cosmos-sdk/Description",
-      value: Description.toAmino(message)
-    };
   },
   fromProtoMsg(message: DescriptionProtoMsg): Description {
     return Description.decode(message.value);
@@ -1051,143 +854,6 @@ export const Validator = {
     }
     return message;
   },
-  fromJSON(object: any): Validator {
-    const obj = createBaseValidator();
-    if (isSet(object.operatorAddress)) obj.operatorAddress = String(object.operatorAddress);
-    if (isSet(object.consensusPubkey)) obj.consensusPubkey = Any.fromJSON(object.consensusPubkey);
-    if (isSet(object.jailed)) obj.jailed = Boolean(object.jailed);
-    if (isSet(object.status)) obj.status = bondStatusFromJSON(object.status);
-    if (isSet(object.tokens)) obj.tokens = String(object.tokens);
-    if (isSet(object.delegatorShares)) obj.delegatorShares = String(object.delegatorShares);
-    if (isSet(object.description)) obj.description = Description.fromJSON(object.description);
-    if (isSet(object.unbondingHeight)) obj.unbondingHeight = BigInt(object.unbondingHeight.toString());
-    if (isSet(object.unbondingTime)) obj.unbondingTime = new Date(object.unbondingTime);
-    if (isSet(object.commission)) obj.commission = Commission.fromJSON(object.commission);
-    if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
-    return obj;
-  },
-  toJSON(message: Validator): unknown {
-    const obj: any = {};
-    message.operatorAddress !== undefined && (obj.operatorAddress = message.operatorAddress);
-    message.consensusPubkey !== undefined && (obj.consensusPubkey = message.consensusPubkey ? Any.toJSON(message.consensusPubkey) : undefined);
-    message.jailed !== undefined && (obj.jailed = message.jailed);
-    message.status !== undefined && (obj.status = bondStatusToJSON(message.status));
-    message.tokens !== undefined && (obj.tokens = message.tokens);
-    message.delegatorShares !== undefined && (obj.delegatorShares = message.delegatorShares);
-    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
-    message.unbondingHeight !== undefined && (obj.unbondingHeight = (message.unbondingHeight || BigInt(0)).toString());
-    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime.toISOString());
-    message.commission !== undefined && (obj.commission = message.commission ? Commission.toJSON(message.commission) : undefined);
-    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Validator>): Validator {
-    const message = createBaseValidator();
-    message.operatorAddress = object.operatorAddress ?? "";
-    if (object.consensusPubkey !== undefined && object.consensusPubkey !== null) {
-      message.consensusPubkey = Any.fromPartial(object.consensusPubkey);
-    }
-    message.jailed = object.jailed ?? false;
-    message.status = object.status ?? 0;
-    message.tokens = object.tokens ?? "";
-    message.delegatorShares = object.delegatorShares ?? "";
-    if (object.description !== undefined && object.description !== null) {
-      message.description = Description.fromPartial(object.description);
-    }
-    if (object.unbondingHeight !== undefined && object.unbondingHeight !== null) {
-      message.unbondingHeight = BigInt(object.unbondingHeight.toString());
-    }
-    message.unbondingTime = object.unbondingTime ?? undefined;
-    if (object.commission !== undefined && object.commission !== null) {
-      message.commission = Commission.fromPartial(object.commission);
-    }
-    message.minSelfDelegation = object.minSelfDelegation ?? "";
-    return message;
-  },
-  fromSDK(object: ValidatorSDKType): Validator {
-    return {
-      operatorAddress: object?.operator_address,
-      consensusPubkey: object.consensus_pubkey ? Any.fromSDK(object.consensus_pubkey) : undefined,
-      jailed: object?.jailed,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
-      tokens: object?.tokens,
-      delegatorShares: object?.delegator_shares,
-      description: object.description ? Description.fromSDK(object.description) : undefined,
-      unbondingHeight: object?.unbonding_height,
-      unbondingTime: object.unbonding_time ?? undefined,
-      commission: object.commission ? Commission.fromSDK(object.commission) : undefined,
-      minSelfDelegation: object?.min_self_delegation
-    };
-  },
-  fromSDKJSON(object: any): ValidatorSDKType {
-    return {
-      operator_address: isSet(object.operator_address) ? String(object.operator_address) : "",
-      consensus_pubkey: isSet(object.consensus_pubkey) ? Any.fromSDKJSON(object.consensus_pubkey) : undefined,
-      jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
-      tokens: isSet(object.tokens) ? String(object.tokens) : "",
-      delegator_shares: isSet(object.delegator_shares) ? String(object.delegator_shares) : "",
-      description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
-      unbonding_height: isSet(object.unbonding_height) ? BigInt(object.unbonding_height.toString()) : BigInt(0),
-      unbonding_time: isSet(object.unbonding_time) ? new Date(object.unbonding_time) : undefined,
-      commission: isSet(object.commission) ? Commission.fromSDKJSON(object.commission) : undefined,
-      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : ""
-    };
-  },
-  toSDK(message: Validator): ValidatorSDKType {
-    const obj: any = {};
-    obj.operator_address = message.operatorAddress;
-    message.consensusPubkey !== undefined && (obj.consensus_pubkey = message.consensusPubkey ? Any.toSDK(message.consensusPubkey) : undefined);
-    obj.jailed = message.jailed;
-    message.status !== undefined && (obj.status = bondStatusToJSON(message.status));
-    obj.tokens = message.tokens;
-    obj.delegator_shares = message.delegatorShares;
-    message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
-    obj.unbonding_height = message.unbondingHeight;
-    message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ?? undefined);
-    message.commission !== undefined && (obj.commission = message.commission ? Commission.toSDK(message.commission) : undefined);
-    obj.min_self_delegation = message.minSelfDelegation;
-    return obj;
-  },
-  fromAmino(object: ValidatorAmino): Validator {
-    return {
-      operatorAddress: object.operator_address,
-      consensusPubkey: object?.consensus_pubkey ? encodePubkey(object.consensus_pubkey) : undefined,
-      jailed: object.jailed,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
-      tokens: object.tokens,
-      delegatorShares: object.delegator_shares,
-      description: object?.description ? Description.fromAmino(object.description) : undefined,
-      unbondingHeight: BigInt(object.unbonding_height),
-      unbondingTime: object.unbonding_time,
-      commission: object?.commission ? Commission.fromAmino(object.commission) : undefined,
-      minSelfDelegation: object.min_self_delegation
-    };
-  },
-  toAmino(message: Validator): ValidatorAmino {
-    const obj: any = {};
-    obj.operator_address = message.operatorAddress;
-    obj.consensus_pubkey = message.consensusPubkey ? decodePubkey(message.consensusPubkey) : undefined;
-    obj.jailed = message.jailed;
-    obj.status = message.status;
-    obj.tokens = message.tokens;
-    obj.delegator_shares = message.delegatorShares;
-    obj.description = message.description ? Description.toAmino(message.description) : undefined;
-    obj.unbonding_height = message.unbondingHeight ? message.unbondingHeight.toString() : undefined;
-    obj.unbonding_time = message.unbondingTime;
-    obj.commission = message.commission ? Commission.toAmino(message.commission) : undefined;
-    obj.min_self_delegation = message.minSelfDelegation;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorAminoMsg): Validator {
-    return Validator.fromAmino(object.value);
-  },
-  toAminoMsg(message: Validator): ValidatorAminoMsg {
-    return {
-      type: "cosmos-sdk/Validator",
-      value: Validator.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ValidatorProtoMsg): Validator {
     return Validator.decode(message.value);
   },
@@ -1230,67 +896,6 @@ export const ValAddresses = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ValAddresses {
-    const obj = createBaseValAddresses();
-    if (Array.isArray(object?.addresses)) obj.addresses = object.addresses.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ValAddresses): unknown {
-    const obj: any = {};
-    if (message.addresses) {
-      obj.addresses = message.addresses.map(e => e);
-    } else {
-      obj.addresses = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValAddresses>): ValAddresses {
-    const message = createBaseValAddresses();
-    message.addresses = object.addresses?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: ValAddressesSDKType): ValAddresses {
-    return {
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): ValAddressesSDKType {
-    return {
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: ValAddresses): ValAddressesSDKType {
-    const obj: any = {};
-    if (message.addresses) {
-      obj.addresses = message.addresses.map(e => e);
-    } else {
-      obj.addresses = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ValAddressesAmino): ValAddresses {
-    return {
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: ValAddresses): ValAddressesAmino {
-    const obj: any = {};
-    if (message.addresses) {
-      obj.addresses = message.addresses.map(e => e);
-    } else {
-      obj.addresses = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ValAddressesAminoMsg): ValAddresses {
-    return ValAddresses.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValAddresses): ValAddressesAminoMsg {
-    return {
-      type: "cosmos-sdk/ValAddresses",
-      value: ValAddresses.toAmino(message)
-    };
   },
   fromProtoMsg(message: ValAddressesProtoMsg): ValAddresses {
     return ValAddresses.decode(message.value);
@@ -1342,63 +947,6 @@ export const DVPair = {
     }
     return message;
   },
-  fromJSON(object: any): DVPair {
-    const obj = createBaseDVPair();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    return obj;
-  },
-  toJSON(message: DVPair): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DVPair>): DVPair {
-    const message = createBaseDVPair();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
-    return message;
-  },
-  fromSDK(object: DVPairSDKType): DVPair {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address
-    };
-  },
-  fromSDKJSON(object: any): DVPairSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
-    };
-  },
-  toSDK(message: DVPair): DVPairSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    return obj;
-  },
-  fromAmino(object: DVPairAmino): DVPair {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorAddress: object.validator_address
-    };
-  },
-  toAmino(message: DVPair): DVPairAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    return obj;
-  },
-  fromAminoMsg(object: DVPairAminoMsg): DVPair {
-    return DVPair.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVPair): DVPairAminoMsg {
-    return {
-      type: "cosmos-sdk/DVPair",
-      value: DVPair.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DVPairProtoMsg): DVPair {
     return DVPair.decode(message.value);
   },
@@ -1441,67 +989,6 @@ export const DVPairs = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DVPairs {
-    const obj = createBaseDVPairs();
-    if (Array.isArray(object?.pairs)) obj.pairs = object.pairs.map((e: any) => DVPair.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DVPairs): unknown {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? DVPair.toJSON(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DVPairs>): DVPairs {
-    const message = createBaseDVPairs();
-    message.pairs = object.pairs?.map(e => DVPair.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: DVPairsSDKType): DVPairs {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): DVPairsSDKType {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: DVPairs): DVPairsSDKType {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? DVPair.toSDK(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DVPairsAmino): DVPairs {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: DVPairs): DVPairsAmino {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? DVPair.toAmino(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DVPairsAminoMsg): DVPairs {
-    return DVPairs.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVPairs): DVPairsAminoMsg {
-    return {
-      type: "cosmos-sdk/DVPairs",
-      value: DVPairs.toAmino(message)
-    };
   },
   fromProtoMsg(message: DVPairsProtoMsg): DVPairs {
     return DVPairs.decode(message.value);
@@ -1560,71 +1047,6 @@ export const DVVTriplet = {
     }
     return message;
   },
-  fromJSON(object: any): DVVTriplet {
-    const obj = createBaseDVVTriplet();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
-    if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
-    return obj;
-  },
-  toJSON(message: DVVTriplet): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DVVTriplet>): DVVTriplet {
-    const message = createBaseDVVTriplet();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorSrcAddress = object.validatorSrcAddress ?? "";
-    message.validatorDstAddress = object.validatorDstAddress ?? "";
-    return message;
-  },
-  fromSDK(object: DVVTripletSDKType): DVVTriplet {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorSrcAddress: object?.validator_src_address,
-      validatorDstAddress: object?.validator_dst_address
-    };
-  },
-  fromSDKJSON(object: any): DVVTripletSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
-      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : ""
-    };
-  },
-  toSDK(message: DVVTriplet): DVVTripletSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
-    return obj;
-  },
-  fromAmino(object: DVVTripletAmino): DVVTriplet {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorSrcAddress: object.validator_src_address,
-      validatorDstAddress: object.validator_dst_address
-    };
-  },
-  toAmino(message: DVVTriplet): DVVTripletAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
-    return obj;
-  },
-  fromAminoMsg(object: DVVTripletAminoMsg): DVVTriplet {
-    return DVVTriplet.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVVTriplet): DVVTripletAminoMsg {
-    return {
-      type: "cosmos-sdk/DVVTriplet",
-      value: DVVTriplet.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DVVTripletProtoMsg): DVVTriplet {
     return DVVTriplet.decode(message.value);
   },
@@ -1667,67 +1089,6 @@ export const DVVTriplets = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DVVTriplets {
-    const obj = createBaseDVVTriplets();
-    if (Array.isArray(object?.triplets)) obj.triplets = object.triplets.map((e: any) => DVVTriplet.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DVVTriplets): unknown {
-    const obj: any = {};
-    if (message.triplets) {
-      obj.triplets = message.triplets.map(e => e ? DVVTriplet.toJSON(e) : undefined);
-    } else {
-      obj.triplets = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DVVTriplets>): DVVTriplets {
-    const message = createBaseDVVTriplets();
-    message.triplets = object.triplets?.map(e => DVVTriplet.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: DVVTripletsSDKType): DVVTriplets {
-    return {
-      triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): DVVTripletsSDKType {
-    return {
-      triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: DVVTriplets): DVVTripletsSDKType {
-    const obj: any = {};
-    if (message.triplets) {
-      obj.triplets = message.triplets.map(e => e ? DVVTriplet.toSDK(e) : undefined);
-    } else {
-      obj.triplets = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DVVTripletsAmino): DVVTriplets {
-    return {
-      triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: DVVTriplets): DVVTripletsAmino {
-    const obj: any = {};
-    if (message.triplets) {
-      obj.triplets = message.triplets.map(e => e ? DVVTriplet.toAmino(e) : undefined);
-    } else {
-      obj.triplets = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DVVTripletsAminoMsg): DVVTriplets {
-    return DVVTriplets.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVVTriplets): DVVTripletsAminoMsg {
-    return {
-      type: "cosmos-sdk/DVVTriplets",
-      value: DVVTriplets.toAmino(message)
-    };
   },
   fromProtoMsg(message: DVVTripletsProtoMsg): DVVTriplets {
     return DVVTriplets.decode(message.value);
@@ -1786,71 +1147,6 @@ export const Delegation = {
     }
     return message;
   },
-  fromJSON(object: any): Delegation {
-    const obj = createBaseDelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.shares)) obj.shares = String(object.shares);
-    return obj;
-  },
-  toJSON(message: Delegation): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.shares !== undefined && (obj.shares = message.shares);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Delegation>): Delegation {
-    const message = createBaseDelegation();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
-    message.shares = object.shares ?? "";
-    return message;
-  },
-  fromSDK(object: DelegationSDKType): Delegation {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address,
-      shares: object?.shares
-    };
-  },
-  fromSDKJSON(object: any): DelegationSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      shares: isSet(object.shares) ? String(object.shares) : ""
-    };
-  },
-  toSDK(message: Delegation): DelegationSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.shares = message.shares;
-    return obj;
-  },
-  fromAmino(object: DelegationAmino): Delegation {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorAddress: object.validator_address,
-      shares: object.shares
-    };
-  },
-  toAmino(message: Delegation): DelegationAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.shares = message.shares;
-    return obj;
-  },
-  fromAminoMsg(object: DelegationAminoMsg): Delegation {
-    return Delegation.fromAmino(object.value);
-  },
-  toAminoMsg(message: Delegation): DelegationAminoMsg {
-    return {
-      type: "cosmos-sdk/Delegation",
-      value: Delegation.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DelegationProtoMsg): Delegation {
     return Delegation.decode(message.value);
   },
@@ -1907,83 +1203,6 @@ export const UnbondingDelegation = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): UnbondingDelegation {
-    const obj = createBaseUnbondingDelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => UnbondingDelegationEntry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: UnbondingDelegation): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UnbondingDelegation>): UnbondingDelegation {
-    const message = createBaseUnbondingDelegation();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
-    message.entries = object.entries?.map(e => UnbondingDelegationEntry.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: UnbondingDelegationSDKType): UnbondingDelegation {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): UnbondingDelegationSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: UnbondingDelegation): UnbondingDelegationSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAmino(object: UnbondingDelegationAmino): UnbondingDelegation {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorAddress: object.validator_address,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: UnbondingDelegation): UnbondingDelegationAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UnbondingDelegationAminoMsg): UnbondingDelegation {
-    return UnbondingDelegation.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnbondingDelegation): UnbondingDelegationAminoMsg {
-    return {
-      type: "cosmos-sdk/UnbondingDelegation",
-      value: UnbondingDelegation.toAmino(message)
-    };
   },
   fromProtoMsg(message: UnbondingDelegationProtoMsg): UnbondingDelegation {
     return UnbondingDelegation.decode(message.value);
@@ -2049,81 +1268,6 @@ export const UnbondingDelegationEntry = {
     }
     return message;
   },
-  fromJSON(object: any): UnbondingDelegationEntry {
-    const obj = createBaseUnbondingDelegationEntry();
-    if (isSet(object.creationHeight)) obj.creationHeight = BigInt(object.creationHeight.toString());
-    if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
-    if (isSet(object.initialBalance)) obj.initialBalance = String(object.initialBalance);
-    if (isSet(object.balance)) obj.balance = String(object.balance);
-    return obj;
-  },
-  toJSON(message: UnbondingDelegationEntry): unknown {
-    const obj: any = {};
-    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
-    message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
-    message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
-    message.balance !== undefined && (obj.balance = message.balance);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
-    const message = createBaseUnbondingDelegationEntry();
-    if (object.creationHeight !== undefined && object.creationHeight !== null) {
-      message.creationHeight = BigInt(object.creationHeight.toString());
-    }
-    message.completionTime = object.completionTime ?? undefined;
-    message.initialBalance = object.initialBalance ?? "";
-    message.balance = object.balance ?? "";
-    return message;
-  },
-  fromSDK(object: UnbondingDelegationEntrySDKType): UnbondingDelegationEntry {
-    return {
-      creationHeight: object?.creation_height,
-      completionTime: object.completion_time ?? undefined,
-      initialBalance: object?.initial_balance,
-      balance: object?.balance
-    };
-  },
-  fromSDKJSON(object: any): UnbondingDelegationEntrySDKType {
-    return {
-      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : BigInt(0),
-      completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
-      initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
-      balance: isSet(object.balance) ? String(object.balance) : ""
-    };
-  },
-  toSDK(message: UnbondingDelegationEntry): UnbondingDelegationEntrySDKType {
-    const obj: any = {};
-    obj.creation_height = message.creationHeight;
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
-    obj.initial_balance = message.initialBalance;
-    obj.balance = message.balance;
-    return obj;
-  },
-  fromAmino(object: UnbondingDelegationEntryAmino): UnbondingDelegationEntry {
-    return {
-      creationHeight: BigInt(object.creation_height),
-      completionTime: object.completion_time,
-      initialBalance: object.initial_balance,
-      balance: object.balance
-    };
-  },
-  toAmino(message: UnbondingDelegationEntry): UnbondingDelegationEntryAmino {
-    const obj: any = {};
-    obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
-    obj.completion_time = message.completionTime;
-    obj.initial_balance = message.initialBalance;
-    obj.balance = message.balance;
-    return obj;
-  },
-  fromAminoMsg(object: UnbondingDelegationEntryAminoMsg): UnbondingDelegationEntry {
-    return UnbondingDelegationEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnbondingDelegationEntry): UnbondingDelegationEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/UnbondingDelegationEntry",
-      value: UnbondingDelegationEntry.toAmino(message)
-    };
-  },
   fromProtoMsg(message: UnbondingDelegationEntryProtoMsg): UnbondingDelegationEntry {
     return UnbondingDelegationEntry.decode(message.value);
   },
@@ -2188,81 +1332,6 @@ export const RedelegationEntry = {
     }
     return message;
   },
-  fromJSON(object: any): RedelegationEntry {
-    const obj = createBaseRedelegationEntry();
-    if (isSet(object.creationHeight)) obj.creationHeight = BigInt(object.creationHeight.toString());
-    if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
-    if (isSet(object.initialBalance)) obj.initialBalance = String(object.initialBalance);
-    if (isSet(object.sharesDst)) obj.sharesDst = String(object.sharesDst);
-    return obj;
-  },
-  toJSON(message: RedelegationEntry): unknown {
-    const obj: any = {};
-    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
-    message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
-    message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
-    message.sharesDst !== undefined && (obj.sharesDst = message.sharesDst);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
-    const message = createBaseRedelegationEntry();
-    if (object.creationHeight !== undefined && object.creationHeight !== null) {
-      message.creationHeight = BigInt(object.creationHeight.toString());
-    }
-    message.completionTime = object.completionTime ?? undefined;
-    message.initialBalance = object.initialBalance ?? "";
-    message.sharesDst = object.sharesDst ?? "";
-    return message;
-  },
-  fromSDK(object: RedelegationEntrySDKType): RedelegationEntry {
-    return {
-      creationHeight: object?.creation_height,
-      completionTime: object.completion_time ?? undefined,
-      initialBalance: object?.initial_balance,
-      sharesDst: object?.shares_dst
-    };
-  },
-  fromSDKJSON(object: any): RedelegationEntrySDKType {
-    return {
-      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : BigInt(0),
-      completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
-      initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
-      shares_dst: isSet(object.shares_dst) ? String(object.shares_dst) : ""
-    };
-  },
-  toSDK(message: RedelegationEntry): RedelegationEntrySDKType {
-    const obj: any = {};
-    obj.creation_height = message.creationHeight;
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
-    obj.initial_balance = message.initialBalance;
-    obj.shares_dst = message.sharesDst;
-    return obj;
-  },
-  fromAmino(object: RedelegationEntryAmino): RedelegationEntry {
-    return {
-      creationHeight: BigInt(object.creation_height),
-      completionTime: object.completion_time,
-      initialBalance: object.initial_balance,
-      sharesDst: object.shares_dst
-    };
-  },
-  toAmino(message: RedelegationEntry): RedelegationEntryAmino {
-    const obj: any = {};
-    obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
-    obj.completion_time = message.completionTime;
-    obj.initial_balance = message.initialBalance;
-    obj.shares_dst = message.sharesDst;
-    return obj;
-  },
-  fromAminoMsg(object: RedelegationEntryAminoMsg): RedelegationEntry {
-    return RedelegationEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: RedelegationEntry): RedelegationEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/RedelegationEntry",
-      value: RedelegationEntry.toAmino(message)
-    };
-  },
   fromProtoMsg(message: RedelegationEntryProtoMsg): RedelegationEntry {
     return RedelegationEntry.decode(message.value);
   },
@@ -2326,91 +1395,6 @@ export const Redelegation = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Redelegation {
-    const obj = createBaseRedelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
-    if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => RedelegationEntry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Redelegation): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Redelegation>): Redelegation {
-    const message = createBaseRedelegation();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorSrcAddress = object.validatorSrcAddress ?? "";
-    message.validatorDstAddress = object.validatorDstAddress ?? "";
-    message.entries = object.entries?.map(e => RedelegationEntry.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: RedelegationSDKType): Redelegation {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorSrcAddress: object?.validator_src_address,
-      validatorDstAddress: object?.validator_dst_address,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): RedelegationSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
-      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Redelegation): RedelegationSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAmino(object: RedelegationAmino): Redelegation {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorSrcAddress: object.validator_src_address,
-      validatorDstAddress: object.validator_dst_address,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Redelegation): RedelegationAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: RedelegationAminoMsg): Redelegation {
-    return Redelegation.fromAmino(object.value);
-  },
-  toAminoMsg(message: Redelegation): RedelegationAminoMsg {
-    return {
-      type: "cosmos-sdk/Redelegation",
-      value: Redelegation.toAmino(message)
-    };
   },
   fromProtoMsg(message: RedelegationProtoMsg): Redelegation {
     return Redelegation.decode(message.value);
@@ -2490,97 +1474,6 @@ export const Params = {
     }
     return message;
   },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.unbondingTime)) obj.unbondingTime = Duration.fromJSON(object.unbondingTime);
-    if (isSet(object.maxValidators)) obj.maxValidators = Number(object.maxValidators);
-    if (isSet(object.maxEntries)) obj.maxEntries = Number(object.maxEntries);
-    if (isSet(object.historicalEntries)) obj.historicalEntries = Number(object.historicalEntries);
-    if (isSet(object.bondDenom)) obj.bondDenom = String(object.bondDenom);
-    if (isSet(object.minCommissionRate)) obj.minCommissionRate = String(object.minCommissionRate);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime ? Duration.toJSON(message.unbondingTime) : undefined);
-    message.maxValidators !== undefined && (obj.maxValidators = Math.round(message.maxValidators));
-    message.maxEntries !== undefined && (obj.maxEntries = Math.round(message.maxEntries));
-    message.historicalEntries !== undefined && (obj.historicalEntries = Math.round(message.historicalEntries));
-    message.bondDenom !== undefined && (obj.bondDenom = message.bondDenom);
-    message.minCommissionRate !== undefined && (obj.minCommissionRate = message.minCommissionRate);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    if (object.unbondingTime !== undefined && object.unbondingTime !== null) {
-      message.unbondingTime = Duration.fromPartial(object.unbondingTime);
-    }
-    message.maxValidators = object.maxValidators ?? 0;
-    message.maxEntries = object.maxEntries ?? 0;
-    message.historicalEntries = object.historicalEntries ?? 0;
-    message.bondDenom = object.bondDenom ?? "";
-    message.minCommissionRate = object.minCommissionRate ?? "";
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      unbondingTime: object.unbonding_time ? Duration.fromSDK(object.unbonding_time) : undefined,
-      maxValidators: object?.max_validators,
-      maxEntries: object?.max_entries,
-      historicalEntries: object?.historical_entries,
-      bondDenom: object?.bond_denom,
-      minCommissionRate: object?.min_commission_rate
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      unbonding_time: isSet(object.unbonding_time) ? Duration.fromSDKJSON(object.unbonding_time) : undefined,
-      max_validators: isSet(object.max_validators) ? Number(object.max_validators) : 0,
-      max_entries: isSet(object.max_entries) ? Number(object.max_entries) : 0,
-      historical_entries: isSet(object.historical_entries) ? Number(object.historical_entries) : 0,
-      bond_denom: isSet(object.bond_denom) ? String(object.bond_denom) : "",
-      min_commission_rate: isSet(object.min_commission_rate) ? String(object.min_commission_rate) : ""
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ? Duration.toSDK(message.unbondingTime) : undefined);
-    obj.max_validators = message.maxValidators;
-    obj.max_entries = message.maxEntries;
-    obj.historical_entries = message.historicalEntries;
-    obj.bond_denom = message.bondDenom;
-    obj.min_commission_rate = message.minCommissionRate;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      unbondingTime: object?.unbonding_time ? Duration.fromAmino(object.unbonding_time) : undefined,
-      maxValidators: object.max_validators,
-      maxEntries: object.max_entries,
-      historicalEntries: object.historical_entries,
-      bondDenom: object.bond_denom,
-      minCommissionRate: object.min_commission_rate
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.unbonding_time = message.unbondingTime ? Duration.toAmino(message.unbondingTime) : undefined;
-    obj.max_validators = message.maxValidators;
-    obj.max_entries = message.maxEntries;
-    obj.historical_entries = message.historicalEntries;
-    obj.bond_denom = message.bondDenom;
-    obj.min_commission_rate = message.minCommissionRate;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
   },
@@ -2630,67 +1523,6 @@ export const DelegationResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DelegationResponse {
-    const obj = createBaseDelegationResponse();
-    if (isSet(object.delegation)) obj.delegation = Delegation.fromJSON(object.delegation);
-    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
-    return obj;
-  },
-  toJSON(message: DelegationResponse): unknown {
-    const obj: any = {};
-    message.delegation !== undefined && (obj.delegation = message.delegation ? Delegation.toJSON(message.delegation) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DelegationResponse>): DelegationResponse {
-    const message = createBaseDelegationResponse();
-    if (object.delegation !== undefined && object.delegation !== null) {
-      message.delegation = Delegation.fromPartial(object.delegation);
-    }
-    if (object.balance !== undefined && object.balance !== null) {
-      message.balance = Coin.fromPartial(object.balance);
-    }
-    return message;
-  },
-  fromSDK(object: DelegationResponseSDKType): DelegationResponse {
-    return {
-      delegation: object.delegation ? Delegation.fromSDK(object.delegation) : undefined,
-      balance: object.balance ? Coin.fromSDK(object.balance) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DelegationResponseSDKType {
-    return {
-      delegation: isSet(object.delegation) ? Delegation.fromSDKJSON(object.delegation) : undefined,
-      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined
-    };
-  },
-  toSDK(message: DelegationResponse): DelegationResponseSDKType {
-    const obj: any = {};
-    message.delegation !== undefined && (obj.delegation = message.delegation ? Delegation.toSDK(message.delegation) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
-    return obj;
-  },
-  fromAmino(object: DelegationResponseAmino): DelegationResponse {
-    return {
-      delegation: object?.delegation ? Delegation.fromAmino(object.delegation) : undefined,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined
-    };
-  },
-  toAmino(message: DelegationResponse): DelegationResponseAmino {
-    const obj: any = {};
-    obj.delegation = message.delegation ? Delegation.toAmino(message.delegation) : undefined;
-    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DelegationResponseAminoMsg): DelegationResponse {
-    return DelegationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: DelegationResponse): DelegationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/DelegationResponse",
-      value: DelegationResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: DelegationResponseProtoMsg): DelegationResponse {
     return DelegationResponse.decode(message.value);
@@ -2742,65 +1574,6 @@ export const RedelegationEntryResponse = {
     }
     return message;
   },
-  fromJSON(object: any): RedelegationEntryResponse {
-    const obj = createBaseRedelegationEntryResponse();
-    if (isSet(object.redelegationEntry)) obj.redelegationEntry = RedelegationEntry.fromJSON(object.redelegationEntry);
-    if (isSet(object.balance)) obj.balance = String(object.balance);
-    return obj;
-  },
-  toJSON(message: RedelegationEntryResponse): unknown {
-    const obj: any = {};
-    message.redelegationEntry !== undefined && (obj.redelegationEntry = message.redelegationEntry ? RedelegationEntry.toJSON(message.redelegationEntry) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
-    const message = createBaseRedelegationEntryResponse();
-    if (object.redelegationEntry !== undefined && object.redelegationEntry !== null) {
-      message.redelegationEntry = RedelegationEntry.fromPartial(object.redelegationEntry);
-    }
-    message.balance = object.balance ?? "";
-    return message;
-  },
-  fromSDK(object: RedelegationEntryResponseSDKType): RedelegationEntryResponse {
-    return {
-      redelegationEntry: object.redelegation_entry ? RedelegationEntry.fromSDK(object.redelegation_entry) : undefined,
-      balance: object?.balance
-    };
-  },
-  fromSDKJSON(object: any): RedelegationEntryResponseSDKType {
-    return {
-      redelegation_entry: isSet(object.redelegation_entry) ? RedelegationEntry.fromSDKJSON(object.redelegation_entry) : undefined,
-      balance: isSet(object.balance) ? String(object.balance) : ""
-    };
-  },
-  toSDK(message: RedelegationEntryResponse): RedelegationEntryResponseSDKType {
-    const obj: any = {};
-    message.redelegationEntry !== undefined && (obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toSDK(message.redelegationEntry) : undefined);
-    obj.balance = message.balance;
-    return obj;
-  },
-  fromAmino(object: RedelegationEntryResponseAmino): RedelegationEntryResponse {
-    return {
-      redelegationEntry: object?.redelegation_entry ? RedelegationEntry.fromAmino(object.redelegation_entry) : undefined,
-      balance: object.balance
-    };
-  },
-  toAmino(message: RedelegationEntryResponse): RedelegationEntryResponseAmino {
-    const obj: any = {};
-    obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toAmino(message.redelegationEntry) : undefined;
-    obj.balance = message.balance;
-    return obj;
-  },
-  fromAminoMsg(object: RedelegationEntryResponseAminoMsg): RedelegationEntryResponse {
-    return RedelegationEntryResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: RedelegationEntryResponse): RedelegationEntryResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/RedelegationEntryResponse",
-      value: RedelegationEntryResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: RedelegationEntryResponseProtoMsg): RedelegationEntryResponse {
     return RedelegationEntryResponse.decode(message.value);
   },
@@ -2851,77 +1624,6 @@ export const RedelegationResponse = {
     }
     return message;
   },
-  fromJSON(object: any): RedelegationResponse {
-    const obj = createBaseRedelegationResponse();
-    if (isSet(object.redelegation)) obj.redelegation = Redelegation.fromJSON(object.redelegation);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => RedelegationEntryResponse.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: RedelegationResponse): unknown {
-    const obj: any = {};
-    message.redelegation !== undefined && (obj.redelegation = message.redelegation ? Redelegation.toJSON(message.redelegation) : undefined);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntryResponse.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RedelegationResponse>): RedelegationResponse {
-    const message = createBaseRedelegationResponse();
-    if (object.redelegation !== undefined && object.redelegation !== null) {
-      message.redelegation = Redelegation.fromPartial(object.redelegation);
-    }
-    message.entries = object.entries?.map(e => RedelegationEntryResponse.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: RedelegationResponseSDKType): RedelegationResponse {
-    return {
-      redelegation: object.redelegation ? Redelegation.fromSDK(object.redelegation) : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): RedelegationResponseSDKType {
-    return {
-      redelegation: isSet(object.redelegation) ? Redelegation.fromSDKJSON(object.redelegation) : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: RedelegationResponse): RedelegationResponseSDKType {
-    const obj: any = {};
-    message.redelegation !== undefined && (obj.redelegation = message.redelegation ? Redelegation.toSDK(message.redelegation) : undefined);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntryResponse.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAmino(object: RedelegationResponseAmino): RedelegationResponse {
-    return {
-      redelegation: object?.redelegation ? Redelegation.fromAmino(object.redelegation) : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: RedelegationResponse): RedelegationResponseAmino {
-    const obj: any = {};
-    obj.redelegation = message.redelegation ? Redelegation.toAmino(message.redelegation) : undefined;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntryResponse.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: RedelegationResponseAminoMsg): RedelegationResponse {
-    return RedelegationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: RedelegationResponse): RedelegationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/RedelegationResponse",
-      value: RedelegationResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: RedelegationResponseProtoMsg): RedelegationResponse {
     return RedelegationResponse.decode(message.value);
   },
@@ -2971,63 +1673,6 @@ export const Pool = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Pool {
-    const obj = createBasePool();
-    if (isSet(object.notBondedTokens)) obj.notBondedTokens = String(object.notBondedTokens);
-    if (isSet(object.bondedTokens)) obj.bondedTokens = String(object.bondedTokens);
-    return obj;
-  },
-  toJSON(message: Pool): unknown {
-    const obj: any = {};
-    message.notBondedTokens !== undefined && (obj.notBondedTokens = message.notBondedTokens);
-    message.bondedTokens !== undefined && (obj.bondedTokens = message.bondedTokens);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Pool>): Pool {
-    const message = createBasePool();
-    message.notBondedTokens = object.notBondedTokens ?? "";
-    message.bondedTokens = object.bondedTokens ?? "";
-    return message;
-  },
-  fromSDK(object: PoolSDKType): Pool {
-    return {
-      notBondedTokens: object?.not_bonded_tokens,
-      bondedTokens: object?.bonded_tokens
-    };
-  },
-  fromSDKJSON(object: any): PoolSDKType {
-    return {
-      not_bonded_tokens: isSet(object.not_bonded_tokens) ? String(object.not_bonded_tokens) : "",
-      bonded_tokens: isSet(object.bonded_tokens) ? String(object.bonded_tokens) : ""
-    };
-  },
-  toSDK(message: Pool): PoolSDKType {
-    const obj: any = {};
-    obj.not_bonded_tokens = message.notBondedTokens;
-    obj.bonded_tokens = message.bondedTokens;
-    return obj;
-  },
-  fromAmino(object: PoolAmino): Pool {
-    return {
-      notBondedTokens: object.not_bonded_tokens,
-      bondedTokens: object.bonded_tokens
-    };
-  },
-  toAmino(message: Pool): PoolAmino {
-    const obj: any = {};
-    obj.not_bonded_tokens = message.notBondedTokens;
-    obj.bonded_tokens = message.bondedTokens;
-    return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "cosmos-sdk/Pool",
-      value: Pool.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);

@@ -10,6 +10,10 @@ export interface GenesisState {
   controllerGenesisState: ControllerGenesisState;
   hostGenesisState: HostGenesisState;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the interchain accounts genesis state */
 export interface GenesisStateSDKType {
   controller_genesis_state: ControllerGenesisStateSDKType;
@@ -21,6 +25,10 @@ export interface ControllerGenesisState {
   interchainAccounts: RegisteredInterchainAccount[];
   ports: string[];
   params: Params1;
+}
+export interface ControllerGenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.ControllerGenesisState";
+  value: Uint8Array;
 }
 /** ControllerGenesisState defines the interchain accounts controller genesis state */
 export interface ControllerGenesisStateSDKType {
@@ -35,6 +43,10 @@ export interface HostGenesisState {
   interchainAccounts: RegisteredInterchainAccount[];
   port: string;
   params: Params2;
+}
+export interface HostGenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.HostGenesisState";
+  value: Uint8Array;
 }
 /** HostGenesisState defines the interchain accounts host genesis state */
 export interface HostGenesisStateSDKType {
@@ -53,6 +65,10 @@ export interface ActiveChannel {
   channelId: string;
   isMiddlewareEnabled: boolean;
 }
+export interface ActiveChannelProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.ActiveChannel";
+  value: Uint8Array;
+}
 /**
  * ActiveChannel contains a connection ID, port ID and associated active channel ID, as well as a boolean flag to
  * indicate if the channel is middleware enabled
@@ -68,6 +84,10 @@ export interface RegisteredInterchainAccount {
   connectionId: string;
   portId: string;
   accountAddress: string;
+}
+export interface RegisteredInterchainAccountProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.RegisteredInterchainAccount";
+  value: Uint8Array;
 }
 /** RegisteredInterchainAccount contains a connection ID, port ID and associated interchain account address */
 export interface RegisteredInterchainAccountSDKType {

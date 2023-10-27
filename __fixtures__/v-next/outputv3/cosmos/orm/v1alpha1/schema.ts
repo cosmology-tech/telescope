@@ -99,6 +99,10 @@ export interface ModuleSchemaDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1alpha1.ModuleSchemaDescriptor";
   value: Uint8Array;
 }
+export interface ModuleSchemaDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1alpha1.ModuleSchemaDescriptor";
+  value: Uint8Array;
+}
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorAmino {
   schema_file: ModuleSchemaDescriptor_FileEntryAmino[];
@@ -136,6 +140,10 @@ export interface ModuleSchemaDescriptor_FileEntry {
    * of the app will be used.
    */
   storageType: StorageType;
+}
+export interface ModuleSchemaDescriptor_FileEntryProtoMsg {
+  typeUrl: "/cosmos.orm.v1alpha1.FileEntry";
+  value: Uint8Array;
 }
 export interface ModuleSchemaDescriptor_FileEntryProtoMsg {
   typeUrl: "/cosmos.orm.v1alpha1.FileEntry";

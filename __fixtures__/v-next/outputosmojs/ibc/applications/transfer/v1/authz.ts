@@ -13,6 +13,10 @@ export interface Allocation {
   /** allow list of receivers, an empty allow list permits any receiver address */
   allowList: string[];
 }
+export interface AllocationProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.Allocation";
+  value: Uint8Array;
+}
 /** Allocation defines the spend limit for a particular port and channel */
 export interface AllocationSDKType {
   source_port: string;
@@ -27,6 +31,10 @@ export interface AllocationSDKType {
 export interface TransferAuthorization {
   /** port and channel amounts */
   allocations: Allocation[];
+}
+export interface TransferAuthorizationProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.TransferAuthorization";
+  value: Uint8Array;
 }
 /**
  * TransferAuthorization allows the grantee to spend up to spend_limit coins from

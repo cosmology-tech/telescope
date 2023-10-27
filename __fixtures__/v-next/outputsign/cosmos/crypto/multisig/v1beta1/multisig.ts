@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { bytesFromBase64, base64FromBytes, DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -8,6 +7,10 @@ export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
  */
 export interface MultiSignature {
   signatures: Uint8Array[];
+}
+export interface MultiSignatureProtoMsg {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature";
+  value: Uint8Array;
 }
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -26,6 +29,10 @@ export interface MultiSignatureSDKType {
 export interface CompactBitArray {
   extraBitsStored: number;
   elems: Uint8Array;
+}
+export interface CompactBitArrayProtoMsg {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray";
+  value: Uint8Array;
 }
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -66,67 +73,6 @@ export const MultiSignature = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MultiSignature {
-    const obj = createBaseMultiSignature();
-    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => bytesFromBase64(e));
-    return obj;
-  },
-  toJSON(message: MultiSignature): unknown {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
-    const message = createBaseMultiSignature();
-    message.signatures = object.signatures?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: MultiSignatureSDKType): MultiSignature {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): MultiSignatureSDKType {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
-    };
-  },
-  toSDK(message: MultiSignature): MultiSignatureSDKType {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MultiSignatureAmino): MultiSignature {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: MultiSignature): MultiSignatureAmino {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MultiSignatureAminoMsg): MultiSignature {
-    return MultiSignature.fromAmino(object.value);
-  },
-  toAminoMsg(message: MultiSignature): MultiSignatureAminoMsg {
-    return {
-      type: "cosmos-sdk/MultiSignature",
-      value: MultiSignature.toAmino(message)
-    };
   },
   fromProtoMsg(message: MultiSignatureProtoMsg): MultiSignature {
     return MultiSignature.decode(message.value);
@@ -177,63 +123,6 @@ export const CompactBitArray = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CompactBitArray {
-    const obj = createBaseCompactBitArray();
-    if (isSet(object.extraBitsStored)) obj.extraBitsStored = Number(object.extraBitsStored);
-    if (isSet(object.elems)) obj.elems = bytesFromBase64(object.elems);
-    return obj;
-  },
-  toJSON(message: CompactBitArray): unknown {
-    const obj: any = {};
-    message.extraBitsStored !== undefined && (obj.extraBitsStored = Math.round(message.extraBitsStored));
-    message.elems !== undefined && (obj.elems = base64FromBytes(message.elems !== undefined ? message.elems : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {
-    const message = createBaseCompactBitArray();
-    message.extraBitsStored = object.extraBitsStored ?? 0;
-    message.elems = object.elems ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: CompactBitArraySDKType): CompactBitArray {
-    return {
-      extraBitsStored: object?.extra_bits_stored,
-      elems: object?.elems
-    };
-  },
-  fromSDKJSON(object: any): CompactBitArraySDKType {
-    return {
-      extra_bits_stored: isSet(object.extra_bits_stored) ? Number(object.extra_bits_stored) : 0,
-      elems: isSet(object.elems) ? bytesFromBase64(object.elems) : new Uint8Array()
-    };
-  },
-  toSDK(message: CompactBitArray): CompactBitArraySDKType {
-    const obj: any = {};
-    obj.extra_bits_stored = message.extraBitsStored;
-    obj.elems = message.elems;
-    return obj;
-  },
-  fromAmino(object: CompactBitArrayAmino): CompactBitArray {
-    return {
-      extraBitsStored: object.extra_bits_stored,
-      elems: object.elems
-    };
-  },
-  toAmino(message: CompactBitArray): CompactBitArrayAmino {
-    const obj: any = {};
-    obj.extra_bits_stored = message.extraBitsStored;
-    obj.elems = message.elems;
-    return obj;
-  },
-  fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {
-    return CompactBitArray.fromAmino(object.value);
-  },
-  toAminoMsg(message: CompactBitArray): CompactBitArrayAminoMsg {
-    return {
-      type: "cosmos-sdk/CompactBitArray",
-      value: CompactBitArray.toAmino(message)
-    };
   },
   fromProtoMsg(message: CompactBitArrayProtoMsg): CompactBitArray {
     return CompactBitArray.decode(message.value);

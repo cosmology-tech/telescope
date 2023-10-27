@@ -13,6 +13,10 @@ export interface PoolParams {
   swapFee: string;
   exitFee: string;
 }
+export interface PoolParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams";
+  value: Uint8Array;
+}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -47,6 +51,10 @@ export interface Pool {
   scalingFactors: bigint[];
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController: string;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool";
+  value: Uint8Array;
 }
 /** Pool is the stableswap Pool struct */
 export interface PoolSDKType {

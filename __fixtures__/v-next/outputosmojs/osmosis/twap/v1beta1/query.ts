@@ -11,6 +11,10 @@ export interface ArithmeticTwapRequest {
   startTime: Date;
   endTime?: Date;
 }
+export interface ArithmeticTwapRequestProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest";
+  value: Uint8Array;
+}
 export interface ArithmeticTwapRequestSDKType {
   pool_id: bigint;
   base_asset: string;
@@ -21,6 +25,10 @@ export interface ArithmeticTwapRequestSDKType {
 export interface ArithmeticTwapResponse {
   arithmeticTwap: string;
 }
+export interface ArithmeticTwapResponseProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse";
+  value: Uint8Array;
+}
 export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
 }
@@ -29,6 +37,10 @@ export interface ArithmeticTwapToNowRequest {
   baseAsset: string;
   quoteAsset: string;
   startTime: Date;
+}
+export interface ArithmeticTwapToNowRequestProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest";
+  value: Uint8Array;
 }
 export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: bigint;
@@ -39,13 +51,25 @@ export interface ArithmeticTwapToNowRequestSDKType {
 export interface ArithmeticTwapToNowResponse {
   arithmeticTwap: string;
 }
+export interface ArithmeticTwapToNowResponseProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse";
+  value: Uint8Array;
+}
 export interface ArithmeticTwapToNowResponseSDKType {
   arithmetic_twap: string;
 }
 export interface ParamsRequest {}
+export interface ParamsRequestProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsRequest";
+  value: Uint8Array;
+}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
+}
+export interface ParamsResponseProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsResponse";
+  value: Uint8Array;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;

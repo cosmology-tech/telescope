@@ -88,6 +88,10 @@ export interface ServiceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.Service";
   value: Uint8Array;
 }
+export interface ServiceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.Service";
+  value: Uint8Array;
+}
 /** A service that is available for use by the consumer. */
 export interface ServiceAmino {
   /**
@@ -172,6 +176,10 @@ export interface ServiceConfigProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
   value: Uint8Array;
 }
+export interface ServiceConfigProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
+  value: Uint8Array;
+}
 /** The configuration of the service. */
 export interface ServiceConfigAmino {
   /**
@@ -239,6 +247,10 @@ export interface OperationMetadata {
    * associated with.
    */
   resourceNames: string[];
+}
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.OperationMetadata";
+  value: Uint8Array;
 }
 export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.OperationMetadata";

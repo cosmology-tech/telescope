@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -50,6 +49,10 @@ export interface Endpoint {
    * allowed to proceed.
    */
   allowCors: boolean;
+}
+export interface EndpointProtoMsg {
+  typeUrl: "/google.api.Endpoint";
+  value: Uint8Array;
 }
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -126,85 +129,6 @@ export const Endpoint = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Endpoint {
-    const obj = createBaseEndpoint();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
-    if (isSet(object.target)) obj.target = String(object.target);
-    if (isSet(object.allowCors)) obj.allowCors = Boolean(object.allowCors);
-    return obj;
-  },
-  toJSON(message: Endpoint): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    message.target !== undefined && (obj.target = message.target);
-    message.allowCors !== undefined && (obj.allowCors = message.allowCors);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
-    const message = createBaseEndpoint();
-    message.name = object.name ?? "";
-    message.aliases = object.aliases?.map(e => e) || [];
-    message.target = object.target ?? "";
-    message.allowCors = object.allowCors ?? false;
-    return message;
-  },
-  fromSDK(object: EndpointSDKType): Endpoint {
-    return {
-      name: object?.name,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: object?.target,
-      allowCors: object?.allow_cors
-    };
-  },
-  fromSDKJSON(object: any): EndpointSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
-      target: isSet(object.target) ? String(object.target) : "",
-      allow_cors: isSet(object.allow_cors) ? Boolean(object.allow_cors) : false
-    };
-  },
-  toSDK(message: Endpoint): EndpointSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    obj.target = message.target;
-    obj.allow_cors = message.allowCors;
-    return obj;
-  },
-  fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      name: object.name,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: object.target,
-      allowCors: object.allow_cors
-    };
-  },
-  toAmino(message: Endpoint): EndpointAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    obj.target = message.target;
-    obj.allow_cors = message.allowCors;
-    return obj;
-  },
-  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
-    return Endpoint.fromAmino(object.value);
   },
   fromProtoMsg(message: EndpointProtoMsg): Endpoint {
     return Endpoint.decode(message.value);

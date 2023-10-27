@@ -14,6 +14,10 @@ export interface TableDescriptor {
    */
   id: number;
 }
+export interface TableDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.TableDescriptor";
+  value: Uint8Array;
+}
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
   primary_key?: PrimaryKeyDescriptorSDKType;
@@ -62,6 +66,10 @@ export interface PrimaryKeyDescriptor {
    */
   autoIncrement: boolean;
 }
+export interface PrimaryKeyDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
+  value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptorSDKType {
   fields: string;
@@ -90,6 +98,10 @@ export interface SecondaryIndexDescriptor {
   /** unique specifies that this an unique index. */
   unique: boolean;
 }
+export interface SecondaryIndexDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
+  value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptorSDKType {
   fields: string;
@@ -104,6 +116,10 @@ export interface SingletonDescriptor {
    * can be auto-generated.
    */
   id: number;
+}
+export interface SingletonDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.SingletonDescriptor";
+  value: Uint8Array;
 }
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptorSDKType {

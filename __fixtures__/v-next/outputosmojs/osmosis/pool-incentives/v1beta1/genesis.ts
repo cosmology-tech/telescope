@@ -11,6 +11,10 @@ export interface GenesisState {
   distrInfo?: DistrInfo;
   poolToGauges?: PoolToGauges;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;

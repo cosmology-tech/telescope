@@ -1,6 +1,5 @@
 import { FeeToken, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -13,6 +12,10 @@ export interface UpdateFeeTokenProposal {
   title: string;
   description: string;
   feetoken: FeeToken;
+}
+export interface UpdateFeeTokenProposalProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
+  value: Uint8Array;
 }
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -69,73 +72,6 @@ export const UpdateFeeTokenProposal = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): UpdateFeeTokenProposal {
-    const obj = createBaseUpdateFeeTokenProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.feetoken)) obj.feetoken = FeeToken.fromJSON(object.feetoken);
-    return obj;
-  },
-  toJSON(message: UpdateFeeTokenProposal): unknown {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toJSON(message.feetoken) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
-    const message = createBaseUpdateFeeTokenProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    if (object.feetoken !== undefined && object.feetoken !== null) {
-      message.feetoken = FeeToken.fromPartial(object.feetoken);
-    }
-    return message;
-  },
-  fromSDK(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {
-    return {
-      title: object?.title,
-      description: object?.description,
-      feetoken: object.feetoken ? FeeToken.fromSDK(object.feetoken) : undefined
-    };
-  },
-  fromSDKJSON(object: any): UpdateFeeTokenProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      feetoken: isSet(object.feetoken) ? FeeToken.fromSDKJSON(object.feetoken) : undefined
-    };
-  },
-  toSDK(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalSDKType {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toSDK(message.feetoken) : undefined);
-    return obj;
-  },
-  fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
-    };
-  },
-  toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateFeeTokenProposalAminoMsg): UpdateFeeTokenProposal {
-    return UpdateFeeTokenProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAminoMsg {
-    return {
-      type: "osmosis/txfees/update-fee-token-proposal",
-      value: UpdateFeeTokenProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg): UpdateFeeTokenProposal {
     return UpdateFeeTokenProposal.decode(message.value);

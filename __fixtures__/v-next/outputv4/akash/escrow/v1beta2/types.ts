@@ -103,6 +103,10 @@ export interface AccountID {
   scope: string;
   xid: string;
 }
+export interface AccountIDProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.AccountID";
+  value: Uint8Array;
+}
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
@@ -134,6 +138,10 @@ export interface Account {
    */
   funds: DecCoin;
 }
+export interface AccountProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.Account";
+  value: Uint8Array;
+}
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
@@ -154,6 +162,10 @@ export interface FractionalPayment {
   rate: DecCoin;
   balance: DecCoin;
   withdrawn: Coin;
+}
+export interface FractionalPaymentProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
+  value: Uint8Array;
 }
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {

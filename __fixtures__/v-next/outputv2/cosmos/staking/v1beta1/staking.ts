@@ -71,6 +71,10 @@ export interface HistoricalInfoProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.HistoricalInfo";
   value: Uint8Array;
 }
+export interface HistoricalInfoProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.HistoricalInfo";
+  value: Uint8Array;
+}
 /**
  * HistoricalInfo contains header and validator information for a given block.
  * It is stored as part of staking module's state, which persists the `n` most
@@ -106,6 +110,10 @@ export interface CommissionRates {
   maxRate: string;
   /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
   maxChangeRate: string;
+}
+export interface CommissionRatesProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.CommissionRates";
+  value: Uint8Array;
 }
 export interface CommissionRatesProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.CommissionRates";
@@ -147,6 +155,10 @@ export interface CommissionProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Commission";
   value: Uint8Array;
 }
+export interface CommissionProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Commission";
+  value: Uint8Array;
+}
 /** Commission defines commission parameters for a given validator. */
 export interface CommissionAmino {
   /** commission_rates defines the initial commission rates to be used for creating a validator. */
@@ -175,6 +187,10 @@ export interface Description {
   securityContact: string;
   /** details define other optional details. */
   details: string;
+}
+export interface DescriptionProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Description";
+  value: Uint8Array;
 }
 export interface DescriptionProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Description";
@@ -238,6 +254,10 @@ export interface Validator {
   commission: Commission;
   /** min_self_delegation is the validator's self declared minimum self delegation. */
   minSelfDelegation: string;
+}
+export interface ValidatorProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Validator";
+  value: Uint8Array;
 }
 export interface ValidatorProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Validator";
@@ -315,6 +335,10 @@ export interface ValAddressesProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.ValAddresses";
   value: Uint8Array;
 }
+export interface ValAddressesProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.ValAddresses";
+  value: Uint8Array;
+}
 /** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddressesAmino {
   addresses: string[];
@@ -335,6 +359,10 @@ export interface ValAddressesSDKType {
 export interface DVPair {
   delegatorAddress: string;
   validatorAddress: string;
+}
+export interface DVPairProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVPair";
+  value: Uint8Array;
 }
 export interface DVPairProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVPair";
@@ -370,6 +398,10 @@ export interface DVPairsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVPairs";
   value: Uint8Array;
 }
+export interface DVPairsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVPairs";
+  value: Uint8Array;
+}
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairsAmino {
   pairs: DVPairAmino[];
@@ -392,6 +424,10 @@ export interface DVVTriplet {
   delegatorAddress: string;
   validatorSrcAddress: string;
   validatorDstAddress: string;
+}
+export interface DVVTripletProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVVTriplet";
+  value: Uint8Array;
 }
 export interface DVVTripletProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVVTriplet";
@@ -431,6 +467,10 @@ export interface DVVTripletsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVVTriplets";
   value: Uint8Array;
 }
+export interface DVVTripletsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DVVTriplets";
+  value: Uint8Array;
+}
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTripletsAmino {
   triplets: DVVTripletAmino[];
@@ -455,6 +495,10 @@ export interface Delegation {
   validatorAddress: string;
   /** shares define the delegation shares received. */
   shares: string;
+}
+export interface DelegationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Delegation";
+  value: Uint8Array;
 }
 export interface DelegationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Delegation";
@@ -503,6 +547,10 @@ export interface UnbondingDelegationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegation";
   value: Uint8Array;
 }
+export interface UnbondingDelegationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegation";
+  value: Uint8Array;
+}
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
  * for a single validator in an time-ordered list.
@@ -538,6 +586,10 @@ export interface UnbondingDelegationEntry {
   initialBalance: string;
   /** balance defines the tokens to receive at completion. */
   balance: string;
+}
+export interface UnbondingDelegationEntryProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegationEntry";
+  value: Uint8Array;
 }
 export interface UnbondingDelegationEntryProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegationEntry";
@@ -580,6 +632,10 @@ export interface RedelegationEntryProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationEntry";
   value: Uint8Array;
 }
+export interface RedelegationEntryProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.RedelegationEntry";
+  value: Uint8Array;
+}
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntryAmino {
   /** creation_height  defines the height which the redelegation took place. */
@@ -615,6 +671,10 @@ export interface Redelegation {
   validatorDstAddress: string;
   /** entries are the redelegation entries. */
   entries: RedelegationEntry[];
+}
+export interface RedelegationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Redelegation";
+  value: Uint8Array;
 }
 export interface RedelegationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Redelegation";
@@ -667,6 +727,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the staking module. */
 export interface ParamsAmino {
   /** unbonding_time is the time duration of unbonding. */
@@ -707,6 +771,10 @@ export interface DelegationResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DelegationResponse";
   value: Uint8Array;
 }
+export interface DelegationResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.DelegationResponse";
+  value: Uint8Array;
+}
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a
  * balance in addition to shares which is more suitable for client responses.
@@ -735,6 +803,10 @@ export interface DelegationResponseSDKType {
 export interface RedelegationEntryResponse {
   redelegationEntry: RedelegationEntry;
   balance: string;
+}
+export interface RedelegationEntryResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.RedelegationEntryResponse";
+  value: Uint8Array;
 }
 export interface RedelegationEntryResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationEntryResponse";
@@ -775,6 +847,10 @@ export interface RedelegationResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationResponse";
   value: Uint8Array;
 }
+export interface RedelegationResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.RedelegationResponse";
+  value: Uint8Array;
+}
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
  * contain a balance in addition to shares which is more suitable for client
@@ -804,6 +880,10 @@ export interface RedelegationResponseSDKType {
 export interface Pool {
   notBondedTokens: string;
   bondedTokens: string;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Pool";
+  value: Uint8Array;
 }
 export interface PoolProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Pool";

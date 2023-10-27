@@ -147,6 +147,10 @@ export interface ServiceProtoMsg {
   typeUrl: "/google.api.Service";
   value: Uint8Array;
 }
+export interface ServiceProtoMsg {
+  typeUrl: "/google.api.Service";
+  value: Uint8Array;
+}
 /**
  * `Service` is the root object of Google service configuration schema. It
  * describes basic information about a service, such as the name and the

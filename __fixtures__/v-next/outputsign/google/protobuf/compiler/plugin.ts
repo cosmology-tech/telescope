@@ -1,6 +1,5 @@
 import { FileDescriptorProto, FileDescriptorProtoSDKType } from "../descriptor";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -12,6 +11,10 @@ export interface Version {
    * be empty for mainline stable releases.
    */
   suffix: string;
+}
+export interface VersionProtoMsg {
+  typeUrl: "/google.protobuf.compiler.Version";
+  value: Uint8Array;
 }
 /** The version number of protocol compiler. */
 export interface VersionSDKType {
@@ -50,6 +53,10 @@ export interface CodeGeneratorRequest {
   /** The version number of protocol compiler. */
   compilerVersion?: Version;
 }
+export interface CodeGeneratorRequestProtoMsg {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
+  value: Uint8Array;
+}
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestSDKType {
   file_to_generate: string[];
@@ -71,6 +78,10 @@ export interface CodeGeneratorResponse {
    */
   error: string;
   file: CodeGeneratorResponse_File[];
+}
+export interface CodeGeneratorResponseProtoMsg {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
+  value: Uint8Array;
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseSDKType {
@@ -136,6 +147,10 @@ export interface CodeGeneratorResponse_File {
   /** The file contents. */
   content: string;
 }
+export interface CodeGeneratorResponse_FileProtoMsg {
+  typeUrl: "/google.protobuf.compiler.File";
+  value: Uint8Array;
+}
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_FileSDKType {
   name: string;
@@ -192,73 +207,6 @@ export const Version = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Version {
-    const obj = createBaseVersion();
-    if (isSet(object.major)) obj.major = Number(object.major);
-    if (isSet(object.minor)) obj.minor = Number(object.minor);
-    if (isSet(object.patch)) obj.patch = Number(object.patch);
-    if (isSet(object.suffix)) obj.suffix = String(object.suffix);
-    return obj;
-  },
-  toJSON(message: Version): unknown {
-    const obj: any = {};
-    message.major !== undefined && (obj.major = Math.round(message.major));
-    message.minor !== undefined && (obj.minor = Math.round(message.minor));
-    message.patch !== undefined && (obj.patch = Math.round(message.patch));
-    message.suffix !== undefined && (obj.suffix = message.suffix);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Version>): Version {
-    const message = createBaseVersion();
-    message.major = object.major ?? 0;
-    message.minor = object.minor ?? 0;
-    message.patch = object.patch ?? 0;
-    message.suffix = object.suffix ?? "";
-    return message;
-  },
-  fromSDK(object: VersionSDKType): Version {
-    return {
-      major: object?.major,
-      minor: object?.minor,
-      patch: object?.patch,
-      suffix: object?.suffix
-    };
-  },
-  fromSDKJSON(object: any): VersionSDKType {
-    return {
-      major: isSet(object.major) ? Number(object.major) : 0,
-      minor: isSet(object.minor) ? Number(object.minor) : 0,
-      patch: isSet(object.patch) ? Number(object.patch) : 0,
-      suffix: isSet(object.suffix) ? String(object.suffix) : ""
-    };
-  },
-  toSDK(message: Version): VersionSDKType {
-    const obj: any = {};
-    obj.major = message.major;
-    obj.minor = message.minor;
-    obj.patch = message.patch;
-    obj.suffix = message.suffix;
-    return obj;
-  },
-  fromAmino(object: VersionAmino): Version {
-    return {
-      major: object.major,
-      minor: object.minor,
-      patch: object.patch,
-      suffix: object.suffix
-    };
-  },
-  toAmino(message: Version): VersionAmino {
-    const obj: any = {};
-    obj.major = message.major;
-    obj.minor = message.minor;
-    obj.patch = message.patch;
-    obj.suffix = message.suffix;
-    return obj;
-  },
-  fromAminoMsg(object: VersionAminoMsg): Version {
-    return Version.fromAmino(object.value);
   },
   fromProtoMsg(message: VersionProtoMsg): Version {
     return Version.decode(message.value);
@@ -324,99 +272,6 @@ export const CodeGeneratorRequest = {
     }
     return message;
   },
-  fromJSON(object: any): CodeGeneratorRequest {
-    const obj = createBaseCodeGeneratorRequest();
-    if (Array.isArray(object?.fileToGenerate)) obj.fileToGenerate = object.fileToGenerate.map((e: any) => String(e));
-    if (isSet(object.parameter)) obj.parameter = String(object.parameter);
-    if (Array.isArray(object?.protoFile)) obj.protoFile = object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e));
-    if (isSet(object.compilerVersion)) obj.compilerVersion = Version.fromJSON(object.compilerVersion);
-    return obj;
-  },
-  toJSON(message: CodeGeneratorRequest): unknown {
-    const obj: any = {};
-    if (message.fileToGenerate) {
-      obj.fileToGenerate = message.fileToGenerate.map(e => e);
-    } else {
-      obj.fileToGenerate = [];
-    }
-    message.parameter !== undefined && (obj.parameter = message.parameter);
-    if (message.protoFile) {
-      obj.protoFile = message.protoFile.map(e => e ? FileDescriptorProto.toJSON(e) : undefined);
-    } else {
-      obj.protoFile = [];
-    }
-    message.compilerVersion !== undefined && (obj.compilerVersion = message.compilerVersion ? Version.toJSON(message.compilerVersion) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CodeGeneratorRequest>): CodeGeneratorRequest {
-    const message = createBaseCodeGeneratorRequest();
-    message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
-    message.parameter = object.parameter ?? "";
-    message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
-    if (object.compilerVersion !== undefined && object.compilerVersion !== null) {
-      message.compilerVersion = Version.fromPartial(object.compilerVersion);
-    }
-    return message;
-  },
-  fromSDK(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {
-    return {
-      fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
-      parameter: object?.parameter,
-      protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDK(e)) : [],
-      compilerVersion: object.compiler_version ? Version.fromSDK(object.compiler_version) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CodeGeneratorRequestSDKType {
-    return {
-      file_to_generate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => String(e)) : [],
-      parameter: isSet(object.parameter) ? String(object.parameter) : "",
-      proto_file: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDKJSON(e)) : [],
-      compiler_version: isSet(object.compiler_version) ? Version.fromSDKJSON(object.compiler_version) : undefined
-    };
-  },
-  toSDK(message: CodeGeneratorRequest): CodeGeneratorRequestSDKType {
-    const obj: any = {};
-    if (message.fileToGenerate) {
-      obj.file_to_generate = message.fileToGenerate.map(e => e);
-    } else {
-      obj.file_to_generate = [];
-    }
-    obj.parameter = message.parameter;
-    if (message.protoFile) {
-      obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toSDK(e) : undefined);
-    } else {
-      obj.proto_file = [];
-    }
-    message.compilerVersion !== undefined && (obj.compiler_version = message.compilerVersion ? Version.toSDK(message.compilerVersion) : undefined);
-    return obj;
-  },
-  fromAmino(object: CodeGeneratorRequestAmino): CodeGeneratorRequest {
-    return {
-      fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
-      parameter: object.parameter,
-      protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromAmino(e)) : [],
-      compilerVersion: object?.compiler_version ? Version.fromAmino(object.compiler_version) : undefined
-    };
-  },
-  toAmino(message: CodeGeneratorRequest): CodeGeneratorRequestAmino {
-    const obj: any = {};
-    if (message.fileToGenerate) {
-      obj.file_to_generate = message.fileToGenerate.map(e => e);
-    } else {
-      obj.file_to_generate = [];
-    }
-    obj.parameter = message.parameter;
-    if (message.protoFile) {
-      obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
-    } else {
-      obj.proto_file = [];
-    }
-    obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CodeGeneratorRequestAminoMsg): CodeGeneratorRequest {
-    return CodeGeneratorRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CodeGeneratorRequestProtoMsg): CodeGeneratorRequest {
     return CodeGeneratorRequest.decode(message.value);
   },
@@ -466,69 +321,6 @@ export const CodeGeneratorResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CodeGeneratorResponse {
-    const obj = createBaseCodeGeneratorResponse();
-    if (isSet(object.error)) obj.error = String(object.error);
-    if (Array.isArray(object?.file)) obj.file = object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: CodeGeneratorResponse): unknown {
-    const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
-    if (message.file) {
-      obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toJSON(e) : undefined);
-    } else {
-      obj.file = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CodeGeneratorResponse>): CodeGeneratorResponse {
-    const message = createBaseCodeGeneratorResponse();
-    message.error = object.error ?? "";
-    message.file = object.file?.map(e => CodeGeneratorResponse_File.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: CodeGeneratorResponseSDKType): CodeGeneratorResponse {
-    return {
-      error: object?.error,
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): CodeGeneratorResponseSDKType {
-    return {
-      error: isSet(object.error) ? String(object.error) : "",
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: CodeGeneratorResponse): CodeGeneratorResponseSDKType {
-    const obj: any = {};
-    obj.error = message.error;
-    if (message.file) {
-      obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toSDK(e) : undefined);
-    } else {
-      obj.file = [];
-    }
-    return obj;
-  },
-  fromAmino(object: CodeGeneratorResponseAmino): CodeGeneratorResponse {
-    return {
-      error: object.error,
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: CodeGeneratorResponse): CodeGeneratorResponseAmino {
-    const obj: any = {};
-    obj.error = message.error;
-    if (message.file) {
-      obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toAmino(e) : undefined);
-    } else {
-      obj.file = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CodeGeneratorResponseAminoMsg): CodeGeneratorResponse {
-    return CodeGeneratorResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: CodeGeneratorResponseProtoMsg): CodeGeneratorResponse {
     return CodeGeneratorResponse.decode(message.value);
@@ -586,65 +378,6 @@ export const CodeGeneratorResponse_File = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CodeGeneratorResponse_File {
-    const obj = createBaseCodeGeneratorResponse_File();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.insertionPoint)) obj.insertionPoint = String(object.insertionPoint);
-    if (isSet(object.content)) obj.content = String(object.content);
-    return obj;
-  },
-  toJSON(message: CodeGeneratorResponse_File): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.insertionPoint !== undefined && (obj.insertionPoint = message.insertionPoint);
-    message.content !== undefined && (obj.content = message.content);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CodeGeneratorResponse_File>): CodeGeneratorResponse_File {
-    const message = createBaseCodeGeneratorResponse_File();
-    message.name = object.name ?? "";
-    message.insertionPoint = object.insertionPoint ?? "";
-    message.content = object.content ?? "";
-    return message;
-  },
-  fromSDK(object: CodeGeneratorResponse_FileSDKType): CodeGeneratorResponse_File {
-    return {
-      name: object?.name,
-      insertionPoint: object?.insertion_point,
-      content: object?.content
-    };
-  },
-  fromSDKJSON(object: any): CodeGeneratorResponse_FileSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      insertion_point: isSet(object.insertion_point) ? String(object.insertion_point) : "",
-      content: isSet(object.content) ? String(object.content) : ""
-    };
-  },
-  toSDK(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.insertion_point = message.insertionPoint;
-    obj.content = message.content;
-    return obj;
-  },
-  fromAmino(object: CodeGeneratorResponse_FileAmino): CodeGeneratorResponse_File {
-    return {
-      name: object.name,
-      insertionPoint: object.insertion_point,
-      content: object.content
-    };
-  },
-  toAmino(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.insertion_point = message.insertionPoint;
-    obj.content = message.content;
-    return obj;
-  },
-  fromAminoMsg(object: CodeGeneratorResponse_FileAminoMsg): CodeGeneratorResponse_File {
-    return CodeGeneratorResponse_File.fromAmino(object.value);
   },
   fromProtoMsg(message: CodeGeneratorResponse_FileProtoMsg): CodeGeneratorResponse_File {
     return CodeGeneratorResponse_File.decode(message.value);

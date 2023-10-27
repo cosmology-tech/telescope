@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Monitoring configuration of the service.
@@ -75,6 +74,10 @@ export interface Monitoring {
    */
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
+export interface MonitoringProtoMsg {
+  typeUrl: "/google.api.Monitoring";
+  value: Uint8Array;
+}
 /**
  * Monitoring configuration of the service.
  * 
@@ -149,6 +152,10 @@ export interface Monitoring_MonitoringDestination {
    */
   metrics: string[];
 }
+export interface Monitoring_MonitoringDestinationProtoMsg {
+  typeUrl: "/google.api.MonitoringDestination";
+  value: Uint8Array;
+}
 /**
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
@@ -193,81 +200,6 @@ export const Monitoring = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Monitoring {
-    const obj = createBaseMonitoring();
-    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
-    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Monitoring): unknown {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producerDestinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toJSON(e) : undefined);
-    } else {
-      obj.producerDestinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toJSON(e) : undefined);
-    } else {
-      obj.consumerDestinations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Monitoring>): Monitoring {
-    const message = createBaseMonitoring();
-    message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
-    message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: MonitoringSDKType): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDK(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): MonitoringSDKType {
-    return {
-      producer_destinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDKJSON(e)) : [],
-      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Monitoring): MonitoringSDKType {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toSDK(e) : undefined);
-    } else {
-      obj.producer_destinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toSDK(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MonitoringAmino): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Monitoring): MonitoringAmino {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
-    } else {
-      obj.producer_destinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MonitoringAminoMsg): Monitoring {
-    return Monitoring.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoringProtoMsg): Monitoring {
     return Monitoring.decode(message.value);
@@ -318,69 +250,6 @@ export const Monitoring_MonitoringDestination = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Monitoring_MonitoringDestination {
-    const obj = createBaseMonitoring_MonitoringDestination();
-    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Monitoring_MonitoringDestination): unknown {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
-    const message = createBaseMonitoring_MonitoringDestination();
-    message.monitoredResource = object.monitoredResource ?? "";
-    message.metrics = object.metrics?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: Monitoring_MonitoringDestinationSDKType): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object?.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): Monitoring_MonitoringDestinationSDKType {
-    return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationSDKType {
-    const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationAmino {
-    const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Monitoring_MonitoringDestinationAminoMsg): Monitoring_MonitoringDestination {
-    return Monitoring_MonitoringDestination.fromAmino(object.value);
   },
   fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg): Monitoring_MonitoringDestination {
     return Monitoring_MonitoringDestination.decode(message.value);

@@ -75,6 +75,10 @@ export interface StakeAuthorization {
   /** authorization_type defines one of AuthorizationType. */
   authorizationType: AuthorizationType;
 }
+export interface StakeAuthorizationProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization";
+  value: Uint8Array;
+}
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
  * 
@@ -89,6 +93,10 @@ export interface StakeAuthorizationSDKType {
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_Validators {
   address: string[];
+}
+export interface StakeAuthorization_ValidatorsProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.Validators";
+  value: Uint8Array;
 }
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_ValidatorsSDKType {

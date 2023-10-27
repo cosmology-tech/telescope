@@ -11,6 +11,10 @@ export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.GroupID";
   value: Uint8Array;
 }
+export interface GroupIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupID";
+  value: Uint8Array;
+}
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
   owner: string;

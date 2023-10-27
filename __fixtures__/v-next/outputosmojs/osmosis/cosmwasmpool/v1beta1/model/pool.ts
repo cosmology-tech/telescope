@@ -7,6 +7,10 @@ export interface CosmWasmPool {
   poolId: bigint;
   codeId: bigint;
 }
+export interface CosmWasmPoolProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.CosmWasmPool";
+  value: Uint8Array;
+}
 export interface CosmWasmPoolSDKType {
   pool_address: string;
   contract_address: string;

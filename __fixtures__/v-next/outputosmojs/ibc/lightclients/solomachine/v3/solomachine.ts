@@ -13,6 +13,10 @@ export interface ClientState {
   isFrozen: boolean;
   consensusState?: ConsensusState;
 }
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.ClientState";
+  value: Uint8Array;
+}
 /**
  * ClientState defines a solo machine client that tracks the current consensus
  * state and if the client is frozen.
@@ -38,6 +42,10 @@ export interface ConsensusState {
   diversifier: string;
   timestamp: bigint;
 }
+export interface ConsensusStateProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.ConsensusState";
+  value: Uint8Array;
+}
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
  * consensus state is contained in the "height" key used in storing the
@@ -55,6 +63,10 @@ export interface Header {
   newPublicKey?: Any;
   newDiversifier: string;
 }
+export interface HeaderProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.Header";
+  value: Uint8Array;
+}
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
   timestamp: bigint;
@@ -70,6 +82,10 @@ export interface Misbehaviour {
   sequence: bigint;
   signatureOne?: SignatureAndData;
   signatureTwo?: SignatureAndData;
+}
+export interface MisbehaviourProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.Misbehaviour";
+  value: Uint8Array;
 }
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
@@ -90,6 +106,10 @@ export interface SignatureAndData {
   data: Uint8Array;
   timestamp: bigint;
 }
+export interface SignatureAndDataProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.SignatureAndData";
+  value: Uint8Array;
+}
 /**
  * SignatureAndData contains a signature and the data signed over to create that
  * signature.
@@ -107,6 +127,10 @@ export interface SignatureAndDataSDKType {
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: bigint;
+}
+export interface TimestampedSignatureDataProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.TimestampedSignatureData";
+  value: Uint8Array;
 }
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
@@ -129,6 +153,10 @@ export interface SignBytes {
   /** the marshaled data bytes */
   data: Uint8Array;
 }
+export interface SignBytesProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.SignBytes";
+  value: Uint8Array;
+}
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesSDKType {
   sequence: bigint;
@@ -143,6 +171,10 @@ export interface HeaderData {
   newPubKey?: Any;
   /** header diversifier */
   newDiversifier: string;
+}
+export interface HeaderDataProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.HeaderData";
+  value: Uint8Array;
 }
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {

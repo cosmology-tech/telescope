@@ -12,6 +12,10 @@ export interface ConsensusParams {
   validator: ValidatorParams;
   version: VersionParams;
 }
+export interface ConsensusParamsProtoMsg {
+  typeUrl: "/tendermint.types.ConsensusParams";
+  value: Uint8Array;
+}
 /**
  * ConsensusParams contains consensus critical parameters that determine the
  * validity of blocks.
@@ -41,6 +45,10 @@ export interface BlockParams {
    * Not exposed to the application.
    */
   timeIotaMs: bigint;
+}
+export interface BlockParamsProtoMsg {
+  typeUrl: "/tendermint.types.BlockParams";
+  value: Uint8Array;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
@@ -72,6 +80,10 @@ export interface EvidenceParams {
    */
   maxBytes: bigint;
 }
+export interface EvidenceParamsProtoMsg {
+  typeUrl: "/tendermint.types.EvidenceParams";
+  value: Uint8Array;
+}
 /** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParamsSDKType {
   max_age_num_blocks: bigint;
@@ -85,6 +97,10 @@ export interface EvidenceParamsSDKType {
 export interface ValidatorParams {
   pubKeyTypes: string[];
 }
+export interface ValidatorParamsProtoMsg {
+  typeUrl: "/tendermint.types.ValidatorParams";
+  value: Uint8Array;
+}
 /**
  * ValidatorParams restrict the public key types validators can use.
  * NOTE: uses ABCI pubkey naming, not Amino names.
@@ -95,6 +111,10 @@ export interface ValidatorParamsSDKType {
 /** VersionParams contains the ABCI application version. */
 export interface VersionParams {
   appVersion: bigint;
+}
+export interface VersionParamsProtoMsg {
+  typeUrl: "/tendermint.types.VersionParams";
+  value: Uint8Array;
 }
 /** VersionParams contains the ABCI application version. */
 export interface VersionParamsSDKType {
@@ -108,6 +128,10 @@ export interface VersionParamsSDKType {
 export interface HashedParams {
   blockMaxBytes: bigint;
   blockMaxGas: bigint;
+}
+export interface HashedParamsProtoMsg {
+  typeUrl: "/tendermint.types.HashedParams";
+  value: Uint8Array;
 }
 /**
  * HashedParams is a subset of ConsensusParams.

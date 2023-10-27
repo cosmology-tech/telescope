@@ -7,6 +7,10 @@ export interface GenesisCertificate {
   owner: string;
   certificate: Certificate;
 }
+export interface GenesisCertificateProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.GenesisCertificate";
+  value: Uint8Array;
+}
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
   owner: string;
@@ -15,6 +19,10 @@ export interface GenesisCertificateSDKType {
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisState {
   certificates: GenesisCertificate[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateSDKType {

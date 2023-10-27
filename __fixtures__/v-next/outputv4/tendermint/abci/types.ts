@@ -213,6 +213,10 @@ export interface Request {
   loadSnapshotChunk?: RequestLoadSnapshotChunk;
   applySnapshotChunk?: RequestApplySnapshotChunk;
 }
+export interface RequestProtoMsg {
+  typeUrl: "/tendermint.abci.Request";
+  value: Uint8Array;
+}
 export interface RequestSDKType {
   echo?: RequestEchoSDKType;
   flush?: RequestFlushSDKType;
@@ -233,15 +237,27 @@ export interface RequestSDKType {
 export interface RequestEcho {
   message: string;
 }
+export interface RequestEchoProtoMsg {
+  typeUrl: "/tendermint.abci.RequestEcho";
+  value: Uint8Array;
+}
 export interface RequestEchoSDKType {
   message: string;
 }
 export interface RequestFlush {}
+export interface RequestFlushProtoMsg {
+  typeUrl: "/tendermint.abci.RequestFlush";
+  value: Uint8Array;
+}
 export interface RequestFlushSDKType {}
 export interface RequestInfo {
   version: string;
   blockVersion: bigint;
   p2pVersion: bigint;
+}
+export interface RequestInfoProtoMsg {
+  typeUrl: "/tendermint.abci.RequestInfo";
+  value: Uint8Array;
 }
 export interface RequestInfoSDKType {
   version: string;
@@ -252,6 +268,10 @@ export interface RequestInfoSDKType {
 export interface RequestSetOption {
   key: string;
   value: string;
+}
+export interface RequestSetOptionProtoMsg {
+  typeUrl: "/tendermint.abci.RequestSetOption";
+  value: Uint8Array;
 }
 /** nondeterministic */
 export interface RequestSetOptionSDKType {
@@ -265,6 +285,10 @@ export interface RequestInitChain {
   validators: ValidatorUpdate[];
   appStateBytes: Uint8Array;
   initialHeight: bigint;
+}
+export interface RequestInitChainProtoMsg {
+  typeUrl: "/tendermint.abci.RequestInitChain";
+  value: Uint8Array;
 }
 export interface RequestInitChainSDKType {
   time: Date;
@@ -280,6 +304,10 @@ export interface RequestQuery {
   height: bigint;
   prove: boolean;
 }
+export interface RequestQueryProtoMsg {
+  typeUrl: "/tendermint.abci.RequestQuery";
+  value: Uint8Array;
+}
 export interface RequestQuerySDKType {
   data: Uint8Array;
   path: string;
@@ -292,6 +320,10 @@ export interface RequestBeginBlock {
   lastCommitInfo: LastCommitInfo;
   byzantineValidators: Evidence[];
 }
+export interface RequestBeginBlockProtoMsg {
+  typeUrl: "/tendermint.abci.RequestBeginBlock";
+  value: Uint8Array;
+}
 export interface RequestBeginBlockSDKType {
   hash: Uint8Array;
   header: HeaderSDKType;
@@ -302,6 +334,10 @@ export interface RequestCheckTx {
   tx: Uint8Array;
   type: CheckTxType;
 }
+export interface RequestCheckTxProtoMsg {
+  typeUrl: "/tendermint.abci.RequestCheckTx";
+  value: Uint8Array;
+}
 export interface RequestCheckTxSDKType {
   tx: Uint8Array;
   type: CheckTxType;
@@ -309,19 +345,35 @@ export interface RequestCheckTxSDKType {
 export interface RequestDeliverTx {
   tx: Uint8Array;
 }
+export interface RequestDeliverTxProtoMsg {
+  typeUrl: "/tendermint.abci.RequestDeliverTx";
+  value: Uint8Array;
+}
 export interface RequestDeliverTxSDKType {
   tx: Uint8Array;
 }
 export interface RequestEndBlock {
   height: bigint;
 }
+export interface RequestEndBlockProtoMsg {
+  typeUrl: "/tendermint.abci.RequestEndBlock";
+  value: Uint8Array;
+}
 export interface RequestEndBlockSDKType {
   height: bigint;
 }
 export interface RequestCommit {}
+export interface RequestCommitProtoMsg {
+  typeUrl: "/tendermint.abci.RequestCommit";
+  value: Uint8Array;
+}
 export interface RequestCommitSDKType {}
 /** lists available snapshots */
 export interface RequestListSnapshots {}
+export interface RequestListSnapshotsProtoMsg {
+  typeUrl: "/tendermint.abci.RequestListSnapshots";
+  value: Uint8Array;
+}
 /** lists available snapshots */
 export interface RequestListSnapshotsSDKType {}
 /** offers a snapshot to the application */
@@ -330,6 +382,10 @@ export interface RequestOfferSnapshot {
   snapshot?: Snapshot;
   /** light client-verified app hash for snapshot height */
   appHash: Uint8Array;
+}
+export interface RequestOfferSnapshotProtoMsg {
+  typeUrl: "/tendermint.abci.RequestOfferSnapshot";
+  value: Uint8Array;
 }
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshotSDKType {
@@ -342,6 +398,10 @@ export interface RequestLoadSnapshotChunk {
   format: number;
   chunk: number;
 }
+export interface RequestLoadSnapshotChunkProtoMsg {
+  typeUrl: "/tendermint.abci.RequestLoadSnapshotChunk";
+  value: Uint8Array;
+}
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunkSDKType {
   height: bigint;
@@ -353,6 +413,10 @@ export interface RequestApplySnapshotChunk {
   index: number;
   chunk: Uint8Array;
   sender: string;
+}
+export interface RequestApplySnapshotChunkProtoMsg {
+  typeUrl: "/tendermint.abci.RequestApplySnapshotChunk";
+  value: Uint8Array;
 }
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunkSDKType {
@@ -378,6 +442,10 @@ export interface Response {
   loadSnapshotChunk?: ResponseLoadSnapshotChunk;
   applySnapshotChunk?: ResponseApplySnapshotChunk;
 }
+export interface ResponseProtoMsg {
+  typeUrl: "/tendermint.abci.Response";
+  value: Uint8Array;
+}
 export interface ResponseSDKType {
   exception?: ResponseExceptionSDKType;
   echo?: ResponseEchoSDKType;
@@ -400,6 +468,10 @@ export interface ResponseSDKType {
 export interface ResponseException {
   error: string;
 }
+export interface ResponseExceptionProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseException";
+  value: Uint8Array;
+}
 /** nondeterministic */
 export interface ResponseExceptionSDKType {
   error: string;
@@ -407,10 +479,18 @@ export interface ResponseExceptionSDKType {
 export interface ResponseEcho {
   message: string;
 }
+export interface ResponseEchoProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseEcho";
+  value: Uint8Array;
+}
 export interface ResponseEchoSDKType {
   message: string;
 }
 export interface ResponseFlush {}
+export interface ResponseFlushProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseFlush";
+  value: Uint8Array;
+}
 export interface ResponseFlushSDKType {}
 export interface ResponseInfo {
   data: string;
@@ -418,6 +498,10 @@ export interface ResponseInfo {
   appVersion: bigint;
   lastBlockHeight: bigint;
   lastBlockAppHash: Uint8Array;
+}
+export interface ResponseInfoProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseInfo";
+  value: Uint8Array;
 }
 export interface ResponseInfoSDKType {
   data: string;
@@ -433,6 +517,10 @@ export interface ResponseSetOption {
   log: string;
   info: string;
 }
+export interface ResponseSetOptionProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseSetOption";
+  value: Uint8Array;
+}
 /** nondeterministic */
 export interface ResponseSetOptionSDKType {
   code: number;
@@ -443,6 +531,10 @@ export interface ResponseInitChain {
   consensusParams?: ConsensusParams;
   validators: ValidatorUpdate[];
   appHash: Uint8Array;
+}
+export interface ResponseInitChainProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseInitChain";
+  value: Uint8Array;
 }
 export interface ResponseInitChainSDKType {
   consensus_params?: ConsensusParamsSDKType;
@@ -462,6 +554,10 @@ export interface ResponseQuery {
   height: bigint;
   codespace: string;
 }
+export interface ResponseQueryProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseQuery";
+  value: Uint8Array;
+}
 export interface ResponseQuerySDKType {
   code: number;
   log: string;
@@ -475,6 +571,10 @@ export interface ResponseQuerySDKType {
 }
 export interface ResponseBeginBlock {
   events: Event[];
+}
+export interface ResponseBeginBlockProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseBeginBlock";
+  value: Uint8Array;
 }
 export interface ResponseBeginBlockSDKType {
   events: EventSDKType[];
@@ -490,6 +590,10 @@ export interface ResponseCheckTx {
   gasUsed: bigint;
   events: Event[];
   codespace: string;
+}
+export interface ResponseCheckTxProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseCheckTx";
+  value: Uint8Array;
 }
 export interface ResponseCheckTxSDKType {
   code: number;
@@ -513,6 +617,10 @@ export interface ResponseDeliverTx {
   events: Event[];
   codespace: string;
 }
+export interface ResponseDeliverTxProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseDeliverTx";
+  value: Uint8Array;
+}
 export interface ResponseDeliverTxSDKType {
   code: number;
   data: Uint8Array;
@@ -528,6 +636,10 @@ export interface ResponseEndBlock {
   consensusParamUpdates?: ConsensusParams;
   events: Event[];
 }
+export interface ResponseEndBlockProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseEndBlock";
+  value: Uint8Array;
+}
 export interface ResponseEndBlockSDKType {
   validator_updates: ValidatorUpdateSDKType[];
   consensus_param_updates?: ConsensusParamsSDKType;
@@ -538,6 +650,10 @@ export interface ResponseCommit {
   data: Uint8Array;
   retainHeight: bigint;
 }
+export interface ResponseCommitProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseCommit";
+  value: Uint8Array;
+}
 export interface ResponseCommitSDKType {
   data: Uint8Array;
   retain_height: bigint;
@@ -545,17 +661,29 @@ export interface ResponseCommitSDKType {
 export interface ResponseListSnapshots {
   snapshots: Snapshot[];
 }
+export interface ResponseListSnapshotsProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseListSnapshots";
+  value: Uint8Array;
+}
 export interface ResponseListSnapshotsSDKType {
   snapshots: SnapshotSDKType[];
 }
 export interface ResponseOfferSnapshot {
   result: ResponseOfferSnapshot_Result;
 }
+export interface ResponseOfferSnapshotProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseOfferSnapshot";
+  value: Uint8Array;
+}
 export interface ResponseOfferSnapshotSDKType {
   result: ResponseOfferSnapshot_Result;
 }
 export interface ResponseLoadSnapshotChunk {
   chunk: Uint8Array;
+}
+export interface ResponseLoadSnapshotChunkProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseLoadSnapshotChunk";
+  value: Uint8Array;
 }
 export interface ResponseLoadSnapshotChunkSDKType {
   chunk: Uint8Array;
@@ -566,6 +694,10 @@ export interface ResponseApplySnapshotChunk {
   refetchChunks: number[];
   /** Chunk senders to reject and ban */
   rejectSenders: string[];
+}
+export interface ResponseApplySnapshotChunkProtoMsg {
+  typeUrl: "/tendermint.abci.ResponseApplySnapshotChunk";
+  value: Uint8Array;
 }
 export interface ResponseApplySnapshotChunkSDKType {
   result: ResponseApplySnapshotChunk_Result;
@@ -581,6 +713,10 @@ export interface ConsensusParams {
   evidence?: EvidenceParams;
   validator?: ValidatorParams;
   version?: VersionParams;
+}
+export interface ConsensusParamsProtoMsg {
+  typeUrl: "/tendermint.abci.ConsensusParams";
+  value: Uint8Array;
 }
 /**
  * ConsensusParams contains all consensus-relevant parameters
@@ -599,6 +735,10 @@ export interface BlockParams {
   /** Note: must be greater or equal to -1 */
   maxGas: bigint;
 }
+export interface BlockParamsProtoMsg {
+  typeUrl: "/tendermint.abci.BlockParams";
+  value: Uint8Array;
+}
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
   max_bytes: bigint;
@@ -607,6 +747,10 @@ export interface BlockParamsSDKType {
 export interface LastCommitInfo {
   round: number;
   votes: VoteInfo[];
+}
+export interface LastCommitInfoProtoMsg {
+  typeUrl: "/tendermint.abci.LastCommitInfo";
+  value: Uint8Array;
 }
 export interface LastCommitInfoSDKType {
   round: number;
@@ -620,6 +764,10 @@ export interface LastCommitInfoSDKType {
 export interface Event {
   type: string;
   attributes: EventAttribute[];
+}
+export interface EventProtoMsg {
+  typeUrl: "/tendermint.abci.Event";
+  value: Uint8Array;
 }
 /**
  * Event allows application developers to attach additional information to
@@ -637,6 +785,10 @@ export interface EventAttribute {
   /** nondeterministic */
   index: boolean;
 }
+export interface EventAttributeProtoMsg {
+  typeUrl: "/tendermint.abci.EventAttribute";
+  value: Uint8Array;
+}
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttributeSDKType {
   key: Uint8Array;
@@ -653,6 +805,10 @@ export interface TxResult {
   index: number;
   tx: Uint8Array;
   result: ResponseDeliverTx;
+}
+export interface TxResultProtoMsg {
+  typeUrl: "/tendermint.abci.TxResult";
+  value: Uint8Array;
 }
 /**
  * TxResult contains results of executing the transaction.
@@ -675,6 +831,10 @@ export interface Validator {
   /** The voting power */
   power: bigint;
 }
+export interface ValidatorProtoMsg {
+  typeUrl: "/tendermint.abci.Validator";
+  value: Uint8Array;
+}
 /** Validator */
 export interface ValidatorSDKType {
   address: Uint8Array;
@@ -685,6 +845,10 @@ export interface ValidatorUpdate {
   pubKey: PublicKey;
   power: bigint;
 }
+export interface ValidatorUpdateProtoMsg {
+  typeUrl: "/tendermint.abci.ValidatorUpdate";
+  value: Uint8Array;
+}
 /** ValidatorUpdate */
 export interface ValidatorUpdateSDKType {
   pub_key: PublicKeySDKType;
@@ -694,6 +858,10 @@ export interface ValidatorUpdateSDKType {
 export interface VoteInfo {
   validator: Validator;
   signedLastBlock: boolean;
+}
+export interface VoteInfoProtoMsg {
+  typeUrl: "/tendermint.abci.VoteInfo";
+  value: Uint8Array;
 }
 /** VoteInfo */
 export interface VoteInfoSDKType {
@@ -715,6 +883,10 @@ export interface Evidence {
    */
   totalVotingPower: bigint;
 }
+export interface EvidenceProtoMsg {
+  typeUrl: "/tendermint.abci.Evidence";
+  value: Uint8Array;
+}
 export interface EvidenceSDKType {
   type: EvidenceType;
   validator: ValidatorSDKType;
@@ -733,6 +905,10 @@ export interface Snapshot {
   hash: Uint8Array;
   /** Arbitrary application metadata */
   metadata: Uint8Array;
+}
+export interface SnapshotProtoMsg {
+  typeUrl: "/tendermint.abci.Snapshot";
+  value: Uint8Array;
 }
 export interface SnapshotSDKType {
   height: bigint;

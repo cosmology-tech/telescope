@@ -43,6 +43,10 @@ export interface SystemParameters {
    */
   rules: SystemParameterRule[];
 }
+export interface SystemParametersProtoMsg {
+  typeUrl: "/google.api.SystemParameters";
+  value: Uint8Array;
+}
 /**
  * ### System parameter configuration
  * 
@@ -75,6 +79,10 @@ export interface SystemParameterRule {
    */
   parameters: SystemParameter[];
 }
+export interface SystemParameterRuleProtoMsg {
+  typeUrl: "/google.api.SystemParameterRule";
+  value: Uint8Array;
+}
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
@@ -101,6 +109,10 @@ export interface SystemParameter {
    * sensitive.
    */
   urlQueryParameter: string;
+}
+export interface SystemParameterProtoMsg {
+  typeUrl: "/google.api.SystemParameter";
+  value: Uint8Array;
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either

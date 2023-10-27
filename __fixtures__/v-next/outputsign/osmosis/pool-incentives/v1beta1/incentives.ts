@@ -1,6 +1,5 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -11,11 +10,19 @@ export interface Params {
    */
   mintedDenom: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.Params";
+  value: Uint8Array;
+}
 export interface ParamsSDKType {
   minted_denom: string;
 }
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
+  value: Uint8Array;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -24,6 +31,10 @@ export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
 }
+export interface DistrInfoProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
+  value: Uint8Array;
+}
 export interface DistrInfoSDKType {
   total_weight: string;
   records: DistrRecordSDKType[];
@@ -31,6 +42,10 @@ export interface DistrInfoSDKType {
 export interface DistrRecord {
   gaugeId: bigint;
   weight: string;
+}
+export interface DistrRecordProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
+  value: Uint8Array;
 }
 export interface DistrRecordSDKType {
   gauge_id: bigint;
@@ -41,6 +56,10 @@ export interface PoolToGauge {
   gaugeId: bigint;
   duration: Duration;
 }
+export interface PoolToGaugeProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
+  value: Uint8Array;
+}
 export interface PoolToGaugeSDKType {
   pool_id: bigint;
   gauge_id: bigint;
@@ -48,6 +67,10 @@ export interface PoolToGaugeSDKType {
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
+}
+export interface PoolToGaugesProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
+  value: Uint8Array;
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];
@@ -81,55 +104,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.mintedDenom)) obj.mintedDenom = String(object.mintedDenom);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.mintedDenom !== undefined && (obj.mintedDenom = message.mintedDenom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.mintedDenom = object.mintedDenom ?? "";
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      mintedDenom: object?.minted_denom
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : ""
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.minted_denom = message.mintedDenom;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      mintedDenom: object.minted_denom
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.minted_denom = message.mintedDenom;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/poolincentives/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
@@ -173,67 +147,6 @@ export const LockableDurationsInfo = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): LockableDurationsInfo {
-    const obj = createBaseLockableDurationsInfo();
-    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: LockableDurationsInfo): unknown {
-    const obj: any = {};
-    if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
-    } else {
-      obj.lockableDurations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<LockableDurationsInfo>): LockableDurationsInfo {
-    const message = createBaseLockableDurationsInfo();
-    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
-    return {
-      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
-    const obj: any = {};
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
-    const obj: any = {};
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: LockableDurationsInfo): LockableDurationsInfoAminoMsg {
-    return {
-      type: "osmosis/poolincentives/lockable-durations-info",
-      value: LockableDurationsInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
     return LockableDurationsInfo.decode(message.value);
@@ -285,75 +198,6 @@ export const DistrInfo = {
     }
     return message;
   },
-  fromJSON(object: any): DistrInfo {
-    const obj = createBaseDistrInfo();
-    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DistrInfo): unknown {
-    const obj: any = {};
-    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DistrInfo>): DistrInfo {
-    const message = createBaseDistrInfo();
-    message.totalWeight = object.totalWeight ?? "";
-    message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: DistrInfoSDKType): DistrInfo {
-    return {
-      totalWeight: object?.total_weight,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): DistrInfoSDKType {
-    return {
-      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: DistrInfo): DistrInfoSDKType {
-    const obj: any = {};
-    obj.total_weight = message.totalWeight;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DistrInfoAmino): DistrInfo {
-    return {
-      totalWeight: object.total_weight,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: DistrInfo): DistrInfoAmino {
-    const obj: any = {};
-    obj.total_weight = message.totalWeight;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DistrInfoAminoMsg): DistrInfo {
-    return DistrInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistrInfo): DistrInfoAminoMsg {
-    return {
-      type: "osmosis/poolincentives/distr-info",
-      value: DistrInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DistrInfoProtoMsg): DistrInfo {
     return DistrInfo.decode(message.value);
   },
@@ -403,65 +247,6 @@ export const DistrRecord = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DistrRecord {
-    const obj = createBaseDistrRecord();
-    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
-  },
-  toJSON(message: DistrRecord): unknown {
-    const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
-    message.weight !== undefined && (obj.weight = message.weight);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
-    const message = createBaseDistrRecord();
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = BigInt(object.gaugeId.toString());
-    }
-    message.weight = object.weight ?? "";
-    return message;
-  },
-  fromSDK(object: DistrRecordSDKType): DistrRecord {
-    return {
-      gaugeId: object?.gauge_id,
-      weight: object?.weight
-    };
-  },
-  fromSDKJSON(object: any): DistrRecordSDKType {
-    return {
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
-  },
-  toSDK(message: DistrRecord): DistrRecordSDKType {
-    const obj: any = {};
-    obj.gauge_id = message.gaugeId;
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAmino(object: DistrRecordAmino): DistrRecord {
-    return {
-      gaugeId: BigInt(object.gauge_id),
-      weight: object.weight
-    };
-  },
-  toAmino(message: DistrRecord): DistrRecordAmino {
-    const obj: any = {};
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAminoMsg(object: DistrRecordAminoMsg): DistrRecord {
-    return DistrRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistrRecord): DistrRecordAminoMsg {
-    return {
-      type: "osmosis/poolincentives/distr-record",
-      value: DistrRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: DistrRecordProtoMsg): DistrRecord {
     return DistrRecord.decode(message.value);
@@ -520,77 +305,6 @@ export const PoolToGauge = {
     }
     return message;
   },
-  fromJSON(object: any): PoolToGauge {
-    const obj = createBasePoolToGauge();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    return obj;
-  },
-  toJSON(message: PoolToGauge): unknown {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
-    const message = createBasePoolToGauge();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = BigInt(object.gaugeId.toString());
-    }
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    return message;
-  },
-  fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
-    return {
-      poolId: object?.pool_id,
-      gaugeId: object?.gauge_id,
-      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
-    };
-  },
-  fromSDKJSON(object: any): PoolToGaugeSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
-    };
-  },
-  toSDK(message: PoolToGauge): PoolToGaugeSDKType {
-    const obj: any = {};
-    obj.pool_id = message.poolId;
-    obj.gauge_id = message.gaugeId;
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    return obj;
-  },
-  fromAmino(object: PoolToGaugeAmino): PoolToGauge {
-    return {
-      poolId: BigInt(object.pool_id),
-      gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-  toAmino(message: PoolToGauge): PoolToGaugeAmino {
-    const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: PoolToGaugeAminoMsg): PoolToGauge {
-    return PoolToGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolToGauge): PoolToGaugeAminoMsg {
-    return {
-      type: "osmosis/poolincentives/pool-to-gauge",
-      value: PoolToGauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PoolToGaugeProtoMsg): PoolToGauge {
     return PoolToGauge.decode(message.value);
   },
@@ -633,67 +347,6 @@ export const PoolToGauges = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PoolToGauges {
-    const obj = createBasePoolToGauges();
-    if (Array.isArray(object?.poolToGauge)) obj.poolToGauge = object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: PoolToGauges): unknown {
-    const obj: any = {};
-    if (message.poolToGauge) {
-      obj.poolToGauge = message.poolToGauge.map(e => e ? PoolToGauge.toJSON(e) : undefined);
-    } else {
-      obj.poolToGauge = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PoolToGauges>): PoolToGauges {
-    const message = createBasePoolToGauges();
-    message.poolToGauge = object.poolToGauge?.map(e => PoolToGauge.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: PoolToGaugesSDKType): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): PoolToGaugesSDKType {
-    return {
-      pool_to_gauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: PoolToGauges): PoolToGaugesSDKType {
-    const obj: any = {};
-    if (message.poolToGauge) {
-      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toSDK(e) : undefined);
-    } else {
-      obj.pool_to_gauge = [];
-    }
-    return obj;
-  },
-  fromAmino(object: PoolToGaugesAmino): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: PoolToGauges): PoolToGaugesAmino {
-    const obj: any = {};
-    if (message.poolToGauge) {
-      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e) : undefined);
-    } else {
-      obj.pool_to_gauge = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PoolToGaugesAminoMsg): PoolToGauges {
-    return PoolToGauges.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolToGauges): PoolToGaugesAminoMsg {
-    return {
-      type: "osmosis/poolincentives/pool-to-gauges",
-      value: PoolToGauges.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolToGaugesProtoMsg): PoolToGauges {
     return PoolToGauges.decode(message.value);

@@ -29,6 +29,10 @@ export interface Pool {
    */
   lastLiquidityUpdate: Date;
 }
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.Pool";
+  value: Uint8Array;
+}
 export interface PoolSDKType {
   address: string;
   incentives_address: string;

@@ -92,6 +92,10 @@ export interface SignatureDescriptors {
   /** signatures are the signature descriptors */
   signatures: SignatureDescriptor[];
 }
+export interface SignatureDescriptorsProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptors";
+  value: Uint8Array;
+}
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
   signatures: SignatureDescriptorSDKType[];
@@ -113,6 +117,10 @@ export interface SignatureDescriptor {
    */
   sequence: bigint;
 }
+export interface SignatureDescriptorProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptor";
+  value: Uint8Array;
+}
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
  * a signature including the public key of the signer, signing modes and the
@@ -131,6 +139,10 @@ export interface SignatureDescriptor_Data {
   /** multi represents a multisig signer */
   multi?: SignatureDescriptor_Data_Multi;
 }
+export interface SignatureDescriptor_DataProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.Data";
+  value: Uint8Array;
+}
 /** Data represents signature data */
 export interface SignatureDescriptor_DataSDKType {
   single?: SignatureDescriptor_Data_SingleSDKType;
@@ -143,6 +155,10 @@ export interface SignatureDescriptor_Data_Single {
   /** signature is the raw signature bytes */
   signature: Uint8Array;
 }
+export interface SignatureDescriptor_Data_SingleProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.Single";
+  value: Uint8Array;
+}
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
   mode: SignMode;
@@ -154,6 +170,10 @@ export interface SignatureDescriptor_Data_Multi {
   bitarray?: CompactBitArray;
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
+}
+export interface SignatureDescriptor_Data_MultiProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.Multi";
+  value: Uint8Array;
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {

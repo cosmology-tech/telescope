@@ -16,6 +16,10 @@ export interface ParsedExprProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ParsedExpr";
   value: Uint8Array;
 }
+export interface ParsedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.ParsedExpr";
+  value: Uint8Array;
+}
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprAmino {
   /** The parsed expression. */
@@ -73,6 +77,10 @@ export interface Expr {
   structExpr?: Expr_CreateStruct;
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
+}
+export interface ExprProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Expr";
+  value: Uint8Array;
 }
 export interface ExprProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Expr";
@@ -162,6 +170,10 @@ export interface Expr_IdentProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Ident";
   value: Uint8Array;
 }
+export interface Expr_IdentProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Ident";
+  value: Uint8Array;
+}
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentAmino {
   /**
@@ -202,6 +214,10 @@ export interface Expr_Select {
    * This results from the macro `has(request.auth)`.
    */
   testOnly: boolean;
+}
+export interface Expr_SelectProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Select";
+  value: Uint8Array;
 }
 export interface Expr_SelectProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Select";
@@ -260,6 +276,10 @@ export interface Expr_CallProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Call";
   value: Uint8Array;
 }
+export interface Expr_CallProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Call";
+  value: Uint8Array;
+}
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -304,6 +324,10 @@ export interface Expr_CreateListProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.CreateList";
   value: Uint8Array;
 }
+export interface Expr_CreateListProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.CreateList";
+  value: Uint8Array;
+}
 /**
  * A list creation expression.
  * 
@@ -342,6 +366,10 @@ export interface Expr_CreateStruct {
   type: string;
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
+}
+export interface Expr_CreateStructProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.CreateStruct";
+  value: Uint8Array;
 }
 export interface Expr_CreateStructProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.CreateStruct";
@@ -392,6 +420,10 @@ export interface Expr_CreateStruct_Entry {
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
   value?: Expr;
+}
+export interface Expr_CreateStruct_EntryProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
 }
 export interface Expr_CreateStruct_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Entry";
@@ -479,6 +511,10 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
+}
+export interface Expr_ComprehensionProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Comprehension";
+  value: Uint8Array;
 }
 export interface Expr_ComprehensionProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Comprehension";
@@ -610,6 +646,10 @@ export interface Literal {
   stringValue?: string;
   /** bytes value. */
   bytesValue?: Uint8Array;
+}
+export interface LiteralProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Literal";
+  value: Uint8Array;
 }
 export interface LiteralProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Literal";

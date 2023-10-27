@@ -78,6 +78,10 @@ export interface DeleteLogRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogRequest";
   value: Uint8Array;
 }
+export interface DeleteLogRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteLogRequest";
+  value: Uint8Array;
+}
 /** The parameters to DeleteLog. */
 export interface DeleteLogRequestAmino {
   /**
@@ -108,6 +112,10 @@ export interface DeleteLogRequestSDKType {
 export interface WriteLogEntriesRequest_LabelsEntry {
   key: string;
   value: string;
+}
+export interface WriteLogEntriesRequest_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface WriteLogEntriesRequest_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -208,6 +216,10 @@ export interface WriteLogEntriesRequest {
    * logging API endpoints are working properly before sending valuable data.
    */
   dryRun: boolean;
+}
+export interface WriteLogEntriesRequestProtoMsg {
+  typeUrl: "/google.logging.v2.WriteLogEntriesRequest";
+  value: Uint8Array;
 }
 export interface WriteLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesRequest";
@@ -318,6 +330,10 @@ export interface WriteLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesResponse";
   value: Uint8Array;
 }
+export interface WriteLogEntriesResponseProtoMsg {
+  typeUrl: "/google.logging.v2.WriteLogEntriesResponse";
+  value: Uint8Array;
+}
 /** Result returned from WriteLogEntries. */
 export interface WriteLogEntriesResponseAmino {}
 export interface WriteLogEntriesResponseAminoMsg {
@@ -329,6 +345,10 @@ export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
   value?: Status;
+}
+export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg {
   typeUrl: string;
@@ -359,6 +379,10 @@ export interface WriteLogEntriesPartialErrors {
   logEntryErrors: {
     [key: number]: Status;
   };
+}
+export interface WriteLogEntriesPartialErrorsProtoMsg {
+  typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors";
+  value: Uint8Array;
 }
 export interface WriteLogEntriesPartialErrorsProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors";
@@ -442,6 +466,10 @@ export interface ListLogEntriesRequest {
    * parameters should be identical to those in the previous call.
    */
   pageToken: string;
+}
+export interface ListLogEntriesRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogEntriesRequest";
+  value: Uint8Array;
 }
 export interface ListLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogEntriesRequest";
@@ -540,6 +568,10 @@ export interface ListLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogEntriesResponse";
   value: Uint8Array;
 }
+export interface ListLogEntriesResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogEntriesResponse";
+  value: Uint8Array;
+}
 /** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponseAmino {
   /**
@@ -591,6 +623,10 @@ export interface ListMonitoredResourceDescriptorsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest";
   value: Uint8Array;
 }
+export interface ListMonitoredResourceDescriptorsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest";
+  value: Uint8Array;
+}
 /** The parameters to ListMonitoredResourceDescriptors */
 export interface ListMonitoredResourceDescriptorsRequestAmino {
   /**
@@ -626,6 +662,10 @@ export interface ListMonitoredResourceDescriptorsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListMonitoredResourceDescriptorsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
+  value: Uint8Array;
 }
 export interface ListMonitoredResourceDescriptorsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
@@ -691,6 +731,10 @@ export interface ListLogsRequest {
    * *  `folders/[FOLDER_ID]`
    */
   resourceNames: string[];
+}
+export interface ListLogsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogsRequest";
+  value: Uint8Array;
 }
 export interface ListLogsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogsRequest";
@@ -767,6 +811,10 @@ export interface ListLogsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogsResponse";
   value: Uint8Array;
 }
+export interface ListLogsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogsResponse";
+  value: Uint8Array;
+}
 /** Result returned from ListLogs. */
 export interface ListLogsResponseAmino {
   /**
@@ -826,6 +874,10 @@ export interface TailLogEntriesRequest {
    * milliseconds.
    */
   bufferWindow?: Duration;
+}
+export interface TailLogEntriesRequestProtoMsg {
+  typeUrl: "/google.logging.v2.TailLogEntriesRequest";
+  value: Uint8Array;
 }
 export interface TailLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.TailLogEntriesRequest";
@@ -898,6 +950,10 @@ export interface TailLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.TailLogEntriesResponse";
   value: Uint8Array;
 }
+export interface TailLogEntriesResponseProtoMsg {
+  typeUrl: "/google.logging.v2.TailLogEntriesResponse";
+  value: Uint8Array;
+}
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponseAmino {
   /**
@@ -930,6 +986,10 @@ export interface TailLogEntriesResponse_SuppressionInfo {
   reason: TailLogEntriesResponse_SuppressionInfo_Reason;
   /** A lower bound on the count of entries omitted due to `reason`. */
   suppressedCount: number;
+}
+export interface TailLogEntriesResponse_SuppressionInfoProtoMsg {
+  typeUrl: "/google.logging.v2.SuppressionInfo";
+  value: Uint8Array;
 }
 export interface TailLogEntriesResponse_SuppressionInfoProtoMsg {
   typeUrl: "/google.logging.v2.SuppressionInfo";

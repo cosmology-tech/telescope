@@ -31,6 +31,10 @@ export interface MsgCreateGauge {
    */
   numEpochsPaidOver: bigint;
 }
+export interface MsgCreateGaugeProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgCreateGauge";
+  value: Uint8Array;
+}
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
   is_perpetual: boolean;
@@ -41,6 +45,10 @@ export interface MsgCreateGaugeSDKType {
   num_epochs_paid_over: bigint;
 }
 export interface MsgCreateGaugeResponse {}
+export interface MsgCreateGaugeResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse";
+  value: Uint8Array;
+}
 export interface MsgCreateGaugeResponseSDKType {}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGauge {
@@ -51,6 +59,10 @@ export interface MsgAddToGauge {
   /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
+export interface MsgAddToGaugeProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgAddToGauge";
+  value: Uint8Array;
+}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
   owner: string;
@@ -58,6 +70,10 @@ export interface MsgAddToGaugeSDKType {
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
+export interface MsgAddToGaugeResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse";
+  value: Uint8Array;
+}
 export interface MsgAddToGaugeResponseSDKType {}
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {

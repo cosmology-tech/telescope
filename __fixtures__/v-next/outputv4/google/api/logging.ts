@@ -48,6 +48,10 @@ export interface Logging {
    */
   consumerDestinations: Logging_LoggingDestination[];
 }
+export interface LoggingProtoMsg {
+  typeUrl: "/google.api.Logging";
+  value: Uint8Array;
+}
 /**
  * Logging configuration of the service.
  * 
@@ -100,6 +104,10 @@ export interface Logging_LoggingDestination {
    * the service name followed by "/".
    */
   logs: string[];
+}
+export interface Logging_LoggingDestinationProtoMsg {
+  typeUrl: "/google.api.LoggingDestination";
+  value: Uint8Array;
 }
 /**
  * Configuration of a specific logging destination (the producer project

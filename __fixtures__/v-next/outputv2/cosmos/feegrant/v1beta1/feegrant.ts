@@ -24,6 +24,10 @@ export interface BasicAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
   value: Uint8Array;
 }
+export interface BasicAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
+  value: Uint8Array;
+}
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
@@ -77,6 +81,10 @@ export interface PeriodicAllowance {
    * last period ended
    */
   periodReset: Date;
+}
+export interface PeriodicAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance";
+  value: Uint8Array;
 }
 export interface PeriodicAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance";
@@ -136,6 +144,10 @@ export interface AllowedMsgAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
   value: Uint8Array;
 }
+export interface AllowedMsgAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
+  value: Uint8Array;
+}
 export type AllowedMsgAllowanceEncoded = Omit<AllowedMsgAllowance, "allowance"> & {
   /** allowance can be any of basic and periodic fee allowance. */allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
 };
@@ -164,6 +176,10 @@ export interface Grant {
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
+}
+export interface GrantProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.Grant";
+  value: Uint8Array;
 }
 export interface GrantProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.Grant";

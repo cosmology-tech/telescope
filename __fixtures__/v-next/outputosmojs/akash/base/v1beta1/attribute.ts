@@ -6,6 +6,10 @@ export interface Attribute {
   key: string;
   value: string;
 }
+export interface AttributeProtoMsg {
+  typeUrl: "/akash.base.v1beta1.Attribute";
+  value: Uint8Array;
+}
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
   key: string;
@@ -23,6 +27,10 @@ export interface SignedBy {
   /** any_of at least of of the keys from the list must have signed attributes */
   anyOf: string[];
 }
+export interface SignedByProtoMsg {
+  typeUrl: "/akash.base.v1beta1.SignedBy";
+  value: Uint8Array;
+}
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
  * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
@@ -39,6 +47,10 @@ export interface PlacementRequirements {
   signedBy: SignedBy;
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
+}
+export interface PlacementRequirementsProtoMsg {
+  typeUrl: "/akash.base.v1beta1.PlacementRequirements";
+  value: Uint8Array;
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {

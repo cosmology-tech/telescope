@@ -8,6 +8,10 @@ export interface Provider {
   auditor: string;
   attributes: Attribute[];
 }
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.Provider";
+  value: Uint8Array;
+}
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
   owner: string;
@@ -20,6 +24,10 @@ export interface AuditedAttributes {
   auditor: string;
   attributes: Attribute[];
 }
+export interface AuditedAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AuditedAttributes";
+  value: Uint8Array;
+}
 /** Attributes */
 export interface AuditedAttributesSDKType {
   owner: string;
@@ -30,6 +38,10 @@ export interface AuditedAttributesSDKType {
 export interface AttributesResponse {
   attributes: AuditedAttributes[];
 }
+export interface AttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AttributesResponse";
+  value: Uint8Array;
+}
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
   attributes: AuditedAttributesSDKType[];
@@ -38,6 +50,10 @@ export interface AttributesResponseSDKType {
 export interface AttributesFilters {
   auditors: string[];
   owners: string[];
+}
+export interface AttributesFiltersProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AttributesFilters";
+  value: Uint8Array;
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
@@ -50,6 +66,10 @@ export interface MsgSignProviderAttributes {
   auditor: string;
   attributes: Attribute[];
 }
+export interface MsgSignProviderAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes";
+  value: Uint8Array;
+}
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
   owner: string;
@@ -58,6 +78,10 @@ export interface MsgSignProviderAttributesSDKType {
 }
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponse {}
+export interface MsgSignProviderAttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributesResponse";
+  value: Uint8Array;
+}
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseSDKType {}
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
@@ -65,6 +89,10 @@ export interface MsgDeleteProviderAttributes {
   owner: string;
   auditor: string;
   keys: string[];
+}
+export interface MsgDeleteProviderAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes";
+  value: Uint8Array;
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
@@ -74,6 +102,10 @@ export interface MsgDeleteProviderAttributesSDKType {
 }
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponse {}
+export interface MsgDeleteProviderAttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributesResponse";
+  value: Uint8Array;
+}
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseSDKType {}
 function createBaseProvider(): Provider {

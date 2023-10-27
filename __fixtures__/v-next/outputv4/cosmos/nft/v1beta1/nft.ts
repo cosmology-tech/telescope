@@ -19,6 +19,10 @@ export interface Class {
   /** data is the app specific metadata of the NFT class. Optional */
   data?: Any;
 }
+export interface ClassProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.Class";
+  value: Uint8Array;
+}
 /** Class defines the class of the nft type. */
 export interface ClassSDKType {
   id: string;
@@ -41,6 +45,10 @@ export interface NFT {
   uriHash: string;
   /** data is an app specific data of the NFT. Optional */
   data?: Any;
+}
+export interface NFTProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.NFT";
+  value: Uint8Array;
 }
 /** NFT defines the NFT. */
 export interface NFTSDKType {

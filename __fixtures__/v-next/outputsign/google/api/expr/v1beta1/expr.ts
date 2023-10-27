@@ -1,7 +1,6 @@
 import { SourceInfo, SourceInfoSDKType } from "./source";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, NullValueSDKType } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -11,6 +10,10 @@ export interface ParsedExpr {
   sourceInfo?: SourceInfo;
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
+}
+export interface ParsedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.ParsedExpr";
+  value: Uint8Array;
 }
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
@@ -57,6 +60,10 @@ export interface Expr {
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
+export interface ExprProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Expr";
+  value: Uint8Array;
+}
 /**
  * An abstract representation of a common expression.
  * 
@@ -94,6 +101,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
+export interface Expr_IdentProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Ident";
+  value: Uint8Array;
+}
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
   name: string;
@@ -121,6 +132,10 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
+export interface Expr_SelectProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Select";
+  value: Uint8Array;
+}
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
@@ -143,6 +158,10 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
+export interface Expr_CallProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Call";
+  value: Uint8Array;
+}
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -162,6 +181,10 @@ export interface Expr_CallSDKType {
 export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
+}
+export interface Expr_CreateListProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.CreateList";
+  value: Uint8Array;
 }
 /**
  * A list creation expression.
@@ -188,6 +211,10 @@ export interface Expr_CreateStruct {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
+export interface Expr_CreateStructProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.CreateStruct";
+  value: Uint8Array;
+}
 /**
  * A map or message creation expression.
  * 
@@ -213,6 +240,10 @@ export interface Expr_CreateStruct_Entry {
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
   value?: Expr;
+}
+export interface Expr_CreateStruct_EntryProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
@@ -277,6 +308,10 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
+}
+export interface Expr_ComprehensionProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Comprehension";
+  value: Uint8Array;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -344,6 +379,10 @@ export interface Literal {
   /** bytes value. */
   bytesValue?: Uint8Array;
 }
+export interface LiteralProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Literal";
+  value: Uint8Array;
+}
 /**
  * Represents a primitive literal.
  * 
@@ -409,69 +448,6 @@ export const ParsedExpr = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ParsedExpr {
-    const obj = createBaseParsedExpr();
-    if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
-    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
-    if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
-    return obj;
-  },
-  toJSON(message: ParsedExpr): unknown {
-    const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
-    message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
-    message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
-    const message = createBaseParsedExpr();
-    if (object.expr !== undefined && object.expr !== null) {
-      message.expr = Expr.fromPartial(object.expr);
-    }
-    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
-      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
-    }
-    message.syntaxVersion = object.syntaxVersion ?? "";
-    return message;
-  },
-  fromSDK(object: ParsedExprSDKType): ParsedExpr {
-    return {
-      expr: object.expr ? Expr.fromSDK(object.expr) : undefined,
-      sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
-      syntaxVersion: object?.syntax_version
-    };
-  },
-  fromSDKJSON(object: any): ParsedExprSDKType {
-    return {
-      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined,
-      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined,
-      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : ""
-    };
-  },
-  toSDK(message: ParsedExpr): ParsedExprSDKType {
-    const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
-    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
-    obj.syntax_version = message.syntaxVersion;
-    return obj;
-  },
-  fromAmino(object: ParsedExprAmino): ParsedExpr {
-    return {
-      expr: object?.expr ? Expr.fromAmino(object.expr) : undefined,
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
-      syntaxVersion: object.syntax_version
-    };
-  },
-  toAmino(message: ParsedExpr): ParsedExprAmino {
-    const obj: any = {};
-    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.syntax_version = message.syntaxVersion;
-    return obj;
-  },
-  fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
-    return ParsedExpr.fromAmino(object.value);
   },
   fromProtoMsg(message: ParsedExprProtoMsg): ParsedExpr {
     return ParsedExpr.decode(message.value);
@@ -565,119 +541,6 @@ export const Expr = {
     }
     return message;
   },
-  fromJSON(object: any): Expr {
-    const obj = createBaseExpr();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.literalExpr)) obj.literalExpr = Literal.fromJSON(object.literalExpr);
-    if (isSet(object.identExpr)) obj.identExpr = Expr_Ident.fromJSON(object.identExpr);
-    if (isSet(object.selectExpr)) obj.selectExpr = Expr_Select.fromJSON(object.selectExpr);
-    if (isSet(object.callExpr)) obj.callExpr = Expr_Call.fromJSON(object.callExpr);
-    if (isSet(object.listExpr)) obj.listExpr = Expr_CreateList.fromJSON(object.listExpr);
-    if (isSet(object.structExpr)) obj.structExpr = Expr_CreateStruct.fromJSON(object.structExpr);
-    if (isSet(object.comprehensionExpr)) obj.comprehensionExpr = Expr_Comprehension.fromJSON(object.comprehensionExpr);
-    return obj;
-  },
-  toJSON(message: Expr): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.literalExpr !== undefined && (obj.literalExpr = message.literalExpr ? Literal.toJSON(message.literalExpr) : undefined);
-    message.identExpr !== undefined && (obj.identExpr = message.identExpr ? Expr_Ident.toJSON(message.identExpr) : undefined);
-    message.selectExpr !== undefined && (obj.selectExpr = message.selectExpr ? Expr_Select.toJSON(message.selectExpr) : undefined);
-    message.callExpr !== undefined && (obj.callExpr = message.callExpr ? Expr_Call.toJSON(message.callExpr) : undefined);
-    message.listExpr !== undefined && (obj.listExpr = message.listExpr ? Expr_CreateList.toJSON(message.listExpr) : undefined);
-    message.structExpr !== undefined && (obj.structExpr = message.structExpr ? Expr_CreateStruct.toJSON(message.structExpr) : undefined);
-    message.comprehensionExpr !== undefined && (obj.comprehensionExpr = message.comprehensionExpr ? Expr_Comprehension.toJSON(message.comprehensionExpr) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr>): Expr {
-    const message = createBaseExpr();
-    message.id = object.id ?? 0;
-    if (object.literalExpr !== undefined && object.literalExpr !== null) {
-      message.literalExpr = Literal.fromPartial(object.literalExpr);
-    }
-    if (object.identExpr !== undefined && object.identExpr !== null) {
-      message.identExpr = Expr_Ident.fromPartial(object.identExpr);
-    }
-    if (object.selectExpr !== undefined && object.selectExpr !== null) {
-      message.selectExpr = Expr_Select.fromPartial(object.selectExpr);
-    }
-    if (object.callExpr !== undefined && object.callExpr !== null) {
-      message.callExpr = Expr_Call.fromPartial(object.callExpr);
-    }
-    if (object.listExpr !== undefined && object.listExpr !== null) {
-      message.listExpr = Expr_CreateList.fromPartial(object.listExpr);
-    }
-    if (object.structExpr !== undefined && object.structExpr !== null) {
-      message.structExpr = Expr_CreateStruct.fromPartial(object.structExpr);
-    }
-    if (object.comprehensionExpr !== undefined && object.comprehensionExpr !== null) {
-      message.comprehensionExpr = Expr_Comprehension.fromPartial(object.comprehensionExpr);
-    }
-    return message;
-  },
-  fromSDK(object: ExprSDKType): Expr {
-    return {
-      id: object?.id,
-      literalExpr: object.literal_expr ? Literal.fromSDK(object.literal_expr) : undefined,
-      identExpr: object.ident_expr ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
-      selectExpr: object.select_expr ? Expr_Select.fromSDK(object.select_expr) : undefined,
-      callExpr: object.call_expr ? Expr_Call.fromSDK(object.call_expr) : undefined,
-      listExpr: object.list_expr ? Expr_CreateList.fromSDK(object.list_expr) : undefined,
-      structExpr: object.struct_expr ? Expr_CreateStruct.fromSDK(object.struct_expr) : undefined,
-      comprehensionExpr: object.comprehension_expr ? Expr_Comprehension.fromSDK(object.comprehension_expr) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ExprSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      literal_expr: isSet(object.literal_expr) ? Literal.fromSDKJSON(object.literal_expr) : undefined,
-      ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
-      select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
-      call_expr: isSet(object.call_expr) ? Expr_Call.fromSDKJSON(object.call_expr) : undefined,
-      list_expr: isSet(object.list_expr) ? Expr_CreateList.fromSDKJSON(object.list_expr) : undefined,
-      struct_expr: isSet(object.struct_expr) ? Expr_CreateStruct.fromSDKJSON(object.struct_expr) : undefined,
-      comprehension_expr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromSDKJSON(object.comprehension_expr) : undefined
-    };
-  },
-  toSDK(message: Expr): ExprSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    message.literalExpr !== undefined && (obj.literal_expr = message.literalExpr ? Literal.toSDK(message.literalExpr) : undefined);
-    message.identExpr !== undefined && (obj.ident_expr = message.identExpr ? Expr_Ident.toSDK(message.identExpr) : undefined);
-    message.selectExpr !== undefined && (obj.select_expr = message.selectExpr ? Expr_Select.toSDK(message.selectExpr) : undefined);
-    message.callExpr !== undefined && (obj.call_expr = message.callExpr ? Expr_Call.toSDK(message.callExpr) : undefined);
-    message.listExpr !== undefined && (obj.list_expr = message.listExpr ? Expr_CreateList.toSDK(message.listExpr) : undefined);
-    message.structExpr !== undefined && (obj.struct_expr = message.structExpr ? Expr_CreateStruct.toSDK(message.structExpr) : undefined);
-    message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toSDK(message.comprehensionExpr) : undefined);
-    return obj;
-  },
-  fromAmino(object: ExprAmino): Expr {
-    return {
-      id: object.id,
-      literalExpr: object?.literal_expr ? Literal.fromAmino(object.literal_expr) : undefined,
-      identExpr: object?.ident_expr ? Expr_Ident.fromAmino(object.ident_expr) : undefined,
-      selectExpr: object?.select_expr ? Expr_Select.fromAmino(object.select_expr) : undefined,
-      callExpr: object?.call_expr ? Expr_Call.fromAmino(object.call_expr) : undefined,
-      listExpr: object?.list_expr ? Expr_CreateList.fromAmino(object.list_expr) : undefined,
-      structExpr: object?.struct_expr ? Expr_CreateStruct.fromAmino(object.struct_expr) : undefined,
-      comprehensionExpr: object?.comprehension_expr ? Expr_Comprehension.fromAmino(object.comprehension_expr) : undefined
-    };
-  },
-  toAmino(message: Expr): ExprAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.literal_expr = message.literalExpr ? Literal.toAmino(message.literalExpr) : undefined;
-    obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
-    obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
-    obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr) : undefined;
-    obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr) : undefined;
-    obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr) : undefined;
-    obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ExprAminoMsg): Expr {
-    return Expr.fromAmino(object.value);
-  },
   fromProtoMsg(message: ExprProtoMsg): Expr {
     return Expr.decode(message.value);
   },
@@ -720,49 +583,6 @@ export const Expr_Ident = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Expr_Ident {
-    const obj = createBaseExpr_Ident();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: Expr_Ident): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_Ident>): Expr_Ident {
-    const message = createBaseExpr_Ident();
-    message.name = object.name ?? "";
-    return message;
-  },
-  fromSDK(object: Expr_IdentSDKType): Expr_Ident {
-    return {
-      name: object?.name
-    };
-  },
-  fromSDKJSON(object: any): Expr_IdentSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-  toSDK(message: Expr_Ident): Expr_IdentSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAmino(object: Expr_IdentAmino): Expr_Ident {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: Expr_Ident): Expr_IdentAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
-    return Expr_Ident.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_IdentProtoMsg): Expr_Ident {
     return Expr_Ident.decode(message.value);
@@ -821,67 +641,6 @@ export const Expr_Select = {
     }
     return message;
   },
-  fromJSON(object: any): Expr_Select {
-    const obj = createBaseExpr_Select();
-    if (isSet(object.operand)) obj.operand = Expr.fromJSON(object.operand);
-    if (isSet(object.field)) obj.field = String(object.field);
-    if (isSet(object.testOnly)) obj.testOnly = Boolean(object.testOnly);
-    return obj;
-  },
-  toJSON(message: Expr_Select): unknown {
-    const obj: any = {};
-    message.operand !== undefined && (obj.operand = message.operand ? Expr.toJSON(message.operand) : undefined);
-    message.field !== undefined && (obj.field = message.field);
-    message.testOnly !== undefined && (obj.testOnly = message.testOnly);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
-    const message = createBaseExpr_Select();
-    if (object.operand !== undefined && object.operand !== null) {
-      message.operand = Expr.fromPartial(object.operand);
-    }
-    message.field = object.field ?? "";
-    message.testOnly = object.testOnly ?? false;
-    return message;
-  },
-  fromSDK(object: Expr_SelectSDKType): Expr_Select {
-    return {
-      operand: object.operand ? Expr.fromSDK(object.operand) : undefined,
-      field: object?.field,
-      testOnly: object?.test_only
-    };
-  },
-  fromSDKJSON(object: any): Expr_SelectSDKType {
-    return {
-      operand: isSet(object.operand) ? Expr.fromSDKJSON(object.operand) : undefined,
-      field: isSet(object.field) ? String(object.field) : "",
-      test_only: isSet(object.test_only) ? Boolean(object.test_only) : false
-    };
-  },
-  toSDK(message: Expr_Select): Expr_SelectSDKType {
-    const obj: any = {};
-    message.operand !== undefined && (obj.operand = message.operand ? Expr.toSDK(message.operand) : undefined);
-    obj.field = message.field;
-    obj.test_only = message.testOnly;
-    return obj;
-  },
-  fromAmino(object: Expr_SelectAmino): Expr_Select {
-    return {
-      operand: object?.operand ? Expr.fromAmino(object.operand) : undefined,
-      field: object.field,
-      testOnly: object.test_only
-    };
-  },
-  toAmino(message: Expr_Select): Expr_SelectAmino {
-    const obj: any = {};
-    obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
-    obj.field = message.field;
-    obj.test_only = message.testOnly;
-    return obj;
-  },
-  fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
-    return Expr_Select.fromAmino(object.value);
-  },
   fromProtoMsg(message: Expr_SelectProtoMsg): Expr_Select {
     return Expr_Select.decode(message.value);
   },
@@ -939,79 +698,6 @@ export const Expr_Call = {
     }
     return message;
   },
-  fromJSON(object: any): Expr_Call {
-    const obj = createBaseExpr_Call();
-    if (isSet(object.target)) obj.target = Expr.fromJSON(object.target);
-    if (isSet(object.function)) obj.function = String(object.function);
-    if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => Expr.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Expr_Call): unknown {
-    const obj: any = {};
-    message.target !== undefined && (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
-    message.function !== undefined && (obj.function = message.function);
-    if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toJSON(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
-    const message = createBaseExpr_Call();
-    if (object.target !== undefined && object.target !== null) {
-      message.target = Expr.fromPartial(object.target);
-    }
-    message.function = object.function ?? "";
-    message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Expr_CallSDKType): Expr_Call {
-    return {
-      target: object.target ? Expr.fromSDK(object.target) : undefined,
-      function: object?.function,
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Expr_CallSDKType {
-    return {
-      target: isSet(object.target) ? Expr.fromSDKJSON(object.target) : undefined,
-      function: isSet(object.function) ? String(object.function) : "",
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Expr_Call): Expr_CallSDKType {
-    const obj: any = {};
-    message.target !== undefined && (obj.target = message.target ? Expr.toSDK(message.target) : undefined);
-    obj.function = message.function;
-    if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toSDK(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Expr_CallAmino): Expr_Call {
-    return {
-      target: object?.target ? Expr.fromAmino(object.target) : undefined,
-      function: object.function,
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Expr_Call): Expr_CallAmino {
-    const obj: any = {};
-    obj.target = message.target ? Expr.toAmino(message.target) : undefined;
-    obj.function = message.function;
-    if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Expr_CallAminoMsg): Expr_Call {
-    return Expr_Call.fromAmino(object.value);
-  },
   fromProtoMsg(message: Expr_CallProtoMsg): Expr_Call {
     return Expr_Call.decode(message.value);
   },
@@ -1054,61 +740,6 @@ export const Expr_CreateList = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Expr_CreateList {
-    const obj = createBaseExpr_CreateList();
-    if (Array.isArray(object?.elements)) obj.elements = object.elements.map((e: any) => Expr.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Expr_CreateList): unknown {
-    const obj: any = {};
-    if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toJSON(e) : undefined);
-    } else {
-      obj.elements = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_CreateList>): Expr_CreateList {
-    const message = createBaseExpr_CreateList();
-    message.elements = object.elements?.map(e => Expr.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Expr_CreateListSDKType): Expr_CreateList {
-    return {
-      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Expr_CreateListSDKType {
-    return {
-      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Expr_CreateList): Expr_CreateListSDKType {
-    const obj: any = {};
-    if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toSDK(e) : undefined);
-    } else {
-      obj.elements = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Expr_CreateListAmino): Expr_CreateList {
-    return {
-      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Expr_CreateList): Expr_CreateListAmino {
-    const obj: any = {};
-    if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toAmino(e) : undefined);
-    } else {
-      obj.elements = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Expr_CreateListAminoMsg): Expr_CreateList {
-    return Expr_CreateList.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_CreateListProtoMsg): Expr_CreateList {
     return Expr_CreateList.decode(message.value);
@@ -1159,69 +790,6 @@ export const Expr_CreateStruct = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Expr_CreateStruct {
-    const obj = createBaseExpr_CreateStruct();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Expr_CreateStruct): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_CreateStruct>): Expr_CreateStruct {
-    const message = createBaseExpr_CreateStruct();
-    message.type = object.type ?? "";
-    message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Expr_CreateStructSDKType): Expr_CreateStruct {
-    return {
-      type: object?.type,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Expr_CreateStructSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Expr_CreateStruct): Expr_CreateStructSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Expr_CreateStructAmino): Expr_CreateStruct {
-    return {
-      type: object.type,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Expr_CreateStructAminoMsg): Expr_CreateStruct {
-    return Expr_CreateStruct.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_CreateStructProtoMsg): Expr_CreateStruct {
     return Expr_CreateStruct.decode(message.value);
@@ -1286,77 +854,6 @@ export const Expr_CreateStruct_Entry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Expr_CreateStruct_Entry {
-    const obj = createBaseExpr_CreateStruct_Entry();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.fieldKey)) obj.fieldKey = String(object.fieldKey);
-    if (isSet(object.mapKey)) obj.mapKey = Expr.fromJSON(object.mapKey);
-    if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: Expr_CreateStruct_Entry): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
-    message.mapKey !== undefined && (obj.mapKey = message.mapKey ? Expr.toJSON(message.mapKey) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
-    const message = createBaseExpr_CreateStruct_Entry();
-    message.id = object.id ?? 0;
-    message.fieldKey = object.fieldKey ?? undefined;
-    if (object.mapKey !== undefined && object.mapKey !== null) {
-      message.mapKey = Expr.fromPartial(object.mapKey);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Expr.fromPartial(object.value);
-    }
-    return message;
-  },
-  fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
-    return {
-      id: object?.id,
-      fieldKey: object?.field_key,
-      mapKey: object.map_key ? Expr.fromSDK(object.map_key) : undefined,
-      value: object.value ? Expr.fromSDK(object.value) : undefined
-    };
-  },
-  fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
-      map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
-      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
-    };
-  },
-  toSDK(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntrySDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.field_key = message.fieldKey;
-    message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toSDK(message.mapKey) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
-    return obj;
-  },
-  fromAmino(object: Expr_CreateStruct_EntryAmino): Expr_CreateStruct_Entry {
-    return {
-      id: object.id,
-      fieldKey: object?.field_key,
-      mapKey: object?.map_key ? Expr.fromAmino(object.map_key) : undefined,
-      value: object?.value ? Expr.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.field_key = message.fieldKey;
-    obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
-    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Expr_CreateStruct_EntryAminoMsg): Expr_CreateStruct_Entry {
-    return Expr_CreateStruct_Entry.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg): Expr_CreateStruct_Entry {
     return Expr_CreateStruct_Entry.decode(message.value);
@@ -1443,107 +940,6 @@ export const Expr_Comprehension = {
     }
     return message;
   },
-  fromJSON(object: any): Expr_Comprehension {
-    const obj = createBaseExpr_Comprehension();
-    if (isSet(object.iterVar)) obj.iterVar = String(object.iterVar);
-    if (isSet(object.iterRange)) obj.iterRange = Expr.fromJSON(object.iterRange);
-    if (isSet(object.accuVar)) obj.accuVar = String(object.accuVar);
-    if (isSet(object.accuInit)) obj.accuInit = Expr.fromJSON(object.accuInit);
-    if (isSet(object.loopCondition)) obj.loopCondition = Expr.fromJSON(object.loopCondition);
-    if (isSet(object.loopStep)) obj.loopStep = Expr.fromJSON(object.loopStep);
-    if (isSet(object.result)) obj.result = Expr.fromJSON(object.result);
-    return obj;
-  },
-  toJSON(message: Expr_Comprehension): unknown {
-    const obj: any = {};
-    message.iterVar !== undefined && (obj.iterVar = message.iterVar);
-    message.iterRange !== undefined && (obj.iterRange = message.iterRange ? Expr.toJSON(message.iterRange) : undefined);
-    message.accuVar !== undefined && (obj.accuVar = message.accuVar);
-    message.accuInit !== undefined && (obj.accuInit = message.accuInit ? Expr.toJSON(message.accuInit) : undefined);
-    message.loopCondition !== undefined && (obj.loopCondition = message.loopCondition ? Expr.toJSON(message.loopCondition) : undefined);
-    message.loopStep !== undefined && (obj.loopStep = message.loopStep ? Expr.toJSON(message.loopStep) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Expr.toJSON(message.result) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
-    const message = createBaseExpr_Comprehension();
-    message.iterVar = object.iterVar ?? "";
-    if (object.iterRange !== undefined && object.iterRange !== null) {
-      message.iterRange = Expr.fromPartial(object.iterRange);
-    }
-    message.accuVar = object.accuVar ?? "";
-    if (object.accuInit !== undefined && object.accuInit !== null) {
-      message.accuInit = Expr.fromPartial(object.accuInit);
-    }
-    if (object.loopCondition !== undefined && object.loopCondition !== null) {
-      message.loopCondition = Expr.fromPartial(object.loopCondition);
-    }
-    if (object.loopStep !== undefined && object.loopStep !== null) {
-      message.loopStep = Expr.fromPartial(object.loopStep);
-    }
-    if (object.result !== undefined && object.result !== null) {
-      message.result = Expr.fromPartial(object.result);
-    }
-    return message;
-  },
-  fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
-    return {
-      iterVar: object?.iter_var,
-      iterRange: object.iter_range ? Expr.fromSDK(object.iter_range) : undefined,
-      accuVar: object?.accu_var,
-      accuInit: object.accu_init ? Expr.fromSDK(object.accu_init) : undefined,
-      loopCondition: object.loop_condition ? Expr.fromSDK(object.loop_condition) : undefined,
-      loopStep: object.loop_step ? Expr.fromSDK(object.loop_step) : undefined,
-      result: object.result ? Expr.fromSDK(object.result) : undefined
-    };
-  },
-  fromSDKJSON(object: any): Expr_ComprehensionSDKType {
-    return {
-      iter_var: isSet(object.iter_var) ? String(object.iter_var) : "",
-      iter_range: isSet(object.iter_range) ? Expr.fromSDKJSON(object.iter_range) : undefined,
-      accu_var: isSet(object.accu_var) ? String(object.accu_var) : "",
-      accu_init: isSet(object.accu_init) ? Expr.fromSDKJSON(object.accu_init) : undefined,
-      loop_condition: isSet(object.loop_condition) ? Expr.fromSDKJSON(object.loop_condition) : undefined,
-      loop_step: isSet(object.loop_step) ? Expr.fromSDKJSON(object.loop_step) : undefined,
-      result: isSet(object.result) ? Expr.fromSDKJSON(object.result) : undefined
-    };
-  },
-  toSDK(message: Expr_Comprehension): Expr_ComprehensionSDKType {
-    const obj: any = {};
-    obj.iter_var = message.iterVar;
-    message.iterRange !== undefined && (obj.iter_range = message.iterRange ? Expr.toSDK(message.iterRange) : undefined);
-    obj.accu_var = message.accuVar;
-    message.accuInit !== undefined && (obj.accu_init = message.accuInit ? Expr.toSDK(message.accuInit) : undefined);
-    message.loopCondition !== undefined && (obj.loop_condition = message.loopCondition ? Expr.toSDK(message.loopCondition) : undefined);
-    message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toSDK(message.loopStep) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
-    return obj;
-  },
-  fromAmino(object: Expr_ComprehensionAmino): Expr_Comprehension {
-    return {
-      iterVar: object.iter_var,
-      iterRange: object?.iter_range ? Expr.fromAmino(object.iter_range) : undefined,
-      accuVar: object.accu_var,
-      accuInit: object?.accu_init ? Expr.fromAmino(object.accu_init) : undefined,
-      loopCondition: object?.loop_condition ? Expr.fromAmino(object.loop_condition) : undefined,
-      loopStep: object?.loop_step ? Expr.fromAmino(object.loop_step) : undefined,
-      result: object?.result ? Expr.fromAmino(object.result) : undefined
-    };
-  },
-  toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
-    const obj: any = {};
-    obj.iter_var = message.iterVar;
-    obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
-    obj.accu_var = message.accuVar;
-    obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
-    obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
-    obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
-    obj.result = message.result ? Expr.toAmino(message.result) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Expr_ComprehensionAminoMsg): Expr_Comprehension {
-    return Expr_Comprehension.fromAmino(object.value);
-  },
   fromProtoMsg(message: Expr_ComprehensionProtoMsg): Expr_Comprehension {
     return Expr_Comprehension.decode(message.value);
   },
@@ -1628,105 +1024,6 @@ export const Literal = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Literal {
-    const obj = createBaseLiteral();
-    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
-    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
-    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
-    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
-    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
-    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
-    if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
-    return obj;
-  },
-  toJSON(message: Literal): unknown {
-    const obj: any = {};
-    message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    if (message.int64Value !== undefined) {
-      obj.int64Value = message.int64Value.toString();
-    }
-    if (message.uint64Value !== undefined) {
-      obj.uint64Value = message.uint64Value.toString();
-    }
-    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Literal>): Literal {
-    const message = createBaseLiteral();
-    message.nullValue = object.nullValue ?? undefined;
-    message.boolValue = object.boolValue ?? undefined;
-    if (object.int64Value !== undefined && object.int64Value !== null) {
-      message.int64Value = BigInt(object.int64Value.toString());
-    }
-    if (object.uint64Value !== undefined && object.uint64Value !== null) {
-      message.uint64Value = BigInt(object.uint64Value.toString());
-    }
-    message.doubleValue = object.doubleValue ?? undefined;
-    message.stringValue = object.stringValue ?? undefined;
-    message.bytesValue = object.bytesValue ?? undefined;
-    return message;
-  },
-  fromSDK(object: LiteralSDKType): Literal {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value,
-      uint64Value: object?.uint64_value,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      bytesValue: object?.bytes_value
-    };
-  },
-  fromSDKJSON(object: any): LiteralSDKType {
-    return {
-      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
-      int64_value: isSet(object.int64_value) ? BigInt(object.int64_value.toString()) : undefined,
-      uint64_value: isSet(object.uint64_value) ? BigInt(object.uint64_value.toString()) : undefined,
-      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
-      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
-      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined
-    };
-  },
-  toSDK(message: Literal): LiteralSDKType {
-    const obj: any = {};
-    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value;
-    obj.uint64_value = message.uint64Value;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
-    return obj;
-  },
-  fromAmino(object: LiteralAmino): Literal {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
-      uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      bytesValue: object?.bytes_value
-    };
-  },
-  toAmino(message: Literal): LiteralAmino {
-    const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
-    return obj;
-  },
-  fromAminoMsg(object: LiteralAminoMsg): Literal {
-    return Literal.fromAmino(object.value);
   },
   fromProtoMsg(message: LiteralProtoMsg): Literal {
     return Literal.decode(message.value);

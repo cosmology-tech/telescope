@@ -9,6 +9,10 @@ export interface MsgSetHotRoutes {
   /** hot_routes is the list of hot routes to set. */
   hotRoutes: TokenPairArbRoutes[];
 }
+export interface MsgSetHotRoutesProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetHotRoutes";
+  value: Uint8Array;
+}
 /** MsgSetHotRoutes defines the Msg/SetHotRoutes request type. */
 export interface MsgSetHotRoutesSDKType {
   admin: string;
@@ -16,6 +20,10 @@ export interface MsgSetHotRoutesSDKType {
 }
 /** MsgSetHotRoutesResponse defines the Msg/SetHotRoutes response type. */
 export interface MsgSetHotRoutesResponse {}
+export interface MsgSetHotRoutesResponseProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetHotRoutesResponse";
+  value: Uint8Array;
+}
 /** MsgSetHotRoutesResponse defines the Msg/SetHotRoutes response type. */
 export interface MsgSetHotRoutesResponseSDKType {}
 /** MsgSetDeveloperAccount defines the Msg/SetDeveloperAccount request type. */
@@ -28,6 +36,10 @@ export interface MsgSetDeveloperAccount {
    */
   developerAccount: string;
 }
+export interface MsgSetDeveloperAccountProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetDeveloperAccount";
+  value: Uint8Array;
+}
 /** MsgSetDeveloperAccount defines the Msg/SetDeveloperAccount request type. */
 export interface MsgSetDeveloperAccountSDKType {
   admin: string;
@@ -38,6 +50,10 @@ export interface MsgSetDeveloperAccountSDKType {
  * type.
  */
 export interface MsgSetDeveloperAccountResponse {}
+export interface MsgSetDeveloperAccountResponseProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetDeveloperAccountResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSetDeveloperAccountResponse defines the Msg/SetDeveloperAccount response
  * type.
@@ -50,6 +66,10 @@ export interface MsgSetPoolWeights {
   /** pool_weights is the list of pool weights to set. */
   poolWeights: PoolWeights;
 }
+export interface MsgSetPoolWeightsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetPoolWeights";
+  value: Uint8Array;
+}
 /** MsgSetPoolWeights defines the Msg/SetPoolWeights request type. */
 export interface MsgSetPoolWeightsSDKType {
   admin: string;
@@ -57,6 +77,10 @@ export interface MsgSetPoolWeightsSDKType {
 }
 /** MsgSetPoolWeightsResponse defines the Msg/SetPoolWeights response type. */
 export interface MsgSetPoolWeightsResponse {}
+export interface MsgSetPoolWeightsResponseProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetPoolWeightsResponse";
+  value: Uint8Array;
+}
 /** MsgSetPoolWeightsResponse defines the Msg/SetPoolWeights response type. */
 export interface MsgSetPoolWeightsResponseSDKType {}
 /** MsgSetMaxPoolPointsPerTx defines the Msg/SetMaxPoolPointsPerTx request type. */
@@ -69,6 +93,10 @@ export interface MsgSetMaxPoolPointsPerTx {
    */
   maxPoolPointsPerTx: bigint;
 }
+export interface MsgSetMaxPoolPointsPerTxProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerTx";
+  value: Uint8Array;
+}
 /** MsgSetMaxPoolPointsPerTx defines the Msg/SetMaxPoolPointsPerTx request type. */
 export interface MsgSetMaxPoolPointsPerTxSDKType {
   admin: string;
@@ -79,6 +107,10 @@ export interface MsgSetMaxPoolPointsPerTxSDKType {
  * response type.
  */
 export interface MsgSetMaxPoolPointsPerTxResponse {}
+export interface MsgSetMaxPoolPointsPerTxResponseProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerTxResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSetMaxPoolPointsPerTxResponse defines the Msg/SetMaxPoolPointsPerTx
  * response type.
@@ -100,6 +132,10 @@ export interface MsgSetMaxPoolPointsPerBlock {
    */
   maxPoolPointsPerBlock: bigint;
 }
+export interface MsgSetMaxPoolPointsPerBlockProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerBlock";
+  value: Uint8Array;
+}
 /**
  * MsgSetMaxPoolPointsPerBlock defines the Msg/SetMaxPoolPointsPerBlock request
  * type.
@@ -113,6 +149,10 @@ export interface MsgSetMaxPoolPointsPerBlockSDKType {
  * Msg/SetMaxPoolPointsPerBlock response type.
  */
 export interface MsgSetMaxPoolPointsPerBlockResponse {}
+export interface MsgSetMaxPoolPointsPerBlockResponseProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerBlockResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSetMaxPoolPointsPerBlockResponse defines the
  * Msg/SetMaxPoolPointsPerBlock response type.
@@ -125,6 +165,10 @@ export interface MsgSetBaseDenoms {
   /** base_denoms is the list of base denoms to set. */
   baseDenoms: BaseDenom[];
 }
+export interface MsgSetBaseDenomsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetBaseDenoms";
+  value: Uint8Array;
+}
 /** MsgSetBaseDenoms defines the Msg/SetBaseDenoms request type. */
 export interface MsgSetBaseDenomsSDKType {
   admin: string;
@@ -132,6 +176,10 @@ export interface MsgSetBaseDenomsSDKType {
 }
 /** MsgSetBaseDenomsResponse defines the Msg/SetBaseDenoms response type. */
 export interface MsgSetBaseDenomsResponse {}
+export interface MsgSetBaseDenomsResponseProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetBaseDenomsResponse";
+  value: Uint8Array;
+}
 /** MsgSetBaseDenomsResponse defines the Msg/SetBaseDenoms response type. */
 export interface MsgSetBaseDenomsResponseSDKType {}
 function createBaseMsgSetHotRoutes(): MsgSetHotRoutes {

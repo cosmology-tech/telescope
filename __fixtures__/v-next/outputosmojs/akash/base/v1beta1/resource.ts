@@ -9,6 +9,10 @@ export interface CPU {
   units: ResourceValue;
   attributes: Attribute[];
 }
+export interface CPUProtoMsg {
+  typeUrl: "/akash.base.v1beta1.CPU";
+  value: Uint8Array;
+}
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
   units: ResourceValueSDKType;
@@ -19,6 +23,10 @@ export interface Memory {
   quantity: ResourceValue;
   attributes: Attribute[];
 }
+export interface MemoryProtoMsg {
+  typeUrl: "/akash.base.v1beta1.Memory";
+  value: Uint8Array;
+}
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
   quantity: ResourceValueSDKType;
@@ -28,6 +36,10 @@ export interface MemorySDKType {
 export interface Storage {
   quantity: ResourceValue;
   attributes: Attribute[];
+}
+export interface StorageProtoMsg {
+  typeUrl: "/akash.base.v1beta1.Storage";
+  value: Uint8Array;
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
@@ -43,6 +55,10 @@ export interface ResourceUnits {
   memory?: Memory;
   storage?: Storage;
   endpoints: Endpoint[];
+}
+export interface ResourceUnitsProtoMsg {
+  typeUrl: "/akash.base.v1beta1.ResourceUnits";
+  value: Uint8Array;
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc

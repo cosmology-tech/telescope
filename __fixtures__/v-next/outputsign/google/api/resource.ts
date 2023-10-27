@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -227,6 +226,10 @@ export interface ResourceDescriptor {
    */
   style: ResourceDescriptor_Style[];
 }
+export interface ResourceDescriptorProtoMsg {
+  typeUrl: "/google.api.ResourceDescriptor";
+  value: Uint8Array;
+}
 /**
  * A simple descriptor of a resource type.
  * 
@@ -328,6 +331,10 @@ export interface ResourceReference {
    */
   childType: string;
 }
+export interface ResourceReferenceProtoMsg {
+  typeUrl: "/google.api.ResourceReference";
+  value: Uint8Array;
+}
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
@@ -417,121 +424,6 @@ export const ResourceDescriptor = {
     }
     return message;
   },
-  fromJSON(object: any): ResourceDescriptor {
-    const obj = createBaseResourceDescriptor();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.pattern)) obj.pattern = object.pattern.map((e: any) => String(e));
-    if (isSet(object.nameField)) obj.nameField = String(object.nameField);
-    if (isSet(object.history)) obj.history = resourceDescriptor_HistoryFromJSON(object.history);
-    if (isSet(object.plural)) obj.plural = String(object.plural);
-    if (isSet(object.singular)) obj.singular = String(object.singular);
-    if (Array.isArray(object?.style)) obj.style = object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
-    return obj;
-  },
-  toJSON(message: ResourceDescriptor): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    if (message.pattern) {
-      obj.pattern = message.pattern.map(e => e);
-    } else {
-      obj.pattern = [];
-    }
-    message.nameField !== undefined && (obj.nameField = message.nameField);
-    message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
-    message.plural !== undefined && (obj.plural = message.plural);
-    message.singular !== undefined && (obj.singular = message.singular);
-    if (message.style) {
-      obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
-    } else {
-      obj.style = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ResourceDescriptor>): ResourceDescriptor {
-    const message = createBaseResourceDescriptor();
-    message.type = object.type ?? "";
-    message.pattern = object.pattern?.map(e => e) || [];
-    message.nameField = object.nameField ?? "";
-    message.history = object.history ?? 0;
-    message.plural = object.plural ?? "";
-    message.singular = object.singular ?? "";
-    message.style = object.style?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: ResourceDescriptorSDKType): ResourceDescriptor {
-    return {
-      type: object?.type,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: object?.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: object?.plural,
-      singular: object?.singular,
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ResourceDescriptorSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => String(e)) : [],
-      name_field: isSet(object.name_field) ? String(object.name_field) : "",
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: isSet(object.plural) ? String(object.plural) : "",
-      singular: isSet(object.singular) ? String(object.singular) : "",
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
-  },
-  toSDK(message: ResourceDescriptor): ResourceDescriptorSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    if (message.pattern) {
-      obj.pattern = message.pattern.map(e => e);
-    } else {
-      obj.pattern = [];
-    }
-    obj.name_field = message.nameField;
-    message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
-    obj.plural = message.plural;
-    obj.singular = message.singular;
-    if (message.style) {
-      obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
-    } else {
-      obj.style = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
-    return {
-      type: object.type,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: object.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: object.plural,
-      singular: object.singular,
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
-  },
-  toAmino(message: ResourceDescriptor): ResourceDescriptorAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    if (message.pattern) {
-      obj.pattern = message.pattern.map(e => e);
-    } else {
-      obj.pattern = [];
-    }
-    obj.name_field = message.nameField;
-    obj.history = message.history;
-    obj.plural = message.plural;
-    obj.singular = message.singular;
-    if (message.style) {
-      obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
-    } else {
-      obj.style = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ResourceDescriptorAminoMsg): ResourceDescriptor {
-    return ResourceDescriptor.fromAmino(object.value);
-  },
   fromProtoMsg(message: ResourceDescriptorProtoMsg): ResourceDescriptor {
     return ResourceDescriptor.decode(message.value);
   },
@@ -581,57 +473,6 @@ export const ResourceReference = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ResourceReference {
-    const obj = createBaseResourceReference();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.childType)) obj.childType = String(object.childType);
-    return obj;
-  },
-  toJSON(message: ResourceReference): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.childType !== undefined && (obj.childType = message.childType);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ResourceReference>): ResourceReference {
-    const message = createBaseResourceReference();
-    message.type = object.type ?? "";
-    message.childType = object.childType ?? "";
-    return message;
-  },
-  fromSDK(object: ResourceReferenceSDKType): ResourceReference {
-    return {
-      type: object?.type,
-      childType: object?.child_type
-    };
-  },
-  fromSDKJSON(object: any): ResourceReferenceSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      child_type: isSet(object.child_type) ? String(object.child_type) : ""
-    };
-  },
-  toSDK(message: ResourceReference): ResourceReferenceSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.child_type = message.childType;
-    return obj;
-  },
-  fromAmino(object: ResourceReferenceAmino): ResourceReference {
-    return {
-      type: object.type,
-      childType: object.child_type
-    };
-  },
-  toAmino(message: ResourceReference): ResourceReferenceAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.child_type = message.childType;
-    return obj;
-  },
-  fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {
-    return ResourceReference.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceReferenceProtoMsg): ResourceReference {
     return ResourceReference.decode(message.value);

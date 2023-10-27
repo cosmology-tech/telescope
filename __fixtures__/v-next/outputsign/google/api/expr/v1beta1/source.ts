@@ -1,9 +1,12 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
   value: number;
+}
+export interface SourceInfo_PositionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
@@ -35,6 +38,10 @@ export interface SourceInfo {
     [key: number]: number;
   };
 }
+export interface SourceInfoProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.SourceInfo";
+  value: Uint8Array;
+}
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   location: string;
@@ -59,6 +66,10 @@ export interface SourcePosition {
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
   column: number;
+}
+export interface SourcePositionProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.SourcePosition";
+  value: Uint8Array;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
@@ -102,57 +113,6 @@ export const SourceInfo_PositionsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SourceInfo_PositionsEntry {
-    const obj = createBaseSourceInfo_PositionsEntry();
-    if (isSet(object.key)) obj.key = Number(object.key);
-    if (isSet(object.value)) obj.value = Number(object.value);
-    return obj;
-  },
-  toJSON(message: SourceInfo_PositionsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
-    const message = createBaseSourceInfo_PositionsEntry();
-    message.key = object.key ?? 0;
-    message.value = object.value ?? 0;
-    return message;
-  },
-  fromSDK(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): SourceInfo_PositionsEntrySDKType {
-    return {
-      key: isSet(object.key) ? Number(object.key) : 0,
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
-  },
-  toSDK(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
-    return SourceInfo_PositionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
     return SourceInfo_PositionsEntry.decode(message.value);
@@ -220,119 +180,6 @@ export const SourceInfo = {
     }
     return message;
   },
-  fromJSON(object: any): SourceInfo {
-    const obj = createBaseSourceInfo();
-    if (isSet(object.location)) obj.location = String(object.location);
-    if (Array.isArray(object?.lineOffsets)) obj.lineOffsets = object.lineOffsets.map((e: any) => Number(e));
-    if (isObject(object.positions)) obj.positions = Object.entries(object.positions).reduce<{
-      [key: number]: number;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Number(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: SourceInfo): unknown {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    if (message.lineOffsets) {
-      obj.lineOffsets = message.lineOffsets.map(e => Math.round(e));
-    } else {
-      obj.lineOffsets = [];
-    }
-    obj.positions = {};
-    if (message.positions) {
-      Object.entries(message.positions).forEach(([k, v]) => {
-        obj.positions[k] = Math.round(v);
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
-    const message = createBaseSourceInfo();
-    message.location = object.location ?? "";
-    message.lineOffsets = object.lineOffsets?.map(e => e) || [];
-    message.positions = Object.entries(object.positions ?? {}).reduce<{
-      [key: number]: number;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[Number(key)] = Number(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: SourceInfoSDKType): SourceInfo {
-    return {
-      location: object?.location,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): SourceInfoSDKType {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      line_offsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => Number(e)) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: SourceInfo): SourceInfoSDKType {
-    const obj: any = {};
-    obj.location = message.location;
-    if (message.lineOffsets) {
-      obj.line_offsets = message.lineOffsets.map(e => e);
-    } else {
-      obj.line_offsets = [];
-    }
-    obj.positions = {};
-    if (message.positions) {
-      Object.entries(message.positions).forEach(([k, v]) => {
-        obj.positions[k] = Math.round(v);
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      location: object.location,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: SourceInfo): SourceInfoAmino {
-    const obj: any = {};
-    obj.location = message.location;
-    if (message.lineOffsets) {
-      obj.line_offsets = message.lineOffsets.map(e => e);
-    } else {
-      obj.line_offsets = [];
-    }
-    obj.positions = {};
-    if (message.positions) {
-      Object.entries(message.positions).forEach(([k, v]) => {
-        obj.positions[k] = Math.round(v);
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
-    return SourceInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
     return SourceInfo.decode(message.value);
   },
@@ -396,73 +243,6 @@ export const SourcePosition = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SourcePosition {
-    const obj = createBaseSourcePosition();
-    if (isSet(object.location)) obj.location = String(object.location);
-    if (isSet(object.offset)) obj.offset = Number(object.offset);
-    if (isSet(object.line)) obj.line = Number(object.line);
-    if (isSet(object.column)) obj.column = Number(object.column);
-    return obj;
-  },
-  toJSON(message: SourcePosition): unknown {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.offset !== undefined && (obj.offset = Math.round(message.offset));
-    message.line !== undefined && (obj.line = Math.round(message.line));
-    message.column !== undefined && (obj.column = Math.round(message.column));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SourcePosition>): SourcePosition {
-    const message = createBaseSourcePosition();
-    message.location = object.location ?? "";
-    message.offset = object.offset ?? 0;
-    message.line = object.line ?? 0;
-    message.column = object.column ?? 0;
-    return message;
-  },
-  fromSDK(object: SourcePositionSDKType): SourcePosition {
-    return {
-      location: object?.location,
-      offset: object?.offset,
-      line: object?.line,
-      column: object?.column
-    };
-  },
-  fromSDKJSON(object: any): SourcePositionSDKType {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      offset: isSet(object.offset) ? Number(object.offset) : 0,
-      line: isSet(object.line) ? Number(object.line) : 0,
-      column: isSet(object.column) ? Number(object.column) : 0
-    };
-  },
-  toSDK(message: SourcePosition): SourcePositionSDKType {
-    const obj: any = {};
-    obj.location = message.location;
-    obj.offset = message.offset;
-    obj.line = message.line;
-    obj.column = message.column;
-    return obj;
-  },
-  fromAmino(object: SourcePositionAmino): SourcePosition {
-    return {
-      location: object.location,
-      offset: object.offset,
-      line: object.line,
-      column: object.column
-    };
-  },
-  toAmino(message: SourcePosition): SourcePositionAmino {
-    const obj: any = {};
-    obj.location = message.location;
-    obj.offset = message.offset;
-    obj.line = message.line;
-    obj.column = message.column;
-    return obj;
-  },
-  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
-    return SourcePosition.fromAmino(object.value);
   },
   fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
     return SourcePosition.decode(message.value);

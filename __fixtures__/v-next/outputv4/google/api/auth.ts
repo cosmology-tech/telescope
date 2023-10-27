@@ -31,6 +31,10 @@ export interface Authentication {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
 }
+export interface AuthenticationProtoMsg {
+  typeUrl: "/google.api.Authentication";
+  value: Uint8Array;
+}
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -83,6 +87,10 @@ export interface AuthenticationRule {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
+export interface AuthenticationRuleProtoMsg {
+  typeUrl: "/google.api.AuthenticationRule";
+  value: Uint8Array;
+}
 /**
  * Authentication rules for the service.
  * 
@@ -117,6 +125,10 @@ export interface JwtLocation {
    * value_prefix="Bearer " with a space at the end.
    */
   valuePrefix: string;
+}
+export interface JwtLocationProtoMsg {
+  typeUrl: "/google.api.JwtLocation";
+  value: Uint8Array;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -207,6 +219,10 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
+export interface AuthProviderProtoMsg {
+  typeUrl: "/google.api.AuthProvider";
+  value: Uint8Array;
+}
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
@@ -251,6 +267,10 @@ export interface OAuthRequirements {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonicalScopes: string;
+}
+export interface OAuthRequirementsProtoMsg {
+  typeUrl: "/google.api.OAuthRequirements";
+  value: Uint8Array;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -308,6 +328,10 @@ export interface AuthRequirement {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
+}
+export interface AuthRequirementProtoMsg {
+  typeUrl: "/google.api.AuthRequirement";
+  value: Uint8Array;
 }
 /**
  * User-defined authentication requirements, including support for

@@ -1,12 +1,15 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta1";
 /** Provider stores owner auditor and attributes details */
 export interface Provider {
   owner: string;
   auditor: string;
   attributes: Attribute[];
+}
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.Provider";
+  value: Uint8Array;
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
@@ -20,6 +23,10 @@ export interface AuditedAttributes {
   auditor: string;
   attributes: Attribute[];
 }
+export interface AuditedAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AuditedAttributes";
+  value: Uint8Array;
+}
 /** Attributes */
 export interface AuditedAttributesSDKType {
   owner: string;
@@ -30,6 +37,10 @@ export interface AuditedAttributesSDKType {
 export interface AttributesResponse {
   attributes: AuditedAttributes[];
 }
+export interface AttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AttributesResponse";
+  value: Uint8Array;
+}
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
   attributes: AuditedAttributesSDKType[];
@@ -38,6 +49,10 @@ export interface AttributesResponseSDKType {
 export interface AttributesFilters {
   auditors: string[];
   owners: string[];
+}
+export interface AttributesFiltersProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AttributesFilters";
+  value: Uint8Array;
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
@@ -50,6 +65,10 @@ export interface MsgSignProviderAttributes {
   auditor: string;
   attributes: Attribute[];
 }
+export interface MsgSignProviderAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes";
+  value: Uint8Array;
+}
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
   owner: string;
@@ -58,6 +77,10 @@ export interface MsgSignProviderAttributesSDKType {
 }
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponse {}
+export interface MsgSignProviderAttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributesResponse";
+  value: Uint8Array;
+}
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseSDKType {}
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
@@ -65,6 +88,10 @@ export interface MsgDeleteProviderAttributes {
   owner: string;
   auditor: string;
   keys: string[];
+}
+export interface MsgDeleteProviderAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes";
+  value: Uint8Array;
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
@@ -74,6 +101,10 @@ export interface MsgDeleteProviderAttributesSDKType {
 }
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponse {}
+export interface MsgDeleteProviderAttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributesResponse";
+  value: Uint8Array;
+}
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseSDKType {}
 function createBaseProvider(): Provider {
@@ -119,83 +150,6 @@ export const Provider = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Provider {
-    const obj = createBaseProvider();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Provider): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Provider>, I>>(object: I): Provider {
-    const message = createBaseProvider();
-    message.owner = object.owner ?? "";
-    message.auditor = object.auditor ?? "";
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ProviderSDKType): Provider {
-    return {
-      owner: object?.owner,
-      auditor: object?.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Provider): ProviderSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ProviderAmino): Provider {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Provider): ProviderAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ProviderAminoMsg): Provider {
-    return Provider.fromAmino(object.value);
-  },
-  toAminoMsg(message: Provider): ProviderAminoMsg {
-    return {
-      type: "akash/audit/provider",
-      value: Provider.toAmino(message)
-    };
   },
   fromProtoMsg(message: ProviderProtoMsg): Provider {
     return Provider.decode(message.value);
@@ -254,83 +208,6 @@ export const AuditedAttributes = {
     }
     return message;
   },
-  fromJSON(object: any): AuditedAttributes {
-    const obj = createBaseAuditedAttributes();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AuditedAttributes): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<AuditedAttributes>, I>>(object: I): AuditedAttributes {
-    const message = createBaseAuditedAttributes();
-    message.owner = object.owner ?? "";
-    message.auditor = object.auditor ?? "";
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AuditedAttributesSDKType): AuditedAttributes {
-    return {
-      owner: object?.owner,
-      auditor: object?.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AuditedAttributesSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: AuditedAttributes): AuditedAttributesSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AuditedAttributesAmino): AuditedAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AuditedAttributes): AuditedAttributesAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuditedAttributesAminoMsg): AuditedAttributes {
-    return AuditedAttributes.fromAmino(object.value);
-  },
-  toAminoMsg(message: AuditedAttributes): AuditedAttributesAminoMsg {
-    return {
-      type: "akash/audit/audited-attributes",
-      value: AuditedAttributes.toAmino(message)
-    };
-  },
   fromProtoMsg(message: AuditedAttributesProtoMsg): AuditedAttributes {
     return AuditedAttributes.decode(message.value);
   },
@@ -373,67 +250,6 @@ export const AttributesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributesResponse {
-    const obj = createBaseAttributesResponse();
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AttributesResponse): unknown {
-    const obj: any = {};
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<AttributesResponse>, I>>(object: I): AttributesResponse {
-    const message = createBaseAttributesResponse();
-    message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AttributesResponseSDKType): AttributesResponse {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AttributesResponseSDKType {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: AttributesResponse): AttributesResponseSDKType {
-    const obj: any = {};
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AttributesResponseAmino): AttributesResponse {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AttributesResponse): AttributesResponseAmino {
-    const obj: any = {};
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AttributesResponseAminoMsg): AttributesResponse {
-    return AttributesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AttributesResponse): AttributesResponseAminoMsg {
-    return {
-      type: "akash/audit/attributes-response",
-      value: AttributesResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: AttributesResponseProtoMsg): AttributesResponse {
     return AttributesResponse.decode(message.value);
@@ -484,87 +300,6 @@ export const AttributesFilters = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributesFilters {
-    const obj = createBaseAttributesFilters();
-    if (Array.isArray(object?.auditors)) obj.auditors = object.auditors.map((e: any) => String(e));
-    if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: AttributesFilters): unknown {
-    const obj: any = {};
-    if (message.auditors) {
-      obj.auditors = message.auditors.map(e => e);
-    } else {
-      obj.auditors = [];
-    }
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<AttributesFilters>, I>>(object: I): AttributesFilters {
-    const message = createBaseAttributesFilters();
-    message.auditors = object.auditors?.map(e => e) || [];
-    message.owners = object.owners?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: AttributesFiltersSDKType): AttributesFilters {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): AttributesFiltersSDKType {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => String(e)) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: AttributesFilters): AttributesFiltersSDKType {
-    const obj: any = {};
-    if (message.auditors) {
-      obj.auditors = message.auditors.map(e => e);
-    } else {
-      obj.auditors = [];
-    }
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AttributesFiltersAmino): AttributesFilters {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: AttributesFilters): AttributesFiltersAmino {
-    const obj: any = {};
-    if (message.auditors) {
-      obj.auditors = message.auditors.map(e => e);
-    } else {
-      obj.auditors = [];
-    }
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AttributesFiltersAminoMsg): AttributesFilters {
-    return AttributesFilters.fromAmino(object.value);
-  },
-  toAminoMsg(message: AttributesFilters): AttributesFiltersAminoMsg {
-    return {
-      type: "akash/audit/attributes-filters",
-      value: AttributesFilters.toAmino(message)
-    };
   },
   fromProtoMsg(message: AttributesFiltersProtoMsg): AttributesFilters {
     return AttributesFilters.decode(message.value);
@@ -623,83 +358,6 @@ export const MsgSignProviderAttributes = {
     }
     return message;
   },
-  fromJSON(object: any): MsgSignProviderAttributes {
-    const obj = createBaseMsgSignProviderAttributes();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgSignProviderAttributes): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSignProviderAttributes>, I>>(object: I): MsgSignProviderAttributes {
-    const message = createBaseMsgSignProviderAttributes();
-    message.owner = object.owner ?? "";
-    message.auditor = object.auditor ?? "";
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
-    return {
-      owner: object?.owner,
-      auditor: object?.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): MsgSignProviderAttributesSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: MsgSignProviderAttributes): MsgSignProviderAttributesSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MsgSignProviderAttributesAmino): MsgSignProviderAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgSignProviderAttributesAminoMsg): MsgSignProviderAttributes {
-    return MsgSignProviderAttributes.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSignProviderAttributes): MsgSignProviderAttributesAminoMsg {
-    return {
-      type: "akash/audit/testonly-sign-provider-attributes",
-      value: MsgSignProviderAttributes.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSignProviderAttributesProtoMsg): MsgSignProviderAttributes {
     return MsgSignProviderAttributes.decode(message.value);
   },
@@ -734,44 +392,6 @@ export const MsgSignProviderAttributesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgSignProviderAttributesResponse {
-    const obj = createBaseMsgSignProviderAttributesResponse();
-    return obj;
-  },
-  toJSON(_: MsgSignProviderAttributesResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSignProviderAttributesResponse>, I>>(_: I): MsgSignProviderAttributesResponse {
-    const message = createBaseMsgSignProviderAttributesResponse();
-    return message;
-  },
-  fromSDK(_: MsgSignProviderAttributesResponseSDKType): MsgSignProviderAttributesResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgSignProviderAttributesResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
-    return {};
-  },
-  toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgSignProviderAttributesResponseAminoMsg): MsgSignProviderAttributesResponse {
-    return MsgSignProviderAttributesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseAminoMsg {
-    return {
-      type: "akash/audit/testonly-sign-provider-attributes-response",
-      value: MsgSignProviderAttributesResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSignProviderAttributesResponseProtoMsg): MsgSignProviderAttributesResponse {
     return MsgSignProviderAttributesResponse.decode(message.value);
@@ -830,83 +450,6 @@ export const MsgDeleteProviderAttributes = {
     }
     return message;
   },
-  fromJSON(object: any): MsgDeleteProviderAttributes {
-    const obj = createBaseMsgDeleteProviderAttributes();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
-    if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: MsgDeleteProviderAttributes): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.keys) {
-      obj.keys = message.keys.map(e => e);
-    } else {
-      obj.keys = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderAttributes>, I>>(object: I): MsgDeleteProviderAttributes {
-    const message = createBaseMsgDeleteProviderAttributes();
-    message.owner = object.owner ?? "";
-    message.auditor = object.auditor ?? "";
-    message.keys = object.keys?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
-    return {
-      owner: object?.owner,
-      auditor: object?.auditor,
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): MsgDeleteProviderAttributesSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.keys) {
-      obj.keys = message.keys.map(e => e);
-    } else {
-      obj.keys = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MsgDeleteProviderAttributesAmino): MsgDeleteProviderAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
-    if (message.keys) {
-      obj.keys = message.keys.map(e => e);
-    } else {
-      obj.keys = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgDeleteProviderAttributesAminoMsg): MsgDeleteProviderAttributes {
-    return MsgDeleteProviderAttributes.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAminoMsg {
-    return {
-      type: "akash/audit/testonly-delete-provider-attributes",
-      value: MsgDeleteProviderAttributes.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgDeleteProviderAttributesProtoMsg): MsgDeleteProviderAttributes {
     return MsgDeleteProviderAttributes.decode(message.value);
   },
@@ -941,44 +484,6 @@ export const MsgDeleteProviderAttributesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgDeleteProviderAttributesResponse {
-    const obj = createBaseMsgDeleteProviderAttributesResponse();
-    return obj;
-  },
-  toJSON(_: MsgDeleteProviderAttributesResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderAttributesResponse>, I>>(_: I): MsgDeleteProviderAttributesResponse {
-    const message = createBaseMsgDeleteProviderAttributesResponse();
-    return message;
-  },
-  fromSDK(_: MsgDeleteProviderAttributesResponseSDKType): MsgDeleteProviderAttributesResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgDeleteProviderAttributesResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {
-    return {};
-  },
-  toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgDeleteProviderAttributesResponseAminoMsg): MsgDeleteProviderAttributesResponse {
-    return MsgDeleteProviderAttributesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseAminoMsg {
-    return {
-      type: "akash/audit/testonly-delete-provider-attributes-response",
-      value: MsgDeleteProviderAttributesResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgDeleteProviderAttributesResponseProtoMsg): MsgDeleteProviderAttributesResponse {
     return MsgDeleteProviderAttributesResponse.decode(message.value);

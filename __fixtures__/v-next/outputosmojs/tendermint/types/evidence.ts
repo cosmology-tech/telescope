@@ -8,6 +8,10 @@ export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
   lightClientAttackEvidence?: LightClientAttackEvidence;
 }
+export interface EvidenceProtoMsg {
+  typeUrl: "/tendermint.types.Evidence";
+  value: Uint8Array;
+}
 export interface EvidenceSDKType {
   duplicate_vote_evidence?: DuplicateVoteEvidenceSDKType;
   light_client_attack_evidence?: LightClientAttackEvidenceSDKType;
@@ -19,6 +23,10 @@ export interface DuplicateVoteEvidence {
   totalVotingPower: bigint;
   validatorPower: bigint;
   timestamp: Date;
+}
+export interface DuplicateVoteEvidenceProtoMsg {
+  typeUrl: "/tendermint.types.DuplicateVoteEvidence";
+  value: Uint8Array;
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
@@ -36,6 +44,10 @@ export interface LightClientAttackEvidence {
   totalVotingPower: bigint;
   timestamp: Date;
 }
+export interface LightClientAttackEvidenceProtoMsg {
+  typeUrl: "/tendermint.types.LightClientAttackEvidence";
+  value: Uint8Array;
+}
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
   conflicting_block?: LightBlockSDKType;
@@ -46,6 +58,10 @@ export interface LightClientAttackEvidenceSDKType {
 }
 export interface EvidenceList {
   evidence: Evidence[];
+}
+export interface EvidenceListProtoMsg {
+  typeUrl: "/tendermint.types.EvidenceList";
+  value: Uint8Array;
 }
 export interface EvidenceListSDKType {
   evidence: EvidenceSDKType[];

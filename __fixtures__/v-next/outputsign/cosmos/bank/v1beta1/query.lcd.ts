@@ -31,7 +31,7 @@ export class LCDQueryClient {
       options.params.denom = params.denom;
     }
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}/by_denom`;
-    return QueryBalanceResponse.fromSDKJSON(await this.req.get<QueryBalanceResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryBalanceResponseSDKType>(endpoint, options);
   }
   /* AllBalances queries the balance of all coins for a single account. */
   async allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponseSDKType> {
@@ -42,7 +42,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}`;
-    return QueryAllBalancesResponse.fromSDKJSON(await this.req.get<QueryAllBalancesResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryAllBalancesResponseSDKType>(endpoint, options);
   }
   /* SpendableBalances queries the spenable balance of all coins for a single
    account. */
@@ -54,7 +54,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/bank/v1beta1/spendable_balances/${params.address}`;
-    return QuerySpendableBalancesResponse.fromSDKJSON(await this.req.get<QuerySpendableBalancesResponseSDKType>(endpoint, options));
+    return await this.req.get<QuerySpendableBalancesResponseSDKType>(endpoint, options);
   }
   /* TotalSupply queries the total supply of all coins. */
   async totalSupply(params: QueryTotalSupplyRequest = {
@@ -67,7 +67,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/bank/v1beta1/supply`;
-    return QueryTotalSupplyResponse.fromSDKJSON(await this.req.get<QueryTotalSupplyResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryTotalSupplyResponseSDKType>(endpoint, options);
   }
   /* SupplyOf queries the supply of a single coin. */
   async supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponseSDKType> {
@@ -78,17 +78,17 @@ export class LCDQueryClient {
       options.params.denom = params.denom;
     }
     const endpoint = `cosmos/bank/v1beta1/supply/by_denom`;
-    return QuerySupplyOfResponse.fromSDKJSON(await this.req.get<QuerySupplyOfResponseSDKType>(endpoint, options));
+    return await this.req.get<QuerySupplyOfResponseSDKType>(endpoint, options);
   }
   /* Params queries the parameters of x/bank module. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `cosmos/bank/v1beta1/params`;
-    return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint));
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponseSDKType> {
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata/${params.denom}`;
-    return QueryDenomMetadataResponse.fromSDKJSON(await this.req.get<QueryDenomMetadataResponseSDKType>(endpoint));
+    return await this.req.get<QueryDenomMetadataResponseSDKType>(endpoint);
   }
   /* DenomsMetadata queries the client metadata for all registered coin
    denominations. */
@@ -102,7 +102,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
-    return QueryDenomsMetadataResponse.fromSDKJSON(await this.req.get<QueryDenomsMetadataResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryDenomsMetadataResponseSDKType>(endpoint, options);
   }
   /* DenomOwners queries for all account addresses that own a particular token
    denomination. */
@@ -114,6 +114,6 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/bank/v1beta1/denom_owners/${params.denom}`;
-    return QueryDenomOwnersResponse.fromSDKJSON(await this.req.get<QueryDenomOwnersResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryDenomOwnersResponseSDKType>(endpoint, options);
   }
 }

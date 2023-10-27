@@ -2,7 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timesta
 import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -43,6 +43,10 @@ export interface SmoothWeightChangeParams {
    */
   targetPoolWeights: PoolAsset[];
 }
+export interface SmoothWeightChangeParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
+  value: Uint8Array;
+}
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
  * a start weight and end weight over a period of time.
@@ -73,6 +77,10 @@ export interface PoolParams {
   exitFee: string;
   smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
+export interface PoolParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
+  value: Uint8Array;
+}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -98,6 +106,10 @@ export interface PoolAsset {
   token: Coin;
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
+}
+export interface PoolAssetProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
+  value: Uint8Array;
 }
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -134,6 +146,10 @@ export interface Pool {
   poolAssets: PoolAsset[];
   /** sum of all non-normalized pool weights */
   totalWeight: string;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.Pool";
+  value: Uint8Array;
 }
 export interface PoolSDKType {
   address: string;
@@ -195,105 +211,6 @@ export const SmoothWeightChangeParams = {
     }
     return message;
   },
-  fromJSON(object: any): SmoothWeightChangeParams {
-    const obj = createBaseSmoothWeightChangeParams();
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (Array.isArray(object?.initialPoolWeights)) obj.initialPoolWeights = object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
-    if (Array.isArray(object?.targetPoolWeights)) obj.targetPoolWeights = object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SmoothWeightChangeParams): unknown {
-    const obj: any = {};
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    if (message.initialPoolWeights) {
-      obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.initialPoolWeights = [];
-    }
-    if (message.targetPoolWeights) {
-      obj.targetPoolWeights = message.targetPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.targetPoolWeights = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
-    const message = createBaseSmoothWeightChangeParams();
-    message.startTime = object.startTime ?? undefined;
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
-    message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SmoothWeightChangeParamsSDKType): SmoothWeightChangeParams {
-    return {
-      startTime: object.start_time ?? undefined,
-      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
-      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SmoothWeightChangeParamsSDKType {
-    return {
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      initial_pool_weights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
-      target_pool_weights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SmoothWeightChangeParams): SmoothWeightChangeParamsSDKType {
-    const obj: any = {};
-    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    if (message.initialPoolWeights) {
-      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
-    } else {
-      obj.initial_pool_weights = [];
-    }
-    if (message.targetPoolWeights) {
-      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
-    } else {
-      obj.target_pool_weights = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
-    return {
-      startTime: object.start_time,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAmino {
-    const obj: any = {};
-    obj.start_time = message.startTime;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    if (message.initialPoolWeights) {
-      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
-    } else {
-      obj.initial_pool_weights = [];
-    }
-    if (message.targetPoolWeights) {
-      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
-    } else {
-      obj.target_pool_weights = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SmoothWeightChangeParamsAminoMsg): SmoothWeightChangeParams {
-    return SmoothWeightChangeParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/smooth-weight-change-params",
-      value: SmoothWeightChangeParams.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg): SmoothWeightChangeParams {
     return SmoothWeightChangeParams.decode(message.value);
   },
@@ -351,73 +268,6 @@ export const PoolParams = {
     }
     return message;
   },
-  fromJSON(object: any): PoolParams {
-    const obj = createBasePoolParams();
-    if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
-    if (isSet(object.exitFee)) obj.exitFee = String(object.exitFee);
-    if (isSet(object.smoothWeightChangeParams)) obj.smoothWeightChangeParams = SmoothWeightChangeParams.fromJSON(object.smoothWeightChangeParams);
-    return obj;
-  },
-  toJSON(message: PoolParams): unknown {
-    const obj: any = {};
-    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
-    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
-    message.smoothWeightChangeParams !== undefined && (obj.smoothWeightChangeParams = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toJSON(message.smoothWeightChangeParams) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PoolParams>): PoolParams {
-    const message = createBasePoolParams();
-    message.swapFee = object.swapFee ?? "";
-    message.exitFee = object.exitFee ?? "";
-    if (object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null) {
-      message.smoothWeightChangeParams = SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams);
-    }
-    return message;
-  },
-  fromSDK(object: PoolParamsSDKType): PoolParams {
-    return {
-      swapFee: object?.swap_fee,
-      exitFee: object?.exit_fee,
-      smoothWeightChangeParams: object.smooth_weight_change_params ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): PoolParamsSDKType {
-    return {
-      swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
-      exit_fee: isSet(object.exit_fee) ? String(object.exit_fee) : "",
-      smooth_weight_change_params: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromSDKJSON(object.smooth_weight_change_params) : undefined
-    };
-  },
-  toSDK(message: PoolParams): PoolParamsSDKType {
-    const obj: any = {};
-    obj.swap_fee = message.swapFee;
-    obj.exit_fee = message.exitFee;
-    message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
-    return obj;
-  },
-  fromAmino(object: PoolParamsAmino): PoolParams {
-    return {
-      swapFee: object.swap_fee,
-      exitFee: object.exit_fee,
-      smoothWeightChangeParams: object?.smooth_weight_change_params ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
-    };
-  },
-  toAmino(message: PoolParams): PoolParamsAmino {
-    const obj: any = {};
-    obj.swap_fee = message.swapFee;
-    obj.exit_fee = message.exitFee;
-    obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
-    return PoolParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/pool-params",
-      value: PoolParams.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
     return PoolParams.decode(message.value);
   },
@@ -467,65 +317,6 @@ export const PoolAsset = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PoolAsset {
-    const obj = createBasePoolAsset();
-    if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
-  },
-  toJSON(message: PoolAsset): unknown {
-    const obj: any = {};
-    message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
-    message.weight !== undefined && (obj.weight = message.weight);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
-    const message = createBasePoolAsset();
-    if (object.token !== undefined && object.token !== null) {
-      message.token = Coin.fromPartial(object.token);
-    }
-    message.weight = object.weight ?? "";
-    return message;
-  },
-  fromSDK(object: PoolAssetSDKType): PoolAsset {
-    return {
-      token: object.token ? Coin.fromSDK(object.token) : undefined,
-      weight: object?.weight
-    };
-  },
-  fromSDKJSON(object: any): PoolAssetSDKType {
-    return {
-      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
-  },
-  toSDK(message: PoolAsset): PoolAssetSDKType {
-    const obj: any = {};
-    message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAmino(object: PoolAssetAmino): PoolAsset {
-    return {
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      weight: object.weight
-    };
-  },
-  toAmino(message: PoolAsset): PoolAssetAmino {
-    const obj: any = {};
-    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
-    return PoolAsset.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolAsset): PoolAssetAminoMsg {
-    return {
-      type: "osmosis/gamm/pool-asset",
-      value: PoolAsset.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolAssetProtoMsg): PoolAsset {
     return PoolAsset.decode(message.value);
@@ -611,121 +402,6 @@ export const Pool = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Pool {
-    const obj = createBasePool();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
-    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
-    if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
-    if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
-    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    return obj;
-  },
-  toJSON(message: Pool): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
-    if (message.poolAssets) {
-      obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.poolAssets = [];
-    }
-    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Pool>): Pool {
-    const message = createBasePool();
-    message.address = object.address ?? "";
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
-    if (object.poolParams !== undefined && object.poolParams !== null) {
-      message.poolParams = PoolParams.fromPartial(object.poolParams);
-    }
-    message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    if (object.totalShares !== undefined && object.totalShares !== null) {
-      message.totalShares = Coin.fromPartial(object.totalShares);
-    }
-    message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
-    message.totalWeight = object.totalWeight ?? "";
-    return message;
-  },
-  fromSDK(object: PoolSDKType): Pool {
-    return {
-      address: object?.address,
-      id: object?.id,
-      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
-      futurePoolGovernor: object?.future_pool_governor,
-      totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined,
-      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      totalWeight: object?.total_weight
-    };
-  },
-  fromSDKJSON(object: any): PoolSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
-      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
-      pool_assets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
-      total_weight: isSet(object.total_weight) ? String(object.total_weight) : ""
-    };
-  },
-  toSDK(message: Pool): PoolSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.id = message.id;
-    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
-    obj.future_pool_governor = message.futurePoolGovernor;
-    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
-    if (message.poolAssets) {
-      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toSDK(e) : undefined);
-    } else {
-      obj.pool_assets = [];
-    }
-    obj.total_weight = message.totalWeight;
-    return obj;
-  },
-  fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
-      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      totalWeight: object.total_weight
-    };
-  },
-  toAmino(message: Pool): PoolAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
-    obj.future_pool_governor = message.futurePoolGovernor;
-    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
-    if (message.poolAssets) {
-      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
-    } else {
-      obj.pool_assets = [];
-    }
-    obj.total_weight = message.totalWeight;
-    return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "osmosis/gamm/pool",
-      value: Pool.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);

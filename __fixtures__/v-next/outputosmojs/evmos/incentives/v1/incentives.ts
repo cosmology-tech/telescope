@@ -19,6 +19,10 @@ export interface Incentive {
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: bigint;
 }
+export interface IncentiveProtoMsg {
+  typeUrl: "/evmos.incentives.v1.Incentive";
+  value: Uint8Array;
+}
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
@@ -39,6 +43,10 @@ export interface GasMeter {
   /** cumulative gas spent during the epoch */
   cumulativeGas: bigint;
 }
+export interface GasMeterProtoMsg {
+  typeUrl: "/evmos.incentives.v1.GasMeter";
+  value: Uint8Array;
+}
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterSDKType {
   contract: string;
@@ -58,6 +66,10 @@ export interface RegisterIncentiveProposal {
   /** number of remaining epochs */
   epochs: number;
 }
+export interface RegisterIncentiveProposalProtoMsg {
+  typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal";
+  value: Uint8Array;
+}
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
   title: string;
@@ -74,6 +86,10 @@ export interface CancelIncentiveProposal {
   description: string;
   /** contract address */
   contract: string;
+}
+export interface CancelIncentiveProposalProtoMsg {
+  typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal";
+  value: Uint8Array;
 }
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposalSDKType {

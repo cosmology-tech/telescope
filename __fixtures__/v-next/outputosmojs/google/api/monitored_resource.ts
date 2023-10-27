@@ -51,6 +51,10 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface MonitoredResourceDescriptorProtoMsg {
+  typeUrl: "/google.api.MonitoredResourceDescriptor";
+  value: Uint8Array;
+}
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -73,6 +77,10 @@ export interface MonitoredResourceDescriptorSDKType {
 export interface MonitoredResource_LabelsEntry {
   key: string;
   value: string;
+}
+export interface MonitoredResource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
@@ -109,6 +117,10 @@ export interface MonitoredResource {
     [key: string]: string;
   };
 }
+export interface MonitoredResourceProtoMsg {
+  typeUrl: "/google.api.MonitoredResource";
+  value: Uint8Array;
+}
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -133,6 +145,10 @@ export interface MonitoredResourceSDKType {
 export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
+}
+export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
@@ -164,6 +180,10 @@ export interface MonitoredResourceMetadata {
   userLabels: {
     [key: string]: string;
   };
+}
+export interface MonitoredResourceMetadataProtoMsg {
+  typeUrl: "/google.api.MonitoredResourceMetadata";
+  value: Uint8Array;
 }
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.

@@ -11,6 +11,10 @@ export interface GenericAuthorization {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
+export interface GenericAuthorizationProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization";
+  value: Uint8Array;
+}
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
  * the provided method on behalf of the granter's account.
@@ -31,6 +35,10 @@ export interface Grant {
    */
   expiration?: Date;
 }
+export interface GrantProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.Grant";
+  value: Uint8Array;
+}
 /**
  * Grant gives permissions to execute
  * the provide method with expiration time.
@@ -49,6 +57,10 @@ export interface GrantAuthorization {
   authorization?: Any;
   expiration?: Date;
 }
+export interface GrantAuthorizationProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
+  value: Uint8Array;
+}
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
  * It is used in genesis.proto and query.proto
@@ -63,6 +75,10 @@ export interface GrantAuthorizationSDKType {
 export interface GrantQueueItem {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msgTypeUrls: string[];
+}
+export interface GrantQueueItemProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem";
+  value: Uint8Array;
 }
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItemSDKType {

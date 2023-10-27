@@ -13,6 +13,10 @@ export interface BaseAccount {
   accountNumber: bigint;
   sequence: bigint;
 }
+export interface BaseAccountProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.BaseAccount";
+  value: Uint8Array;
+}
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
  * for basic account functionality. Any custom account type should extend this
@@ -30,6 +34,10 @@ export interface ModuleAccount {
   name: string;
   permissions: string[];
 }
+export interface ModuleAccountProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.ModuleAccount";
+  value: Uint8Array;
+}
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
   base_account?: BaseAccountSDKType;
@@ -43,6 +51,10 @@ export interface Params {
   txSizeCostPerByte: bigint;
   sigVerifyCostEd25519: bigint;
   sigVerifyCostSecp256k1: bigint;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.Params";
+  value: Uint8Array;
 }
 /** Params defines the parameters for the auth module. */
 export interface ParamsSDKType {

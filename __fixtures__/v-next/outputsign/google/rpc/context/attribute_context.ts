@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnySDKType } from "../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -58,6 +58,10 @@ export interface AttributeContext {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
+export interface AttributeContextProtoMsg {
+  typeUrl: "/google.rpc.context.AttributeContext";
+  value: Uint8Array;
+}
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -91,6 +95,10 @@ export interface AttributeContext_Peer_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Peer_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -122,6 +130,10 @@ export interface AttributeContext_Peer {
    * physical location where this peer is running.
    */
   regionCode: string;
+}
+export interface AttributeContext_PeerProtoMsg {
+  typeUrl: "/google.rpc.context.Peer";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes for a node that handles a network request.
@@ -166,6 +178,10 @@ export interface AttributeContext_Api {
    * "v1alpha1".
    */
   version: string;
+}
+export interface AttributeContext_ApiProtoMsg {
+  typeUrl: "/google.rpc.context.Api";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -245,6 +261,10 @@ export interface AttributeContext_Auth {
    */
   accessLevels: string[];
 }
+export interface AttributeContext_AuthProtoMsg {
+  typeUrl: "/google.rpc.context.Auth";
+  value: Uint8Array;
+}
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
@@ -260,6 +280,10 @@ export interface AttributeContext_AuthSDKType {
 export interface AttributeContext_Request_HeadersEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Request_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -323,6 +347,10 @@ export interface AttributeContext_Request {
    */
   auth?: AttributeContext_Auth;
 }
+export interface AttributeContext_RequestProtoMsg {
+  typeUrl: "/google.rpc.context.Request";
+  value: Uint8Array;
+}
 /**
  * This message defines attributes for an HTTP request. If the actual
  * request is not an HTTP request, the runtime system should try to map
@@ -347,6 +375,10 @@ export interface AttributeContext_RequestSDKType {
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Response_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -382,6 +414,10 @@ export interface AttributeContext_Response {
    */
   backendLatency?: Duration;
 }
+export interface AttributeContext_ResponseProtoMsg {
+  typeUrl: "/google.rpc.context.Response";
+  value: Uint8Array;
+}
 /**
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
@@ -399,6 +435,10 @@ export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Resource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -406,6 +446,10 @@ export interface AttributeContext_Resource_LabelsEntrySDKType {
 export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -505,6 +549,10 @@ export interface AttributeContext_Resource {
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
   location: string;
+}
+export interface AttributeContext_ResourceProtoMsg {
+  typeUrl: "/google.rpc.context.Resource";
+  value: Uint8Array;
 }
 /**
  * This message defines core attributes for a resource. A resource is an
@@ -608,131 +656,6 @@ export const AttributeContext = {
     }
     return message;
   },
-  fromJSON(object: any): AttributeContext {
-    const obj = createBaseAttributeContext();
-    if (isSet(object.origin)) obj.origin = AttributeContext_Peer.fromJSON(object.origin);
-    if (isSet(object.source)) obj.source = AttributeContext_Peer.fromJSON(object.source);
-    if (isSet(object.destination)) obj.destination = AttributeContext_Peer.fromJSON(object.destination);
-    if (isSet(object.request)) obj.request = AttributeContext_Request.fromJSON(object.request);
-    if (isSet(object.response)) obj.response = AttributeContext_Response.fromJSON(object.response);
-    if (isSet(object.resource)) obj.resource = AttributeContext_Resource.fromJSON(object.resource);
-    if (isSet(object.api)) obj.api = AttributeContext_Api.fromJSON(object.api);
-    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AttributeContext): unknown {
-    const obj: any = {};
-    message.origin !== undefined && (obj.origin = message.origin ? AttributeContext_Peer.toJSON(message.origin) : undefined);
-    message.source !== undefined && (obj.source = message.source ? AttributeContext_Peer.toJSON(message.source) : undefined);
-    message.destination !== undefined && (obj.destination = message.destination ? AttributeContext_Peer.toJSON(message.destination) : undefined);
-    message.request !== undefined && (obj.request = message.request ? AttributeContext_Request.toJSON(message.request) : undefined);
-    message.response !== undefined && (obj.response = message.response ? AttributeContext_Response.toJSON(message.response) : undefined);
-    message.resource !== undefined && (obj.resource = message.resource ? AttributeContext_Resource.toJSON(message.resource) : undefined);
-    message.api !== undefined && (obj.api = message.api ? AttributeContext_Api.toJSON(message.api) : undefined);
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext>): AttributeContext {
-    const message = createBaseAttributeContext();
-    if (object.origin !== undefined && object.origin !== null) {
-      message.origin = AttributeContext_Peer.fromPartial(object.origin);
-    }
-    if (object.source !== undefined && object.source !== null) {
-      message.source = AttributeContext_Peer.fromPartial(object.source);
-    }
-    if (object.destination !== undefined && object.destination !== null) {
-      message.destination = AttributeContext_Peer.fromPartial(object.destination);
-    }
-    if (object.request !== undefined && object.request !== null) {
-      message.request = AttributeContext_Request.fromPartial(object.request);
-    }
-    if (object.response !== undefined && object.response !== null) {
-      message.response = AttributeContext_Response.fromPartial(object.response);
-    }
-    if (object.resource !== undefined && object.resource !== null) {
-      message.resource = AttributeContext_Resource.fromPartial(object.resource);
-    }
-    if (object.api !== undefined && object.api !== null) {
-      message.api = AttributeContext_Api.fromPartial(object.api);
-    }
-    message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AttributeContextSDKType): AttributeContext {
-    return {
-      origin: object.origin ? AttributeContext_Peer.fromSDK(object.origin) : undefined,
-      source: object.source ? AttributeContext_Peer.fromSDK(object.source) : undefined,
-      destination: object.destination ? AttributeContext_Peer.fromSDK(object.destination) : undefined,
-      request: object.request ? AttributeContext_Request.fromSDK(object.request) : undefined,
-      response: object.response ? AttributeContext_Response.fromSDK(object.response) : undefined,
-      resource: object.resource ? AttributeContext_Resource.fromSDK(object.resource) : undefined,
-      api: object.api ? AttributeContext_Api.fromSDK(object.api) : undefined,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AttributeContextSDKType {
-    return {
-      origin: isSet(object.origin) ? AttributeContext_Peer.fromSDKJSON(object.origin) : undefined,
-      source: isSet(object.source) ? AttributeContext_Peer.fromSDKJSON(object.source) : undefined,
-      destination: isSet(object.destination) ? AttributeContext_Peer.fromSDKJSON(object.destination) : undefined,
-      request: isSet(object.request) ? AttributeContext_Request.fromSDKJSON(object.request) : undefined,
-      response: isSet(object.response) ? AttributeContext_Response.fromSDKJSON(object.response) : undefined,
-      resource: isSet(object.resource) ? AttributeContext_Resource.fromSDKJSON(object.resource) : undefined,
-      api: isSet(object.api) ? AttributeContext_Api.fromSDKJSON(object.api) : undefined,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: AttributeContext): AttributeContextSDKType {
-    const obj: any = {};
-    message.origin !== undefined && (obj.origin = message.origin ? AttributeContext_Peer.toSDK(message.origin) : undefined);
-    message.source !== undefined && (obj.source = message.source ? AttributeContext_Peer.toSDK(message.source) : undefined);
-    message.destination !== undefined && (obj.destination = message.destination ? AttributeContext_Peer.toSDK(message.destination) : undefined);
-    message.request !== undefined && (obj.request = message.request ? AttributeContext_Request.toSDK(message.request) : undefined);
-    message.response !== undefined && (obj.response = message.response ? AttributeContext_Response.toSDK(message.response) : undefined);
-    message.resource !== undefined && (obj.resource = message.resource ? AttributeContext_Resource.toSDK(message.resource) : undefined);
-    message.api !== undefined && (obj.api = message.api ? AttributeContext_Api.toSDK(message.api) : undefined);
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AttributeContextAmino): AttributeContext {
-    return {
-      origin: object?.origin ? AttributeContext_Peer.fromAmino(object.origin) : undefined,
-      source: object?.source ? AttributeContext_Peer.fromAmino(object.source) : undefined,
-      destination: object?.destination ? AttributeContext_Peer.fromAmino(object.destination) : undefined,
-      request: object?.request ? AttributeContext_Request.fromAmino(object.request) : undefined,
-      response: object?.response ? AttributeContext_Response.fromAmino(object.response) : undefined,
-      resource: object?.resource ? AttributeContext_Resource.fromAmino(object.resource) : undefined,
-      api: object?.api ? AttributeContext_Api.fromAmino(object.api) : undefined,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AttributeContext): AttributeContextAmino {
-    const obj: any = {};
-    obj.origin = message.origin ? AttributeContext_Peer.toAmino(message.origin) : undefined;
-    obj.source = message.source ? AttributeContext_Peer.toAmino(message.source) : undefined;
-    obj.destination = message.destination ? AttributeContext_Peer.toAmino(message.destination) : undefined;
-    obj.request = message.request ? AttributeContext_Request.toAmino(message.request) : undefined;
-    obj.response = message.response ? AttributeContext_Response.toAmino(message.response) : undefined;
-    obj.resource = message.resource ? AttributeContext_Resource.toAmino(message.resource) : undefined;
-    obj.api = message.api ? AttributeContext_Api.toAmino(message.api) : undefined;
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContextAminoMsg): AttributeContext {
-    return AttributeContext.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContextProtoMsg): AttributeContext {
     return AttributeContext.decode(message.value);
   },
@@ -781,57 +704,6 @@ export const AttributeContext_Peer_LabelsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributeContext_Peer_LabelsEntry {
-    const obj = createBaseAttributeContext_Peer_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Peer_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Peer_LabelsEntry>): AttributeContext_Peer_LabelsEntry {
-    const message = createBaseAttributeContext_Peer_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_Peer_LabelsEntrySDKType): AttributeContext_Peer_LabelsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_Peer_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_Peer_LabelsEntryAmino): AttributeContext_Peer_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
-    return AttributeContext_Peer_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Peer_LabelsEntryProtoMsg): AttributeContext_Peer_LabelsEntry {
     return AttributeContext_Peer_LabelsEntry.decode(message.value);
@@ -904,125 +776,6 @@ export const AttributeContext_Peer = {
     }
     return message;
   },
-  fromJSON(object: any): AttributeContext_Peer {
-    const obj = createBaseAttributeContext_Peer();
-    if (isSet(object.ip)) obj.ip = String(object.ip);
-    if (isSet(object.port)) obj.port = BigInt(object.port.toString());
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.principal)) obj.principal = String(object.principal);
-    if (isSet(object.regionCode)) obj.regionCode = String(object.regionCode);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Peer): unknown {
-    const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = (message.port || BigInt(0)).toString());
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    message.principal !== undefined && (obj.principal = message.principal);
-    message.regionCode !== undefined && (obj.regionCode = message.regionCode);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
-    const message = createBaseAttributeContext_Peer();
-    message.ip = object.ip ?? "";
-    if (object.port !== undefined && object.port !== null) {
-      message.port = BigInt(object.port.toString());
-    }
-    message.labels = Object.entries(object.labels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.principal = object.principal ?? "";
-    message.regionCode = object.regionCode ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_PeerSDKType): AttributeContext_Peer {
-    return {
-      ip: object?.ip,
-      port: object?.port,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      principal: object?.principal,
-      regionCode: object?.region_code
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_PeerSDKType {
-    return {
-      ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt(0),
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      principal: isSet(object.principal) ? String(object.principal) : "",
-      region_code: isSet(object.region_code) ? String(object.region_code) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Peer): AttributeContext_PeerSDKType {
-    const obj: any = {};
-    obj.ip = message.ip;
-    obj.port = message.port;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.principal = message.principal;
-    obj.region_code = message.regionCode;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_PeerAmino): AttributeContext_Peer {
-    return {
-      ip: object.ip,
-      port: BigInt(object.port),
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      principal: object.principal,
-      regionCode: object.region_code
-    };
-  },
-  toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
-    const obj: any = {};
-    obj.ip = message.ip;
-    obj.port = message.port ? message.port.toString() : undefined;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.principal = message.principal;
-    obj.region_code = message.regionCode;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
-    return AttributeContext_Peer.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_PeerProtoMsg): AttributeContext_Peer {
     return AttributeContext_Peer.decode(message.value);
   },
@@ -1086,73 +839,6 @@ export const AttributeContext_Api = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributeContext_Api {
-    const obj = createBaseAttributeContext_Api();
-    if (isSet(object.service)) obj.service = String(object.service);
-    if (isSet(object.operation)) obj.operation = String(object.operation);
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    if (isSet(object.version)) obj.version = String(object.version);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Api): unknown {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service);
-    message.operation !== undefined && (obj.operation = message.operation);
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Api>): AttributeContext_Api {
-    const message = createBaseAttributeContext_Api();
-    message.service = object.service ?? "";
-    message.operation = object.operation ?? "";
-    message.protocol = object.protocol ?? "";
-    message.version = object.version ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_ApiSDKType): AttributeContext_Api {
-    return {
-      service: object?.service,
-      operation: object?.operation,
-      protocol: object?.protocol,
-      version: object?.version
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_ApiSDKType {
-    return {
-      service: isSet(object.service) ? String(object.service) : "",
-      operation: isSet(object.operation) ? String(object.operation) : "",
-      protocol: isSet(object.protocol) ? String(object.protocol) : "",
-      version: isSet(object.version) ? String(object.version) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Api): AttributeContext_ApiSDKType {
-    const obj: any = {};
-    obj.service = message.service;
-    obj.operation = message.operation;
-    obj.protocol = message.protocol;
-    obj.version = message.version;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_ApiAmino): AttributeContext_Api {
-    return {
-      service: object.service,
-      operation: object.operation,
-      protocol: object.protocol,
-      version: object.version
-    };
-  },
-  toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
-    const obj: any = {};
-    obj.service = message.service;
-    obj.operation = message.operation;
-    obj.protocol = message.protocol;
-    obj.version = message.version;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
-    return AttributeContext_Api.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_ApiProtoMsg): AttributeContext_Api {
     return AttributeContext_Api.decode(message.value);
@@ -1225,107 +911,6 @@ export const AttributeContext_Auth = {
     }
     return message;
   },
-  fromJSON(object: any): AttributeContext_Auth {
-    const obj = createBaseAttributeContext_Auth();
-    if (isSet(object.principal)) obj.principal = String(object.principal);
-    if (Array.isArray(object?.audiences)) obj.audiences = object.audiences.map((e: any) => String(e));
-    if (isSet(object.presenter)) obj.presenter = String(object.presenter);
-    if (isSet(object.claims)) obj.claims = Struct.fromJSON(object.claims);
-    if (Array.isArray(object?.accessLevels)) obj.accessLevels = object.accessLevels.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: AttributeContext_Auth): unknown {
-    const obj: any = {};
-    message.principal !== undefined && (obj.principal = message.principal);
-    if (message.audiences) {
-      obj.audiences = message.audiences.map(e => e);
-    } else {
-      obj.audiences = [];
-    }
-    message.presenter !== undefined && (obj.presenter = message.presenter);
-    message.claims !== undefined && (obj.claims = message.claims ? Struct.toJSON(message.claims) : undefined);
-    if (message.accessLevels) {
-      obj.accessLevels = message.accessLevels.map(e => e);
-    } else {
-      obj.accessLevels = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Auth>): AttributeContext_Auth {
-    const message = createBaseAttributeContext_Auth();
-    message.principal = object.principal ?? "";
-    message.audiences = object.audiences?.map(e => e) || [];
-    message.presenter = object.presenter ?? "";
-    if (object.claims !== undefined && object.claims !== null) {
-      message.claims = Struct.fromPartial(object.claims);
-    }
-    message.accessLevels = object.accessLevels?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: AttributeContext_AuthSDKType): AttributeContext_Auth {
-    return {
-      principal: object?.principal,
-      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
-      presenter: object?.presenter,
-      claims: object.claims ? Struct.fromSDK(object.claims) : undefined,
-      accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_AuthSDKType {
-    return {
-      principal: isSet(object.principal) ? String(object.principal) : "",
-      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => String(e)) : [],
-      presenter: isSet(object.presenter) ? String(object.presenter) : "",
-      claims: isSet(object.claims) ? Struct.fromSDKJSON(object.claims) : undefined,
-      access_levels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: AttributeContext_Auth): AttributeContext_AuthSDKType {
-    const obj: any = {};
-    obj.principal = message.principal;
-    if (message.audiences) {
-      obj.audiences = message.audiences.map(e => e);
-    } else {
-      obj.audiences = [];
-    }
-    obj.presenter = message.presenter;
-    message.claims !== undefined && (obj.claims = message.claims ? Struct.toSDK(message.claims) : undefined);
-    if (message.accessLevels) {
-      obj.access_levels = message.accessLevels.map(e => e);
-    } else {
-      obj.access_levels = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AttributeContext_AuthAmino): AttributeContext_Auth {
-    return {
-      principal: object.principal,
-      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
-      presenter: object.presenter,
-      claims: object?.claims ? Struct.fromAmino(object.claims) : undefined,
-      accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
-    const obj: any = {};
-    obj.principal = message.principal;
-    if (message.audiences) {
-      obj.audiences = message.audiences.map(e => e);
-    } else {
-      obj.audiences = [];
-    }
-    obj.presenter = message.presenter;
-    obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
-    if (message.accessLevels) {
-      obj.access_levels = message.accessLevels.map(e => e);
-    } else {
-      obj.access_levels = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_AuthAminoMsg): AttributeContext_Auth {
-    return AttributeContext_Auth.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_AuthProtoMsg): AttributeContext_Auth {
     return AttributeContext_Auth.decode(message.value);
   },
@@ -1374,57 +959,6 @@ export const AttributeContext_Request_HeadersEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributeContext_Request_HeadersEntry {
-    const obj = createBaseAttributeContext_Request_HeadersEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Request_HeadersEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Request_HeadersEntry>): AttributeContext_Request_HeadersEntry {
-    const message = createBaseAttributeContext_Request_HeadersEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_Request_HeadersEntrySDKType): AttributeContext_Request_HeadersEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_Request_HeadersEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_Request_HeadersEntryAmino): AttributeContext_Request_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
-    return AttributeContext_Request_HeadersEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Request_HeadersEntryProtoMsg): AttributeContext_Request_HeadersEntry {
     return AttributeContext_Request_HeadersEntry.decode(message.value);
@@ -1546,183 +1080,6 @@ export const AttributeContext_Request = {
     }
     return message;
   },
-  fromJSON(object: any): AttributeContext_Request {
-    const obj = createBaseAttributeContext_Request();
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.method)) obj.method = String(object.method);
-    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.path)) obj.path = String(object.path);
-    if (isSet(object.host)) obj.host = String(object.host);
-    if (isSet(object.scheme)) obj.scheme = String(object.scheme);
-    if (isSet(object.query)) obj.query = String(object.query);
-    if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.size)) obj.size = BigInt(object.size.toString());
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    if (isSet(object.reason)) obj.reason = String(object.reason);
-    if (isSet(object.auth)) obj.auth = AttributeContext_Auth.fromJSON(object.auth);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Request): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.method !== undefined && (obj.method = message.method);
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    message.path !== undefined && (obj.path = message.path);
-    message.host !== undefined && (obj.host = message.host);
-    message.scheme !== undefined && (obj.scheme = message.scheme);
-    message.query !== undefined && (obj.query = message.query);
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.reason !== undefined && (obj.reason = message.reason);
-    message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toJSON(message.auth) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Request>): AttributeContext_Request {
-    const message = createBaseAttributeContext_Request();
-    message.id = object.id ?? "";
-    message.method = object.method ?? "";
-    message.headers = Object.entries(object.headers ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.path = object.path ?? "";
-    message.host = object.host ?? "";
-    message.scheme = object.scheme ?? "";
-    message.query = object.query ?? "";
-    message.time = object.time ?? undefined;
-    if (object.size !== undefined && object.size !== null) {
-      message.size = BigInt(object.size.toString());
-    }
-    message.protocol = object.protocol ?? "";
-    message.reason = object.reason ?? "";
-    if (object.auth !== undefined && object.auth !== null) {
-      message.auth = AttributeContext_Auth.fromPartial(object.auth);
-    }
-    return message;
-  },
-  fromSDK(object: AttributeContext_RequestSDKType): AttributeContext_Request {
-    return {
-      id: object?.id,
-      method: object?.method,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      path: object?.path,
-      host: object?.host,
-      scheme: object?.scheme,
-      query: object?.query,
-      time: object.time ?? undefined,
-      size: object?.size,
-      protocol: object?.protocol,
-      reason: object?.reason,
-      auth: object.auth ? AttributeContext_Auth.fromSDK(object.auth) : undefined
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_RequestSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      method: isSet(object.method) ? String(object.method) : "",
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      path: isSet(object.path) ? String(object.path) : "",
-      host: isSet(object.host) ? String(object.host) : "",
-      scheme: isSet(object.scheme) ? String(object.scheme) : "",
-      query: isSet(object.query) ? String(object.query) : "",
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
-      protocol: isSet(object.protocol) ? String(object.protocol) : "",
-      reason: isSet(object.reason) ? String(object.reason) : "",
-      auth: isSet(object.auth) ? AttributeContext_Auth.fromSDKJSON(object.auth) : undefined
-    };
-  },
-  toSDK(message: AttributeContext_Request): AttributeContext_RequestSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.method = message.method;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    obj.path = message.path;
-    obj.host = message.host;
-    obj.scheme = message.scheme;
-    obj.query = message.query;
-    message.time !== undefined && (obj.time = message.time ?? undefined);
-    obj.size = message.size;
-    obj.protocol = message.protocol;
-    obj.reason = message.reason;
-    message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toSDK(message.auth) : undefined);
-    return obj;
-  },
-  fromAmino(object: AttributeContext_RequestAmino): AttributeContext_Request {
-    return {
-      id: object.id,
-      method: object.method,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      path: object.path,
-      host: object.host,
-      scheme: object.scheme,
-      query: object.query,
-      time: object?.time,
-      size: BigInt(object.size),
-      protocol: object.protocol,
-      reason: object.reason,
-      auth: object?.auth ? AttributeContext_Auth.fromAmino(object.auth) : undefined
-    };
-  },
-  toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.method = message.method;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    obj.path = message.path;
-    obj.host = message.host;
-    obj.scheme = message.scheme;
-    obj.query = message.query;
-    obj.time = message.time;
-    obj.size = message.size ? message.size.toString() : undefined;
-    obj.protocol = message.protocol;
-    obj.reason = message.reason;
-    obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_RequestAminoMsg): AttributeContext_Request {
-    return AttributeContext_Request.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_RequestProtoMsg): AttributeContext_Request {
     return AttributeContext_Request.decode(message.value);
   },
@@ -1771,57 +1128,6 @@ export const AttributeContext_Response_HeadersEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributeContext_Response_HeadersEntry {
-    const obj = createBaseAttributeContext_Response_HeadersEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Response_HeadersEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Response_HeadersEntry>): AttributeContext_Response_HeadersEntry {
-    const message = createBaseAttributeContext_Response_HeadersEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_Response_HeadersEntrySDKType): AttributeContext_Response_HeadersEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_Response_HeadersEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_Response_HeadersEntryAmino): AttributeContext_Response_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
-    return AttributeContext_Response_HeadersEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Response_HeadersEntryProtoMsg): AttributeContext_Response_HeadersEntry {
     return AttributeContext_Response_HeadersEntry.decode(message.value);
@@ -1894,129 +1200,6 @@ export const AttributeContext_Response = {
     }
     return message;
   },
-  fromJSON(object: any): AttributeContext_Response {
-    const obj = createBaseAttributeContext_Response();
-    if (isSet(object.code)) obj.code = BigInt(object.code.toString());
-    if (isSet(object.size)) obj.size = BigInt(object.size.toString());
-    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.backendLatency)) obj.backendLatency = Duration.fromJSON(object.backendLatency);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Response): unknown {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = (message.code || BigInt(0)).toString());
-    message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.backendLatency !== undefined && (obj.backendLatency = message.backendLatency ? Duration.toJSON(message.backendLatency) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
-    const message = createBaseAttributeContext_Response();
-    if (object.code !== undefined && object.code !== null) {
-      message.code = BigInt(object.code.toString());
-    }
-    if (object.size !== undefined && object.size !== null) {
-      message.size = BigInt(object.size.toString());
-    }
-    message.headers = Object.entries(object.headers ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.time = object.time ?? undefined;
-    if (object.backendLatency !== undefined && object.backendLatency !== null) {
-      message.backendLatency = Duration.fromPartial(object.backendLatency);
-    }
-    return message;
-  },
-  fromSDK(object: AttributeContext_ResponseSDKType): AttributeContext_Response {
-    return {
-      code: object?.code,
-      size: object?.size,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      time: object.time ?? undefined,
-      backendLatency: object.backend_latency ? Duration.fromSDK(object.backend_latency) : undefined
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_ResponseSDKType {
-    return {
-      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt(0),
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      backend_latency: isSet(object.backend_latency) ? Duration.fromSDKJSON(object.backend_latency) : undefined
-    };
-  },
-  toSDK(message: AttributeContext_Response): AttributeContext_ResponseSDKType {
-    const obj: any = {};
-    obj.code = message.code;
-    obj.size = message.size;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    message.time !== undefined && (obj.time = message.time ?? undefined);
-    message.backendLatency !== undefined && (obj.backend_latency = message.backendLatency ? Duration.toSDK(message.backendLatency) : undefined);
-    return obj;
-  },
-  fromAmino(object: AttributeContext_ResponseAmino): AttributeContext_Response {
-    return {
-      code: BigInt(object.code),
-      size: BigInt(object.size),
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      time: object?.time,
-      backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
-    };
-  },
-  toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
-    const obj: any = {};
-    obj.code = message.code ? message.code.toString() : undefined;
-    obj.size = message.size ? message.size.toString() : undefined;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    obj.time = message.time;
-    obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ResponseAminoMsg): AttributeContext_Response {
-    return AttributeContext_Response.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_ResponseProtoMsg): AttributeContext_Response {
     return AttributeContext_Response.decode(message.value);
   },
@@ -2066,57 +1249,6 @@ export const AttributeContext_Resource_LabelsEntry = {
     }
     return message;
   },
-  fromJSON(object: any): AttributeContext_Resource_LabelsEntry {
-    const obj = createBaseAttributeContext_Resource_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Resource_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Resource_LabelsEntry>): AttributeContext_Resource_LabelsEntry {
-    const message = createBaseAttributeContext_Resource_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_Resource_LabelsEntrySDKType): AttributeContext_Resource_LabelsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_Resource_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_Resource_LabelsEntryAmino): AttributeContext_Resource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
-    return AttributeContext_Resource_LabelsEntry.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_Resource_LabelsEntryProtoMsg): AttributeContext_Resource_LabelsEntry {
     return AttributeContext_Resource_LabelsEntry.decode(message.value);
   },
@@ -2159,57 +1291,6 @@ export const AttributeContext_Resource_AnnotationsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributeContext_Resource_AnnotationsEntry {
-    const obj = createBaseAttributeContext_Resource_AnnotationsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Resource_AnnotationsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Resource_AnnotationsEntry>): AttributeContext_Resource_AnnotationsEntry {
-    const message = createBaseAttributeContext_Resource_AnnotationsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_Resource_AnnotationsEntrySDKType): AttributeContext_Resource_AnnotationsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_Resource_AnnotationsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_Resource_AnnotationsEntryAmino): AttributeContext_Resource_AnnotationsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
-    return AttributeContext_Resource_AnnotationsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Resource_AnnotationsEntryProtoMsg): AttributeContext_Resource_AnnotationsEntry {
     return AttributeContext_Resource_AnnotationsEntry.decode(message.value);
@@ -2336,221 +1417,6 @@ export const AttributeContext_Resource = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AttributeContext_Resource {
-    const obj = createBaseAttributeContext_Resource();
-    if (isSet(object.service)) obj.service = String(object.service);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.uid)) obj.uid = String(object.uid);
-    if (isObject(object.annotations)) obj.annotations = Object.entries(object.annotations).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.deleteTime)) obj.deleteTime = new Date(object.deleteTime);
-    if (isSet(object.etag)) obj.etag = String(object.etag);
-    if (isSet(object.location)) obj.location = String(object.location);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Resource): unknown {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service);
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    message.uid !== undefined && (obj.uid = message.uid);
-    obj.annotations = {};
-    if (message.annotations) {
-      Object.entries(message.annotations).forEach(([k, v]) => {
-        obj.annotations[k] = v;
-      });
-    }
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    message.deleteTime !== undefined && (obj.deleteTime = message.deleteTime.toISOString());
-    message.etag !== undefined && (obj.etag = message.etag);
-    message.location !== undefined && (obj.location = message.location);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AttributeContext_Resource>): AttributeContext_Resource {
-    const message = createBaseAttributeContext_Resource();
-    message.service = object.service ?? "";
-    message.name = object.name ?? "";
-    message.type = object.type ?? "";
-    message.labels = Object.entries(object.labels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.uid = object.uid ?? "";
-    message.annotations = Object.entries(object.annotations ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.displayName = object.displayName ?? "";
-    message.createTime = object.createTime ?? undefined;
-    message.updateTime = object.updateTime ?? undefined;
-    message.deleteTime = object.deleteTime ?? undefined;
-    message.etag = object.etag ?? "";
-    message.location = object.location ?? "";
-    return message;
-  },
-  fromSDK(object: AttributeContext_ResourceSDKType): AttributeContext_Resource {
-    return {
-      service: object?.service,
-      name: object?.name,
-      type: object?.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      uid: object?.uid,
-      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      displayName: object?.display_name,
-      createTime: object.create_time ?? undefined,
-      updateTime: object.update_time ?? undefined,
-      deleteTime: object.delete_time ?? undefined,
-      etag: object?.etag,
-      location: object?.location
-    };
-  },
-  fromSDKJSON(object: any): AttributeContext_ResourceSDKType {
-    return {
-      service: isSet(object.service) ? String(object.service) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      uid: isSet(object.uid) ? String(object.uid) : "",
-      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      display_name: isSet(object.display_name) ? String(object.display_name) : "",
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      delete_time: isSet(object.delete_time) ? new Date(object.delete_time) : undefined,
-      etag: isSet(object.etag) ? String(object.etag) : "",
-      location: isSet(object.location) ? String(object.location) : ""
-    };
-  },
-  toSDK(message: AttributeContext_Resource): AttributeContext_ResourceSDKType {
-    const obj: any = {};
-    obj.service = message.service;
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.uid = message.uid;
-    obj.annotations = {};
-    if (message.annotations) {
-      Object.entries(message.annotations).forEach(([k, v]) => {
-        obj.annotations[k] = v;
-      });
-    }
-    obj.display_name = message.displayName;
-    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
-    message.deleteTime !== undefined && (obj.delete_time = message.deleteTime ?? undefined);
-    obj.etag = message.etag;
-    obj.location = message.location;
-    return obj;
-  },
-  fromAmino(object: AttributeContext_ResourceAmino): AttributeContext_Resource {
-    return {
-      service: object.service,
-      name: object.name,
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      uid: object.uid,
-      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      displayName: object.display_name,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
-      deleteTime: object?.delete_time,
-      etag: object.etag,
-      location: object.location
-    };
-  },
-  toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
-    const obj: any = {};
-    obj.service = message.service;
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.uid = message.uid;
-    obj.annotations = {};
-    if (message.annotations) {
-      Object.entries(message.annotations).forEach(([k, v]) => {
-        obj.annotations[k] = v;
-      });
-    }
-    obj.display_name = message.displayName;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.delete_time = message.deleteTime;
-    obj.etag = message.etag;
-    obj.location = message.location;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {
-    return AttributeContext_Resource.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_ResourceProtoMsg): AttributeContext_Resource {
     return AttributeContext_Resource.decode(message.value);

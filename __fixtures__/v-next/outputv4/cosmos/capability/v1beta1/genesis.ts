@@ -9,6 +9,10 @@ export interface GenesisOwners {
   /** index_owners are the owners at the given index. */
   indexOwners: CapabilityOwners;
 }
+export interface GenesisOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
+  value: Uint8Array;
+}
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
   index: bigint;
@@ -23,6 +27,10 @@ export interface GenesisState {
    * index key is string to allow amino marshalling.
    */
   owners: GenesisOwners[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisStateSDKType {

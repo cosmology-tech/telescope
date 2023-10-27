@@ -44,6 +44,10 @@ export interface TwapRecordProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord";
   value: Uint8Array;
 }
+export interface TwapRecordProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.TwapRecord";
+  value: Uint8Array;
+}
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
  * The asset pair assets should be lexicographically sorted.

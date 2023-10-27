@@ -11,6 +11,10 @@ export interface QueryDeploymentsRequest {
   filters: DeploymentFilters | undefined;
   pagination?: PageRequest | undefined;
 }
+export interface QueryDeploymentsRequestProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
+  value: Uint8Array;
+}
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
   filters: DeploymentFiltersSDKType | undefined;
@@ -21,6 +25,10 @@ export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
   pagination?: PageResponse | undefined;
 }
+export interface QueryDeploymentsResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsResponse";
+  value: Uint8Array;
+}
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
@@ -29,6 +37,10 @@ export interface QueryDeploymentsResponseSDKType {
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
   id: DeploymentID | undefined;
+}
+export interface QueryDeploymentRequestProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentRequest";
+  value: Uint8Array;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
@@ -40,6 +52,10 @@ export interface QueryDeploymentResponse {
   groups: Group[];
   escrowAccount: Account | undefined;
 }
+export interface QueryDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentResponse";
+  value: Uint8Array;
+}
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
   deployment: DeploymentSDKType | undefined;
@@ -50,6 +66,10 @@ export interface QueryDeploymentResponseSDKType {
 export interface QueryGroupRequest {
   id: GroupID | undefined;
 }
+export interface QueryGroupRequestProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.QueryGroupRequest";
+  value: Uint8Array;
+}
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
   id: GroupIDSDKType | undefined;
@@ -57,6 +77,10 @@ export interface QueryGroupRequestSDKType {
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
   group: Group | undefined;
+}
+export interface QueryGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.QueryGroupResponse";
+  value: Uint8Array;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {

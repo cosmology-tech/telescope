@@ -25,7 +25,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `evmos/epochs/v1/epochs`;
-    return QueryEpochsInfoResponse.fromSDKJSON(await this.req.get<QueryEpochsInfoResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryEpochsInfoResponseSDKType>(endpoint, options);
   }
   /* CurrentEpoch provide current epoch of specified identifier */
   async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> {
@@ -36,6 +36,6 @@ export class LCDQueryClient {
       options.params.identifier = params.identifier;
     }
     const endpoint = `evmos/epochs/v1/current_epoch`;
-    return QueryCurrentEpochResponse.fromSDKJSON(await this.req.get<QueryCurrentEpochResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryCurrentEpochResponseSDKType>(endpoint, options);
   }
 }

@@ -15,6 +15,10 @@ export interface Config {
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
 }
+export interface ConfigProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.Config";
+  value: Uint8Array;
+}
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -47,6 +51,10 @@ export interface ModuleConfig {
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
   config?: Any;
+}
+export interface ModuleConfigProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
+  value: Uint8Array;
 }
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfigSDKType {

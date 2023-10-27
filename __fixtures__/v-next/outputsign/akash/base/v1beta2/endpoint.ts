@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -47,6 +46,10 @@ export interface Endpoint {
   kind: Endpoint_Kind;
   sequenceNumber: number;
 }
+export interface EndpointProtoMsg {
+  typeUrl: "/akash.base.v1beta2.Endpoint";
+  value: Uint8Array;
+}
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
   kind: Endpoint_Kind;
@@ -88,63 +91,6 @@ export const Endpoint = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Endpoint {
-    const obj = createBaseEndpoint();
-    if (isSet(object.kind)) obj.kind = endpoint_KindFromJSON(object.kind);
-    if (isSet(object.sequenceNumber)) obj.sequenceNumber = Number(object.sequenceNumber);
-    return obj;
-  },
-  toJSON(message: Endpoint): unknown {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
-    message.sequenceNumber !== undefined && (obj.sequenceNumber = Math.round(message.sequenceNumber));
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
-    const message = createBaseEndpoint();
-    message.kind = object.kind ?? 0;
-    message.sequenceNumber = object.sequenceNumber ?? 0;
-    return message;
-  },
-  fromSDK(object: EndpointSDKType): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequenceNumber: object?.sequence_number
-    };
-  },
-  fromSDKJSON(object: any): EndpointSDKType {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : 0
-    };
-  },
-  toSDK(message: Endpoint): EndpointSDKType {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
-    obj.sequence_number = message.sequenceNumber;
-    return obj;
-  },
-  fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequenceNumber: object.sequence_number
-    };
-  },
-  toAmino(message: Endpoint): EndpointAmino {
-    const obj: any = {};
-    obj.kind = message.kind;
-    obj.sequence_number = message.sequenceNumber;
-    return obj;
-  },
-  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
-    return Endpoint.fromAmino(object.value);
-  },
-  toAminoMsg(message: Endpoint): EndpointAminoMsg {
-    return {
-      type: "akash/base/v1beta2/endpoint",
-      value: Endpoint.toAmino(message)
-    };
   },
   fromProtoMsg(message: EndpointProtoMsg): Endpoint {
     return Endpoint.decode(message.value);

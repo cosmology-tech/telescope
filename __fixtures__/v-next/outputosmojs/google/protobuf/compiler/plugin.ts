@@ -13,6 +13,10 @@ export interface Version {
    */
   suffix: string;
 }
+export interface VersionProtoMsg {
+  typeUrl: "/google.protobuf.compiler.Version";
+  value: Uint8Array;
+}
 /** The version number of protocol compiler. */
 export interface VersionSDKType {
   major: number;
@@ -50,6 +54,10 @@ export interface CodeGeneratorRequest {
   /** The version number of protocol compiler. */
   compilerVersion?: Version;
 }
+export interface CodeGeneratorRequestProtoMsg {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
+  value: Uint8Array;
+}
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestSDKType {
   file_to_generate: string[];
@@ -71,6 +79,10 @@ export interface CodeGeneratorResponse {
    */
   error: string;
   file: CodeGeneratorResponse_File[];
+}
+export interface CodeGeneratorResponseProtoMsg {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
+  value: Uint8Array;
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseSDKType {
@@ -135,6 +147,10 @@ export interface CodeGeneratorResponse_File {
   insertionPoint: string;
   /** The file contents. */
   content: string;
+}
+export interface CodeGeneratorResponse_FileProtoMsg {
+  typeUrl: "/google.protobuf.compiler.File";
+  value: Uint8Array;
 }
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_FileSDKType {

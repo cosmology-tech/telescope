@@ -7,6 +7,10 @@ export interface Proof {
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
+export interface ProofProtoMsg {
+  typeUrl: "/tendermint.crypto.Proof";
+  value: Uint8Array;
+}
 export interface ProofSDKType {
   total: bigint;
   index: bigint;
@@ -19,6 +23,10 @@ export interface ValueOp {
   /** To encode in ProofOp.Data */
   proof?: Proof;
 }
+export interface ValueOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ValueOp";
+  value: Uint8Array;
+}
 export interface ValueOpSDKType {
   key: Uint8Array;
   proof?: ProofSDKType;
@@ -27,6 +35,10 @@ export interface DominoOp {
   key: string;
   input: string;
   output: string;
+}
+export interface DominoOpProtoMsg {
+  typeUrl: "/tendermint.crypto.DominoOp";
+  value: Uint8Array;
 }
 export interface DominoOpSDKType {
   key: string;
@@ -43,6 +55,10 @@ export interface ProofOp {
   key: Uint8Array;
   data: Uint8Array;
 }
+export interface ProofOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOp";
+  value: Uint8Array;
+}
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
@@ -56,6 +72,10 @@ export interface ProofOpSDKType {
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOps {
   ops: ProofOp[];
+}
+export interface ProofOpsProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOps";
+  value: Uint8Array;
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsSDKType {

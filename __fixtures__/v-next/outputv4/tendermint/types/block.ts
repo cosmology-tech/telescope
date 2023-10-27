@@ -9,6 +9,10 @@ export interface Block {
   evidence: EvidenceList;
   lastCommit?: Commit;
 }
+export interface BlockProtoMsg {
+  typeUrl: "/tendermint.types.Block";
+  value: Uint8Array;
+}
 export interface BlockSDKType {
   header: HeaderSDKType;
   data: DataSDKType;

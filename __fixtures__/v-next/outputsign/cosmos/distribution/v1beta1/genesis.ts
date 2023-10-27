@@ -1,7 +1,6 @@
 import { DecCoin, DecCoinSDKType } from "../../base/v1beta1/coin";
 import { ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionSDKType, ValidatorHistoricalRewards, ValidatorHistoricalRewardsSDKType, ValidatorCurrentRewards, ValidatorCurrentRewardsSDKType, DelegatorStartingInfo, DelegatorStartingInfoSDKType, ValidatorSlashEvent, ValidatorSlashEventSDKType, Params, ParamsSDKType, FeePool, FeePoolSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -13,6 +12,10 @@ export interface DelegatorWithdrawInfo {
   delegatorAddress: string;
   /** withdraw_address is the address to withdraw the delegation rewards to. */
   withdrawAddress: string;
+}
+export interface DelegatorWithdrawInfoProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorWithdrawInfo";
+  value: Uint8Array;
 }
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -30,6 +33,10 @@ export interface ValidatorOutstandingRewardsRecord {
   /** outstanding_rewards represents the oustanding rewards of a validator. */
   outstandingRewards: DecCoin[];
 }
+export interface ValidatorOutstandingRewardsRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord";
+  value: Uint8Array;
+}
 /** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
 export interface ValidatorOutstandingRewardsRecordSDKType {
   validator_address: string;
@@ -44,6 +51,10 @@ export interface ValidatorAccumulatedCommissionRecord {
   validatorAddress: string;
   /** accumulated is the accumulated commission of a validator. */
   accumulated: ValidatorAccumulatedCommission;
+}
+export interface ValidatorAccumulatedCommissionRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord";
+  value: Uint8Array;
 }
 /**
  * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
@@ -65,6 +76,10 @@ export interface ValidatorHistoricalRewardsRecord {
   /** rewards defines the historical rewards of a validator. */
   rewards: ValidatorHistoricalRewards;
 }
+export interface ValidatorHistoricalRewardsRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord";
+  value: Uint8Array;
+}
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
  * json.
@@ -81,6 +96,10 @@ export interface ValidatorCurrentRewardsRecord {
   /** rewards defines the current rewards of a validator. */
   rewards: ValidatorCurrentRewards;
 }
+export interface ValidatorCurrentRewardsRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord";
+  value: Uint8Array;
+}
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordSDKType {
   validator_address: string;
@@ -94,6 +113,10 @@ export interface DelegatorStartingInfoRecord {
   validatorAddress: string;
   /** starting_info defines the starting info of a delegator. */
   startingInfo: DelegatorStartingInfo;
+}
+export interface DelegatorStartingInfoRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord";
+  value: Uint8Array;
 }
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecordSDKType {
@@ -111,6 +134,10 @@ export interface ValidatorSlashEventRecord {
   period: bigint;
   /** validator_slash_event describes the slash event. */
   validatorSlashEvent: ValidatorSlashEvent;
+}
+export interface ValidatorSlashEventRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEventRecord";
+  value: Uint8Array;
 }
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecordSDKType {
@@ -141,6 +168,10 @@ export interface GenesisState {
   delegatorStartingInfos: DelegatorStartingInfoRecord[];
   /** fee_pool defines the validator slash events at genesis. */
   validatorSlashEvents: ValidatorSlashEventRecord[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisStateSDKType {
@@ -192,63 +223,6 @@ export const DelegatorWithdrawInfo = {
     }
     return message;
   },
-  fromJSON(object: any): DelegatorWithdrawInfo {
-    const obj = createBaseDelegatorWithdrawInfo();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    return obj;
-  },
-  toJSON(message: DelegatorWithdrawInfo): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DelegatorWithdrawInfo>): DelegatorWithdrawInfo {
-    const message = createBaseDelegatorWithdrawInfo();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
-    return message;
-  },
-  fromSDK(object: DelegatorWithdrawInfoSDKType): DelegatorWithdrawInfo {
-    return {
-      delegatorAddress: object?.delegator_address,
-      withdrawAddress: object?.withdraw_address
-    };
-  },
-  fromSDKJSON(object: any): DelegatorWithdrawInfoSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
-    };
-  },
-  toSDK(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    return obj;
-  },
-  fromAmino(object: DelegatorWithdrawInfoAmino): DelegatorWithdrawInfo {
-    return {
-      delegatorAddress: object.delegator_address,
-      withdrawAddress: object.withdraw_address
-    };
-  },
-  toAmino(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    return obj;
-  },
-  fromAminoMsg(object: DelegatorWithdrawInfoAminoMsg): DelegatorWithdrawInfo {
-    return DelegatorWithdrawInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/DelegatorWithdrawInfo",
-      value: DelegatorWithdrawInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg): DelegatorWithdrawInfo {
     return DelegatorWithdrawInfo.decode(message.value);
   },
@@ -299,75 +273,6 @@ export const ValidatorOutstandingRewardsRecord = {
     }
     return message;
   },
-  fromJSON(object: any): ValidatorOutstandingRewardsRecord {
-    const obj = createBaseValidatorOutstandingRewardsRecord();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (Array.isArray(object?.outstandingRewards)) obj.outstandingRewards = object.outstandingRewards.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ValidatorOutstandingRewardsRecord): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    if (message.outstandingRewards) {
-      obj.outstandingRewards = message.outstandingRewards.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.outstandingRewards = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValidatorOutstandingRewardsRecord>): ValidatorOutstandingRewardsRecord {
-    const message = createBaseValidatorOutstandingRewardsRecord();
-    message.validatorAddress = object.validatorAddress ?? "";
-    message.outstandingRewards = object.outstandingRewards?.map(e => DecCoin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ValidatorOutstandingRewardsRecordSDKType): ValidatorOutstandingRewardsRecord {
-    return {
-      validatorAddress: object?.validator_address,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ValidatorOutstandingRewardsRecordSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      outstanding_rewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toSDK(e) : undefined);
-    } else {
-      obj.outstanding_rewards = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ValidatorOutstandingRewardsRecordAmino): ValidatorOutstandingRewardsRecord {
-    return {
-      validatorAddress: object.validator_address,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.outstanding_rewards = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorOutstandingRewardsRecordAminoMsg): ValidatorOutstandingRewardsRecord {
-    return ValidatorOutstandingRewardsRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorOutstandingRewardsRecord",
-      value: ValidatorOutstandingRewardsRecord.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg): ValidatorOutstandingRewardsRecord {
     return ValidatorOutstandingRewardsRecord.decode(message.value);
   },
@@ -417,65 +322,6 @@ export const ValidatorAccumulatedCommissionRecord = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ValidatorAccumulatedCommissionRecord {
-    const obj = createBaseValidatorAccumulatedCommissionRecord();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.accumulated)) obj.accumulated = ValidatorAccumulatedCommission.fromJSON(object.accumulated);
-    return obj;
-  },
-  toJSON(message: ValidatorAccumulatedCommissionRecord): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.accumulated !== undefined && (obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toJSON(message.accumulated) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValidatorAccumulatedCommissionRecord>): ValidatorAccumulatedCommissionRecord {
-    const message = createBaseValidatorAccumulatedCommissionRecord();
-    message.validatorAddress = object.validatorAddress ?? "";
-    if (object.accumulated !== undefined && object.accumulated !== null) {
-      message.accumulated = ValidatorAccumulatedCommission.fromPartial(object.accumulated);
-    }
-    return message;
-  },
-  fromSDK(object: ValidatorAccumulatedCommissionRecordSDKType): ValidatorAccumulatedCommissionRecord {
-    return {
-      validatorAddress: object?.validator_address,
-      accumulated: object.accumulated ? ValidatorAccumulatedCommission.fromSDK(object.accumulated) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ValidatorAccumulatedCommissionRecordSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromSDKJSON(object.accumulated) : undefined
-    };
-  },
-  toSDK(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    message.accumulated !== undefined && (obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toSDK(message.accumulated) : undefined);
-    return obj;
-  },
-  fromAmino(object: ValidatorAccumulatedCommissionRecordAmino): ValidatorAccumulatedCommissionRecord {
-    return {
-      validatorAddress: object.validator_address,
-      accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
-    };
-  },
-  toAmino(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorAccumulatedCommissionRecordAminoMsg): ValidatorAccumulatedCommissionRecord {
-    return ValidatorAccumulatedCommissionRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord",
-      value: ValidatorAccumulatedCommissionRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg): ValidatorAccumulatedCommissionRecord {
     return ValidatorAccumulatedCommissionRecord.decode(message.value);
@@ -534,75 +380,6 @@ export const ValidatorHistoricalRewardsRecord = {
     }
     return message;
   },
-  fromJSON(object: any): ValidatorHistoricalRewardsRecord {
-    const obj = createBaseValidatorHistoricalRewardsRecord();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
-    if (isSet(object.rewards)) obj.rewards = ValidatorHistoricalRewards.fromJSON(object.rewards);
-    return obj;
-  },
-  toJSON(message: ValidatorHistoricalRewardsRecord): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toJSON(message.rewards) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValidatorHistoricalRewardsRecord>): ValidatorHistoricalRewardsRecord {
-    const message = createBaseValidatorHistoricalRewardsRecord();
-    message.validatorAddress = object.validatorAddress ?? "";
-    if (object.period !== undefined && object.period !== null) {
-      message.period = BigInt(object.period.toString());
-    }
-    if (object.rewards !== undefined && object.rewards !== null) {
-      message.rewards = ValidatorHistoricalRewards.fromPartial(object.rewards);
-    }
-    return message;
-  },
-  fromSDK(object: ValidatorHistoricalRewardsRecordSDKType): ValidatorHistoricalRewardsRecord {
-    return {
-      validatorAddress: object?.validator_address,
-      period: object?.period,
-      rewards: object.rewards ? ValidatorHistoricalRewards.fromSDK(object.rewards) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ValidatorHistoricalRewardsRecordSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
-      rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromSDKJSON(object.rewards) : undefined
-    };
-  },
-  toSDK(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.period = message.period;
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toSDK(message.rewards) : undefined);
-    return obj;
-  },
-  fromAmino(object: ValidatorHistoricalRewardsRecordAmino): ValidatorHistoricalRewardsRecord {
-    return {
-      validatorAddress: object.validator_address,
-      period: BigInt(object.period),
-      rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
-    };
-  },
-  toAmino(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.period = message.period ? message.period.toString() : undefined;
-    obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorHistoricalRewardsRecordAminoMsg): ValidatorHistoricalRewardsRecord {
-    return ValidatorHistoricalRewardsRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorHistoricalRewardsRecord",
-      value: ValidatorHistoricalRewardsRecord.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg): ValidatorHistoricalRewardsRecord {
     return ValidatorHistoricalRewardsRecord.decode(message.value);
   },
@@ -652,65 +429,6 @@ export const ValidatorCurrentRewardsRecord = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ValidatorCurrentRewardsRecord {
-    const obj = createBaseValidatorCurrentRewardsRecord();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.rewards)) obj.rewards = ValidatorCurrentRewards.fromJSON(object.rewards);
-    return obj;
-  },
-  toJSON(message: ValidatorCurrentRewardsRecord): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorCurrentRewards.toJSON(message.rewards) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValidatorCurrentRewardsRecord>): ValidatorCurrentRewardsRecord {
-    const message = createBaseValidatorCurrentRewardsRecord();
-    message.validatorAddress = object.validatorAddress ?? "";
-    if (object.rewards !== undefined && object.rewards !== null) {
-      message.rewards = ValidatorCurrentRewards.fromPartial(object.rewards);
-    }
-    return message;
-  },
-  fromSDK(object: ValidatorCurrentRewardsRecordSDKType): ValidatorCurrentRewardsRecord {
-    return {
-      validatorAddress: object?.validator_address,
-      rewards: object.rewards ? ValidatorCurrentRewards.fromSDK(object.rewards) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ValidatorCurrentRewardsRecordSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromSDKJSON(object.rewards) : undefined
-    };
-  },
-  toSDK(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorCurrentRewards.toSDK(message.rewards) : undefined);
-    return obj;
-  },
-  fromAmino(object: ValidatorCurrentRewardsRecordAmino): ValidatorCurrentRewardsRecord {
-    return {
-      validatorAddress: object.validator_address,
-      rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
-    };
-  },
-  toAmino(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorCurrentRewardsRecordAminoMsg): ValidatorCurrentRewardsRecord {
-    return ValidatorCurrentRewardsRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorCurrentRewardsRecord",
-      value: ValidatorCurrentRewardsRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg): ValidatorCurrentRewardsRecord {
     return ValidatorCurrentRewardsRecord.decode(message.value);
@@ -768,73 +486,6 @@ export const DelegatorStartingInfoRecord = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DelegatorStartingInfoRecord {
-    const obj = createBaseDelegatorStartingInfoRecord();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.startingInfo)) obj.startingInfo = DelegatorStartingInfo.fromJSON(object.startingInfo);
-    return obj;
-  },
-  toJSON(message: DelegatorStartingInfoRecord): unknown {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.startingInfo !== undefined && (obj.startingInfo = message.startingInfo ? DelegatorStartingInfo.toJSON(message.startingInfo) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DelegatorStartingInfoRecord>): DelegatorStartingInfoRecord {
-    const message = createBaseDelegatorStartingInfoRecord();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
-    if (object.startingInfo !== undefined && object.startingInfo !== null) {
-      message.startingInfo = DelegatorStartingInfo.fromPartial(object.startingInfo);
-    }
-    return message;
-  },
-  fromSDK(object: DelegatorStartingInfoRecordSDKType): DelegatorStartingInfoRecord {
-    return {
-      delegatorAddress: object?.delegator_address,
-      validatorAddress: object?.validator_address,
-      startingInfo: object.starting_info ? DelegatorStartingInfo.fromSDK(object.starting_info) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DelegatorStartingInfoRecordSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      starting_info: isSet(object.starting_info) ? DelegatorStartingInfo.fromSDKJSON(object.starting_info) : undefined
-    };
-  },
-  toSDK(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordSDKType {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    message.startingInfo !== undefined && (obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toSDK(message.startingInfo) : undefined);
-    return obj;
-  },
-  fromAmino(object: DelegatorStartingInfoRecordAmino): DelegatorStartingInfoRecord {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorAddress: object.validator_address,
-      startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
-    };
-  },
-  toAmino(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAmino {
-    const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DelegatorStartingInfoRecordAminoMsg): DelegatorStartingInfoRecord {
-    return DelegatorStartingInfoRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/DelegatorStartingInfoRecord",
-      value: DelegatorStartingInfoRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg): DelegatorStartingInfoRecord {
     return DelegatorStartingInfoRecord.decode(message.value);
@@ -899,85 +550,6 @@ export const ValidatorSlashEventRecord = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ValidatorSlashEventRecord {
-    const obj = createBaseValidatorSlashEventRecord();
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
-    if (isSet(object.validatorSlashEvent)) obj.validatorSlashEvent = ValidatorSlashEvent.fromJSON(object.validatorSlashEvent);
-    return obj;
-  },
-  toJSON(message: ValidatorSlashEventRecord): unknown {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
-    message.validatorSlashEvent !== undefined && (obj.validatorSlashEvent = message.validatorSlashEvent ? ValidatorSlashEvent.toJSON(message.validatorSlashEvent) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValidatorSlashEventRecord>): ValidatorSlashEventRecord {
-    const message = createBaseValidatorSlashEventRecord();
-    message.validatorAddress = object.validatorAddress ?? "";
-    if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
-    }
-    if (object.period !== undefined && object.period !== null) {
-      message.period = BigInt(object.period.toString());
-    }
-    if (object.validatorSlashEvent !== undefined && object.validatorSlashEvent !== null) {
-      message.validatorSlashEvent = ValidatorSlashEvent.fromPartial(object.validatorSlashEvent);
-    }
-    return message;
-  },
-  fromSDK(object: ValidatorSlashEventRecordSDKType): ValidatorSlashEventRecord {
-    return {
-      validatorAddress: object?.validator_address,
-      height: object?.height,
-      period: object?.period,
-      validatorSlashEvent: object.validator_slash_event ? ValidatorSlashEvent.fromSDK(object.validator_slash_event) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ValidatorSlashEventRecordSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
-      validator_slash_event: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromSDKJSON(object.validator_slash_event) : undefined
-    };
-  },
-  toSDK(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordSDKType {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.height = message.height;
-    obj.period = message.period;
-    message.validatorSlashEvent !== undefined && (obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toSDK(message.validatorSlashEvent) : undefined);
-    return obj;
-  },
-  fromAmino(object: ValidatorSlashEventRecordAmino): ValidatorSlashEventRecord {
-    return {
-      validatorAddress: object.validator_address,
-      height: BigInt(object.height),
-      period: BigInt(object.period),
-      validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
-    };
-  },
-  toAmino(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAmino {
-    const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.period = message.period ? message.period.toString() : undefined;
-    obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorSlashEventRecordAminoMsg): ValidatorSlashEventRecord {
-    return ValidatorSlashEventRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorSlashEventRecord",
-      value: ValidatorSlashEventRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg): ValidatorSlashEventRecord {
     return ValidatorSlashEventRecord.decode(message.value);
@@ -1084,215 +656,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (isSet(object.feePool)) obj.feePool = FeePool.fromJSON(object.feePool);
-    if (Array.isArray(object?.delegatorWithdrawInfos)) obj.delegatorWithdrawInfos = object.delegatorWithdrawInfos.map((e: any) => DelegatorWithdrawInfo.fromJSON(e));
-    if (isSet(object.previousProposer)) obj.previousProposer = String(object.previousProposer);
-    if (Array.isArray(object?.outstandingRewards)) obj.outstandingRewards = object.outstandingRewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromJSON(e));
-    if (Array.isArray(object?.validatorAccumulatedCommissions)) obj.validatorAccumulatedCommissions = object.validatorAccumulatedCommissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromJSON(e));
-    if (Array.isArray(object?.validatorHistoricalRewards)) obj.validatorHistoricalRewards = object.validatorHistoricalRewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromJSON(e));
-    if (Array.isArray(object?.validatorCurrentRewards)) obj.validatorCurrentRewards = object.validatorCurrentRewards.map((e: any) => ValidatorCurrentRewardsRecord.fromJSON(e));
-    if (Array.isArray(object?.delegatorStartingInfos)) obj.delegatorStartingInfos = object.delegatorStartingInfos.map((e: any) => DelegatorStartingInfoRecord.fromJSON(e));
-    if (Array.isArray(object?.validatorSlashEvents)) obj.validatorSlashEvents = object.validatorSlashEvents.map((e: any) => ValidatorSlashEventRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.feePool !== undefined && (obj.feePool = message.feePool ? FeePool.toJSON(message.feePool) : undefined);
-    if (message.delegatorWithdrawInfos) {
-      obj.delegatorWithdrawInfos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toJSON(e) : undefined);
-    } else {
-      obj.delegatorWithdrawInfos = [];
-    }
-    message.previousProposer !== undefined && (obj.previousProposer = message.previousProposer);
-    if (message.outstandingRewards) {
-      obj.outstandingRewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toJSON(e) : undefined);
-    } else {
-      obj.outstandingRewards = [];
-    }
-    if (message.validatorAccumulatedCommissions) {
-      obj.validatorAccumulatedCommissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toJSON(e) : undefined);
-    } else {
-      obj.validatorAccumulatedCommissions = [];
-    }
-    if (message.validatorHistoricalRewards) {
-      obj.validatorHistoricalRewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toJSON(e) : undefined);
-    } else {
-      obj.validatorHistoricalRewards = [];
-    }
-    if (message.validatorCurrentRewards) {
-      obj.validatorCurrentRewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toJSON(e) : undefined);
-    } else {
-      obj.validatorCurrentRewards = [];
-    }
-    if (message.delegatorStartingInfos) {
-      obj.delegatorStartingInfos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toJSON(e) : undefined);
-    } else {
-      obj.delegatorStartingInfos = [];
-    }
-    if (message.validatorSlashEvents) {
-      obj.validatorSlashEvents = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toJSON(e) : undefined);
-    } else {
-      obj.validatorSlashEvents = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    if (object.feePool !== undefined && object.feePool !== null) {
-      message.feePool = FeePool.fromPartial(object.feePool);
-    }
-    message.delegatorWithdrawInfos = object.delegatorWithdrawInfos?.map(e => DelegatorWithdrawInfo.fromPartial(e)) || [];
-    message.previousProposer = object.previousProposer ?? "";
-    message.outstandingRewards = object.outstandingRewards?.map(e => ValidatorOutstandingRewardsRecord.fromPartial(e)) || [];
-    message.validatorAccumulatedCommissions = object.validatorAccumulatedCommissions?.map(e => ValidatorAccumulatedCommissionRecord.fromPartial(e)) || [];
-    message.validatorHistoricalRewards = object.validatorHistoricalRewards?.map(e => ValidatorHistoricalRewardsRecord.fromPartial(e)) || [];
-    message.validatorCurrentRewards = object.validatorCurrentRewards?.map(e => ValidatorCurrentRewardsRecord.fromPartial(e)) || [];
-    message.delegatorStartingInfos = object.delegatorStartingInfos?.map(e => DelegatorStartingInfoRecord.fromPartial(e)) || [];
-    message.validatorSlashEvents = object.validatorSlashEvents?.map(e => ValidatorSlashEventRecord.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined,
-      feePool: object.fee_pool ? FeePool.fromSDK(object.fee_pool) : undefined,
-      delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromSDK(e)) : [],
-      previousProposer: object?.previous_proposer,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromSDK(e)) : [],
-      validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromSDK(e)) : [],
-      validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromSDK(e)) : [],
-      validatorCurrentRewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromSDK(e)) : [],
-      delegatorStartingInfos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromSDK(e)) : [],
-      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      fee_pool: isSet(object.fee_pool) ? FeePool.fromSDKJSON(object.fee_pool) : undefined,
-      delegator_withdraw_infos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromSDKJSON(e)) : [],
-      previous_proposer: isSet(object.previous_proposer) ? String(object.previous_proposer) : "",
-      outstanding_rewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromSDKJSON(e)) : [],
-      validator_accumulated_commissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromSDKJSON(e)) : [],
-      validator_historical_rewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromSDKJSON(e)) : [],
-      validator_current_rewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromSDKJSON(e)) : [],
-      delegator_starting_infos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromSDKJSON(e)) : [],
-      validator_slash_events: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    message.feePool !== undefined && (obj.fee_pool = message.feePool ? FeePool.toSDK(message.feePool) : undefined);
-    if (message.delegatorWithdrawInfos) {
-      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toSDK(e) : undefined);
-    } else {
-      obj.delegator_withdraw_infos = [];
-    }
-    obj.previous_proposer = message.previousProposer;
-    if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toSDK(e) : undefined);
-    } else {
-      obj.outstanding_rewards = [];
-    }
-    if (message.validatorAccumulatedCommissions) {
-      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toSDK(e) : undefined);
-    } else {
-      obj.validator_accumulated_commissions = [];
-    }
-    if (message.validatorHistoricalRewards) {
-      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toSDK(e) : undefined);
-    } else {
-      obj.validator_historical_rewards = [];
-    }
-    if (message.validatorCurrentRewards) {
-      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toSDK(e) : undefined);
-    } else {
-      obj.validator_current_rewards = [];
-    }
-    if (message.delegatorStartingInfos) {
-      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toSDK(e) : undefined);
-    } else {
-      obj.delegator_starting_infos = [];
-    }
-    if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toSDK(e) : undefined);
-    } else {
-      obj.validator_slash_events = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      feePool: object?.fee_pool ? FeePool.fromAmino(object.fee_pool) : undefined,
-      delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromAmino(e)) : [],
-      previousProposer: object.previous_proposer,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromAmino(e)) : [],
-      validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromAmino(e)) : [],
-      validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromAmino(e)) : [],
-      validatorCurrentRewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromAmino(e)) : [],
-      delegatorStartingInfos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromAmino(e)) : [],
-      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool) : undefined;
-    if (message.delegatorWithdrawInfos) {
-      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e) : undefined);
-    } else {
-      obj.delegator_withdraw_infos = [];
-    }
-    obj.previous_proposer = message.previousProposer;
-    if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e) : undefined);
-    } else {
-      obj.outstanding_rewards = [];
-    }
-    if (message.validatorAccumulatedCommissions) {
-      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_accumulated_commissions = [];
-    }
-    if (message.validatorHistoricalRewards) {
-      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_historical_rewards = [];
-    }
-    if (message.validatorCurrentRewards) {
-      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_current_rewards = [];
-    }
-    if (message.delegatorStartingInfos) {
-      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e) : undefined);
-    } else {
-      obj.delegator_starting_infos = [];
-    }
-    if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_slash_events = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

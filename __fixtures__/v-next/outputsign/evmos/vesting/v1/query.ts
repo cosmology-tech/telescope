@@ -1,11 +1,14 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
   address: string;
+}
+export interface QueryBalancesRequestProtoMsg {
+  typeUrl: "/evmos.vesting.v1.QueryBalancesRequest";
+  value: Uint8Array;
 }
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
@@ -22,6 +25,10 @@ export interface QueryBalancesResponse {
   unvested: Coin[];
   /** current amount of vested tokens */
   vested: Coin[];
+}
+export interface QueryBalancesResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.QueryBalancesResponse";
+  value: Uint8Array;
 }
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
@@ -61,49 +68,6 @@ export const QueryBalancesRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryBalancesRequest {
-    const obj = createBaseQueryBalancesRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
-  },
-  toJSON(message: QueryBalancesRequest): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryBalancesRequest>): QueryBalancesRequest {
-    const message = createBaseQueryBalancesRequest();
-    message.address = object.address ?? "";
-    return message;
-  },
-  fromSDK(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
-    return {
-      address: object?.address
-    };
-  },
-  fromSDKJSON(object: any): QueryBalancesRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
-  },
-  toSDK(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: QueryBalancesRequest): QueryBalancesRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: QueryBalancesRequestAminoMsg): QueryBalancesRequest {
-    return QueryBalancesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryBalancesRequestProtoMsg): QueryBalancesRequest {
     return QueryBalancesRequest.decode(message.value);
@@ -161,101 +125,6 @@ export const QueryBalancesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryBalancesResponse {
-    const obj = createBaseQueryBalancesResponse();
-    if (Array.isArray(object?.locked)) obj.locked = object.locked.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.unvested)) obj.unvested = object.unvested.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.vested)) obj.vested = object.vested.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryBalancesResponse): unknown {
-    const obj: any = {};
-    if (message.locked) {
-      obj.locked = message.locked.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.locked = [];
-    }
-    if (message.unvested) {
-      obj.unvested = message.unvested.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.unvested = [];
-    }
-    if (message.vested) {
-      obj.vested = message.vested.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.vested = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryBalancesResponse>): QueryBalancesResponse {
-    const message = createBaseQueryBalancesResponse();
-    message.locked = object.locked?.map(e => Coin.fromPartial(e)) || [];
-    message.unvested = object.unvested?.map(e => Coin.fromPartial(e)) || [];
-    message.vested = object.vested?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: QueryBalancesResponseSDKType): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDK(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDK(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): QueryBalancesResponseSDKType {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: QueryBalancesResponse): QueryBalancesResponseSDKType {
-    const obj: any = {};
-    if (message.locked) {
-      obj.locked = message.locked.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.locked = [];
-    }
-    if (message.unvested) {
-      obj.unvested = message.unvested.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.unvested = [];
-    }
-    if (message.vested) {
-      obj.vested = message.vested.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.vested = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QueryBalancesResponseAmino): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromAmino(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromAmino(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryBalancesResponse): QueryBalancesResponseAmino {
-    const obj: any = {};
-    if (message.locked) {
-      obj.locked = message.locked.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.locked = [];
-    }
-    if (message.unvested) {
-      obj.unvested = message.unvested.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.unvested = [];
-    }
-    if (message.vested) {
-      obj.vested = message.vested.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.vested = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryBalancesResponseAminoMsg): QueryBalancesResponse {
-    return QueryBalancesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryBalancesResponseProtoMsg): QueryBalancesResponse {
     return QueryBalancesResponse.decode(message.value);

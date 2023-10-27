@@ -26,7 +26,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/deployment/v1beta1/deployments/list`;
-    return QueryDeploymentsResponse.fromSDKJSON(await this.req.get<QueryDeploymentsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryDeploymentsResponseSDKType>(endpoint, options);
   };
   /* Deployment queries deployment details */
   deployment = async (params: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> => {
@@ -37,7 +37,7 @@ export class LCDQueryClient {
       options.params.id = params.id;
     }
     const endpoint = `akash/deployment/v1beta1/deployments/info`;
-    return QueryDeploymentResponse.fromSDKJSON(await this.req.get<QueryDeploymentResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryDeploymentResponseSDKType>(endpoint, options);
   };
   /* Group queries group details */
   group = async (params: QueryGroupRequest): Promise<QueryGroupResponseSDKType> => {
@@ -48,6 +48,6 @@ export class LCDQueryClient {
       options.params.id = params.id;
     }
     const endpoint = `akash/deployment/v1beta1/groups/info`;
-    return QueryGroupResponse.fromSDKJSON(await this.req.get<QueryGroupResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryGroupResponseSDKType>(endpoint, options);
   };
 }

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -16,6 +15,10 @@ export interface Params {
    * It is a decimal value in the range [0.0, 1.0].
    */
   variance: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.inflation.v1beta2.Params";
+  value: Uint8Array;
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
@@ -66,71 +69,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.inflationDecayFactor)) obj.inflationDecayFactor = String(object.inflationDecayFactor);
-    if (isSet(object.initialInflation)) obj.initialInflation = String(object.initialInflation);
-    if (isSet(object.variance)) obj.variance = String(object.variance);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.inflationDecayFactor !== undefined && (obj.inflationDecayFactor = message.inflationDecayFactor);
-    message.initialInflation !== undefined && (obj.initialInflation = message.initialInflation);
-    message.variance !== undefined && (obj.variance = message.variance);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
-    const message = createBaseParams();
-    message.inflationDecayFactor = object.inflationDecayFactor ?? "";
-    message.initialInflation = object.initialInflation ?? "";
-    message.variance = object.variance ?? "";
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      inflationDecayFactor: object?.inflation_decay_factor,
-      initialInflation: object?.initial_inflation,
-      variance: object?.variance
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      inflation_decay_factor: isSet(object.inflation_decay_factor) ? String(object.inflation_decay_factor) : "",
-      initial_inflation: isSet(object.initial_inflation) ? String(object.initial_inflation) : "",
-      variance: isSet(object.variance) ? String(object.variance) : ""
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.inflation_decay_factor = message.inflationDecayFactor;
-    obj.initial_inflation = message.initialInflation;
-    obj.variance = message.variance;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      inflationDecayFactor: object.inflation_decay_factor,
-      initialInflation: object.initial_inflation,
-      variance: object.variance
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.inflation_decay_factor = message.inflationDecayFactor;
-    obj.initial_inflation = message.initialInflation;
-    obj.variance = message.variance;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "akash/inflation/v1beta2/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

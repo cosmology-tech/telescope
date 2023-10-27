@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
@@ -11,6 +10,10 @@ export interface SourceContext {
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
   fileName: string;
+}
+export interface SourceContextProtoMsg {
+  typeUrl: "/google.protobuf.SourceContext";
+  value: Uint8Array;
 }
 /**
  * `SourceContext` represents information about the source of a
@@ -48,49 +51,6 @@ export const SourceContext = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SourceContext {
-    const obj = createBaseSourceContext();
-    if (isSet(object.fileName)) obj.fileName = String(object.fileName);
-    return obj;
-  },
-  toJSON(message: SourceContext): unknown {
-    const obj: any = {};
-    message.fileName !== undefined && (obj.fileName = message.fileName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SourceContext>): SourceContext {
-    const message = createBaseSourceContext();
-    message.fileName = object.fileName ?? "";
-    return message;
-  },
-  fromSDK(object: SourceContextSDKType): SourceContext {
-    return {
-      fileName: object?.file_name
-    };
-  },
-  fromSDKJSON(object: any): SourceContextSDKType {
-    return {
-      file_name: isSet(object.file_name) ? String(object.file_name) : ""
-    };
-  },
-  toSDK(message: SourceContext): SourceContextSDKType {
-    const obj: any = {};
-    obj.file_name = message.fileName;
-    return obj;
-  },
-  fromAmino(object: SourceContextAmino): SourceContext {
-    return {
-      fileName: object.file_name
-    };
-  },
-  toAmino(message: SourceContext): SourceContextAmino {
-    const obj: any = {};
-    obj.file_name = message.fileName;
-    return obj;
-  },
-  fromAminoMsg(object: SourceContextAminoMsg): SourceContext {
-    return SourceContext.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceContextProtoMsg): SourceContext {
     return SourceContext.decode(message.value);

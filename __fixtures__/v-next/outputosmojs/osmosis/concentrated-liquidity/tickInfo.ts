@@ -9,6 +9,10 @@ export interface TickInfo {
   feeGrowthOutside: DecCoin[];
   uptimeTrackers: UptimeTracker[];
 }
+export interface TickInfoProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.TickInfo";
+  value: Uint8Array;
+}
 export interface TickInfoSDKType {
   liquidity_gross: string;
   liquidity_net: string;
@@ -17,6 +21,10 @@ export interface TickInfoSDKType {
 }
 export interface UptimeTracker {
   uptimeGrowthOutside: DecCoin[];
+}
+export interface UptimeTrackerProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.UptimeTracker";
+  value: Uint8Array;
 }
 export interface UptimeTrackerSDKType {
   uptime_growth_outside: DecCoinSDKType[];

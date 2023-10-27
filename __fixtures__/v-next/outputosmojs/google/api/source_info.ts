@@ -7,6 +7,10 @@ export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
 }
+export interface SourceInfoProtoMsg {
+  typeUrl: "/google.api.SourceInfo";
+  value: Uint8Array;
+}
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
   source_files: AnySDKType[];

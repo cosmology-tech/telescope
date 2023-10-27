@@ -11,6 +11,10 @@ export interface MsgCreateConcentratedPool {
   exponentAtPriceOne: string;
   swapFee: string;
 }
+export interface MsgCreateConcentratedPoolProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateConcentratedPool";
+  value: Uint8Array;
+}
 /** ===================== MsgCreateConcentratedPool */
 export interface MsgCreateConcentratedPoolSDKType {
   sender: string;
@@ -23,6 +27,10 @@ export interface MsgCreateConcentratedPoolSDKType {
 /** Returns a unique poolID to identify the pool with. */
 export interface MsgCreateConcentratedPoolResponse {
   poolId: bigint;
+}
+export interface MsgCreateConcentratedPoolResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateConcentratedPoolResponse";
+  value: Uint8Array;
 }
 /** Returns a unique poolID to identify the pool with. */
 export interface MsgCreateConcentratedPoolResponseSDKType {

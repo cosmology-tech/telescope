@@ -2,7 +2,7 @@ import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -41,6 +41,10 @@ export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string
 export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
+}
+export interface LogMetric_LabelExtractorsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
@@ -182,6 +186,10 @@ export interface LogMetric {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
+export interface LogMetricProtoMsg {
+  typeUrl: "/google.logging.v2.LogMetric";
+  value: Uint8Array;
+}
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -229,6 +237,10 @@ export interface ListLogMetricsRequest {
    */
   pageSize: number;
 }
+export interface ListLogMetricsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogMetricsRequest";
+  value: Uint8Array;
+}
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
   parent: string;
@@ -246,6 +258,10 @@ export interface ListLogMetricsResponse {
    */
   nextPageToken: string;
 }
+export interface ListLogMetricsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogMetricsResponse";
+  value: Uint8Array;
+}
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
   metrics: LogMetricSDKType[];
@@ -259,6 +275,10 @@ export interface GetLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
+}
+export interface GetLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetLogMetricRequest";
+  value: Uint8Array;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestSDKType {
@@ -280,6 +300,10 @@ export interface CreateLogMetricRequest {
    */
   metric?: LogMetric;
 }
+export interface CreateLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateLogMetricRequest";
+  value: Uint8Array;
+}
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestSDKType {
   parent: string;
@@ -300,6 +324,10 @@ export interface UpdateLogMetricRequest {
   /** Required. The updated metric. */
   metric?: LogMetric;
 }
+export interface UpdateLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
+  value: Uint8Array;
+}
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
@@ -313,6 +341,10 @@ export interface DeleteLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
+}
+export interface DeleteLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
+  value: Uint8Array;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestSDKType {
@@ -353,57 +385,6 @@ export const LogMetric_LabelExtractorsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): LogMetric_LabelExtractorsEntry {
-    const obj = createBaseLogMetric_LabelExtractorsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<LogMetric_LabelExtractorsEntry>): LogMetric_LabelExtractorsEntry {
-    const message = createBaseLogMetric_LabelExtractorsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: LogMetric_LabelExtractorsEntrySDKType): LogMetric_LabelExtractorsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): LogMetric_LabelExtractorsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: LogMetric_LabelExtractorsEntryAmino): LogMetric_LabelExtractorsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
-    return LogMetric_LabelExtractorsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg): LogMetric_LabelExtractorsEntry {
     return LogMetric_LabelExtractorsEntry.decode(message.value);
@@ -518,175 +499,6 @@ export const LogMetric = {
     }
     return message;
   },
-  fromJSON(object: any): LogMetric {
-    const obj = createBaseLogMetric();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
-    if (isSet(object.metricDescriptor)) obj.metricDescriptor = MetricDescriptor.fromJSON(object.metricDescriptor);
-    if (isSet(object.valueExtractor)) obj.valueExtractor = String(object.valueExtractor);
-    if (isObject(object.labelExtractors)) obj.labelExtractors = Object.entries(object.labelExtractors).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.version)) obj.version = logMetric_ApiVersionFromJSON(object.version);
-    return obj;
-  },
-  toJSON(message: LogMetric): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-    message.metricDescriptor !== undefined && (obj.metricDescriptor = message.metricDescriptor ? MetricDescriptor.toJSON(message.metricDescriptor) : undefined);
-    message.valueExtractor !== undefined && (obj.valueExtractor = message.valueExtractor);
-    obj.labelExtractors = {};
-    if (message.labelExtractors) {
-      Object.entries(message.labelExtractors).forEach(([k, v]) => {
-        obj.labelExtractors[k] = v;
-      });
-    }
-    message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<LogMetric>): LogMetric {
-    const message = createBaseLogMetric();
-    message.name = object.name ?? "";
-    message.description = object.description ?? "";
-    message.filter = object.filter ?? "";
-    message.disabled = object.disabled ?? false;
-    if (object.metricDescriptor !== undefined && object.metricDescriptor !== null) {
-      message.metricDescriptor = MetricDescriptor.fromPartial(object.metricDescriptor);
-    }
-    message.valueExtractor = object.valueExtractor ?? "";
-    message.labelExtractors = Object.entries(object.labelExtractors ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
-      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
-    }
-    message.createTime = object.createTime ?? undefined;
-    message.updateTime = object.updateTime ?? undefined;
-    message.version = object.version ?? 0;
-    return message;
-  },
-  fromSDK(object: LogMetricSDKType): LogMetric {
-    return {
-      name: object?.name,
-      description: object?.description,
-      filter: object?.filter,
-      disabled: object?.disabled,
-      metricDescriptor: object.metric_descriptor ? MetricDescriptor.fromSDK(object.metric_descriptor) : undefined,
-      valueExtractor: object?.value_extractor,
-      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
-      createTime: object.create_time ?? undefined,
-      updateTime: object.update_time ?? undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
-    };
-  },
-  fromSDKJSON(object: any): LogMetricSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      metric_descriptor: isSet(object.metric_descriptor) ? MetricDescriptor.fromSDKJSON(object.metric_descriptor) : undefined,
-      value_extractor: isSet(object.value_extractor) ? String(object.value_extractor) : "",
-      label_extractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
-    };
-  },
-  toSDK(message: LogMetric): LogMetricSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
-    message.metricDescriptor !== undefined && (obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toSDK(message.metricDescriptor) : undefined);
-    obj.value_extractor = message.valueExtractor;
-    obj.label_extractors = {};
-    if (message.labelExtractors) {
-      Object.entries(message.labelExtractors).forEach(([k, v]) => {
-        obj.label_extractors[k] = v;
-      });
-    }
-    message.bucketOptions !== undefined && (obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toSDK(message.bucketOptions) : undefined);
-    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
-    message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
-    return obj;
-  },
-  fromAmino(object: LogMetricAmino): LogMetric {
-    return {
-      name: object.name,
-      description: object.description,
-      filter: object.filter,
-      disabled: object.disabled,
-      metricDescriptor: object?.metric_descriptor ? MetricDescriptor.fromAmino(object.metric_descriptor) : undefined,
-      valueExtractor: object.value_extractor,
-      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
-    };
-  },
-  toAmino(message: LogMetric): LogMetricAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
-    obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor) : undefined;
-    obj.value_extractor = message.valueExtractor;
-    obj.label_extractors = {};
-    if (message.labelExtractors) {
-      Object.entries(message.labelExtractors).forEach(([k, v]) => {
-        obj.label_extractors[k] = v;
-      });
-    }
-    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.version = message.version;
-    return obj;
-  },
-  fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
-    return LogMetric.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogMetricProtoMsg): LogMetric {
     return LogMetric.decode(message.value);
   },
@@ -744,65 +556,6 @@ export const ListLogMetricsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ListLogMetricsRequest {
-    const obj = createBaseListLogMetricsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
-  },
-  toJSON(message: ListLogMetricsRequest): unknown {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListLogMetricsRequest>): ListLogMetricsRequest {
-    const message = createBaseListLogMetricsRequest();
-    message.parent = object.parent ?? "";
-    message.pageToken = object.pageToken ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    return message;
-  },
-  fromSDK(object: ListLogMetricsRequestSDKType): ListLogMetricsRequest {
-    return {
-      parent: object?.parent,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
-    };
-  },
-  fromSDKJSON(object: any): ListLogMetricsRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-  toSDK(message: ListLogMetricsRequest): ListLogMetricsRequestSDKType {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAmino(object: ListLogMetricsRequestAmino): ListLogMetricsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
-    return ListLogMetricsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogMetricsRequestProtoMsg): ListLogMetricsRequest {
     return ListLogMetricsRequest.decode(message.value);
   },
@@ -853,69 +606,6 @@ export const ListLogMetricsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): ListLogMetricsResponse {
-    const obj = createBaseListLogMetricsResponse();
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => LogMetric.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListLogMetricsResponse): unknown {
-    const obj: any = {};
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? LogMetric.toJSON(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListLogMetricsResponse>): ListLogMetricsResponse {
-    const message = createBaseListLogMetricsResponse();
-    message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-  fromSDK(object: ListLogMetricsResponseSDKType): ListLogMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromSDK(e)) : [],
-      nextPageToken: object?.next_page_token
-    };
-  },
-  fromSDKJSON(object: any): ListLogMetricsResponseSDKType {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-  toSDK(message: ListLogMetricsResponse): ListLogMetricsResponseSDKType {
-    const obj: any = {};
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? LogMetric.toSDK(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAmino(object: ListLogMetricsResponseAmino): ListLogMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListLogMetricsResponse): ListLogMetricsResponseAmino {
-    const obj: any = {};
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
-    return ListLogMetricsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogMetricsResponseProtoMsg): ListLogMetricsResponse {
     return ListLogMetricsResponse.decode(message.value);
   },
@@ -958,49 +648,6 @@ export const GetLogMetricRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GetLogMetricRequest {
-    const obj = createBaseGetLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
-  },
-  toJSON(message: GetLogMetricRequest): unknown {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GetLogMetricRequest>): GetLogMetricRequest {
-    const message = createBaseGetLogMetricRequest();
-    message.metricName = object.metricName ?? "";
-    return message;
-  },
-  fromSDK(object: GetLogMetricRequestSDKType): GetLogMetricRequest {
-    return {
-      metricName: object?.metric_name
-    };
-  },
-  fromSDKJSON(object: any): GetLogMetricRequestSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : ""
-    };
-  },
-  toSDK(message: GetLogMetricRequest): GetLogMetricRequestSDKType {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    return obj;
-  },
-  fromAmino(object: GetLogMetricRequestAmino): GetLogMetricRequest {
-    return {
-      metricName: object.metric_name
-    };
-  },
-  toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    return obj;
-  },
-  fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
-    return GetLogMetricRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetLogMetricRequestProtoMsg): GetLogMetricRequest {
     return GetLogMetricRequest.decode(message.value);
@@ -1052,59 +699,6 @@ export const CreateLogMetricRequest = {
     }
     return message;
   },
-  fromJSON(object: any): CreateLogMetricRequest {
-    const obj = createBaseCreateLogMetricRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
-  },
-  toJSON(message: CreateLogMetricRequest): unknown {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
-    const message = createBaseCreateLogMetricRequest();
-    message.parent = object.parent ?? "";
-    if (object.metric !== undefined && object.metric !== null) {
-      message.metric = LogMetric.fromPartial(object.metric);
-    }
-    return message;
-  },
-  fromSDK(object: CreateLogMetricRequestSDKType): CreateLogMetricRequest {
-    return {
-      parent: object?.parent,
-      metric: object.metric ? LogMetric.fromSDK(object.metric) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CreateLogMetricRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      metric: isSet(object.metric) ? LogMetric.fromSDKJSON(object.metric) : undefined
-    };
-  },
-  toSDK(message: CreateLogMetricRequest): CreateLogMetricRequestSDKType {
-    const obj: any = {};
-    obj.parent = message.parent;
-    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toSDK(message.metric) : undefined);
-    return obj;
-  },
-  fromAmino(object: CreateLogMetricRequestAmino): CreateLogMetricRequest {
-    return {
-      parent: object.parent,
-      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
-    };
-  },
-  toAmino(message: CreateLogMetricRequest): CreateLogMetricRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateLogMetricRequestAminoMsg): CreateLogMetricRequest {
-    return CreateLogMetricRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CreateLogMetricRequestProtoMsg): CreateLogMetricRequest {
     return CreateLogMetricRequest.decode(message.value);
   },
@@ -1155,59 +749,6 @@ export const UpdateLogMetricRequest = {
     }
     return message;
   },
-  fromJSON(object: any): UpdateLogMetricRequest {
-    const obj = createBaseUpdateLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
-  },
-  toJSON(message: UpdateLogMetricRequest): unknown {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
-    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
-    const message = createBaseUpdateLogMetricRequest();
-    message.metricName = object.metricName ?? "";
-    if (object.metric !== undefined && object.metric !== null) {
-      message.metric = LogMetric.fromPartial(object.metric);
-    }
-    return message;
-  },
-  fromSDK(object: UpdateLogMetricRequestSDKType): UpdateLogMetricRequest {
-    return {
-      metricName: object?.metric_name,
-      metric: object.metric ? LogMetric.fromSDK(object.metric) : undefined
-    };
-  },
-  fromSDKJSON(object: any): UpdateLogMetricRequestSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
-      metric: isSet(object.metric) ? LogMetric.fromSDKJSON(object.metric) : undefined
-    };
-  },
-  toSDK(message: UpdateLogMetricRequest): UpdateLogMetricRequestSDKType {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toSDK(message.metric) : undefined);
-    return obj;
-  },
-  fromAmino(object: UpdateLogMetricRequestAmino): UpdateLogMetricRequest {
-    return {
-      metricName: object.metric_name,
-      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
-    };
-  },
-  toAmino(message: UpdateLogMetricRequest): UpdateLogMetricRequestAmino {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpdateLogMetricRequestAminoMsg): UpdateLogMetricRequest {
-    return UpdateLogMetricRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateLogMetricRequestProtoMsg): UpdateLogMetricRequest {
     return UpdateLogMetricRequest.decode(message.value);
   },
@@ -1250,49 +791,6 @@ export const DeleteLogMetricRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DeleteLogMetricRequest {
-    const obj = createBaseDeleteLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
-  },
-  toJSON(message: DeleteLogMetricRequest): unknown {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DeleteLogMetricRequest>): DeleteLogMetricRequest {
-    const message = createBaseDeleteLogMetricRequest();
-    message.metricName = object.metricName ?? "";
-    return message;
-  },
-  fromSDK(object: DeleteLogMetricRequestSDKType): DeleteLogMetricRequest {
-    return {
-      metricName: object?.metric_name
-    };
-  },
-  fromSDKJSON(object: any): DeleteLogMetricRequestSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : ""
-    };
-  },
-  toSDK(message: DeleteLogMetricRequest): DeleteLogMetricRequestSDKType {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    return obj;
-  },
-  fromAmino(object: DeleteLogMetricRequestAmino): DeleteLogMetricRequest {
-    return {
-      metricName: object.metric_name
-    };
-  },
-  toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {
-    return DeleteLogMetricRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteLogMetricRequestProtoMsg): DeleteLogMetricRequest {
     return DeleteLogMetricRequest.decode(message.value);

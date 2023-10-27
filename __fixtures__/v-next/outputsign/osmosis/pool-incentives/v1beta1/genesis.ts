@@ -1,7 +1,6 @@
 import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType, PoolToGauges, PoolToGaugesSDKType } from "./incentives";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
@@ -10,6 +9,10 @@ export interface GenesisState {
   lockableDurations: Duration[];
   distrInfo?: DistrInfo;
   poolToGauges?: PoolToGauges;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {
@@ -68,97 +71,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    if (isSet(object.distrInfo)) obj.distrInfo = DistrInfo.fromJSON(object.distrInfo);
-    if (isSet(object.poolToGauges)) obj.poolToGauges = PoolToGauges.fromJSON(object.poolToGauges);
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
-    } else {
-      obj.lockableDurations = [];
-    }
-    message.distrInfo !== undefined && (obj.distrInfo = message.distrInfo ? DistrInfo.toJSON(message.distrInfo) : undefined);
-    message.poolToGauges !== undefined && (obj.poolToGauges = message.poolToGauges ? PoolToGauges.toJSON(message.poolToGauges) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    if (object.distrInfo !== undefined && object.distrInfo !== null) {
-      message.distrInfo = DistrInfo.fromPartial(object.distrInfo);
-    }
-    if (object.poolToGauges !== undefined && object.poolToGauges !== null) {
-      message.poolToGauges = PoolToGauges.fromPartial(object.poolToGauges);
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined,
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
-      distrInfo: object.distr_info ? DistrInfo.fromSDK(object.distr_info) : undefined,
-      poolToGauges: object.pool_to_gauges ? PoolToGauges.fromSDK(object.pool_to_gauges) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
-      distr_info: isSet(object.distr_info) ? DistrInfo.fromSDKJSON(object.distr_info) : undefined,
-      pool_to_gauges: isSet(object.pool_to_gauges) ? PoolToGauges.fromSDKJSON(object.pool_to_gauges) : undefined
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-    message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toSDK(message.distrInfo) : undefined);
-    message.poolToGauges !== undefined && (obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toSDK(message.poolToGauges) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
-      distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined,
-      poolToGauges: object?.pool_to_gauges ? PoolToGauges.fromAmino(object.pool_to_gauges) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-    obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined;
-    obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/poolincentives/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

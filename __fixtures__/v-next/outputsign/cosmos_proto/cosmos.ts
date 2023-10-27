@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../binary";
-import { isSet, DeepPartial } from "../helpers";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,
@@ -56,6 +55,10 @@ export interface InterfaceDescriptor {
    */
   description: string;
 }
+export interface InterfaceDescriptorProtoMsg {
+  typeUrl: "/cosmos_proto.InterfaceDescriptor";
+  value: Uint8Array;
+}
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
@@ -94,6 +97,10 @@ export interface ScalarDescriptor {
    * bytes fields are supported for scalars.
    */
   fieldType: ScalarType[];
+}
+export interface ScalarDescriptorProtoMsg {
+  typeUrl: "/cosmos_proto.ScalarDescriptor";
+  value: Uint8Array;
 }
 /**
  * ScalarDescriptor describes an scalar type to be used with
@@ -145,57 +152,6 @@ export const InterfaceDescriptor = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): InterfaceDescriptor {
-    const obj = createBaseInterfaceDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: InterfaceDescriptor): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
-    const message = createBaseInterfaceDescriptor();
-    message.name = object.name ?? "";
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: InterfaceDescriptorSDKType): InterfaceDescriptor {
-    return {
-      name: object?.name,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): InterfaceDescriptorSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: InterfaceDescriptor): InterfaceDescriptorSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
-    return {
-      name: object.name,
-      description: object.description
-    };
-  },
-  toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
-    return InterfaceDescriptor.fromAmino(object.value);
   },
   fromProtoMsg(message: InterfaceDescriptorProtoMsg): InterfaceDescriptor {
     return InterfaceDescriptor.decode(message.value);
@@ -262,77 +218,6 @@ export const ScalarDescriptor = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ScalarDescriptor {
-    const obj = createBaseScalarDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.fieldType)) obj.fieldType = object.fieldType.map((e: any) => scalarTypeFromJSON(e));
-    return obj;
-  },
-  toJSON(message: ScalarDescriptor): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.fieldType) {
-      obj.fieldType = message.fieldType.map(e => scalarTypeToJSON(e));
-    } else {
-      obj.fieldType = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ScalarDescriptor>): ScalarDescriptor {
-    const message = createBaseScalarDescriptor();
-    message.name = object.name ?? "";
-    message.description = object.description ?? "";
-    message.fieldType = object.fieldType?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: ScalarDescriptorSDKType): ScalarDescriptor {
-    return {
-      name: object?.name,
-      description: object?.description,
-      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ScalarDescriptorSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      field_type: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
-  },
-  toSDK(message: ScalarDescriptor): ScalarDescriptorSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    if (message.fieldType) {
-      obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));
-    } else {
-      obj.field_type = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ScalarDescriptorAmino): ScalarDescriptor {
-    return {
-      name: object.name,
-      description: object.description,
-      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
-  },
-  toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    if (message.fieldType) {
-      obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));
-    } else {
-      obj.field_type = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ScalarDescriptorAminoMsg): ScalarDescriptor {
-    return ScalarDescriptor.fromAmino(object.value);
   },
   fromProtoMsg(message: ScalarDescriptorProtoMsg): ScalarDescriptor {
     return ScalarDescriptor.decode(message.value);

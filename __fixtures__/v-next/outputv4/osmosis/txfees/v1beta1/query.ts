@@ -4,9 +4,17 @@ import { DeepPartial, isSet } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
+export interface QueryFeeTokensRequestProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensRequest";
+  value: Uint8Array;
+}
 export interface QueryFeeTokensRequestSDKType {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];
+}
+export interface QueryFeeTokensResponseProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensResponse";
+  value: Uint8Array;
 }
 export interface QueryFeeTokensResponseSDKType {
   fee_tokens: FeeTokenSDKType[];
@@ -17,6 +25,10 @@ export interface QueryFeeTokensResponseSDKType {
  */
 export interface QueryDenomSpotPriceRequest {
   denom: string;
+}
+export interface QueryDenomSpotPriceRequestProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
@@ -33,6 +45,10 @@ export interface QueryDenomSpotPriceResponse {
   poolID: bigint;
   spotPrice: string;
 }
+export interface QueryDenomSpotPriceResponseProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
@@ -44,19 +60,35 @@ export interface QueryDenomSpotPriceResponseSDKType {
 export interface QueryDenomPoolIdRequest {
   denom: string;
 }
+export interface QueryDenomPoolIdRequestProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdRequest";
+  value: Uint8Array;
+}
 export interface QueryDenomPoolIdRequestSDKType {
   denom: string;
 }
 export interface QueryDenomPoolIdResponse {
   poolID: bigint;
 }
+export interface QueryDenomPoolIdResponseProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdResponse";
+  value: Uint8Array;
+}
 export interface QueryDenomPoolIdResponseSDKType {
   poolID: bigint;
 }
 export interface QueryBaseDenomRequest {}
+export interface QueryBaseDenomRequestProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomRequest";
+  value: Uint8Array;
+}
 export interface QueryBaseDenomRequestSDKType {}
 export interface QueryBaseDenomResponse {
   baseDenom: string;
+}
+export interface QueryBaseDenomResponseProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomResponse";
+  value: Uint8Array;
 }
 export interface QueryBaseDenomResponseSDKType {
   base_denom: string;

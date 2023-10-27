@@ -11,6 +11,10 @@ export interface ContractExecutionAuthorization {
   /** Grants for contract executions */
   grants: ContractGrant[];
 }
+export interface ContractExecutionAuthorizationProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractExecutionAuthorization";
+  value: Uint8Array;
+}
 /**
  * ContractExecutionAuthorization defines authorization for wasm execute.
  * Since: wasmd 0.30
@@ -25,6 +29,10 @@ export interface ContractExecutionAuthorizationSDKType {
 export interface ContractMigrationAuthorization {
   /** Grants for contract migrations */
   grants: ContractGrant[];
+}
+export interface ContractMigrationAuthorizationProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractMigrationAuthorization";
+  value: Uint8Array;
 }
 /**
  * ContractMigrationAuthorization defines authorization for wasm contract
@@ -52,6 +60,10 @@ export interface ContractGrant {
    */
   filter?: Any;
 }
+export interface ContractGrantProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractGrant";
+  value: Uint8Array;
+}
 /**
  * ContractGrant a granted permission for a single contract
  * Since: wasmd 0.30
@@ -69,6 +81,10 @@ export interface MaxCallsLimit {
   /** Remaining number that is decremented on each execution */
   remaining: bigint;
 }
+export interface MaxCallsLimitProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MaxCallsLimit";
+  value: Uint8Array;
+}
 /**
  * MaxCallsLimit limited number of calls to the contract. No funds transferable.
  * Since: wasmd 0.30
@@ -83,6 +99,10 @@ export interface MaxCallsLimitSDKType {
 export interface MaxFundsLimit {
   /** Amounts is the maximal amount of tokens transferable to the contract. */
   amounts: Coin[];
+}
+export interface MaxFundsLimitProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MaxFundsLimit";
+  value: Uint8Array;
 }
 /**
  * MaxFundsLimit defines the maximal amounts that can be sent to the contract.
@@ -102,6 +122,10 @@ export interface CombinedLimit {
   /** Amounts is the maximal amount of tokens transferable to the contract. */
   amounts: Coin[];
 }
+export interface CombinedLimitProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.CombinedLimit";
+  value: Uint8Array;
+}
 /**
  * CombinedLimit defines the maximal amounts that can be sent to a contract and
  * the maximal number of calls executable. Both need to remain >0 to be valid.
@@ -117,6 +141,10 @@ export interface CombinedLimitSDKType {
  * Since: wasmd 0.30
  */
 export interface AllowAllMessagesFilter {}
+export interface AllowAllMessagesFilterProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AllowAllMessagesFilter";
+  value: Uint8Array;
+}
 /**
  * AllowAllMessagesFilter is a wildcard to allow any type of contract payload
  * message.
@@ -131,6 +159,10 @@ export interface AllowAllMessagesFilterSDKType {}
 export interface AcceptedMessageKeysFilter {
   /** Messages is the list of unique keys */
   keys: string[];
+}
+export interface AcceptedMessageKeysFilterProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AcceptedMessageKeysFilter";
+  value: Uint8Array;
 }
 /**
  * AcceptedMessageKeysFilter accept only the specific contract message keys in
@@ -148,6 +180,10 @@ export interface AcceptedMessageKeysFilterSDKType {
 export interface AcceptedMessagesFilter {
   /** Messages is the list of raw contract messages */
   messages: Uint8Array[];
+}
+export interface AcceptedMessagesFilterProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AcceptedMessagesFilter";
+  value: Uint8Array;
 }
 /**
  * AcceptedMessagesFilter accept only the specific raw contract messages to be

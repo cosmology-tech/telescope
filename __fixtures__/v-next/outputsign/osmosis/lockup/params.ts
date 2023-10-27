@@ -1,8 +1,11 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.lockup.Params";
+  value: Uint8Array;
 }
 export interface ParamsSDKType {
   force_unlock_allowed_addresses: string[];
@@ -36,67 +39,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (Array.isArray(object?.forceUnlockAllowedAddresses)) obj.forceUnlockAllowedAddresses = object.forceUnlockAllowedAddresses.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    if (message.forceUnlockAllowedAddresses) {
-      obj.forceUnlockAllowedAddresses = message.forceUnlockAllowedAddresses.map(e => e);
-    } else {
-      obj.forceUnlockAllowedAddresses = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.forceUnlockAllowedAddresses = object.forceUnlockAllowedAddresses?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      forceUnlockAllowedAddresses: Array.isArray(object?.force_unlock_allowed_addresses) ? object.force_unlock_allowed_addresses.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      force_unlock_allowed_addresses: Array.isArray(object?.force_unlock_allowed_addresses) ? object.force_unlock_allowed_addresses.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    if (message.forceUnlockAllowedAddresses) {
-      obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses.map(e => e);
-    } else {
-      obj.force_unlock_allowed_addresses = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      forceUnlockAllowedAddresses: Array.isArray(object?.force_unlock_allowed_addresses) ? object.force_unlock_allowed_addresses.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    if (message.forceUnlockAllowedAddresses) {
-      obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses.map(e => e);
-    } else {
-      obj.force_unlock_allowed_addresses = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/lockup/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

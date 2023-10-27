@@ -9,6 +9,10 @@ export interface PairsProtoMsg {
   typeUrl: "/cosmos.base.kv.v1beta1.Pairs";
   value: Uint8Array;
 }
+export interface PairsProtoMsg {
+  typeUrl: "/cosmos.base.kv.v1beta1.Pairs";
+  value: Uint8Array;
+}
 /** Pairs defines a repeated slice of Pair objects. */
 export interface PairsAmino {
   pairs: PairAmino[];
@@ -24,6 +28,10 @@ export interface PairsSDKType {
 /** Pair defines a key/value bytes tuple. */
 export interface Pair {
   key: Uint8Array;
+  value: Uint8Array;
+}
+export interface PairProtoMsg {
+  typeUrl: "/cosmos.base.kv.v1beta1.Pair";
   value: Uint8Array;
 }
 export interface PairProtoMsg {

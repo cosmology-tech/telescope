@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
@@ -98,6 +97,10 @@ export interface Documentation {
    */
   overview: string;
 }
+export interface DocumentationProtoMsg {
+  typeUrl: "/google.api.Documentation";
+  value: Uint8Array;
+}
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -182,6 +185,10 @@ export interface DocumentationRule {
    */
   deprecationDescription: string;
 }
+export interface DocumentationRuleProtoMsg {
+  typeUrl: "/google.api.DocumentationRule";
+  value: Uint8Array;
+}
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
   selector: string;
@@ -220,6 +227,10 @@ export interface Page {
    * honored in the generated docset.
    */
   subpages: Page[];
+}
+export interface PageProtoMsg {
+  typeUrl: "/google.api.Page";
+  value: Uint8Array;
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -295,113 +306,6 @@ export const Documentation = {
     }
     return message;
   },
-  fromJSON(object: any): Documentation {
-    const obj = createBaseDocumentation();
-    if (isSet(object.summary)) obj.summary = String(object.summary);
-    if (Array.isArray(object?.pages)) obj.pages = object.pages.map((e: any) => Page.fromJSON(e));
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => DocumentationRule.fromJSON(e));
-    if (isSet(object.documentationRootUrl)) obj.documentationRootUrl = String(object.documentationRootUrl);
-    if (isSet(object.serviceRootUrl)) obj.serviceRootUrl = String(object.serviceRootUrl);
-    if (isSet(object.overview)) obj.overview = String(object.overview);
-    return obj;
-  },
-  toJSON(message: Documentation): unknown {
-    const obj: any = {};
-    message.summary !== undefined && (obj.summary = message.summary);
-    if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toJSON(e) : undefined);
-    } else {
-      obj.pages = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    message.documentationRootUrl !== undefined && (obj.documentationRootUrl = message.documentationRootUrl);
-    message.serviceRootUrl !== undefined && (obj.serviceRootUrl = message.serviceRootUrl);
-    message.overview !== undefined && (obj.overview = message.overview);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Documentation>): Documentation {
-    const message = createBaseDocumentation();
-    message.summary = object.summary ?? "";
-    message.pages = object.pages?.map(e => Page.fromPartial(e)) || [];
-    message.rules = object.rules?.map(e => DocumentationRule.fromPartial(e)) || [];
-    message.documentationRootUrl = object.documentationRootUrl ?? "";
-    message.serviceRootUrl = object.serviceRootUrl ?? "";
-    message.overview = object.overview ?? "";
-    return message;
-  },
-  fromSDK(object: DocumentationSDKType): Documentation {
-    return {
-      summary: object?.summary,
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDK(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDK(e)) : [],
-      documentationRootUrl: object?.documentation_root_url,
-      serviceRootUrl: object?.service_root_url,
-      overview: object?.overview
-    };
-  },
-  fromSDKJSON(object: any): DocumentationSDKType {
-    return {
-      summary: isSet(object.summary) ? String(object.summary) : "",
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDKJSON(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDKJSON(e)) : [],
-      documentation_root_url: isSet(object.documentation_root_url) ? String(object.documentation_root_url) : "",
-      service_root_url: isSet(object.service_root_url) ? String(object.service_root_url) : "",
-      overview: isSet(object.overview) ? String(object.overview) : ""
-    };
-  },
-  toSDK(message: Documentation): DocumentationSDKType {
-    const obj: any = {};
-    obj.summary = message.summary;
-    if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toSDK(e) : undefined);
-    } else {
-      obj.pages = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toSDK(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    obj.documentation_root_url = message.documentationRootUrl;
-    obj.service_root_url = message.serviceRootUrl;
-    obj.overview = message.overview;
-    return obj;
-  },
-  fromAmino(object: DocumentationAmino): Documentation {
-    return {
-      summary: object.summary,
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromAmino(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromAmino(e)) : [],
-      documentationRootUrl: object.documentation_root_url,
-      serviceRootUrl: object.service_root_url,
-      overview: object.overview
-    };
-  },
-  toAmino(message: Documentation): DocumentationAmino {
-    const obj: any = {};
-    obj.summary = message.summary;
-    if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toAmino(e) : undefined);
-    } else {
-      obj.pages = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    obj.documentation_root_url = message.documentationRootUrl;
-    obj.service_root_url = message.serviceRootUrl;
-    obj.overview = message.overview;
-    return obj;
-  },
-  fromAminoMsg(object: DocumentationAminoMsg): Documentation {
-    return Documentation.fromAmino(object.value);
-  },
   fromProtoMsg(message: DocumentationProtoMsg): Documentation {
     return Documentation.decode(message.value);
   },
@@ -459,65 +363,6 @@ export const DocumentationRule = {
     }
     return message;
   },
-  fromJSON(object: any): DocumentationRule {
-    const obj = createBaseDocumentationRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.deprecationDescription)) obj.deprecationDescription = String(object.deprecationDescription);
-    return obj;
-  },
-  toJSON(message: DocumentationRule): unknown {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.description !== undefined && (obj.description = message.description);
-    message.deprecationDescription !== undefined && (obj.deprecationDescription = message.deprecationDescription);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
-    const message = createBaseDocumentationRule();
-    message.selector = object.selector ?? "";
-    message.description = object.description ?? "";
-    message.deprecationDescription = object.deprecationDescription ?? "";
-    return message;
-  },
-  fromSDK(object: DocumentationRuleSDKType): DocumentationRule {
-    return {
-      selector: object?.selector,
-      description: object?.description,
-      deprecationDescription: object?.deprecation_description
-    };
-  },
-  fromSDKJSON(object: any): DocumentationRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      deprecation_description: isSet(object.deprecation_description) ? String(object.deprecation_description) : ""
-    };
-  },
-  toSDK(message: DocumentationRule): DocumentationRuleSDKType {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.description = message.description;
-    obj.deprecation_description = message.deprecationDescription;
-    return obj;
-  },
-  fromAmino(object: DocumentationRuleAmino): DocumentationRule {
-    return {
-      selector: object.selector,
-      description: object.description,
-      deprecationDescription: object.deprecation_description
-    };
-  },
-  toAmino(message: DocumentationRule): DocumentationRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.description = message.description;
-    obj.deprecation_description = message.deprecationDescription;
-    return obj;
-  },
-  fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
-    return DocumentationRule.fromAmino(object.value);
-  },
   fromProtoMsg(message: DocumentationRuleProtoMsg): DocumentationRule {
     return DocumentationRule.decode(message.value);
   },
@@ -574,77 +419,6 @@ export const Page = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Page {
-    const obj = createBasePage();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.content)) obj.content = String(object.content);
-    if (Array.isArray(object?.subpages)) obj.subpages = object.subpages.map((e: any) => Page.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Page): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.content !== undefined && (obj.content = message.content);
-    if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toJSON(e) : undefined);
-    } else {
-      obj.subpages = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Page>): Page {
-    const message = createBasePage();
-    message.name = object.name ?? "";
-    message.content = object.content ?? "";
-    message.subpages = object.subpages?.map(e => Page.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: PageSDKType): Page {
-    return {
-      name: object?.name,
-      content: object?.content,
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): PageSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      content: isSet(object.content) ? String(object.content) : "",
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Page): PageSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.content = message.content;
-    if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toSDK(e) : undefined);
-    } else {
-      obj.subpages = [];
-    }
-    return obj;
-  },
-  fromAmino(object: PageAmino): Page {
-    return {
-      name: object.name,
-      content: object.content,
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Page): PageAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.content = message.content;
-    if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e) : undefined);
-    } else {
-      obj.subpages = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PageAminoMsg): Page {
-    return Page.fromAmino(object.value);
   },
   fromProtoMsg(message: PageProtoMsg): Page {
     return Page.decode(message.value);

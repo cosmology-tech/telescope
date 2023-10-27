@@ -15,6 +15,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the claim module's parameters. */
 export interface ParamsAmino {
   airdrop_start_time?: Date;

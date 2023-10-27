@@ -7,6 +7,10 @@ export interface InterchainAccount {
   baseAccount?: BaseAccount;
   accountOwner: string;
 }
+export interface InterchainAccountProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccount";
+  value: Uint8Array;
+}
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccountSDKType {
   base_account?: BaseAccountSDKType;

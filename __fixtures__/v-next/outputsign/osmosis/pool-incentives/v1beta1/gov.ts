@@ -1,6 +1,5 @@
 import { DistrRecord, DistrRecordSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -15,6 +14,10 @@ export interface ReplacePoolIncentivesProposal {
   title: string;
   description: string;
   records: DistrRecord[];
+}
+export interface ReplacePoolIncentivesProposalProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
+  value: Uint8Array;
 }
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -43,6 +46,10 @@ export interface UpdatePoolIncentivesProposal {
   title: string;
   description: string;
   records: DistrRecord[];
+}
+export interface UpdatePoolIncentivesProposalProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
+  value: Uint8Array;
 }
 /**
  * For example: if the existing DistrRecords were:
@@ -102,83 +109,6 @@ export const ReplacePoolIncentivesProposal = {
     }
     return message;
   },
-  fromJSON(object: any): ReplacePoolIncentivesProposal {
-    const obj = createBaseReplacePoolIncentivesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ReplacePoolIncentivesProposal): unknown {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
-    const message = createBaseReplacePoolIncentivesProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ReplacePoolIncentivesProposalSDKType): ReplacePoolIncentivesProposal {
-    return {
-      title: object?.title,
-      description: object?.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ReplacePoolIncentivesProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalSDKType {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ReplacePoolIncentivesProposalAminoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/replace-pool-incentives-proposal",
-      value: ReplacePoolIncentivesProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
     return ReplacePoolIncentivesProposal.decode(message.value);
   },
@@ -235,83 +165,6 @@ export const UpdatePoolIncentivesProposal = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): UpdatePoolIncentivesProposal {
-    const obj = createBaseUpdatePoolIncentivesProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: UpdatePoolIncentivesProposal): unknown {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
-    const message = createBaseUpdatePoolIncentivesProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: UpdatePoolIncentivesProposalSDKType): UpdatePoolIncentivesProposal {
-    return {
-      title: object?.title,
-      description: object?.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): UpdatePoolIncentivesProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalSDKType {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UpdatePoolIncentivesProposalAminoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/update-pool-incentives-proposal",
-      value: UpdatePoolIncentivesProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
     return UpdatePoolIncentivesProposal.decode(message.value);

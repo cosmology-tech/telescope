@@ -373,6 +373,10 @@ export interface RoutingRule {
    */
   routingParameters: RoutingParameter[];
 }
+export interface RoutingRuleProtoMsg {
+  typeUrl: "/google.api.RoutingRule";
+  value: Uint8Array;
+}
 /**
  * Specifies the routing information that should be sent along with the request
  * in the form of routing header.
@@ -798,6 +802,10 @@ export interface RoutingParameter {
    * See Example 1 for more details.
    */
   pathTemplate: string;
+}
+export interface RoutingParameterProtoMsg {
+  typeUrl: "/google.api.RoutingParameter";
+  value: Uint8Array;
 }
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterSDKType {

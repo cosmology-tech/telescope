@@ -1,7 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Plan, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -12,6 +11,10 @@ export interface IdentifiedClientState {
   clientId: string;
   /** client state */
   clientState?: Any;
+}
+export interface IdentifiedClientStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedClientState";
+  value: Uint8Array;
 }
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -31,6 +34,10 @@ export interface ConsensusStateWithHeight {
   /** consensus state */
   consensusState?: Any;
 }
+export interface ConsensusStateWithHeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight";
+  value: Uint8Array;
+}
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
  * field.
@@ -48,6 +55,10 @@ export interface ClientConsensusStates {
   clientId: string;
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
+}
+export interface ClientConsensusStatesProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientConsensusStates";
+  value: Uint8Array;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -75,6 +86,10 @@ export interface ClientUpdateProposal {
    * client
    */
   substituteClientId: string;
+}
+export interface ClientUpdateProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientUpdateProposal";
+  value: Uint8Array;
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -106,6 +121,10 @@ export interface UpgradeProposal {
    */
   upgradedClientState?: Any;
 }
+export interface UpgradeProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.UpgradeProposal";
+  value: Uint8Array;
+}
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
@@ -134,6 +153,10 @@ export interface Height {
   /** the height within the given revision */
   revisionHeight: bigint;
 }
+export interface HeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Height";
+  value: Uint8Array;
+}
 /**
  * Height is a monotonically increasing data type
  * that can be compared against another Height for the purposes of updating and
@@ -154,6 +177,10 @@ export interface HeightSDKType {
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
   allowedClients: string[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Params";
+  value: Uint8Array;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {
@@ -195,65 +222,6 @@ export const IdentifiedClientState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): IdentifiedClientState {
-    const obj = createBaseIdentifiedClientState();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
-    return obj;
-  },
-  toJSON(message: IdentifiedClientState): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
-    const message = createBaseIdentifiedClientState();
-    message.clientId = object.clientId ?? "";
-    if (object.clientState !== undefined && object.clientState !== null) {
-      message.clientState = Any.fromPartial(object.clientState);
-    }
-    return message;
-  },
-  fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
-    return {
-      clientId: object?.client_id,
-      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined
-    };
-  },
-  fromSDKJSON(object: any): IdentifiedClientStateSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined
-    };
-  },
-  toSDK(message: IdentifiedClientState): IdentifiedClientStateSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
-    return obj;
-  },
-  fromAmino(object: IdentifiedClientStateAmino): IdentifiedClientState {
-    return {
-      clientId: object.client_id,
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
-    };
-  },
-  toAmino(message: IdentifiedClientState): IdentifiedClientStateAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: IdentifiedClientStateAminoMsg): IdentifiedClientState {
-    return IdentifiedClientState.fromAmino(object.value);
-  },
-  toAminoMsg(message: IdentifiedClientState): IdentifiedClientStateAminoMsg {
-    return {
-      type: "cosmos-sdk/IdentifiedClientState",
-      value: IdentifiedClientState.toAmino(message)
-    };
   },
   fromProtoMsg(message: IdentifiedClientStateProtoMsg): IdentifiedClientState {
     return IdentifiedClientState.decode(message.value);
@@ -305,67 +273,6 @@ export const ConsensusStateWithHeight = {
     }
     return message;
   },
-  fromJSON(object: any): ConsensusStateWithHeight {
-    const obj = createBaseConsensusStateWithHeight();
-    if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
-    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
-    return obj;
-  },
-  toJSON(message: ConsensusStateWithHeight): unknown {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height ? Height.toJSON(message.height) : undefined);
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
-    const message = createBaseConsensusStateWithHeight();
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Height.fromPartial(object.height);
-    }
-    if (object.consensusState !== undefined && object.consensusState !== null) {
-      message.consensusState = Any.fromPartial(object.consensusState);
-    }
-    return message;
-  },
-  fromSDK(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
-    return {
-      height: object.height ? Height.fromSDK(object.height) : undefined,
-      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ConsensusStateWithHeightSDKType {
-    return {
-      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined,
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined
-    };
-  },
-  toSDK(message: ConsensusStateWithHeight): ConsensusStateWithHeightSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    return obj;
-  },
-  fromAmino(object: ConsensusStateWithHeightAmino): ConsensusStateWithHeight {
-    return {
-      height: object?.height ? Height.fromAmino(object.height) : undefined,
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
-    };
-  },
-  toAmino(message: ConsensusStateWithHeight): ConsensusStateWithHeightAmino {
-    const obj: any = {};
-    obj.height = message.height ? Height.toAmino(message.height) : undefined;
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ConsensusStateWithHeightAminoMsg): ConsensusStateWithHeight {
-    return ConsensusStateWithHeight.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConsensusStateWithHeight): ConsensusStateWithHeightAminoMsg {
-    return {
-      type: "cosmos-sdk/ConsensusStateWithHeight",
-      value: ConsensusStateWithHeight.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ConsensusStateWithHeightProtoMsg): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.decode(message.value);
   },
@@ -415,75 +322,6 @@ export const ClientConsensusStates = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ClientConsensusStates {
-    const obj = createBaseClientConsensusStates();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (Array.isArray(object?.consensusStates)) obj.consensusStates = object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ClientConsensusStates): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.consensusStates) {
-      obj.consensusStates = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toJSON(e) : undefined);
-    } else {
-      obj.consensusStates = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ClientConsensusStates>): ClientConsensusStates {
-    const message = createBaseClientConsensusStates();
-    message.clientId = object.clientId ?? "";
-    message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ClientConsensusStatesSDKType): ClientConsensusStates {
-    return {
-      clientId: object?.client_id,
-      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ClientConsensusStatesSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ClientConsensusStates): ClientConsensusStatesSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    if (message.consensusStates) {
-      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toSDK(e) : undefined);
-    } else {
-      obj.consensus_states = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ClientConsensusStatesAmino): ClientConsensusStates {
-    return {
-      clientId: object.client_id,
-      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ClientConsensusStates): ClientConsensusStatesAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    if (message.consensusStates) {
-      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
-    } else {
-      obj.consensus_states = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ClientConsensusStatesAminoMsg): ClientConsensusStates {
-    return ClientConsensusStates.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientConsensusStates): ClientConsensusStatesAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientConsensusStates",
-      value: ClientConsensusStates.toAmino(message)
-    };
   },
   fromProtoMsg(message: ClientConsensusStatesProtoMsg): ClientConsensusStates {
     return ClientConsensusStates.decode(message.value);
@@ -549,79 +387,6 @@ export const ClientUpdateProposal = {
     }
     return message;
   },
-  fromJSON(object: any): ClientUpdateProposal {
-    const obj = createBaseClientUpdateProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.subjectClientId)) obj.subjectClientId = String(object.subjectClientId);
-    if (isSet(object.substituteClientId)) obj.substituteClientId = String(object.substituteClientId);
-    return obj;
-  },
-  toJSON(message: ClientUpdateProposal): unknown {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.subjectClientId !== undefined && (obj.subjectClientId = message.subjectClientId);
-    message.substituteClientId !== undefined && (obj.substituteClientId = message.substituteClientId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ClientUpdateProposal>): ClientUpdateProposal {
-    const message = createBaseClientUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.subjectClientId = object.subjectClientId ?? "";
-    message.substituteClientId = object.substituteClientId ?? "";
-    return message;
-  },
-  fromSDK(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
-    return {
-      title: object?.title,
-      description: object?.description,
-      subjectClientId: object?.subject_client_id,
-      substituteClientId: object?.substitute_client_id
-    };
-  },
-  fromSDKJSON(object: any): ClientUpdateProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : "",
-      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : ""
-    };
-  },
-  toSDK(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.subject_client_id = message.subjectClientId;
-    obj.substitute_client_id = message.substituteClientId;
-    return obj;
-  },
-  fromAmino(object: ClientUpdateProposalAmino): ClientUpdateProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      subjectClientId: object.subject_client_id,
-      substituteClientId: object.substitute_client_id
-    };
-  },
-  toAmino(message: ClientUpdateProposal): ClientUpdateProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.subject_client_id = message.subjectClientId;
-    obj.substitute_client_id = message.substituteClientId;
-    return obj;
-  },
-  fromAminoMsg(object: ClientUpdateProposalAminoMsg): ClientUpdateProposal {
-    return ClientUpdateProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientUpdateProposal): ClientUpdateProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientUpdateProposal",
-      value: ClientUpdateProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ClientUpdateProposalProtoMsg): ClientUpdateProposal {
     return ClientUpdateProposal.decode(message.value);
   },
@@ -686,83 +451,6 @@ export const UpgradeProposal = {
     }
     return message;
   },
-  fromJSON(object: any): UpgradeProposal {
-    const obj = createBaseUpgradeProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
-    if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
-    return obj;
-  },
-  toJSON(message: UpgradeProposal): unknown {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
-    message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UpgradeProposal>): UpgradeProposal {
-    const message = createBaseUpgradeProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    if (object.plan !== undefined && object.plan !== null) {
-      message.plan = Plan.fromPartial(object.plan);
-    }
-    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
-      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
-    }
-    return message;
-  },
-  fromSDK(object: UpgradeProposalSDKType): UpgradeProposal {
-    return {
-      title: object?.title,
-      description: object?.description,
-      plan: object.plan ? Plan.fromSDK(object.plan) : undefined,
-      upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
-    };
-  },
-  fromSDKJSON(object: any): UpgradeProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined,
-      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
-    };
-  },
-  toSDK(message: UpgradeProposal): UpgradeProposalSDKType {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
-    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
-    return obj;
-  },
-  fromAmino(object: UpgradeProposalAmino): UpgradeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined,
-      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
-  },
-  toAmino(message: UpgradeProposal): UpgradeProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
-    obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UpgradeProposalAminoMsg): UpgradeProposal {
-    return UpgradeProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpgradeProposal): UpgradeProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/UpgradeProposal",
-      value: UpgradeProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: UpgradeProposalProtoMsg): UpgradeProposal {
     return UpgradeProposal.decode(message.value);
   },
@@ -813,67 +501,6 @@ export const Height = {
     }
     return message;
   },
-  fromJSON(object: any): Height {
-    const obj = createBaseHeight();
-    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
-    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
-    return obj;
-  },
-  toJSON(message: Height): unknown {
-    const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Height>): Height {
-    const message = createBaseHeight();
-    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
-      message.revisionNumber = BigInt(object.revisionNumber.toString());
-    }
-    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
-      message.revisionHeight = BigInt(object.revisionHeight.toString());
-    }
-    return message;
-  },
-  fromSDK(object: HeightSDKType): Height {
-    return {
-      revisionNumber: object?.revision_number,
-      revisionHeight: object?.revision_height
-    };
-  },
-  fromSDKJSON(object: any): HeightSDKType {
-    return {
-      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
-      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Height): HeightSDKType {
-    const obj: any = {};
-    obj.revision_number = message.revisionNumber;
-    obj.revision_height = message.revisionHeight;
-    return obj;
-  },
-  fromAmino(object: HeightAmino): Height {
-    return {
-      revisionNumber: BigInt(object.revision_number || "0"),
-      revisionHeight: BigInt(object.revision_height || "0")
-    };
-  },
-  toAmino(message: Height): HeightAmino {
-    const obj: any = {};
-    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
-    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: HeightAminoMsg): Height {
-    return Height.fromAmino(object.value);
-  },
-  toAminoMsg(message: Height): HeightAminoMsg {
-    return {
-      type: "cosmos-sdk/Height",
-      value: Height.toAmino(message)
-    };
-  },
   fromProtoMsg(message: HeightProtoMsg): Height {
     return Height.decode(message.value);
   },
@@ -916,67 +543,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (Array.isArray(object?.allowedClients)) obj.allowedClients = object.allowedClients.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    if (message.allowedClients) {
-      obj.allowedClients = message.allowedClients.map(e => e);
-    } else {
-      obj.allowedClients = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.allowedClients = object.allowedClients?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      allowed_clients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    if (message.allowedClients) {
-      obj.allowed_clients = message.allowedClients.map(e => e);
-    } else {
-      obj.allowed_clients = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    if (message.allowedClients) {
-      obj.allowed_clients = message.allowedClients.map(e => e);
-    } else {
-      obj.allowed_clients = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

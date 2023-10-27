@@ -15,6 +15,10 @@ export interface GenesisState {
   /** list of forward relayer addresses */
   forwardRelayers: ForwardRelayerAddress[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ICS29 fee middleware genesis state */
 export interface GenesisStateSDKType {
   identified_fees: IdentifiedPacketFeesSDKType[];
@@ -30,6 +34,10 @@ export interface FeeEnabledChannel {
   /** unique channel identifier */
   channelId: string;
 }
+export interface FeeEnabledChannelProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.FeeEnabledChannel";
+  value: Uint8Array;
+}
 /** FeeEnabledChannel contains the PortID & ChannelID for a fee enabled channel */
 export interface FeeEnabledChannelSDKType {
   port_id: string;
@@ -43,6 +51,10 @@ export interface RegisteredPayee {
   relayer: string;
   /** the payee address */
   payee: string;
+}
+export interface RegisteredPayeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.RegisteredPayee";
+  value: Uint8Array;
 }
 /** RegisteredPayee contains the relayer address and payee address for a specific channel */
 export interface RegisteredPayeeSDKType {
@@ -62,6 +74,10 @@ export interface RegisteredCounterpartyPayee {
   /** the counterparty payee address */
   counterpartyPayee: string;
 }
+export interface RegisteredCounterpartyPayeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.RegisteredCounterpartyPayee";
+  value: Uint8Array;
+}
 /**
  * RegisteredCounterpartyPayee contains the relayer address and counterparty payee address for a specific channel (used
  * for recv fee distribution)
@@ -75,6 +91,10 @@ export interface RegisteredCounterpartyPayeeSDKType {
 export interface ForwardRelayerAddress {
   /** the forward relayer address */
   address: string;
+}
+export interface ForwardRelayerAddressProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.ForwardRelayerAddress";
+  value: Uint8Array;
 }
 /** ForwardRelayerAddress contains the forward relayer address and PacketId used for async acknowledgements */
 export interface ForwardRelayerAddressSDKType {

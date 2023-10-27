@@ -16,6 +16,10 @@ export interface EquivocationProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.Equivocation";
   value: Uint8Array;
 }
+export interface EquivocationProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.Equivocation";
+  value: Uint8Array;
+}
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.

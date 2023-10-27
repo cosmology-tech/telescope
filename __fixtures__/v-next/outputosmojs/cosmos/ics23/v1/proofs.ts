@@ -179,6 +179,10 @@ export interface ExistenceProof {
   leaf?: LeafOp;
   path: InnerOp[];
 }
+export interface ExistenceProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.ExistenceProof";
+  value: Uint8Array;
+}
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
  * The result of peforming all these steps will provide a "root hash", which can
@@ -217,6 +221,10 @@ export interface NonExistenceProof {
   left?: ExistenceProof;
   right?: ExistenceProof;
 }
+export interface NonExistenceProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.NonExistenceProof";
+  value: Uint8Array;
+}
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
  * one right of the desired key. If both proofs are valid AND they are neighbors,
@@ -233,6 +241,10 @@ export interface CommitmentProof {
   nonexist?: NonExistenceProof;
   batch?: BatchProof;
   compressed?: CompressedBatchProof;
+}
+export interface CommitmentProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.CommitmentProof";
+  value: Uint8Array;
 }
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProofSDKType {
@@ -267,6 +279,10 @@ export interface LeafOp {
    * a leaf node from an inner node.
    */
   prefix: Uint8Array;
+}
+export interface LeafOpProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.LeafOp";
+  value: Uint8Array;
 }
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
@@ -312,6 +328,10 @@ export interface InnerOp {
   hash: HashOp;
   prefix: Uint8Array;
   suffix: Uint8Array;
+}
+export interface InnerOpProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.InnerOp";
+  value: Uint8Array;
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
@@ -359,6 +379,10 @@ export interface ProofSpec {
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   minDepth: number;
 }
+export interface ProofSpecProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.ProofSpec";
+  value: Uint8Array;
+}
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
  * This can be stored in the client and used to validate any incoming proofs.
@@ -402,6 +426,10 @@ export interface InnerSpec {
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
+export interface InnerSpecProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.InnerSpec";
+  value: Uint8Array;
+}
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
  * given store are neighbors.
@@ -424,6 +452,10 @@ export interface InnerSpecSDKType {
 export interface BatchProof {
   entries: BatchEntry[];
 }
+export interface BatchProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.BatchProof";
+  value: Uint8Array;
+}
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofSDKType {
   entries: BatchEntrySDKType[];
@@ -432,6 +464,10 @@ export interface BatchProofSDKType {
 export interface BatchEntry {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
+}
+export interface BatchEntryProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.BatchEntry";
+  value: Uint8Array;
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface BatchEntrySDKType {
@@ -442,6 +478,10 @@ export interface CompressedBatchProof {
   entries: CompressedBatchEntry[];
   lookupInners: InnerOp[];
 }
+export interface CompressedBatchProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.CompressedBatchProof";
+  value: Uint8Array;
+}
 export interface CompressedBatchProofSDKType {
   entries: CompressedBatchEntrySDKType[];
   lookup_inners: InnerOpSDKType[];
@@ -450,6 +490,10 @@ export interface CompressedBatchProofSDKType {
 export interface CompressedBatchEntry {
   exist?: CompressedExistenceProof;
   nonexist?: CompressedNonExistenceProof;
+}
+export interface CompressedBatchEntryProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.CompressedBatchEntry";
+  value: Uint8Array;
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface CompressedBatchEntrySDKType {
@@ -463,6 +507,10 @@ export interface CompressedExistenceProof {
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
+export interface CompressedExistenceProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.CompressedExistenceProof";
+  value: Uint8Array;
+}
 export interface CompressedExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
@@ -474,6 +522,10 @@ export interface CompressedNonExistenceProof {
   key: Uint8Array;
   left?: CompressedExistenceProof;
   right?: CompressedExistenceProof;
+}
+export interface CompressedNonExistenceProofProtoMsg {
+  typeUrl: "/cosmos.ics23.v1.CompressedNonExistenceProof";
+  value: Uint8Array;
 }
 export interface CompressedNonExistenceProofSDKType {
   key: Uint8Array;

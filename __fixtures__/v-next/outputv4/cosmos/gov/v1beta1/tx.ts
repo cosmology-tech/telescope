@@ -13,6 +13,10 @@ export interface MsgSubmitProposal {
   initialDeposit: Coin[];
   proposer: string;
 }
+export interface MsgSubmitProposalProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal";
+  value: Uint8Array;
+}
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
@@ -26,6 +30,10 @@ export interface MsgSubmitProposalSDKType {
 export interface MsgSubmitProposalResponse {
   proposalId: bigint;
 }
+export interface MsgSubmitProposalResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse";
+  value: Uint8Array;
+}
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseSDKType {
   proposal_id: bigint;
@@ -36,6 +44,10 @@ export interface MsgVote {
   voter: string;
   option: VoteOption;
 }
+export interface MsgVoteProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVote";
+  value: Uint8Array;
+}
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteSDKType {
   proposal_id: bigint;
@@ -44,6 +56,10 @@ export interface MsgVoteSDKType {
 }
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+export interface MsgVoteResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse";
+  value: Uint8Array;
+}
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseSDKType {}
 /**
@@ -55,6 +71,10 @@ export interface MsgVoteWeighted {
   proposalId: bigint;
   voter: string;
   options: WeightedVoteOption[];
+}
+export interface MsgVoteWeightedProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted";
+  value: Uint8Array;
 }
 /**
  * MsgVoteWeighted defines a message to cast a vote.
@@ -72,6 +92,10 @@ export interface MsgVoteWeightedSDKType {
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponse {}
+export interface MsgVoteWeightedResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse";
+  value: Uint8Array;
+}
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
@@ -84,6 +108,10 @@ export interface MsgDeposit {
   depositor: string;
   amount: Coin[];
 }
+export interface MsgDepositProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgDeposit";
+  value: Uint8Array;
+}
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositSDKType {
   proposal_id: bigint;
@@ -92,6 +120,10 @@ export interface MsgDepositSDKType {
 }
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
+export interface MsgDepositResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse";
+  value: Uint8Array;
+}
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseSDKType {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {

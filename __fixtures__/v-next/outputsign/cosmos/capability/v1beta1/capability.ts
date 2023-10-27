@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /**
  * Capability defines an implementation of an object capability. The index
@@ -7,6 +6,10 @@ export const protobufPackage = "cosmos.capability.v1beta1";
  */
 export interface Capability {
   index: bigint;
+}
+export interface CapabilityProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.Capability";
+  value: Uint8Array;
 }
 /**
  * Capability defines an implementation of an object capability. The index
@@ -23,6 +26,10 @@ export interface Owner {
   module: string;
   name: string;
 }
+export interface OwnerProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.Owner";
+  value: Uint8Array;
+}
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
  * capability and the module name.
@@ -37,6 +44,10 @@ export interface OwnerSDKType {
  */
 export interface CapabilityOwners {
   owners: Owner[];
+}
+export interface CapabilityOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";
+  value: Uint8Array;
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -74,57 +85,6 @@ export const Capability = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Capability {
-    const obj = createBaseCapability();
-    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    return obj;
-  },
-  toJSON(message: Capability): unknown {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Capability>): Capability {
-    const message = createBaseCapability();
-    if (object.index !== undefined && object.index !== null) {
-      message.index = BigInt(object.index.toString());
-    }
-    return message;
-  },
-  fromSDK(object: CapabilitySDKType): Capability {
-    return {
-      index: object?.index
-    };
-  },
-  fromSDKJSON(object: any): CapabilitySDKType {
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Capability): CapabilitySDKType {
-    const obj: any = {};
-    obj.index = message.index;
-    return obj;
-  },
-  fromAmino(object: CapabilityAmino): Capability {
-    return {
-      index: BigInt(object.index)
-    };
-  },
-  toAmino(message: Capability): CapabilityAmino {
-    const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CapabilityAminoMsg): Capability {
-    return Capability.fromAmino(object.value);
-  },
-  toAminoMsg(message: Capability): CapabilityAminoMsg {
-    return {
-      type: "cosmos-sdk/Capability",
-      value: Capability.toAmino(message)
-    };
   },
   fromProtoMsg(message: CapabilityProtoMsg): Capability {
     return Capability.decode(message.value);
@@ -176,63 +136,6 @@ export const Owner = {
     }
     return message;
   },
-  fromJSON(object: any): Owner {
-    const obj = createBaseOwner();
-    if (isSet(object.module)) obj.module = String(object.module);
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: Owner): unknown {
-    const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Owner>): Owner {
-    const message = createBaseOwner();
-    message.module = object.module ?? "";
-    message.name = object.name ?? "";
-    return message;
-  },
-  fromSDK(object: OwnerSDKType): Owner {
-    return {
-      module: object?.module,
-      name: object?.name
-    };
-  },
-  fromSDKJSON(object: any): OwnerSDKType {
-    return {
-      module: isSet(object.module) ? String(object.module) : "",
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-  toSDK(message: Owner): OwnerSDKType {
-    const obj: any = {};
-    obj.module = message.module;
-    obj.name = message.name;
-    return obj;
-  },
-  fromAmino(object: OwnerAmino): Owner {
-    return {
-      module: object.module,
-      name: object.name
-    };
-  },
-  toAmino(message: Owner): OwnerAmino {
-    const obj: any = {};
-    obj.module = message.module;
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: OwnerAminoMsg): Owner {
-    return Owner.fromAmino(object.value);
-  },
-  toAminoMsg(message: Owner): OwnerAminoMsg {
-    return {
-      type: "cosmos-sdk/Owner",
-      value: Owner.toAmino(message)
-    };
-  },
   fromProtoMsg(message: OwnerProtoMsg): Owner {
     return Owner.decode(message.value);
   },
@@ -275,67 +178,6 @@ export const CapabilityOwners = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CapabilityOwners {
-    const obj = createBaseCapabilityOwners();
-    if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => Owner.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: CapabilityOwners): unknown {
-    const obj: any = {};
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toJSON(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CapabilityOwners>): CapabilityOwners {
-    const message = createBaseCapabilityOwners();
-    message.owners = object.owners?.map(e => Owner.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: CapabilityOwnersSDKType): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): CapabilityOwnersSDKType {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: CapabilityOwners): CapabilityOwnersSDKType {
-    const obj: any = {};
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toSDK(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
-    const obj: any = {};
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CapabilityOwnersAminoMsg): CapabilityOwners {
-    return CapabilityOwners.fromAmino(object.value);
-  },
-  toAminoMsg(message: CapabilityOwners): CapabilityOwnersAminoMsg {
-    return {
-      type: "cosmos-sdk/CapabilityOwners",
-      value: CapabilityOwners.toAmino(message)
-    };
   },
   fromProtoMsg(message: CapabilityOwnersProtoMsg): CapabilityOwners {
     return CapabilityOwners.decode(message.value);

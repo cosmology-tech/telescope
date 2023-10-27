@@ -15,6 +15,10 @@ export interface PubKeyProtoMsg {
   typeUrl: "/cosmos.crypto.secp256k1.PubKey";
   value: Uint8Array;
 }
+export interface PubKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256k1.PubKey";
+  value: Uint8Array;
+}
 /**
  * PubKey defines a secp256k1 public key
  * Key is the compressed form of the pubkey. The first byte depends is a 0x02 byte
@@ -42,6 +46,10 @@ export interface PubKeySDKType {
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKey {
   key: Uint8Array;
+}
+export interface PrivKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256k1.PrivKey";
+  value: Uint8Array;
 }
 export interface PrivKeyProtoMsg {
   typeUrl: "/cosmos.crypto.secp256k1.PrivKey";

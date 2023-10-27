@@ -68,6 +68,10 @@ export interface Claim {
   /** claimable token amount for the action. Zero if completed */
   claimableAmount: string;
 }
+export interface ClaimProtoMsg {
+  typeUrl: "/evmos.claims.v1.Claim";
+  value: Uint8Array;
+}
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
@@ -86,6 +90,10 @@ export interface ClaimsRecordAddress {
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
 }
+export interface ClaimsRecordAddressProtoMsg {
+  typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
+  value: Uint8Array;
+}
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
   address: string;
@@ -101,6 +109,10 @@ export interface ClaimsRecord {
   initialClaimableAmount: string;
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
+}
+export interface ClaimsRecordProtoMsg {
+  typeUrl: "/evmos.claims.v1.ClaimsRecord";
+  value: Uint8Array;
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of

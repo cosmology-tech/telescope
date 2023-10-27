@@ -33,7 +33,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/authz/v1beta1/grants`;
-    return QueryGrantsResponse.fromSDKJSON(await this.req.get<QueryGrantsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryGrantsResponseSDKType>(endpoint, options);
   }
   /* GranterGrants returns list of `GrantAuthorization`, granted by granter.
   
@@ -46,7 +46,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/authz/v1beta1/grants/granter/${params.granter}`;
-    return QueryGranterGrantsResponse.fromSDKJSON(await this.req.get<QueryGranterGrantsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryGranterGrantsResponseSDKType>(endpoint, options);
   }
   /* GranteeGrants returns a list of `GrantAuthorization` by grantee.
   
@@ -59,6 +59,6 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/authz/v1beta1/grants/grantee/${params.grantee}`;
-    return QueryGranteeGrantsResponse.fromSDKJSON(await this.req.get<QueryGranteeGrantsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryGranteeGrantsResponseSDKType>(endpoint, options);
   }
 }

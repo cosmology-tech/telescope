@@ -11,6 +11,10 @@ export interface ModuleProtoMsg {
   typeUrl: "/cosmos.orm.module.v1alpha1.Module";
   value: Uint8Array;
 }
+export interface ModuleProtoMsg {
+  typeUrl: "/cosmos.orm.module.v1alpha1.Module";
+  value: Uint8Array;
+}
 /**
  * Module defines the ORM module which adds providers to the app container for
  * module-scoped DB's. In the future it may provide gRPC services for interacting

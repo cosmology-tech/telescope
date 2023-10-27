@@ -15,6 +15,10 @@ export interface MsgConnectionOpenInit {
   delayPeriod: bigint;
   signer: string;
 }
+export interface MsgConnectionOpenInitProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit";
+  value: Uint8Array;
+}
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
  * initialize a connection with Chain B.
@@ -31,6 +35,10 @@ export interface MsgConnectionOpenInitSDKType {
  * type.
  */
 export interface MsgConnectionOpenInitResponse {}
+export interface MsgConnectionOpenInitResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInitResponse";
+  value: Uint8Array;
+}
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
  * type.
@@ -64,6 +72,10 @@ export interface MsgConnectionOpenTry {
   consensusHeight: Height;
   signer: string;
 }
+export interface MsgConnectionOpenTryProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry";
+  value: Uint8Array;
+}
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
  * connection on Chain B.
@@ -84,6 +96,10 @@ export interface MsgConnectionOpenTrySDKType {
 }
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponse {}
+export interface MsgConnectionOpenTryResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTryResponse";
+  value: Uint8Array;
+}
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseSDKType {}
 /**
@@ -108,6 +124,10 @@ export interface MsgConnectionOpenAck {
   consensusHeight: Height;
   signer: string;
 }
+export interface MsgConnectionOpenAckProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck";
+  value: Uint8Array;
+}
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
  * acknowledge the change of connection state to TRYOPEN on Chain B.
@@ -126,6 +146,10 @@ export interface MsgConnectionOpenAckSDKType {
 }
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponse {}
+export interface MsgConnectionOpenAckResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAckResponse";
+  value: Uint8Array;
+}
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseSDKType {}
 /**
@@ -138,6 +162,10 @@ export interface MsgConnectionOpenConfirm {
   proofAck: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgConnectionOpenConfirmProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm";
+  value: Uint8Array;
 }
 /**
  * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -154,6 +182,10 @@ export interface MsgConnectionOpenConfirmSDKType {
  * response type.
  */
 export interface MsgConnectionOpenConfirmResponse {}
+export interface MsgConnectionOpenConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirmResponse";
+  value: Uint8Array;
+}
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
  * response type.

@@ -22,6 +22,10 @@ export interface RecordProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Record";
   value: Uint8Array;
 }
+export interface RecordProtoMsg {
+  typeUrl: "/cosmos.crypto.keyring.v1.Record";
+  value: Uint8Array;
+}
 /** Record is used for representing a key in the keyring. */
 export interface RecordAmino {
   /** name represents a name of Record */
@@ -62,6 +66,10 @@ export interface Record_LocalProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Local";
   value: Uint8Array;
 }
+export interface Record_LocalProtoMsg {
+  typeUrl: "/cosmos.crypto.keyring.v1.Local";
+  value: Uint8Array;
+}
 /**
  * Item is a keyring item stored in a keyring backend.
  * Local item
@@ -90,6 +98,10 @@ export interface Record_LedgerProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Ledger";
   value: Uint8Array;
 }
+export interface Record_LedgerProtoMsg {
+  typeUrl: "/cosmos.crypto.keyring.v1.Ledger";
+  value: Uint8Array;
+}
 /** Ledger item */
 export interface Record_LedgerAmino {
   path?: BIP44ParamsAmino;
@@ -108,6 +120,10 @@ export interface Record_MultiProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Multi";
   value: Uint8Array;
 }
+export interface Record_MultiProtoMsg {
+  typeUrl: "/cosmos.crypto.keyring.v1.Multi";
+  value: Uint8Array;
+}
 /** Multi item */
 export interface Record_MultiAmino {}
 export interface Record_MultiAminoMsg {
@@ -118,6 +134,10 @@ export interface Record_MultiAminoMsg {
 export interface Record_MultiSDKType {}
 /** Offline item */
 export interface Record_Offline {}
+export interface Record_OfflineProtoMsg {
+  typeUrl: "/cosmos.crypto.keyring.v1.Offline";
+  value: Uint8Array;
+}
 export interface Record_OfflineProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Offline";
   value: Uint8Array;

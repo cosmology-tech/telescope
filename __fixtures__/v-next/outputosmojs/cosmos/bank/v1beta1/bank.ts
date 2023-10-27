@@ -7,6 +7,10 @@ export interface Params {
   sendEnabled: SendEnabled[];
   defaultSendEnabled: boolean;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
   send_enabled: SendEnabledSDKType[];
@@ -19,6 +23,10 @@ export interface ParamsSDKType {
 export interface SendEnabled {
   denom: string;
   enabled: boolean;
+}
+export interface SendEnabledProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
+  value: Uint8Array;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
@@ -33,6 +41,10 @@ export interface Input {
   address: string;
   coins: Coin[];
 }
+export interface InputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Input";
+  value: Uint8Array;
+}
 /** Input models transaction input. */
 export interface InputSDKType {
   address: string;
@@ -42,6 +54,10 @@ export interface InputSDKType {
 export interface Output {
   address: string;
   coins: Coin[];
+}
+export interface OutputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Output";
+  value: Uint8Array;
 }
 /** Output models transaction outputs. */
 export interface OutputSDKType {
@@ -56,6 +72,10 @@ export interface OutputSDKType {
 /** @deprecated */
 export interface Supply {
   total: Coin[];
+}
+export interface SupplyProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Supply";
+  value: Uint8Array;
 }
 /**
  * Supply represents a struct that passively keeps track of the total supply
@@ -83,6 +103,10 @@ export interface DenomUnit {
   exponent: number;
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
+}
+export interface DenomUnitProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
+  value: Uint8Array;
 }
 /**
  * DenomUnit represents a struct that describes a given
@@ -134,6 +158,10 @@ export interface Metadata {
    * Since: cosmos-sdk 0.46
    */
   uriHash: string;
+}
+export interface MetadataProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Metadata";
+  value: Uint8Array;
 }
 /**
  * Metadata represents a struct that describes

@@ -15,6 +15,10 @@ export interface Decl {
   /** A function declaration. */
   function?: FunctionDecl;
 }
+export interface DeclProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Decl";
+  value: Uint8Array;
+}
 /** A declaration. */
 export interface DeclSDKType {
   id: number;
@@ -40,6 +44,10 @@ export interface DeclType {
    */
   typeParams: DeclType[];
 }
+export interface DeclTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.DeclType";
+  value: Uint8Array;
+}
 /**
  * The declared type of a variable.
  * 
@@ -58,6 +66,10 @@ export interface IdentDecl {
   /** Optional value of the identifier. */
   value?: Expr;
 }
+export interface IdentDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.IdentDecl";
+  value: Uint8Array;
+}
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
   type?: DeclTypeSDKType;
@@ -71,6 +83,10 @@ export interface FunctionDecl {
   returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
+}
+export interface FunctionDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
+  value: Uint8Array;
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {

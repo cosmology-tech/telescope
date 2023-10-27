@@ -1,6 +1,5 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoin {
@@ -14,6 +13,10 @@ export interface MsgConvertCoin {
   /** cosmos bech32 address from the owner of the given Cosmos coins */
   sender: string;
 }
+export interface MsgConvertCoinProtoMsg {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoin";
+  value: Uint8Array;
+}
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinSDKType {
   coin: CoinSDKType;
@@ -22,6 +25,10 @@ export interface MsgConvertCoinSDKType {
 }
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponse {}
+export interface MsgConvertCoinResponseProtoMsg {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse";
+  value: Uint8Array;
+}
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseSDKType {}
 /**
@@ -38,6 +45,10 @@ export interface MsgConvertERC20 {
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
 }
+export interface MsgConvertERC20ProtoMsg {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20";
+  value: Uint8Array;
+}
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
  * coin.
@@ -50,6 +61,10 @@ export interface MsgConvertERC20SDKType {
 }
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20Response {}
+export interface MsgConvertERC20ResponseProtoMsg {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response";
+  value: Uint8Array;
+}
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseSDKType {}
 function createBaseMsgConvertCoin(): MsgConvertCoin {
@@ -96,67 +111,6 @@ export const MsgConvertCoin = {
     }
     return message;
   },
-  fromJSON(object: any): MsgConvertCoin {
-    const obj = createBaseMsgConvertCoin();
-    if (isSet(object.coin)) obj.coin = Coin.fromJSON(object.coin);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    return obj;
-  },
-  toJSON(message: MsgConvertCoin): unknown {
-    const obj: any = {};
-    message.coin !== undefined && (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgConvertCoin>): MsgConvertCoin {
-    const message = createBaseMsgConvertCoin();
-    if (object.coin !== undefined && object.coin !== null) {
-      message.coin = Coin.fromPartial(object.coin);
-    }
-    message.receiver = object.receiver ?? "";
-    message.sender = object.sender ?? "";
-    return message;
-  },
-  fromSDK(object: MsgConvertCoinSDKType): MsgConvertCoin {
-    return {
-      coin: object.coin ? Coin.fromSDK(object.coin) : undefined,
-      receiver: object?.receiver,
-      sender: object?.sender
-    };
-  },
-  fromSDKJSON(object: any): MsgConvertCoinSDKType {
-    return {
-      coin: isSet(object.coin) ? Coin.fromSDKJSON(object.coin) : undefined,
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      sender: isSet(object.sender) ? String(object.sender) : ""
-    };
-  },
-  toSDK(message: MsgConvertCoin): MsgConvertCoinSDKType {
-    const obj: any = {};
-    message.coin !== undefined && (obj.coin = message.coin ? Coin.toSDK(message.coin) : undefined);
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
-    return obj;
-  },
-  fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
-    return {
-      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined,
-      receiver: object.receiver,
-      sender: object.sender
-    };
-  },
-  toAmino(message: MsgConvertCoin): MsgConvertCoinAmino {
-    const obj: any = {};
-    obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertCoinAminoMsg): MsgConvertCoin {
-    return MsgConvertCoin.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgConvertCoinProtoMsg): MsgConvertCoin {
     return MsgConvertCoin.decode(message.value);
   },
@@ -191,38 +145,6 @@ export const MsgConvertCoinResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgConvertCoinResponse {
-    const obj = createBaseMsgConvertCoinResponse();
-    return obj;
-  },
-  toJSON(_: MsgConvertCoinResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgConvertCoinResponse>): MsgConvertCoinResponse {
-    const message = createBaseMsgConvertCoinResponse();
-    return message;
-  },
-  fromSDK(_: MsgConvertCoinResponseSDKType): MsgConvertCoinResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgConvertCoinResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgConvertCoinResponse): MsgConvertCoinResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
-    return {};
-  },
-  toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertCoinResponseAminoMsg): MsgConvertCoinResponse {
-    return MsgConvertCoinResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgConvertCoinResponseProtoMsg): MsgConvertCoinResponse {
     return MsgConvertCoinResponse.decode(message.value);
@@ -288,73 +210,6 @@ export const MsgConvertERC20 = {
     }
     return message;
   },
-  fromJSON(object: any): MsgConvertERC20 {
-    const obj = createBaseMsgConvertERC20();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.amount)) obj.amount = String(object.amount);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    return obj;
-  },
-  toJSON(message: MsgConvertERC20): unknown {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgConvertERC20>): MsgConvertERC20 {
-    const message = createBaseMsgConvertERC20();
-    message.contractAddress = object.contractAddress ?? "";
-    message.amount = object.amount ?? "";
-    message.receiver = object.receiver ?? "";
-    message.sender = object.sender ?? "";
-    return message;
-  },
-  fromSDK(object: MsgConvertERC20SDKType): MsgConvertERC20 {
-    return {
-      contractAddress: object?.contract_address,
-      amount: object?.amount,
-      receiver: object?.receiver,
-      sender: object?.sender
-    };
-  },
-  fromSDKJSON(object: any): MsgConvertERC20SDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      sender: isSet(object.sender) ? String(object.sender) : ""
-    };
-  },
-  toSDK(message: MsgConvertERC20): MsgConvertERC20SDKType {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.amount = message.amount;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
-    return obj;
-  },
-  fromAmino(object: MsgConvertERC20Amino): MsgConvertERC20 {
-    return {
-      contractAddress: object.contract_address,
-      amount: object.amount,
-      receiver: object.receiver,
-      sender: object.sender
-    };
-  },
-  toAmino(message: MsgConvertERC20): MsgConvertERC20Amino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.amount = message.amount;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertERC20AminoMsg): MsgConvertERC20 {
-    return MsgConvertERC20.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgConvertERC20ProtoMsg): MsgConvertERC20 {
     return MsgConvertERC20.decode(message.value);
   },
@@ -389,38 +244,6 @@ export const MsgConvertERC20Response = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgConvertERC20Response {
-    const obj = createBaseMsgConvertERC20Response();
-    return obj;
-  },
-  toJSON(_: MsgConvertERC20Response): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgConvertERC20Response>): MsgConvertERC20Response {
-    const message = createBaseMsgConvertERC20Response();
-    return message;
-  },
-  fromSDK(_: MsgConvertERC20ResponseSDKType): MsgConvertERC20Response {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgConvertERC20ResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgConvertERC20Response): MsgConvertERC20ResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {
-    return {};
-  },
-  toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertERC20ResponseAminoMsg): MsgConvertERC20Response {
-    return MsgConvertERC20Response.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgConvertERC20ResponseProtoMsg): MsgConvertERC20Response {
     return MsgConvertERC20Response.decode(message.value);

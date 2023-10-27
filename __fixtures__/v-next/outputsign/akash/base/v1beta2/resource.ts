@@ -1,12 +1,15 @@
 import { ResourceValue, ResourceValueSDKType } from "./resourcevalue";
 import { Attribute, AttributeSDKType } from "./attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
   units: ResourceValue;
   attributes: Attribute[];
+}
+export interface CPUProtoMsg {
+  typeUrl: "/akash.base.v1beta2.CPU";
+  value: Uint8Array;
 }
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
@@ -18,6 +21,10 @@ export interface Memory {
   quantity: ResourceValue;
   attributes: Attribute[];
 }
+export interface MemoryProtoMsg {
+  typeUrl: "/akash.base.v1beta2.Memory";
+  value: Uint8Array;
+}
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
   quantity: ResourceValueSDKType;
@@ -28,6 +35,10 @@ export interface Storage {
   name: string;
   quantity: ResourceValue;
   attributes: Attribute[];
+}
+export interface StorageProtoMsg {
+  typeUrl: "/akash.base.v1beta2.Storage";
+  value: Uint8Array;
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
@@ -71,77 +82,6 @@ export const CPU = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CPU {
-    const obj = createBaseCPU();
-    if (isSet(object.units)) obj.units = ResourceValue.fromJSON(object.units);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: CPU): unknown {
-    const obj: any = {};
-    message.units !== undefined && (obj.units = message.units ? ResourceValue.toJSON(message.units) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<CPU>, I>>(object: I): CPU {
-    const message = createBaseCPU();
-    if (object.units !== undefined && object.units !== null) {
-      message.units = ResourceValue.fromPartial(object.units);
-    }
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: CPUSDKType): CPU {
-    return {
-      units: object.units ? ResourceValue.fromSDK(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): CPUSDKType {
-    return {
-      units: isSet(object.units) ? ResourceValue.fromSDKJSON(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: CPU): CPUSDKType {
-    const obj: any = {};
-    message.units !== undefined && (obj.units = message.units ? ResourceValue.toSDK(message.units) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: CPUAmino): CPU {
-    return {
-      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: CPU): CPUAmino {
-    const obj: any = {};
-    obj.units = message.units ? ResourceValue.toAmino(message.units) : undefined;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CPUAminoMsg): CPU {
-    return CPU.fromAmino(object.value);
-  },
-  toAminoMsg(message: CPU): CPUAminoMsg {
-    return {
-      type: "akash/base/v1beta2/cpu",
-      value: CPU.toAmino(message)
-    };
   },
   fromProtoMsg(message: CPUProtoMsg): CPU {
     return CPU.decode(message.value);
@@ -192,77 +132,6 @@ export const Memory = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Memory {
-    const obj = createBaseMemory();
-    if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Memory): unknown {
-    const obj: any = {};
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Memory>, I>>(object: I): Memory {
-    const message = createBaseMemory();
-    if (object.quantity !== undefined && object.quantity !== null) {
-      message.quantity = ResourceValue.fromPartial(object.quantity);
-    }
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: MemorySDKType): Memory {
-    return {
-      quantity: object.quantity ? ResourceValue.fromSDK(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): MemorySDKType {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Memory): MemorySDKType {
-    const obj: any = {};
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MemoryAmino): Memory {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Memory): MemoryAmino {
-    const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MemoryAminoMsg): Memory {
-    return Memory.fromAmino(object.value);
-  },
-  toAminoMsg(message: Memory): MemoryAminoMsg {
-    return {
-      type: "akash/base/v1beta2/memory",
-      value: Memory.toAmino(message)
-    };
   },
   fromProtoMsg(message: MemoryProtoMsg): Memory {
     return Memory.decode(message.value);
@@ -320,85 +189,6 @@ export const Storage = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Storage {
-    const obj = createBaseStorage();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Storage): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Storage>, I>>(object: I): Storage {
-    const message = createBaseStorage();
-    message.name = object.name ?? "";
-    if (object.quantity !== undefined && object.quantity !== null) {
-      message.quantity = ResourceValue.fromPartial(object.quantity);
-    }
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: StorageSDKType): Storage {
-    return {
-      name: object?.name,
-      quantity: object.quantity ? ResourceValue.fromSDK(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): StorageSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Storage): StorageSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAmino(object: StorageAmino): Storage {
-    return {
-      name: object.name,
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Storage): StorageAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: StorageAminoMsg): Storage {
-    return Storage.fromAmino(object.value);
-  },
-  toAminoMsg(message: Storage): StorageAminoMsg {
-    return {
-      type: "akash/base/v1beta2/storage",
-      value: Storage.toAmino(message)
-    };
   },
   fromProtoMsg(message: StorageProtoMsg): Storage {
     return Storage.decode(message.value);

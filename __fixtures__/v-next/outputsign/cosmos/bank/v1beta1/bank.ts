@@ -1,11 +1,14 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** Params defines the parameters for the bank module. */
 export interface Params {
   sendEnabled: SendEnabled[];
   defaultSendEnabled: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Params";
+  value: Uint8Array;
 }
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
@@ -20,6 +23,10 @@ export interface SendEnabled {
   denom: string;
   enabled: boolean;
 }
+export interface SendEnabledProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
+  value: Uint8Array;
+}
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
  * sendable).
@@ -33,6 +40,10 @@ export interface Input {
   address: string;
   coins: Coin[];
 }
+export interface InputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Input";
+  value: Uint8Array;
+}
 /** Input models transaction input. */
 export interface InputSDKType {
   address: string;
@@ -42,6 +53,10 @@ export interface InputSDKType {
 export interface Output {
   address: string;
   coins: Coin[];
+}
+export interface OutputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Output";
+  value: Uint8Array;
 }
 /** Output models transaction outputs. */
 export interface OutputSDKType {
@@ -56,6 +71,10 @@ export interface OutputSDKType {
 /** @deprecated */
 export interface Supply {
   total: Coin[];
+}
+export interface SupplyProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Supply";
+  value: Uint8Array;
 }
 /**
  * Supply represents a struct that passively keeps track of the total supply
@@ -83,6 +102,10 @@ export interface DenomUnit {
   exponent: number;
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
+}
+export interface DenomUnitProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
+  value: Uint8Array;
 }
 /**
  * DenomUnit represents a struct that describes a given
@@ -135,6 +158,10 @@ export interface Metadata {
    */
   uriHash: string;
 }
+export interface MetadataProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Metadata";
+  value: Uint8Array;
+}
 /**
  * Metadata represents a struct that describes
  * a basic token.
@@ -186,75 +213,6 @@ export const Params = {
     }
     return message;
   },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (Array.isArray(object?.sendEnabled)) obj.sendEnabled = object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e));
-    if (isSet(object.defaultSendEnabled)) obj.defaultSendEnabled = Boolean(object.defaultSendEnabled);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    if (message.sendEnabled) {
-      obj.sendEnabled = message.sendEnabled.map(e => e ? SendEnabled.toJSON(e) : undefined);
-    } else {
-      obj.sendEnabled = [];
-    }
-    message.defaultSendEnabled !== undefined && (obj.defaultSendEnabled = message.defaultSendEnabled);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.sendEnabled = object.sendEnabled?.map(e => SendEnabled.fromPartial(e)) || [];
-    message.defaultSendEnabled = object.defaultSendEnabled ?? false;
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromSDK(e)) : [],
-      defaultSendEnabled: object?.default_send_enabled
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      send_enabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromSDKJSON(e)) : [],
-      default_send_enabled: isSet(object.default_send_enabled) ? Boolean(object.default_send_enabled) : false
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    if (message.sendEnabled) {
-      obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toSDK(e) : undefined);
-    } else {
-      obj.send_enabled = [];
-    }
-    obj.default_send_enabled = message.defaultSendEnabled;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromAmino(e)) : [],
-      defaultSendEnabled: object.default_send_enabled
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    if (message.sendEnabled) {
-      obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toAmino(e) : undefined);
-    } else {
-      obj.send_enabled = [];
-    }
-    obj.default_send_enabled = message.defaultSendEnabled;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
   },
@@ -304,63 +262,6 @@ export const SendEnabled = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SendEnabled {
-    const obj = createBaseSendEnabled();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
-    return obj;
-  },
-  toJSON(message: SendEnabled): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SendEnabled>): SendEnabled {
-    const message = createBaseSendEnabled();
-    message.denom = object.denom ?? "";
-    message.enabled = object.enabled ?? false;
-    return message;
-  },
-  fromSDK(object: SendEnabledSDKType): SendEnabled {
-    return {
-      denom: object?.denom,
-      enabled: object?.enabled
-    };
-  },
-  fromSDKJSON(object: any): SendEnabledSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
-    };
-  },
-  toSDK(message: SendEnabled): SendEnabledSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
-    return obj;
-  },
-  fromAmino(object: SendEnabledAmino): SendEnabled {
-    return {
-      denom: object.denom,
-      enabled: object.enabled
-    };
-  },
-  toAmino(message: SendEnabled): SendEnabledAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
-    return obj;
-  },
-  fromAminoMsg(object: SendEnabledAminoMsg): SendEnabled {
-    return SendEnabled.fromAmino(object.value);
-  },
-  toAminoMsg(message: SendEnabled): SendEnabledAminoMsg {
-    return {
-      type: "cosmos-sdk/SendEnabled",
-      value: SendEnabled.toAmino(message)
-    };
   },
   fromProtoMsg(message: SendEnabledProtoMsg): SendEnabled {
     return SendEnabled.decode(message.value);
@@ -412,75 +313,6 @@ export const Input = {
     }
     return message;
   },
-  fromJSON(object: any): Input {
-    const obj = createBaseInput();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Input): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Input>): Input {
-    const message = createBaseInput();
-    message.address = object.address ?? "";
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: InputSDKType): Input {
-    return {
-      address: object?.address,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): InputSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Input): InputSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAmino(object: InputAmino): Input {
-    return {
-      address: object.address,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Input): InputAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: InputAminoMsg): Input {
-    return Input.fromAmino(object.value);
-  },
-  toAminoMsg(message: Input): InputAminoMsg {
-    return {
-      type: "cosmos-sdk/Input",
-      value: Input.toAmino(message)
-    };
-  },
   fromProtoMsg(message: InputProtoMsg): Input {
     return Input.decode(message.value);
   },
@@ -531,75 +363,6 @@ export const Output = {
     }
     return message;
   },
-  fromJSON(object: any): Output {
-    const obj = createBaseOutput();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Output): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Output>): Output {
-    const message = createBaseOutput();
-    message.address = object.address ?? "";
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: OutputSDKType): Output {
-    return {
-      address: object?.address,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): OutputSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Output): OutputSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAmino(object: OutputAmino): Output {
-    return {
-      address: object.address,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Output): OutputAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: OutputAminoMsg): Output {
-    return Output.fromAmino(object.value);
-  },
-  toAminoMsg(message: Output): OutputAminoMsg {
-    return {
-      type: "cosmos-sdk/Output",
-      value: Output.toAmino(message)
-    };
-  },
   fromProtoMsg(message: OutputProtoMsg): Output {
     return Output.decode(message.value);
   },
@@ -642,67 +405,6 @@ export const Supply = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Supply {
-    const obj = createBaseSupply();
-    if (Array.isArray(object?.total)) obj.total = object.total.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Supply): unknown {
-    const obj: any = {};
-    if (message.total) {
-      obj.total = message.total.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.total = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Supply>): Supply {
-    const message = createBaseSupply();
-    message.total = object.total?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SupplySDKType): Supply {
-    return {
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SupplySDKType {
-    return {
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Supply): SupplySDKType {
-    const obj: any = {};
-    if (message.total) {
-      obj.total = message.total.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SupplyAmino): Supply {
-    return {
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Supply): SupplyAmino {
-    const obj: any = {};
-    if (message.total) {
-      obj.total = message.total.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SupplyAminoMsg): Supply {
-    return Supply.fromAmino(object.value);
-  },
-  toAminoMsg(message: Supply): SupplyAminoMsg {
-    return {
-      type: "cosmos-sdk/Supply",
-      value: Supply.toAmino(message)
-    };
   },
   fromProtoMsg(message: SupplyProtoMsg): Supply {
     return Supply.decode(message.value);
@@ -760,83 +462,6 @@ export const DenomUnit = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DenomUnit {
-    const obj = createBaseDenomUnit();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.exponent)) obj.exponent = Number(object.exponent);
-    if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: DenomUnit): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.exponent !== undefined && (obj.exponent = Math.round(message.exponent));
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DenomUnit>): DenomUnit {
-    const message = createBaseDenomUnit();
-    message.denom = object.denom ?? "";
-    message.exponent = object.exponent ?? 0;
-    message.aliases = object.aliases?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: DenomUnitSDKType): DenomUnit {
-    return {
-      denom: object?.denom,
-      exponent: object?.exponent,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): DenomUnitSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: DenomUnit): DenomUnitSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.exponent = message.exponent;
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DenomUnitAmino): DenomUnit {
-    return {
-      denom: object.denom,
-      exponent: object.exponent,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: DenomUnit): DenomUnitAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.exponent = message.exponent;
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DenomUnitAminoMsg): DenomUnit {
-    return DenomUnit.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomUnit): DenomUnitAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomUnit",
-      value: DenomUnit.toAmino(message)
-    };
   },
   fromProtoMsg(message: DenomUnitProtoMsg): DenomUnit {
     return DenomUnit.decode(message.value);
@@ -929,123 +554,6 @@ export const Metadata = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Metadata {
-    const obj = createBaseMetadata();
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.denomUnits)) obj.denomUnits = object.denomUnits.map((e: any) => DenomUnit.fromJSON(e));
-    if (isSet(object.base)) obj.base = String(object.base);
-    if (isSet(object.display)) obj.display = String(object.display);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.symbol)) obj.symbol = String(object.symbol);
-    if (isSet(object.uri)) obj.uri = String(object.uri);
-    if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
-    return obj;
-  },
-  toJSON(message: Metadata): unknown {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    if (message.denomUnits) {
-      obj.denomUnits = message.denomUnits.map(e => e ? DenomUnit.toJSON(e) : undefined);
-    } else {
-      obj.denomUnits = [];
-    }
-    message.base !== undefined && (obj.base = message.base);
-    message.display !== undefined && (obj.display = message.display);
-    message.name !== undefined && (obj.name = message.name);
-    message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uriHash = message.uriHash);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Metadata>): Metadata {
-    const message = createBaseMetadata();
-    message.description = object.description ?? "";
-    message.denomUnits = object.denomUnits?.map(e => DenomUnit.fromPartial(e)) || [];
-    message.base = object.base ?? "";
-    message.display = object.display ?? "";
-    message.name = object.name ?? "";
-    message.symbol = object.symbol ?? "";
-    message.uri = object.uri ?? "";
-    message.uriHash = object.uriHash ?? "";
-    return message;
-  },
-  fromSDK(object: MetadataSDKType): Metadata {
-    return {
-      description: object?.description,
-      denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromSDK(e)) : [],
-      base: object?.base,
-      display: object?.display,
-      name: object?.name,
-      symbol: object?.symbol,
-      uri: object?.uri,
-      uriHash: object?.uri_hash
-    };
-  },
-  fromSDKJSON(object: any): MetadataSDKType {
-    return {
-      description: isSet(object.description) ? String(object.description) : "",
-      denom_units: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromSDKJSON(e)) : [],
-      base: isSet(object.base) ? String(object.base) : "",
-      display: isSet(object.display) ? String(object.display) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : ""
-    };
-  },
-  toSDK(message: Metadata): MetadataSDKType {
-    const obj: any = {};
-    obj.description = message.description;
-    if (message.denomUnits) {
-      obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toSDK(e) : undefined);
-    } else {
-      obj.denom_units = [];
-    }
-    obj.base = message.base;
-    obj.display = message.display;
-    obj.name = message.name;
-    obj.symbol = message.symbol;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
-    return obj;
-  },
-  fromAmino(object: MetadataAmino): Metadata {
-    return {
-      description: object.description,
-      denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromAmino(e)) : [],
-      base: object.base,
-      display: object.display,
-      name: object.name,
-      symbol: object.symbol,
-      uri: object.uri,
-      uriHash: object.uri_hash
-    };
-  },
-  toAmino(message: Metadata): MetadataAmino {
-    const obj: any = {};
-    obj.description = message.description;
-    if (message.denomUnits) {
-      obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toAmino(e) : undefined);
-    } else {
-      obj.denom_units = [];
-    }
-    obj.base = message.base;
-    obj.display = message.display;
-    obj.name = message.name;
-    obj.symbol = message.symbol;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
-    return obj;
-  },
-  fromAminoMsg(object: MetadataAminoMsg): Metadata {
-    return Metadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: Metadata): MetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/Metadata",
-      value: Metadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: MetadataProtoMsg): Metadata {
     return Metadata.decode(message.value);

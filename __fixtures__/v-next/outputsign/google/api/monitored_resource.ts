@@ -1,8 +1,7 @@
 import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { LaunchStage, LaunchStageSDKType } from "./launch_stage";
 import { Struct, StructSDKType } from "../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -51,6 +50,10 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface MonitoredResourceDescriptorProtoMsg {
+  typeUrl: "/google.api.MonitoredResourceDescriptor";
+  value: Uint8Array;
+}
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -73,6 +76,10 @@ export interface MonitoredResourceDescriptorSDKType {
 export interface MonitoredResource_LabelsEntry {
   key: string;
   value: string;
+}
+export interface MonitoredResource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
@@ -109,6 +116,10 @@ export interface MonitoredResource {
     [key: string]: string;
   };
 }
+export interface MonitoredResourceProtoMsg {
+  typeUrl: "/google.api.MonitoredResource";
+  value: Uint8Array;
+}
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -133,6 +144,10 @@ export interface MonitoredResourceSDKType {
 export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
+}
+export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
@@ -164,6 +179,10 @@ export interface MonitoredResourceMetadata {
   userLabels: {
     [key: string]: string;
   };
+}
+export interface MonitoredResourceMetadataProtoMsg {
+  typeUrl: "/google.api.MonitoredResourceMetadata";
+  value: Uint8Array;
 }
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
@@ -244,101 +263,6 @@ export const MonitoredResourceDescriptor = {
     }
     return message;
   },
-  fromJSON(object: any): MonitoredResourceDescriptor {
-    const obj = createBaseMonitoredResourceDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    return obj;
-  },
-  toJSON(message: MonitoredResourceDescriptor): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MonitoredResourceDescriptor>): MonitoredResourceDescriptor {
-    const message = createBaseMonitoredResourceDescriptor();
-    message.name = object.name ?? "";
-    message.type = object.type ?? "";
-    message.displayName = object.displayName ?? "";
-    message.description = object.description ?? "";
-    message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];
-    message.launchStage = object.launchStage ?? 0;
-    return message;
-  },
-  fromSDK(object: MonitoredResourceDescriptorSDKType): MonitoredResourceDescriptor {
-    return {
-      name: object?.name,
-      type: object?.type,
-      displayName: object?.display_name,
-      description: object?.description,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
-    };
-  },
-  fromSDKJSON(object: any): MonitoredResourceDescriptorSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      display_name: isSet(object.display_name) ? String(object.display_name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
-      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
-    };
-  },
-  toSDK(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.display_name = message.displayName;
-    obj.description = message.description;
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
-    return obj;
-  },
-  fromAmino(object: MonitoredResourceDescriptorAmino): MonitoredResourceDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      displayName: object.display_name,
-      description: object.description,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
-    };
-  },
-  toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.display_name = message.displayName;
-    obj.description = message.description;
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    obj.launch_stage = message.launchStage;
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
-    return MonitoredResourceDescriptor.fromAmino(object.value);
-  },
   fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg): MonitoredResourceDescriptor {
     return MonitoredResourceDescriptor.decode(message.value);
   },
@@ -387,57 +311,6 @@ export const MonitoredResource_LabelsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MonitoredResource_LabelsEntry {
-    const obj = createBaseMonitoredResource_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: MonitoredResource_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MonitoredResource_LabelsEntry>): MonitoredResource_LabelsEntry {
-    const message = createBaseMonitoredResource_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: MonitoredResource_LabelsEntrySDKType): MonitoredResource_LabelsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): MonitoredResource_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: MonitoredResource_LabelsEntryAmino): MonitoredResource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
-    return MonitoredResource_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoredResource_LabelsEntryProtoMsg): MonitoredResource_LabelsEntry {
     return MonitoredResource_LabelsEntry.decode(message.value);
@@ -489,99 +362,6 @@ export const MonitoredResource = {
     }
     return message;
   },
-  fromJSON(object: any): MonitoredResource {
-    const obj = createBaseMonitoredResource();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: MonitoredResource): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MonitoredResource>): MonitoredResource {
-    const message = createBaseMonitoredResource();
-    message.type = object.type ?? "";
-    message.labels = Object.entries(object.labels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: MonitoredResourceSDKType): MonitoredResource {
-    return {
-      type: object?.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): MonitoredResourceSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: MonitoredResource): MonitoredResourceSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: MonitoredResourceAmino): MonitoredResource {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: MonitoredResource): MonitoredResourceAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceAminoMsg): MonitoredResource {
-    return MonitoredResource.fromAmino(object.value);
-  },
   fromProtoMsg(message: MonitoredResourceProtoMsg): MonitoredResource {
     return MonitoredResource.decode(message.value);
   },
@@ -630,57 +410,6 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MonitoredResourceMetadata_UserLabelsEntry {
-    const obj = createBaseMonitoredResourceMetadata_UserLabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MonitoredResourceMetadata_UserLabelsEntry>): MonitoredResourceMetadata_UserLabelsEntry {
-    const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: MonitoredResourceMetadata_UserLabelsEntrySDKType): MonitoredResourceMetadata_UserLabelsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): MonitoredResourceMetadata_UserLabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: MonitoredResourceMetadata_UserLabelsEntryAmino): MonitoredResourceMetadata_UserLabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {
-    return MonitoredResourceMetadata_UserLabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoredResourceMetadata_UserLabelsEntryProtoMsg): MonitoredResourceMetadata_UserLabelsEntry {
     return MonitoredResourceMetadata_UserLabelsEntry.decode(message.value);
@@ -731,101 +460,6 @@ export const MonitoredResourceMetadata = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MonitoredResourceMetadata {
-    const obj = createBaseMonitoredResourceMetadata();
-    if (isSet(object.systemLabels)) obj.systemLabels = Struct.fromJSON(object.systemLabels);
-    if (isObject(object.userLabels)) obj.userLabels = Object.entries(object.userLabels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: MonitoredResourceMetadata): unknown {
-    const obj: any = {};
-    message.systemLabels !== undefined && (obj.systemLabels = message.systemLabels ? Struct.toJSON(message.systemLabels) : undefined);
-    obj.userLabels = {};
-    if (message.userLabels) {
-      Object.entries(message.userLabels).forEach(([k, v]) => {
-        obj.userLabels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
-    const message = createBaseMonitoredResourceMetadata();
-    if (object.systemLabels !== undefined && object.systemLabels !== null) {
-      message.systemLabels = Struct.fromPartial(object.systemLabels);
-    }
-    message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: MonitoredResourceMetadataSDKType): MonitoredResourceMetadata {
-    return {
-      systemLabels: object.system_labels ? Struct.fromSDK(object.system_labels) : undefined,
-      userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): MonitoredResourceMetadataSDKType {
-    return {
-      system_labels: isSet(object.system_labels) ? Struct.fromSDKJSON(object.system_labels) : undefined,
-      user_labels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: MonitoredResourceMetadata): MonitoredResourceMetadataSDKType {
-    const obj: any = {};
-    message.systemLabels !== undefined && (obj.system_labels = message.systemLabels ? Struct.toSDK(message.systemLabels) : undefined);
-    obj.user_labels = {};
-    if (message.userLabels) {
-      Object.entries(message.userLabels).forEach(([k, v]) => {
-        obj.user_labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: MonitoredResourceMetadataAmino): MonitoredResourceMetadata {
-    return {
-      systemLabels: object?.system_labels ? Struct.fromAmino(object.system_labels) : undefined,
-      userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: MonitoredResourceMetadata): MonitoredResourceMetadataAmino {
-    const obj: any = {};
-    obj.system_labels = message.systemLabels ? Struct.toAmino(message.systemLabels) : undefined;
-    obj.user_labels = {};
-    if (message.userLabels) {
-      Object.entries(message.userLabels).forEach(([k, v]) => {
-        obj.user_labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceMetadataAminoMsg): MonitoredResourceMetadata {
-    return MonitoredResourceMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoredResourceMetadataProtoMsg): MonitoredResourceMetadata {
     return MonitoredResourceMetadata.decode(message.value);

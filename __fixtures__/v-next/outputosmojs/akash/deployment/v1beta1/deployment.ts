@@ -53,6 +53,10 @@ export interface MsgCreateDeployment {
   version: Uint8Array;
   deposit: Coin | undefined;
 }
+export interface MsgCreateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
+  value: Uint8Array;
+}
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
@@ -62,12 +66,20 @@ export interface MsgCreateDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
+export interface MsgCreateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
   id: DeploymentID | undefined;
   amount: Coin | undefined;
+}
+export interface MsgDepositDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
+  value: Uint8Array;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -76,6 +88,10 @@ export interface MsgDepositDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
+export interface MsgDepositDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
@@ -83,6 +99,10 @@ export interface MsgUpdateDeployment {
   id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
+}
+export interface MsgUpdateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment";
+  value: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -92,11 +112,19 @@ export interface MsgUpdateDeploymentSDKType {
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
+export interface MsgUpdateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
   id: DeploymentID | undefined;
+}
+export interface MsgCloseDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
+  value: Uint8Array;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -104,12 +132,20 @@ export interface MsgCloseDeploymentSDKType {
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
+export interface MsgCloseDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
   dseq: bigint;
+}
+export interface DeploymentIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentID";
+  value: Uint8Array;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -123,6 +159,10 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: bigint;
 }
+export interface DeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Deployment";
+  value: Uint8Array;
+}
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType | undefined;
@@ -135,6 +175,10 @@ export interface DeploymentFilters {
   owner: string;
   dseq: bigint;
   state: string;
+}
+export interface DeploymentFiltersProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentFilters";
+  value: Uint8Array;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {

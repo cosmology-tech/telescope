@@ -102,6 +102,10 @@ export interface Backend {
    */
   rules: BackendRule[];
 }
+export interface BackendProtoMsg {
+  typeUrl: "/google.api.Backend";
+  value: Uint8Array;
+}
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
   rules: BackendRuleSDKType[];
@@ -190,6 +194,10 @@ export interface BackendRule {
    * for more details on the supported values.
    */
   protocol: string;
+}
+export interface BackendRuleProtoMsg {
+  typeUrl: "/google.api.BackendRule";
+  value: Uint8Array;
 }
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleSDKType {

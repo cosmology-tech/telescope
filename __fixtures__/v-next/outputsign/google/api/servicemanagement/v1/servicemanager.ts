@@ -2,7 +2,6 @@ import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKTyp
 import { Service, ServiceSDKType } from "../../service";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
@@ -66,6 +65,10 @@ export interface ListServicesRequest {
   /** @deprecated */
   consumerId: string;
 }
+export interface ListServicesRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest";
+  value: Uint8Array;
+}
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestSDKType {
   producer_project_id: string;
@@ -81,6 +84,10 @@ export interface ListServicesResponse {
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   nextPageToken: string;
 }
+export interface ListServicesResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse";
+  value: Uint8Array;
+}
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseSDKType {
   services: ManagedServiceSDKType[];
@@ -94,6 +101,10 @@ export interface GetServiceRequest {
    */
   serviceName: string;
 }
+export interface GetServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for `GetService` method. */
 export interface GetServiceRequestSDKType {
   service_name: string;
@@ -102,6 +113,10 @@ export interface GetServiceRequestSDKType {
 export interface CreateServiceRequest {
   /** Required. Initial values for the service resource. */
   service?: ManagedService;
+}
+export interface CreateServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
+  value: Uint8Array;
 }
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
@@ -115,6 +130,10 @@ export interface DeleteServiceRequest {
    */
   serviceName: string;
 }
+export interface DeleteServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for DeleteService method. */
 export interface DeleteServiceRequestSDKType {
   service_name: string;
@@ -127,6 +146,10 @@ export interface UndeleteServiceRequest {
    */
   serviceName: string;
 }
+export interface UndeleteServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestSDKType {
   service_name: string;
@@ -135,6 +158,10 @@ export interface UndeleteServiceRequestSDKType {
 export interface UndeleteServiceResponse {
   /** Revived service resource. */
   service?: ManagedService;
+}
+export interface UndeleteServiceResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
+  value: Uint8Array;
 }
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
@@ -160,6 +187,10 @@ export interface GetServiceConfigRequest {
    */
   view: GetServiceConfigRequest_ConfigView;
 }
+export interface GetServiceConfigRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
+  value: Uint8Array;
+}
 /** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequestSDKType {
   service_name: string;
@@ -181,6 +212,10 @@ export interface ListServiceConfigsRequest {
    */
   pageSize: number;
 }
+export interface ListServiceConfigsRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
+  value: Uint8Array;
+}
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestSDKType {
   service_name: string;
@@ -193,6 +228,10 @@ export interface ListServiceConfigsResponse {
   serviceConfigs: Service[];
   /** The token of the next page of results. */
   nextPageToken: string;
+}
+export interface ListServiceConfigsResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+  value: Uint8Array;
 }
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseSDKType {
@@ -208,6 +247,10 @@ export interface CreateServiceConfigRequest {
   serviceName: string;
   /** Required. The service configuration resource. */
   serviceConfig?: Service;
+}
+export interface CreateServiceConfigRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
+  value: Uint8Array;
 }
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestSDKType {
@@ -230,6 +273,10 @@ export interface SubmitConfigSourceRequest {
    */
   validateOnly: boolean;
 }
+export interface SubmitConfigSourceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+  value: Uint8Array;
+}
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
   service_name: string;
@@ -240,6 +287,10 @@ export interface SubmitConfigSourceRequestSDKType {
 export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
   serviceConfig?: Service;
+}
+export interface SubmitConfigSourceResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
+  value: Uint8Array;
 }
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
@@ -254,6 +305,10 @@ export interface CreateServiceRolloutRequest {
   serviceName: string;
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: Rollout;
+}
+export interface CreateServiceRolloutRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
+  value: Uint8Array;
 }
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestSDKType {
@@ -286,6 +341,10 @@ export interface ListServiceRolloutsRequest {
    */
   filter: string;
 }
+export interface ListServiceRolloutsRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+  value: Uint8Array;
+}
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestSDKType {
   service_name: string;
@@ -299,6 +358,10 @@ export interface ListServiceRolloutsResponse {
   rollouts: Rollout[];
   /** The token of the next page of results. */
   nextPageToken: string;
+}
+export interface ListServiceRolloutsResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+  value: Uint8Array;
 }
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseSDKType {
@@ -314,6 +377,10 @@ export interface GetServiceRolloutRequest {
   serviceName: string;
   /** Required. The id of the rollout resource. */
   rolloutId: string;
+}
+export interface GetServiceRolloutRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
+  value: Uint8Array;
 }
 /** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequestSDKType {
@@ -339,6 +406,10 @@ export interface GenerateConfigReportRequest {
    */
   oldConfig?: Any;
 }
+export interface GenerateConfigReportRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
+  value: Uint8Array;
+}
 /** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestSDKType {
   new_config?: AnySDKType;
@@ -361,6 +432,10 @@ export interface GenerateConfigReportResponse {
    * belongs to.
    */
   diagnostics: Diagnostic[];
+}
+export interface GenerateConfigReportResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+  value: Uint8Array;
 }
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseSDKType {
@@ -420,73 +495,6 @@ export const ListServicesRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
-    return obj;
-  },
-  toJSON(message: ListServicesRequest): unknown {
-    const obj: any = {};
-    message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.consumerId !== undefined && (obj.consumerId = message.consumerId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
-    const message = createBaseListServicesRequest();
-    message.producerProjectId = object.producerProjectId ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
-    message.consumerId = object.consumerId ?? "";
-    return message;
-  },
-  fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
-    return {
-      producerProjectId: object?.producer_project_id,
-      pageSize: object?.page_size,
-      pageToken: object?.page_token,
-      consumerId: object?.consumer_id
-    };
-  },
-  fromSDKJSON(object: any): ListServicesRequestSDKType {
-    return {
-      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : ""
-    };
-  },
-  toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
-    const obj: any = {};
-    obj.producer_project_id = message.producerProjectId;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.consumer_id = message.consumerId;
-    return obj;
-  },
-  fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
-    return {
-      producerProjectId: object.producer_project_id,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      consumerId: object.consumer_id
-    };
-  },
-  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
-    const obj: any = {};
-    obj.producer_project_id = message.producerProjectId;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.consumer_id = message.consumerId;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
     return ListServicesRequest.decode(message.value);
   },
@@ -537,69 +545,6 @@ export const ListServicesResponse = {
     }
     return message;
   },
-  fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => ManagedService.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListServicesResponse): unknown {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? ManagedService.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
-    const message = createBaseListServicesResponse();
-    message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-  fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDK(e)) : [],
-      nextPageToken: object?.next_page_token
-    };
-  },
-  fromSDKJSON(object: any): ListServicesResponseSDKType {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-  toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? ManagedService.toSDK(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? ManagedService.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
     return ListServicesResponse.decode(message.value);
   },
@@ -642,49 +587,6 @@ export const GetServiceRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
-  },
-  toJSON(message: GetServiceRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
-    const message = createBaseGetServiceRequest();
-    message.serviceName = object.serviceName ?? "";
-    return message;
-  },
-  fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
-    return {
-      serviceName: object?.service_name
-    };
-  },
-  fromSDKJSON(object: any): GetServiceRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : ""
-    };
-  },
-  toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
-    return {
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
     return GetServiceRequest.decode(message.value);
@@ -729,51 +631,6 @@ export const CreateServiceRequest = {
     }
     return message;
   },
-  fromJSON(object: any): CreateServiceRequest {
-    const obj = createBaseCreateServiceRequest();
-    if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: CreateServiceRequest): unknown {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? ManagedService.toJSON(message.service) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
-    const message = createBaseCreateServiceRequest();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = ManagedService.fromPartial(object.service);
-    }
-    return message;
-  },
-  fromSDK(object: CreateServiceRequestSDKType): CreateServiceRequest {
-    return {
-      service: object.service ? ManagedService.fromSDK(object.service) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CreateServiceRequestSDKType {
-    return {
-      service: isSet(object.service) ? ManagedService.fromSDKJSON(object.service) : undefined
-    };
-  },
-  toSDK(message: CreateServiceRequest): CreateServiceRequestSDKType {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? ManagedService.toSDK(message.service) : undefined);
-    return obj;
-  },
-  fromAmino(object: CreateServiceRequestAmino): CreateServiceRequest {
-    return {
-      service: object?.service ? ManagedService.fromAmino(object.service) : undefined
-    };
-  },
-  toAmino(message: CreateServiceRequest): CreateServiceRequestAmino {
-    const obj: any = {};
-    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateServiceRequestAminoMsg): CreateServiceRequest {
-    return CreateServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CreateServiceRequestProtoMsg): CreateServiceRequest {
     return CreateServiceRequest.decode(message.value);
   },
@@ -816,49 +673,6 @@ export const DeleteServiceRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DeleteServiceRequest {
-    const obj = createBaseDeleteServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
-  },
-  toJSON(message: DeleteServiceRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DeleteServiceRequest>): DeleteServiceRequest {
-    const message = createBaseDeleteServiceRequest();
-    message.serviceName = object.serviceName ?? "";
-    return message;
-  },
-  fromSDK(object: DeleteServiceRequestSDKType): DeleteServiceRequest {
-    return {
-      serviceName: object?.service_name
-    };
-  },
-  fromSDKJSON(object: any): DeleteServiceRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : ""
-    };
-  },
-  toSDK(message: DeleteServiceRequest): DeleteServiceRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAmino(object: DeleteServiceRequestAmino): DeleteServiceRequest {
-    return {
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: DeleteServiceRequest): DeleteServiceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteServiceRequestAminoMsg): DeleteServiceRequest {
-    return DeleteServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteServiceRequestProtoMsg): DeleteServiceRequest {
     return DeleteServiceRequest.decode(message.value);
@@ -903,49 +717,6 @@ export const UndeleteServiceRequest = {
     }
     return message;
   },
-  fromJSON(object: any): UndeleteServiceRequest {
-    const obj = createBaseUndeleteServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
-  },
-  toJSON(message: UndeleteServiceRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UndeleteServiceRequest>): UndeleteServiceRequest {
-    const message = createBaseUndeleteServiceRequest();
-    message.serviceName = object.serviceName ?? "";
-    return message;
-  },
-  fromSDK(object: UndeleteServiceRequestSDKType): UndeleteServiceRequest {
-    return {
-      serviceName: object?.service_name
-    };
-  },
-  fromSDKJSON(object: any): UndeleteServiceRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : ""
-    };
-  },
-  toSDK(message: UndeleteServiceRequest): UndeleteServiceRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAmino(object: UndeleteServiceRequestAmino): UndeleteServiceRequest {
-    return {
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: UndeleteServiceRequest): UndeleteServiceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: UndeleteServiceRequestAminoMsg): UndeleteServiceRequest {
-    return UndeleteServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UndeleteServiceRequestProtoMsg): UndeleteServiceRequest {
     return UndeleteServiceRequest.decode(message.value);
   },
@@ -988,51 +759,6 @@ export const UndeleteServiceResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): UndeleteServiceResponse {
-    const obj = createBaseUndeleteServiceResponse();
-    if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: UndeleteServiceResponse): unknown {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? ManagedService.toJSON(message.service) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
-    const message = createBaseUndeleteServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = ManagedService.fromPartial(object.service);
-    }
-    return message;
-  },
-  fromSDK(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
-    return {
-      service: object.service ? ManagedService.fromSDK(object.service) : undefined
-    };
-  },
-  fromSDKJSON(object: any): UndeleteServiceResponseSDKType {
-    return {
-      service: isSet(object.service) ? ManagedService.fromSDKJSON(object.service) : undefined
-    };
-  },
-  toSDK(message: UndeleteServiceResponse): UndeleteServiceResponseSDKType {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? ManagedService.toSDK(message.service) : undefined);
-    return obj;
-  },
-  fromAmino(object: UndeleteServiceResponseAmino): UndeleteServiceResponse {
-    return {
-      service: object?.service ? ManagedService.fromAmino(object.service) : undefined
-    };
-  },
-  toAmino(message: UndeleteServiceResponse): UndeleteServiceResponseAmino {
-    const obj: any = {};
-    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UndeleteServiceResponseAminoMsg): UndeleteServiceResponse {
-    return UndeleteServiceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: UndeleteServiceResponseProtoMsg): UndeleteServiceResponse {
     return UndeleteServiceResponse.decode(message.value);
@@ -1091,65 +817,6 @@ export const GetServiceConfigRequest = {
     }
     return message;
   },
-  fromJSON(object: any): GetServiceConfigRequest {
-    const obj = createBaseGetServiceConfigRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.configId)) obj.configId = String(object.configId);
-    if (isSet(object.view)) obj.view = getServiceConfigRequest_ConfigViewFromJSON(object.view);
-    return obj;
-  },
-  toJSON(message: GetServiceConfigRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.configId !== undefined && (obj.configId = message.configId);
-    message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GetServiceConfigRequest>): GetServiceConfigRequest {
-    const message = createBaseGetServiceConfigRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.configId = object.configId ?? "";
-    message.view = object.view ?? 0;
-    return message;
-  },
-  fromSDK(object: GetServiceConfigRequestSDKType): GetServiceConfigRequest {
-    return {
-      serviceName: object?.service_name,
-      configId: object?.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
-    };
-  },
-  fromSDKJSON(object: any): GetServiceConfigRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      config_id: isSet(object.config_id) ? String(object.config_id) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
-    };
-  },
-  toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.config_id = message.configId;
-    message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
-    return obj;
-  },
-  fromAmino(object: GetServiceConfigRequestAmino): GetServiceConfigRequest {
-    return {
-      serviceName: object.service_name,
-      configId: object.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
-    };
-  },
-  toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.config_id = message.configId;
-    obj.view = message.view;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceConfigRequestAminoMsg): GetServiceConfigRequest {
-    return GetServiceConfigRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: GetServiceConfigRequestProtoMsg): GetServiceConfigRequest {
     return GetServiceConfigRequest.decode(message.value);
   },
@@ -1207,65 +874,6 @@ export const ListServiceConfigsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ListServiceConfigsRequest {
-    const obj = createBaseListServiceConfigsRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
-  },
-  toJSON(message: ListServiceConfigsRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServiceConfigsRequest>): ListServiceConfigsRequest {
-    const message = createBaseListServiceConfigsRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.pageToken = object.pageToken ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    return message;
-  },
-  fromSDK(object: ListServiceConfigsRequestSDKType): ListServiceConfigsRequest {
-    return {
-      serviceName: object?.service_name,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size
-    };
-  },
-  fromSDKJSON(object: any): ListServiceConfigsRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-  toSDK(message: ListServiceConfigsRequest): ListServiceConfigsRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAmino(object: ListServiceConfigsRequestAmino): ListServiceConfigsRequest {
-    return {
-      serviceName: object.service_name,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListServiceConfigsRequest): ListServiceConfigsRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceConfigsRequestAminoMsg): ListServiceConfigsRequest {
-    return ListServiceConfigsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceConfigsRequestProtoMsg): ListServiceConfigsRequest {
     return ListServiceConfigsRequest.decode(message.value);
   },
@@ -1316,69 +924,6 @@ export const ListServiceConfigsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): ListServiceConfigsResponse {
-    const obj = createBaseListServiceConfigsResponse();
-    if (Array.isArray(object?.serviceConfigs)) obj.serviceConfigs = object.serviceConfigs.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListServiceConfigsResponse): unknown {
-    const obj: any = {};
-    if (message.serviceConfigs) {
-      obj.serviceConfigs = message.serviceConfigs.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.serviceConfigs = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServiceConfigsResponse>): ListServiceConfigsResponse {
-    const message = createBaseListServiceConfigsResponse();
-    message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-  fromSDK(object: ListServiceConfigsResponseSDKType): ListServiceConfigsResponse {
-    return {
-      serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: object?.next_page_token
-    };
-  },
-  fromSDKJSON(object: any): ListServiceConfigsResponseSDKType {
-    return {
-      service_configs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-  toSDK(message: ListServiceConfigsResponse): ListServiceConfigsResponseSDKType {
-    const obj: any = {};
-    if (message.serviceConfigs) {
-      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toSDK(e) : undefined);
-    } else {
-      obj.service_configs = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAmino(object: ListServiceConfigsResponseAmino): ListServiceConfigsResponse {
-    return {
-      serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServiceConfigsResponse): ListServiceConfigsResponseAmino {
-    const obj: any = {};
-    if (message.serviceConfigs) {
-      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.service_configs = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceConfigsResponseAminoMsg): ListServiceConfigsResponse {
-    return ListServiceConfigsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceConfigsResponseProtoMsg): ListServiceConfigsResponse {
     return ListServiceConfigsResponse.decode(message.value);
   },
@@ -1428,59 +973,6 @@ export const CreateServiceConfigRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CreateServiceConfigRequest {
-    const obj = createBaseCreateServiceConfigRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
-  },
-  toJSON(message: CreateServiceConfigRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.serviceConfig !== undefined && (obj.serviceConfig = message.serviceConfig ? Service.toJSON(message.serviceConfig) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
-    const message = createBaseCreateServiceConfigRequest();
-    message.serviceName = object.serviceName ?? "";
-    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
-      message.serviceConfig = Service.fromPartial(object.serviceConfig);
-    }
-    return message;
-  },
-  fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
-    return {
-      serviceName: object?.service_name,
-      serviceConfig: object.service_config ? Service.fromSDK(object.service_config) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CreateServiceConfigRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config: isSet(object.service_config) ? Service.fromSDKJSON(object.service_config) : undefined
-    };
-  },
-  toSDK(message: CreateServiceConfigRequest): CreateServiceConfigRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
-    return obj;
-  },
-  fromAmino(object: CreateServiceConfigRequestAmino): CreateServiceConfigRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
-    };
-  },
-  toAmino(message: CreateServiceConfigRequest): CreateServiceConfigRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateServiceConfigRequestAminoMsg): CreateServiceConfigRequest {
-    return CreateServiceConfigRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateServiceConfigRequestProtoMsg): CreateServiceConfigRequest {
     return CreateServiceConfigRequest.decode(message.value);
@@ -1539,67 +1031,6 @@ export const SubmitConfigSourceRequest = {
     }
     return message;
   },
-  fromJSON(object: any): SubmitConfigSourceRequest {
-    const obj = createBaseSubmitConfigSourceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.configSource)) obj.configSource = ConfigSource.fromJSON(object.configSource);
-    if (isSet(object.validateOnly)) obj.validateOnly = Boolean(object.validateOnly);
-    return obj;
-  },
-  toJSON(message: SubmitConfigSourceRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.configSource !== undefined && (obj.configSource = message.configSource ? ConfigSource.toJSON(message.configSource) : undefined);
-    message.validateOnly !== undefined && (obj.validateOnly = message.validateOnly);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
-    const message = createBaseSubmitConfigSourceRequest();
-    message.serviceName = object.serviceName ?? "";
-    if (object.configSource !== undefined && object.configSource !== null) {
-      message.configSource = ConfigSource.fromPartial(object.configSource);
-    }
-    message.validateOnly = object.validateOnly ?? false;
-    return message;
-  },
-  fromSDK(object: SubmitConfigSourceRequestSDKType): SubmitConfigSourceRequest {
-    return {
-      serviceName: object?.service_name,
-      configSource: object.config_source ? ConfigSource.fromSDK(object.config_source) : undefined,
-      validateOnly: object?.validate_only
-    };
-  },
-  fromSDKJSON(object: any): SubmitConfigSourceRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      config_source: isSet(object.config_source) ? ConfigSource.fromSDKJSON(object.config_source) : undefined,
-      validate_only: isSet(object.validate_only) ? Boolean(object.validate_only) : false
-    };
-  },
-  toSDK(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    message.configSource !== undefined && (obj.config_source = message.configSource ? ConfigSource.toSDK(message.configSource) : undefined);
-    obj.validate_only = message.validateOnly;
-    return obj;
-  },
-  fromAmino(object: SubmitConfigSourceRequestAmino): SubmitConfigSourceRequest {
-    return {
-      serviceName: object.service_name,
-      configSource: object?.config_source ? ConfigSource.fromAmino(object.config_source) : undefined,
-      validateOnly: object.validate_only
-    };
-  },
-  toAmino(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource) : undefined;
-    obj.validate_only = message.validateOnly;
-    return obj;
-  },
-  fromAminoMsg(object: SubmitConfigSourceRequestAminoMsg): SubmitConfigSourceRequest {
-    return SubmitConfigSourceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: SubmitConfigSourceRequestProtoMsg): SubmitConfigSourceRequest {
     return SubmitConfigSourceRequest.decode(message.value);
   },
@@ -1642,51 +1073,6 @@ export const SubmitConfigSourceResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SubmitConfigSourceResponse {
-    const obj = createBaseSubmitConfigSourceResponse();
-    if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
-  },
-  toJSON(message: SubmitConfigSourceResponse): unknown {
-    const obj: any = {};
-    message.serviceConfig !== undefined && (obj.serviceConfig = message.serviceConfig ? Service.toJSON(message.serviceConfig) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
-    const message = createBaseSubmitConfigSourceResponse();
-    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
-      message.serviceConfig = Service.fromPartial(object.serviceConfig);
-    }
-    return message;
-  },
-  fromSDK(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
-    return {
-      serviceConfig: object.service_config ? Service.fromSDK(object.service_config) : undefined
-    };
-  },
-  fromSDKJSON(object: any): SubmitConfigSourceResponseSDKType {
-    return {
-      service_config: isSet(object.service_config) ? Service.fromSDKJSON(object.service_config) : undefined
-    };
-  },
-  toSDK(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseSDKType {
-    const obj: any = {};
-    message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
-    return obj;
-  },
-  fromAmino(object: SubmitConfigSourceResponseAmino): SubmitConfigSourceResponse {
-    return {
-      serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
-    };
-  },
-  toAmino(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseAmino {
-    const obj: any = {};
-    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SubmitConfigSourceResponseAminoMsg): SubmitConfigSourceResponse {
-    return SubmitConfigSourceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: SubmitConfigSourceResponseProtoMsg): SubmitConfigSourceResponse {
     return SubmitConfigSourceResponse.decode(message.value);
@@ -1737,59 +1123,6 @@ export const CreateServiceRolloutRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CreateServiceRolloutRequest {
-    const obj = createBaseCreateServiceRolloutRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.rollout)) obj.rollout = Rollout.fromJSON(object.rollout);
-    return obj;
-  },
-  toJSON(message: CreateServiceRolloutRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toJSON(message.rollout) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
-    const message = createBaseCreateServiceRolloutRequest();
-    message.serviceName = object.serviceName ?? "";
-    if (object.rollout !== undefined && object.rollout !== null) {
-      message.rollout = Rollout.fromPartial(object.rollout);
-    }
-    return message;
-  },
-  fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
-    return {
-      serviceName: object?.service_name,
-      rollout: object.rollout ? Rollout.fromSDK(object.rollout) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CreateServiceRolloutRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      rollout: isSet(object.rollout) ? Rollout.fromSDKJSON(object.rollout) : undefined
-    };
-  },
-  toSDK(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toSDK(message.rollout) : undefined);
-    return obj;
-  },
-  fromAmino(object: CreateServiceRolloutRequestAmino): CreateServiceRolloutRequest {
-    return {
-      serviceName: object.service_name,
-      rollout: object?.rollout ? Rollout.fromAmino(object.rollout) : undefined
-    };
-  },
-  toAmino(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateServiceRolloutRequestAminoMsg): CreateServiceRolloutRequest {
-    return CreateServiceRolloutRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateServiceRolloutRequestProtoMsg): CreateServiceRolloutRequest {
     return CreateServiceRolloutRequest.decode(message.value);
@@ -1855,73 +1188,6 @@ export const ListServiceRolloutsRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ListServiceRolloutsRequest {
-    const obj = createBaseListServiceRolloutsRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
-  },
-  toJSON(message: ListServiceRolloutsRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.filter !== undefined && (obj.filter = message.filter);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServiceRolloutsRequest>): ListServiceRolloutsRequest {
-    const message = createBaseListServiceRolloutsRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.pageToken = object.pageToken ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    message.filter = object.filter ?? "";
-    return message;
-  },
-  fromSDK(object: ListServiceRolloutsRequestSDKType): ListServiceRolloutsRequest {
-    return {
-      serviceName: object?.service_name,
-      pageToken: object?.page_token,
-      pageSize: object?.page_size,
-      filter: object?.filter
-    };
-  },
-  fromSDKJSON(object: any): ListServiceRolloutsRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
-      filter: isSet(object.filter) ? String(object.filter) : ""
-    };
-  },
-  toSDK(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAmino(object: ListServiceRolloutsRequestAmino): ListServiceRolloutsRequest {
-    return {
-      serviceName: object.service_name,
-      pageToken: object.page_token,
-      pageSize: object.page_size,
-      filter: object.filter
-    };
-  },
-  toAmino(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceRolloutsRequestAminoMsg): ListServiceRolloutsRequest {
-    return ListServiceRolloutsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceRolloutsRequestProtoMsg): ListServiceRolloutsRequest {
     return ListServiceRolloutsRequest.decode(message.value);
   },
@@ -1971,69 +1237,6 @@ export const ListServiceRolloutsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ListServiceRolloutsResponse {
-    const obj = createBaseListServiceRolloutsResponse();
-    if (Array.isArray(object?.rollouts)) obj.rollouts = object.rollouts.map((e: any) => Rollout.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListServiceRolloutsResponse): unknown {
-    const obj: any = {};
-    if (message.rollouts) {
-      obj.rollouts = message.rollouts.map(e => e ? Rollout.toJSON(e) : undefined);
-    } else {
-      obj.rollouts = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServiceRolloutsResponse>): ListServiceRolloutsResponse {
-    const message = createBaseListServiceRolloutsResponse();
-    message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-  fromSDK(object: ListServiceRolloutsResponseSDKType): ListServiceRolloutsResponse {
-    return {
-      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDK(e)) : [],
-      nextPageToken: object?.next_page_token
-    };
-  },
-  fromSDKJSON(object: any): ListServiceRolloutsResponseSDKType {
-    return {
-      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-  toSDK(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseSDKType {
-    const obj: any = {};
-    if (message.rollouts) {
-      obj.rollouts = message.rollouts.map(e => e ? Rollout.toSDK(e) : undefined);
-    } else {
-      obj.rollouts = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAmino(object: ListServiceRolloutsResponseAmino): ListServiceRolloutsResponse {
-    return {
-      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseAmino {
-    const obj: any = {};
-    if (message.rollouts) {
-      obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e) : undefined);
-    } else {
-      obj.rollouts = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceRolloutsResponseAminoMsg): ListServiceRolloutsResponse {
-    return ListServiceRolloutsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListServiceRolloutsResponseProtoMsg): ListServiceRolloutsResponse {
     return ListServiceRolloutsResponse.decode(message.value);
@@ -2085,57 +1288,6 @@ export const GetServiceRolloutRequest = {
     }
     return message;
   },
-  fromJSON(object: any): GetServiceRolloutRequest {
-    const obj = createBaseGetServiceRolloutRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
-    return obj;
-  },
-  toJSON(message: GetServiceRolloutRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.rolloutId !== undefined && (obj.rolloutId = message.rolloutId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GetServiceRolloutRequest>): GetServiceRolloutRequest {
-    const message = createBaseGetServiceRolloutRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.rolloutId = object.rolloutId ?? "";
-    return message;
-  },
-  fromSDK(object: GetServiceRolloutRequestSDKType): GetServiceRolloutRequest {
-    return {
-      serviceName: object?.service_name,
-      rolloutId: object?.rollout_id
-    };
-  },
-  fromSDKJSON(object: any): GetServiceRolloutRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : ""
-    };
-  },
-  toSDK(message: GetServiceRolloutRequest): GetServiceRolloutRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.rollout_id = message.rolloutId;
-    return obj;
-  },
-  fromAmino(object: GetServiceRolloutRequestAmino): GetServiceRolloutRequest {
-    return {
-      serviceName: object.service_name,
-      rolloutId: object.rollout_id
-    };
-  },
-  toAmino(message: GetServiceRolloutRequest): GetServiceRolloutRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.rollout_id = message.rolloutId;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceRolloutRequestAminoMsg): GetServiceRolloutRequest {
-    return GetServiceRolloutRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: GetServiceRolloutRequestProtoMsg): GetServiceRolloutRequest {
     return GetServiceRolloutRequest.decode(message.value);
   },
@@ -2185,61 +1337,6 @@ export const GenerateConfigReportRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenerateConfigReportRequest {
-    const obj = createBaseGenerateConfigReportRequest();
-    if (isSet(object.newConfig)) obj.newConfig = Any.fromJSON(object.newConfig);
-    if (isSet(object.oldConfig)) obj.oldConfig = Any.fromJSON(object.oldConfig);
-    return obj;
-  },
-  toJSON(message: GenerateConfigReportRequest): unknown {
-    const obj: any = {};
-    message.newConfig !== undefined && (obj.newConfig = message.newConfig ? Any.toJSON(message.newConfig) : undefined);
-    message.oldConfig !== undefined && (obj.oldConfig = message.oldConfig ? Any.toJSON(message.oldConfig) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
-    const message = createBaseGenerateConfigReportRequest();
-    if (object.newConfig !== undefined && object.newConfig !== null) {
-      message.newConfig = Any.fromPartial(object.newConfig);
-    }
-    if (object.oldConfig !== undefined && object.oldConfig !== null) {
-      message.oldConfig = Any.fromPartial(object.oldConfig);
-    }
-    return message;
-  },
-  fromSDK(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {
-    return {
-      newConfig: object.new_config ? Any.fromSDK(object.new_config) : undefined,
-      oldConfig: object.old_config ? Any.fromSDK(object.old_config) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenerateConfigReportRequestSDKType {
-    return {
-      new_config: isSet(object.new_config) ? Any.fromSDKJSON(object.new_config) : undefined,
-      old_config: isSet(object.old_config) ? Any.fromSDKJSON(object.old_config) : undefined
-    };
-  },
-  toSDK(message: GenerateConfigReportRequest): GenerateConfigReportRequestSDKType {
-    const obj: any = {};
-    message.newConfig !== undefined && (obj.new_config = message.newConfig ? Any.toSDK(message.newConfig) : undefined);
-    message.oldConfig !== undefined && (obj.old_config = message.oldConfig ? Any.toSDK(message.oldConfig) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenerateConfigReportRequestAmino): GenerateConfigReportRequest {
-    return {
-      newConfig: object?.new_config ? Any.fromAmino(object.new_config) : undefined,
-      oldConfig: object?.old_config ? Any.fromAmino(object.old_config) : undefined
-    };
-  },
-  toAmino(message: GenerateConfigReportRequest): GenerateConfigReportRequestAmino {
-    const obj: any = {};
-    obj.new_config = message.newConfig ? Any.toAmino(message.newConfig) : undefined;
-    obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenerateConfigReportRequestAminoMsg): GenerateConfigReportRequest {
-    return GenerateConfigReportRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateConfigReportRequestProtoMsg): GenerateConfigReportRequest {
     return GenerateConfigReportRequest.decode(message.value);
@@ -2304,97 +1401,6 @@ export const GenerateConfigReportResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenerateConfigReportResponse {
-    const obj = createBaseGenerateConfigReportResponse();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.changeReports)) obj.changeReports = object.changeReports.map((e: any) => ChangeReport.fromJSON(e));
-    if (Array.isArray(object?.diagnostics)) obj.diagnostics = object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenerateConfigReportResponse): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.id !== undefined && (obj.id = message.id);
-    if (message.changeReports) {
-      obj.changeReports = message.changeReports.map(e => e ? ChangeReport.toJSON(e) : undefined);
-    } else {
-      obj.changeReports = [];
-    }
-    if (message.diagnostics) {
-      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toJSON(e) : undefined);
-    } else {
-      obj.diagnostics = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenerateConfigReportResponse>): GenerateConfigReportResponse {
-    const message = createBaseGenerateConfigReportResponse();
-    message.serviceName = object.serviceName ?? "";
-    message.id = object.id ?? "";
-    message.changeReports = object.changeReports?.map(e => ChangeReport.fromPartial(e)) || [];
-    message.diagnostics = object.diagnostics?.map(e => Diagnostic.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenerateConfigReportResponseSDKType): GenerateConfigReportResponse {
-    return {
-      serviceName: object?.service_name,
-      id: object?.id,
-      changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDK(e)) : [],
-      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenerateConfigReportResponseSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      change_reports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDKJSON(e)) : [],
-      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenerateConfigReportResponse): GenerateConfigReportResponseSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.id = message.id;
-    if (message.changeReports) {
-      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toSDK(e) : undefined);
-    } else {
-      obj.change_reports = [];
-    }
-    if (message.diagnostics) {
-      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toSDK(e) : undefined);
-    } else {
-      obj.diagnostics = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenerateConfigReportResponseAmino): GenerateConfigReportResponse {
-    return {
-      serviceName: object.service_name,
-      id: object.id,
-      changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromAmino(e)) : [],
-      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenerateConfigReportResponse): GenerateConfigReportResponseAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.id = message.id;
-    if (message.changeReports) {
-      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e) : undefined);
-    } else {
-      obj.change_reports = [];
-    }
-    if (message.diagnostics) {
-      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e) : undefined);
-    } else {
-      obj.diagnostics = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenerateConfigReportResponseAminoMsg): GenerateConfigReportResponse {
-    return GenerateConfigReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateConfigReportResponseProtoMsg): GenerateConfigReportResponse {
     return GenerateConfigReportResponse.decode(message.value);

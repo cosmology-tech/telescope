@@ -14,6 +14,10 @@ export interface MsgGrantAllowance {
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: Any;
 }
+export interface MsgGrantAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
+  value: Uint8Array;
+}
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
  * of fees from the account of Granter.
@@ -25,6 +29,10 @@ export interface MsgGrantAllowanceSDKType {
 }
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {}
+export interface MsgGrantAllowanceResponseProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse";
+  value: Uint8Array;
+}
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseSDKType {}
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
@@ -34,6 +42,10 @@ export interface MsgRevokeAllowance {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
+export interface MsgRevokeAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
+  value: Uint8Array;
+}
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowanceSDKType {
   granter: string;
@@ -41,6 +53,10 @@ export interface MsgRevokeAllowanceSDKType {
 }
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
+export interface MsgRevokeAllowanceResponseProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse";
+  value: Uint8Array;
+}
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponseSDKType {}
 function createBaseMsgGrantAllowance(): MsgGrantAllowance {

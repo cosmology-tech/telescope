@@ -7,17 +7,29 @@ export interface AccumulatorContent {
   accumValue: DecCoin[];
   totalShares: string;
 }
+export interface AccumulatorContentProtoMsg {
+  typeUrl: "/osmosis.accum.v1beta1.AccumulatorContent";
+  value: Uint8Array;
+}
 export interface AccumulatorContentSDKType {
   accum_value: DecCoinSDKType[];
   total_shares: string;
 }
 export interface Options {}
+export interface OptionsProtoMsg {
+  typeUrl: "/osmosis.accum.v1beta1.Options";
+  value: Uint8Array;
+}
 export interface OptionsSDKType {}
 export interface Record {
   numShares: string;
   initAccumValue: DecCoin[];
   unclaimedRewards: DecCoin[];
   options?: Options;
+}
+export interface RecordProtoMsg {
+  typeUrl: "/osmosis.accum.v1beta1.Record";
+  value: Uint8Array;
 }
 export interface RecordSDKType {
   num_shares: string;

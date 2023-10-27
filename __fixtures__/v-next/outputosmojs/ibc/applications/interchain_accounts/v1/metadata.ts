@@ -22,6 +22,10 @@ export interface Metadata {
   /** tx_type defines the type of transactions the interchain account can execute */
   txType: string;
 }
+export interface MetadataProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.Metadata";
+  value: Uint8Array;
+}
 /**
  * Metadata defines a set of protocol specific data encoded into the ICS27 channel version bytestring
  * See ICS004: https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#Versioning

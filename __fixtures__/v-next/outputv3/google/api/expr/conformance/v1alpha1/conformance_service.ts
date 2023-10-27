@@ -72,6 +72,10 @@ export interface ParseRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
   value: Uint8Array;
 }
+export interface ParseRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
+  value: Uint8Array;
+}
 /** Request message for the Parse method. */
 export interface ParseRequestAmino {
   /** Required. Source text in CEL syntax. */
@@ -100,6 +104,10 @@ export interface ParseResponse {
   parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
+}
+export interface ParseResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
+  value: Uint8Array;
 }
 export interface ParseResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
@@ -142,6 +150,10 @@ export interface CheckRequest {
    * "Standard Definitions" in the Language Definition.
    */
   noStdEnv: boolean;
+}
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
+  value: Uint8Array;
 }
 export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
@@ -191,6 +203,10 @@ export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
   value: Uint8Array;
 }
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
+  value: Uint8Array;
+}
 /** Response message for the Check method. */
 export interface CheckResponseAmino {
   /** The annotated representation, or unset if checking failed. */
@@ -210,6 +226,10 @@ export interface CheckResponseSDKType {
 export interface EvalRequest_BindingsEntry {
   key: string;
   value?: ExprValue;
+}
+export interface EvalRequest_BindingsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntryProtoMsg {
   typeUrl: string;
@@ -242,6 +262,10 @@ export interface EvalRequest {
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
+}
+export interface EvalRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
+  value: Uint8Array;
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
@@ -292,6 +316,10 @@ export interface EvalResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
   value: Uint8Array;
 }
+export interface EvalResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
+  value: Uint8Array;
+}
 /** Response message for the Eval method. */
 export interface EvalResponseAmino {
   /** The execution result, or unset if execution couldn't start. */
@@ -325,6 +353,10 @@ export interface IssueDetails {
   position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: bigint;
+}
+export interface IssueDetailsProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
+  value: Uint8Array;
 }
 export interface IssueDetailsProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";

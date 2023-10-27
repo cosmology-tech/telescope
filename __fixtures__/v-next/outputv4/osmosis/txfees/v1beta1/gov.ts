@@ -14,6 +14,10 @@ export interface UpdateFeeTokenProposal {
   description: string;
   feetoken: FeeToken;
 }
+export interface UpdateFeeTokenProposalProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
+  value: Uint8Array;
+}
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price

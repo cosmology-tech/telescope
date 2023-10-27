@@ -27,6 +27,10 @@ export interface CheckRequest {
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
@@ -64,6 +68,10 @@ export interface ResourceInfo {
    */
   location: string;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: Uint8Array;
+}
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
   name: string;
@@ -75,6 +83,10 @@ export interface ResourceInfoSDKType {
 export interface CheckResponse_HeadersEntry {
   key: string;
   value: string;
+}
+export interface CheckResponse_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -92,6 +104,10 @@ export interface CheckResponse {
   headers: {
     [key: string]: string;
   };
+}
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
+  value: Uint8Array;
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -124,6 +140,10 @@ export interface ReportRequest {
    */
   operations: AttributeContext[];
 }
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
+  value: Uint8Array;
+}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -135,6 +155,10 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
+  value: Uint8Array;
+}
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.

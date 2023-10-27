@@ -61,6 +61,10 @@ export interface Quota {
    */
   metricRules: MetricRule[];
 }
+export interface QuotaProtoMsg {
+  typeUrl: "/google.api.Quota";
+  value: Uint8Array;
+}
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -120,6 +124,10 @@ export interface MetricRule_MetricCostsEntry {
   key: string;
   value: bigint;
 }
+export interface MetricRule_MetricCostsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface MetricRule_MetricCostsEntrySDKType {
   key: string;
   value: bigint;
@@ -147,6 +155,10 @@ export interface MetricRule {
     [key: string]: bigint;
   };
 }
+export interface MetricRuleProtoMsg {
+  typeUrl: "/google.api.MetricRule";
+  value: Uint8Array;
+}
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
  * metric's configured quota behaviors to apply to the method call.
@@ -160,6 +172,10 @@ export interface MetricRuleSDKType {
 export interface QuotaLimit_ValuesEntry {
   key: string;
   value: bigint;
+}
+export interface QuotaLimit_ValuesEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaLimit_ValuesEntrySDKType {
   key: string;
@@ -261,6 +277,10 @@ export interface QuotaLimit {
    * display name generated from the configuration.
    */
   displayName: string;
+}
+export interface QuotaLimitProtoMsg {
+  typeUrl: "/google.api.QuotaLimit";
+  value: Uint8Array;
 }
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration

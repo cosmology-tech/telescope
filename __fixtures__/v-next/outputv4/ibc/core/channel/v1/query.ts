@@ -12,6 +12,10 @@ export interface QueryChannelRequest {
   /** channel unique identifier */
   channelId: string;
 }
+export interface QueryChannelRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelRequest";
+  value: Uint8Array;
+}
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequestSDKType {
   port_id: string;
@@ -30,6 +34,10 @@ export interface QueryChannelResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryChannelResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelResponse";
+  value: Uint8Array;
+}
 /**
  * QueryChannelResponse is the response type for the Query/Channel RPC method.
  * Besides the Channel end, it includes a proof and the height from which the
@@ -45,6 +53,10 @@ export interface QueryChannelsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryChannelsRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest";
+  value: Uint8Array;
+}
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -57,6 +69,10 @@ export interface QueryChannelsResponse {
   pagination?: PageResponse;
   /** query block height */
   height: Height;
+}
+export interface QueryChannelsResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse";
+  value: Uint8Array;
 }
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponseSDKType {
@@ -73,6 +89,10 @@ export interface QueryConnectionChannelsRequest {
   connection: string;
   /** pagination request */
   pagination?: PageRequest;
+}
+export interface QueryConnectionChannelsRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionChannelsRequest is the request type for the
@@ -94,6 +114,10 @@ export interface QueryConnectionChannelsResponse {
   /** query block height */
   height: Height;
 }
+export interface QueryConnectionChannelsResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionChannelsResponse is the Response type for the
  * Query/QueryConnectionChannels RPC method
@@ -112,6 +136,10 @@ export interface QueryChannelClientStateRequest {
   portId: string;
   /** channel unique identifier */
   channelId: string;
+}
+export interface QueryChannelClientStateRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest";
+  value: Uint8Array;
 }
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
@@ -132,6 +160,10 @@ export interface QueryChannelClientStateResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryChannelClientStateResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse";
+  value: Uint8Array;
 }
 /**
  * QueryChannelClientStateResponse is the Response type for the
@@ -155,6 +187,10 @@ export interface QueryChannelConsensusStateRequest {
   revisionNumber: bigint;
   /** revision height of the consensus state */
   revisionHeight: bigint;
+}
+export interface QueryChannelConsensusStateRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest";
+  value: Uint8Array;
 }
 /**
  * QueryChannelConsensusStateRequest is the request type for the
@@ -180,6 +216,10 @@ export interface QueryChannelConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryChannelConsensusStateResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryChannelClientStateResponse is the Response type for the
  * Query/QueryChannelClientState RPC method
@@ -201,6 +241,10 @@ export interface QueryPacketCommitmentRequest {
   channelId: string;
   /** packet sequence */
   sequence: bigint;
+}
+export interface QueryPacketCommitmentRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest";
+  value: Uint8Array;
 }
 /**
  * QueryPacketCommitmentRequest is the request type for the
@@ -224,6 +268,10 @@ export interface QueryPacketCommitmentResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryPacketCommitmentResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse";
+  value: Uint8Array;
+}
 /**
  * QueryPacketCommitmentResponse defines the client query response for a packet
  * which also includes a proof and the height from which the proof was
@@ -246,6 +294,10 @@ export interface QueryPacketCommitmentsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryPacketCommitmentsRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryPacketCommitmentsRequest is the request type for the
  * Query/QueryPacketCommitments RPC method
@@ -265,6 +317,10 @@ export interface QueryPacketCommitmentsResponse {
   pagination?: PageResponse;
   /** query block height */
   height: Height;
+}
+export interface QueryPacketCommitmentsResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryPacketCommitmentsResponse is the request type for the
@@ -286,6 +342,10 @@ export interface QueryPacketReceiptRequest {
   channelId: string;
   /** packet sequence */
   sequence: bigint;
+}
+export interface QueryPacketReceiptRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest";
+  value: Uint8Array;
 }
 /**
  * QueryPacketReceiptRequest is the request type for the
@@ -309,6 +369,10 @@ export interface QueryPacketReceiptResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryPacketReceiptResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse";
+  value: Uint8Array;
+}
 /**
  * QueryPacketReceiptResponse defines the client query response for a packet
  * receipt which also includes a proof, and the height from which the proof was
@@ -331,6 +395,10 @@ export interface QueryPacketAcknowledgementRequest {
   /** packet sequence */
   sequence: bigint;
 }
+export interface QueryPacketAcknowledgementRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest";
+  value: Uint8Array;
+}
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
  * Query/PacketAcknowledgement RPC method
@@ -352,6 +420,10 @@ export interface QueryPacketAcknowledgementResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryPacketAcknowledgementResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse";
+  value: Uint8Array;
 }
 /**
  * QueryPacketAcknowledgementResponse defines the client query response for a
@@ -377,6 +449,10 @@ export interface QueryPacketAcknowledgementsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: bigint[];
 }
+export interface QueryPacketAcknowledgementsRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
  * Query/QueryPacketCommitments RPC method
@@ -397,6 +473,10 @@ export interface QueryPacketAcknowledgementsResponse {
   pagination?: PageResponse;
   /** query block height */
   height: Height;
+}
+export interface QueryPacketAcknowledgementsResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
@@ -419,6 +499,10 @@ export interface QueryUnreceivedPacketsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: bigint[];
 }
+export interface QueryUnreceivedPacketsRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
  * Query/UnreceivedPackets RPC method
@@ -437,6 +521,10 @@ export interface QueryUnreceivedPacketsResponse {
   sequences: bigint[];
   /** query block height */
   height: Height;
+}
+export interface QueryUnreceivedPacketsResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
@@ -458,6 +546,10 @@ export interface QueryUnreceivedAcksRequest {
   /** list of acknowledgement sequences */
   packetAckSequences: bigint[];
 }
+export interface QueryUnreceivedAcksRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest";
+  value: Uint8Array;
+}
 /**
  * QueryUnreceivedAcks is the request type for the
  * Query/UnreceivedAcks RPC method
@@ -477,6 +569,10 @@ export interface QueryUnreceivedAcksResponse {
   /** query block height */
   height: Height;
 }
+export interface QueryUnreceivedAcksResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse";
+  value: Uint8Array;
+}
 /**
  * QueryUnreceivedAcksResponse is the response type for the
  * Query/UnreceivedAcks RPC method
@@ -494,6 +590,10 @@ export interface QueryNextSequenceReceiveRequest {
   portId: string;
   /** channel unique identifier */
   channelId: string;
+}
+export interface QueryNextSequenceReceiveRequestProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest";
+  value: Uint8Array;
 }
 /**
  * QueryNextSequenceReceiveRequest is the request type for the
@@ -514,6 +614,10 @@ export interface QueryNextSequenceReceiveResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryNextSequenceReceiveResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse";
+  value: Uint8Array;
 }
 /**
  * QuerySequenceResponse is the request type for the

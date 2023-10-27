@@ -19,6 +19,10 @@ export interface EvalState {
    */
   results: EvalState_Result[];
 }
+export interface EvalStateProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.EvalState";
+  value: Uint8Array;
+}
 /**
  * The state of an evaluation.
  * 
@@ -34,6 +38,10 @@ export interface EvalState_Result {
   expr: bigint;
   /** The index in `values` of the resulting value. */
   value: bigint;
+}
+export interface EvalState_ResultProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Result";
+  value: Uint8Array;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
@@ -91,6 +99,10 @@ export interface ExprValue {
    */
   unknown?: UnknownSet;
 }
+export interface ExprValueProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ExprValue";
+  value: Uint8Array;
+}
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
   value?: ValueSDKType;
@@ -105,6 +117,10 @@ export interface ExprValueSDKType {
 export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
+}
+export interface ErrorSetProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ErrorSet";
+  value: Uint8Array;
 }
 /**
  * A set of errors.
@@ -122,6 +138,10 @@ export interface ErrorSetSDKType {
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: bigint[];
+}
+export interface UnknownSetProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.UnknownSet";
+  value: Uint8Array;
 }
 /**
  * A set of expressions for which the value is unknown.

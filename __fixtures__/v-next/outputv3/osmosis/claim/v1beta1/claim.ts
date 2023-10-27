@@ -62,6 +62,10 @@ export interface ClaimRecordProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
   value: Uint8Array;
 }
+export interface ClaimRecordProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
+  value: Uint8Array;
+}
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordAmino {
   /** address of claim user */

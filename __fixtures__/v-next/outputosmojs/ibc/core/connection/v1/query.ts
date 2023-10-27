@@ -13,6 +13,10 @@ export interface QueryConnectionRequest {
   /** connection unique identifier */
   connectionId: string;
 }
+export interface QueryConnectionRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
  * method
@@ -33,6 +37,10 @@ export interface QueryConnectionResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryConnectionResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
  * method. Besides the connection end, it includes a proof and the height from
@@ -49,6 +57,10 @@ export interface QueryConnectionResponseSDKType {
  */
 export interface QueryConnectionsRequest {
   pagination?: PageRequest;
+}
+export interface QueryConnectionsRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
@@ -69,6 +81,10 @@ export interface QueryConnectionsResponse {
   /** query block height */
   height: Height;
 }
+export interface QueryConnectionsResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
  * method.
@@ -85,6 +101,10 @@ export interface QueryConnectionsResponseSDKType {
 export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
   clientId: string;
+}
+export interface QueryClientConnectionsRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryClientConnectionsRequest is the request type for the
@@ -105,6 +125,10 @@ export interface QueryClientConnectionsResponse {
   /** height at which the proof was generated */
   proofHeight: Height;
 }
+export interface QueryClientConnectionsResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryClientConnectionsResponse is the response type for the
  * Query/ClientConnections RPC method
@@ -121,6 +145,10 @@ export interface QueryClientConnectionsResponseSDKType {
 export interface QueryConnectionClientStateRequest {
   /** connection identifier */
   connectionId: string;
+}
+export interface QueryConnectionClientStateRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionClientStateRequest is the request type for the
@@ -141,6 +169,10 @@ export interface QueryConnectionClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryConnectionClientStateResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionClientStateResponse is the response type for the
  * Query/ConnectionClientState RPC method
@@ -159,6 +191,10 @@ export interface QueryConnectionConsensusStateRequest {
   connectionId: string;
   revisionNumber: bigint;
   revisionHeight: bigint;
+}
+export interface QueryConnectionConsensusStateRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
@@ -182,6 +218,10 @@ export interface QueryConnectionConsensusStateResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryConnectionConsensusStateResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionConsensusStateResponse is the response type for the

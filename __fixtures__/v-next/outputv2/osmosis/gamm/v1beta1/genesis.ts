@@ -17,6 +17,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
   pool_creation_fee: CoinAmino[];
@@ -35,6 +39,10 @@ export interface GenesisState {
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: bigint;
   params: Params;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.GenesisState";

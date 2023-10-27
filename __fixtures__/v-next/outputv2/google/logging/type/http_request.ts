@@ -85,6 +85,10 @@ export interface HttpRequestProtoMsg {
   typeUrl: "/google.logging.type.HttpRequest";
   value: Uint8Array;
 }
+export interface HttpRequestProtoMsg {
+  typeUrl: "/google.logging.type.HttpRequest";
+  value: Uint8Array;
+}
 /**
  * A common proto for logging HTTP requests. Only contains semantics
  * defined by the HTTP specification. Product-specific logging

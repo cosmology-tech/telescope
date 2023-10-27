@@ -1,6 +1,5 @@
 import { Value, ValueSDKType } from "./value";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -24,6 +23,10 @@ export interface Explain {
    */
   exprSteps: Explain_ExprStep[];
 }
+export interface ExplainProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Explain";
+  value: Uint8Array;
+}
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
@@ -39,6 +42,10 @@ export interface Explain_ExprStep {
   id: bigint;
   /** Index of the value in the values list. */
   valueIndex: number;
+}
+export interface Explain_ExprStepProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ExprStep";
+  value: Uint8Array;
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
@@ -81,81 +88,6 @@ export const Explain = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Explain {
-    const obj = createBaseExplain();
-    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
-    if (Array.isArray(object?.exprSteps)) obj.exprSteps = object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Explain): unknown {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.exprSteps) {
-      obj.exprSteps = message.exprSteps.map(e => e ? Explain_ExprStep.toJSON(e) : undefined);
-    } else {
-      obj.exprSteps = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Explain>): Explain {
-    const message = createBaseExplain();
-    message.values = object.values?.map(e => Value.fromPartial(e)) || [];
-    message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ExplainSDKType): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : [],
-      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ExplainSDKType {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDKJSON(e)) : [],
-      expr_steps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Explain): ExplainSDKType {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.exprSteps) {
-      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toSDK(e) : undefined);
-    } else {
-      obj.expr_steps = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ExplainAmino): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : [],
-      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Explain): ExplainAmino {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.exprSteps) {
-      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
-    } else {
-      obj.expr_steps = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ExplainAminoMsg): Explain {
-    return Explain.fromAmino(object.value);
   },
   fromProtoMsg(message: ExplainProtoMsg): Explain {
     return Explain.decode(message.value);
@@ -206,59 +138,6 @@ export const Explain_ExprStep = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Explain_ExprStep {
-    const obj = createBaseExplain_ExprStep();
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.valueIndex)) obj.valueIndex = Number(object.valueIndex);
-    return obj;
-  },
-  toJSON(message: Explain_ExprStep): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
-    const message = createBaseExplain_ExprStep();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
-    message.valueIndex = object.valueIndex ?? 0;
-    return message;
-  },
-  fromSDK(object: Explain_ExprStepSDKType): Explain_ExprStep {
-    return {
-      id: object?.id,
-      valueIndex: object?.value_index
-    };
-  },
-  fromSDKJSON(object: any): Explain_ExprStepSDKType {
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      value_index: isSet(object.value_index) ? Number(object.value_index) : 0
-    };
-  },
-  toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.value_index = message.valueIndex;
-    return obj;
-  },
-  fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
-    return {
-      id: BigInt(object.id),
-      valueIndex: object.value_index
-    };
-  },
-  toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
-    const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.value_index = message.valueIndex;
-    return obj;
-  },
-  fromAminoMsg(object: Explain_ExprStepAminoMsg): Explain_ExprStep {
-    return Explain_ExprStep.fromAmino(object.value);
   },
   fromProtoMsg(message: Explain_ExprStepProtoMsg): Explain_ExprStep {
     return Explain_ExprStep.decode(message.value);

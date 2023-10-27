@@ -1,6 +1,5 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
+import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.port.v1";
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
@@ -14,6 +13,10 @@ export interface QueryAppVersionRequest {
   counterparty?: Counterparty;
   /** proposed version */
   proposedVersion: string;
+}
+export interface QueryAppVersionRequestProtoMsg {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest";
+  value: Uint8Array;
 }
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestSDKType {
@@ -29,6 +32,10 @@ export interface QueryAppVersionResponse {
   portId: string;
   /** supported app version */
   version: string;
+}
+export interface QueryAppVersionResponseProtoMsg {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse";
+  value: Uint8Array;
 }
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponseSDKType {
@@ -93,89 +100,6 @@ export const QueryAppVersionRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryAppVersionRequest {
-    const obj = createBaseQueryAppVersionRequest();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
-    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
-    if (isSet(object.proposedVersion)) obj.proposedVersion = String(object.proposedVersion);
-    return obj;
-  },
-  toJSON(message: QueryAppVersionRequest): unknown {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.proposedVersion !== undefined && (obj.proposedVersion = message.proposedVersion);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryAppVersionRequest>): QueryAppVersionRequest {
-    const message = createBaseQueryAppVersionRequest();
-    message.portId = object.portId ?? "";
-    message.connectionId = object.connectionId ?? "";
-    message.ordering = object.ordering ?? 0;
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = Counterparty.fromPartial(object.counterparty);
-    }
-    message.proposedVersion = object.proposedVersion ?? "";
-    return message;
-  },
-  fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
-    return {
-      portId: object?.port_id,
-      connectionId: object?.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
-      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
-      proposedVersion: object?.proposed_version
-    };
-  },
-  fromSDKJSON(object: any): QueryAppVersionRequestSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      proposed_version: isSet(object.proposed_version) ? String(object.proposed_version) : ""
-    };
-  },
-  toSDK(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
-    const obj: any = {};
-    obj.port_id = message.portId;
-    obj.connection_id = message.connectionId;
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
-    obj.proposed_version = message.proposedVersion;
-    return obj;
-  },
-  fromAmino(object: QueryAppVersionRequestAmino): QueryAppVersionRequest {
-    return {
-      portId: object.port_id,
-      connectionId: object.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
-      proposedVersion: object.proposed_version
-    };
-  },
-  toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
-    const obj: any = {};
-    obj.port_id = message.portId;
-    obj.connection_id = message.connectionId;
-    obj.ordering = message.ordering;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.proposed_version = message.proposedVersion;
-    return obj;
-  },
-  fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
-    return QueryAppVersionRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAppVersionRequest",
-      value: QueryAppVersionRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryAppVersionRequestProtoMsg): QueryAppVersionRequest {
     return QueryAppVersionRequest.decode(message.value);
   },
@@ -225,63 +149,6 @@ export const QueryAppVersionResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryAppVersionResponse {
-    const obj = createBaseQueryAppVersionResponse();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.version)) obj.version = String(object.version);
-    return obj;
-  },
-  toJSON(message: QueryAppVersionResponse): unknown {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryAppVersionResponse>): QueryAppVersionResponse {
-    const message = createBaseQueryAppVersionResponse();
-    message.portId = object.portId ?? "";
-    message.version = object.version ?? "";
-    return message;
-  },
-  fromSDK(object: QueryAppVersionResponseSDKType): QueryAppVersionResponse {
-    return {
-      portId: object?.port_id,
-      version: object?.version
-    };
-  },
-  fromSDKJSON(object: any): QueryAppVersionResponseSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      version: isSet(object.version) ? String(object.version) : ""
-    };
-  },
-  toSDK(message: QueryAppVersionResponse): QueryAppVersionResponseSDKType {
-    const obj: any = {};
-    obj.port_id = message.portId;
-    obj.version = message.version;
-    return obj;
-  },
-  fromAmino(object: QueryAppVersionResponseAmino): QueryAppVersionResponse {
-    return {
-      portId: object.port_id,
-      version: object.version
-    };
-  },
-  toAmino(message: QueryAppVersionResponse): QueryAppVersionResponseAmino {
-    const obj: any = {};
-    obj.port_id = message.portId;
-    obj.version = message.version;
-    return obj;
-  },
-  fromAminoMsg(object: QueryAppVersionResponseAminoMsg): QueryAppVersionResponse {
-    return QueryAppVersionResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAppVersionResponse): QueryAppVersionResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAppVersionResponse",
-      value: QueryAppVersionResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryAppVersionResponseProtoMsg): QueryAppVersionResponse {
     return QueryAppVersionResponse.decode(message.value);

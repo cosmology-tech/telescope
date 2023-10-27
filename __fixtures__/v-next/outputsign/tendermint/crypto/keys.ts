@@ -1,10 +1,13 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.crypto";
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKey {
   ed25519?: Uint8Array;
   secp256k1?: Uint8Array;
+}
+export interface PublicKeyProtoMsg {
+  typeUrl: "/tendermint.crypto.PublicKey";
+  value: Uint8Array;
 }
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKeySDKType {
@@ -47,57 +50,6 @@ export const PublicKey = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PublicKey {
-    const obj = createBasePublicKey();
-    if (isSet(object.ed25519)) obj.ed25519 = bytesFromBase64(object.ed25519);
-    if (isSet(object.secp256k1)) obj.secp256k1 = bytesFromBase64(object.secp256k1);
-    return obj;
-  },
-  toJSON(message: PublicKey): unknown {
-    const obj: any = {};
-    message.ed25519 !== undefined && (obj.ed25519 = message.ed25519 !== undefined ? base64FromBytes(message.ed25519) : undefined);
-    message.secp256k1 !== undefined && (obj.secp256k1 = message.secp256k1 !== undefined ? base64FromBytes(message.secp256k1) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PublicKey>): PublicKey {
-    const message = createBasePublicKey();
-    message.ed25519 = object.ed25519 ?? undefined;
-    message.secp256k1 = object.secp256k1 ?? undefined;
-    return message;
-  },
-  fromSDK(object: PublicKeySDKType): PublicKey {
-    return {
-      ed25519: object?.ed25519,
-      secp256k1: object?.secp256k1
-    };
-  },
-  fromSDKJSON(object: any): PublicKeySDKType {
-    return {
-      ed25519: isSet(object.ed25519) ? bytesFromBase64(object.ed25519) : undefined,
-      secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : undefined
-    };
-  },
-  toSDK(message: PublicKey): PublicKeySDKType {
-    const obj: any = {};
-    obj.ed25519 = message.ed25519;
-    obj.secp256k1 = message.secp256k1;
-    return obj;
-  },
-  fromAmino(object: PublicKeyAmino): PublicKey {
-    return {
-      ed25519: object?.ed25519,
-      secp256k1: object?.secp256k1
-    };
-  },
-  toAmino(message: PublicKey): PublicKeyAmino {
-    const obj: any = {};
-    obj.ed25519 = message.ed25519;
-    obj.secp256k1 = message.secp256k1;
-    return obj;
-  },
-  fromAminoMsg(object: PublicKeyAminoMsg): PublicKey {
-    return PublicKey.fromAmino(object.value);
   },
   fromProtoMsg(message: PublicKeyProtoMsg): PublicKey {
     return PublicKey.decode(message.value);

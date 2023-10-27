@@ -12,6 +12,10 @@ export interface Params {
   authorizedTickSpacing: bigint[];
   authorizedSwapFees: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.Params";
+  value: Uint8Array;
+}
 export interface ParamsSDKType {
   authorized_tick_spacing: bigint[];
   authorized_swap_fees: string[];

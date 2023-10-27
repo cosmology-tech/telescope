@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -77,6 +76,10 @@ export interface Duration {
    * to +999,999,999 inclusive.
    */
   nanos: number;
+}
+export interface DurationProtoMsg {
+  typeUrl: "/google.protobuf.Duration";
+  value: Uint8Array;
 }
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -178,57 +181,6 @@ export const Duration = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Duration {
-    const obj = createBaseDuration();
-    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
-    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
-    return obj;
-  },
-  toJSON(message: Duration): unknown {
-    const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
-    message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Duration>): Duration {
-    const message = createBaseDuration();
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = BigInt(object.seconds.toString());
-    }
-    message.nanos = object.nanos ?? 0;
-    return message;
-  },
-  fromSDK(object: DurationSDKType): Duration {
-    return {
-      seconds: object?.seconds,
-      nanos: object?.nanos
-    };
-  },
-  fromSDKJSON(object: any): DurationSDKType {
-    return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
-  },
-  toSDK(message: Duration): DurationSDKType {
-    const obj: any = {};
-    obj.seconds = message.seconds;
-    obj.nanos = message.nanos;
-    return obj;
-  },
-  fromAmino(object: DurationAmino): Duration {
-    const value = BigInt(object);
-    return {
-      seconds: value / BigInt("1000000000"),
-      nanos: Number(value % BigInt("1000000000"))
-    };
-  },
-  toAmino(message: Duration): DurationAmino {
-    return (message.seconds * BigInt("1000000000") + BigInt(message.nanos)).toString();
-  },
-  fromAminoMsg(object: DurationAminoMsg): Duration {
-    return Duration.fromAmino(object.value);
   },
   fromProtoMsg(message: DurationProtoMsg): Duration {
     return Duration.decode(message.value);

@@ -1,6 +1,5 @@
 import { Any, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.rpc";
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -25,6 +24,10 @@ export interface Status {
    * message types for APIs to use.
    */
   details: Any[];
+}
+export interface StatusProtoMsg {
+  typeUrl: "/google.rpc.Status";
+  value: Uint8Array;
 }
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -83,77 +86,6 @@ export const Status = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Status {
-    const obj = createBaseStatus();
-    if (isSet(object.code)) obj.code = Number(object.code);
-    if (isSet(object.message)) obj.message = String(object.message);
-    if (Array.isArray(object?.details)) obj.details = object.details.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Status): unknown {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = Math.round(message.code));
-    message.message !== undefined && (obj.message = message.message);
-    if (message.details) {
-      obj.details = message.details.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.details = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Status>): Status {
-    const message = createBaseStatus();
-    message.code = object.code ?? 0;
-    message.message = object.message ?? "";
-    message.details = object.details?.map(e => Any.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: StatusSDKType): Status {
-    return {
-      code: object?.code,
-      message: object?.message,
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): StatusSDKType {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      message: isSet(object.message) ? String(object.message) : "",
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Status): StatusSDKType {
-    const obj: any = {};
-    obj.code = message.code;
-    obj.message = message.message;
-    if (message.details) {
-      obj.details = message.details.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.details = [];
-    }
-    return obj;
-  },
-  fromAmino(object: StatusAmino): Status {
-    return {
-      code: object.code,
-      message: object.message,
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Status): StatusAmino {
-    const obj: any = {};
-    obj.code = message.code;
-    obj.message = message.message;
-    if (message.details) {
-      obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.details = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: StatusAminoMsg): Status {
-    return Status.fromAmino(object.value);
   },
   fromProtoMsg(message: StatusProtoMsg): Status {
     return Status.decode(message.value);

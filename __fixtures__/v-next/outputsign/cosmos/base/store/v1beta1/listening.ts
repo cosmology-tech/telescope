@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -14,6 +13,10 @@ export interface StoreKVPair {
   /** true indicates a delete operation, false indicates a set operation */
   delete: boolean;
   key: Uint8Array;
+  value: Uint8Array;
+}
+export interface StoreKVPairProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair";
   value: Uint8Array;
 }
 /**
@@ -79,79 +82,6 @@ export const StoreKVPair = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): StoreKVPair {
-    const obj = createBaseStoreKVPair();
-    if (isSet(object.storeKey)) obj.storeKey = String(object.storeKey);
-    if (isSet(object.delete)) obj.delete = Boolean(object.delete);
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: StoreKVPair): unknown {
-    const obj: any = {};
-    message.storeKey !== undefined && (obj.storeKey = message.storeKey);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<StoreKVPair>): StoreKVPair {
-    const message = createBaseStoreKVPair();
-    message.storeKey = object.storeKey ?? "";
-    message.delete = object.delete ?? false;
-    message.key = object.key ?? new Uint8Array();
-    message.value = object.value ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: StoreKVPairSDKType): StoreKVPair {
-    return {
-      storeKey: object?.store_key,
-      delete: object?.delete,
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): StoreKVPairSDKType {
-    return {
-      store_key: isSet(object.store_key) ? String(object.store_key) : "",
-      delete: isSet(object.delete) ? Boolean(object.delete) : false,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
-  },
-  toSDK(message: StoreKVPair): StoreKVPairSDKType {
-    const obj: any = {};
-    obj.store_key = message.storeKey;
-    obj.delete = message.delete;
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: StoreKVPairAmino): StoreKVPair {
-    return {
-      storeKey: object.store_key,
-      delete: object.delete,
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: StoreKVPair): StoreKVPairAmino {
-    const obj: any = {};
-    obj.store_key = message.storeKey;
-    obj.delete = message.delete;
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {
-    return StoreKVPair.fromAmino(object.value);
-  },
-  toAminoMsg(message: StoreKVPair): StoreKVPairAminoMsg {
-    return {
-      type: "cosmos-sdk/StoreKVPair",
-      value: StoreKVPair.toAmino(message)
-    };
   },
   fromProtoMsg(message: StoreKVPairProtoMsg): StoreKVPair {
     return StoreKVPair.decode(message.value);

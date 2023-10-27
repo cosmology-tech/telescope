@@ -11,6 +11,10 @@ export interface Params {
   /** allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain. */
   allowMessages: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.host.v1.Params";
+  value: Uint8Array;
+}
 /**
  * Params defines the set of on-chain interchain accounts parameters.
  * The following parameters may be used to disable the host submodule.

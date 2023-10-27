@@ -7,6 +7,10 @@ export interface MetricValue_LabelsEntry {
   key: string;
   value: string;
 }
+export interface MetricValue_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface MetricValue_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -47,6 +51,10 @@ export interface MetricValue {
   /** A distribution value. */
   distributionValue?: Distribution;
 }
+export interface MetricValueProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.MetricValue";
+  value: Uint8Array;
+}
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
   labels: {
@@ -70,6 +78,10 @@ export interface MetricValueSet {
   metricName: string;
   /** The values in this metric. */
   metricValues: MetricValue[];
+}
+export interface MetricValueSetProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.MetricValueSet";
+  value: Uint8Array;
 }
 /**
  * Represents a set of metric values in the same metric.

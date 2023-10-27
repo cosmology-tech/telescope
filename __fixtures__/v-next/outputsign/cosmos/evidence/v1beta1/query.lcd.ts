@@ -17,7 +17,7 @@ export class LCDQueryClient {
   /* Evidence queries evidence based on evidence hash. */
   async evidence(params: QueryEvidenceRequest): Promise<QueryEvidenceResponseSDKType> {
     const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidenceHash}`;
-    return QueryEvidenceResponse.fromSDKJSON(await this.req.get<QueryEvidenceResponseSDKType>(endpoint));
+    return await this.req.get<QueryEvidenceResponseSDKType>(endpoint);
   }
   /* AllEvidence queries all evidence. */
   async allEvidence(params: QueryAllEvidenceRequest = {
@@ -30,6 +30,6 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `cosmos/evidence/v1beta1/evidence`;
-    return QueryAllEvidenceResponse.fromSDKJSON(await this.req.get<QueryAllEvidenceResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryAllEvidenceResponseSDKType>(endpoint, options);
   }
 }

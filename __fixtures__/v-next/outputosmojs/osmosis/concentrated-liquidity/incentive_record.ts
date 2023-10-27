@@ -32,6 +32,10 @@ export interface IncentiveRecord {
    */
   minUptime: Duration;
 }
+export interface IncentiveRecordProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecord";
+  value: Uint8Array;
+}
 /**
  * IncentiveRecord is the high-level struct we use to deal with an independent
  * incentive being distributed on a pool. Note that PoolId, Denom, and MinUptime
@@ -56,6 +60,10 @@ export interface IncentiveRecordBody {
   emissionRate: string;
   /** start_time is the time when the incentive starts distributing */
   startTime: Date;
+}
+export interface IncentiveRecordBodyProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecordBody";
+  value: Uint8Array;
 }
 /**
  * IncentiveRecordBody represents the body stored in state for each individual

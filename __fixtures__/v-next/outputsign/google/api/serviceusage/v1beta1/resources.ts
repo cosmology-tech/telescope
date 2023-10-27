@@ -7,7 +7,6 @@ import { Endpoint, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -184,6 +183,10 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
+export interface ServiceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service";
+  value: Uint8Array;
+}
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
@@ -234,6 +237,10 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
+export interface ServiceConfigProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
+  value: Uint8Array;
+}
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
@@ -254,6 +261,10 @@ export interface OperationMetadata {
    * associated with.
    */
   resourceNames: string[];
+}
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
+  value: Uint8Array;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
@@ -301,6 +312,10 @@ export interface ConsumerQuotaMetric {
   descendantConsumerQuotaLimits: ConsumerQuotaLimit[];
   /** The units in which the metric value is reported. */
   unit: string;
+}
+export interface ConsumerQuotaMetricProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
+  value: Uint8Array;
 }
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetricSDKType {
@@ -350,6 +365,10 @@ export interface ConsumerQuotaLimit {
    */
   quotaBuckets: QuotaBucket[];
 }
+export interface ConsumerQuotaLimitProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
+  value: Uint8Array;
+}
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
   name: string;
@@ -362,6 +381,10 @@ export interface ConsumerQuotaLimitSDKType {
 export interface QuotaBucket_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface QuotaBucket_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaBucket_DimensionsEntrySDKType {
   key: string;
@@ -402,6 +425,10 @@ export interface QuotaBucket {
     [key: string]: string;
   };
 }
+export interface QuotaBucketProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
+  value: Uint8Array;
+}
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
   effective_limit: bigint;
@@ -416,6 +443,10 @@ export interface QuotaBucketSDKType {
 export interface QuotaOverride_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface QuotaOverride_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntrySDKType {
   key: string;
@@ -490,6 +521,10 @@ export interface QuotaOverride {
    */
   adminOverrideAncestor: string;
 }
+export interface QuotaOverrideProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
+  value: Uint8Array;
+}
 /** A quota override */
 export interface QuotaOverrideSDKType {
   name: string;
@@ -511,6 +546,10 @@ export interface OverrideInlineSource {
    */
   overrides: QuotaOverride[];
 }
+export interface OverrideInlineSourceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
+  value: Uint8Array;
+}
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -518,6 +557,10 @@ export interface OverrideInlineSourceSDKType {
 export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntrySDKType {
   key: string;
@@ -577,6 +620,10 @@ export interface AdminQuotaPolicy {
    */
   container: string;
 }
+export interface AdminQuotaPolicyProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
+  value: Uint8Array;
+}
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
   name: string;
@@ -603,6 +650,10 @@ export interface ServiceIdentity {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   uniqueId: string;
+}
+export interface ServiceIdentityProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";
+  value: Uint8Array;
 }
 /**
  * Service identity for a service. This is the identity that service producer
@@ -662,75 +713,6 @@ export const Service = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Service {
-    const obj = createBaseService();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.config)) obj.config = ServiceConfig.fromJSON(object.config);
-    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
-    return obj;
-  },
-  toJSON(message: Service): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toJSON(message.config) : undefined);
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Service>): Service {
-    const message = createBaseService();
-    message.name = object.name ?? "";
-    message.parent = object.parent ?? "";
-    if (object.config !== undefined && object.config !== null) {
-      message.config = ServiceConfig.fromPartial(object.config);
-    }
-    message.state = object.state ?? 0;
-    return message;
-  },
-  fromSDK(object: ServiceSDKType): Service {
-    return {
-      name: object?.name,
-      parent: object?.parent,
-      config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
-  },
-  fromSDKJSON(object: any): ServiceSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
-  },
-  toSDK(message: Service): ServiceSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
-    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    return obj;
-  },
-  fromAmino(object: ServiceAmino): Service {
-    return {
-      name: object.name,
-      parent: object.parent,
-      config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
-  },
-  toAmino(message: Service): ServiceAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
-    obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: ServiceAminoMsg): Service {
-    return Service.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceProtoMsg): Service {
     return Service.decode(message.value);
@@ -838,167 +820,6 @@ export const ServiceConfig = {
     }
     return message;
   },
-  fromJSON(object: any): ServiceConfig {
-    const obj = createBaseServiceConfig();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (Array.isArray(object?.apis)) obj.apis = object.apis.map((e: any) => Api.fromJSON(e));
-    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
-    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
-    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
-    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) obj.monitoredResources = object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
-    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
-    return obj;
-  },
-  toJSON(message: ServiceConfig): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toJSON(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toJSON(message.documentation) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toJSON(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toJSON(message.authentication) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toJSON(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitoredResources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.monitoredResources = [];
-    }
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toJSON(message.monitoring) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
-    const message = createBaseServiceConfig();
-    message.name = object.name ?? "";
-    message.title = object.title ?? "";
-    message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    if (object.documentation !== undefined && object.documentation !== null) {
-      message.documentation = Documentation.fromPartial(object.documentation);
-    }
-    if (object.quota !== undefined && object.quota !== null) {
-      message.quota = Quota.fromPartial(object.quota);
-    }
-    if (object.authentication !== undefined && object.authentication !== null) {
-      message.authentication = Authentication.fromPartial(object.authentication);
-    }
-    if (object.usage !== undefined && object.usage !== null) {
-      message.usage = Usage.fromPartial(object.usage);
-    }
-    message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
-    message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    if (object.monitoring !== undefined && object.monitoring !== null) {
-      message.monitoring = Monitoring.fromPartial(object.monitoring);
-    }
-    return message;
-  },
-  fromSDK(object: ServiceConfigSDKType): ServiceConfig {
-    return {
-      name: object?.name,
-      title: object?.title,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
-      documentation: object.documentation ? Documentation.fromSDK(object.documentation) : undefined,
-      quota: object.quota ? Quota.fromSDK(object.quota) : undefined,
-      authentication: object.authentication ? Authentication.fromSDK(object.authentication) : undefined,
-      usage: object.usage ? Usage.fromSDK(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      monitoring: object.monitoring ? Monitoring.fromSDK(object.monitoring) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ServiceConfigSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
-      quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromSDKJSON(object.authentication) : undefined,
-      usage: isSet(object.usage) ? Usage.fromSDKJSON(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : [],
-      monitored_resources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
-      monitoring: isSet(object.monitoring) ? Monitoring.fromSDKJSON(object.monitoring) : undefined
-    };
-  },
-  toSDK(message: ServiceConfig): ServiceConfigSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toSDK(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toSDK(message.documentation) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toSDK(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toSDK(message.authentication) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toSDK(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toSDK(e) : undefined);
-    } else {
-      obj.monitored_resources = [];
-    }
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
-    return obj;
-  },
-  fromAmino(object: ServiceConfigAmino): ServiceConfig {
-    return {
-      name: object.name,
-      title: object.title,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
-      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
-      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
-      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
-      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
-    };
-  },
-  toAmino(message: ServiceConfig): ServiceConfigAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
-    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
-    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
-    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.monitored_resources = [];
-    }
-    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
-    return ServiceConfig.fromAmino(object.value);
-  },
   fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
     return ServiceConfig.decode(message.value);
   },
@@ -1041,61 +862,6 @@ export const OperationMetadata = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): OperationMetadata {
-    const obj = createBaseOperationMetadata();
-    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: OperationMetadata): unknown {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
-    const message = createBaseOperationMetadata();
-    message.resourceNames = object.resourceNames?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: OperationMetadataSDKType): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): OperationMetadataSDKType {
-    return {
-      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: OperationMetadata): OperationMetadataSDKType {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resource_names = message.resourceNames.map(e => e);
-    } else {
-      obj.resource_names = [];
-    }
-    return obj;
-  },
-  fromAmino(object: OperationMetadataAmino): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: OperationMetadata): OperationMetadataAmino {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resource_names = message.resourceNames.map(e => e);
-    } else {
-      obj.resource_names = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
-    return OperationMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
     return OperationMetadata.decode(message.value);
@@ -1175,113 +941,6 @@ export const ConsumerQuotaMetric = {
     }
     return message;
   },
-  fromJSON(object: any): ConsumerQuotaMetric {
-    const obj = createBaseConsumerQuotaMetric();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (Array.isArray(object?.consumerQuotaLimits)) obj.consumerQuotaLimits = object.consumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e));
-    if (Array.isArray(object?.descendantConsumerQuotaLimits)) obj.descendantConsumerQuotaLimits = object.descendantConsumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e));
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    return obj;
-  },
-  toJSON(message: ConsumerQuotaMetric): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    if (message.consumerQuotaLimits) {
-      obj.consumerQuotaLimits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toJSON(e) : undefined);
-    } else {
-      obj.consumerQuotaLimits = [];
-    }
-    if (message.descendantConsumerQuotaLimits) {
-      obj.descendantConsumerQuotaLimits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toJSON(e) : undefined);
-    } else {
-      obj.descendantConsumerQuotaLimits = [];
-    }
-    message.unit !== undefined && (obj.unit = message.unit);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ConsumerQuotaMetric>): ConsumerQuotaMetric {
-    const message = createBaseConsumerQuotaMetric();
-    message.name = object.name ?? "";
-    message.metric = object.metric ?? "";
-    message.displayName = object.displayName ?? "";
-    message.consumerQuotaLimits = object.consumerQuotaLimits?.map(e => ConsumerQuotaLimit.fromPartial(e)) || [];
-    message.descendantConsumerQuotaLimits = object.descendantConsumerQuotaLimits?.map(e => ConsumerQuotaLimit.fromPartial(e)) || [];
-    message.unit = object.unit ?? "";
-    return message;
-  },
-  fromSDK(object: ConsumerQuotaMetricSDKType): ConsumerQuotaMetric {
-    return {
-      name: object?.name,
-      metric: object?.metric,
-      displayName: object?.display_name,
-      consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
-      descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
-      unit: object?.unit
-    };
-  },
-  fromSDKJSON(object: any): ConsumerQuotaMetricSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      display_name: isSet(object.display_name) ? String(object.display_name) : "",
-      consumer_quota_limits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
-      descendant_consumer_quota_limits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
-      unit: isSet(object.unit) ? String(object.unit) : ""
-    };
-  },
-  toSDK(message: ConsumerQuotaMetric): ConsumerQuotaMetricSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.display_name = message.displayName;
-    if (message.consumerQuotaLimits) {
-      obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toSDK(e) : undefined);
-    } else {
-      obj.consumer_quota_limits = [];
-    }
-    if (message.descendantConsumerQuotaLimits) {
-      obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toSDK(e) : undefined);
-    } else {
-      obj.descendant_consumer_quota_limits = [];
-    }
-    obj.unit = message.unit;
-    return obj;
-  },
-  fromAmino(object: ConsumerQuotaMetricAmino): ConsumerQuotaMetric {
-    return {
-      name: object.name,
-      metric: object.metric,
-      displayName: object.display_name,
-      consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
-      descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
-      unit: object.unit
-    };
-  },
-  toAmino(message: ConsumerQuotaMetric): ConsumerQuotaMetricAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.display_name = message.displayName;
-    if (message.consumerQuotaLimits) {
-      obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
-    } else {
-      obj.consumer_quota_limits = [];
-    }
-    if (message.descendantConsumerQuotaLimits) {
-      obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
-    } else {
-      obj.descendant_consumer_quota_limits = [];
-    }
-    obj.unit = message.unit;
-    return obj;
-  },
-  fromAminoMsg(object: ConsumerQuotaMetricAminoMsg): ConsumerQuotaMetric {
-    return ConsumerQuotaMetric.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConsumerQuotaMetricProtoMsg): ConsumerQuotaMetric {
     return ConsumerQuotaMetric.decode(message.value);
   },
@@ -1360,101 +1019,6 @@ export const ConsumerQuotaLimit = {
     }
     return message;
   },
-  fromJSON(object: any): ConsumerQuotaLimit {
-    const obj = createBaseConsumerQuotaLimit();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.isPrecise)) obj.isPrecise = Boolean(object.isPrecise);
-    if (isSet(object.allowsAdminOverrides)) obj.allowsAdminOverrides = Boolean(object.allowsAdminOverrides);
-    if (Array.isArray(object?.quotaBuckets)) obj.quotaBuckets = object.quotaBuckets.map((e: any) => QuotaBucket.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ConsumerQuotaLimit): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.isPrecise !== undefined && (obj.isPrecise = message.isPrecise);
-    message.allowsAdminOverrides !== undefined && (obj.allowsAdminOverrides = message.allowsAdminOverrides);
-    if (message.quotaBuckets) {
-      obj.quotaBuckets = message.quotaBuckets.map(e => e ? QuotaBucket.toJSON(e) : undefined);
-    } else {
-      obj.quotaBuckets = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ConsumerQuotaLimit>): ConsumerQuotaLimit {
-    const message = createBaseConsumerQuotaLimit();
-    message.name = object.name ?? "";
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.isPrecise = object.isPrecise ?? false;
-    message.allowsAdminOverrides = object.allowsAdminOverrides ?? false;
-    message.quotaBuckets = object.quotaBuckets?.map(e => QuotaBucket.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ConsumerQuotaLimitSDKType): ConsumerQuotaLimit {
-    return {
-      name: object?.name,
-      metric: object?.metric,
-      unit: object?.unit,
-      isPrecise: object?.is_precise,
-      allowsAdminOverrides: object?.allows_admin_overrides,
-      quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ConsumerQuotaLimitSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      is_precise: isSet(object.is_precise) ? Boolean(object.is_precise) : false,
-      allows_admin_overrides: isSet(object.allows_admin_overrides) ? Boolean(object.allows_admin_overrides) : false,
-      quota_buckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ConsumerQuotaLimit): ConsumerQuotaLimitSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.is_precise = message.isPrecise;
-    obj.allows_admin_overrides = message.allowsAdminOverrides;
-    if (message.quotaBuckets) {
-      obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toSDK(e) : undefined);
-    } else {
-      obj.quota_buckets = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ConsumerQuotaLimitAmino): ConsumerQuotaLimit {
-    return {
-      name: object.name,
-      metric: object.metric,
-      unit: object.unit,
-      isPrecise: object.is_precise,
-      allowsAdminOverrides: object.allows_admin_overrides,
-      quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ConsumerQuotaLimit): ConsumerQuotaLimitAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.is_precise = message.isPrecise;
-    obj.allows_admin_overrides = message.allowsAdminOverrides;
-    if (message.quotaBuckets) {
-      obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toAmino(e) : undefined);
-    } else {
-      obj.quota_buckets = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ConsumerQuotaLimitAminoMsg): ConsumerQuotaLimit {
-    return ConsumerQuotaLimit.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConsumerQuotaLimitProtoMsg): ConsumerQuotaLimit {
     return ConsumerQuotaLimit.decode(message.value);
   },
@@ -1503,57 +1067,6 @@ export const QuotaBucket_DimensionsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaBucket_DimensionsEntry {
-    const obj = createBaseQuotaBucket_DimensionsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: QuotaBucket_DimensionsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaBucket_DimensionsEntry>): QuotaBucket_DimensionsEntry {
-    const message = createBaseQuotaBucket_DimensionsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: QuotaBucket_DimensionsEntrySDKType): QuotaBucket_DimensionsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): QuotaBucket_DimensionsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: QuotaBucket_DimensionsEntryAmino): QuotaBucket_DimensionsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaBucket_DimensionsEntryAminoMsg): QuotaBucket_DimensionsEntry {
-    return QuotaBucket_DimensionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaBucket_DimensionsEntryProtoMsg): QuotaBucket_DimensionsEntry {
     return QuotaBucket_DimensionsEntry.decode(message.value);
@@ -1633,141 +1146,6 @@ export const QuotaBucket = {
     }
     return message;
   },
-  fromJSON(object: any): QuotaBucket {
-    const obj = createBaseQuotaBucket();
-    if (isSet(object.effectiveLimit)) obj.effectiveLimit = BigInt(object.effectiveLimit.toString());
-    if (isSet(object.defaultLimit)) obj.defaultLimit = BigInt(object.defaultLimit.toString());
-    if (isSet(object.producerOverride)) obj.producerOverride = QuotaOverride.fromJSON(object.producerOverride);
-    if (isSet(object.consumerOverride)) obj.consumerOverride = QuotaOverride.fromJSON(object.consumerOverride);
-    if (isSet(object.adminOverride)) obj.adminOverride = QuotaOverride.fromJSON(object.adminOverride);
-    if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: QuotaBucket): unknown {
-    const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt(0)).toString());
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
-    message.producerOverride !== undefined && (obj.producerOverride = message.producerOverride ? QuotaOverride.toJSON(message.producerOverride) : undefined);
-    message.consumerOverride !== undefined && (obj.consumerOverride = message.consumerOverride ? QuotaOverride.toJSON(message.consumerOverride) : undefined);
-    message.adminOverride !== undefined && (obj.adminOverride = message.adminOverride ? QuotaOverride.toJSON(message.adminOverride) : undefined);
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaBucket>): QuotaBucket {
-    const message = createBaseQuotaBucket();
-    if (object.effectiveLimit !== undefined && object.effectiveLimit !== null) {
-      message.effectiveLimit = BigInt(object.effectiveLimit.toString());
-    }
-    if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
-      message.defaultLimit = BigInt(object.defaultLimit.toString());
-    }
-    if (object.producerOverride !== undefined && object.producerOverride !== null) {
-      message.producerOverride = QuotaOverride.fromPartial(object.producerOverride);
-    }
-    if (object.consumerOverride !== undefined && object.consumerOverride !== null) {
-      message.consumerOverride = QuotaOverride.fromPartial(object.consumerOverride);
-    }
-    if (object.adminOverride !== undefined && object.adminOverride !== null) {
-      message.adminOverride = QuotaOverride.fromPartial(object.adminOverride);
-    }
-    message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: QuotaBucketSDKType): QuotaBucket {
-    return {
-      effectiveLimit: object?.effective_limit,
-      defaultLimit: object?.default_limit,
-      producerOverride: object.producer_override ? QuotaOverride.fromSDK(object.producer_override) : undefined,
-      consumerOverride: object.consumer_override ? QuotaOverride.fromSDK(object.consumer_override) : undefined,
-      adminOverride: object.admin_override ? QuotaOverride.fromSDK(object.admin_override) : undefined,
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): QuotaBucketSDKType {
-    return {
-      effective_limit: isSet(object.effective_limit) ? BigInt(object.effective_limit.toString()) : BigInt(0),
-      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt(0),
-      producer_override: isSet(object.producer_override) ? QuotaOverride.fromSDKJSON(object.producer_override) : undefined,
-      consumer_override: isSet(object.consumer_override) ? QuotaOverride.fromSDKJSON(object.consumer_override) : undefined,
-      admin_override: isSet(object.admin_override) ? QuotaOverride.fromSDKJSON(object.admin_override) : undefined,
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: QuotaBucket): QuotaBucketSDKType {
-    const obj: any = {};
-    obj.effective_limit = message.effectiveLimit;
-    obj.default_limit = message.defaultLimit;
-    message.producerOverride !== undefined && (obj.producer_override = message.producerOverride ? QuotaOverride.toSDK(message.producerOverride) : undefined);
-    message.consumerOverride !== undefined && (obj.consumer_override = message.consumerOverride ? QuotaOverride.toSDK(message.consumerOverride) : undefined);
-    message.adminOverride !== undefined && (obj.admin_override = message.adminOverride ? QuotaOverride.toSDK(message.adminOverride) : undefined);
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: QuotaBucketAmino): QuotaBucket {
-    return {
-      effectiveLimit: BigInt(object.effective_limit),
-      defaultLimit: BigInt(object.default_limit),
-      producerOverride: object?.producer_override ? QuotaOverride.fromAmino(object.producer_override) : undefined,
-      consumerOverride: object?.consumer_override ? QuotaOverride.fromAmino(object.consumer_override) : undefined,
-      adminOverride: object?.admin_override ? QuotaOverride.fromAmino(object.admin_override) : undefined,
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: QuotaBucket): QuotaBucketAmino {
-    const obj: any = {};
-    obj.effective_limit = message.effectiveLimit ? message.effectiveLimit.toString() : undefined;
-    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
-    obj.producer_override = message.producerOverride ? QuotaOverride.toAmino(message.producerOverride) : undefined;
-    obj.consumer_override = message.consumerOverride ? QuotaOverride.toAmino(message.consumerOverride) : undefined;
-    obj.admin_override = message.adminOverride ? QuotaOverride.toAmino(message.adminOverride) : undefined;
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QuotaBucketAminoMsg): QuotaBucket {
-    return QuotaBucket.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaBucketProtoMsg): QuotaBucket {
     return QuotaBucket.decode(message.value);
   },
@@ -1816,57 +1194,6 @@ export const QuotaOverride_DimensionsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaOverride_DimensionsEntry {
-    const obj = createBaseQuotaOverride_DimensionsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: QuotaOverride_DimensionsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaOverride_DimensionsEntry>): QuotaOverride_DimensionsEntry {
-    const message = createBaseQuotaOverride_DimensionsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: QuotaOverride_DimensionsEntrySDKType): QuotaOverride_DimensionsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): QuotaOverride_DimensionsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: QuotaOverride_DimensionsEntryAmino): QuotaOverride_DimensionsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaOverride_DimensionsEntryAminoMsg): QuotaOverride_DimensionsEntry {
-    return QuotaOverride_DimensionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaOverride_DimensionsEntryProtoMsg): QuotaOverride_DimensionsEntry {
     return QuotaOverride_DimensionsEntry.decode(message.value);
@@ -1946,133 +1273,6 @@ export const QuotaOverride = {
     }
     return message;
   },
-  fromJSON(object: any): QuotaOverride {
-    const obj = createBaseQuotaOverride();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.overrideValue)) obj.overrideValue = BigInt(object.overrideValue.toString());
-    if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.adminOverrideAncestor)) obj.adminOverrideAncestor = String(object.adminOverrideAncestor);
-    return obj;
-  },
-  toJSON(message: QuotaOverride): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt(0)).toString());
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.adminOverrideAncestor !== undefined && (obj.adminOverrideAncestor = message.adminOverrideAncestor);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaOverride>): QuotaOverride {
-    const message = createBaseQuotaOverride();
-    message.name = object.name ?? "";
-    if (object.overrideValue !== undefined && object.overrideValue !== null) {
-      message.overrideValue = BigInt(object.overrideValue.toString());
-    }
-    message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.adminOverrideAncestor = object.adminOverrideAncestor ?? "";
-    return message;
-  },
-  fromSDK(object: QuotaOverrideSDKType): QuotaOverride {
-    return {
-      name: object?.name,
-      overrideValue: object?.override_value,
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric: object?.metric,
-      unit: object?.unit,
-      adminOverrideAncestor: object?.admin_override_ancestor
-    };
-  },
-  fromSDKJSON(object: any): QuotaOverrideSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      override_value: isSet(object.override_value) ? BigInt(object.override_value.toString()) : BigInt(0),
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      admin_override_ancestor: isSet(object.admin_override_ancestor) ? String(object.admin_override_ancestor) : ""
-    };
-  },
-  toSDK(message: QuotaOverride): QuotaOverrideSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.override_value = message.overrideValue;
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.admin_override_ancestor = message.adminOverrideAncestor;
-    return obj;
-  },
-  fromAmino(object: QuotaOverrideAmino): QuotaOverride {
-    return {
-      name: object.name,
-      overrideValue: BigInt(object.override_value),
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric: object.metric,
-      unit: object.unit,
-      adminOverrideAncestor: object.admin_override_ancestor
-    };
-  },
-  toAmino(message: QuotaOverride): QuotaOverrideAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.override_value = message.overrideValue ? message.overrideValue.toString() : undefined;
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.admin_override_ancestor = message.adminOverrideAncestor;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaOverrideAminoMsg): QuotaOverride {
-    return QuotaOverride.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaOverrideProtoMsg): QuotaOverride {
     return QuotaOverride.decode(message.value);
   },
@@ -2115,61 +1315,6 @@ export const OverrideInlineSource = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): OverrideInlineSource {
-    const obj = createBaseOverrideInlineSource();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: OverrideInlineSource): unknown {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<OverrideInlineSource>): OverrideInlineSource {
-    const message = createBaseOverrideInlineSource();
-    message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: OverrideInlineSourceSDKType): OverrideInlineSource {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): OverrideInlineSourceSDKType {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: OverrideInlineSource): OverrideInlineSourceSDKType {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromAmino(object: OverrideInlineSourceAmino): OverrideInlineSource {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: OverrideInlineSource): OverrideInlineSourceAmino {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: OverrideInlineSourceAminoMsg): OverrideInlineSource {
-    return OverrideInlineSource.fromAmino(object.value);
   },
   fromProtoMsg(message: OverrideInlineSourceProtoMsg): OverrideInlineSource {
     return OverrideInlineSource.decode(message.value);
@@ -2219,57 +1364,6 @@ export const AdminQuotaPolicy_DimensionsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AdminQuotaPolicy_DimensionsEntry {
-    const obj = createBaseAdminQuotaPolicy_DimensionsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AdminQuotaPolicy_DimensionsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AdminQuotaPolicy_DimensionsEntry>): AdminQuotaPolicy_DimensionsEntry {
-    const message = createBaseAdminQuotaPolicy_DimensionsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: AdminQuotaPolicy_DimensionsEntrySDKType): AdminQuotaPolicy_DimensionsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AdminQuotaPolicy_DimensionsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AdminQuotaPolicy_DimensionsEntryAmino): AdminQuotaPolicy_DimensionsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AdminQuotaPolicy_DimensionsEntryAminoMsg): AdminQuotaPolicy_DimensionsEntry {
-    return AdminQuotaPolicy_DimensionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AdminQuotaPolicy_DimensionsEntryProtoMsg): AdminQuotaPolicy_DimensionsEntry {
     return AdminQuotaPolicy_DimensionsEntry.decode(message.value);
@@ -2349,133 +1443,6 @@ export const AdminQuotaPolicy = {
     }
     return message;
   },
-  fromJSON(object: any): AdminQuotaPolicy {
-    const obj = createBaseAdminQuotaPolicy();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.policyValue)) obj.policyValue = BigInt(object.policyValue.toString());
-    if (isObject(object.dimensions)) obj.dimensions = Object.entries(object.dimensions).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.container)) obj.container = String(object.container);
-    return obj;
-  },
-  toJSON(message: AdminQuotaPolicy): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt(0)).toString());
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.container !== undefined && (obj.container = message.container);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AdminQuotaPolicy>): AdminQuotaPolicy {
-    const message = createBaseAdminQuotaPolicy();
-    message.name = object.name ?? "";
-    if (object.policyValue !== undefined && object.policyValue !== null) {
-      message.policyValue = BigInt(object.policyValue.toString());
-    }
-    message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.container = object.container ?? "";
-    return message;
-  },
-  fromSDK(object: AdminQuotaPolicySDKType): AdminQuotaPolicy {
-    return {
-      name: object?.name,
-      policyValue: object?.policy_value,
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric: object?.metric,
-      unit: object?.unit,
-      container: object?.container
-    };
-  },
-  fromSDKJSON(object: any): AdminQuotaPolicySDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      policy_value: isSet(object.policy_value) ? BigInt(object.policy_value.toString()) : BigInt(0),
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      container: isSet(object.container) ? String(object.container) : ""
-    };
-  },
-  toSDK(message: AdminQuotaPolicy): AdminQuotaPolicySDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.policy_value = message.policyValue;
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.container = message.container;
-    return obj;
-  },
-  fromAmino(object: AdminQuotaPolicyAmino): AdminQuotaPolicy {
-    return {
-      name: object.name,
-      policyValue: BigInt(object.policy_value),
-      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric: object.metric,
-      unit: object.unit,
-      container: object.container
-    };
-  },
-  toAmino(message: AdminQuotaPolicy): AdminQuotaPolicyAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.policy_value = message.policyValue ? message.policyValue.toString() : undefined;
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.container = message.container;
-    return obj;
-  },
-  fromAminoMsg(object: AdminQuotaPolicyAminoMsg): AdminQuotaPolicy {
-    return AdminQuotaPolicy.fromAmino(object.value);
-  },
   fromProtoMsg(message: AdminQuotaPolicyProtoMsg): AdminQuotaPolicy {
     return AdminQuotaPolicy.decode(message.value);
   },
@@ -2525,57 +1492,6 @@ export const ServiceIdentity = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ServiceIdentity {
-    const obj = createBaseServiceIdentity();
-    if (isSet(object.email)) obj.email = String(object.email);
-    if (isSet(object.uniqueId)) obj.uniqueId = String(object.uniqueId);
-    return obj;
-  },
-  toJSON(message: ServiceIdentity): unknown {
-    const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ServiceIdentity>): ServiceIdentity {
-    const message = createBaseServiceIdentity();
-    message.email = object.email ?? "";
-    message.uniqueId = object.uniqueId ?? "";
-    return message;
-  },
-  fromSDK(object: ServiceIdentitySDKType): ServiceIdentity {
-    return {
-      email: object?.email,
-      uniqueId: object?.unique_id
-    };
-  },
-  fromSDKJSON(object: any): ServiceIdentitySDKType {
-    return {
-      email: isSet(object.email) ? String(object.email) : "",
-      unique_id: isSet(object.unique_id) ? String(object.unique_id) : ""
-    };
-  },
-  toSDK(message: ServiceIdentity): ServiceIdentitySDKType {
-    const obj: any = {};
-    obj.email = message.email;
-    obj.unique_id = message.uniqueId;
-    return obj;
-  },
-  fromAmino(object: ServiceIdentityAmino): ServiceIdentity {
-    return {
-      email: object.email,
-      uniqueId: object.unique_id
-    };
-  },
-  toAmino(message: ServiceIdentity): ServiceIdentityAmino {
-    const obj: any = {};
-    obj.email = message.email;
-    obj.unique_id = message.uniqueId;
-    return obj;
-  },
-  fromAminoMsg(object: ServiceIdentityAminoMsg): ServiceIdentity {
-    return ServiceIdentity.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceIdentityProtoMsg): ServiceIdentity {
     return ServiceIdentity.decode(message.value);

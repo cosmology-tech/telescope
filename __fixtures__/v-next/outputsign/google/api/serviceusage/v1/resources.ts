@@ -7,7 +7,6 @@ import { Endpoint, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -83,6 +82,10 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
+export interface ServiceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.Service";
+  value: Uint8Array;
+}
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
@@ -133,6 +136,10 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
+export interface ServiceConfigProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
+  value: Uint8Array;
+}
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
@@ -153,6 +160,10 @@ export interface OperationMetadata {
    * associated with.
    */
   resourceNames: string[];
+}
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.OperationMetadata";
+  value: Uint8Array;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
@@ -208,75 +219,6 @@ export const Service = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Service {
-    const obj = createBaseService();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.config)) obj.config = ServiceConfig.fromJSON(object.config);
-    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
-    return obj;
-  },
-  toJSON(message: Service): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toJSON(message.config) : undefined);
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Service>): Service {
-    const message = createBaseService();
-    message.name = object.name ?? "";
-    message.parent = object.parent ?? "";
-    if (object.config !== undefined && object.config !== null) {
-      message.config = ServiceConfig.fromPartial(object.config);
-    }
-    message.state = object.state ?? 0;
-    return message;
-  },
-  fromSDK(object: ServiceSDKType): Service {
-    return {
-      name: object?.name,
-      parent: object?.parent,
-      config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
-  },
-  fromSDKJSON(object: any): ServiceSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
-  },
-  toSDK(message: Service): ServiceSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
-    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    return obj;
-  },
-  fromAmino(object: ServiceAmino): Service {
-    return {
-      name: object.name,
-      parent: object.parent,
-      config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
-  },
-  toAmino(message: Service): ServiceAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
-    obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: ServiceAminoMsg): Service {
-    return Service.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceProtoMsg): Service {
     return Service.decode(message.value);
@@ -384,167 +326,6 @@ export const ServiceConfig = {
     }
     return message;
   },
-  fromJSON(object: any): ServiceConfig {
-    const obj = createBaseServiceConfig();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (Array.isArray(object?.apis)) obj.apis = object.apis.map((e: any) => Api.fromJSON(e));
-    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
-    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
-    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
-    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) obj.monitoredResources = object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
-    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
-    return obj;
-  },
-  toJSON(message: ServiceConfig): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toJSON(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toJSON(message.documentation) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toJSON(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toJSON(message.authentication) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toJSON(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitoredResources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.monitoredResources = [];
-    }
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toJSON(message.monitoring) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
-    const message = createBaseServiceConfig();
-    message.name = object.name ?? "";
-    message.title = object.title ?? "";
-    message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    if (object.documentation !== undefined && object.documentation !== null) {
-      message.documentation = Documentation.fromPartial(object.documentation);
-    }
-    if (object.quota !== undefined && object.quota !== null) {
-      message.quota = Quota.fromPartial(object.quota);
-    }
-    if (object.authentication !== undefined && object.authentication !== null) {
-      message.authentication = Authentication.fromPartial(object.authentication);
-    }
-    if (object.usage !== undefined && object.usage !== null) {
-      message.usage = Usage.fromPartial(object.usage);
-    }
-    message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
-    message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    if (object.monitoring !== undefined && object.monitoring !== null) {
-      message.monitoring = Monitoring.fromPartial(object.monitoring);
-    }
-    return message;
-  },
-  fromSDK(object: ServiceConfigSDKType): ServiceConfig {
-    return {
-      name: object?.name,
-      title: object?.title,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
-      documentation: object.documentation ? Documentation.fromSDK(object.documentation) : undefined,
-      quota: object.quota ? Quota.fromSDK(object.quota) : undefined,
-      authentication: object.authentication ? Authentication.fromSDK(object.authentication) : undefined,
-      usage: object.usage ? Usage.fromSDK(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      monitoring: object.monitoring ? Monitoring.fromSDK(object.monitoring) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ServiceConfigSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
-      quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromSDKJSON(object.authentication) : undefined,
-      usage: isSet(object.usage) ? Usage.fromSDKJSON(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : [],
-      monitored_resources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
-      monitoring: isSet(object.monitoring) ? Monitoring.fromSDKJSON(object.monitoring) : undefined
-    };
-  },
-  toSDK(message: ServiceConfig): ServiceConfigSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toSDK(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toSDK(message.documentation) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toSDK(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toSDK(message.authentication) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toSDK(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toSDK(e) : undefined);
-    } else {
-      obj.monitored_resources = [];
-    }
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
-    return obj;
-  },
-  fromAmino(object: ServiceConfigAmino): ServiceConfig {
-    return {
-      name: object.name,
-      title: object.title,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
-      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
-      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
-      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
-      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
-    };
-  },
-  toAmino(message: ServiceConfig): ServiceConfigAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
-    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
-    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
-    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.monitored_resources = [];
-    }
-    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
-    return ServiceConfig.fromAmino(object.value);
-  },
   fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
     return ServiceConfig.decode(message.value);
   },
@@ -587,61 +368,6 @@ export const OperationMetadata = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): OperationMetadata {
-    const obj = createBaseOperationMetadata();
-    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: OperationMetadata): unknown {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
-    const message = createBaseOperationMetadata();
-    message.resourceNames = object.resourceNames?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: OperationMetadataSDKType): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): OperationMetadataSDKType {
-    return {
-      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: OperationMetadata): OperationMetadataSDKType {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resource_names = message.resourceNames.map(e => e);
-    } else {
-      obj.resource_names = [];
-    }
-    return obj;
-  },
-  fromAmino(object: OperationMetadataAmino): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: OperationMetadata): OperationMetadataAmino {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resource_names = message.resourceNames.map(e => e);
-    } else {
-      obj.resource_names = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
-    return OperationMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
     return OperationMetadata.decode(message.value);

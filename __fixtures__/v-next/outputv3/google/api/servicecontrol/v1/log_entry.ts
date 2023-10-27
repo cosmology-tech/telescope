@@ -14,6 +14,10 @@ export interface LogEntry_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface LogEntry_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
@@ -90,6 +94,10 @@ export interface LogEntry {
    * if any.
    */
   sourceLocation?: LogEntrySourceLocation;
+}
+export interface LogEntryProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntry";
+  value: Uint8Array;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry";
@@ -206,6 +214,10 @@ export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation";
   value: Uint8Array;
 }
+export interface LogEntryOperationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation";
+  value: Uint8Array;
+}
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
@@ -265,6 +277,10 @@ export interface LogEntrySourceLocation {
    * (Python).
    */
   function: string;
+}
+export interface LogEntrySourceLocationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
+  value: Uint8Array;
 }
 export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation";

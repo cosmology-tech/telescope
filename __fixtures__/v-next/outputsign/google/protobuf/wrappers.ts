@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -9,6 +8,10 @@ export const protobufPackage = "google.protobuf";
 export interface DoubleValue {
   /** The double value. */
   value: number;
+}
+export interface DoubleValueProtoMsg {
+  typeUrl: "/google.protobuf.DoubleValue";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `double`.
@@ -27,6 +30,10 @@ export interface FloatValue {
   /** The float value. */
   value: number;
 }
+export interface FloatValueProtoMsg {
+  typeUrl: "/google.protobuf.FloatValue";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `float`.
  * 
@@ -43,6 +50,10 @@ export interface FloatValueSDKType {
 export interface Int64Value {
   /** The int64 value. */
   value: bigint;
+}
+export interface Int64ValueProtoMsg {
+  typeUrl: "/google.protobuf.Int64Value";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `int64`.
@@ -61,6 +72,10 @@ export interface UInt64Value {
   /** The uint64 value. */
   value: bigint;
 }
+export interface UInt64ValueProtoMsg {
+  typeUrl: "/google.protobuf.UInt64Value";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `uint64`.
  * 
@@ -77,6 +92,10 @@ export interface UInt64ValueSDKType {
 export interface Int32Value {
   /** The int32 value. */
   value: number;
+}
+export interface Int32ValueProtoMsg {
+  typeUrl: "/google.protobuf.Int32Value";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `int32`.
@@ -95,6 +114,10 @@ export interface UInt32Value {
   /** The uint32 value. */
   value: number;
 }
+export interface UInt32ValueProtoMsg {
+  typeUrl: "/google.protobuf.UInt32Value";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `uint32`.
  * 
@@ -111,6 +134,10 @@ export interface UInt32ValueSDKType {
 export interface BoolValue {
   /** The bool value. */
   value: boolean;
+}
+export interface BoolValueProtoMsg {
+  typeUrl: "/google.protobuf.BoolValue";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `bool`.
@@ -129,6 +156,10 @@ export interface StringValue {
   /** The string value. */
   value: string;
 }
+export interface StringValueProtoMsg {
+  typeUrl: "/google.protobuf.StringValue";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `string`.
  * 
@@ -144,6 +175,10 @@ export interface StringValueSDKType {
  */
 export interface BytesValue {
   /** The bytes value. */
+  value: Uint8Array;
+}
+export interface BytesValueProtoMsg {
+  typeUrl: "/google.protobuf.BytesValue";
   value: Uint8Array;
 }
 /**
@@ -183,49 +218,6 @@ export const DoubleValue = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DoubleValue {
-    const obj = createBaseDoubleValue();
-    if (isSet(object.value)) obj.value = Number(object.value);
-    return obj;
-  },
-  toJSON(message: DoubleValue): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DoubleValue>): DoubleValue {
-    const message = createBaseDoubleValue();
-    message.value = object.value ?? 0;
-    return message;
-  },
-  fromSDK(object: DoubleValueSDKType): DoubleValue {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): DoubleValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
-  },
-  toSDK(message: DoubleValue): DoubleValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: DoubleValueAmino): DoubleValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: DoubleValue): DoubleValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: DoubleValueAminoMsg): DoubleValue {
-    return DoubleValue.fromAmino(object.value);
   },
   fromProtoMsg(message: DoubleValueProtoMsg): DoubleValue {
     return DoubleValue.decode(message.value);
@@ -270,49 +262,6 @@ export const FloatValue = {
     }
     return message;
   },
-  fromJSON(object: any): FloatValue {
-    const obj = createBaseFloatValue();
-    if (isSet(object.value)) obj.value = Number(object.value);
-    return obj;
-  },
-  toJSON(message: FloatValue): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<FloatValue>): FloatValue {
-    const message = createBaseFloatValue();
-    message.value = object.value ?? 0;
-    return message;
-  },
-  fromSDK(object: FloatValueSDKType): FloatValue {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): FloatValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
-  },
-  toSDK(message: FloatValue): FloatValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: FloatValueAmino): FloatValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: FloatValue): FloatValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: FloatValueAminoMsg): FloatValue {
-    return FloatValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: FloatValueProtoMsg): FloatValue {
     return FloatValue.decode(message.value);
   },
@@ -355,51 +304,6 @@ export const Int64Value = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Int64Value {
-    const obj = createBaseInt64Value();
-    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: Int64Value): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Int64Value>): Int64Value {
-    const message = createBaseInt64Value();
-    if (object.value !== undefined && object.value !== null) {
-      message.value = BigInt(object.value.toString());
-    }
-    return message;
-  },
-  fromSDK(object: Int64ValueSDKType): Int64Value {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): Int64ValueSDKType {
-    return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Int64Value): Int64ValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: Int64ValueAmino): Int64Value {
-    return {
-      value: BigInt(object.value)
-    };
-  },
-  toAmino(message: Int64Value): Int64ValueAmino {
-    const obj: any = {};
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Int64ValueAminoMsg): Int64Value {
-    return Int64Value.fromAmino(object.value);
   },
   fromProtoMsg(message: Int64ValueProtoMsg): Int64Value {
     return Int64Value.decode(message.value);
@@ -444,51 +348,6 @@ export const UInt64Value = {
     }
     return message;
   },
-  fromJSON(object: any): UInt64Value {
-    const obj = createBaseUInt64Value();
-    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: UInt64Value): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
-    const message = createBaseUInt64Value();
-    if (object.value !== undefined && object.value !== null) {
-      message.value = BigInt(object.value.toString());
-    }
-    return message;
-  },
-  fromSDK(object: UInt64ValueSDKType): UInt64Value {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): UInt64ValueSDKType {
-    return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: UInt64Value): UInt64ValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: UInt64ValueAmino): UInt64Value {
-    return {
-      value: BigInt(object.value)
-    };
-  },
-  toAmino(message: UInt64Value): UInt64ValueAmino {
-    const obj: any = {};
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UInt64ValueAminoMsg): UInt64Value {
-    return UInt64Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: UInt64ValueProtoMsg): UInt64Value {
     return UInt64Value.decode(message.value);
   },
@@ -531,49 +390,6 @@ export const Int32Value = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Int32Value {
-    const obj = createBaseInt32Value();
-    if (isSet(object.value)) obj.value = Number(object.value);
-    return obj;
-  },
-  toJSON(message: Int32Value): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Int32Value>): Int32Value {
-    const message = createBaseInt32Value();
-    message.value = object.value ?? 0;
-    return message;
-  },
-  fromSDK(object: Int32ValueSDKType): Int32Value {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): Int32ValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
-  },
-  toSDK(message: Int32Value): Int32ValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: Int32ValueAmino): Int32Value {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: Int32Value): Int32ValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: Int32ValueAminoMsg): Int32Value {
-    return Int32Value.fromAmino(object.value);
   },
   fromProtoMsg(message: Int32ValueProtoMsg): Int32Value {
     return Int32Value.decode(message.value);
@@ -618,49 +434,6 @@ export const UInt32Value = {
     }
     return message;
   },
-  fromJSON(object: any): UInt32Value {
-    const obj = createBaseUInt32Value();
-    if (isSet(object.value)) obj.value = Number(object.value);
-    return obj;
-  },
-  toJSON(message: UInt32Value): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UInt32Value>): UInt32Value {
-    const message = createBaseUInt32Value();
-    message.value = object.value ?? 0;
-    return message;
-  },
-  fromSDK(object: UInt32ValueSDKType): UInt32Value {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): UInt32ValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
-  },
-  toSDK(message: UInt32Value): UInt32ValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: UInt32ValueAmino): UInt32Value {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: UInt32Value): UInt32ValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: UInt32ValueAminoMsg): UInt32Value {
-    return UInt32Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: UInt32ValueProtoMsg): UInt32Value {
     return UInt32Value.decode(message.value);
   },
@@ -703,49 +476,6 @@ export const BoolValue = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BoolValue {
-    const obj = createBaseBoolValue();
-    if (isSet(object.value)) obj.value = Boolean(object.value);
-    return obj;
-  },
-  toJSON(message: BoolValue): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BoolValue>): BoolValue {
-    const message = createBaseBoolValue();
-    message.value = object.value ?? false;
-    return message;
-  },
-  fromSDK(object: BoolValueSDKType): BoolValue {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): BoolValueSDKType {
-    return {
-      value: isSet(object.value) ? Boolean(object.value) : false
-    };
-  },
-  toSDK(message: BoolValue): BoolValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: BoolValueAmino): BoolValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: BoolValue): BoolValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: BoolValueAminoMsg): BoolValue {
-    return BoolValue.fromAmino(object.value);
   },
   fromProtoMsg(message: BoolValueProtoMsg): BoolValue {
     return BoolValue.decode(message.value);
@@ -790,49 +520,6 @@ export const StringValue = {
     }
     return message;
   },
-  fromJSON(object: any): StringValue {
-    const obj = createBaseStringValue();
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: StringValue): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<StringValue>): StringValue {
-    const message = createBaseStringValue();
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: StringValueSDKType): StringValue {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): StringValueSDKType {
-    return {
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: StringValue): StringValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: StringValueAmino): StringValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: StringValue): StringValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: StringValueAminoMsg): StringValue {
-    return StringValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: StringValueProtoMsg): StringValue {
     return StringValue.decode(message.value);
   },
@@ -875,49 +562,6 @@ export const BytesValue = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BytesValue {
-    const obj = createBaseBytesValue();
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: BytesValue): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BytesValue>): BytesValue {
-    const message = createBaseBytesValue();
-    message.value = object.value ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: BytesValueSDKType): BytesValue {
-    return {
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): BytesValueSDKType {
-    return {
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
-  },
-  toSDK(message: BytesValue): BytesValueSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: BytesValueAmino): BytesValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: BytesValue): BytesValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: BytesValueAminoMsg): BytesValue {
-    return BytesValue.fromAmino(object.value);
   },
   fromProtoMsg(message: BytesValueProtoMsg): BytesValue {
     return BytesValue.decode(message.value);

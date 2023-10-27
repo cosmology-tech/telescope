@@ -57,6 +57,10 @@ export interface TokenPair {
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contractOwner: Owner;
 }
+export interface TokenPairProtoMsg {
+  typeUrl: "/evmos.erc20.v1.TokenPair";
+  value: Uint8Array;
+}
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
  *  Cosmos Coin and an ERC20 token address.
@@ -79,6 +83,10 @@ export interface RegisterCoinProposal {
   /** metadata of the native Cosmos coin */
   metadata: Metadata;
 }
+export interface RegisterCoinProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.RegisterCoinProposal";
+  value: Uint8Array;
+}
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
  * native Cosmos coin.
@@ -99,6 +107,10 @@ export interface RegisterERC20Proposal {
   description: string;
   /** contract address of ERC20 token */
   erc20address: string;
+}
+export interface RegisterERC20ProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal";
+  value: Uint8Array;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
@@ -123,6 +135,10 @@ export interface ToggleTokenConversionProposal {
    * Cosmos base denomination
    */
   token: string;
+}
+export interface ToggleTokenConversionProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal";
+  value: Uint8Array;
 }
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion

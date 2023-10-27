@@ -228,6 +228,10 @@ export interface LogBucket {
    */
   cmekSettings?: CmekSettings;
 }
+export interface LogBucketProtoMsg {
+  typeUrl: "/google.logging.v2.LogBucket";
+  value: Uint8Array;
+}
 /** Describes a repository in which log entries are stored. */
 export interface LogBucketSDKType {
   name: string;
@@ -273,6 +277,10 @@ export interface LogView {
    *                                AND LOG_ID("stdout")
    */
   filter: string;
+}
+export interface LogViewProtoMsg {
+  typeUrl: "/google.logging.v2.LogView";
+  value: Uint8Array;
 }
 /** Describes a view over log entries in a bucket. */
 export interface LogViewSDKType {
@@ -400,6 +408,10 @@ export interface LogSink {
    */
   updateTime?: Date;
 }
+export interface LogSinkProtoMsg {
+  typeUrl: "/google.logging.v2.LogSink";
+  value: Uint8Array;
+}
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -446,6 +458,10 @@ export interface BigQueryOptions {
    */
   usesTimestampColumnPartitioning: boolean;
 }
+export interface BigQueryOptionsProtoMsg {
+  typeUrl: "/google.logging.v2.BigQueryOptions";
+  value: Uint8Array;
+}
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptionsSDKType {
   use_partitioned_tables: boolean;
@@ -480,6 +496,10 @@ export interface ListBucketsRequest {
    */
   pageSize: number;
 }
+export interface ListBucketsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListBucketsRequest";
+  value: Uint8Array;
+}
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequestSDKType {
   parent: string;
@@ -496,6 +516,10 @@ export interface ListBucketsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListBucketsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListBucketsResponse";
+  value: Uint8Array;
 }
 /** The response from ListBuckets. */
 export interface ListBucketsResponseSDKType {
@@ -526,6 +550,10 @@ export interface CreateBucketRequest {
    * ignored.
    */
   bucket?: LogBucket;
+}
+export interface CreateBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateBucketRequest";
+  value: Uint8Array;
 }
 /** The parameters to `CreateBucket`. */
 export interface CreateBucketRequestSDKType {
@@ -562,6 +590,10 @@ export interface UpdateBucketRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateBucketRequest";
+  value: Uint8Array;
+}
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequestSDKType {
   name: string;
@@ -584,6 +616,10 @@ export interface GetBucketRequest {
    */
   name: string;
 }
+export interface GetBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetBucketRequest";
+  value: Uint8Array;
+}
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequestSDKType {
   name: string;
@@ -604,6 +640,10 @@ export interface DeleteBucketRequest {
    */
   name: string;
 }
+export interface DeleteBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteBucketRequest";
+  value: Uint8Array;
+}
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequestSDKType {
   name: string;
@@ -623,6 +663,10 @@ export interface UndeleteBucketRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
+}
+export interface UndeleteBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UndeleteBucketRequest";
+  value: Uint8Array;
 }
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequestSDKType {
@@ -651,6 +695,10 @@ export interface ListViewsRequest {
    */
   pageSize: number;
 }
+export interface ListViewsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListViewsRequest";
+  value: Uint8Array;
+}
 /** The parameters to `ListViews`. */
 export interface ListViewsRequestSDKType {
   parent: string;
@@ -667,6 +715,10 @@ export interface ListViewsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListViewsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListViewsResponse";
+  value: Uint8Array;
 }
 /** The response from ListViews. */
 export interface ListViewsResponseSDKType {
@@ -689,6 +741,10 @@ export interface CreateViewRequest {
   viewId: string;
   /** Required. The new view. */
   view?: LogView;
+}
+export interface CreateViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateViewRequest";
+  value: Uint8Array;
 }
 /** The parameters to `CreateView`. */
 export interface CreateViewRequestSDKType {
@@ -722,6 +778,10 @@ export interface UpdateViewRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateViewRequest";
+  value: Uint8Array;
+}
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequestSDKType {
   name: string;
@@ -741,6 +801,10 @@ export interface GetViewRequest {
    */
   name: string;
 }
+export interface GetViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetViewRequest";
+  value: Uint8Array;
+}
 /** The parameters to `GetView`. */
 export interface GetViewRequestSDKType {
   name: string;
@@ -757,6 +821,10 @@ export interface DeleteViewRequest {
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
+}
+export interface DeleteViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteViewRequest";
+  value: Uint8Array;
 }
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequestSDKType {
@@ -787,6 +855,10 @@ export interface ListSinksRequest {
    */
   pageSize: number;
 }
+export interface ListSinksRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListSinksRequest";
+  value: Uint8Array;
+}
 /** The parameters to `ListSinks`. */
 export interface ListSinksRequestSDKType {
   parent: string;
@@ -803,6 +875,10 @@ export interface ListSinksResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListSinksResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListSinksResponse";
+  value: Uint8Array;
 }
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseSDKType {
@@ -824,6 +900,10 @@ export interface GetSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+}
+export interface GetSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetSinkRequest";
+  value: Uint8Array;
 }
 /** The parameters to `GetSink`. */
 export interface GetSinkRequestSDKType {
@@ -864,6 +944,10 @@ export interface CreateSinkRequest {
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
   uniqueWriterIdentity: boolean;
+}
+export interface CreateSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateSinkRequest";
+  value: Uint8Array;
 }
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequestSDKType {
@@ -926,6 +1010,10 @@ export interface UpdateSinkRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateSinkRequest";
+  value: Uint8Array;
+}
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequestSDKType {
   sink_name: string;
@@ -949,6 +1037,10 @@ export interface DeleteSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+}
+export interface DeleteSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteSinkRequest";
+  value: Uint8Array;
 }
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequestSDKType {
@@ -1004,6 +1096,10 @@ export interface LogExclusion {
    */
   updateTime?: Date;
 }
+export interface LogExclusionProtoMsg {
+  typeUrl: "/google.logging.v2.LogExclusion";
+  value: Uint8Array;
+}
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -1044,6 +1140,10 @@ export interface ListExclusionsRequest {
    */
   pageSize: number;
 }
+export interface ListExclusionsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListExclusionsRequest";
+  value: Uint8Array;
+}
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequestSDKType {
   parent: string;
@@ -1060,6 +1160,10 @@ export interface ListExclusionsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListExclusionsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListExclusionsResponse";
+  value: Uint8Array;
 }
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseSDKType {
@@ -1081,6 +1185,10 @@ export interface GetExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
+}
+export interface GetExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetExclusionRequest";
+  value: Uint8Array;
 }
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequestSDKType {
@@ -1107,6 +1215,10 @@ export interface CreateExclusionRequest {
    * that is not already used in the parent resource.
    */
   exclusion?: LogExclusion;
+}
+export interface CreateExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateExclusionRequest";
+  value: Uint8Array;
 }
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequestSDKType {
@@ -1144,6 +1256,10 @@ export interface UpdateExclusionRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateExclusionRequest";
+  value: Uint8Array;
+}
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequestSDKType {
   name: string;
@@ -1165,6 +1281,10 @@ export interface DeleteExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
+}
+export interface DeleteExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteExclusionRequest";
+  value: Uint8Array;
 }
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequestSDKType {
@@ -1197,6 +1317,10 @@ export interface GetCmekSettingsRequest {
    * organization.
    */
   name: string;
+}
+export interface GetCmekSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetCmekSettingsRequest";
+  value: Uint8Array;
 }
 /**
  * The parameters to
@@ -1253,6 +1377,10 @@ export interface UpdateCmekSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask?: FieldMask;
+}
+export interface UpdateCmekSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
+  value: Uint8Array;
 }
 /**
  * The parameters to
@@ -1329,6 +1457,10 @@ export interface CmekSettings {
    */
   serviceAccountId: string;
 }
+export interface CmekSettingsProtoMsg {
+  typeUrl: "/google.logging.v2.CmekSettings";
+  value: Uint8Array;
+}
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -1373,6 +1505,10 @@ export interface GetSettingsRequest {
    * applies to all projects and folders in the Google Cloud organization.
    */
   name: string;
+}
+export interface GetSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetSettingsRequest";
+  value: Uint8Array;
 }
 /**
  * The parameters to
@@ -1426,6 +1562,10 @@ export interface UpdateSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask?: FieldMask;
+}
+export interface UpdateSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateSettingsRequest";
+  value: Uint8Array;
 }
 /**
  * The parameters to
@@ -1506,6 +1646,10 @@ export interface Settings {
    */
   disableDefaultSink: boolean;
 }
+export interface SettingsProtoMsg {
+  typeUrl: "/google.logging.v2.Settings";
+  value: Uint8Array;
+}
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
@@ -1534,6 +1678,10 @@ export interface CopyLogEntriesRequest {
   filter: string;
   /** Required. Destination to which to copy log entries. */
   destination: string;
+}
+export interface CopyLogEntriesRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CopyLogEntriesRequest";
+  value: Uint8Array;
 }
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequestSDKType {
@@ -1566,6 +1714,10 @@ export interface CopyLogEntriesMetadata {
    */
   writerIdentity: string;
 }
+export interface CopyLogEntriesMetadataProtoMsg {
+  typeUrl: "/google.logging.v2.CopyLogEntriesMetadata";
+  value: Uint8Array;
+}
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataSDKType {
   start_time?: Date;
@@ -1580,6 +1732,10 @@ export interface CopyLogEntriesMetadataSDKType {
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: bigint;
+}
+export interface CopyLogEntriesResponseProtoMsg {
+  typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
+  value: Uint8Array;
 }
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseSDKType {

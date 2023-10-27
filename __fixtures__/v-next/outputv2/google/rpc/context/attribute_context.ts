@@ -62,6 +62,10 @@ export interface AttributeContextProtoMsg {
   typeUrl: "/google.rpc.context.AttributeContext";
   value: Uint8Array;
 }
+export interface AttributeContextProtoMsg {
+  typeUrl: "/google.rpc.context.AttributeContext";
+  value: Uint8Array;
+}
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -156,6 +160,10 @@ export interface AttributeContext_Peer_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface AttributeContext_Peer_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Peer_LabelsEntryAmino {
   key: string;
   value: string;
@@ -195,6 +203,10 @@ export interface AttributeContext_Peer {
    * physical location where this peer is running.
    */
   regionCode: string;
+}
+export interface AttributeContext_PeerProtoMsg {
+  typeUrl: "/google.rpc.context.Peer";
+  value: Uint8Array;
 }
 export interface AttributeContext_PeerProtoMsg {
   typeUrl: "/google.rpc.context.Peer";
@@ -275,6 +287,10 @@ export interface AttributeContext_Api {
    * "v1alpha1".
    */
   version: string;
+}
+export interface AttributeContext_ApiProtoMsg {
+  typeUrl: "/google.rpc.context.Api";
+  value: Uint8Array;
 }
 export interface AttributeContext_ApiProtoMsg {
   typeUrl: "/google.rpc.context.Api";
@@ -395,6 +411,10 @@ export interface AttributeContext_AuthProtoMsg {
   typeUrl: "/google.rpc.context.Auth";
   value: Uint8Array;
 }
+export interface AttributeContext_AuthProtoMsg {
+  typeUrl: "/google.rpc.context.Auth";
+  value: Uint8Array;
+}
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
@@ -486,6 +506,10 @@ export interface AttributeContext_Request_HeadersEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface AttributeContext_Request_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Request_HeadersEntryAmino {
   key: string;
   value: string;
@@ -555,6 +579,10 @@ export interface AttributeContext_Request {
    * Derived from the HTTP request `Authorization` header or equivalent.
    */
   auth?: AttributeContext_Auth;
+}
+export interface AttributeContext_RequestProtoMsg {
+  typeUrl: "/google.rpc.context.Request";
+  value: Uint8Array;
 }
 export interface AttributeContext_RequestProtoMsg {
   typeUrl: "/google.rpc.context.Request";
@@ -651,6 +679,10 @@ export interface AttributeContext_Response_HeadersEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface AttributeContext_Response_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Response_HeadersEntryAmino {
   key: string;
   value: string;
@@ -692,6 +724,10 @@ export interface AttributeContext_Response {
    * complete response from the backend.
    */
   backendLatency?: Duration;
+}
+export interface AttributeContext_ResponseProtoMsg {
+  typeUrl: "/google.rpc.context.Response";
+  value: Uint8Array;
 }
 export interface AttributeContext_ResponseProtoMsg {
   typeUrl: "/google.rpc.context.Response";
@@ -752,6 +788,10 @@ export interface AttributeContext_Resource_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface AttributeContext_Resource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Resource_LabelsEntryAmino {
   key: string;
   value: string;
@@ -767,6 +807,10 @@ export interface AttributeContext_Resource_LabelsEntrySDKType {
 export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
   typeUrl: string;
@@ -878,6 +922,10 @@ export interface AttributeContext_Resource {
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
   location: string;
+}
+export interface AttributeContext_ResourceProtoMsg {
+  typeUrl: "/google.rpc.context.Resource";
+  value: Uint8Array;
 }
 export interface AttributeContext_ResourceProtoMsg {
   typeUrl: "/google.rpc.context.Resource";

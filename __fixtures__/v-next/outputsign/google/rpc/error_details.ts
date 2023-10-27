@@ -1,6 +1,5 @@
 import { Duration, DurationSDKType } from "../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.rpc";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -20,6 +19,10 @@ export const protobufPackage = "google.rpc";
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
   retryDelay?: Duration;
+}
+export interface RetryInfoProtoMsg {
+  typeUrl: "/google.rpc.RetryInfo";
+  value: Uint8Array;
 }
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -46,6 +49,10 @@ export interface DebugInfo {
   /** Additional debugging information provided by the server. */
   detail: string;
 }
+export interface DebugInfoProtoMsg {
+  typeUrl: "/google.rpc.DebugInfo";
+  value: Uint8Array;
+}
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
   stack_entries: string[];
@@ -67,6 +74,10 @@ export interface DebugInfoSDKType {
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
+}
+export interface QuotaFailureProtoMsg {
+  typeUrl: "/google.rpc.QuotaFailure";
+  value: Uint8Array;
 }
 /**
  * Describes how a quota check failed.
@@ -106,6 +117,10 @@ export interface QuotaFailure_Violation {
    */
   description: string;
 }
+export interface QuotaFailure_ViolationProtoMsg {
+  typeUrl: "/google.rpc.Violation";
+  value: Uint8Array;
+}
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -117,6 +132,10 @@ export interface QuotaFailure_ViolationSDKType {
 export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
+}
+export interface ErrorInfo_MetadataEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -179,6 +198,10 @@ export interface ErrorInfo {
     [key: string]: string;
   };
 }
+export interface ErrorInfoProtoMsg {
+  typeUrl: "/google.rpc.ErrorInfo";
+  value: Uint8Array;
+}
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -223,6 +246,10 @@ export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
+export interface PreconditionFailureProtoMsg {
+  typeUrl: "/google.rpc.PreconditionFailure";
+  value: Uint8Array;
+}
 /**
  * Describes what preconditions have failed.
  * 
@@ -255,6 +282,10 @@ export interface PreconditionFailure_Violation {
    */
   description: string;
 }
+export interface PreconditionFailure_ViolationProtoMsg {
+  typeUrl: "/google.rpc.Violation";
+  value: Uint8Array;
+}
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
   type: string;
@@ -268,6 +299,10 @@ export interface PreconditionFailure_ViolationSDKType {
 export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
+}
+export interface BadRequestProtoMsg {
+  typeUrl: "/google.rpc.BadRequest";
+  value: Uint8Array;
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -286,6 +321,10 @@ export interface BadRequest_FieldViolation {
   field: string;
   /** A description of why the request element is bad. */
   description: string;
+}
+export interface BadRequest_FieldViolationProtoMsg {
+  typeUrl: "/google.rpc.FieldViolation";
+  value: Uint8Array;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
@@ -307,6 +346,10 @@ export interface RequestInfo {
    * stack trace that can be sent back to the service provider for debugging.
    */
   servingData: string;
+}
+export interface RequestInfoProtoMsg {
+  typeUrl: "/google.rpc.RequestInfo";
+  value: Uint8Array;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -343,6 +386,10 @@ export interface ResourceInfo {
    */
   description: string;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.rpc.ResourceInfo";
+  value: Uint8Array;
+}
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
   resource_type: string;
@@ -361,6 +408,10 @@ export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
+export interface HelpProtoMsg {
+  typeUrl: "/google.rpc.Help";
+  value: Uint8Array;
+}
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -377,6 +428,10 @@ export interface Help_Link {
   description: string;
   /** The URL of the link. */
   url: string;
+}
+export interface Help_LinkProtoMsg {
+  typeUrl: "/google.rpc.Link";
+  value: Uint8Array;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
@@ -396,6 +451,10 @@ export interface LocalizedMessage {
   locale: string;
   /** The localized error message in the above locale. */
   message: string;
+}
+export interface LocalizedMessageProtoMsg {
+  typeUrl: "/google.rpc.LocalizedMessage";
+  value: Uint8Array;
 }
 /**
  * Provides a localized error message that is safe to return to the user
@@ -434,51 +493,6 @@ export const RetryInfo = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): RetryInfo {
-    const obj = createBaseRetryInfo();
-    if (isSet(object.retryDelay)) obj.retryDelay = Duration.fromJSON(object.retryDelay);
-    return obj;
-  },
-  toJSON(message: RetryInfo): unknown {
-    const obj: any = {};
-    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
-    const message = createBaseRetryInfo();
-    if (object.retryDelay !== undefined && object.retryDelay !== null) {
-      message.retryDelay = Duration.fromPartial(object.retryDelay);
-    }
-    return message;
-  },
-  fromSDK(object: RetryInfoSDKType): RetryInfo {
-    return {
-      retryDelay: object.retry_delay ? Duration.fromSDK(object.retry_delay) : undefined
-    };
-  },
-  fromSDKJSON(object: any): RetryInfoSDKType {
-    return {
-      retry_delay: isSet(object.retry_delay) ? Duration.fromSDKJSON(object.retry_delay) : undefined
-    };
-  },
-  toSDK(message: RetryInfo): RetryInfoSDKType {
-    const obj: any = {};
-    message.retryDelay !== undefined && (obj.retry_delay = message.retryDelay ? Duration.toSDK(message.retryDelay) : undefined);
-    return obj;
-  },
-  fromAmino(object: RetryInfoAmino): RetryInfo {
-    return {
-      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
-    };
-  },
-  toAmino(message: RetryInfo): RetryInfoAmino {
-    const obj: any = {};
-    obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: RetryInfoAminoMsg): RetryInfo {
-    return RetryInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: RetryInfoProtoMsg): RetryInfo {
     return RetryInfo.decode(message.value);
@@ -530,69 +544,6 @@ export const DebugInfo = {
     }
     return message;
   },
-  fromJSON(object: any): DebugInfo {
-    const obj = createBaseDebugInfo();
-    if (Array.isArray(object?.stackEntries)) obj.stackEntries = object.stackEntries.map((e: any) => String(e));
-    if (isSet(object.detail)) obj.detail = String(object.detail);
-    return obj;
-  },
-  toJSON(message: DebugInfo): unknown {
-    const obj: any = {};
-    if (message.stackEntries) {
-      obj.stackEntries = message.stackEntries.map(e => e);
-    } else {
-      obj.stackEntries = [];
-    }
-    message.detail !== undefined && (obj.detail = message.detail);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DebugInfo>): DebugInfo {
-    const message = createBaseDebugInfo();
-    message.stackEntries = object.stackEntries?.map(e => e) || [];
-    message.detail = object.detail ?? "";
-    return message;
-  },
-  fromSDK(object: DebugInfoSDKType): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object?.detail
-    };
-  },
-  fromSDKJSON(object: any): DebugInfoSDKType {
-    return {
-      stack_entries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => String(e)) : [],
-      detail: isSet(object.detail) ? String(object.detail) : ""
-    };
-  },
-  toSDK(message: DebugInfo): DebugInfoSDKType {
-    const obj: any = {};
-    if (message.stackEntries) {
-      obj.stack_entries = message.stackEntries.map(e => e);
-    } else {
-      obj.stack_entries = [];
-    }
-    obj.detail = message.detail;
-    return obj;
-  },
-  fromAmino(object: DebugInfoAmino): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object.detail
-    };
-  },
-  toAmino(message: DebugInfo): DebugInfoAmino {
-    const obj: any = {};
-    if (message.stackEntries) {
-      obj.stack_entries = message.stackEntries.map(e => e);
-    } else {
-      obj.stack_entries = [];
-    }
-    obj.detail = message.detail;
-    return obj;
-  },
-  fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
-    return DebugInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: DebugInfoProtoMsg): DebugInfo {
     return DebugInfo.decode(message.value);
   },
@@ -635,61 +586,6 @@ export const QuotaFailure = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaFailure {
-    const obj = createBaseQuotaFailure();
-    if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QuotaFailure): unknown {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toJSON(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaFailure>): QuotaFailure {
-    const message = createBaseQuotaFailure();
-    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: QuotaFailureSDKType): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): QuotaFailureSDKType {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: QuotaFailure): QuotaFailureSDKType {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toSDK(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QuotaFailureAmino): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QuotaFailure): QuotaFailureAmino {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QuotaFailureAminoMsg): QuotaFailure {
-    return QuotaFailure.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaFailureProtoMsg): QuotaFailure {
     return QuotaFailure.decode(message.value);
@@ -741,57 +637,6 @@ export const QuotaFailure_Violation = {
     }
     return message;
   },
-  fromJSON(object: any): QuotaFailure_Violation {
-    const obj = createBaseQuotaFailure_Violation();
-    if (isSet(object.subject)) obj.subject = String(object.subject);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: QuotaFailure_Violation): unknown {
-    const obj: any = {};
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaFailure_Violation>): QuotaFailure_Violation {
-    const message = createBaseQuotaFailure_Violation();
-    message.subject = object.subject ?? "";
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: QuotaFailure_ViolationSDKType): QuotaFailure_Violation {
-    return {
-      subject: object?.subject,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): QuotaFailure_ViolationSDKType {
-    return {
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: QuotaFailure_Violation): QuotaFailure_ViolationSDKType {
-    const obj: any = {};
-    obj.subject = message.subject;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
-    return {
-      subject: object.subject,
-      description: object.description
-    };
-  },
-  toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
-    const obj: any = {};
-    obj.subject = message.subject;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
-    return QuotaFailure_Violation.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaFailure_ViolationProtoMsg): QuotaFailure_Violation {
     return QuotaFailure_Violation.decode(message.value);
   },
@@ -840,57 +685,6 @@ export const ErrorInfo_MetadataEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ErrorInfo_MetadataEntry {
-    const obj = createBaseErrorInfo_MetadataEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: ErrorInfo_MetadataEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ErrorInfo_MetadataEntry>): ErrorInfo_MetadataEntry {
-    const message = createBaseErrorInfo_MetadataEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: ErrorInfo_MetadataEntrySDKType): ErrorInfo_MetadataEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): ErrorInfo_MetadataEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
-    return ErrorInfo_MetadataEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg): ErrorInfo_MetadataEntry {
     return ErrorInfo_MetadataEntry.decode(message.value);
@@ -949,107 +743,6 @@ export const ErrorInfo = {
     }
     return message;
   },
-  fromJSON(object: any): ErrorInfo {
-    const obj = createBaseErrorInfo();
-    if (isSet(object.reason)) obj.reason = String(object.reason);
-    if (isSet(object.domain)) obj.domain = String(object.domain);
-    if (isObject(object.metadata)) obj.metadata = Object.entries(object.metadata).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: ErrorInfo): unknown {
-    const obj: any = {};
-    message.reason !== undefined && (obj.reason = message.reason);
-    message.domain !== undefined && (obj.domain = message.domain);
-    obj.metadata = {};
-    if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ErrorInfo>): ErrorInfo {
-    const message = createBaseErrorInfo();
-    message.reason = object.reason ?? "";
-    message.domain = object.domain ?? "";
-    message.metadata = Object.entries(object.metadata ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: ErrorInfoSDKType): ErrorInfo {
-    return {
-      reason: object?.reason,
-      domain: object?.domain,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): ErrorInfoSDKType {
-    return {
-      reason: isSet(object.reason) ? String(object.reason) : "",
-      domain: isSet(object.domain) ? String(object.domain) : "",
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: ErrorInfo): ErrorInfoSDKType {
-    const obj: any = {};
-    obj.reason = message.reason;
-    obj.domain = message.domain;
-    obj.metadata = {};
-    if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: ErrorInfoAmino): ErrorInfo {
-    return {
-      reason: object.reason,
-      domain: object.domain,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: ErrorInfo): ErrorInfoAmino {
-    const obj: any = {};
-    obj.reason = message.reason;
-    obj.domain = message.domain;
-    obj.metadata = {};
-    if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ErrorInfoAminoMsg): ErrorInfo {
-    return ErrorInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: ErrorInfoProtoMsg): ErrorInfo {
     return ErrorInfo.decode(message.value);
   },
@@ -1092,61 +785,6 @@ export const PreconditionFailure = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PreconditionFailure {
-    const obj = createBasePreconditionFailure();
-    if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: PreconditionFailure): unknown {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
-    const message = createBasePreconditionFailure();
-    message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: PreconditionFailureSDKType): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): PreconditionFailureSDKType {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: PreconditionFailure): PreconditionFailureSDKType {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toSDK(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: PreconditionFailure): PreconditionFailureAmino {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
-    return PreconditionFailure.fromAmino(object.value);
   },
   fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
     return PreconditionFailure.decode(message.value);
@@ -1205,65 +843,6 @@ export const PreconditionFailure_Violation = {
     }
     return message;
   },
-  fromJSON(object: any): PreconditionFailure_Violation {
-    const obj = createBasePreconditionFailure_Violation();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.subject)) obj.subject = String(object.subject);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: PreconditionFailure_Violation): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
-    const message = createBasePreconditionFailure_Violation();
-    message.type = object.type ?? "";
-    message.subject = object.subject ?? "";
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: PreconditionFailure_ViolationSDKType): PreconditionFailure_Violation {
-    return {
-      type: object?.type,
-      subject: object?.subject,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): PreconditionFailure_ViolationSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: PreconditionFailure_Violation): PreconditionFailure_ViolationSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.subject = message.subject;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
-    return {
-      type: object.type,
-      subject: object.subject,
-      description: object.description
-    };
-  },
-  toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.subject = message.subject;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
-    return PreconditionFailure_Violation.fromAmino(object.value);
-  },
   fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg): PreconditionFailure_Violation {
     return PreconditionFailure_Violation.decode(message.value);
   },
@@ -1306,61 +885,6 @@ export const BadRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BadRequest {
-    const obj = createBaseBadRequest();
-    if (Array.isArray(object?.fieldViolations)) obj.fieldViolations = object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BadRequest): unknown {
-    const obj: any = {};
-    if (message.fieldViolations) {
-      obj.fieldViolations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toJSON(e) : undefined);
-    } else {
-      obj.fieldViolations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BadRequest>): BadRequest {
-    const message = createBaseBadRequest();
-    message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: BadRequestSDKType): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): BadRequestSDKType {
-    return {
-      field_violations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: BadRequest): BadRequestSDKType {
-    const obj: any = {};
-    if (message.fieldViolations) {
-      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toSDK(e) : undefined);
-    } else {
-      obj.field_violations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: BadRequestAmino): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: BadRequest): BadRequestAmino {
-    const obj: any = {};
-    if (message.fieldViolations) {
-      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e) : undefined);
-    } else {
-      obj.field_violations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BadRequestAminoMsg): BadRequest {
-    return BadRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: BadRequestProtoMsg): BadRequest {
     return BadRequest.decode(message.value);
@@ -1412,57 +936,6 @@ export const BadRequest_FieldViolation = {
     }
     return message;
   },
-  fromJSON(object: any): BadRequest_FieldViolation {
-    const obj = createBaseBadRequest_FieldViolation();
-    if (isSet(object.field)) obj.field = String(object.field);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: BadRequest_FieldViolation): unknown {
-    const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
-    const message = createBaseBadRequest_FieldViolation();
-    message.field = object.field ?? "";
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: BadRequest_FieldViolationSDKType): BadRequest_FieldViolation {
-    return {
-      field: object?.field,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): BadRequest_FieldViolationSDKType {
-    return {
-      field: isSet(object.field) ? String(object.field) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: BadRequest_FieldViolation): BadRequest_FieldViolationSDKType {
-    const obj: any = {};
-    obj.field = message.field;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
-    return {
-      field: object.field,
-      description: object.description
-    };
-  },
-  toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
-    const obj: any = {};
-    obj.field = message.field;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
-    return BadRequest_FieldViolation.fromAmino(object.value);
-  },
   fromProtoMsg(message: BadRequest_FieldViolationProtoMsg): BadRequest_FieldViolation {
     return BadRequest_FieldViolation.decode(message.value);
   },
@@ -1512,57 +985,6 @@ export const RequestInfo = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): RequestInfo {
-    const obj = createBaseRequestInfo();
-    if (isSet(object.requestId)) obj.requestId = String(object.requestId);
-    if (isSet(object.servingData)) obj.servingData = String(object.servingData);
-    return obj;
-  },
-  toJSON(message: RequestInfo): unknown {
-    const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.servingData !== undefined && (obj.servingData = message.servingData);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
-    const message = createBaseRequestInfo();
-    message.requestId = object.requestId ?? "";
-    message.servingData = object.servingData ?? "";
-    return message;
-  },
-  fromSDK(object: RequestInfoSDKType): RequestInfo {
-    return {
-      requestId: object?.request_id,
-      servingData: object?.serving_data
-    };
-  },
-  fromSDKJSON(object: any): RequestInfoSDKType {
-    return {
-      request_id: isSet(object.request_id) ? String(object.request_id) : "",
-      serving_data: isSet(object.serving_data) ? String(object.serving_data) : ""
-    };
-  },
-  toSDK(message: RequestInfo): RequestInfoSDKType {
-    const obj: any = {};
-    obj.request_id = message.requestId;
-    obj.serving_data = message.servingData;
-    return obj;
-  },
-  fromAmino(object: RequestInfoAmino): RequestInfo {
-    return {
-      requestId: object.request_id,
-      servingData: object.serving_data
-    };
-  },
-  toAmino(message: RequestInfo): RequestInfoAmino {
-    const obj: any = {};
-    obj.request_id = message.requestId;
-    obj.serving_data = message.servingData;
-    return obj;
-  },
-  fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
-    return RequestInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: RequestInfoProtoMsg): RequestInfo {
     return RequestInfo.decode(message.value);
@@ -1628,73 +1050,6 @@ export const ResourceInfo = {
     }
     return message;
   },
-  fromJSON(object: any): ResourceInfo {
-    const obj = createBaseResourceInfo();
-    if (isSet(object.resourceType)) obj.resourceType = String(object.resourceType);
-    if (isSet(object.resourceName)) obj.resourceName = String(object.resourceName);
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: ResourceInfo): unknown {
-    const obj: any = {};
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    message.resourceName !== undefined && (obj.resourceName = message.resourceName);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
-    const message = createBaseResourceInfo();
-    message.resourceType = object.resourceType ?? "";
-    message.resourceName = object.resourceName ?? "";
-    message.owner = object.owner ?? "";
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: ResourceInfoSDKType): ResourceInfo {
-    return {
-      resourceType: object?.resource_type,
-      resourceName: object?.resource_name,
-      owner: object?.owner,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): ResourceInfoSDKType {
-    return {
-      resource_type: isSet(object.resource_type) ? String(object.resource_type) : "",
-      resource_name: isSet(object.resource_name) ? String(object.resource_name) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: ResourceInfo): ResourceInfoSDKType {
-    const obj: any = {};
-    obj.resource_type = message.resourceType;
-    obj.resource_name = message.resourceName;
-    obj.owner = message.owner;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      resourceType: object.resource_type,
-      resourceName: object.resource_name,
-      owner: object.owner,
-      description: object.description
-    };
-  },
-  toAmino(message: ResourceInfo): ResourceInfoAmino {
-    const obj: any = {};
-    obj.resource_type = message.resourceType;
-    obj.resource_name = message.resourceName;
-    obj.owner = message.owner;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
-    return ResourceInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
     return ResourceInfo.decode(message.value);
   },
@@ -1737,61 +1092,6 @@ export const Help = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Help {
-    const obj = createBaseHelp();
-    if (Array.isArray(object?.links)) obj.links = object.links.map((e: any) => Help_Link.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Help): unknown {
-    const obj: any = {};
-    if (message.links) {
-      obj.links = message.links.map(e => e ? Help_Link.toJSON(e) : undefined);
-    } else {
-      obj.links = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Help>): Help {
-    const message = createBaseHelp();
-    message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: HelpSDKType): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): HelpSDKType {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Help): HelpSDKType {
-    const obj: any = {};
-    if (message.links) {
-      obj.links = message.links.map(e => e ? Help_Link.toSDK(e) : undefined);
-    } else {
-      obj.links = [];
-    }
-    return obj;
-  },
-  fromAmino(object: HelpAmino): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Help): HelpAmino {
-    const obj: any = {};
-    if (message.links) {
-      obj.links = message.links.map(e => e ? Help_Link.toAmino(e) : undefined);
-    } else {
-      obj.links = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: HelpAminoMsg): Help {
-    return Help.fromAmino(object.value);
   },
   fromProtoMsg(message: HelpProtoMsg): Help {
     return Help.decode(message.value);
@@ -1843,57 +1143,6 @@ export const Help_Link = {
     }
     return message;
   },
-  fromJSON(object: any): Help_Link {
-    const obj = createBaseHelp_Link();
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.url)) obj.url = String(object.url);
-    return obj;
-  },
-  toJSON(message: Help_Link): unknown {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.url !== undefined && (obj.url = message.url);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Help_Link>): Help_Link {
-    const message = createBaseHelp_Link();
-    message.description = object.description ?? "";
-    message.url = object.url ?? "";
-    return message;
-  },
-  fromSDK(object: Help_LinkSDKType): Help_Link {
-    return {
-      description: object?.description,
-      url: object?.url
-    };
-  },
-  fromSDKJSON(object: any): Help_LinkSDKType {
-    return {
-      description: isSet(object.description) ? String(object.description) : "",
-      url: isSet(object.url) ? String(object.url) : ""
-    };
-  },
-  toSDK(message: Help_Link): Help_LinkSDKType {
-    const obj: any = {};
-    obj.description = message.description;
-    obj.url = message.url;
-    return obj;
-  },
-  fromAmino(object: Help_LinkAmino): Help_Link {
-    return {
-      description: object.description,
-      url: object.url
-    };
-  },
-  toAmino(message: Help_Link): Help_LinkAmino {
-    const obj: any = {};
-    obj.description = message.description;
-    obj.url = message.url;
-    return obj;
-  },
-  fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
-    return Help_Link.fromAmino(object.value);
-  },
   fromProtoMsg(message: Help_LinkProtoMsg): Help_Link {
     return Help_Link.decode(message.value);
   },
@@ -1943,57 +1192,6 @@ export const LocalizedMessage = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): LocalizedMessage {
-    const obj = createBaseLocalizedMessage();
-    if (isSet(object.locale)) obj.locale = String(object.locale);
-    if (isSet(object.message)) obj.message = String(object.message);
-    return obj;
-  },
-  toJSON(message: LocalizedMessage): unknown {
-    const obj: any = {};
-    message.locale !== undefined && (obj.locale = message.locale);
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<LocalizedMessage>): LocalizedMessage {
-    const message = createBaseLocalizedMessage();
-    message.locale = object.locale ?? "";
-    message.message = object.message ?? "";
-    return message;
-  },
-  fromSDK(object: LocalizedMessageSDKType): LocalizedMessage {
-    return {
-      locale: object?.locale,
-      message: object?.message
-    };
-  },
-  fromSDKJSON(object: any): LocalizedMessageSDKType {
-    return {
-      locale: isSet(object.locale) ? String(object.locale) : "",
-      message: isSet(object.message) ? String(object.message) : ""
-    };
-  },
-  toSDK(message: LocalizedMessage): LocalizedMessageSDKType {
-    const obj: any = {};
-    obj.locale = message.locale;
-    obj.message = message.message;
-    return obj;
-  },
-  fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
-    return {
-      locale: object.locale,
-      message: object.message
-    };
-  },
-  toAmino(message: LocalizedMessage): LocalizedMessageAmino {
-    const obj: any = {};
-    obj.locale = message.locale;
-    obj.message = message.message;
-    return obj;
-  },
-  fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {
-    return LocalizedMessage.fromAmino(object.value);
   },
   fromProtoMsg(message: LocalizedMessageProtoMsg): LocalizedMessage {
     return LocalizedMessage.decode(message.value);

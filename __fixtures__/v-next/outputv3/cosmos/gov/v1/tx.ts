@@ -25,6 +25,10 @@ export interface MsgSubmitProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgSubmitProposal";
   value: Uint8Array;
 }
+export interface MsgSubmitProposalProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposal";
+  value: Uint8Array;
+}
 export type MsgSubmitProposalEncoded = Omit<MsgSubmitProposal, "messages"> & {
   messages: (TextProposalProtoMsg | RegisterIncentiveProposalProtoMsg | ClientUpdateProposalProtoMsg | UpgradeProposalProtoMsg | ReplacePoolIncentivesProposalProtoMsg | UpdatePoolIncentivesProposalProtoMsg | SetSuperfluidAssetsProposalProtoMsg | RemoveSuperfluidAssetsProposalProtoMsg | UpdateUnpoolWhiteListProposalProtoMsg | UpdateFeeTokenProposalProtoMsg | AnyProtoMsg)[];
 };
@@ -61,6 +65,10 @@ export interface MsgSubmitProposalResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse";
   value: Uint8Array;
 }
+export interface MsgSubmitProposalResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse";
+  value: Uint8Array;
+}
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseAmino {
   proposal_id: string;
@@ -82,6 +90,10 @@ export interface MsgExecLegacyContent {
   content?: TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any | undefined;
   /** authority must be the gov module address. */
   authority: string;
+}
+export interface MsgExecLegacyContentProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent";
+  value: Uint8Array;
 }
 export interface MsgExecLegacyContentProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent";
@@ -118,6 +130,10 @@ export interface MsgExecLegacyContentResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse";
   value: Uint8Array;
 }
+export interface MsgExecLegacyContentResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse";
+  value: Uint8Array;
+}
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponseAmino {}
 export interface MsgExecLegacyContentResponseAminoMsg {
@@ -132,6 +148,10 @@ export interface MsgVote {
   voter: string;
   option: VoteOption;
   metadata: string;
+}
+export interface MsgVoteProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVote";
+  value: Uint8Array;
 }
 export interface MsgVoteProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVote";
@@ -161,6 +181,10 @@ export interface MsgVoteResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVoteResponse";
   value: Uint8Array;
 }
+export interface MsgVoteResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVoteResponse";
+  value: Uint8Array;
+}
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseAmino {}
 export interface MsgVoteResponseAminoMsg {
@@ -175,6 +199,10 @@ export interface MsgVoteWeighted {
   voter: string;
   options: WeightedVoteOption[];
   metadata: string;
+}
+export interface MsgVoteWeightedProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeighted";
+  value: Uint8Array;
 }
 export interface MsgVoteWeightedProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVoteWeighted";
@@ -204,6 +232,10 @@ export interface MsgVoteWeightedResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse";
   value: Uint8Array;
 }
+export interface MsgVoteWeightedResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse";
+  value: Uint8Array;
+}
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponseAmino {}
 export interface MsgVoteWeightedResponseAminoMsg {
@@ -217,6 +249,10 @@ export interface MsgDeposit {
   proposalId: bigint;
   depositor: string;
   amount: Coin[];
+}
+export interface MsgDepositProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgDeposit";
+  value: Uint8Array;
 }
 export interface MsgDepositProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgDeposit";
@@ -240,6 +276,10 @@ export interface MsgDepositSDKType {
 }
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
+export interface MsgDepositResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.MsgDepositResponse";
+  value: Uint8Array;
+}
 export interface MsgDepositResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgDepositResponse";
   value: Uint8Array;

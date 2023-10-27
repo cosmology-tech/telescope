@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Logging configuration of the service.
@@ -47,6 +46,10 @@ export interface Logging {
    * one consumer destination.
    */
   consumerDestinations: Logging_LoggingDestination[];
+}
+export interface LoggingProtoMsg {
+  typeUrl: "/google.api.Logging";
+  value: Uint8Array;
 }
 /**
  * Logging configuration of the service.
@@ -101,6 +104,10 @@ export interface Logging_LoggingDestination {
    */
   logs: string[];
 }
+export interface Logging_LoggingDestinationProtoMsg {
+  typeUrl: "/google.api.LoggingDestination";
+  value: Uint8Array;
+}
 /**
  * Configuration of a specific logging destination (the producer project
  * or the consumer project).
@@ -145,81 +152,6 @@ export const Logging = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Logging {
-    const obj = createBaseLogging();
-    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
-    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Logging): unknown {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producerDestinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
-    } else {
-      obj.producerDestinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
-    } else {
-      obj.consumerDestinations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Logging>): Logging {
-    const message = createBaseLogging();
-    message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
-    message.consumerDestinations = object.consumerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: LoggingSDKType): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromSDK(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): LoggingSDKType {
-    return {
-      producer_destinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromSDKJSON(e)) : [],
-      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Logging): LoggingSDKType {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toSDK(e) : undefined);
-    } else {
-      obj.producer_destinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toSDK(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: LoggingAmino): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Logging): LoggingAmino {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
-    } else {
-      obj.producer_destinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: LoggingAminoMsg): Logging {
-    return Logging.fromAmino(object.value);
   },
   fromProtoMsg(message: LoggingProtoMsg): Logging {
     return Logging.decode(message.value);
@@ -270,69 +202,6 @@ export const Logging_LoggingDestination = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Logging_LoggingDestination {
-    const obj = createBaseLogging_LoggingDestination();
-    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Logging_LoggingDestination): unknown {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e);
-    } else {
-      obj.logs = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {
-    const message = createBaseLogging_LoggingDestination();
-    message.monitoredResource = object.monitoredResource ?? "";
-    message.logs = object.logs?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: Logging_LoggingDestinationSDKType): Logging_LoggingDestination {
-    return {
-      monitoredResource: object?.monitored_resource,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): Logging_LoggingDestinationSDKType {
-    return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: Logging_LoggingDestination): Logging_LoggingDestinationSDKType {
-    const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e);
-    } else {
-      obj.logs = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
-    const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e);
-    } else {
-      obj.logs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Logging_LoggingDestinationAminoMsg): Logging_LoggingDestination {
-    return Logging_LoggingDestination.fromAmino(object.value);
   },
   fromProtoMsg(message: Logging_LoggingDestinationProtoMsg): Logging_LoggingDestination {
     return Logging_LoggingDestination.decode(message.value);

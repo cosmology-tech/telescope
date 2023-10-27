@@ -98,6 +98,10 @@ export interface Documentation {
    */
   overview: string;
 }
+export interface DocumentationProtoMsg {
+  typeUrl: "/google.api.Documentation";
+  value: Uint8Array;
+}
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -182,6 +186,10 @@ export interface DocumentationRule {
    */
   deprecationDescription: string;
 }
+export interface DocumentationRuleProtoMsg {
+  typeUrl: "/google.api.DocumentationRule";
+  value: Uint8Array;
+}
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
   selector: string;
@@ -220,6 +228,10 @@ export interface Page {
    * honored in the generated docset.
    */
   subpages: Page[];
+}
+export interface PageProtoMsg {
+  typeUrl: "/google.api.Page";
+  value: Uint8Array;
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -27,6 +27,10 @@ export interface MsgCreateClawbackVestingAccount {
    */
   merge: boolean;
 }
+export interface MsgCreateClawbackVestingAccountProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
+  value: Uint8Array;
+}
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
@@ -41,6 +45,10 @@ export interface MsgCreateClawbackVestingAccountSDKType {
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponse {}
+export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
+  value: Uint8Array;
+}
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
@@ -62,6 +70,10 @@ export interface MsgClawback {
    */
   destAddress: string;
 }
+export interface MsgClawbackProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgClawback";
+  value: Uint8Array;
+}
 /**
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
@@ -73,6 +85,10 @@ export interface MsgClawbackSDKType {
 }
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponse {}
+export interface MsgClawbackResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
+  value: Uint8Array;
+}
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseSDKType {}
 function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAccount {
@@ -140,113 +156,6 @@ export const MsgCreateClawbackVestingAccount = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCreateClawbackVestingAccount {
-    const obj = createBaseMsgCreateClawbackVestingAccount();
-    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
-    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
-    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
-    if (isSet(object.merge)) obj.merge = Boolean(object.merge);
-    return obj;
-  },
-  toJSON(message: MsgCreateClawbackVestingAccount): unknown {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
-    message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    if (message.lockupPeriods) {
-      obj.lockupPeriods = message.lockupPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.lockupPeriods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.vestingPeriods = [];
-    }
-    message.merge !== undefined && (obj.merge = message.merge);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgCreateClawbackVestingAccount>): MsgCreateClawbackVestingAccount {
-    const message = createBaseMsgCreateClawbackVestingAccount();
-    message.fromAddress = object.fromAddress ?? "";
-    message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime ?? undefined;
-    message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
-    message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
-    message.merge = object.merge ?? false;
-    return message;
-  },
-  fromSDK(object: MsgCreateClawbackVestingAccountSDKType): MsgCreateClawbackVestingAccount {
-    return {
-      fromAddress: object?.from_address,
-      toAddress: object?.to_address,
-      startTime: object.start_time ?? undefined,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : [],
-      merge: object?.merge
-    };
-  },
-  fromSDKJSON(object: any): MsgCreateClawbackVestingAccountSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      merge: isSet(object.merge) ? Boolean(object.merge) : false
-    };
-  },
-  toSDK(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountSDKType {
-    const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
-    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
-    if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toSDK(e) : undefined);
-    } else {
-      obj.lockup_periods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toSDK(e) : undefined);
-    } else {
-      obj.vesting_periods = [];
-    }
-    obj.merge = message.merge;
-    return obj;
-  },
-  fromAmino(object: MsgCreateClawbackVestingAccountAmino): MsgCreateClawbackVestingAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      startTime: object.start_time,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
-      merge: object.merge
-    };
-  },
-  toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
-    const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
-    obj.start_time = message.startTime;
-    if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
-    } else {
-      obj.lockup_periods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
-    } else {
-      obj.vesting_periods = [];
-    }
-    obj.merge = message.merge;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateClawbackVestingAccountAminoMsg): MsgCreateClawbackVestingAccount {
-    return MsgCreateClawbackVestingAccount.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCreateClawbackVestingAccountProtoMsg): MsgCreateClawbackVestingAccount {
     return MsgCreateClawbackVestingAccount.decode(message.value);
   },
@@ -281,38 +190,6 @@ export const MsgCreateClawbackVestingAccountResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCreateClawbackVestingAccountResponse {
-    const obj = createBaseMsgCreateClawbackVestingAccountResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateClawbackVestingAccountResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgCreateClawbackVestingAccountResponse>): MsgCreateClawbackVestingAccountResponse {
-    const message = createBaseMsgCreateClawbackVestingAccountResponse();
-    return message;
-  },
-  fromSDK(_: MsgCreateClawbackVestingAccountResponseSDKType): MsgCreateClawbackVestingAccountResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCreateClawbackVestingAccountResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCreateClawbackVestingAccountResponseAmino): MsgCreateClawbackVestingAccountResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateClawbackVestingAccountResponseAminoMsg): MsgCreateClawbackVestingAccountResponse {
-    return MsgCreateClawbackVestingAccountResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCreateClawbackVestingAccountResponseProtoMsg): MsgCreateClawbackVestingAccountResponse {
     return MsgCreateClawbackVestingAccountResponse.decode(message.value);
@@ -371,65 +248,6 @@ export const MsgClawback = {
     }
     return message;
   },
-  fromJSON(object: any): MsgClawback {
-    const obj = createBaseMsgClawback();
-    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
-    if (isSet(object.accountAddress)) obj.accountAddress = String(object.accountAddress);
-    if (isSet(object.destAddress)) obj.destAddress = String(object.destAddress);
-    return obj;
-  },
-  toJSON(message: MsgClawback): unknown {
-    const obj: any = {};
-    message.funderAddress !== undefined && (obj.funderAddress = message.funderAddress);
-    message.accountAddress !== undefined && (obj.accountAddress = message.accountAddress);
-    message.destAddress !== undefined && (obj.destAddress = message.destAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgClawback>): MsgClawback {
-    const message = createBaseMsgClawback();
-    message.funderAddress = object.funderAddress ?? "";
-    message.accountAddress = object.accountAddress ?? "";
-    message.destAddress = object.destAddress ?? "";
-    return message;
-  },
-  fromSDK(object: MsgClawbackSDKType): MsgClawback {
-    return {
-      funderAddress: object?.funder_address,
-      accountAddress: object?.account_address,
-      destAddress: object?.dest_address
-    };
-  },
-  fromSDKJSON(object: any): MsgClawbackSDKType {
-    return {
-      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
-      account_address: isSet(object.account_address) ? String(object.account_address) : "",
-      dest_address: isSet(object.dest_address) ? String(object.dest_address) : ""
-    };
-  },
-  toSDK(message: MsgClawback): MsgClawbackSDKType {
-    const obj: any = {};
-    obj.funder_address = message.funderAddress;
-    obj.account_address = message.accountAddress;
-    obj.dest_address = message.destAddress;
-    return obj;
-  },
-  fromAmino(object: MsgClawbackAmino): MsgClawback {
-    return {
-      funderAddress: object.funder_address,
-      accountAddress: object.account_address,
-      destAddress: object.dest_address
-    };
-  },
-  toAmino(message: MsgClawback): MsgClawbackAmino {
-    const obj: any = {};
-    obj.funder_address = message.funderAddress;
-    obj.account_address = message.accountAddress;
-    obj.dest_address = message.destAddress;
-    return obj;
-  },
-  fromAminoMsg(object: MsgClawbackAminoMsg): MsgClawback {
-    return MsgClawback.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgClawbackProtoMsg): MsgClawback {
     return MsgClawback.decode(message.value);
   },
@@ -464,38 +282,6 @@ export const MsgClawbackResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgClawbackResponse {
-    const obj = createBaseMsgClawbackResponse();
-    return obj;
-  },
-  toJSON(_: MsgClawbackResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgClawbackResponse>): MsgClawbackResponse {
-    const message = createBaseMsgClawbackResponse();
-    return message;
-  },
-  fromSDK(_: MsgClawbackResponseSDKType): MsgClawbackResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgClawbackResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgClawbackResponse): MsgClawbackResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgClawbackResponseAmino): MsgClawbackResponse {
-    return {};
-  },
-  toAmino(_: MsgClawbackResponse): MsgClawbackResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgClawbackResponseAminoMsg): MsgClawbackResponse {
-    return MsgClawbackResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgClawbackResponseProtoMsg): MsgClawbackResponse {
     return MsgClawbackResponse.decode(message.value);

@@ -11,6 +11,10 @@ export interface QueryProvidersRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest";
   value: Uint8Array;
 }
+export interface QueryProvidersRequestProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest";
+  value: Uint8Array;
+}
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequestAmino {
   pagination?: PageRequestAmino;
@@ -27,6 +31,10 @@ export interface QueryProvidersRequestSDKType {
 export interface QueryProvidersResponse {
   providers: Provider[];
   pagination?: PageResponse;
+}
+export interface QueryProvidersResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse";
+  value: Uint8Array;
 }
 export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse";
@@ -54,6 +62,10 @@ export interface QueryProviderRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest";
   value: Uint8Array;
 }
+export interface QueryProviderRequestProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.QueryProviderRequest";
+  value: Uint8Array;
+}
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestAmino {
   owner: string;
@@ -69,6 +81,10 @@ export interface QueryProviderRequestSDKType {
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
   provider: Provider;
+}
+export interface QueryProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.QueryProviderResponse";
+  value: Uint8Array;
 }
 export interface QueryProviderResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderResponse";

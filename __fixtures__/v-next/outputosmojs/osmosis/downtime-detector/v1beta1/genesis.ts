@@ -7,6 +7,10 @@ export interface GenesisDowntimeEntry {
   duration: Downtime;
   lastDowntime: Date;
 }
+export interface GenesisDowntimeEntryProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisDowntimeEntry";
+  value: Uint8Array;
+}
 export interface GenesisDowntimeEntrySDKType {
   duration: Downtime;
   last_downtime: Date;
@@ -15,6 +19,10 @@ export interface GenesisDowntimeEntrySDKType {
 export interface GenesisState {
   downtimes: GenesisDowntimeEntry[];
   lastBlockTime: Date;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateSDKType {

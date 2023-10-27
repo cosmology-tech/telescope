@@ -28,6 +28,10 @@ export interface ClawbackVestingAccountProtoMsg {
   typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
   value: Uint8Array;
 }
+export interface ClawbackVestingAccountProtoMsg {
+  typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
+  value: Uint8Array;
+}
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
  * an account that can hold contributions subject to "lockup" (like a

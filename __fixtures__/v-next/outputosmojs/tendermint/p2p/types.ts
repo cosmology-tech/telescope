@@ -7,6 +7,10 @@ export interface ProtocolVersion {
   block: bigint;
   app: bigint;
 }
+export interface ProtocolVersionProtoMsg {
+  typeUrl: "/tendermint.p2p.ProtocolVersion";
+  value: Uint8Array;
+}
 export interface ProtocolVersionSDKType {
   p2p: bigint;
   block: bigint;
@@ -22,6 +26,10 @@ export interface NodeInfo {
   moniker: string;
   other: NodeInfoOther;
 }
+export interface NodeInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.NodeInfo";
+  value: Uint8Array;
+}
 export interface NodeInfoSDKType {
   protocol_version: ProtocolVersionSDKType;
   node_id: string;
@@ -36,6 +44,10 @@ export interface NodeInfoOther {
   txIndex: string;
   rpcAddress: string;
 }
+export interface NodeInfoOtherProtoMsg {
+  typeUrl: "/tendermint.p2p.NodeInfoOther";
+  value: Uint8Array;
+}
 export interface NodeInfoOtherSDKType {
   tx_index: string;
   rpc_address: string;
@@ -44,6 +56,10 @@ export interface PeerInfo {
   id: string;
   addressInfo: PeerAddressInfo[];
   lastConnected?: Date;
+}
+export interface PeerInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.PeerInfo";
+  value: Uint8Array;
 }
 export interface PeerInfoSDKType {
   id: string;
@@ -55,6 +71,10 @@ export interface PeerAddressInfo {
   lastDialSuccess?: Date;
   lastDialFailure?: Date;
   dialFailures: number;
+}
+export interface PeerAddressInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.PeerAddressInfo";
+  value: Uint8Array;
 }
 export interface PeerAddressInfoSDKType {
   address: string;

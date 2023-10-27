@@ -10,6 +10,10 @@ export interface IncentivizedAcknowledgement {
   /** success flag of the base application callback */
   underlyingAppSuccess: boolean;
 }
+export interface IncentivizedAcknowledgementProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.IncentivizedAcknowledgement";
+  value: Uint8Array;
+}
 /** IncentivizedAcknowledgement is the acknowledgement format to be used by applications wrapped in the fee middleware */
 export interface IncentivizedAcknowledgementSDKType {
   app_acknowledgement: Uint8Array;

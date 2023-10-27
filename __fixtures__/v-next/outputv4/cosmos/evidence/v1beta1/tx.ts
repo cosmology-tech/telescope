@@ -10,6 +10,10 @@ export interface MsgSubmitEvidence {
   submitter: string;
   evidence?: Any;
 }
+export interface MsgSubmitEvidenceProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
+  value: Uint8Array;
+}
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
@@ -22,6 +26,10 @@ export interface MsgSubmitEvidenceSDKType {
 export interface MsgSubmitEvidenceResponse {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
+}
+export interface MsgSubmitEvidenceResponseProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse";
+  value: Uint8Array;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {

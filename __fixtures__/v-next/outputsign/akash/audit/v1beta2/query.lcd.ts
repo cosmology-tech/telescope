@@ -25,7 +25,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/audit/v1beta2/audit/attributes/list`;
-    return QueryProvidersResponse.fromSDKJSON(await this.req.get<QueryProvidersResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryProvidersResponseSDKType>(endpoint, options);
   };
   /* ProviderAttributes queries all provider signed attributes
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -38,14 +38,14 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/audit/v1beta2/audit/attributes/${params.owner}/list`;
-    return QueryProvidersResponse.fromSDKJSON(await this.req.get<QueryProvidersResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryProvidersResponseSDKType>(endpoint, options);
   };
   /* ProviderAuditorAttributes queries provider signed attributes by specific auditor
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   providerAuditorAttributes = async (params: QueryProviderAuditorRequest): Promise<QueryProvidersResponseSDKType> => {
     const endpoint = `akash/audit/v1beta2/audit/attributes/${params.auditor}/${params.owner}`;
-    return QueryProvidersResponse.fromSDKJSON(await this.req.get<QueryProvidersResponseSDKType>(endpoint));
+    return await this.req.get<QueryProvidersResponseSDKType>(endpoint);
   };
   /* AuditorAttributes queries all providers signed by this auditor
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -58,6 +58,6 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/provider/v1beta2/auditor/${params.auditor}/list`;
-    return QueryProvidersResponse.fromSDKJSON(await this.req.get<QueryProvidersResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryProvidersResponseSDKType>(endpoint, options);
   };
 }

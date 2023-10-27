@@ -1,7 +1,6 @@
 import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -26,6 +25,10 @@ export interface CheckRequest {
   resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
+}
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
+  value: Uint8Array;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
@@ -64,6 +67,10 @@ export interface ResourceInfo {
    */
   location: string;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: Uint8Array;
+}
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
   name: string;
@@ -75,6 +82,10 @@ export interface ResourceInfoSDKType {
 export interface CheckResponse_HeadersEntry {
   key: string;
   value: string;
+}
+export interface CheckResponse_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -92,6 +103,10 @@ export interface CheckResponse {
   headers: {
     [key: string]: string;
   };
+}
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
+  value: Uint8Array;
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -124,6 +139,10 @@ export interface ReportRequest {
    */
   operations: AttributeContext[];
 }
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
+  value: Uint8Array;
+}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -135,6 +154,10 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
+  value: Uint8Array;
+}
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
@@ -197,95 +220,6 @@ export const CheckRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckRequest {
-    const obj = createBaseCheckRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (isSet(object.attributes)) obj.attributes = AttributeContext.fromJSON(object.attributes);
-    if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => ResourceInfo.fromJSON(e));
-    if (isSet(object.flags)) obj.flags = String(object.flags);
-    return obj;
-  },
-  toJSON(message: CheckRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    message.attributes !== undefined && (obj.attributes = message.attributes ? AttributeContext.toJSON(message.attributes) : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? ResourceInfo.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
-    message.flags !== undefined && (obj.flags = message.flags);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
-    const message = createBaseCheckRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    if (object.attributes !== undefined && object.attributes !== null) {
-      message.attributes = AttributeContext.fromPartial(object.attributes);
-    }
-    message.resources = object.resources?.map(e => ResourceInfo.fromPartial(e)) || [];
-    message.flags = object.flags ?? "";
-    return message;
-  },
-  fromSDK(object: CheckRequestSDKType): CheckRequest {
-    return {
-      serviceName: object?.service_name,
-      serviceConfigId: object?.service_config_id,
-      attributes: object.attributes ? AttributeContext.fromSDK(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDK(e)) : [],
-      flags: object?.flags
-    };
-  },
-  fromSDKJSON(object: any): CheckRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
-      attributes: isSet(object.attributes) ? AttributeContext.fromSDKJSON(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDKJSON(e)) : [],
-      flags: isSet(object.flags) ? String(object.flags) : ""
-    };
-  },
-  toSDK(message: CheckRequest): CheckRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config_id = message.serviceConfigId;
-    message.attributes !== undefined && (obj.attributes = message.attributes ? AttributeContext.toSDK(message.attributes) : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? ResourceInfo.toSDK(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
-    obj.flags = message.flags;
-    return obj;
-  },
-  fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
-      attributes: object?.attributes ? AttributeContext.fromAmino(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
-      flags: object.flags
-    };
-  },
-  toAmino(message: CheckRequest): CheckRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config_id = message.serviceConfigId;
-    obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes) : undefined;
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
-    obj.flags = message.flags;
-    return obj;
-  },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
@@ -358,81 +292,6 @@ export const ResourceInfo = {
     }
     return message;
   },
-  fromJSON(object: any): ResourceInfo {
-    const obj = createBaseResourceInfo();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.permission)) obj.permission = String(object.permission);
-    if (isSet(object.container)) obj.container = String(object.container);
-    if (isSet(object.location)) obj.location = String(object.location);
-    return obj;
-  },
-  toJSON(message: ResourceInfo): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    message.permission !== undefined && (obj.permission = message.permission);
-    message.container !== undefined && (obj.container = message.container);
-    message.location !== undefined && (obj.location = message.location);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
-    const message = createBaseResourceInfo();
-    message.name = object.name ?? "";
-    message.type = object.type ?? "";
-    message.permission = object.permission ?? "";
-    message.container = object.container ?? "";
-    message.location = object.location ?? "";
-    return message;
-  },
-  fromSDK(object: ResourceInfoSDKType): ResourceInfo {
-    return {
-      name: object?.name,
-      type: object?.type,
-      permission: object?.permission,
-      container: object?.container,
-      location: object?.location
-    };
-  },
-  fromSDKJSON(object: any): ResourceInfoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      permission: isSet(object.permission) ? String(object.permission) : "",
-      container: isSet(object.container) ? String(object.container) : "",
-      location: isSet(object.location) ? String(object.location) : ""
-    };
-  },
-  toSDK(message: ResourceInfo): ResourceInfoSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.permission = message.permission;
-    obj.container = message.container;
-    obj.location = message.location;
-    return obj;
-  },
-  fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      name: object.name,
-      type: object.type,
-      permission: object.permission,
-      container: object.container,
-      location: object.location
-    };
-  },
-  toAmino(message: ResourceInfo): ResourceInfoAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.permission = message.permission;
-    obj.container = message.container;
-    obj.location = message.location;
-    return obj;
-  },
-  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
-    return ResourceInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
     return ResourceInfo.decode(message.value);
   },
@@ -481,57 +340,6 @@ export const CheckResponse_HeadersEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckResponse_HeadersEntry {
-    const obj = createBaseCheckResponse_HeadersEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: CheckResponse_HeadersEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckResponse_HeadersEntry>): CheckResponse_HeadersEntry {
-    const message = createBaseCheckResponse_HeadersEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: CheckResponse_HeadersEntrySDKType): CheckResponse_HeadersEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): CheckResponse_HeadersEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: CheckResponse_HeadersEntryAmino): CheckResponse_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
-    return CheckResponse_HeadersEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg): CheckResponse_HeadersEntry {
     return CheckResponse_HeadersEntry.decode(message.value);
@@ -582,101 +390,6 @@ export const CheckResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckResponse {
-    const obj = createBaseCheckResponse();
-    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: CheckResponse): unknown {
-    const obj: any = {};
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
-    const message = createBaseCheckResponse();
-    if (object.status !== undefined && object.status !== null) {
-      message.status = Status.fromPartial(object.status);
-    }
-    message.headers = Object.entries(object.headers ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: CheckResponseSDKType): CheckResponse {
-    return {
-      status: object.status ? Status.fromSDK(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): CheckResponseSDKType {
-    return {
-      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: CheckResponse): CheckResponseSDKType {
-    const obj: any = {};
-    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      status: object?.status ? Status.fromAmino(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: CheckResponse): CheckResponseAmino {
-    const obj: any = {};
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
@@ -735,77 +448,6 @@ export const ReportRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ReportRequest {
-    const obj = createBaseReportRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => AttributeContext.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ReportRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? AttributeContext.toJSON(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
-    const message = createBaseReportRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    message.operations = object.operations?.map(e => AttributeContext.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ReportRequestSDKType): ReportRequest {
-    return {
-      serviceName: object?.service_name,
-      serviceConfigId: object?.service_config_id,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ReportRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ReportRequest): ReportRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config_id = message.serviceConfigId;
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? AttributeContext.toSDK(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ReportRequestAmino): ReportRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ReportRequest): ReportRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config_id = message.serviceConfigId;
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
-    return ReportRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
     return ReportRequest.decode(message.value);
   },
@@ -840,38 +482,6 @@ export const ReportResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): ReportResponse {
-    const obj = createBaseReportResponse();
-    return obj;
-  },
-  toJSON(_: ReportResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<ReportResponse>): ReportResponse {
-    const message = createBaseReportResponse();
-    return message;
-  },
-  fromSDK(_: ReportResponseSDKType): ReportResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): ReportResponseSDKType {
-    return {};
-  },
-  toSDK(_: ReportResponse): ReportResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: ReportResponseAmino): ReportResponse {
-    return {};
-  },
-  toAmino(_: ReportResponse): ReportResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
-    return ReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
     return ReportResponse.decode(message.value);

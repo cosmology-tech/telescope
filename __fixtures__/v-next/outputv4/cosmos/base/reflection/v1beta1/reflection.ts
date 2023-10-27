@@ -3,12 +3,20 @@ import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
+export interface ListAllInterfacesRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest";
+  value: Uint8Array;
+}
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequestSDKType {}
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
   interfaceNames: string[];
+}
+export interface ListAllInterfacesResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse";
+  value: Uint8Array;
 }
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponseSDKType {
@@ -21,6 +29,10 @@ export interface ListAllInterfacesResponseSDKType {
 export interface ListImplementationsRequest {
   /** interface_name defines the interface to query the implementations for. */
   interfaceName: string;
+}
+export interface ListImplementationsRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest";
+  value: Uint8Array;
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
@@ -35,6 +47,10 @@ export interface ListImplementationsRequestSDKType {
  */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
+}
+export interface ListImplementationsResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse";
+  value: Uint8Array;
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations

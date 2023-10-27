@@ -10,6 +10,10 @@ export interface MsgSwapExactAmountIn {
   tokenIn: Coin;
   tokenOutMinAmount: string;
 }
+export interface MsgSwapExactAmountInProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountIn";
+  value: Uint8Array;
+}
 /** ===================== MsgSwapExactAmountIn */
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
@@ -19,6 +23,10 @@ export interface MsgSwapExactAmountInSDKType {
 }
 export interface MsgSwapExactAmountInResponse {
   tokenOutAmount: string;
+}
+export interface MsgSwapExactAmountInResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountInResponse";
+  value: Uint8Array;
 }
 export interface MsgSwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -30,6 +38,10 @@ export interface MsgSwapExactAmountOut {
   tokenInMaxAmount: string;
   tokenOut: Coin;
 }
+export interface MsgSwapExactAmountOutProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOut";
+  value: Uint8Array;
+}
 /** ===================== MsgSwapExactAmountOut */
 export interface MsgSwapExactAmountOutSDKType {
   sender: string;
@@ -39,6 +51,10 @@ export interface MsgSwapExactAmountOutSDKType {
 }
 export interface MsgSwapExactAmountOutResponse {
   tokenInAmount: string;
+}
+export interface MsgSwapExactAmountOutResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOutResponse";
+  value: Uint8Array;
 }
 export interface MsgSwapExactAmountOutResponseSDKType {
   token_in_amount: string;

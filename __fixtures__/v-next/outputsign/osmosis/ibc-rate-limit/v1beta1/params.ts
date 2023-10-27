@@ -1,9 +1,12 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
   contractAddress: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
+  value: Uint8Array;
 }
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
@@ -38,55 +41,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.contractAddress = object.contractAddress ?? "";
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      contractAddress: object?.contract_address
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      contractAddress: object.contract_address
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/ibcratelimit/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

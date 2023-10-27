@@ -13,6 +13,10 @@ export interface BlockProtoMsg {
   typeUrl: "/tendermint.types.Block";
   value: Uint8Array;
 }
+export interface BlockProtoMsg {
+  typeUrl: "/tendermint.types.Block";
+  value: Uint8Array;
+}
 export interface BlockAmino {
   header?: HeaderAmino;
   data?: DataAmino;

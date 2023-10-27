@@ -1,6 +1,5 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisState {
@@ -9,6 +8,10 @@ export interface GenesisState {
    * module.
    */
   constantFee: Coin;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.crisis.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisStateSDKType {
@@ -43,57 +46,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.constantFee)) obj.constantFee = Coin.fromJSON(object.constantFee);
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.constantFee !== undefined && (obj.constantFee = message.constantFee ? Coin.toJSON(message.constantFee) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.constantFee !== undefined && object.constantFee !== null) {
-      message.constantFee = Coin.fromPartial(object.constantFee);
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      constantFee: object.constant_fee ? Coin.fromSDK(object.constant_fee) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      constant_fee: isSet(object.constant_fee) ? Coin.fromSDKJSON(object.constant_fee) : undefined
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.constantFee !== undefined && (obj.constant_fee = message.constantFee ? Coin.toSDK(message.constantFee) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      constantFee: object?.constant_fee ? Coin.fromAmino(object.constant_fee) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.constant_fee = message.constantFee ? Coin.toAmino(message.constantFee) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

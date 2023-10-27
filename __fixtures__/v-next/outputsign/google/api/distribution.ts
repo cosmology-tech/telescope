@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -74,6 +74,10 @@ export interface Distribution {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface DistributionProtoMsg {
+  typeUrl: "/google.api.Distribution";
+  value: Uint8Array;
+}
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -106,6 +110,10 @@ export interface Distribution_Range {
   /** The maximum of the population values. */
   max: number;
 }
+export interface Distribution_RangeProtoMsg {
+  typeUrl: "/google.api.Range";
+  value: Uint8Array;
+}
 /** The range of the population values. */
 export interface Distribution_RangeSDKType {
   min: number;
@@ -135,6 +143,10 @@ export interface Distribution_BucketOptions {
   exponentialBuckets?: Distribution_BucketOptions_Exponential;
   /** The explicit buckets. */
   explicitBuckets?: Distribution_BucketOptions_Explicit;
+}
+export interface Distribution_BucketOptionsProtoMsg {
+  typeUrl: "/google.api.BucketOptions";
+  value: Uint8Array;
 }
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
@@ -177,6 +189,10 @@ export interface Distribution_BucketOptions_Linear {
   /** Lower bound of the first bucket. */
   offset: number;
 }
+export interface Distribution_BucketOptions_LinearProtoMsg {
+  typeUrl: "/google.api.Linear";
+  value: Uint8Array;
+}
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -212,6 +228,10 @@ export interface Distribution_BucketOptions_Exponential {
   /** Must be greater than 0. */
   scale: number;
 }
+export interface Distribution_BucketOptions_ExponentialProtoMsg {
+  typeUrl: "/google.api.Exponential";
+  value: Uint8Array;
+}
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -244,6 +264,10 @@ export interface Distribution_BucketOptions_ExponentialSDKType {
 export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
+}
+export interface Distribution_BucketOptions_ExplicitProtoMsg {
+  typeUrl: "/google.api.Explicit";
+  value: Uint8Array;
 }
 /**
  * Specifies a set of buckets with arbitrary widths.
@@ -290,6 +314,10 @@ export interface Distribution_Exemplar {
    * single exemplar, and this is enforced by the system.
    */
   attachments: Any[];
+}
+export interface Distribution_ExemplarProtoMsg {
+  typeUrl: "/google.api.Exemplar";
+  value: Uint8Array;
 }
 /**
  * Exemplars are example points that may be used to annotate aggregated
@@ -384,127 +412,6 @@ export const Distribution = {
     }
     return message;
   },
-  fromJSON(object: any): Distribution {
-    const obj = createBaseDistribution();
-    if (isSet(object.count)) obj.count = BigInt(object.count.toString());
-    if (isSet(object.mean)) obj.mean = Number(object.mean);
-    if (isSet(object.sumOfSquaredDeviation)) obj.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
-    if (isSet(object.range)) obj.range = Distribution_Range.fromJSON(object.range);
-    if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (Array.isArray(object?.bucketCounts)) obj.bucketCounts = object.bucketCounts.map((e: any) => BigInt(e.toString()));
-    if (Array.isArray(object?.exemplars)) obj.exemplars = object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Distribution): unknown {
-    const obj: any = {};
-    message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());
-    message.mean !== undefined && (obj.mean = message.mean);
-    message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
-    message.range !== undefined && (obj.range = message.range ? Distribution_Range.toJSON(message.range) : undefined);
-    message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
-    if (message.bucketCounts) {
-      obj.bucketCounts = message.bucketCounts.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.bucketCounts = [];
-    }
-    if (message.exemplars) {
-      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toJSON(e) : undefined);
-    } else {
-      obj.exemplars = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution>): Distribution {
-    const message = createBaseDistribution();
-    if (object.count !== undefined && object.count !== null) {
-      message.count = BigInt(object.count.toString());
-    }
-    message.mean = object.mean ?? 0;
-    message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
-    if (object.range !== undefined && object.range !== null) {
-      message.range = Distribution_Range.fromPartial(object.range);
-    }
-    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
-      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
-    }
-    message.bucketCounts = object.bucketCounts?.map(e => BigInt(e.toString())) || [];
-    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: DistributionSDKType): Distribution {
-    return {
-      count: object?.count,
-      mean: object?.mean,
-      sumOfSquaredDeviation: object?.sum_of_squared_deviation,
-      range: object.range ? Distribution_Range.fromSDK(object.range) : undefined,
-      bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): DistributionSDKType {
-    return {
-      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt(0),
-      mean: isSet(object.mean) ? Number(object.mean) : 0,
-      sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
-      range: isSet(object.range) ? Distribution_Range.fromSDKJSON(object.range) : undefined,
-      bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
-      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e.toString())) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Distribution): DistributionSDKType {
-    const obj: any = {};
-    obj.count = message.count;
-    obj.mean = message.mean;
-    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
-    message.range !== undefined && (obj.range = message.range ? Distribution_Range.toSDK(message.range) : undefined);
-    message.bucketOptions !== undefined && (obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toSDK(message.bucketOptions) : undefined);
-    if (message.bucketCounts) {
-      obj.bucket_counts = message.bucketCounts.map(e => e);
-    } else {
-      obj.bucket_counts = [];
-    }
-    if (message.exemplars) {
-      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toSDK(e) : undefined);
-    } else {
-      obj.exemplars = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DistributionAmino): Distribution {
-    return {
-      count: BigInt(object.count),
-      mean: object.mean,
-      sumOfSquaredDeviation: object.sum_of_squared_deviation,
-      range: object?.range ? Distribution_Range.fromAmino(object.range) : undefined,
-      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e)) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Distribution): DistributionAmino {
-    const obj: any = {};
-    obj.count = message.count ? message.count.toString() : undefined;
-    obj.mean = message.mean;
-    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
-    obj.range = message.range ? Distribution_Range.toAmino(message.range) : undefined;
-    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
-    if (message.bucketCounts) {
-      obj.bucket_counts = message.bucketCounts.map(e => e.toString());
-    } else {
-      obj.bucket_counts = [];
-    }
-    if (message.exemplars) {
-      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
-    } else {
-      obj.exemplars = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DistributionAminoMsg): Distribution {
-    return Distribution.fromAmino(object.value);
-  },
   fromProtoMsg(message: DistributionProtoMsg): Distribution {
     return Distribution.decode(message.value);
   },
@@ -554,57 +461,6 @@ export const Distribution_Range = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Distribution_Range {
-    const obj = createBaseDistribution_Range();
-    if (isSet(object.min)) obj.min = Number(object.min);
-    if (isSet(object.max)) obj.max = Number(object.max);
-    return obj;
-  },
-  toJSON(message: Distribution_Range): unknown {
-    const obj: any = {};
-    message.min !== undefined && (obj.min = message.min);
-    message.max !== undefined && (obj.max = message.max);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution_Range>): Distribution_Range {
-    const message = createBaseDistribution_Range();
-    message.min = object.min ?? 0;
-    message.max = object.max ?? 0;
-    return message;
-  },
-  fromSDK(object: Distribution_RangeSDKType): Distribution_Range {
-    return {
-      min: object?.min,
-      max: object?.max
-    };
-  },
-  fromSDKJSON(object: any): Distribution_RangeSDKType {
-    return {
-      min: isSet(object.min) ? Number(object.min) : 0,
-      max: isSet(object.max) ? Number(object.max) : 0
-    };
-  },
-  toSDK(message: Distribution_Range): Distribution_RangeSDKType {
-    const obj: any = {};
-    obj.min = message.min;
-    obj.max = message.max;
-    return obj;
-  },
-  fromAmino(object: Distribution_RangeAmino): Distribution_Range {
-    return {
-      min: object.min,
-      max: object.max
-    };
-  },
-  toAmino(message: Distribution_Range): Distribution_RangeAmino {
-    const obj: any = {};
-    obj.min = message.min;
-    obj.max = message.max;
-    return obj;
-  },
-  fromAminoMsg(object: Distribution_RangeAminoMsg): Distribution_Range {
-    return Distribution_Range.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_RangeProtoMsg): Distribution_Range {
     return Distribution_Range.decode(message.value);
@@ -663,71 +519,6 @@ export const Distribution_BucketOptions = {
     }
     return message;
   },
-  fromJSON(object: any): Distribution_BucketOptions {
-    const obj = createBaseDistribution_BucketOptions();
-    if (isSet(object.linearBuckets)) obj.linearBuckets = Distribution_BucketOptions_Linear.fromJSON(object.linearBuckets);
-    if (isSet(object.exponentialBuckets)) obj.exponentialBuckets = Distribution_BucketOptions_Exponential.fromJSON(object.exponentialBuckets);
-    if (isSet(object.explicitBuckets)) obj.explicitBuckets = Distribution_BucketOptions_Explicit.fromJSON(object.explicitBuckets);
-    return obj;
-  },
-  toJSON(message: Distribution_BucketOptions): unknown {
-    const obj: any = {};
-    message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toJSON(message.linearBuckets) : undefined);
-    message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toJSON(message.exponentialBuckets) : undefined);
-    message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toJSON(message.explicitBuckets) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution_BucketOptions>): Distribution_BucketOptions {
-    const message = createBaseDistribution_BucketOptions();
-    if (object.linearBuckets !== undefined && object.linearBuckets !== null) {
-      message.linearBuckets = Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets);
-    }
-    if (object.exponentialBuckets !== undefined && object.exponentialBuckets !== null) {
-      message.exponentialBuckets = Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets);
-    }
-    if (object.explicitBuckets !== undefined && object.explicitBuckets !== null) {
-      message.explicitBuckets = Distribution_BucketOptions_Explicit.fromPartial(object.explicitBuckets);
-    }
-    return message;
-  },
-  fromSDK(object: Distribution_BucketOptionsSDKType): Distribution_BucketOptions {
-    return {
-      linearBuckets: object.linear_buckets ? Distribution_BucketOptions_Linear.fromSDK(object.linear_buckets) : undefined,
-      exponentialBuckets: object.exponential_buckets ? Distribution_BucketOptions_Exponential.fromSDK(object.exponential_buckets) : undefined,
-      explicitBuckets: object.explicit_buckets ? Distribution_BucketOptions_Explicit.fromSDK(object.explicit_buckets) : undefined
-    };
-  },
-  fromSDKJSON(object: any): Distribution_BucketOptionsSDKType {
-    return {
-      linear_buckets: isSet(object.linear_buckets) ? Distribution_BucketOptions_Linear.fromSDKJSON(object.linear_buckets) : undefined,
-      exponential_buckets: isSet(object.exponential_buckets) ? Distribution_BucketOptions_Exponential.fromSDKJSON(object.exponential_buckets) : undefined,
-      explicit_buckets: isSet(object.explicit_buckets) ? Distribution_BucketOptions_Explicit.fromSDKJSON(object.explicit_buckets) : undefined
-    };
-  },
-  toSDK(message: Distribution_BucketOptions): Distribution_BucketOptionsSDKType {
-    const obj: any = {};
-    message.linearBuckets !== undefined && (obj.linear_buckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toSDK(message.linearBuckets) : undefined);
-    message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toSDK(message.exponentialBuckets) : undefined);
-    message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toSDK(message.explicitBuckets) : undefined);
-    return obj;
-  },
-  fromAmino(object: Distribution_BucketOptionsAmino): Distribution_BucketOptions {
-    return {
-      linearBuckets: object?.linear_buckets ? Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets) : undefined,
-      exponentialBuckets: object?.exponential_buckets ? Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets) : undefined,
-      explicitBuckets: object?.explicit_buckets ? Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets) : undefined
-    };
-  },
-  toAmino(message: Distribution_BucketOptions): Distribution_BucketOptionsAmino {
-    const obj: any = {};
-    obj.linear_buckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toAmino(message.linearBuckets) : undefined;
-    obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toAmino(message.exponentialBuckets) : undefined;
-    obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toAmino(message.explicitBuckets) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Distribution_BucketOptionsAminoMsg): Distribution_BucketOptions {
-    return Distribution_BucketOptions.fromAmino(object.value);
-  },
   fromProtoMsg(message: Distribution_BucketOptionsProtoMsg): Distribution_BucketOptions {
     return Distribution_BucketOptions.decode(message.value);
   },
@@ -784,65 +575,6 @@ export const Distribution_BucketOptions_Linear = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Distribution_BucketOptions_Linear {
-    const obj = createBaseDistribution_BucketOptions_Linear();
-    if (isSet(object.numFiniteBuckets)) obj.numFiniteBuckets = Number(object.numFiniteBuckets);
-    if (isSet(object.width)) obj.width = Number(object.width);
-    if (isSet(object.offset)) obj.offset = Number(object.offset);
-    return obj;
-  },
-  toJSON(message: Distribution_BucketOptions_Linear): unknown {
-    const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
-    message.width !== undefined && (obj.width = message.width);
-    message.offset !== undefined && (obj.offset = message.offset);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution_BucketOptions_Linear>): Distribution_BucketOptions_Linear {
-    const message = createBaseDistribution_BucketOptions_Linear();
-    message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
-    message.width = object.width ?? 0;
-    message.offset = object.offset ?? 0;
-    return message;
-  },
-  fromSDK(object: Distribution_BucketOptions_LinearSDKType): Distribution_BucketOptions_Linear {
-    return {
-      numFiniteBuckets: object?.num_finite_buckets,
-      width: object?.width,
-      offset: object?.offset
-    };
-  },
-  fromSDKJSON(object: any): Distribution_BucketOptions_LinearSDKType {
-    return {
-      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
-      width: isSet(object.width) ? Number(object.width) : 0,
-      offset: isSet(object.offset) ? Number(object.offset) : 0
-    };
-  },
-  toSDK(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearSDKType {
-    const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.width = message.width;
-    obj.offset = message.offset;
-    return obj;
-  },
-  fromAmino(object: Distribution_BucketOptions_LinearAmino): Distribution_BucketOptions_Linear {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      width: object.width,
-      offset: object.offset
-    };
-  },
-  toAmino(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearAmino {
-    const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.width = message.width;
-    obj.offset = message.offset;
-    return obj;
-  },
-  fromAminoMsg(object: Distribution_BucketOptions_LinearAminoMsg): Distribution_BucketOptions_Linear {
-    return Distribution_BucketOptions_Linear.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_BucketOptions_LinearProtoMsg): Distribution_BucketOptions_Linear {
     return Distribution_BucketOptions_Linear.decode(message.value);
@@ -901,65 +633,6 @@ export const Distribution_BucketOptions_Exponential = {
     }
     return message;
   },
-  fromJSON(object: any): Distribution_BucketOptions_Exponential {
-    const obj = createBaseDistribution_BucketOptions_Exponential();
-    if (isSet(object.numFiniteBuckets)) obj.numFiniteBuckets = Number(object.numFiniteBuckets);
-    if (isSet(object.growthFactor)) obj.growthFactor = Number(object.growthFactor);
-    if (isSet(object.scale)) obj.scale = Number(object.scale);
-    return obj;
-  },
-  toJSON(message: Distribution_BucketOptions_Exponential): unknown {
-    const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
-    message.growthFactor !== undefined && (obj.growthFactor = message.growthFactor);
-    message.scale !== undefined && (obj.scale = message.scale);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution_BucketOptions_Exponential>): Distribution_BucketOptions_Exponential {
-    const message = createBaseDistribution_BucketOptions_Exponential();
-    message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
-    message.growthFactor = object.growthFactor ?? 0;
-    message.scale = object.scale ?? 0;
-    return message;
-  },
-  fromSDK(object: Distribution_BucketOptions_ExponentialSDKType): Distribution_BucketOptions_Exponential {
-    return {
-      numFiniteBuckets: object?.num_finite_buckets,
-      growthFactor: object?.growth_factor,
-      scale: object?.scale
-    };
-  },
-  fromSDKJSON(object: any): Distribution_BucketOptions_ExponentialSDKType {
-    return {
-      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
-      growth_factor: isSet(object.growth_factor) ? Number(object.growth_factor) : 0,
-      scale: isSet(object.scale) ? Number(object.scale) : 0
-    };
-  },
-  toSDK(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialSDKType {
-    const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.growth_factor = message.growthFactor;
-    obj.scale = message.scale;
-    return obj;
-  },
-  fromAmino(object: Distribution_BucketOptions_ExponentialAmino): Distribution_BucketOptions_Exponential {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      growthFactor: object.growth_factor,
-      scale: object.scale
-    };
-  },
-  toAmino(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialAmino {
-    const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.growth_factor = message.growthFactor;
-    obj.scale = message.scale;
-    return obj;
-  },
-  fromAminoMsg(object: Distribution_BucketOptions_ExponentialAminoMsg): Distribution_BucketOptions_Exponential {
-    return Distribution_BucketOptions_Exponential.fromAmino(object.value);
-  },
   fromProtoMsg(message: Distribution_BucketOptions_ExponentialProtoMsg): Distribution_BucketOptions_Exponential {
     return Distribution_BucketOptions_Exponential.decode(message.value);
   },
@@ -1011,61 +684,6 @@ export const Distribution_BucketOptions_Explicit = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Distribution_BucketOptions_Explicit {
-    const obj = createBaseDistribution_BucketOptions_Explicit();
-    if (Array.isArray(object?.bounds)) obj.bounds = object.bounds.map((e: any) => Number(e));
-    return obj;
-  },
-  toJSON(message: Distribution_BucketOptions_Explicit): unknown {
-    const obj: any = {};
-    if (message.bounds) {
-      obj.bounds = message.bounds.map(e => e);
-    } else {
-      obj.bounds = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution_BucketOptions_Explicit>): Distribution_BucketOptions_Explicit {
-    const message = createBaseDistribution_BucketOptions_Explicit();
-    message.bounds = object.bounds?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: Distribution_BucketOptions_ExplicitSDKType): Distribution_BucketOptions_Explicit {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): Distribution_BucketOptions_ExplicitSDKType {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
-    };
-  },
-  toSDK(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitSDKType {
-    const obj: any = {};
-    if (message.bounds) {
-      obj.bounds = message.bounds.map(e => e);
-    } else {
-      obj.bounds = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Distribution_BucketOptions_ExplicitAmino): Distribution_BucketOptions_Explicit {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitAmino {
-    const obj: any = {};
-    if (message.bounds) {
-      obj.bounds = message.bounds.map(e => e);
-    } else {
-      obj.bounds = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Distribution_BucketOptions_ExplicitAminoMsg): Distribution_BucketOptions_Explicit {
-    return Distribution_BucketOptions_Explicit.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_BucketOptions_ExplicitProtoMsg): Distribution_BucketOptions_Explicit {
     return Distribution_BucketOptions_Explicit.decode(message.value);
@@ -1123,77 +741,6 @@ export const Distribution_Exemplar = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Distribution_Exemplar {
-    const obj = createBaseDistribution_Exemplar();
-    if (isSet(object.value)) obj.value = Number(object.value);
-    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
-    if (Array.isArray(object?.attachments)) obj.attachments = object.attachments.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Distribution_Exemplar): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    if (message.attachments) {
-      obj.attachments = message.attachments.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.attachments = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Distribution_Exemplar>): Distribution_Exemplar {
-    const message = createBaseDistribution_Exemplar();
-    message.value = object.value ?? 0;
-    message.timestamp = object.timestamp ?? undefined;
-    message.attachments = object.attachments?.map(e => Any.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
-    return {
-      value: object?.value,
-      timestamp: object.timestamp ?? undefined,
-      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Distribution_ExemplarSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Distribution_Exemplar): Distribution_ExemplarSDKType {
-    const obj: any = {};
-    obj.value = message.value;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
-    if (message.attachments) {
-      obj.attachments = message.attachments.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.attachments = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
-    return {
-      value: object.value,
-      timestamp: object?.timestamp,
-      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    obj.timestamp = message.timestamp;
-    if (message.attachments) {
-      obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.attachments = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Distribution_ExemplarAminoMsg): Distribution_Exemplar {
-    return Distribution_Exemplar.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_ExemplarProtoMsg): Distribution_Exemplar {
     return Distribution_Exemplar.decode(message.value);

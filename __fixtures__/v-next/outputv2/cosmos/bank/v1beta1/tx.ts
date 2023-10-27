@@ -13,6 +13,10 @@ export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgSend";
   value: Uint8Array;
 }
+export interface MsgSendProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.MsgSend";
+  value: Uint8Array;
+}
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendAmino {
   from_address: string;
@@ -35,6 +39,10 @@ export interface MsgSendResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgSendResponse";
   value: Uint8Array;
 }
+export interface MsgSendResponseProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.MsgSendResponse";
+  value: Uint8Array;
+}
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
 export interface MsgSendResponseAminoMsg {
@@ -47,6 +55,10 @@ export interface MsgSendResponseSDKType {}
 export interface MsgMultiSend {
   inputs: Input[];
   outputs: Output[];
+}
+export interface MsgMultiSendProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend";
+  value: Uint8Array;
 }
 export interface MsgMultiSendProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend";
@@ -68,6 +80,10 @@ export interface MsgMultiSendSDKType {
 }
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponse {}
+export interface MsgMultiSendResponseProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.MsgMultiSendResponse";
+  value: Uint8Array;
+}
 export interface MsgMultiSendResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgMultiSendResponse";
   value: Uint8Array;

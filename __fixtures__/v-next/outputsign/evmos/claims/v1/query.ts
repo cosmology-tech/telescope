@@ -3,13 +3,16 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequest {}
+export interface QueryTotalUnclaimedRequestProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
+  value: Uint8Array;
+}
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
  * RPC method.
@@ -23,6 +26,10 @@ export interface QueryTotalUnclaimedResponse {
   /** coins defines the unclaimed coins */
   coins: Coin[];
 }
+export interface QueryTotalUnclaimedResponseProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
+  value: Uint8Array;
+}
 /**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
  * RPC method.
@@ -32,12 +39,20 @@ export interface QueryTotalUnclaimedResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -50,6 +65,10 @@ export interface QueryParamsResponseSDKType {
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryClaimsRecordsRequestProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
@@ -68,6 +87,10 @@ export interface QueryClaimsRecordsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryClaimsRecordsResponseProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
  * RPC method.
@@ -83,6 +106,10 @@ export interface QueryClaimsRecordsResponseSDKType {
 export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
   address: string;
+}
+export interface QueryClaimsRecordRequestProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest";
+  value: Uint8Array;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -100,6 +127,10 @@ export interface QueryClaimsRecordResponse {
   initialClaimableAmount: string;
   /** the claims of the user */
   claims: Claim[];
+}
+export interface QueryClaimsRecordResponseProtoMsg {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse";
+  value: Uint8Array;
 }
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
@@ -130,38 +161,6 @@ export const QueryTotalUnclaimedRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryTotalUnclaimedRequest {
-    const obj = createBaseQueryTotalUnclaimedRequest();
-    return obj;
-  },
-  toJSON(_: QueryTotalUnclaimedRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryTotalUnclaimedRequest>): QueryTotalUnclaimedRequest {
-    const message = createBaseQueryTotalUnclaimedRequest();
-    return message;
-  },
-  fromSDK(_: QueryTotalUnclaimedRequestSDKType): QueryTotalUnclaimedRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryTotalUnclaimedRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryTotalUnclaimedRequestAmino): QueryTotalUnclaimedRequest {
-    return {};
-  },
-  toAmino(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalUnclaimedRequestAminoMsg): QueryTotalUnclaimedRequest {
-    return QueryTotalUnclaimedRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryTotalUnclaimedRequestProtoMsg): QueryTotalUnclaimedRequest {
     return QueryTotalUnclaimedRequest.decode(message.value);
@@ -206,61 +205,6 @@ export const QueryTotalUnclaimedResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryTotalUnclaimedResponse {
-    const obj = createBaseQueryTotalUnclaimedResponse();
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryTotalUnclaimedResponse): unknown {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryTotalUnclaimedResponse>): QueryTotalUnclaimedResponse {
-    const message = createBaseQueryTotalUnclaimedResponse();
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: QueryTotalUnclaimedResponseSDKType): QueryTotalUnclaimedResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): QueryTotalUnclaimedResponseSDKType {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseSDKType {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QueryTotalUnclaimedResponseAmino): QueryTotalUnclaimedResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseAmino {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalUnclaimedResponseAminoMsg): QueryTotalUnclaimedResponse {
-    return QueryTotalUnclaimedResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryTotalUnclaimedResponseProtoMsg): QueryTotalUnclaimedResponse {
     return QueryTotalUnclaimedResponse.decode(message.value);
   },
@@ -295,38 +239,6 @@ export const QueryParamsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
-  },
-  toJSON(_: QueryParamsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
-    const message = createBaseQueryParamsRequest();
-    return message;
-  },
-  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -371,51 +283,6 @@ export const QueryParamsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
-    const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    return message;
-  },
-  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -458,51 +325,6 @@ export const QueryClaimsRecordsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryClaimsRecordsRequest {
-    const obj = createBaseQueryClaimsRecordsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordsRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryClaimsRecordsRequest>): QueryClaimsRecordsRequest {
-    const message = createBaseQueryClaimsRecordsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
-    return {
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryClaimsRecordsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryClaimsRecordsRequestAmino): QueryClaimsRecordsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordsRequestAminoMsg): QueryClaimsRecordsRequest {
-    return QueryClaimsRecordsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryClaimsRecordsRequestProtoMsg): QueryClaimsRecordsRequest {
     return QueryClaimsRecordsRequest.decode(message.value);
@@ -554,71 +376,6 @@ export const QueryClaimsRecordsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryClaimsRecordsResponse {
-    const obj = createBaseQueryClaimsRecordsResponse();
-    if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => ClaimsRecordAddress.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordsResponse): unknown {
-    const obj: any = {};
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toJSON(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryClaimsRecordsResponse>): QueryClaimsRecordsResponse {
-    const message = createBaseQueryClaimsRecordsResponse();
-    message.claims = object.claims?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryClaimsRecordsResponseSDKType): QueryClaimsRecordsResponse {
-    return {
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryClaimsRecordsResponseSDKType {
-    return {
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseSDKType {
-    const obj: any = {};
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toSDK(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryClaimsRecordsResponseAmino): QueryClaimsRecordsResponse {
-    return {
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseAmino {
-    const obj: any = {};
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordsResponseAminoMsg): QueryClaimsRecordsResponse {
-    return QueryClaimsRecordsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryClaimsRecordsResponseProtoMsg): QueryClaimsRecordsResponse {
     return QueryClaimsRecordsResponse.decode(message.value);
   },
@@ -661,49 +418,6 @@ export const QueryClaimsRecordRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryClaimsRecordRequest {
-    const obj = createBaseQueryClaimsRecordRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordRequest): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryClaimsRecordRequest>): QueryClaimsRecordRequest {
-    const message = createBaseQueryClaimsRecordRequest();
-    message.address = object.address ?? "";
-    return message;
-  },
-  fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
-    return {
-      address: object?.address
-    };
-  },
-  fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
-  },
-  toSDK(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAmino(object: QueryClaimsRecordRequestAmino): QueryClaimsRecordRequest {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordRequestAminoMsg): QueryClaimsRecordRequest {
-    return QueryClaimsRecordRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryClaimsRecordRequestProtoMsg): QueryClaimsRecordRequest {
     return QueryClaimsRecordRequest.decode(message.value);
@@ -754,69 +468,6 @@ export const QueryClaimsRecordResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryClaimsRecordResponse {
-    const obj = createBaseQueryClaimsRecordResponse();
-    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => Claim.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordResponse): unknown {
-    const obj: any = {};
-    message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? Claim.toJSON(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryClaimsRecordResponse>): QueryClaimsRecordResponse {
-    const message = createBaseQueryClaimsRecordResponse();
-    message.initialClaimableAmount = object.initialClaimableAmount ?? "";
-    message.claims = object.claims?.map(e => Claim.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: QueryClaimsRecordResponseSDKType): QueryClaimsRecordResponse {
-    return {
-      initialClaimableAmount: object?.initial_claimable_amount,
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): QueryClaimsRecordResponseSDKType {
-    return {
-      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseSDKType {
-    const obj: any = {};
-    obj.initial_claimable_amount = message.initialClaimableAmount;
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? Claim.toSDK(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QueryClaimsRecordResponseAmino): QueryClaimsRecordResponse {
-    return {
-      initialClaimableAmount: object.initial_claimable_amount,
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseAmino {
-    const obj: any = {};
-    obj.initial_claimable_amount = message.initialClaimableAmount;
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? Claim.toAmino(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordResponseAminoMsg): QueryClaimsRecordResponse {
-    return QueryClaimsRecordResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryClaimsRecordResponseProtoMsg): QueryClaimsRecordResponse {
     return QueryClaimsRecordResponse.decode(message.value);

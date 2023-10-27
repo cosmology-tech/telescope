@@ -1,7 +1,6 @@
 import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -189,6 +188,10 @@ export interface AllocateQuotaRequest {
    */
   serviceConfigId: string;
 }
+export interface AllocateQuotaRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
+  value: Uint8Array;
+}
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
   service_name: string;
@@ -198,6 +201,10 @@ export interface AllocateQuotaRequestSDKType {
 export interface QuotaOperation_LabelsEntry {
   key: string;
   value: string;
+}
+export interface QuotaOperation_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
@@ -262,6 +269,10 @@ export interface QuotaOperation {
   /** Quota mode for this operation. */
   quotaMode: QuotaOperation_QuotaMode;
 }
+export interface QuotaOperationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaOperation";
+  value: Uint8Array;
+}
 /** Represents information regarding a quota operation. */
 export interface QuotaOperationSDKType {
   operation_id: string;
@@ -298,6 +309,10 @@ export interface AllocateQuotaResponse {
   /** ID of the actual config used to process the request. */
   serviceConfigId: string;
 }
+export interface AllocateQuotaResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
+  value: Uint8Array;
+}
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseSDKType {
   operation_id: string;
@@ -322,6 +337,10 @@ export interface QuotaError {
    * If available, `status.code` will be non zero.
    */
   status?: Status;
+}
+export interface QuotaErrorProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaError";
+  value: Uint8Array;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
@@ -374,67 +393,6 @@ export const AllocateQuotaRequest = {
     }
     return message;
   },
-  fromJSON(object: any): AllocateQuotaRequest {
-    const obj = createBaseAllocateQuotaRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.allocateOperation)) obj.allocateOperation = QuotaOperation.fromJSON(object.allocateOperation);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
-  },
-  toJSON(message: AllocateQuotaRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.allocateOperation !== undefined && (obj.allocateOperation = message.allocateOperation ? QuotaOperation.toJSON(message.allocateOperation) : undefined);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AllocateQuotaRequest>): AllocateQuotaRequest {
-    const message = createBaseAllocateQuotaRequest();
-    message.serviceName = object.serviceName ?? "";
-    if (object.allocateOperation !== undefined && object.allocateOperation !== null) {
-      message.allocateOperation = QuotaOperation.fromPartial(object.allocateOperation);
-    }
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    return message;
-  },
-  fromSDK(object: AllocateQuotaRequestSDKType): AllocateQuotaRequest {
-    return {
-      serviceName: object?.service_name,
-      allocateOperation: object.allocate_operation ? QuotaOperation.fromSDK(object.allocate_operation) : undefined,
-      serviceConfigId: object?.service_config_id
-    };
-  },
-  fromSDKJSON(object: any): AllocateQuotaRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      allocate_operation: isSet(object.allocate_operation) ? QuotaOperation.fromSDKJSON(object.allocate_operation) : undefined,
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
-    };
-  },
-  toSDK(message: AllocateQuotaRequest): AllocateQuotaRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    message.allocateOperation !== undefined && (obj.allocate_operation = message.allocateOperation ? QuotaOperation.toSDK(message.allocateOperation) : undefined);
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAmino(object: AllocateQuotaRequestAmino): AllocateQuotaRequest {
-    return {
-      serviceName: object.service_name,
-      allocateOperation: object?.allocate_operation ? QuotaOperation.fromAmino(object.allocate_operation) : undefined,
-      serviceConfigId: object.service_config_id
-    };
-  },
-  toAmino(message: AllocateQuotaRequest): AllocateQuotaRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.allocate_operation = message.allocateOperation ? QuotaOperation.toAmino(message.allocateOperation) : undefined;
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAminoMsg(object: AllocateQuotaRequestAminoMsg): AllocateQuotaRequest {
-    return AllocateQuotaRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: AllocateQuotaRequestProtoMsg): AllocateQuotaRequest {
     return AllocateQuotaRequest.decode(message.value);
   },
@@ -483,57 +441,6 @@ export const QuotaOperation_LabelsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaOperation_LabelsEntry {
-    const obj = createBaseQuotaOperation_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: QuotaOperation_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaOperation_LabelsEntry>): QuotaOperation_LabelsEntry {
-    const message = createBaseQuotaOperation_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: QuotaOperation_LabelsEntrySDKType): QuotaOperation_LabelsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): QuotaOperation_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: QuotaOperation_LabelsEntryAmino): QuotaOperation_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaOperation_LabelsEntryAminoMsg): QuotaOperation_LabelsEntry {
-    return QuotaOperation_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaOperation_LabelsEntryProtoMsg): QuotaOperation_LabelsEntry {
     return QuotaOperation_LabelsEntry.decode(message.value);
@@ -613,143 +520,6 @@ export const QuotaOperation = {
     }
     return message;
   },
-  fromJSON(object: any): QuotaOperation {
-    const obj = createBaseQuotaOperation();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (isSet(object.methodName)) obj.methodName = String(object.methodName);
-    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
-    if (isSet(object.quotaMode)) obj.quotaMode = quotaOperation_QuotaModeFromJSON(object.quotaMode);
-    return obj;
-  },
-  toJSON(message: QuotaOperation): unknown {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    message.methodName !== undefined && (obj.methodName = message.methodName);
-    message.consumerId !== undefined && (obj.consumerId = message.consumerId);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.quotaMetrics) {
-      obj.quotaMetrics = message.quotaMetrics.map(e => e ? MetricValueSet.toJSON(e) : undefined);
-    } else {
-      obj.quotaMetrics = [];
-    }
-    message.quotaMode !== undefined && (obj.quotaMode = quotaOperation_QuotaModeToJSON(message.quotaMode));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaOperation>): QuotaOperation {
-    const message = createBaseQuotaOperation();
-    message.operationId = object.operationId ?? "";
-    message.methodName = object.methodName ?? "";
-    message.consumerId = object.consumerId ?? "";
-    message.labels = Object.entries(object.labels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
-    message.quotaMode = object.quotaMode ?? 0;
-    return message;
-  },
-  fromSDK(object: QuotaOperationSDKType): QuotaOperation {
-    return {
-      operationId: object?.operation_id,
-      methodName: object?.method_name,
-      consumerId: object?.consumer_id,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
-      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
-    };
-  },
-  fromSDKJSON(object: any): QuotaOperationSDKType {
-    return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
-      method_name: isSet(object.method_name) ? String(object.method_name) : "",
-      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quota_metrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
-      quota_mode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
-    };
-  },
-  toSDK(message: QuotaOperation): QuotaOperationSDKType {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.method_name = message.methodName;
-    obj.consumer_id = message.consumerId;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.quotaMetrics) {
-      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toSDK(e) : undefined);
-    } else {
-      obj.quota_metrics = [];
-    }
-    message.quotaMode !== undefined && (obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode));
-    return obj;
-  },
-  fromAmino(object: QuotaOperationAmino): QuotaOperation {
-    return {
-      operationId: object.operation_id,
-      methodName: object.method_name,
-      consumerId: object.consumer_id,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
-    };
-  },
-  toAmino(message: QuotaOperation): QuotaOperationAmino {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.method_name = message.methodName;
-    obj.consumer_id = message.consumerId;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.quotaMetrics) {
-      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toAmino(e) : undefined);
-    } else {
-      obj.quota_metrics = [];
-    }
-    obj.quota_mode = message.quotaMode;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaOperationAminoMsg): QuotaOperation {
-    return QuotaOperation.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaOperationProtoMsg): QuotaOperation {
     return QuotaOperation.decode(message.value);
   },
@@ -814,97 +584,6 @@ export const AllocateQuotaResponse = {
     }
     return message;
   },
-  fromJSON(object: any): AllocateQuotaResponse {
-    const obj = createBaseAllocateQuotaResponse();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (Array.isArray(object?.allocateErrors)) obj.allocateErrors = object.allocateErrors.map((e: any) => QuotaError.fromJSON(e));
-    if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
-  },
-  toJSON(message: AllocateQuotaResponse): unknown {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    if (message.allocateErrors) {
-      obj.allocateErrors = message.allocateErrors.map(e => e ? QuotaError.toJSON(e) : undefined);
-    } else {
-      obj.allocateErrors = [];
-    }
-    if (message.quotaMetrics) {
-      obj.quotaMetrics = message.quotaMetrics.map(e => e ? MetricValueSet.toJSON(e) : undefined);
-    } else {
-      obj.quotaMetrics = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AllocateQuotaResponse>): AllocateQuotaResponse {
-    const message = createBaseAllocateQuotaResponse();
-    message.operationId = object.operationId ?? "";
-    message.allocateErrors = object.allocateErrors?.map(e => QuotaError.fromPartial(e)) || [];
-    message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    return message;
-  },
-  fromSDK(object: AllocateQuotaResponseSDKType): AllocateQuotaResponse {
-    return {
-      operationId: object?.operation_id,
-      allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromSDK(e)) : [],
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
-      serviceConfigId: object?.service_config_id
-    };
-  },
-  fromSDKJSON(object: any): AllocateQuotaResponseSDKType {
-    return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
-      allocate_errors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromSDKJSON(e)) : [],
-      quota_metrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
-    };
-  },
-  toSDK(message: AllocateQuotaResponse): AllocateQuotaResponseSDKType {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    if (message.allocateErrors) {
-      obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toSDK(e) : undefined);
-    } else {
-      obj.allocate_errors = [];
-    }
-    if (message.quotaMetrics) {
-      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toSDK(e) : undefined);
-    } else {
-      obj.quota_metrics = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAmino(object: AllocateQuotaResponseAmino): AllocateQuotaResponse {
-    return {
-      operationId: object.operation_id,
-      allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromAmino(e)) : [],
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id
-    };
-  },
-  toAmino(message: AllocateQuotaResponse): AllocateQuotaResponseAmino {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    if (message.allocateErrors) {
-      obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toAmino(e) : undefined);
-    } else {
-      obj.allocate_errors = [];
-    }
-    if (message.quotaMetrics) {
-      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toAmino(e) : undefined);
-    } else {
-      obj.quota_metrics = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAminoMsg(object: AllocateQuotaResponseAminoMsg): AllocateQuotaResponse {
-    return AllocateQuotaResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: AllocateQuotaResponseProtoMsg): AllocateQuotaResponse {
     return AllocateQuotaResponse.decode(message.value);
   },
@@ -968,75 +647,6 @@ export const QuotaError = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaError {
-    const obj = createBaseQuotaError();
-    if (isSet(object.code)) obj.code = quotaError_CodeFromJSON(object.code);
-    if (isSet(object.subject)) obj.subject = String(object.subject);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
-  },
-  toJSON(message: QuotaError): unknown {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaError>): QuotaError {
-    const message = createBaseQuotaError();
-    message.code = object.code ?? 0;
-    message.subject = object.subject ?? "";
-    message.description = object.description ?? "";
-    if (object.status !== undefined && object.status !== null) {
-      message.status = Status.fromPartial(object.status);
-    }
-    return message;
-  },
-  fromSDK(object: QuotaErrorSDKType): QuotaError {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
-      subject: object?.subject,
-      description: object?.description,
-      status: object.status ? Status.fromSDK(object.status) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QuotaErrorSDKType {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
-    };
-  },
-  toSDK(message: QuotaError): QuotaErrorSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
-    obj.subject = message.subject;
-    obj.description = message.description;
-    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
-    return obj;
-  },
-  fromAmino(object: QuotaErrorAmino): QuotaError {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      description: object.description,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
-  },
-  toAmino(message: QuotaError): QuotaErrorAmino {
-    const obj: any = {};
-    obj.code = message.code;
-    obj.subject = message.subject;
-    obj.description = message.description;
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaErrorAminoMsg): QuotaError {
-    return QuotaError.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaErrorProtoMsg): QuotaError {
     return QuotaError.decode(message.value);

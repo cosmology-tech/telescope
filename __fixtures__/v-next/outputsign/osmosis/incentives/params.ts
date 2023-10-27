@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -8,6 +7,10 @@ export interface Params {
    * (day, week, etc.)
    */
   distrEpochIdentifier: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.incentives.Params";
+  value: Uint8Array;
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
@@ -42,55 +45,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.distrEpochIdentifier)) obj.distrEpochIdentifier = String(object.distrEpochIdentifier);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.distrEpochIdentifier !== undefined && (obj.distrEpochIdentifier = message.distrEpochIdentifier);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      distrEpochIdentifier: object?.distr_epoch_identifier
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      distr_epoch_identifier: isSet(object.distr_epoch_identifier) ? String(object.distr_epoch_identifier) : ""
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.distr_epoch_identifier = message.distrEpochIdentifier;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      distrEpochIdentifier: object.distr_epoch_identifier
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.distr_epoch_identifier = message.distrEpochIdentifier;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/incentives/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

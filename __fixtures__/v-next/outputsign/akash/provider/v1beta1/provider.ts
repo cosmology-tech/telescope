@@ -1,11 +1,14 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta1";
 /** ProviderInfo */
 export interface ProviderInfo {
   email: string;
   website: string;
+}
+export interface ProviderInfoProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.ProviderInfo";
+  value: Uint8Array;
 }
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
@@ -19,6 +22,10 @@ export interface MsgCreateProvider {
   attributes: Attribute[];
   info: ProviderInfo;
 }
+export interface MsgCreateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProvider";
+  value: Uint8Array;
+}
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
   owner: string;
@@ -28,6 +35,10 @@ export interface MsgCreateProviderSDKType {
 }
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
+export interface MsgCreateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProviderResponse";
+  value: Uint8Array;
+}
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseSDKType {}
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -36,6 +47,10 @@ export interface MsgUpdateProvider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface MsgUpdateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider";
+  value: Uint8Array;
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
@@ -46,11 +61,19 @@ export interface MsgUpdateProviderSDKType {
 }
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
+export interface MsgUpdateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProviderResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseSDKType {}
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
   owner: string;
+}
+export interface MsgDeleteProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider";
+  value: Uint8Array;
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
@@ -58,6 +81,10 @@ export interface MsgDeleteProviderSDKType {
 }
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponse {}
+export interface MsgDeleteProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProviderResponse";
+  value: Uint8Array;
+}
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseSDKType {}
 /** Provider stores owner and host details */
@@ -66,6 +93,10 @@ export interface Provider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.Provider";
+  value: Uint8Array;
 }
 /** Provider stores owner and host details */
 export interface ProviderSDKType {
@@ -110,63 +141,6 @@ export const ProviderInfo = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ProviderInfo {
-    const obj = createBaseProviderInfo();
-    if (isSet(object.email)) obj.email = String(object.email);
-    if (isSet(object.website)) obj.website = String(object.website);
-    return obj;
-  },
-  toJSON(message: ProviderInfo): unknown {
-    const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    message.website !== undefined && (obj.website = message.website);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<ProviderInfo>, I>>(object: I): ProviderInfo {
-    const message = createBaseProviderInfo();
-    message.email = object.email ?? "";
-    message.website = object.website ?? "";
-    return message;
-  },
-  fromSDK(object: ProviderInfoSDKType): ProviderInfo {
-    return {
-      email: object?.email,
-      website: object?.website
-    };
-  },
-  fromSDKJSON(object: any): ProviderInfoSDKType {
-    return {
-      email: isSet(object.email) ? String(object.email) : "",
-      website: isSet(object.website) ? String(object.website) : ""
-    };
-  },
-  toSDK(message: ProviderInfo): ProviderInfoSDKType {
-    const obj: any = {};
-    obj.email = message.email;
-    obj.website = message.website;
-    return obj;
-  },
-  fromAmino(object: ProviderInfoAmino): ProviderInfo {
-    return {
-      email: object.email,
-      website: object.website
-    };
-  },
-  toAmino(message: ProviderInfo): ProviderInfoAmino {
-    const obj: any = {};
-    obj.email = message.email;
-    obj.website = message.website;
-    return obj;
-  },
-  fromAminoMsg(object: ProviderInfoAminoMsg): ProviderInfo {
-    return ProviderInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: ProviderInfo): ProviderInfoAminoMsg {
-    return {
-      type: "akash/provider/provider-info",
-      value: ProviderInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: ProviderInfoProtoMsg): ProviderInfo {
     return ProviderInfo.decode(message.value);
@@ -232,93 +206,6 @@ export const MsgCreateProvider = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCreateProvider {
-    const obj = createBaseMsgCreateProvider();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: MsgCreateProvider): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.hostUri = message.hostUri);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateProvider>, I>>(object: I): MsgCreateProvider {
-    const message = createBaseMsgCreateProvider();
-    message.owner = object.owner ?? "";
-    message.hostUri = object.hostUri ?? "";
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    if (object.info !== undefined && object.info !== null) {
-      message.info = ProviderInfo.fromPartial(object.info);
-    }
-    return message;
-  },
-  fromSDK(object: MsgCreateProviderSDKType): MsgCreateProvider {
-    return {
-      owner: object?.owner,
-      hostUri: object?.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgCreateProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
-  },
-  toSDK(message: MsgCreateProvider): MsgCreateProviderSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
-    };
-  },
-  toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
-    return MsgCreateProvider.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateProvider): MsgCreateProviderAminoMsg {
-    return {
-      type: "akash/provider/testonly-create-provider",
-      value: MsgCreateProvider.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateProviderProtoMsg): MsgCreateProvider {
     return MsgCreateProvider.decode(message.value);
   },
@@ -353,44 +240,6 @@ export const MsgCreateProviderResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCreateProviderResponse {
-    const obj = createBaseMsgCreateProviderResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateProviderResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateProviderResponse>, I>>(_: I): MsgCreateProviderResponse {
-    const message = createBaseMsgCreateProviderResponse();
-    return message;
-  },
-  fromSDK(_: MsgCreateProviderResponseSDKType): MsgCreateProviderResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCreateProviderResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCreateProviderResponse): MsgCreateProviderResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateProviderResponseAminoMsg): MsgCreateProviderResponse {
-    return MsgCreateProviderResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateProviderResponse): MsgCreateProviderResponseAminoMsg {
-    return {
-      type: "akash/provider/testonly-create-provider-response",
-      value: MsgCreateProviderResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateProviderResponseProtoMsg): MsgCreateProviderResponse {
     return MsgCreateProviderResponse.decode(message.value);
@@ -456,93 +305,6 @@ export const MsgUpdateProvider = {
     }
     return message;
   },
-  fromJSON(object: any): MsgUpdateProvider {
-    const obj = createBaseMsgUpdateProvider();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: MsgUpdateProvider): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.hostUri = message.hostUri);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateProvider>, I>>(object: I): MsgUpdateProvider {
-    const message = createBaseMsgUpdateProvider();
-    message.owner = object.owner ?? "";
-    message.hostUri = object.hostUri ?? "";
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    if (object.info !== undefined && object.info !== null) {
-      message.info = ProviderInfo.fromPartial(object.info);
-    }
-    return message;
-  },
-  fromSDK(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
-    return {
-      owner: object?.owner,
-      hostUri: object?.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgUpdateProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
-  },
-  toSDK(message: MsgUpdateProvider): MsgUpdateProviderSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
-    };
-  },
-  toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
-    return MsgUpdateProvider.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateProvider): MsgUpdateProviderAminoMsg {
-    return {
-      type: "akash/provider/testonly-update-provider",
-      value: MsgUpdateProvider.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgUpdateProviderProtoMsg): MsgUpdateProvider {
     return MsgUpdateProvider.decode(message.value);
   },
@@ -577,44 +339,6 @@ export const MsgUpdateProviderResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgUpdateProviderResponse {
-    const obj = createBaseMsgUpdateProviderResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateProviderResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateProviderResponse>, I>>(_: I): MsgUpdateProviderResponse {
-    const message = createBaseMsgUpdateProviderResponse();
-    return message;
-  },
-  fromSDK(_: MsgUpdateProviderResponseSDKType): MsgUpdateProviderResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgUpdateProviderResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
-    return {};
-  },
-  toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateProviderResponseAminoMsg): MsgUpdateProviderResponse {
-    return MsgUpdateProviderResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateProviderResponse): MsgUpdateProviderResponseAminoMsg {
-    return {
-      type: "akash/provider/testonly-update-provider-response",
-      value: MsgUpdateProviderResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgUpdateProviderResponseProtoMsg): MsgUpdateProviderResponse {
     return MsgUpdateProviderResponse.decode(message.value);
@@ -659,55 +383,6 @@ export const MsgDeleteProvider = {
     }
     return message;
   },
-  fromJSON(object: any): MsgDeleteProvider {
-    const obj = createBaseMsgDeleteProvider();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    return obj;
-  },
-  toJSON(message: MsgDeleteProvider): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteProvider>, I>>(object: I): MsgDeleteProvider {
-    const message = createBaseMsgDeleteProvider();
-    message.owner = object.owner ?? "";
-    return message;
-  },
-  fromSDK(object: MsgDeleteProviderSDKType): MsgDeleteProvider {
-    return {
-      owner: object?.owner
-    };
-  },
-  fromSDKJSON(object: any): MsgDeleteProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
-  },
-  toSDK(message: MsgDeleteProvider): MsgDeleteProviderSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    return obj;
-  },
-  fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
-    return {
-      owner: object.owner
-    };
-  },
-  toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    return obj;
-  },
-  fromAminoMsg(object: MsgDeleteProviderAminoMsg): MsgDeleteProvider {
-    return MsgDeleteProvider.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDeleteProvider): MsgDeleteProviderAminoMsg {
-    return {
-      type: "akash/provider/testonly-delete-provider",
-      value: MsgDeleteProvider.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgDeleteProviderProtoMsg): MsgDeleteProvider {
     return MsgDeleteProvider.decode(message.value);
   },
@@ -742,44 +417,6 @@ export const MsgDeleteProviderResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgDeleteProviderResponse {
-    const obj = createBaseMsgDeleteProviderResponse();
-    return obj;
-  },
-  toJSON(_: MsgDeleteProviderResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderResponse>, I>>(_: I): MsgDeleteProviderResponse {
-    const message = createBaseMsgDeleteProviderResponse();
-    return message;
-  },
-  fromSDK(_: MsgDeleteProviderResponseSDKType): MsgDeleteProviderResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgDeleteProviderResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
-    return {};
-  },
-  toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgDeleteProviderResponseAminoMsg): MsgDeleteProviderResponse {
-    return MsgDeleteProviderResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDeleteProviderResponse): MsgDeleteProviderResponseAminoMsg {
-    return {
-      type: "akash/provider/testonly-delete-provider-response",
-      value: MsgDeleteProviderResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgDeleteProviderResponseProtoMsg): MsgDeleteProviderResponse {
     return MsgDeleteProviderResponse.decode(message.value);
@@ -844,93 +481,6 @@ export const Provider = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Provider {
-    const obj = createBaseProvider();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
-    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: Provider): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.hostUri = message.hostUri);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Provider>, I>>(object: I): Provider {
-    const message = createBaseProvider();
-    message.owner = object.owner ?? "";
-    message.hostUri = object.hostUri ?? "";
-    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
-    if (object.info !== undefined && object.info !== null) {
-      message.info = ProviderInfo.fromPartial(object.info);
-    }
-    return message;
-  },
-  fromSDK(object: ProviderSDKType): Provider {
-    return {
-      owner: object?.owner,
-      hostUri: object?.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
-  },
-  toSDK(message: Provider): ProviderSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
-    return obj;
-  },
-  fromAmino(object: ProviderAmino): Provider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
-    };
-  },
-  toAmino(message: Provider): ProviderAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ProviderAminoMsg): Provider {
-    return Provider.fromAmino(object.value);
-  },
-  toAminoMsg(message: Provider): ProviderAminoMsg {
-    return {
-      type: "akash/provider/provider",
-      value: Provider.toAmino(message)
-    };
   },
   fromProtoMsg(message: ProviderProtoMsg): Provider {
     return Provider.decode(message.value);

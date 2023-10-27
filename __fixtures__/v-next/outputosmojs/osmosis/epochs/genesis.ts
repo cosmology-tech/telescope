@@ -61,6 +61,10 @@ export interface EpochInfo {
    */
   currentEpochStartHeight: bigint;
 }
+export interface EpochInfoProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.EpochInfo";
+  value: Uint8Array;
+}
 /**
  * EpochInfo is a struct that describes the data going into
  * a timer defined by the x/epochs module.
@@ -77,6 +81,10 @@ export interface EpochInfoSDKType {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
   epochs: EpochInfo[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateSDKType {

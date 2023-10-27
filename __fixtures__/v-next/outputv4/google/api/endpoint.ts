@@ -51,6 +51,10 @@ export interface Endpoint {
    */
   allowCors: boolean;
 }
+export interface EndpointProtoMsg {
+  typeUrl: "/google.api.Endpoint";
+  value: Uint8Array;
+}
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
  * APIs. It is commonly known as a service endpoint. A service may expose

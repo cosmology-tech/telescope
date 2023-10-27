@@ -14,6 +14,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.market.v1beta2.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.market.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateAmino {
   orders: OrderAmino[];

@@ -7,17 +7,33 @@ import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
+export interface ModuleBalanceRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.ModuleBalanceRequest";
+  value: Uint8Array;
+}
 export interface ModuleBalanceRequestSDKType {}
 export interface ModuleBalanceResponse {
   coins: Coin[];
+}
+export interface ModuleBalanceResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.ModuleBalanceResponse";
+  value: Uint8Array;
 }
 export interface ModuleBalanceResponseSDKType {
   coins: CoinSDKType[];
 }
 export interface ModuleLockedAmountRequest {}
+export interface ModuleLockedAmountRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.ModuleLockedAmountRequest";
+  value: Uint8Array;
+}
 export interface ModuleLockedAmountRequestSDKType {}
 export interface ModuleLockedAmountResponse {
   coins: Coin[];
+}
+export interface ModuleLockedAmountResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.ModuleLockedAmountResponse";
+  value: Uint8Array;
 }
 export interface ModuleLockedAmountResponseSDKType {
   coins: CoinSDKType[];
@@ -25,11 +41,19 @@ export interface ModuleLockedAmountResponseSDKType {
 export interface AccountUnlockableCoinsRequest {
   owner: string;
 }
+export interface AccountUnlockableCoinsRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountUnlockableCoinsRequest";
+  value: Uint8Array;
+}
 export interface AccountUnlockableCoinsRequestSDKType {
   owner: string;
 }
 export interface AccountUnlockableCoinsResponse {
   coins: Coin[];
+}
+export interface AccountUnlockableCoinsResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountUnlockableCoinsResponse";
+  value: Uint8Array;
 }
 export interface AccountUnlockableCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -37,11 +61,19 @@ export interface AccountUnlockableCoinsResponseSDKType {
 export interface AccountUnlockingCoinsRequest {
   owner: string;
 }
+export interface AccountUnlockingCoinsRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountUnlockingCoinsRequest";
+  value: Uint8Array;
+}
 export interface AccountUnlockingCoinsRequestSDKType {
   owner: string;
 }
 export interface AccountUnlockingCoinsResponse {
   coins: Coin[];
+}
+export interface AccountUnlockingCoinsResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountUnlockingCoinsResponse";
+  value: Uint8Array;
 }
 export interface AccountUnlockingCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -49,11 +81,19 @@ export interface AccountUnlockingCoinsResponseSDKType {
 export interface AccountLockedCoinsRequest {
   owner: string;
 }
+export interface AccountLockedCoinsRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedCoinsRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedCoinsRequestSDKType {
   owner: string;
 }
 export interface AccountLockedCoinsResponse {
   coins: Coin[];
+}
+export interface AccountLockedCoinsResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedCoinsResponse";
+  value: Uint8Array;
 }
 export interface AccountLockedCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -62,12 +102,20 @@ export interface AccountLockedPastTimeRequest {
   owner: string;
   timestamp: Date;
 }
+export interface AccountLockedPastTimeRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedPastTimeRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedPastTimeRequestSDKType {
   owner: string;
   timestamp: Date;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedPastTimeResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedPastTimeResponse";
+  value: Uint8Array;
 }
 export interface AccountLockedPastTimeResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -76,12 +124,20 @@ export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
   owner: string;
   timestamp: Date;
 }
+export interface AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
   owner: string;
   timestamp: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedPastTimeNotUnlockingOnlyResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyResponse";
+  value: Uint8Array;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -90,12 +146,20 @@ export interface AccountUnlockedBeforeTimeRequest {
   owner: string;
   timestamp: Date;
 }
+export interface AccountUnlockedBeforeTimeRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeRequest";
+  value: Uint8Array;
+}
 export interface AccountUnlockedBeforeTimeRequestSDKType {
   owner: string;
   timestamp: Date;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
+}
+export interface AccountUnlockedBeforeTimeResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeResponse";
+  value: Uint8Array;
 }
 export interface AccountUnlockedBeforeTimeResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -105,6 +169,10 @@ export interface AccountLockedPastTimeDenomRequest {
   timestamp: Date;
   denom: string;
 }
+export interface AccountLockedPastTimeDenomRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedPastTimeDenomRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
   timestamp: Date;
@@ -113,12 +181,20 @@ export interface AccountLockedPastTimeDenomRequestSDKType {
 export interface AccountLockedPastTimeDenomResponse {
   locks: PeriodLock[];
 }
+export interface AccountLockedPastTimeDenomResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedPastTimeDenomResponse";
+  value: Uint8Array;
+}
 export interface AccountLockedPastTimeDenomResponseSDKType {
   locks: PeriodLockSDKType[];
 }
 export interface LockedDenomRequest {
   denom: string;
   duration: Duration;
+}
+export interface LockedDenomRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.LockedDenomRequest";
+  value: Uint8Array;
 }
 export interface LockedDenomRequestSDKType {
   denom: string;
@@ -127,11 +203,19 @@ export interface LockedDenomRequestSDKType {
 export interface LockedDenomResponse {
   amount: string;
 }
+export interface LockedDenomResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.LockedDenomResponse";
+  value: Uint8Array;
+}
 export interface LockedDenomResponseSDKType {
   amount: string;
 }
 export interface LockedRequest {
   lockId: bigint;
+}
+export interface LockedRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.LockedRequest";
+  value: Uint8Array;
 }
 export interface LockedRequestSDKType {
   lock_id: bigint;
@@ -139,17 +223,29 @@ export interface LockedRequestSDKType {
 export interface LockedResponse {
   lock?: PeriodLock;
 }
+export interface LockedResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.LockedResponse";
+  value: Uint8Array;
+}
 export interface LockedResponseSDKType {
   lock?: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: bigint;
 }
+export interface SyntheticLockupsByLockupIDRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.SyntheticLockupsByLockupIDRequest";
+  value: Uint8Array;
+}
 export interface SyntheticLockupsByLockupIDRequestSDKType {
   lock_id: bigint;
 }
 export interface SyntheticLockupsByLockupIDResponse {
   syntheticLocks: SyntheticLock[];
+}
+export interface SyntheticLockupsByLockupIDResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.SyntheticLockupsByLockupIDResponse";
+  value: Uint8Array;
 }
 export interface SyntheticLockupsByLockupIDResponseSDKType {
   synthetic_locks: SyntheticLockSDKType[];
@@ -158,12 +254,20 @@ export interface AccountLockedLongerDurationRequest {
   owner: string;
   duration: Duration;
 }
+export interface AccountLockedLongerDurationRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedLongerDurationRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedLongerDurationRequestSDKType {
   owner: string;
   duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedLongerDurationResponse";
+  value: Uint8Array;
 }
 export interface AccountLockedLongerDurationResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -172,12 +276,20 @@ export interface AccountLockedDurationRequest {
   owner: string;
   duration: Duration;
 }
+export interface AccountLockedDurationRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedDurationRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedDurationRequestSDKType {
   owner: string;
   duration: DurationSDKType;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedDurationResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedDurationResponse";
+  value: Uint8Array;
 }
 export interface AccountLockedDurationResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -186,12 +298,20 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
   duration: Duration;
 }
+export interface AccountLockedLongerDurationNotUnlockingOnlyRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
   owner: string;
   duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationNotUnlockingOnlyResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyResponse";
+  value: Uint8Array;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -201,6 +321,10 @@ export interface AccountLockedLongerDurationDenomRequest {
   duration: Duration;
   denom: string;
 }
+export interface AccountLockedLongerDurationDenomRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedLongerDurationDenomRequest";
+  value: Uint8Array;
+}
 export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
   duration: DurationSDKType;
@@ -209,13 +333,25 @@ export interface AccountLockedLongerDurationDenomRequestSDKType {
 export interface AccountLockedLongerDurationDenomResponse {
   locks: PeriodLock[];
 }
+export interface AccountLockedLongerDurationDenomResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.AccountLockedLongerDurationDenomResponse";
+  value: Uint8Array;
+}
 export interface AccountLockedLongerDurationDenomResponseSDKType {
   locks: PeriodLockSDKType[];
 }
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/osmosis.lockup.QueryParamsRequest";
+  value: Uint8Array;
+}
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.QueryParamsResponse";
+  value: Uint8Array;
 }
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;

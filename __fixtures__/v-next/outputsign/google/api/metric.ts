@@ -1,8 +1,7 @@
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { LaunchStage, LaunchStageSDKType } from "./launch_stage";
 import { Duration, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -302,6 +301,10 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
+export interface MetricDescriptorProtoMsg {
+  typeUrl: "/google.api.MetricDescriptor";
+  value: Uint8Array;
+}
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
@@ -339,6 +342,10 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
+  typeUrl: "/google.api.MetricDescriptorMetadata";
+  value: Uint8Array;
+}
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
   /** @deprecated */
@@ -349,6 +356,10 @@ export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
 export interface Metric_LabelsEntry {
   key: string;
   value: string;
+}
+export interface Metric_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface Metric_LabelsEntrySDKType {
   key: string;
@@ -371,6 +382,10 @@ export interface Metric {
   labels: {
     [key: string]: string;
   };
+}
+export interface MetricProtoMsg {
+  typeUrl: "/google.api.Metric";
+  value: Uint8Array;
 }
 /**
  * A specific metric, identified by specifying values for all of the
@@ -482,155 +497,6 @@ export const MetricDescriptor = {
     }
     return message;
   },
-  fromJSON(object: any): MetricDescriptor {
-    const obj = createBaseMetricDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
-    if (isSet(object.metricKind)) obj.metricKind = metricDescriptor_MetricKindFromJSON(object.metricKind);
-    if (isSet(object.valueType)) obj.valueType = metricDescriptor_ValueTypeFromJSON(object.valueType);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.metadata)) obj.metadata = MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata);
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (Array.isArray(object?.monitoredResourceTypes)) obj.monitoredResourceTypes = object.monitoredResourceTypes.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: MetricDescriptor): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.metricKind !== undefined && (obj.metricKind = metricDescriptor_MetricKindToJSON(message.metricKind));
-    message.valueType !== undefined && (obj.valueType = metricDescriptor_ValueTypeToJSON(message.valueType));
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.description !== undefined && (obj.description = message.description);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toJSON(message.metadata) : undefined);
-    message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    if (message.monitoredResourceTypes) {
-      obj.monitoredResourceTypes = message.monitoredResourceTypes.map(e => e);
-    } else {
-      obj.monitoredResourceTypes = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MetricDescriptor>): MetricDescriptor {
-    const message = createBaseMetricDescriptor();
-    message.name = object.name ?? "";
-    message.type = object.type ?? "";
-    message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];
-    message.metricKind = object.metricKind ?? 0;
-    message.valueType = object.valueType ?? 0;
-    message.unit = object.unit ?? "";
-    message.description = object.description ?? "";
-    message.displayName = object.displayName ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata);
-    }
-    message.launchStage = object.launchStage ?? 0;
-    message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: MetricDescriptorSDKType): MetricDescriptor {
-    return {
-      name: object?.name,
-      type: object?.type,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
-      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
-      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      unit: object?.unit,
-      description: object?.description,
-      displayName: object?.display_name,
-      metadata: object.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromSDK(object.metadata) : undefined,
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): MetricDescriptorSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
-      metric_kind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
-      value_type: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      display_name: isSet(object.display_name) ? String(object.display_name) : "",
-      metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromSDKJSON(object.metadata) : undefined,
-      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      monitored_resource_types: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: MetricDescriptor): MetricDescriptorSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.metricKind !== undefined && (obj.metric_kind = metricDescriptor_MetricKindToJSON(message.metricKind));
-    message.valueType !== undefined && (obj.value_type = metricDescriptor_ValueTypeToJSON(message.valueType));
-    obj.unit = message.unit;
-    obj.description = message.description;
-    obj.display_name = message.displayName;
-    message.metadata !== undefined && (obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toSDK(message.metadata) : undefined);
-    message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
-    if (message.monitoredResourceTypes) {
-      obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
-    } else {
-      obj.monitored_resource_types = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MetricDescriptorAmino): MetricDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
-      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      unit: object.unit,
-      description: object.description,
-      displayName: object.display_name,
-      metadata: object?.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata) : undefined,
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: MetricDescriptor): MetricDescriptorAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    obj.metric_kind = message.metricKind;
-    obj.value_type = message.valueType;
-    obj.unit = message.unit;
-    obj.description = message.description;
-    obj.display_name = message.displayName;
-    obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata) : undefined;
-    obj.launch_stage = message.launchStage;
-    if (message.monitoredResourceTypes) {
-      obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
-    } else {
-      obj.monitored_resource_types = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MetricDescriptorAminoMsg): MetricDescriptor {
-    return MetricDescriptor.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricDescriptorProtoMsg): MetricDescriptor {
     return MetricDescriptor.decode(message.value);
   },
@@ -688,69 +554,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     }
     return message;
   },
-  fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
-    const obj = createBaseMetricDescriptor_MetricDescriptorMetadata();
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (isSet(object.samplePeriod)) obj.samplePeriod = Duration.fromJSON(object.samplePeriod);
-    if (isSet(object.ingestDelay)) obj.ingestDelay = Duration.fromJSON(object.ingestDelay);
-    return obj;
-  },
-  toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown {
-    const obj: any = {};
-    message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod ? Duration.toJSON(message.samplePeriod) : undefined);
-    message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay ? Duration.toJSON(message.ingestDelay) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
-    const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
-    message.launchStage = object.launchStage ?? 0;
-    if (object.samplePeriod !== undefined && object.samplePeriod !== null) {
-      message.samplePeriod = Duration.fromPartial(object.samplePeriod);
-    }
-    if (object.ingestDelay !== undefined && object.ingestDelay !== null) {
-      message.ingestDelay = Duration.fromPartial(object.ingestDelay);
-    }
-    return message;
-  },
-  fromSDK(object: MetricDescriptor_MetricDescriptorMetadataSDKType): MetricDescriptor_MetricDescriptorMetadata {
-    return {
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      samplePeriod: object.sample_period ? Duration.fromSDK(object.sample_period) : undefined,
-      ingestDelay: object.ingest_delay ? Duration.fromSDK(object.ingest_delay) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MetricDescriptor_MetricDescriptorMetadataSDKType {
-    return {
-      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      sample_period: isSet(object.sample_period) ? Duration.fromSDKJSON(object.sample_period) : undefined,
-      ingest_delay: isSet(object.ingest_delay) ? Duration.fromSDKJSON(object.ingest_delay) : undefined
-    };
-  },
-  toSDK(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataSDKType {
-    const obj: any = {};
-    message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
-    message.samplePeriod !== undefined && (obj.sample_period = message.samplePeriod ? Duration.toSDK(message.samplePeriod) : undefined);
-    message.ingestDelay !== undefined && (obj.ingest_delay = message.ingestDelay ? Duration.toSDK(message.ingestDelay) : undefined);
-    return obj;
-  },
-  fromAmino(object: MetricDescriptor_MetricDescriptorMetadataAmino): MetricDescriptor_MetricDescriptorMetadata {
-    return {
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      samplePeriod: object?.sample_period ? Duration.fromAmino(object.sample_period) : undefined,
-      ingestDelay: object?.ingest_delay ? Duration.fromAmino(object.ingest_delay) : undefined
-    };
-  },
-  toAmino(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataAmino {
-    const obj: any = {};
-    obj.launch_stage = message.launchStage;
-    obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod) : undefined;
-    obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MetricDescriptor_MetricDescriptorMetadataAminoMsg): MetricDescriptor_MetricDescriptorMetadata {
-    return MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricDescriptor_MetricDescriptorMetadataProtoMsg): MetricDescriptor_MetricDescriptorMetadata {
     return MetricDescriptor_MetricDescriptorMetadata.decode(message.value);
   },
@@ -799,57 +602,6 @@ export const Metric_LabelsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Metric_LabelsEntry {
-    const obj = createBaseMetric_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: Metric_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Metric_LabelsEntry>): Metric_LabelsEntry {
-    const message = createBaseMetric_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  },
-  fromSDK(object: Metric_LabelsEntrySDKType): Metric_LabelsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): Metric_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-  toSDK(message: Metric_LabelsEntry): Metric_LabelsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: Metric_LabelsEntryAmino): Metric_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: Metric_LabelsEntry): Metric_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
-    return Metric_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: Metric_LabelsEntryProtoMsg): Metric_LabelsEntry {
     return Metric_LabelsEntry.decode(message.value);
@@ -900,99 +652,6 @@ export const Metric = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Metric {
-    const obj = createBaseMetric();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: Metric): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Metric>): Metric {
-    const message = createBaseMetric();
-    message.type = object.type ?? "";
-    message.labels = Object.entries(object.labels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: MetricSDKType): Metric {
-    return {
-      type: object?.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): MetricSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: Metric): MetricSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: MetricAmino): Metric {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: Metric): MetricAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MetricAminoMsg): Metric {
-    return Metric.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricProtoMsg): Metric {
     return Metric.decode(message.value);

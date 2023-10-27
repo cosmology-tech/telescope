@@ -10,6 +10,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisStateAmino {
   authorization: GrantAuthorizationAmino[];

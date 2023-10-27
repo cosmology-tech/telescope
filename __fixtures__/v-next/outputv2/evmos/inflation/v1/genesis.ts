@@ -19,6 +19,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.inflation.v1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.inflation.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
@@ -54,6 +58,10 @@ export interface Params {
   inflationDistribution: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.inflation.v1.Params";
+  value: Uint8Array;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.inflation.v1.Params";

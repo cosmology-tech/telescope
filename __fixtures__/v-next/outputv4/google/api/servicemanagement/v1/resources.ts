@@ -265,6 +265,10 @@ export interface ManagedService {
   /** ID of the project that produces and owns this service. */
   producerProjectId: string;
 }
+export interface ManagedServiceProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ManagedService";
+  value: Uint8Array;
+}
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
@@ -287,6 +291,10 @@ export interface OperationMetadata {
   /** The start time of the operation. */
   startTime?: Date;
 }
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
+  value: Uint8Array;
+}
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
@@ -301,6 +309,10 @@ export interface OperationMetadata_Step {
   /** The status code. */
   status: OperationMetadata_Status;
 }
+export interface OperationMetadata_StepProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.Step";
+  value: Uint8Array;
+}
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepSDKType {
   description: string;
@@ -314,6 +326,10 @@ export interface Diagnostic {
   kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
   message: string;
+}
+export interface DiagnosticProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.Diagnostic";
+  value: Uint8Array;
 }
 /** Represents a diagnostic message (error or warning) */
 export interface DiagnosticSDKType {
@@ -338,6 +354,10 @@ export interface ConfigSource {
    */
   files: ConfigFile[];
 }
+export interface ConfigSourceProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigSource";
+  value: Uint8Array;
+}
 /**
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
@@ -355,6 +375,10 @@ export interface ConfigFile {
   /** The type of configuration file this represents. */
   fileType: ConfigFile_FileType;
 }
+export interface ConfigFileProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigFile";
+  value: Uint8Array;
+}
 /** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
   file_path: string;
@@ -368,6 +392,10 @@ export interface ConfigRef {
    * format: "services/{service name}/configs/{config id}".
    */
   name: string;
+}
+export interface ConfigRefProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigRef";
+  value: Uint8Array;
 }
 /** Represents a service configuration with its name and id. */
 export interface ConfigRefSDKType {
@@ -388,6 +416,10 @@ export interface ChangeReport {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
+}
+export interface ChangeReportProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ChangeReport";
+  value: Uint8Array;
 }
 /**
  * Change report associated with a particular service configuration.
@@ -438,6 +470,10 @@ export interface Rollout {
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
+export interface RolloutProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.Rollout";
+  value: Uint8Array;
+}
 /**
  * A rollout resource that defines how service configuration versions are pushed
  * to control plane systems. Typically, you create a new version of the
@@ -455,6 +491,10 @@ export interface RolloutSDKType {
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   key: string;
   value: number;
+}
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
   key: string;
@@ -502,6 +542,10 @@ export interface Rollout_TrafficPercentStrategy {
     [key: string]: number;
   };
 }
+export interface Rollout_TrafficPercentStrategyProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
+  value: Uint8Array;
+}
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -544,6 +588,10 @@ export interface Rollout_TrafficPercentStrategySDKType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
+export interface Rollout_DeleteServiceStrategyProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
+  value: Uint8Array;
+}
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.

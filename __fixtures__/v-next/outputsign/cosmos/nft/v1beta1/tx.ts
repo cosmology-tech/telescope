@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -12,6 +11,10 @@ export interface MsgSend {
   /** receiver is the receiver address of nft */
   receiver: string;
 }
+export interface MsgSendProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.MsgSend";
+  value: Uint8Array;
+}
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendSDKType {
   class_id: string;
@@ -21,6 +24,10 @@ export interface MsgSendSDKType {
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
+export interface MsgSendResponseProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse";
+  value: Uint8Array;
+}
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
@@ -74,79 +81,6 @@ export const MsgSend = {
     }
     return message;
   },
-  fromJSON(object: any): MsgSend {
-    const obj = createBaseMsgSend();
-    if (isSet(object.classId)) obj.classId = String(object.classId);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    return obj;
-  },
-  toJSON(message: MsgSend): unknown {
-    const obj: any = {};
-    message.classId !== undefined && (obj.classId = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgSend>): MsgSend {
-    const message = createBaseMsgSend();
-    message.classId = object.classId ?? "";
-    message.id = object.id ?? "";
-    message.sender = object.sender ?? "";
-    message.receiver = object.receiver ?? "";
-    return message;
-  },
-  fromSDK(object: MsgSendSDKType): MsgSend {
-    return {
-      classId: object?.class_id,
-      id: object?.id,
-      sender: object?.sender,
-      receiver: object?.receiver
-    };
-  },
-  fromSDKJSON(object: any): MsgSendSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : ""
-    };
-  },
-  toSDK(message: MsgSend): MsgSendSDKType {
-    const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
-    return obj;
-  },
-  fromAmino(object: MsgSendAmino): MsgSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
-  },
-  toAmino(message: MsgSend): MsgSendAmino {
-    const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
-    return MsgSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgNFTSend",
-      value: MsgSend.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
     return MsgSend.decode(message.value);
   },
@@ -181,44 +115,6 @@ export const MsgSendResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgSendResponse {
-    const obj = createBaseMsgSendResponse();
-    return obj;
-  },
-  toJSON(_: MsgSendResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
-    const message = createBaseMsgSendResponse();
-    return message;
-  },
-  fromSDK(_: MsgSendResponseSDKType): MsgSendResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgSendResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
-    return {};
-  },
-  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
-    return MsgSendResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSendResponse",
-      value: MsgSendResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
     return MsgSendResponse.decode(message.value);

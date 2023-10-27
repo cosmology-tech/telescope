@@ -7,6 +7,10 @@ export interface UserValidatorPreferencesRequest {
   /** user account address */
   address: string;
 }
+export interface UserValidatorPreferencesRequestProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesRequest";
+  value: Uint8Array;
+}
 /** Request type for UserValidatorPreferences. */
 export interface UserValidatorPreferencesRequestSDKType {
   address: string;
@@ -14,6 +18,10 @@ export interface UserValidatorPreferencesRequestSDKType {
 /** Response type the QueryUserValidatorPreferences query request */
 export interface UserValidatorPreferencesResponse {
   preferences: ValidatorPreference[];
+}
+export interface UserValidatorPreferencesResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesResponse";
+  value: Uint8Array;
 }
 /** Response type the QueryUserValidatorPreferences query request */
 export interface UserValidatorPreferencesResponseSDKType {

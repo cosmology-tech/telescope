@@ -13,6 +13,10 @@ export interface CommitInfoProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.CommitInfo";
   value: Uint8Array;
 }
+export interface CommitInfoProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.CommitInfo";
+  value: Uint8Array;
+}
 /**
  * CommitInfo defines commit information used by the multi-store when committing
  * a version/height.
@@ -45,6 +49,10 @@ export interface StoreInfoProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.StoreInfo";
   value: Uint8Array;
 }
+export interface StoreInfoProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreInfo";
+  value: Uint8Array;
+}
 /**
  * StoreInfo defines store-specific commit information. It contains a reference
  * between a store name and the commit ID.
@@ -72,6 +80,10 @@ export interface StoreInfoSDKType {
 export interface CommitID {
   version: bigint;
   hash: Uint8Array;
+}
+export interface CommitIDProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.CommitID";
+  value: Uint8Array;
 }
 export interface CommitIDProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.CommitID";

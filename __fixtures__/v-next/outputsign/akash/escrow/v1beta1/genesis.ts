@@ -1,11 +1,14 @@
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisState {
   accounts: Account[];
   payments: Payment[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {
@@ -48,87 +51,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Account.fromJSON(e));
-    if (Array.isArray(object?.payments)) obj.payments = object.payments.map((e: any) => Payment.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toJSON(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    if (message.payments) {
-      obj.payments = message.payments.map(e => e ? Payment.toJSON(e) : undefined);
-    } else {
-      obj.payments = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
-    const message = createBaseGenesisState();
-    message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
-    message.payments = object.payments?.map(e => Payment.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDK(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDKJSON(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toSDK(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    if (message.payments) {
-      obj.payments = message.payments.map(e => e ? Payment.toSDK(e) : undefined);
-    } else {
-      obj.payments = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    if (message.payments) {
-      obj.payments = message.payments.map(e => e ? Payment.toAmino(e) : undefined);
-    } else {
-      obj.payments = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "akash/escrow/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

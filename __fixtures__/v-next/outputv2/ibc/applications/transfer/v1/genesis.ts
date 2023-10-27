@@ -12,6 +12,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisStateAmino {
   port_id: string;

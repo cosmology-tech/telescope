@@ -7,6 +7,10 @@ export interface Params {
   bidMinDeposit: Coin;
   orderMaxBids: number;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Params";
+  value: Uint8Array;
+}
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
   bid_min_deposit: CoinSDKType;

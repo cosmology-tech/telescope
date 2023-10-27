@@ -59,6 +59,10 @@ export interface LeaseID {
   oseq: number;
   provider: string;
 }
+export interface LeaseIDProtoMsg {
+  typeUrl: "/akash.market.v1beta2.LeaseID";
+  value: Uint8Array;
+}
 /** LeaseID stores bid details of lease */
 export interface LeaseIDSDKType {
   owner: string;
@@ -74,6 +78,10 @@ export interface Lease {
   price: DecCoin;
   createdAt: bigint;
   closedOn: bigint;
+}
+export interface LeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Lease";
+  value: Uint8Array;
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
@@ -92,6 +100,10 @@ export interface LeaseFilters {
   provider: string;
   state: string;
 }
+export interface LeaseFiltersProtoMsg {
+  typeUrl: "/akash.market.v1beta2.LeaseFilters";
+  value: Uint8Array;
+}
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersSDKType {
   owner: string;
@@ -105,17 +117,29 @@ export interface LeaseFiltersSDKType {
 export interface MsgCreateLease {
   bidId: BidID;
 }
+export interface MsgCreateLeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateLease";
+  value: Uint8Array;
+}
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseSDKType {
   bid_id: BidIDSDKType;
 }
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
+export interface MsgCreateLeaseResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateLeaseResponse";
+  value: Uint8Array;
+}
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponseSDKType {}
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLease {
   bidId: LeaseID;
+}
+export interface MsgWithdrawLeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgWithdrawLease";
+  value: Uint8Array;
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseSDKType {
@@ -123,11 +147,19 @@ export interface MsgWithdrawLeaseSDKType {
 }
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
+export interface MsgWithdrawLeaseResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgWithdrawLeaseResponse";
+  value: Uint8Array;
+}
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponseSDKType {}
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLease {
   leaseId: LeaseID;
+}
+export interface MsgCloseLeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseLease";
+  value: Uint8Array;
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseSDKType {
@@ -135,6 +167,10 @@ export interface MsgCloseLeaseSDKType {
 }
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}
+export interface MsgCloseLeaseResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseLeaseResponse";
+  value: Uint8Array;
+}
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponseSDKType {}
 function createBaseLeaseID(): LeaseID {

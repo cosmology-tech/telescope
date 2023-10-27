@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.hd.v1";
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44Params {
@@ -16,6 +15,10 @@ export interface BIP44Params {
   change: boolean;
   /** address_index is used as child index in BIP32 derivation */
   addressIndex: number;
+}
+export interface BIP44ParamsProtoMsg {
+  typeUrl: "/cosmos.crypto.hd.v1.BIP44Params";
+  value: Uint8Array;
 }
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44ParamsSDKType {
@@ -82,87 +85,6 @@ export const BIP44Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BIP44Params {
-    const obj = createBaseBIP44Params();
-    if (isSet(object.purpose)) obj.purpose = Number(object.purpose);
-    if (isSet(object.coinType)) obj.coinType = Number(object.coinType);
-    if (isSet(object.account)) obj.account = Number(object.account);
-    if (isSet(object.change)) obj.change = Boolean(object.change);
-    if (isSet(object.addressIndex)) obj.addressIndex = Number(object.addressIndex);
-    return obj;
-  },
-  toJSON(message: BIP44Params): unknown {
-    const obj: any = {};
-    message.purpose !== undefined && (obj.purpose = Math.round(message.purpose));
-    message.coinType !== undefined && (obj.coinType = Math.round(message.coinType));
-    message.account !== undefined && (obj.account = Math.round(message.account));
-    message.change !== undefined && (obj.change = message.change);
-    message.addressIndex !== undefined && (obj.addressIndex = Math.round(message.addressIndex));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BIP44Params>): BIP44Params {
-    const message = createBaseBIP44Params();
-    message.purpose = object.purpose ?? 0;
-    message.coinType = object.coinType ?? 0;
-    message.account = object.account ?? 0;
-    message.change = object.change ?? false;
-    message.addressIndex = object.addressIndex ?? 0;
-    return message;
-  },
-  fromSDK(object: BIP44ParamsSDKType): BIP44Params {
-    return {
-      purpose: object?.purpose,
-      coinType: object?.coin_type,
-      account: object?.account,
-      change: object?.change,
-      addressIndex: object?.address_index
-    };
-  },
-  fromSDKJSON(object: any): BIP44ParamsSDKType {
-    return {
-      purpose: isSet(object.purpose) ? Number(object.purpose) : 0,
-      coin_type: isSet(object.coin_type) ? Number(object.coin_type) : 0,
-      account: isSet(object.account) ? Number(object.account) : 0,
-      change: isSet(object.change) ? Boolean(object.change) : false,
-      address_index: isSet(object.address_index) ? Number(object.address_index) : 0
-    };
-  },
-  toSDK(message: BIP44Params): BIP44ParamsSDKType {
-    const obj: any = {};
-    obj.purpose = message.purpose;
-    obj.coin_type = message.coinType;
-    obj.account = message.account;
-    obj.change = message.change;
-    obj.address_index = message.addressIndex;
-    return obj;
-  },
-  fromAmino(object: BIP44ParamsAmino): BIP44Params {
-    return {
-      purpose: object.purpose,
-      coinType: object.coin_type,
-      account: object.account,
-      change: object.change,
-      addressIndex: object.address_index
-    };
-  },
-  toAmino(message: BIP44Params): BIP44ParamsAmino {
-    const obj: any = {};
-    obj.purpose = message.purpose;
-    obj.coin_type = message.coinType;
-    obj.account = message.account;
-    obj.change = message.change;
-    obj.address_index = message.addressIndex;
-    return obj;
-  },
-  fromAminoMsg(object: BIP44ParamsAminoMsg): BIP44Params {
-    return BIP44Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: BIP44Params): BIP44ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/BIP44Params",
-      value: BIP44Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: BIP44ParamsProtoMsg): BIP44Params {
     return BIP44Params.decode(message.value);

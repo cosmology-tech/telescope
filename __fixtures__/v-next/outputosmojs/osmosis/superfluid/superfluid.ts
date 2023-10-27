@@ -47,6 +47,10 @@ export interface SuperfluidAsset {
    */
   assetType: SuperfluidAssetType;
 }
+export interface SuperfluidAssetProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidAsset";
+  value: Uint8Array;
+}
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
   denom: string;
@@ -63,6 +67,10 @@ export interface SuperfluidIntermediaryAccount {
   valAddr: string;
   /** perpetual gauge for rewards distribution */
   gaugeId: bigint;
+}
+export interface SuperfluidIntermediaryAccountProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
+  value: Uint8Array;
 }
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
@@ -89,6 +97,10 @@ export interface OsmoEquivalentMultiplierRecord {
   denom: string;
   multiplier: string;
 }
+export interface OsmoEquivalentMultiplierRecordProtoMsg {
+  typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord";
+  value: Uint8Array;
+}
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
  * treat an LP share as having, for all of epoch N. Eventually this is intended
@@ -113,6 +125,10 @@ export interface SuperfluidDelegationRecord {
   delegationAmount: Coin;
   equivalentStakedAmount?: Coin;
 }
+export interface SuperfluidDelegationRecordProtoMsg {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
+  value: Uint8Array;
+}
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
  * delegations of an account in the state machine in a user friendly form.
@@ -132,6 +148,10 @@ export interface LockIdIntermediaryAccountConnection {
   lockId: bigint;
   intermediaryAccount: string;
 }
+export interface LockIdIntermediaryAccountConnectionProtoMsg {
+  typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection";
+  value: Uint8Array;
+}
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
  * relationship between the underlying lock id and superfluid delegation done
@@ -143,6 +163,10 @@ export interface LockIdIntermediaryAccountConnectionSDKType {
 }
 export interface UnpoolWhitelistedPools {
   ids: bigint[];
+}
+export interface UnpoolWhitelistedPoolsProtoMsg {
+  typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";
+  value: Uint8Array;
 }
 export interface UnpoolWhitelistedPoolsSDKType {
   ids: bigint[];

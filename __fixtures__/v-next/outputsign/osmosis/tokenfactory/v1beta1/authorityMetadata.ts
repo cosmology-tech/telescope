@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -9,6 +8,10 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 export interface DenomAuthorityMetadata {
   /** Can be empty for no admin, or a valid osmosis address */
   admin: string;
+}
+export interface DenomAuthorityMetadataProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata";
+  value: Uint8Array;
 }
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -47,55 +50,6 @@ export const DenomAuthorityMetadata = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DenomAuthorityMetadata {
-    const obj = createBaseDenomAuthorityMetadata();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    return obj;
-  },
-  toJSON(message: DenomAuthorityMetadata): unknown {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DenomAuthorityMetadata>): DenomAuthorityMetadata {
-    const message = createBaseDenomAuthorityMetadata();
-    message.admin = object.admin ?? "";
-    return message;
-  },
-  fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
-    return {
-      admin: object?.admin
-    };
-  },
-  fromSDKJSON(object: any): DenomAuthorityMetadataSDKType {
-    return {
-      admin: isSet(object.admin) ? String(object.admin) : ""
-    };
-  },
-  toSDK(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
-    const obj: any = {};
-    obj.admin = message.admin;
-    return obj;
-  },
-  fromAmino(object: DenomAuthorityMetadataAmino): DenomAuthorityMetadata {
-    return {
-      admin: object.admin
-    };
-  },
-  toAmino(message: DenomAuthorityMetadata): DenomAuthorityMetadataAmino {
-    const obj: any = {};
-    obj.admin = message.admin;
-    return obj;
-  },
-  fromAminoMsg(object: DenomAuthorityMetadataAminoMsg): DenomAuthorityMetadata {
-    return DenomAuthorityMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomAuthorityMetadata): DenomAuthorityMetadataAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/denom-authority-metadata",
-      value: DenomAuthorityMetadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: DenomAuthorityMetadataProtoMsg): DenomAuthorityMetadata {
     return DenomAuthorityMetadata.decode(message.value);

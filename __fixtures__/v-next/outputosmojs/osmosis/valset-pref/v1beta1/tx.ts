@@ -10,12 +10,20 @@ export interface MsgSetValidatorSetPreference {
   /** list of {valAddr, weight} to delegate to */
   preferences: ValidatorPreference[];
 }
+export interface MsgSetValidatorSetPreferenceProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgSetValidatorSetPreference";
+  value: Uint8Array;
+}
 /** MsgCreateValidatorSetPreference is a list that holds validator-set. */
 export interface MsgSetValidatorSetPreferenceSDKType {
   delegator: string;
   preferences: ValidatorPreferenceSDKType[];
 }
 export interface MsgSetValidatorSetPreferenceResponse {}
+export interface MsgSetValidatorSetPreferenceResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgSetValidatorSetPreferenceResponse";
+  value: Uint8Array;
+}
 export interface MsgSetValidatorSetPreferenceResponseSDKType {}
 /**
  * MsgDelegateToValidatorSet allows users to delegate to an existing
@@ -32,6 +40,10 @@ export interface MsgDelegateToValidatorSet {
    */
   coin: Coin;
 }
+export interface MsgDelegateToValidatorSetProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgDelegateToValidatorSet";
+  value: Uint8Array;
+}
 /**
  * MsgDelegateToValidatorSet allows users to delegate to an existing
  * validator-set
@@ -41,6 +53,10 @@ export interface MsgDelegateToValidatorSetSDKType {
   coin: CoinSDKType;
 }
 export interface MsgDelegateToValidatorSetResponse {}
+export interface MsgDelegateToValidatorSetResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgDelegateToValidatorSetResponse";
+  value: Uint8Array;
+}
 export interface MsgDelegateToValidatorSetResponseSDKType {}
 export interface MsgUndelegateFromValidatorSet {
   /** delegator is the user who is trying to undelegate. */
@@ -54,11 +70,19 @@ export interface MsgUndelegateFromValidatorSet {
    */
   coin: Coin;
 }
+export interface MsgUndelegateFromValidatorSetProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgUndelegateFromValidatorSet";
+  value: Uint8Array;
+}
 export interface MsgUndelegateFromValidatorSetSDKType {
   delegator: string;
   coin: CoinSDKType;
 }
 export interface MsgUndelegateFromValidatorSetResponse {}
+export interface MsgUndelegateFromValidatorSetResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgUndelegateFromValidatorSetResponse";
+  value: Uint8Array;
+}
 export interface MsgUndelegateFromValidatorSetResponseSDKType {}
 export interface MsgRedelegateValidatorSet {
   /** delegator is the user who is trying to create a validator-set. */
@@ -66,11 +90,19 @@ export interface MsgRedelegateValidatorSet {
   /** list of {valAddr, weight} to delegate to */
   preferences: ValidatorPreference[];
 }
+export interface MsgRedelegateValidatorSetProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgRedelegateValidatorSet";
+  value: Uint8Array;
+}
 export interface MsgRedelegateValidatorSetSDKType {
   delegator: string;
   preferences: ValidatorPreferenceSDKType[];
 }
 export interface MsgRedelegateValidatorSetResponse {}
+export interface MsgRedelegateValidatorSetResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgRedelegateValidatorSetResponse";
+  value: Uint8Array;
+}
 export interface MsgRedelegateValidatorSetResponseSDKType {}
 /**
  * MsgWithdrawDelegationRewards allows user to claim staking rewards from the
@@ -80,6 +112,10 @@ export interface MsgWithdrawDelegationRewards {
   /** delegator is the user who is trying to claim staking rewards. */
   delegator: string;
 }
+export interface MsgWithdrawDelegationRewardsProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgWithdrawDelegationRewards";
+  value: Uint8Array;
+}
 /**
  * MsgWithdrawDelegationRewards allows user to claim staking rewards from the
  * validator set.
@@ -88,6 +124,10 @@ export interface MsgWithdrawDelegationRewardsSDKType {
   delegator: string;
 }
 export interface MsgWithdrawDelegationRewardsResponse {}
+export interface MsgWithdrawDelegationRewardsResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgWithdrawDelegationRewardsResponse";
+  value: Uint8Array;
+}
 export interface MsgWithdrawDelegationRewardsResponseSDKType {}
 /**
  * MsgDelegateBondedTokens breaks bonded lockup (by ID) of osmo, of
@@ -100,6 +140,10 @@ export interface MsgDelegateBondedTokens {
   /** lockup id of osmo in the pool */
   lockID: bigint;
 }
+export interface MsgDelegateBondedTokensProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgDelegateBondedTokens";
+  value: Uint8Array;
+}
 /**
  * MsgDelegateBondedTokens breaks bonded lockup (by ID) of osmo, of
  * length <= 2 weeks and takes all that osmo and delegates according to
@@ -110,6 +154,10 @@ export interface MsgDelegateBondedTokensSDKType {
   lockID: bigint;
 }
 export interface MsgDelegateBondedTokensResponse {}
+export interface MsgDelegateBondedTokensResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.MsgDelegateBondedTokensResponse";
+  value: Uint8Array;
+}
 export interface MsgDelegateBondedTokensResponseSDKType {}
 function createBaseMsgSetValidatorSetPreference(): MsgSetValidatorSetPreference {
   return {

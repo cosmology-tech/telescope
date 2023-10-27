@@ -12,6 +12,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.lockup.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.lockup.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateAmino {
   last_lock_id: string;

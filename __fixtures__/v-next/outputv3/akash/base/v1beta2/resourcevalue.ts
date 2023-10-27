@@ -9,6 +9,10 @@ export interface ResourceValueProtoMsg {
   typeUrl: "/akash.base.v1beta2.ResourceValue";
   value: Uint8Array;
 }
+export interface ResourceValueProtoMsg {
+  typeUrl: "/akash.base.v1beta2.ResourceValue";
+  value: Uint8Array;
+}
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueAmino {
   val: Uint8Array;

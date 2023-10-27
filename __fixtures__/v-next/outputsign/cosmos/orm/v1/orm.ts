@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
@@ -13,6 +12,10 @@ export interface TableDescriptor {
    * can be auto-generated.
    */
   id: number;
+}
+export interface TableDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.TableDescriptor";
+  value: Uint8Array;
 }
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
@@ -62,6 +65,10 @@ export interface PrimaryKeyDescriptor {
    */
   autoIncrement: boolean;
 }
+export interface PrimaryKeyDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
+  value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptorSDKType {
   fields: string;
@@ -90,6 +97,10 @@ export interface SecondaryIndexDescriptor {
   /** unique specifies that this an unique index. */
   unique: boolean;
 }
+export interface SecondaryIndexDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
+  value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptorSDKType {
   fields: string;
@@ -104,6 +115,10 @@ export interface SingletonDescriptor {
    * can be auto-generated.
    */
   id: number;
+}
+export interface SingletonDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.SingletonDescriptor";
+  value: Uint8Array;
 }
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptorSDKType {
@@ -152,85 +167,6 @@ export const TableDescriptor = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): TableDescriptor {
-    const obj = createBaseTableDescriptor();
-    if (isSet(object.primaryKey)) obj.primaryKey = PrimaryKeyDescriptor.fromJSON(object.primaryKey);
-    if (Array.isArray(object?.index)) obj.index = object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e));
-    if (isSet(object.id)) obj.id = Number(object.id);
-    return obj;
-  },
-  toJSON(message: TableDescriptor): unknown {
-    const obj: any = {};
-    message.primaryKey !== undefined && (obj.primaryKey = message.primaryKey ? PrimaryKeyDescriptor.toJSON(message.primaryKey) : undefined);
-    if (message.index) {
-      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.index = [];
-    }
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor {
-    const message = createBaseTableDescriptor();
-    if (object.primaryKey !== undefined && object.primaryKey !== null) {
-      message.primaryKey = PrimaryKeyDescriptor.fromPartial(object.primaryKey);
-    }
-    message.index = object.index?.map(e => SecondaryIndexDescriptor.fromPartial(e)) || [];
-    message.id = object.id ?? 0;
-    return message;
-  },
-  fromSDK(object: TableDescriptorSDKType): TableDescriptor {
-    return {
-      primaryKey: object.primary_key ? PrimaryKeyDescriptor.fromSDK(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromSDK(e)) : [],
-      id: object?.id
-    };
-  },
-  fromSDKJSON(object: any): TableDescriptorSDKType {
-    return {
-      primary_key: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromSDKJSON(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromSDKJSON(e)) : [],
-      id: isSet(object.id) ? Number(object.id) : 0
-    };
-  },
-  toSDK(message: TableDescriptor): TableDescriptorSDKType {
-    const obj: any = {};
-    message.primaryKey !== undefined && (obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toSDK(message.primaryKey) : undefined);
-    if (message.index) {
-      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toSDK(e) : undefined);
-    } else {
-      obj.index = [];
-    }
-    obj.id = message.id;
-    return obj;
-  },
-  fromAmino(object: TableDescriptorAmino): TableDescriptor {
-    return {
-      primaryKey: object?.primary_key ? PrimaryKeyDescriptor.fromAmino(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromAmino(e)) : [],
-      id: object.id
-    };
-  },
-  toAmino(message: TableDescriptor): TableDescriptorAmino {
-    const obj: any = {};
-    obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toAmino(message.primaryKey) : undefined;
-    if (message.index) {
-      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.index = [];
-    }
-    obj.id = message.id;
-    return obj;
-  },
-  fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor {
-    return TableDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: TableDescriptor): TableDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/TableDescriptor",
-      value: TableDescriptor.toAmino(message)
-    };
   },
   fromProtoMsg(message: TableDescriptorProtoMsg): TableDescriptor {
     return TableDescriptor.decode(message.value);
@@ -281,63 +217,6 @@ export const PrimaryKeyDescriptor = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PrimaryKeyDescriptor {
-    const obj = createBasePrimaryKeyDescriptor();
-    if (isSet(object.fields)) obj.fields = String(object.fields);
-    if (isSet(object.autoIncrement)) obj.autoIncrement = Boolean(object.autoIncrement);
-    return obj;
-  },
-  toJSON(message: PrimaryKeyDescriptor): unknown {
-    const obj: any = {};
-    message.fields !== undefined && (obj.fields = message.fields);
-    message.autoIncrement !== undefined && (obj.autoIncrement = message.autoIncrement);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor {
-    const message = createBasePrimaryKeyDescriptor();
-    message.fields = object.fields ?? "";
-    message.autoIncrement = object.autoIncrement ?? false;
-    return message;
-  },
-  fromSDK(object: PrimaryKeyDescriptorSDKType): PrimaryKeyDescriptor {
-    return {
-      fields: object?.fields,
-      autoIncrement: object?.auto_increment
-    };
-  },
-  fromSDKJSON(object: any): PrimaryKeyDescriptorSDKType {
-    return {
-      fields: isSet(object.fields) ? String(object.fields) : "",
-      auto_increment: isSet(object.auto_increment) ? Boolean(object.auto_increment) : false
-    };
-  },
-  toSDK(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorSDKType {
-    const obj: any = {};
-    obj.fields = message.fields;
-    obj.auto_increment = message.autoIncrement;
-    return obj;
-  },
-  fromAmino(object: PrimaryKeyDescriptorAmino): PrimaryKeyDescriptor {
-    return {
-      fields: object.fields,
-      autoIncrement: object.auto_increment
-    };
-  },
-  toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino {
-    const obj: any = {};
-    obj.fields = message.fields;
-    obj.auto_increment = message.autoIncrement;
-    return obj;
-  },
-  fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor {
-    return PrimaryKeyDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/PrimaryKeyDescriptor",
-      value: PrimaryKeyDescriptor.toAmino(message)
-    };
   },
   fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg): PrimaryKeyDescriptor {
     return PrimaryKeyDescriptor.decode(message.value);
@@ -396,71 +275,6 @@ export const SecondaryIndexDescriptor = {
     }
     return message;
   },
-  fromJSON(object: any): SecondaryIndexDescriptor {
-    const obj = createBaseSecondaryIndexDescriptor();
-    if (isSet(object.fields)) obj.fields = String(object.fields);
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.unique)) obj.unique = Boolean(object.unique);
-    return obj;
-  },
-  toJSON(message: SecondaryIndexDescriptor): unknown {
-    const obj: any = {};
-    message.fields !== undefined && (obj.fields = message.fields);
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.unique !== undefined && (obj.unique = message.unique);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor {
-    const message = createBaseSecondaryIndexDescriptor();
-    message.fields = object.fields ?? "";
-    message.id = object.id ?? 0;
-    message.unique = object.unique ?? false;
-    return message;
-  },
-  fromSDK(object: SecondaryIndexDescriptorSDKType): SecondaryIndexDescriptor {
-    return {
-      fields: object?.fields,
-      id: object?.id,
-      unique: object?.unique
-    };
-  },
-  fromSDKJSON(object: any): SecondaryIndexDescriptorSDKType {
-    return {
-      fields: isSet(object.fields) ? String(object.fields) : "",
-      id: isSet(object.id) ? Number(object.id) : 0,
-      unique: isSet(object.unique) ? Boolean(object.unique) : false
-    };
-  },
-  toSDK(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorSDKType {
-    const obj: any = {};
-    obj.fields = message.fields;
-    obj.id = message.id;
-    obj.unique = message.unique;
-    return obj;
-  },
-  fromAmino(object: SecondaryIndexDescriptorAmino): SecondaryIndexDescriptor {
-    return {
-      fields: object.fields,
-      id: object.id,
-      unique: object.unique
-    };
-  },
-  toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino {
-    const obj: any = {};
-    obj.fields = message.fields;
-    obj.id = message.id;
-    obj.unique = message.unique;
-    return obj;
-  },
-  fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor {
-    return SecondaryIndexDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SecondaryIndexDescriptor",
-      value: SecondaryIndexDescriptor.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg): SecondaryIndexDescriptor {
     return SecondaryIndexDescriptor.decode(message.value);
   },
@@ -503,55 +317,6 @@ export const SingletonDescriptor = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SingletonDescriptor {
-    const obj = createBaseSingletonDescriptor();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    return obj;
-  },
-  toJSON(message: SingletonDescriptor): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SingletonDescriptor>): SingletonDescriptor {
-    const message = createBaseSingletonDescriptor();
-    message.id = object.id ?? 0;
-    return message;
-  },
-  fromSDK(object: SingletonDescriptorSDKType): SingletonDescriptor {
-    return {
-      id: object?.id
-    };
-  },
-  fromSDKJSON(object: any): SingletonDescriptorSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0
-    };
-  },
-  toSDK(message: SingletonDescriptor): SingletonDescriptorSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    return obj;
-  },
-  fromAmino(object: SingletonDescriptorAmino): SingletonDescriptor {
-    return {
-      id: object.id
-    };
-  },
-  toAmino(message: SingletonDescriptor): SingletonDescriptorAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    return obj;
-  },
-  fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor {
-    return SingletonDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SingletonDescriptor): SingletonDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SingletonDescriptor",
-      value: SingletonDescriptor.toAmino(message)
-    };
   },
   fromProtoMsg(message: SingletonDescriptorProtoMsg): SingletonDescriptor {
     return SingletonDescriptor.decode(message.value);

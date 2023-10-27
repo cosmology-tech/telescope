@@ -11,6 +11,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/akash.market.v1beta2.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Params";
+  value: Uint8Array;
+}
 /** Params is the params for the x/market module */
 export interface ParamsAmino {
   bid_min_deposit?: CoinAmino;

@@ -11,11 +11,19 @@ export interface Params {
    */
   mintedDenom: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.Params";
+  value: Uint8Array;
+}
 export interface ParamsSDKType {
   minted_denom: string;
 }
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
+  value: Uint8Array;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -24,6 +32,10 @@ export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
 }
+export interface DistrInfoProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
+  value: Uint8Array;
+}
 export interface DistrInfoSDKType {
   total_weight: string;
   records: DistrRecordSDKType[];
@@ -31,6 +43,10 @@ export interface DistrInfoSDKType {
 export interface DistrRecord {
   gaugeId: bigint;
   weight: string;
+}
+export interface DistrRecordProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
+  value: Uint8Array;
 }
 export interface DistrRecordSDKType {
   gauge_id: bigint;
@@ -41,6 +57,10 @@ export interface PoolToGauge {
   gaugeId: bigint;
   duration: Duration;
 }
+export interface PoolToGaugeProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
+  value: Uint8Array;
+}
 export interface PoolToGaugeSDKType {
   pool_id: bigint;
   gauge_id: bigint;
@@ -48,6 +68,10 @@ export interface PoolToGaugeSDKType {
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
+}
+export interface PoolToGaugesProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
+  value: Uint8Array;
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];

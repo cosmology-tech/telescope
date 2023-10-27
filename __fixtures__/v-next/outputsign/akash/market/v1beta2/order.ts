@@ -1,6 +1,5 @@
 import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -57,6 +56,10 @@ export interface OrderID {
   gseq: number;
   oseq: number;
 }
+export interface OrderIDProtoMsg {
+  typeUrl: "/akash.market.v1beta2.OrderID";
+  value: Uint8Array;
+}
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
@@ -70,6 +73,10 @@ export interface Order {
   state: Order_State;
   spec: GroupSpec;
   createdAt: bigint;
+}
+export interface OrderProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Order";
+  value: Uint8Array;
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
@@ -85,6 +92,10 @@ export interface OrderFilters {
   gseq: number;
   oseq: number;
   state: string;
+}
+export interface OrderFiltersProtoMsg {
+  typeUrl: "/akash.market.v1beta2.OrderFilters";
+  value: Uint8Array;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
@@ -144,81 +155,6 @@ export const OrderID = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): OrderID {
-    const obj = createBaseOrderID();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
-    return obj;
-  },
-  toJSON(message: OrderID): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
-    message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
-    const message = createBaseOrderID();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    message.gseq = object.gseq ?? 0;
-    message.oseq = object.oseq ?? 0;
-    return message;
-  },
-  fromSDK(object: OrderIDSDKType): OrderID {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq,
-      gseq: object?.gseq,
-      oseq: object?.oseq
-    };
-  },
-  fromSDKJSON(object: any): OrderIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0
-    };
-  },
-  toSDK(message: OrderID): OrderIDSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    return obj;
-  },
-  fromAmino(object: OrderIDAmino): OrderID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq
-    };
-  },
-  toAmino(message: OrderID): OrderIDAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    return obj;
-  },
-  fromAminoMsg(object: OrderIDAminoMsg): OrderID {
-    return OrderID.fromAmino(object.value);
-  },
-  toAminoMsg(message: OrderID): OrderIDAminoMsg {
-    return {
-      type: "akash/market/v1beta2/order-i-d",
-      value: OrderID.toAmino(message)
-    };
   },
   fromProtoMsg(message: OrderIDProtoMsg): OrderID {
     return OrderID.decode(message.value);
@@ -283,85 +219,6 @@ export const Order = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Order {
-    const obj = createBaseOrder();
-    if (isSet(object.orderId)) obj.orderId = OrderID.fromJSON(object.orderId);
-    if (isSet(object.state)) obj.state = order_StateFromJSON(object.state);
-    if (isSet(object.spec)) obj.spec = GroupSpec.fromJSON(object.spec);
-    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Order): unknown {
-    const obj: any = {};
-    message.orderId !== undefined && (obj.orderId = message.orderId ? OrderID.toJSON(message.orderId) : undefined);
-    message.state !== undefined && (obj.state = order_StateToJSON(message.state));
-    message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toJSON(message.spec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
-    const message = createBaseOrder();
-    if (object.orderId !== undefined && object.orderId !== null) {
-      message.orderId = OrderID.fromPartial(object.orderId);
-    }
-    message.state = object.state ?? 0;
-    if (object.spec !== undefined && object.spec !== null) {
-      message.spec = GroupSpec.fromPartial(object.spec);
-    }
-    if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = BigInt(object.createdAt.toString());
-    }
-    return message;
-  },
-  fromSDK(object: OrderSDKType): Order {
-    return {
-      orderId: object.order_id ? OrderID.fromSDK(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
-      spec: object.spec ? GroupSpec.fromSDK(object.spec) : undefined,
-      createdAt: object?.created_at
-    };
-  },
-  fromSDKJSON(object: any): OrderSDKType {
-    return {
-      order_id: isSet(object.order_id) ? OrderID.fromSDKJSON(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
-      spec: isSet(object.spec) ? GroupSpec.fromSDKJSON(object.spec) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Order): OrderSDKType {
-    const obj: any = {};
-    message.orderId !== undefined && (obj.order_id = message.orderId ? OrderID.toSDK(message.orderId) : undefined);
-    message.state !== undefined && (obj.state = order_StateToJSON(message.state));
-    message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toSDK(message.spec) : undefined);
-    obj.created_at = message.createdAt;
-    return obj;
-  },
-  fromAmino(object: OrderAmino): Order {
-    return {
-      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
-      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
-  },
-  toAmino(message: Order): OrderAmino {
-    const obj: any = {};
-    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
-    obj.state = message.state;
-    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: OrderAminoMsg): Order {
-    return Order.fromAmino(object.value);
-  },
-  toAminoMsg(message: Order): OrderAminoMsg {
-    return {
-      type: "akash/market/v1beta2/order",
-      value: Order.toAmino(message)
-    };
   },
   fromProtoMsg(message: OrderProtoMsg): Order {
     return Order.decode(message.value);
@@ -433,89 +290,6 @@ export const OrderFilters = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): OrderFilters {
-    const obj = createBaseOrderFilters();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
-    if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: OrderFilters): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
-    message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
-    message.state !== undefined && (obj.state = message.state);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
-    const message = createBaseOrderFilters();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    message.gseq = object.gseq ?? 0;
-    message.oseq = object.oseq ?? 0;
-    message.state = object.state ?? "";
-    return message;
-  },
-  fromSDK(object: OrderFiltersSDKType): OrderFilters {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq,
-      gseq: object?.gseq,
-      oseq: object?.oseq,
-      state: object?.state
-    };
-  },
-  fromSDKJSON(object: any): OrderFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      state: isSet(object.state) ? String(object.state) : ""
-    };
-  },
-  toSDK(message: OrderFilters): OrderFiltersSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAmino(object: OrderFiltersAmino): OrderFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      state: object.state
-    };
-  },
-  toAmino(message: OrderFilters): OrderFiltersAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: OrderFiltersAminoMsg): OrderFilters {
-    return OrderFilters.fromAmino(object.value);
-  },
-  toAminoMsg(message: OrderFilters): OrderFiltersAminoMsg {
-    return {
-      type: "akash/market/v1beta2/order-filters",
-      value: OrderFilters.toAmino(message)
-    };
   },
   fromProtoMsg(message: OrderFiltersProtoMsg): OrderFilters {
     return OrderFilters.decode(message.value);

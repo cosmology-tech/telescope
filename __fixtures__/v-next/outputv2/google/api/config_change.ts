@@ -105,6 +105,10 @@ export interface ConfigChangeProtoMsg {
   typeUrl: "/google.api.ConfigChange";
   value: Uint8Array;
 }
+export interface ConfigChangeProtoMsg {
+  typeUrl: "/google.api.ConfigChange";
+  value: Uint8Array;
+}
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
@@ -173,6 +177,10 @@ export interface Advice {
    * be taken to mitigate any implied risks.
    */
   description: string;
+}
+export interface AdviceProtoMsg {
+  typeUrl: "/google.api.Advice";
+  value: Uint8Array;
 }
 export interface AdviceProtoMsg {
   typeUrl: "/google.api.Advice";

@@ -6,17 +6,29 @@ export const protobufPackage = "akash.deployment.v1beta2";
 export interface MsgCloseGroup {
   id: GroupID;
 }
+export interface MsgCloseGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup";
+  value: Uint8Array;
+}
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id: GroupIDSDKType;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
+export interface MsgCloseGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse";
+  value: Uint8Array;
+}
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id: GroupID;
+}
+export interface MsgPauseGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup";
+  value: Uint8Array;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
@@ -24,11 +36,19 @@ export interface MsgPauseGroupSDKType {
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
+export interface MsgPauseGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse";
+  value: Uint8Array;
+}
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id: GroupID;
+}
+export interface MsgStartGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.MsgStartGroup";
+  value: Uint8Array;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
@@ -36,6 +56,10 @@ export interface MsgStartGroupSDKType {
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
+export interface MsgStartGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.MsgStartGroupResponse";
+  value: Uint8Array;
+}
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
 function createBaseMsgCloseGroup(): MsgCloseGroup {

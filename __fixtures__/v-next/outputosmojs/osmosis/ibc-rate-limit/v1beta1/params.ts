@@ -5,6 +5,10 @@ export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 export interface Params {
   contractAddress: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
   contract_address: string;

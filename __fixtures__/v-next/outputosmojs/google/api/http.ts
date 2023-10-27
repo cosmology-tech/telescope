@@ -23,6 +23,10 @@ export interface Http {
    */
   fullyDecodeReservedExpansion: boolean;
 }
+export interface HttpProtoMsg {
+  typeUrl: "/google.api.Http";
+  value: Uint8Array;
+}
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
  * [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
@@ -355,6 +359,10 @@ export interface HttpRule {
    */
   additionalBindings: HttpRule[];
 }
+export interface HttpRuleProtoMsg {
+  typeUrl: "/google.api.HttpRule";
+  value: Uint8Array;
+}
 /**
  * # gRPC Transcoding
  * 
@@ -644,6 +652,10 @@ export interface CustomHttpPattern {
   kind: string;
   /** The path matched by this custom verb. */
   path: string;
+}
+export interface CustomHttpPatternProtoMsg {
+  typeUrl: "/google.api.CustomHttpPattern";
+  value: Uint8Array;
 }
 /** A custom pattern is used for defining custom HTTP verb. */
 export interface CustomHttpPatternSDKType {

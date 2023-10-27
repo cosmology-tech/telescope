@@ -10,6 +10,10 @@ export interface EvalRequest_BindingsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface EvalRequest_BindingsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface EvalRequest_BindingsEntryAmino {
   key: string;
   value?: ExprValueAmino;
@@ -25,6 +29,10 @@ export interface EvalRequest_BindingsEntrySDKType {
 export interface EvalRequest_RefsEntry {
   key: string;
   value?: IdRef;
+}
+export interface EvalRequest_RefsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface EvalRequest_RefsEntryProtoMsg {
   typeUrl: string;
@@ -61,6 +69,10 @@ export interface EvalRequest {
   id?: string;
   name?: string;
   testArray: string[];
+}
+export interface EvalRequestProtoMsg {
+  typeUrl: "/misc.EvalRequest";
+  value: Uint8Array;
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/misc.EvalRequest";
@@ -107,6 +119,10 @@ export interface EvalRequestSDKType {
 }
 export interface AccessConfig {
   sender: string;
+}
+export interface AccessConfigProtoMsg {
+  typeUrl: "/misc.AccessConfig";
+  value: Uint8Array;
 }
 export interface AccessConfigProtoMsg {
   typeUrl: "/misc.AccessConfig";

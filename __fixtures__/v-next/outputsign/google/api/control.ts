@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Selects and configures the service controller used by the service.  The
@@ -12,6 +11,10 @@ export interface Control {
    * feature (like quota and billing) will be enabled.
    */
   environment: string;
+}
+export interface ControlProtoMsg {
+  typeUrl: "/google.api.Control";
+  value: Uint8Array;
 }
 /**
  * Selects and configures the service controller used by the service.  The
@@ -50,49 +53,6 @@ export const Control = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Control {
-    const obj = createBaseControl();
-    if (isSet(object.environment)) obj.environment = String(object.environment);
-    return obj;
-  },
-  toJSON(message: Control): unknown {
-    const obj: any = {};
-    message.environment !== undefined && (obj.environment = message.environment);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Control>): Control {
-    const message = createBaseControl();
-    message.environment = object.environment ?? "";
-    return message;
-  },
-  fromSDK(object: ControlSDKType): Control {
-    return {
-      environment: object?.environment
-    };
-  },
-  fromSDKJSON(object: any): ControlSDKType {
-    return {
-      environment: isSet(object.environment) ? String(object.environment) : ""
-    };
-  },
-  toSDK(message: Control): ControlSDKType {
-    const obj: any = {};
-    obj.environment = message.environment;
-    return obj;
-  },
-  fromAmino(object: ControlAmino): Control {
-    return {
-      environment: object.environment
-    };
-  },
-  toAmino(message: Control): ControlAmino {
-    const obj: any = {};
-    obj.environment = message.environment;
-    return obj;
-  },
-  fromAminoMsg(object: ControlAminoMsg): Control {
-    return Control.fromAmino(object.value);
   },
   fromProtoMsg(message: ControlProtoMsg): Control {
     return Control.decode(message.value);

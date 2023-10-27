@@ -17,6 +17,10 @@ export interface QueryIncentivesRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest";
   value: Uint8Array;
 }
+export interface QueryIncentivesRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest";
+  value: Uint8Array;
+}
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
  * method.
@@ -44,6 +48,10 @@ export interface QueryIncentivesResponse {
   incentives: Incentive[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryIncentivesResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse";
+  value: Uint8Array;
 }
 export interface QueryIncentivesResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse";
@@ -79,6 +87,10 @@ export interface QueryIncentiveRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest";
   value: Uint8Array;
 }
+export interface QueryIncentiveRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest";
+  value: Uint8Array;
+}
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequestAmino {
   /** contract identifier is the hex contract address of a contract */
@@ -98,6 +110,10 @@ export interface QueryIncentiveRequestSDKType {
  */
 export interface QueryIncentiveResponse {
   incentive: Incentive;
+}
+export interface QueryIncentiveResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse";
+  value: Uint8Array;
 }
 export interface QueryIncentiveResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse";
@@ -130,6 +146,10 @@ export interface QueryGasMetersRequest {
   contract: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryGasMetersRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest";
+  value: Uint8Array;
 }
 export interface QueryGasMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest";
@@ -170,6 +190,10 @@ export interface QueryGasMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse";
   value: Uint8Array;
 }
+export interface QueryGasMetersResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse";
+  value: Uint8Array;
+}
 /**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
  * method.
@@ -202,6 +226,10 @@ export interface QueryGasMeterRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest";
   value: Uint8Array;
 }
+export interface QueryGasMeterRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest";
+  value: Uint8Array;
+}
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequestAmino {
   /** contract identifier is the hex contract address of a contract */
@@ -228,6 +256,10 @@ export interface QueryGasMeterResponse {
    * method.
    */
   gasMeter: bigint;
+}
+export interface QueryGasMeterResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse";
+  value: Uint8Array;
 }
 export interface QueryGasMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse";
@@ -267,6 +299,10 @@ export interface QueryAllocationMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest";
   value: Uint8Array;
 }
+export interface QueryAllocationMetersRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest";
+  value: Uint8Array;
+}
 /**
  * QueryAllocationMetersRequest is the request type for the
  * Query/AllocationMeters RPC method.
@@ -294,6 +330,10 @@ export interface QueryAllocationMetersResponse {
   allocationMeters: DecCoin[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryAllocationMetersResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse";
+  value: Uint8Array;
 }
 export interface QueryAllocationMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse";
@@ -332,6 +372,10 @@ export interface QueryAllocationMeterRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest";
   value: Uint8Array;
 }
+export interface QueryAllocationMeterRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest";
+  value: Uint8Array;
+}
 /**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
  * RPC method.
@@ -362,6 +406,10 @@ export interface QueryAllocationMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse";
   value: Uint8Array;
 }
+export interface QueryAllocationMeterResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse";
+  value: Uint8Array;
+}
 /**
  * QueryAllocationMeterResponse is the response type for the
  * Query/AllocationMeter RPC method.
@@ -386,6 +434,10 @@ export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryParamsRequest";
   value: Uint8Array;
 }
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
@@ -400,6 +452,10 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/evmos.incentives.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryParamsResponse";

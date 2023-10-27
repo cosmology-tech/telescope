@@ -9,6 +9,10 @@ export interface GenesisDeployment {
   deployment: Deployment;
   groups: Group[];
 }
+export interface GenesisDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GenesisDeployment";
+  value: Uint8Array;
+}
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
   deployment: DeploymentSDKType;
@@ -18,6 +22,10 @@ export interface GenesisDeploymentSDKType {
 export interface GenesisState {
   deployments: GenesisDeployment[];
   params: Params;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {

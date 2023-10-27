@@ -33,6 +33,10 @@ export interface Usage {
    */
   producerNotificationChannel: string;
 }
+export interface UsageProtoMsg {
+  typeUrl: "/google.api.Usage";
+  value: Uint8Array;
+}
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
   requirements: string[];
@@ -86,6 +90,10 @@ export interface UsageRule {
    * methods, such as service health check methods.
    */
   skipServiceControl: boolean;
+}
+export interface UsageRuleProtoMsg {
+  typeUrl: "/google.api.UsageRule";
+  value: Uint8Array;
 }
 /**
  * Usage configuration rules for the service.

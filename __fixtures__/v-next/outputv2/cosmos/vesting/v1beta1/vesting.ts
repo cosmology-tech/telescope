@@ -18,6 +18,10 @@ export interface BaseVestingAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.BaseVestingAccount";
   value: Uint8Array;
 }
+export interface BaseVestingAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.BaseVestingAccount";
+  value: Uint8Array;
+}
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
  * the necessary fields needed for any vesting account implementation.
@@ -56,6 +60,10 @@ export interface ContinuousVestingAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.ContinuousVestingAccount";
   value: Uint8Array;
 }
+export interface ContinuousVestingAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.ContinuousVestingAccount";
+  value: Uint8Array;
+}
 /**
  * ContinuousVestingAccount implements the VestingAccount interface. It
  * continuously vests by unlocking coins linearly with respect to time.
@@ -83,6 +91,10 @@ export interface ContinuousVestingAccountSDKType {
  */
 export interface DelayedVestingAccount {
   baseVestingAccount?: BaseVestingAccount;
+}
+export interface DelayedVestingAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.DelayedVestingAccount";
+  value: Uint8Array;
 }
 export interface DelayedVestingAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.DelayedVestingAccount";
@@ -117,6 +129,10 @@ export interface PeriodProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.Period";
   value: Uint8Array;
 }
+export interface PeriodProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.Period";
+  value: Uint8Array;
+}
 /** Period defines a length of time and amount of coins that will vest. */
 export interface PeriodAmino {
   length: string;
@@ -139,6 +155,10 @@ export interface PeriodicVestingAccount {
   baseVestingAccount?: BaseVestingAccount;
   startTime: bigint;
   vestingPeriods: Period[];
+}
+export interface PeriodicVestingAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.PeriodicVestingAccount";
+  value: Uint8Array;
 }
 export interface PeriodicVestingAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.PeriodicVestingAccount";
@@ -175,6 +195,10 @@ export interface PeriodicVestingAccountSDKType {
  */
 export interface PermanentLockedAccount {
   baseVestingAccount?: BaseVestingAccount;
+}
+export interface PermanentLockedAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.PermanentLockedAccount";
+  value: Uint8Array;
 }
 export interface PermanentLockedAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.PermanentLockedAccount";

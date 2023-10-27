@@ -10,6 +10,10 @@ export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
 }
+export interface LogEntry_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -79,6 +83,10 @@ export interface LogEntry {
    */
   sourceLocation?: LogEntrySourceLocation;
 }
+export interface LogEntryProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntry";
+  value: Uint8Array;
+}
 /** An individual log entry. */
 export interface LogEntrySDKType {
   name: string;
@@ -117,6 +125,10 @@ export interface LogEntryOperation {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
+export interface LogEntryOperationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation";
+  value: Uint8Array;
+}
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
@@ -151,6 +163,10 @@ export interface LogEntrySourceLocation {
    * (Python).
    */
   function: string;
+}
+export interface LogEntrySourceLocationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
+  value: Uint8Array;
 }
 /**
  * Additional information about the source code location that produced the log

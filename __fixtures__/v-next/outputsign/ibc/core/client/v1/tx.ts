@@ -1,6 +1,5 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
@@ -14,6 +13,10 @@ export interface MsgCreateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgCreateClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClient";
+  value: Uint8Array;
+}
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
   client_state?: AnySDKType;
@@ -22,6 +25,10 @@ export interface MsgCreateClientSDKType {
 }
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
+export interface MsgCreateClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
+  value: Uint8Array;
+}
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseSDKType {}
 /**
@@ -36,6 +43,10 @@ export interface MsgUpdateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgUpdateClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
  * the given header.
@@ -47,6 +58,10 @@ export interface MsgUpdateClientSDKType {
 }
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
+export interface MsgUpdateClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseSDKType {}
 /**
@@ -70,6 +85,10 @@ export interface MsgUpgradeClient {
   /** signer address */
   signer: string;
 }
+export interface MsgUpgradeClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
+  value: Uint8Array;
+}
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
  * state
@@ -84,6 +103,10 @@ export interface MsgUpgradeClientSDKType {
 }
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
+export interface MsgUpgradeClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
+  value: Uint8Array;
+}
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseSDKType {}
 /**
@@ -97,6 +120,10 @@ export interface MsgSubmitMisbehaviour {
   misbehaviour?: Any;
   /** signer address */
   signer: string;
+}
+export interface MsgSubmitMisbehaviourProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
+  value: Uint8Array;
 }
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
@@ -112,6 +139,10 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+export interface MsgSubmitMisbehaviourResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
  * type.
@@ -161,75 +192,6 @@ export const MsgCreateClient = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCreateClient {
-    const obj = createBaseMsgCreateClient();
-    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
-    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
-    if (isSet(object.signer)) obj.signer = String(object.signer);
-    return obj;
-  },
-  toJSON(message: MsgCreateClient): unknown {
-    const obj: any = {};
-    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
-    const message = createBaseMsgCreateClient();
-    if (object.clientState !== undefined && object.clientState !== null) {
-      message.clientState = Any.fromPartial(object.clientState);
-    }
-    if (object.consensusState !== undefined && object.consensusState !== null) {
-      message.consensusState = Any.fromPartial(object.consensusState);
-    }
-    message.signer = object.signer ?? "";
-    return message;
-  },
-  fromSDK(object: MsgCreateClientSDKType): MsgCreateClient {
-    return {
-      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
-      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
-      signer: object?.signer
-    };
-  },
-  fromSDKJSON(object: any): MsgCreateClientSDKType {
-    return {
-      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-  toSDK(message: MsgCreateClient): MsgCreateClientSDKType {
-    const obj: any = {};
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAmino(object: MsgCreateClientAmino): MsgCreateClient {
-    return {
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      signer: object.signer
-    };
-  },
-  toAmino(message: MsgCreateClient): MsgCreateClientAmino {
-    const obj: any = {};
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateClientAminoMsg): MsgCreateClient {
-    return MsgCreateClient.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateClient): MsgCreateClientAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCreateClient",
-      value: MsgCreateClient.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateClientProtoMsg): MsgCreateClient {
     return MsgCreateClient.decode(message.value);
   },
@@ -264,44 +226,6 @@ export const MsgCreateClientResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCreateClientResponse {
-    const obj = createBaseMsgCreateClientResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateClientResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
-    const message = createBaseMsgCreateClientResponse();
-    return message;
-  },
-  fromSDK(_: MsgCreateClientResponseSDKType): MsgCreateClientResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCreateClientResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCreateClientResponse): MsgCreateClientResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCreateClientResponseAmino): MsgCreateClientResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateClientResponseAminoMsg): MsgCreateClientResponse {
-    return MsgCreateClientResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateClientResponse): MsgCreateClientResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCreateClientResponse",
-      value: MsgCreateClientResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateClientResponseProtoMsg): MsgCreateClientResponse {
     return MsgCreateClientResponse.decode(message.value);
@@ -360,73 +284,6 @@ export const MsgUpdateClient = {
     }
     return message;
   },
-  fromJSON(object: any): MsgUpdateClient {
-    const obj = createBaseMsgUpdateClient();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (isSet(object.header)) obj.header = Any.fromJSON(object.header);
-    if (isSet(object.signer)) obj.signer = String(object.signer);
-    return obj;
-  },
-  toJSON(message: MsgUpdateClient): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.header !== undefined && (obj.header = message.header ? Any.toJSON(message.header) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
-    const message = createBaseMsgUpdateClient();
-    message.clientId = object.clientId ?? "";
-    if (object.header !== undefined && object.header !== null) {
-      message.header = Any.fromPartial(object.header);
-    }
-    message.signer = object.signer ?? "";
-    return message;
-  },
-  fromSDK(object: MsgUpdateClientSDKType): MsgUpdateClient {
-    return {
-      clientId: object?.client_id,
-      header: object.header ? Any.fromSDK(object.header) : undefined,
-      signer: object?.signer
-    };
-  },
-  fromSDKJSON(object: any): MsgUpdateClientSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      header: isSet(object.header) ? Any.fromSDKJSON(object.header) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-  toSDK(message: MsgUpdateClient): MsgUpdateClientSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    message.header !== undefined && (obj.header = message.header ? Any.toSDK(message.header) : undefined);
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAmino(object: MsgUpdateClientAmino): MsgUpdateClient {
-    return {
-      clientId: object.client_id,
-      header: object?.header ? Any.fromAmino(object.header) : undefined,
-      signer: object.signer
-    };
-  },
-  toAmino(message: MsgUpdateClient): MsgUpdateClientAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.header = message.header ? Any.toAmino(message.header) : undefined;
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateClientAminoMsg): MsgUpdateClient {
-    return MsgUpdateClient.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateClient): MsgUpdateClientAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgUpdateClient",
-      value: MsgUpdateClient.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgUpdateClientProtoMsg): MsgUpdateClient {
     return MsgUpdateClient.decode(message.value);
   },
@@ -461,44 +318,6 @@ export const MsgUpdateClientResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgUpdateClientResponse {
-    const obj = createBaseMsgUpdateClientResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateClientResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
-    const message = createBaseMsgUpdateClientResponse();
-    return message;
-  },
-  fromSDK(_: MsgUpdateClientResponseSDKType): MsgUpdateClientResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgUpdateClientResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgUpdateClientResponse): MsgUpdateClientResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgUpdateClientResponseAmino): MsgUpdateClientResponse {
-    return {};
-  },
-  toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateClientResponseAminoMsg): MsgUpdateClientResponse {
-    return MsgUpdateClientResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateClientResponse): MsgUpdateClientResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgUpdateClientResponse",
-      value: MsgUpdateClientResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgUpdateClientResponseProtoMsg): MsgUpdateClientResponse {
     return MsgUpdateClientResponse.decode(message.value);
@@ -578,99 +397,6 @@ export const MsgUpgradeClient = {
     }
     return message;
   },
-  fromJSON(object: any): MsgUpgradeClient {
-    const obj = createBaseMsgUpgradeClient();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
-    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
-    if (isSet(object.proofUpgradeClient)) obj.proofUpgradeClient = bytesFromBase64(object.proofUpgradeClient);
-    if (isSet(object.proofUpgradeConsensusState)) obj.proofUpgradeConsensusState = bytesFromBase64(object.proofUpgradeConsensusState);
-    if (isSet(object.signer)) obj.signer = String(object.signer);
-    return obj;
-  },
-  toJSON(message: MsgUpgradeClient): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    message.proofUpgradeClient !== undefined && (obj.proofUpgradeClient = base64FromBytes(message.proofUpgradeClient !== undefined ? message.proofUpgradeClient : new Uint8Array()));
-    message.proofUpgradeConsensusState !== undefined && (obj.proofUpgradeConsensusState = base64FromBytes(message.proofUpgradeConsensusState !== undefined ? message.proofUpgradeConsensusState : new Uint8Array()));
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
-    const message = createBaseMsgUpgradeClient();
-    message.clientId = object.clientId ?? "";
-    if (object.clientState !== undefined && object.clientState !== null) {
-      message.clientState = Any.fromPartial(object.clientState);
-    }
-    if (object.consensusState !== undefined && object.consensusState !== null) {
-      message.consensusState = Any.fromPartial(object.consensusState);
-    }
-    message.proofUpgradeClient = object.proofUpgradeClient ?? new Uint8Array();
-    message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
-    message.signer = object.signer ?? "";
-    return message;
-  },
-  fromSDK(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
-    return {
-      clientId: object?.client_id,
-      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
-      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
-      proofUpgradeClient: object?.proof_upgrade_client,
-      proofUpgradeConsensusState: object?.proof_upgrade_consensus_state,
-      signer: object?.signer
-    };
-  },
-  fromSDKJSON(object: any): MsgUpgradeClientSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      proof_upgrade_client: isSet(object.proof_upgrade_client) ? bytesFromBase64(object.proof_upgrade_client) : new Uint8Array(),
-      proof_upgrade_consensus_state: isSet(object.proof_upgrade_consensus_state) ? bytesFromBase64(object.proof_upgrade_consensus_state) : new Uint8Array(),
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-  toSDK(message: MsgUpgradeClient): MsgUpgradeClientSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    obj.proof_upgrade_client = message.proofUpgradeClient;
-    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAmino(object: MsgUpgradeClientAmino): MsgUpgradeClient {
-    return {
-      clientId: object.client_id,
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      proofUpgradeClient: object.proof_upgrade_client,
-      proofUpgradeConsensusState: object.proof_upgrade_consensus_state,
-      signer: object.signer
-    };
-  },
-  toAmino(message: MsgUpgradeClient): MsgUpgradeClientAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.proof_upgrade_client = message.proofUpgradeClient;
-    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpgradeClientAminoMsg): MsgUpgradeClient {
-    return MsgUpgradeClient.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpgradeClient): MsgUpgradeClientAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgUpgradeClient",
-      value: MsgUpgradeClient.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgUpgradeClientProtoMsg): MsgUpgradeClient {
     return MsgUpgradeClient.decode(message.value);
   },
@@ -705,44 +431,6 @@ export const MsgUpgradeClientResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgUpgradeClientResponse {
-    const obj = createBaseMsgUpgradeClientResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpgradeClientResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
-    const message = createBaseMsgUpgradeClientResponse();
-    return message;
-  },
-  fromSDK(_: MsgUpgradeClientResponseSDKType): MsgUpgradeClientResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgUpgradeClientResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgUpgradeClientResponseAmino): MsgUpgradeClientResponse {
-    return {};
-  },
-  toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpgradeClientResponseAminoMsg): MsgUpgradeClientResponse {
-    return MsgUpgradeClientResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpgradeClientResponse): MsgUpgradeClientResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgUpgradeClientResponse",
-      value: MsgUpgradeClientResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgUpgradeClientResponseProtoMsg): MsgUpgradeClientResponse {
     return MsgUpgradeClientResponse.decode(message.value);
@@ -801,73 +489,6 @@ export const MsgSubmitMisbehaviour = {
     }
     return message;
   },
-  fromJSON(object: any): MsgSubmitMisbehaviour {
-    const obj = createBaseMsgSubmitMisbehaviour();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (isSet(object.misbehaviour)) obj.misbehaviour = Any.fromJSON(object.misbehaviour);
-    if (isSet(object.signer)) obj.signer = String(object.signer);
-    return obj;
-  },
-  toJSON(message: MsgSubmitMisbehaviour): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toJSON(message.misbehaviour) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
-    const message = createBaseMsgSubmitMisbehaviour();
-    message.clientId = object.clientId ?? "";
-    if (object.misbehaviour !== undefined && object.misbehaviour !== null) {
-      message.misbehaviour = Any.fromPartial(object.misbehaviour);
-    }
-    message.signer = object.signer ?? "";
-    return message;
-  },
-  fromSDK(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
-    return {
-      clientId: object?.client_id,
-      misbehaviour: object.misbehaviour ? Any.fromSDK(object.misbehaviour) : undefined,
-      signer: object?.signer
-    };
-  },
-  fromSDKJSON(object: any): MsgSubmitMisbehaviourSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      misbehaviour: isSet(object.misbehaviour) ? Any.fromSDKJSON(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-  toSDK(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toSDK(message.misbehaviour) : undefined);
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAmino(object: MsgSubmitMisbehaviourAmino): MsgSubmitMisbehaviour {
-    return {
-      clientId: object.client_id,
-      misbehaviour: object?.misbehaviour ? Any.fromAmino(object.misbehaviour) : undefined,
-      signer: object.signer
-    };
-  },
-  toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined;
-    obj.signer = message.signer;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitMisbehaviourAminoMsg): MsgSubmitMisbehaviour {
-    return MsgSubmitMisbehaviour.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitMisbehaviour",
-      value: MsgSubmitMisbehaviour.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSubmitMisbehaviourProtoMsg): MsgSubmitMisbehaviour {
     return MsgSubmitMisbehaviour.decode(message.value);
   },
@@ -902,44 +523,6 @@ export const MsgSubmitMisbehaviourResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgSubmitMisbehaviourResponse {
-    const obj = createBaseMsgSubmitMisbehaviourResponse();
-    return obj;
-  },
-  toJSON(_: MsgSubmitMisbehaviourResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
-    const message = createBaseMsgSubmitMisbehaviourResponse();
-    return message;
-  },
-  fromSDK(_: MsgSubmitMisbehaviourResponseSDKType): MsgSubmitMisbehaviourResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgSubmitMisbehaviourResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgSubmitMisbehaviourResponseAmino): MsgSubmitMisbehaviourResponse {
-    return {};
-  },
-  toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitMisbehaviourResponseAminoMsg): MsgSubmitMisbehaviourResponse {
-    return MsgSubmitMisbehaviourResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitMisbehaviourResponse",
-      value: MsgSubmitMisbehaviourResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSubmitMisbehaviourResponseProtoMsg): MsgSubmitMisbehaviourResponse {
     return MsgSubmitMisbehaviourResponse.decode(message.value);
