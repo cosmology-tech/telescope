@@ -58,6 +58,10 @@ export interface AttributeContext {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
+export interface AttributeContextProtoMsg {
+  typeUrl: "/google.rpc.context.AttributeContext";
+  value: Uint8Array;
+}
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -91,6 +95,10 @@ export interface AttributeContext_Peer_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Peer_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -122,6 +130,10 @@ export interface AttributeContext_Peer {
    * physical location where this peer is running.
    */
   regionCode: string;
+}
+export interface AttributeContext_PeerProtoMsg {
+  typeUrl: "/google.rpc.context.Peer";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes for a node that handles a network request.
@@ -166,6 +178,10 @@ export interface AttributeContext_Api {
    * "v1alpha1".
    */
   version: string;
+}
+export interface AttributeContext_ApiProtoMsg {
+  typeUrl: "/google.rpc.context.Api";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -245,6 +261,10 @@ export interface AttributeContext_Auth {
    */
   accessLevels: string[];
 }
+export interface AttributeContext_AuthProtoMsg {
+  typeUrl: "/google.rpc.context.Auth";
+  value: Uint8Array;
+}
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
@@ -260,6 +280,10 @@ export interface AttributeContext_AuthSDKType {
 export interface AttributeContext_Request_HeadersEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Request_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -323,6 +347,10 @@ export interface AttributeContext_Request {
    */
   auth?: AttributeContext_Auth;
 }
+export interface AttributeContext_RequestProtoMsg {
+  typeUrl: "/google.rpc.context.Request";
+  value: Uint8Array;
+}
 /**
  * This message defines attributes for an HTTP request. If the actual
  * request is not an HTTP request, the runtime system should try to map
@@ -347,6 +375,10 @@ export interface AttributeContext_RequestSDKType {
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Response_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -382,6 +414,10 @@ export interface AttributeContext_Response {
    */
   backendLatency?: Duration;
 }
+export interface AttributeContext_ResponseProtoMsg {
+  typeUrl: "/google.rpc.context.Response";
+  value: Uint8Array;
+}
 /**
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
@@ -399,6 +435,10 @@ export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Resource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -406,6 +446,10 @@ export interface AttributeContext_Resource_LabelsEntrySDKType {
 export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -505,6 +549,10 @@ export interface AttributeContext_Resource {
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
   location: string;
+}
+export interface AttributeContext_ResourceProtoMsg {
+  typeUrl: "/google.rpc.context.Resource";
+  value: Uint8Array;
 }
 /**
  * This message defines core attributes for a resource. A resource is an

@@ -16,6 +16,10 @@ export interface SourceContextProtoMsg {
   typeUrl: "/google.protobuf.SourceContext";
   value: Uint8Array;
 }
+export interface SourceContextProtoMsg {
+  typeUrl: "/google.protobuf.SourceContext";
+  value: Uint8Array;
+}
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.

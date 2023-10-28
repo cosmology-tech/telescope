@@ -51,6 +51,10 @@ export interface ClientState {
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
+  value: Uint8Array;
+}
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -79,6 +83,10 @@ export interface ConsensusState {
   root: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
+export interface ConsensusStateProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
+  value: Uint8Array;
+}
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
   timestamp: Date;
@@ -93,6 +101,10 @@ export interface Misbehaviour {
   clientId: string;
   header1?: Header;
   header2?: Header;
+}
+export interface MisbehaviourProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
+  value: Uint8Array;
 }
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
@@ -123,6 +135,10 @@ export interface Header {
   trustedHeight: Height;
   trustedValidators?: ValidatorSet;
 }
+export interface HeaderProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Header";
+  value: Uint8Array;
+}
 /**
  * Header defines the Tendermint client consensus Header.
  * It encapsulates all the information necessary to update from a trusted
@@ -150,6 +166,10 @@ export interface HeaderSDKType {
 export interface Fraction {
   numerator: bigint;
   denominator: bigint;
+}
+export interface FractionProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
+  value: Uint8Array;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only

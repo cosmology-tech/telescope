@@ -2,7 +2,6 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
 import { ClaimRecord, ClaimRecordSDKType } from "./claim";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {
@@ -12,6 +11,10 @@ export interface GenesisState {
   params: Params;
   /** list of claim records, one for every airdrop recipient */
   claimRecords: ClaimRecord[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisStateSDKType {
@@ -62,87 +65,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.moduleAccountBalance)) obj.moduleAccountBalance = Coin.fromJSON(object.moduleAccountBalance);
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.claimRecords)) obj.claimRecords = object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.moduleAccountBalance !== undefined && (obj.moduleAccountBalance = message.moduleAccountBalance ? Coin.toJSON(message.moduleAccountBalance) : undefined);
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.claimRecords) {
-      obj.claimRecords = message.claimRecords.map(e => e ? ClaimRecord.toJSON(e) : undefined);
-    } else {
-      obj.claimRecords = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.moduleAccountBalance !== undefined && object.moduleAccountBalance !== null) {
-      message.moduleAccountBalance = Coin.fromPartial(object.moduleAccountBalance);
-    }
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    message.claimRecords = object.claimRecords?.map(e => ClaimRecord.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      moduleAccountBalance: object.module_account_balance ? Coin.fromSDK(object.module_account_balance) : undefined,
-      params: object.params ? Params.fromSDK(object.params) : undefined,
-      claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      module_account_balance: isSet(object.module_account_balance) ? Coin.fromSDKJSON(object.module_account_balance) : undefined,
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      claim_records: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.moduleAccountBalance !== undefined && (obj.module_account_balance = message.moduleAccountBalance ? Coin.toSDK(message.moduleAccountBalance) : undefined);
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    if (message.claimRecords) {
-      obj.claim_records = message.claimRecords.map(e => e ? ClaimRecord.toSDK(e) : undefined);
-    } else {
-      obj.claim_records = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      moduleAccountBalance: object?.module_account_balance ? Coin.fromAmino(object.module_account_balance) : undefined,
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.module_account_balance = message.moduleAccountBalance ? Coin.toAmino(message.moduleAccountBalance) : undefined;
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    if (message.claimRecords) {
-      obj.claim_records = message.claimRecords.map(e => e ? ClaimRecord.toAmino(e) : undefined);
-    } else {
-      obj.claim_records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/claim/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

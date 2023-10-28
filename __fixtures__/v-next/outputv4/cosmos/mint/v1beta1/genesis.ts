@@ -9,6 +9,10 @@ export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
   minter: MinterSDKType;

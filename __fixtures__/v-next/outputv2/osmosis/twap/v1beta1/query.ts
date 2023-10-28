@@ -15,6 +15,10 @@ export interface ArithmeticTwapRequestProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest";
   value: Uint8Array;
 }
+export interface ArithmeticTwapRequestProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest";
+  value: Uint8Array;
+}
 export interface ArithmeticTwapRequestAmino {
   pool_id: string;
   base_asset: string;
@@ -40,6 +44,10 @@ export interface ArithmeticTwapResponseProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse";
   value: Uint8Array;
 }
+export interface ArithmeticTwapResponseProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse";
+  value: Uint8Array;
+}
 export interface ArithmeticTwapResponseAmino {
   arithmetic_twap: string;
 }
@@ -55,6 +63,10 @@ export interface ArithmeticTwapToNowRequest {
   baseAsset: string;
   quoteAsset: string;
   startTime: Date;
+}
+export interface ArithmeticTwapToNowRequestProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest";
+  value: Uint8Array;
 }
 export interface ArithmeticTwapToNowRequestProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest";
@@ -83,6 +95,10 @@ export interface ArithmeticTwapToNowResponseProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse";
   value: Uint8Array;
 }
+export interface ArithmeticTwapToNowResponseProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse";
+  value: Uint8Array;
+}
 export interface ArithmeticTwapToNowResponseAmino {
   arithmetic_twap: string;
 }
@@ -98,6 +114,10 @@ export interface ParamsRequestProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ParamsRequest";
   value: Uint8Array;
 }
+export interface ParamsRequestProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsRequest";
+  value: Uint8Array;
+}
 export interface ParamsRequestAmino {}
 export interface ParamsRequestAminoMsg {
   type: "osmosis/twap/params-request";
@@ -106,6 +126,10 @@ export interface ParamsRequestAminoMsg {
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
+}
+export interface ParamsResponseProtoMsg {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsResponse";
+  value: Uint8Array;
 }
 export interface ParamsResponseProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ParamsResponse";

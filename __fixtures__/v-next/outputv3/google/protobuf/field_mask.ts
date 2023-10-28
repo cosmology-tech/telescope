@@ -210,6 +210,10 @@ export interface FieldMaskProtoMsg {
   typeUrl: "/google.protobuf.FieldMask";
   value: Uint8Array;
 }
+export interface FieldMaskProtoMsg {
+  typeUrl: "/google.protobuf.FieldMask";
+  value: Uint8Array;
+}
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  * 

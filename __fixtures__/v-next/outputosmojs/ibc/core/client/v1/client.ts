@@ -13,6 +13,10 @@ export interface IdentifiedClientState {
   /** client state */
   clientState?: Any;
 }
+export interface IdentifiedClientStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedClientState";
+  value: Uint8Array;
+}
 /**
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
@@ -31,6 +35,10 @@ export interface ConsensusStateWithHeight {
   /** consensus state */
   consensusState?: Any;
 }
+export interface ConsensusStateWithHeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight";
+  value: Uint8Array;
+}
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
  * field.
@@ -48,6 +56,10 @@ export interface ClientConsensusStates {
   clientId: string;
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
+}
+export interface ClientConsensusStatesProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientConsensusStates";
+  value: Uint8Array;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -75,6 +87,10 @@ export interface ClientUpdateProposal {
    * client
    */
   substituteClientId: string;
+}
+export interface ClientUpdateProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientUpdateProposal";
+  value: Uint8Array;
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -106,6 +122,10 @@ export interface UpgradeProposal {
    */
   upgradedClientState?: Any;
 }
+export interface UpgradeProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.UpgradeProposal";
+  value: Uint8Array;
+}
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
@@ -134,6 +154,10 @@ export interface Height {
   /** the height within the given revision */
   revisionHeight: bigint;
 }
+export interface HeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Height";
+  value: Uint8Array;
+}
 /**
  * Height is a monotonically increasing data type
  * that can be compared against another Height for the purposes of updating and
@@ -154,6 +178,10 @@ export interface HeightSDKType {
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
   allowedClients: string[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Params";
+  value: Uint8Array;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {

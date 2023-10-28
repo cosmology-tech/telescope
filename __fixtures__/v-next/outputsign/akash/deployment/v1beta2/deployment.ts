@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -47,6 +46,10 @@ export interface DeploymentID {
   owner: string;
   dseq: bigint;
 }
+export interface DeploymentIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentID";
+  value: Uint8Array;
+}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
@@ -58,6 +61,10 @@ export interface Deployment {
   state: Deployment_State;
   version: Uint8Array;
   createdAt: bigint;
+}
+export interface DeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Deployment";
+  value: Uint8Array;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
@@ -71,6 +78,10 @@ export interface DeploymentFilters {
   owner: string;
   dseq: bigint;
   state: string;
+}
+export interface DeploymentFiltersProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: Uint8Array;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -114,65 +125,6 @@ export const DeploymentID = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DeploymentID {
-    const obj = createBaseDeploymentID();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    return obj;
-  },
-  toJSON(message: DeploymentID): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<DeploymentID>, I>>(object: I): DeploymentID {
-    const message = createBaseDeploymentID();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    return message;
-  },
-  fromSDK(object: DeploymentIDSDKType): DeploymentID {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq
-    };
-  },
-  fromSDKJSON(object: any): DeploymentIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: DeploymentID): DeploymentIDSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    return obj;
-  },
-  fromAmino(object: DeploymentIDAmino): DeploymentID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq)
-    };
-  },
-  toAmino(message: DeploymentID): DeploymentIDAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
-    return DeploymentID.fromAmino(object.value);
-  },
-  toAminoMsg(message: DeploymentID): DeploymentIDAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/deployment-i-d",
-      value: DeploymentID.toAmino(message)
-    };
   },
   fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
     return DeploymentID.decode(message.value);
@@ -238,83 +190,6 @@ export const Deployment = {
     }
     return message;
   },
-  fromJSON(object: any): Deployment {
-    const obj = createBaseDeployment();
-    if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
-    if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Deployment): unknown {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Deployment>, I>>(object: I): Deployment {
-    const message = createBaseDeployment();
-    if (object.deploymentId !== undefined && object.deploymentId !== null) {
-      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
-    }
-    message.state = object.state ?? 0;
-    message.version = object.version ?? new Uint8Array();
-    if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = BigInt(object.createdAt.toString());
-    }
-    return message;
-  },
-  fromSDK(object: DeploymentSDKType): Deployment {
-    return {
-      deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object?.version,
-      createdAt: object?.created_at
-    };
-  },
-  fromSDKJSON(object: any): DeploymentSDKType {
-    return {
-      deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Deployment): DeploymentSDKType {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toSDK(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    obj.version = message.version;
-    obj.created_at = message.createdAt;
-    return obj;
-  },
-  fromAmino(object: DeploymentAmino): Deployment {
-    return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
-      createdAt: BigInt(object.created_at)
-    };
-  },
-  toAmino(message: Deployment): DeploymentAmino {
-    const obj: any = {};
-    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
-    obj.state = message.state;
-    obj.version = message.version;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
-    return Deployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: Deployment): DeploymentAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/deployment",
-      value: Deployment.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DeploymentProtoMsg): Deployment {
     return Deployment.decode(message.value);
   },
@@ -371,73 +246,6 @@ export const DeploymentFilters = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DeploymentFilters {
-    const obj = createBaseDeploymentFilters();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: DeploymentFilters): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.state !== undefined && (obj.state = message.state);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
-    const message = createBaseDeploymentFilters();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    message.state = object.state ?? "";
-    return message;
-  },
-  fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq,
-      state: object?.state
-    };
-  },
-  fromSDKJSON(object: any): DeploymentFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      state: isSet(object.state) ? String(object.state) : ""
-    };
-  },
-  toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      state: object.state
-    };
-  },
-  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
-    return DeploymentFilters.fromAmino(object.value);
-  },
-  toAminoMsg(message: DeploymentFilters): DeploymentFiltersAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/deployment-filters",
-      value: DeploymentFilters.toAmino(message)
-    };
   },
   fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
     return DeploymentFilters.decode(message.value);

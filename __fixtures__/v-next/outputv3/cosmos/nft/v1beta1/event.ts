@@ -12,6 +12,10 @@ export interface EventSendProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventSend";
   value: Uint8Array;
 }
+export interface EventSendProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.EventSend";
+  value: Uint8Array;
+}
 /** EventSend is emitted on Msg/Send */
 export interface EventSendAmino {
   class_id: string;
@@ -40,6 +44,10 @@ export interface EventMintProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventMint";
   value: Uint8Array;
 }
+export interface EventMintProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.EventMint";
+  value: Uint8Array;
+}
 /** EventMint is emitted on Mint */
 export interface EventMintAmino {
   class_id: string;
@@ -61,6 +69,10 @@ export interface EventBurn {
   classId: string;
   id: string;
   owner: string;
+}
+export interface EventBurnProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.EventBurn";
+  value: Uint8Array;
 }
 export interface EventBurnProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventBurn";

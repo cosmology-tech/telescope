@@ -7,6 +7,10 @@ export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
   value: Uint8Array;
 }
+export interface QueryEpochsInfoRequestProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoRequestAmino {}
 export interface QueryEpochsInfoRequestAminoMsg {
   type: "osmosis/epochs/query-epochs-info-request";
@@ -15,6 +19,10 @@ export interface QueryEpochsInfoRequestAminoMsg {
 export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
+}
+export interface QueryEpochsInfoResponseProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
@@ -37,6 +45,10 @@ export interface QueryCurrentEpochRequestProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
   value: Uint8Array;
 }
+export interface QueryCurrentEpochRequestProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
 }
@@ -49,6 +61,10 @@ export interface QueryCurrentEpochRequestSDKType {
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: bigint;
+}
+export interface QueryCurrentEpochResponseProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse";
+  value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse";

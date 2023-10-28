@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -205,6 +204,10 @@ export const protobufPackage = "google.protobuf";
 export interface FieldMask {
   /** The set of field mask paths. */
   paths: string[];
+}
+export interface FieldMaskProtoMsg {
+  typeUrl: "/google.protobuf.FieldMask";
+  value: Uint8Array;
 }
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -439,61 +442,6 @@ export const FieldMask = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): FieldMask {
-    const obj = createBaseFieldMask();
-    if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: FieldMask): unknown {
-    const obj: any = {};
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<FieldMask>): FieldMask {
-    const message = createBaseFieldMask();
-    message.paths = object.paths?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: FieldMaskSDKType): FieldMask {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): FieldMaskSDKType {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: FieldMask): FieldMaskSDKType {
-    const obj: any = {};
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-    return obj;
-  },
-  fromAmino(object: FieldMaskAmino): FieldMask {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: FieldMask): FieldMaskAmino {
-    const obj: any = {};
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
-    return FieldMask.fromAmino(object.value);
   },
   fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
     return FieldMask.decode(message.value);

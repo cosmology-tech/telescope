@@ -23,6 +23,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.types.v1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.core.types.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisStateAmino {
   /** ICS002 - Clients genesis state */

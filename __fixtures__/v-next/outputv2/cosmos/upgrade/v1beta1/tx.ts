@@ -17,6 +17,10 @@ export interface MsgSoftwareUpgradeProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade";
   value: Uint8Array;
 }
+export interface MsgSoftwareUpgradeProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade";
+  value: Uint8Array;
+}
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
  * 
@@ -51,6 +55,10 @@ export interface MsgSoftwareUpgradeResponseProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse";
   value: Uint8Array;
 }
+export interface MsgSoftwareUpgradeResponseProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
  * 
@@ -75,6 +83,10 @@ export interface MsgSoftwareUpgradeResponseSDKType {}
 export interface MsgCancelUpgrade {
   /** authority is the address of the governance account. */
   authority: string;
+}
+export interface MsgCancelUpgradeProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade";
+  value: Uint8Array;
 }
 export interface MsgCancelUpgradeProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade";
@@ -107,6 +119,10 @@ export interface MsgCancelUpgradeSDKType {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeResponse {}
+export interface MsgCancelUpgradeResponseProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse";
+  value: Uint8Array;
+}
 export interface MsgCancelUpgradeResponseProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse";
   value: Uint8Array;

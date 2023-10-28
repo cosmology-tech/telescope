@@ -20,6 +20,10 @@ export interface MsgStoreCodeProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode";
   value: Uint8Array;
 }
+export interface MsgStoreCodeProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode";
+  value: Uint8Array;
+}
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCodeAmino {
   /** Sender is the that actor that signed the messages */
@@ -46,6 +50,10 @@ export interface MsgStoreCodeSDKType {
 export interface MsgStoreCodeResponse {
   /** CodeID is the reference to the stored WASM code */
   codeId: bigint;
+}
+export interface MsgStoreCodeResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgStoreCodeResponse";
+  value: Uint8Array;
 }
 export interface MsgStoreCodeResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgStoreCodeResponse";
@@ -81,6 +89,10 @@ export interface MsgInstantiateContract {
   msg: Uint8Array;
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
+}
+export interface MsgInstantiateContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContract";
+  value: Uint8Array;
 }
 export interface MsgInstantiateContractProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContract";
@@ -131,6 +143,10 @@ export interface MsgInstantiateContractResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContractResponse";
   value: Uint8Array;
 }
+export interface MsgInstantiateContractResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContractResponse";
+  value: Uint8Array;
+}
 /** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponseAmino {
   /** Address is the bech32 address of the new contract instance. */
@@ -157,6 +173,10 @@ export interface MsgExecuteContract {
   msg: Uint8Array;
   /** Funds coins that are transferred to the contract on execution */
   funds: Coin[];
+}
+export interface MsgExecuteContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract";
+  value: Uint8Array;
 }
 export interface MsgExecuteContractProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract";
@@ -193,6 +213,10 @@ export interface MsgExecuteContractResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContractResponse";
   value: Uint8Array;
 }
+export interface MsgExecuteContractResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContractResponse";
+  value: Uint8Array;
+}
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseAmino {
   /** Data contains base64-encoded bytes to returned from the contract */
@@ -216,6 +240,10 @@ export interface MsgMigrateContract {
   codeId: bigint;
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
+}
+export interface MsgMigrateContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContract";
+  value: Uint8Array;
 }
 export interface MsgMigrateContractProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContract";
@@ -255,6 +283,10 @@ export interface MsgMigrateContractResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContractResponse";
   value: Uint8Array;
 }
+export interface MsgMigrateContractResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContractResponse";
+  value: Uint8Array;
+}
 /** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponseAmino {
   /**
@@ -279,6 +311,10 @@ export interface MsgUpdateAdmin {
   newAdmin: string;
   /** Contract is the address of the smart contract */
   contract: string;
+}
+export interface MsgUpdateAdminProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdmin";
+  value: Uint8Array;
 }
 export interface MsgUpdateAdminProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdmin";
@@ -309,6 +345,10 @@ export interface MsgUpdateAdminResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdminResponse";
   value: Uint8Array;
 }
+export interface MsgUpdateAdminResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdminResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponseAmino {}
 export interface MsgUpdateAdminResponseAminoMsg {
@@ -323,6 +363,10 @@ export interface MsgClearAdmin {
   sender: string;
   /** Contract is the address of the smart contract */
   contract: string;
+}
+export interface MsgClearAdminProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgClearAdmin";
+  value: Uint8Array;
 }
 export interface MsgClearAdminProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgClearAdmin";
@@ -346,6 +390,10 @@ export interface MsgClearAdminSDKType {
 }
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponse {}
+export interface MsgClearAdminResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgClearAdminResponse";
+  value: Uint8Array;
+}
 export interface MsgClearAdminResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgClearAdminResponse";
   value: Uint8Array;

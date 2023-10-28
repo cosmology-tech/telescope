@@ -1,10 +1,13 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
   deploymentMinDeposit: Coin;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Params";
+  value: Uint8Array;
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
@@ -39,57 +42,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.deploymentMinDeposit)) obj.deploymentMinDeposit = Coin.fromJSON(object.deploymentMinDeposit);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.deploymentMinDeposit !== undefined && (obj.deploymentMinDeposit = message.deploymentMinDeposit ? Coin.toJSON(message.deploymentMinDeposit) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
-    const message = createBaseParams();
-    if (object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null) {
-      message.deploymentMinDeposit = Coin.fromPartial(object.deploymentMinDeposit);
-    }
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      deploymentMinDeposit: object.deployment_min_deposit ? Coin.fromSDK(object.deployment_min_deposit) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      deployment_min_deposit: isSet(object.deployment_min_deposit) ? Coin.fromSDKJSON(object.deployment_min_deposit) : undefined
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.deploymentMinDeposit !== undefined && (obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toSDK(message.deploymentMinDeposit) : undefined);
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      deploymentMinDeposit: object?.deployment_min_deposit ? Coin.fromAmino(object.deployment_min_deposit) : undefined
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

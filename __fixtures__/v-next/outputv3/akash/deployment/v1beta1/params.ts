@@ -10,6 +10,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {
   deployment_min_deposit?: CoinAmino;

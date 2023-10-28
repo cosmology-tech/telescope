@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * ### System parameter configuration
@@ -43,6 +42,10 @@ export interface SystemParameters {
    */
   rules: SystemParameterRule[];
 }
+export interface SystemParametersProtoMsg {
+  typeUrl: "/google.api.SystemParameters";
+  value: Uint8Array;
+}
 /**
  * ### System parameter configuration
  * 
@@ -75,6 +78,10 @@ export interface SystemParameterRule {
    */
   parameters: SystemParameter[];
 }
+export interface SystemParameterRuleProtoMsg {
+  typeUrl: "/google.api.SystemParameterRule";
+  value: Uint8Array;
+}
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
@@ -101,6 +108,10 @@ export interface SystemParameter {
    * sensitive.
    */
   urlQueryParameter: string;
+}
+export interface SystemParameterProtoMsg {
+  typeUrl: "/google.api.SystemParameter";
+  value: Uint8Array;
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -141,61 +152,6 @@ export const SystemParameters = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SystemParameters {
-    const obj = createBaseSystemParameters();
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => SystemParameterRule.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SystemParameters): unknown {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? SystemParameterRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SystemParameters>): SystemParameters {
-    const message = createBaseSystemParameters();
-    message.rules = object.rules?.map(e => SystemParameterRule.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SystemParametersSDKType): SystemParameters {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SystemParametersSDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SystemParameters): SystemParametersSDKType {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? SystemParameterRule.toSDK(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SystemParametersAmino): SystemParameters {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SystemParameters): SystemParametersAmino {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SystemParametersAminoMsg): SystemParameters {
-    return SystemParameters.fromAmino(object.value);
   },
   fromProtoMsg(message: SystemParametersProtoMsg): SystemParameters {
     return SystemParameters.decode(message.value);
@@ -246,69 +202,6 @@ export const SystemParameterRule = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SystemParameterRule {
-    const obj = createBaseSystemParameterRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (Array.isArray(object?.parameters)) obj.parameters = object.parameters.map((e: any) => SystemParameter.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SystemParameterRule): unknown {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    if (message.parameters) {
-      obj.parameters = message.parameters.map(e => e ? SystemParameter.toJSON(e) : undefined);
-    } else {
-      obj.parameters = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SystemParameterRule>): SystemParameterRule {
-    const message = createBaseSystemParameterRule();
-    message.selector = object.selector ?? "";
-    message.parameters = object.parameters?.map(e => SystemParameter.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SystemParameterRuleSDKType): SystemParameterRule {
-    return {
-      selector: object?.selector,
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SystemParameterRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SystemParameterRule): SystemParameterRuleSDKType {
-    const obj: any = {};
-    obj.selector = message.selector;
-    if (message.parameters) {
-      obj.parameters = message.parameters.map(e => e ? SystemParameter.toSDK(e) : undefined);
-    } else {
-      obj.parameters = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
-    return {
-      selector: object.selector,
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    if (message.parameters) {
-      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
-    } else {
-      obj.parameters = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SystemParameterRuleAminoMsg): SystemParameterRule {
-    return SystemParameterRule.fromAmino(object.value);
   },
   fromProtoMsg(message: SystemParameterRuleProtoMsg): SystemParameterRule {
     return SystemParameterRule.decode(message.value);
@@ -366,65 +259,6 @@ export const SystemParameter = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SystemParameter {
-    const obj = createBaseSystemParameter();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.httpHeader)) obj.httpHeader = String(object.httpHeader);
-    if (isSet(object.urlQueryParameter)) obj.urlQueryParameter = String(object.urlQueryParameter);
-    return obj;
-  },
-  toJSON(message: SystemParameter): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.httpHeader !== undefined && (obj.httpHeader = message.httpHeader);
-    message.urlQueryParameter !== undefined && (obj.urlQueryParameter = message.urlQueryParameter);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SystemParameter>): SystemParameter {
-    const message = createBaseSystemParameter();
-    message.name = object.name ?? "";
-    message.httpHeader = object.httpHeader ?? "";
-    message.urlQueryParameter = object.urlQueryParameter ?? "";
-    return message;
-  },
-  fromSDK(object: SystemParameterSDKType): SystemParameter {
-    return {
-      name: object?.name,
-      httpHeader: object?.http_header,
-      urlQueryParameter: object?.url_query_parameter
-    };
-  },
-  fromSDKJSON(object: any): SystemParameterSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      http_header: isSet(object.http_header) ? String(object.http_header) : "",
-      url_query_parameter: isSet(object.url_query_parameter) ? String(object.url_query_parameter) : ""
-    };
-  },
-  toSDK(message: SystemParameter): SystemParameterSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.http_header = message.httpHeader;
-    obj.url_query_parameter = message.urlQueryParameter;
-    return obj;
-  },
-  fromAmino(object: SystemParameterAmino): SystemParameter {
-    return {
-      name: object.name,
-      httpHeader: object.http_header,
-      urlQueryParameter: object.url_query_parameter
-    };
-  },
-  toAmino(message: SystemParameter): SystemParameterAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.http_header = message.httpHeader;
-    obj.url_query_parameter = message.urlQueryParameter;
-    return obj;
-  },
-  fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {
-    return SystemParameter.fromAmino(object.value);
   },
   fromProtoMsg(message: SystemParameterProtoMsg): SystemParameter {
     return SystemParameter.decode(message.value);

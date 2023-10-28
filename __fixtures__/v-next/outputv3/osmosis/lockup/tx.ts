@@ -13,6 +13,10 @@ export interface MsgLockTokensProtoMsg {
   typeUrl: "/osmosis.lockup.MsgLockTokens";
   value: Uint8Array;
 }
+export interface MsgLockTokensProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgLockTokens";
+  value: Uint8Array;
+}
 export interface MsgLockTokensAmino {
   owner: string;
   duration?: DurationAmino;
@@ -29,6 +33,10 @@ export interface MsgLockTokensSDKType {
 }
 export interface MsgLockTokensResponse {
   ID: bigint;
+}
+export interface MsgLockTokensResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgLockTokensResponse";
+  value: Uint8Array;
 }
 export interface MsgLockTokensResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgLockTokensResponse";
@@ -51,6 +59,10 @@ export interface MsgBeginUnlockingAllProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll";
   value: Uint8Array;
 }
+export interface MsgBeginUnlockingAllProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll";
+  value: Uint8Array;
+}
 export interface MsgBeginUnlockingAllAmino {
   owner: string;
 }
@@ -63,6 +75,10 @@ export interface MsgBeginUnlockingAllSDKType {
 }
 export interface MsgBeginUnlockingAllResponse {
   unlocks: PeriodLock[];
+}
+export interface MsgBeginUnlockingAllResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlockingAllResponse";
+  value: Uint8Array;
 }
 export interface MsgBeginUnlockingAllResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAllResponse";
@@ -83,6 +99,10 @@ export interface MsgBeginUnlocking {
   ID: bigint;
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
+}
+export interface MsgBeginUnlockingProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlocking";
+  value: Uint8Array;
 }
 export interface MsgBeginUnlockingProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlocking";
@@ -110,6 +130,10 @@ export interface MsgBeginUnlockingResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse";
   value: Uint8Array;
 }
+export interface MsgBeginUnlockingResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse";
+  value: Uint8Array;
+}
 export interface MsgBeginUnlockingResponseAmino {
   success: boolean;
 }
@@ -132,6 +156,10 @@ export interface MsgExtendLockup {
    * unlocking
    */
   duration: Duration;
+}
+export interface MsgExtendLockupProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgExtendLockup";
+  value: Uint8Array;
 }
 export interface MsgExtendLockupProtoMsg {
   typeUrl: "/osmosis.lockup.MsgExtendLockup";
@@ -170,6 +198,10 @@ export interface MsgExtendLockupResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgExtendLockupResponse";
   value: Uint8Array;
 }
+export interface MsgExtendLockupResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgExtendLockupResponse";
+  value: Uint8Array;
+}
 export interface MsgExtendLockupResponseAmino {
   success: boolean;
 }
@@ -189,6 +221,10 @@ export interface MsgForceUnlock {
   ID: bigint;
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
+}
+export interface MsgForceUnlockProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgForceUnlock";
+  value: Uint8Array;
 }
 export interface MsgForceUnlockProtoMsg {
   typeUrl: "/osmosis.lockup.MsgForceUnlock";
@@ -219,6 +255,10 @@ export interface MsgForceUnlockSDKType {
 }
 export interface MsgForceUnlockResponse {
   success: boolean;
+}
+export interface MsgForceUnlockResponseProtoMsg {
+  typeUrl: "/osmosis.lockup.MsgForceUnlockResponse";
+  value: Uint8Array;
 }
 export interface MsgForceUnlockResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgForceUnlockResponse";

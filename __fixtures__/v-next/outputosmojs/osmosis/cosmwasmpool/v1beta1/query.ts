@@ -4,10 +4,18 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** =============================== Params */
 export interface ParamsRequest {}
+export interface ParamsRequestProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsRequest";
+  value: Uint8Array;
+}
 /** =============================== Params */
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
+}
+export interface ParamsResponseProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsResponse";
+  value: Uint8Array;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;

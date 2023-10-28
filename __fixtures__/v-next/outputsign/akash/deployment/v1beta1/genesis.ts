@@ -2,12 +2,15 @@ import { Deployment, DeploymentSDKType } from "./deployment";
 import { Group, GroupSDKType } from "./group";
 import { Params, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
   deployment: Deployment | undefined;
   groups: Group[];
+}
+export interface GenesisDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
+  value: Uint8Array;
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
@@ -18,6 +21,10 @@ export interface GenesisDeploymentSDKType {
 export interface GenesisState {
   deployments: GenesisDeployment[];
   params: Params | undefined;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -60,77 +67,6 @@ export const GenesisDeployment = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisDeployment {
-    const obj = createBaseGenesisDeployment();
-    if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
-    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisDeployment): unknown {
-    const obj: any = {};
-    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
-    const message = createBaseGenesisDeployment();
-    if (object.deployment !== undefined && object.deployment !== null) {
-      message.deployment = Deployment.fromPartial(object.deployment);
-    }
-    message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenesisDeploymentSDKType): GenesisDeployment {
-    return {
-      deployment: object.deployment ? Deployment.fromSDK(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenesisDeploymentSDKType {
-    return {
-      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenesisDeployment): GenesisDeploymentSDKType {
-    const obj: any = {};
-    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toSDK(message.deployment) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toSDK(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenesisDeploymentAmino): GenesisDeployment {
-    return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
-    const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
-    return GenesisDeployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisDeployment): GenesisDeploymentAminoMsg {
-    return {
-      type: "akash/deployment/genesis-deployment",
-      value: GenesisDeployment.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
     return GenesisDeployment.decode(message.value);
@@ -181,77 +117,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.deployments)) obj.deployments = object.deployments.map((e: any) => GenesisDeployment.fromJSON(e));
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toJSON(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<GenesisState>, I>>(object: I): GenesisState {
-    const message = createBaseGenesisState();
-    message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromSDK(e)) : [],
-      params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromSDKJSON(e)) : [],
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toSDK(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "akash/deployment/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

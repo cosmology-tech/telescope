@@ -7,6 +7,10 @@ export interface ListAllInterfacesRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest";
   value: Uint8Array;
 }
+export interface ListAllInterfacesRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest";
+  value: Uint8Array;
+}
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequestAmino {}
 export interface ListAllInterfacesRequestAminoMsg {
@@ -19,6 +23,10 @@ export interface ListAllInterfacesRequestSDKType {}
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
   interfaceNames: string[];
+}
+export interface ListAllInterfacesResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse";
+  value: Uint8Array;
 }
 export interface ListAllInterfacesResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse";
@@ -49,6 +57,10 @@ export interface ListImplementationsRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest";
   value: Uint8Array;
 }
+export interface ListImplementationsRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest";
+  value: Uint8Array;
+}
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
  * RPC.
@@ -74,6 +86,10 @@ export interface ListImplementationsRequestSDKType {
  */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
+}
+export interface ListImplementationsResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse";
+  value: Uint8Array;
 }
 export interface ListImplementationsResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse";

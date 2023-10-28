@@ -16,6 +16,10 @@ export interface MsgCreatePosition {
   tokenMinAmount0: string;
   tokenMinAmount1: string;
 }
+export interface MsgCreatePositionProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreatePosition";
+  value: Uint8Array;
+}
 /** ===================== MsgCreatePosition */
 export interface MsgCreatePositionSDKType {
   pool_id: bigint;
@@ -34,6 +38,10 @@ export interface MsgCreatePositionResponse {
   joinTime: Date;
   liquidityCreated: string;
 }
+export interface MsgCreatePositionResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreatePositionResponse";
+  value: Uint8Array;
+}
 export interface MsgCreatePositionResponseSDKType {
   position_id: bigint;
   amount0: string;
@@ -47,6 +55,10 @@ export interface MsgWithdrawPosition {
   sender: string;
   liquidityAmount: string;
 }
+export interface MsgWithdrawPositionProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgWithdrawPosition";
+  value: Uint8Array;
+}
 /** ===================== MsgWithdrawPosition */
 export interface MsgWithdrawPositionSDKType {
   position_id: bigint;
@@ -57,6 +69,10 @@ export interface MsgWithdrawPositionResponse {
   amount0: string;
   amount1: string;
 }
+export interface MsgWithdrawPositionResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgWithdrawPositionResponse";
+  value: Uint8Array;
+}
 export interface MsgWithdrawPositionResponseSDKType {
   amount0: string;
   amount1: string;
@@ -66,6 +82,10 @@ export interface MsgCollectFees {
   positionIds: bigint[];
   sender: string;
 }
+export interface MsgCollectFeesProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCollectFees";
+  value: Uint8Array;
+}
 /** ===================== MsgCollectFees */
 export interface MsgCollectFeesSDKType {
   position_ids: bigint[];
@@ -73,6 +93,10 @@ export interface MsgCollectFeesSDKType {
 }
 export interface MsgCollectFeesResponse {
   collectedFees: Coin[];
+}
+export interface MsgCollectFeesResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCollectFeesResponse";
+  value: Uint8Array;
 }
 export interface MsgCollectFeesResponseSDKType {
   collected_fees: CoinSDKType[];
@@ -82,6 +106,10 @@ export interface MsgCollectIncentives {
   positionIds: bigint[];
   sender: string;
 }
+export interface MsgCollectIncentivesProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCollectIncentives";
+  value: Uint8Array;
+}
 /** ===================== MsgCollectIncentives */
 export interface MsgCollectIncentivesSDKType {
   position_ids: bigint[];
@@ -89,6 +117,10 @@ export interface MsgCollectIncentivesSDKType {
 }
 export interface MsgCollectIncentivesResponse {
   collectedIncentives: Coin[];
+}
+export interface MsgCollectIncentivesResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCollectIncentivesResponse";
+  value: Uint8Array;
 }
 export interface MsgCollectIncentivesResponseSDKType {
   collected_incentives: CoinSDKType[];
@@ -102,6 +134,10 @@ export interface MsgCreateIncentive {
   emissionRate: string;
   startTime: Date;
   minUptime: Duration;
+}
+export interface MsgCreateIncentiveProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateIncentive";
+  value: Uint8Array;
 }
 /** ===================== MsgCreateIncentive */
 export interface MsgCreateIncentiveSDKType {
@@ -120,6 +156,10 @@ export interface MsgCreateIncentiveResponse {
   startTime: Date;
   minUptime: Duration;
 }
+export interface MsgCreateIncentiveResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgCreateIncentiveResponse";
+  value: Uint8Array;
+}
 export interface MsgCreateIncentiveResponseSDKType {
   incentive_denom: string;
   incentive_amount: string;
@@ -132,6 +172,10 @@ export interface MsgFungifyChargedPositions {
   positionIds: bigint[];
   sender: string;
 }
+export interface MsgFungifyChargedPositionsProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgFungifyChargedPositions";
+  value: Uint8Array;
+}
 /** ===================== MsgFungifyChargedPositions */
 export interface MsgFungifyChargedPositionsSDKType {
   position_ids: bigint[];
@@ -139,6 +183,10 @@ export interface MsgFungifyChargedPositionsSDKType {
 }
 export interface MsgFungifyChargedPositionsResponse {
   newPositionId: bigint;
+}
+export interface MsgFungifyChargedPositionsResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.MsgFungifyChargedPositionsResponse";
+  value: Uint8Array;
 }
 export interface MsgFungifyChargedPositionsResponseSDKType {
   new_position_id: bigint;

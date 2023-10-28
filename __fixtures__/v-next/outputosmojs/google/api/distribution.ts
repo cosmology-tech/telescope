@@ -74,6 +74,10 @@ export interface Distribution {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface DistributionProtoMsg {
+  typeUrl: "/google.api.Distribution";
+  value: Uint8Array;
+}
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -106,6 +110,10 @@ export interface Distribution_Range {
   /** The maximum of the population values. */
   max: number;
 }
+export interface Distribution_RangeProtoMsg {
+  typeUrl: "/google.api.Range";
+  value: Uint8Array;
+}
 /** The range of the population values. */
 export interface Distribution_RangeSDKType {
   min: number;
@@ -135,6 +143,10 @@ export interface Distribution_BucketOptions {
   exponentialBuckets?: Distribution_BucketOptions_Exponential;
   /** The explicit buckets. */
   explicitBuckets?: Distribution_BucketOptions_Explicit;
+}
+export interface Distribution_BucketOptionsProtoMsg {
+  typeUrl: "/google.api.BucketOptions";
+  value: Uint8Array;
 }
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
@@ -177,6 +189,10 @@ export interface Distribution_BucketOptions_Linear {
   /** Lower bound of the first bucket. */
   offset: number;
 }
+export interface Distribution_BucketOptions_LinearProtoMsg {
+  typeUrl: "/google.api.Linear";
+  value: Uint8Array;
+}
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -212,6 +228,10 @@ export interface Distribution_BucketOptions_Exponential {
   /** Must be greater than 0. */
   scale: number;
 }
+export interface Distribution_BucketOptions_ExponentialProtoMsg {
+  typeUrl: "/google.api.Exponential";
+  value: Uint8Array;
+}
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -244,6 +264,10 @@ export interface Distribution_BucketOptions_ExponentialSDKType {
 export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
+}
+export interface Distribution_BucketOptions_ExplicitProtoMsg {
+  typeUrl: "/google.api.Explicit";
+  value: Uint8Array;
 }
 /**
  * Specifies a set of buckets with arbitrary widths.
@@ -290,6 +314,10 @@ export interface Distribution_Exemplar {
    * single exemplar, and this is enforced by the system.
    */
   attachments: Any[];
+}
+export interface Distribution_ExemplarProtoMsg {
+  typeUrl: "/google.api.Exemplar";
+  value: Uint8Array;
 }
 /**
  * Exemplars are example points that may be used to annotate aggregated

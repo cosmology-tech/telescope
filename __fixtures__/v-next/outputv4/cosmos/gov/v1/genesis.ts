@@ -19,6 +19,10 @@ export interface GenesisState {
   /** params defines all the paramaters of related to tally. */
   tallyParams?: TallyParams;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.gov.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateSDKType {
   starting_proposal_id: bigint;

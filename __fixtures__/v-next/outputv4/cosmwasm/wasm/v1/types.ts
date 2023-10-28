@@ -103,6 +103,10 @@ export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHisto
 export interface AccessTypeParam {
   value: AccessType;
 }
+export interface AccessTypeParamProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam";
+  value: Uint8Array;
+}
 /** AccessTypeParam */
 export interface AccessTypeParamSDKType {
   value: AccessType;
@@ -111,6 +115,10 @@ export interface AccessTypeParamSDKType {
 export interface AccessConfig {
   permission: AccessType;
   address: string;
+}
+export interface AccessConfigProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AccessConfig";
+  value: Uint8Array;
 }
 /** AccessConfig access control type. */
 export interface AccessConfigSDKType {
@@ -122,6 +130,10 @@ export interface Params {
   codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: bigint;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Params";
+  value: Uint8Array;
 }
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
@@ -137,6 +149,10 @@ export interface CodeInfo {
   creator: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig: AccessConfig;
+}
+export interface CodeInfoProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfo";
+  value: Uint8Array;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoSDKType {
@@ -167,6 +183,10 @@ export interface ContractInfo {
    */
   extension?: Any;
 }
+export interface ContractInfoProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
+  value: Uint8Array;
+}
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
   code_id: bigint;
@@ -185,6 +205,10 @@ export interface ContractCodeHistoryEntry {
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPosition;
   msg: Uint8Array;
+}
+export interface ContractCodeHistoryEntryProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry";
+  value: Uint8Array;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
@@ -206,6 +230,10 @@ export interface AbsoluteTxPosition {
    */
   txIndex: bigint;
 }
+export interface AbsoluteTxPositionProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition";
+  value: Uint8Array;
+}
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
  * ordering of transactions.
@@ -219,6 +247,10 @@ export interface Model {
   /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
   /** base64-encode raw value */
+  value: Uint8Array;
+}
+export interface ModelProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Model";
   value: Uint8Array;
 }
 /** Model is a struct that holds a KV pair */

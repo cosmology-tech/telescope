@@ -71,6 +71,10 @@ export interface ListServicesRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest";
   value: Uint8Array;
 }
+export interface ListServicesRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest";
+  value: Uint8Array;
+}
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestAmino {
   /** Include services produced by the specified project. */
@@ -118,6 +122,10 @@ export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse";
   value: Uint8Array;
 }
+export interface ListServicesResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse";
+  value: Uint8Array;
+}
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseAmino {
   /** The returned services will only have the name field set. */
@@ -141,6 +149,10 @@ export interface GetServiceRequest {
    * requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
+}
+export interface GetServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest";
+  value: Uint8Array;
 }
 export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest";
@@ -171,6 +183,10 @@ export interface CreateServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
   value: Uint8Array;
 }
+export interface CreateServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for CreateService method. */
 export interface CreateServiceRequestAmino {
   /** Required. Initial values for the service resource. */
@@ -191,6 +207,10 @@ export interface DeleteServiceRequest {
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
+}
+export interface DeleteServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest";
+  value: Uint8Array;
 }
 export interface DeleteServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest";
@@ -224,6 +244,10 @@ export interface UndeleteServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
   value: Uint8Array;
 }
+export interface UndeleteServiceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestAmino {
   /**
@@ -244,6 +268,10 @@ export interface UndeleteServiceRequestSDKType {
 export interface UndeleteServiceResponse {
   /** Revived service resource. */
   service?: ManagedService;
+}
+export interface UndeleteServiceResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
+  value: Uint8Array;
 }
 export interface UndeleteServiceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
@@ -281,6 +309,10 @@ export interface GetServiceConfigRequest {
    * response.
    */
   view: GetServiceConfigRequest_ConfigView;
+}
+export interface GetServiceConfigRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
+  value: Uint8Array;
 }
 export interface GetServiceConfigRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
@@ -335,6 +367,10 @@ export interface ListServiceConfigsRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
   value: Uint8Array;
 }
+export interface ListServiceConfigsRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
+  value: Uint8Array;
+}
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestAmino {
   /**
@@ -371,6 +407,10 @@ export interface ListServiceConfigsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
   value: Uint8Array;
 }
+export interface ListServiceConfigsResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+  value: Uint8Array;
+}
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseAmino {
   /** The list of service configuration resources. */
@@ -396,6 +436,10 @@ export interface CreateServiceConfigRequest {
   serviceName: string;
   /** Required. The service configuration resource. */
   serviceConfig?: Service;
+}
+export interface CreateServiceConfigRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
+  value: Uint8Array;
 }
 export interface CreateServiceConfigRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
@@ -440,6 +484,10 @@ export interface SubmitConfigSourceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
   value: Uint8Array;
 }
+export interface SubmitConfigSourceRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+  value: Uint8Array;
+}
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestAmino {
   /**
@@ -475,6 +523,10 @@ export interface SubmitConfigSourceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
   value: Uint8Array;
 }
+export interface SubmitConfigSourceResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
+  value: Uint8Array;
+}
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseAmino {
   /** The generated service configuration. */
@@ -497,6 +549,10 @@ export interface CreateServiceRolloutRequest {
   serviceName: string;
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: Rollout;
+}
+export interface CreateServiceRolloutRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
+  value: Uint8Array;
 }
 export interface CreateServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
@@ -551,6 +607,10 @@ export interface ListServiceRolloutsRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
   value: Uint8Array;
 }
+export interface ListServiceRolloutsRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+  value: Uint8Array;
+}
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestAmino {
   /**
@@ -599,6 +659,10 @@ export interface ListServiceRolloutsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
   value: Uint8Array;
 }
+export interface ListServiceRolloutsResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+  value: Uint8Array;
+}
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseAmino {
   /** The list of rollout resources. */
@@ -624,6 +688,10 @@ export interface GetServiceRolloutRequest {
   serviceName: string;
   /** Required. The id of the rollout resource. */
   rolloutId: string;
+}
+export interface GetServiceRolloutRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
+  value: Uint8Array;
 }
 export interface GetServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
@@ -666,6 +734,10 @@ export interface GenerateConfigReportRequest {
    * and [google.api.Service][google.api.Service]
    */
   oldConfig?: Any;
+}
+export interface GenerateConfigReportRequestProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
+  value: Uint8Array;
 }
 export interface GenerateConfigReportRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
@@ -716,6 +788,10 @@ export interface GenerateConfigReportResponse {
    * belongs to.
    */
   diagnostics: Diagnostic[];
+}
+export interface GenerateConfigReportResponseProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+  value: Uint8Array;
 }
 export interface GenerateConfigReportResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";

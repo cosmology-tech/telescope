@@ -4,6 +4,10 @@ export const protobufPackage = "osmosis.lockup";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.lockup.Params";
+  value: Uint8Array;
+}
 export interface ParamsSDKType {
   force_unlock_allowed_addresses: string[];
 }

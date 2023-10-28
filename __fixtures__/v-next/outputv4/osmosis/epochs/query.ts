@@ -3,9 +3,17 @@ import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
+export interface QueryEpochsInfoRequestProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
+}
+export interface QueryEpochsInfoResponseProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
@@ -13,11 +21,19 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: bigint;
+}
+export interface QueryCurrentEpochResponseProtoMsg {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse";
+  value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;

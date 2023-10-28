@@ -20,6 +20,10 @@ export interface FungibleTokenPacketDataProtoMsg {
   typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData";
   value: Uint8Array;
 }
+export interface FungibleTokenPacketDataProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData";
+  value: Uint8Array;
+}
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
  * See FungibleTokenPacketData spec:

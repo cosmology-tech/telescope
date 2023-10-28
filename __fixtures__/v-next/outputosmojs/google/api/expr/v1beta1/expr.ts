@@ -12,6 +12,10 @@ export interface ParsedExpr {
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
 }
+export interface ParsedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.ParsedExpr";
+  value: Uint8Array;
+}
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
   expr?: ExprSDKType;
@@ -57,6 +61,10 @@ export interface Expr {
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
+export interface ExprProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Expr";
+  value: Uint8Array;
+}
 /**
  * An abstract representation of a common expression.
  * 
@@ -94,6 +102,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
+export interface Expr_IdentProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Ident";
+  value: Uint8Array;
+}
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
   name: string;
@@ -121,6 +133,10 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
+export interface Expr_SelectProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Select";
+  value: Uint8Array;
+}
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
@@ -143,6 +159,10 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
+export interface Expr_CallProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Call";
+  value: Uint8Array;
+}
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -162,6 +182,10 @@ export interface Expr_CallSDKType {
 export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
+}
+export interface Expr_CreateListProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.CreateList";
+  value: Uint8Array;
 }
 /**
  * A list creation expression.
@@ -188,6 +212,10 @@ export interface Expr_CreateStruct {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
+export interface Expr_CreateStructProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.CreateStruct";
+  value: Uint8Array;
+}
 /**
  * A map or message creation expression.
  * 
@@ -213,6 +241,10 @@ export interface Expr_CreateStruct_Entry {
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
   value?: Expr;
+}
+export interface Expr_CreateStruct_EntryProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
@@ -277,6 +309,10 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
+}
+export interface Expr_ComprehensionProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Comprehension";
+  value: Uint8Array;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -343,6 +379,10 @@ export interface Literal {
   stringValue?: string;
   /** bytes value. */
   bytesValue?: Uint8Array;
+}
+export interface LiteralProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Literal";
+  value: Uint8Array;
 }
 /**
  * Represents a primitive literal.

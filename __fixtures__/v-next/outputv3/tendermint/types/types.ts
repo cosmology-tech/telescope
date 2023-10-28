@@ -106,6 +106,10 @@ export interface PartSetHeaderProtoMsg {
   typeUrl: "/tendermint.types.PartSetHeader";
   value: Uint8Array;
 }
+export interface PartSetHeaderProtoMsg {
+  typeUrl: "/tendermint.types.PartSetHeader";
+  value: Uint8Array;
+}
 /** PartsetHeader */
 export interface PartSetHeaderAmino {
   total: number;
@@ -129,6 +133,10 @@ export interface PartProtoMsg {
   typeUrl: "/tendermint.types.Part";
   value: Uint8Array;
 }
+export interface PartProtoMsg {
+  typeUrl: "/tendermint.types.Part";
+  value: Uint8Array;
+}
 export interface PartAmino {
   index: number;
   bytes: Uint8Array;
@@ -147,6 +155,10 @@ export interface PartSDKType {
 export interface BlockID {
   hash: Uint8Array;
   partSetHeader: PartSetHeader;
+}
+export interface BlockIDProtoMsg {
+  typeUrl: "/tendermint.types.BlockID";
+  value: Uint8Array;
 }
 export interface BlockIDProtoMsg {
   typeUrl: "/tendermint.types.BlockID";
@@ -191,6 +203,10 @@ export interface Header {
   evidenceHash: Uint8Array;
   /** original proposer of the block */
   proposerAddress: Uint8Array;
+}
+export interface HeaderProtoMsg {
+  typeUrl: "/tendermint.types.Header";
+  value: Uint8Array;
 }
 export interface HeaderProtoMsg {
   typeUrl: "/tendermint.types.Header";
@@ -256,6 +272,10 @@ export interface DataProtoMsg {
   typeUrl: "/tendermint.types.Data";
   value: Uint8Array;
 }
+export interface DataProtoMsg {
+  typeUrl: "/tendermint.types.Data";
+  value: Uint8Array;
+}
 /** Data contains the set of transactions included in the block */
 export interface DataAmino {
   /**
@@ -287,6 +307,10 @@ export interface Vote {
   validatorAddress: Uint8Array;
   validatorIndex: number;
   signature: Uint8Array;
+}
+export interface VoteProtoMsg {
+  typeUrl: "/tendermint.types.Vote";
+  value: Uint8Array;
 }
 export interface VoteProtoMsg {
   typeUrl: "/tendermint.types.Vote";
@@ -336,6 +360,10 @@ export interface CommitProtoMsg {
   typeUrl: "/tendermint.types.Commit";
   value: Uint8Array;
 }
+export interface CommitProtoMsg {
+  typeUrl: "/tendermint.types.Commit";
+  value: Uint8Array;
+}
 /** Commit contains the evidence that a block was committed by a set of validators. */
 export interface CommitAmino {
   height: string;
@@ -360,6 +388,10 @@ export interface CommitSig {
   validatorAddress: Uint8Array;
   timestamp: Date;
   signature: Uint8Array;
+}
+export interface CommitSigProtoMsg {
+  typeUrl: "/tendermint.types.CommitSig";
+  value: Uint8Array;
 }
 export interface CommitSigProtoMsg {
   typeUrl: "/tendermint.types.CommitSig";
@@ -396,6 +428,10 @@ export interface ProposalProtoMsg {
   typeUrl: "/tendermint.types.Proposal";
   value: Uint8Array;
 }
+export interface ProposalProtoMsg {
+  typeUrl: "/tendermint.types.Proposal";
+  value: Uint8Array;
+}
 export interface ProposalAmino {
   type: SignedMsgType;
   height: string;
@@ -426,6 +462,10 @@ export interface SignedHeaderProtoMsg {
   typeUrl: "/tendermint.types.SignedHeader";
   value: Uint8Array;
 }
+export interface SignedHeaderProtoMsg {
+  typeUrl: "/tendermint.types.SignedHeader";
+  value: Uint8Array;
+}
 export interface SignedHeaderAmino {
   header?: HeaderAmino;
   commit?: CommitAmino;
@@ -441,6 +481,10 @@ export interface SignedHeaderSDKType {
 export interface LightBlock {
   signedHeader?: SignedHeader;
   validatorSet?: ValidatorSet;
+}
+export interface LightBlockProtoMsg {
+  typeUrl: "/tendermint.types.LightBlock";
+  value: Uint8Array;
 }
 export interface LightBlockProtoMsg {
   typeUrl: "/tendermint.types.LightBlock";
@@ -468,6 +512,10 @@ export interface BlockMetaProtoMsg {
   typeUrl: "/tendermint.types.BlockMeta";
   value: Uint8Array;
 }
+export interface BlockMetaProtoMsg {
+  typeUrl: "/tendermint.types.BlockMeta";
+  value: Uint8Array;
+}
 export interface BlockMetaAmino {
   block_id?: BlockIDAmino;
   block_size: string;
@@ -489,6 +537,10 @@ export interface TxProof {
   rootHash: Uint8Array;
   data: Uint8Array;
   proof?: Proof;
+}
+export interface TxProofProtoMsg {
+  typeUrl: "/tendermint.types.TxProof";
+  value: Uint8Array;
 }
 export interface TxProofProtoMsg {
   typeUrl: "/tendermint.types.TxProof";

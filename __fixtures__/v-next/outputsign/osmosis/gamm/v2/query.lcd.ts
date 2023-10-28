@@ -23,6 +23,6 @@ export class LCDQueryClient {
       options.params.quote_asset_denom = params.quoteAssetDenom;
     }
     const endpoint = `osmosis/gamm/v2/pools/${params.poolId}/prices`;
-    return QuerySpotPriceResponse.fromSDKJSON(await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options));
+    return await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options);
   }
 }

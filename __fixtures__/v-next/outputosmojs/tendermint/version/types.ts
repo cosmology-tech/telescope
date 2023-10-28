@@ -10,6 +10,10 @@ export interface App {
   protocol: bigint;
   software: string;
 }
+export interface AppProtoMsg {
+  typeUrl: "/tendermint.version.App";
+  value: Uint8Array;
+}
 /**
  * App includes the protocol and software version for the application.
  * This information is included in ResponseInfo. The App.Protocol can be
@@ -27,6 +31,10 @@ export interface AppSDKType {
 export interface Consensus {
   block: bigint;
   app: bigint;
+}
+export interface ConsensusProtoMsg {
+  typeUrl: "/tendermint.version.Consensus";
+  value: Uint8Array;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,

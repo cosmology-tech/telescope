@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -51,6 +50,10 @@ export interface LabelDescriptor {
   /** A human-readable description for the label. */
   description: string;
 }
+export interface LabelDescriptorProtoMsg {
+  typeUrl: "/google.api.LabelDescriptor";
+  value: Uint8Array;
+}
 /** A description of a label. */
 export interface LabelDescriptorSDKType {
   key: string;
@@ -100,65 +103,6 @@ export const LabelDescriptor = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): LabelDescriptor {
-    const obj = createBaseLabelDescriptor();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.valueType)) obj.valueType = labelDescriptor_ValueTypeFromJSON(object.valueType);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: LabelDescriptor): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.valueType !== undefined && (obj.valueType = labelDescriptor_ValueTypeToJSON(message.valueType));
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {
-    const message = createBaseLabelDescriptor();
-    message.key = object.key ?? "";
-    message.valueType = object.valueType ?? 0;
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: LabelDescriptorSDKType): LabelDescriptor {
-    return {
-      key: object?.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): LabelDescriptorSDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: LabelDescriptor): LabelDescriptorSDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
-    return {
-      key: object.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: object.description
-    };
-  },
-  toAmino(message: LabelDescriptor): LabelDescriptorAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value_type = message.valueType;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {
-    return LabelDescriptor.fromAmino(object.value);
   },
   fromProtoMsg(message: LabelDescriptorProtoMsg): LabelDescriptor {
     return LabelDescriptor.decode(message.value);

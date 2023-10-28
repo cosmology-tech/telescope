@@ -2,7 +2,7 @@ import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
@@ -31,6 +31,10 @@ export interface MsgCreateGauge {
    */
   numEpochsPaidOver: bigint;
 }
+export interface MsgCreateGaugeProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgCreateGauge";
+  value: Uint8Array;
+}
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
   is_perpetual: boolean;
@@ -41,6 +45,10 @@ export interface MsgCreateGaugeSDKType {
   num_epochs_paid_over: bigint;
 }
 export interface MsgCreateGaugeResponse {}
+export interface MsgCreateGaugeResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse";
+  value: Uint8Array;
+}
 export interface MsgCreateGaugeResponseSDKType {}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGauge {
@@ -51,6 +59,10 @@ export interface MsgAddToGauge {
   /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
+export interface MsgAddToGaugeProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgAddToGauge";
+  value: Uint8Array;
+}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
   owner: string;
@@ -58,6 +70,10 @@ export interface MsgAddToGaugeSDKType {
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
+export interface MsgAddToGaugeResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse";
+  value: Uint8Array;
+}
 export interface MsgAddToGaugeResponseSDKType {}
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
@@ -124,111 +140,6 @@ export const MsgCreateGauge = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCreateGauge {
-    const obj = createBaseMsgCreateGauge();
-    if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
-    return obj;
-  },
-  toJSON(message: MsgCreateGauge): unknown {
-    const obj: any = {};
-    message.isPerpetual !== undefined && (obj.isPerpetual = message.isPerpetual);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.distributeTo !== undefined && (obj.distributeTo = message.distributeTo ? QueryCondition.toJSON(message.distributeTo) : undefined);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgCreateGauge>): MsgCreateGauge {
-    const message = createBaseMsgCreateGauge();
-    message.isPerpetual = object.isPerpetual ?? false;
-    message.owner = object.owner ?? "";
-    if (object.distributeTo !== undefined && object.distributeTo !== null) {
-      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
-    }
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    message.startTime = object.startTime ?? undefined;
-    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
-      message.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
-    }
-    return message;
-  },
-  fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
-    return {
-      isPerpetual: object?.is_perpetual,
-      owner: object?.owner,
-      distributeTo: object.distribute_to ? QueryCondition.fromSDK(object.distribute_to) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      startTime: object.start_time ?? undefined,
-      numEpochsPaidOver: object?.num_epochs_paid_over
-    };
-  },
-  fromSDKJSON(object: any): MsgCreateGaugeSDKType {
-    return {
-      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: MsgCreateGauge): MsgCreateGaugeSDKType {
-    const obj: any = {};
-    obj.is_perpetual = message.isPerpetual;
-    obj.owner = message.owner;
-    message.distributeTo !== undefined && (obj.distribute_to = message.distributeTo ? QueryCondition.toSDK(message.distributeTo) : undefined);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
-    obj.num_epochs_paid_over = message.numEpochsPaidOver;
-    return obj;
-  },
-  fromAmino(object: MsgCreateGaugeAmino): MsgCreateGauge {
-    return {
-      isPerpetual: object.is_perpetual,
-      owner: object.owner,
-      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object.start_time,
-      numEpochsPaidOver: BigInt(object.num_epochs_paid_over)
-    };
-  },
-  toAmino(message: MsgCreateGauge): MsgCreateGaugeAmino {
-    const obj: any = {};
-    obj.is_perpetual = message.isPerpetual;
-    obj.owner = message.owner;
-    obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    obj.start_time = message.startTime;
-    obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateGaugeAminoMsg): MsgCreateGauge {
-    return MsgCreateGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateGauge): MsgCreateGaugeAminoMsg {
-    return {
-      type: "osmosis/incentives/create-gauge",
-      value: MsgCreateGauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateGaugeProtoMsg): MsgCreateGauge {
     return MsgCreateGauge.decode(message.value);
   },
@@ -263,44 +174,6 @@ export const MsgCreateGaugeResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCreateGaugeResponse {
-    const obj = createBaseMsgCreateGaugeResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateGaugeResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgCreateGaugeResponse>): MsgCreateGaugeResponse {
-    const message = createBaseMsgCreateGaugeResponse();
-    return message;
-  },
-  fromSDK(_: MsgCreateGaugeResponseSDKType): MsgCreateGaugeResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCreateGaugeResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCreateGaugeResponse): MsgCreateGaugeResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCreateGaugeResponseAmino): MsgCreateGaugeResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateGaugeResponse): MsgCreateGaugeResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateGaugeResponseAminoMsg): MsgCreateGaugeResponse {
-    return MsgCreateGaugeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateGaugeResponse): MsgCreateGaugeResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/create-gauge-response",
-      value: MsgCreateGaugeResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateGaugeResponseProtoMsg): MsgCreateGaugeResponse {
     return MsgCreateGaugeResponse.decode(message.value);
@@ -359,85 +232,6 @@ export const MsgAddToGauge = {
     }
     return message;
   },
-  fromJSON(object: any): MsgAddToGauge {
-    const obj = createBaseMsgAddToGauge();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
-    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgAddToGauge): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgAddToGauge>): MsgAddToGauge {
-    const message = createBaseMsgAddToGauge();
-    message.owner = object.owner ?? "";
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = BigInt(object.gaugeId.toString());
-    }
-    message.rewards = object.rewards?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: MsgAddToGaugeSDKType): MsgAddToGauge {
-    return {
-      owner: object?.owner,
-      gaugeId: object?.gauge_id,
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): MsgAddToGaugeSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: MsgAddToGauge): MsgAddToGaugeSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.gauge_id = message.gaugeId;
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MsgAddToGaugeAmino): MsgAddToGauge {
-    return {
-      owner: object.owner,
-      gaugeId: BigInt(object.gauge_id),
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MsgAddToGauge): MsgAddToGaugeAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgAddToGaugeAminoMsg): MsgAddToGauge {
-    return MsgAddToGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgAddToGauge): MsgAddToGaugeAminoMsg {
-    return {
-      type: "osmosis/incentives/add-to-gauge",
-      value: MsgAddToGauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgAddToGaugeProtoMsg): MsgAddToGauge {
     return MsgAddToGauge.decode(message.value);
   },
@@ -472,44 +266,6 @@ export const MsgAddToGaugeResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgAddToGaugeResponse {
-    const obj = createBaseMsgAddToGaugeResponse();
-    return obj;
-  },
-  toJSON(_: MsgAddToGaugeResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgAddToGaugeResponse>): MsgAddToGaugeResponse {
-    const message = createBaseMsgAddToGaugeResponse();
-    return message;
-  },
-  fromSDK(_: MsgAddToGaugeResponseSDKType): MsgAddToGaugeResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgAddToGaugeResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgAddToGaugeResponse): MsgAddToGaugeResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgAddToGaugeResponseAmino): MsgAddToGaugeResponse {
-    return {};
-  },
-  toAmino(_: MsgAddToGaugeResponse): MsgAddToGaugeResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgAddToGaugeResponseAminoMsg): MsgAddToGaugeResponse {
-    return MsgAddToGaugeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgAddToGaugeResponse): MsgAddToGaugeResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/add-to-gauge-response",
-      value: MsgAddToGaugeResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgAddToGaugeResponseProtoMsg): MsgAddToGaugeResponse {
     return MsgAddToGaugeResponse.decode(message.value);

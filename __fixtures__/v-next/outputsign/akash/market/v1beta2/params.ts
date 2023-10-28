@@ -1,11 +1,14 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
   bidMinDeposit: Coin;
   orderMaxBids: number;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Params";
+  value: Uint8Array;
 }
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
@@ -48,65 +51,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.bidMinDeposit)) obj.bidMinDeposit = Coin.fromJSON(object.bidMinDeposit);
-    if (isSet(object.orderMaxBids)) obj.orderMaxBids = Number(object.orderMaxBids);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.bidMinDeposit !== undefined && (obj.bidMinDeposit = message.bidMinDeposit ? Coin.toJSON(message.bidMinDeposit) : undefined);
-    message.orderMaxBids !== undefined && (obj.orderMaxBids = Math.round(message.orderMaxBids));
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
-    const message = createBaseParams();
-    if (object.bidMinDeposit !== undefined && object.bidMinDeposit !== null) {
-      message.bidMinDeposit = Coin.fromPartial(object.bidMinDeposit);
-    }
-    message.orderMaxBids = object.orderMaxBids ?? 0;
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      bidMinDeposit: object.bid_min_deposit ? Coin.fromSDK(object.bid_min_deposit) : undefined,
-      orderMaxBids: object?.order_max_bids
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      bid_min_deposit: isSet(object.bid_min_deposit) ? Coin.fromSDKJSON(object.bid_min_deposit) : undefined,
-      order_max_bids: isSet(object.order_max_bids) ? Number(object.order_max_bids) : 0
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.bidMinDeposit !== undefined && (obj.bid_min_deposit = message.bidMinDeposit ? Coin.toSDK(message.bidMinDeposit) : undefined);
-    obj.order_max_bids = message.orderMaxBids;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
-      orderMaxBids: object.order_max_bids
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined;
-    obj.order_max_bids = message.orderMaxBids;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "akash/market/v1beta2/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

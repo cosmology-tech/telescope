@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -32,6 +31,10 @@ export interface Visibility {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: VisibilityRule[];
+}
+export interface VisibilityProtoMsg {
+  typeUrl: "/google.api.Visibility";
+  value: Uint8Array;
 }
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -90,6 +93,10 @@ export interface VisibilityRule {
    */
   restriction: string;
 }
+export interface VisibilityRuleProtoMsg {
+  typeUrl: "/google.api.VisibilityRule";
+  value: Uint8Array;
+}
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
@@ -127,61 +134,6 @@ export const Visibility = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Visibility {
-    const obj = createBaseVisibility();
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => VisibilityRule.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Visibility): unknown {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Visibility>): Visibility {
-    const message = createBaseVisibility();
-    message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: VisibilitySDKType): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): VisibilitySDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Visibility): VisibilitySDKType {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toSDK(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromAmino(object: VisibilityAmino): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Visibility): VisibilityAmino {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
-    return Visibility.fromAmino(object.value);
   },
   fromProtoMsg(message: VisibilityProtoMsg): Visibility {
     return Visibility.decode(message.value);
@@ -232,57 +184,6 @@ export const VisibilityRule = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): VisibilityRule {
-    const obj = createBaseVisibilityRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.restriction)) obj.restriction = String(object.restriction);
-    return obj;
-  },
-  toJSON(message: VisibilityRule): unknown {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.restriction !== undefined && (obj.restriction = message.restriction);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
-    const message = createBaseVisibilityRule();
-    message.selector = object.selector ?? "";
-    message.restriction = object.restriction ?? "";
-    return message;
-  },
-  fromSDK(object: VisibilityRuleSDKType): VisibilityRule {
-    return {
-      selector: object?.selector,
-      restriction: object?.restriction
-    };
-  },
-  fromSDKJSON(object: any): VisibilityRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      restriction: isSet(object.restriction) ? String(object.restriction) : ""
-    };
-  },
-  toSDK(message: VisibilityRule): VisibilityRuleSDKType {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.restriction = message.restriction;
-    return obj;
-  },
-  fromAmino(object: VisibilityRuleAmino): VisibilityRule {
-    return {
-      selector: object.selector,
-      restriction: object.restriction
-    };
-  },
-  toAmino(message: VisibilityRule): VisibilityRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.restriction = message.restriction;
-    return obj;
-  },
-  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
-    return VisibilityRule.fromAmino(object.value);
   },
   fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
     return VisibilityRule.decode(message.value);

@@ -1,6 +1,5 @@
 import { Service, ServiceSDKType } from "./resources";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -67,6 +66,10 @@ export interface EnableServiceRequest {
    */
   name: string;
 }
+export interface EnableServiceRequestProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
   name: string;
@@ -79,6 +82,10 @@ export interface EnableServiceRequestSDKType {
 export interface EnableServiceResponse {
   /** The new state of the service after enabling. */
   service?: Service;
+}
+export interface EnableServiceResponseProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse";
+  value: Uint8Array;
 }
 /**
  * Response message for the `EnableService` method.
@@ -111,6 +118,10 @@ export interface DisableServiceRequest {
   /** Defines the behavior for checking service usage when disabling a service. */
   checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
+export interface DisableServiceRequestProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest";
+  value: Uint8Array;
+}
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
   name: string;
@@ -125,6 +136,10 @@ export interface DisableServiceRequestSDKType {
 export interface DisableServiceResponse {
   /** The new state of the service after disabling. */
   service?: Service;
+}
+export interface DisableServiceResponseProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse";
+  value: Uint8Array;
 }
 /**
  * Response message for the `DisableService` method.
@@ -144,6 +159,10 @@ export interface GetServiceRequest {
    * project number.
    */
   name: string;
+}
+export interface GetServiceRequestProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.GetServiceRequest";
+  value: Uint8Array;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
@@ -175,6 +194,10 @@ export interface ListServicesRequest {
    */
   filter: string;
 }
+export interface ListServicesRequestProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.ListServicesRequest";
+  value: Uint8Array;
+}
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
   parent: string;
@@ -191,6 +214,10 @@ export interface ListServicesResponse {
    * query.
    */
   nextPageToken: string;
+}
+export interface ListServicesResponseProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.ListServicesResponse";
+  value: Uint8Array;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
@@ -223,6 +250,10 @@ export interface BatchEnableServicesRequest {
    */
   serviceIds: string[];
 }
+export interface BatchEnableServicesRequestProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
+  value: Uint8Array;
+}
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
   parent: string;
@@ -242,6 +273,10 @@ export interface BatchEnableServicesResponse {
    */
   failures: BatchEnableServicesResponse_EnableFailure[];
 }
+export interface BatchEnableServicesResponseProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
+  value: Uint8Array;
+}
 /**
  * Response message for the `BatchEnableServices` method.
  * This response message is assigned to the `response` field of the returned
@@ -257,6 +292,10 @@ export interface BatchEnableServicesResponse_EnableFailure {
   serviceId: string;
   /** An error message describing why the service could not be enabled. */
   errorMessage: string;
+}
+export interface BatchEnableServicesResponse_EnableFailureProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.EnableFailure";
+  value: Uint8Array;
 }
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailureSDKType {
@@ -283,6 +322,10 @@ export interface BatchGetServicesRequest {
    */
   names: string[];
 }
+export interface BatchGetServicesRequestProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest";
+  value: Uint8Array;
+}
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestSDKType {
   parent: string;
@@ -292,6 +335,10 @@ export interface BatchGetServicesRequestSDKType {
 export interface BatchGetServicesResponse {
   /** The requested Service states. */
   services: Service[];
+}
+export interface BatchGetServicesResponseProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1.BatchGetServicesResponse";
+  value: Uint8Array;
 }
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponseSDKType {
@@ -326,49 +373,6 @@ export const EnableServiceRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): EnableServiceRequest {
-    const obj = createBaseEnableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: EnableServiceRequest): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
-    const message = createBaseEnableServiceRequest();
-    message.name = object.name ?? "";
-    return message;
-  },
-  fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
-    return {
-      name: object?.name
-    };
-  },
-  fromSDKJSON(object: any): EnableServiceRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-  toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
-    return EnableServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: EnableServiceRequestProtoMsg): EnableServiceRequest {
     return EnableServiceRequest.decode(message.value);
@@ -412,51 +416,6 @@ export const EnableServiceResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): EnableServiceResponse {
-    const obj = createBaseEnableServiceResponse();
-    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: EnableServiceResponse): unknown {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
-    const message = createBaseEnableServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = Service.fromPartial(object.service);
-    }
-    return message;
-  },
-  fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
-    return {
-      service: object.service ? Service.fromSDK(object.service) : undefined
-    };
-  },
-  fromSDKJSON(object: any): EnableServiceResponseSDKType {
-    return {
-      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
-    };
-  },
-  toSDK(message: EnableServiceResponse): EnableServiceResponseSDKType {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
-    return obj;
-  },
-  fromAmino(object: EnableServiceResponseAmino): EnableServiceResponse {
-    return {
-      service: object?.service ? Service.fromAmino(object.service) : undefined
-    };
-  },
-  toAmino(message: EnableServiceResponse): EnableServiceResponseAmino {
-    const obj: any = {};
-    obj.service = message.service ? Service.toAmino(message.service) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: EnableServiceResponseAminoMsg): EnableServiceResponse {
-    return EnableServiceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: EnableServiceResponseProtoMsg): EnableServiceResponse {
     return EnableServiceResponse.decode(message.value);
@@ -515,65 +474,6 @@ export const DisableServiceRequest = {
     }
     return message;
   },
-  fromJSON(object: any): DisableServiceRequest {
-    const obj = createBaseDisableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.disableDependentServices)) obj.disableDependentServices = Boolean(object.disableDependentServices);
-    if (isSet(object.checkIfServiceHasUsage)) obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage);
-    return obj;
-  },
-  toJSON(message: DisableServiceRequest): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.disableDependentServices !== undefined && (obj.disableDependentServices = message.disableDependentServices);
-    message.checkIfServiceHasUsage !== undefined && (obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
-    const message = createBaseDisableServiceRequest();
-    message.name = object.name ?? "";
-    message.disableDependentServices = object.disableDependentServices ?? false;
-    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? 0;
-    return message;
-  },
-  fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
-    return {
-      name: object?.name,
-      disableDependentServices: object?.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
-    };
-  },
-  fromSDKJSON(object: any): DisableServiceRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
-      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
-    };
-  },
-  toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.disable_dependent_services = message.disableDependentServices;
-    message.checkIfServiceHasUsage !== undefined && (obj.check_if_service_has_usage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
-    return obj;
-  },
-  fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
-    return {
-      name: object.name,
-      disableDependentServices: object.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
-    };
-  },
-  toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.disable_dependent_services = message.disableDependentServices;
-    obj.check_if_service_has_usage = message.checkIfServiceHasUsage;
-    return obj;
-  },
-  fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
-    return DisableServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DisableServiceRequestProtoMsg): DisableServiceRequest {
     return DisableServiceRequest.decode(message.value);
   },
@@ -617,51 +517,6 @@ export const DisableServiceResponse = {
     }
     return message;
   },
-  fromJSON(object: any): DisableServiceResponse {
-    const obj = createBaseDisableServiceResponse();
-    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: DisableServiceResponse): unknown {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
-    const message = createBaseDisableServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = Service.fromPartial(object.service);
-    }
-    return message;
-  },
-  fromSDK(object: DisableServiceResponseSDKType): DisableServiceResponse {
-    return {
-      service: object.service ? Service.fromSDK(object.service) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DisableServiceResponseSDKType {
-    return {
-      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
-    };
-  },
-  toSDK(message: DisableServiceResponse): DisableServiceResponseSDKType {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
-    return obj;
-  },
-  fromAmino(object: DisableServiceResponseAmino): DisableServiceResponse {
-    return {
-      service: object?.service ? Service.fromAmino(object.service) : undefined
-    };
-  },
-  toAmino(message: DisableServiceResponse): DisableServiceResponseAmino {
-    const obj: any = {};
-    obj.service = message.service ? Service.toAmino(message.service) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DisableServiceResponseAminoMsg): DisableServiceResponse {
-    return DisableServiceResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: DisableServiceResponseProtoMsg): DisableServiceResponse {
     return DisableServiceResponse.decode(message.value);
   },
@@ -704,49 +559,6 @@ export const GetServiceRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: GetServiceRequest): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
-    const message = createBaseGetServiceRequest();
-    message.name = object.name ?? "";
-    return message;
-  },
-  fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
-    return {
-      name: object?.name
-    };
-  },
-  fromSDKJSON(object: any): GetServiceRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-  toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
     return GetServiceRequest.decode(message.value);
@@ -812,73 +624,6 @@ export const ListServicesRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
-  },
-  toJSON(message: ListServicesRequest): unknown {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
-    const message = createBaseListServicesRequest();
-    message.parent = object.parent ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
-    message.filter = object.filter ?? "";
-    return message;
-  },
-  fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
-    return {
-      parent: object?.parent,
-      pageSize: object?.page_size,
-      pageToken: object?.page_token,
-      filter: object?.filter
-    };
-  },
-  fromSDKJSON(object: any): ListServicesRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      filter: isSet(object.filter) ? String(object.filter) : ""
-    };
-  },
-  toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      filter: object.filter
-    };
-  },
-  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
     return ListServicesRequest.decode(message.value);
   },
@@ -928,69 +673,6 @@ export const ListServicesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListServicesResponse): unknown {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
-    const message = createBaseListServicesResponse();
-    message.services = object.services?.map(e => Service.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-  fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: object?.next_page_token
-    };
-  },
-  fromSDKJSON(object: any): ListServicesResponseSDKType {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-  toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
     return ListServicesResponse.decode(message.value);
@@ -1042,69 +724,6 @@ export const BatchEnableServicesRequest = {
     }
     return message;
   },
-  fromJSON(object: any): BatchEnableServicesRequest {
-    const obj = createBaseBatchEnableServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: BatchEnableServicesRequest): unknown {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    if (message.serviceIds) {
-      obj.serviceIds = message.serviceIds.map(e => e);
-    } else {
-      obj.serviceIds = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
-    const message = createBaseBatchEnableServicesRequest();
-    message.parent = object.parent ?? "";
-    message.serviceIds = object.serviceIds?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
-    return {
-      parent: object?.parent,
-      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
-    const obj: any = {};
-    obj.parent = message.parent;
-    if (message.serviceIds) {
-      obj.service_ids = message.serviceIds.map(e => e);
-    } else {
-      obj.service_ids = [];
-    }
-    return obj;
-  },
-  fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
-    return {
-      parent: object.parent,
-      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    if (message.serviceIds) {
-      obj.service_ids = message.serviceIds.map(e => e);
-    } else {
-      obj.service_ids = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesRequestAminoMsg): BatchEnableServicesRequest {
-    return BatchEnableServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: BatchEnableServicesRequestProtoMsg): BatchEnableServicesRequest {
     return BatchEnableServicesRequest.decode(message.value);
   },
@@ -1154,81 +773,6 @@ export const BatchEnableServicesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BatchEnableServicesResponse {
-    const obj = createBaseBatchEnableServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    if (Array.isArray(object?.failures)) obj.failures = object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BatchEnableServicesResponse): unknown {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    if (message.failures) {
-      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toJSON(e) : undefined);
-    } else {
-      obj.failures = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BatchEnableServicesResponse>): BatchEnableServicesResponse {
-    const message = createBaseBatchEnableServicesResponse();
-    message.services = object.services?.map(e => Service.fromPartial(e)) || [];
-    message.failures = object.failures?.map(e => BatchEnableServicesResponse_EnableFailure.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: BatchEnableServicesResponseSDKType): BatchEnableServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
-      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): BatchEnableServicesResponseSDKType {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
-      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: BatchEnableServicesResponse): BatchEnableServicesResponseSDKType {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    if (message.failures) {
-      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toSDK(e) : undefined);
-    } else {
-      obj.failures = [];
-    }
-    return obj;
-  },
-  fromAmino(object: BatchEnableServicesResponseAmino): BatchEnableServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: BatchEnableServicesResponse): BatchEnableServicesResponseAmino {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    if (message.failures) {
-      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toAmino(e) : undefined);
-    } else {
-      obj.failures = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesResponseAminoMsg): BatchEnableServicesResponse {
-    return BatchEnableServicesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchEnableServicesResponseProtoMsg): BatchEnableServicesResponse {
     return BatchEnableServicesResponse.decode(message.value);
@@ -1280,57 +824,6 @@ export const BatchEnableServicesResponse_EnableFailure = {
     }
     return message;
   },
-  fromJSON(object: any): BatchEnableServicesResponse_EnableFailure {
-    const obj = createBaseBatchEnableServicesResponse_EnableFailure();
-    if (isSet(object.serviceId)) obj.serviceId = String(object.serviceId);
-    if (isSet(object.errorMessage)) obj.errorMessage = String(object.errorMessage);
-    return obj;
-  },
-  toJSON(message: BatchEnableServicesResponse_EnableFailure): unknown {
-    const obj: any = {};
-    message.serviceId !== undefined && (obj.serviceId = message.serviceId);
-    message.errorMessage !== undefined && (obj.errorMessage = message.errorMessage);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BatchEnableServicesResponse_EnableFailure>): BatchEnableServicesResponse_EnableFailure {
-    const message = createBaseBatchEnableServicesResponse_EnableFailure();
-    message.serviceId = object.serviceId ?? "";
-    message.errorMessage = object.errorMessage ?? "";
-    return message;
-  },
-  fromSDK(object: BatchEnableServicesResponse_EnableFailureSDKType): BatchEnableServicesResponse_EnableFailure {
-    return {
-      serviceId: object?.service_id,
-      errorMessage: object?.error_message
-    };
-  },
-  fromSDKJSON(object: any): BatchEnableServicesResponse_EnableFailureSDKType {
-    return {
-      service_id: isSet(object.service_id) ? String(object.service_id) : "",
-      error_message: isSet(object.error_message) ? String(object.error_message) : ""
-    };
-  },
-  toSDK(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
-    const obj: any = {};
-    obj.service_id = message.serviceId;
-    obj.error_message = message.errorMessage;
-    return obj;
-  },
-  fromAmino(object: BatchEnableServicesResponse_EnableFailureAmino): BatchEnableServicesResponse_EnableFailure {
-    return {
-      serviceId: object.service_id,
-      errorMessage: object.error_message
-    };
-  },
-  toAmino(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureAmino {
-    const obj: any = {};
-    obj.service_id = message.serviceId;
-    obj.error_message = message.errorMessage;
-    return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesResponse_EnableFailureAminoMsg): BatchEnableServicesResponse_EnableFailure {
-    return BatchEnableServicesResponse_EnableFailure.fromAmino(object.value);
-  },
   fromProtoMsg(message: BatchEnableServicesResponse_EnableFailureProtoMsg): BatchEnableServicesResponse_EnableFailure {
     return BatchEnableServicesResponse_EnableFailure.decode(message.value);
   },
@@ -1381,69 +874,6 @@ export const BatchGetServicesRequest = {
     }
     return message;
   },
-  fromJSON(object: any): BatchGetServicesRequest {
-    const obj = createBaseBatchGetServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.names)) obj.names = object.names.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: BatchGetServicesRequest): unknown {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    if (message.names) {
-      obj.names = message.names.map(e => e);
-    } else {
-      obj.names = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BatchGetServicesRequest>): BatchGetServicesRequest {
-    const message = createBaseBatchGetServicesRequest();
-    message.parent = object.parent ?? "";
-    message.names = object.names?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: BatchGetServicesRequestSDKType): BatchGetServicesRequest {
-    return {
-      parent: object?.parent,
-      names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): BatchGetServicesRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: BatchGetServicesRequest): BatchGetServicesRequestSDKType {
-    const obj: any = {};
-    obj.parent = message.parent;
-    if (message.names) {
-      obj.names = message.names.map(e => e);
-    } else {
-      obj.names = [];
-    }
-    return obj;
-  },
-  fromAmino(object: BatchGetServicesRequestAmino): BatchGetServicesRequest {
-    return {
-      parent: object.parent,
-      names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: BatchGetServicesRequest): BatchGetServicesRequestAmino {
-    const obj: any = {};
-    obj.parent = message.parent;
-    if (message.names) {
-      obj.names = message.names.map(e => e);
-    } else {
-      obj.names = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchGetServicesRequestAminoMsg): BatchGetServicesRequest {
-    return BatchGetServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: BatchGetServicesRequestProtoMsg): BatchGetServicesRequest {
     return BatchGetServicesRequest.decode(message.value);
   },
@@ -1486,61 +916,6 @@ export const BatchGetServicesResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BatchGetServicesResponse {
-    const obj = createBaseBatchGetServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BatchGetServicesResponse): unknown {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BatchGetServicesResponse>): BatchGetServicesResponse {
-    const message = createBaseBatchGetServicesResponse();
-    message.services = object.services?.map(e => Service.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: BatchGetServicesResponseSDKType): BatchGetServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): BatchGetServicesResponseSDKType {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: BatchGetServicesResponse): BatchGetServicesResponseSDKType {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    return obj;
-  },
-  fromAmino(object: BatchGetServicesResponseAmino): BatchGetServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: BatchGetServicesResponse): BatchGetServicesResponseAmino {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BatchGetServicesResponseAminoMsg): BatchGetServicesResponse {
-    return BatchGetServicesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchGetServicesResponseProtoMsg): BatchGetServicesResponse {
     return BatchGetServicesResponse.decode(message.value);

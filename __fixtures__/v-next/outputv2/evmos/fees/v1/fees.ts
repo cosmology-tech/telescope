@@ -20,6 +20,10 @@ export interface DevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.DevFeeInfo";
   value: Uint8Array;
 }
+export interface DevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.DevFeeInfo";
+  value: Uint8Array;
+}
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract

@@ -109,6 +109,10 @@ export interface AccessTypeParamProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam";
   value: Uint8Array;
 }
+export interface AccessTypeParamProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam";
+  value: Uint8Array;
+}
 /** AccessTypeParam */
 export interface AccessTypeParamAmino {
   value: AccessType;
@@ -125,6 +129,10 @@ export interface AccessTypeParamSDKType {
 export interface AccessConfig {
   permission: AccessType;
   address: string;
+}
+export interface AccessConfigProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AccessConfig";
+  value: Uint8Array;
 }
 export interface AccessConfigProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.AccessConfig";
@@ -154,6 +162,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Params";
+  value: Uint8Array;
+}
 /** Params defines the set of wasm parameters. */
 export interface ParamsAmino {
   code_upload_access?: AccessConfigAmino;
@@ -178,6 +190,10 @@ export interface CodeInfo {
   creator: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig: AccessConfig;
+}
+export interface CodeInfoProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfo";
+  value: Uint8Array;
 }
 export interface CodeInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.CodeInfo";
@@ -224,6 +240,10 @@ export interface ContractInfo {
    * persistence model.
    */
   extension?: Any | undefined;
+}
+export interface ContractInfoProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
+  value: Uint8Array;
 }
 export interface ContractInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
@@ -286,6 +306,10 @@ export interface ContractCodeHistoryEntryProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry";
   value: Uint8Array;
 }
+export interface ContractCodeHistoryEntryProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry";
+  value: Uint8Array;
+}
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntryAmino {
   operation: ContractCodeHistoryOperationType;
@@ -323,6 +347,10 @@ export interface AbsoluteTxPositionProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition";
   value: Uint8Array;
 }
+export interface AbsoluteTxPositionProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition";
+  value: Uint8Array;
+}
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
  * ordering of transactions.
@@ -353,6 +381,10 @@ export interface Model {
   /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
   /** base64-encode raw value */
+  value: Uint8Array;
+}
+export interface ModelProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Model";
   value: Uint8Array;
 }
 export interface ModelProtoMsg {

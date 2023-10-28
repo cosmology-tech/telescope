@@ -2,7 +2,6 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -11,6 +10,10 @@ export const protobufPackage = "evmos.fees.v1";
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryDevFeeInfosRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -28,6 +31,10 @@ export interface QueryDevFeeInfosResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryDevFeeInfosResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
  * RPC method.
@@ -44,6 +51,10 @@ export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
   contractAddress: string;
 }
+export interface QueryDevFeeInfoRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest";
+  value: Uint8Array;
+}
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
  * method.
@@ -58,6 +69,10 @@ export interface QueryDevFeeInfoRequestSDKType {
 export interface QueryDevFeeInfoResponse {
   fee: DevFeeInfo;
 }
+export interface QueryDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
  * method.
@@ -67,6 +82,10 @@ export interface QueryDevFeeInfoResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /**
@@ -75,6 +94,10 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -93,6 +116,10 @@ export interface QueryDevFeeInfosPerDeployerRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
+  value: Uint8Array;
+}
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
  * Query/DevFeeInfosPerDeployer RPC method.
@@ -109,6 +136,10 @@ export interface QueryDevFeeInfosPerDeployerResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -147,51 +178,6 @@ export const QueryDevFeeInfosRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDevFeeInfosRequest {
-    const obj = createBaseQueryDevFeeInfosRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDevFeeInfosRequest>): QueryDevFeeInfosRequest {
-    const message = createBaseQueryDevFeeInfosRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
-    return {
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDevFeeInfosRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDevFeeInfosRequestAmino): QueryDevFeeInfosRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDevFeeInfosRequestAminoMsg): QueryDevFeeInfosRequest {
-    return QueryDevFeeInfosRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDevFeeInfosRequestProtoMsg): QueryDevFeeInfosRequest {
     return QueryDevFeeInfosRequest.decode(message.value);
@@ -243,71 +229,6 @@ export const QueryDevFeeInfosResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDevFeeInfosResponse {
-    const obj = createBaseQueryDevFeeInfosResponse();
-    if (Array.isArray(object?.fees)) obj.fees = object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosResponse): unknown {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toJSON(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDevFeeInfosResponse>): QueryDevFeeInfosResponse {
-    const message = createBaseQueryDevFeeInfosResponse();
-    message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDevFeeInfosResponseSDKType {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseSDKType {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toSDK(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDevFeeInfosResponseAmino): QueryDevFeeInfosResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseAmino {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDevFeeInfosResponseAminoMsg): QueryDevFeeInfosResponse {
-    return QueryDevFeeInfosResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryDevFeeInfosResponseProtoMsg): QueryDevFeeInfosResponse {
     return QueryDevFeeInfosResponse.decode(message.value);
   },
@@ -350,49 +271,6 @@ export const QueryDevFeeInfoRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDevFeeInfoRequest {
-    const obj = createBaseQueryDevFeeInfoRequest();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfoRequest): unknown {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
-    const message = createBaseQueryDevFeeInfoRequest();
-    message.contractAddress = object.contractAddress ?? "";
-    return message;
-  },
-  fromSDK(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
-    return {
-      contractAddress: object?.contract_address
-    };
-  },
-  fromSDKJSON(object: any): QueryDevFeeInfoRequestSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
-    };
-  },
-  toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    return obj;
-  },
-  fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
-    return {
-      contractAddress: object.contract_address
-    };
-  },
-  toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDevFeeInfoRequestAminoMsg): QueryDevFeeInfoRequest {
-    return QueryDevFeeInfoRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDevFeeInfoRequestProtoMsg): QueryDevFeeInfoRequest {
     return QueryDevFeeInfoRequest.decode(message.value);
@@ -437,51 +315,6 @@ export const QueryDevFeeInfoResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDevFeeInfoResponse {
-    const obj = createBaseQueryDevFeeInfoResponse();
-    if (isSet(object.fee)) obj.fee = DevFeeInfo.fromJSON(object.fee);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfoResponse): unknown {
-    const obj: any = {};
-    message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toJSON(message.fee) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDevFeeInfoResponse>): QueryDevFeeInfoResponse {
-    const message = createBaseQueryDevFeeInfoResponse();
-    if (object.fee !== undefined && object.fee !== null) {
-      message.fee = DevFeeInfo.fromPartial(object.fee);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
-    return {
-      fee: object.fee ? DevFeeInfo.fromSDK(object.fee) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDevFeeInfoResponseSDKType {
-    return {
-      fee: isSet(object.fee) ? DevFeeInfo.fromSDKJSON(object.fee) : undefined
-    };
-  },
-  toSDK(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toSDK(message.fee) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDevFeeInfoResponseAmino): QueryDevFeeInfoResponse {
-    return {
-      fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
-    };
-  },
-  toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseAmino {
-    const obj: any = {};
-    obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDevFeeInfoResponseAminoMsg): QueryDevFeeInfoResponse {
-    return QueryDevFeeInfoResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryDevFeeInfoResponseProtoMsg): QueryDevFeeInfoResponse {
     return QueryDevFeeInfoResponse.decode(message.value);
   },
@@ -516,38 +349,6 @@ export const QueryParamsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
-  },
-  toJSON(_: QueryParamsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
-    const message = createBaseQueryParamsRequest();
-    return message;
-  },
-  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -591,51 +392,6 @@ export const QueryParamsResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
-    const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    return message;
-  },
-  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
@@ -687,59 +443,6 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     }
     return message;
   },
-  fromJSON(object: any): QueryDevFeeInfosPerDeployerRequest {
-    const obj = createBaseQueryDevFeeInfosPerDeployerRequest();
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosPerDeployerRequest): unknown {
-    const obj: any = {};
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
-    const message = createBaseQueryDevFeeInfosPerDeployerRequest();
-    message.deployerAddress = object.deployerAddress ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
-    return {
-      deployerAddress: object?.deployer_address,
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerRequestSDKType {
-    return {
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestSDKType {
-    const obj: any = {};
-    obj.deployer_address = message.deployerAddress;
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
-    return {
-      deployerAddress: object.deployer_address,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestAmino {
-    const obj: any = {};
-    obj.deployer_address = message.deployerAddress;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDevFeeInfosPerDeployerRequestAminoMsg): QueryDevFeeInfosPerDeployerRequest {
-    return QueryDevFeeInfosPerDeployerRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryDevFeeInfosPerDeployerRequestProtoMsg): QueryDevFeeInfosPerDeployerRequest {
     return QueryDevFeeInfosPerDeployerRequest.decode(message.value);
   },
@@ -789,71 +492,6 @@ export const QueryDevFeeInfosPerDeployerResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryDevFeeInfosPerDeployerResponse {
-    const obj = createBaseQueryDevFeeInfosPerDeployerResponse();
-    if (Array.isArray(object?.fees)) obj.fees = object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosPerDeployerResponse): unknown {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toJSON(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerResponse>): QueryDevFeeInfosPerDeployerResponse {
-    const message = createBaseQueryDevFeeInfosPerDeployerResponse();
-    message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerResponseSDKType {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseSDKType {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toSDK(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryDevFeeInfosPerDeployerResponseAmino): QueryDevFeeInfosPerDeployerResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseAmino {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryDevFeeInfosPerDeployerResponseAminoMsg): QueryDevFeeInfosPerDeployerResponse {
-    return QueryDevFeeInfosPerDeployerResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDevFeeInfosPerDeployerResponseProtoMsg): QueryDevFeeInfosPerDeployerResponse {
     return QueryDevFeeInfosPerDeployerResponse.decode(message.value);

@@ -15,6 +15,10 @@ export interface PubKeyProtoMsg {
   typeUrl: "/cosmos.crypto.ed25519.PubKey";
   value: Uint8Array;
 }
+export interface PubKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.ed25519.PubKey";
+  value: Uint8Array;
+}
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
  * It's needed for Any serialization and SDK compatibility.
@@ -45,6 +49,10 @@ export interface PubKeySDKType {
  */
 export interface PrivKey {
   key: Uint8Array;
+}
+export interface PrivKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.ed25519.PrivKey";
+  value: Uint8Array;
 }
 export interface PrivKeyProtoMsg {
   typeUrl: "/cosmos.crypto.ed25519.PrivKey";

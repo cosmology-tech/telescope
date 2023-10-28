@@ -1,11 +1,14 @@
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
   proposer?: Validator;
   totalVotingPower: bigint;
+}
+export interface ValidatorSetProtoMsg {
+  typeUrl: "/tendermint.types.ValidatorSet";
+  value: Uint8Array;
 }
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
@@ -18,6 +21,10 @@ export interface Validator {
   votingPower: bigint;
   proposerPriority: bigint;
 }
+export interface ValidatorProtoMsg {
+  typeUrl: "/tendermint.types.Validator";
+  value: Uint8Array;
+}
 export interface ValidatorSDKType {
   address: Uint8Array;
   pub_key: PublicKeySDKType;
@@ -27,6 +34,10 @@ export interface ValidatorSDKType {
 export interface SimpleValidator {
   pubKey?: PublicKey;
   votingPower: bigint;
+}
+export interface SimpleValidatorProtoMsg {
+  typeUrl: "/tendermint.types.SimpleValidator";
+  value: Uint8Array;
 }
 export interface SimpleValidatorSDKType {
   pub_key?: PublicKeySDKType;
@@ -75,81 +86,6 @@ export const ValidatorSet = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ValidatorSet {
-    const obj = createBaseValidatorSet();
-    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
-    if (isSet(object.proposer)) obj.proposer = Validator.fromJSON(object.proposer);
-    if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
-    return obj;
-  },
-  toJSON(message: ValidatorSet): unknown {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toJSON(message.proposer) : undefined);
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
-    const message = createBaseValidatorSet();
-    message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    if (object.proposer !== undefined && object.proposer !== null) {
-      message.proposer = Validator.fromPartial(object.proposer);
-    }
-    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
-      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
-    }
-    return message;
-  },
-  fromSDK(object: ValidatorSetSDKType): ValidatorSet {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      proposer: object.proposer ? Validator.fromSDK(object.proposer) : undefined,
-      totalVotingPower: object?.total_voting_power
-    };
-  },
-  fromSDKJSON(object: any): ValidatorSetSDKType {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      proposer: isSet(object.proposer) ? Validator.fromSDKJSON(object.proposer) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: ValidatorSet): ValidatorSetSDKType {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toSDK(message.proposer) : undefined);
-    obj.total_voting_power = message.totalVotingPower;
-    return obj;
-  },
-  fromAmino(object: ValidatorSetAmino): ValidatorSet {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      proposer: object?.proposer ? Validator.fromAmino(object.proposer) : undefined,
-      totalVotingPower: BigInt(object.total_voting_power)
-    };
-  },
-  toAmino(message: ValidatorSet): ValidatorSetAmino {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    obj.proposer = message.proposer ? Validator.toAmino(message.proposer) : undefined;
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorSetAminoMsg): ValidatorSet {
-    return ValidatorSet.fromAmino(object.value);
   },
   fromProtoMsg(message: ValidatorSetProtoMsg): ValidatorSet {
     return ValidatorSet.decode(message.value);
@@ -215,79 +151,6 @@ export const Validator = {
     }
     return message;
   },
-  fromJSON(object: any): Validator {
-    const obj = createBaseValidator();
-    if (isSet(object.address)) obj.address = bytesFromBase64(object.address);
-    if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
-    if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
-    if (isSet(object.proposerPriority)) obj.proposerPriority = BigInt(object.proposerPriority.toString());
-    return obj;
-  },
-  toJSON(message: Validator): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
-    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
-    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Validator>): Validator {
-    const message = createBaseValidator();
-    message.address = object.address ?? new Uint8Array();
-    if (object.pubKey !== undefined && object.pubKey !== null) {
-      message.pubKey = PublicKey.fromPartial(object.pubKey);
-    }
-    if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = BigInt(object.votingPower.toString());
-    }
-    if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
-      message.proposerPriority = BigInt(object.proposerPriority.toString());
-    }
-    return message;
-  },
-  fromSDK(object: ValidatorSDKType): Validator {
-    return {
-      address: object?.address,
-      pubKey: object.pub_key ? PublicKey.fromSDK(object.pub_key) : undefined,
-      votingPower: object?.voting_power,
-      proposerPriority: object?.proposer_priority
-    };
-  },
-  fromSDKJSON(object: any): ValidatorSDKType {
-    return {
-      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt(0),
-      proposer_priority: isSet(object.proposer_priority) ? BigInt(object.proposer_priority.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Validator): ValidatorSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
-    obj.voting_power = message.votingPower;
-    obj.proposer_priority = message.proposerPriority;
-    return obj;
-  },
-  fromAmino(object: ValidatorAmino): Validator {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      votingPower: BigInt(object.voting_power),
-      proposerPriority: BigInt(object.proposer_priority)
-    };
-  },
-  toAmino(message: Validator): ValidatorAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorAminoMsg): Validator {
-    return Validator.fromAmino(object.value);
-  },
   fromProtoMsg(message: ValidatorProtoMsg): Validator {
     return Validator.decode(message.value);
   },
@@ -337,61 +200,6 @@ export const SimpleValidator = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SimpleValidator {
-    const obj = createBaseSimpleValidator();
-    if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
-    if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
-    return obj;
-  },
-  toJSON(message: SimpleValidator): unknown {
-    const obj: any = {};
-    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
-    const message = createBaseSimpleValidator();
-    if (object.pubKey !== undefined && object.pubKey !== null) {
-      message.pubKey = PublicKey.fromPartial(object.pubKey);
-    }
-    if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = BigInt(object.votingPower.toString());
-    }
-    return message;
-  },
-  fromSDK(object: SimpleValidatorSDKType): SimpleValidator {
-    return {
-      pubKey: object.pub_key ? PublicKey.fromSDK(object.pub_key) : undefined,
-      votingPower: object?.voting_power
-    };
-  },
-  fromSDKJSON(object: any): SimpleValidatorSDKType {
-    return {
-      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: SimpleValidator): SimpleValidatorSDKType {
-    const obj: any = {};
-    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
-    obj.voting_power = message.votingPower;
-    return obj;
-  },
-  fromAmino(object: SimpleValidatorAmino): SimpleValidator {
-    return {
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      votingPower: BigInt(object.voting_power)
-    };
-  },
-  toAmino(message: SimpleValidator): SimpleValidatorAmino {
-    const obj: any = {};
-    obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SimpleValidatorAminoMsg): SimpleValidator {
-    return SimpleValidator.fromAmino(object.value);
   },
   fromProtoMsg(message: SimpleValidatorProtoMsg): SimpleValidator {
     return SimpleValidator.decode(message.value);

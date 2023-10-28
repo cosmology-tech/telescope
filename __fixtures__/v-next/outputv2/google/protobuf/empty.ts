@@ -17,6 +17,10 @@ export interface EmptyProtoMsg {
   typeUrl: "/google.protobuf.Empty";
   value: Uint8Array;
 }
+export interface EmptyProtoMsg {
+  typeUrl: "/google.protobuf.Empty";
+  value: Uint8Array;
+}
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
  * empty messages in your APIs. A typical example is to use it as the request

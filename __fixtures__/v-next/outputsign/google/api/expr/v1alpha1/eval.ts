@@ -1,7 +1,6 @@
 import { Value, ValueSDKType } from "./value";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.
@@ -19,6 +18,10 @@ export interface EvalState {
    */
   results: EvalState_Result[];
 }
+export interface EvalStateProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.EvalState";
+  value: Uint8Array;
+}
 /**
  * The state of an evaluation.
  * 
@@ -34,6 +37,10 @@ export interface EvalState_Result {
   expr: bigint;
   /** The index in `values` of the resulting value. */
   value: bigint;
+}
+export interface EvalState_ResultProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Result";
+  value: Uint8Array;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
@@ -91,6 +98,10 @@ export interface ExprValue {
    */
   unknown?: UnknownSet;
 }
+export interface ExprValueProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ExprValue";
+  value: Uint8Array;
+}
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
   value?: ValueSDKType;
@@ -105,6 +116,10 @@ export interface ExprValueSDKType {
 export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
+}
+export interface ErrorSetProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ErrorSet";
+  value: Uint8Array;
 }
 /**
  * A set of errors.
@@ -122,6 +137,10 @@ export interface ErrorSetSDKType {
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: bigint[];
+}
+export interface UnknownSetProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.UnknownSet";
+  value: Uint8Array;
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -167,81 +186,6 @@ export const EvalState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): EvalState {
-    const obj = createBaseEvalState();
-    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => ExprValue.fromJSON(e));
-    if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => EvalState_Result.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: EvalState): unknown {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? ExprValue.toJSON(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.results) {
-      obj.results = message.results.map(e => e ? EvalState_Result.toJSON(e) : undefined);
-    } else {
-      obj.results = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EvalState>): EvalState {
-    const message = createBaseEvalState();
-    message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
-    message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: EvalStateSDKType): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDK(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): EvalStateSDKType {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDKJSON(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: EvalState): EvalStateSDKType {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? ExprValue.toSDK(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.results) {
-      obj.results = message.results.map(e => e ? EvalState_Result.toSDK(e) : undefined);
-    } else {
-      obj.results = [];
-    }
-    return obj;
-  },
-  fromAmino(object: EvalStateAmino): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: EvalState): EvalStateAmino {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? ExprValue.toAmino(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.results) {
-      obj.results = message.results.map(e => e ? EvalState_Result.toAmino(e) : undefined);
-    } else {
-      obj.results = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: EvalStateAminoMsg): EvalState {
-    return EvalState.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalStateProtoMsg): EvalState {
     return EvalState.decode(message.value);
@@ -292,61 +236,6 @@ export const EvalState_Result = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): EvalState_Result {
-    const obj = createBaseEvalState_Result();
-    if (isSet(object.expr)) obj.expr = BigInt(object.expr.toString());
-    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: EvalState_Result): unknown {
-    const obj: any = {};
-    message.expr !== undefined && (obj.expr = (message.expr || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
-    const message = createBaseEvalState_Result();
-    if (object.expr !== undefined && object.expr !== null) {
-      message.expr = BigInt(object.expr.toString());
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = BigInt(object.value.toString());
-    }
-    return message;
-  },
-  fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
-    return {
-      expr: object?.expr,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): EvalState_ResultSDKType {
-    return {
-      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt(0),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: EvalState_Result): EvalState_ResultSDKType {
-    const obj: any = {};
-    obj.expr = message.expr;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: EvalState_ResultAmino): EvalState_Result {
-    return {
-      expr: BigInt(object.expr),
-      value: BigInt(object.value)
-    };
-  },
-  toAmino(message: EvalState_Result): EvalState_ResultAmino {
-    const obj: any = {};
-    obj.expr = message.expr ? message.expr.toString() : undefined;
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {
-    return EvalState_Result.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalState_ResultProtoMsg): EvalState_Result {
     return EvalState_Result.decode(message.value);
@@ -405,71 +294,6 @@ export const ExprValue = {
     }
     return message;
   },
-  fromJSON(object: any): ExprValue {
-    const obj = createBaseExprValue();
-    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
-    if (isSet(object.error)) obj.error = ErrorSet.fromJSON(object.error);
-    if (isSet(object.unknown)) obj.unknown = UnknownSet.fromJSON(object.unknown);
-    return obj;
-  },
-  toJSON(message: ExprValue): unknown {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
-    message.error !== undefined && (obj.error = message.error ? ErrorSet.toJSON(message.error) : undefined);
-    message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toJSON(message.unknown) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ExprValue>): ExprValue {
-    const message = createBaseExprValue();
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Value.fromPartial(object.value);
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = ErrorSet.fromPartial(object.error);
-    }
-    if (object.unknown !== undefined && object.unknown !== null) {
-      message.unknown = UnknownSet.fromPartial(object.unknown);
-    }
-    return message;
-  },
-  fromSDK(object: ExprValueSDKType): ExprValue {
-    return {
-      value: object.value ? Value.fromSDK(object.value) : undefined,
-      error: object.error ? ErrorSet.fromSDK(object.error) : undefined,
-      unknown: object.unknown ? UnknownSet.fromSDK(object.unknown) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ExprValueSDKType {
-    return {
-      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromSDKJSON(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromSDKJSON(object.unknown) : undefined
-    };
-  },
-  toSDK(message: ExprValue): ExprValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
-    message.error !== undefined && (obj.error = message.error ? ErrorSet.toSDK(message.error) : undefined);
-    message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toSDK(message.unknown) : undefined);
-    return obj;
-  },
-  fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      value: object?.value ? Value.fromAmino(object.value) : undefined,
-      error: object?.error ? ErrorSet.fromAmino(object.error) : undefined,
-      unknown: object?.unknown ? UnknownSet.fromAmino(object.unknown) : undefined
-    };
-  },
-  toAmino(message: ExprValue): ExprValueAmino {
-    const obj: any = {};
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
-    obj.error = message.error ? ErrorSet.toAmino(message.error) : undefined;
-    obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ExprValueAminoMsg): ExprValue {
-    return ExprValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: ExprValueProtoMsg): ExprValue {
     return ExprValue.decode(message.value);
   },
@@ -512,61 +336,6 @@ export const ErrorSet = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ErrorSet {
-    const obj = createBaseErrorSet();
-    if (Array.isArray(object?.errors)) obj.errors = object.errors.map((e: any) => Status.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ErrorSet): unknown {
-    const obj: any = {};
-    if (message.errors) {
-      obj.errors = message.errors.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.errors = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ErrorSet>): ErrorSet {
-    const message = createBaseErrorSet();
-    message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ErrorSetSDKType): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ErrorSetSDKType {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ErrorSet): ErrorSetSDKType {
-    const obj: any = {};
-    if (message.errors) {
-      obj.errors = message.errors.map(e => e ? Status.toSDK(e) : undefined);
-    } else {
-      obj.errors = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ErrorSetAmino): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ErrorSet): ErrorSetAmino {
-    const obj: any = {};
-    if (message.errors) {
-      obj.errors = message.errors.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.errors = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ErrorSetAminoMsg): ErrorSet {
-    return ErrorSet.fromAmino(object.value);
   },
   fromProtoMsg(message: ErrorSetProtoMsg): ErrorSet {
     return ErrorSet.decode(message.value);
@@ -619,61 +388,6 @@ export const UnknownSet = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): UnknownSet {
-    const obj = createBaseUnknownSet();
-    if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: UnknownSet): unknown {
-    const obj: any = {};
-    if (message.exprs) {
-      obj.exprs = message.exprs.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.exprs = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UnknownSet>): UnknownSet {
-    const message = createBaseUnknownSet();
-    message.exprs = object.exprs?.map(e => BigInt(e.toString())) || [];
-    return message;
-  },
-  fromSDK(object: UnknownSetSDKType): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): UnknownSetSDKType {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => BigInt(e.toString())) : []
-    };
-  },
-  toSDK(message: UnknownSet): UnknownSetSDKType {
-    const obj: any = {};
-    if (message.exprs) {
-      obj.exprs = message.exprs.map(e => e);
-    } else {
-      obj.exprs = [];
-    }
-    return obj;
-  },
-  fromAmino(object: UnknownSetAmino): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => BigInt(e)) : []
-    };
-  },
-  toAmino(message: UnknownSet): UnknownSetAmino {
-    const obj: any = {};
-    if (message.exprs) {
-      obj.exprs = message.exprs.map(e => e.toString());
-    } else {
-      obj.exprs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UnknownSetAminoMsg): UnknownSet {
-    return UnknownSet.fromAmino(object.value);
   },
   fromProtoMsg(message: UnknownSetProtoMsg): UnknownSet {
     return UnknownSet.decode(message.value);

@@ -11,6 +11,10 @@ export interface ParsedExpr {
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo?: SourceInfo;
 }
+export interface ParsedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
+  value: Uint8Array;
+}
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
   expr?: ExprSDKType;
@@ -55,6 +59,10 @@ export interface Expr {
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
+export interface ExprProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Expr";
+  value: Uint8Array;
+}
 /**
  * An abstract representation of a common expression.
  * 
@@ -92,6 +100,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
+export interface Expr_IdentProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Ident";
+  value: Uint8Array;
+}
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
   name: string;
@@ -119,6 +131,10 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
+export interface Expr_SelectProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Select";
+  value: Uint8Array;
+}
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
@@ -141,6 +157,10 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
+export interface Expr_CallProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Call";
+  value: Uint8Array;
+}
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -160,6 +180,10 @@ export interface Expr_CallSDKType {
 export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
+}
+export interface Expr_CreateListProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.CreateList";
+  value: Uint8Array;
 }
 /**
  * A list creation expression.
@@ -186,6 +210,10 @@ export interface Expr_CreateStruct {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
+export interface Expr_CreateStructProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.CreateStruct";
+  value: Uint8Array;
+}
 /**
  * A map or message creation expression.
  * 
@@ -211,6 +239,10 @@ export interface Expr_CreateStruct_Entry {
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
   value?: Expr;
+}
+export interface Expr_CreateStruct_EntryProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Entry";
+  value: Uint8Array;
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
@@ -275,6 +307,10 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
+}
+export interface Expr_ComprehensionProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Comprehension";
+  value: Uint8Array;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -358,6 +394,10 @@ export interface Constant {
   /** @deprecated */
   timestampValue?: Date;
 }
+export interface ConstantProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Constant";
+  value: Uint8Array;
+}
 /**
  * Represents a primitive literal.
  * 
@@ -390,6 +430,10 @@ export interface SourceInfo_PositionsEntry {
   key: bigint;
   value: number;
 }
+export interface SourceInfo_PositionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface SourceInfo_PositionsEntrySDKType {
   key: bigint;
   value: number;
@@ -397,6 +441,10 @@ export interface SourceInfo_PositionsEntrySDKType {
 export interface SourceInfo_MacroCallsEntry {
   key: bigint;
   value?: Expr;
+}
+export interface SourceInfo_MacroCallsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface SourceInfo_MacroCallsEntrySDKType {
   key: bigint;
@@ -444,6 +492,10 @@ export interface SourceInfo {
     [key: bigint]: Expr;
   };
 }
+export interface SourceInfoProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.SourceInfo";
+  value: Uint8Array;
+}
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   syntax_version: string;
@@ -472,6 +524,10 @@ export interface SourcePosition {
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
   column: number;
+}
+export interface SourcePositionProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.SourcePosition";
+  value: Uint8Array;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {

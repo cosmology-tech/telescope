@@ -1,7 +1,6 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -12,6 +11,10 @@ export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 export interface PoolParams {
   swapFee: string;
   exitFee: string;
+}
+export interface PoolParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams";
+  value: Uint8Array;
 }
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -47,6 +50,10 @@ export interface Pool {
   scalingFactors: bigint[];
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController: string;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool";
+  value: Uint8Array;
 }
 /** Pool is the stableswap Pool struct */
 export interface PoolSDKType {
@@ -95,63 +102,6 @@ export const PoolParams = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PoolParams {
-    const obj = createBasePoolParams();
-    if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
-    if (isSet(object.exitFee)) obj.exitFee = String(object.exitFee);
-    return obj;
-  },
-  toJSON(message: PoolParams): unknown {
-    const obj: any = {};
-    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
-    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PoolParams>): PoolParams {
-    const message = createBasePoolParams();
-    message.swapFee = object.swapFee ?? "";
-    message.exitFee = object.exitFee ?? "";
-    return message;
-  },
-  fromSDK(object: PoolParamsSDKType): PoolParams {
-    return {
-      swapFee: object?.swap_fee,
-      exitFee: object?.exit_fee
-    };
-  },
-  fromSDKJSON(object: any): PoolParamsSDKType {
-    return {
-      swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
-      exit_fee: isSet(object.exit_fee) ? String(object.exit_fee) : ""
-    };
-  },
-  toSDK(message: PoolParams): PoolParamsSDKType {
-    const obj: any = {};
-    obj.swap_fee = message.swapFee;
-    obj.exit_fee = message.exitFee;
-    return obj;
-  },
-  fromAmino(object: PoolParamsAmino): PoolParams {
-    return {
-      swapFee: object.swap_fee,
-      exitFee: object.exit_fee
-    };
-  },
-  toAmino(message: PoolParams): PoolParamsAmino {
-    const obj: any = {};
-    obj.swap_fee = message.swapFee;
-    obj.exit_fee = message.exitFee;
-    return obj;
-  },
-  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
-    return PoolParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/pool-params",
-      value: PoolParams.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
     return PoolParams.decode(message.value);
@@ -253,141 +203,6 @@ export const Pool = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Pool {
-    const obj = createBasePool();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
-    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
-    if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
-    if (Array.isArray(object?.poolLiquidity)) obj.poolLiquidity = object.poolLiquidity.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.scalingFactors)) obj.scalingFactors = object.scalingFactors.map((e: any) => BigInt(e.toString()));
-    if (isSet(object.scalingFactorController)) obj.scalingFactorController = String(object.scalingFactorController);
-    return obj;
-  },
-  toJSON(message: Pool): unknown {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
-    if (message.poolLiquidity) {
-      obj.poolLiquidity = message.poolLiquidity.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.poolLiquidity = [];
-    }
-    if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.scalingFactors = [];
-    }
-    message.scalingFactorController !== undefined && (obj.scalingFactorController = message.scalingFactorController);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Pool>): Pool {
-    const message = createBasePool();
-    message.address = object.address ?? "";
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
-    if (object.poolParams !== undefined && object.poolParams !== null) {
-      message.poolParams = PoolParams.fromPartial(object.poolParams);
-    }
-    message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    if (object.totalShares !== undefined && object.totalShares !== null) {
-      message.totalShares = Coin.fromPartial(object.totalShares);
-    }
-    message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
-    message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
-    message.scalingFactorController = object.scalingFactorController ?? "";
-    return message;
-  },
-  fromSDK(object: PoolSDKType): Pool {
-    return {
-      address: object?.address,
-      id: object?.id,
-      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
-      futurePoolGovernor: object?.future_pool_governor,
-      totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined,
-      poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
-      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : [],
-      scalingFactorController: object?.scaling_factor_controller
-    };
-  },
-  fromSDKJSON(object: any): PoolSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
-      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
-      pool_liquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : [],
-      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
-    };
-  },
-  toSDK(message: Pool): PoolSDKType {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.id = message.id;
-    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
-    obj.future_pool_governor = message.futurePoolGovernor;
-    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
-    if (message.poolLiquidity) {
-      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.pool_liquidity = [];
-    }
-    if (message.scalingFactors) {
-      obj.scaling_factors = message.scalingFactors.map(e => e);
-    } else {
-      obj.scaling_factors = [];
-    }
-    obj.scaling_factor_controller = message.scalingFactorController;
-    return obj;
-  },
-  fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
-      poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
-      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : [],
-      scalingFactorController: object.scaling_factor_controller
-    };
-  },
-  toAmino(message: Pool): PoolAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
-    obj.future_pool_governor = message.futurePoolGovernor;
-    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
-    if (message.poolLiquidity) {
-      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.pool_liquidity = [];
-    }
-    if (message.scalingFactors) {
-      obj.scaling_factors = message.scalingFactors.map(e => e.toString());
-    } else {
-      obj.scaling_factors = [];
-    }
-    obj.scaling_factor_controller = message.scalingFactorController;
-    return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "osmosis/gamm/pool",
-      value: Pool.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);

@@ -1,13 +1,16 @@
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
   resources: ResourceUnits;
   count: number;
   price: DecCoin;
+}
+export interface ResourceProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Resource";
+  value: Uint8Array;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -58,75 +61,6 @@ export const Resource = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Resource {
-    const obj = createBaseResource();
-    if (isSet(object.resources)) obj.resources = ResourceUnits.fromJSON(object.resources);
-    if (isSet(object.count)) obj.count = Number(object.count);
-    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
-    return obj;
-  },
-  toJSON(message: Resource): unknown {
-    const obj: any = {};
-    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toJSON(message.resources) : undefined);
-    message.count !== undefined && (obj.count = Math.round(message.count));
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
-    const message = createBaseResource();
-    if (object.resources !== undefined && object.resources !== null) {
-      message.resources = ResourceUnits.fromPartial(object.resources);
-    }
-    message.count = object.count ?? 0;
-    if (object.price !== undefined && object.price !== null) {
-      message.price = DecCoin.fromPartial(object.price);
-    }
-    return message;
-  },
-  fromSDK(object: ResourceSDKType): Resource {
-    return {
-      resources: object.resources ? ResourceUnits.fromSDK(object.resources) : undefined,
-      count: object?.count,
-      price: object.price ? DecCoin.fromSDK(object.price) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ResourceSDKType {
-    return {
-      resources: isSet(object.resources) ? ResourceUnits.fromSDKJSON(object.resources) : undefined,
-      count: isSet(object.count) ? Number(object.count) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined
-    };
-  },
-  toSDK(message: Resource): ResourceSDKType {
-    const obj: any = {};
-    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toSDK(message.resources) : undefined);
-    obj.count = message.count;
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
-    return obj;
-  },
-  fromAmino(object: ResourceAmino): Resource {
-    return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: object.count,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
-    };
-  },
-  toAmino(message: Resource): ResourceAmino {
-    const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
-    obj.count = message.count;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ResourceAminoMsg): Resource {
-    return Resource.fromAmino(object.value);
-  },
-  toAminoMsg(message: Resource): ResourceAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/resource",
-      value: Resource.toAmino(message)
-    };
   },
   fromProtoMsg(message: ResourceProtoMsg): Resource {
     return Resource.decode(message.value);

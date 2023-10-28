@@ -17,6 +17,10 @@ export interface Position {
   joinTime: Date;
   liquidity: string;
 }
+export interface PositionProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.Position";
+  value: Uint8Array;
+}
 /**
  * Position contains position's id, address, pool id, lower tick, upper tick
  * join time, and liquidity.
@@ -34,6 +38,10 @@ export interface PositionWithUnderlyingAssetBreakdown {
   position: Position;
   asset0: Coin;
   asset1: Coin;
+}
+export interface PositionWithUnderlyingAssetBreakdownProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.PositionWithUnderlyingAssetBreakdown";
+  value: Uint8Array;
 }
 export interface PositionWithUnderlyingAssetBreakdownSDKType {
   position: PositionSDKType;

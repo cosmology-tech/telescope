@@ -1,11 +1,14 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
   index: bigint;
   leafHash: Uint8Array;
   aunts: Uint8Array[];
+}
+export interface ProofProtoMsg {
+  typeUrl: "/tendermint.crypto.Proof";
+  value: Uint8Array;
 }
 export interface ProofSDKType {
   total: bigint;
@@ -19,6 +22,10 @@ export interface ValueOp {
   /** To encode in ProofOp.Data */
   proof?: Proof;
 }
+export interface ValueOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ValueOp";
+  value: Uint8Array;
+}
 export interface ValueOpSDKType {
   key: Uint8Array;
   proof?: ProofSDKType;
@@ -27,6 +34,10 @@ export interface DominoOp {
   key: string;
   input: string;
   output: string;
+}
+export interface DominoOpProtoMsg {
+  typeUrl: "/tendermint.crypto.DominoOp";
+  value: Uint8Array;
 }
 export interface DominoOpSDKType {
   key: string;
@@ -43,6 +54,10 @@ export interface ProofOp {
   key: Uint8Array;
   data: Uint8Array;
 }
+export interface ProofOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOp";
+  value: Uint8Array;
+}
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
@@ -56,6 +71,10 @@ export interface ProofOpSDKType {
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOps {
   ops: ProofOp[];
+}
+export interface ProofOpsProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOps";
+  value: Uint8Array;
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsSDKType {
@@ -112,89 +131,6 @@ export const Proof = {
     }
     return message;
   },
-  fromJSON(object: any): Proof {
-    const obj = createBaseProof();
-    if (isSet(object.total)) obj.total = BigInt(object.total.toString());
-    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    if (isSet(object.leafHash)) obj.leafHash = bytesFromBase64(object.leafHash);
-    if (Array.isArray(object?.aunts)) obj.aunts = object.aunts.map((e: any) => bytesFromBase64(e));
-    return obj;
-  },
-  toJSON(message: Proof): unknown {
-    const obj: any = {};
-    message.total !== undefined && (obj.total = (message.total || BigInt(0)).toString());
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    message.leafHash !== undefined && (obj.leafHash = base64FromBytes(message.leafHash !== undefined ? message.leafHash : new Uint8Array()));
-    if (message.aunts) {
-      obj.aunts = message.aunts.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
-    } else {
-      obj.aunts = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Proof>): Proof {
-    const message = createBaseProof();
-    if (object.total !== undefined && object.total !== null) {
-      message.total = BigInt(object.total.toString());
-    }
-    if (object.index !== undefined && object.index !== null) {
-      message.index = BigInt(object.index.toString());
-    }
-    message.leafHash = object.leafHash ?? new Uint8Array();
-    message.aunts = object.aunts?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: ProofSDKType): Proof {
-    return {
-      total: object?.total,
-      index: object?.index,
-      leafHash: object?.leaf_hash,
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): ProofSDKType {
-    return {
-      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt(0),
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
-    };
-  },
-  toSDK(message: Proof): ProofSDKType {
-    const obj: any = {};
-    obj.total = message.total;
-    obj.index = message.index;
-    obj.leaf_hash = message.leafHash;
-    if (message.aunts) {
-      obj.aunts = message.aunts.map(e => e);
-    } else {
-      obj.aunts = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ProofAmino): Proof {
-    return {
-      total: BigInt(object.total),
-      index: BigInt(object.index),
-      leafHash: object.leaf_hash,
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Proof): ProofAmino {
-    const obj: any = {};
-    obj.total = message.total ? message.total.toString() : undefined;
-    obj.index = message.index ? message.index.toString() : undefined;
-    obj.leaf_hash = message.leafHash;
-    if (message.aunts) {
-      obj.aunts = message.aunts.map(e => e);
-    } else {
-      obj.aunts = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ProofAminoMsg): Proof {
-    return Proof.fromAmino(object.value);
-  },
   fromProtoMsg(message: ProofProtoMsg): Proof {
     return Proof.decode(message.value);
   },
@@ -244,59 +180,6 @@ export const ValueOp = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ValueOp {
-    const obj = createBaseValueOp();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.proof)) obj.proof = Proof.fromJSON(object.proof);
-    return obj;
-  },
-  toJSON(message: ValueOp): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.proof !== undefined && (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ValueOp>): ValueOp {
-    const message = createBaseValueOp();
-    message.key = object.key ?? new Uint8Array();
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromPartial(object.proof);
-    }
-    return message;
-  },
-  fromSDK(object: ValueOpSDKType): ValueOp {
-    return {
-      key: object?.key,
-      proof: object.proof ? Proof.fromSDK(object.proof) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ValueOpSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      proof: isSet(object.proof) ? Proof.fromSDKJSON(object.proof) : undefined
-    };
-  },
-  toSDK(message: ValueOp): ValueOpSDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
-    return obj;
-  },
-  fromAmino(object: ValueOpAmino): ValueOp {
-    return {
-      key: object.key,
-      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
-    };
-  },
-  toAmino(message: ValueOp): ValueOpAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValueOpAminoMsg): ValueOp {
-    return ValueOp.fromAmino(object.value);
   },
   fromProtoMsg(message: ValueOpProtoMsg): ValueOp {
     return ValueOp.decode(message.value);
@@ -355,65 +238,6 @@ export const DominoOp = {
     }
     return message;
   },
-  fromJSON(object: any): DominoOp {
-    const obj = createBaseDominoOp();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.input)) obj.input = String(object.input);
-    if (isSet(object.output)) obj.output = String(object.output);
-    return obj;
-  },
-  toJSON(message: DominoOp): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.input !== undefined && (obj.input = message.input);
-    message.output !== undefined && (obj.output = message.output);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DominoOp>): DominoOp {
-    const message = createBaseDominoOp();
-    message.key = object.key ?? "";
-    message.input = object.input ?? "";
-    message.output = object.output ?? "";
-    return message;
-  },
-  fromSDK(object: DominoOpSDKType): DominoOp {
-    return {
-      key: object?.key,
-      input: object?.input,
-      output: object?.output
-    };
-  },
-  fromSDKJSON(object: any): DominoOpSDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      input: isSet(object.input) ? String(object.input) : "",
-      output: isSet(object.output) ? String(object.output) : ""
-    };
-  },
-  toSDK(message: DominoOp): DominoOpSDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.input = message.input;
-    obj.output = message.output;
-    return obj;
-  },
-  fromAmino(object: DominoOpAmino): DominoOp {
-    return {
-      key: object.key,
-      input: object.input,
-      output: object.output
-    };
-  },
-  toAmino(message: DominoOp): DominoOpAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.input = message.input;
-    obj.output = message.output;
-    return obj;
-  },
-  fromAminoMsg(object: DominoOpAminoMsg): DominoOp {
-    return DominoOp.fromAmino(object.value);
-  },
   fromProtoMsg(message: DominoOpProtoMsg): DominoOp {
     return DominoOp.decode(message.value);
   },
@@ -471,65 +295,6 @@ export const ProofOp = {
     }
     return message;
   },
-  fromJSON(object: any): ProofOp {
-    const obj = createBaseProofOp();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    return obj;
-  },
-  toJSON(message: ProofOp): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ProofOp>): ProofOp {
-    const message = createBaseProofOp();
-    message.type = object.type ?? "";
-    message.key = object.key ?? new Uint8Array();
-    message.data = object.data ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: ProofOpSDKType): ProofOp {
-    return {
-      type: object?.type,
-      key: object?.key,
-      data: object?.data
-    };
-  },
-  fromSDKJSON(object: any): ProofOpSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
-  },
-  toSDK(message: ProofOp): ProofOpSDKType {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.key = message.key;
-    obj.data = message.data;
-    return obj;
-  },
-  fromAmino(object: ProofOpAmino): ProofOp {
-    return {
-      type: object.type,
-      key: object.key,
-      data: object.data
-    };
-  },
-  toAmino(message: ProofOp): ProofOpAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.key = message.key;
-    obj.data = message.data;
-    return obj;
-  },
-  fromAminoMsg(object: ProofOpAminoMsg): ProofOp {
-    return ProofOp.fromAmino(object.value);
-  },
   fromProtoMsg(message: ProofOpProtoMsg): ProofOp {
     return ProofOp.decode(message.value);
   },
@@ -572,61 +337,6 @@ export const ProofOps = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ProofOps {
-    const obj = createBaseProofOps();
-    if (Array.isArray(object?.ops)) obj.ops = object.ops.map((e: any) => ProofOp.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ProofOps): unknown {
-    const obj: any = {};
-    if (message.ops) {
-      obj.ops = message.ops.map(e => e ? ProofOp.toJSON(e) : undefined);
-    } else {
-      obj.ops = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ProofOps>): ProofOps {
-    const message = createBaseProofOps();
-    message.ops = object.ops?.map(e => ProofOp.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ProofOpsSDKType): ProofOps {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ProofOpsSDKType {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ProofOps): ProofOpsSDKType {
-    const obj: any = {};
-    if (message.ops) {
-      obj.ops = message.ops.map(e => e ? ProofOp.toSDK(e) : undefined);
-    } else {
-      obj.ops = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ProofOpsAmino): ProofOps {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ProofOps): ProofOpsAmino {
-    const obj: any = {};
-    if (message.ops) {
-      obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e) : undefined);
-    } else {
-      obj.ops = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ProofOpsAminoMsg): ProofOps {
-    return ProofOps.fromAmino(object.value);
   },
   fromProtoMsg(message: ProofOpsProtoMsg): ProofOps {
     return ProofOps.decode(message.value);

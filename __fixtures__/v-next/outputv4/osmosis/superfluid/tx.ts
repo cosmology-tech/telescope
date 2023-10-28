@@ -7,32 +7,56 @@ export interface MsgSuperfluidDelegate {
   lockId: bigint;
   valAddr: string;
 }
+export interface MsgSuperfluidDelegateProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidDelegateSDKType {
   sender: string;
   lock_id: bigint;
   val_addr: string;
 }
 export interface MsgSuperfluidDelegateResponse {}
+export interface MsgSuperfluidDelegateResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidDelegateResponseSDKType {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
   lockId: bigint;
+}
+export interface MsgSuperfluidUndelegateProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate";
+  value: Uint8Array;
 }
 export interface MsgSuperfluidUndelegateSDKType {
   sender: string;
   lock_id: bigint;
 }
 export interface MsgSuperfluidUndelegateResponse {}
+export interface MsgSuperfluidUndelegateResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUndelegateResponseSDKType {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
   lockId: bigint;
+}
+export interface MsgSuperfluidUnbondLockProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock";
+  value: Uint8Array;
 }
 export interface MsgSuperfluidUnbondLockSDKType {
   sender: string;
   lock_id: bigint;
 }
 export interface MsgSuperfluidUnbondLockResponse {}
+export interface MsgSuperfluidUnbondLockResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUnbondLockResponseSDKType {}
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -43,6 +67,10 @@ export interface MsgLockAndSuperfluidDelegate {
   sender: string;
   coins: Coin[];
   valAddr: string;
+}
+export interface MsgLockAndSuperfluidDelegateProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate";
+  value: Uint8Array;
 }
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -56,6 +84,10 @@ export interface MsgLockAndSuperfluidDelegateSDKType {
 }
 export interface MsgLockAndSuperfluidDelegateResponse {
   ID: bigint;
+}
+export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
+  value: Uint8Array;
 }
 export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: bigint;
@@ -74,6 +106,10 @@ export interface MsgUnPoolWhitelistedPool {
   sender: string;
   poolId: bigint;
 }
+export interface MsgUnPoolWhitelistedPoolProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool";
+  value: Uint8Array;
+}
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
  * associated with pool pool_id. If pool_id is not approved for unpooling by
@@ -90,6 +126,10 @@ export interface MsgUnPoolWhitelistedPoolSDKType {
 }
 export interface MsgUnPoolWhitelistedPoolResponse {
   exitedLockIds: bigint[];
+}
+export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse";
+  value: Uint8Array;
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
   exited_lock_ids: bigint[];

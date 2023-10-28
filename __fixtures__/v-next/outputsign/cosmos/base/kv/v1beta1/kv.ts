@@ -1,9 +1,12 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.kv.v1beta1";
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
   pairs: Pair[];
+}
+export interface PairsProtoMsg {
+  typeUrl: "/cosmos.base.kv.v1beta1.Pairs";
+  value: Uint8Array;
 }
 /** Pairs defines a repeated slice of Pair objects. */
 export interface PairsSDKType {
@@ -12,6 +15,10 @@ export interface PairsSDKType {
 /** Pair defines a key/value bytes tuple. */
 export interface Pair {
   key: Uint8Array;
+  value: Uint8Array;
+}
+export interface PairProtoMsg {
+  typeUrl: "/cosmos.base.kv.v1beta1.Pair";
   value: Uint8Array;
 }
 /** Pair defines a key/value bytes tuple. */
@@ -48,67 +55,6 @@ export const Pairs = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Pairs {
-    const obj = createBasePairs();
-    if (Array.isArray(object?.pairs)) obj.pairs = object.pairs.map((e: any) => Pair.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Pairs): unknown {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? Pair.toJSON(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Pairs>): Pairs {
-    const message = createBasePairs();
-    message.pairs = object.pairs?.map(e => Pair.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: PairsSDKType): Pairs {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): PairsSDKType {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Pairs): PairsSDKType {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? Pair.toSDK(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-    return obj;
-  },
-  fromAmino(object: PairsAmino): Pairs {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Pairs): PairsAmino {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? Pair.toAmino(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PairsAminoMsg): Pairs {
-    return Pairs.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pairs): PairsAminoMsg {
-    return {
-      type: "cosmos-sdk/Pairs",
-      value: Pairs.toAmino(message)
-    };
   },
   fromProtoMsg(message: PairsProtoMsg): Pairs {
     return Pairs.decode(message.value);
@@ -159,63 +105,6 @@ export const Pair = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Pair {
-    const obj = createBasePair();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: Pair): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Pair>): Pair {
-    const message = createBasePair();
-    message.key = object.key ?? new Uint8Array();
-    message.value = object.value ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: PairSDKType): Pair {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): PairSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
-  },
-  toSDK(message: Pair): PairSDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: PairAmino): Pair {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: Pair): PairAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: PairAminoMsg): Pair {
-    return Pair.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pair): PairAminoMsg {
-    return {
-      type: "cosmos-sdk/Pair",
-      value: Pair.toAmino(message)
-    };
   },
   fromProtoMsg(message: PairProtoMsg): Pair {
     return Pair.decode(message.value);

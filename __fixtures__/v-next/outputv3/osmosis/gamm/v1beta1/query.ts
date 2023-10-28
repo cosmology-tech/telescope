@@ -19,6 +19,10 @@ export interface QueryPoolRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest";
   value: Uint8Array;
 }
+export interface QueryPoolRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest";
+  value: Uint8Array;
+}
 /** =============================== Pool */
 export interface QueryPoolRequestAmino {
   pool_id: string;
@@ -33,6 +37,10 @@ export interface QueryPoolRequestSDKType {
 }
 export interface QueryPoolResponse {
   pool?: Pool1 | Pool2 | Any | undefined;
+}
+export interface QueryPoolResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
+  value: Uint8Array;
 }
 export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
@@ -60,6 +68,10 @@ export interface QueryPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest";
   value: Uint8Array;
 }
+export interface QueryPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest";
+  value: Uint8Array;
+}
 /** =============================== Pools */
 export interface QueryPoolsRequestAmino {
   /** pagination defines an optional pagination for the request. */
@@ -77,6 +89,10 @@ export interface QueryPoolsResponse {
   pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
+  value: Uint8Array;
 }
 export interface QueryPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
@@ -104,6 +120,10 @@ export interface QueryNumPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest";
   value: Uint8Array;
 }
+export interface QueryNumPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest";
+  value: Uint8Array;
+}
 /** =============================== NumPools */
 export interface QueryNumPoolsRequestAmino {}
 export interface QueryNumPoolsRequestAminoMsg {
@@ -114,6 +134,10 @@ export interface QueryNumPoolsRequestAminoMsg {
 export interface QueryNumPoolsRequestSDKType {}
 export interface QueryNumPoolsResponse {
   numPools: bigint;
+}
+export interface QueryNumPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse";
+  value: Uint8Array;
 }
 export interface QueryNumPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse";
@@ -132,6 +156,10 @@ export interface QueryNumPoolsResponseSDKType {
 /** =============================== PoolType */
 export interface QueryPoolTypeRequest {
   poolId: bigint;
+}
+export interface QueryPoolTypeRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest";
+  value: Uint8Array;
 }
 export interface QueryPoolTypeRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest";
@@ -156,6 +184,10 @@ export interface QueryPoolTypeResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse";
   value: Uint8Array;
 }
+export interface QueryPoolTypeResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse";
+  value: Uint8Array;
+}
 export interface QueryPoolTypeResponseAmino {
   pool_type: string;
 }
@@ -170,6 +202,10 @@ export interface QueryPoolTypeResponseSDKType {
 export interface QueryCalcJoinPoolSharesRequest {
   poolId: bigint;
   tokensIn: Coin[];
+}
+export interface QueryCalcJoinPoolSharesRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest";
+  value: Uint8Array;
 }
 export interface QueryCalcJoinPoolSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest";
@@ -197,6 +233,10 @@ export interface QueryCalcJoinPoolSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse";
   value: Uint8Array;
 }
+export interface QueryCalcJoinPoolSharesResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse";
+  value: Uint8Array;
+}
 export interface QueryCalcJoinPoolSharesResponseAmino {
   share_out_amount: string;
   tokens_out: CoinAmino[];
@@ -213,6 +253,10 @@ export interface QueryCalcJoinPoolSharesResponseSDKType {
 export interface QueryCalcExitPoolCoinsFromSharesRequest {
   poolId: bigint;
   shareInAmount: string;
+}
+export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest";
+  value: Uint8Array;
 }
 export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest";
@@ -239,6 +283,10 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse";
   value: Uint8Array;
 }
+export interface QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse";
+  value: Uint8Array;
+}
 export interface QueryCalcExitPoolCoinsFromSharesResponseAmino {
   tokens_out: CoinAmino[];
 }
@@ -252,6 +300,10 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
   poolId: bigint;
+}
+export interface QueryPoolParamsRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest";
+  value: Uint8Array;
 }
 export interface QueryPoolParamsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest";
@@ -276,6 +328,10 @@ export interface QueryPoolParamsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse";
   value: Uint8Array;
 }
+export interface QueryPoolParamsResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse";
+  value: Uint8Array;
+}
 export interface QueryPoolParamsResponseAmino {
   params?: AnyAmino;
 }
@@ -289,6 +345,10 @@ export interface QueryPoolParamsResponseSDKType {
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
   poolId: bigint;
+}
+export interface QueryTotalPoolLiquidityRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
+  value: Uint8Array;
 }
 export interface QueryTotalPoolLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
@@ -313,6 +373,10 @@ export interface QueryTotalPoolLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse";
   value: Uint8Array;
 }
+export interface QueryTotalPoolLiquidityResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse";
+  value: Uint8Array;
+}
 export interface QueryTotalPoolLiquidityResponseAmino {
   liquidity: CoinAmino[];
 }
@@ -326,6 +390,10 @@ export interface QueryTotalPoolLiquidityResponseSDKType {
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequest {
   poolId: bigint;
+}
+export interface QueryTotalSharesRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest";
+  value: Uint8Array;
 }
 export interface QueryTotalSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest";
@@ -350,6 +418,10 @@ export interface QueryTotalSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse";
   value: Uint8Array;
 }
+export interface QueryTotalSharesResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse";
+  value: Uint8Array;
+}
 export interface QueryTotalSharesResponseAmino {
   total_shares?: CoinAmino;
 }
@@ -364,6 +436,10 @@ export interface QueryTotalSharesResponseSDKType {
 export interface QueryCalcJoinPoolNoSwapSharesRequest {
   poolId: bigint;
   tokensIn: Coin[];
+}
+export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest";
+  value: Uint8Array;
 }
 export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest";
@@ -391,6 +467,10 @@ export interface QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse";
   value: Uint8Array;
 }
+export interface QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse";
+  value: Uint8Array;
+}
 export interface QueryCalcJoinPoolNoSwapSharesResponseAmino {
   tokens_out: CoinAmino[];
   shares_out: string;
@@ -412,6 +492,10 @@ export interface QuerySpotPriceRequest {
   poolId: bigint;
   baseAssetDenom: string;
   quoteAssetDenom: string;
+}
+export interface QuerySpotPriceRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest";
+  value: Uint8Array;
 }
 export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest";
@@ -450,6 +534,10 @@ export interface QueryPoolsWithFilterRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest";
   value: Uint8Array;
 }
+export interface QueryPoolsWithFilterRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest";
+  value: Uint8Array;
+}
 export interface QueryPoolsWithFilterRequestAmino {
   min_liquidity: CoinAmino[];
   pool_type: string;
@@ -468,6 +556,10 @@ export interface QueryPoolsWithFilterResponse {
   pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryPoolsWithFilterResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
+  value: Uint8Array;
 }
 export interface QueryPoolsWithFilterResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
@@ -497,6 +589,10 @@ export interface QueryPoolsWithFilterResponseSDKType {
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
+}
+export interface QuerySpotPriceResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse";
+  value: Uint8Array;
 }
 export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse";
@@ -535,6 +631,10 @@ export interface QuerySwapExactAmountInRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest";
   value: Uint8Array;
 }
+export interface QuerySwapExactAmountInRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest";
+  value: Uint8Array;
+}
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestAmino {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
@@ -561,6 +661,10 @@ export interface QuerySwapExactAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse";
   value: Uint8Array;
 }
+export interface QuerySwapExactAmountInResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse";
+  value: Uint8Array;
+}
 export interface QuerySwapExactAmountInResponseAmino {
   token_out_amount: string;
 }
@@ -578,6 +682,10 @@ export interface QuerySwapExactAmountOutRequest {
   poolId: bigint;
   routes: SwapAmountOutRoute[];
   tokenOut: string;
+}
+export interface QuerySwapExactAmountOutRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest";
+  value: Uint8Array;
 }
 export interface QuerySwapExactAmountOutRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest";
@@ -609,6 +717,10 @@ export interface QuerySwapExactAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse";
   value: Uint8Array;
 }
+export interface QuerySwapExactAmountOutResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse";
+  value: Uint8Array;
+}
 export interface QuerySwapExactAmountOutResponseAmino {
   token_in_amount: string;
 }
@@ -624,6 +736,10 @@ export interface QueryTotalLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest";
   value: Uint8Array;
 }
+export interface QueryTotalLiquidityRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest";
+  value: Uint8Array;
+}
 export interface QueryTotalLiquidityRequestAmino {}
 export interface QueryTotalLiquidityRequestAminoMsg {
   type: "osmosis/gamm/query-total-liquidity-request";
@@ -632,6 +748,10 @@ export interface QueryTotalLiquidityRequestAminoMsg {
 export interface QueryTotalLiquidityRequestSDKType {}
 export interface QueryTotalLiquidityResponse {
   liquidity: Coin[];
+}
+export interface QueryTotalLiquidityResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse";
+  value: Uint8Array;
 }
 export interface QueryTotalLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse";

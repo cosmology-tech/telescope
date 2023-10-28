@@ -65,6 +65,10 @@ export interface Group {
   groupSpec: GroupSpec;
   createdAt: bigint;
 }
+export interface GroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Group";
+  value: Uint8Array;
+}
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id: GroupIDSDKType;

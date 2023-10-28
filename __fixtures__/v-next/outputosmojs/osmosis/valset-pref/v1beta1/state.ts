@@ -18,6 +18,10 @@ export interface ValidatorPreference {
   /** weight is decimal between 0 and 1, and they all sum to 1. */
   weight: string;
 }
+export interface ValidatorPreferenceProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.ValidatorPreference";
+  value: Uint8Array;
+}
 /**
  * ValidatorPreference defines the message structure for
  * CreateValidatorSetPreference. It allows a user to set {val_addr, weight} in
@@ -38,6 +42,10 @@ export interface ValidatorPreferenceSDKType {
 export interface ValidatorSetPreferences {
   /** preference holds {valAddr, weight} for the user who created it. */
   preferences: ValidatorPreference[];
+}
+export interface ValidatorSetPreferencesProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.ValidatorSetPreferences";
+  value: Uint8Array;
 }
 /**
  * ValidatorSetPreferences defines a delegator's validator set preference.

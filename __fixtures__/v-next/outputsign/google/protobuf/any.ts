@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -115,6 +114,10 @@ export interface Any {
    */
   typeUrl: string;
   /** Must be a valid serialized protocol buffer of the above specified type. */
+  value: Uint8Array;
+}
+export interface AnyProtoMsg {
+  typeUrl: "/google.protobuf.Any";
   value: Uint8Array;
 }
 /**
@@ -240,57 +243,6 @@ export const Any = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Any {
-    const obj = createBaseAny();
-    if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: Any): unknown {
-    const obj: any = {};
-    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Any>): Any {
-    const message = createBaseAny();
-    message.typeUrl = object.typeUrl ?? "";
-    message.value = object.value ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: AnySDKType): Any {
-    return {
-      typeUrl: object?.type_url,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): AnySDKType {
-    return {
-      type_url: isSet(object.type_url) ? String(object.type_url) : "",
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
-  },
-  toSDK(message: Any): AnySDKType {
-    const obj: any = {};
-    obj.type_url = message.typeUrl;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: AnyAmino): Any {
-    return {
-      typeUrl: object.type,
-      value: object.value
-    };
-  },
-  toAmino(message: Any): AnyAmino {
-    const obj: any = {};
-    obj.type = message.typeUrl;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AnyAminoMsg): Any {
-    return Any.fromAmino(object.value);
   },
   fromProtoMsg(message: AnyProtoMsg): Any {
     return Any.decode(message.value);

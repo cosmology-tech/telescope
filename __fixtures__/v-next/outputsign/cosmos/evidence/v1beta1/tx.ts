@@ -1,6 +1,5 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -9,6 +8,10 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
 export interface MsgSubmitEvidence {
   submitter: string;
   evidence?: Any;
+}
+export interface MsgSubmitEvidenceProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
+  value: Uint8Array;
 }
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -22,6 +25,10 @@ export interface MsgSubmitEvidenceSDKType {
 export interface MsgSubmitEvidenceResponse {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
+}
+export interface MsgSubmitEvidenceResponseProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse";
+  value: Uint8Array;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -63,65 +70,6 @@ export const MsgSubmitEvidence = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MsgSubmitEvidence {
-    const obj = createBaseMsgSubmitEvidence();
-    if (isSet(object.submitter)) obj.submitter = String(object.submitter);
-    if (isSet(object.evidence)) obj.evidence = Any.fromJSON(object.evidence);
-    return obj;
-  },
-  toJSON(message: MsgSubmitEvidence): unknown {
-    const obj: any = {};
-    message.submitter !== undefined && (obj.submitter = message.submitter);
-    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toJSON(message.evidence) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgSubmitEvidence>): MsgSubmitEvidence {
-    const message = createBaseMsgSubmitEvidence();
-    message.submitter = object.submitter ?? "";
-    if (object.evidence !== undefined && object.evidence !== null) {
-      message.evidence = Any.fromPartial(object.evidence);
-    }
-    return message;
-  },
-  fromSDK(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {
-    return {
-      submitter: object?.submitter,
-      evidence: object.evidence ? Any.fromSDK(object.evidence) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgSubmitEvidenceSDKType {
-    return {
-      submitter: isSet(object.submitter) ? String(object.submitter) : "",
-      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
-    };
-  },
-  toSDK(message: MsgSubmitEvidence): MsgSubmitEvidenceSDKType {
-    const obj: any = {};
-    obj.submitter = message.submitter;
-    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
-    return {
-      submitter: object.submitter,
-      evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
-    };
-  },
-  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
-    const obj: any = {};
-    obj.submitter = message.submitter;
-    obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitEvidenceAminoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidence): MsgSubmitEvidenceAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidence",
-      value: MsgSubmitEvidence.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSubmitEvidenceProtoMsg): MsgSubmitEvidence {
     return MsgSubmitEvidence.decode(message.value);
@@ -165,55 +113,6 @@ export const MsgSubmitEvidenceResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MsgSubmitEvidenceResponse {
-    const obj = createBaseMsgSubmitEvidenceResponse();
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
-  },
-  toJSON(message: MsgSubmitEvidenceResponse): unknown {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgSubmitEvidenceResponse>): MsgSubmitEvidenceResponse {
-    const message = createBaseMsgSubmitEvidenceResponse();
-    message.hash = object.hash ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
-    return {
-      hash: object?.hash
-    };
-  },
-  fromSDKJSON(object: any): MsgSubmitEvidenceResponseSDKType {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
-  },
-  toSDK(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseSDKType {
-    const obj: any = {};
-    obj.hash = message.hash;
-    return obj;
-  },
-  fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
-    return {
-      hash: object.hash
-    };
-  },
-  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
-    const obj: any = {};
-    obj.hash = message.hash;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidenceResponse",
-      value: MsgSubmitEvidenceResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg): MsgSubmitEvidenceResponse {
     return MsgSubmitEvidenceResponse.decode(message.value);

@@ -12,6 +12,10 @@ export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse";
   value: Uint8Array;
 }
+export interface QueryProvidersResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse";
+  value: Uint8Array;
+}
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseAmino {
   providers: ProviderAmino[];
@@ -30,6 +34,10 @@ export interface QueryProvidersResponseSDKType {
 export interface QueryProviderRequest {
   auditor: string;
   owner: string;
+}
+export interface QueryProviderRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderRequest";
+  value: Uint8Array;
 }
 export interface QueryProviderRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProviderRequest";
@@ -57,6 +65,10 @@ export interface QueryAllProvidersAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest";
   value: Uint8Array;
 }
+export interface QueryAllProvidersAttributesRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest";
+  value: Uint8Array;
+}
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequestAmino {
   pagination?: PageRequestAmino;
@@ -73,6 +85,10 @@ export interface QueryAllProvidersAttributesRequestSDKType {
 export interface QueryProviderAttributesRequest {
   owner: string;
   pagination?: PageRequest;
+}
+export interface QueryProviderAttributesRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
+  value: Uint8Array;
 }
 export interface QueryProviderAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
@@ -101,6 +117,10 @@ export interface QueryProviderAuditorRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest";
   value: Uint8Array;
 }
+export interface QueryProviderAuditorRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest";
+  value: Uint8Array;
+}
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestAmino {
   auditor: string;
@@ -119,6 +139,10 @@ export interface QueryProviderAuditorRequestSDKType {
 export interface QueryAuditorAttributesRequest {
   auditor: string;
   pagination?: PageRequest;
+}
+export interface QueryAuditorAttributesRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest";
+  value: Uint8Array;
 }
 export interface QueryAuditorAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest";

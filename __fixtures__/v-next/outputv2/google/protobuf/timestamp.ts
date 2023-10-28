@@ -104,6 +104,10 @@ export interface TimestampProtoMsg {
   typeUrl: "/google.protobuf.Timestamp";
   value: Uint8Array;
 }
+export interface TimestampProtoMsg {
+  typeUrl: "/google.protobuf.Timestamp";
+  value: Uint8Array;
+}
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at

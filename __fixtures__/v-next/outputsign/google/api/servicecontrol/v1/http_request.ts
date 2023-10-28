@@ -1,6 +1,5 @@
 import { Duration, DurationSDKType } from "../../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -78,6 +77,10 @@ export interface HttpRequest {
   cacheFillBytes: bigint;
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
+}
+export interface HttpRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.HttpRequest";
+  value: Uint8Array;
 }
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -228,169 +231,6 @@ export const HttpRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): HttpRequest {
-    const obj = createBaseHttpRequest();
-    if (isSet(object.requestMethod)) obj.requestMethod = String(object.requestMethod);
-    if (isSet(object.requestUrl)) obj.requestUrl = String(object.requestUrl);
-    if (isSet(object.requestSize)) obj.requestSize = BigInt(object.requestSize.toString());
-    if (isSet(object.status)) obj.status = Number(object.status);
-    if (isSet(object.responseSize)) obj.responseSize = BigInt(object.responseSize.toString());
-    if (isSet(object.userAgent)) obj.userAgent = String(object.userAgent);
-    if (isSet(object.remoteIp)) obj.remoteIp = String(object.remoteIp);
-    if (isSet(object.serverIp)) obj.serverIp = String(object.serverIp);
-    if (isSet(object.referer)) obj.referer = String(object.referer);
-    if (isSet(object.latency)) obj.latency = Duration.fromJSON(object.latency);
-    if (isSet(object.cacheLookup)) obj.cacheLookup = Boolean(object.cacheLookup);
-    if (isSet(object.cacheHit)) obj.cacheHit = Boolean(object.cacheHit);
-    if (isSet(object.cacheValidatedWithOriginServer)) obj.cacheValidatedWithOriginServer = Boolean(object.cacheValidatedWithOriginServer);
-    if (isSet(object.cacheFillBytes)) obj.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    return obj;
-  },
-  toJSON(message: HttpRequest): unknown {
-    const obj: any = {};
-    message.requestMethod !== undefined && (obj.requestMethod = message.requestMethod);
-    message.requestUrl !== undefined && (obj.requestUrl = message.requestUrl);
-    message.requestSize !== undefined && (obj.requestSize = (message.requestSize || BigInt(0)).toString());
-    message.status !== undefined && (obj.status = Math.round(message.status));
-    message.responseSize !== undefined && (obj.responseSize = (message.responseSize || BigInt(0)).toString());
-    message.userAgent !== undefined && (obj.userAgent = message.userAgent);
-    message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
-    message.serverIp !== undefined && (obj.serverIp = message.serverIp);
-    message.referer !== undefined && (obj.referer = message.referer);
-    message.latency !== undefined && (obj.latency = message.latency ? Duration.toJSON(message.latency) : undefined);
-    message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
-    message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
-    message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);
-    message.cacheFillBytes !== undefined && (obj.cacheFillBytes = (message.cacheFillBytes || BigInt(0)).toString());
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<HttpRequest>): HttpRequest {
-    const message = createBaseHttpRequest();
-    message.requestMethod = object.requestMethod ?? "";
-    message.requestUrl = object.requestUrl ?? "";
-    if (object.requestSize !== undefined && object.requestSize !== null) {
-      message.requestSize = BigInt(object.requestSize.toString());
-    }
-    message.status = object.status ?? 0;
-    if (object.responseSize !== undefined && object.responseSize !== null) {
-      message.responseSize = BigInt(object.responseSize.toString());
-    }
-    message.userAgent = object.userAgent ?? "";
-    message.remoteIp = object.remoteIp ?? "";
-    message.serverIp = object.serverIp ?? "";
-    message.referer = object.referer ?? "";
-    if (object.latency !== undefined && object.latency !== null) {
-      message.latency = Duration.fromPartial(object.latency);
-    }
-    message.cacheLookup = object.cacheLookup ?? false;
-    message.cacheHit = object.cacheHit ?? false;
-    message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    if (object.cacheFillBytes !== undefined && object.cacheFillBytes !== null) {
-      message.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
-    }
-    message.protocol = object.protocol ?? "";
-    return message;
-  },
-  fromSDK(object: HttpRequestSDKType): HttpRequest {
-    return {
-      requestMethod: object?.request_method,
-      requestUrl: object?.request_url,
-      requestSize: object?.request_size,
-      status: object?.status,
-      responseSize: object?.response_size,
-      userAgent: object?.user_agent,
-      remoteIp: object?.remote_ip,
-      serverIp: object?.server_ip,
-      referer: object?.referer,
-      latency: object.latency ? Duration.fromSDK(object.latency) : undefined,
-      cacheLookup: object?.cache_lookup,
-      cacheHit: object?.cache_hit,
-      cacheValidatedWithOriginServer: object?.cache_validated_with_origin_server,
-      cacheFillBytes: object?.cache_fill_bytes,
-      protocol: object?.protocol
-    };
-  },
-  fromSDKJSON(object: any): HttpRequestSDKType {
-    return {
-      request_method: isSet(object.request_method) ? String(object.request_method) : "",
-      request_url: isSet(object.request_url) ? String(object.request_url) : "",
-      request_size: isSet(object.request_size) ? BigInt(object.request_size.toString()) : BigInt(0),
-      status: isSet(object.status) ? Number(object.status) : 0,
-      response_size: isSet(object.response_size) ? BigInt(object.response_size.toString()) : BigInt(0),
-      user_agent: isSet(object.user_agent) ? String(object.user_agent) : "",
-      remote_ip: isSet(object.remote_ip) ? String(object.remote_ip) : "",
-      server_ip: isSet(object.server_ip) ? String(object.server_ip) : "",
-      referer: isSet(object.referer) ? String(object.referer) : "",
-      latency: isSet(object.latency) ? Duration.fromSDKJSON(object.latency) : undefined,
-      cache_lookup: isSet(object.cache_lookup) ? Boolean(object.cache_lookup) : false,
-      cache_hit: isSet(object.cache_hit) ? Boolean(object.cache_hit) : false,
-      cache_validated_with_origin_server: isSet(object.cache_validated_with_origin_server) ? Boolean(object.cache_validated_with_origin_server) : false,
-      cache_fill_bytes: isSet(object.cache_fill_bytes) ? BigInt(object.cache_fill_bytes.toString()) : BigInt(0),
-      protocol: isSet(object.protocol) ? String(object.protocol) : ""
-    };
-  },
-  toSDK(message: HttpRequest): HttpRequestSDKType {
-    const obj: any = {};
-    obj.request_method = message.requestMethod;
-    obj.request_url = message.requestUrl;
-    obj.request_size = message.requestSize;
-    obj.status = message.status;
-    obj.response_size = message.responseSize;
-    obj.user_agent = message.userAgent;
-    obj.remote_ip = message.remoteIp;
-    obj.server_ip = message.serverIp;
-    obj.referer = message.referer;
-    message.latency !== undefined && (obj.latency = message.latency ? Duration.toSDK(message.latency) : undefined);
-    obj.cache_lookup = message.cacheLookup;
-    obj.cache_hit = message.cacheHit;
-    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
-    obj.cache_fill_bytes = message.cacheFillBytes;
-    obj.protocol = message.protocol;
-    return obj;
-  },
-  fromAmino(object: HttpRequestAmino): HttpRequest {
-    return {
-      requestMethod: object.request_method,
-      requestUrl: object.request_url,
-      requestSize: BigInt(object.request_size),
-      status: object.status,
-      responseSize: BigInt(object.response_size),
-      userAgent: object.user_agent,
-      remoteIp: object.remote_ip,
-      serverIp: object.server_ip,
-      referer: object.referer,
-      latency: object?.latency ? Duration.fromAmino(object.latency) : undefined,
-      cacheLookup: object.cache_lookup,
-      cacheHit: object.cache_hit,
-      cacheValidatedWithOriginServer: object.cache_validated_with_origin_server,
-      cacheFillBytes: BigInt(object.cache_fill_bytes),
-      protocol: object.protocol
-    };
-  },
-  toAmino(message: HttpRequest): HttpRequestAmino {
-    const obj: any = {};
-    obj.request_method = message.requestMethod;
-    obj.request_url = message.requestUrl;
-    obj.request_size = message.requestSize ? message.requestSize.toString() : undefined;
-    obj.status = message.status;
-    obj.response_size = message.responseSize ? message.responseSize.toString() : undefined;
-    obj.user_agent = message.userAgent;
-    obj.remote_ip = message.remoteIp;
-    obj.server_ip = message.serverIp;
-    obj.referer = message.referer;
-    obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
-    obj.cache_lookup = message.cacheLookup;
-    obj.cache_hit = message.cacheHit;
-    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
-    obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
-    obj.protocol = message.protocol;
-    return obj;
-  },
-  fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {
-    return HttpRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
     return HttpRequest.decode(message.value);

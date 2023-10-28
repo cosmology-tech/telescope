@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -30,6 +29,10 @@ export interface Authentication {
   rules: AuthenticationRule[];
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
+}
+export interface AuthenticationProtoMsg {
+  typeUrl: "/google.api.Authentication";
+  value: Uint8Array;
 }
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -83,6 +86,10 @@ export interface AuthenticationRule {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
+export interface AuthenticationRuleProtoMsg {
+  typeUrl: "/google.api.AuthenticationRule";
+  value: Uint8Array;
+}
 /**
  * Authentication rules for the service.
  * 
@@ -117,6 +124,10 @@ export interface JwtLocation {
    * value_prefix="Bearer " with a space at the end.
    */
   valuePrefix: string;
+}
+export interface JwtLocationProtoMsg {
+  typeUrl: "/google.api.JwtLocation";
+  value: Uint8Array;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -207,6 +218,10 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
+export interface AuthProviderProtoMsg {
+  typeUrl: "/google.api.AuthProvider";
+  value: Uint8Array;
+}
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
@@ -251,6 +266,10 @@ export interface OAuthRequirements {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonicalScopes: string;
+}
+export interface OAuthRequirementsProtoMsg {
+  typeUrl: "/google.api.OAuthRequirements";
+  value: Uint8Array;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -309,6 +328,10 @@ export interface AuthRequirement {
    */
   audiences: string;
 }
+export interface AuthRequirementProtoMsg {
+  typeUrl: "/google.api.AuthRequirement";
+  value: Uint8Array;
+}
 /**
  * User-defined authentication requirements, including support for
  * [JSON Web Token
@@ -354,81 +377,6 @@ export const Authentication = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Authentication {
-    const obj = createBaseAuthentication();
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => AuthenticationRule.fromJSON(e));
-    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => AuthProvider.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Authentication): unknown {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? AuthenticationRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? AuthProvider.toJSON(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Authentication>): Authentication {
-    const message = createBaseAuthentication();
-    message.rules = object.rules?.map(e => AuthenticationRule.fromPartial(e)) || [];
-    message.providers = object.providers?.map(e => AuthProvider.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AuthenticationSDKType): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromSDK(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AuthenticationSDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromSDKJSON(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Authentication): AuthenticationSDKType {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? AuthenticationRule.toSDK(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? AuthProvider.toSDK(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AuthenticationAmino): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromAmino(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Authentication): AuthenticationAmino {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? AuthProvider.toAmino(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuthenticationAminoMsg): Authentication {
-    return Authentication.fromAmino(object.value);
   },
   fromProtoMsg(message: AuthenticationProtoMsg): Authentication {
     return Authentication.decode(message.value);
@@ -494,87 +442,6 @@ export const AuthenticationRule = {
     }
     return message;
   },
-  fromJSON(object: any): AuthenticationRule {
-    const obj = createBaseAuthenticationRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.oauth)) obj.oauth = OAuthRequirements.fromJSON(object.oauth);
-    if (isSet(object.allowWithoutCredential)) obj.allowWithoutCredential = Boolean(object.allowWithoutCredential);
-    if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => AuthRequirement.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AuthenticationRule): unknown {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toJSON(message.oauth) : undefined);
-    message.allowWithoutCredential !== undefined && (obj.allowWithoutCredential = message.allowWithoutCredential);
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toJSON(e) : undefined);
-    } else {
-      obj.requirements = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
-    const message = createBaseAuthenticationRule();
-    message.selector = object.selector ?? "";
-    if (object.oauth !== undefined && object.oauth !== null) {
-      message.oauth = OAuthRequirements.fromPartial(object.oauth);
-    }
-    message.allowWithoutCredential = object.allowWithoutCredential ?? false;
-    message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AuthenticationRuleSDKType): AuthenticationRule {
-    return {
-      selector: object?.selector,
-      oauth: object.oauth ? OAuthRequirements.fromSDK(object.oauth) : undefined,
-      allowWithoutCredential: object?.allow_without_credential,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AuthenticationRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      oauth: isSet(object.oauth) ? OAuthRequirements.fromSDKJSON(object.oauth) : undefined,
-      allow_without_credential: isSet(object.allow_without_credential) ? Boolean(object.allow_without_credential) : false,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: AuthenticationRule): AuthenticationRuleSDKType {
-    const obj: any = {};
-    obj.selector = message.selector;
-    message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toSDK(message.oauth) : undefined);
-    obj.allow_without_credential = message.allowWithoutCredential;
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toSDK(e) : undefined);
-    } else {
-      obj.requirements = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AuthenticationRuleAmino): AuthenticationRule {
-    return {
-      selector: object.selector,
-      oauth: object?.oauth ? OAuthRequirements.fromAmino(object.oauth) : undefined,
-      allowWithoutCredential: object.allow_without_credential,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AuthenticationRule): AuthenticationRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth) : undefined;
-    obj.allow_without_credential = message.allowWithoutCredential;
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e) : undefined);
-    } else {
-      obj.requirements = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuthenticationRuleAminoMsg): AuthenticationRule {
-    return AuthenticationRule.fromAmino(object.value);
-  },
   fromProtoMsg(message: AuthenticationRuleProtoMsg): AuthenticationRule {
     return AuthenticationRule.decode(message.value);
   },
@@ -631,65 +498,6 @@ export const JwtLocation = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): JwtLocation {
-    const obj = createBaseJwtLocation();
-    if (isSet(object.header)) obj.header = String(object.header);
-    if (isSet(object.query)) obj.query = String(object.query);
-    if (isSet(object.valuePrefix)) obj.valuePrefix = String(object.valuePrefix);
-    return obj;
-  },
-  toJSON(message: JwtLocation): unknown {
-    const obj: any = {};
-    message.header !== undefined && (obj.header = message.header);
-    message.query !== undefined && (obj.query = message.query);
-    message.valuePrefix !== undefined && (obj.valuePrefix = message.valuePrefix);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<JwtLocation>): JwtLocation {
-    const message = createBaseJwtLocation();
-    message.header = object.header ?? undefined;
-    message.query = object.query ?? undefined;
-    message.valuePrefix = object.valuePrefix ?? "";
-    return message;
-  },
-  fromSDK(object: JwtLocationSDKType): JwtLocation {
-    return {
-      header: object?.header,
-      query: object?.query,
-      valuePrefix: object?.value_prefix
-    };
-  },
-  fromSDKJSON(object: any): JwtLocationSDKType {
-    return {
-      header: isSet(object.header) ? String(object.header) : undefined,
-      query: isSet(object.query) ? String(object.query) : undefined,
-      value_prefix: isSet(object.value_prefix) ? String(object.value_prefix) : ""
-    };
-  },
-  toSDK(message: JwtLocation): JwtLocationSDKType {
-    const obj: any = {};
-    obj.header = message.header;
-    obj.query = message.query;
-    obj.value_prefix = message.valuePrefix;
-    return obj;
-  },
-  fromAmino(object: JwtLocationAmino): JwtLocation {
-    return {
-      header: object?.header,
-      query: object?.query,
-      valuePrefix: object.value_prefix
-    };
-  },
-  toAmino(message: JwtLocation): JwtLocationAmino {
-    const obj: any = {};
-    obj.header = message.header;
-    obj.query = message.query;
-    obj.value_prefix = message.valuePrefix;
-    return obj;
-  },
-  fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
-    return JwtLocation.fromAmino(object.value);
   },
   fromProtoMsg(message: JwtLocationProtoMsg): JwtLocation {
     return JwtLocation.decode(message.value);
@@ -769,101 +577,6 @@ export const AuthProvider = {
     }
     return message;
   },
-  fromJSON(object: any): AuthProvider {
-    const obj = createBaseAuthProvider();
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.issuer)) obj.issuer = String(object.issuer);
-    if (isSet(object.jwksUri)) obj.jwksUri = String(object.jwksUri);
-    if (isSet(object.audiences)) obj.audiences = String(object.audiences);
-    if (isSet(object.authorizationUrl)) obj.authorizationUrl = String(object.authorizationUrl);
-    if (Array.isArray(object?.jwtLocations)) obj.jwtLocations = object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AuthProvider): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.issuer !== undefined && (obj.issuer = message.issuer);
-    message.jwksUri !== undefined && (obj.jwksUri = message.jwksUri);
-    message.audiences !== undefined && (obj.audiences = message.audiences);
-    message.authorizationUrl !== undefined && (obj.authorizationUrl = message.authorizationUrl);
-    if (message.jwtLocations) {
-      obj.jwtLocations = message.jwtLocations.map(e => e ? JwtLocation.toJSON(e) : undefined);
-    } else {
-      obj.jwtLocations = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AuthProvider>): AuthProvider {
-    const message = createBaseAuthProvider();
-    message.id = object.id ?? "";
-    message.issuer = object.issuer ?? "";
-    message.jwksUri = object.jwksUri ?? "";
-    message.audiences = object.audiences ?? "";
-    message.authorizationUrl = object.authorizationUrl ?? "";
-    message.jwtLocations = object.jwtLocations?.map(e => JwtLocation.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: AuthProviderSDKType): AuthProvider {
-    return {
-      id: object?.id,
-      issuer: object?.issuer,
-      jwksUri: object?.jwks_uri,
-      audiences: object?.audiences,
-      authorizationUrl: object?.authorization_url,
-      jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): AuthProviderSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      issuer: isSet(object.issuer) ? String(object.issuer) : "",
-      jwks_uri: isSet(object.jwks_uri) ? String(object.jwks_uri) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : "",
-      authorization_url: isSet(object.authorization_url) ? String(object.authorization_url) : "",
-      jwt_locations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: AuthProvider): AuthProviderSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.issuer = message.issuer;
-    obj.jwks_uri = message.jwksUri;
-    obj.audiences = message.audiences;
-    obj.authorization_url = message.authorizationUrl;
-    if (message.jwtLocations) {
-      obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toSDK(e) : undefined);
-    } else {
-      obj.jwt_locations = [];
-    }
-    return obj;
-  },
-  fromAmino(object: AuthProviderAmino): AuthProvider {
-    return {
-      id: object.id,
-      issuer: object.issuer,
-      jwksUri: object.jwks_uri,
-      audiences: object.audiences,
-      authorizationUrl: object.authorization_url,
-      jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AuthProvider): AuthProviderAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.issuer = message.issuer;
-    obj.jwks_uri = message.jwksUri;
-    obj.audiences = message.audiences;
-    obj.authorization_url = message.authorizationUrl;
-    if (message.jwtLocations) {
-      obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e) : undefined);
-    } else {
-      obj.jwt_locations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuthProviderAminoMsg): AuthProvider {
-    return AuthProvider.fromAmino(object.value);
-  },
   fromProtoMsg(message: AuthProviderProtoMsg): AuthProvider {
     return AuthProvider.decode(message.value);
   },
@@ -906,49 +619,6 @@ export const OAuthRequirements = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): OAuthRequirements {
-    const obj = createBaseOAuthRequirements();
-    if (isSet(object.canonicalScopes)) obj.canonicalScopes = String(object.canonicalScopes);
-    return obj;
-  },
-  toJSON(message: OAuthRequirements): unknown {
-    const obj: any = {};
-    message.canonicalScopes !== undefined && (obj.canonicalScopes = message.canonicalScopes);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<OAuthRequirements>): OAuthRequirements {
-    const message = createBaseOAuthRequirements();
-    message.canonicalScopes = object.canonicalScopes ?? "";
-    return message;
-  },
-  fromSDK(object: OAuthRequirementsSDKType): OAuthRequirements {
-    return {
-      canonicalScopes: object?.canonical_scopes
-    };
-  },
-  fromSDKJSON(object: any): OAuthRequirementsSDKType {
-    return {
-      canonical_scopes: isSet(object.canonical_scopes) ? String(object.canonical_scopes) : ""
-    };
-  },
-  toSDK(message: OAuthRequirements): OAuthRequirementsSDKType {
-    const obj: any = {};
-    obj.canonical_scopes = message.canonicalScopes;
-    return obj;
-  },
-  fromAmino(object: OAuthRequirementsAmino): OAuthRequirements {
-    return {
-      canonicalScopes: object.canonical_scopes
-    };
-  },
-  toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
-    const obj: any = {};
-    obj.canonical_scopes = message.canonicalScopes;
-    return obj;
-  },
-  fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
-    return OAuthRequirements.fromAmino(object.value);
   },
   fromProtoMsg(message: OAuthRequirementsProtoMsg): OAuthRequirements {
     return OAuthRequirements.decode(message.value);
@@ -999,57 +669,6 @@ export const AuthRequirement = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): AuthRequirement {
-    const obj = createBaseAuthRequirement();
-    if (isSet(object.providerId)) obj.providerId = String(object.providerId);
-    if (isSet(object.audiences)) obj.audiences = String(object.audiences);
-    return obj;
-  },
-  toJSON(message: AuthRequirement): unknown {
-    const obj: any = {};
-    message.providerId !== undefined && (obj.providerId = message.providerId);
-    message.audiences !== undefined && (obj.audiences = message.audiences);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<AuthRequirement>): AuthRequirement {
-    const message = createBaseAuthRequirement();
-    message.providerId = object.providerId ?? "";
-    message.audiences = object.audiences ?? "";
-    return message;
-  },
-  fromSDK(object: AuthRequirementSDKType): AuthRequirement {
-    return {
-      providerId: object?.provider_id,
-      audiences: object?.audiences
-    };
-  },
-  fromSDKJSON(object: any): AuthRequirementSDKType {
-    return {
-      provider_id: isSet(object.provider_id) ? String(object.provider_id) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : ""
-    };
-  },
-  toSDK(message: AuthRequirement): AuthRequirementSDKType {
-    const obj: any = {};
-    obj.provider_id = message.providerId;
-    obj.audiences = message.audiences;
-    return obj;
-  },
-  fromAmino(object: AuthRequirementAmino): AuthRequirement {
-    return {
-      providerId: object.provider_id,
-      audiences: object.audiences
-    };
-  },
-  toAmino(message: AuthRequirement): AuthRequirementAmino {
-    const obj: any = {};
-    obj.provider_id = message.providerId;
-    obj.audiences = message.audiences;
-    return obj;
-  },
-  fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {
-    return AuthRequirement.fromAmino(object.value);
   },
   fromProtoMsg(message: AuthRequirementProtoMsg): AuthRequirement {
     return AuthRequirement.decode(message.value);

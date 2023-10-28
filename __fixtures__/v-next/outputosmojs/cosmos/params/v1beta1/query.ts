@@ -9,6 +9,10 @@ export interface QueryParamsRequest {
   /** key defines the key of the parameter in the subspace. */
   key: string;
 }
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {
   subspace: string;
@@ -19,6 +23,10 @@ export interface QueryParamsResponse {
   /** param defines the queried parameter. */
   param: ParamChange;
 }
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
+}
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   param: ParamChangeSDKType;
@@ -28,6 +36,10 @@ export interface QueryParamsResponseSDKType {
  * subspaces and all keys for a subspace.
  */
 export interface QuerySubspacesRequest {}
+export interface QuerySubspacesRequestProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.QuerySubspacesRequest";
+  value: Uint8Array;
+}
 /**
  * QuerySubspacesRequest defines a request type for querying for all registered
  * subspaces and all keys for a subspace.
@@ -39,6 +51,10 @@ export interface QuerySubspacesRequestSDKType {}
  */
 export interface QuerySubspacesResponse {
   subspaces: Subspace[];
+}
+export interface QuerySubspacesResponseProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.QuerySubspacesResponse";
+  value: Uint8Array;
 }
 /**
  * QuerySubspacesResponse defines the response types for querying for all
@@ -54,6 +70,10 @@ export interface QuerySubspacesResponseSDKType {
 export interface Subspace {
   subspace: string;
   keys: string[];
+}
+export interface SubspaceProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.Subspace";
+  value: Uint8Array;
 }
 /**
  * Subspace defines a parameter subspace name and all the keys that exist for

@@ -308,6 +308,10 @@ export interface MetricDescriptorProtoMsg {
   typeUrl: "/google.api.MetricDescriptor";
   value: Uint8Array;
 }
+export interface MetricDescriptorProtoMsg {
+  typeUrl: "/google.api.MetricDescriptor";
+  value: Uint8Array;
+}
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
@@ -518,6 +522,10 @@ export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
   typeUrl: "/google.api.MetricDescriptorMetadata";
   value: Uint8Array;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
+  typeUrl: "/google.api.MetricDescriptorMetadata";
+  value: Uint8Array;
+}
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataAmino {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
@@ -556,6 +564,10 @@ export interface Metric_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface Metric_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface Metric_LabelsEntryAmino {
   key: string;
   value: string;
@@ -585,6 +597,10 @@ export interface Metric {
   labels: {
     [key: string]: string;
   };
+}
+export interface MetricProtoMsg {
+  typeUrl: "/google.api.Metric";
+  value: Uint8Array;
 }
 export interface MetricProtoMsg {
   typeUrl: "/google.api.Metric";

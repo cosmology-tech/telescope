@@ -17,6 +17,10 @@ export interface QueryConnectionRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
   value: Uint8Array;
 }
+export interface QueryConnectionRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
  * method
@@ -48,6 +52,10 @@ export interface QueryConnectionResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryConnectionResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
+  value: Uint8Array;
 }
 export interface QueryConnectionResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
@@ -91,6 +99,10 @@ export interface QueryConnectionsRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
   value: Uint8Array;
 }
+export interface QueryConnectionsRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
  * method
@@ -120,6 +132,10 @@ export interface QueryConnectionsResponse {
   pagination?: PageResponse;
   /** query block height */
   height: Height;
+}
+export interface QueryConnectionsResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
+  value: Uint8Array;
 }
 export interface QueryConnectionsResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
@@ -162,6 +178,10 @@ export interface QueryClientConnectionsRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
   value: Uint8Array;
 }
+export interface QueryClientConnectionsRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryClientConnectionsRequest is the request type for the
  * Query/ClientConnections RPC method
@@ -192,6 +212,10 @@ export interface QueryClientConnectionsResponse {
   proof: Uint8Array;
   /** height at which the proof was generated */
   proofHeight: Height;
+}
+export interface QueryClientConnectionsResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
+  value: Uint8Array;
 }
 export interface QueryClientConnectionsResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
@@ -234,6 +258,10 @@ export interface QueryConnectionClientStateRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
   value: Uint8Array;
 }
+export interface QueryConnectionClientStateRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionClientStateRequest is the request type for the
  * Query/ConnectionClientState RPC method
@@ -264,6 +292,10 @@ export interface QueryConnectionClientStateResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryConnectionClientStateResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
+  value: Uint8Array;
 }
 export interface QueryConnectionClientStateResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
@@ -308,6 +340,10 @@ export interface QueryConnectionConsensusStateRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
   value: Uint8Array;
 }
+export interface QueryConnectionConsensusStateRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
  * Query/ConnectionConsensusState RPC method
@@ -344,6 +380,10 @@ export interface QueryConnectionConsensusStateResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryConnectionConsensusStateResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";
+  value: Uint8Array;
 }
 export interface QueryConnectionConsensusStateResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";

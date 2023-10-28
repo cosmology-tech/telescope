@@ -68,6 +68,10 @@ export interface MsgCloseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup";
   value: Uint8Array;
 }
+export interface MsgCloseGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup";
+  value: Uint8Array;
+}
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupAmino {
   id?: GroupIDAmino;
@@ -86,6 +90,10 @@ export interface MsgCloseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
   value: Uint8Array;
 }
+export interface MsgCloseGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
+  value: Uint8Array;
+}
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseAmino {}
 export interface MsgCloseGroupResponseAminoMsg {
@@ -97,6 +105,10 @@ export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id: GroupID;
+}
+export interface MsgPauseGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup";
+  value: Uint8Array;
 }
 export interface MsgPauseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup";
@@ -120,6 +132,10 @@ export interface MsgPauseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
   value: Uint8Array;
 }
+export interface MsgPauseGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
+  value: Uint8Array;
+}
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseAmino {}
 export interface MsgPauseGroupResponseAminoMsg {
@@ -131,6 +147,10 @@ export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id: GroupID;
+}
+export interface MsgStartGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgStartGroup";
+  value: Uint8Array;
 }
 export interface MsgStartGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroup";
@@ -154,6 +174,10 @@ export interface MsgStartGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse";
   value: Uint8Array;
 }
+export interface MsgStartGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse";
+  value: Uint8Array;
+}
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseAmino {}
 export interface MsgStartGroupResponseAminoMsg {
@@ -167,6 +191,10 @@ export interface GroupID {
   owner: string;
   dseq: bigint;
   gseq: number;
+}
+export interface GroupIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GroupID";
+  value: Uint8Array;
 }
 export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupID";
@@ -193,6 +221,10 @@ export interface GroupSpec {
   name: string;
   requirements: PlacementRequirements;
   resources: Resource[];
+}
+export interface GroupSpecProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GroupSpec";
+  value: Uint8Array;
 }
 export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupSpec";
@@ -225,6 +257,10 @@ export interface GroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Group";
   value: Uint8Array;
 }
+export interface GroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Group";
+  value: Uint8Array;
+}
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;
@@ -248,6 +284,10 @@ export interface Resource {
   resources: ResourceUnits;
   count: number;
   price: Coin;
+}
+export interface ResourceProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Resource";
+  value: Uint8Array;
 }
 export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Resource";

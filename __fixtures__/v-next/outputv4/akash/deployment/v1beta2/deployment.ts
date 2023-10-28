@@ -47,6 +47,10 @@ export interface DeploymentID {
   owner: string;
   dseq: bigint;
 }
+export interface DeploymentIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentID";
+  value: Uint8Array;
+}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
@@ -58,6 +62,10 @@ export interface Deployment {
   state: Deployment_State;
   version: Uint8Array;
   createdAt: bigint;
+}
+export interface DeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Deployment";
+  value: Uint8Array;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
@@ -71,6 +79,10 @@ export interface DeploymentFilters {
   owner: string;
   dseq: bigint;
   state: string;
+}
+export interface DeploymentFiltersProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: Uint8Array;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {

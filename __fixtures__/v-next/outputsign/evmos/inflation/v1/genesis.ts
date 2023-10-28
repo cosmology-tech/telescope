@@ -1,6 +1,5 @@
 import { ExponentialCalculation, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionSDKType } from "./inflation";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
@@ -14,6 +13,10 @@ export interface GenesisState {
   epochsPerPeriod: bigint;
   /** number of epochs that have passed while inflation is disabled */
   skippedEpochs: bigint;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.inflation.v1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
@@ -33,6 +36,10 @@ export interface Params {
   inflationDistribution: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.inflation.v1.Params";
+  value: Uint8Array;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
@@ -99,89 +106,6 @@ export const GenesisState = {
     }
     return message;
   },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
-    if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
-    if (isSet(object.epochsPerPeriod)) obj.epochsPerPeriod = BigInt(object.epochsPerPeriod.toString());
-    if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
-    message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.epochsPerPeriod !== undefined && (obj.epochsPerPeriod = (message.epochsPerPeriod || BigInt(0)).toString());
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    if (object.period !== undefined && object.period !== null) {
-      message.period = BigInt(object.period.toString());
-    }
-    message.epochIdentifier = object.epochIdentifier ?? "";
-    if (object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null) {
-      message.epochsPerPeriod = BigInt(object.epochsPerPeriod.toString());
-    }
-    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
-      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined,
-      period: object?.period,
-      epochIdentifier: object?.epoch_identifier,
-      epochsPerPeriod: object?.epochs_per_period,
-      skippedEpochs: object?.skipped_epochs
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
-      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      epochs_per_period: isSet(object.epochs_per_period) ? BigInt(object.epochs_per_period.toString()) : BigInt(0),
-      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    obj.period = message.period;
-    obj.epoch_identifier = message.epochIdentifier;
-    obj.epochs_per_period = message.epochsPerPeriod;
-    obj.skipped_epochs = message.skippedEpochs;
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      period: BigInt(object.period),
-      epochIdentifier: object.epoch_identifier,
-      epochsPerPeriod: BigInt(object.epochs_per_period),
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.period = message.period ? message.period.toString() : undefined;
-    obj.epoch_identifier = message.epochIdentifier;
-    obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
-    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -245,77 +169,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
-    if (isSet(object.exponentialCalculation)) obj.exponentialCalculation = ExponentialCalculation.fromJSON(object.exponentialCalculation);
-    if (isSet(object.inflationDistribution)) obj.inflationDistribution = InflationDistribution.fromJSON(object.inflationDistribution);
-    if (isSet(object.enableInflation)) obj.enableInflation = Boolean(object.enableInflation);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
-    message.exponentialCalculation !== undefined && (obj.exponentialCalculation = message.exponentialCalculation ? ExponentialCalculation.toJSON(message.exponentialCalculation) : undefined);
-    message.inflationDistribution !== undefined && (obj.inflationDistribution = message.inflationDistribution ? InflationDistribution.toJSON(message.inflationDistribution) : undefined);
-    message.enableInflation !== undefined && (obj.enableInflation = message.enableInflation);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.mintDenom = object.mintDenom ?? "";
-    if (object.exponentialCalculation !== undefined && object.exponentialCalculation !== null) {
-      message.exponentialCalculation = ExponentialCalculation.fromPartial(object.exponentialCalculation);
-    }
-    if (object.inflationDistribution !== undefined && object.inflationDistribution !== null) {
-      message.inflationDistribution = InflationDistribution.fromPartial(object.inflationDistribution);
-    }
-    message.enableInflation = object.enableInflation ?? false;
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      mintDenom: object?.mint_denom,
-      exponentialCalculation: object.exponential_calculation ? ExponentialCalculation.fromSDK(object.exponential_calculation) : undefined,
-      inflationDistribution: object.inflation_distribution ? InflationDistribution.fromSDK(object.inflation_distribution) : undefined,
-      enableInflation: object?.enable_inflation
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
-      exponential_calculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromSDKJSON(object.exponential_calculation) : undefined,
-      inflation_distribution: isSet(object.inflation_distribution) ? InflationDistribution.fromSDKJSON(object.inflation_distribution) : undefined,
-      enable_inflation: isSet(object.enable_inflation) ? Boolean(object.enable_inflation) : false
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.mint_denom = message.mintDenom;
-    message.exponentialCalculation !== undefined && (obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toSDK(message.exponentialCalculation) : undefined);
-    message.inflationDistribution !== undefined && (obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toSDK(message.inflationDistribution) : undefined);
-    obj.enable_inflation = message.enableInflation;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
-      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
-      enableInflation: object.enable_inflation
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.mint_denom = message.mintDenom;
-    obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation) : undefined;
-    obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
-    obj.enable_inflation = message.enableInflation;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

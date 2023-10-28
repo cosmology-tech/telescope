@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Supported data type of the property values */
 export enum Property_PropertyType {
@@ -78,6 +77,10 @@ export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
+export interface ProjectPropertiesProtoMsg {
+  typeUrl: "/google.api.ProjectProperties";
+  value: Uint8Array;
+}
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -118,6 +121,10 @@ export interface Property {
   type: Property_PropertyType;
   /** The description of the property */
   description: string;
+}
+export interface PropertyProtoMsg {
+  typeUrl: "/google.api.Property";
+  value: Uint8Array;
 }
 /**
  * Defines project properties.
@@ -165,61 +172,6 @@ export const ProjectProperties = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ProjectProperties {
-    const obj = createBaseProjectProperties();
-    if (Array.isArray(object?.properties)) obj.properties = object.properties.map((e: any) => Property.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ProjectProperties): unknown {
-    const obj: any = {};
-    if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toJSON(e) : undefined);
-    } else {
-      obj.properties = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ProjectProperties>): ProjectProperties {
-    const message = createBaseProjectProperties();
-    message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ProjectPropertiesSDKType): ProjectProperties {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ProjectPropertiesSDKType {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ProjectProperties): ProjectPropertiesSDKType {
-    const obj: any = {};
-    if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toSDK(e) : undefined);
-    } else {
-      obj.properties = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ProjectProperties): ProjectPropertiesAmino {
-    const obj: any = {};
-    if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
-    } else {
-      obj.properties = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
-    return ProjectProperties.fromAmino(object.value);
   },
   fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
     return ProjectProperties.decode(message.value);
@@ -277,65 +229,6 @@ export const Property = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Property {
-    const obj = createBaseProperty();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = property_PropertyTypeFromJSON(object.type);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: Property): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Property>): Property {
-    const message = createBaseProperty();
-    message.name = object.name ?? "";
-    message.type = object.type ?? 0;
-    message.description = object.description ?? "";
-    return message;
-  },
-  fromSDK(object: PropertySDKType): Property {
-    return {
-      name: object?.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object?.description
-    };
-  },
-  fromSDKJSON(object: any): PropertySDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-  toSDK(message: Property): PropertySDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
-    obj.description = message.description;
-    return obj;
-  },
-  fromAmino(object: PropertyAmino): Property {
-    return {
-      name: object.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object.description
-    };
-  },
-  toAmino(message: Property): PropertyAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: PropertyAminoMsg): Property {
-    return Property.fromAmino(object.value);
   },
   fromProtoMsg(message: PropertyProtoMsg): Property {
     return Property.decode(message.value);

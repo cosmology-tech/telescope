@@ -1,7 +1,6 @@
 import { CompactBitArray, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
 /**
  * SignMode represents a signing mode with its own security guarantees.
@@ -92,6 +91,10 @@ export interface SignatureDescriptors {
   /** signatures are the signature descriptors */
   signatures: SignatureDescriptor[];
 }
+export interface SignatureDescriptorsProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptors";
+  value: Uint8Array;
+}
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
   signatures: SignatureDescriptorSDKType[];
@@ -113,6 +116,10 @@ export interface SignatureDescriptor {
    */
   sequence: bigint;
 }
+export interface SignatureDescriptorProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.SignatureDescriptor";
+  value: Uint8Array;
+}
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
  * a signature including the public key of the signer, signing modes and the
@@ -131,6 +138,10 @@ export interface SignatureDescriptor_Data {
   /** multi represents a multisig signer */
   multi?: SignatureDescriptor_Data_Multi;
 }
+export interface SignatureDescriptor_DataProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.Data";
+  value: Uint8Array;
+}
 /** Data represents signature data */
 export interface SignatureDescriptor_DataSDKType {
   single?: SignatureDescriptor_Data_SingleSDKType;
@@ -143,6 +154,10 @@ export interface SignatureDescriptor_Data_Single {
   /** signature is the raw signature bytes */
   signature: Uint8Array;
 }
+export interface SignatureDescriptor_Data_SingleProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.Single";
+  value: Uint8Array;
+}
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
   mode: SignMode;
@@ -154,6 +169,10 @@ export interface SignatureDescriptor_Data_Multi {
   bitarray?: CompactBitArray;
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
+}
+export interface SignatureDescriptor_Data_MultiProtoMsg {
+  typeUrl: "/cosmos.tx.signing.v1beta1.Multi";
+  value: Uint8Array;
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
@@ -189,67 +208,6 @@ export const SignatureDescriptors = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SignatureDescriptors {
-    const obj = createBaseSignatureDescriptors();
-    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SignatureDescriptors): unknown {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
-    const message = createBaseSignatureDescriptors();
-    message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SignatureDescriptorsSDKType): SignatureDescriptors {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SignatureDescriptorsSDKType {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SignatureDescriptors): SignatureDescriptorsSDKType {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toSDK(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SignatureDescriptorsAmino): SignatureDescriptors {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SignatureDescriptors): SignatureDescriptorsAmino {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptorsAminoMsg): SignatureDescriptors {
-    return SignatureDescriptors.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptors): SignatureDescriptorsAminoMsg {
-    return {
-      type: "cosmos-sdk/SignatureDescriptors",
-      value: SignatureDescriptors.toAmino(message)
-    };
   },
   fromProtoMsg(message: SignatureDescriptorsProtoMsg): SignatureDescriptors {
     return SignatureDescriptors.decode(message.value);
@@ -308,77 +266,6 @@ export const SignatureDescriptor = {
     }
     return message;
   },
-  fromJSON(object: any): SignatureDescriptor {
-    const obj = createBaseSignatureDescriptor();
-    if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
-    if (isSet(object.data)) obj.data = SignatureDescriptor_Data.fromJSON(object.data);
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    return obj;
-  },
-  toJSON(message: SignatureDescriptor): unknown {
-    const obj: any = {};
-    message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
-    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
-    const message = createBaseSignatureDescriptor();
-    if (object.publicKey !== undefined && object.publicKey !== null) {
-      message.publicKey = Any.fromPartial(object.publicKey);
-    }
-    if (object.data !== undefined && object.data !== null) {
-      message.data = SignatureDescriptor_Data.fromPartial(object.data);
-    }
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
-    return message;
-  },
-  fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
-    return {
-      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
-      data: object.data ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
-      sequence: object?.sequence
-    };
-  },
-  fromSDKJSON(object: any): SignatureDescriptorSDKType {
-    return {
-      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
-      data: isSet(object.data) ? SignatureDescriptor_Data.fromSDKJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: SignatureDescriptor): SignatureDescriptorSDKType {
-    const obj: any = {};
-    message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
-    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
-    obj.sequence = message.sequence;
-    return obj;
-  },
-  fromAmino(object: SignatureDescriptorAmino): SignatureDescriptor {
-    return {
-      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
-      data: object?.data ? SignatureDescriptor_Data.fromAmino(object.data) : undefined,
-      sequence: BigInt(object.sequence)
-    };
-  },
-  toAmino(message: SignatureDescriptor): SignatureDescriptorAmino {
-    const obj: any = {};
-    obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
-    return SignatureDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor): SignatureDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SignatureDescriptor",
-      value: SignatureDescriptor.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SignatureDescriptorProtoMsg): SignatureDescriptor {
     return SignatureDescriptor.decode(message.value);
   },
@@ -428,67 +315,6 @@ export const SignatureDescriptor_Data = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SignatureDescriptor_Data {
-    const obj = createBaseSignatureDescriptor_Data();
-    if (isSet(object.single)) obj.single = SignatureDescriptor_Data_Single.fromJSON(object.single);
-    if (isSet(object.multi)) obj.multi = SignatureDescriptor_Data_Multi.fromJSON(object.multi);
-    return obj;
-  },
-  toJSON(message: SignatureDescriptor_Data): unknown {
-    const obj: any = {};
-    message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toJSON(message.single) : undefined);
-    message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toJSON(message.multi) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SignatureDescriptor_Data>): SignatureDescriptor_Data {
-    const message = createBaseSignatureDescriptor_Data();
-    if (object.single !== undefined && object.single !== null) {
-      message.single = SignatureDescriptor_Data_Single.fromPartial(object.single);
-    }
-    if (object.multi !== undefined && object.multi !== null) {
-      message.multi = SignatureDescriptor_Data_Multi.fromPartial(object.multi);
-    }
-    return message;
-  },
-  fromSDK(object: SignatureDescriptor_DataSDKType): SignatureDescriptor_Data {
-    return {
-      single: object.single ? SignatureDescriptor_Data_Single.fromSDK(object.single) : undefined,
-      multi: object.multi ? SignatureDescriptor_Data_Multi.fromSDK(object.multi) : undefined
-    };
-  },
-  fromSDKJSON(object: any): SignatureDescriptor_DataSDKType {
-    return {
-      single: isSet(object.single) ? SignatureDescriptor_Data_Single.fromSDKJSON(object.single) : undefined,
-      multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromSDKJSON(object.multi) : undefined
-    };
-  },
-  toSDK(message: SignatureDescriptor_Data): SignatureDescriptor_DataSDKType {
-    const obj: any = {};
-    message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toSDK(message.single) : undefined);
-    message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toSDK(message.multi) : undefined);
-    return obj;
-  },
-  fromAmino(object: SignatureDescriptor_DataAmino): SignatureDescriptor_Data {
-    return {
-      single: object?.single ? SignatureDescriptor_Data_Single.fromAmino(object.single) : undefined,
-      multi: object?.multi ? SignatureDescriptor_Data_Multi.fromAmino(object.multi) : undefined
-    };
-  },
-  toAmino(message: SignatureDescriptor_Data): SignatureDescriptor_DataAmino {
-    const obj: any = {};
-    obj.single = message.single ? SignatureDescriptor_Data_Single.toAmino(message.single) : undefined;
-    obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toAmino(message.multi) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptor_DataAminoMsg): SignatureDescriptor_Data {
-    return SignatureDescriptor_Data.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor_Data): SignatureDescriptor_DataAminoMsg {
-    return {
-      type: "cosmos-sdk/Data",
-      value: SignatureDescriptor_Data.toAmino(message)
-    };
   },
   fromProtoMsg(message: SignatureDescriptor_DataProtoMsg): SignatureDescriptor_Data {
     return SignatureDescriptor_Data.decode(message.value);
@@ -540,63 +366,6 @@ export const SignatureDescriptor_Data_Single = {
     }
     return message;
   },
-  fromJSON(object: any): SignatureDescriptor_Data_Single {
-    const obj = createBaseSignatureDescriptor_Data_Single();
-    if (isSet(object.mode)) obj.mode = signModeFromJSON(object.mode);
-    if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
-    return obj;
-  },
-  toJSON(message: SignatureDescriptor_Data_Single): unknown {
-    const obj: any = {};
-    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SignatureDescriptor_Data_Single>): SignatureDescriptor_Data_Single {
-    const message = createBaseSignatureDescriptor_Data_Single();
-    message.mode = object.mode ?? 0;
-    message.signature = object.signature ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      signature: object?.signature
-    };
-  },
-  fromSDKJSON(object: any): SignatureDescriptor_Data_SingleSDKType {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
-    };
-  },
-  toSDK(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleSDKType {
-    const obj: any = {};
-    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    obj.signature = message.signature;
-    return obj;
-  },
-  fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      signature: object.signature
-    };
-  },
-  toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {
-    const obj: any = {};
-    obj.mode = message.mode;
-    obj.signature = message.signature;
-    return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptor_Data_SingleAminoMsg): SignatureDescriptor_Data_Single {
-    return SignatureDescriptor_Data_Single.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAminoMsg {
-    return {
-      type: "cosmos-sdk/Single",
-      value: SignatureDescriptor_Data_Single.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SignatureDescriptor_Data_SingleProtoMsg): SignatureDescriptor_Data_Single {
     return SignatureDescriptor_Data_Single.decode(message.value);
   },
@@ -646,77 +415,6 @@ export const SignatureDescriptor_Data_Multi = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SignatureDescriptor_Data_Multi {
-    const obj = createBaseSignatureDescriptor_Data_Multi();
-    if (isSet(object.bitarray)) obj.bitarray = CompactBitArray.fromJSON(object.bitarray);
-    if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => SignatureDescriptor_Data.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SignatureDescriptor_Data_Multi): unknown {
-    const obj: any = {};
-    message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toJSON(message.bitarray) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SignatureDescriptor_Data_Multi>): SignatureDescriptor_Data_Multi {
-    const message = createBaseSignatureDescriptor_Data_Multi();
-    if (object.bitarray !== undefined && object.bitarray !== null) {
-      message.bitarray = CompactBitArray.fromPartial(object.bitarray);
-    }
-    message.signatures = object.signatures?.map(e => SignatureDescriptor_Data.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: SignatureDescriptor_Data_MultiSDKType): SignatureDescriptor_Data_Multi {
-    return {
-      bitarray: object.bitarray ? CompactBitArray.fromSDK(object.bitarray) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): SignatureDescriptor_Data_MultiSDKType {
-    return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDKJSON(object.bitarray) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiSDKType {
-    const obj: any = {};
-    message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toSDK(message.bitarray) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toSDK(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromAmino(object: SignatureDescriptor_Data_MultiAmino): SignatureDescriptor_Data_Multi {
-    return {
-      bitarray: object?.bitarray ? CompactBitArray.fromAmino(object.bitarray) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiAmino {
-    const obj: any = {};
-    obj.bitarray = message.bitarray ? CompactBitArray.toAmino(message.bitarray) : undefined;
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toAmino(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptor_Data_MultiAminoMsg): SignatureDescriptor_Data_Multi {
-    return SignatureDescriptor_Data_Multi.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiAminoMsg {
-    return {
-      type: "cosmos-sdk/Multi",
-      value: SignatureDescriptor_Data_Multi.toAmino(message)
-    };
   },
   fromProtoMsg(message: SignatureDescriptor_Data_MultiProtoMsg): SignatureDescriptor_Data_Multi {
     return SignatureDescriptor_Data_Multi.decode(message.value);

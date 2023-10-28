@@ -93,6 +93,10 @@ export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckRequest";
   value: Uint8Array;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestAmino {
   /**
@@ -152,6 +156,10 @@ export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
   value: Uint8Array;
 }
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
+  value: Uint8Array;
+}
 /** Response message for the Check method. */
 export interface CheckResponseAmino {
   /**
@@ -202,6 +210,10 @@ export interface CheckResponse_CheckInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
   value: Uint8Array;
 }
+export interface CheckResponse_CheckInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
+  value: Uint8Array;
+}
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoAmino {
   /**
@@ -243,6 +255,10 @@ export interface CheckResponse_ConsumerInfo {
    * consumer number is found.
    */
   consumerNumber: bigint;
+}
+export interface CheckResponse_ConsumerInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo";
+  value: Uint8Array;
 }
 export interface CheckResponse_ConsumerInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo";
@@ -313,6 +329,10 @@ export interface ReportRequest {
    * latest one will be used.
    */
   serviceConfigId: string;
+}
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportRequest";
+  value: Uint8Array;
 }
 export interface ReportRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportRequest";
@@ -390,6 +410,10 @@ export interface ReportResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportResponse";
   value: Uint8Array;
 }
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportResponse";
+  value: Uint8Array;
+}
 /** Response message for the Report method. */
 export interface ReportResponseAmino {
   /**
@@ -440,6 +464,10 @@ export interface ReportResponse_ReportError {
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
   status?: Status;
+}
+export interface ReportResponse_ReportErrorProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportError";
+  value: Uint8Array;
 }
 export interface ReportResponse_ReportErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportError";

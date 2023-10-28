@@ -88,6 +88,10 @@ export interface CheckRequest {
    */
   serviceConfigId: string;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
@@ -117,6 +121,10 @@ export interface CheckResponse {
   /** Feedback data returned from the server during processing a Check request. */
   checkInfo?: CheckResponse_CheckInfo;
 }
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
+  value: Uint8Array;
+}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   operation_id: string;
@@ -135,6 +143,10 @@ export interface CheckResponse_CheckInfo {
   unusedArguments: string[];
   /** Consumer info of this check. */
   consumerInfo?: CheckResponse_ConsumerInfo;
+}
+export interface CheckResponse_CheckInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
+  value: Uint8Array;
 }
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoSDKType {
@@ -162,6 +174,10 @@ export interface CheckResponse_ConsumerInfo {
    * consumer number is found.
    */
   consumerNumber: bigint;
+}
+export interface CheckResponse_ConsumerInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo";
+  value: Uint8Array;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoSDKType {
@@ -203,6 +219,10 @@ export interface ReportRequest {
    */
   serviceConfigId: string;
 }
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportRequest";
+  value: Uint8Array;
+}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -233,6 +253,10 @@ export interface ReportResponse {
   /** The current service rollout id used to process the request. */
   serviceRolloutId: string;
 }
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportResponse";
+  value: Uint8Array;
+}
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
   report_errors: ReportResponse_ReportErrorSDKType[];
@@ -255,6 +279,10 @@ export interface ReportResponse_ReportError {
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
   status?: Status;
+}
+export interface ReportResponse_ReportErrorProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportError";
+  value: Uint8Array;
 }
 /**
  * Represents the processing error of one

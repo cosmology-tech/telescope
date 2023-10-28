@@ -13,6 +13,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.incentives.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.incentives.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
   /**

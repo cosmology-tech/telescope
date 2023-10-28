@@ -78,6 +78,10 @@ export interface Duration {
    */
   nanos: number;
 }
+export interface DurationProtoMsg {
+  typeUrl: "/google.protobuf.Duration";
+  value: Uint8Array;
+}
 /**
  * A Duration represents a signed, fixed-length span of time represented
  * as a count of seconds and fractions of seconds at nanosecond

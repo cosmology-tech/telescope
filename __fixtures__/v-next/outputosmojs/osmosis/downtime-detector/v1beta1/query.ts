@@ -11,6 +11,10 @@ export interface RecoveredSinceDowntimeOfLengthRequest {
   downtime: Downtime;
   recovery: Duration;
 }
+export interface RecoveredSinceDowntimeOfLengthRequestProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthRequest";
+  value: Uint8Array;
+}
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
  * since the chain has been down for $DOWNTIME_DURATION.
@@ -21,6 +25,10 @@ export interface RecoveredSinceDowntimeOfLengthRequestSDKType {
 }
 export interface RecoveredSinceDowntimeOfLengthResponse {
   succesfullyRecovered: boolean;
+}
+export interface RecoveredSinceDowntimeOfLengthResponseProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthResponse";
+  value: Uint8Array;
 }
 export interface RecoveredSinceDowntimeOfLengthResponseSDKType {
   succesfully_recovered: boolean;

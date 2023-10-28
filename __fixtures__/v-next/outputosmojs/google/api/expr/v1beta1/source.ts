@@ -5,6 +5,10 @@ export interface SourceInfo_PositionsEntry {
   key: number;
   value: number;
 }
+export interface SourceInfo_PositionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
   value: number;
@@ -35,6 +39,10 @@ export interface SourceInfo {
     [key: number]: number;
   };
 }
+export interface SourceInfoProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.SourceInfo";
+  value: Uint8Array;
+}
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   location: string;
@@ -59,6 +67,10 @@ export interface SourcePosition {
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
   column: number;
+}
+export interface SourcePositionProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.SourcePosition";
+  value: Uint8Array;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {

@@ -3,7 +3,6 @@ import { Decl, DeclSDKType, CheckedExpr, CheckedExprSDKType } from "../../v1alph
 import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval";
 import { Status, StatusSDKType } from "../../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../../helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -67,6 +66,10 @@ export interface ParseRequest {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disableMacros: boolean;
 }
+export interface ParseRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
+  value: Uint8Array;
+}
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
   cel_source: string;
@@ -80,6 +83,10 @@ export interface ParseResponse {
   parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
+}
+export interface ParseResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
+  value: Uint8Array;
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
@@ -108,6 +115,10 @@ export interface CheckRequest {
    */
   noStdEnv: boolean;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
@@ -122,6 +133,10 @@ export interface CheckResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
+  value: Uint8Array;
+}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   checked_expr?: CheckedExprSDKType;
@@ -130,6 +145,10 @@ export interface CheckResponseSDKType {
 export interface EvalRequest_BindingsEntry {
   key: string;
   value?: ExprValue;
+}
+export interface EvalRequest_BindingsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
@@ -150,6 +169,10 @@ export interface EvalRequest {
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
+}
+export interface EvalRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
+  value: Uint8Array;
 }
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
@@ -172,6 +195,10 @@ export interface EvalResponse {
    */
   issues: Status[];
 }
+export interface EvalResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
+  value: Uint8Array;
+}
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
   result?: ExprValueSDKType;
@@ -189,6 +216,10 @@ export interface IssueDetails {
   position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: bigint;
+}
+export interface IssueDetailsProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
+  value: Uint8Array;
 }
 /**
  * Warnings or errors in service execution are represented by
@@ -251,73 +282,6 @@ export const ParseRequest = {
     }
     return message;
   },
-  fromJSON(object: any): ParseRequest {
-    const obj = createBaseParseRequest();
-    if (isSet(object.celSource)) obj.celSource = String(object.celSource);
-    if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
-    if (isSet(object.sourceLocation)) obj.sourceLocation = String(object.sourceLocation);
-    if (isSet(object.disableMacros)) obj.disableMacros = Boolean(object.disableMacros);
-    return obj;
-  },
-  toJSON(message: ParseRequest): unknown {
-    const obj: any = {};
-    message.celSource !== undefined && (obj.celSource = message.celSource);
-    message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
-    message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation);
-    message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
-    const message = createBaseParseRequest();
-    message.celSource = object.celSource ?? "";
-    message.syntaxVersion = object.syntaxVersion ?? "";
-    message.sourceLocation = object.sourceLocation ?? "";
-    message.disableMacros = object.disableMacros ?? false;
-    return message;
-  },
-  fromSDK(object: ParseRequestSDKType): ParseRequest {
-    return {
-      celSource: object?.cel_source,
-      syntaxVersion: object?.syntax_version,
-      sourceLocation: object?.source_location,
-      disableMacros: object?.disable_macros
-    };
-  },
-  fromSDKJSON(object: any): ParseRequestSDKType {
-    return {
-      cel_source: isSet(object.cel_source) ? String(object.cel_source) : "",
-      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
-      source_location: isSet(object.source_location) ? String(object.source_location) : "",
-      disable_macros: isSet(object.disable_macros) ? Boolean(object.disable_macros) : false
-    };
-  },
-  toSDK(message: ParseRequest): ParseRequestSDKType {
-    const obj: any = {};
-    obj.cel_source = message.celSource;
-    obj.syntax_version = message.syntaxVersion;
-    obj.source_location = message.sourceLocation;
-    obj.disable_macros = message.disableMacros;
-    return obj;
-  },
-  fromAmino(object: ParseRequestAmino): ParseRequest {
-    return {
-      celSource: object.cel_source,
-      syntaxVersion: object.syntax_version,
-      sourceLocation: object.source_location,
-      disableMacros: object.disable_macros
-    };
-  },
-  toAmino(message: ParseRequest): ParseRequestAmino {
-    const obj: any = {};
-    obj.cel_source = message.celSource;
-    obj.syntax_version = message.syntaxVersion;
-    obj.source_location = message.sourceLocation;
-    obj.disable_macros = message.disableMacros;
-    return obj;
-  },
-  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
-    return ParseRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
     return ParseRequest.decode(message.value);
   },
@@ -367,71 +331,6 @@ export const ParseResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ParseResponse {
-    const obj = createBaseParseResponse();
-    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
-    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ParseResponse): unknown {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
-    const message = createBaseParseResponse();
-    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
-      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
-    }
-    message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ParseResponseSDKType): ParseResponse {
-    return {
-      parsedExpr: object.parsed_expr ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ParseResponseSDKType {
-    return {
-      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ParseResponse): ParseResponseSDKType {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ParseResponseAmino): ParseResponse {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ParseResponse): ParseResponseAmino {
-    const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
-    return ParseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ParseResponseProtoMsg): ParseResponse {
     return ParseResponse.decode(message.value);
@@ -497,87 +396,6 @@ export const CheckRequest = {
     }
     return message;
   },
-  fromJSON(object: any): CheckRequest {
-    const obj = createBaseCheckRequest();
-    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
-    if (Array.isArray(object?.typeEnv)) obj.typeEnv = object.typeEnv.map((e: any) => Decl.fromJSON(e));
-    if (isSet(object.container)) obj.container = String(object.container);
-    if (isSet(object.noStdEnv)) obj.noStdEnv = Boolean(object.noStdEnv);
-    return obj;
-  },
-  toJSON(message: CheckRequest): unknown {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
-    if (message.typeEnv) {
-      obj.typeEnv = message.typeEnv.map(e => e ? Decl.toJSON(e) : undefined);
-    } else {
-      obj.typeEnv = [];
-    }
-    message.container !== undefined && (obj.container = message.container);
-    message.noStdEnv !== undefined && (obj.noStdEnv = message.noStdEnv);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
-    const message = createBaseCheckRequest();
-    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
-      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
-    }
-    message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
-    message.container = object.container ?? "";
-    message.noStdEnv = object.noStdEnv ?? false;
-    return message;
-  },
-  fromSDK(object: CheckRequestSDKType): CheckRequest {
-    return {
-      parsedExpr: object.parsed_expr ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
-      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDK(e)) : [],
-      container: object?.container,
-      noStdEnv: object?.no_std_env
-    };
-  },
-  fromSDKJSON(object: any): CheckRequestSDKType {
-    return {
-      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
-      type_env: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDKJSON(e)) : [],
-      container: isSet(object.container) ? String(object.container) : "",
-      no_std_env: isSet(object.no_std_env) ? Boolean(object.no_std_env) : false
-    };
-  },
-  toSDK(message: CheckRequest): CheckRequestSDKType {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
-    if (message.typeEnv) {
-      obj.type_env = message.typeEnv.map(e => e ? Decl.toSDK(e) : undefined);
-    } else {
-      obj.type_env = [];
-    }
-    obj.container = message.container;
-    obj.no_std_env = message.noStdEnv;
-    return obj;
-  },
-  fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromAmino(e)) : [],
-      container: object.container,
-      noStdEnv: object.no_std_env
-    };
-  },
-  toAmino(message: CheckRequest): CheckRequestAmino {
-    const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    if (message.typeEnv) {
-      obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e) : undefined);
-    } else {
-      obj.type_env = [];
-    }
-    obj.container = message.container;
-    obj.no_std_env = message.noStdEnv;
-    return obj;
-  },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
   },
@@ -628,71 +446,6 @@ export const CheckResponse = {
     }
     return message;
   },
-  fromJSON(object: any): CheckResponse {
-    const obj = createBaseCheckResponse();
-    if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
-    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: CheckResponse): unknown {
-    const obj: any = {};
-    message.checkedExpr !== undefined && (obj.checkedExpr = message.checkedExpr ? CheckedExpr.toJSON(message.checkedExpr) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
-    const message = createBaseCheckResponse();
-    if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
-      message.checkedExpr = CheckedExpr.fromPartial(object.checkedExpr);
-    }
-    message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: CheckResponseSDKType): CheckResponse {
-    return {
-      checkedExpr: object.checked_expr ? CheckedExpr.fromSDK(object.checked_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): CheckResponseSDKType {
-    return {
-      checked_expr: isSet(object.checked_expr) ? CheckedExpr.fromSDKJSON(object.checked_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: CheckResponse): CheckResponseSDKType {
-    const obj: any = {};
-    message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toSDK(message.checkedExpr) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: CheckResponse): CheckResponseAmino {
-    const obj: any = {};
-    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
   },
@@ -741,59 +494,6 @@ export const EvalRequest_BindingsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): EvalRequest_BindingsEntry {
-    const obj = createBaseEvalRequest_BindingsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = ExprValue.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: EvalRequest_BindingsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? ExprValue.toJSON(message.value) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
-    const message = createBaseEvalRequest_BindingsEntry();
-    message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = ExprValue.fromPartial(object.value);
-    }
-    return message;
-  },
-  fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
-    return {
-      key: object?.key,
-      value: object.value ? ExprValue.fromSDK(object.value) : undefined
-    };
-  },
-  fromSDKJSON(object: any): EvalRequest_BindingsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? ExprValue.fromSDKJSON(object.value) : undefined
-    };
-  },
-  toSDK(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    message.value !== undefined && (obj.value = message.value ? ExprValue.toSDK(message.value) : undefined);
-    return obj;
-  },
-  fromAmino(object: EvalRequest_BindingsEntryAmino): EvalRequest_BindingsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? ExprValue.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
-    return EvalRequest_BindingsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg): EvalRequest_BindingsEntry {
     return EvalRequest_BindingsEntry.decode(message.value);
@@ -859,119 +559,6 @@ export const EvalRequest = {
     }
     return message;
   },
-  fromJSON(object: any): EvalRequest {
-    const obj = createBaseEvalRequest();
-    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
-    if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
-    if (isObject(object.bindings)) obj.bindings = Object.entries(object.bindings).reduce<{
-      [key: string]: ExprValue;
-    }>((acc, [key, value]) => {
-      acc[key] = ExprValue.fromJSON(value);
-      return acc;
-    }, {});
-    if (isSet(object.container)) obj.container = String(object.container);
-    return obj;
-  },
-  toJSON(message: EvalRequest): unknown {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
-    message.checkedExpr !== undefined && (obj.checkedExpr = message.checkedExpr ? CheckedExpr.toJSON(message.checkedExpr) : undefined);
-    obj.bindings = {};
-    if (message.bindings) {
-      Object.entries(message.bindings).forEach(([k, v]) => {
-        obj.bindings[k] = ExprValue.toJSON(v);
-      });
-    }
-    message.container !== undefined && (obj.container = message.container);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
-    const message = createBaseEvalRequest();
-    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
-      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
-    }
-    if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
-      message.checkedExpr = CheckedExpr.fromPartial(object.checkedExpr);
-    }
-    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
-      [key: string]: ExprValue;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = ExprValue.fromPartial(value);
-      }
-      return acc;
-    }, {});
-    message.container = object.container ?? "";
-    return message;
-  },
-  fromSDK(object: EvalRequestSDKType): EvalRequest {
-    return {
-      parsedExpr: object.parsed_expr ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
-      checkedExpr: object.checked_expr ? CheckedExpr.fromSDK(object.checked_expr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromSDK(value);
-        return acc;
-      }, {}) : {},
-      container: object?.container
-    };
-  },
-  fromSDKJSON(object: any): EvalRequestSDKType {
-    return {
-      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
-      checked_expr: isSet(object.checked_expr) ? CheckedExpr.fromSDKJSON(object.checked_expr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromSDKJSON(value);
-        return acc;
-      }, {}) : {},
-      container: isSet(object.container) ? String(object.container) : ""
-    };
-  },
-  toSDK(message: EvalRequest): EvalRequestSDKType {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
-    message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toSDK(message.checkedExpr) : undefined);
-    obj.bindings = {};
-    if (message.bindings) {
-      Object.entries(message.bindings).forEach(([k, v]) => {
-        obj.bindings[k] = ExprValue.toSDK(v);
-      });
-    }
-    obj.container = message.container;
-    return obj;
-  },
-  fromAmino(object: EvalRequestAmino): EvalRequest {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      container: object.container
-    };
-  },
-  toAmino(message: EvalRequest): EvalRequestAmino {
-    const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
-    obj.bindings = {};
-    if (message.bindings) {
-      Object.entries(message.bindings).forEach(([k, v]) => {
-        obj.bindings[k] = ExprValue.toAmino(v);
-      });
-    }
-    obj.container = message.container;
-    return obj;
-  },
-  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
-    return EvalRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
     return EvalRequest.decode(message.value);
   },
@@ -1021,71 +608,6 @@ export const EvalResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): EvalResponse {
-    const obj = createBaseEvalResponse();
-    if (isSet(object.result)) obj.result = ExprValue.fromJSON(object.result);
-    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: EvalResponse): unknown {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = message.result ? ExprValue.toJSON(message.result) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
-    const message = createBaseEvalResponse();
-    if (object.result !== undefined && object.result !== null) {
-      message.result = ExprValue.fromPartial(object.result);
-    }
-    message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: EvalResponseSDKType): EvalResponse {
-    return {
-      result: object.result ? ExprValue.fromSDK(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): EvalResponseSDKType {
-    return {
-      result: isSet(object.result) ? ExprValue.fromSDKJSON(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: EvalResponse): EvalResponseSDKType {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = message.result ? ExprValue.toSDK(message.result) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAmino(object: EvalResponseAmino): EvalResponse {
-    return {
-      result: object?.result ? ExprValue.fromAmino(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: EvalResponse): EvalResponseAmino {
-    const obj: any = {};
-    obj.result = message.result ? ExprValue.toAmino(message.result) : undefined;
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
-    return EvalResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalResponseProtoMsg): EvalResponse {
     return EvalResponse.decode(message.value);
@@ -1143,69 +665,6 @@ export const IssueDetails = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): IssueDetails {
-    const obj = createBaseIssueDetails();
-    if (isSet(object.severity)) obj.severity = issueDetails_SeverityFromJSON(object.severity);
-    if (isSet(object.position)) obj.position = SourcePosition.fromJSON(object.position);
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    return obj;
-  },
-  toJSON(message: IssueDetails): unknown {
-    const obj: any = {};
-    message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
-    message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
-    const message = createBaseIssueDetails();
-    message.severity = object.severity ?? 0;
-    if (object.position !== undefined && object.position !== null) {
-      message.position = SourcePosition.fromPartial(object.position);
-    }
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
-    return message;
-  },
-  fromSDK(object: IssueDetailsSDKType): IssueDetails {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
-      position: object.position ? SourcePosition.fromSDK(object.position) : undefined,
-      id: object?.id
-    };
-  },
-  fromSDKJSON(object: any): IssueDetailsSDKType {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
-      position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: IssueDetails): IssueDetailsSDKType {
-    const obj: any = {};
-    message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
-    message.position !== undefined && (obj.position = message.position ? SourcePosition.toSDK(message.position) : undefined);
-    obj.id = message.id;
-    return obj;
-  },
-  fromAmino(object: IssueDetailsAmino): IssueDetails {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
-      position: object?.position ? SourcePosition.fromAmino(object.position) : undefined,
-      id: BigInt(object.id)
-    };
-  },
-  toAmino(message: IssueDetails): IssueDetailsAmino {
-    const obj: any = {};
-    obj.severity = message.severity;
-    obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
-    obj.id = message.id ? message.id.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
-    return IssueDetails.fromAmino(object.value);
   },
   fromProtoMsg(message: IssueDetailsProtoMsg): IssueDetails {
     return IssueDetails.decode(message.value);

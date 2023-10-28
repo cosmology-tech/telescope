@@ -5,6 +5,10 @@ export const protobufPackage = "akash.base.v1beta2";
 export interface ResourceValue {
   val: Uint8Array;
 }
+export interface ResourceValueProtoMsg {
+  typeUrl: "/akash.base.v1beta2.ResourceValue";
+  value: Uint8Array;
+}
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
   val: Uint8Array;

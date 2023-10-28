@@ -12,6 +12,10 @@ export interface MsgCreateStableswapPool {
   futurePoolGovernor: string;
   scalingFactorController: string;
 }
+export interface MsgCreateStableswapPoolProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool";
+  value: Uint8Array;
+}
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
   sender: string;
@@ -24,6 +28,10 @@ export interface MsgCreateStableswapPoolSDKType {
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponse {
   poolId: bigint;
+}
+export interface MsgCreateStableswapPoolResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPoolResponse";
+  value: Uint8Array;
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseSDKType {
@@ -38,6 +46,10 @@ export interface MsgStableSwapAdjustScalingFactors {
   poolId: bigint;
   scalingFactors: bigint[];
 }
+export interface MsgStableSwapAdjustScalingFactorsProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors";
+  value: Uint8Array;
+}
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
@@ -48,6 +60,10 @@ export interface MsgStableSwapAdjustScalingFactorsSDKType {
   scaling_factors: bigint[];
 }
 export interface MsgStableSwapAdjustScalingFactorsResponse {}
+export interface MsgStableSwapAdjustScalingFactorsResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactorsResponse";
+  value: Uint8Array;
+}
 export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
   return {

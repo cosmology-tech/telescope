@@ -191,6 +191,10 @@ export interface ServiceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.Service";
   value: Uint8Array;
 }
+export interface ServiceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service";
+  value: Uint8Array;
+}
 /** A service that is available for use by the consumer. */
 export interface ServiceAmino {
   /**
@@ -275,6 +279,10 @@ export interface ServiceConfigProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
   value: Uint8Array;
 }
+export interface ServiceConfigProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
+  value: Uint8Array;
+}
 /** The configuration of the service. */
 export interface ServiceConfigAmino {
   /**
@@ -347,6 +355,10 @@ export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
   value: Uint8Array;
 }
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
+  value: Uint8Array;
+}
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataAmino {
   /**
@@ -405,6 +417,10 @@ export interface ConsumerQuotaMetric {
   descendantConsumerQuotaLimits: ConsumerQuotaLimit[];
   /** The units in which the metric value is reported. */
   unit: string;
+}
+export interface ConsumerQuotaMetricProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
+  value: Uint8Array;
 }
 export interface ConsumerQuotaMetricProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
@@ -509,6 +525,10 @@ export interface ConsumerQuotaLimitProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
   value: Uint8Array;
 }
+export interface ConsumerQuotaLimitProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
+  value: Uint8Array;
+}
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitAmino {
   /**
@@ -569,6 +589,10 @@ export interface QuotaBucket_DimensionsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface QuotaBucket_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface QuotaBucket_DimensionsEntryAmino {
   key: string;
   value: string;
@@ -615,6 +639,10 @@ export interface QuotaBucket {
   dimensions: {
     [key: string]: string;
   };
+}
+export interface QuotaBucketProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
+  value: Uint8Array;
 }
 export interface QuotaBucketProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
@@ -673,6 +701,10 @@ export interface QuotaBucketSDKType {
 export interface QuotaOverride_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface QuotaOverride_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntryProtoMsg {
   typeUrl: string;
@@ -758,6 +790,10 @@ export interface QuotaOverride {
    * Used by admin overrides only.
    */
   adminOverrideAncestor: string;
+}
+export interface QuotaOverrideProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
+  value: Uint8Array;
 }
 export interface QuotaOverrideProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
@@ -861,6 +897,10 @@ export interface OverrideInlineSourceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
   value: Uint8Array;
 }
+export interface OverrideInlineSourceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
+  value: Uint8Array;
+}
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceAmino {
   /**
@@ -882,6 +922,10 @@ export interface OverrideInlineSourceSDKType {
 export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
   typeUrl: string;
@@ -952,6 +996,10 @@ export interface AdminQuotaPolicy {
    * format is `{container_type}/{container_number}`
    */
   container: string;
+}
+export interface AdminQuotaPolicyProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
+  value: Uint8Array;
 }
 export interface AdminQuotaPolicyProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
@@ -1041,6 +1089,10 @@ export interface ServiceIdentity {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   uniqueId: string;
+}
+export interface ServiceIdentityProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";
+  value: Uint8Array;
 }
 export interface ServiceIdentityProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";

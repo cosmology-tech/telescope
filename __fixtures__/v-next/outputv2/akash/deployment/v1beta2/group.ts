@@ -70,6 +70,10 @@ export interface GroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Group";
   value: Uint8Array;
 }
+export interface GroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Group";
+  value: Uint8Array;
+}
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;

@@ -1,8 +1,11 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
+}
+export interface NodeProtoMsg {
+  typeUrl: "/osmosis.store.v1beta1.Node";
+  value: Uint8Array;
 }
 export interface NodeSDKType {
   children: ChildSDKType[];
@@ -11,12 +14,20 @@ export interface Child {
   index: Uint8Array;
   accumulation: string;
 }
+export interface ChildProtoMsg {
+  typeUrl: "/osmosis.store.v1beta1.Child";
+  value: Uint8Array;
+}
 export interface ChildSDKType {
   index: Uint8Array;
   accumulation: string;
 }
 export interface Leaf {
   leaf?: Child;
+}
+export interface LeafProtoMsg {
+  typeUrl: "/osmosis.store.v1beta1.Leaf";
+  value: Uint8Array;
 }
 export interface LeafSDKType {
   leaf?: ChildSDKType;
@@ -50,67 +61,6 @@ export const Node = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Node {
-    const obj = createBaseNode();
-    if (Array.isArray(object?.children)) obj.children = object.children.map((e: any) => Child.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Node): unknown {
-    const obj: any = {};
-    if (message.children) {
-      obj.children = message.children.map(e => e ? Child.toJSON(e) : undefined);
-    } else {
-      obj.children = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Node>): Node {
-    const message = createBaseNode();
-    message.children = object.children?.map(e => Child.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: NodeSDKType): Node {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): NodeSDKType {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Node): NodeSDKType {
-    const obj: any = {};
-    if (message.children) {
-      obj.children = message.children.map(e => e ? Child.toSDK(e) : undefined);
-    } else {
-      obj.children = [];
-    }
-    return obj;
-  },
-  fromAmino(object: NodeAmino): Node {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Node): NodeAmino {
-    const obj: any = {};
-    if (message.children) {
-      obj.children = message.children.map(e => e ? Child.toAmino(e) : undefined);
-    } else {
-      obj.children = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: NodeAminoMsg): Node {
-    return Node.fromAmino(object.value);
-  },
-  toAminoMsg(message: Node): NodeAminoMsg {
-    return {
-      type: "osmosis/store/node",
-      value: Node.toAmino(message)
-    };
   },
   fromProtoMsg(message: NodeProtoMsg): Node {
     return Node.decode(message.value);
@@ -162,63 +112,6 @@ export const Child = {
     }
     return message;
   },
-  fromJSON(object: any): Child {
-    const obj = createBaseChild();
-    if (isSet(object.index)) obj.index = bytesFromBase64(object.index);
-    if (isSet(object.accumulation)) obj.accumulation = String(object.accumulation);
-    return obj;
-  },
-  toJSON(message: Child): unknown {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = base64FromBytes(message.index !== undefined ? message.index : new Uint8Array()));
-    message.accumulation !== undefined && (obj.accumulation = message.accumulation);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Child>): Child {
-    const message = createBaseChild();
-    message.index = object.index ?? new Uint8Array();
-    message.accumulation = object.accumulation ?? "";
-    return message;
-  },
-  fromSDK(object: ChildSDKType): Child {
-    return {
-      index: object?.index,
-      accumulation: object?.accumulation
-    };
-  },
-  fromSDKJSON(object: any): ChildSDKType {
-    return {
-      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
-      accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
-    };
-  },
-  toSDK(message: Child): ChildSDKType {
-    const obj: any = {};
-    obj.index = message.index;
-    obj.accumulation = message.accumulation;
-    return obj;
-  },
-  fromAmino(object: ChildAmino): Child {
-    return {
-      index: object.index,
-      accumulation: object.accumulation
-    };
-  },
-  toAmino(message: Child): ChildAmino {
-    const obj: any = {};
-    obj.index = message.index;
-    obj.accumulation = message.accumulation;
-    return obj;
-  },
-  fromAminoMsg(object: ChildAminoMsg): Child {
-    return Child.fromAmino(object.value);
-  },
-  toAminoMsg(message: Child): ChildAminoMsg {
-    return {
-      type: "osmosis/store/child",
-      value: Child.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ChildProtoMsg): Child {
     return Child.decode(message.value);
   },
@@ -261,57 +154,6 @@ export const Leaf = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Leaf {
-    const obj = createBaseLeaf();
-    if (isSet(object.leaf)) obj.leaf = Child.fromJSON(object.leaf);
-    return obj;
-  },
-  toJSON(message: Leaf): unknown {
-    const obj: any = {};
-    message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toJSON(message.leaf) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Leaf>): Leaf {
-    const message = createBaseLeaf();
-    if (object.leaf !== undefined && object.leaf !== null) {
-      message.leaf = Child.fromPartial(object.leaf);
-    }
-    return message;
-  },
-  fromSDK(object: LeafSDKType): Leaf {
-    return {
-      leaf: object.leaf ? Child.fromSDK(object.leaf) : undefined
-    };
-  },
-  fromSDKJSON(object: any): LeafSDKType {
-    return {
-      leaf: isSet(object.leaf) ? Child.fromSDKJSON(object.leaf) : undefined
-    };
-  },
-  toSDK(message: Leaf): LeafSDKType {
-    const obj: any = {};
-    message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toSDK(message.leaf) : undefined);
-    return obj;
-  },
-  fromAmino(object: LeafAmino): Leaf {
-    return {
-      leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
-    };
-  },
-  toAmino(message: Leaf): LeafAmino {
-    const obj: any = {};
-    obj.leaf = message.leaf ? Child.toAmino(message.leaf) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: LeafAminoMsg): Leaf {
-    return Leaf.fromAmino(object.value);
-  },
-  toAminoMsg(message: Leaf): LeafAminoMsg {
-    return {
-      type: "osmosis/store/leaf",
-      value: Leaf.toAmino(message)
-    };
   },
   fromProtoMsg(message: LeafProtoMsg): Leaf {
     return Leaf.decode(message.value);

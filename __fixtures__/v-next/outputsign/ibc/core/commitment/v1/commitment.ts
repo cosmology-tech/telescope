@@ -1,6 +1,5 @@
 import { CommitmentProof, CommitmentProofSDKType } from "../../../../confio/proofs";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -8,6 +7,10 @@ export const protobufPackage = "ibc.core.commitment.v1";
  */
 export interface MerkleRoot {
   hash: Uint8Array;
+}
+export interface MerkleRootProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
+  value: Uint8Array;
 }
 /**
  * MerkleRoot defines a merkle root hash.
@@ -24,6 +27,10 @@ export interface MerkleRootSDKType {
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
 }
+export interface MerklePrefixProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
+  value: Uint8Array;
+}
 /**
  * MerklePrefix is merkle path prefixed to the key.
  * The constructed key from the Path and the key will be append(Path.KeyPath,
@@ -39,6 +46,10 @@ export interface MerklePrefixSDKType {
  */
 export interface MerklePath {
   keyPath: string[];
+}
+export interface MerklePathProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerklePath";
+  value: Uint8Array;
 }
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -57,6 +68,10 @@ export interface MerklePathSDKType {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
+}
+export interface MerkleProofProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerkleProof";
+  value: Uint8Array;
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -97,55 +112,6 @@ export const MerkleRoot = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MerkleRoot {
-    const obj = createBaseMerkleRoot();
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
-  },
-  toJSON(message: MerkleRoot): unknown {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MerkleRoot>): MerkleRoot {
-    const message = createBaseMerkleRoot();
-    message.hash = object.hash ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: MerkleRootSDKType): MerkleRoot {
-    return {
-      hash: object?.hash
-    };
-  },
-  fromSDKJSON(object: any): MerkleRootSDKType {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
-  },
-  toSDK(message: MerkleRoot): MerkleRootSDKType {
-    const obj: any = {};
-    obj.hash = message.hash;
-    return obj;
-  },
-  fromAmino(object: MerkleRootAmino): MerkleRoot {
-    return {
-      hash: object.hash
-    };
-  },
-  toAmino(message: MerkleRoot): MerkleRootAmino {
-    const obj: any = {};
-    obj.hash = message.hash;
-    return obj;
-  },
-  fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
-    return MerkleRoot.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerkleRoot): MerkleRootAminoMsg {
-    return {
-      type: "cosmos-sdk/MerkleRoot",
-      value: MerkleRoot.toAmino(message)
-    };
   },
   fromProtoMsg(message: MerkleRootProtoMsg): MerkleRoot {
     return MerkleRoot.decode(message.value);
@@ -190,55 +156,6 @@ export const MerklePrefix = {
     }
     return message;
   },
-  fromJSON(object: any): MerklePrefix {
-    const obj = createBaseMerklePrefix();
-    if (isSet(object.keyPrefix)) obj.keyPrefix = bytesFromBase64(object.keyPrefix);
-    return obj;
-  },
-  toJSON(message: MerklePrefix): unknown {
-    const obj: any = {};
-    message.keyPrefix !== undefined && (obj.keyPrefix = base64FromBytes(message.keyPrefix !== undefined ? message.keyPrefix : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MerklePrefix>): MerklePrefix {
-    const message = createBaseMerklePrefix();
-    message.keyPrefix = object.keyPrefix ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: MerklePrefixSDKType): MerklePrefix {
-    return {
-      keyPrefix: object?.key_prefix
-    };
-  },
-  fromSDKJSON(object: any): MerklePrefixSDKType {
-    return {
-      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
-    };
-  },
-  toSDK(message: MerklePrefix): MerklePrefixSDKType {
-    const obj: any = {};
-    obj.key_prefix = message.keyPrefix;
-    return obj;
-  },
-  fromAmino(object: MerklePrefixAmino): MerklePrefix {
-    return {
-      keyPrefix: object.key_prefix
-    };
-  },
-  toAmino(message: MerklePrefix): MerklePrefixAmino {
-    const obj: any = {};
-    obj.key_prefix = message.keyPrefix;
-    return obj;
-  },
-  fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {
-    return MerklePrefix.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerklePrefix): MerklePrefixAminoMsg {
-    return {
-      type: "cosmos-sdk/MerklePrefix",
-      value: MerklePrefix.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MerklePrefixProtoMsg): MerklePrefix {
     return MerklePrefix.decode(message.value);
   },
@@ -282,67 +199,6 @@ export const MerklePath = {
     }
     return message;
   },
-  fromJSON(object: any): MerklePath {
-    const obj = createBaseMerklePath();
-    if (Array.isArray(object?.keyPath)) obj.keyPath = object.keyPath.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: MerklePath): unknown {
-    const obj: any = {};
-    if (message.keyPath) {
-      obj.keyPath = message.keyPath.map(e => e);
-    } else {
-      obj.keyPath = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MerklePath>): MerklePath {
-    const message = createBaseMerklePath();
-    message.keyPath = object.keyPath?.map(e => e) || [];
-    return message;
-  },
-  fromSDK(object: MerklePathSDKType): MerklePath {
-    return {
-      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): MerklePathSDKType {
-    return {
-      key_path: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => String(e)) : []
-    };
-  },
-  toSDK(message: MerklePath): MerklePathSDKType {
-    const obj: any = {};
-    if (message.keyPath) {
-      obj.key_path = message.keyPath.map(e => e);
-    } else {
-      obj.key_path = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MerklePathAmino): MerklePath {
-    return {
-      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: MerklePath): MerklePathAmino {
-    const obj: any = {};
-    if (message.keyPath) {
-      obj.key_path = message.keyPath.map(e => e);
-    } else {
-      obj.key_path = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MerklePathAminoMsg): MerklePath {
-    return MerklePath.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerklePath): MerklePathAminoMsg {
-    return {
-      type: "cosmos-sdk/MerklePath",
-      value: MerklePath.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MerklePathProtoMsg): MerklePath {
     return MerklePath.decode(message.value);
   },
@@ -385,67 +241,6 @@ export const MerkleProof = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MerkleProof {
-    const obj = createBaseMerkleProof();
-    if (Array.isArray(object?.proofs)) obj.proofs = object.proofs.map((e: any) => CommitmentProof.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MerkleProof): unknown {
-    const obj: any = {};
-    if (message.proofs) {
-      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toJSON(e) : undefined);
-    } else {
-      obj.proofs = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MerkleProof>): MerkleProof {
-    const message = createBaseMerkleProof();
-    message.proofs = object.proofs?.map(e => CommitmentProof.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: MerkleProofSDKType): MerkleProof {
-    return {
-      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): MerkleProofSDKType {
-    return {
-      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: MerkleProof): MerkleProofSDKType {
-    const obj: any = {};
-    if (message.proofs) {
-      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toSDK(e) : undefined);
-    } else {
-      obj.proofs = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MerkleProofAmino): MerkleProof {
-    return {
-      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MerkleProof): MerkleProofAmino {
-    const obj: any = {};
-    if (message.proofs) {
-      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e) : undefined);
-    } else {
-      obj.proofs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MerkleProofAminoMsg): MerkleProof {
-    return MerkleProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerkleProof): MerkleProofAminoMsg {
-    return {
-      type: "cosmos-sdk/MerkleProof",
-      value: MerkleProof.toAmino(message)
-    };
   },
   fromProtoMsg(message: MerkleProofProtoMsg): MerkleProof {
     return MerkleProof.decode(message.value);

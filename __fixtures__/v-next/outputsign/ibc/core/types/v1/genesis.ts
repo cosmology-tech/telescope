@@ -5,7 +5,6 @@ import { GenesisStateSDKType as GenesisState2SDKType } from "../../connection/v1
 import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
 import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.types.v1";
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
@@ -15,6 +14,10 @@ export interface GenesisState {
   connectionGenesis: GenesisState2;
   /** ICS004 - Channel genesis state */
   channelGenesis: GenesisState3;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.core.types.v1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisStateSDKType {
@@ -65,77 +68,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.clientGenesis)) obj.clientGenesis = GenesisState1.fromJSON(object.clientGenesis);
-    if (isSet(object.connectionGenesis)) obj.connectionGenesis = GenesisState2.fromJSON(object.connectionGenesis);
-    if (isSet(object.channelGenesis)) obj.channelGenesis = GenesisState3.fromJSON(object.channelGenesis);
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.clientGenesis !== undefined && (obj.clientGenesis = message.clientGenesis ? GenesisState1.toJSON(message.clientGenesis) : undefined);
-    message.connectionGenesis !== undefined && (obj.connectionGenesis = message.connectionGenesis ? GenesisState2.toJSON(message.connectionGenesis) : undefined);
-    message.channelGenesis !== undefined && (obj.channelGenesis = message.channelGenesis ? GenesisState3.toJSON(message.channelGenesis) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.clientGenesis !== undefined && object.clientGenesis !== null) {
-      message.clientGenesis = GenesisState1.fromPartial(object.clientGenesis);
-    }
-    if (object.connectionGenesis !== undefined && object.connectionGenesis !== null) {
-      message.connectionGenesis = GenesisState2.fromPartial(object.connectionGenesis);
-    }
-    if (object.channelGenesis !== undefined && object.channelGenesis !== null) {
-      message.channelGenesis = GenesisState3.fromPartial(object.channelGenesis);
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      clientGenesis: object.client_genesis ? GenesisState1.fromSDK(object.client_genesis) : undefined,
-      connectionGenesis: object.connection_genesis ? GenesisState2.fromSDK(object.connection_genesis) : undefined,
-      channelGenesis: object.channel_genesis ? GenesisState3.fromSDK(object.channel_genesis) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      client_genesis: isSet(object.client_genesis) ? GenesisState1.fromSDKJSON(object.client_genesis) : undefined,
-      connection_genesis: isSet(object.connection_genesis) ? GenesisState2.fromSDKJSON(object.connection_genesis) : undefined,
-      channel_genesis: isSet(object.channel_genesis) ? GenesisState3.fromSDKJSON(object.channel_genesis) : undefined
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.clientGenesis !== undefined && (obj.client_genesis = message.clientGenesis ? GenesisState1.toSDK(message.clientGenesis) : undefined);
-    message.connectionGenesis !== undefined && (obj.connection_genesis = message.connectionGenesis ? GenesisState2.toSDK(message.connectionGenesis) : undefined);
-    message.channelGenesis !== undefined && (obj.channel_genesis = message.channelGenesis ? GenesisState3.toSDK(message.channelGenesis) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,
-      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : undefined,
-      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis) : undefined;
-    obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis) : undefined;
-    obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

@@ -35,7 +35,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/escrow/v1beta2/types/accounts/list`;
-    return QueryAccountsResponse.fromSDKJSON(await this.req.get<QueryAccountsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryAccountsResponseSDKType>(endpoint, options);
   };
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
@@ -63,6 +63,6 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/escrow/v1beta2/types/payments/list`;
-    return QueryPaymentsResponse.fromSDKJSON(await this.req.get<QueryPaymentsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryPaymentsResponseSDKType>(endpoint, options);
   };
 }

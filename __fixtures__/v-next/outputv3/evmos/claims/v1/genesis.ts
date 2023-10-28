@@ -15,6 +15,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.claims.v1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.claims.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateAmino {
   /** params defines all the parameters of the module. */
@@ -50,6 +54,10 @@ export interface Params {
   authorizedChannels: string[];
   /** list of channel identifiers from EVM compatible chains */
   evmChannels: string[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.claims.v1.Params";
+  value: Uint8Array;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.claims.v1.Params";

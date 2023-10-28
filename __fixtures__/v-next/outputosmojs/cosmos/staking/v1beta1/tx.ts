@@ -17,6 +17,10 @@ export interface MsgCreateValidator {
   pubkey?: Any;
   value: Coin;
 }
+export interface MsgCreateValidatorProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator";
+  value: Uint8Array;
+}
 /** MsgCreateValidator defines a SDK message for creating a new validator. */
 export interface MsgCreateValidatorSDKType {
   description: DescriptionSDKType;
@@ -29,6 +33,10 @@ export interface MsgCreateValidatorSDKType {
 }
 /** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponse {}
+export interface MsgCreateValidatorResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidatorResponse";
+  value: Uint8Array;
+}
 /** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponseSDKType {}
 /** MsgEditValidator defines a SDK message for editing an existing validator. */
@@ -44,6 +52,10 @@ export interface MsgEditValidator {
   commissionRate: string;
   minSelfDelegation: string;
 }
+export interface MsgEditValidatorProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgEditValidator";
+  value: Uint8Array;
+}
 /** MsgEditValidator defines a SDK message for editing an existing validator. */
 export interface MsgEditValidatorSDKType {
   description: DescriptionSDKType;
@@ -53,6 +65,10 @@ export interface MsgEditValidatorSDKType {
 }
 /** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
 export interface MsgEditValidatorResponse {}
+export interface MsgEditValidatorResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgEditValidatorResponse";
+  value: Uint8Array;
+}
 /** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
 export interface MsgEditValidatorResponseSDKType {}
 /**
@@ -63,6 +79,10 @@ export interface MsgDelegate {
   delegatorAddress: string;
   validatorAddress: string;
   amount: Coin;
+}
+export interface MsgDelegateProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgDelegate";
+  value: Uint8Array;
 }
 /**
  * MsgDelegate defines a SDK message for performing a delegation of coins
@@ -75,6 +95,10 @@ export interface MsgDelegateSDKType {
 }
 /** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponse {}
+export interface MsgDelegateResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgDelegateResponse";
+  value: Uint8Array;
+}
 /** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponseSDKType {}
 /**
@@ -86,6 +110,10 @@ export interface MsgBeginRedelegate {
   validatorSrcAddress: string;
   validatorDstAddress: string;
   amount: Coin;
+}
+export interface MsgBeginRedelegateProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegate";
+  value: Uint8Array;
 }
 /**
  * MsgBeginRedelegate defines a SDK message for performing a redelegation
@@ -101,6 +129,10 @@ export interface MsgBeginRedelegateSDKType {
 export interface MsgBeginRedelegateResponse {
   completionTime: Date;
 }
+export interface MsgBeginRedelegateResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegateResponse";
+  value: Uint8Array;
+}
 /** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponseSDKType {
   completion_time: Date;
@@ -114,6 +146,10 @@ export interface MsgUndelegate {
   validatorAddress: string;
   amount: Coin;
 }
+export interface MsgUndelegateProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate";
+  value: Uint8Array;
+}
 /**
  * MsgUndelegate defines a SDK message for performing an undelegation from a
  * delegate and a validator.
@@ -126,6 +162,10 @@ export interface MsgUndelegateSDKType {
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponse {
   completionTime: Date;
+}
+export interface MsgUndelegateResponseProtoMsg {
+  typeUrl: "/cosmos.staking.v1beta1.MsgUndelegateResponse";
+  value: Uint8Array;
 }
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponseSDKType {

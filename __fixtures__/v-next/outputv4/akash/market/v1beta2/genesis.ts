@@ -10,6 +10,10 @@ export interface GenesisState {
   leases: Lease[];
   params: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.market.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateSDKType {
   orders: OrderSDKType[];

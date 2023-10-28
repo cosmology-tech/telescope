@@ -17,6 +17,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisStateAmino {
   /** balance of the claim module's account */

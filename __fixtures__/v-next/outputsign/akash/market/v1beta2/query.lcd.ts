@@ -27,7 +27,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/market/v1beta2/orders/list`;
-    return QueryOrdersResponse.fromSDKJSON(await this.req.get<QueryOrdersResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryOrdersResponseSDKType>(endpoint, options);
   };
   /* Order queries order details */
   order = async (params: QueryOrderRequest): Promise<QueryOrderResponseSDKType> => {
@@ -38,7 +38,7 @@ export class LCDQueryClient {
       options.params.id = params.id;
     }
     const endpoint = `akash/market/v1beta2/orders/info`;
-    return QueryOrderResponse.fromSDKJSON(await this.req.get<QueryOrderResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryOrderResponseSDKType>(endpoint, options);
   };
   /* Bids queries bids with filters */
   bids = async (params: QueryBidsRequest): Promise<QueryBidsResponseSDKType> => {
@@ -52,7 +52,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/market/v1beta2/bids/list`;
-    return QueryBidsResponse.fromSDKJSON(await this.req.get<QueryBidsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryBidsResponseSDKType>(endpoint, options);
   };
   /* Bid queries bid details */
   bid = async (params: QueryBidRequest): Promise<QueryBidResponseSDKType> => {
@@ -63,7 +63,7 @@ export class LCDQueryClient {
       options.params.id = params.id;
     }
     const endpoint = `akash/market/v1beta2/bids/info`;
-    return QueryBidResponse.fromSDKJSON(await this.req.get<QueryBidResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryBidResponseSDKType>(endpoint, options);
   };
   /* Leases queries leases with filters */
   leases = async (params: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> => {
@@ -77,7 +77,7 @@ export class LCDQueryClient {
       setPaginationParams(options, params.pagination);
     }
     const endpoint = `akash/market/v1beta2/leases/list`;
-    return QueryLeasesResponse.fromSDKJSON(await this.req.get<QueryLeasesResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryLeasesResponseSDKType>(endpoint, options);
   };
   /* Lease queries lease details */
   lease = async (params: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> => {
@@ -88,6 +88,6 @@ export class LCDQueryClient {
       options.params.id = params.id;
     }
     const endpoint = `akash/market/v1beta2/leases/info`;
-    return QueryLeaseResponse.fromSDKJSON(await this.req.get<QueryLeaseResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryLeaseResponseSDKType>(endpoint, options);
   };
 }

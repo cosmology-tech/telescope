@@ -17,6 +17,10 @@ export interface GenesisState {
   /** denom_metadata defines the metadata of the differents coins. */
   denomMetadata: Metadata[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -33,6 +37,10 @@ export interface Balance {
   address: string;
   /** coins defines the different coins this balance holds. */
   coins: Coin[];
+}
+export interface BalanceProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Balance";
+  value: Uint8Array;
 }
 /**
  * Balance defines an account address and balance pair used in the bank module's

@@ -28,6 +28,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.incentives.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.incentives.GenesisState";
+  value: Uint8Array;
+}
 /**
  * GenesisState defines the incentives module's various parameters when first
  * initialized

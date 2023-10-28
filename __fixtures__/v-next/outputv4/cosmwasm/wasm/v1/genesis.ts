@@ -11,6 +11,10 @@ export interface GenesisState {
   sequences: Sequence[];
   genMsgs: GenesisState_GenMsgs[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -27,6 +31,10 @@ export interface GenesisState_GenMsgs {
   storeCode?: MsgStoreCode;
   instantiateContract?: MsgInstantiateContract;
   executeContract?: MsgExecuteContract;
+}
+export interface GenesisState_GenMsgsProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.GenMsgs";
+  value: Uint8Array;
 }
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
@@ -45,6 +53,10 @@ export interface Code {
   /** Pinned to wasmvm cache */
   pinned: boolean;
 }
+export interface CodeProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Code";
+  value: Uint8Array;
+}
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
   code_id: bigint;
@@ -58,6 +70,10 @@ export interface Contract {
   contractInfo: ContractInfo;
   contractState: Model[];
 }
+export interface ContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Contract";
+  value: Uint8Array;
+}
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractSDKType {
   contract_address: string;
@@ -68,6 +84,10 @@ export interface ContractSDKType {
 export interface Sequence {
   idKey: Uint8Array;
   value: bigint;
+}
+export interface SequenceProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.Sequence";
+  value: Uint8Array;
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {

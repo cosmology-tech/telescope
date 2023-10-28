@@ -6,10 +6,18 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** =============================== Params */
 export interface ParamsRequest {}
+export interface ParamsRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.ParamsRequest";
+  value: Uint8Array;
+}
 /** =============================== Params */
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
+}
+export interface ParamsResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.ParamsResponse";
+  value: Uint8Array;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;
@@ -19,6 +27,10 @@ export interface EstimateSwapExactAmountInRequest {
   poolId: bigint;
   tokenIn: string;
   routes: SwapAmountInRoute[];
+}
+export interface EstimateSwapExactAmountInRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountInRequest";
+  value: Uint8Array;
 }
 /** =============================== EstimateSwapExactAmountIn */
 export interface EstimateSwapExactAmountInRequestSDKType {
@@ -31,6 +43,10 @@ export interface EstimateSinglePoolSwapExactAmountInRequest {
   tokenIn: string;
   tokenOutDenom: string;
 }
+export interface EstimateSinglePoolSwapExactAmountInRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSinglePoolSwapExactAmountInRequest";
+  value: Uint8Array;
+}
 export interface EstimateSinglePoolSwapExactAmountInRequestSDKType {
   pool_id: bigint;
   token_in: string;
@@ -38,6 +54,10 @@ export interface EstimateSinglePoolSwapExactAmountInRequestSDKType {
 }
 export interface EstimateSwapExactAmountInResponse {
   tokenOutAmount: string;
+}
+export interface EstimateSwapExactAmountInResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountInResponse";
+  value: Uint8Array;
 }
 export interface EstimateSwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -47,6 +67,10 @@ export interface EstimateSwapExactAmountOutRequest {
   poolId: bigint;
   routes: SwapAmountOutRoute[];
   tokenOut: string;
+}
+export interface EstimateSwapExactAmountOutRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountOutRequest";
+  value: Uint8Array;
 }
 /** =============================== EstimateSwapExactAmountOut */
 export interface EstimateSwapExactAmountOutRequestSDKType {
@@ -59,6 +83,10 @@ export interface EstimateSinglePoolSwapExactAmountOutRequest {
   tokenInDenom: string;
   tokenOut: string;
 }
+export interface EstimateSinglePoolSwapExactAmountOutRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSinglePoolSwapExactAmountOutRequest";
+  value: Uint8Array;
+}
 export interface EstimateSinglePoolSwapExactAmountOutRequestSDKType {
   pool_id: bigint;
   token_in_denom: string;
@@ -67,15 +95,27 @@ export interface EstimateSinglePoolSwapExactAmountOutRequestSDKType {
 export interface EstimateSwapExactAmountOutResponse {
   tokenInAmount: string;
 }
+export interface EstimateSwapExactAmountOutResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountOutResponse";
+  value: Uint8Array;
+}
 export interface EstimateSwapExactAmountOutResponseSDKType {
   token_in_amount: string;
 }
 /** =============================== NumPools */
 export interface NumPoolsRequest {}
+export interface NumPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.NumPoolsRequest";
+  value: Uint8Array;
+}
 /** =============================== NumPools */
 export interface NumPoolsRequestSDKType {}
 export interface NumPoolsResponse {
   numPools: bigint;
+}
+export interface NumPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.NumPoolsResponse";
+  value: Uint8Array;
 }
 export interface NumPoolsResponseSDKType {
   num_pools: bigint;
@@ -84,12 +124,20 @@ export interface NumPoolsResponseSDKType {
 export interface PoolRequest {
   poolId: bigint;
 }
+export interface PoolRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.PoolRequest";
+  value: Uint8Array;
+}
 /** =============================== Pool */
 export interface PoolRequestSDKType {
   pool_id: bigint;
 }
 export interface PoolResponse {
   pool?: Any;
+}
+export interface PoolResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.PoolResponse";
+  value: Uint8Array;
 }
 export interface PoolResponseSDKType {
   pool?: AnySDKType;
@@ -98,12 +146,20 @@ export interface PoolResponseSDKType {
 export interface AllPoolsRequest {
   poolId: bigint;
 }
+export interface AllPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.AllPoolsRequest";
+  value: Uint8Array;
+}
 /** =============================== AllPools */
 export interface AllPoolsRequestSDKType {
   pool_id: bigint;
 }
 export interface AllPoolsResponse {
   pools: Any[];
+}
+export interface AllPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.AllPoolsResponse";
+  value: Uint8Array;
 }
 export interface AllPoolsResponseSDKType {
   pools: AnySDKType[];
@@ -116,6 +172,10 @@ export interface SpotPriceRequest {
   poolId: bigint;
   baseAssetDenom: string;
   quoteAssetDenom: string;
+}
+export interface SpotPriceRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SpotPriceRequest";
+  value: Uint8Array;
 }
 /**
  * SpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -133,6 +193,10 @@ export interface SpotPriceRequestSDKType {
 export interface SpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
+}
+export interface SpotPriceResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SpotPriceResponse";
+  value: Uint8Array;
 }
 /**
  * SpotPriceResponse defines the gRPC response structure for a SpotPrice

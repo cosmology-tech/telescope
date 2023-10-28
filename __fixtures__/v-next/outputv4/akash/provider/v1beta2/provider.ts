@@ -7,6 +7,10 @@ export interface ProviderInfo {
   email: string;
   website: string;
 }
+export interface ProviderInfoProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.ProviderInfo";
+  value: Uint8Array;
+}
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
   email: string;
@@ -19,6 +23,10 @@ export interface MsgCreateProvider {
   attributes: Attribute[];
   info: ProviderInfo;
 }
+export interface MsgCreateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.MsgCreateProvider";
+  value: Uint8Array;
+}
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
   owner: string;
@@ -28,6 +36,10 @@ export interface MsgCreateProviderSDKType {
 }
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
+export interface MsgCreateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.MsgCreateProviderResponse";
+  value: Uint8Array;
+}
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseSDKType {}
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -36,6 +48,10 @@ export interface MsgUpdateProvider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface MsgUpdateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider";
+  value: Uint8Array;
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
@@ -46,11 +62,19 @@ export interface MsgUpdateProviderSDKType {
 }
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
+export interface MsgUpdateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.MsgUpdateProviderResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseSDKType {}
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
   owner: string;
+}
+export interface MsgDeleteProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider";
+  value: Uint8Array;
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
@@ -58,6 +82,10 @@ export interface MsgDeleteProviderSDKType {
 }
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponse {}
+export interface MsgDeleteProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.MsgDeleteProviderResponse";
+  value: Uint8Array;
+}
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseSDKType {}
 /** Provider stores owner and host details */
@@ -66,6 +94,10 @@ export interface Provider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.Provider";
+  value: Uint8Array;
 }
 /** Provider stores owner and host details */
 export interface ProviderSDKType {

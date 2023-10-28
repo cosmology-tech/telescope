@@ -23,6 +23,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.gov.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateAmino {
   /** starting_proposal_id is the ID of the starting proposal. */

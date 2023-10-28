@@ -13,6 +13,10 @@ export interface DepositDeploymentAuthorization {
    */
   spendLimit: Coin;
 }
+export interface DepositDeploymentAuthorizationProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
+  value: Uint8Array;
+}
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.

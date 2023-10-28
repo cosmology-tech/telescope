@@ -11,6 +11,10 @@ export interface Params {
   /** denom of claimable asset */
   claimDenom: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
   airdrop_start_time: Date;

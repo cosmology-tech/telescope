@@ -12,6 +12,10 @@ export interface QueryClientStateRequest {
   /** client state unique identifier */
   clientId: string;
 }
+export interface QueryClientStateRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientStateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
  * method
@@ -32,6 +36,10 @@ export interface QueryClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryClientStateResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientStateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryClientStateResponse is the response type for the Query/ClientState RPC
  * method. Besides the client state, it includes a proof and the height from
@@ -50,6 +58,10 @@ export interface QueryClientStatesRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryClientStatesRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest";
+  value: Uint8Array;
+}
 /**
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
  * method
@@ -66,6 +78,10 @@ export interface QueryClientStatesResponse {
   clientStates: IdentifiedClientState[];
   /** pagination response */
   pagination?: PageResponse;
+}
+export interface QueryClientStatesResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse";
+  value: Uint8Array;
 }
 /**
  * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
@@ -93,6 +109,10 @@ export interface QueryConsensusStateRequest {
    */
   latestHeight: boolean;
 }
+export interface QueryConsensusStateRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConsensusStateRequest is the request type for the Query/ConsensusState
  * RPC method. Besides the consensus state, it includes a proof and the height
@@ -116,6 +136,10 @@ export interface QueryConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryConsensusStateResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
  * RPC method
@@ -135,6 +159,10 @@ export interface QueryConsensusStatesRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryConsensusStatesRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest";
+  value: Uint8Array;
+}
 /**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
@@ -153,6 +181,10 @@ export interface QueryConsensusStatesResponse {
   /** pagination response */
   pagination?: PageResponse;
 }
+export interface QueryConsensusStatesResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConsensusStatesResponse is the response type for the
  * Query/ConsensusStates RPC method
@@ -169,6 +201,10 @@ export interface QueryClientStatusRequest {
   /** client unique identifier */
   clientId: string;
 }
+export interface QueryClientStatusRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest";
+  value: Uint8Array;
+}
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
@@ -183,6 +219,10 @@ export interface QueryClientStatusRequestSDKType {
 export interface QueryClientStatusResponse {
   status: string;
 }
+export interface QueryClientStatusResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse";
+  value: Uint8Array;
+}
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
@@ -195,6 +235,10 @@ export interface QueryClientStatusResponseSDKType {
  * method.
  */
 export interface QueryClientParamsRequest {}
+export interface QueryClientParamsRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
  * method.
@@ -208,6 +252,10 @@ export interface QueryClientParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
 }
+export interface QueryClientParamsResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
  * method.
@@ -220,6 +268,10 @@ export interface QueryClientParamsResponseSDKType {
  * Query/UpgradedClientState RPC method
  */
 export interface QueryUpgradedClientStateRequest {}
+export interface QueryUpgradedClientStateRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryUpgradedClientStateRequest is the request type for the
  * Query/UpgradedClientState RPC method
@@ -233,6 +285,10 @@ export interface QueryUpgradedClientStateResponse {
   /** client state associated with the request identifier */
   upgradedClientState?: Any;
 }
+export interface QueryUpgradedClientStateResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryUpgradedClientStateResponse is the response type for the
  * Query/UpgradedClientState RPC method.
@@ -245,6 +301,10 @@ export interface QueryUpgradedClientStateResponseSDKType {
  * Query/UpgradedConsensusState RPC method
  */
 export interface QueryUpgradedConsensusStateRequest {}
+export interface QueryUpgradedConsensusStateRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
  * Query/UpgradedConsensusState RPC method
@@ -257,6 +317,10 @@ export interface QueryUpgradedConsensusStateRequestSDKType {}
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
   upgradedConsensusState?: Any;
+}
+export interface QueryUpgradedConsensusStateResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse";
+  value: Uint8Array;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the

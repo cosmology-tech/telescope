@@ -12,6 +12,10 @@ export interface MsgGrant {
   grantee: string;
   grant: Grant;
 }
+export interface MsgGrantProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgGrant";
+  value: Uint8Array;
+}
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
  * on behalf of the granter with the provided expiration time.
@@ -24,6 +28,10 @@ export interface MsgGrantSDKType {
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {
   results: Uint8Array[];
+}
+export interface MsgExecResponseProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgExecResponse";
+  value: Uint8Array;
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseSDKType {
@@ -43,6 +51,10 @@ export interface MsgExec {
    */
   msgs: Any[];
 }
+export interface MsgExecProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgExec";
+  value: Uint8Array;
+}
 /**
  * MsgExec attempts to execute the provided messages using
  * authorizations granted to the grantee. Each message should have only
@@ -54,6 +66,10 @@ export interface MsgExecSDKType {
 }
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponse {}
+export interface MsgGrantResponseProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgGrantResponse";
+  value: Uint8Array;
+}
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponseSDKType {}
 /**
@@ -64,6 +80,10 @@ export interface MsgRevoke {
   granter: string;
   grantee: string;
   msgTypeUrl: string;
+}
+export interface MsgRevokeProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgRevoke";
+  value: Uint8Array;
 }
 /**
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
@@ -76,6 +96,10 @@ export interface MsgRevokeSDKType {
 }
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponse {}
+export interface MsgRevokeResponseProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgRevokeResponse";
+  value: Uint8Array;
+}
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponseSDKType {}
 function createBaseMsgGrant(): MsgGrant {

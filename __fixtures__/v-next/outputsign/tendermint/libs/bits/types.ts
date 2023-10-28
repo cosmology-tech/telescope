@@ -1,9 +1,12 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: bigint;
   elems: bigint[];
+}
+export interface BitArrayProtoMsg {
+  typeUrl: "/tendermint.libs.bits.BitArray";
+  value: Uint8Array;
 }
 export interface BitArraySDKType {
   bits: bigint;
@@ -54,71 +57,6 @@ export const BitArray = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): BitArray {
-    const obj = createBaseBitArray();
-    if (isSet(object.bits)) obj.bits = BigInt(object.bits.toString());
-    if (Array.isArray(object?.elems)) obj.elems = object.elems.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: BitArray): unknown {
-    const obj: any = {};
-    message.bits !== undefined && (obj.bits = (message.bits || BigInt(0)).toString());
-    if (message.elems) {
-      obj.elems = message.elems.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.elems = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<BitArray>): BitArray {
-    const message = createBaseBitArray();
-    if (object.bits !== undefined && object.bits !== null) {
-      message.bits = BigInt(object.bits.toString());
-    }
-    message.elems = object.elems?.map(e => BigInt(e.toString())) || [];
-    return message;
-  },
-  fromSDK(object: BitArraySDKType): BitArray {
-    return {
-      bits: object?.bits,
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): BitArraySDKType {
-    return {
-      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt(0),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
-    };
-  },
-  toSDK(message: BitArray): BitArraySDKType {
-    const obj: any = {};
-    obj.bits = message.bits;
-    if (message.elems) {
-      obj.elems = message.elems.map(e => e);
-    } else {
-      obj.elems = [];
-    }
-    return obj;
-  },
-  fromAmino(object: BitArrayAmino): BitArray {
-    return {
-      bits: BigInt(object.bits),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e)) : []
-    };
-  },
-  toAmino(message: BitArray): BitArrayAmino {
-    const obj: any = {};
-    obj.bits = message.bits ? message.bits.toString() : undefined;
-    if (message.elems) {
-      obj.elems = message.elems.map(e => e.toString());
-    } else {
-      obj.elems = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BitArrayAminoMsg): BitArray {
-    return BitArray.fromAmino(object.value);
   },
   fromProtoMsg(message: BitArrayProtoMsg): BitArray {
     return BitArray.decode(message.value);

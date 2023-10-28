@@ -67,6 +67,10 @@ export interface ParseRequest {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disableMacros: boolean;
 }
+export interface ParseRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
+  value: Uint8Array;
+}
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
   cel_source: string;
@@ -80,6 +84,10 @@ export interface ParseResponse {
   parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
+}
+export interface ParseResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
+  value: Uint8Array;
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
@@ -108,6 +116,10 @@ export interface CheckRequest {
    */
   noStdEnv: boolean;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
@@ -122,6 +134,10 @@ export interface CheckResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
+  value: Uint8Array;
+}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   checked_expr?: CheckedExprSDKType;
@@ -130,6 +146,10 @@ export interface CheckResponseSDKType {
 export interface EvalRequest_BindingsEntry {
   key: string;
   value?: ExprValue;
+}
+export interface EvalRequest_BindingsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
@@ -150,6 +170,10 @@ export interface EvalRequest {
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
+}
+export interface EvalRequestProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
+  value: Uint8Array;
 }
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
@@ -172,6 +196,10 @@ export interface EvalResponse {
    */
   issues: Status[];
 }
+export interface EvalResponseProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
+  value: Uint8Array;
+}
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
   result?: ExprValueSDKType;
@@ -189,6 +217,10 @@ export interface IssueDetails {
   position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: bigint;
+}
+export interface IssueDetailsProtoMsg {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
+  value: Uint8Array;
 }
 /**
  * Warnings or errors in service execution are represented by

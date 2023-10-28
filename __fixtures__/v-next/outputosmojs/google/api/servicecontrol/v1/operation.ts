@@ -50,6 +50,10 @@ export interface Operation_LabelsEntry {
   key: string;
   value: string;
 }
+export interface Operation_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface Operation_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -135,6 +139,10 @@ export interface Operation {
   importance: Operation_Importance;
   /** Unimplemented. */
   extensions: Any[];
+}
+export interface OperationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.Operation";
+  value: Uint8Array;
 }
 /** Represents information regarding an operation. */
 export interface OperationSDKType {

@@ -2,7 +2,6 @@ import { Operation, OperationSDKType } from "./operation";
 import { CheckError, CheckErrorSDKType } from "./check_error";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * The type of the consumer as defined in
@@ -88,6 +87,10 @@ export interface CheckRequest {
    */
   serviceConfigId: string;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
@@ -117,6 +120,10 @@ export interface CheckResponse {
   /** Feedback data returned from the server during processing a Check request. */
   checkInfo?: CheckResponse_CheckInfo;
 }
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
+  value: Uint8Array;
+}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   operation_id: string;
@@ -135,6 +142,10 @@ export interface CheckResponse_CheckInfo {
   unusedArguments: string[];
   /** Consumer info of this check. */
   consumerInfo?: CheckResponse_ConsumerInfo;
+}
+export interface CheckResponse_CheckInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
+  value: Uint8Array;
 }
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoSDKType {
@@ -162,6 +173,10 @@ export interface CheckResponse_ConsumerInfo {
    * consumer number is found.
    */
   consumerNumber: bigint;
+}
+export interface CheckResponse_ConsumerInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo";
+  value: Uint8Array;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoSDKType {
@@ -203,6 +218,10 @@ export interface ReportRequest {
    */
   serviceConfigId: string;
 }
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportRequest";
+  value: Uint8Array;
+}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -233,6 +252,10 @@ export interface ReportResponse {
   /** The current service rollout id used to process the request. */
   serviceRolloutId: string;
 }
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportResponse";
+  value: Uint8Array;
+}
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
   report_errors: ReportResponse_ReportErrorSDKType[];
@@ -255,6 +278,10 @@ export interface ReportResponse_ReportError {
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
   status?: Status;
+}
+export interface ReportResponse_ReportErrorProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ReportError";
+  value: Uint8Array;
 }
 /**
  * Represents the processing error of one
@@ -307,67 +334,6 @@ export const CheckRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckRequest {
-    const obj = createBaseCheckRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.operation)) obj.operation = Operation.fromJSON(object.operation);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
-  },
-  toJSON(message: CheckRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.operation !== undefined && (obj.operation = message.operation ? Operation.toJSON(message.operation) : undefined);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
-    const message = createBaseCheckRequest();
-    message.serviceName = object.serviceName ?? "";
-    if (object.operation !== undefined && object.operation !== null) {
-      message.operation = Operation.fromPartial(object.operation);
-    }
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    return message;
-  },
-  fromSDK(object: CheckRequestSDKType): CheckRequest {
-    return {
-      serviceName: object?.service_name,
-      operation: object.operation ? Operation.fromSDK(object.operation) : undefined,
-      serviceConfigId: object?.service_config_id
-    };
-  },
-  fromSDKJSON(object: any): CheckRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      operation: isSet(object.operation) ? Operation.fromSDKJSON(object.operation) : undefined,
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
-    };
-  },
-  toSDK(message: CheckRequest): CheckRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    message.operation !== undefined && (obj.operation = message.operation ? Operation.toSDK(message.operation) : undefined);
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      serviceName: object.service_name,
-      operation: object?.operation ? Operation.fromAmino(object.operation) : undefined,
-      serviceConfigId: object.service_config_id
-    };
-  },
-  toAmino(message: CheckRequest): CheckRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined;
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
@@ -440,95 +406,6 @@ export const CheckResponse = {
     }
     return message;
   },
-  fromJSON(object: any): CheckResponse {
-    const obj = createBaseCheckResponse();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (Array.isArray(object?.checkErrors)) obj.checkErrors = object.checkErrors.map((e: any) => CheckError.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
-    if (isSet(object.checkInfo)) obj.checkInfo = CheckResponse_CheckInfo.fromJSON(object.checkInfo);
-    return obj;
-  },
-  toJSON(message: CheckResponse): unknown {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    if (message.checkErrors) {
-      obj.checkErrors = message.checkErrors.map(e => e ? CheckError.toJSON(e) : undefined);
-    } else {
-      obj.checkErrors = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    message.serviceRolloutId !== undefined && (obj.serviceRolloutId = message.serviceRolloutId);
-    message.checkInfo !== undefined && (obj.checkInfo = message.checkInfo ? CheckResponse_CheckInfo.toJSON(message.checkInfo) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
-    const message = createBaseCheckResponse();
-    message.operationId = object.operationId ?? "";
-    message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    message.serviceRolloutId = object.serviceRolloutId ?? "";
-    if (object.checkInfo !== undefined && object.checkInfo !== null) {
-      message.checkInfo = CheckResponse_CheckInfo.fromPartial(object.checkInfo);
-    }
-    return message;
-  },
-  fromSDK(object: CheckResponseSDKType): CheckResponse {
-    return {
-      operationId: object?.operation_id,
-      checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDK(e)) : [],
-      serviceConfigId: object?.service_config_id,
-      serviceRolloutId: object?.service_rollout_id,
-      checkInfo: object.check_info ? CheckResponse_CheckInfo.fromSDK(object.check_info) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CheckResponseSDKType {
-    return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
-      check_errors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
-      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : "",
-      check_info: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDKJSON(object.check_info) : undefined
-    };
-  },
-  toSDK(message: CheckResponse): CheckResponseSDKType {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    if (message.checkErrors) {
-      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toSDK(e) : undefined);
-    } else {
-      obj.check_errors = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
-    message.checkInfo !== undefined && (obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toSDK(message.checkInfo) : undefined);
-    return obj;
-  },
-  fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      operationId: object.operation_id,
-      checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id,
-      serviceRolloutId: object.service_rollout_id,
-      checkInfo: object?.check_info ? CheckResponse_CheckInfo.fromAmino(object.check_info) : undefined
-    };
-  },
-  toAmino(message: CheckResponse): CheckResponseAmino {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    if (message.checkErrors) {
-      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e) : undefined);
-    } else {
-      obj.check_errors = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
-    obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
   },
@@ -578,71 +455,6 @@ export const CheckResponse_CheckInfo = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckResponse_CheckInfo {
-    const obj = createBaseCheckResponse_CheckInfo();
-    if (Array.isArray(object?.unusedArguments)) obj.unusedArguments = object.unusedArguments.map((e: any) => String(e));
-    if (isSet(object.consumerInfo)) obj.consumerInfo = CheckResponse_ConsumerInfo.fromJSON(object.consumerInfo);
-    return obj;
-  },
-  toJSON(message: CheckResponse_CheckInfo): unknown {
-    const obj: any = {};
-    if (message.unusedArguments) {
-      obj.unusedArguments = message.unusedArguments.map(e => e);
-    } else {
-      obj.unusedArguments = [];
-    }
-    message.consumerInfo !== undefined && (obj.consumerInfo = message.consumerInfo ? CheckResponse_ConsumerInfo.toJSON(message.consumerInfo) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
-    const message = createBaseCheckResponse_CheckInfo();
-    message.unusedArguments = object.unusedArguments?.map(e => e) || [];
-    if (object.consumerInfo !== undefined && object.consumerInfo !== null) {
-      message.consumerInfo = CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo);
-    }
-    return message;
-  },
-  fromSDK(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
-    return {
-      unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
-      consumerInfo: object.consumer_info ? CheckResponse_ConsumerInfo.fromSDK(object.consumer_info) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CheckResponse_CheckInfoSDKType {
-    return {
-      unused_arguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => String(e)) : [],
-      consumer_info: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromSDKJSON(object.consumer_info) : undefined
-    };
-  },
-  toSDK(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoSDKType {
-    const obj: any = {};
-    if (message.unusedArguments) {
-      obj.unused_arguments = message.unusedArguments.map(e => e);
-    } else {
-      obj.unused_arguments = [];
-    }
-    message.consumerInfo !== undefined && (obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toSDK(message.consumerInfo) : undefined);
-    return obj;
-  },
-  fromAmino(object: CheckResponse_CheckInfoAmino): CheckResponse_CheckInfo {
-    return {
-      unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
-      consumerInfo: object?.consumer_info ? CheckResponse_ConsumerInfo.fromAmino(object.consumer_info) : undefined
-    };
-  },
-  toAmino(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoAmino {
-    const obj: any = {};
-    if (message.unusedArguments) {
-      obj.unused_arguments = message.unusedArguments.map(e => e);
-    } else {
-      obj.unused_arguments = [];
-    }
-    obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponse_CheckInfoAminoMsg): CheckResponse_CheckInfo {
-    return CheckResponse_CheckInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckResponse_CheckInfoProtoMsg): CheckResponse_CheckInfo {
     return CheckResponse_CheckInfo.decode(message.value);
@@ -701,69 +513,6 @@ export const CheckResponse_ConsumerInfo = {
     }
     return message;
   },
-  fromJSON(object: any): CheckResponse_ConsumerInfo {
-    const obj = createBaseCheckResponse_ConsumerInfo();
-    if (isSet(object.projectNumber)) obj.projectNumber = BigInt(object.projectNumber.toString());
-    if (isSet(object.type)) obj.type = checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type);
-    if (isSet(object.consumerNumber)) obj.consumerNumber = BigInt(object.consumerNumber.toString());
-    return obj;
-  },
-  toJSON(message: CheckResponse_ConsumerInfo): unknown {
-    const obj: any = {};
-    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt(0)).toString());
-    message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
-    const message = createBaseCheckResponse_ConsumerInfo();
-    if (object.projectNumber !== undefined && object.projectNumber !== null) {
-      message.projectNumber = BigInt(object.projectNumber.toString());
-    }
-    message.type = object.type ?? 0;
-    if (object.consumerNumber !== undefined && object.consumerNumber !== null) {
-      message.consumerNumber = BigInt(object.consumerNumber.toString());
-    }
-    return message;
-  },
-  fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
-    return {
-      projectNumber: object?.project_number,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
-      consumerNumber: object?.consumer_number
-    };
-  },
-  fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
-    return {
-      project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : BigInt(0),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
-      consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {
-    const obj: any = {};
-    obj.project_number = message.projectNumber;
-    message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    obj.consumer_number = message.consumerNumber;
-    return obj;
-  },
-  fromAmino(object: CheckResponse_ConsumerInfoAmino): CheckResponse_ConsumerInfo {
-    return {
-      projectNumber: BigInt(object.project_number),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
-      consumerNumber: BigInt(object.consumer_number)
-    };
-  },
-  toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
-    const obj: any = {};
-    obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
-    obj.type = message.type;
-    obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CheckResponse_ConsumerInfoAminoMsg): CheckResponse_ConsumerInfo {
-    return CheckResponse_ConsumerInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg): CheckResponse_ConsumerInfo {
     return CheckResponse_ConsumerInfo.decode(message.value);
   },
@@ -820,77 +569,6 @@ export const ReportRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ReportRequest {
-    const obj = createBaseReportRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => Operation.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
-  },
-  toJSON(message: ReportRequest): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toJSON(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
-    const message = createBaseReportRequest();
-    message.serviceName = object.serviceName ?? "";
-    message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    return message;
-  },
-  fromSDK(object: ReportRequestSDKType): ReportRequest {
-    return {
-      serviceName: object?.service_name,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDK(e)) : [],
-      serviceConfigId: object?.service_config_id
-    };
-  },
-  fromSDKJSON(object: any): ReportRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
-    };
-  },
-  toSDK(message: ReportRequest): ReportRequestSDKType {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toSDK(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAmino(object: ReportRequestAmino): ReportRequest {
-    return {
-      serviceName: object.service_name,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id
-    };
-  },
-  toAmino(message: ReportRequest): ReportRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    return obj;
-  },
-  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
-    return ReportRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
     return ReportRequest.decode(message.value);
@@ -949,77 +627,6 @@ export const ReportResponse = {
     }
     return message;
   },
-  fromJSON(object: any): ReportResponse {
-    const obj = createBaseReportResponse();
-    if (Array.isArray(object?.reportErrors)) obj.reportErrors = object.reportErrors.map((e: any) => ReportResponse_ReportError.fromJSON(e));
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
-    return obj;
-  },
-  toJSON(message: ReportResponse): unknown {
-    const obj: any = {};
-    if (message.reportErrors) {
-      obj.reportErrors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toJSON(e) : undefined);
-    } else {
-      obj.reportErrors = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    message.serviceRolloutId !== undefined && (obj.serviceRolloutId = message.serviceRolloutId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ReportResponse>): ReportResponse {
-    const message = createBaseReportResponse();
-    message.reportErrors = object.reportErrors?.map(e => ReportResponse_ReportError.fromPartial(e)) || [];
-    message.serviceConfigId = object.serviceConfigId ?? "";
-    message.serviceRolloutId = object.serviceRolloutId ?? "";
-    return message;
-  },
-  fromSDK(object: ReportResponseSDKType): ReportResponse {
-    return {
-      reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDK(e)) : [],
-      serviceConfigId: object?.service_config_id,
-      serviceRolloutId: object?.service_rollout_id
-    };
-  },
-  fromSDKJSON(object: any): ReportResponseSDKType {
-    return {
-      report_errors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDKJSON(e)) : [],
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
-      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : ""
-    };
-  },
-  toSDK(message: ReportResponse): ReportResponseSDKType {
-    const obj: any = {};
-    if (message.reportErrors) {
-      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toSDK(e) : undefined);
-    } else {
-      obj.report_errors = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
-    return obj;
-  },
-  fromAmino(object: ReportResponseAmino): ReportResponse {
-    return {
-      reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id,
-      serviceRolloutId: object.service_rollout_id
-    };
-  },
-  toAmino(message: ReportResponse): ReportResponseAmino {
-    const obj: any = {};
-    if (message.reportErrors) {
-      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toAmino(e) : undefined);
-    } else {
-      obj.report_errors = [];
-    }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
-    return obj;
-  },
-  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
-    return ReportResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
     return ReportResponse.decode(message.value);
   },
@@ -1069,59 +676,6 @@ export const ReportResponse_ReportError = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ReportResponse_ReportError {
-    const obj = createBaseReportResponse_ReportError();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
-  },
-  toJSON(message: ReportResponse_ReportError): unknown {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
-    const message = createBaseReportResponse_ReportError();
-    message.operationId = object.operationId ?? "";
-    if (object.status !== undefined && object.status !== null) {
-      message.status = Status.fromPartial(object.status);
-    }
-    return message;
-  },
-  fromSDK(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {
-    return {
-      operationId: object?.operation_id,
-      status: object.status ? Status.fromSDK(object.status) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ReportResponse_ReportErrorSDKType {
-    return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
-      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
-    };
-  },
-  toSDK(message: ReportResponse_ReportError): ReportResponse_ReportErrorSDKType {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
-    return obj;
-  },
-  fromAmino(object: ReportResponse_ReportErrorAmino): ReportResponse_ReportError {
-    return {
-      operationId: object.operation_id,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
-  },
-  toAmino(message: ReportResponse_ReportError): ReportResponse_ReportErrorAmino {
-    const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ReportResponse_ReportErrorAminoMsg): ReportResponse_ReportError {
-    return ReportResponse_ReportError.fromAmino(object.value);
   },
   fromProtoMsg(message: ReportResponse_ReportErrorProtoMsg): ReportResponse_ReportError {
     return ReportResponse_ReportError.decode(message.value);

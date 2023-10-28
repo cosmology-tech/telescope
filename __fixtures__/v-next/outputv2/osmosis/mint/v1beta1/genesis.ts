@@ -18,6 +18,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.mint.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateAmino {
   /** minter is an abstraction for holding current rewards information. */

@@ -5,6 +5,10 @@ export interface BitArray {
   bits: bigint;
   elems: bigint[];
 }
+export interface BitArrayProtoMsg {
+  typeUrl: "/tendermint.libs.bits.BitArray";
+  value: Uint8Array;
+}
 export interface BitArraySDKType {
   bits: bigint;
   elems: bigint[];

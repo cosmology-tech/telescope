@@ -14,6 +14,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.connection.v1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisStateAmino {
   connections: IdentifiedConnectionAmino[];

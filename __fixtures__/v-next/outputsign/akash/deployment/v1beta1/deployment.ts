@@ -3,7 +3,7 @@
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
+import { Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -53,6 +53,10 @@ export interface MsgCreateDeployment {
   version: Uint8Array;
   deposit: Coin | undefined;
 }
+export interface MsgCreateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
+  value: Uint8Array;
+}
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
@@ -62,12 +66,20 @@ export interface MsgCreateDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
+export interface MsgCreateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
   id: DeploymentID | undefined;
   amount: Coin | undefined;
+}
+export interface MsgDepositDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
+  value: Uint8Array;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -76,6 +88,10 @@ export interface MsgDepositDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
+export interface MsgDepositDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
@@ -83,6 +99,10 @@ export interface MsgUpdateDeployment {
   id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
+}
+export interface MsgUpdateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment";
+  value: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -92,11 +112,19 @@ export interface MsgUpdateDeploymentSDKType {
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
+export interface MsgUpdateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
   id: DeploymentID | undefined;
+}
+export interface MsgCloseDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
+  value: Uint8Array;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -104,12 +132,20 @@ export interface MsgCloseDeploymentSDKType {
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
+export interface MsgCloseDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
   dseq: bigint;
+}
+export interface DeploymentIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentID";
+  value: Uint8Array;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -123,6 +159,10 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: bigint;
 }
+export interface DeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Deployment";
+  value: Uint8Array;
+}
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType | undefined;
@@ -135,6 +175,10 @@ export interface DeploymentFilters {
   owner: string;
   dseq: bigint;
   state: string;
+}
+export interface DeploymentFiltersProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentFilters";
+  value: Uint8Array;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -193,95 +237,6 @@ export const MsgCreateDeployment = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCreateDeployment {
-    const obj = createBaseMsgCreateDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupSpec.fromJSON(e));
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
-    return obj;
-  },
-  toJSON(message: MsgCreateDeployment): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toJSON(message.deposit) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
-    const message = createBaseMsgCreateDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
-    message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
-    message.version = object.version ?? new Uint8Array();
-    if (object.deposit !== undefined && object.deposit !== null) {
-      message.deposit = Coin.fromPartial(object.deposit);
-    }
-    return message;
-  },
-  fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
-    return {
-      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: object?.version,
-      deposit: object.deposit ? Coin.fromSDK(object.deposit) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgCreateDeploymentSDKType {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined
-    };
-  },
-  toSDK(message: MsgCreateDeployment): MsgCreateDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toSDK(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    obj.version = message.version;
-    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
-    };
-  },
-  toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
-    const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    obj.version = message.version;
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateDeploymentAminoMsg): MsgCreateDeployment {
-    return MsgCreateDeployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateDeployment): MsgCreateDeploymentAminoMsg {
-    return {
-      type: "akash/deployment/testonly-create-deployment",
-      value: MsgCreateDeployment.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateDeploymentProtoMsg): MsgCreateDeployment {
     return MsgCreateDeployment.decode(message.value);
   },
@@ -316,44 +271,6 @@ export const MsgCreateDeploymentResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCreateDeploymentResponse {
-    const obj = createBaseMsgCreateDeploymentResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateDeploymentResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
-    const message = createBaseMsgCreateDeploymentResponse();
-    return message;
-  },
-  fromSDK(_: MsgCreateDeploymentResponseSDKType): MsgCreateDeploymentResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCreateDeploymentResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateDeploymentResponseAminoMsg): MsgCreateDeploymentResponse {
-    return MsgCreateDeploymentResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAminoMsg {
-    return {
-      type: "akash/deployment/testonly-create-deployment-response",
-      value: MsgCreateDeploymentResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg): MsgCreateDeploymentResponse {
     return MsgCreateDeploymentResponse.decode(message.value);
@@ -405,67 +322,6 @@ export const MsgDepositDeployment = {
     }
     return message;
   },
-  fromJSON(object: any): MsgDepositDeployment {
-    const obj = createBaseMsgDepositDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    return obj;
-  },
-  toJSON(message: MsgDepositDeployment): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
-    const message = createBaseMsgDepositDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
-    if (object.amount !== undefined && object.amount !== null) {
-      message.amount = Coin.fromPartial(object.amount);
-    }
-    return message;
-  },
-  fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
-    return {
-      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
-      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgDepositDeploymentSDKType {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
-      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
-    };
-  },
-  toSDK(message: MsgDepositDeployment): MsgDepositDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
-  },
-  toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
-    const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgDepositDeploymentAminoMsg): MsgDepositDeployment {
-    return MsgDepositDeployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDepositDeployment): MsgDepositDeploymentAminoMsg {
-    return {
-      type: "akash/deployment/testonly-deposit-deployment",
-      value: MsgDepositDeployment.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgDepositDeploymentProtoMsg): MsgDepositDeployment {
     return MsgDepositDeployment.decode(message.value);
   },
@@ -500,44 +356,6 @@ export const MsgDepositDeploymentResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgDepositDeploymentResponse {
-    const obj = createBaseMsgDepositDeploymentResponse();
-    return obj;
-  },
-  toJSON(_: MsgDepositDeploymentResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
-    const message = createBaseMsgDepositDeploymentResponse();
-    return message;
-  },
-  fromSDK(_: MsgDepositDeploymentResponseSDKType): MsgDepositDeploymentResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgDepositDeploymentResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
-    return {};
-  },
-  toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgDepositDeploymentResponseAminoMsg): MsgDepositDeploymentResponse {
-    return MsgDepositDeploymentResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAminoMsg {
-    return {
-      type: "akash/deployment/testonly-deposit-deployment-response",
-      value: MsgDepositDeploymentResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg): MsgDepositDeploymentResponse {
     return MsgDepositDeploymentResponse.decode(message.value);
@@ -596,85 +414,6 @@ export const MsgUpdateDeployment = {
     }
     return message;
   },
-  fromJSON(object: any): MsgUpdateDeployment {
-    const obj = createBaseMsgUpdateDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupSpec.fromJSON(e));
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    return obj;
-  },
-  toJSON(message: MsgUpdateDeployment): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
-    const message = createBaseMsgUpdateDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
-    message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
-    message.version = object.version ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
-    return {
-      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: object?.version
-    };
-  },
-  fromSDKJSON(object: any): MsgUpdateDeploymentSDKType {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
-    };
-  },
-  toSDK(message: MsgUpdateDeployment): MsgUpdateDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toSDK(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    obj.version = message.version;
-    return obj;
-  },
-  fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version
-    };
-  },
-  toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
-    const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    obj.version = message.version;
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
-    return MsgUpdateDeployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateDeployment): MsgUpdateDeploymentAminoMsg {
-    return {
-      type: "akash/deployment/testonly-update-deployment",
-      value: MsgUpdateDeployment.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg): MsgUpdateDeployment {
     return MsgUpdateDeployment.decode(message.value);
   },
@@ -709,44 +448,6 @@ export const MsgUpdateDeploymentResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgUpdateDeploymentResponse {
-    const obj = createBaseMsgUpdateDeploymentResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateDeploymentResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
-    const message = createBaseMsgUpdateDeploymentResponse();
-    return message;
-  },
-  fromSDK(_: MsgUpdateDeploymentResponseSDKType): MsgUpdateDeploymentResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgUpdateDeploymentResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
-    return {};
-  },
-  toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateDeploymentResponseAminoMsg): MsgUpdateDeploymentResponse {
-    return MsgUpdateDeploymentResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAminoMsg {
-    return {
-      type: "akash/deployment/testonly-update-deployment-response",
-      value: MsgUpdateDeploymentResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg): MsgUpdateDeploymentResponse {
     return MsgUpdateDeploymentResponse.decode(message.value);
@@ -791,57 +492,6 @@ export const MsgCloseDeployment = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCloseDeployment {
-    const obj = createBaseMsgCloseDeployment();
-    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: MsgCloseDeployment): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
-    const message = createBaseMsgCloseDeployment();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = DeploymentID.fromPartial(object.id);
-    }
-    return message;
-  },
-  fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
-    return {
-      id: object.id ? DeploymentID.fromSDK(object.id) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgCloseDeploymentSDKType {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
-    };
-  },
-  toSDK(message: MsgCloseDeployment): MsgCloseDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
-    const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCloseDeploymentAminoMsg): MsgCloseDeployment {
-    return MsgCloseDeployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCloseDeployment): MsgCloseDeploymentAminoMsg {
-    return {
-      type: "akash/deployment/testonly-close-deployment",
-      value: MsgCloseDeployment.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCloseDeploymentProtoMsg): MsgCloseDeployment {
     return MsgCloseDeployment.decode(message.value);
   },
@@ -876,44 +526,6 @@ export const MsgCloseDeploymentResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCloseDeploymentResponse {
-    const obj = createBaseMsgCloseDeploymentResponse();
-    return obj;
-  },
-  toJSON(_: MsgCloseDeploymentResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
-    const message = createBaseMsgCloseDeploymentResponse();
-    return message;
-  },
-  fromSDK(_: MsgCloseDeploymentResponseSDKType): MsgCloseDeploymentResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCloseDeploymentResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
-    return {};
-  },
-  toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCloseDeploymentResponseAminoMsg): MsgCloseDeploymentResponse {
-    return MsgCloseDeploymentResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAminoMsg {
-    return {
-      type: "akash/deployment/testonly-close-deployment-response",
-      value: MsgCloseDeploymentResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg): MsgCloseDeploymentResponse {
     return MsgCloseDeploymentResponse.decode(message.value);
@@ -964,65 +576,6 @@ export const DeploymentID = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DeploymentID {
-    const obj = createBaseDeploymentID();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    return obj;
-  },
-  toJSON(message: DeploymentID): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
-    const message = createBaseDeploymentID();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    return message;
-  },
-  fromSDK(object: DeploymentIDSDKType): DeploymentID {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq
-    };
-  },
-  fromSDKJSON(object: any): DeploymentIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: DeploymentID): DeploymentIDSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    return obj;
-  },
-  fromAmino(object: DeploymentIDAmino): DeploymentID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq)
-    };
-  },
-  toAmino(message: DeploymentID): DeploymentIDAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
-    return DeploymentID.fromAmino(object.value);
-  },
-  toAminoMsg(message: DeploymentID): DeploymentIDAminoMsg {
-    return {
-      type: "akash/deployment/deployment-i-d",
-      value: DeploymentID.toAmino(message)
-    };
   },
   fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
     return DeploymentID.decode(message.value);
@@ -1088,83 +641,6 @@ export const Deployment = {
     }
     return message;
   },
-  fromJSON(object: any): Deployment {
-    const obj = createBaseDeployment();
-    if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
-    if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
-    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Deployment): unknown {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
-    const message = createBaseDeployment();
-    if (object.deploymentId !== undefined && object.deploymentId !== null) {
-      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
-    }
-    message.state = object.state ?? 0;
-    message.version = object.version ?? new Uint8Array();
-    if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = BigInt(object.createdAt.toString());
-    }
-    return message;
-  },
-  fromSDK(object: DeploymentSDKType): Deployment {
-    return {
-      deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object?.version,
-      createdAt: object?.created_at
-    };
-  },
-  fromSDKJSON(object: any): DeploymentSDKType {
-    return {
-      deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Deployment): DeploymentSDKType {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toSDK(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    obj.version = message.version;
-    obj.created_at = message.createdAt;
-    return obj;
-  },
-  fromAmino(object: DeploymentAmino): Deployment {
-    return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
-      createdAt: BigInt(object.created_at)
-    };
-  },
-  toAmino(message: Deployment): DeploymentAmino {
-    const obj: any = {};
-    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
-    obj.state = message.state;
-    obj.version = message.version;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
-    return Deployment.fromAmino(object.value);
-  },
-  toAminoMsg(message: Deployment): DeploymentAminoMsg {
-    return {
-      type: "akash/deployment/deployment",
-      value: Deployment.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DeploymentProtoMsg): Deployment {
     return Deployment.decode(message.value);
   },
@@ -1221,73 +697,6 @@ export const DeploymentFilters = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DeploymentFilters {
-    const obj = createBaseDeploymentFilters();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: DeploymentFilters): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.state !== undefined && (obj.state = message.state);
-    return obj;
-  },
-  fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
-    const message = createBaseDeploymentFilters();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    message.state = object.state ?? "";
-    return message;
-  },
-  fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq,
-      state: object?.state
-    };
-  },
-  fromSDKJSON(object: any): DeploymentFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      state: isSet(object.state) ? String(object.state) : ""
-    };
-  },
-  toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      state: object.state
-    };
-  },
-  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
-    return DeploymentFilters.fromAmino(object.value);
-  },
-  toAminoMsg(message: DeploymentFilters): DeploymentFiltersAminoMsg {
-    return {
-      type: "akash/deployment/deployment-filters",
-      value: DeploymentFilters.toAmino(message)
-    };
   },
   fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
     return DeploymentFilters.decode(message.value);

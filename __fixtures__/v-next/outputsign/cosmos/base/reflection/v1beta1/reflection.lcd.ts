@@ -15,12 +15,12 @@ export class LCDQueryClient {
    registry. */
   async listAllInterfaces(_params: ListAllInterfacesRequest = {}): Promise<ListAllInterfacesResponseSDKType> {
     const endpoint = `cosmos/base/reflection/v1beta1/interfaces`;
-    return ListAllInterfacesResponse.fromSDKJSON(await this.req.get<ListAllInterfacesResponseSDKType>(endpoint));
+    return await this.req.get<ListAllInterfacesResponseSDKType>(endpoint);
   }
   /* ListImplementations list all the concrete types that implement a given
    interface. */
   async listImplementations(params: ListImplementationsRequest): Promise<ListImplementationsResponseSDKType> {
     const endpoint = `cosmos/base/reflection/v1beta1/interfaces/${params.interfaceName}/implementations`;
-    return ListImplementationsResponse.fromSDKJSON(await this.req.get<ListImplementationsResponseSDKType>(endpoint));
+    return await this.req.get<ListImplementationsResponseSDKType>(endpoint);
   }
 }

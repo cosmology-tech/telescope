@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -32,6 +31,10 @@ export interface Usage {
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
   producerNotificationChannel: string;
+}
+export interface UsageProtoMsg {
+  typeUrl: "/google.api.Usage";
+  value: Uint8Array;
 }
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
@@ -86,6 +89,10 @@ export interface UsageRule {
    * methods, such as service health check methods.
    */
   skipServiceControl: boolean;
+}
+export interface UsageRuleProtoMsg {
+  typeUrl: "/google.api.UsageRule";
+  value: Uint8Array;
 }
 /**
  * Usage configuration rules for the service.
@@ -163,89 +170,6 @@ export const Usage = {
     }
     return message;
   },
-  fromJSON(object: any): Usage {
-    const obj = createBaseUsage();
-    if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => String(e));
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => UsageRule.fromJSON(e));
-    if (isSet(object.producerNotificationChannel)) obj.producerNotificationChannel = String(object.producerNotificationChannel);
-    return obj;
-  },
-  toJSON(message: Usage): unknown {
-    const obj: any = {};
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e);
-    } else {
-      obj.requirements = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    message.producerNotificationChannel !== undefined && (obj.producerNotificationChannel = message.producerNotificationChannel);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Usage>): Usage {
-    const message = createBaseUsage();
-    message.requirements = object.requirements?.map(e => e) || [];
-    message.rules = object.rules?.map(e => UsageRule.fromPartial(e)) || [];
-    message.producerNotificationChannel = object.producerNotificationChannel ?? "";
-    return message;
-  },
-  fromSDK(object: UsageSDKType): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDK(e)) : [],
-      producerNotificationChannel: object?.producer_notification_channel
-    };
-  },
-  fromSDKJSON(object: any): UsageSDKType {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => String(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDKJSON(e)) : [],
-      producer_notification_channel: isSet(object.producer_notification_channel) ? String(object.producer_notification_channel) : ""
-    };
-  },
-  toSDK(message: Usage): UsageSDKType {
-    const obj: any = {};
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e);
-    } else {
-      obj.requirements = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toSDK(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    obj.producer_notification_channel = message.producerNotificationChannel;
-    return obj;
-  },
-  fromAmino(object: UsageAmino): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromAmino(e)) : [],
-      producerNotificationChannel: object.producer_notification_channel
-    };
-  },
-  toAmino(message: Usage): UsageAmino {
-    const obj: any = {};
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e);
-    } else {
-      obj.requirements = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    obj.producer_notification_channel = message.producerNotificationChannel;
-    return obj;
-  },
-  fromAminoMsg(object: UsageAminoMsg): Usage {
-    return Usage.fromAmino(object.value);
-  },
   fromProtoMsg(message: UsageProtoMsg): Usage {
     return Usage.decode(message.value);
   },
@@ -302,65 +226,6 @@ export const UsageRule = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): UsageRule {
-    const obj = createBaseUsageRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.allowUnregisteredCalls)) obj.allowUnregisteredCalls = Boolean(object.allowUnregisteredCalls);
-    if (isSet(object.skipServiceControl)) obj.skipServiceControl = Boolean(object.skipServiceControl);
-    return obj;
-  },
-  toJSON(message: UsageRule): unknown {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.allowUnregisteredCalls !== undefined && (obj.allowUnregisteredCalls = message.allowUnregisteredCalls);
-    message.skipServiceControl !== undefined && (obj.skipServiceControl = message.skipServiceControl);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<UsageRule>): UsageRule {
-    const message = createBaseUsageRule();
-    message.selector = object.selector ?? "";
-    message.allowUnregisteredCalls = object.allowUnregisteredCalls ?? false;
-    message.skipServiceControl = object.skipServiceControl ?? false;
-    return message;
-  },
-  fromSDK(object: UsageRuleSDKType): UsageRule {
-    return {
-      selector: object?.selector,
-      allowUnregisteredCalls: object?.allow_unregistered_calls,
-      skipServiceControl: object?.skip_service_control
-    };
-  },
-  fromSDKJSON(object: any): UsageRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      allow_unregistered_calls: isSet(object.allow_unregistered_calls) ? Boolean(object.allow_unregistered_calls) : false,
-      skip_service_control: isSet(object.skip_service_control) ? Boolean(object.skip_service_control) : false
-    };
-  },
-  toSDK(message: UsageRule): UsageRuleSDKType {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.allow_unregistered_calls = message.allowUnregisteredCalls;
-    obj.skip_service_control = message.skipServiceControl;
-    return obj;
-  },
-  fromAmino(object: UsageRuleAmino): UsageRule {
-    return {
-      selector: object.selector,
-      allowUnregisteredCalls: object.allow_unregistered_calls,
-      skipServiceControl: object.skip_service_control
-    };
-  },
-  toAmino(message: UsageRule): UsageRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.allow_unregistered_calls = message.allowUnregisteredCalls;
-    obj.skip_service_control = message.skipServiceControl;
-    return obj;
-  },
-  fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {
-    return UsageRule.fromAmino(object.value);
   },
   fromProtoMsg(message: UsageRuleProtoMsg): UsageRule {
     return UsageRule.decode(message.value);

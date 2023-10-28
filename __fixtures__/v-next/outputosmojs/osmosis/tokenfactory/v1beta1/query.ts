@@ -5,12 +5,20 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -22,6 +30,10 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryDenomAuthorityMetadataRequest {
   denom: string;
+}
+export interface QueryDenomAuthorityMetadataRequestProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDenomAuthorityMetadataRequest defines the request structure for the
@@ -37,6 +49,10 @@ export interface QueryDenomAuthorityMetadataRequestSDKType {
 export interface QueryDenomAuthorityMetadataResponse {
   authorityMetadata: DenomAuthorityMetadata;
 }
+export interface QueryDenomAuthorityMetadataResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDenomAuthorityMetadataResponse defines the response structure for the
  * DenomAuthorityMetadata gRPC query.
@@ -51,6 +67,10 @@ export interface QueryDenomAuthorityMetadataResponseSDKType {
 export interface QueryDenomsFromCreatorRequest {
   creator: string;
 }
+export interface QueryDenomsFromCreatorRequestProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest";
+  value: Uint8Array;
+}
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the
  * DenomsFromCreator gRPC query.
@@ -64,6 +84,10 @@ export interface QueryDenomsFromCreatorRequestSDKType {
  */
 export interface QueryDenomsFromCreatorResponse {
   denoms: string[];
+}
+export interface QueryDenomsFromCreatorResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorResponse";
+  value: Uint8Array;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the response structure for the

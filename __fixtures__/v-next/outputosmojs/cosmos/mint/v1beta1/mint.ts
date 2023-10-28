@@ -9,6 +9,10 @@ export interface Minter {
   /** current annual expected provisions */
   annualProvisions: string;
 }
+export interface MinterProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.Minter";
+  value: Uint8Array;
+}
 /** Minter represents the minting state. */
 export interface MinterSDKType {
   inflation: string;
@@ -28,6 +32,10 @@ export interface Params {
   goalBonded: string;
   /** expected blocks per year */
   blocksPerYear: bigint;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.Params";
+  value: Uint8Array;
 }
 /** Params holds parameters for the mint module. */
 export interface ParamsSDKType {

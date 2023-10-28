@@ -47,6 +47,10 @@ export interface Endpoint {
   kind: Endpoint_Kind;
   sequenceNumber: number;
 }
+export interface EndpointProtoMsg {
+  typeUrl: "/akash.base.v1beta2.Endpoint";
+  value: Uint8Array;
+}
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
   kind: Endpoint_Kind;

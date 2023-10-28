@@ -1,11 +1,14 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.recovery.v1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateSDKType {
@@ -17,6 +20,10 @@ export interface Params {
   enableRecovery: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration: Duration;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.recovery.v1.Params";
+  value: Uint8Array;
 }
 /** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
@@ -52,51 +59,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -147,59 +109,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enableRecovery)) obj.enableRecovery = Boolean(object.enableRecovery);
-    if (isSet(object.packetTimeoutDuration)) obj.packetTimeoutDuration = Duration.fromJSON(object.packetTimeoutDuration);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.enableRecovery !== undefined && (obj.enableRecovery = message.enableRecovery);
-    message.packetTimeoutDuration !== undefined && (obj.packetTimeoutDuration = message.packetTimeoutDuration ? Duration.toJSON(message.packetTimeoutDuration) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.enableRecovery = object.enableRecovery ?? false;
-    if (object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null) {
-      message.packetTimeoutDuration = Duration.fromPartial(object.packetTimeoutDuration);
-    }
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      enableRecovery: object?.enable_recovery,
-      packetTimeoutDuration: object.packet_timeout_duration ? Duration.fromSDK(object.packet_timeout_duration) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      enable_recovery: isSet(object.enable_recovery) ? Boolean(object.enable_recovery) : false,
-      packet_timeout_duration: isSet(object.packet_timeout_duration) ? Duration.fromSDKJSON(object.packet_timeout_duration) : undefined
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.enable_recovery = message.enableRecovery;
-    message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      enableRecovery: object.enable_recovery,
-      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.enable_recovery = message.enableRecovery;
-    obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
@@ -11,6 +11,10 @@ export interface EpochInfo {
   currentEpochStartTime: Date;
   epochCountingStarted: boolean;
   currentEpochStartHeight: bigint;
+}
+export interface EpochInfoProtoMsg {
+  typeUrl: "/evmos.epochs.v1.EpochInfo";
+  value: Uint8Array;
 }
 export interface EpochInfoSDKType {
   identifier: string;
@@ -24,6 +28,10 @@ export interface EpochInfoSDKType {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
   epochs: EpochInfo[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.epochs.v1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateSDKType {
@@ -101,103 +109,6 @@ export const EpochInfo = {
     }
     return message;
   },
-  fromJSON(object: any): EpochInfo {
-    const obj = createBaseEpochInfo();
-    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (isSet(object.currentEpoch)) obj.currentEpoch = BigInt(object.currentEpoch.toString());
-    if (isSet(object.currentEpochStartTime)) obj.currentEpochStartTime = new Date(object.currentEpochStartTime);
-    if (isSet(object.epochCountingStarted)) obj.epochCountingStarted = Boolean(object.epochCountingStarted);
-    if (isSet(object.currentEpochStartHeight)) obj.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
-    return obj;
-  },
-  toJSON(message: EpochInfo): unknown {
-    const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
-    message.currentEpochStartTime !== undefined && (obj.currentEpochStartTime = message.currentEpochStartTime.toISOString());
-    message.epochCountingStarted !== undefined && (obj.epochCountingStarted = message.epochCountingStarted);
-    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<EpochInfo>): EpochInfo {
-    const message = createBaseEpochInfo();
-    message.identifier = object.identifier ?? "";
-    message.startTime = object.startTime ?? undefined;
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
-      message.currentEpoch = BigInt(object.currentEpoch.toString());
-    }
-    message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
-    message.epochCountingStarted = object.epochCountingStarted ?? false;
-    if (object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null) {
-      message.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
-    }
-    return message;
-  },
-  fromSDK(object: EpochInfoSDKType): EpochInfo {
-    return {
-      identifier: object?.identifier,
-      startTime: object.start_time ?? undefined,
-      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
-      currentEpoch: object?.current_epoch,
-      currentEpochStartTime: object.current_epoch_start_time ?? undefined,
-      epochCountingStarted: object?.epoch_counting_started,
-      currentEpochStartHeight: object?.current_epoch_start_height
-    };
-  },
-  fromSDKJSON(object: any): EpochInfoSDKType {
-    return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt(0),
-      current_epoch_start_time: isSet(object.current_epoch_start_time) ? new Date(object.current_epoch_start_time) : undefined,
-      epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
-      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: EpochInfo): EpochInfoSDKType {
-    const obj: any = {};
-    obj.identifier = message.identifier;
-    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    obj.current_epoch = message.currentEpoch;
-    message.currentEpochStartTime !== undefined && (obj.current_epoch_start_time = message.currentEpochStartTime ?? undefined);
-    obj.epoch_counting_started = message.epochCountingStarted;
-    obj.current_epoch_start_height = message.currentEpochStartHeight;
-    return obj;
-  },
-  fromAmino(object: EpochInfoAmino): EpochInfo {
-    return {
-      identifier: object.identifier,
-      startTime: object.start_time,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      currentEpoch: BigInt(object.current_epoch),
-      currentEpochStartTime: object.current_epoch_start_time,
-      epochCountingStarted: object.epoch_counting_started,
-      currentEpochStartHeight: BigInt(object.current_epoch_start_height)
-    };
-  },
-  toAmino(message: EpochInfo): EpochInfoAmino {
-    const obj: any = {};
-    obj.identifier = message.identifier;
-    obj.start_time = message.startTime;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
-    obj.current_epoch_start_time = message.currentEpochStartTime;
-    obj.epoch_counting_started = message.epochCountingStarted;
-    obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: EpochInfoAminoMsg): EpochInfo {
-    return EpochInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: EpochInfoProtoMsg): EpochInfo {
     return EpochInfo.decode(message.value);
   },
@@ -240,61 +151,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.epochs)) obj.epochs = object.epochs.map((e: any) => EpochInfo.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);
-    } else {
-      obj.epochs = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toSDK(e) : undefined);
-    } else {
-      obj.epochs = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
-    } else {
-      obj.epochs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

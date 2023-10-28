@@ -41,6 +41,10 @@ export interface GenesisState {
   /** The number of pool points that have been consumed in the current block. */
   pointCountForBlock: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;

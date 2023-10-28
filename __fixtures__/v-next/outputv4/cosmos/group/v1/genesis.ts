@@ -30,6 +30,10 @@ export interface GenesisState {
   /** votes is the list of votes. */
   votes: Vote[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.group.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisStateSDKType {
   group_seq: bigint;

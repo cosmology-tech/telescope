@@ -3,11 +3,19 @@ import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.node.v1beta1";
 /** ConfigRequest defines the request structure for the Config gRPC query. */
 export interface ConfigRequest {}
+export interface ConfigRequestProtoMsg {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigRequest";
+  value: Uint8Array;
+}
 /** ConfigRequest defines the request structure for the Config gRPC query. */
 export interface ConfigRequestSDKType {}
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponse {
   minimumGasPrice: string;
+}
+export interface ConfigResponseProtoMsg {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigResponse";
+  value: Uint8Array;
 }
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponseSDKType {

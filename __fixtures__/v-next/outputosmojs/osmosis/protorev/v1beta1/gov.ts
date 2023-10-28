@@ -10,6 +10,10 @@ export interface SetProtoRevEnabledProposal {
   description: string;
   enabled: boolean;
 }
+export interface SetProtoRevEnabledProposalProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.SetProtoRevEnabledProposal";
+  value: Uint8Array;
+}
 /**
  * SetProtoRevEnabledProposal is a gov Content type to update whether the
  * protorev module is enabled
@@ -28,6 +32,10 @@ export interface SetProtoRevAdminAccountProposal {
   title: string;
   description: string;
   account: string;
+}
+export interface SetProtoRevAdminAccountProposalProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.SetProtoRevAdminAccountProposal";
+  value: Uint8Array;
 }
 /**
  * SetProtoRevAdminAccountProposal is a gov Content type to set the admin

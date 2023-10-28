@@ -1,6 +1,5 @@
 import { CapabilityOwners, CapabilityOwnersSDKType } from "./capability";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwners {
@@ -8,6 +7,10 @@ export interface GenesisOwners {
   index: bigint;
   /** index_owners are the owners at the given index. */
   indexOwners: CapabilityOwners;
+}
+export interface GenesisOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
+  value: Uint8Array;
 }
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
@@ -23,6 +26,10 @@ export interface GenesisState {
    * index key is string to allow amino marshalling.
    */
   owners: GenesisOwners[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisStateSDKType {
@@ -65,67 +72,6 @@ export const GenesisOwners = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisOwners {
-    const obj = createBaseGenesisOwners();
-    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    if (isSet(object.indexOwners)) obj.indexOwners = CapabilityOwners.fromJSON(object.indexOwners);
-    return obj;
-  },
-  toJSON(message: GenesisOwners): unknown {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    message.indexOwners !== undefined && (obj.indexOwners = message.indexOwners ? CapabilityOwners.toJSON(message.indexOwners) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
-    const message = createBaseGenesisOwners();
-    if (object.index !== undefined && object.index !== null) {
-      message.index = BigInt(object.index.toString());
-    }
-    if (object.indexOwners !== undefined && object.indexOwners !== null) {
-      message.indexOwners = CapabilityOwners.fromPartial(object.indexOwners);
-    }
-    return message;
-  },
-  fromSDK(object: GenesisOwnersSDKType): GenesisOwners {
-    return {
-      index: object?.index,
-      indexOwners: object.index_owners ? CapabilityOwners.fromSDK(object.index_owners) : undefined
-    };
-  },
-  fromSDKJSON(object: any): GenesisOwnersSDKType {
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      index_owners: isSet(object.index_owners) ? CapabilityOwners.fromSDKJSON(object.index_owners) : undefined
-    };
-  },
-  toSDK(message: GenesisOwners): GenesisOwnersSDKType {
-    const obj: any = {};
-    obj.index = message.index;
-    message.indexOwners !== undefined && (obj.index_owners = message.indexOwners ? CapabilityOwners.toSDK(message.indexOwners) : undefined);
-    return obj;
-  },
-  fromAmino(object: GenesisOwnersAmino): GenesisOwners {
-    return {
-      index: BigInt(object.index),
-      indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
-    };
-  },
-  toAmino(message: GenesisOwners): GenesisOwnersAmino {
-    const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
-    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisOwnersAminoMsg): GenesisOwners {
-    return GenesisOwners.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisOwners): GenesisOwnersAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisOwners",
-      value: GenesisOwners.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisOwnersProtoMsg): GenesisOwners {
     return GenesisOwners.decode(message.value);
@@ -176,77 +122,6 @@ export const GenesisState = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
-    if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => GenesisOwners.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toJSON(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    if (object.index !== undefined && object.index !== null) {
-      message.index = BigInt(object.index.toString());
-    }
-    message.owners = object.owners?.map(e => GenesisOwners.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      index: object?.index,
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    obj.index = message.index;
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toSDK(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      index: BigInt(object.index),
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

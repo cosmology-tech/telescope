@@ -17,6 +17,10 @@ export interface VersionProtoMsg {
   typeUrl: "/google.protobuf.compiler.Version";
   value: Uint8Array;
 }
+export interface VersionProtoMsg {
+  typeUrl: "/google.protobuf.compiler.Version";
+  value: Uint8Array;
+}
 /** The version number of protocol compiler. */
 export interface VersionAmino {
   major: number;
@@ -68,6 +72,10 @@ export interface CodeGeneratorRequest {
   protoFile: FileDescriptorProto[];
   /** The version number of protocol compiler. */
   compilerVersion?: Version;
+}
+export interface CodeGeneratorRequestProtoMsg {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
+  value: Uint8Array;
 }
 export interface CodeGeneratorRequestProtoMsg {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
@@ -128,6 +136,10 @@ export interface CodeGeneratorResponse {
    */
   error: string;
   file: CodeGeneratorResponse_File[];
+}
+export interface CodeGeneratorResponseProtoMsg {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
+  value: Uint8Array;
 }
 export interface CodeGeneratorResponseProtoMsg {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
@@ -215,6 +227,10 @@ export interface CodeGeneratorResponse_File {
   insertionPoint: string;
   /** The file contents. */
   content: string;
+}
+export interface CodeGeneratorResponse_FileProtoMsg {
+  typeUrl: "/google.protobuf.compiler.File";
+  value: Uint8Array;
 }
 export interface CodeGeneratorResponse_FileProtoMsg {
   typeUrl: "/google.protobuf.compiler.File";

@@ -42,6 +42,10 @@ export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
 }
+export interface LogMetric_LabelExtractorsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
   value: string;
@@ -182,6 +186,10 @@ export interface LogMetric {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
+export interface LogMetricProtoMsg {
+  typeUrl: "/google.logging.v2.LogMetric";
+  value: Uint8Array;
+}
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -229,6 +237,10 @@ export interface ListLogMetricsRequest {
    */
   pageSize: number;
 }
+export interface ListLogMetricsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogMetricsRequest";
+  value: Uint8Array;
+}
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
   parent: string;
@@ -246,6 +258,10 @@ export interface ListLogMetricsResponse {
    */
   nextPageToken: string;
 }
+export interface ListLogMetricsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListLogMetricsResponse";
+  value: Uint8Array;
+}
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
   metrics: LogMetricSDKType[];
@@ -259,6 +275,10 @@ export interface GetLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
+}
+export interface GetLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetLogMetricRequest";
+  value: Uint8Array;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestSDKType {
@@ -280,6 +300,10 @@ export interface CreateLogMetricRequest {
    */
   metric?: LogMetric;
 }
+export interface CreateLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateLogMetricRequest";
+  value: Uint8Array;
+}
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestSDKType {
   parent: string;
@@ -300,6 +324,10 @@ export interface UpdateLogMetricRequest {
   /** Required. The updated metric. */
   metric?: LogMetric;
 }
+export interface UpdateLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
+  value: Uint8Array;
+}
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
@@ -313,6 +341,10 @@ export interface DeleteLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
+}
+export interface DeleteLogMetricRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
+  value: Uint8Array;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestSDKType {

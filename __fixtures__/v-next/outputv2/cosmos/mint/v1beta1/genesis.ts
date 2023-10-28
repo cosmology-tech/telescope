@@ -13,6 +13,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateAmino {
   /** minter is a space for holding current inflation information. */

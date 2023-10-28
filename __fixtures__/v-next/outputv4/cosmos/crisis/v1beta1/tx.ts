@@ -7,6 +7,10 @@ export interface MsgVerifyInvariant {
   invariantModuleName: string;
   invariantRoute: string;
 }
+export interface MsgVerifyInvariantProtoMsg {
+  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant";
+  value: Uint8Array;
+}
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantSDKType {
   sender: string;
@@ -15,6 +19,10 @@ export interface MsgVerifyInvariantSDKType {
 }
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
+export interface MsgVerifyInvariantResponseProtoMsg {
+  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse";
+  value: Uint8Array;
+}
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseSDKType {}
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {

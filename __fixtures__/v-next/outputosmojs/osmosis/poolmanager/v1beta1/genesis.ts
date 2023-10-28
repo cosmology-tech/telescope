@@ -7,6 +7,10 @@ export const protobufPackage = "osmosis.poolmanager.v1beta1";
 export interface Params {
   poolCreationFee: Coin[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the poolmanager module */
 export interface ParamsSDKType {
   pool_creation_fee: CoinSDKType[];
@@ -19,6 +23,10 @@ export interface GenesisState {
   params: Params;
   /** pool_routes is the container of the mappings from pool id to pool type. */
   poolRoutes: ModuleRoute[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the poolmanager module's genesis state. */
 export interface GenesisStateSDKType {

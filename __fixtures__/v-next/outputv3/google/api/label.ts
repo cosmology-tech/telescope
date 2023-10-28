@@ -56,6 +56,10 @@ export interface LabelDescriptorProtoMsg {
   typeUrl: "/google.api.LabelDescriptor";
   value: Uint8Array;
 }
+export interface LabelDescriptorProtoMsg {
+  typeUrl: "/google.api.LabelDescriptor";
+  value: Uint8Array;
+}
 /** A description of a label. */
 export interface LabelDescriptorAmino {
   /** The label key. */

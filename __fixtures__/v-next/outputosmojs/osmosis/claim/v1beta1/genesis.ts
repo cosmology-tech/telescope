@@ -13,6 +13,10 @@ export interface GenesisState {
   /** list of claim records, one for every airdrop recipient */
   claimRecords: ClaimRecord[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisStateSDKType {
   module_account_balance: CoinSDKType;

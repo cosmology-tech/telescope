@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crypto.secp256k1";
 /**
  * PubKey defines a secp256k1 public key
@@ -10,6 +9,10 @@ export const protobufPackage = "cosmos.crypto.secp256k1";
  */
 export interface PubKey {
   key: Uint8Array;
+}
+export interface PubKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256k1.PubKey";
+  value: Uint8Array;
 }
 /**
  * PubKey defines a secp256k1 public key
@@ -24,6 +27,10 @@ export interface PubKeySDKType {
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKey {
   key: Uint8Array;
+}
+export interface PrivKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256k1.PrivKey";
+  value: Uint8Array;
 }
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeySDKType {
@@ -58,55 +65,6 @@ export const PubKey = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PubKey {
-    const obj = createBasePubKey();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    return obj;
-  },
-  toJSON(message: PubKey): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PubKey>): PubKey {
-    const message = createBasePubKey();
-    message.key = object.key ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: PubKeySDKType): PubKey {
-    return {
-      key: object?.key
-    };
-  },
-  fromSDKJSON(object: any): PubKeySDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
-    };
-  },
-  toSDK(message: PubKey): PubKeySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    return obj;
-  },
-  fromAmino(object: PubKeyAmino): PubKey {
-    return {
-      key: object.key
-    };
-  },
-  toAmino(message: PubKey): PubKeyAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    return obj;
-  },
-  fromAminoMsg(object: PubKeyAminoMsg): PubKey {
-    return PubKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PubKey): PubKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PubKey",
-      value: PubKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: PubKeyProtoMsg): PubKey {
     return PubKey.decode(message.value);
@@ -150,55 +108,6 @@ export const PrivKey = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): PrivKey {
-    const obj = createBasePrivKey();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    return obj;
-  },
-  toJSON(message: PrivKey): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PrivKey>): PrivKey {
-    const message = createBasePrivKey();
-    message.key = object.key ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: PrivKeySDKType): PrivKey {
-    return {
-      key: object?.key
-    };
-  },
-  fromSDKJSON(object: any): PrivKeySDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
-    };
-  },
-  toSDK(message: PrivKey): PrivKeySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    return obj;
-  },
-  fromAmino(object: PrivKeyAmino): PrivKey {
-    return {
-      key: object.key
-    };
-  },
-  toAmino(message: PrivKey): PrivKeyAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    return obj;
-  },
-  fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {
-    return PrivKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrivKey): PrivKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PrivKey",
-      value: PrivKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: PrivKeyProtoMsg): PrivKey {
     return PrivKey.decode(message.value);

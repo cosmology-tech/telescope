@@ -17,6 +17,10 @@ export interface Params {
    */
   variance: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.inflation.v1beta2.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
   inflation_decay_factor: string;

@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Specifies the routing information that should be sent along with the request
@@ -372,6 +371,10 @@ export interface RoutingRule {
    * See the examples for more details.
    */
   routingParameters: RoutingParameter[];
+}
+export interface RoutingRuleProtoMsg {
+  typeUrl: "/google.api.RoutingRule";
+  value: Uint8Array;
 }
 /**
  * Specifies the routing information that should be sent along with the request
@@ -799,6 +802,10 @@ export interface RoutingParameter {
    */
   pathTemplate: string;
 }
+export interface RoutingParameterProtoMsg {
+  typeUrl: "/google.api.RoutingParameter";
+  value: Uint8Array;
+}
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterSDKType {
   field: string;
@@ -833,61 +840,6 @@ export const RoutingRule = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): RoutingRule {
-    const obj = createBaseRoutingRule();
-    if (Array.isArray(object?.routingParameters)) obj.routingParameters = object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: RoutingRule): unknown {
-    const obj: any = {};
-    if (message.routingParameters) {
-      obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
-    } else {
-      obj.routingParameters = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RoutingRule>): RoutingRule {
-    const message = createBaseRoutingRule();
-    message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: RoutingRuleSDKType): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): RoutingRuleSDKType {
-    return {
-      routing_parameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: RoutingRule): RoutingRuleSDKType {
-    const obj: any = {};
-    if (message.routingParameters) {
-      obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toSDK(e) : undefined);
-    } else {
-      obj.routing_parameters = [];
-    }
-    return obj;
-  },
-  fromAmino(object: RoutingRuleAmino): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: RoutingRule): RoutingRuleAmino {
-    const obj: any = {};
-    if (message.routingParameters) {
-      obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e) : undefined);
-    } else {
-      obj.routing_parameters = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: RoutingRuleAminoMsg): RoutingRule {
-    return RoutingRule.fromAmino(object.value);
   },
   fromProtoMsg(message: RoutingRuleProtoMsg): RoutingRule {
     return RoutingRule.decode(message.value);
@@ -938,57 +890,6 @@ export const RoutingParameter = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): RoutingParameter {
-    const obj = createBaseRoutingParameter();
-    if (isSet(object.field)) obj.field = String(object.field);
-    if (isSet(object.pathTemplate)) obj.pathTemplate = String(object.pathTemplate);
-    return obj;
-  },
-  toJSON(message: RoutingParameter): unknown {
-    const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.pathTemplate !== undefined && (obj.pathTemplate = message.pathTemplate);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {
-    const message = createBaseRoutingParameter();
-    message.field = object.field ?? "";
-    message.pathTemplate = object.pathTemplate ?? "";
-    return message;
-  },
-  fromSDK(object: RoutingParameterSDKType): RoutingParameter {
-    return {
-      field: object?.field,
-      pathTemplate: object?.path_template
-    };
-  },
-  fromSDKJSON(object: any): RoutingParameterSDKType {
-    return {
-      field: isSet(object.field) ? String(object.field) : "",
-      path_template: isSet(object.path_template) ? String(object.path_template) : ""
-    };
-  },
-  toSDK(message: RoutingParameter): RoutingParameterSDKType {
-    const obj: any = {};
-    obj.field = message.field;
-    obj.path_template = message.pathTemplate;
-    return obj;
-  },
-  fromAmino(object: RoutingParameterAmino): RoutingParameter {
-    return {
-      field: object.field,
-      pathTemplate: object.path_template
-    };
-  },
-  toAmino(message: RoutingParameter): RoutingParameterAmino {
-    const obj: any = {};
-    obj.field = message.field;
-    obj.path_template = message.pathTemplate;
-    return obj;
-  },
-  fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {
-    return RoutingParameter.fromAmino(object.value);
   },
   fromProtoMsg(message: RoutingParameterProtoMsg): RoutingParameter {
     return RoutingParameter.decode(message.value);

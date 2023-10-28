@@ -14,6 +14,10 @@ export interface MsgCreateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgCreateClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClient";
+  value: Uint8Array;
+}
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
   client_state?: AnySDKType;
@@ -22,6 +26,10 @@ export interface MsgCreateClientSDKType {
 }
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
+export interface MsgCreateClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
+  value: Uint8Array;
+}
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseSDKType {}
 /**
@@ -36,6 +44,10 @@ export interface MsgUpdateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgUpdateClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
  * the given header.
@@ -47,6 +59,10 @@ export interface MsgUpdateClientSDKType {
 }
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
+export interface MsgUpdateClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseSDKType {}
 /**
@@ -70,6 +86,10 @@ export interface MsgUpgradeClient {
   /** signer address */
   signer: string;
 }
+export interface MsgUpgradeClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
+  value: Uint8Array;
+}
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
  * state
@@ -84,6 +104,10 @@ export interface MsgUpgradeClientSDKType {
 }
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
+export interface MsgUpgradeClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
+  value: Uint8Array;
+}
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseSDKType {}
 /**
@@ -97,6 +121,10 @@ export interface MsgSubmitMisbehaviour {
   misbehaviour?: Any;
   /** signer address */
   signer: string;
+}
+export interface MsgSubmitMisbehaviourProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
+  value: Uint8Array;
 }
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
@@ -112,6 +140,10 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+export interface MsgSubmitMisbehaviourResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
  * type.

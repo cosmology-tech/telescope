@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -10,6 +9,10 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface FeeToken {
   denom: string;
   poolID: bigint;
+}
+export interface FeeTokenProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.FeeToken";
+  value: Uint8Array;
 }
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -57,65 +60,6 @@ export const FeeToken = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): FeeToken {
-    const obj = createBaseFeeToken();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
-    return obj;
-  },
-  toJSON(message: FeeToken): unknown {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<FeeToken>): FeeToken {
-    const message = createBaseFeeToken();
-    message.denom = object.denom ?? "";
-    if (object.poolID !== undefined && object.poolID !== null) {
-      message.poolID = BigInt(object.poolID.toString());
-    }
-    return message;
-  },
-  fromSDK(object: FeeTokenSDKType): FeeToken {
-    return {
-      denom: object?.denom,
-      poolID: object?.poolID
-    };
-  },
-  fromSDKJSON(object: any): FeeTokenSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: FeeToken): FeeTokenSDKType {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.poolID = message.poolID;
-    return obj;
-  },
-  fromAmino(object: FeeTokenAmino): FeeToken {
-    return {
-      denom: object.denom,
-      poolID: BigInt(object.poolID)
-    };
-  },
-  toAmino(message: FeeToken): FeeTokenAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {
-    return FeeToken.fromAmino(object.value);
-  },
-  toAminoMsg(message: FeeToken): FeeTokenAminoMsg {
-    return {
-      type: "osmosis/txfees/fee-token",
-      value: FeeToken.toAmino(message)
-    };
   },
   fromProtoMsg(message: FeeTokenProtoMsg): FeeToken {
     return FeeToken.decode(message.value);

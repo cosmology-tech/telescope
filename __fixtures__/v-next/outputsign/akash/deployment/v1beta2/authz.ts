@@ -1,6 +1,5 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -12,6 +11,10 @@ export interface DepositDeploymentAuthorization {
    * the purpose of deployment.
    */
   spendLimit: Coin;
+}
+export interface DepositDeploymentAuthorizationProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
+  value: Uint8Array;
 }
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -49,57 +52,6 @@ export const DepositDeploymentAuthorization = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DepositDeploymentAuthorization {
-    const obj = createBaseDepositDeploymentAuthorization();
-    if (isSet(object.spendLimit)) obj.spendLimit = Coin.fromJSON(object.spendLimit);
-    return obj;
-  },
-  toJSON(message: DepositDeploymentAuthorization): unknown {
-    const obj: any = {};
-    message.spendLimit !== undefined && (obj.spendLimit = message.spendLimit ? Coin.toJSON(message.spendLimit) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<DepositDeploymentAuthorization>, I>>(object: I): DepositDeploymentAuthorization {
-    const message = createBaseDepositDeploymentAuthorization();
-    if (object.spendLimit !== undefined && object.spendLimit !== null) {
-      message.spendLimit = Coin.fromPartial(object.spendLimit);
-    }
-    return message;
-  },
-  fromSDK(object: DepositDeploymentAuthorizationSDKType): DepositDeploymentAuthorization {
-    return {
-      spendLimit: object.spend_limit ? Coin.fromSDK(object.spend_limit) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DepositDeploymentAuthorizationSDKType {
-    return {
-      spend_limit: isSet(object.spend_limit) ? Coin.fromSDKJSON(object.spend_limit) : undefined
-    };
-  },
-  toSDK(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationSDKType {
-    const obj: any = {};
-    message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toSDK(message.spendLimit) : undefined);
-    return obj;
-  },
-  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
-    return {
-      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
-    };
-  },
-  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
-    const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAminoMsg {
-    return {
-      type: "akash/deployment/v1beta2/deposit-deployment-authorization",
-      value: DepositDeploymentAuthorization.toAmino(message)
-    };
   },
   fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
     return DepositDeploymentAuthorization.decode(message.value);

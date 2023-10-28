@@ -23,6 +23,10 @@ export interface MsgRegisterDevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
   value: Uint8Array;
 }
+export interface MsgRegisterDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: Uint8Array;
+}
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoAmino {
   /** contract hex address */
@@ -61,6 +65,10 @@ export interface MsgRegisterDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
   value: Uint8Array;
 }
+export interface MsgRegisterDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
@@ -84,6 +92,10 @@ export interface MsgCancelDevFeeInfo {
   contractAddress: string;
   /** deployer bech32 address */
   deployerAddress: string;
+}
+export interface MsgCancelDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: Uint8Array;
 }
 export interface MsgCancelDevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo";
@@ -117,6 +129,10 @@ export interface MsgCancelDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
   value: Uint8Array;
 }
+export interface MsgCancelDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseAmino {}
 export interface MsgCancelDevFeeInfoResponseAminoMsg {
@@ -136,6 +152,10 @@ export interface MsgUpdateDevFeeInfo {
   deployerAddress: string;
   /** new withdraw bech32 address for receiving the transaction fees */
   withdrawAddress: string;
+}
+export interface MsgUpdateDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: Uint8Array;
 }
 export interface MsgUpdateDevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
@@ -168,6 +188,10 @@ export interface MsgUpdateDevFeeInfoSDKType {
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+export interface MsgUpdateDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: Uint8Array;
+}
 export interface MsgUpdateDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
   value: Uint8Array;

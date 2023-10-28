@@ -18,6 +18,10 @@ export interface MsgCreateClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClient";
   value: Uint8Array;
 }
+export interface MsgCreateClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClient";
+  value: Uint8Array;
+}
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientAmino {
   /** light client state */
@@ -46,6 +50,10 @@ export interface MsgCreateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
   value: Uint8Array;
 }
+export interface MsgCreateClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
+  value: Uint8Array;
+}
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseAmino {}
 export interface MsgCreateClientResponseAminoMsg {
@@ -65,6 +73,10 @@ export interface MsgUpdateClient {
   header?: Any;
   /** signer address */
   signer: string;
+}
+export interface MsgUpdateClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
+  value: Uint8Array;
 }
 export interface MsgUpdateClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
@@ -101,6 +113,10 @@ export interface MsgUpdateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
   value: Uint8Array;
 }
+export interface MsgUpdateClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseAmino {}
 export interface MsgUpdateClientResponseAminoMsg {
@@ -129,6 +145,10 @@ export interface MsgUpgradeClient {
   proofUpgradeConsensusState: Uint8Array;
   /** signer address */
   signer: string;
+}
+export interface MsgUpgradeClientProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
+  value: Uint8Array;
 }
 export interface MsgUpgradeClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
@@ -177,6 +197,10 @@ export interface MsgUpgradeClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
   value: Uint8Array;
 }
+export interface MsgUpgradeClientResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
+  value: Uint8Array;
+}
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseAmino {}
 export interface MsgUpgradeClientResponseAminoMsg {
@@ -196,6 +220,10 @@ export interface MsgSubmitMisbehaviour {
   misbehaviour?: Any;
   /** signer address */
   signer: string;
+}
+export interface MsgSubmitMisbehaviourProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
+  value: Uint8Array;
 }
 export interface MsgSubmitMisbehaviourProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
@@ -231,6 +259,10 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+export interface MsgSubmitMisbehaviourResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
+  value: Uint8Array;
+}
 export interface MsgSubmitMisbehaviourResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
   value: Uint8Array;

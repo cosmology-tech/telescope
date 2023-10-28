@@ -19,6 +19,10 @@ export interface MsgConnectionOpenInitProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit";
   value: Uint8Array;
 }
+export interface MsgConnectionOpenInitProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit";
+  value: Uint8Array;
+}
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
  * initialize a connection with Chain B.
@@ -50,6 +54,10 @@ export interface MsgConnectionOpenInitSDKType {
  * type.
  */
 export interface MsgConnectionOpenInitResponse {}
+export interface MsgConnectionOpenInitResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInitResponse";
+  value: Uint8Array;
+}
 export interface MsgConnectionOpenInitResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInitResponse";
   value: Uint8Array;
@@ -95,6 +103,10 @@ export interface MsgConnectionOpenTry {
   proofConsensus: Uint8Array;
   consensusHeight: Height;
   signer: string;
+}
+export interface MsgConnectionOpenTryProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry";
+  value: Uint8Array;
 }
 export interface MsgConnectionOpenTryProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry";
@@ -156,6 +168,10 @@ export interface MsgConnectionOpenTryResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTryResponse";
   value: Uint8Array;
 }
+export interface MsgConnectionOpenTryResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTryResponse";
+  value: Uint8Array;
+}
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseAmino {}
 export interface MsgConnectionOpenTryResponseAminoMsg {
@@ -185,6 +201,10 @@ export interface MsgConnectionOpenAck {
   proofConsensus: Uint8Array;
   consensusHeight: Height;
   signer: string;
+}
+export interface MsgConnectionOpenAckProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck";
+  value: Uint8Array;
 }
 export interface MsgConnectionOpenAckProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck";
@@ -238,6 +258,10 @@ export interface MsgConnectionOpenAckResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAckResponse";
   value: Uint8Array;
 }
+export interface MsgConnectionOpenAckResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAckResponse";
+  value: Uint8Array;
+}
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseAmino {}
 export interface MsgConnectionOpenAckResponseAminoMsg {
@@ -256,6 +280,10 @@ export interface MsgConnectionOpenConfirm {
   proofAck: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgConnectionOpenConfirmProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm";
+  value: Uint8Array;
 }
 export interface MsgConnectionOpenConfirmProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm";
@@ -291,6 +319,10 @@ export interface MsgConnectionOpenConfirmSDKType {
  * response type.
  */
 export interface MsgConnectionOpenConfirmResponse {}
+export interface MsgConnectionOpenConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirmResponse";
+  value: Uint8Array;
+}
 export interface MsgConnectionOpenConfirmResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirmResponse";
   value: Uint8Array;

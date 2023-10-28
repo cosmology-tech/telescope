@@ -31,6 +31,10 @@ export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
   value: Uint8Array;
 }
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
+  value: Uint8Array;
+}
 /** Request message for the Check method. */
 export interface CheckRequestAmino {
   /**
@@ -100,6 +104,10 @@ export interface ResourceInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
   value: Uint8Array;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: Uint8Array;
+}
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoAmino {
   /** The name of the resource referenced in the request. */
@@ -149,6 +157,10 @@ export interface CheckResponse_HeadersEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface CheckResponse_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface CheckResponse_HeadersEntryAmino {
   key: string;
   value: string;
@@ -173,6 +185,10 @@ export interface CheckResponse {
   headers: {
     [key: string]: string;
   };
+}
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
+  value: Uint8Array;
 }
 export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
@@ -230,6 +246,10 @@ export interface ReportRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
   value: Uint8Array;
 }
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
+  value: Uint8Array;
+}
 /** Request message for the Report method. */
 export interface ReportRequestAmino {
   /**
@@ -269,6 +289,10 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
+  value: Uint8Array;
+}
 export interface ReportResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
   value: Uint8Array;

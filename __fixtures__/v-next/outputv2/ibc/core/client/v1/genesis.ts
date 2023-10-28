@@ -20,6 +20,10 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.client.v1.GenesisState";
   value: Uint8Array;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateAmino {
   /** client states with their corresponding identifiers */
@@ -61,6 +65,10 @@ export interface GenesisMetadataProtoMsg {
   typeUrl: "/ibc.core.client.v1.GenesisMetadata";
   value: Uint8Array;
 }
+export interface GenesisMetadataProtoMsg {
+  typeUrl: "/ibc.core.client.v1.GenesisMetadata";
+  value: Uint8Array;
+}
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
  * with ExportMetadata
@@ -90,6 +98,10 @@ export interface GenesisMetadataSDKType {
 export interface IdentifiedGenesisMetadata {
   clientId: string;
   clientMetadata: GenesisMetadata[];
+}
+export interface IdentifiedGenesisMetadataProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata";
+  value: Uint8Array;
 }
 export interface IdentifiedGenesisMetadataProtoMsg {
   typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata";

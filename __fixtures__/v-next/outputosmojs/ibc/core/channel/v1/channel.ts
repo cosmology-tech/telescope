@@ -130,6 +130,10 @@ export interface Channel {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
+export interface ChannelProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.Channel";
+  value: Uint8Array;
+}
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
  * modules on separate blockchains, which has at least one end capable of
@@ -165,6 +169,10 @@ export interface IdentifiedChannel {
   /** channel identifier */
   channelId: string;
 }
+export interface IdentifiedChannelProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.IdentifiedChannel";
+  value: Uint8Array;
+}
 /**
  * IdentifiedChannel defines a channel with additional port and channel
  * identifier fields.
@@ -184,6 +192,10 @@ export interface Counterparty {
   portId: string;
   /** channel end on the counterparty chain */
   channelId: string;
+}
+export interface CounterpartyProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.Counterparty";
+  value: Uint8Array;
 }
 /** Counterparty defines a channel end counterparty */
 export interface CounterpartySDKType {
@@ -213,6 +225,10 @@ export interface Packet {
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: bigint;
 }
+export interface PacketProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.Packet";
+  value: Uint8Array;
+}
 /** Packet defines a type that carries data across different chains through IBC */
 export interface PacketSDKType {
   sequence: bigint;
@@ -240,6 +256,10 @@ export interface PacketState {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
+export interface PacketStateProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.PacketState";
+  value: Uint8Array;
+}
 /**
  * PacketState defines the generic type necessary to retrieve and store
  * packet commitments, acknowledgements, and receipts.
@@ -264,6 +284,10 @@ export interface PacketStateSDKType {
 export interface Acknowledgement {
   result?: Uint8Array;
   error?: string;
+}
+export interface AcknowledgementProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.Acknowledgement";
+  value: Uint8Array;
 }
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by

@@ -81,6 +81,10 @@ export interface ConnectionEnd {
    */
   delayPeriod: bigint;
 }
+export interface ConnectionEndProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.ConnectionEnd";
+  value: Uint8Array;
+}
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
  * separate one.
@@ -115,6 +119,10 @@ export interface IdentifiedConnection {
   /** delay period associated with this connection. */
   delayPeriod: bigint;
 }
+export interface IdentifiedConnectionProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.IdentifiedConnection";
+  value: Uint8Array;
+}
 /**
  * IdentifiedConnection defines a connection with additional connection
  * identifier field.
@@ -142,6 +150,10 @@ export interface Counterparty {
   /** commitment merkle prefix of the counterparty chain. */
   prefix: MerklePrefix;
 }
+export interface CounterpartyProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.Counterparty";
+  value: Uint8Array;
+}
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartySDKType {
   client_id: string;
@@ -153,6 +165,10 @@ export interface ClientPaths {
   /** list of connection paths */
   paths: string[];
 }
+export interface ClientPathsProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.ClientPaths";
+  value: Uint8Array;
+}
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsSDKType {
   paths: string[];
@@ -163,6 +179,10 @@ export interface ConnectionPaths {
   clientId: string;
   /** list of connection paths */
   paths: string[];
+}
+export interface ConnectionPathsProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.ConnectionPaths";
+  value: Uint8Array;
 }
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsSDKType {
@@ -178,6 +198,10 @@ export interface Version {
   identifier: string;
   /** list of features compatible with the specified identifier */
   features: string[];
+}
+export interface VersionProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.Version";
+  value: Uint8Array;
 }
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
@@ -195,6 +219,10 @@ export interface Params {
    * conditions. A safe choice is 3-5x the expected time per block.
    */
   maxExpectedTimePerBlock: bigint;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.Params";
+  value: Uint8Array;
 }
 /** Params defines the set of Connection parameters. */
 export interface ParamsSDKType {

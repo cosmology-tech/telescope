@@ -12,6 +12,10 @@ export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryTokenPairsRequestProtoMsg {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
  * method.
@@ -27,6 +31,10 @@ export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryTokenPairsResponseProtoMsg {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -44,6 +52,10 @@ export interface QueryTokenPairRequest {
    */
   token: string;
 }
+export interface QueryTokenPairRequestProtoMsg {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest";
+  value: Uint8Array;
+}
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
   token: string;
@@ -55,6 +67,10 @@ export interface QueryTokenPairRequestSDKType {
 export interface QueryTokenPairResponse {
   tokenPair: TokenPair;
 }
+export interface QueryTokenPairResponseProtoMsg {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse";
+  value: Uint8Array;
+}
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
  * method.
@@ -64,6 +80,10 @@ export interface QueryTokenPairResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/evmos.erc20.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /**
@@ -72,6 +92,10 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/evmos.erc20.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC

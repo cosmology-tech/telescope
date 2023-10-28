@@ -6,12 +6,20 @@ export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
 }
+export interface QueryEpochsInfoRequestProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
+}
+export interface QueryEpochsInfoResponseProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
@@ -20,11 +28,19 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: bigint;
+}
+export interface QueryCurrentEpochResponseProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;

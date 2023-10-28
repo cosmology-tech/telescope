@@ -1,6 +1,7 @@
 import { TelescopeBuilder } from "../src/builder";
 import { TelescopeOptions } from "@cosmology/types";
 import { TelescopeInput } from "../src";
+import deepmerge from "deepmerge";
 
 const outPath = __dirname + "/../../../__fixtures__/misc/output";
 
@@ -17,11 +18,9 @@ const options: TelescopeOptions = {
   prototypes: {
     enabled: true,
 
-    excluded:{
+    excluded: {
       // hard exclude faulty proto files
-      hardProtos:[
-        "google/api/expr/v1alpha1/eval1.proto"
-      ]
+      hardProtos: ["google/api/expr/v1alpha1/eval1.proto"],
     },
 
     parser: {
@@ -100,7 +99,7 @@ const options: TelescopeOptions = {
 
   aminoEncoding: {
     enabled: true,
-    useLegacyInlineEncoding: false
+    useLegacyInlineEncoding: false,
   },
 };
 
@@ -110,10 +109,160 @@ const input: TelescopeInput = {
   options,
 };
 
-const telescope = new TelescopeBuilder(input);
-
 describe("misc", () => {
   it("generates", async () => {
+    const telescope = new TelescopeBuilder(input);
+
+    await telescope.build();
+  });
+
+  it("generates without amino", async () => {
+    const testFolder = "/output-proto-amino/no-amino";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates without amino, no proto", async () => {
+    const testFolder = "/output-proto-amino/no-amino-no-proto";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates without amino but legacy", async () => {
+    const testFolder = "/output-proto-amino/no-amino-legacy";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates without amino but legacy, no proto", async () => {
+    const testFolder = "/output-proto-amino/no-amino-legacy-no-proto";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates, proto only", async () => {
+    const testFolder = "/output-proto-amino/proto-only";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates, proto only, legacy", async () => {
+    const testFolder = "/output-proto-amino/proto-only-legacy";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
     await telescope.build();
   });
 });

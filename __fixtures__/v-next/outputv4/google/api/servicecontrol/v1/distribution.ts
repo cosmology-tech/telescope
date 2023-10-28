@@ -54,6 +54,10 @@ export interface Distribution {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface DistributionProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.Distribution";
+  value: Uint8Array;
+}
 /**
  * Distribution represents a frequency distribution of double-valued sample
  * points. It contains the size of the population of sample points plus
@@ -98,6 +102,10 @@ export interface Distribution_LinearBuckets {
    */
   offset: number;
 }
+export interface Distribution_LinearBucketsProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LinearBuckets";
+  value: Uint8Array;
+}
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBucketsSDKType {
   num_finite_buckets: number;
@@ -127,6 +135,10 @@ export interface Distribution_ExponentialBuckets {
    */
   scale: number;
 }
+export interface Distribution_ExponentialBucketsProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets";
+  value: Uint8Array;
+}
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsSDKType {
   num_finite_buckets: number;
@@ -153,6 +165,10 @@ export interface Distribution_ExplicitBuckets {
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
+}
+export interface Distribution_ExplicitBucketsProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets";
+  value: Uint8Array;
 }
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBucketsSDKType {

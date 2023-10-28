@@ -184,6 +184,10 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
+export interface ServiceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service";
+  value: Uint8Array;
+}
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
@@ -234,6 +238,10 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
+export interface ServiceConfigProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
+  value: Uint8Array;
+}
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
@@ -254,6 +262,10 @@ export interface OperationMetadata {
    * associated with.
    */
   resourceNames: string[];
+}
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
+  value: Uint8Array;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
@@ -301,6 +313,10 @@ export interface ConsumerQuotaMetric {
   descendantConsumerQuotaLimits: ConsumerQuotaLimit[];
   /** The units in which the metric value is reported. */
   unit: string;
+}
+export interface ConsumerQuotaMetricProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
+  value: Uint8Array;
 }
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetricSDKType {
@@ -350,6 +366,10 @@ export interface ConsumerQuotaLimit {
    */
   quotaBuckets: QuotaBucket[];
 }
+export interface ConsumerQuotaLimitProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
+  value: Uint8Array;
+}
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
   name: string;
@@ -362,6 +382,10 @@ export interface ConsumerQuotaLimitSDKType {
 export interface QuotaBucket_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface QuotaBucket_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaBucket_DimensionsEntrySDKType {
   key: string;
@@ -402,6 +426,10 @@ export interface QuotaBucket {
     [key: string]: string;
   };
 }
+export interface QuotaBucketProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
+  value: Uint8Array;
+}
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
   effective_limit: bigint;
@@ -416,6 +444,10 @@ export interface QuotaBucketSDKType {
 export interface QuotaOverride_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface QuotaOverride_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntrySDKType {
   key: string;
@@ -490,6 +522,10 @@ export interface QuotaOverride {
    */
   adminOverrideAncestor: string;
 }
+export interface QuotaOverrideProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
+  value: Uint8Array;
+}
 /** A quota override */
 export interface QuotaOverrideSDKType {
   name: string;
@@ -511,6 +547,10 @@ export interface OverrideInlineSource {
    */
   overrides: QuotaOverride[];
 }
+export interface OverrideInlineSourceProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
+  value: Uint8Array;
+}
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -518,6 +558,10 @@ export interface OverrideInlineSourceSDKType {
 export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntrySDKType {
   key: string;
@@ -577,6 +621,10 @@ export interface AdminQuotaPolicy {
    */
   container: string;
 }
+export interface AdminQuotaPolicyProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
+  value: Uint8Array;
+}
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
   name: string;
@@ -603,6 +651,10 @@ export interface ServiceIdentity {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   uniqueId: string;
+}
+export interface ServiceIdentityProtoMsg {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";
+  value: Uint8Array;
 }
 /**
  * Service identity for a service. This is the identity that service producer

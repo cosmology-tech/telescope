@@ -1,8 +1,7 @@
 import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax";
 import { Empty, EmptySDKType } from "../../../protobuf/empty";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, NullValueSDKType } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -143,6 +142,10 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: bigint;
   value?: Reference;
 }
+export interface CheckedExpr_ReferenceMapEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: bigint;
   value?: ReferenceSDKType;
@@ -150,6 +153,10 @@ export interface CheckedExpr_ReferenceMapEntrySDKType {
 export interface CheckedExpr_TypeMapEntry {
   key: bigint;
   value?: Type;
+}
+export interface CheckedExpr_TypeMapEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: bigint;
@@ -207,6 +214,10 @@ export interface CheckedExpr {
    * may have structural differences.
    */
   expr?: Expr;
+}
+export interface CheckedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: Uint8Array;
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
@@ -271,6 +282,10 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
+export interface TypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Type";
+  value: Uint8Array;
+}
 /** Represents a CEL type. */
 export interface TypeSDKType {
   dyn?: EmptySDKType;
@@ -292,6 +307,10 @@ export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
+export interface Type_ListTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ListType";
+  value: Uint8Array;
+}
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
   elem_type?: TypeSDKType;
@@ -302,6 +321,10 @@ export interface Type_MapType {
   keyType?: Type;
   /** The type of the value. */
   valueType?: Type;
+}
+export interface Type_MapTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.MapType";
+  value: Uint8Array;
 }
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeSDKType {
@@ -315,6 +338,10 @@ export interface Type_FunctionType {
   /** Argument types of the function. */
   argTypes: Type[];
 }
+export interface Type_FunctionTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType";
+  value: Uint8Array;
+}
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
   result_type?: TypeSDKType;
@@ -326,6 +353,10 @@ export interface Type_AbstractType {
   name: string;
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
+}
+export interface Type_AbstractTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType";
+  value: Uint8Array;
 }
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
@@ -354,6 +385,10 @@ export interface Decl {
   ident?: Decl_IdentDecl;
   /** Function declaration. */
   function?: Decl_FunctionDecl;
+}
+export interface DeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Decl";
+  value: Uint8Array;
 }
 /**
  * Represents a declaration of a named value or function.
@@ -385,6 +420,10 @@ export interface Decl_IdentDecl {
   /** Documentation string for the identifier. */
   doc: string;
 }
+export interface Decl_IdentDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Uint8Array;
+}
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
  * 
@@ -408,6 +447,10 @@ export interface Decl_IdentDeclSDKType {
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
+}
+export interface Decl_FunctionDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Uint8Array;
 }
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -476,6 +519,10 @@ export interface Decl_FunctionDecl_Overload {
   /** Documentation string for the overload. */
   doc: string;
 }
+export interface Decl_FunctionDecl_OverloadProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Overload";
+  value: Uint8Array;
+}
 /**
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
@@ -516,6 +563,10 @@ export interface Reference {
    * constant if known at compile time.
    */
   value?: Constant;
+}
+export interface ReferenceProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Reference";
+  value: Uint8Array;
 }
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceSDKType {
@@ -559,61 +610,6 @@ export const CheckedExpr_ReferenceMapEntry = {
     }
     return message;
   },
-  fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
-    const obj = createBaseCheckedExpr_ReferenceMapEntry();
-    if (isSet(object.key)) obj.key = BigInt(object.key.toString());
-    if (isSet(object.value)) obj.value = Reference.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
-    const message = createBaseCheckedExpr_ReferenceMapEntry();
-    if (object.key !== undefined && object.key !== null) {
-      message.key = BigInt(object.key.toString());
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Reference.fromPartial(object.value);
-    }
-    return message;
-  },
-  fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
-    return {
-      key: object?.key,
-      value: object.value ? Reference.fromSDK(object.value) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CheckedExpr_ReferenceMapEntrySDKType {
-    return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
-      value: isSet(object.value) ? Reference.fromSDKJSON(object.value) : undefined
-    };
-  },
-  toSDK(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    message.value !== undefined && (obj.value = message.value ? Reference.toSDK(message.value) : undefined);
-    return obj;
-  },
-  fromAmino(object: CheckedExpr_ReferenceMapEntryAmino): CheckedExpr_ReferenceMapEntry {
-    return {
-      key: BigInt(object.key),
-      value: object?.value ? Reference.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntryAmino {
-    const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
-    obj.value = message.value ? Reference.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CheckedExpr_ReferenceMapEntryAminoMsg): CheckedExpr_ReferenceMapEntry {
-    return CheckedExpr_ReferenceMapEntry.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckedExpr_ReferenceMapEntryProtoMsg): CheckedExpr_ReferenceMapEntry {
     return CheckedExpr_ReferenceMapEntry.decode(message.value);
   },
@@ -656,61 +652,6 @@ export const CheckedExpr_TypeMapEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckedExpr_TypeMapEntry {
-    const obj = createBaseCheckedExpr_TypeMapEntry();
-    if (isSet(object.key)) obj.key = BigInt(object.key.toString());
-    if (isSet(object.value)) obj.value = Type.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: CheckedExpr_TypeMapEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
-    const message = createBaseCheckedExpr_TypeMapEntry();
-    if (object.key !== undefined && object.key !== null) {
-      message.key = BigInt(object.key.toString());
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Type.fromPartial(object.value);
-    }
-    return message;
-  },
-  fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
-    return {
-      key: object?.key,
-      value: object.value ? Type.fromSDK(object.value) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CheckedExpr_TypeMapEntrySDKType {
-    return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
-      value: isSet(object.value) ? Type.fromSDKJSON(object.value) : undefined
-    };
-  },
-  toSDK(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    message.value !== undefined && (obj.value = message.value ? Type.toSDK(message.value) : undefined);
-    return obj;
-  },
-  fromAmino(object: CheckedExpr_TypeMapEntryAmino): CheckedExpr_TypeMapEntry {
-    return {
-      key: BigInt(object.key),
-      value: object?.value ? Type.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntryAmino {
-    const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
-    obj.value = message.value ? Type.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CheckedExpr_TypeMapEntryAminoMsg): CheckedExpr_TypeMapEntry {
-    return CheckedExpr_TypeMapEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckedExpr_TypeMapEntryProtoMsg): CheckedExpr_TypeMapEntry {
     return CheckedExpr_TypeMapEntry.decode(message.value);
@@ -788,169 +729,6 @@ export const CheckedExpr = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): CheckedExpr {
-    const obj = createBaseCheckedExpr();
-    if (isObject(object.referenceMap)) obj.referenceMap = Object.entries(object.referenceMap).reduce<{
-      [key: bigint]: Reference;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Reference.fromJSON(value);
-      return acc;
-    }, {});
-    if (isObject(object.typeMap)) obj.typeMap = Object.entries(object.typeMap).reduce<{
-      [key: bigint]: Type;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Type.fromJSON(value);
-      return acc;
-    }, {});
-    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
-    if (isSet(object.exprVersion)) obj.exprVersion = String(object.exprVersion);
-    if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
-    return obj;
-  },
-  toJSON(message: CheckedExpr): unknown {
-    const obj: any = {};
-    obj.referenceMap = {};
-    if (message.referenceMap) {
-      Object.entries(message.referenceMap).forEach(([k, v]) => {
-        obj.referenceMap[k] = Reference.toJSON(v);
-      });
-    }
-    obj.typeMap = {};
-    if (message.typeMap) {
-      Object.entries(message.typeMap).forEach(([k, v]) => {
-        obj.typeMap[k] = Type.toJSON(v);
-      });
-    }
-    message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
-    message.exprVersion !== undefined && (obj.exprVersion = message.exprVersion);
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
-    const message = createBaseCheckedExpr();
-    message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
-      [key: bigint]: Reference;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[Number(key)] = Reference.fromPartial(value);
-      }
-      return acc;
-    }, {});
-    message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
-      [key: bigint]: Type;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[Number(key)] = Type.fromPartial(value);
-      }
-      return acc;
-    }, {});
-    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
-      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
-    }
-    message.exprVersion = object.exprVersion ?? "";
-    if (object.expr !== undefined && object.expr !== null) {
-      message.expr = Expr.fromPartial(object.expr);
-    }
-    return message;
-  },
-  fromSDK(object: CheckedExprSDKType): CheckedExpr {
-    return {
-      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: bigint]: Reference;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Reference.fromSDK(value);
-        return acc;
-      }, {}) : {},
-      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: bigint]: Type;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Type.fromSDK(value);
-        return acc;
-      }, {}) : {},
-      sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
-      exprVersion: object?.expr_version,
-      expr: object.expr ? Expr.fromSDK(object.expr) : undefined
-    };
-  },
-  fromSDKJSON(object: any): CheckedExprSDKType {
-    return {
-      reference_map: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: bigint]: Reference;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Reference.fromSDKJSON(value);
-        return acc;
-      }, {}) : {},
-      type_map: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: bigint]: Type;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Type.fromSDKJSON(value);
-        return acc;
-      }, {}) : {},
-      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined,
-      expr_version: isSet(object.expr_version) ? String(object.expr_version) : "",
-      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined
-    };
-  },
-  toSDK(message: CheckedExpr): CheckedExprSDKType {
-    const obj: any = {};
-    obj.reference_map = {};
-    if (message.referenceMap) {
-      Object.entries(message.referenceMap).forEach(([k, v]) => {
-        obj.reference_map[k] = Reference.toSDK(v);
-      });
-    }
-    obj.type_map = {};
-    if (message.typeMap) {
-      Object.entries(message.typeMap).forEach(([k, v]) => {
-        obj.type_map[k] = Type.toSDK(v);
-      });
-    }
-    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
-    obj.expr_version = message.exprVersion;
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
-    return obj;
-  },
-  fromAmino(object: CheckedExprAmino): CheckedExpr {
-    return {
-      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: bigint]: Reference;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Reference.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: bigint]: Type;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Type.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
-      exprVersion: object.expr_version,
-      expr: object?.expr ? Expr.fromAmino(object.expr) : undefined
-    };
-  },
-  toAmino(message: CheckedExpr): CheckedExprAmino {
-    const obj: any = {};
-    obj.reference_map = {};
-    if (message.referenceMap) {
-      Object.entries(message.referenceMap).forEach(([k, v]) => {
-        obj.reference_map[k] = Reference.toAmino(v);
-      });
-    }
-    obj.type_map = {};
-    if (message.typeMap) {
-      Object.entries(message.typeMap).forEach(([k, v]) => {
-        obj.type_map[k] = Type.toAmino(v);
-      });
-    }
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.expr_version = message.exprVersion;
-    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CheckedExprAminoMsg): CheckedExpr {
-    return CheckedExpr.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckedExprProtoMsg): CheckedExpr {
     return CheckedExpr.decode(message.value);
@@ -1079,159 +857,6 @@ export const Type = {
     }
     return message;
   },
-  fromJSON(object: any): Type {
-    const obj = createBaseType();
-    if (isSet(object.dyn)) obj.dyn = Empty.fromJSON(object.dyn);
-    if (isSet(object.null)) obj.null = nullValueFromJSON(object.null);
-    if (isSet(object.primitive)) obj.primitive = type_PrimitiveTypeFromJSON(object.primitive);
-    if (isSet(object.wrapper)) obj.wrapper = type_PrimitiveTypeFromJSON(object.wrapper);
-    if (isSet(object.wellKnown)) obj.wellKnown = type_WellKnownTypeFromJSON(object.wellKnown);
-    if (isSet(object.listType)) obj.listType = Type_ListType.fromJSON(object.listType);
-    if (isSet(object.mapType)) obj.mapType = Type_MapType.fromJSON(object.mapType);
-    if (isSet(object.function)) obj.function = Type_FunctionType.fromJSON(object.function);
-    if (isSet(object.messageType)) obj.messageType = String(object.messageType);
-    if (isSet(object.typeParam)) obj.typeParam = String(object.typeParam);
-    if (isSet(object.type)) obj.type = Type.fromJSON(object.type);
-    if (isSet(object.error)) obj.error = Empty.fromJSON(object.error);
-    if (isSet(object.abstractType)) obj.abstractType = Type_AbstractType.fromJSON(object.abstractType);
-    return obj;
-  },
-  toJSON(message: Type): unknown {
-    const obj: any = {};
-    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
-    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
-    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
-    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
-    message.wellKnown !== undefined && (obj.wellKnown = type_WellKnownTypeToJSON(message.wellKnown));
-    message.listType !== undefined && (obj.listType = message.listType ? Type_ListType.toJSON(message.listType) : undefined);
-    message.mapType !== undefined && (obj.mapType = message.mapType ? Type_MapType.toJSON(message.mapType) : undefined);
-    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toJSON(message.function) : undefined);
-    message.messageType !== undefined && (obj.messageType = message.messageType);
-    message.typeParam !== undefined && (obj.typeParam = message.typeParam);
-    message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
-    message.error !== undefined && (obj.error = message.error ? Empty.toJSON(message.error) : undefined);
-    message.abstractType !== undefined && (obj.abstractType = message.abstractType ? Type_AbstractType.toJSON(message.abstractType) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Type>): Type {
-    const message = createBaseType();
-    if (object.dyn !== undefined && object.dyn !== null) {
-      message.dyn = Empty.fromPartial(object.dyn);
-    }
-    message.null = object.null ?? undefined;
-    message.primitive = object.primitive ?? undefined;
-    message.wrapper = object.wrapper ?? undefined;
-    message.wellKnown = object.wellKnown ?? undefined;
-    if (object.listType !== undefined && object.listType !== null) {
-      message.listType = Type_ListType.fromPartial(object.listType);
-    }
-    if (object.mapType !== undefined && object.mapType !== null) {
-      message.mapType = Type_MapType.fromPartial(object.mapType);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = Type_FunctionType.fromPartial(object.function);
-    }
-    message.messageType = object.messageType ?? undefined;
-    message.typeParam = object.typeParam ?? undefined;
-    if (object.type !== undefined && object.type !== null) {
-      message.type = Type.fromPartial(object.type);
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = Empty.fromPartial(object.error);
-    }
-    if (object.abstractType !== undefined && object.abstractType !== null) {
-      message.abstractType = Type_AbstractType.fromPartial(object.abstractType);
-    }
-    return message;
-  },
-  fromSDK(object: TypeSDKType): Type {
-    return {
-      dyn: object.dyn ? Empty.fromSDK(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
-      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      listType: object.list_type ? Type_ListType.fromSDK(object.list_type) : undefined,
-      mapType: object.map_type ? Type_MapType.fromSDK(object.map_type) : undefined,
-      function: object.function ? Type_FunctionType.fromSDK(object.function) : undefined,
-      messageType: object?.message_type,
-      typeParam: object?.type_param,
-      type: object.type ? Type.fromSDK(object.type) : undefined,
-      error: object.error ? Empty.fromSDK(object.error) : undefined,
-      abstractType: object.abstract_type ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
-    };
-  },
-  fromSDKJSON(object: any): TypeSDKType {
-    return {
-      dyn: isSet(object.dyn) ? Empty.fromSDKJSON(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
-      well_known: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      list_type: isSet(object.list_type) ? Type_ListType.fromSDKJSON(object.list_type) : undefined,
-      map_type: isSet(object.map_type) ? Type_MapType.fromSDKJSON(object.map_type) : undefined,
-      function: isSet(object.function) ? Type_FunctionType.fromSDKJSON(object.function) : undefined,
-      message_type: isSet(object.message_type) ? String(object.message_type) : undefined,
-      type_param: isSet(object.type_param) ? String(object.type_param) : undefined,
-      type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
-      error: isSet(object.error) ? Empty.fromSDKJSON(object.error) : undefined,
-      abstract_type: isSet(object.abstract_type) ? Type_AbstractType.fromSDKJSON(object.abstract_type) : undefined
-    };
-  },
-  toSDK(message: Type): TypeSDKType {
-    const obj: any = {};
-    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toSDK(message.dyn) : undefined);
-    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
-    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
-    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
-    message.wellKnown !== undefined && (obj.well_known = type_WellKnownTypeToJSON(message.wellKnown));
-    message.listType !== undefined && (obj.list_type = message.listType ? Type_ListType.toSDK(message.listType) : undefined);
-    message.mapType !== undefined && (obj.map_type = message.mapType ? Type_MapType.toSDK(message.mapType) : undefined);
-    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toSDK(message.function) : undefined);
-    obj.message_type = message.messageType;
-    obj.type_param = message.typeParam;
-    message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
-    message.error !== undefined && (obj.error = message.error ? Empty.toSDK(message.error) : undefined);
-    message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
-    return obj;
-  },
-  fromAmino(object: TypeAmino): Type {
-    return {
-      dyn: object?.dyn ? Empty.fromAmino(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
-      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      listType: object?.list_type ? Type_ListType.fromAmino(object.list_type) : undefined,
-      mapType: object?.map_type ? Type_MapType.fromAmino(object.map_type) : undefined,
-      function: object?.function ? Type_FunctionType.fromAmino(object.function) : undefined,
-      messageType: object?.message_type,
-      typeParam: object?.type_param,
-      type: object?.type ? Type.fromAmino(object.type) : undefined,
-      error: object?.error ? Empty.fromAmino(object.error) : undefined,
-      abstractType: object?.abstract_type ? Type_AbstractType.fromAmino(object.abstract_type) : undefined
-    };
-  },
-  toAmino(message: Type): TypeAmino {
-    const obj: any = {};
-    obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
-    obj.null = message.null;
-    obj.primitive = message.primitive;
-    obj.wrapper = message.wrapper;
-    obj.well_known = message.wellKnown;
-    obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
-    obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
-    obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
-    obj.message_type = message.messageType;
-    obj.type_param = message.typeParam;
-    obj.type = message.type ? Type.toAmino(message.type) : undefined;
-    obj.error = message.error ? Empty.toAmino(message.error) : undefined;
-    obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: TypeAminoMsg): Type {
-    return Type.fromAmino(object.value);
-  },
   fromProtoMsg(message: TypeProtoMsg): Type {
     return Type.decode(message.value);
   },
@@ -1274,51 +899,6 @@ export const Type_ListType = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Type_ListType {
-    const obj = createBaseType_ListType();
-    if (isSet(object.elemType)) obj.elemType = Type.fromJSON(object.elemType);
-    return obj;
-  },
-  toJSON(message: Type_ListType): unknown {
-    const obj: any = {};
-    message.elemType !== undefined && (obj.elemType = message.elemType ? Type.toJSON(message.elemType) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Type_ListType>): Type_ListType {
-    const message = createBaseType_ListType();
-    if (object.elemType !== undefined && object.elemType !== null) {
-      message.elemType = Type.fromPartial(object.elemType);
-    }
-    return message;
-  },
-  fromSDK(object: Type_ListTypeSDKType): Type_ListType {
-    return {
-      elemType: object.elem_type ? Type.fromSDK(object.elem_type) : undefined
-    };
-  },
-  fromSDKJSON(object: any): Type_ListTypeSDKType {
-    return {
-      elem_type: isSet(object.elem_type) ? Type.fromSDKJSON(object.elem_type) : undefined
-    };
-  },
-  toSDK(message: Type_ListType): Type_ListTypeSDKType {
-    const obj: any = {};
-    message.elemType !== undefined && (obj.elem_type = message.elemType ? Type.toSDK(message.elemType) : undefined);
-    return obj;
-  },
-  fromAmino(object: Type_ListTypeAmino): Type_ListType {
-    return {
-      elemType: object?.elem_type ? Type.fromAmino(object.elem_type) : undefined
-    };
-  },
-  toAmino(message: Type_ListType): Type_ListTypeAmino {
-    const obj: any = {};
-    obj.elem_type = message.elemType ? Type.toAmino(message.elemType) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Type_ListTypeAminoMsg): Type_ListType {
-    return Type_ListType.fromAmino(object.value);
   },
   fromProtoMsg(message: Type_ListTypeProtoMsg): Type_ListType {
     return Type_ListType.decode(message.value);
@@ -1370,61 +950,6 @@ export const Type_MapType = {
     }
     return message;
   },
-  fromJSON(object: any): Type_MapType {
-    const obj = createBaseType_MapType();
-    if (isSet(object.keyType)) obj.keyType = Type.fromJSON(object.keyType);
-    if (isSet(object.valueType)) obj.valueType = Type.fromJSON(object.valueType);
-    return obj;
-  },
-  toJSON(message: Type_MapType): unknown {
-    const obj: any = {};
-    message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
-    message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
-    const message = createBaseType_MapType();
-    if (object.keyType !== undefined && object.keyType !== null) {
-      message.keyType = Type.fromPartial(object.keyType);
-    }
-    if (object.valueType !== undefined && object.valueType !== null) {
-      message.valueType = Type.fromPartial(object.valueType);
-    }
-    return message;
-  },
-  fromSDK(object: Type_MapTypeSDKType): Type_MapType {
-    return {
-      keyType: object.key_type ? Type.fromSDK(object.key_type) : undefined,
-      valueType: object.value_type ? Type.fromSDK(object.value_type) : undefined
-    };
-  },
-  fromSDKJSON(object: any): Type_MapTypeSDKType {
-    return {
-      key_type: isSet(object.key_type) ? Type.fromSDKJSON(object.key_type) : undefined,
-      value_type: isSet(object.value_type) ? Type.fromSDKJSON(object.value_type) : undefined
-    };
-  },
-  toSDK(message: Type_MapType): Type_MapTypeSDKType {
-    const obj: any = {};
-    message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
-    message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
-    return obj;
-  },
-  fromAmino(object: Type_MapTypeAmino): Type_MapType {
-    return {
-      keyType: object?.key_type ? Type.fromAmino(object.key_type) : undefined,
-      valueType: object?.value_type ? Type.fromAmino(object.value_type) : undefined
-    };
-  },
-  toAmino(message: Type_MapType): Type_MapTypeAmino {
-    const obj: any = {};
-    obj.key_type = message.keyType ? Type.toAmino(message.keyType) : undefined;
-    obj.value_type = message.valueType ? Type.toAmino(message.valueType) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Type_MapTypeAminoMsg): Type_MapType {
-    return Type_MapType.fromAmino(object.value);
-  },
   fromProtoMsg(message: Type_MapTypeProtoMsg): Type_MapType {
     return Type_MapType.decode(message.value);
   },
@@ -1475,71 +1000,6 @@ export const Type_FunctionType = {
     }
     return message;
   },
-  fromJSON(object: any): Type_FunctionType {
-    const obj = createBaseType_FunctionType();
-    if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
-    if (Array.isArray(object?.argTypes)) obj.argTypes = object.argTypes.map((e: any) => Type.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Type_FunctionType): unknown {
-    const obj: any = {};
-    message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
-    if (message.argTypes) {
-      obj.argTypes = message.argTypes.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.argTypes = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Type_FunctionType>): Type_FunctionType {
-    const message = createBaseType_FunctionType();
-    if (object.resultType !== undefined && object.resultType !== null) {
-      message.resultType = Type.fromPartial(object.resultType);
-    }
-    message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Type_FunctionTypeSDKType): Type_FunctionType {
-    return {
-      resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
-      argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Type_FunctionTypeSDKType {
-    return {
-      result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
-      arg_types: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Type_FunctionType): Type_FunctionTypeSDKType {
-    const obj: any = {};
-    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
-    if (message.argTypes) {
-      obj.arg_types = message.argTypes.map(e => e ? Type.toSDK(e) : undefined);
-    } else {
-      obj.arg_types = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Type_FunctionTypeAmino): Type_FunctionType {
-    return {
-      resultType: object?.result_type ? Type.fromAmino(object.result_type) : undefined,
-      argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Type_FunctionType): Type_FunctionTypeAmino {
-    const obj: any = {};
-    obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
-    if (message.argTypes) {
-      obj.arg_types = message.argTypes.map(e => e ? Type.toAmino(e) : undefined);
-    } else {
-      obj.arg_types = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Type_FunctionTypeAminoMsg): Type_FunctionType {
-    return Type_FunctionType.fromAmino(object.value);
-  },
   fromProtoMsg(message: Type_FunctionTypeProtoMsg): Type_FunctionType {
     return Type_FunctionType.decode(message.value);
   },
@@ -1589,69 +1049,6 @@ export const Type_AbstractType = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Type_AbstractType {
-    const obj = createBaseType_AbstractType();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.parameterTypes)) obj.parameterTypes = object.parameterTypes.map((e: any) => Type.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Type_AbstractType): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.parameterTypes) {
-      obj.parameterTypes = message.parameterTypes.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.parameterTypes = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Type_AbstractType>): Type_AbstractType {
-    const message = createBaseType_AbstractType();
-    message.name = object.name ?? "";
-    message.parameterTypes = object.parameterTypes?.map(e => Type.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Type_AbstractTypeSDKType): Type_AbstractType {
-    return {
-      name: object?.name,
-      parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Type_AbstractTypeSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parameter_types: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Type_AbstractType): Type_AbstractTypeSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.parameterTypes) {
-      obj.parameter_types = message.parameterTypes.map(e => e ? Type.toSDK(e) : undefined);
-    } else {
-      obj.parameter_types = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Type_AbstractTypeAmino): Type_AbstractType {
-    return {
-      name: object.name,
-      parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Type_AbstractType): Type_AbstractTypeAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.parameterTypes) {
-      obj.parameter_types = message.parameterTypes.map(e => e ? Type.toAmino(e) : undefined);
-    } else {
-      obj.parameter_types = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Type_AbstractTypeAminoMsg): Type_AbstractType {
-    return Type_AbstractType.fromAmino(object.value);
   },
   fromProtoMsg(message: Type_AbstractTypeProtoMsg): Type_AbstractType {
     return Type_AbstractType.decode(message.value);
@@ -1710,69 +1107,6 @@ export const Decl = {
     }
     return message;
   },
-  fromJSON(object: any): Decl {
-    const obj = createBaseDecl();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.ident)) obj.ident = Decl_IdentDecl.fromJSON(object.ident);
-    if (isSet(object.function)) obj.function = Decl_FunctionDecl.fromJSON(object.function);
-    return obj;
-  },
-  toJSON(message: Decl): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toJSON(message.ident) : undefined);
-    message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toJSON(message.function) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Decl>): Decl {
-    const message = createBaseDecl();
-    message.name = object.name ?? "";
-    if (object.ident !== undefined && object.ident !== null) {
-      message.ident = Decl_IdentDecl.fromPartial(object.ident);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = Decl_FunctionDecl.fromPartial(object.function);
-    }
-    return message;
-  },
-  fromSDK(object: DeclSDKType): Decl {
-    return {
-      name: object?.name,
-      ident: object.ident ? Decl_IdentDecl.fromSDK(object.ident) : undefined,
-      function: object.function ? Decl_FunctionDecl.fromSDK(object.function) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DeclSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      ident: isSet(object.ident) ? Decl_IdentDecl.fromSDKJSON(object.ident) : undefined,
-      function: isSet(object.function) ? Decl_FunctionDecl.fromSDKJSON(object.function) : undefined
-    };
-  },
-  toSDK(message: Decl): DeclSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toSDK(message.ident) : undefined);
-    message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toSDK(message.function) : undefined);
-    return obj;
-  },
-  fromAmino(object: DeclAmino): Decl {
-    return {
-      name: object.name,
-      ident: object?.ident ? Decl_IdentDecl.fromAmino(object.ident) : undefined,
-      function: object?.function ? Decl_FunctionDecl.fromAmino(object.function) : undefined
-    };
-  },
-  toAmino(message: Decl): DeclAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident) : undefined;
-    obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeclAminoMsg): Decl {
-    return Decl.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeclProtoMsg): Decl {
     return Decl.decode(message.value);
   },
@@ -1830,69 +1164,6 @@ export const Decl_IdentDecl = {
     }
     return message;
   },
-  fromJSON(object: any): Decl_IdentDecl {
-    const obj = createBaseDecl_IdentDecl();
-    if (isSet(object.type)) obj.type = Type.fromJSON(object.type);
-    if (isSet(object.value)) obj.value = Constant.fromJSON(object.value);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    return obj;
-  },
-  toJSON(message: Decl_IdentDecl): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
-    message.doc !== undefined && (obj.doc = message.doc);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Decl_IdentDecl>): Decl_IdentDecl {
-    const message = createBaseDecl_IdentDecl();
-    if (object.type !== undefined && object.type !== null) {
-      message.type = Type.fromPartial(object.type);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Constant.fromPartial(object.value);
-    }
-    message.doc = object.doc ?? "";
-    return message;
-  },
-  fromSDK(object: Decl_IdentDeclSDKType): Decl_IdentDecl {
-    return {
-      type: object.type ? Type.fromSDK(object.type) : undefined,
-      value: object.value ? Constant.fromSDK(object.value) : undefined,
-      doc: object?.doc
-    };
-  },
-  fromSDKJSON(object: any): Decl_IdentDeclSDKType {
-    return {
-      type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
-      value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined,
-      doc: isSet(object.doc) ? String(object.doc) : ""
-    };
-  },
-  toSDK(message: Decl_IdentDecl): Decl_IdentDeclSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
-    obj.doc = message.doc;
-    return obj;
-  },
-  fromAmino(object: Decl_IdentDeclAmino): Decl_IdentDecl {
-    return {
-      type: object?.type ? Type.fromAmino(object.type) : undefined,
-      value: object?.value ? Constant.fromAmino(object.value) : undefined,
-      doc: object.doc
-    };
-  },
-  toAmino(message: Decl_IdentDecl): Decl_IdentDeclAmino {
-    const obj: any = {};
-    obj.type = message.type ? Type.toAmino(message.type) : undefined;
-    obj.value = message.value ? Constant.toAmino(message.value) : undefined;
-    obj.doc = message.doc;
-    return obj;
-  },
-  fromAminoMsg(object: Decl_IdentDeclAminoMsg): Decl_IdentDecl {
-    return Decl_IdentDecl.fromAmino(object.value);
-  },
   fromProtoMsg(message: Decl_IdentDeclProtoMsg): Decl_IdentDecl {
     return Decl_IdentDecl.decode(message.value);
   },
@@ -1935,61 +1206,6 @@ export const Decl_FunctionDecl = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Decl_FunctionDecl {
-    const obj = createBaseDecl_FunctionDecl();
-    if (Array.isArray(object?.overloads)) obj.overloads = object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Decl_FunctionDecl): unknown {
-    const obj: any = {};
-    if (message.overloads) {
-      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined);
-    } else {
-      obj.overloads = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Decl_FunctionDecl>): Decl_FunctionDecl {
-    const message = createBaseDecl_FunctionDecl();
-    message.overloads = object.overloads?.map(e => Decl_FunctionDecl_Overload.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: Decl_FunctionDeclSDKType): Decl_FunctionDecl {
-    return {
-      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): Decl_FunctionDeclSDKType {
-    return {
-      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Decl_FunctionDecl): Decl_FunctionDeclSDKType {
-    const obj: any = {};
-    if (message.overloads) {
-      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toSDK(e) : undefined);
-    } else {
-      obj.overloads = [];
-    }
-    return obj;
-  },
-  fromAmino(object: Decl_FunctionDeclAmino): Decl_FunctionDecl {
-    return {
-      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Decl_FunctionDecl): Decl_FunctionDeclAmino {
-    const obj: any = {};
-    if (message.overloads) {
-      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toAmino(e) : undefined);
-    } else {
-      obj.overloads = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Decl_FunctionDeclAminoMsg): Decl_FunctionDecl {
-    return Decl_FunctionDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: Decl_FunctionDeclProtoMsg): Decl_FunctionDecl {
     return Decl_FunctionDecl.decode(message.value);
@@ -2069,115 +1285,6 @@ export const Decl_FunctionDecl_Overload = {
     }
     return message;
   },
-  fromJSON(object: any): Decl_FunctionDecl_Overload {
-    const obj = createBaseDecl_FunctionDecl_Overload();
-    if (isSet(object.overloadId)) obj.overloadId = String(object.overloadId);
-    if (Array.isArray(object?.params)) obj.params = object.params.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => String(e));
-    if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
-    if (isSet(object.isInstanceFunction)) obj.isInstanceFunction = Boolean(object.isInstanceFunction);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    return obj;
-  },
-  toJSON(message: Decl_FunctionDecl_Overload): unknown {
-    const obj: any = {};
-    message.overloadId !== undefined && (obj.overloadId = message.overloadId);
-    if (message.params) {
-      obj.params = message.params.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.params = [];
-    }
-    if (message.typeParams) {
-      obj.typeParams = message.typeParams.map(e => e);
-    } else {
-      obj.typeParams = [];
-    }
-    message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
-    message.isInstanceFunction !== undefined && (obj.isInstanceFunction = message.isInstanceFunction);
-    message.doc !== undefined && (obj.doc = message.doc);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
-    const message = createBaseDecl_FunctionDecl_Overload();
-    message.overloadId = object.overloadId ?? "";
-    message.params = object.params?.map(e => Type.fromPartial(e)) || [];
-    message.typeParams = object.typeParams?.map(e => e) || [];
-    if (object.resultType !== undefined && object.resultType !== null) {
-      message.resultType = Type.fromPartial(object.resultType);
-    }
-    message.isInstanceFunction = object.isInstanceFunction ?? false;
-    message.doc = object.doc ?? "";
-    return message;
-  },
-  fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
-    return {
-      overloadId: object?.overload_id,
-      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
-      resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
-      isInstanceFunction: object?.is_instance_function,
-      doc: object?.doc
-    };
-  },
-  fromSDKJSON(object: any): Decl_FunctionDecl_OverloadSDKType {
-    return {
-      overload_id: isSet(object.overload_id) ? String(object.overload_id) : "",
-      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDKJSON(e)) : [],
-      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => String(e)) : [],
-      result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
-      is_instance_function: isSet(object.is_instance_function) ? Boolean(object.is_instance_function) : false,
-      doc: isSet(object.doc) ? String(object.doc) : ""
-    };
-  },
-  toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
-    const obj: any = {};
-    obj.overload_id = message.overloadId;
-    if (message.params) {
-      obj.params = message.params.map(e => e ? Type.toSDK(e) : undefined);
-    } else {
-      obj.params = [];
-    }
-    if (message.typeParams) {
-      obj.type_params = message.typeParams.map(e => e);
-    } else {
-      obj.type_params = [];
-    }
-    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
-    obj.is_instance_function = message.isInstanceFunction;
-    obj.doc = message.doc;
-    return obj;
-  },
-  fromAmino(object: Decl_FunctionDecl_OverloadAmino): Decl_FunctionDecl_Overload {
-    return {
-      overloadId: object.overload_id,
-      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromAmino(e)) : [],
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
-      resultType: object?.result_type ? Type.fromAmino(object.result_type) : undefined,
-      isInstanceFunction: object.is_instance_function,
-      doc: object.doc
-    };
-  },
-  toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadAmino {
-    const obj: any = {};
-    obj.overload_id = message.overloadId;
-    if (message.params) {
-      obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
-    } else {
-      obj.params = [];
-    }
-    if (message.typeParams) {
-      obj.type_params = message.typeParams.map(e => e);
-    } else {
-      obj.type_params = [];
-    }
-    obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
-    obj.is_instance_function = message.isInstanceFunction;
-    obj.doc = message.doc;
-    return obj;
-  },
-  fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
-    return Decl_FunctionDecl_Overload.fromAmino(object.value);
-  },
   fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg): Decl_FunctionDecl_Overload {
     return Decl_FunctionDecl_Overload.decode(message.value);
   },
@@ -2234,79 +1341,6 @@ export const Reference = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Reference {
-    const obj = createBaseReference();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.overloadId)) obj.overloadId = object.overloadId.map((e: any) => String(e));
-    if (isSet(object.value)) obj.value = Constant.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: Reference): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.overloadId) {
-      obj.overloadId = message.overloadId.map(e => e);
-    } else {
-      obj.overloadId = [];
-    }
-    message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Reference>): Reference {
-    const message = createBaseReference();
-    message.name = object.name ?? "";
-    message.overloadId = object.overloadId?.map(e => e) || [];
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Constant.fromPartial(object.value);
-    }
-    return message;
-  },
-  fromSDK(object: ReferenceSDKType): Reference {
-    return {
-      name: object?.name,
-      overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
-      value: object.value ? Constant.fromSDK(object.value) : undefined
-    };
-  },
-  fromSDKJSON(object: any): ReferenceSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      overload_id: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => String(e)) : [],
-      value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined
-    };
-  },
-  toSDK(message: Reference): ReferenceSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.overloadId) {
-      obj.overload_id = message.overloadId.map(e => e);
-    } else {
-      obj.overload_id = [];
-    }
-    message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
-    return obj;
-  },
-  fromAmino(object: ReferenceAmino): Reference {
-    return {
-      name: object.name,
-      overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
-      value: object?.value ? Constant.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: Reference): ReferenceAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.overloadId) {
-      obj.overload_id = message.overloadId.map(e => e);
-    } else {
-      obj.overload_id = [];
-    }
-    obj.value = message.value ? Constant.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ReferenceAminoMsg): Reference {
-    return Reference.fromAmino(object.value);
   },
   fromProtoMsg(message: ReferenceProtoMsg): Reference {
     return Reference.decode(message.value);

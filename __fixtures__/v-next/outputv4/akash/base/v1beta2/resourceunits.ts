@@ -13,6 +13,10 @@ export interface ResourceUnits {
   storage: Storage[];
   endpoints: Endpoint[];
 }
+export interface ResourceUnitsProtoMsg {
+  typeUrl: "/akash.base.v1beta2.ResourceUnits";
+  value: Uint8Array;
+}
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure

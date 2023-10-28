@@ -19,6 +19,10 @@ export interface FullTick {
   /** tick's info. */
   info: TickInfo;
 }
+export interface FullTickProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.FullTick";
+  value: Uint8Array;
+}
 /**
  * FullTick contains tick index and pool id along with other tick model
  * information.
@@ -42,6 +46,10 @@ export interface PoolData {
   /** incentive records to be set */
   incentiveRecords: IncentiveRecord[];
 }
+export interface PoolDataProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.PoolData";
+  value: Uint8Array;
+}
 /**
  * PoolData represents a serialized pool along with its ticks
  * for genesis state.
@@ -62,6 +70,10 @@ export interface GenesisState {
   positions: Position[];
   nextPositionId: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the concentrated liquidity module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -73,6 +85,10 @@ export interface AccumObject {
   /** Accumulator's name (pulled from AccumulatorContent) */
   name: string;
   accumContent?: AccumulatorContent;
+}
+export interface AccumObjectProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.AccumObject";
+  value: Uint8Array;
 }
 export interface AccumObjectSDKType {
   name: string;

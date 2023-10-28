@@ -19,6 +19,10 @@ export interface AppDescriptor {
   /** tx provides metadata information regarding how to send transactions to the given application */
   tx?: TxDescriptor;
 }
+export interface AppDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.AppDescriptor";
+  value: Uint8Array;
+}
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptorSDKType {
   authn?: AuthnDescriptorSDKType;
@@ -39,6 +43,10 @@ export interface TxDescriptor {
   /** msgs lists the accepted application messages (sdk.Msg) */
   msgs: MsgDescriptor[];
 }
+export interface TxDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.TxDescriptor";
+  value: Uint8Array;
+}
 /** TxDescriptor describes the accepted transaction type */
 export interface TxDescriptorSDKType {
   fullname: string;
@@ -51,6 +59,10 @@ export interface TxDescriptorSDKType {
 export interface AuthnDescriptor {
   /** sign_modes defines the supported signature algorithm */
   signModes: SigningModeDescriptor[];
+}
+export interface AuthnDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.AuthnDescriptor";
+  value: Uint8Array;
 }
 /**
  * AuthnDescriptor provides information on how to sign transactions without relying
@@ -76,6 +88,10 @@ export interface SigningModeDescriptor {
    */
   authnInfoProviderMethodFullname: string;
 }
+export interface SigningModeDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.SigningModeDescriptor";
+  value: Uint8Array;
+}
 /**
  * SigningModeDescriptor provides information on a signing flow of the application
  * NOTE(fdymylja): here we could go as far as providing an entire flow on how
@@ -92,6 +108,10 @@ export interface ChainDescriptor {
   /** id is the chain id */
   id: string;
 }
+export interface ChainDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.ChainDescriptor";
+  value: Uint8Array;
+}
 /** ChainDescriptor describes chain information of the application */
 export interface ChainDescriptorSDKType {
   id: string;
@@ -100,6 +120,10 @@ export interface ChainDescriptorSDKType {
 export interface CodecDescriptor {
   /** interfaces is a list of the registerted interfaces descriptors */
   interfaces: InterfaceDescriptor[];
+}
+export interface CodecDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.CodecDescriptor";
+  value: Uint8Array;
 }
 /** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
 export interface CodecDescriptorSDKType {
@@ -116,6 +140,10 @@ export interface InterfaceDescriptor {
   interfaceAcceptingMessages: InterfaceAcceptingMessageDescriptor[];
   /** interface_implementers is a list of the descriptors of the interface implementers */
   interfaceImplementers: InterfaceImplementerDescriptor[];
+}
+export interface InterfaceDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceDescriptor";
+  value: Uint8Array;
 }
 /** InterfaceDescriptor describes the implementation of an interface */
 export interface InterfaceDescriptorSDKType {
@@ -134,6 +162,10 @@ export interface InterfaceImplementerDescriptor {
    * in our interface fields
    */
   typeUrl: string;
+}
+export interface InterfaceImplementerDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor";
+  value: Uint8Array;
 }
 /** InterfaceImplementerDescriptor describes an interface implementer */
 export interface InterfaceImplementerDescriptorSDKType {
@@ -154,6 +186,10 @@ export interface InterfaceAcceptingMessageDescriptor {
    */
   fieldDescriptorNames: string[];
 }
+export interface InterfaceAcceptingMessageDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor";
+  value: Uint8Array;
+}
 /**
  * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
  * an interface represented as a google.protobuf.Any
@@ -167,6 +203,10 @@ export interface ConfigurationDescriptor {
   /** bech32_account_address_prefix is the account address prefix */
   bech32AccountAddressPrefix: string;
 }
+export interface ConfigurationDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.ConfigurationDescriptor";
+  value: Uint8Array;
+}
 /** ConfigurationDescriptor contains metadata information on the sdk.Config */
 export interface ConfigurationDescriptorSDKType {
   bech32_account_address_prefix: string;
@@ -176,12 +216,20 @@ export interface MsgDescriptor {
   /** msg_type_url contains the TypeURL of a sdk.Msg. */
   msgTypeUrl: string;
 }
+export interface MsgDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.MsgDescriptor";
+  value: Uint8Array;
+}
 /** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
 export interface MsgDescriptorSDKType {
   msg_type_url: string;
 }
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequest {}
+export interface GetAuthnDescriptorRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest";
+  value: Uint8Array;
+}
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequestSDKType {}
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
@@ -189,12 +237,20 @@ export interface GetAuthnDescriptorResponse {
   /** authn describes how to authenticate to the application when sending transactions */
   authn?: AuthnDescriptor;
 }
+export interface GetAuthnDescriptorResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse";
+  value: Uint8Array;
+}
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponseSDKType {
   authn?: AuthnDescriptorSDKType;
 }
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequest {}
+export interface GetChainDescriptorRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest";
+  value: Uint8Array;
+}
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequestSDKType {}
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
@@ -202,12 +258,20 @@ export interface GetChainDescriptorResponse {
   /** chain describes application chain information */
   chain?: ChainDescriptor;
 }
+export interface GetChainDescriptorResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse";
+  value: Uint8Array;
+}
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponseSDKType {
   chain?: ChainDescriptorSDKType;
 }
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequest {}
+export interface GetCodecDescriptorRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest";
+  value: Uint8Array;
+}
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequestSDKType {}
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
@@ -215,12 +279,20 @@ export interface GetCodecDescriptorResponse {
   /** codec describes the application codec such as registered interfaces and implementations */
   codec?: CodecDescriptor;
 }
+export interface GetCodecDescriptorResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse";
+  value: Uint8Array;
+}
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponseSDKType {
   codec?: CodecDescriptorSDKType;
 }
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequest {}
+export interface GetConfigurationDescriptorRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest";
+  value: Uint8Array;
+}
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequestSDKType {}
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
@@ -228,12 +300,20 @@ export interface GetConfigurationDescriptorResponse {
   /** config describes the application's sdk.Config */
   config?: ConfigurationDescriptor;
 }
+export interface GetConfigurationDescriptorResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse";
+  value: Uint8Array;
+}
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponseSDKType {
   config?: ConfigurationDescriptorSDKType;
 }
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequest {}
+export interface GetQueryServicesDescriptorRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest";
+  value: Uint8Array;
+}
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequestSDKType {}
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
@@ -241,12 +321,20 @@ export interface GetQueryServicesDescriptorResponse {
   /** queries provides information on the available queryable services */
   queries?: QueryServicesDescriptor;
 }
+export interface GetQueryServicesDescriptorResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse";
+  value: Uint8Array;
+}
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponseSDKType {
   queries?: QueryServicesDescriptorSDKType;
 }
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequest {}
+export interface GetTxDescriptorRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest";
+  value: Uint8Array;
+}
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequestSDKType {}
 /** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
@@ -257,6 +345,10 @@ export interface GetTxDescriptorResponse {
    */
   tx?: TxDescriptor;
 }
+export interface GetTxDescriptorResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse";
+  value: Uint8Array;
+}
 /** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
 export interface GetTxDescriptorResponseSDKType {
   tx?: TxDescriptorSDKType;
@@ -265,6 +357,10 @@ export interface GetTxDescriptorResponseSDKType {
 export interface QueryServicesDescriptor {
   /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
   queryServices: QueryServiceDescriptor[];
+}
+export interface QueryServicesDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServicesDescriptor";
+  value: Uint8Array;
 }
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptorSDKType {
@@ -278,6 +374,10 @@ export interface QueryServiceDescriptor {
   isModule: boolean;
   /** methods provides a list of query service methods */
   methods: QueryMethodDescriptor[];
+}
+export interface QueryServiceDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServiceDescriptor";
+  value: Uint8Array;
 }
 /** QueryServiceDescriptor describes a cosmos-sdk queryable service */
 export interface QueryServiceDescriptorSDKType {
@@ -298,6 +398,10 @@ export interface QueryMethodDescriptor {
    * this method via tendermint abci.Query
    */
   fullQueryPath: string;
+}
+export interface QueryMethodDescriptorProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v2alpha1.QueryMethodDescriptor";
+  value: Uint8Array;
 }
 /**
  * QueryMethodDescriptor describes a queryable method of a query service

@@ -8,6 +8,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.lockup.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.lockup.Params";
+  value: Uint8Array;
+}
 export interface ParamsAmino {
   force_unlock_allowed_addresses: string[];
 }

@@ -57,6 +57,10 @@ export interface ClaimRecord {
    */
   actionCompleted: boolean[];
 }
+export interface ClaimRecordProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
+  value: Uint8Array;
+}
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
   address: string;

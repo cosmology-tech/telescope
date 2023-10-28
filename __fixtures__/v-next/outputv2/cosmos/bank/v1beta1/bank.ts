@@ -11,6 +11,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the bank module. */
 export interface ParamsAmino {
   send_enabled: SendEnabledAmino[];
@@ -32,6 +36,10 @@ export interface ParamsSDKType {
 export interface SendEnabled {
   denom: string;
   enabled: boolean;
+}
+export interface SendEnabledProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
+  value: Uint8Array;
 }
 export interface SendEnabledProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
@@ -66,6 +74,10 @@ export interface InputProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Input";
   value: Uint8Array;
 }
+export interface InputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Input";
+  value: Uint8Array;
+}
 /** Input models transaction input. */
 export interface InputAmino {
   address: string;
@@ -84,6 +96,10 @@ export interface InputSDKType {
 export interface Output {
   address: string;
   coins: Coin[];
+}
+export interface OutputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Output";
+  value: Uint8Array;
 }
 export interface OutputProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Output";
@@ -112,6 +128,10 @@ export interface OutputSDKType {
 export interface Supply {
   $typeUrl?: "/cosmos.bank.v1beta1.Supply";
   total: Coin[];
+}
+export interface SupplyProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Supply";
+  value: Uint8Array;
 }
 export interface SupplyProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Supply";
@@ -157,6 +177,10 @@ export interface DenomUnit {
   exponent: number;
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
+}
+export interface DenomUnitProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
+  value: Uint8Array;
 }
 export interface DenomUnitProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
@@ -234,6 +258,10 @@ export interface Metadata {
    * Since: cosmos-sdk 0.46
    */
   uriHash: string;
+}
+export interface MetadataProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Metadata";
+  value: Uint8Array;
 }
 export interface MetadataProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Metadata";

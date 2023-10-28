@@ -121,6 +121,10 @@ export interface GetTxsEventRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest";
   value: Uint8Array;
 }
+export interface GetTxsEventRequestProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest";
+  value: Uint8Array;
+}
 /**
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
  * RPC method.
@@ -156,6 +160,10 @@ export interface GetTxsEventResponse {
   txResponses: TxResponse[];
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
+}
+export interface GetTxsEventResponseProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse";
+  value: Uint8Array;
 }
 export interface GetTxsEventResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse";
@@ -199,6 +207,10 @@ export interface BroadcastTxRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest";
   value: Uint8Array;
 }
+export interface BroadcastTxRequestProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest";
+  value: Uint8Array;
+}
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
  * RPC method.
@@ -227,6 +239,10 @@ export interface BroadcastTxRequestSDKType {
 export interface BroadcastTxResponse {
   /** tx_response is the queried TxResponses. */
   txResponse?: TxResponse;
+}
+export interface BroadcastTxResponseProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse";
+  value: Uint8Array;
 }
 export interface BroadcastTxResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse";
@@ -268,6 +284,10 @@ export interface SimulateRequest {
    * Since: cosmos-sdk 0.43
    */
   txBytes: Uint8Array;
+}
+export interface SimulateRequestProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.SimulateRequest";
+  value: Uint8Array;
 }
 export interface SimulateRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.SimulateRequest";
@@ -318,6 +338,10 @@ export interface SimulateResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.SimulateResponse";
   value: Uint8Array;
 }
+export interface SimulateResponseProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.SimulateResponse";
+  value: Uint8Array;
+}
 /**
  * SimulateResponse is the response type for the
  * Service.SimulateRPC method.
@@ -347,6 +371,10 @@ export interface SimulateResponseSDKType {
 export interface GetTxRequest {
   /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
+}
+export interface GetTxRequestProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxRequest";
+  value: Uint8Array;
 }
 export interface GetTxRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxRequest";
@@ -382,6 +410,10 @@ export interface GetTxResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxResponse";
   value: Uint8Array;
 }
+export interface GetTxResponseProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxResponse";
+  value: Uint8Array;
+}
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseAmino {
   /** tx is the queried transaction. */
@@ -409,6 +441,10 @@ export interface GetBlockWithTxsRequest {
   height: bigint;
   /** pagination defines a pagination for the request. */
   pagination?: PageRequest;
+}
+export interface GetBlockWithTxsRequestProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest";
+  value: Uint8Array;
 }
 export interface GetBlockWithTxsRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest";
@@ -452,6 +488,10 @@ export interface GetBlockWithTxsResponse {
   block?: Block;
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
+}
+export interface GetBlockWithTxsResponseProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse";
+  value: Uint8Array;
 }
 export interface GetBlockWithTxsResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse";

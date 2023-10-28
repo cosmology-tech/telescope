@@ -37,6 +37,10 @@ export interface VisibilityProtoMsg {
   typeUrl: "/google.api.Visibility";
   value: Uint8Array;
 }
+export interface VisibilityProtoMsg {
+  typeUrl: "/google.api.Visibility";
+  value: Uint8Array;
+}
 /**
  * `Visibility` defines restrictions for the visibility of service
  * elements.  Restrictions are specified using visibility labels
@@ -129,6 +133,10 @@ export interface VisibilityRule {
    * this method and only had access to it through INTERNAL.
    */
   restriction: string;
+}
+export interface VisibilityRuleProtoMsg {
+  typeUrl: "/google.api.VisibilityRule";
+  value: Uint8Array;
 }
 export interface VisibilityRuleProtoMsg {
   typeUrl: "/google.api.VisibilityRule";

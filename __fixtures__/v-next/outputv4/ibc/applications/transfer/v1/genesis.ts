@@ -8,6 +8,10 @@ export interface GenesisState {
   denomTraces: DenomTrace[];
   params: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisStateSDKType {
   port_id: string;

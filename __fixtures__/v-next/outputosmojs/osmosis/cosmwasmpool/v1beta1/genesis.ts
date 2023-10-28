@@ -3,12 +3,20 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** Params holds parameters for the cosmwasmpool module */
 export interface Params {}
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the cosmwasmpool module */
 export interface ParamsSDKType {}
 /** GenesisState defines the cosmwasmpool module's genesis state. */
 export interface GenesisState {
   /** params is the container of cosmwasmpool parameters. */
   params: Params;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the cosmwasmpool module's genesis state. */
 export interface GenesisStateSDKType {

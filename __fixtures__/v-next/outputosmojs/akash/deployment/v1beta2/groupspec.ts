@@ -9,6 +9,10 @@ export interface GroupSpec {
   requirements: PlacementRequirements;
   resources: Resource[];
 }
+export interface GroupSpecProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupSpec";
+  value: Uint8Array;
+}
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;

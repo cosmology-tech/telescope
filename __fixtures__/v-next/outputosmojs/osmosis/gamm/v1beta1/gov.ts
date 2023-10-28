@@ -12,6 +12,10 @@ export interface ReplaceMigrationRecordsProposal {
   title: string;
   description: string;
 }
+export interface ReplaceMigrationRecordsProposalProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.ReplaceMigrationRecordsProposal";
+  value: Uint8Array;
+}
 /**
  * ReplaceMigrationRecordsProposal is a gov Content type for updating the
  * migration records. If a ReplaceMigrationRecordsProposal passes, the
@@ -36,6 +40,10 @@ export interface ReplaceMigrationRecordsProposalSDKType {
 export interface UpdateMigrationRecordsProposal {
   title: string;
   description: string;
+}
+export interface UpdateMigrationRecordsProposalProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.UpdateMigrationRecordsProposal";
+  value: Uint8Array;
 }
 /**
  * For example: if the existing DistrRecords were:

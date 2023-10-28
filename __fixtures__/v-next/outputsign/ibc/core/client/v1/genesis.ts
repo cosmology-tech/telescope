@@ -1,6 +1,5 @@
 import { IdentifiedClientState, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesSDKType, Params, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -15,6 +14,10 @@ export interface GenesisState {
   createLocalhost: boolean;
   /** the sequence for the next generated client identifier */
   nextClientSequence: bigint;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateSDKType {
@@ -35,6 +38,10 @@ export interface GenesisMetadata {
   /** metadata value */
   value: Uint8Array;
 }
+export interface GenesisMetadataProtoMsg {
+  typeUrl: "/ibc.core.client.v1.GenesisMetadata";
+  value: Uint8Array;
+}
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
  * with ExportMetadata
@@ -50,6 +57,10 @@ export interface GenesisMetadataSDKType {
 export interface IdentifiedGenesisMetadata {
   clientId: string;
   clientMetadata: GenesisMetadata[];
+}
+export interface IdentifiedGenesisMetadataProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata";
+  value: Uint8Array;
 }
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
@@ -124,135 +135,6 @@ export const GenesisState = {
     }
     return message;
   },
-  fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.clients)) obj.clients = object.clients.map((e: any) => IdentifiedClientState.fromJSON(e));
-    if (Array.isArray(object?.clientsConsensus)) obj.clientsConsensus = object.clientsConsensus.map((e: any) => ClientConsensusStates.fromJSON(e));
-    if (Array.isArray(object?.clientsMetadata)) obj.clientsMetadata = object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e));
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (isSet(object.createLocalhost)) obj.createLocalhost = Boolean(object.createLocalhost);
-    if (isSet(object.nextClientSequence)) obj.nextClientSequence = BigInt(object.nextClientSequence.toString());
-    return obj;
-  },
-  toJSON(message: GenesisState): unknown {
-    const obj: any = {};
-    if (message.clients) {
-      obj.clients = message.clients.map(e => e ? IdentifiedClientState.toJSON(e) : undefined);
-    } else {
-      obj.clients = [];
-    }
-    if (message.clientsConsensus) {
-      obj.clientsConsensus = message.clientsConsensus.map(e => e ? ClientConsensusStates.toJSON(e) : undefined);
-    } else {
-      obj.clientsConsensus = [];
-    }
-    if (message.clientsMetadata) {
-      obj.clientsMetadata = message.clientsMetadata.map(e => e ? IdentifiedGenesisMetadata.toJSON(e) : undefined);
-    } else {
-      obj.clientsMetadata = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.createLocalhost !== undefined && (obj.createLocalhost = message.createLocalhost);
-    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = createBaseGenesisState();
-    message.clients = object.clients?.map(e => IdentifiedClientState.fromPartial(e)) || [];
-    message.clientsConsensus = object.clientsConsensus?.map(e => ClientConsensusStates.fromPartial(e)) || [];
-    message.clientsMetadata = object.clientsMetadata?.map(e => IdentifiedGenesisMetadata.fromPartial(e)) || [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
-    message.createLocalhost = object.createLocalhost ?? false;
-    if (object.nextClientSequence !== undefined && object.nextClientSequence !== null) {
-      message.nextClientSequence = BigInt(object.nextClientSequence.toString());
-    }
-    return message;
-  },
-  fromSDK(object: GenesisStateSDKType): GenesisState {
-    return {
-      clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromSDK(e)) : [],
-      clientsConsensus: Array.isArray(object?.clients_consensus) ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromSDK(e)) : [],
-      clientsMetadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDK(e)) : [],
-      params: object.params ? Params.fromSDK(object.params) : undefined,
-      createLocalhost: object?.create_localhost,
-      nextClientSequence: object?.next_client_sequence
-    };
-  },
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromSDKJSON(e)) : [],
-      clients_consensus: Array.isArray(object?.clients_consensus) ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromSDKJSON(e)) : [],
-      clients_metadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDKJSON(e)) : [],
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
-      next_client_sequence: isSet(object.next_client_sequence) ? BigInt(object.next_client_sequence.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    if (message.clients) {
-      obj.clients = message.clients.map(e => e ? IdentifiedClientState.toSDK(e) : undefined);
-    } else {
-      obj.clients = [];
-    }
-    if (message.clientsConsensus) {
-      obj.clients_consensus = message.clientsConsensus.map(e => e ? ClientConsensusStates.toSDK(e) : undefined);
-    } else {
-      obj.clients_consensus = [];
-    }
-    if (message.clientsMetadata) {
-      obj.clients_metadata = message.clientsMetadata.map(e => e ? IdentifiedGenesisMetadata.toSDK(e) : undefined);
-    } else {
-      obj.clients_metadata = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    obj.create_localhost = message.createLocalhost;
-    obj.next_client_sequence = message.nextClientSequence;
-    return obj;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromAmino(e)) : [],
-      clientsConsensus: Array.isArray(object?.clients_consensus) ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromAmino(e)) : [],
-      clientsMetadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      createLocalhost: object.create_localhost,
-      nextClientSequence: BigInt(object.next_client_sequence)
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.clients) {
-      obj.clients = message.clients.map(e => e ? IdentifiedClientState.toAmino(e) : undefined);
-    } else {
-      obj.clients = [];
-    }
-    if (message.clientsConsensus) {
-      obj.clients_consensus = message.clientsConsensus.map(e => e ? ClientConsensusStates.toAmino(e) : undefined);
-    } else {
-      obj.clients_consensus = [];
-    }
-    if (message.clientsMetadata) {
-      obj.clients_metadata = message.clientsMetadata.map(e => e ? IdentifiedGenesisMetadata.toAmino(e) : undefined);
-    } else {
-      obj.clients_metadata = [];
-    }
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.create_localhost = message.createLocalhost;
-    obj.next_client_sequence = message.nextClientSequence ? message.nextClientSequence.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -303,63 +185,6 @@ export const GenesisMetadata = {
     }
     return message;
   },
-  fromJSON(object: any): GenesisMetadata {
-    const obj = createBaseGenesisMetadata();
-    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: GenesisMetadata): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
-  fromPartial(object: DeepPartial<GenesisMetadata>): GenesisMetadata {
-    const message = createBaseGenesisMetadata();
-    message.key = object.key ?? new Uint8Array();
-    message.value = object.value ?? new Uint8Array();
-    return message;
-  },
-  fromSDK(object: GenesisMetadataSDKType): GenesisMetadata {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): GenesisMetadataSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
-  },
-  toSDK(message: GenesisMetadata): GenesisMetadataSDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: GenesisMetadataAmino): GenesisMetadata {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: GenesisMetadata): GenesisMetadataAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {
-    return GenesisMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisMetadata): GenesisMetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisMetadata",
-      value: GenesisMetadata.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisMetadataProtoMsg): GenesisMetadata {
     return GenesisMetadata.decode(message.value);
   },
@@ -409,75 +234,6 @@ export const IdentifiedGenesisMetadata = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): IdentifiedGenesisMetadata {
-    const obj = createBaseIdentifiedGenesisMetadata();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (Array.isArray(object?.clientMetadata)) obj.clientMetadata = object.clientMetadata.map((e: any) => GenesisMetadata.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: IdentifiedGenesisMetadata): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.clientMetadata) {
-      obj.clientMetadata = message.clientMetadata.map(e => e ? GenesisMetadata.toJSON(e) : undefined);
-    } else {
-      obj.clientMetadata = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata {
-    const message = createBaseIdentifiedGenesisMetadata();
-    message.clientId = object.clientId ?? "";
-    message.clientMetadata = object.clientMetadata?.map(e => GenesisMetadata.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: IdentifiedGenesisMetadataSDKType): IdentifiedGenesisMetadata {
-    return {
-      clientId: object?.client_id,
-      clientMetadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): IdentifiedGenesisMetadataSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      client_metadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    if (message.clientMetadata) {
-      obj.client_metadata = message.clientMetadata.map(e => e ? GenesisMetadata.toSDK(e) : undefined);
-    } else {
-      obj.client_metadata = [];
-    }
-    return obj;
-  },
-  fromAmino(object: IdentifiedGenesisMetadataAmino): IdentifiedGenesisMetadata {
-    return {
-      clientId: object.client_id,
-      clientMetadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    if (message.clientMetadata) {
-      obj.client_metadata = message.clientMetadata.map(e => e ? GenesisMetadata.toAmino(e) : undefined);
-    } else {
-      obj.client_metadata = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: IdentifiedGenesisMetadataAminoMsg): IdentifiedGenesisMetadata {
-    return IdentifiedGenesisMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/IdentifiedGenesisMetadata",
-      value: IdentifiedGenesisMetadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg): IdentifiedGenesisMetadata {
     return IdentifiedGenesisMetadata.decode(message.value);

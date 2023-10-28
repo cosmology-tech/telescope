@@ -69,6 +69,10 @@ export interface ModuleRoute {
   poolType: PoolType;
   poolId?: bigint;
 }
+export interface ModuleRouteProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.ModuleRoute";
+  value: Uint8Array;
+}
 /**
  * ModuleRouter defines a route encapsulating pool type.
  * It is used as the value of a mapping from pool id to the pool type,

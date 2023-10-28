@@ -7,6 +7,10 @@ export interface ValidatorSet {
   proposer?: Validator;
   totalVotingPower: bigint;
 }
+export interface ValidatorSetProtoMsg {
+  typeUrl: "/tendermint.types.ValidatorSet";
+  value: Uint8Array;
+}
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
   proposer?: ValidatorSDKType;
@@ -18,6 +22,10 @@ export interface Validator {
   votingPower: bigint;
   proposerPriority: bigint;
 }
+export interface ValidatorProtoMsg {
+  typeUrl: "/tendermint.types.Validator";
+  value: Uint8Array;
+}
 export interface ValidatorSDKType {
   address: Uint8Array;
   pub_key: PublicKeySDKType;
@@ -27,6 +35,10 @@ export interface ValidatorSDKType {
 export interface SimpleValidator {
   pubKey?: PublicKey;
   votingPower: bigint;
+}
+export interface SimpleValidatorProtoMsg {
+  typeUrl: "/tendermint.types.SimpleValidator";
+  value: Uint8Array;
 }
 export interface SimpleValidatorSDKType {
   pub_key?: PublicKeySDKType;

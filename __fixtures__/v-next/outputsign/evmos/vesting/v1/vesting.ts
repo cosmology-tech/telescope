@@ -1,7 +1,7 @@
 import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -23,6 +23,10 @@ export interface ClawbackVestingAccount {
   lockupPeriods: Period[];
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
+}
+export interface ClawbackVestingAccountProtoMsg {
+  typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
+  value: Uint8Array;
 }
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -94,107 +98,6 @@ export const ClawbackVestingAccount = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ClawbackVestingAccount {
-    const obj = createBaseClawbackVestingAccount();
-    if (isSet(object.baseVestingAccount)) obj.baseVestingAccount = BaseVestingAccount.fromJSON(object.baseVestingAccount);
-    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
-    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ClawbackVestingAccount): unknown {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
-    message.funderAddress !== undefined && (obj.funderAddress = message.funderAddress);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    if (message.lockupPeriods) {
-      obj.lockupPeriods = message.lockupPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.lockupPeriods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.vestingPeriods = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ClawbackVestingAccount>): ClawbackVestingAccount {
-    const message = createBaseClawbackVestingAccount();
-    if (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null) {
-      message.baseVestingAccount = BaseVestingAccount.fromPartial(object.baseVestingAccount);
-    }
-    message.funderAddress = object.funderAddress ?? "";
-    message.startTime = object.startTime ?? undefined;
-    message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
-    message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ClawbackVestingAccountSDKType): ClawbackVestingAccount {
-    return {
-      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
-      funderAddress: object?.funder_address,
-      startTime: object.start_time ?? undefined,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ClawbackVestingAccountSDKType {
-    return {
-      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
-      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ClawbackVestingAccount): ClawbackVestingAccountSDKType {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
-    obj.funder_address = message.funderAddress;
-    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
-    if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toSDK(e) : undefined);
-    } else {
-      obj.lockup_periods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toSDK(e) : undefined);
-    } else {
-      obj.vesting_periods = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ClawbackVestingAccountAmino): ClawbackVestingAccount {
-    return {
-      baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
-      funderAddress: object.funder_address,
-      startTime: object.start_time,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ClawbackVestingAccount): ClawbackVestingAccountAmino {
-    const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.funder_address = message.funderAddress;
-    obj.start_time = message.startTime;
-    if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
-    } else {
-      obj.lockup_periods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
-    } else {
-      obj.vesting_periods = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ClawbackVestingAccountAminoMsg): ClawbackVestingAccount {
-    return ClawbackVestingAccount.fromAmino(object.value);
   },
   fromProtoMsg(message: ClawbackVestingAccountProtoMsg): ClawbackVestingAccount {
     return ClawbackVestingAccount.decode(message.value);

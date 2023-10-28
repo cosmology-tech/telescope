@@ -45,6 +45,10 @@ export interface InterchainAccountPacketData {
   data: Uint8Array;
   memo: string;
 }
+export interface InterchainAccountPacketDataProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccountPacketData";
+  value: Uint8Array;
+}
 /** InterchainAccountPacketData is comprised of a raw transaction, type of transaction and optional memo field. */
 export interface InterchainAccountPacketDataSDKType {
   type: Type;
@@ -54,6 +58,10 @@ export interface InterchainAccountPacketDataSDKType {
 /** CosmosTx contains a list of sdk.Msg's. It should be used when sending transactions to an SDK host chain. */
 export interface CosmosTx {
   messages: Any[];
+}
+export interface CosmosTxProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.CosmosTx";
+  value: Uint8Array;
 }
 /** CosmosTx contains a list of sdk.Msg's. It should be used when sending transactions to an SDK host chain. */
 export interface CosmosTxSDKType {

@@ -11,6 +11,10 @@ export interface QueryAccountsRequest {
   state: string;
   pagination?: PageRequest;
 }
+export interface QueryAccountsRequestProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.QueryAccountsRequest";
+  value: Uint8Array;
+}
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestSDKType {
   scope: string;
@@ -23,6 +27,10 @@ export interface QueryAccountsRequestSDKType {
 export interface QueryAccountsResponse {
   accounts: Account[];
   pagination?: PageResponse;
+}
+export interface QueryAccountsResponseProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.QueryAccountsResponse";
+  value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseSDKType {
@@ -38,6 +46,10 @@ export interface QueryPaymentsRequest {
   state: string;
   pagination?: PageRequest;
 }
+export interface QueryPaymentsRequestProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.QueryPaymentsRequest";
+  value: Uint8Array;
+}
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestSDKType {
   scope: string;
@@ -51,6 +63,10 @@ export interface QueryPaymentsRequestSDKType {
 export interface QueryPaymentsResponse {
   payments: Payment[];
   pagination?: PageResponse;
+}
+export interface QueryPaymentsResponseProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.QueryPaymentsResponse";
+  value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseSDKType {

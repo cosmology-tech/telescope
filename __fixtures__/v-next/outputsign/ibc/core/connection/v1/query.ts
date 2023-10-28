@@ -3,7 +3,6 @@ import { ConnectionEnd, ConnectionEndSDKType, IdentifiedConnection, IdentifiedCo
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -12,6 +11,10 @@ export const protobufPackage = "ibc.core.connection.v1";
 export interface QueryConnectionRequest {
   /** connection unique identifier */
   connectionId: string;
+}
+export interface QueryConnectionRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -33,6 +36,10 @@ export interface QueryConnectionResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryConnectionResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
  * method. Besides the connection end, it includes a proof and the height from
@@ -49,6 +56,10 @@ export interface QueryConnectionResponseSDKType {
  */
 export interface QueryConnectionsRequest {
   pagination?: PageRequest;
+}
+export interface QueryConnectionsRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
@@ -69,6 +80,10 @@ export interface QueryConnectionsResponse {
   /** query block height */
   height: Height;
 }
+export interface QueryConnectionsResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
  * method.
@@ -85,6 +100,10 @@ export interface QueryConnectionsResponseSDKType {
 export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
   clientId: string;
+}
+export interface QueryClientConnectionsRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryClientConnectionsRequest is the request type for the
@@ -105,6 +124,10 @@ export interface QueryClientConnectionsResponse {
   /** height at which the proof was generated */
   proofHeight: Height;
 }
+export interface QueryClientConnectionsResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
+  value: Uint8Array;
+}
 /**
  * QueryClientConnectionsResponse is the response type for the
  * Query/ClientConnections RPC method
@@ -121,6 +144,10 @@ export interface QueryClientConnectionsResponseSDKType {
 export interface QueryConnectionClientStateRequest {
   /** connection identifier */
   connectionId: string;
+}
+export interface QueryConnectionClientStateRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionClientStateRequest is the request type for the
@@ -141,6 +168,10 @@ export interface QueryConnectionClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+export interface QueryConnectionClientStateResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryConnectionClientStateResponse is the response type for the
  * Query/ConnectionClientState RPC method
@@ -159,6 +190,10 @@ export interface QueryConnectionConsensusStateRequest {
   connectionId: string;
   revisionNumber: bigint;
   revisionHeight: bigint;
+}
+export interface QueryConnectionConsensusStateRequestProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
@@ -182,6 +217,10 @@ export interface QueryConnectionConsensusStateResponse {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proofHeight: Height;
+}
+export interface QueryConnectionConsensusStateResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";
+  value: Uint8Array;
 }
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
@@ -222,55 +261,6 @@ export const QueryConnectionRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryConnectionRequest {
-    const obj = createBaseQueryConnectionRequest();
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    return obj;
-  },
-  toJSON(message: QueryConnectionRequest): unknown {
-    const obj: any = {};
-    message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionRequest>): QueryConnectionRequest {
-    const message = createBaseQueryConnectionRequest();
-    message.connectionId = object.connectionId ?? "";
-    return message;
-  },
-  fromSDK(object: QueryConnectionRequestSDKType): QueryConnectionRequest {
-    return {
-      connectionId: object?.connection_id
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionRequestSDKType {
-    return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : ""
-    };
-  },
-  toSDK(message: QueryConnectionRequest): QueryConnectionRequestSDKType {
-    const obj: any = {};
-    obj.connection_id = message.connectionId;
-    return obj;
-  },
-  fromAmino(object: QueryConnectionRequestAmino): QueryConnectionRequest {
-    return {
-      connectionId: object.connection_id
-    };
-  },
-  toAmino(message: QueryConnectionRequest): QueryConnectionRequestAmino {
-    const obj: any = {};
-    obj.connection_id = message.connectionId;
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionRequestAminoMsg): QueryConnectionRequest {
-    return QueryConnectionRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionRequest): QueryConnectionRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionRequest",
-      value: QueryConnectionRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionRequestProtoMsg): QueryConnectionRequest {
     return QueryConnectionRequest.decode(message.value);
@@ -329,75 +319,6 @@ export const QueryConnectionResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryConnectionResponse {
-    const obj = createBaseQueryConnectionResponse();
-    if (isSet(object.connection)) obj.connection = ConnectionEnd.fromJSON(object.connection);
-    if (isSet(object.proof)) obj.proof = bytesFromBase64(object.proof);
-    if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
-    return obj;
-  },
-  toJSON(message: QueryConnectionResponse): unknown {
-    const obj: any = {};
-    message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toJSON(message.connection) : undefined);
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionResponse>): QueryConnectionResponse {
-    const message = createBaseQueryConnectionResponse();
-    if (object.connection !== undefined && object.connection !== null) {
-      message.connection = ConnectionEnd.fromPartial(object.connection);
-    }
-    message.proof = object.proof ?? new Uint8Array();
-    if (object.proofHeight !== undefined && object.proofHeight !== null) {
-      message.proofHeight = Height.fromPartial(object.proofHeight);
-    }
-    return message;
-  },
-  fromSDK(object: QueryConnectionResponseSDKType): QueryConnectionResponse {
-    return {
-      connection: object.connection ? ConnectionEnd.fromSDK(object.connection) : undefined,
-      proof: object?.proof,
-      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionResponseSDKType {
-    return {
-      connection: isSet(object.connection) ? ConnectionEnd.fromSDKJSON(object.connection) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
-  },
-  toSDK(message: QueryConnectionResponse): QueryConnectionResponseSDKType {
-    const obj: any = {};
-    message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
-    obj.proof = message.proof;
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryConnectionResponseAmino): QueryConnectionResponse {
-    return {
-      connection: object?.connection ? ConnectionEnd.fromAmino(object.connection) : undefined,
-      proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-  toAmino(message: QueryConnectionResponse): QueryConnectionResponseAmino {
-    const obj: any = {};
-    obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
-    obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionResponseAminoMsg): QueryConnectionResponse {
-    return QueryConnectionResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionResponse): QueryConnectionResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionResponse",
-      value: QueryConnectionResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConnectionResponseProtoMsg): QueryConnectionResponse {
     return QueryConnectionResponse.decode(message.value);
   },
@@ -440,57 +361,6 @@ export const QueryConnectionsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryConnectionsRequest {
-    const obj = createBaseQueryConnectionsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryConnectionsRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionsRequest>): QueryConnectionsRequest {
-    const message = createBaseQueryConnectionsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
-    return message;
-  },
-  fromSDK(object: QueryConnectionsRequestSDKType): QueryConnectionsRequest {
-    return {
-      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-  toSDK(message: QueryConnectionsRequest): QueryConnectionsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryConnectionsRequestAmino): QueryConnectionsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryConnectionsRequest): QueryConnectionsRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionsRequestAminoMsg): QueryConnectionsRequest {
-    return QueryConnectionsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionsRequest): QueryConnectionsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionsRequest",
-      value: QueryConnectionsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionsRequestProtoMsg): QueryConnectionsRequest {
     return QueryConnectionsRequest.decode(message.value);
@@ -549,87 +419,6 @@ export const QueryConnectionsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryConnectionsResponse {
-    const obj = createBaseQueryConnectionsResponse();
-    if (Array.isArray(object?.connections)) obj.connections = object.connections.map((e: any) => IdentifiedConnection.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
-    return obj;
-  },
-  toJSON(message: QueryConnectionsResponse): unknown {
-    const obj: any = {};
-    if (message.connections) {
-      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toJSON(e) : undefined);
-    } else {
-      obj.connections = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    message.height !== undefined && (obj.height = message.height ? Height.toJSON(message.height) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionsResponse>): QueryConnectionsResponse {
-    const message = createBaseQueryConnectionsResponse();
-    message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Height.fromPartial(object.height);
-    }
-    return message;
-  },
-  fromSDK(object: QueryConnectionsResponseSDKType): QueryConnectionsResponse {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDK(e)) : [],
-      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: object.height ? Height.fromSDK(object.height) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionsResponseSDKType {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
-    };
-  },
-  toSDK(message: QueryConnectionsResponse): QueryConnectionsResponseSDKType {
-    const obj: any = {};
-    if (message.connections) {
-      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toSDK(e) : undefined);
-    } else {
-      obj.connections = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryConnectionsResponseAmino): QueryConnectionsResponse {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
-    };
-  },
-  toAmino(message: QueryConnectionsResponse): QueryConnectionsResponseAmino {
-    const obj: any = {};
-    if (message.connections) {
-      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
-    } else {
-      obj.connections = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    obj.height = message.height ? Height.toAmino(message.height) : {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionsResponseAminoMsg): QueryConnectionsResponse {
-    return QueryConnectionsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionsResponse): QueryConnectionsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionsResponse",
-      value: QueryConnectionsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConnectionsResponseProtoMsg): QueryConnectionsResponse {
     return QueryConnectionsResponse.decode(message.value);
   },
@@ -672,55 +461,6 @@ export const QueryClientConnectionsRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryClientConnectionsRequest {
-    const obj = createBaseQueryClientConnectionsRequest();
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    return obj;
-  },
-  toJSON(message: QueryClientConnectionsRequest): unknown {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryClientConnectionsRequest>): QueryClientConnectionsRequest {
-    const message = createBaseQueryClientConnectionsRequest();
-    message.clientId = object.clientId ?? "";
-    return message;
-  },
-  fromSDK(object: QueryClientConnectionsRequestSDKType): QueryClientConnectionsRequest {
-    return {
-      clientId: object?.client_id
-    };
-  },
-  fromSDKJSON(object: any): QueryClientConnectionsRequestSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : ""
-    };
-  },
-  toSDK(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestSDKType {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    return obj;
-  },
-  fromAmino(object: QueryClientConnectionsRequestAmino): QueryClientConnectionsRequest {
-    return {
-      clientId: object.client_id
-    };
-  },
-  toAmino(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestAmino {
-    const obj: any = {};
-    obj.client_id = message.clientId;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClientConnectionsRequestAminoMsg): QueryClientConnectionsRequest {
-    return QueryClientConnectionsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientConnectionsRequest",
-      value: QueryClientConnectionsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg): QueryClientConnectionsRequest {
     return QueryClientConnectionsRequest.decode(message.value);
@@ -779,85 +519,6 @@ export const QueryClientConnectionsResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryClientConnectionsResponse {
-    const obj = createBaseQueryClientConnectionsResponse();
-    if (Array.isArray(object?.connectionPaths)) obj.connectionPaths = object.connectionPaths.map((e: any) => String(e));
-    if (isSet(object.proof)) obj.proof = bytesFromBase64(object.proof);
-    if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
-    return obj;
-  },
-  toJSON(message: QueryClientConnectionsResponse): unknown {
-    const obj: any = {};
-    if (message.connectionPaths) {
-      obj.connectionPaths = message.connectionPaths.map(e => e);
-    } else {
-      obj.connectionPaths = [];
-    }
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryClientConnectionsResponse>): QueryClientConnectionsResponse {
-    const message = createBaseQueryClientConnectionsResponse();
-    message.connectionPaths = object.connectionPaths?.map(e => e) || [];
-    message.proof = object.proof ?? new Uint8Array();
-    if (object.proofHeight !== undefined && object.proofHeight !== null) {
-      message.proofHeight = Height.fromPartial(object.proofHeight);
-    }
-    return message;
-  },
-  fromSDK(object: QueryClientConnectionsResponseSDKType): QueryClientConnectionsResponse {
-    return {
-      connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
-      proof: object?.proof,
-      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryClientConnectionsResponseSDKType {
-    return {
-      connection_paths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => String(e)) : [],
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
-  },
-  toSDK(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseSDKType {
-    const obj: any = {};
-    if (message.connectionPaths) {
-      obj.connection_paths = message.connectionPaths.map(e => e);
-    } else {
-      obj.connection_paths = [];
-    }
-    obj.proof = message.proof;
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryClientConnectionsResponseAmino): QueryClientConnectionsResponse {
-    return {
-      connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
-      proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-  toAmino(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseAmino {
-    const obj: any = {};
-    if (message.connectionPaths) {
-      obj.connection_paths = message.connectionPaths.map(e => e);
-    } else {
-      obj.connection_paths = [];
-    }
-    obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryClientConnectionsResponseAminoMsg): QueryClientConnectionsResponse {
-    return QueryClientConnectionsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientConnectionsResponse",
-      value: QueryClientConnectionsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg): QueryClientConnectionsResponse {
     return QueryClientConnectionsResponse.decode(message.value);
   },
@@ -900,55 +561,6 @@ export const QueryConnectionClientStateRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryConnectionClientStateRequest {
-    const obj = createBaseQueryConnectionClientStateRequest();
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    return obj;
-  },
-  toJSON(message: QueryConnectionClientStateRequest): unknown {
-    const obj: any = {};
-    message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionClientStateRequest>): QueryConnectionClientStateRequest {
-    const message = createBaseQueryConnectionClientStateRequest();
-    message.connectionId = object.connectionId ?? "";
-    return message;
-  },
-  fromSDK(object: QueryConnectionClientStateRequestSDKType): QueryConnectionClientStateRequest {
-    return {
-      connectionId: object?.connection_id
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionClientStateRequestSDKType {
-    return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : ""
-    };
-  },
-  toSDK(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestSDKType {
-    const obj: any = {};
-    obj.connection_id = message.connectionId;
-    return obj;
-  },
-  fromAmino(object: QueryConnectionClientStateRequestAmino): QueryConnectionClientStateRequest {
-    return {
-      connectionId: object.connection_id
-    };
-  },
-  toAmino(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestAmino {
-    const obj: any = {};
-    obj.connection_id = message.connectionId;
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionClientStateRequestAminoMsg): QueryConnectionClientStateRequest {
-    return QueryConnectionClientStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionClientStateRequest",
-      value: QueryConnectionClientStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg): QueryConnectionClientStateRequest {
     return QueryConnectionClientStateRequest.decode(message.value);
@@ -1007,75 +619,6 @@ export const QueryConnectionClientStateResponse = {
     }
     return message;
   },
-  fromJSON(object: any): QueryConnectionClientStateResponse {
-    const obj = createBaseQueryConnectionClientStateResponse();
-    if (isSet(object.identifiedClientState)) obj.identifiedClientState = IdentifiedClientState.fromJSON(object.identifiedClientState);
-    if (isSet(object.proof)) obj.proof = bytesFromBase64(object.proof);
-    if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
-    return obj;
-  },
-  toJSON(message: QueryConnectionClientStateResponse): unknown {
-    const obj: any = {};
-    message.identifiedClientState !== undefined && (obj.identifiedClientState = message.identifiedClientState ? IdentifiedClientState.toJSON(message.identifiedClientState) : undefined);
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionClientStateResponse>): QueryConnectionClientStateResponse {
-    const message = createBaseQueryConnectionClientStateResponse();
-    if (object.identifiedClientState !== undefined && object.identifiedClientState !== null) {
-      message.identifiedClientState = IdentifiedClientState.fromPartial(object.identifiedClientState);
-    }
-    message.proof = object.proof ?? new Uint8Array();
-    if (object.proofHeight !== undefined && object.proofHeight !== null) {
-      message.proofHeight = Height.fromPartial(object.proofHeight);
-    }
-    return message;
-  },
-  fromSDK(object: QueryConnectionClientStateResponseSDKType): QueryConnectionClientStateResponse {
-    return {
-      identifiedClientState: object.identified_client_state ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
-      proof: object?.proof,
-      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionClientStateResponseSDKType {
-    return {
-      identified_client_state: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDKJSON(object.identified_client_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
-  },
-  toSDK(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseSDKType {
-    const obj: any = {};
-    message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toSDK(message.identifiedClientState) : undefined);
-    obj.proof = message.proof;
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryConnectionClientStateResponseAmino): QueryConnectionClientStateResponse {
-    return {
-      identifiedClientState: object?.identified_client_state ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
-      proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-  toAmino(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAmino {
-    const obj: any = {};
-    obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
-    obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionClientStateResponseAminoMsg): QueryConnectionClientStateResponse {
-    return QueryConnectionClientStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionClientStateResponse",
-      value: QueryConnectionClientStateResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg): QueryConnectionClientStateResponse {
     return QueryConnectionClientStateResponse.decode(message.value);
   },
@@ -1132,75 +675,6 @@ export const QueryConnectionConsensusStateRequest = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryConnectionConsensusStateRequest {
-    const obj = createBaseQueryConnectionConsensusStateRequest();
-    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
-    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
-    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
-    return obj;
-  },
-  toJSON(message: QueryConnectionConsensusStateRequest): unknown {
-    const obj: any = {};
-    message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionConsensusStateRequest>): QueryConnectionConsensusStateRequest {
-    const message = createBaseQueryConnectionConsensusStateRequest();
-    message.connectionId = object.connectionId ?? "";
-    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
-      message.revisionNumber = BigInt(object.revisionNumber.toString());
-    }
-    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
-      message.revisionHeight = BigInt(object.revisionHeight.toString());
-    }
-    return message;
-  },
-  fromSDK(object: QueryConnectionConsensusStateRequestSDKType): QueryConnectionConsensusStateRequest {
-    return {
-      connectionId: object?.connection_id,
-      revisionNumber: object?.revision_number,
-      revisionHeight: object?.revision_height
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionConsensusStateRequestSDKType {
-    return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
-      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestSDKType {
-    const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.revision_number = message.revisionNumber;
-    obj.revision_height = message.revisionHeight;
-    return obj;
-  },
-  fromAmino(object: QueryConnectionConsensusStateRequestAmino): QueryConnectionConsensusStateRequest {
-    return {
-      connectionId: object.connection_id,
-      revisionNumber: BigInt(object.revision_number),
-      revisionHeight: BigInt(object.revision_height)
-    };
-  },
-  toAmino(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAmino {
-    const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
-    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionConsensusStateRequestAminoMsg): QueryConnectionConsensusStateRequest {
-    return QueryConnectionConsensusStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionConsensusStateRequest",
-      value: QueryConnectionConsensusStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg): QueryConnectionConsensusStateRequest {
     return QueryConnectionConsensusStateRequest.decode(message.value);
@@ -1265,83 +739,6 @@ export const QueryConnectionConsensusStateResponse = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QueryConnectionConsensusStateResponse {
-    const obj = createBaseQueryConnectionConsensusStateResponse();
-    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
-    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
-    if (isSet(object.proof)) obj.proof = bytesFromBase64(object.proof);
-    if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
-    return obj;
-  },
-  toJSON(message: QueryConnectionConsensusStateResponse): unknown {
-    const obj: any = {};
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryConnectionConsensusStateResponse>): QueryConnectionConsensusStateResponse {
-    const message = createBaseQueryConnectionConsensusStateResponse();
-    if (object.consensusState !== undefined && object.consensusState !== null) {
-      message.consensusState = Any.fromPartial(object.consensusState);
-    }
-    message.clientId = object.clientId ?? "";
-    message.proof = object.proof ?? new Uint8Array();
-    if (object.proofHeight !== undefined && object.proofHeight !== null) {
-      message.proofHeight = Height.fromPartial(object.proofHeight);
-    }
-    return message;
-  },
-  fromSDK(object: QueryConnectionConsensusStateResponseSDKType): QueryConnectionConsensusStateResponse {
-    return {
-      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
-      clientId: object?.client_id,
-      proof: object?.proof,
-      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryConnectionConsensusStateResponseSDKType {
-    return {
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
-  },
-  toSDK(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseSDKType {
-    const obj: any = {};
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    obj.client_id = message.clientId;
-    obj.proof = message.proof;
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-  fromAmino(object: QueryConnectionConsensusStateResponseAmino): QueryConnectionConsensusStateResponse {
-    return {
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      clientId: object.client_id,
-      proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-  toAmino(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAmino {
-    const obj: any = {};
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.client_id = message.clientId;
-    obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryConnectionConsensusStateResponseAminoMsg): QueryConnectionConsensusStateResponse {
-    return QueryConnectionConsensusStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionConsensusStateResponse",
-      value: QueryConnectionConsensusStateResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg): QueryConnectionConsensusStateResponse {
     return QueryConnectionConsensusStateResponse.decode(message.value);

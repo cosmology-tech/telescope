@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
@@ -10,6 +10,10 @@ export interface Params {
   durationOfDecay: Duration;
   /** denom of claimable asset */
   claimDenom: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.Params";
+  value: Uint8Array;
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
@@ -68,83 +72,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.airdropStartTime)) obj.airdropStartTime = new Date(object.airdropStartTime);
-    if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
-    if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
-    if (isSet(object.claimDenom)) obj.claimDenom = String(object.claimDenom);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());
-    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);
-    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay ? Duration.toJSON(message.durationOfDecay) : undefined);
-    message.claimDenom !== undefined && (obj.claimDenom = message.claimDenom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.airdropStartTime = object.airdropStartTime ?? undefined;
-    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
-      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
-    }
-    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
-      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
-    }
-    message.claimDenom = object.claimDenom ?? "";
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      airdropStartTime: object.airdrop_start_time ?? undefined,
-      durationUntilDecay: object.duration_until_decay ? Duration.fromSDK(object.duration_until_decay) : undefined,
-      durationOfDecay: object.duration_of_decay ? Duration.fromSDK(object.duration_of_decay) : undefined,
-      claimDenom: object?.claim_denom
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      airdrop_start_time: isSet(object.airdrop_start_time) ? new Date(object.airdrop_start_time) : undefined,
-      duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
-      duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
-      claim_denom: isSet(object.claim_denom) ? String(object.claim_denom) : ""
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ?? undefined);
-    message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
-    message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
-    obj.claim_denom = message.claimDenom;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      airdropStartTime: object.airdrop_start_time,
-      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
-      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
-      claimDenom: object.claim_denom
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.airdrop_start_time = message.airdropStartTime;
-    obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
-    obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
-    obj.claim_denom = message.claimDenom;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/claim/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

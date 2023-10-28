@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -27,6 +26,10 @@ export interface InflationDistribution {
    * be allocated to the community pool
    */
   communityPool: string;
+}
+export interface InflationDistributionProtoMsg {
+  typeUrl: "/evmos.inflation.v1.InflationDistribution";
+  value: Uint8Array;
 }
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -60,6 +63,10 @@ export interface ExponentialCalculation {
   bondingTarget: string;
   /** max variance */
   maxVariance: string;
+}
+export interface ExponentialCalculationProtoMsg {
+  typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
+  value: Uint8Array;
 }
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
@@ -118,65 +125,6 @@ export const InflationDistribution = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): InflationDistribution {
-    const obj = createBaseInflationDistribution();
-    if (isSet(object.stakingRewards)) obj.stakingRewards = String(object.stakingRewards);
-    if (isSet(object.usageIncentives)) obj.usageIncentives = String(object.usageIncentives);
-    if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
-    return obj;
-  },
-  toJSON(message: InflationDistribution): unknown {
-    const obj: any = {};
-    message.stakingRewards !== undefined && (obj.stakingRewards = message.stakingRewards);
-    message.usageIncentives !== undefined && (obj.usageIncentives = message.usageIncentives);
-    message.communityPool !== undefined && (obj.communityPool = message.communityPool);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<InflationDistribution>): InflationDistribution {
-    const message = createBaseInflationDistribution();
-    message.stakingRewards = object.stakingRewards ?? "";
-    message.usageIncentives = object.usageIncentives ?? "";
-    message.communityPool = object.communityPool ?? "";
-    return message;
-  },
-  fromSDK(object: InflationDistributionSDKType): InflationDistribution {
-    return {
-      stakingRewards: object?.staking_rewards,
-      usageIncentives: object?.usage_incentives,
-      communityPool: object?.community_pool
-    };
-  },
-  fromSDKJSON(object: any): InflationDistributionSDKType {
-    return {
-      staking_rewards: isSet(object.staking_rewards) ? String(object.staking_rewards) : "",
-      usage_incentives: isSet(object.usage_incentives) ? String(object.usage_incentives) : "",
-      community_pool: isSet(object.community_pool) ? String(object.community_pool) : ""
-    };
-  },
-  toSDK(message: InflationDistribution): InflationDistributionSDKType {
-    const obj: any = {};
-    obj.staking_rewards = message.stakingRewards;
-    obj.usage_incentives = message.usageIncentives;
-    obj.community_pool = message.communityPool;
-    return obj;
-  },
-  fromAmino(object: InflationDistributionAmino): InflationDistribution {
-    return {
-      stakingRewards: object.staking_rewards,
-      usageIncentives: object.usage_incentives,
-      communityPool: object.community_pool
-    };
-  },
-  toAmino(message: InflationDistribution): InflationDistributionAmino {
-    const obj: any = {};
-    obj.staking_rewards = message.stakingRewards;
-    obj.usage_incentives = message.usageIncentives;
-    obj.community_pool = message.communityPool;
-    return obj;
-  },
-  fromAminoMsg(object: InflationDistributionAminoMsg): InflationDistribution {
-    return InflationDistribution.fromAmino(object.value);
   },
   fromProtoMsg(message: InflationDistributionProtoMsg): InflationDistribution {
     return InflationDistribution.decode(message.value);
@@ -248,81 +196,6 @@ export const ExponentialCalculation = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ExponentialCalculation {
-    const obj = createBaseExponentialCalculation();
-    if (isSet(object.a)) obj.a = String(object.a);
-    if (isSet(object.r)) obj.r = String(object.r);
-    if (isSet(object.c)) obj.c = String(object.c);
-    if (isSet(object.bondingTarget)) obj.bondingTarget = String(object.bondingTarget);
-    if (isSet(object.maxVariance)) obj.maxVariance = String(object.maxVariance);
-    return obj;
-  },
-  toJSON(message: ExponentialCalculation): unknown {
-    const obj: any = {};
-    message.a !== undefined && (obj.a = message.a);
-    message.r !== undefined && (obj.r = message.r);
-    message.c !== undefined && (obj.c = message.c);
-    message.bondingTarget !== undefined && (obj.bondingTarget = message.bondingTarget);
-    message.maxVariance !== undefined && (obj.maxVariance = message.maxVariance);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<ExponentialCalculation>): ExponentialCalculation {
-    const message = createBaseExponentialCalculation();
-    message.a = object.a ?? "";
-    message.r = object.r ?? "";
-    message.c = object.c ?? "";
-    message.bondingTarget = object.bondingTarget ?? "";
-    message.maxVariance = object.maxVariance ?? "";
-    return message;
-  },
-  fromSDK(object: ExponentialCalculationSDKType): ExponentialCalculation {
-    return {
-      a: object?.a,
-      r: object?.r,
-      c: object?.c,
-      bondingTarget: object?.bonding_target,
-      maxVariance: object?.max_variance
-    };
-  },
-  fromSDKJSON(object: any): ExponentialCalculationSDKType {
-    return {
-      a: isSet(object.a) ? String(object.a) : "",
-      r: isSet(object.r) ? String(object.r) : "",
-      c: isSet(object.c) ? String(object.c) : "",
-      bonding_target: isSet(object.bonding_target) ? String(object.bonding_target) : "",
-      max_variance: isSet(object.max_variance) ? String(object.max_variance) : ""
-    };
-  },
-  toSDK(message: ExponentialCalculation): ExponentialCalculationSDKType {
-    const obj: any = {};
-    obj.a = message.a;
-    obj.r = message.r;
-    obj.c = message.c;
-    obj.bonding_target = message.bondingTarget;
-    obj.max_variance = message.maxVariance;
-    return obj;
-  },
-  fromAmino(object: ExponentialCalculationAmino): ExponentialCalculation {
-    return {
-      a: object.a,
-      r: object.r,
-      c: object.c,
-      bondingTarget: object.bonding_target,
-      maxVariance: object.max_variance
-    };
-  },
-  toAmino(message: ExponentialCalculation): ExponentialCalculationAmino {
-    const obj: any = {};
-    obj.a = message.a;
-    obj.r = message.r;
-    obj.c = message.c;
-    obj.bonding_target = message.bondingTarget;
-    obj.max_variance = message.maxVariance;
-    return obj;
-  },
-  fromAminoMsg(object: ExponentialCalculationAminoMsg): ExponentialCalculation {
-    return ExponentialCalculation.fromAmino(object.value);
   },
   fromProtoMsg(message: ExponentialCalculationProtoMsg): ExponentialCalculation {
     return ExponentialCalculation.decode(message.value);

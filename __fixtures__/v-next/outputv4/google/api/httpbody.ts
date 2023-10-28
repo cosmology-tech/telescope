@@ -58,6 +58,10 @@ export interface HttpBody {
    */
   extensions: Any[];
 }
+export interface HttpBodyProtoMsg {
+  typeUrl: "/google.api.HttpBody";
+  value: Uint8Array;
+}
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or

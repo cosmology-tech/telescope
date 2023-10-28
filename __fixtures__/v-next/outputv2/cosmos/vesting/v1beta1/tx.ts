@@ -18,6 +18,10 @@ export interface MsgCreateVestingAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccount";
   value: Uint8Array;
 }
+export interface MsgCreateVestingAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccount";
+  value: Uint8Array;
+}
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
  * account.
@@ -50,6 +54,10 @@ export interface MsgCreateVestingAccountResponseProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse";
   value: Uint8Array;
 }
+export interface MsgCreateVestingAccountResponseProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse";
+  value: Uint8Array;
+}
 /** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
 export interface MsgCreateVestingAccountResponseAmino {}
 export interface MsgCreateVestingAccountResponseAminoMsg {
@@ -66,6 +74,10 @@ export interface MsgCreatePermanentLockedAccount {
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
+}
+export interface MsgCreatePermanentLockedAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount";
+  value: Uint8Array;
 }
 export interface MsgCreatePermanentLockedAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount";
@@ -99,6 +111,10 @@ export interface MsgCreatePermanentLockedAccountResponseProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse";
   value: Uint8Array;
 }
+export interface MsgCreatePermanentLockedAccountResponseProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse";
+  value: Uint8Array;
+}
 /** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
 export interface MsgCreatePermanentLockedAccountResponseAmino {}
 export interface MsgCreatePermanentLockedAccountResponseAminoMsg {
@@ -116,6 +132,10 @@ export interface MsgCreatePeriodicVestingAccount {
   toAddress: string;
   startTime: bigint;
   vestingPeriods: Period[];
+}
+export interface MsgCreatePeriodicVestingAccountProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount";
+  value: Uint8Array;
 }
 export interface MsgCreatePeriodicVestingAccountProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount";
@@ -150,6 +170,10 @@ export interface MsgCreatePeriodicVestingAccountSDKType {
  * response type.
  */
 export interface MsgCreatePeriodicVestingAccountResponse {}
+export interface MsgCreatePeriodicVestingAccountResponseProtoMsg {
+  typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccountResponse";
+  value: Uint8Array;
+}
 export interface MsgCreatePeriodicVestingAccountResponseProtoMsg {
   typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccountResponse";
   value: Uint8Array;

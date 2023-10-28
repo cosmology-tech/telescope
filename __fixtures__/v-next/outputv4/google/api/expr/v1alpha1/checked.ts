@@ -143,6 +143,10 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: bigint;
   value?: Reference;
 }
+export interface CheckedExpr_ReferenceMapEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: bigint;
   value?: ReferenceSDKType;
@@ -150,6 +154,10 @@ export interface CheckedExpr_ReferenceMapEntrySDKType {
 export interface CheckedExpr_TypeMapEntry {
   key: bigint;
   value?: Type;
+}
+export interface CheckedExpr_TypeMapEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: bigint;
@@ -207,6 +215,10 @@ export interface CheckedExpr {
    * may have structural differences.
    */
   expr?: Expr;
+}
+export interface CheckedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: Uint8Array;
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
@@ -271,6 +283,10 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
+export interface TypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Type";
+  value: Uint8Array;
+}
 /** Represents a CEL type. */
 export interface TypeSDKType {
   dyn?: EmptySDKType;
@@ -292,6 +308,10 @@ export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
+export interface Type_ListTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ListType";
+  value: Uint8Array;
+}
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
   elem_type?: TypeSDKType;
@@ -302,6 +322,10 @@ export interface Type_MapType {
   keyType?: Type;
   /** The type of the value. */
   valueType?: Type;
+}
+export interface Type_MapTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.MapType";
+  value: Uint8Array;
 }
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeSDKType {
@@ -315,6 +339,10 @@ export interface Type_FunctionType {
   /** Argument types of the function. */
   argTypes: Type[];
 }
+export interface Type_FunctionTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType";
+  value: Uint8Array;
+}
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
   result_type?: TypeSDKType;
@@ -326,6 +354,10 @@ export interface Type_AbstractType {
   name: string;
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
+}
+export interface Type_AbstractTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType";
+  value: Uint8Array;
 }
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
@@ -354,6 +386,10 @@ export interface Decl {
   ident?: Decl_IdentDecl;
   /** Function declaration. */
   function?: Decl_FunctionDecl;
+}
+export interface DeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Decl";
+  value: Uint8Array;
 }
 /**
  * Represents a declaration of a named value or function.
@@ -385,6 +421,10 @@ export interface Decl_IdentDecl {
   /** Documentation string for the identifier. */
   doc: string;
 }
+export interface Decl_IdentDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Uint8Array;
+}
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
  * 
@@ -408,6 +448,10 @@ export interface Decl_IdentDeclSDKType {
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
+}
+export interface Decl_FunctionDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Uint8Array;
 }
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -476,6 +520,10 @@ export interface Decl_FunctionDecl_Overload {
   /** Documentation string for the overload. */
   doc: string;
 }
+export interface Decl_FunctionDecl_OverloadProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Overload";
+  value: Uint8Array;
+}
 /**
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
@@ -516,6 +564,10 @@ export interface Reference {
    * constant if known at compile time.
    */
   value?: Constant;
+}
+export interface ReferenceProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Reference";
+  value: Uint8Array;
 }
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceSDKType {

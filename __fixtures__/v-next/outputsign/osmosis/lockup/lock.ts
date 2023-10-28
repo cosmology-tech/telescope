@@ -2,7 +2,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can
@@ -72,6 +72,10 @@ export interface PeriodLock {
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: Coin[];
 }
+export interface PeriodLockProtoMsg {
+  typeUrl: "/osmosis.lockup.PeriodLock";
+  value: Uint8Array;
+}
 /**
  * PeriodLock is a single lock unit by period defined by the x/lockup module.
  * It's a record of a locked coin at a specific time. It stores owner, duration,
@@ -108,6 +112,10 @@ export interface QueryCondition {
    * Querying locks with timestamp is currently not implemented.
    */
   timestamp: Date;
+}
+export interface QueryConditionProtoMsg {
+  typeUrl: "/osmosis.lockup.QueryCondition";
+  value: Uint8Array;
 }
 /**
  * QueryCondition is a struct used for querying locks upon different conditions.
@@ -147,6 +155,10 @@ export interface SyntheticLock {
    * at the point of unbonding has started.
    */
   duration: Duration;
+}
+export interface SyntheticLockProtoMsg {
+  typeUrl: "/osmosis.lockup.SyntheticLock";
+  value: Uint8Array;
 }
 /**
  * SyntheticLock is creating virtual lockup where new denom is combination of
@@ -218,103 +230,6 @@ export const PeriodLock = {
     }
     return message;
   },
-  fromJSON(object: any): PeriodLock {
-    const obj = createBasePeriodLock();
-    if (isSet(object.ID)) obj.ID = BigInt(object.ID.toString());
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: PeriodLock): unknown {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
-    const message = createBasePeriodLock();
-    if (object.ID !== undefined && object.ID !== null) {
-      message.ID = BigInt(object.ID.toString());
-    }
-    message.owner = object.owner ?? "";
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    message.endTime = object.endTime ?? undefined;
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: PeriodLockSDKType): PeriodLock {
-    return {
-      ID: object?.ID,
-      owner: object?.owner,
-      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
-      endTime: object.end_time ?? undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): PeriodLockSDKType {
-    return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: PeriodLock): PeriodLockSDKType {
-    const obj: any = {};
-    obj.ID = message.ID;
-    obj.owner = message.owner;
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAmino(object: PeriodLockAmino): PeriodLock {
-    return {
-      ID: BigInt(object.ID),
-      owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      endTime: object.end_time,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: PeriodLock): PeriodLockAmino {
-    const obj: any = {};
-    obj.ID = message.ID ? message.ID.toString() : undefined;
-    obj.owner = message.owner;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.end_time = message.endTime;
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PeriodLockAminoMsg): PeriodLock {
-    return PeriodLock.fromAmino(object.value);
-  },
-  toAminoMsg(message: PeriodLock): PeriodLockAminoMsg {
-    return {
-      type: "osmosis/lockup/period-lock",
-      value: PeriodLock.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PeriodLockProtoMsg): PeriodLock {
     return PeriodLock.decode(message.value);
   },
@@ -379,81 +294,6 @@ export const QueryCondition = {
     }
     return message;
   },
-  fromJSON(object: any): QueryCondition {
-    const obj = createBaseQueryCondition();
-    if (isSet(object.lockQueryType)) obj.lockQueryType = lockQueryTypeFromJSON(object.lockQueryType);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
-    return obj;
-  },
-  toJSON(message: QueryCondition): unknown {
-    const obj: any = {};
-    message.lockQueryType !== undefined && (obj.lockQueryType = lockQueryTypeToJSON(message.lockQueryType));
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QueryCondition>): QueryCondition {
-    const message = createBaseQueryCondition();
-    message.lockQueryType = object.lockQueryType ?? 0;
-    message.denom = object.denom ?? "";
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    message.timestamp = object.timestamp ?? undefined;
-    return message;
-  },
-  fromSDK(object: QueryConditionSDKType): QueryCondition {
-    return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
-      denom: object?.denom,
-      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
-      timestamp: object.timestamp ?? undefined
-    };
-  },
-  fromSDKJSON(object: any): QueryConditionSDKType {
-    return {
-      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
-    };
-  },
-  toSDK(message: QueryCondition): QueryConditionSDKType {
-    const obj: any = {};
-    message.lockQueryType !== undefined && (obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType));
-    obj.denom = message.denom;
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
-    return obj;
-  },
-  fromAmino(object: QueryConditionAmino): QueryCondition {
-    return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
-      denom: object.denom,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: object.timestamp
-    };
-  },
-  toAmino(message: QueryCondition): QueryConditionAmino {
-    const obj: any = {};
-    obj.lock_query_type = message.lockQueryType;
-    obj.denom = message.denom;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.timestamp = message.timestamp;
-    return obj;
-  },
-  fromAminoMsg(object: QueryConditionAminoMsg): QueryCondition {
-    return QueryCondition.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCondition): QueryConditionAminoMsg {
-    return {
-      type: "osmosis/lockup/query-condition",
-      value: QueryCondition.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConditionProtoMsg): QueryCondition {
     return QueryCondition.decode(message.value);
   },
@@ -517,83 +357,6 @@ export const SyntheticLock = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): SyntheticLock {
-    const obj = createBaseSyntheticLock();
-    if (isSet(object.underlyingLockId)) obj.underlyingLockId = BigInt(object.underlyingLockId.toString());
-    if (isSet(object.synthDenom)) obj.synthDenom = String(object.synthDenom);
-    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    return obj;
-  },
-  toJSON(message: SyntheticLock): unknown {
-    const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || BigInt(0)).toString());
-    message.synthDenom !== undefined && (obj.synthDenom = message.synthDenom);
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {
-    const message = createBaseSyntheticLock();
-    if (object.underlyingLockId !== undefined && object.underlyingLockId !== null) {
-      message.underlyingLockId = BigInt(object.underlyingLockId.toString());
-    }
-    message.synthDenom = object.synthDenom ?? "";
-    message.endTime = object.endTime ?? undefined;
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    return message;
-  },
-  fromSDK(object: SyntheticLockSDKType): SyntheticLock {
-    return {
-      underlyingLockId: object?.underlying_lock_id,
-      synthDenom: object?.synth_denom,
-      endTime: object.end_time ?? undefined,
-      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
-    };
-  },
-  fromSDKJSON(object: any): SyntheticLockSDKType {
-    return {
-      underlying_lock_id: isSet(object.underlying_lock_id) ? BigInt(object.underlying_lock_id.toString()) : BigInt(0),
-      synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : "",
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
-    };
-  },
-  toSDK(message: SyntheticLock): SyntheticLockSDKType {
-    const obj: any = {};
-    obj.underlying_lock_id = message.underlyingLockId;
-    obj.synth_denom = message.synthDenom;
-    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    return obj;
-  },
-  fromAmino(object: SyntheticLockAmino): SyntheticLock {
-    return {
-      underlyingLockId: BigInt(object.underlying_lock_id),
-      synthDenom: object.synth_denom,
-      endTime: object.end_time,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-  toAmino(message: SyntheticLock): SyntheticLockAmino {
-    const obj: any = {};
-    obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
-    obj.synth_denom = message.synthDenom;
-    obj.end_time = message.endTime;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SyntheticLockAminoMsg): SyntheticLock {
-    return SyntheticLock.fromAmino(object.value);
-  },
-  toAminoMsg(message: SyntheticLock): SyntheticLockAminoMsg {
-    return {
-      type: "osmosis/lockup/synthetic-lock",
-      value: SyntheticLock.toAmino(message)
-    };
   },
   fromProtoMsg(message: SyntheticLockProtoMsg): SyntheticLock {
     return SyntheticLock.decode(message.value);

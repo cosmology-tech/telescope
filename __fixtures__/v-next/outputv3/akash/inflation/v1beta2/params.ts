@@ -21,6 +21,10 @@ export interface ParamsProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.Params";
   value: Uint8Array;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.inflation.v1beta2.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {
   /** InflationDecayFactor is the number of years it takes inflation to halve. */

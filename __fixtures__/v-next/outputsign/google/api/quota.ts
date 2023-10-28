@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -61,6 +60,10 @@ export interface Quota {
    */
   metricRules: MetricRule[];
 }
+export interface QuotaProtoMsg {
+  typeUrl: "/google.api.Quota";
+  value: Uint8Array;
+}
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -120,6 +123,10 @@ export interface MetricRule_MetricCostsEntry {
   key: string;
   value: bigint;
 }
+export interface MetricRule_MetricCostsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
 export interface MetricRule_MetricCostsEntrySDKType {
   key: string;
   value: bigint;
@@ -147,6 +154,10 @@ export interface MetricRule {
     [key: string]: bigint;
   };
 }
+export interface MetricRuleProtoMsg {
+  typeUrl: "/google.api.MetricRule";
+  value: Uint8Array;
+}
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
  * metric's configured quota behaviors to apply to the method call.
@@ -160,6 +171,10 @@ export interface MetricRuleSDKType {
 export interface QuotaLimit_ValuesEntry {
   key: string;
   value: bigint;
+}
+export interface QuotaLimit_ValuesEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaLimit_ValuesEntrySDKType {
   key: string;
@@ -262,6 +277,10 @@ export interface QuotaLimit {
    */
   displayName: string;
 }
+export interface QuotaLimitProtoMsg {
+  typeUrl: "/google.api.QuotaLimit";
+  value: Uint8Array;
+}
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
  * for a limit type. There can be at most one limit for a duration and limit
@@ -318,81 +337,6 @@ export const Quota = {
     }
     return message;
   },
-  fromJSON(object: any): Quota {
-    const obj = createBaseQuota();
-    if (Array.isArray(object?.limits)) obj.limits = object.limits.map((e: any) => QuotaLimit.fromJSON(e));
-    if (Array.isArray(object?.metricRules)) obj.metricRules = object.metricRules.map((e: any) => MetricRule.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Quota): unknown {
-    const obj: any = {};
-    if (message.limits) {
-      obj.limits = message.limits.map(e => e ? QuotaLimit.toJSON(e) : undefined);
-    } else {
-      obj.limits = [];
-    }
-    if (message.metricRules) {
-      obj.metricRules = message.metricRules.map(e => e ? MetricRule.toJSON(e) : undefined);
-    } else {
-      obj.metricRules = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Quota>): Quota {
-    const message = createBaseQuota();
-    message.limits = object.limits?.map(e => QuotaLimit.fromPartial(e)) || [];
-    message.metricRules = object.metricRules?.map(e => MetricRule.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: QuotaSDKType): Quota {
-    return {
-      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromSDK(e)) : [],
-      metricRules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): QuotaSDKType {
-    return {
-      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromSDKJSON(e)) : [],
-      metric_rules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: Quota): QuotaSDKType {
-    const obj: any = {};
-    if (message.limits) {
-      obj.limits = message.limits.map(e => e ? QuotaLimit.toSDK(e) : undefined);
-    } else {
-      obj.limits = [];
-    }
-    if (message.metricRules) {
-      obj.metric_rules = message.metricRules.map(e => e ? MetricRule.toSDK(e) : undefined);
-    } else {
-      obj.metric_rules = [];
-    }
-    return obj;
-  },
-  fromAmino(object: QuotaAmino): Quota {
-    return {
-      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromAmino(e)) : [],
-      metricRules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Quota): QuotaAmino {
-    const obj: any = {};
-    if (message.limits) {
-      obj.limits = message.limits.map(e => e ? QuotaLimit.toAmino(e) : undefined);
-    } else {
-      obj.limits = [];
-    }
-    if (message.metricRules) {
-      obj.metric_rules = message.metricRules.map(e => e ? MetricRule.toAmino(e) : undefined);
-    } else {
-      obj.metric_rules = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QuotaAminoMsg): Quota {
-    return Quota.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaProtoMsg): Quota {
     return Quota.decode(message.value);
   },
@@ -441,59 +385,6 @@ export const MetricRule_MetricCostsEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): MetricRule_MetricCostsEntry {
-    const obj = createBaseMetricRule_MetricCostsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: MetricRule_MetricCostsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
-    const message = createBaseMetricRule_MetricCostsEntry();
-    message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = BigInt(object.value.toString());
-    }
-    return message;
-  },
-  fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): MetricRule_MetricCostsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: MetricRule_MetricCostsEntryAmino): MetricRule_MetricCostsEntry {
-    return {
-      key: object.key,
-      value: BigInt(object.value)
-    };
-  },
-  toAmino(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
-    return MetricRule_MetricCostsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg): MetricRule_MetricCostsEntry {
     return MetricRule_MetricCostsEntry.decode(message.value);
@@ -545,99 +436,6 @@ export const MetricRule = {
     }
     return message;
   },
-  fromJSON(object: any): MetricRule {
-    const obj = createBaseMetricRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isObject(object.metricCosts)) obj.metricCosts = Object.entries(object.metricCosts).reduce<{
-      [key: string]: bigint;
-    }>((acc, [key, value]) => {
-      acc[key] = BigInt((value as bigint | string).toString());
-      return acc;
-    }, {});
-    return obj;
-  },
-  toJSON(message: MetricRule): unknown {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    obj.metricCosts = {};
-    if (message.metricCosts) {
-      Object.entries(message.metricCosts).forEach(([k, v]) => {
-        obj.metricCosts[k] = v.toString();
-      });
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MetricRule>): MetricRule {
-    const message = createBaseMetricRule();
-    message.selector = object.selector ?? "";
-    message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
-      [key: string]: bigint;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = BigInt(value.toString());
-      }
-      return acc;
-    }, {});
-    return message;
-  },
-  fromSDK(object: MetricRuleSDKType): MetricRule {
-    return {
-      selector: object?.selector,
-      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {}
-    };
-  },
-  fromSDKJSON(object: any): MetricRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      metric_costs: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toSDK(message: MetricRule): MetricRuleSDKType {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.metric_costs = {};
-    if (message.metricCosts) {
-      Object.entries(message.metricCosts).forEach(([k, v]) => {
-        obj.metric_costs[k] = v.toString();
-      });
-    }
-    return obj;
-  },
-  fromAmino(object: MetricRuleAmino): MetricRule {
-    return {
-      selector: object.selector,
-      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: MetricRule): MetricRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.metric_costs = {};
-    if (message.metricCosts) {
-      Object.entries(message.metricCosts).forEach(([k, v]) => {
-        obj.metric_costs[k] = v.toString();
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MetricRuleAminoMsg): MetricRule {
-    return MetricRule.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricRuleProtoMsg): MetricRule {
     return MetricRule.decode(message.value);
   },
@@ -686,59 +484,6 @@ export const QuotaLimit_ValuesEntry = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaLimit_ValuesEntry {
-    const obj = createBaseQuotaLimit_ValuesEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: QuotaLimit_ValuesEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
-    const message = createBaseQuotaLimit_ValuesEntry();
-    message.key = object.key ?? "";
-    if (object.value !== undefined && object.value !== null) {
-      message.value = BigInt(object.value.toString());
-    }
-    return message;
-  },
-  fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
-    return {
-      key: object?.key,
-      value: object?.value
-    };
-  },
-  fromSDKJSON(object: any): QuotaLimit_ValuesEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntrySDKType {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAmino(object: QuotaLimit_ValuesEntryAmino): QuotaLimit_ValuesEntry {
-    return {
-      key: object.key,
-      value: BigInt(object.value)
-    };
-  },
-  toAmino(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
-    return QuotaLimit_ValuesEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg): QuotaLimit_ValuesEntry {
     return QuotaLimit_ValuesEntry.decode(message.value);
@@ -845,169 +590,6 @@ export const QuotaLimit = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): QuotaLimit {
-    const obj = createBaseQuotaLimit();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.defaultLimit)) obj.defaultLimit = BigInt(object.defaultLimit.toString());
-    if (isSet(object.maxLimit)) obj.maxLimit = BigInt(object.maxLimit.toString());
-    if (isSet(object.freeTier)) obj.freeTier = BigInt(object.freeTier.toString());
-    if (isSet(object.duration)) obj.duration = String(object.duration);
-    if (isSet(object.metric)) obj.metric = String(object.metric);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isObject(object.values)) obj.values = Object.entries(object.values).reduce<{
-      [key: string]: bigint;
-    }>((acc, [key, value]) => {
-      acc[key] = BigInt((value as bigint | string).toString());
-      return acc;
-    }, {});
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    return obj;
-  },
-  toJSON(message: QuotaLimit): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
-    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt(0)).toString());
-    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt(0)).toString());
-    message.duration !== undefined && (obj.duration = message.duration);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    obj.values = {};
-    if (message.values) {
-      Object.entries(message.values).forEach(([k, v]) => {
-        obj.values[k] = v.toString();
-      });
-    }
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<QuotaLimit>): QuotaLimit {
-    const message = createBaseQuotaLimit();
-    message.name = object.name ?? "";
-    message.description = object.description ?? "";
-    if (object.defaultLimit !== undefined && object.defaultLimit !== null) {
-      message.defaultLimit = BigInt(object.defaultLimit.toString());
-    }
-    if (object.maxLimit !== undefined && object.maxLimit !== null) {
-      message.maxLimit = BigInt(object.maxLimit.toString());
-    }
-    if (object.freeTier !== undefined && object.freeTier !== null) {
-      message.freeTier = BigInt(object.freeTier.toString());
-    }
-    message.duration = object.duration ?? "";
-    message.metric = object.metric ?? "";
-    message.unit = object.unit ?? "";
-    message.values = Object.entries(object.values ?? {}).reduce<{
-      [key: string]: bigint;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = BigInt(value.toString());
-      }
-      return acc;
-    }, {});
-    message.displayName = object.displayName ?? "";
-    return message;
-  },
-  fromSDK(object: QuotaLimitSDKType): QuotaLimit {
-    return {
-      name: object?.name,
-      description: object?.description,
-      defaultLimit: object?.default_limit,
-      maxLimit: object?.max_limit,
-      freeTier: object?.free_tier,
-      duration: object?.duration,
-      metric: object?.metric,
-      unit: object?.unit,
-      values: isObject(object.values) ? Object.entries(object.values).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {},
-      displayName: object?.display_name
-    };
-  },
-  fromSDKJSON(object: any): QuotaLimitSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt(0),
-      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt(0),
-      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt(0),
-      duration: isSet(object.duration) ? String(object.duration) : "",
-      metric: isSet(object.metric) ? String(object.metric) : "",
-      unit: isSet(object.unit) ? String(object.unit) : "",
-      values: isObject(object.values) ? Object.entries(object.values).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {},
-      display_name: isSet(object.display_name) ? String(object.display_name) : ""
-    };
-  },
-  toSDK(message: QuotaLimit): QuotaLimitSDKType {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.default_limit = message.defaultLimit;
-    obj.max_limit = message.maxLimit;
-    obj.free_tier = message.freeTier;
-    obj.duration = message.duration;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.values = {};
-    if (message.values) {
-      Object.entries(message.values).forEach(([k, v]) => {
-        obj.values[k] = v.toString();
-      });
-    }
-    obj.display_name = message.displayName;
-    return obj;
-  },
-  fromAmino(object: QuotaLimitAmino): QuotaLimit {
-    return {
-      name: object.name,
-      description: object.description,
-      defaultLimit: BigInt(object.default_limit),
-      maxLimit: BigInt(object.max_limit),
-      freeTier: BigInt(object.free_tier),
-      duration: object.duration,
-      metric: object.metric,
-      unit: object.unit,
-      values: isObject(object.values) ? Object.entries(object.values).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {},
-      displayName: object.display_name
-    };
-  },
-  toAmino(message: QuotaLimit): QuotaLimitAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
-    obj.max_limit = message.maxLimit ? message.maxLimit.toString() : undefined;
-    obj.free_tier = message.freeTier ? message.freeTier.toString() : undefined;
-    obj.duration = message.duration;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.values = {};
-    if (message.values) {
-      Object.entries(message.values).forEach(([k, v]) => {
-        obj.values[k] = v.toString();
-      });
-    }
-    obj.display_name = message.displayName;
-    return obj;
-  },
-  fromAminoMsg(object: QuotaLimitAminoMsg): QuotaLimit {
-    return QuotaLimit.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaLimitProtoMsg): QuotaLimit {
     return QuotaLimit.decode(message.value);

@@ -42,6 +42,10 @@ export interface Operation {
    */
   response?: Any;
 }
+export interface OperationProtoMsg {
+  typeUrl: "/google.longrunning.Operation";
+  value: Uint8Array;
+}
 /**
  * This resource represents a long-running operation that is the result of a
  * network API call.
@@ -58,6 +62,10 @@ export interface GetOperationRequest {
   /** The name of the operation resource. */
   name: string;
 }
+export interface GetOperationRequestProtoMsg {
+  typeUrl: "/google.longrunning.GetOperationRequest";
+  value: Uint8Array;
+}
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestSDKType {
   name: string;
@@ -73,6 +81,10 @@ export interface ListOperationsRequest {
   /** The standard list page token. */
   pageToken: string;
 }
+export interface ListOperationsRequestProtoMsg {
+  typeUrl: "/google.longrunning.ListOperationsRequest";
+  value: Uint8Array;
+}
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
   name: string;
@@ -87,6 +99,10 @@ export interface ListOperationsResponse {
   /** The standard List next-page token. */
   nextPageToken: string;
 }
+export interface ListOperationsResponseProtoMsg {
+  typeUrl: "/google.longrunning.ListOperationsResponse";
+  value: Uint8Array;
+}
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
   operations: OperationSDKType[];
@@ -97,6 +113,10 @@ export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
+export interface CancelOperationRequestProtoMsg {
+  typeUrl: "/google.longrunning.CancelOperationRequest";
+  value: Uint8Array;
+}
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestSDKType {
   name: string;
@@ -105,6 +125,10 @@ export interface CancelOperationRequestSDKType {
 export interface DeleteOperationRequest {
   /** The name of the operation resource to be deleted. */
   name: string;
+}
+export interface DeleteOperationRequestProtoMsg {
+  typeUrl: "/google.longrunning.DeleteOperationRequest";
+  value: Uint8Array;
 }
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequestSDKType {
@@ -120,6 +144,10 @@ export interface WaitOperationRequest {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
   timeout?: Duration;
+}
+export interface WaitOperationRequestProtoMsg {
+  typeUrl: "/google.longrunning.WaitOperationRequest";
+  value: Uint8Array;
 }
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestSDKType {
@@ -161,6 +189,10 @@ export interface OperationInfo {
    * Note: Altering this value constitutes a breaking change.
    */
   metadataType: string;
+}
+export interface OperationInfoProtoMsg {
+  typeUrl: "/google.longrunning.OperationInfo";
+  value: Uint8Array;
 }
 /**
  * A message representing the message types used by a long-running operation.

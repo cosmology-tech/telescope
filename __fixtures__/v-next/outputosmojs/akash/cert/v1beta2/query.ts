@@ -8,6 +8,10 @@ export interface CertificateResponse {
   certificate: Certificate;
   serial: string;
 }
+export interface CertificateResponseProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.CertificateResponse";
+  value: Uint8Array;
+}
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
   certificate: CertificateSDKType;
@@ -18,6 +22,10 @@ export interface QueryCertificatesRequest {
   filter: CertificateFilter;
   pagination?: PageRequest;
 }
+export interface QueryCertificatesRequestProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
+  value: Uint8Array;
+}
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter: CertificateFilterSDKType;
@@ -27,6 +35,10 @@ export interface QueryCertificatesRequestSDKType {
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
   pagination?: PageResponse;
+}
+export interface QueryCertificatesResponseProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
+  value: Uint8Array;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {

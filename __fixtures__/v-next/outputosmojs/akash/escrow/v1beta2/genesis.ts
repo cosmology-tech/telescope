@@ -7,6 +7,10 @@ export interface GenesisState {
   accounts: Account[];
   payments: FractionalPayment[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {
   accounts: AccountSDKType[];

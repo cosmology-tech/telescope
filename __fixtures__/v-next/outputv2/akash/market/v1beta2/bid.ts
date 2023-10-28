@@ -70,6 +70,10 @@ export interface MsgCreateBidProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateBid";
   value: Uint8Array;
 }
+export interface MsgCreateBidProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBid";
+  value: Uint8Array;
+}
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidAmino {
   order?: OrderIDAmino;
@@ -94,6 +98,10 @@ export interface MsgCreateBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse";
   value: Uint8Array;
 }
+export interface MsgCreateBidResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse";
+  value: Uint8Array;
+}
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseAmino {}
 export interface MsgCreateBidResponseAminoMsg {
@@ -105,6 +113,10 @@ export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
   bidId: BidID;
+}
+export interface MsgCloseBidProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBid";
+  value: Uint8Array;
 }
 export interface MsgCloseBidProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseBid";
@@ -128,6 +140,10 @@ export interface MsgCloseBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse";
   value: Uint8Array;
 }
+export interface MsgCloseBidResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse";
+  value: Uint8Array;
+}
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseAmino {}
 export interface MsgCloseBidResponseAminoMsg {
@@ -146,6 +162,10 @@ export interface BidID {
   gseq: number;
   oseq: number;
   provider: string;
+}
+export interface BidIDProtoMsg {
+  typeUrl: "/akash.market.v1beta2.BidID";
+  value: Uint8Array;
 }
 export interface BidIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.BidID";
@@ -188,6 +208,10 @@ export interface BidProtoMsg {
   typeUrl: "/akash.market.v1beta2.Bid";
   value: Uint8Array;
 }
+export interface BidProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Bid";
+  value: Uint8Array;
+}
 /** Bid stores BidID, state of bid and price */
 export interface BidAmino {
   bid_id?: BidIDAmino;
@@ -214,6 +238,10 @@ export interface BidFilters {
   oseq: number;
   provider: string;
   state: string;
+}
+export interface BidFiltersProtoMsg {
+  typeUrl: "/akash.market.v1beta2.BidFilters";
+  value: Uint8Array;
 }
 export interface BidFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.BidFilters";

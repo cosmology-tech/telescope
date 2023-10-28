@@ -11,6 +11,10 @@ export interface TokenPairArbRoutes {
   /** Token denomination of the second asset */
   tokenOut: string;
 }
+export interface TokenPairArbRoutesProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.TokenPairArbRoutes";
+  value: Uint8Array;
+}
 /** TokenPairArbRoutes tracks all of the hot routes for a given pair of tokens */
 export interface TokenPairArbRoutesSDKType {
   arb_routes: RouteSDKType[];
@@ -30,6 +34,10 @@ export interface Route {
    */
   stepSize: string;
 }
+export interface RouteProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.Route";
+  value: Uint8Array;
+}
 /** Route is a hot route for a given pair of tokens */
 export interface RouteSDKType {
   trades: TradeSDKType[];
@@ -43,6 +51,10 @@ export interface Trade {
   tokenIn: string;
   /** The denom of the token that is received */
   tokenOut: string;
+}
+export interface TradeProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.Trade";
+  value: Uint8Array;
 }
 /** Trade is a single trade in a route */
 export interface TradeSDKType {
@@ -64,6 +76,10 @@ export interface RouteStatistics {
   numberOfTrades: string;
   /** route is the route that was used (pool ids along the arbitrage route) */
   route: bigint[];
+}
+export interface RouteStatisticsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.RouteStatistics";
+  value: Uint8Array;
 }
 /**
  * RouteStatistics contains the number of trades the module has executed after a
@@ -88,6 +104,10 @@ export interface PoolWeights {
   balancerWeight: bigint;
   /** The weight of a concentrated pool */
   concentratedWeight: bigint;
+}
+export interface PoolWeightsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.PoolWeights";
+  value: Uint8Array;
 }
 /**
  * PoolWeights contains the weights of all of the different pool types. This
@@ -114,6 +134,10 @@ export interface BaseDenom {
    * amount
    */
   stepSize: string;
+}
+export interface BaseDenomProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.BaseDenom";
+  value: Uint8Array;
 }
 /**
  * BaseDenom represents a single base denom that the module uses for its

@@ -7,6 +7,10 @@ export interface MsgCreateCosmWasmPool {
   instantiateMsg: Uint8Array;
   sender: string;
 }
+export interface MsgCreateCosmWasmPoolProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.MsgCreateCosmWasmPool";
+  value: Uint8Array;
+}
 /** ===================== MsgCreateCosmwasmPool */
 export interface MsgCreateCosmWasmPoolSDKType {
   code_id: bigint;
@@ -16,6 +20,10 @@ export interface MsgCreateCosmWasmPoolSDKType {
 /** Returns a unique poolID to identify the pool with. */
 export interface MsgCreateCosmWasmPoolResponse {
   poolId: bigint;
+}
+export interface MsgCreateCosmWasmPoolResponseProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.MsgCreateCosmWasmPoolResponse";
+  value: Uint8Array;
 }
 /** Returns a unique poolID to identify the pool with. */
 export interface MsgCreateCosmWasmPoolResponseSDKType {

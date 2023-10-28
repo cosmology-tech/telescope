@@ -1,7 +1,6 @@
 import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "./resource";
 import { Endpoint, EndpointSDKType } from "./endpoint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -12,6 +11,10 @@ export interface ResourceUnits {
   memory?: Memory;
   storage: Storage[];
   endpoints: Endpoint[];
+}
+export interface ResourceUnitsProtoMsg {
+  typeUrl: "/akash.base.v1beta2.ResourceUnits";
+  value: Uint8Array;
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -73,107 +76,6 @@ export const ResourceUnits = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): ResourceUnits {
-    const obj = createBaseResourceUnits();
-    if (isSet(object.cpu)) obj.cpu = CPU.fromJSON(object.cpu);
-    if (isSet(object.memory)) obj.memory = Memory.fromJSON(object.memory);
-    if (Array.isArray(object?.storage)) obj.storage = object.storage.map((e: any) => Storage.fromJSON(e));
-    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ResourceUnits): unknown {
-    const obj: any = {};
-    message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toJSON(message.cpu) : undefined);
-    message.memory !== undefined && (obj.memory = message.memory ? Memory.toJSON(message.memory) : undefined);
-    if (message.storage) {
-      obj.storage = message.storage.map(e => e ? Storage.toJSON(e) : undefined);
-    } else {
-      obj.storage = [];
-    }
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<ResourceUnits>, I>>(object: I): ResourceUnits {
-    const message = createBaseResourceUnits();
-    if (object.cpu !== undefined && object.cpu !== null) {
-      message.cpu = CPU.fromPartial(object.cpu);
-    }
-    if (object.memory !== undefined && object.memory !== null) {
-      message.memory = Memory.fromPartial(object.memory);
-    }
-    message.storage = object.storage?.map(e => Storage.fromPartial(e)) || [];
-    message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: ResourceUnitsSDKType): ResourceUnits {
-    return {
-      cpu: object.cpu ? CPU.fromSDK(object.cpu) : undefined,
-      memory: object.memory ? Memory.fromSDK(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromSDK(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): ResourceUnitsSDKType {
-    return {
-      cpu: isSet(object.cpu) ? CPU.fromSDKJSON(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromSDKJSON(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromSDKJSON(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: ResourceUnits): ResourceUnitsSDKType {
-    const obj: any = {};
-    message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toSDK(message.cpu) : undefined);
-    message.memory !== undefined && (obj.memory = message.memory ? Memory.toSDK(message.memory) : undefined);
-    if (message.storage) {
-      obj.storage = message.storage.map(e => e ? Storage.toSDK(e) : undefined);
-    } else {
-      obj.storage = [];
-    }
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    return obj;
-  },
-  fromAmino(object: ResourceUnitsAmino): ResourceUnits {
-    return {
-      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
-      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromAmino(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ResourceUnits): ResourceUnitsAmino {
-    const obj: any = {};
-    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
-    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
-    if (message.storage) {
-      obj.storage = message.storage.map(e => e ? Storage.toAmino(e) : undefined);
-    } else {
-      obj.storage = [];
-    }
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
-    return ResourceUnits.fromAmino(object.value);
-  },
-  toAminoMsg(message: ResourceUnits): ResourceUnitsAminoMsg {
-    return {
-      type: "akash/base/v1beta2/resource-units",
-      value: ResourceUnits.toAmino(message)
-    };
   },
   fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
     return ResourceUnits.decode(message.value);

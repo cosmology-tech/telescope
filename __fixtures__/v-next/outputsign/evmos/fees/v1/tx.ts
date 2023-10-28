@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfo {
@@ -19,6 +18,10 @@ export interface MsgRegisterDevFeeInfo {
    */
   nonces: bigint[];
 }
+export interface MsgRegisterDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: Uint8Array;
+}
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
@@ -31,6 +34,10 @@ export interface MsgRegisterDevFeeInfoSDKType {
  * type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
+export interface MsgRegisterDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
@@ -46,6 +53,10 @@ export interface MsgCancelDevFeeInfo {
   /** deployer bech32 address */
   deployerAddress: string;
 }
+export interface MsgCancelDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: Uint8Array;
+}
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
@@ -56,6 +67,10 @@ export interface MsgCancelDevFeeInfoSDKType {
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
+export interface MsgCancelDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
 /**
@@ -70,6 +85,10 @@ export interface MsgUpdateDevFeeInfo {
   /** new withdraw bech32 address for receiving the transaction fees */
   withdrawAddress: string;
 }
+export interface MsgUpdateDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
@@ -81,6 +100,10 @@ export interface MsgUpdateDevFeeInfoSDKType {
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+export interface MsgUpdateDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
@@ -143,85 +166,6 @@ export const MsgRegisterDevFeeInfo = {
     }
     return message;
   },
-  fromJSON(object: any): MsgRegisterDevFeeInfo {
-    const obj = createBaseMsgRegisterDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    if (Array.isArray(object?.nonces)) obj.nonces = object.nonces.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: MsgRegisterDevFeeInfo): unknown {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.nonces = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
-    const message = createBaseMsgRegisterDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
-    message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
-    return message;
-  },
-  fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: object?.contract_address,
-      deployerAddress: object?.deployer_address,
-      withdrawAddress: object?.withdraw_address,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
-    };
-  },
-  fromSDKJSON(object: any): MsgRegisterDevFeeInfoSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
-    };
-  },
-  toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    if (message.nonces) {
-      obj.nonces = message.nonces.map(e => e);
-    } else {
-      obj.nonces = [];
-    }
-    return obj;
-  },
-  fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
-    };
-  },
-  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    if (message.nonces) {
-      obj.nonces = message.nonces.map(e => e.toString());
-    } else {
-      obj.nonces = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
-    return MsgRegisterDevFeeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
     return MsgRegisterDevFeeInfo.decode(message.value);
   },
@@ -256,38 +200,6 @@ export const MsgRegisterDevFeeInfoResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgRegisterDevFeeInfoResponse {
-    const obj = createBaseMsgRegisterDevFeeInfoResponse();
-    return obj;
-  },
-  toJSON(_: MsgRegisterDevFeeInfoResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
-    const message = createBaseMsgRegisterDevFeeInfoResponse();
-    return message;
-  },
-  fromSDK(_: MsgRegisterDevFeeInfoResponseSDKType): MsgRegisterDevFeeInfoResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgRegisterDevFeeInfoResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
-    return {};
-  },
-  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgRegisterDevFeeInfoResponseAminoMsg): MsgRegisterDevFeeInfoResponse {
-    return MsgRegisterDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg): MsgRegisterDevFeeInfoResponse {
     return MsgRegisterDevFeeInfoResponse.decode(message.value);
@@ -339,57 +251,6 @@ export const MsgCancelDevFeeInfo = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCancelDevFeeInfo {
-    const obj = createBaseMsgCancelDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    return obj;
-  },
-  toJSON(message: MsgCancelDevFeeInfo): unknown {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
-    const message = createBaseMsgCancelDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
-    return message;
-  },
-  fromSDK(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
-    return {
-      contractAddress: object?.contract_address,
-      deployerAddress: object?.deployer_address
-    };
-  },
-  fromSDKJSON(object: any): MsgCancelDevFeeInfoSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : ""
-    };
-  },
-  toSDK(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    return obj;
-  },
-  fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address
-    };
-  },
-  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
-    return MsgCancelDevFeeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg): MsgCancelDevFeeInfo {
     return MsgCancelDevFeeInfo.decode(message.value);
   },
@@ -424,38 +285,6 @@ export const MsgCancelDevFeeInfoResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCancelDevFeeInfoResponse {
-    const obj = createBaseMsgCancelDevFeeInfoResponse();
-    return obj;
-  },
-  toJSON(_: MsgCancelDevFeeInfoResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
-    const message = createBaseMsgCancelDevFeeInfoResponse();
-    return message;
-  },
-  fromSDK(_: MsgCancelDevFeeInfoResponseSDKType): MsgCancelDevFeeInfoResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCancelDevFeeInfoResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
-    return {};
-  },
-  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCancelDevFeeInfoResponseAminoMsg): MsgCancelDevFeeInfoResponse {
-    return MsgCancelDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg): MsgCancelDevFeeInfoResponse {
     return MsgCancelDevFeeInfoResponse.decode(message.value);
@@ -514,65 +343,6 @@ export const MsgUpdateDevFeeInfo = {
     }
     return message;
   },
-  fromJSON(object: any): MsgUpdateDevFeeInfo {
-    const obj = createBaseMsgUpdateDevFeeInfo();
-    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
-    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
-    return obj;
-  },
-  toJSON(message: MsgUpdateDevFeeInfo): unknown {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
-    const message = createBaseMsgUpdateDevFeeInfo();
-    message.contractAddress = object.contractAddress ?? "";
-    message.deployerAddress = object.deployerAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
-    return message;
-  },
-  fromSDK(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
-    return {
-      contractAddress: object?.contract_address,
-      deployerAddress: object?.deployer_address,
-      withdrawAddress: object?.withdraw_address
-    };
-  },
-  fromSDKJSON(object: any): MsgUpdateDevFeeInfoSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
-    };
-  },
-  toSDK(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    return obj;
-  },
-  fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
-    };
-  },
-  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {
-    return MsgUpdateDevFeeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg): MsgUpdateDevFeeInfo {
     return MsgUpdateDevFeeInfo.decode(message.value);
   },
@@ -607,38 +377,6 @@ export const MsgUpdateDevFeeInfoResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgUpdateDevFeeInfoResponse {
-    const obj = createBaseMsgUpdateDevFeeInfoResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateDevFeeInfoResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
-    const message = createBaseMsgUpdateDevFeeInfoResponse();
-    return message;
-  },
-  fromSDK(_: MsgUpdateDevFeeInfoResponseSDKType): MsgUpdateDevFeeInfoResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgUpdateDevFeeInfoResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
-    return {};
-  },
-  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgUpdateDevFeeInfoResponseAminoMsg): MsgUpdateDevFeeInfoResponse {
-    return MsgUpdateDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg): MsgUpdateDevFeeInfoResponse {
     return MsgUpdateDevFeeInfoResponse.decode(message.value);

@@ -31,6 +31,10 @@ export interface MsgCreateClawbackVestingAccountProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
   value: Uint8Array;
 }
+export interface MsgCreateClawbackVestingAccountProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
+  value: Uint8Array;
+}
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountAmino {
   /**
@@ -77,6 +81,10 @@ export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
   value: Uint8Array;
 }
+export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
+  value: Uint8Array;
+}
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
@@ -106,6 +114,10 @@ export interface MsgClawback {
    * the account.
    */
   destAddress: string;
+}
+export interface MsgClawbackProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgClawback";
+  value: Uint8Array;
 }
 export interface MsgClawbackProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawback";
@@ -142,6 +154,10 @@ export interface MsgClawbackSDKType {
 }
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponse {}
+export interface MsgClawbackResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
+  value: Uint8Array;
+}
 export interface MsgClawbackResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
   value: Uint8Array;

@@ -109,6 +109,10 @@ export interface AccountIDProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.AccountID";
   value: Uint8Array;
 }
+export interface AccountIDProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.AccountID";
+  value: Uint8Array;
+}
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
   scope: string;
@@ -137,6 +141,10 @@ export interface Account {
   transferred: Coin;
   /** block height at which this account was last settled */
   settledAt: bigint;
+}
+export interface AccountProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.Account";
+  value: Uint8Array;
 }
 export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Account";
@@ -179,6 +187,10 @@ export interface Payment {
   rate: Coin;
   balance: Coin;
   withdrawn: Coin;
+}
+export interface PaymentProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.Payment";
+  value: Uint8Array;
 }
 export interface PaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Payment";

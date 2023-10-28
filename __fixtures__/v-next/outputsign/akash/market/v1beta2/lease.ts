@@ -1,7 +1,6 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType } from "./bid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of lease */
 export enum Lease_State {
@@ -59,6 +58,10 @@ export interface LeaseID {
   oseq: number;
   provider: string;
 }
+export interface LeaseIDProtoMsg {
+  typeUrl: "/akash.market.v1beta2.LeaseID";
+  value: Uint8Array;
+}
 /** LeaseID stores bid details of lease */
 export interface LeaseIDSDKType {
   owner: string;
@@ -74,6 +77,10 @@ export interface Lease {
   price: DecCoin;
   createdAt: bigint;
   closedOn: bigint;
+}
+export interface LeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Lease";
+  value: Uint8Array;
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
@@ -92,6 +99,10 @@ export interface LeaseFilters {
   provider: string;
   state: string;
 }
+export interface LeaseFiltersProtoMsg {
+  typeUrl: "/akash.market.v1beta2.LeaseFilters";
+  value: Uint8Array;
+}
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersSDKType {
   owner: string;
@@ -105,17 +116,29 @@ export interface LeaseFiltersSDKType {
 export interface MsgCreateLease {
   bidId: BidID;
 }
+export interface MsgCreateLeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateLease";
+  value: Uint8Array;
+}
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseSDKType {
   bid_id: BidIDSDKType;
 }
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
+export interface MsgCreateLeaseResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateLeaseResponse";
+  value: Uint8Array;
+}
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponseSDKType {}
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLease {
   bidId: LeaseID;
+}
+export interface MsgWithdrawLeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgWithdrawLease";
+  value: Uint8Array;
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseSDKType {
@@ -123,11 +146,19 @@ export interface MsgWithdrawLeaseSDKType {
 }
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
+export interface MsgWithdrawLeaseResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgWithdrawLeaseResponse";
+  value: Uint8Array;
+}
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponseSDKType {}
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLease {
   leaseId: LeaseID;
+}
+export interface MsgCloseLeaseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseLease";
+  value: Uint8Array;
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseSDKType {
@@ -135,6 +166,10 @@ export interface MsgCloseLeaseSDKType {
 }
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}
+export interface MsgCloseLeaseResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseLeaseResponse";
+  value: Uint8Array;
+}
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponseSDKType {}
 function createBaseLeaseID(): LeaseID {
@@ -194,89 +229,6 @@ export const LeaseID = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): LeaseID {
-    const obj = createBaseLeaseID();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
-    if (isSet(object.provider)) obj.provider = String(object.provider);
-    return obj;
-  },
-  toJSON(message: LeaseID): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
-    message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
-    message.provider !== undefined && (obj.provider = message.provider);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<LeaseID>, I>>(object: I): LeaseID {
-    const message = createBaseLeaseID();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    message.gseq = object.gseq ?? 0;
-    message.oseq = object.oseq ?? 0;
-    message.provider = object.provider ?? "";
-    return message;
-  },
-  fromSDK(object: LeaseIDSDKType): LeaseID {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq,
-      gseq: object?.gseq,
-      oseq: object?.oseq,
-      provider: object?.provider
-    };
-  },
-  fromSDKJSON(object: any): LeaseIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : ""
-    };
-  },
-  toSDK(message: LeaseID): LeaseIDSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    return obj;
-  },
-  fromAmino(object: LeaseIDAmino): LeaseID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      provider: object.provider
-    };
-  },
-  toAmino(message: LeaseID): LeaseIDAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    return obj;
-  },
-  fromAminoMsg(object: LeaseIDAminoMsg): LeaseID {
-    return LeaseID.fromAmino(object.value);
-  },
-  toAminoMsg(message: LeaseID): LeaseIDAminoMsg {
-    return {
-      type: "akash/market/v1beta2/lease-i-d",
-      value: LeaseID.toAmino(message)
-    };
   },
   fromProtoMsg(message: LeaseIDProtoMsg): LeaseID {
     return LeaseID.decode(message.value);
@@ -348,95 +300,6 @@ export const Lease = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Lease {
-    const obj = createBaseLease();
-    if (isSet(object.leaseId)) obj.leaseId = LeaseID.fromJSON(object.leaseId);
-    if (isSet(object.state)) obj.state = lease_StateFromJSON(object.state);
-    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
-    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    if (isSet(object.closedOn)) obj.closedOn = BigInt(object.closedOn.toString());
-    return obj;
-  },
-  toJSON(message: Lease): unknown {
-    const obj: any = {};
-    message.leaseId !== undefined && (obj.leaseId = message.leaseId ? LeaseID.toJSON(message.leaseId) : undefined);
-    message.state !== undefined && (obj.state = lease_StateToJSON(message.state));
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
-    message.closedOn !== undefined && (obj.closedOn = (message.closedOn || BigInt(0)).toString());
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<Lease>, I>>(object: I): Lease {
-    const message = createBaseLease();
-    if (object.leaseId !== undefined && object.leaseId !== null) {
-      message.leaseId = LeaseID.fromPartial(object.leaseId);
-    }
-    message.state = object.state ?? 0;
-    if (object.price !== undefined && object.price !== null) {
-      message.price = DecCoin.fromPartial(object.price);
-    }
-    if (object.createdAt !== undefined && object.createdAt !== null) {
-      message.createdAt = BigInt(object.createdAt.toString());
-    }
-    if (object.closedOn !== undefined && object.closedOn !== null) {
-      message.closedOn = BigInt(object.closedOn.toString());
-    }
-    return message;
-  },
-  fromSDK(object: LeaseSDKType): Lease {
-    return {
-      leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
-      price: object.price ? DecCoin.fromSDK(object.price) : undefined,
-      createdAt: object?.created_at,
-      closedOn: object?.closed_on
-    };
-  },
-  fromSDKJSON(object: any): LeaseSDKType {
-    return {
-      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0),
-      closed_on: isSet(object.closed_on) ? BigInt(object.closed_on.toString()) : BigInt(0)
-    };
-  },
-  toSDK(message: Lease): LeaseSDKType {
-    const obj: any = {};
-    message.leaseId !== undefined && (obj.lease_id = message.leaseId ? LeaseID.toSDK(message.leaseId) : undefined);
-    message.state !== undefined && (obj.state = lease_StateToJSON(message.state));
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
-    obj.created_at = message.createdAt;
-    obj.closed_on = message.closedOn;
-    return obj;
-  },
-  fromAmino(object: LeaseAmino): Lease {
-    return {
-      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      createdAt: BigInt(object.created_at),
-      closedOn: BigInt(object.closed_on)
-    };
-  },
-  toAmino(message: Lease): LeaseAmino {
-    const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
-    obj.state = message.state;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: LeaseAminoMsg): Lease {
-    return Lease.fromAmino(object.value);
-  },
-  toAminoMsg(message: Lease): LeaseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/lease",
-      value: Lease.toAmino(message)
-    };
   },
   fromProtoMsg(message: LeaseProtoMsg): Lease {
     return Lease.decode(message.value);
@@ -516,97 +379,6 @@ export const LeaseFilters = {
     }
     return message;
   },
-  fromJSON(object: any): LeaseFilters {
-    const obj = createBaseLeaseFilters();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
-    if (isSet(object.provider)) obj.provider = String(object.provider);
-    if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: LeaseFilters): unknown {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
-    message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
-    message.provider !== undefined && (obj.provider = message.provider);
-    message.state !== undefined && (obj.state = message.state);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<LeaseFilters>, I>>(object: I): LeaseFilters {
-    const message = createBaseLeaseFilters();
-    message.owner = object.owner ?? "";
-    if (object.dseq !== undefined && object.dseq !== null) {
-      message.dseq = BigInt(object.dseq.toString());
-    }
-    message.gseq = object.gseq ?? 0;
-    message.oseq = object.oseq ?? 0;
-    message.provider = object.provider ?? "";
-    message.state = object.state ?? "";
-    return message;
-  },
-  fromSDK(object: LeaseFiltersSDKType): LeaseFilters {
-    return {
-      owner: object?.owner,
-      dseq: object?.dseq,
-      gseq: object?.gseq,
-      oseq: object?.oseq,
-      provider: object?.provider,
-      state: object?.state
-    };
-  },
-  fromSDKJSON(object: any): LeaseFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
-  },
-  toSDK(message: LeaseFilters): LeaseFiltersSDKType {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAmino(object: LeaseFiltersAmino): LeaseFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      provider: object.provider,
-      state: object.state
-    };
-  },
-  toAmino(message: LeaseFilters): LeaseFiltersAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: LeaseFiltersAminoMsg): LeaseFilters {
-    return LeaseFilters.fromAmino(object.value);
-  },
-  toAminoMsg(message: LeaseFilters): LeaseFiltersAminoMsg {
-    return {
-      type: "akash/market/v1beta2/lease-filters",
-      value: LeaseFilters.toAmino(message)
-    };
-  },
   fromProtoMsg(message: LeaseFiltersProtoMsg): LeaseFilters {
     return LeaseFilters.decode(message.value);
   },
@@ -650,57 +422,6 @@ export const MsgCreateLease = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCreateLease {
-    const obj = createBaseMsgCreateLease();
-    if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
-    return obj;
-  },
-  toJSON(message: MsgCreateLease): unknown {
-    const obj: any = {};
-    message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateLease>, I>>(object: I): MsgCreateLease {
-    const message = createBaseMsgCreateLease();
-    if (object.bidId !== undefined && object.bidId !== null) {
-      message.bidId = BidID.fromPartial(object.bidId);
-    }
-    return message;
-  },
-  fromSDK(object: MsgCreateLeaseSDKType): MsgCreateLease {
-    return {
-      bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgCreateLeaseSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
-    };
-  },
-  toSDK(message: MsgCreateLease): MsgCreateLeaseSDKType {
-    const obj: any = {};
-    message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgCreateLeaseAmino): MsgCreateLease {
-    return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
-    };
-  },
-  toAmino(message: MsgCreateLease): MsgCreateLeaseAmino {
-    const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateLeaseAminoMsg): MsgCreateLease {
-    return MsgCreateLease.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateLease): MsgCreateLeaseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/testonly-create-lease",
-      value: MsgCreateLease.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateLeaseProtoMsg): MsgCreateLease {
     return MsgCreateLease.decode(message.value);
   },
@@ -735,44 +456,6 @@ export const MsgCreateLeaseResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCreateLeaseResponse {
-    const obj = createBaseMsgCreateLeaseResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateLeaseResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateLeaseResponse>, I>>(_: I): MsgCreateLeaseResponse {
-    const message = createBaseMsgCreateLeaseResponse();
-    return message;
-  },
-  fromSDK(_: MsgCreateLeaseResponseSDKType): MsgCreateLeaseResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCreateLeaseResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCreateLeaseResponseAmino): MsgCreateLeaseResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateLeaseResponseAminoMsg): MsgCreateLeaseResponse {
-    return MsgCreateLeaseResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateLeaseResponse): MsgCreateLeaseResponseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/testonly-create-lease-response",
-      value: MsgCreateLeaseResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateLeaseResponseProtoMsg): MsgCreateLeaseResponse {
     return MsgCreateLeaseResponse.decode(message.value);
@@ -817,57 +500,6 @@ export const MsgWithdrawLease = {
     }
     return message;
   },
-  fromJSON(object: any): MsgWithdrawLease {
-    const obj = createBaseMsgWithdrawLease();
-    if (isSet(object.bidId)) obj.bidId = LeaseID.fromJSON(object.bidId);
-    return obj;
-  },
-  toJSON(message: MsgWithdrawLease): unknown {
-    const obj: any = {};
-    message.bidId !== undefined && (obj.bidId = message.bidId ? LeaseID.toJSON(message.bidId) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawLease>, I>>(object: I): MsgWithdrawLease {
-    const message = createBaseMsgWithdrawLease();
-    if (object.bidId !== undefined && object.bidId !== null) {
-      message.bidId = LeaseID.fromPartial(object.bidId);
-    }
-    return message;
-  },
-  fromSDK(object: MsgWithdrawLeaseSDKType): MsgWithdrawLease {
-    return {
-      bidId: object.bid_id ? LeaseID.fromSDK(object.bid_id) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgWithdrawLeaseSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? LeaseID.fromSDKJSON(object.bid_id) : undefined
-    };
-  },
-  toSDK(message: MsgWithdrawLease): MsgWithdrawLeaseSDKType {
-    const obj: any = {};
-    message.bidId !== undefined && (obj.bid_id = message.bidId ? LeaseID.toSDK(message.bidId) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgWithdrawLeaseAmino): MsgWithdrawLease {
-    return {
-      bidId: object?.bid_id ? LeaseID.fromAmino(object.bid_id) : undefined
-    };
-  },
-  toAmino(message: MsgWithdrawLease): MsgWithdrawLeaseAmino {
-    const obj: any = {};
-    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgWithdrawLeaseAminoMsg): MsgWithdrawLease {
-    return MsgWithdrawLease.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgWithdrawLease): MsgWithdrawLeaseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/testonly-withdraw-lease",
-      value: MsgWithdrawLease.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgWithdrawLeaseProtoMsg): MsgWithdrawLease {
     return MsgWithdrawLease.decode(message.value);
   },
@@ -902,44 +534,6 @@ export const MsgWithdrawLeaseResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgWithdrawLeaseResponse {
-    const obj = createBaseMsgWithdrawLeaseResponse();
-    return obj;
-  },
-  toJSON(_: MsgWithdrawLeaseResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawLeaseResponse>, I>>(_: I): MsgWithdrawLeaseResponse {
-    const message = createBaseMsgWithdrawLeaseResponse();
-    return message;
-  },
-  fromSDK(_: MsgWithdrawLeaseResponseSDKType): MsgWithdrawLeaseResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgWithdrawLeaseResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgWithdrawLeaseResponseAmino): MsgWithdrawLeaseResponse {
-    return {};
-  },
-  toAmino(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgWithdrawLeaseResponseAminoMsg): MsgWithdrawLeaseResponse {
-    return MsgWithdrawLeaseResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/testonly-withdraw-lease-response",
-      value: MsgWithdrawLeaseResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgWithdrawLeaseResponseProtoMsg): MsgWithdrawLeaseResponse {
     return MsgWithdrawLeaseResponse.decode(message.value);
@@ -984,57 +578,6 @@ export const MsgCloseLease = {
     }
     return message;
   },
-  fromJSON(object: any): MsgCloseLease {
-    const obj = createBaseMsgCloseLease();
-    if (isSet(object.leaseId)) obj.leaseId = LeaseID.fromJSON(object.leaseId);
-    return obj;
-  },
-  toJSON(message: MsgCloseLease): unknown {
-    const obj: any = {};
-    message.leaseId !== undefined && (obj.leaseId = message.leaseId ? LeaseID.toJSON(message.leaseId) : undefined);
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCloseLease>, I>>(object: I): MsgCloseLease {
-    const message = createBaseMsgCloseLease();
-    if (object.leaseId !== undefined && object.leaseId !== null) {
-      message.leaseId = LeaseID.fromPartial(object.leaseId);
-    }
-    return message;
-  },
-  fromSDK(object: MsgCloseLeaseSDKType): MsgCloseLease {
-    return {
-      leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined
-    };
-  },
-  fromSDKJSON(object: any): MsgCloseLeaseSDKType {
-    return {
-      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined
-    };
-  },
-  toSDK(message: MsgCloseLease): MsgCloseLeaseSDKType {
-    const obj: any = {};
-    message.leaseId !== undefined && (obj.lease_id = message.leaseId ? LeaseID.toSDK(message.leaseId) : undefined);
-    return obj;
-  },
-  fromAmino(object: MsgCloseLeaseAmino): MsgCloseLease {
-    return {
-      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined
-    };
-  },
-  toAmino(message: MsgCloseLease): MsgCloseLeaseAmino {
-    const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCloseLeaseAminoMsg): MsgCloseLease {
-    return MsgCloseLease.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCloseLease): MsgCloseLeaseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/testonly-close-lease",
-      value: MsgCloseLease.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCloseLeaseProtoMsg): MsgCloseLease {
     return MsgCloseLease.decode(message.value);
   },
@@ -1069,44 +612,6 @@ export const MsgCloseLeaseResponse = {
       }
     }
     return message;
-  },
-  fromJSON(_: any): MsgCloseLeaseResponse {
-    const obj = createBaseMsgCloseLeaseResponse();
-    return obj;
-  },
-  toJSON(_: MsgCloseLeaseResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCloseLeaseResponse>, I>>(_: I): MsgCloseLeaseResponse {
-    const message = createBaseMsgCloseLeaseResponse();
-    return message;
-  },
-  fromSDK(_: MsgCloseLeaseResponseSDKType): MsgCloseLeaseResponse {
-    return {};
-  },
-  fromSDKJSON(_: any): MsgCloseLeaseResponseSDKType {
-    return {};
-  },
-  toSDK(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-  fromAmino(_: MsgCloseLeaseResponseAmino): MsgCloseLeaseResponse {
-    return {};
-  },
-  toAmino(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCloseLeaseResponseAminoMsg): MsgCloseLeaseResponse {
-    return MsgCloseLeaseResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCloseLeaseResponse): MsgCloseLeaseResponseAminoMsg {
-    return {
-      type: "akash/market/v1beta2/testonly-close-lease-response",
-      value: MsgCloseLeaseResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCloseLeaseResponseProtoMsg): MsgCloseLeaseResponse {
     return MsgCloseLeaseResponse.decode(message.value);

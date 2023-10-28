@@ -21,6 +21,10 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   value: Uint8Array;
 }
+export interface ReplacePoolIncentivesProposalProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
+  value: Uint8Array;
+}
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -68,6 +72,10 @@ export interface UpdatePoolIncentivesProposal {
   title: string;
   description: string;
   records: DistrRecord[];
+}
+export interface UpdatePoolIncentivesProposalProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
+  value: Uint8Array;
 }
 export interface UpdatePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";

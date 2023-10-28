@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -13,6 +12,10 @@ export interface DenomTrace {
   path: string;
   /** base denomination of the relayed fungible token. */
   baseDenom: string;
+}
+export interface DenomTraceProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.DenomTrace";
+  value: Uint8Array;
 }
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -39,6 +42,10 @@ export interface Params {
    * chain.
    */
   receiveEnabled: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.Params";
+  value: Uint8Array;
 }
 /**
  * Params defines the set of IBC transfer parameters.
@@ -86,63 +93,6 @@ export const DenomTrace = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): DenomTrace {
-    const obj = createBaseDenomTrace();
-    if (isSet(object.path)) obj.path = String(object.path);
-    if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
-    return obj;
-  },
-  toJSON(message: DenomTrace): unknown {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DenomTrace>): DenomTrace {
-    const message = createBaseDenomTrace();
-    message.path = object.path ?? "";
-    message.baseDenom = object.baseDenom ?? "";
-    return message;
-  },
-  fromSDK(object: DenomTraceSDKType): DenomTrace {
-    return {
-      path: object?.path,
-      baseDenom: object?.base_denom
-    };
-  },
-  fromSDKJSON(object: any): DenomTraceSDKType {
-    return {
-      path: isSet(object.path) ? String(object.path) : "",
-      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
-    };
-  },
-  toSDK(message: DenomTrace): DenomTraceSDKType {
-    const obj: any = {};
-    obj.path = message.path;
-    obj.base_denom = message.baseDenom;
-    return obj;
-  },
-  fromAmino(object: DenomTraceAmino): DenomTrace {
-    return {
-      path: object.path,
-      baseDenom: object.base_denom
-    };
-  },
-  toAmino(message: DenomTrace): DenomTraceAmino {
-    const obj: any = {};
-    obj.path = message.path;
-    obj.base_denom = message.baseDenom;
-    return obj;
-  },
-  fromAminoMsg(object: DenomTraceAminoMsg): DenomTrace {
-    return DenomTrace.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomTrace): DenomTraceAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomTrace",
-      value: DenomTrace.toAmino(message)
-    };
   },
   fromProtoMsg(message: DenomTraceProtoMsg): DenomTrace {
     return DenomTrace.decode(message.value);
@@ -193,63 +143,6 @@ export const Params = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.sendEnabled)) obj.sendEnabled = Boolean(object.sendEnabled);
-    if (isSet(object.receiveEnabled)) obj.receiveEnabled = Boolean(object.receiveEnabled);
-    return obj;
-  },
-  toJSON(message: Params): unknown {
-    const obj: any = {};
-    message.sendEnabled !== undefined && (obj.sendEnabled = message.sendEnabled);
-    message.receiveEnabled !== undefined && (obj.receiveEnabled = message.receiveEnabled);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Params>): Params {
-    const message = createBaseParams();
-    message.sendEnabled = object.sendEnabled ?? false;
-    message.receiveEnabled = object.receiveEnabled ?? false;
-    return message;
-  },
-  fromSDK(object: ParamsSDKType): Params {
-    return {
-      sendEnabled: object?.send_enabled,
-      receiveEnabled: object?.receive_enabled
-    };
-  },
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
-      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false
-    };
-  },
-  toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    obj.send_enabled = message.sendEnabled;
-    obj.receive_enabled = message.receiveEnabled;
-    return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: object.send_enabled,
-      receiveEnabled: object.receive_enabled
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.send_enabled = message.sendEnabled;
-    obj.receive_enabled = message.receiveEnabled;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

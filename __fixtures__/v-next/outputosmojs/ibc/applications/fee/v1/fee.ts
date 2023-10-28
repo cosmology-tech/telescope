@@ -11,6 +11,10 @@ export interface Fee {
   /** the packet timeout fee */
   timeoutFee: Coin[];
 }
+export interface FeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.Fee";
+  value: Uint8Array;
+}
 /** Fee defines the ICS29 receive, acknowledgement and timeout fees */
 export interface FeeSDKType {
   recv_fee: CoinSDKType[];
@@ -26,6 +30,10 @@ export interface PacketFee {
   /** optional list of relayers permitted to receive fees */
   relayers: string[];
 }
+export interface PacketFeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.PacketFee";
+  value: Uint8Array;
+}
 /** PacketFee contains ICS29 relayer fees, refund address and optional list of permitted relayers */
 export interface PacketFeeSDKType {
   fee: FeeSDKType;
@@ -37,6 +45,10 @@ export interface PacketFees {
   /** list of packet fees */
   packetFees: PacketFee[];
 }
+export interface PacketFeesProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.PacketFees";
+  value: Uint8Array;
+}
 /** PacketFees contains a list of type PacketFee */
 export interface PacketFeesSDKType {
   packet_fees: PacketFeeSDKType[];
@@ -45,6 +57,10 @@ export interface PacketFeesSDKType {
 export interface IdentifiedPacketFees {
   /** list of packet fees */
   packetFees: PacketFee[];
+}
+export interface IdentifiedPacketFeesProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.IdentifiedPacketFees";
+  value: Uint8Array;
 }
 /** IdentifiedPacketFees contains a list of type PacketFee and associated PacketId */
 export interface IdentifiedPacketFeesSDKType {

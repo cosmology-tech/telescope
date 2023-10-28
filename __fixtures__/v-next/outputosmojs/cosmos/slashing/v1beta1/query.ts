@@ -5,11 +5,19 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseSDKType {
@@ -22,6 +30,10 @@ export interface QueryParamsResponseSDKType {
 export interface QuerySigningInfoRequest {
   /** cons_address is the address to query signing info of */
   consAddress: string;
+}
+export interface QuerySigningInfoRequestProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoRequest";
+  value: Uint8Array;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
@@ -38,6 +50,10 @@ export interface QuerySigningInfoResponse {
   /** val_signing_info is the signing info of requested val cons address */
   valSigningInfo: ValidatorSigningInfo;
 }
+export interface QuerySigningInfoResponseProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoResponse";
+  value: Uint8Array;
+}
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
  * method
@@ -51,6 +67,10 @@ export interface QuerySigningInfoResponseSDKType {
  */
 export interface QuerySigningInfosRequest {
   pagination?: PageRequest;
+}
+export interface QuerySigningInfosRequestProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosRequest";
+  value: Uint8Array;
 }
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
@@ -67,6 +87,10 @@ export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
   pagination?: PageResponse;
+}
+export interface QuerySigningInfosResponseProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosResponse";
+  value: Uint8Array;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC

@@ -10,6 +10,10 @@ export interface QuerySpotPriceRequest {
   baseAssetDenom: string;
   quoteAssetDenom: string;
 }
+export interface QuerySpotPriceRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest";
+  value: Uint8Array;
+}
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
@@ -26,6 +30,10 @@ export interface QuerySpotPriceRequestSDKType {
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
+}
+export interface QuerySpotPriceResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse";
+  value: Uint8Array;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice

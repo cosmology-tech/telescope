@@ -1,6 +1,5 @@
 import { Expr, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -14,6 +13,10 @@ export interface Decl {
   ident?: IdentDecl;
   /** A function declaration. */
   function?: FunctionDecl;
+}
+export interface DeclProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Decl";
+  value: Uint8Array;
 }
 /** A declaration. */
 export interface DeclSDKType {
@@ -40,6 +43,10 @@ export interface DeclType {
    */
   typeParams: DeclType[];
 }
+export interface DeclTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.DeclType";
+  value: Uint8Array;
+}
 /**
  * The declared type of a variable.
  * 
@@ -58,6 +65,10 @@ export interface IdentDecl {
   /** Optional value of the identifier. */
   value?: Expr;
 }
+export interface IdentDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.IdentDecl";
+  value: Uint8Array;
+}
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
   type?: DeclTypeSDKType;
@@ -71,6 +82,10 @@ export interface FunctionDecl {
   returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
+}
+export interface FunctionDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
+  value: Uint8Array;
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {
@@ -136,85 +151,6 @@ export const Decl = {
     }
     return message;
   },
-  fromJSON(object: any): Decl {
-    const obj = createBaseDecl();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    if (isSet(object.ident)) obj.ident = IdentDecl.fromJSON(object.ident);
-    if (isSet(object.function)) obj.function = FunctionDecl.fromJSON(object.function);
-    return obj;
-  },
-  toJSON(message: Decl): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.name !== undefined && (obj.name = message.name);
-    message.doc !== undefined && (obj.doc = message.doc);
-    message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toJSON(message.ident) : undefined);
-    message.function !== undefined && (obj.function = message.function ? FunctionDecl.toJSON(message.function) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<Decl>): Decl {
-    const message = createBaseDecl();
-    message.id = object.id ?? 0;
-    message.name = object.name ?? "";
-    message.doc = object.doc ?? "";
-    if (object.ident !== undefined && object.ident !== null) {
-      message.ident = IdentDecl.fromPartial(object.ident);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = FunctionDecl.fromPartial(object.function);
-    }
-    return message;
-  },
-  fromSDK(object: DeclSDKType): Decl {
-    return {
-      id: object?.id,
-      name: object?.name,
-      doc: object?.doc,
-      ident: object.ident ? IdentDecl.fromSDK(object.ident) : undefined,
-      function: object.function ? FunctionDecl.fromSDK(object.function) : undefined
-    };
-  },
-  fromSDKJSON(object: any): DeclSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      doc: isSet(object.doc) ? String(object.doc) : "",
-      ident: isSet(object.ident) ? IdentDecl.fromSDKJSON(object.ident) : undefined,
-      function: isSet(object.function) ? FunctionDecl.fromSDKJSON(object.function) : undefined
-    };
-  },
-  toSDK(message: Decl): DeclSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.name = message.name;
-    obj.doc = message.doc;
-    message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toSDK(message.ident) : undefined);
-    message.function !== undefined && (obj.function = message.function ? FunctionDecl.toSDK(message.function) : undefined);
-    return obj;
-  },
-  fromAmino(object: DeclAmino): Decl {
-    return {
-      id: object.id,
-      name: object.name,
-      doc: object.doc,
-      ident: object?.ident ? IdentDecl.fromAmino(object.ident) : undefined,
-      function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
-    };
-  },
-  toAmino(message: Decl): DeclAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.name = message.name;
-    obj.doc = message.doc;
-    obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
-    obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeclAminoMsg): Decl {
-    return Decl.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeclProtoMsg): Decl {
     return Decl.decode(message.value);
   },
@@ -272,77 +208,6 @@ export const DeclType = {
     }
     return message;
   },
-  fromJSON(object: any): DeclType {
-    const obj = createBaseDeclType();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => DeclType.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DeclType): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.type !== undefined && (obj.type = message.type);
-    if (message.typeParams) {
-      obj.typeParams = message.typeParams.map(e => e ? DeclType.toJSON(e) : undefined);
-    } else {
-      obj.typeParams = [];
-    }
-    return obj;
-  },
-  fromPartial(object: DeepPartial<DeclType>): DeclType {
-    const message = createBaseDeclType();
-    message.id = object.id ?? 0;
-    message.type = object.type ?? "";
-    message.typeParams = object.typeParams?.map(e => DeclType.fromPartial(e)) || [];
-    return message;
-  },
-  fromSDK(object: DeclTypeSDKType): DeclType {
-    return {
-      id: object?.id,
-      type: object?.type,
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDK(e)) : []
-    };
-  },
-  fromSDKJSON(object: any): DeclTypeSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      type: isSet(object.type) ? String(object.type) : "",
-      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDKJSON(e)) : []
-    };
-  },
-  toSDK(message: DeclType): DeclTypeSDKType {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.type = message.type;
-    if (message.typeParams) {
-      obj.type_params = message.typeParams.map(e => e ? DeclType.toSDK(e) : undefined);
-    } else {
-      obj.type_params = [];
-    }
-    return obj;
-  },
-  fromAmino(object: DeclTypeAmino): DeclType {
-    return {
-      id: object.id,
-      type: object.type,
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: DeclType): DeclTypeAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.type = message.type;
-    if (message.typeParams) {
-      obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
-    } else {
-      obj.type_params = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: DeclTypeAminoMsg): DeclType {
-    return DeclType.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeclTypeProtoMsg): DeclType {
     return DeclType.decode(message.value);
   },
@@ -392,61 +257,6 @@ export const IdentDecl = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): IdentDecl {
-    const obj = createBaseIdentDecl();
-    if (isSet(object.type)) obj.type = DeclType.fromJSON(object.type);
-    if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: IdentDecl): unknown {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type ? DeclType.toJSON(message.type) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
-    const message = createBaseIdentDecl();
-    if (object.type !== undefined && object.type !== null) {
-      message.type = DeclType.fromPartial(object.type);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Expr.fromPartial(object.value);
-    }
-    return message;
-  },
-  fromSDK(object: IdentDeclSDKType): IdentDecl {
-    return {
-      type: object.type ? DeclType.fromSDK(object.type) : undefined,
-      value: object.value ? Expr.fromSDK(object.value) : undefined
-    };
-  },
-  fromSDKJSON(object: any): IdentDeclSDKType {
-    return {
-      type: isSet(object.type) ? DeclType.fromSDKJSON(object.type) : undefined,
-      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
-    };
-  },
-  toSDK(message: IdentDecl): IdentDeclSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type ? DeclType.toSDK(message.type) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
-    return obj;
-  },
-  fromAmino(object: IdentDeclAmino): IdentDecl {
-    return {
-      type: object?.type ? DeclType.fromAmino(object.type) : undefined,
-      value: object?.value ? Expr.fromAmino(object.value) : undefined
-    };
-  },
-  toAmino(message: IdentDecl): IdentDeclAmino {
-    const obj: any = {};
-    obj.type = message.type ? DeclType.toAmino(message.type) : undefined;
-    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: IdentDeclAminoMsg): IdentDecl {
-    return IdentDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: IdentDeclProtoMsg): IdentDecl {
     return IdentDecl.decode(message.value);
@@ -504,79 +314,6 @@ export const FunctionDecl = {
       }
     }
     return message;
-  },
-  fromJSON(object: any): FunctionDecl {
-    const obj = createBaseFunctionDecl();
-    if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => IdentDecl.fromJSON(e));
-    if (isSet(object.returnType)) obj.returnType = DeclType.fromJSON(object.returnType);
-    if (isSet(object.receiverFunction)) obj.receiverFunction = Boolean(object.receiverFunction);
-    return obj;
-  },
-  toJSON(message: FunctionDecl): unknown {
-    const obj: any = {};
-    if (message.args) {
-      obj.args = message.args.map(e => e ? IdentDecl.toJSON(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    message.returnType !== undefined && (obj.returnType = message.returnType ? DeclType.toJSON(message.returnType) : undefined);
-    message.receiverFunction !== undefined && (obj.receiverFunction = message.receiverFunction);
-    return obj;
-  },
-  fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
-    const message = createBaseFunctionDecl();
-    message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
-    if (object.returnType !== undefined && object.returnType !== null) {
-      message.returnType = DeclType.fromPartial(object.returnType);
-    }
-    message.receiverFunction = object.receiverFunction ?? false;
-    return message;
-  },
-  fromSDK(object: FunctionDeclSDKType): FunctionDecl {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDK(e)) : [],
-      returnType: object.return_type ? DeclType.fromSDK(object.return_type) : undefined,
-      receiverFunction: object?.receiver_function
-    };
-  },
-  fromSDKJSON(object: any): FunctionDeclSDKType {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDKJSON(e)) : [],
-      return_type: isSet(object.return_type) ? DeclType.fromSDKJSON(object.return_type) : undefined,
-      receiver_function: isSet(object.receiver_function) ? Boolean(object.receiver_function) : false
-    };
-  },
-  toSDK(message: FunctionDecl): FunctionDeclSDKType {
-    const obj: any = {};
-    if (message.args) {
-      obj.args = message.args.map(e => e ? IdentDecl.toSDK(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    message.returnType !== undefined && (obj.return_type = message.returnType ? DeclType.toSDK(message.returnType) : undefined);
-    obj.receiver_function = message.receiverFunction;
-    return obj;
-  },
-  fromAmino(object: FunctionDeclAmino): FunctionDecl {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
-      returnType: object?.return_type ? DeclType.fromAmino(object.return_type) : undefined,
-      receiverFunction: object.receiver_function
-    };
-  },
-  toAmino(message: FunctionDecl): FunctionDeclAmino {
-    const obj: any = {};
-    if (message.args) {
-      obj.args = message.args.map(e => e ? IdentDecl.toAmino(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
-    obj.receiver_function = message.receiverFunction;
-    return obj;
-  },
-  fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {
-    return FunctionDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: FunctionDeclProtoMsg): FunctionDecl {
     return FunctionDecl.decode(message.value);
