@@ -110,8 +110,16 @@ export class TelescopeBuilder {
   }
 
   async build() {
-    // [x] get bundle of all packages
+    // check warnings
+    if(!this.options.aminoEncoding?.enabled && (this.options.prototypes?.methods?.fromAmino || this.options.prototypes?.methods?.toAmino)){
+      console.warn("There could be compilation errors in generated code, because 'aminoEncoding.enabled: false' means amino types wouldn't be created, but 'toAmino' or 'fromAmino' need amino types.");
+    }
 
+    if(!this.options.prototypes.methods.fromPartial){
+      console.warn("The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on, otherwise there could be compilation errors in generated code.");
+    }
+
+    // [x] get bundle of all packages
     const bundles = bundlePackages(this.store).map((bundle) => {
       // store bundleFile in filesToInclude
       const bundler = new Bundler(this, bundle);

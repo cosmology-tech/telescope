@@ -30,6 +30,9 @@ interface TelescopeOpts {
             decode?: boolean;
             fromJSON?: boolean;
             toJSON?: boolean;
+            /**
+            * @deprecated The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on.
+            */
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;

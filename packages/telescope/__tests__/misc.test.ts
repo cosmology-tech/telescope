@@ -117,7 +117,7 @@ describe("misc", () => {
   });
 
   it("generates without amino", async () => {
-    const testFolder = "/output-proto-amino/amino";
+    const testFolder = "/output-proto-amino/no-amino";
 
     const telescope = new TelescopeBuilder({
       outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
@@ -142,7 +142,7 @@ describe("misc", () => {
   });
 
   it("generates without amino, no proto", async () => {
-    const testFolder = "/output-proto-amino/amino-no-proto";
+    const testFolder = "/output-proto-amino/no-amino-no-proto";
 
     const telescope = new TelescopeBuilder({
       outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
@@ -167,7 +167,7 @@ describe("misc", () => {
   });
 
   it("generates without amino but legacy", async () => {
-    const testFolder = "/output-proto-amino/amino-legacy";
+    const testFolder = "/output-proto-amino/no-amino-legacy";
 
     const telescope = new TelescopeBuilder({
       outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
@@ -192,7 +192,7 @@ describe("misc", () => {
   });
 
   it("generates without amino but legacy, no proto", async () => {
-    const testFolder = "/output-proto-amino/amino-legacy-no-proto";
+    const testFolder = "/output-proto-amino/no-amino-legacy-no-proto";
 
     const telescope = new TelescopeBuilder({
       outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
