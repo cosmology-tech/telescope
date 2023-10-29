@@ -46,10 +46,6 @@ export interface Struct_FieldsEntryAmino {
   key: string;
   value?: ValueAmino;
 }
-export interface Struct_FieldsEntryAminoMsg {
-  type: string;
-  value: Struct_FieldsEntryAmino;
-}
 export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
@@ -89,10 +85,6 @@ export interface StructAmino {
   fields?: {
     [key: string]: ValueAmino;
   };
-}
-export interface StructAminoMsg {
-  type: "/google.protobuf.Struct";
-  value: StructAmino;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -157,10 +149,6 @@ export interface ValueAmino {
   /** Represents a repeated `Value`. */
   list_value?: ListValueAmino;
 }
-export interface ValueAminoMsg {
-  type: "/google.protobuf.Value";
-  value: ValueAmino;
-}
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -198,10 +186,6 @@ export interface ListValueProtoMsg {
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
   values: ValueAmino[];
-}
-export interface ListValueAminoMsg {
-  type: "/google.protobuf.ListValue";
-  value: ListValueAmino;
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -290,9 +274,6 @@ export const Struct_FieldsEntry = {
     obj.key = message.key;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
-    return Struct_FieldsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
     return Struct_FieldsEntry.decode(message.value);
@@ -408,9 +389,6 @@ export const Struct = {
       });
     }
     return obj;
-  },
-  fromAminoMsg(object: StructAminoMsg): Struct {
-    return Struct.fromAmino(object.value);
   },
   fromProtoMsg(message: StructProtoMsg): Struct {
     return Struct.decode(message.value);
@@ -564,9 +542,6 @@ export const Value = {
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValueAminoMsg): Value {
-    return Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: ValueProtoMsg): Value {
     return Value.decode(message.value);
   },
@@ -656,9 +631,6 @@ export const ListValue = {
       obj.values = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ListValueAminoMsg): ListValue {
-    return ListValue.fromAmino(object.value);
   },
   fromProtoMsg(message: ListValueProtoMsg): ListValue {
     return ListValue.decode(message.value);

@@ -25,10 +25,6 @@ export interface QueryGrantsRequestAmino {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryGrantsRequestAminoMsg {
-  type: "cosmos-sdk/QueryGrantsRequest";
-  value: QueryGrantsRequestAmino;
-}
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestSDKType {
   granter: string;
@@ -54,10 +50,6 @@ export interface QueryGrantsResponseAmino {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryGrantsResponseAminoMsg {
-  type: "cosmos-sdk/QueryGrantsResponse";
-  value: QueryGrantsResponseAmino;
-}
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseSDKType {
   grants: GrantSDKType[];
@@ -78,10 +70,6 @@ export interface QueryGranterGrantsRequestAmino {
   granter: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryGranterGrantsRequestAminoMsg {
-  type: "cosmos-sdk/QueryGranterGrantsRequest";
-  value: QueryGranterGrantsRequestAmino;
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestSDKType {
@@ -106,10 +94,6 @@ export interface QueryGranterGrantsResponseAmino {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryGranterGrantsResponseAminoMsg {
-  type: "cosmos-sdk/QueryGranterGrantsResponse";
-  value: QueryGranterGrantsResponseAmino;
-}
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseSDKType {
   grants: GrantAuthorizationSDKType[];
@@ -130,10 +114,6 @@ export interface QueryGranteeGrantsRequestAmino {
   grantee: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryGranteeGrantsRequestAminoMsg {
-  type: "cosmos-sdk/QueryGranteeGrantsRequest";
-  value: QueryGranteeGrantsRequestAmino;
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestSDKType {
@@ -157,10 +137,6 @@ export interface QueryGranteeGrantsResponseAmino {
   grants: GrantAuthorizationAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryGranteeGrantsResponseAminoMsg {
-  type: "cosmos-sdk/QueryGranteeGrantsResponse";
-  value: QueryGranteeGrantsResponseAmino;
 }
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseSDKType {
@@ -277,15 +253,6 @@ export const QueryGrantsRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGrantsRequestAminoMsg): QueryGrantsRequest {
-    return QueryGrantsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGrantsRequest): QueryGrantsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGrantsRequest",
-      value: QueryGrantsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryGrantsRequestProtoMsg): QueryGrantsRequest {
     return QueryGrantsRequest.decode(message.value);
   },
@@ -393,15 +360,6 @@ export const QueryGrantsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGrantsResponseAminoMsg): QueryGrantsResponse {
-    return QueryGrantsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGrantsResponse): QueryGrantsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGrantsResponse",
-      value: QueryGrantsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryGrantsResponseProtoMsg): QueryGrantsResponse {
     return QueryGrantsResponse.decode(message.value);
   },
@@ -496,15 +454,6 @@ export const QueryGranterGrantsRequest = {
     obj.granter = message.granter;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryGranterGrantsRequestAminoMsg): QueryGranterGrantsRequest {
-    return QueryGranterGrantsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranterGrantsRequest",
-      value: QueryGranterGrantsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryGranterGrantsRequestProtoMsg): QueryGranterGrantsRequest {
     return QueryGranterGrantsRequest.decode(message.value);
@@ -613,15 +562,6 @@ export const QueryGranterGrantsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGranterGrantsResponseAminoMsg): QueryGranterGrantsResponse {
-    return QueryGranterGrantsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranterGrantsResponse",
-      value: QueryGranterGrantsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryGranterGrantsResponseProtoMsg): QueryGranterGrantsResponse {
     return QueryGranterGrantsResponse.decode(message.value);
   },
@@ -716,15 +656,6 @@ export const QueryGranteeGrantsRequest = {
     obj.grantee = message.grantee;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryGranteeGrantsRequestAminoMsg): QueryGranteeGrantsRequest {
-    return QueryGranteeGrantsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranteeGrantsRequest",
-      value: QueryGranteeGrantsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryGranteeGrantsRequestProtoMsg): QueryGranteeGrantsRequest {
     return QueryGranteeGrantsRequest.decode(message.value);
@@ -832,15 +763,6 @@ export const QueryGranteeGrantsResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryGranteeGrantsResponseAminoMsg): QueryGranteeGrantsResponse {
-    return QueryGranteeGrantsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranteeGrantsResponse",
-      value: QueryGranteeGrantsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryGranteeGrantsResponseProtoMsg): QueryGranteeGrantsResponse {
     return QueryGranteeGrantsResponse.decode(message.value);

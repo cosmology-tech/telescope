@@ -20,10 +20,6 @@ export interface MinterAmino {
   /** current annual expected provisions */
   annual_provisions: string;
 }
-export interface MinterAminoMsg {
-  type: "cosmos-sdk/Minter";
-  value: MinterAmino;
-}
 /** Minter represents the minting state. */
 export interface MinterSDKType {
   inflation: string;
@@ -62,10 +58,6 @@ export interface ParamsAmino {
   goal_bonded: string;
   /** expected blocks per year */
   blocks_per_year: string;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
 }
 /** Params holds parameters for the mint module. */
 export interface ParamsSDKType {
@@ -155,15 +147,6 @@ export const Minter = {
     obj.inflation = message.inflation;
     obj.annual_provisions = message.annualProvisions;
     return obj;
-  },
-  fromAminoMsg(object: MinterAminoMsg): Minter {
-    return Minter.fromAmino(object.value);
-  },
-  toAminoMsg(message: Minter): MinterAminoMsg {
-    return {
-      type: "cosmos-sdk/Minter",
-      value: Minter.toAmino(message)
-    };
   },
   fromProtoMsg(message: MinterProtoMsg): Minter {
     return Minter.decode(message.value);
@@ -315,15 +298,6 @@ export const Params = {
     obj.goal_bonded = message.goalBonded;
     obj.blocks_per_year = message.blocksPerYear ? message.blocksPerYear.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

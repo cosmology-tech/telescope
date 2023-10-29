@@ -160,10 +160,6 @@ export interface HttpRequestAmino {
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
-export interface HttpRequestAminoMsg {
-  type: "/google.api.servicecontrol.v1.HttpRequest";
-  value: HttpRequestAmino;
-}
 /**
  * A common proto for logging HTTP requests. Only contains semantics
  * defined by the HTTP specification. Product-specific logging
@@ -454,9 +450,6 @@ export const HttpRequest = {
     obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
     obj.protocol = message.protocol;
     return obj;
-  },
-  fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {
-    return HttpRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
     return HttpRequest.decode(message.value);

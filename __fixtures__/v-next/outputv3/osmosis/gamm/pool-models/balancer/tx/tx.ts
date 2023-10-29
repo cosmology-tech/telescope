@@ -20,10 +20,6 @@ export interface MsgCreateBalancerPoolAmino {
   pool_assets: PoolAssetAmino[];
   future_pool_governor: string;
 }
-export interface MsgCreateBalancerPoolAminoMsg {
-  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
-  value: MsgCreateBalancerPoolAmino;
-}
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolSDKType {
   sender: string;
@@ -42,10 +38,6 @@ export interface MsgCreateBalancerPoolResponseProtoMsg {
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseAmino {
   pool_id: string;
-}
-export interface MsgCreateBalancerPoolResponseAminoMsg {
-  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
-  value: MsgCreateBalancerPoolResponseAmino;
 }
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseSDKType {
@@ -173,15 +165,6 @@ export const MsgCreateBalancerPool = {
     obj.future_pool_governor = message.futurePoolGovernor;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateBalancerPoolAminoMsg): MsgCreateBalancerPool {
-    return MsgCreateBalancerPool.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoMsg {
-    return {
-      type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
-      value: MsgCreateBalancerPool.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateBalancerPoolProtoMsg): MsgCreateBalancerPool {
     return MsgCreateBalancerPool.decode(message.value);
   },
@@ -262,15 +245,6 @@ export const MsgCreateBalancerPoolResponse = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateBalancerPoolResponseAminoMsg): MsgCreateBalancerPoolResponse {
-    return MsgCreateBalancerPoolResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAminoMsg {
-    return {
-      type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
-      value: MsgCreateBalancerPoolResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateBalancerPoolResponseProtoMsg): MsgCreateBalancerPoolResponse {
     return MsgCreateBalancerPoolResponse.decode(message.value);

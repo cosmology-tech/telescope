@@ -153,10 +153,6 @@ export interface CheckedExpr_ReferenceMapEntryAmino {
   key: string;
   value?: ReferenceAmino;
 }
-export interface CheckedExpr_ReferenceMapEntryAminoMsg {
-  type: string;
-  value: CheckedExpr_ReferenceMapEntryAmino;
-}
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: bigint;
   value?: ReferenceSDKType;
@@ -172,10 +168,6 @@ export interface CheckedExpr_TypeMapEntryProtoMsg {
 export interface CheckedExpr_TypeMapEntryAmino {
   key: string;
   value?: TypeAmino;
-}
-export interface CheckedExpr_TypeMapEntryAminoMsg {
-  type: string;
-  value: CheckedExpr_TypeMapEntryAmino;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: bigint;
@@ -290,10 +282,6 @@ export interface CheckedExprAmino {
    * may have structural differences.
    */
   expr?: ExprAmino;
-}
-export interface CheckedExprAminoMsg {
-  type: "/google.api.expr.v1alpha1.CheckedExpr";
-  value: CheckedExprAmino;
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
@@ -413,10 +401,6 @@ export interface TypeAmino {
   /** Abstract, application defined type. */
   abstract_type?: Type_AbstractTypeAmino;
 }
-export interface TypeAminoMsg {
-  type: "/google.api.expr.v1alpha1.Type";
-  value: TypeAmino;
-}
 /** Represents a CEL type. */
 export interface TypeSDKType {
   dyn?: EmptySDKType;
@@ -447,10 +431,6 @@ export interface Type_ListTypeAmino {
   /** The element type. */
   elem_type?: TypeAmino;
 }
-export interface Type_ListTypeAminoMsg {
-  type: "/google.api.expr.v1alpha1.ListType";
-  value: Type_ListTypeAmino;
-}
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
   elem_type?: TypeSDKType;
@@ -472,10 +452,6 @@ export interface Type_MapTypeAmino {
   key_type?: TypeAmino;
   /** The type of the value. */
   value_type?: TypeAmino;
-}
-export interface Type_MapTypeAminoMsg {
-  type: "/google.api.expr.v1alpha1.MapType";
-  value: Type_MapTypeAmino;
 }
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeSDKType {
@@ -500,10 +476,6 @@ export interface Type_FunctionTypeAmino {
   /** Argument types of the function. */
   arg_types: TypeAmino[];
 }
-export interface Type_FunctionTypeAminoMsg {
-  type: "/google.api.expr.v1alpha1.FunctionType";
-  value: Type_FunctionTypeAmino;
-}
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
   result_type?: TypeSDKType;
@@ -526,10 +498,6 @@ export interface Type_AbstractTypeAmino {
   name: string;
   /** Parameter types for this abstract type. */
   parameter_types: TypeAmino[];
-}
-export interface Type_AbstractTypeAminoMsg {
-  type: "/google.api.expr.v1alpha1.AbstractType";
-  value: Type_AbstractTypeAmino;
 }
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
@@ -586,10 +554,6 @@ export interface DeclAmino {
   /** Function declaration. */
   function?: Decl_FunctionDeclAmino;
 }
-export interface DeclAminoMsg {
-  type: "/google.api.expr.v1alpha1.Decl";
-  value: DeclAmino;
-}
 /**
  * Represents a declaration of a named value or function.
  * 
@@ -643,10 +607,6 @@ export interface Decl_IdentDeclAmino {
   /** Documentation string for the identifier. */
   doc: string;
 }
-export interface Decl_IdentDeclAminoMsg {
-  type: "/google.api.expr.v1alpha1.IdentDecl";
-  value: Decl_IdentDeclAmino;
-}
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
  * 
@@ -685,10 +645,6 @@ export interface Decl_FunctionDeclProtoMsg {
 export interface Decl_FunctionDeclAmino {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_OverloadAmino[];
-}
-export interface Decl_FunctionDeclAminoMsg {
-  type: "/google.api.expr.v1alpha1.FunctionDecl";
-  value: Decl_FunctionDeclAmino;
 }
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -818,10 +774,6 @@ export interface Decl_FunctionDecl_OverloadAmino {
   /** Documentation string for the overload. */
   doc: string;
 }
-export interface Decl_FunctionDecl_OverloadAminoMsg {
-  type: "/google.api.expr.v1alpha1.Overload";
-  value: Decl_FunctionDecl_OverloadAmino;
-}
 /**
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
@@ -887,10 +839,6 @@ export interface ReferenceAmino {
    * constant if known at compile time.
    */
   value?: ConstantAmino;
-}
-export interface ReferenceAminoMsg {
-  type: "/google.api.expr.v1alpha1.Reference";
-  value: ReferenceAmino;
 }
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceSDKType {
@@ -980,9 +928,6 @@ export const CheckedExpr_ReferenceMapEntry = {
     obj.value = message.value ? Reference.toAmino(message.value) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CheckedExpr_ReferenceMapEntryAminoMsg): CheckedExpr_ReferenceMapEntry {
-    return CheckedExpr_ReferenceMapEntry.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckedExpr_ReferenceMapEntryProtoMsg): CheckedExpr_ReferenceMapEntry {
     return CheckedExpr_ReferenceMapEntry.decode(message.value);
   },
@@ -1071,9 +1016,6 @@ export const CheckedExpr_TypeMapEntry = {
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Type.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CheckedExpr_TypeMapEntryAminoMsg): CheckedExpr_TypeMapEntry {
-    return CheckedExpr_TypeMapEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckedExpr_TypeMapEntryProtoMsg): CheckedExpr_TypeMapEntry {
     return CheckedExpr_TypeMapEntry.decode(message.value);
@@ -1292,9 +1234,6 @@ export const CheckedExpr = {
     obj.expr_version = message.exprVersion;
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CheckedExprAminoMsg): CheckedExpr {
-    return CheckedExpr.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckedExprProtoMsg): CheckedExpr {
     return CheckedExpr.decode(message.value);
@@ -1556,9 +1495,6 @@ export const Type = {
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
     return obj;
   },
-  fromAminoMsg(object: TypeAminoMsg): Type {
-    return Type.fromAmino(object.value);
-  },
   fromProtoMsg(message: TypeProtoMsg): Type {
     return Type.decode(message.value);
   },
@@ -1638,9 +1574,6 @@ export const Type_ListType = {
     const obj: any = {};
     obj.elem_type = message.elemType ? Type.toAmino(message.elemType) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: Type_ListTypeAminoMsg): Type_ListType {
-    return Type_ListType.fromAmino(object.value);
   },
   fromProtoMsg(message: Type_ListTypeProtoMsg): Type_ListType {
     return Type_ListType.decode(message.value);
@@ -1737,9 +1670,6 @@ export const Type_MapType = {
     obj.key_type = message.keyType ? Type.toAmino(message.keyType) : undefined;
     obj.value_type = message.valueType ? Type.toAmino(message.valueType) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: Type_MapTypeAminoMsg): Type_MapType {
-    return Type_MapType.fromAmino(object.value);
   },
   fromProtoMsg(message: Type_MapTypeProtoMsg): Type_MapType {
     return Type_MapType.decode(message.value);
@@ -1847,9 +1777,6 @@ export const Type_FunctionType = {
     }
     return obj;
   },
-  fromAminoMsg(object: Type_FunctionTypeAminoMsg): Type_FunctionType {
-    return Type_FunctionType.fromAmino(object.value);
-  },
   fromProtoMsg(message: Type_FunctionTypeProtoMsg): Type_FunctionType {
     return Type_FunctionType.decode(message.value);
   },
@@ -1953,9 +1880,6 @@ export const Type_AbstractType = {
       obj.parameter_types = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Type_AbstractTypeAminoMsg): Type_AbstractType {
-    return Type_AbstractType.fromAmino(object.value);
   },
   fromProtoMsg(message: Type_AbstractTypeProtoMsg): Type_AbstractType {
     return Type_AbstractType.decode(message.value);
@@ -2067,9 +1991,6 @@ export const Decl = {
     obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DeclAminoMsg): Decl {
-    return Decl.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeclProtoMsg): Decl {
     return Decl.decode(message.value);
   },
@@ -2180,9 +2101,6 @@ export const Decl_IdentDecl = {
     obj.doc = message.doc;
     return obj;
   },
-  fromAminoMsg(object: Decl_IdentDeclAminoMsg): Decl_IdentDecl {
-    return Decl_IdentDecl.fromAmino(object.value);
-  },
   fromProtoMsg(message: Decl_IdentDeclProtoMsg): Decl_IdentDecl {
     return Decl_IdentDecl.decode(message.value);
   },
@@ -2272,9 +2190,6 @@ export const Decl_FunctionDecl = {
       obj.overloads = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Decl_FunctionDeclAminoMsg): Decl_FunctionDecl {
-    return Decl_FunctionDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: Decl_FunctionDeclProtoMsg): Decl_FunctionDecl {
     return Decl_FunctionDecl.decode(message.value);
@@ -2450,9 +2365,6 @@ export const Decl_FunctionDecl_Overload = {
     obj.doc = message.doc;
     return obj;
   },
-  fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
-    return Decl_FunctionDecl_Overload.fromAmino(object.value);
-  },
   fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg): Decl_FunctionDecl_Overload {
     return Decl_FunctionDecl_Overload.decode(message.value);
   },
@@ -2572,9 +2484,6 @@ export const Reference = {
     }
     obj.value = message.value ? Constant.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ReferenceAminoMsg): Reference {
-    return Reference.fromAmino(object.value);
   },
   fromProtoMsg(message: ReferenceProtoMsg): Reference {
     return Reference.decode(message.value);

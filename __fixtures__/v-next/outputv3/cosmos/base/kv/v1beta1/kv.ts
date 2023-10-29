@@ -13,10 +13,6 @@ export interface PairsProtoMsg {
 export interface PairsAmino {
   pairs: PairAmino[];
 }
-export interface PairsAminoMsg {
-  type: "cosmos-sdk/Pairs";
-  value: PairsAmino;
-}
 /** Pairs defines a repeated slice of Pair objects. */
 export interface PairsSDKType {
   pairs: PairSDKType[];
@@ -34,10 +30,6 @@ export interface PairProtoMsg {
 export interface PairAmino {
   key: Uint8Array;
   value: Uint8Array;
-}
-export interface PairAminoMsg {
-  type: "cosmos-sdk/Pair";
-  value: PairAmino;
 }
 /** Pair defines a key/value bytes tuple. */
 export interface PairSDKType {
@@ -121,15 +113,6 @@ export const Pairs = {
       obj.pairs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: PairsAminoMsg): Pairs {
-    return Pairs.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pairs): PairsAminoMsg {
-    return {
-      type: "cosmos-sdk/Pairs",
-      value: Pairs.toAmino(message)
-    };
   },
   fromProtoMsg(message: PairsProtoMsg): Pairs {
     return Pairs.decode(message.value);
@@ -223,15 +206,6 @@ export const Pair = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: PairAminoMsg): Pair {
-    return Pair.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pair): PairAminoMsg {
-    return {
-      type: "cosmos-sdk/Pair",
-      value: Pair.toAmino(message)
-    };
   },
   fromProtoMsg(message: PairProtoMsg): Pair {
     return Pair.decode(message.value);

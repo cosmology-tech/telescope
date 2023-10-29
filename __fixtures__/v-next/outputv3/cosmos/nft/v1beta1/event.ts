@@ -19,10 +19,6 @@ export interface EventSendAmino {
   sender: string;
   receiver: string;
 }
-export interface EventSendAminoMsg {
-  type: "cosmos-sdk/EventSend";
-  value: EventSendAmino;
-}
 /** EventSend is emitted on Msg/Send */
 export interface EventSendSDKType {
   class_id: string;
@@ -46,10 +42,6 @@ export interface EventMintAmino {
   id: string;
   owner: string;
 }
-export interface EventMintAminoMsg {
-  type: "cosmos-sdk/EventMint";
-  value: EventMintAmino;
-}
 /** EventMint is emitted on Mint */
 export interface EventMintSDKType {
   class_id: string;
@@ -71,10 +63,6 @@ export interface EventBurnAmino {
   class_id: string;
   id: string;
   owner: string;
-}
-export interface EventBurnAminoMsg {
-  type: "cosmos-sdk/EventBurn";
-  value: EventBurnAmino;
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnSDKType {
@@ -190,15 +178,6 @@ export const EventSend = {
     obj.receiver = message.receiver;
     return obj;
   },
-  fromAminoMsg(object: EventSendAminoMsg): EventSend {
-    return EventSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: EventSend): EventSendAminoMsg {
-    return {
-      type: "cosmos-sdk/EventSend",
-      value: EventSend.toAmino(message)
-    };
-  },
   fromProtoMsg(message: EventSendProtoMsg): EventSend {
     return EventSend.decode(message.value);
   },
@@ -306,15 +285,6 @@ export const EventMint = {
     obj.owner = message.owner;
     return obj;
   },
-  fromAminoMsg(object: EventMintAminoMsg): EventMint {
-    return EventMint.fromAmino(object.value);
-  },
-  toAminoMsg(message: EventMint): EventMintAminoMsg {
-    return {
-      type: "cosmos-sdk/EventMint",
-      value: EventMint.toAmino(message)
-    };
-  },
   fromProtoMsg(message: EventMintProtoMsg): EventMint {
     return EventMint.decode(message.value);
   },
@@ -421,15 +391,6 @@ export const EventBurn = {
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
-  },
-  fromAminoMsg(object: EventBurnAminoMsg): EventBurn {
-    return EventBurn.fromAmino(object.value);
-  },
-  toAminoMsg(message: EventBurn): EventBurnAminoMsg {
-    return {
-      type: "cosmos-sdk/EventBurn",
-      value: EventBurn.toAmino(message)
-    };
   },
   fromProtoMsg(message: EventBurnProtoMsg): EventBurn {
     return EventBurn.decode(message.value);

@@ -50,10 +50,6 @@ export interface ExplainAmino {
    */
   expr_steps: Explain_ExprStepAmino[];
 }
-export interface ExplainAminoMsg {
-  type: "/google.api.expr.v1alpha1.Explain";
-  value: ExplainAmino;
-}
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
@@ -80,10 +76,6 @@ export interface Explain_ExprStepAmino {
   id: string;
   /** Index of the value in the values list. */
   value_index: number;
-}
-export interface Explain_ExprStepAminoMsg {
-  type: "/google.api.expr.v1alpha1.ExprStep";
-  value: Explain_ExprStepAmino;
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
@@ -193,9 +185,6 @@ export const Explain = {
     }
     return obj;
   },
-  fromAminoMsg(object: ExplainAminoMsg): Explain {
-    return Explain.fromAmino(object.value);
-  },
   fromProtoMsg(message: ExplainProtoMsg): Explain {
     return Explain.decode(message.value);
   },
@@ -289,9 +278,6 @@ export const Explain_ExprStep = {
     obj.id = message.id ? message.id.toString() : undefined;
     obj.value_index = message.valueIndex;
     return obj;
-  },
-  fromAminoMsg(object: Explain_ExprStepAminoMsg): Explain_ExprStep {
-    return Explain_ExprStep.fromAmino(object.value);
   },
   fromProtoMsg(message: Explain_ExprStepProtoMsg): Explain_ExprStep {
     return Explain_ExprStep.decode(message.value);

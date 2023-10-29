@@ -111,10 +111,6 @@ export interface PartSetHeaderAmino {
   total: number;
   hash: Uint8Array;
 }
-export interface PartSetHeaderAminoMsg {
-  type: "/tendermint.types.PartSetHeader";
-  value: PartSetHeaderAmino;
-}
 /** PartsetHeader */
 export interface PartSetHeaderSDKType {
   total: number;
@@ -134,10 +130,6 @@ export interface PartAmino {
   bytes: Uint8Array;
   proof?: ProofAmino;
 }
-export interface PartAminoMsg {
-  type: "/tendermint.types.Part";
-  value: PartAmino;
-}
 export interface PartSDKType {
   index: number;
   bytes: Uint8Array;
@@ -156,10 +148,6 @@ export interface BlockIDProtoMsg {
 export interface BlockIDAmino {
   hash: Uint8Array;
   part_set_header?: PartSetHeaderAmino;
-}
-export interface BlockIDAminoMsg {
-  type: "/tendermint.types.BlockID";
-  value: BlockIDAmino;
 }
 /** BlockID */
 export interface BlockIDSDKType {
@@ -222,10 +210,6 @@ export interface HeaderAmino {
   /** original proposer of the block */
   proposer_address: Uint8Array;
 }
-export interface HeaderAminoMsg {
-  type: "/tendermint.types.Header";
-  value: HeaderAmino;
-}
 /** Header defines the structure of a Tendermint block header. */
 export interface HeaderSDKType {
   version: ConsensusSDKType;
@@ -265,10 +249,6 @@ export interface DataAmino {
    */
   txs: Uint8Array[];
 }
-export interface DataAminoMsg {
-  type: "/tendermint.types.Data";
-  value: DataAmino;
-}
 /** Data contains the set of transactions included in the block */
 export interface DataSDKType {
   txs: Uint8Array[];
@@ -307,10 +287,6 @@ export interface VoteAmino {
   validator_index: number;
   signature: Uint8Array;
 }
-export interface VoteAminoMsg {
-  type: "/tendermint.types.Vote";
-  value: VoteAmino;
-}
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for
  * consensus.
@@ -343,10 +319,6 @@ export interface CommitAmino {
   block_id?: BlockIDAmino;
   signatures: CommitSigAmino[];
 }
-export interface CommitAminoMsg {
-  type: "/tendermint.types.Commit";
-  value: CommitAmino;
-}
 /** Commit contains the evidence that a block was committed by a set of validators. */
 export interface CommitSDKType {
   height: bigint;
@@ -371,10 +343,6 @@ export interface CommitSigAmino {
   validator_address: Uint8Array;
   timestamp?: Date;
   signature: Uint8Array;
-}
-export interface CommitSigAminoMsg {
-  type: "/tendermint.types.CommitSig";
-  value: CommitSigAmino;
 }
 /** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSigSDKType {
@@ -405,10 +373,6 @@ export interface ProposalAmino {
   timestamp?: Date;
   signature: Uint8Array;
 }
-export interface ProposalAminoMsg {
-  type: "/tendermint.types.Proposal";
-  value: ProposalAmino;
-}
 export interface ProposalSDKType {
   type: SignedMsgType;
   height: bigint;
@@ -430,10 +394,6 @@ export interface SignedHeaderAmino {
   header?: HeaderAmino;
   commit?: CommitAmino;
 }
-export interface SignedHeaderAminoMsg {
-  type: "/tendermint.types.SignedHeader";
-  value: SignedHeaderAmino;
-}
 export interface SignedHeaderSDKType {
   header?: HeaderSDKType;
   commit?: CommitSDKType;
@@ -449,10 +409,6 @@ export interface LightBlockProtoMsg {
 export interface LightBlockAmino {
   signed_header?: SignedHeaderAmino;
   validator_set?: ValidatorSetAmino;
-}
-export interface LightBlockAminoMsg {
-  type: "/tendermint.types.LightBlock";
-  value: LightBlockAmino;
 }
 export interface LightBlockSDKType {
   signed_header?: SignedHeaderSDKType;
@@ -473,10 +429,6 @@ export interface BlockMetaAmino {
   block_size: string;
   header?: HeaderAmino;
   num_txs: string;
-}
-export interface BlockMetaAminoMsg {
-  type: "/tendermint.types.BlockMeta";
-  value: BlockMetaAmino;
 }
 export interface BlockMetaSDKType {
   block_id: BlockIDSDKType;
@@ -499,10 +451,6 @@ export interface TxProofAmino {
   root_hash: Uint8Array;
   data: Uint8Array;
   proof?: ProofAmino;
-}
-export interface TxProofAminoMsg {
-  type: "/tendermint.types.TxProof";
-  value: TxProofAmino;
 }
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 export interface TxProofSDKType {
@@ -588,9 +536,6 @@ export const PartSetHeader = {
     obj.total = message.total;
     obj.hash = message.hash;
     return obj;
-  },
-  fromAminoMsg(object: PartSetHeaderAminoMsg): PartSetHeader {
-    return PartSetHeader.fromAmino(object.value);
   },
   fromProtoMsg(message: PartSetHeaderProtoMsg): PartSetHeader {
     return PartSetHeader.decode(message.value);
@@ -700,9 +645,6 @@ export const Part = {
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   },
-  fromAminoMsg(object: PartAminoMsg): Part {
-    return Part.fromAmino(object.value);
-  },
   fromProtoMsg(message: PartProtoMsg): Part {
     return Part.decode(message.value);
   },
@@ -796,9 +738,6 @@ export const BlockID = {
     obj.hash = message.hash;
     obj.part_set_header = message.partSetHeader ? PartSetHeader.toAmino(message.partSetHeader) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: BlockIDAminoMsg): BlockID {
-    return BlockID.fromAmino(object.value);
   },
   fromProtoMsg(message: BlockIDProtoMsg): BlockID {
     return BlockID.decode(message.value);
@@ -1066,9 +1005,6 @@ export const Header = {
     obj.proposer_address = message.proposerAddress;
     return obj;
   },
-  fromAminoMsg(object: HeaderAminoMsg): Header {
-    return Header.fromAmino(object.value);
-  },
   fromProtoMsg(message: HeaderProtoMsg): Header {
     return Header.decode(message.value);
   },
@@ -1158,9 +1094,6 @@ export const Data = {
       obj.txs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: DataAminoMsg): Data {
-    return Data.fromAmino(object.value);
   },
   fromProtoMsg(message: DataProtoMsg): Data {
     return Data.decode(message.value);
@@ -1342,9 +1275,6 @@ export const Vote = {
     obj.signature = message.signature;
     return obj;
   },
-  fromAminoMsg(object: VoteAminoMsg): Vote {
-    return Vote.fromAmino(object.value);
-  },
   fromProtoMsg(message: VoteProtoMsg): Vote {
     return Vote.decode(message.value);
   },
@@ -1481,9 +1411,6 @@ export const Commit = {
     }
     return obj;
   },
-  fromAminoMsg(object: CommitAminoMsg): Commit {
-    return Commit.fromAmino(object.value);
-  },
   fromProtoMsg(message: CommitProtoMsg): Commit {
     return Commit.decode(message.value);
   },
@@ -1603,9 +1530,6 @@ export const CommitSig = {
     obj.timestamp = message.timestamp;
     obj.signature = message.signature;
     return obj;
-  },
-  fromAminoMsg(object: CommitSigAminoMsg): CommitSig {
-    return CommitSig.fromAmino(object.value);
   },
   fromProtoMsg(message: CommitSigProtoMsg): CommitSig {
     return CommitSig.decode(message.value);
@@ -1773,9 +1697,6 @@ export const Proposal = {
     obj.signature = message.signature;
     return obj;
   },
-  fromAminoMsg(object: ProposalAminoMsg): Proposal {
-    return Proposal.fromAmino(object.value);
-  },
   fromProtoMsg(message: ProposalProtoMsg): Proposal {
     return Proposal.decode(message.value);
   },
@@ -1872,9 +1793,6 @@ export const SignedHeader = {
     obj.commit = message.commit ? Commit.toAmino(message.commit) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SignedHeaderAminoMsg): SignedHeader {
-    return SignedHeader.fromAmino(object.value);
-  },
   fromProtoMsg(message: SignedHeaderProtoMsg): SignedHeader {
     return SignedHeader.decode(message.value);
   },
@@ -1970,9 +1888,6 @@ export const LightBlock = {
     obj.signed_header = message.signedHeader ? SignedHeader.toAmino(message.signedHeader) : undefined;
     obj.validator_set = message.validatorSet ? ValidatorSet.toAmino(message.validatorSet) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: LightBlockAminoMsg): LightBlock {
-    return LightBlock.fromAmino(object.value);
   },
   fromProtoMsg(message: LightBlockProtoMsg): LightBlock {
     return LightBlock.decode(message.value);
@@ -2102,9 +2017,6 @@ export const BlockMeta = {
     obj.num_txs = message.numTxs ? message.numTxs.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: BlockMetaAminoMsg): BlockMeta {
-    return BlockMeta.fromAmino(object.value);
-  },
   fromProtoMsg(message: BlockMetaProtoMsg): BlockMeta {
     return BlockMeta.decode(message.value);
   },
@@ -2212,9 +2124,6 @@ export const TxProof = {
     obj.data = message.data;
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: TxProofAminoMsg): TxProof {
-    return TxProof.fromAmino(object.value);
   },
   fromProtoMsg(message: TxProofProtoMsg): TxProof {
     return TxProof.decode(message.value);

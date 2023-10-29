@@ -115,10 +115,6 @@ export interface AttributeContextAmino {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: AnyAmino[];
 }
-export interface AttributeContextAminoMsg {
-  type: "/google.rpc.context.AttributeContext";
-  value: AttributeContextAmino;
-}
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -159,10 +155,6 @@ export interface AttributeContext_Peer_LabelsEntryProtoMsg {
 export interface AttributeContext_Peer_LabelsEntryAmino {
   key: string;
   value: string;
-}
-export interface AttributeContext_Peer_LabelsEntryAminoMsg {
-  type: string;
-  value: AttributeContext_Peer_LabelsEntryAmino;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
@@ -227,10 +219,6 @@ export interface AttributeContext_PeerAmino {
    * physical location where this peer is running.
    */
   region_code: string;
-}
-export interface AttributeContext_PeerAminoMsg {
-  type: "/google.rpc.context.Peer";
-  value: AttributeContext_PeerAmino;
 }
 /**
  * This message defines attributes for a node that handles a network request.
@@ -308,10 +296,6 @@ export interface AttributeContext_ApiAmino {
    * "v1alpha1".
    */
   version: string;
-}
-export interface AttributeContext_ApiAminoMsg {
-  type: "/google.rpc.context.Api";
-  value: AttributeContext_ApiAmino;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -462,10 +446,6 @@ export interface AttributeContext_AuthAmino {
    */
   access_levels: string[];
 }
-export interface AttributeContext_AuthAminoMsg {
-  type: "/google.rpc.context.Auth";
-  value: AttributeContext_AuthAmino;
-}
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
@@ -489,10 +469,6 @@ export interface AttributeContext_Request_HeadersEntryProtoMsg {
 export interface AttributeContext_Request_HeadersEntryAmino {
   key: string;
   value: string;
-}
-export interface AttributeContext_Request_HeadersEntryAminoMsg {
-  type: string;
-  value: AttributeContext_Request_HeadersEntryAmino;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -618,10 +594,6 @@ export interface AttributeContext_RequestAmino {
    */
   auth?: AttributeContext_AuthAmino;
 }
-export interface AttributeContext_RequestAminoMsg {
-  type: "/google.rpc.context.Request";
-  value: AttributeContext_RequestAmino;
-}
 /**
  * This message defines attributes for an HTTP request. If the actual
  * request is not an HTTP request, the runtime system should try to map
@@ -654,10 +626,6 @@ export interface AttributeContext_Response_HeadersEntryProtoMsg {
 export interface AttributeContext_Response_HeadersEntryAmino {
   key: string;
   value: string;
-}
-export interface AttributeContext_Response_HeadersEntryAminoMsg {
-  type: string;
-  value: AttributeContext_Response_HeadersEntryAmino;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -727,10 +695,6 @@ export interface AttributeContext_ResponseAmino {
    */
   backend_latency?: DurationAmino;
 }
-export interface AttributeContext_ResponseAminoMsg {
-  type: "/google.rpc.context.Response";
-  value: AttributeContext_ResponseAmino;
-}
 /**
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
@@ -756,10 +720,6 @@ export interface AttributeContext_Resource_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface AttributeContext_Resource_LabelsEntryAminoMsg {
-  type: string;
-  value: AttributeContext_Resource_LabelsEntryAmino;
-}
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -775,10 +735,6 @@ export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
 export interface AttributeContext_Resource_AnnotationsEntryAmino {
   key: string;
   value: string;
-}
-export interface AttributeContext_Resource_AnnotationsEntryAminoMsg {
-  type: string;
-  value: AttributeContext_Resource_AnnotationsEntryAmino;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -977,10 +933,6 @@ export interface AttributeContext_ResourceAmino {
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
   location: string;
-}
-export interface AttributeContext_ResourceAminoMsg {
-  type: "/google.rpc.context.Resource";
-  value: AttributeContext_ResourceAmino;
 }
 /**
  * This message defines core attributes for a resource. A resource is an
@@ -1194,9 +1146,6 @@ export const AttributeContext = {
     }
     return obj;
   },
-  fromAminoMsg(object: AttributeContextAminoMsg): AttributeContext {
-    return AttributeContext.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContextProtoMsg): AttributeContext {
     return AttributeContext.decode(message.value);
   },
@@ -1287,9 +1236,6 @@ export const AttributeContext_Peer_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
-    return AttributeContext_Peer_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Peer_LabelsEntryProtoMsg): AttributeContext_Peer_LabelsEntry {
     return AttributeContext_Peer_LabelsEntry.decode(message.value);
@@ -1464,9 +1410,6 @@ export const AttributeContext_Peer = {
     obj.region_code = message.regionCode;
     return obj;
   },
-  fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
-    return AttributeContext_Peer.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_PeerProtoMsg): AttributeContext_Peer {
     return AttributeContext_Peer.decode(message.value);
   },
@@ -1586,9 +1529,6 @@ export const AttributeContext_Api = {
     obj.protocol = message.protocol;
     obj.version = message.version;
     return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
-    return AttributeContext_Api.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_ApiProtoMsg): AttributeContext_Api {
     return AttributeContext_Api.decode(message.value);
@@ -1750,9 +1690,6 @@ export const AttributeContext_Auth = {
     }
     return obj;
   },
-  fromAminoMsg(object: AttributeContext_AuthAminoMsg): AttributeContext_Auth {
-    return AttributeContext_Auth.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_AuthProtoMsg): AttributeContext_Auth {
     return AttributeContext_Auth.decode(message.value);
   },
@@ -1843,9 +1780,6 @@ export const AttributeContext_Request_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
-    return AttributeContext_Request_HeadersEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Request_HeadersEntryProtoMsg): AttributeContext_Request_HeadersEntry {
     return AttributeContext_Request_HeadersEntry.decode(message.value);
@@ -2120,9 +2054,6 @@ export const AttributeContext_Request = {
     obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
     return obj;
   },
-  fromAminoMsg(object: AttributeContext_RequestAminoMsg): AttributeContext_Request {
-    return AttributeContext_Request.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_RequestProtoMsg): AttributeContext_Request {
     return AttributeContext_Request.decode(message.value);
   },
@@ -2213,9 +2144,6 @@ export const AttributeContext_Response_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
-    return AttributeContext_Response_HeadersEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Response_HeadersEntryProtoMsg): AttributeContext_Response_HeadersEntry {
     return AttributeContext_Response_HeadersEntry.decode(message.value);
@@ -2394,9 +2322,6 @@ export const AttributeContext_Response = {
     obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
     return obj;
   },
-  fromAminoMsg(object: AttributeContext_ResponseAminoMsg): AttributeContext_Response {
-    return AttributeContext_Response.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_ResponseProtoMsg): AttributeContext_Response {
     return AttributeContext_Response.decode(message.value);
   },
@@ -2488,9 +2413,6 @@ export const AttributeContext_Resource_LabelsEntry = {
     obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
-    return AttributeContext_Resource_LabelsEntry.fromAmino(object.value);
-  },
   fromProtoMsg(message: AttributeContext_Resource_LabelsEntryProtoMsg): AttributeContext_Resource_LabelsEntry {
     return AttributeContext_Resource_LabelsEntry.decode(message.value);
   },
@@ -2575,9 +2497,6 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
-    return AttributeContext_Resource_AnnotationsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_Resource_AnnotationsEntryProtoMsg): AttributeContext_Resource_AnnotationsEntry {
     return AttributeContext_Resource_AnnotationsEntry.decode(message.value);
@@ -2890,9 +2809,6 @@ export const AttributeContext_Resource = {
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;
-  },
-  fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {
-    return AttributeContext_Resource.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeContext_ResourceProtoMsg): AttributeContext_Resource {
     return AttributeContext_Resource.decode(message.value);

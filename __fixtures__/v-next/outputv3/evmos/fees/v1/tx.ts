@@ -41,10 +41,6 @@ export interface MsgRegisterDevFeeInfoAmino {
    */
   nonces: string[];
 }
-export interface MsgRegisterDevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
-  value: MsgRegisterDevFeeInfoAmino;
-}
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
@@ -66,10 +62,6 @@ export interface MsgRegisterDevFeeInfoResponseProtoMsg {
  * type
  */
 export interface MsgRegisterDevFeeInfoResponseAmino {}
-export interface MsgRegisterDevFeeInfoResponseAminoMsg {
-  type: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
-  value: MsgRegisterDevFeeInfoResponseAmino;
-}
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
@@ -99,10 +91,6 @@ export interface MsgCancelDevFeeInfoAmino {
   /** deployer bech32 address */
   deployer_address: string;
 }
-export interface MsgCancelDevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
-  value: MsgCancelDevFeeInfoAmino;
-}
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
@@ -119,10 +107,6 @@ export interface MsgCancelDevFeeInfoResponseProtoMsg {
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseAmino {}
-export interface MsgCancelDevFeeInfoResponseAminoMsg {
-  type: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
-  value: MsgCancelDevFeeInfoResponseAmino;
-}
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
 /**
@@ -153,10 +137,6 @@ export interface MsgUpdateDevFeeInfoAmino {
   /** new withdraw bech32 address for receiving the transaction fees */
   withdraw_address: string;
 }
-export interface MsgUpdateDevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
-  value: MsgUpdateDevFeeInfoAmino;
-}
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
@@ -174,10 +154,6 @@ export interface MsgUpdateDevFeeInfoResponseProtoMsg {
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseAmino {}
-export interface MsgUpdateDevFeeInfoResponseAminoMsg {
-  type: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
-  value: MsgUpdateDevFeeInfoResponseAmino;
-}
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
@@ -308,9 +284,6 @@ export const MsgRegisterDevFeeInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
-    return MsgRegisterDevFeeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
     return MsgRegisterDevFeeInfo.decode(message.value);
   },
@@ -371,9 +344,6 @@ export const MsgRegisterDevFeeInfoResponse = {
   toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgRegisterDevFeeInfoResponseAminoMsg): MsgRegisterDevFeeInfoResponse {
-    return MsgRegisterDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg): MsgRegisterDevFeeInfoResponse {
     return MsgRegisterDevFeeInfoResponse.decode(message.value);
@@ -467,9 +437,6 @@ export const MsgCancelDevFeeInfo = {
     obj.deployer_address = message.deployerAddress;
     return obj;
   },
-  fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
-    return MsgCancelDevFeeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg): MsgCancelDevFeeInfo {
     return MsgCancelDevFeeInfo.decode(message.value);
   },
@@ -530,9 +497,6 @@ export const MsgCancelDevFeeInfoResponse = {
   toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCancelDevFeeInfoResponseAminoMsg): MsgCancelDevFeeInfoResponse {
-    return MsgCancelDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg): MsgCancelDevFeeInfoResponse {
     return MsgCancelDevFeeInfoResponse.decode(message.value);
@@ -640,9 +604,6 @@ export const MsgUpdateDevFeeInfo = {
     obj.withdraw_address = message.withdrawAddress;
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {
-    return MsgUpdateDevFeeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg): MsgUpdateDevFeeInfo {
     return MsgUpdateDevFeeInfo.decode(message.value);
   },
@@ -703,9 +664,6 @@ export const MsgUpdateDevFeeInfoResponse = {
   toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgUpdateDevFeeInfoResponseAminoMsg): MsgUpdateDevFeeInfoResponse {
-    return MsgUpdateDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg): MsgUpdateDevFeeInfoResponse {
     return MsgUpdateDevFeeInfoResponse.decode(message.value);

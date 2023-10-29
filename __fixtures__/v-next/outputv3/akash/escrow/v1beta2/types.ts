@@ -114,10 +114,6 @@ export interface AccountIDAmino {
   scope: string;
   xid: string;
 }
-export interface AccountIDAminoMsg {
-  type: "/akash.escrow.v1beta2.AccountID";
-  value: AccountIDAmino;
-}
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
@@ -179,10 +175,6 @@ export interface AccountAmino {
    */
   funds?: DecCoinAmino;
 }
-export interface AccountAminoMsg {
-  type: "/akash.escrow.v1beta2.Account";
-  value: AccountAmino;
-}
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
@@ -217,10 +209,6 @@ export interface FractionalPaymentAmino {
   rate?: DecCoinAmino;
   balance?: DecCoinAmino;
   withdrawn?: CoinAmino;
-}
-export interface FractionalPaymentAminoMsg {
-  type: "/akash.escrow.v1beta2.FractionalPayment";
-  value: FractionalPaymentAmino;
 }
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
@@ -310,9 +298,6 @@ export const AccountID = {
     obj.scope = message.scope;
     obj.xid = message.xid;
     return obj;
-  },
-  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
-    return AccountID.fromAmino(object.value);
   },
   fromProtoMsg(message: AccountIDProtoMsg): AccountID {
     return AccountID.decode(message.value);
@@ -500,9 +485,6 @@ export const Account = {
     obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined;
     return obj;
   },
-  fromAminoMsg(object: AccountAminoMsg): Account {
-    return Account.fromAmino(object.value);
-  },
   fromProtoMsg(message: AccountProtoMsg): Account {
     return Account.decode(message.value);
   },
@@ -672,9 +654,6 @@ export const FractionalPayment = {
     obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
     obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {
-    return FractionalPayment.fromAmino(object.value);
   },
   fromProtoMsg(message: FractionalPaymentProtoMsg): FractionalPayment {
     return FractionalPayment.decode(message.value);

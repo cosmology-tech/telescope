@@ -89,10 +89,6 @@ export interface EnableServiceRequestAmino {
    */
   name: string;
 }
-export interface EnableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.EnableServiceRequest";
-  value: EnableServiceRequestAmino;
-}
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
   name: string;
@@ -118,10 +114,6 @@ export interface EnableServiceResponseProtoMsg {
 export interface EnableServiceResponseAmino {
   /** The new state of the service after enabling. */
   service?: ServiceAmino;
-}
-export interface EnableServiceResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.EnableServiceResponse";
-  value: EnableServiceResponseAmino;
 }
 /**
  * Response message for the `EnableService` method.
@@ -181,10 +173,6 @@ export interface DisableServiceRequestAmino {
   /** Defines the behavior for checking service usage when disabling a service. */
   check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
-export interface DisableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.DisableServiceRequest";
-  value: DisableServiceRequestAmino;
-}
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
   name: string;
@@ -212,10 +200,6 @@ export interface DisableServiceResponseProtoMsg {
 export interface DisableServiceResponseAmino {
   /** The new state of the service after disabling. */
   service?: ServiceAmino;
-}
-export interface DisableServiceResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.DisableServiceResponse";
-  value: DisableServiceResponseAmino;
 }
 /**
  * Response message for the `DisableService` method.
@@ -250,10 +234,6 @@ export interface GetServiceRequestAmino {
    * project number.
    */
   name: string;
-}
-export interface GetServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.GetServiceRequest";
-  value: GetServiceRequestAmino;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
@@ -315,10 +295,6 @@ export interface ListServicesRequestAmino {
    */
   filter: string;
 }
-export interface ListServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.ListServicesRequest";
-  value: ListServicesRequestAmino;
-}
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
   parent: string;
@@ -349,10 +325,6 @@ export interface ListServicesResponseAmino {
    * query.
    */
   next_page_token: string;
-}
-export interface ListServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.ListServicesResponse";
-  value: ListServicesResponseAmino;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
@@ -415,10 +387,6 @@ export interface BatchEnableServicesRequestAmino {
    */
   service_ids: string[];
 }
-export interface BatchEnableServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
-  value: BatchEnableServicesRequestAmino;
-}
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
   parent: string;
@@ -456,10 +424,6 @@ export interface BatchEnableServicesResponseAmino {
    */
   failures: BatchEnableServicesResponse_EnableFailureAmino[];
 }
-export interface BatchEnableServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
-  value: BatchEnableServicesResponseAmino;
-}
 /**
  * Response message for the `BatchEnableServices` method.
  * This response message is assigned to the `response` field of the returned
@@ -486,10 +450,6 @@ export interface BatchEnableServicesResponse_EnableFailureAmino {
   service_id: string;
   /** An error message describing why the service could not be enabled. */
   error_message: string;
-}
-export interface BatchEnableServicesResponse_EnableFailureAminoMsg {
-  type: "/google.api.serviceusage.v1.EnableFailure";
-  value: BatchEnableServicesResponse_EnableFailureAmino;
 }
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailureSDKType {
@@ -540,10 +500,6 @@ export interface BatchGetServicesRequestAmino {
    */
   names: string[];
 }
-export interface BatchGetServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchGetServicesRequest";
-  value: BatchGetServicesRequestAmino;
-}
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestSDKType {
   parent: string;
@@ -562,10 +518,6 @@ export interface BatchGetServicesResponseProtoMsg {
 export interface BatchGetServicesResponseAmino {
   /** The requested Service states. */
   services: ServiceAmino[];
-}
-export interface BatchGetServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchGetServicesResponse";
-  value: BatchGetServicesResponseAmino;
 }
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponseSDKType {
@@ -635,9 +587,6 @@ export const EnableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
-    return EnableServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: EnableServiceRequestProtoMsg): EnableServiceRequest {
     return EnableServiceRequest.decode(message.value);
@@ -718,9 +667,6 @@ export const EnableServiceResponse = {
     const obj: any = {};
     obj.service = message.service ? Service.toAmino(message.service) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: EnableServiceResponseAminoMsg): EnableServiceResponse {
-    return EnableServiceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: EnableServiceResponseProtoMsg): EnableServiceResponse {
     return EnableServiceResponse.decode(message.value);
@@ -828,9 +774,6 @@ export const DisableServiceRequest = {
     obj.check_if_service_has_usage = message.checkIfServiceHasUsage;
     return obj;
   },
-  fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
-    return DisableServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DisableServiceRequestProtoMsg): DisableServiceRequest {
     return DisableServiceRequest.decode(message.value);
   },
@@ -911,9 +854,6 @@ export const DisableServiceResponse = {
     obj.service = message.service ? Service.toAmino(message.service) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DisableServiceResponseAminoMsg): DisableServiceResponse {
-    return DisableServiceResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: DisableServiceResponseProtoMsg): DisableServiceResponse {
     return DisableServiceResponse.decode(message.value);
   },
@@ -991,9 +931,6 @@ export const GetServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
     return GetServiceRequest.decode(message.value);
@@ -1115,9 +1052,6 @@ export const ListServicesRequest = {
     obj.filter = message.filter;
     return obj;
   },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
     return ListServicesRequest.decode(message.value);
   },
@@ -1222,9 +1156,6 @@ export const ListServicesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
     return ListServicesResponse.decode(message.value);
   },
@@ -1328,9 +1259,6 @@ export const BatchEnableServicesRequest = {
       obj.service_ids = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesRequestAminoMsg): BatchEnableServicesRequest {
-    return BatchEnableServicesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchEnableServicesRequestProtoMsg): BatchEnableServicesRequest {
     return BatchEnableServicesRequest.decode(message.value);
@@ -1448,9 +1376,6 @@ export const BatchEnableServicesResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: BatchEnableServicesResponseAminoMsg): BatchEnableServicesResponse {
-    return BatchEnableServicesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: BatchEnableServicesResponseProtoMsg): BatchEnableServicesResponse {
     return BatchEnableServicesResponse.decode(message.value);
   },
@@ -1542,9 +1467,6 @@ export const BatchEnableServicesResponse_EnableFailure = {
     obj.service_id = message.serviceId;
     obj.error_message = message.errorMessage;
     return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesResponse_EnableFailureAminoMsg): BatchEnableServicesResponse_EnableFailure {
-    return BatchEnableServicesResponse_EnableFailure.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchEnableServicesResponse_EnableFailureProtoMsg): BatchEnableServicesResponse_EnableFailure {
     return BatchEnableServicesResponse_EnableFailure.decode(message.value);
@@ -1650,9 +1572,6 @@ export const BatchGetServicesRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: BatchGetServicesRequestAminoMsg): BatchGetServicesRequest {
-    return BatchGetServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: BatchGetServicesRequestProtoMsg): BatchGetServicesRequest {
     return BatchGetServicesRequest.decode(message.value);
   },
@@ -1742,9 +1661,6 @@ export const BatchGetServicesResponse = {
       obj.services = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BatchGetServicesResponseAminoMsg): BatchGetServicesResponse {
-    return BatchGetServicesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchGetServicesResponseProtoMsg): BatchGetServicesResponse {
     return BatchGetServicesResponse.decode(message.value);

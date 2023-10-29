@@ -13,10 +13,6 @@ export interface SourceInfo_PositionsEntryAmino {
   key: number;
   value: number;
 }
-export interface SourceInfo_PositionsEntryAminoMsg {
-  type: string;
-  value: SourceInfo_PositionsEntryAmino;
-}
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
   value: number;
@@ -77,10 +73,6 @@ export interface SourceInfoAmino {
     [key: number]: number;
   };
 }
-export interface SourceInfoAminoMsg {
-  type: "/google.api.expr.v1beta1.SourceInfo";
-  value: SourceInfoAmino;
-}
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   location: string;
@@ -126,10 +118,6 @@ export interface SourcePositionAmino {
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
   column: number;
-}
-export interface SourcePositionAminoMsg {
-  type: "/google.api.expr.v1beta1.SourcePosition";
-  value: SourcePositionAmino;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
@@ -215,9 +203,6 @@ export const SourceInfo_PositionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
-    return SourceInfo_PositionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
     return SourceInfo_PositionsEntry.decode(message.value);
@@ -383,9 +368,6 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
-    return SourceInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
     return SourceInfo.decode(message.value);
   },
@@ -505,9 +487,6 @@ export const SourcePosition = {
     obj.line = message.line;
     obj.column = message.column;
     return obj;
-  },
-  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
-    return SourcePosition.fromAmino(object.value);
   },
   fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
     return SourcePosition.decode(message.value);

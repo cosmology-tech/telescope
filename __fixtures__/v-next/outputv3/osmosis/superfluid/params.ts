@@ -26,10 +26,6 @@ export interface ParamsAmino {
    */
   minimum_risk_factor: string;
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/params";
-  value: ParamsAmino;
-}
 /** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
   minimum_risk_factor: string;
@@ -99,15 +95,6 @@ export const Params = {
     const obj: any = {};
     obj.minimum_risk_factor = message.minimumRiskFactor;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

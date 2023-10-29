@@ -31,10 +31,6 @@ export interface TableDescriptorAmino {
    */
   id: number;
 }
-export interface TableDescriptorAminoMsg {
-  type: "cosmos-sdk/TableDescriptor";
-  value: TableDescriptorAmino;
-}
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
   primary_key?: PrimaryKeyDescriptorSDKType;
@@ -129,10 +125,6 @@ export interface PrimaryKeyDescriptorAmino {
    */
   auto_increment: boolean;
 }
-export interface PrimaryKeyDescriptorAminoMsg {
-  type: "cosmos-sdk/PrimaryKeyDescriptor";
-  value: PrimaryKeyDescriptorAmino;
-}
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptorSDKType {
   fields: string;
@@ -188,10 +180,6 @@ export interface SecondaryIndexDescriptorAmino {
   /** unique specifies that this an unique index. */
   unique: boolean;
 }
-export interface SecondaryIndexDescriptorAminoMsg {
-  type: "cosmos-sdk/SecondaryIndexDescriptor";
-  value: SecondaryIndexDescriptorAmino;
-}
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptorSDKType {
   fields: string;
@@ -219,10 +207,6 @@ export interface SingletonDescriptorAmino {
    * can be auto-generated.
    */
   id: number;
-}
-export interface SingletonDescriptorAminoMsg {
-  type: "cosmos-sdk/SingletonDescriptor";
-  value: SingletonDescriptorAmino;
 }
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptorSDKType {
@@ -336,15 +320,6 @@ export const TableDescriptor = {
     obj.id = message.id;
     return obj;
   },
-  fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor {
-    return TableDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: TableDescriptor): TableDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/TableDescriptor",
-      value: TableDescriptor.toAmino(message)
-    };
-  },
   fromProtoMsg(message: TableDescriptorProtoMsg): TableDescriptor {
     return TableDescriptor.decode(message.value);
   },
@@ -437,15 +412,6 @@ export const PrimaryKeyDescriptor = {
     obj.fields = message.fields;
     obj.auto_increment = message.autoIncrement;
     return obj;
-  },
-  fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor {
-    return PrimaryKeyDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/PrimaryKeyDescriptor",
-      value: PrimaryKeyDescriptor.toAmino(message)
-    };
   },
   fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg): PrimaryKeyDescriptor {
     return PrimaryKeyDescriptor.decode(message.value);
@@ -554,15 +520,6 @@ export const SecondaryIndexDescriptor = {
     obj.unique = message.unique;
     return obj;
   },
-  fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor {
-    return SecondaryIndexDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SecondaryIndexDescriptor",
-      value: SecondaryIndexDescriptor.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg): SecondaryIndexDescriptor {
     return SecondaryIndexDescriptor.decode(message.value);
   },
@@ -641,15 +598,6 @@ export const SingletonDescriptor = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
-  },
-  fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor {
-    return SingletonDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SingletonDescriptor): SingletonDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SingletonDescriptor",
-      value: SingletonDescriptor.toAmino(message)
-    };
   },
   fromProtoMsg(message: SingletonDescriptorProtoMsg): SingletonDescriptor {
     return SingletonDescriptor.decode(message.value);

@@ -24,10 +24,6 @@ export interface LegacyAminoPubKeyAmino {
   threshold: number;
   public_keys: AnyAmino[];
 }
-export interface LegacyAminoPubKeyAminoMsg {
-  type: "cosmos-sdk/LegacyAminoPubKey";
-  value: LegacyAminoPubKeyAmino;
-}
 /**
  * LegacyAminoPubKey specifies a public key type
  * which nests multiple public keys and a threshold,
@@ -128,15 +124,6 @@ export const LegacyAminoPubKey = {
       obj.public_keys = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: LegacyAminoPubKeyAminoMsg): LegacyAminoPubKey {
-    return LegacyAminoPubKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/LegacyAminoPubKey",
-      value: LegacyAminoPubKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: LegacyAminoPubKeyProtoMsg): LegacyAminoPubKey {
     return LegacyAminoPubKey.decode(message.value);

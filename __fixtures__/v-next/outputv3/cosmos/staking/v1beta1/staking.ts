@@ -81,10 +81,6 @@ export interface HistoricalInfoAmino {
   header?: HeaderAmino;
   valset: ValidatorAmino[];
 }
-export interface HistoricalInfoAminoMsg {
-  type: "cosmos-sdk/HistoricalInfo";
-  value: HistoricalInfoAmino;
-}
 /**
  * HistoricalInfo contains header and validator information for a given block.
  * It is stored as part of staking module's state, which persists the `n` most
@@ -123,10 +119,6 @@ export interface CommissionRatesAmino {
   /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
   max_change_rate: string;
 }
-export interface CommissionRatesAminoMsg {
-  type: "cosmos-sdk/CommissionRates";
-  value: CommissionRatesAmino;
-}
 /**
  * CommissionRates defines the initial commission rates to be used for creating
  * a validator.
@@ -153,10 +145,6 @@ export interface CommissionAmino {
   commission_rates?: CommissionRatesAmino;
   /** update_time is the last time the commission rate was changed. */
   update_time?: Date;
-}
-export interface CommissionAminoMsg {
-  type: "cosmos-sdk/Commission";
-  value: CommissionAmino;
 }
 /** Commission defines commission parameters for a given validator. */
 export interface CommissionSDKType {
@@ -192,10 +180,6 @@ export interface DescriptionAmino {
   security_contact: string;
   /** details define other optional details. */
   details: string;
-}
-export interface DescriptionAminoMsg {
-  type: "cosmos-sdk/Description";
-  value: DescriptionAmino;
 }
 /** Description defines a validator description. */
 export interface DescriptionSDKType {
@@ -280,10 +264,6 @@ export interface ValidatorAmino {
   /** min_self_delegation is the validator's self declared minimum self delegation. */
   min_self_delegation: string;
 }
-export interface ValidatorAminoMsg {
-  type: "cosmos-sdk/Validator";
-  value: ValidatorAmino;
-}
 /**
  * Validator defines a validator, together with the total amount of the
  * Validator's bond shares and their exchange rate to coins. Slashing results in
@@ -319,10 +299,6 @@ export interface ValAddressesProtoMsg {
 export interface ValAddressesAmino {
   addresses: string[];
 }
-export interface ValAddressesAminoMsg {
-  type: "cosmos-sdk/ValAddresses";
-  value: ValAddressesAmino;
-}
 /** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddressesSDKType {
   addresses: string[];
@@ -349,10 +325,6 @@ export interface DVPairAmino {
   delegator_address: string;
   validator_address: string;
 }
-export interface DVPairAminoMsg {
-  type: "cosmos-sdk/DVPair";
-  value: DVPairAmino;
-}
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
  * It is intended to be used as a marshalable pointer. For example, a DVPair can
@@ -373,10 +345,6 @@ export interface DVPairsProtoMsg {
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairsAmino {
   pairs: DVPairAmino[];
-}
-export interface DVPairsAminoMsg {
-  type: "cosmos-sdk/DVPairs";
-  value: DVPairsAmino;
 }
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairsSDKType {
@@ -408,10 +376,6 @@ export interface DVVTripletAmino {
   validator_src_address: string;
   validator_dst_address: string;
 }
-export interface DVVTripletAminoMsg {
-  type: "cosmos-sdk/DVVTriplet";
-  value: DVVTripletAmino;
-}
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
  * with no other data. It is intended to be used as a marshalable pointer. For
@@ -434,10 +398,6 @@ export interface DVVTripletsProtoMsg {
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTripletsAmino {
   triplets: DVVTripletAmino[];
-}
-export interface DVVTripletsAminoMsg {
-  type: "cosmos-sdk/DVVTriplets";
-  value: DVVTripletsAmino;
 }
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTripletsSDKType {
@@ -472,10 +432,6 @@ export interface DelegationAmino {
   validator_address: string;
   /** shares define the delegation shares received. */
   shares: string;
-}
-export interface DelegationAminoMsg {
-  type: "cosmos-sdk/Delegation";
-  value: DelegationAmino;
 }
 /**
  * Delegation represents the bond with tokens held by an account. It is
@@ -515,10 +471,6 @@ export interface UnbondingDelegationAmino {
   /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntryAmino[];
 }
-export interface UnbondingDelegationAminoMsg {
-  type: "cosmos-sdk/UnbondingDelegation";
-  value: UnbondingDelegationAmino;
-}
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
  * for a single validator in an time-ordered list.
@@ -554,10 +506,6 @@ export interface UnbondingDelegationEntryAmino {
   /** balance defines the tokens to receive at completion. */
   balance: string;
 }
-export interface UnbondingDelegationEntryAminoMsg {
-  type: "cosmos-sdk/UnbondingDelegationEntry";
-  value: UnbondingDelegationEntryAmino;
-}
 /** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntrySDKType {
   creation_height: bigint;
@@ -590,10 +538,6 @@ export interface RedelegationEntryAmino {
   initial_balance: string;
   /** shares_dst is the amount of destination-validator shares created by redelegation. */
   shares_dst: string;
-}
-export interface RedelegationEntryAminoMsg {
-  type: "cosmos-sdk/RedelegationEntry";
-  value: RedelegationEntryAmino;
 }
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntrySDKType {
@@ -633,10 +577,6 @@ export interface RedelegationAmino {
   validator_dst_address: string;
   /** entries are the redelegation entries. */
   entries: RedelegationEntryAmino[];
-}
-export interface RedelegationAminoMsg {
-  type: "cosmos-sdk/Redelegation";
-  value: RedelegationAmino;
 }
 /**
  * Redelegation contains the list of a particular delegator's redelegating bonds
@@ -682,10 +622,6 @@ export interface ParamsAmino {
   /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
   min_commission_rate: string;
 }
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
-}
 /** Params defines the parameters for the staking module. */
 export interface ParamsSDKType {
   unbonding_time: DurationSDKType;
@@ -714,10 +650,6 @@ export interface DelegationResponseProtoMsg {
 export interface DelegationResponseAmino {
   delegation?: DelegationAmino;
   balance?: CoinAmino;
-}
-export interface DelegationResponseAminoMsg {
-  type: "cosmos-sdk/DelegationResponse";
-  value: DelegationResponseAmino;
 }
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a
@@ -748,10 +680,6 @@ export interface RedelegationEntryResponseProtoMsg {
 export interface RedelegationEntryResponseAmino {
   redelegation_entry?: RedelegationEntryAmino;
   balance: string;
-}
-export interface RedelegationEntryResponseAminoMsg {
-  type: "cosmos-sdk/RedelegationEntryResponse";
-  value: RedelegationEntryResponseAmino;
 }
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
@@ -784,10 +712,6 @@ export interface RedelegationResponseAmino {
   redelegation?: RedelegationAmino;
   entries: RedelegationEntryResponseAmino[];
 }
-export interface RedelegationResponseAminoMsg {
-  type: "cosmos-sdk/RedelegationResponse";
-  value: RedelegationResponseAmino;
-}
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
  * contain a balance in addition to shares which is more suitable for client
@@ -816,10 +740,6 @@ export interface PoolProtoMsg {
 export interface PoolAmino {
   not_bonded_tokens: string;
   bonded_tokens: string;
-}
-export interface PoolAminoMsg {
-  type: "cosmos-sdk/Pool";
-  value: PoolAmino;
 }
 /**
  * Pool is used for tracking bonded and not-bonded token supply of the bond
@@ -922,15 +842,6 @@ export const HistoricalInfo = {
       obj.valset = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: HistoricalInfoAminoMsg): HistoricalInfo {
-    return HistoricalInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: HistoricalInfo): HistoricalInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/HistoricalInfo",
-      value: HistoricalInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: HistoricalInfoProtoMsg): HistoricalInfo {
     return HistoricalInfo.decode(message.value);
@@ -1039,15 +950,6 @@ export const CommissionRates = {
     obj.max_change_rate = message.maxChangeRate;
     return obj;
   },
-  fromAminoMsg(object: CommissionRatesAminoMsg): CommissionRates {
-    return CommissionRates.fromAmino(object.value);
-  },
-  toAminoMsg(message: CommissionRates): CommissionRatesAminoMsg {
-    return {
-      type: "cosmos-sdk/CommissionRates",
-      value: CommissionRates.toAmino(message)
-    };
-  },
   fromProtoMsg(message: CommissionRatesProtoMsg): CommissionRates {
     return CommissionRates.decode(message.value);
   },
@@ -1142,15 +1044,6 @@ export const Commission = {
     obj.commission_rates = message.commissionRates ? CommissionRates.toAmino(message.commissionRates) : undefined;
     obj.update_time = message.updateTime;
     return obj;
-  },
-  fromAminoMsg(object: CommissionAminoMsg): Commission {
-    return Commission.fromAmino(object.value);
-  },
-  toAminoMsg(message: Commission): CommissionAminoMsg {
-    return {
-      type: "cosmos-sdk/Commission",
-      value: Commission.toAmino(message)
-    };
   },
   fromProtoMsg(message: CommissionProtoMsg): Commission {
     return Commission.decode(message.value);
@@ -1286,15 +1179,6 @@ export const Description = {
     obj.security_contact = message.securityContact;
     obj.details = message.details;
     return obj;
-  },
-  fromAminoMsg(object: DescriptionAminoMsg): Description {
-    return Description.fromAmino(object.value);
-  },
-  toAminoMsg(message: Description): DescriptionAminoMsg {
-    return {
-      type: "cosmos-sdk/Description",
-      value: Description.toAmino(message)
-    };
   },
   fromProtoMsg(message: DescriptionProtoMsg): Description {
     return Description.decode(message.value);
@@ -1523,15 +1407,6 @@ export const Validator = {
     obj.min_self_delegation = message.minSelfDelegation;
     return obj;
   },
-  fromAminoMsg(object: ValidatorAminoMsg): Validator {
-    return Validator.fromAmino(object.value);
-  },
-  toAminoMsg(message: Validator): ValidatorAminoMsg {
-    return {
-      type: "cosmos-sdk/Validator",
-      value: Validator.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ValidatorProtoMsg): Validator {
     return Validator.decode(message.value);
   },
@@ -1622,15 +1497,6 @@ export const ValAddresses = {
       obj.addresses = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ValAddressesAminoMsg): ValAddresses {
-    return ValAddresses.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValAddresses): ValAddressesAminoMsg {
-    return {
-      type: "cosmos-sdk/ValAddresses",
-      value: ValAddresses.toAmino(message)
-    };
   },
   fromProtoMsg(message: ValAddressesProtoMsg): ValAddresses {
     return ValAddresses.decode(message.value);
@@ -1725,15 +1591,6 @@ export const DVPair = {
     obj.validator_address = message.validatorAddress;
     return obj;
   },
-  fromAminoMsg(object: DVPairAminoMsg): DVPair {
-    return DVPair.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVPair): DVPairAminoMsg {
-    return {
-      type: "cosmos-sdk/DVPair",
-      value: DVPair.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DVPairProtoMsg): DVPair {
     return DVPair.decode(message.value);
   },
@@ -1824,15 +1681,6 @@ export const DVPairs = {
       obj.pairs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: DVPairsAminoMsg): DVPairs {
-    return DVPairs.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVPairs): DVPairsAminoMsg {
-    return {
-      type: "cosmos-sdk/DVPairs",
-      value: DVPairs.toAmino(message)
-    };
   },
   fromProtoMsg(message: DVPairsProtoMsg): DVPairs {
     return DVPairs.decode(message.value);
@@ -1941,15 +1789,6 @@ export const DVVTriplet = {
     obj.validator_dst_address = message.validatorDstAddress;
     return obj;
   },
-  fromAminoMsg(object: DVVTripletAminoMsg): DVVTriplet {
-    return DVVTriplet.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVVTriplet): DVVTripletAminoMsg {
-    return {
-      type: "cosmos-sdk/DVVTriplet",
-      value: DVVTriplet.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DVVTripletProtoMsg): DVVTriplet {
     return DVVTriplet.decode(message.value);
   },
@@ -2040,15 +1879,6 @@ export const DVVTriplets = {
       obj.triplets = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: DVVTripletsAminoMsg): DVVTriplets {
-    return DVVTriplets.fromAmino(object.value);
-  },
-  toAminoMsg(message: DVVTriplets): DVVTripletsAminoMsg {
-    return {
-      type: "cosmos-sdk/DVVTriplets",
-      value: DVVTriplets.toAmino(message)
-    };
   },
   fromProtoMsg(message: DVVTripletsProtoMsg): DVVTriplets {
     return DVVTriplets.decode(message.value);
@@ -2156,15 +1986,6 @@ export const Delegation = {
     obj.validator_address = message.validatorAddress;
     obj.shares = message.shares;
     return obj;
-  },
-  fromAminoMsg(object: DelegationAminoMsg): Delegation {
-    return Delegation.fromAmino(object.value);
-  },
-  toAminoMsg(message: Delegation): DelegationAminoMsg {
-    return {
-      type: "cosmos-sdk/Delegation",
-      value: Delegation.toAmino(message)
-    };
   },
   fromProtoMsg(message: DelegationProtoMsg): Delegation {
     return Delegation.decode(message.value);
@@ -2284,15 +2105,6 @@ export const UnbondingDelegation = {
       obj.entries = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: UnbondingDelegationAminoMsg): UnbondingDelegation {
-    return UnbondingDelegation.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnbondingDelegation): UnbondingDelegationAminoMsg {
-    return {
-      type: "cosmos-sdk/UnbondingDelegation",
-      value: UnbondingDelegation.toAmino(message)
-    };
   },
   fromProtoMsg(message: UnbondingDelegationProtoMsg): UnbondingDelegation {
     return UnbondingDelegation.decode(message.value);
@@ -2417,15 +2229,6 @@ export const UnbondingDelegationEntry = {
     obj.balance = message.balance;
     return obj;
   },
-  fromAminoMsg(object: UnbondingDelegationEntryAminoMsg): UnbondingDelegationEntry {
-    return UnbondingDelegationEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnbondingDelegationEntry): UnbondingDelegationEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/UnbondingDelegationEntry",
-      value: UnbondingDelegationEntry.toAmino(message)
-    };
-  },
   fromProtoMsg(message: UnbondingDelegationEntryProtoMsg): UnbondingDelegationEntry {
     return UnbondingDelegationEntry.decode(message.value);
   },
@@ -2548,15 +2351,6 @@ export const RedelegationEntry = {
     obj.initial_balance = message.initialBalance;
     obj.shares_dst = message.sharesDst;
     return obj;
-  },
-  fromAminoMsg(object: RedelegationEntryAminoMsg): RedelegationEntry {
-    return RedelegationEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: RedelegationEntry): RedelegationEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/RedelegationEntry",
-      value: RedelegationEntry.toAmino(message)
-    };
   },
   fromProtoMsg(message: RedelegationEntryProtoMsg): RedelegationEntry {
     return RedelegationEntry.decode(message.value);
@@ -2690,15 +2484,6 @@ export const Redelegation = {
       obj.entries = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: RedelegationAminoMsg): Redelegation {
-    return Redelegation.fromAmino(object.value);
-  },
-  toAminoMsg(message: Redelegation): RedelegationAminoMsg {
-    return {
-      type: "cosmos-sdk/Redelegation",
-      value: Redelegation.toAmino(message)
-    };
   },
   fromProtoMsg(message: RedelegationProtoMsg): Redelegation {
     return Redelegation.decode(message.value);
@@ -2851,15 +2636,6 @@ export const Params = {
     obj.min_commission_rate = message.minCommissionRate;
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
   },
@@ -2957,15 +2733,6 @@ export const DelegationResponse = {
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DelegationResponseAminoMsg): DelegationResponse {
-    return DelegationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: DelegationResponse): DelegationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/DelegationResponse",
-      value: DelegationResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DelegationResponseProtoMsg): DelegationResponse {
     return DelegationResponse.decode(message.value);
   },
@@ -3060,15 +2827,6 @@ export const RedelegationEntryResponse = {
     obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toAmino(message.redelegationEntry) : undefined;
     obj.balance = message.balance;
     return obj;
-  },
-  fromAminoMsg(object: RedelegationEntryResponseAminoMsg): RedelegationEntryResponse {
-    return RedelegationEntryResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: RedelegationEntryResponse): RedelegationEntryResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/RedelegationEntryResponse",
-      value: RedelegationEntryResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: RedelegationEntryResponseProtoMsg): RedelegationEntryResponse {
     return RedelegationEntryResponse.decode(message.value);
@@ -3177,15 +2935,6 @@ export const RedelegationResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: RedelegationResponseAminoMsg): RedelegationResponse {
-    return RedelegationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: RedelegationResponse): RedelegationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/RedelegationResponse",
-      value: RedelegationResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: RedelegationResponseProtoMsg): RedelegationResponse {
     return RedelegationResponse.decode(message.value);
   },
@@ -3278,15 +3027,6 @@ export const Pool = {
     obj.not_bonded_tokens = message.notBondedTokens;
     obj.bonded_tokens = message.bondedTokens;
     return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "cosmos-sdk/Pool",
-      value: Pool.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);

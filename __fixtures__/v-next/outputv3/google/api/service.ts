@@ -269,10 +269,6 @@ export interface ServiceAmino {
   /** @deprecated */
   config_version?: UInt32ValueAmino;
 }
-export interface ServiceAminoMsg {
-  type: "/google.api.Service";
-  value: ServiceAmino;
-}
 /**
  * `Service` is the root object of Google service configuration schema. It
  * describes basic information about a service, such as the name and the
@@ -837,9 +833,6 @@ export const Service = {
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
     obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ServiceAminoMsg): Service {
-    return Service.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceProtoMsg): Service {
     return Service.decode(message.value);

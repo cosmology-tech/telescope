@@ -18,10 +18,6 @@ export interface GenesisStateAmino {
   locks: PeriodLockAmino[];
   synthetic_locks: SyntheticLockAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "osmosis/lockup/genesis-state";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateSDKType {
   last_lock_id: bigint;
@@ -147,15 +143,6 @@ export const GenesisState = {
       obj.synthetic_locks = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/lockup/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

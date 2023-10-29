@@ -39,10 +39,6 @@ export interface IncentiveAmino {
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   total_gas: string;
 }
-export interface IncentiveAminoMsg {
-  type: "/evmos.incentives.v1.Incentive";
-  value: IncentiveAmino;
-}
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
@@ -75,10 +71,6 @@ export interface GasMeterAmino {
   participant: string;
   /** cumulative gas spent during the epoch */
   cumulative_gas: string;
-}
-export interface GasMeterAminoMsg {
-  type: "/evmos.incentives.v1.GasMeter";
-  value: GasMeterAmino;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterSDKType {
@@ -117,10 +109,6 @@ export interface RegisterIncentiveProposalAmino {
   /** number of remaining epochs */
   epochs: number;
 }
-export interface RegisterIncentiveProposalAminoMsg {
-  type: "/evmos.incentives.v1.RegisterIncentiveProposal";
-  value: RegisterIncentiveProposalAmino;
-}
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
   $typeUrl?: "/evmos.incentives.v1.RegisterIncentiveProposal";
@@ -151,10 +139,6 @@ export interface CancelIncentiveProposalAmino {
   description: string;
   /** contract address */
   contract: string;
-}
-export interface CancelIncentiveProposalAminoMsg {
-  type: "/evmos.incentives.v1.CancelIncentiveProposal";
-  value: CancelIncentiveProposalAmino;
 }
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposalSDKType {
@@ -297,9 +281,6 @@ export const Incentive = {
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: IncentiveAminoMsg): Incentive {
-    return Incentive.fromAmino(object.value);
-  },
   fromProtoMsg(message: IncentiveProtoMsg): Incentive {
     return Incentive.decode(message.value);
   },
@@ -407,9 +388,6 @@ export const GasMeter = {
     obj.participant = message.participant;
     obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GasMeterAminoMsg): GasMeter {
-    return GasMeter.fromAmino(object.value);
   },
   fromProtoMsg(message: GasMeterProtoMsg): GasMeter {
     return GasMeter.decode(message.value);
@@ -558,9 +536,6 @@ export const RegisterIncentiveProposal = {
     obj.epochs = message.epochs;
     return obj;
   },
-  fromAminoMsg(object: RegisterIncentiveProposalAminoMsg): RegisterIncentiveProposal {
-    return RegisterIncentiveProposal.fromAmino(object.value);
-  },
   fromProtoMsg(message: RegisterIncentiveProposalProtoMsg): RegisterIncentiveProposal {
     return RegisterIncentiveProposal.decode(message.value);
   },
@@ -666,9 +641,6 @@ export const CancelIncentiveProposal = {
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
-  },
-  fromAminoMsg(object: CancelIncentiveProposalAminoMsg): CancelIncentiveProposal {
-    return CancelIncentiveProposal.fromAmino(object.value);
   },
   fromProtoMsg(message: CancelIncentiveProposalProtoMsg): CancelIncentiveProposal {
     return CancelIncentiveProposal.decode(message.value);

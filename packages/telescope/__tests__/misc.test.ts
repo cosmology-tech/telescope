@@ -265,4 +265,80 @@ describe("misc", () => {
 
     await telescope.build();
   });
+
+  it("generates amino, useMsgTypes, with amino func", async () => {
+    const testFolder = "/output-proto-amino/amino-msg-with-func";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates amino, useMsgTypes, no amino func", async () => {
+    const testFolder = "/output-proto-amino/amino-msg-no-func";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates amino, no useMsgTypes, with amino func", async () => {
+    const testFolder = "/output-proto-amino/amino-no-msg-with-func";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+          disableMsgTypes: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
 });

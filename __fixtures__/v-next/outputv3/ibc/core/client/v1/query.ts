@@ -24,10 +24,6 @@ export interface QueryClientStateRequestAmino {
   /** client state unique identifier */
   client_id: string;
 }
-export interface QueryClientStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientStateRequest";
-  value: QueryClientStateRequestAmino;
-}
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
  * method
@@ -65,10 +61,6 @@ export interface QueryClientStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryClientStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientStateResponse";
-  value: QueryClientStateResponseAmino;
-}
 /**
  * QueryClientStateResponse is the response type for the Query/ClientState RPC
  * method. Besides the client state, it includes a proof and the height from
@@ -98,10 +90,6 @@ export interface QueryClientStatesRequestProtoMsg {
 export interface QueryClientStatesRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
-}
-export interface QueryClientStatesRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientStatesRequest";
-  value: QueryClientStatesRequestAmino;
 }
 /**
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
@@ -133,10 +121,6 @@ export interface QueryClientStatesResponseAmino {
   client_states: IdentifiedClientStateAmino[];
   /** pagination response */
   pagination?: PageResponseAmino;
-}
-export interface QueryClientStatesResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientStatesResponse";
-  value: QueryClientStatesResponseAmino;
 }
 /**
  * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
@@ -186,10 +170,6 @@ export interface QueryConsensusStateRequestAmino {
    */
   latest_height: boolean;
 }
-export interface QueryConsensusStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStateRequest";
-  value: QueryConsensusStateRequestAmino;
-}
 /**
  * QueryConsensusStateRequest is the request type for the Query/ConsensusState
  * RPC method. Besides the consensus state, it includes a proof and the height
@@ -229,10 +209,6 @@ export interface QueryConsensusStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryConsensusStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStateResponse";
-  value: QueryConsensusStateResponseAmino;
-}
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
  * RPC method
@@ -266,10 +242,6 @@ export interface QueryConsensusStatesRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
 }
-export interface QueryConsensusStatesRequestAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStatesRequest";
-  value: QueryConsensusStatesRequestAmino;
-}
 /**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
@@ -302,10 +274,6 @@ export interface QueryConsensusStatesResponseAmino {
   /** pagination response */
   pagination?: PageResponseAmino;
 }
-export interface QueryConsensusStatesResponseAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStatesResponse";
-  value: QueryConsensusStatesResponseAmino;
-}
 /**
  * QueryConsensusStatesResponse is the response type for the
  * Query/ConsensusStates RPC method
@@ -334,10 +302,6 @@ export interface QueryClientStatusRequestAmino {
   /** client unique identifier */
   client_id: string;
 }
-export interface QueryClientStatusRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientStatusRequest";
-  value: QueryClientStatusRequestAmino;
-}
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
@@ -363,10 +327,6 @@ export interface QueryClientStatusResponseProtoMsg {
 export interface QueryClientStatusResponseAmino {
   status: string;
 }
-export interface QueryClientStatusResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientStatusResponse";
-  value: QueryClientStatusResponseAmino;
-}
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
@@ -388,10 +348,6 @@ export interface QueryClientParamsRequestProtoMsg {
  * method.
  */
 export interface QueryClientParamsRequestAmino {}
-export interface QueryClientParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientParamsRequest";
-  value: QueryClientParamsRequestAmino;
-}
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
  * method.
@@ -417,10 +373,6 @@ export interface QueryClientParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
-export interface QueryClientParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientParamsResponse";
-  value: QueryClientParamsResponseAmino;
-}
 /**
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
  * method.
@@ -442,10 +394,6 @@ export interface QueryUpgradedClientStateRequestProtoMsg {
  * Query/UpgradedClientState RPC method
  */
 export interface QueryUpgradedClientStateRequestAmino {}
-export interface QueryUpgradedClientStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedClientStateRequest";
-  value: QueryUpgradedClientStateRequestAmino;
-}
 /**
  * QueryUpgradedClientStateRequest is the request type for the
  * Query/UpgradedClientState RPC method
@@ -471,10 +419,6 @@ export interface QueryUpgradedClientStateResponseAmino {
   /** client state associated with the request identifier */
   upgraded_client_state?: AnyAmino;
 }
-export interface QueryUpgradedClientStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedClientStateResponse";
-  value: QueryUpgradedClientStateResponseAmino;
-}
 /**
  * QueryUpgradedClientStateResponse is the response type for the
  * Query/UpgradedClientState RPC method.
@@ -496,10 +440,6 @@ export interface QueryUpgradedConsensusStateRequestProtoMsg {
  * Query/UpgradedConsensusState RPC method
  */
 export interface QueryUpgradedConsensusStateRequestAmino {}
-export interface QueryUpgradedConsensusStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedConsensusStateRequest";
-  value: QueryUpgradedConsensusStateRequestAmino;
-}
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
  * Query/UpgradedConsensusState RPC method
@@ -524,10 +464,6 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
 export interface QueryUpgradedConsensusStateResponseAmino {
   /** Consensus state associated with the request identifier */
   upgraded_consensus_state?: AnyAmino;
-}
-export interface QueryUpgradedConsensusStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
-  value: QueryUpgradedConsensusStateResponseAmino;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the
@@ -601,15 +537,6 @@ export const QueryClientStateRequest = {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
-  },
-  fromAminoMsg(object: QueryClientStateRequestAminoMsg): QueryClientStateRequest {
-    return QueryClientStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientStateRequest): QueryClientStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientStateRequest",
-      value: QueryClientStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientStateRequestProtoMsg): QueryClientStateRequest {
     return QueryClientStateRequest.decode(message.value);
@@ -722,15 +649,6 @@ export const QueryClientStateResponse = {
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
-  fromAminoMsg(object: QueryClientStateResponseAminoMsg): QueryClientStateResponse {
-    return QueryClientStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientStateResponse): QueryClientStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientStateResponse",
-      value: QueryClientStateResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryClientStateResponseProtoMsg): QueryClientStateResponse {
     return QueryClientStateResponse.decode(message.value);
   },
@@ -811,15 +729,6 @@ export const QueryClientStatesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryClientStatesRequestAminoMsg): QueryClientStatesRequest {
-    return QueryClientStatesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientStatesRequest): QueryClientStatesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientStatesRequest",
-      value: QueryClientStatesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientStatesRequestProtoMsg): QueryClientStatesRequest {
     return QueryClientStatesRequest.decode(message.value);
@@ -927,15 +836,6 @@ export const QueryClientStatesResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryClientStatesResponseAminoMsg): QueryClientStatesResponse {
-    return QueryClientStatesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientStatesResponse): QueryClientStatesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientStatesResponse",
-      value: QueryClientStatesResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientStatesResponseProtoMsg): QueryClientStatesResponse {
     return QueryClientStatesResponse.decode(message.value);
@@ -1062,15 +962,6 @@ export const QueryConsensusStateRequest = {
     obj.latest_height = message.latestHeight;
     return obj;
   },
-  fromAminoMsg(object: QueryConsensusStateRequestAminoMsg): QueryConsensusStateRequest {
-    return QueryConsensusStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConsensusStateRequest): QueryConsensusStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConsensusStateRequest",
-      value: QueryConsensusStateRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConsensusStateRequestProtoMsg): QueryConsensusStateRequest {
     return QueryConsensusStateRequest.decode(message.value);
   },
@@ -1182,15 +1073,6 @@ export const QueryConsensusStateResponse = {
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
-  fromAminoMsg(object: QueryConsensusStateResponseAminoMsg): QueryConsensusStateResponse {
-    return QueryConsensusStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConsensusStateResponse): QueryConsensusStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConsensusStateResponse",
-      value: QueryConsensusStateResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConsensusStateResponseProtoMsg): QueryConsensusStateResponse {
     return QueryConsensusStateResponse.decode(message.value);
   },
@@ -1285,15 +1167,6 @@ export const QueryConsensusStatesRequest = {
     obj.client_id = message.clientId;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryConsensusStatesRequestAminoMsg): QueryConsensusStatesRequest {
-    return QueryConsensusStatesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConsensusStatesRequest",
-      value: QueryConsensusStatesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConsensusStatesRequestProtoMsg): QueryConsensusStatesRequest {
     return QueryConsensusStatesRequest.decode(message.value);
@@ -1402,15 +1275,6 @@ export const QueryConsensusStatesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryConsensusStatesResponseAminoMsg): QueryConsensusStatesResponse {
-    return QueryConsensusStatesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConsensusStatesResponse",
-      value: QueryConsensusStatesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConsensusStatesResponseProtoMsg): QueryConsensusStatesResponse {
     return QueryConsensusStatesResponse.decode(message.value);
   },
@@ -1489,15 +1353,6 @@ export const QueryClientStatusRequest = {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
-  },
-  fromAminoMsg(object: QueryClientStatusRequestAminoMsg): QueryClientStatusRequest {
-    return QueryClientStatusRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientStatusRequest): QueryClientStatusRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientStatusRequest",
-      value: QueryClientStatusRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientStatusRequestProtoMsg): QueryClientStatusRequest {
     return QueryClientStatusRequest.decode(message.value);
@@ -1578,15 +1433,6 @@ export const QueryClientStatusResponse = {
     obj.status = message.status;
     return obj;
   },
-  fromAminoMsg(object: QueryClientStatusResponseAminoMsg): QueryClientStatusResponse {
-    return QueryClientStatusResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientStatusResponse): QueryClientStatusResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientStatusResponse",
-      value: QueryClientStatusResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryClientStatusResponseProtoMsg): QueryClientStatusResponse {
     return QueryClientStatusResponse.decode(message.value);
   },
@@ -1648,15 +1494,6 @@ export const QueryClientParamsRequest = {
   toAmino(_: QueryClientParamsRequest): QueryClientParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryClientParamsRequestAminoMsg): QueryClientParamsRequest {
-    return QueryClientParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientParamsRequest): QueryClientParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientParamsRequest",
-      value: QueryClientParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientParamsRequestProtoMsg): QueryClientParamsRequest {
     return QueryClientParamsRequest.decode(message.value);
@@ -1739,15 +1576,6 @@ export const QueryClientParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryClientParamsResponseAminoMsg): QueryClientParamsResponse {
-    return QueryClientParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientParamsResponse): QueryClientParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientParamsResponse",
-      value: QueryClientParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryClientParamsResponseProtoMsg): QueryClientParamsResponse {
     return QueryClientParamsResponse.decode(message.value);
   },
@@ -1809,15 +1637,6 @@ export const QueryUpgradedClientStateRequest = {
   toAmino(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryUpgradedClientStateRequestAminoMsg): QueryUpgradedClientStateRequest {
-    return QueryUpgradedClientStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryUpgradedClientStateRequest",
-      value: QueryUpgradedClientStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryUpgradedClientStateRequestProtoMsg): QueryUpgradedClientStateRequest {
     return QueryUpgradedClientStateRequest.decode(message.value);
@@ -1900,15 +1719,6 @@ export const QueryUpgradedClientStateResponse = {
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryUpgradedClientStateResponseAminoMsg): QueryUpgradedClientStateResponse {
-    return QueryUpgradedClientStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryUpgradedClientStateResponse",
-      value: QueryUpgradedClientStateResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryUpgradedClientStateResponseProtoMsg): QueryUpgradedClientStateResponse {
     return QueryUpgradedClientStateResponse.decode(message.value);
   },
@@ -1970,15 +1780,6 @@ export const QueryUpgradedConsensusStateRequest = {
   toAmino(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryUpgradedConsensusStateRequestAminoMsg): QueryUpgradedConsensusStateRequest {
-    return QueryUpgradedConsensusStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryUpgradedConsensusStateRequest",
-      value: QueryUpgradedConsensusStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.decode(message.value);
@@ -2060,15 +1861,6 @@ export const QueryUpgradedConsensusStateResponse = {
     const obj: any = {};
     obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toAmino(message.upgradedConsensusState) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryUpgradedConsensusStateResponseAminoMsg): QueryUpgradedConsensusStateResponse {
-    return QueryUpgradedConsensusStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryUpgradedConsensusStateResponse",
-      value: QueryUpgradedConsensusStateResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.decode(message.value);

@@ -24,10 +24,6 @@ export interface ParamsAmino {
    */
   minted_denom: string;
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/poolincentives/params";
-  value: ParamsAmino;
-}
 export interface ParamsSDKType {
   minted_denom: string;
 }
@@ -40,10 +36,6 @@ export interface LockableDurationsInfoProtoMsg {
 }
 export interface LockableDurationsInfoAmino {
   lockable_durations: DurationAmino[];
-}
-export interface LockableDurationsInfoAminoMsg {
-  type: "osmosis/poolincentives/lockable-durations-info";
-  value: LockableDurationsInfoAmino;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -60,10 +52,6 @@ export interface DistrInfoAmino {
   total_weight: string;
   records: DistrRecordAmino[];
 }
-export interface DistrInfoAminoMsg {
-  type: "osmosis/poolincentives/distr-info";
-  value: DistrInfoAmino;
-}
 export interface DistrInfoSDKType {
   total_weight: string;
   records: DistrRecordSDKType[];
@@ -79,10 +67,6 @@ export interface DistrRecordProtoMsg {
 export interface DistrRecordAmino {
   gauge_id: string;
   weight: string;
-}
-export interface DistrRecordAminoMsg {
-  type: "osmosis/poolincentives/distr-record";
-  value: DistrRecordAmino;
 }
 export interface DistrRecordSDKType {
   gauge_id: bigint;
@@ -102,10 +86,6 @@ export interface PoolToGaugeAmino {
   gauge_id: string;
   duration?: DurationAmino;
 }
-export interface PoolToGaugeAminoMsg {
-  type: "osmosis/poolincentives/pool-to-gauge";
-  value: PoolToGaugeAmino;
-}
 export interface PoolToGaugeSDKType {
   pool_id: bigint;
   gauge_id: bigint;
@@ -120,10 +100,6 @@ export interface PoolToGaugesProtoMsg {
 }
 export interface PoolToGaugesAmino {
   pool_to_gauge: PoolToGaugeAmino[];
-}
-export interface PoolToGaugesAminoMsg {
-  type: "osmosis/poolincentives/pool-to-gauges";
-  value: PoolToGaugesAmino;
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];
@@ -193,15 +169,6 @@ export const Params = {
     const obj: any = {};
     obj.minted_denom = message.mintedDenom;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/poolincentives/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
@@ -293,15 +260,6 @@ export const LockableDurationsInfo = {
       obj.lockable_durations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: LockableDurationsInfo): LockableDurationsInfoAminoMsg {
-    return {
-      type: "osmosis/poolincentives/lockable-durations-info",
-      value: LockableDurationsInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
     return LockableDurationsInfo.decode(message.value);
@@ -408,15 +366,6 @@ export const DistrInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: DistrInfoAminoMsg): DistrInfo {
-    return DistrInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistrInfo): DistrInfoAminoMsg {
-    return {
-      type: "osmosis/poolincentives/distr-info",
-      value: DistrInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DistrInfoProtoMsg): DistrInfo {
     return DistrInfo.decode(message.value);
   },
@@ -511,15 +460,6 @@ export const DistrRecord = {
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     obj.weight = message.weight;
     return obj;
-  },
-  fromAminoMsg(object: DistrRecordAminoMsg): DistrRecord {
-    return DistrRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistrRecord): DistrRecordAminoMsg {
-    return {
-      type: "osmosis/poolincentives/distr-record",
-      value: DistrRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: DistrRecordProtoMsg): DistrRecord {
     return DistrRecord.decode(message.value);
@@ -634,15 +574,6 @@ export const PoolToGauge = {
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
-  fromAminoMsg(object: PoolToGaugeAminoMsg): PoolToGauge {
-    return PoolToGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolToGauge): PoolToGaugeAminoMsg {
-    return {
-      type: "osmosis/poolincentives/pool-to-gauge",
-      value: PoolToGauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PoolToGaugeProtoMsg): PoolToGauge {
     return PoolToGauge.decode(message.value);
   },
@@ -733,15 +664,6 @@ export const PoolToGauges = {
       obj.pool_to_gauge = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: PoolToGaugesAminoMsg): PoolToGauges {
-    return PoolToGauges.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolToGauges): PoolToGaugesAminoMsg {
-    return {
-      type: "osmosis/poolincentives/pool-to-gauges",
-      value: PoolToGauges.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolToGaugesProtoMsg): PoolToGauges {
     return PoolToGauges.decode(message.value);

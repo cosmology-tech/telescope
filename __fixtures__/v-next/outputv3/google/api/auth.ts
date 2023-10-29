@@ -65,10 +65,6 @@ export interface AuthenticationAmino {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProviderAmino[];
 }
-export interface AuthenticationAminoMsg {
-  type: "/google.api.Authentication";
-  value: AuthenticationAmino;
-}
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -153,10 +149,6 @@ export interface AuthenticationRuleAmino {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirementAmino[];
 }
-export interface AuthenticationRuleAminoMsg {
-  type: "/google.api.AuthenticationRule";
-  value: AuthenticationRuleAmino;
-}
 /**
  * Authentication rules for the service.
  * 
@@ -213,10 +205,6 @@ export interface JwtLocationAmino {
    * value_prefix="Bearer " with a space at the end.
    */
   value_prefix: string;
-}
-export interface JwtLocationAminoMsg {
-  type: "/google.api.JwtLocation";
-  value: JwtLocationAmino;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -394,10 +382,6 @@ export interface AuthProviderAmino {
    */
   jwt_locations: JwtLocationAmino[];
 }
-export interface AuthProviderAminoMsg {
-  type: "/google.api.AuthProvider";
-  value: AuthProviderAmino;
-}
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
@@ -478,10 +462,6 @@ export interface OAuthRequirementsAmino {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonical_scopes: string;
-}
-export interface OAuthRequirementsAminoMsg {
-  type: "/google.api.OAuthRequirements";
-  value: OAuthRequirementsAmino;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -577,10 +557,6 @@ export interface AuthRequirementAmino {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
-}
-export interface AuthRequirementAminoMsg {
-  type: "/google.api.AuthRequirement";
-  value: AuthRequirementAmino;
 }
 /**
  * User-defined authentication requirements, including support for
@@ -693,9 +669,6 @@ export const Authentication = {
       obj.providers = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: AuthenticationAminoMsg): Authentication {
-    return Authentication.fromAmino(object.value);
   },
   fromProtoMsg(message: AuthenticationProtoMsg): Authentication {
     return Authentication.decode(message.value);
@@ -831,9 +804,6 @@ export const AuthenticationRule = {
     }
     return obj;
   },
-  fromAminoMsg(object: AuthenticationRuleAminoMsg): AuthenticationRule {
-    return AuthenticationRule.fromAmino(object.value);
-  },
   fromProtoMsg(message: AuthenticationRuleProtoMsg): AuthenticationRule {
     return AuthenticationRule.decode(message.value);
   },
@@ -939,9 +909,6 @@ export const JwtLocation = {
     obj.query = message.query;
     obj.value_prefix = message.valuePrefix;
     return obj;
-  },
-  fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
-    return JwtLocation.fromAmino(object.value);
   },
   fromProtoMsg(message: JwtLocationProtoMsg): JwtLocation {
     return JwtLocation.decode(message.value);
@@ -1103,9 +1070,6 @@ export const AuthProvider = {
     }
     return obj;
   },
-  fromAminoMsg(object: AuthProviderAminoMsg): AuthProvider {
-    return AuthProvider.fromAmino(object.value);
-  },
   fromProtoMsg(message: AuthProviderProtoMsg): AuthProvider {
     return AuthProvider.decode(message.value);
   },
@@ -1183,9 +1147,6 @@ export const OAuthRequirements = {
     const obj: any = {};
     obj.canonical_scopes = message.canonicalScopes;
     return obj;
-  },
-  fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
-    return OAuthRequirements.fromAmino(object.value);
   },
   fromProtoMsg(message: OAuthRequirementsProtoMsg): OAuthRequirements {
     return OAuthRequirements.decode(message.value);
@@ -1278,9 +1239,6 @@ export const AuthRequirement = {
     obj.provider_id = message.providerId;
     obj.audiences = message.audiences;
     return obj;
-  },
-  fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {
-    return AuthRequirement.fromAmino(object.value);
   },
   fromProtoMsg(message: AuthRequirementProtoMsg): AuthRequirement {
     return AuthRequirement.decode(message.value);

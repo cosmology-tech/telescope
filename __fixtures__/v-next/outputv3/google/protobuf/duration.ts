@@ -143,10 +143,6 @@ export interface DurationProtoMsg {
  * microsecond should be expressed in JSON format as "3.000001s".
  */
 export type DurationAmino = string;
-export interface DurationAminoMsg {
-  type: "/google.protobuf.Duration";
-  value: DurationAmino;
-}
 /**
  * A Duration represents a signed, fixed-length span of time represented
  * as a count of seconds and fractions of seconds at nanosecond
@@ -289,9 +285,6 @@ export const Duration = {
   },
   toAmino(message: Duration): DurationAmino {
     return (message.seconds * BigInt("1000000000") + BigInt(message.nanos)).toString();
-  },
-  fromAminoMsg(object: DurationAminoMsg): Duration {
-    return Duration.fromAmino(object.value);
   },
   fromProtoMsg(message: DurationProtoMsg): Duration {
     return Duration.decode(message.value);

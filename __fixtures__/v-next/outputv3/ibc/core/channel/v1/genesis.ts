@@ -30,10 +30,6 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated channel identifier */
   next_channel_sequence: string;
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisStateSDKType {
   channels: IdentifiedChannelSDKType[];
@@ -66,10 +62,6 @@ export interface PacketSequenceAmino {
   port_id: string;
   channel_id: string;
   sequence: string;
-}
-export interface PacketSequenceAminoMsg {
-  type: "cosmos-sdk/PacketSequence";
-  value: PacketSequenceAmino;
 }
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
@@ -330,15 +322,6 @@ export const GenesisState = {
     obj.next_channel_sequence = message.nextChannelSequence ? message.nextChannelSequence.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -447,15 +430,6 @@ export const PacketSequence = {
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: PacketSequenceAminoMsg): PacketSequence {
-    return PacketSequence.fromAmino(object.value);
-  },
-  toAminoMsg(message: PacketSequence): PacketSequenceAminoMsg {
-    return {
-      type: "cosmos-sdk/PacketSequence",
-      value: PacketSequence.toAmino(message)
-    };
   },
   fromProtoMsg(message: PacketSequenceProtoMsg): PacketSequence {
     return PacketSequence.decode(message.value);

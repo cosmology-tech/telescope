@@ -15,10 +15,6 @@ export interface MetricValue_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface MetricValue_LabelsEntryAminoMsg {
-  type: string;
-  value: MetricValue_LabelsEntryAmino;
-}
 export interface MetricValue_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -99,10 +95,6 @@ export interface MetricValueAmino {
   /** A distribution value. */
   distribution_value?: DistributionAmino;
 }
-export interface MetricValueAminoMsg {
-  type: "/google.api.servicecontrol.v1.MetricValue";
-  value: MetricValueAmino;
-}
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
   labels: {
@@ -141,10 +133,6 @@ export interface MetricValueSetAmino {
   metric_name: string;
   /** The values in this metric. */
   metric_values: MetricValueAmino[];
-}
-export interface MetricValueSetAminoMsg {
-  type: "/google.api.servicecontrol.v1.MetricValueSet";
-  value: MetricValueSetAmino;
 }
 /**
  * Represents a set of metric values in the same metric.
@@ -232,9 +220,6 @@ export const MetricValue_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
-    return MetricValue_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg): MetricValue_LabelsEntry {
     return MetricValue_LabelsEntry.decode(message.value);
@@ -455,9 +440,6 @@ export const MetricValue = {
     obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MetricValueAminoMsg): MetricValue {
-    return MetricValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricValueProtoMsg): MetricValue {
     return MetricValue.decode(message.value);
   },
@@ -561,9 +543,6 @@ export const MetricValueSet = {
       obj.metric_values = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: MetricValueSetAminoMsg): MetricValueSet {
-    return MetricValueSet.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricValueSetProtoMsg): MetricValueSet {
     return MetricValueSet.decode(message.value);

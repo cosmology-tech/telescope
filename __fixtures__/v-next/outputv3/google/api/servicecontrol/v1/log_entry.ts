@@ -18,10 +18,6 @@ export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface LogEntry_LabelsEntryAminoMsg {
-  type: string;
-  value: LogEntry_LabelsEntryAmino;
-}
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -160,10 +156,6 @@ export interface LogEntryAmino {
    */
   source_location?: LogEntrySourceLocationAmino;
 }
-export interface LogEntryAminoMsg {
-  type: "/google.api.servicecontrol.v1.LogEntry";
-  value: LogEntryAmino;
-}
 /** An individual log entry. */
 export interface LogEntrySDKType {
   name: string;
@@ -226,10 +218,6 @@ export interface LogEntryOperationAmino {
   first: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
-}
-export interface LogEntryOperationAminoMsg {
-  type: "/google.api.servicecontrol.v1.LogEntryOperation";
-  value: LogEntryOperationAmino;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -294,10 +282,6 @@ export interface LogEntrySourceLocationAmino {
    * (Python).
    */
   function: string;
-}
-export interface LogEntrySourceLocationAminoMsg {
-  type: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
-  value: LogEntrySourceLocationAmino;
 }
 /**
  * Additional information about the source code location that produced the log
@@ -385,9 +369,6 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
-    return LogEntry_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
     return LogEntry_LabelsEntry.decode(message.value);
@@ -668,9 +649,6 @@ export const LogEntry = {
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
     return obj;
   },
-  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
-    return LogEntry.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
     return LogEntry.decode(message.value);
   },
@@ -791,9 +769,6 @@ export const LogEntryOperation = {
     obj.last = message.last;
     return obj;
   },
-  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
-    return LogEntryOperation.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
     return LogEntryOperation.decode(message.value);
   },
@@ -901,9 +876,6 @@ export const LogEntrySourceLocation = {
     obj.line = message.line ? message.line.toString() : undefined;
     obj.function = message.function;
     return obj;
-  },
-  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
-    return LogEntrySourceLocation.fromAmino(object.value);
   },
   fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
     return LogEntrySourceLocation.decode(message.value);

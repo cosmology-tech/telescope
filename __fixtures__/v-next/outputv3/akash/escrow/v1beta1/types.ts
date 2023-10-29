@@ -114,10 +114,6 @@ export interface AccountIDAmino {
   scope: string;
   xid: string;
 }
-export interface AccountIDAminoMsg {
-  type: "/akash.escrow.v1beta1.AccountID";
-  value: AccountIDAmino;
-}
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
@@ -157,10 +153,6 @@ export interface AccountAmino {
   /** block height at which this account was last settled */
   settled_at: string;
 }
-export interface AccountAminoMsg {
-  type: "/akash.escrow.v1beta1.Account";
-  value: AccountAmino;
-}
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
@@ -193,10 +185,6 @@ export interface PaymentAmino {
   rate?: CoinAmino;
   balance?: CoinAmino;
   withdrawn?: CoinAmino;
-}
-export interface PaymentAminoMsg {
-  type: "/akash.escrow.v1beta1.Payment";
-  value: PaymentAmino;
 }
 /** Payment stores state for a payment */
 export interface PaymentSDKType {
@@ -286,9 +274,6 @@ export const AccountID = {
     obj.scope = message.scope;
     obj.xid = message.xid;
     return obj;
-  },
-  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
-    return AccountID.fromAmino(object.value);
   },
   fromProtoMsg(message: AccountIDProtoMsg): AccountID {
     return AccountID.decode(message.value);
@@ -445,9 +430,6 @@ export const Account = {
     obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
     obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: AccountAminoMsg): Account {
-    return Account.fromAmino(object.value);
   },
   fromProtoMsg(message: AccountProtoMsg): Account {
     return Account.decode(message.value);
@@ -618,9 +600,6 @@ export const Payment = {
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: PaymentAminoMsg): Payment {
-    return Payment.fromAmino(object.value);
   },
   fromProtoMsg(message: PaymentProtoMsg): Payment {
     return Payment.decode(message.value);

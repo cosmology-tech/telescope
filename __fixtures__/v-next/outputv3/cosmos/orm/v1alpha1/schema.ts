@@ -108,10 +108,6 @@ export interface ModuleSchemaDescriptorAmino {
    */
   prefix: Uint8Array;
 }
-export interface ModuleSchemaDescriptorAminoMsg {
-  type: "cosmos-sdk/ModuleSchemaDescriptor";
-  value: ModuleSchemaDescriptorAmino;
-}
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorSDKType {
   schema_file: ModuleSchemaDescriptor_FileEntrySDKType[];
@@ -160,10 +156,6 @@ export interface ModuleSchemaDescriptor_FileEntryAmino {
    * of the app will be used.
    */
   storage_type: StorageType;
-}
-export interface ModuleSchemaDescriptor_FileEntryAminoMsg {
-  type: "cosmos-sdk/FileEntry";
-  value: ModuleSchemaDescriptor_FileEntryAmino;
 }
 /** FileEntry describes an ORM file used in a module. */
 export interface ModuleSchemaDescriptor_FileEntrySDKType {
@@ -262,15 +254,6 @@ export const ModuleSchemaDescriptor = {
     }
     obj.prefix = message.prefix;
     return obj;
-  },
-  fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {
-    return ModuleSchemaDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/ModuleSchemaDescriptor",
-      value: ModuleSchemaDescriptor.toAmino(message)
-    };
   },
   fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg): ModuleSchemaDescriptor {
     return ModuleSchemaDescriptor.decode(message.value);
@@ -378,15 +361,6 @@ export const ModuleSchemaDescriptor_FileEntry = {
     obj.proto_file_name = message.protoFileName;
     obj.storage_type = message.storageType;
     return obj;
-  },
-  fromAminoMsg(object: ModuleSchemaDescriptor_FileEntryAminoMsg): ModuleSchemaDescriptor_FileEntry {
-    return ModuleSchemaDescriptor_FileEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/FileEntry",
-      value: ModuleSchemaDescriptor_FileEntry.toAmino(message)
-    };
   },
   fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg): ModuleSchemaDescriptor_FileEntry {
     return ModuleSchemaDescriptor_FileEntry.decode(message.value);

@@ -27,10 +27,6 @@ export interface ResourceUnitsAmino {
   storage: StorageAmino[];
   endpoints: EndpointAmino[];
 }
-export interface ResourceUnitsAminoMsg {
-  type: "/akash.base.v1beta2.ResourceUnits";
-  value: ResourceUnitsAmino;
-}
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
@@ -175,9 +171,6 @@ export const ResourceUnits = {
       obj.endpoints = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
-    return ResourceUnits.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
     return ResourceUnits.decode(message.value);

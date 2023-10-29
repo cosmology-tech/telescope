@@ -25,10 +25,6 @@ export interface CoinAmino {
   denom: string;
   amount: string;
 }
-export interface CoinAminoMsg {
-  type: "cosmos-sdk/Coin";
-  value: CoinAmino;
-}
 /**
  * Coin defines a token with a denomination and an amount.
  * 
@@ -63,10 +59,6 @@ export interface DecCoinAmino {
   denom: string;
   amount: string;
 }
-export interface DecCoinAminoMsg {
-  type: "cosmos-sdk/DecCoin";
-  value: DecCoinAmino;
-}
 /**
  * DecCoin defines a token with a denomination and a decimal amount.
  * 
@@ -89,10 +81,6 @@ export interface IntProtoProtoMsg {
 export interface IntProtoAmino {
   int: string;
 }
-export interface IntProtoAminoMsg {
-  type: "cosmos-sdk/IntProto";
-  value: IntProtoAmino;
-}
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
   int: string;
@@ -108,10 +96,6 @@ export interface DecProtoProtoMsg {
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
   dec: string;
-}
-export interface DecProtoAminoMsg {
-  type: "cosmos-sdk/DecProto";
-  value: DecProtoAmino;
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoSDKType {
@@ -196,15 +180,6 @@ export const Coin = {
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
-  },
-  fromAminoMsg(object: CoinAminoMsg): Coin {
-    return Coin.fromAmino(object.value);
-  },
-  toAminoMsg(message: Coin): CoinAminoMsg {
-    return {
-      type: "cosmos-sdk/Coin",
-      value: Coin.toAmino(message)
-    };
   },
   fromProtoMsg(message: CoinProtoMsg): Coin {
     return Coin.decode(message.value);
@@ -299,15 +274,6 @@ export const DecCoin = {
     obj.amount = message.amount;
     return obj;
   },
-  fromAminoMsg(object: DecCoinAminoMsg): DecCoin {
-    return DecCoin.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecCoin): DecCoinAminoMsg {
-    return {
-      type: "cosmos-sdk/DecCoin",
-      value: DecCoin.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DecCoinProtoMsg): DecCoin {
     return DecCoin.decode(message.value);
   },
@@ -387,15 +353,6 @@ export const IntProto = {
     obj.int = message.int;
     return obj;
   },
-  fromAminoMsg(object: IntProtoAminoMsg): IntProto {
-    return IntProto.fromAmino(object.value);
-  },
-  toAminoMsg(message: IntProto): IntProtoAminoMsg {
-    return {
-      type: "cosmos-sdk/IntProto",
-      value: IntProto.toAmino(message)
-    };
-  },
   fromProtoMsg(message: IntProtoProtoMsg): IntProto {
     return IntProto.decode(message.value);
   },
@@ -474,15 +431,6 @@ export const DecProto = {
     const obj: any = {};
     obj.dec = message.dec;
     return obj;
-  },
-  fromAminoMsg(object: DecProtoAminoMsg): DecProto {
-    return DecProto.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecProto): DecProtoAminoMsg {
-    return {
-      type: "cosmos-sdk/DecProto",
-      value: DecProto.toAmino(message)
-    };
   },
   fromProtoMsg(message: DecProtoProtoMsg): DecProto {
     return DecProto.decode(message.value);

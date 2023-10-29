@@ -19,10 +19,6 @@ export interface GroupSpecAmino {
   requirements?: PlacementRequirementsAmino;
   resources: ResourceAmino[];
 }
-export interface GroupSpecAminoMsg {
-  type: "/akash.deployment.v1beta2.GroupSpec";
-  value: GroupSpecAmino;
-}
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
@@ -135,9 +131,6 @@ export const GroupSpec = {
       obj.resources = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
-    return GroupSpec.fromAmino(object.value);
   },
   fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
     return GroupSpec.decode(message.value);

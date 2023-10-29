@@ -34,10 +34,6 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated client identifier */
   next_client_sequence: string;
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateSDKType {
   clients: IdentifiedClientStateSDKType[];
@@ -71,10 +67,6 @@ export interface GenesisMetadataAmino {
   /** metadata value */
   value: Uint8Array;
 }
-export interface GenesisMetadataAminoMsg {
-  type: "cosmos-sdk/GenesisMetadata";
-  value: GenesisMetadataAmino;
-}
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
  * with ExportMetadata
@@ -102,10 +94,6 @@ export interface IdentifiedGenesisMetadataProtoMsg {
 export interface IdentifiedGenesisMetadataAmino {
   client_id: string;
   client_metadata: GenesisMetadataAmino[];
-}
-export interface IdentifiedGenesisMetadataAminoMsg {
-  type: "cosmos-sdk/IdentifiedGenesisMetadata";
-  value: IdentifiedGenesisMetadataAmino;
 }
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
@@ -291,15 +279,6 @@ export const GenesisState = {
     obj.next_client_sequence = message.nextClientSequence ? message.nextClientSequence.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -392,15 +371,6 @@ export const GenesisMetadata = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {
-    return GenesisMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisMetadata): GenesisMetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisMetadata",
-      value: GenesisMetadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisMetadataProtoMsg): GenesisMetadata {
     return GenesisMetadata.decode(message.value);
@@ -506,15 +476,6 @@ export const IdentifiedGenesisMetadata = {
       obj.client_metadata = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: IdentifiedGenesisMetadataAminoMsg): IdentifiedGenesisMetadata {
-    return IdentifiedGenesisMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/IdentifiedGenesisMetadata",
-      value: IdentifiedGenesisMetadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg): IdentifiedGenesisMetadata {
     return IdentifiedGenesisMetadata.decode(message.value);

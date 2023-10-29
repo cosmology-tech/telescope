@@ -49,10 +49,6 @@ export interface ClawbackVestingAccountAmino {
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vesting_periods: PeriodAmino[];
 }
-export interface ClawbackVestingAccountAminoMsg {
-  type: "/evmos.vesting.v1.ClawbackVestingAccount";
-  value: ClawbackVestingAccountAmino;
-}
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
  * an account that can hold contributions subject to "lockup" (like a
@@ -212,9 +208,6 @@ export const ClawbackVestingAccount = {
       obj.vesting_periods = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ClawbackVestingAccountAminoMsg): ClawbackVestingAccount {
-    return ClawbackVestingAccount.fromAmino(object.value);
   },
   fromProtoMsg(message: ClawbackVestingAccountProtoMsg): ClawbackVestingAccount {
     return ClawbackVestingAccount.decode(message.value);

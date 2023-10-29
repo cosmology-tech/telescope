@@ -19,10 +19,6 @@ export interface MsgSendAmino {
   to_address: string;
   amount: CoinAmino[];
 }
-export interface MsgSendAminoMsg {
-  type: "cosmos-sdk/MsgSend";
-  value: MsgSendAmino;
-}
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendSDKType {
   from_address: string;
@@ -37,10 +33,6 @@ export interface MsgSendResponseProtoMsg {
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
-export interface MsgSendResponseAminoMsg {
-  type: "cosmos-sdk/MsgSendResponse";
-  value: MsgSendResponseAmino;
-}
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
@@ -57,10 +49,6 @@ export interface MsgMultiSendAmino {
   inputs: InputAmino[];
   outputs: OutputAmino[];
 }
-export interface MsgMultiSendAminoMsg {
-  type: "cosmos-sdk/MsgMultiSend";
-  value: MsgMultiSendAmino;
-}
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendSDKType {
   inputs: InputSDKType[];
@@ -74,10 +62,6 @@ export interface MsgMultiSendResponseProtoMsg {
 }
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseAmino {}
-export interface MsgMultiSendResponseAminoMsg {
-  type: "cosmos-sdk/MsgMultiSendResponse";
-  value: MsgMultiSendResponseAmino;
-}
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
@@ -186,15 +170,6 @@ export const MsgSend = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
-    return MsgSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSend",
-      value: MsgSend.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
     return MsgSend.decode(message.value);
   },
@@ -256,15 +231,6 @@ export const MsgSendResponse = {
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
-    return MsgSendResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSendResponse",
-      value: MsgSendResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
     return MsgSendResponse.decode(message.value);
@@ -383,15 +349,6 @@ export const MsgMultiSend = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgMultiSendAminoMsg): MsgMultiSend {
-    return MsgMultiSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMultiSend): MsgMultiSendAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgMultiSend",
-      value: MsgMultiSend.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgMultiSendProtoMsg): MsgMultiSend {
     return MsgMultiSend.decode(message.value);
   },
@@ -453,15 +410,6 @@ export const MsgMultiSendResponse = {
   toAmino(_: MsgMultiSendResponse): MsgMultiSendResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgMultiSendResponseAminoMsg): MsgMultiSendResponse {
-    return MsgMultiSendResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMultiSendResponse): MsgMultiSendResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgMultiSendResponse",
-      value: MsgMultiSendResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgMultiSendResponseProtoMsg): MsgMultiSendResponse {
     return MsgMultiSendResponse.decode(message.value);

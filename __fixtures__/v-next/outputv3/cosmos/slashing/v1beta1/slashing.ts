@@ -61,10 +61,6 @@ export interface ValidatorSigningInfoAmino {
    */
   missed_blocks_counter: string;
 }
-export interface ValidatorSigningInfoAminoMsg {
-  type: "cosmos-sdk/ValidatorSigningInfo";
-  value: ValidatorSigningInfoAmino;
-}
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
@@ -96,10 +92,6 @@ export interface ParamsAmino {
   downtime_jail_duration?: DurationAmino;
   slash_fraction_double_sign: Uint8Array;
   slash_fraction_downtime: Uint8Array;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface ParamsSDKType {
@@ -251,15 +243,6 @@ export const ValidatorSigningInfo = {
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValidatorSigningInfoAminoMsg): ValidatorSigningInfo {
-    return ValidatorSigningInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorSigningInfo): ValidatorSigningInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorSigningInfo",
-      value: ValidatorSigningInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ValidatorSigningInfoProtoMsg): ValidatorSigningInfo {
     return ValidatorSigningInfo.decode(message.value);
   },
@@ -398,15 +381,6 @@ export const Params = {
     obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
     obj.slash_fraction_downtime = message.slashFractionDowntime;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

@@ -62,10 +62,6 @@ export interface GenesisStateAmino {
   /** votes is the list of votes. */
   votes: VoteAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisStateSDKType {
   group_seq: bigint;
@@ -306,15 +302,6 @@ export const GenesisState = {
       obj.votes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

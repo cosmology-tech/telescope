@@ -13,10 +13,6 @@ export interface BitArrayAmino {
   bits: string;
   elems: string[];
 }
-export interface BitArrayAminoMsg {
-  type: "/tendermint.libs.bits.BitArray";
-  value: BitArrayAmino;
-}
 export interface BitArraySDKType {
   bits: bigint;
   elems: bigint[];
@@ -122,9 +118,6 @@ export const BitArray = {
       obj.elems = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BitArrayAminoMsg): BitArray {
-    return BitArray.fromAmino(object.value);
   },
   fromProtoMsg(message: BitArrayProtoMsg): BitArray {
     return BitArray.decode(message.value);

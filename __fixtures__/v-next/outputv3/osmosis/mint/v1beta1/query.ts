@@ -10,10 +10,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "osmosis/mint/query-params-request";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -29,10 +25,6 @@ export interface QueryParamsResponseProtoMsg {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "osmosis/mint/query-params-response";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -52,10 +44,6 @@ export interface QueryEpochProvisionsRequestProtoMsg {
  * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsRequestAmino {}
-export interface QueryEpochProvisionsRequestAminoMsg {
-  type: "osmosis/mint/query-epoch-provisions-request";
-  value: QueryEpochProvisionsRequestAmino;
-}
 /**
  * QueryEpochProvisionsRequest is the request type for the
  * Query/EpochProvisions RPC method.
@@ -80,10 +68,6 @@ export interface QueryEpochProvisionsResponseProtoMsg {
 export interface QueryEpochProvisionsResponseAmino {
   /** epoch_provisions is the current minting per epoch provisions value. */
   epoch_provisions: Uint8Array;
-}
-export interface QueryEpochProvisionsResponseAminoMsg {
-  type: "osmosis/mint/query-epoch-provisions-response";
-  value: QueryEpochProvisionsResponseAmino;
 }
 /**
  * QueryEpochProvisionsResponse is the response type for the
@@ -140,15 +124,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "osmosis/mint/query-params-request",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -231,15 +206,6 @@ export const QueryParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "osmosis/mint/query-params-response",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -301,15 +267,6 @@ export const QueryEpochProvisionsRequest = {
   toAmino(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryEpochProvisionsRequestAminoMsg): QueryEpochProvisionsRequest {
-    return QueryEpochProvisionsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestAminoMsg {
-    return {
-      type: "osmosis/mint/query-epoch-provisions-request",
-      value: QueryEpochProvisionsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryEpochProvisionsRequestProtoMsg): QueryEpochProvisionsRequest {
     return QueryEpochProvisionsRequest.decode(message.value);
@@ -389,15 +346,6 @@ export const QueryEpochProvisionsResponse = {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
-  },
-  fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {
-    return QueryEpochProvisionsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAminoMsg {
-    return {
-      type: "osmosis/mint/query-epoch-provisions-response",
-      value: QueryEpochProvisionsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryEpochProvisionsResponseProtoMsg): QueryEpochProvisionsResponse {
     return QueryEpochProvisionsResponse.decode(message.value);

@@ -134,10 +134,6 @@ export interface ClientStateAmino {
    */
   allow_update_after_proposal: boolean;
 }
-export interface ClientStateAminoMsg {
-  type: "cosmos-sdk/ClientState";
-  value: ClientStateAmino;
-}
 /**
  * ClientState defines a solo machine client that tracks the current consensus
  * state and if the client is frozen.
@@ -184,10 +180,6 @@ export interface ConsensusStateAmino {
   diversifier: string;
   timestamp: string;
 }
-export interface ConsensusStateAminoMsg {
-  type: "cosmos-sdk/ConsensusState";
-  value: ConsensusStateAmino;
-}
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
  * consensus state is contained in the "height" key used in storing the
@@ -220,10 +212,6 @@ export interface HeaderAmino {
   new_public_key?: AnyAmino;
   new_diversifier: string;
 }
-export interface HeaderAminoMsg {
-  type: "cosmos-sdk/Header";
-  value: HeaderAmino;
-}
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
   sequence: bigint;
@@ -255,10 +243,6 @@ export interface MisbehaviourAmino {
   sequence: string;
   signature_one?: SignatureAndDataAmino;
   signature_two?: SignatureAndDataAmino;
-}
-export interface MisbehaviourAminoMsg {
-  type: "cosmos-sdk/Misbehaviour";
-  value: MisbehaviourAmino;
 }
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
@@ -294,10 +278,6 @@ export interface SignatureAndDataAmino {
   data: Uint8Array;
   timestamp: string;
 }
-export interface SignatureAndDataAminoMsg {
-  type: "cosmos-sdk/SignatureAndData";
-  value: SignatureAndDataAmino;
-}
 /**
  * SignatureAndData contains a signature and the data signed over to create that
  * signature.
@@ -327,10 +307,6 @@ export interface TimestampedSignatureDataProtoMsg {
 export interface TimestampedSignatureDataAmino {
   signature_data: Uint8Array;
   timestamp: string;
-}
-export interface TimestampedSignatureDataAminoMsg {
-  type: "cosmos-sdk/TimestampedSignatureData";
-  value: TimestampedSignatureDataAmino;
 }
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
@@ -364,10 +340,6 @@ export interface SignBytesAmino {
   /** marshaled data */
   data: Uint8Array;
 }
-export interface SignBytesAminoMsg {
-  type: "cosmos-sdk/SignBytes";
-  value: SignBytesAmino;
-}
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesSDKType {
   sequence: bigint;
@@ -394,10 +366,6 @@ export interface HeaderDataAmino {
   /** header diversifier */
   new_diversifier: string;
 }
-export interface HeaderDataAminoMsg {
-  type: "cosmos-sdk/HeaderData";
-  value: HeaderDataAmino;
-}
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
   new_pub_key?: AnySDKType;
@@ -416,10 +384,6 @@ export interface ClientStateDataProtoMsg {
 export interface ClientStateDataAmino {
   path: Uint8Array;
   client_state?: AnyAmino;
-}
-export interface ClientStateDataAminoMsg {
-  type: "cosmos-sdk/ClientStateData";
-  value: ClientStateDataAmino;
 }
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataSDKType {
@@ -445,10 +409,6 @@ export interface ConsensusStateDataProtoMsg {
 export interface ConsensusStateDataAmino {
   path: Uint8Array;
   consensus_state?: AnyAmino;
-}
-export interface ConsensusStateDataAminoMsg {
-  type: "cosmos-sdk/ConsensusStateData";
-  value: ConsensusStateDataAmino;
 }
 /**
  * ConsensusStateData returns the SignBytes data for consensus state
@@ -478,10 +438,6 @@ export interface ConnectionStateDataAmino {
   path: Uint8Array;
   connection?: ConnectionEndAmino;
 }
-export interface ConnectionStateDataAminoMsg {
-  type: "cosmos-sdk/ConnectionStateData";
-  value: ConnectionStateDataAmino;
-}
 /**
  * ConnectionStateData returns the SignBytes data for connection state
  * verification.
@@ -509,10 +465,6 @@ export interface ChannelStateDataProtoMsg {
 export interface ChannelStateDataAmino {
   path: Uint8Array;
   channel?: ChannelAmino;
-}
-export interface ChannelStateDataAminoMsg {
-  type: "cosmos-sdk/ChannelStateData";
-  value: ChannelStateDataAmino;
 }
 /**
  * ChannelStateData returns the SignBytes data for channel state
@@ -542,10 +494,6 @@ export interface PacketCommitmentDataAmino {
   path: Uint8Array;
   commitment: Uint8Array;
 }
-export interface PacketCommitmentDataAminoMsg {
-  type: "cosmos-sdk/PacketCommitmentData";
-  value: PacketCommitmentDataAmino;
-}
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
  * verification.
@@ -574,10 +522,6 @@ export interface PacketAcknowledgementDataAmino {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
-export interface PacketAcknowledgementDataAminoMsg {
-  type: "cosmos-sdk/PacketAcknowledgementData";
-  value: PacketAcknowledgementDataAmino;
-}
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
  * verification.
@@ -603,10 +547,6 @@ export interface PacketReceiptAbsenceDataProtoMsg {
  */
 export interface PacketReceiptAbsenceDataAmino {
   path: Uint8Array;
-}
-export interface PacketReceiptAbsenceDataAminoMsg {
-  type: "cosmos-sdk/PacketReceiptAbsenceData";
-  value: PacketReceiptAbsenceDataAmino;
 }
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
@@ -634,10 +574,6 @@ export interface NextSequenceRecvDataProtoMsg {
 export interface NextSequenceRecvDataAmino {
   path: Uint8Array;
   next_seq_recv: string;
-}
-export interface NextSequenceRecvDataAminoMsg {
-  type: "cosmos-sdk/NextSequenceRecvData";
-  value: NextSequenceRecvDataAmino;
 }
 /**
  * NextSequenceRecvData returns the SignBytes data for verification of the next
@@ -761,15 +697,6 @@ export const ClientState = {
     obj.allow_update_after_proposal = message.allowUpdateAfterProposal;
     return obj;
   },
-  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
-    return ClientState.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientState): ClientStateAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ClientStateProtoMsg): ClientState {
     return ClientState.decode(message.value);
   },
@@ -880,15 +807,6 @@ export const ConsensusState = {
     obj.diversifier = message.diversifier;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
-    return ConsensusState.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConsensusState): ConsensusStateAminoMsg {
-    return {
-      type: "cosmos-sdk/ConsensusState",
-      value: ConsensusState.toAmino(message)
-    };
   },
   fromProtoMsg(message: ConsensusStateProtoMsg): ConsensusState {
     return ConsensusState.decode(message.value);
@@ -1031,15 +949,6 @@ export const Header = {
     obj.new_diversifier = message.newDiversifier;
     return obj;
   },
-  fromAminoMsg(object: HeaderAminoMsg): Header {
-    return Header.fromAmino(object.value);
-  },
-  toAminoMsg(message: Header): HeaderAminoMsg {
-    return {
-      type: "cosmos-sdk/Header",
-      value: Header.toAmino(message)
-    };
-  },
   fromProtoMsg(message: HeaderProtoMsg): Header {
     return Header.decode(message.value);
   },
@@ -1167,15 +1076,6 @@ export const Misbehaviour = {
     obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MisbehaviourAminoMsg): Misbehaviour {
-    return Misbehaviour.fromAmino(object.value);
-  },
-  toAminoMsg(message: Misbehaviour): MisbehaviourAminoMsg {
-    return {
-      type: "cosmos-sdk/Misbehaviour",
-      value: Misbehaviour.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MisbehaviourProtoMsg): Misbehaviour {
     return Misbehaviour.decode(message.value);
   },
@@ -1299,15 +1199,6 @@ export const SignatureAndData = {
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: SignatureAndDataAminoMsg): SignatureAndData {
-    return SignatureAndData.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureAndData): SignatureAndDataAminoMsg {
-    return {
-      type: "cosmos-sdk/SignatureAndData",
-      value: SignatureAndData.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SignatureAndDataProtoMsg): SignatureAndData {
     return SignatureAndData.decode(message.value);
   },
@@ -1402,15 +1293,6 @@ export const TimestampedSignatureData = {
     obj.signature_data = message.signatureData;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: TimestampedSignatureDataAminoMsg): TimestampedSignatureData {
-    return TimestampedSignatureData.fromAmino(object.value);
-  },
-  toAminoMsg(message: TimestampedSignatureData): TimestampedSignatureDataAminoMsg {
-    return {
-      type: "cosmos-sdk/TimestampedSignatureData",
-      value: TimestampedSignatureData.toAmino(message)
-    };
   },
   fromProtoMsg(message: TimestampedSignatureDataProtoMsg): TimestampedSignatureData {
     return TimestampedSignatureData.decode(message.value);
@@ -1551,15 +1433,6 @@ export const SignBytes = {
     obj.data = message.data;
     return obj;
   },
-  fromAminoMsg(object: SignBytesAminoMsg): SignBytes {
-    return SignBytes.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignBytes): SignBytesAminoMsg {
-    return {
-      type: "cosmos-sdk/SignBytes",
-      value: SignBytes.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SignBytesProtoMsg): SignBytes {
     return SignBytes.decode(message.value);
   },
@@ -1654,15 +1527,6 @@ export const HeaderData = {
     obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
-  },
-  fromAminoMsg(object: HeaderDataAminoMsg): HeaderData {
-    return HeaderData.fromAmino(object.value);
-  },
-  toAminoMsg(message: HeaderData): HeaderDataAminoMsg {
-    return {
-      type: "cosmos-sdk/HeaderData",
-      value: HeaderData.toAmino(message)
-    };
   },
   fromProtoMsg(message: HeaderDataProtoMsg): HeaderData {
     return HeaderData.decode(message.value);
@@ -1759,15 +1623,6 @@ export const ClientStateData = {
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ClientStateDataAminoMsg): ClientStateData {
-    return ClientStateData.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientStateData): ClientStateDataAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientStateData",
-      value: ClientStateData.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ClientStateDataProtoMsg): ClientStateData {
     return ClientStateData.decode(message.value);
   },
@@ -1862,15 +1717,6 @@ export const ConsensusStateData = {
     obj.path = message.path;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ConsensusStateDataAminoMsg): ConsensusStateData {
-    return ConsensusStateData.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConsensusStateData): ConsensusStateDataAminoMsg {
-    return {
-      type: "cosmos-sdk/ConsensusStateData",
-      value: ConsensusStateData.toAmino(message)
-    };
   },
   fromProtoMsg(message: ConsensusStateDataProtoMsg): ConsensusStateData {
     return ConsensusStateData.decode(message.value);
@@ -1967,15 +1813,6 @@ export const ConnectionStateData = {
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ConnectionStateDataAminoMsg): ConnectionStateData {
-    return ConnectionStateData.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConnectionStateData): ConnectionStateDataAminoMsg {
-    return {
-      type: "cosmos-sdk/ConnectionStateData",
-      value: ConnectionStateData.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ConnectionStateDataProtoMsg): ConnectionStateData {
     return ConnectionStateData.decode(message.value);
   },
@@ -2071,15 +1908,6 @@ export const ChannelStateData = {
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ChannelStateDataAminoMsg): ChannelStateData {
-    return ChannelStateData.fromAmino(object.value);
-  },
-  toAminoMsg(message: ChannelStateData): ChannelStateDataAminoMsg {
-    return {
-      type: "cosmos-sdk/ChannelStateData",
-      value: ChannelStateData.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ChannelStateDataProtoMsg): ChannelStateData {
     return ChannelStateData.decode(message.value);
   },
@@ -2172,15 +2000,6 @@ export const PacketCommitmentData = {
     obj.path = message.path;
     obj.commitment = message.commitment;
     return obj;
-  },
-  fromAminoMsg(object: PacketCommitmentDataAminoMsg): PacketCommitmentData {
-    return PacketCommitmentData.fromAmino(object.value);
-  },
-  toAminoMsg(message: PacketCommitmentData): PacketCommitmentDataAminoMsg {
-    return {
-      type: "cosmos-sdk/PacketCommitmentData",
-      value: PacketCommitmentData.toAmino(message)
-    };
   },
   fromProtoMsg(message: PacketCommitmentDataProtoMsg): PacketCommitmentData {
     return PacketCommitmentData.decode(message.value);
@@ -2275,15 +2094,6 @@ export const PacketAcknowledgementData = {
     obj.acknowledgement = message.acknowledgement;
     return obj;
   },
-  fromAminoMsg(object: PacketAcknowledgementDataAminoMsg): PacketAcknowledgementData {
-    return PacketAcknowledgementData.fromAmino(object.value);
-  },
-  toAminoMsg(message: PacketAcknowledgementData): PacketAcknowledgementDataAminoMsg {
-    return {
-      type: "cosmos-sdk/PacketAcknowledgementData",
-      value: PacketAcknowledgementData.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PacketAcknowledgementDataProtoMsg): PacketAcknowledgementData {
     return PacketAcknowledgementData.decode(message.value);
   },
@@ -2362,15 +2172,6 @@ export const PacketReceiptAbsenceData = {
     const obj: any = {};
     obj.path = message.path;
     return obj;
-  },
-  fromAminoMsg(object: PacketReceiptAbsenceDataAminoMsg): PacketReceiptAbsenceData {
-    return PacketReceiptAbsenceData.fromAmino(object.value);
-  },
-  toAminoMsg(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataAminoMsg {
-    return {
-      type: "cosmos-sdk/PacketReceiptAbsenceData",
-      value: PacketReceiptAbsenceData.toAmino(message)
-    };
   },
   fromProtoMsg(message: PacketReceiptAbsenceDataProtoMsg): PacketReceiptAbsenceData {
     return PacketReceiptAbsenceData.decode(message.value);
@@ -2466,15 +2267,6 @@ export const NextSequenceRecvData = {
     obj.path = message.path;
     obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: NextSequenceRecvDataAminoMsg): NextSequenceRecvData {
-    return NextSequenceRecvData.fromAmino(object.value);
-  },
-  toAminoMsg(message: NextSequenceRecvData): NextSequenceRecvDataAminoMsg {
-    return {
-      type: "cosmos-sdk/NextSequenceRecvData",
-      value: NextSequenceRecvData.toAmino(message)
-    };
   },
   fromProtoMsg(message: NextSequenceRecvDataProtoMsg): NextSequenceRecvData {
     return NextSequenceRecvData.decode(message.value);

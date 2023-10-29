@@ -48,10 +48,6 @@ export interface GenesisStateAmino {
    */
   last_gauge_id: string;
 }
-export interface GenesisStateAminoMsg {
-  type: "osmosis/incentives/genesis-state";
-  value: GenesisStateAmino;
-}
 /**
  * GenesisState defines the incentives module's various parameters when first
  * initialized
@@ -197,15 +193,6 @@ export const GenesisState = {
     }
     obj.last_gauge_id = message.lastGaugeId ? message.lastGaugeId.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/incentives/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

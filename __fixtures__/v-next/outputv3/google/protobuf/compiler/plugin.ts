@@ -28,10 +28,6 @@ export interface VersionAmino {
    */
   suffix: string;
 }
-export interface VersionAminoMsg {
-  type: "/google.protobuf.compiler.Version";
-  value: VersionAmino;
-}
 /** The version number of protocol compiler. */
 export interface VersionSDKType {
   major: number;
@@ -103,10 +99,6 @@ export interface CodeGeneratorRequestAmino {
   /** The version number of protocol compiler. */
   compiler_version?: VersionAmino;
 }
-export interface CodeGeneratorRequestAminoMsg {
-  type: "/google.protobuf.compiler.CodeGeneratorRequest";
-  value: CodeGeneratorRequestAmino;
-}
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestSDKType {
   file_to_generate: string[];
@@ -147,10 +139,6 @@ export interface CodeGeneratorResponseAmino {
    */
   error: string;
   file: CodeGeneratorResponse_FileAmino[];
-}
-export interface CodeGeneratorResponseAminoMsg {
-  type: "/google.protobuf.compiler.CodeGeneratorResponse";
-  value: CodeGeneratorResponseAmino;
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseSDKType {
@@ -279,10 +267,6 @@ export interface CodeGeneratorResponse_FileAmino {
   /** The file contents. */
   content: string;
 }
-export interface CodeGeneratorResponse_FileAminoMsg {
-  type: "/google.protobuf.compiler.File";
-  value: CodeGeneratorResponse_FileAmino;
-}
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_FileSDKType {
   name: string;
@@ -395,9 +379,6 @@ export const Version = {
     obj.patch = message.patch;
     obj.suffix = message.suffix;
     return obj;
-  },
-  fromAminoMsg(object: VersionAminoMsg): Version {
-    return Version.fromAmino(object.value);
   },
   fromProtoMsg(message: VersionProtoMsg): Version {
     return Version.decode(message.value);
@@ -545,9 +526,6 @@ export const CodeGeneratorRequest = {
     obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CodeGeneratorRequestAminoMsg): CodeGeneratorRequest {
-    return CodeGeneratorRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CodeGeneratorRequestProtoMsg): CodeGeneratorRequest {
     return CodeGeneratorRequest.decode(message.value);
   },
@@ -651,9 +629,6 @@ export const CodeGeneratorResponse = {
       obj.file = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: CodeGeneratorResponseAminoMsg): CodeGeneratorResponse {
-    return CodeGeneratorResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: CodeGeneratorResponseProtoMsg): CodeGeneratorResponse {
     return CodeGeneratorResponse.decode(message.value);
@@ -760,9 +735,6 @@ export const CodeGeneratorResponse_File = {
     obj.insertion_point = message.insertionPoint;
     obj.content = message.content;
     return obj;
-  },
-  fromAminoMsg(object: CodeGeneratorResponse_FileAminoMsg): CodeGeneratorResponse_File {
-    return CodeGeneratorResponse_File.fromAmino(object.value);
   },
   fromProtoMsg(message: CodeGeneratorResponse_FileProtoMsg): CodeGeneratorResponse_File {
     return CodeGeneratorResponse_File.decode(message.value);

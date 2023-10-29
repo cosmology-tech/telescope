@@ -189,10 +189,6 @@ export interface TimestampProtoMsg {
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
 export type TimestampAmino = string;
-export interface TimestampAminoMsg {
-  type: "/google.protobuf.Timestamp";
-  value: TimestampAmino;
-}
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -355,9 +351,6 @@ export const Timestamp = {
   },
   toAmino(message: Timestamp): TimestampAmino {
     return fromTimestamp(message).toString();
-  },
-  fromAminoMsg(object: TimestampAminoMsg): Timestamp {
-    return Timestamp.fromAmino(object.value);
   },
   fromProtoMsg(message: TimestampProtoMsg): Timestamp {
     return Timestamp.decode(message.value);

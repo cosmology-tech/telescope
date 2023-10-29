@@ -206,10 +206,6 @@ export interface ExistenceProofAmino {
   leaf?: LeafOpAmino;
   path: InnerOpAmino[];
 }
-export interface ExistenceProofAminoMsg {
-  type: "/ics23.ExistenceProof";
-  value: ExistenceProofAmino;
-}
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
  * The result of peforming all these steps will provide a "root hash", which can
@@ -263,10 +259,6 @@ export interface NonExistenceProofAmino {
   left?: ExistenceProofAmino;
   right?: ExistenceProofAmino;
 }
-export interface NonExistenceProofAminoMsg {
-  type: "/ics23.NonExistenceProof";
-  value: NonExistenceProofAmino;
-}
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
  * one right of the desired key. If both proofs are valid AND they are neighbors,
@@ -294,10 +286,6 @@ export interface CommitmentProofAmino {
   nonexist?: NonExistenceProofAmino;
   batch?: BatchProofAmino;
   compressed?: CompressedBatchProofAmino;
-}
-export interface CommitmentProofAminoMsg {
-  type: "/ics23.CommitmentProof";
-  value: CommitmentProofAmino;
 }
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProofSDKType {
@@ -363,10 +351,6 @@ export interface LeafOpAmino {
    * a leaf node from an inner node.
    */
   prefix: Uint8Array;
-}
-export interface LeafOpAminoMsg {
-  type: "/ics23.LeafOp";
-  value: LeafOpAmino;
 }
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
@@ -438,10 +422,6 @@ export interface InnerOpAmino {
   hash: HashOp;
   prefix: Uint8Array;
   suffix: Uint8Array;
-}
-export interface InnerOpAminoMsg {
-  type: "/ics23.InnerOp";
-  value: InnerOpAmino;
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
@@ -517,10 +497,6 @@ export interface ProofSpecAmino {
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   min_depth: number;
 }
-export interface ProofSpecAminoMsg {
-  type: "/ics23.ProofSpec";
-  value: ProofSpecAmino;
-}
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
  * This can be stored in the client and used to validate any incoming proofs.
@@ -593,10 +569,6 @@ export interface InnerSpecAmino {
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
-export interface InnerSpecAminoMsg {
-  type: "/ics23.InnerSpec";
-  value: InnerSpecAmino;
-}
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
  * given store are neighbors.
@@ -627,10 +599,6 @@ export interface BatchProofProtoMsg {
 export interface BatchProofAmino {
   entries: BatchEntryAmino[];
 }
-export interface BatchProofAminoMsg {
-  type: "/ics23.BatchProof";
-  value: BatchProofAmino;
-}
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofSDKType {
   entries: BatchEntrySDKType[];
@@ -649,10 +617,6 @@ export interface BatchEntryAmino {
   exist?: ExistenceProofAmino;
   nonexist?: NonExistenceProofAmino;
 }
-export interface BatchEntryAminoMsg {
-  type: "/ics23.BatchEntry";
-  value: BatchEntryAmino;
-}
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface BatchEntrySDKType {
   exist?: ExistenceProofSDKType;
@@ -669,10 +633,6 @@ export interface CompressedBatchProofProtoMsg {
 export interface CompressedBatchProofAmino {
   entries: CompressedBatchEntryAmino[];
   lookup_inners: InnerOpAmino[];
-}
-export interface CompressedBatchProofAminoMsg {
-  type: "/ics23.CompressedBatchProof";
-  value: CompressedBatchProofAmino;
 }
 export interface CompressedBatchProofSDKType {
   entries: CompressedBatchEntrySDKType[];
@@ -691,10 +651,6 @@ export interface CompressedBatchEntryProtoMsg {
 export interface CompressedBatchEntryAmino {
   exist?: CompressedExistenceProofAmino;
   nonexist?: CompressedNonExistenceProofAmino;
-}
-export interface CompressedBatchEntryAminoMsg {
-  type: "/ics23.CompressedBatchEntry";
-  value: CompressedBatchEntryAmino;
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface CompressedBatchEntrySDKType {
@@ -719,10 +675,6 @@ export interface CompressedExistenceProofAmino {
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
-export interface CompressedExistenceProofAminoMsg {
-  type: "/ics23.CompressedExistenceProof";
-  value: CompressedExistenceProofAmino;
-}
 export interface CompressedExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
@@ -744,10 +696,6 @@ export interface CompressedNonExistenceProofAmino {
   key: Uint8Array;
   left?: CompressedExistenceProofAmino;
   right?: CompressedExistenceProofAmino;
-}
-export interface CompressedNonExistenceProofAminoMsg {
-  type: "/ics23.CompressedNonExistenceProof";
-  value: CompressedNonExistenceProofAmino;
 }
 export interface CompressedNonExistenceProofSDKType {
   key: Uint8Array;
@@ -875,9 +823,6 @@ export const ExistenceProof = {
     }
     return obj;
   },
-  fromAminoMsg(object: ExistenceProofAminoMsg): ExistenceProof {
-    return ExistenceProof.fromAmino(object.value);
-  },
   fromProtoMsg(message: ExistenceProofProtoMsg): ExistenceProof {
     return ExistenceProof.decode(message.value);
   },
@@ -987,9 +932,6 @@ export const NonExistenceProof = {
     obj.left = message.left ? ExistenceProof.toAmino(message.left) : undefined;
     obj.right = message.right ? ExistenceProof.toAmino(message.right) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: NonExistenceProofAminoMsg): NonExistenceProof {
-    return NonExistenceProof.fromAmino(object.value);
   },
   fromProtoMsg(message: NonExistenceProofProtoMsg): NonExistenceProof {
     return NonExistenceProof.decode(message.value);
@@ -1118,9 +1060,6 @@ export const CommitmentProof = {
     obj.batch = message.batch ? BatchProof.toAmino(message.batch) : undefined;
     obj.compressed = message.compressed ? CompressedBatchProof.toAmino(message.compressed) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CommitmentProofAminoMsg): CommitmentProof {
-    return CommitmentProof.fromAmino(object.value);
   },
   fromProtoMsg(message: CommitmentProofProtoMsg): CommitmentProof {
     return CommitmentProof.decode(message.value);
@@ -1256,9 +1195,6 @@ export const LeafOp = {
     obj.prefix = message.prefix;
     return obj;
   },
-  fromAminoMsg(object: LeafOpAminoMsg): LeafOp {
-    return LeafOp.fromAmino(object.value);
-  },
   fromProtoMsg(message: LeafOpProtoMsg): LeafOp {
     return LeafOp.decode(message.value);
   },
@@ -1364,9 +1300,6 @@ export const InnerOp = {
     obj.prefix = message.prefix;
     obj.suffix = message.suffix;
     return obj;
-  },
-  fromAminoMsg(object: InnerOpAminoMsg): InnerOp {
-    return InnerOp.fromAmino(object.value);
   },
   fromProtoMsg(message: InnerOpProtoMsg): InnerOp {
     return InnerOp.decode(message.value);
@@ -1491,9 +1424,6 @@ export const ProofSpec = {
     obj.max_depth = message.maxDepth;
     obj.min_depth = message.minDepth;
     return obj;
-  },
-  fromAminoMsg(object: ProofSpecAminoMsg): ProofSpec {
-    return ProofSpec.fromAmino(object.value);
   },
   fromProtoMsg(message: ProofSpecProtoMsg): ProofSpec {
     return ProofSpec.decode(message.value);
@@ -1664,9 +1594,6 @@ export const InnerSpec = {
     obj.hash = message.hash;
     return obj;
   },
-  fromAminoMsg(object: InnerSpecAminoMsg): InnerSpec {
-    return InnerSpec.fromAmino(object.value);
-  },
   fromProtoMsg(message: InnerSpecProtoMsg): InnerSpec {
     return InnerSpec.decode(message.value);
   },
@@ -1756,9 +1683,6 @@ export const BatchProof = {
       obj.entries = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BatchProofAminoMsg): BatchProof {
-    return BatchProof.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchProofProtoMsg): BatchProof {
     return BatchProof.decode(message.value);
@@ -1855,9 +1779,6 @@ export const BatchEntry = {
     obj.exist = message.exist ? ExistenceProof.toAmino(message.exist) : undefined;
     obj.nonexist = message.nonexist ? NonExistenceProof.toAmino(message.nonexist) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: BatchEntryAminoMsg): BatchEntry {
-    return BatchEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchEntryProtoMsg): BatchEntry {
     return BatchEntry.decode(message.value);
@@ -1975,9 +1896,6 @@ export const CompressedBatchProof = {
     }
     return obj;
   },
-  fromAminoMsg(object: CompressedBatchProofAminoMsg): CompressedBatchProof {
-    return CompressedBatchProof.fromAmino(object.value);
-  },
   fromProtoMsg(message: CompressedBatchProofProtoMsg): CompressedBatchProof {
     return CompressedBatchProof.decode(message.value);
   },
@@ -2073,9 +1991,6 @@ export const CompressedBatchEntry = {
     obj.exist = message.exist ? CompressedExistenceProof.toAmino(message.exist) : undefined;
     obj.nonexist = message.nonexist ? CompressedNonExistenceProof.toAmino(message.nonexist) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CompressedBatchEntryAminoMsg): CompressedBatchEntry {
-    return CompressedBatchEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: CompressedBatchEntryProtoMsg): CompressedBatchEntry {
     return CompressedBatchEntry.decode(message.value);
@@ -2220,9 +2135,6 @@ export const CompressedExistenceProof = {
     }
     return obj;
   },
-  fromAminoMsg(object: CompressedExistenceProofAminoMsg): CompressedExistenceProof {
-    return CompressedExistenceProof.fromAmino(object.value);
-  },
   fromProtoMsg(message: CompressedExistenceProofProtoMsg): CompressedExistenceProof {
     return CompressedExistenceProof.decode(message.value);
   },
@@ -2332,9 +2244,6 @@ export const CompressedNonExistenceProof = {
     obj.left = message.left ? CompressedExistenceProof.toAmino(message.left) : undefined;
     obj.right = message.right ? CompressedExistenceProof.toAmino(message.right) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CompressedNonExistenceProofAminoMsg): CompressedNonExistenceProof {
-    return CompressedNonExistenceProof.fromAmino(object.value);
   },
   fromProtoMsg(message: CompressedNonExistenceProofProtoMsg): CompressedNonExistenceProof {
     return CompressedNonExistenceProof.decode(message.value);

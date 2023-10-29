@@ -99,10 +99,6 @@ export interface TxResponseAmino {
    */
   events: EventAmino[];
 }
-export interface TxResponseAminoMsg {
-  type: "cosmos-sdk/TxResponse";
-  value: TxResponseAmino;
-}
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
  * tags are stringified and the log is JSON decoded.
@@ -146,10 +142,6 @@ export interface ABCIMessageLogAmino {
    */
   events: StringEventAmino[];
 }
-export interface ABCIMessageLogAminoMsg {
-  type: "cosmos-sdk/ABCIMessageLog";
-  value: ABCIMessageLogAmino;
-}
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLogSDKType {
   msg_index: number;
@@ -175,10 +167,6 @@ export interface StringEventProtoMsg {
 export interface StringEventAmino {
   type: string;
   attributes: AttributeAmino[];
-}
-export interface StringEventAminoMsg {
-  type: "cosmos-sdk/StringEvent";
-  value: StringEventAmino;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes
@@ -208,10 +196,6 @@ export interface AttributeAmino {
   key: string;
   value: string;
 }
-export interface AttributeAminoMsg {
-  type: "cosmos-sdk/Attribute";
-  value: AttributeAmino;
-}
 /**
  * Attribute defines an attribute wrapper where the key and value are
  * strings instead of raw bytes.
@@ -237,10 +221,6 @@ export interface GasInfoAmino {
   gas_wanted: string;
   /** GasUsed is the amount of gas actually consumed. */
   gas_used: string;
-}
-export interface GasInfoAminoMsg {
-  type: "cosmos-sdk/GasInfo";
-  value: GasInfoAmino;
 }
 /** GasInfo defines tx execution gas context. */
 export interface GasInfoSDKType {
@@ -299,10 +279,6 @@ export interface ResultAmino {
    */
   msg_responses: AnyAmino[];
 }
-export interface ResultAminoMsg {
-  type: "cosmos-sdk/Result";
-  value: ResultAmino;
-}
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface ResultSDKType {
   /** @deprecated */
@@ -330,10 +306,6 @@ export interface SimulationResponseProtoMsg {
 export interface SimulationResponseAmino {
   gas_info?: GasInfoAmino;
   result?: ResultAmino;
-}
-export interface SimulationResponseAminoMsg {
-  type: "cosmos-sdk/SimulationResponse";
-  value: SimulationResponseAmino;
 }
 /**
  * SimulationResponse defines the response generated when a transaction is
@@ -364,10 +336,6 @@ export interface MsgDataProtoMsg {
 export interface MsgDataAmino {
   msg_type: string;
   data: Uint8Array;
-}
-export interface MsgDataAminoMsg {
-  type: "cosmos-sdk/MsgData";
-  value: MsgDataAmino;
 }
 /**
  * MsgData defines the data returned in a Result object during message
@@ -412,10 +380,6 @@ export interface TxMsgDataAmino {
    */
   msg_responses: AnyAmino[];
 }
-export interface TxMsgDataAminoMsg {
-  type: "cosmos-sdk/TxMsgData";
-  value: TxMsgDataAmino;
-}
 /**
  * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
  * for each message.
@@ -458,10 +422,6 @@ export interface SearchTxsResultAmino {
   limit: string;
   /** List of txs in current page */
   txs: TxResponseAmino[];
-}
-export interface SearchTxsResultAminoMsg {
-  type: "cosmos-sdk/SearchTxsResult";
-  value: SearchTxsResultAmino;
 }
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResultSDKType {
@@ -738,15 +698,6 @@ export const TxResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: TxResponseAminoMsg): TxResponse {
-    return TxResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: TxResponse): TxResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/TxResponse",
-      value: TxResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: TxResponseProtoMsg): TxResponse {
     return TxResponse.decode(message.value);
   },
@@ -866,15 +817,6 @@ export const ABCIMessageLog = {
     }
     return obj;
   },
-  fromAminoMsg(object: ABCIMessageLogAminoMsg): ABCIMessageLog {
-    return ABCIMessageLog.fromAmino(object.value);
-  },
-  toAminoMsg(message: ABCIMessageLog): ABCIMessageLogAminoMsg {
-    return {
-      type: "cosmos-sdk/ABCIMessageLog",
-      value: ABCIMessageLog.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ABCIMessageLogProtoMsg): ABCIMessageLog {
     return ABCIMessageLog.decode(message.value);
   },
@@ -980,15 +922,6 @@ export const StringEvent = {
     }
     return obj;
   },
-  fromAminoMsg(object: StringEventAminoMsg): StringEvent {
-    return StringEvent.fromAmino(object.value);
-  },
-  toAminoMsg(message: StringEvent): StringEventAminoMsg {
-    return {
-      type: "cosmos-sdk/StringEvent",
-      value: StringEvent.toAmino(message)
-    };
-  },
   fromProtoMsg(message: StringEventProtoMsg): StringEvent {
     return StringEvent.decode(message.value);
   },
@@ -1081,15 +1014,6 @@ export const Attribute = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AttributeAminoMsg): Attribute {
-    return Attribute.fromAmino(object.value);
-  },
-  toAminoMsg(message: Attribute): AttributeAminoMsg {
-    return {
-      type: "cosmos-sdk/Attribute",
-      value: Attribute.toAmino(message)
-    };
   },
   fromProtoMsg(message: AttributeProtoMsg): Attribute {
     return Attribute.decode(message.value);
@@ -1187,15 +1111,6 @@ export const GasInfo = {
     obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
     obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GasInfoAminoMsg): GasInfo {
-    return GasInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: GasInfo): GasInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/GasInfo",
-      value: GasInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: GasInfoProtoMsg): GasInfo {
     return GasInfo.decode(message.value);
@@ -1342,15 +1257,6 @@ export const Result = {
     }
     return obj;
   },
-  fromAminoMsg(object: ResultAminoMsg): Result {
-    return Result.fromAmino(object.value);
-  },
-  toAminoMsg(message: Result): ResultAminoMsg {
-    return {
-      type: "cosmos-sdk/Result",
-      value: Result.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ResultProtoMsg): Result {
     return Result.decode(message.value);
   },
@@ -1448,15 +1354,6 @@ export const SimulationResponse = {
     obj.result = message.result ? Result.toAmino(message.result) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SimulationResponseAminoMsg): SimulationResponse {
-    return SimulationResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: SimulationResponse): SimulationResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/SimulationResponse",
-      value: SimulationResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SimulationResponseProtoMsg): SimulationResponse {
     return SimulationResponse.decode(message.value);
   },
@@ -1549,15 +1446,6 @@ export const MsgData = {
     obj.msg_type = message.msgType;
     obj.data = message.data;
     return obj;
-  },
-  fromAminoMsg(object: MsgDataAminoMsg): MsgData {
-    return MsgData.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgData): MsgDataAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgData",
-      value: MsgData.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgDataProtoMsg): MsgData {
     return MsgData.decode(message.value);
@@ -1675,15 +1563,6 @@ export const TxMsgData = {
       obj.msg_responses = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: TxMsgDataAminoMsg): TxMsgData {
-    return TxMsgData.fromAmino(object.value);
-  },
-  toAminoMsg(message: TxMsgData): TxMsgDataAminoMsg {
-    return {
-      type: "cosmos-sdk/TxMsgData",
-      value: TxMsgData.toAmino(message)
-    };
   },
   fromProtoMsg(message: TxMsgDataProtoMsg): TxMsgData {
     return TxMsgData.decode(message.value);
@@ -1855,15 +1734,6 @@ export const SearchTxsResult = {
       obj.txs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SearchTxsResultAminoMsg): SearchTxsResult {
-    return SearchTxsResult.fromAmino(object.value);
-  },
-  toAminoMsg(message: SearchTxsResult): SearchTxsResultAminoMsg {
-    return {
-      type: "cosmos-sdk/SearchTxsResult",
-      value: SearchTxsResult.toAmino(message)
-    };
   },
   fromProtoMsg(message: SearchTxsResultProtoMsg): SearchTxsResult {
     return SearchTxsResult.decode(message.value);

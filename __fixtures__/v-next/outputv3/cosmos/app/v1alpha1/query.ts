@@ -10,10 +10,6 @@ export interface QueryConfigRequestProtoMsg {
 }
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestAmino {}
-export interface QueryConfigRequestAminoMsg {
-  type: "cosmos-sdk/QueryConfigRequest";
-  value: QueryConfigRequestAmino;
-}
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestSDKType {}
 /** QueryConfigRequest is the Query/Config response type. */
@@ -29,10 +25,6 @@ export interface QueryConfigResponseProtoMsg {
 export interface QueryConfigResponseAmino {
   /** config is the current app config. */
   config?: ConfigAmino;
-}
-export interface QueryConfigResponseAminoMsg {
-  type: "cosmos-sdk/QueryConfigResponse";
-  value: QueryConfigResponseAmino;
 }
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
@@ -86,15 +78,6 @@ export const QueryConfigRequest = {
   toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryConfigRequestAminoMsg): QueryConfigRequest {
-    return QueryConfigRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConfigRequest): QueryConfigRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConfigRequest",
-      value: QueryConfigRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConfigRequestProtoMsg): QueryConfigRequest {
     return QueryConfigRequest.decode(message.value);
@@ -176,15 +159,6 @@ export const QueryConfigResponse = {
     const obj: any = {};
     obj.config = message.config ? Config.toAmino(message.config) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryConfigResponseAminoMsg): QueryConfigResponse {
-    return QueryConfigResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConfigResponse): QueryConfigResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConfigResponse",
-      value: QueryConfigResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConfigResponseProtoMsg): QueryConfigResponse {
     return QueryConfigResponse.decode(message.value);

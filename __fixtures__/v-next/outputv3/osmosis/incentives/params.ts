@@ -21,10 +21,6 @@ export interface ParamsAmino {
    */
   distr_epoch_identifier: string;
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/incentives/params";
-  value: ParamsAmino;
-}
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
   distr_epoch_identifier: string;
@@ -94,15 +90,6 @@ export const Params = {
     const obj: any = {};
     obj.distr_epoch_identifier = message.distrEpochIdentifier;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/incentives/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

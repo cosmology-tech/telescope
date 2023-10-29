@@ -32,10 +32,6 @@ export interface GenesisStateAmino {
   /** number of epochs that have passed while inflation is disabled */
   skipped_epochs: string;
 }
-export interface GenesisStateAminoMsg {
-  type: "/evmos.inflation.v1.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -69,10 +65,6 @@ export interface ParamsAmino {
   inflation_distribution?: InflationDistributionAmino;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enable_inflation: boolean;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.inflation.v1.Params";
-  value: ParamsAmino;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
@@ -210,9 +202,6 @@ export const GenesisState = {
     obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -336,9 +325,6 @@ export const Params = {
     obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
     obj.enable_inflation = message.enableInflation;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

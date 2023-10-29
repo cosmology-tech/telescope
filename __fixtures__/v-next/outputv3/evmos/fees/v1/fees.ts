@@ -35,10 +35,6 @@ export interface DevFeeInfoAmino {
    */
   withdraw_address: string;
 }
-export interface DevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.DevFeeInfo";
-  value: DevFeeInfoAmino;
-}
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
@@ -140,9 +136,6 @@ export const DevFeeInfo = {
     obj.deployer_address = message.deployerAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
-  },
-  fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {
-    return DevFeeInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: DevFeeInfoProtoMsg): DevFeeInfo {
     return DevFeeInfo.decode(message.value);

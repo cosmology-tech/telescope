@@ -22,10 +22,6 @@ export interface ArithmeticTwapRequestAmino {
   start_time?: Date;
   end_time?: Date;
 }
-export interface ArithmeticTwapRequestAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-request";
-  value: ArithmeticTwapRequestAmino;
-}
 export interface ArithmeticTwapRequestSDKType {
   pool_id: bigint;
   base_asset: string;
@@ -42,10 +38,6 @@ export interface ArithmeticTwapResponseProtoMsg {
 }
 export interface ArithmeticTwapResponseAmino {
   arithmetic_twap: string;
-}
-export interface ArithmeticTwapResponseAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-response";
-  value: ArithmeticTwapResponseAmino;
 }
 export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
@@ -66,10 +58,6 @@ export interface ArithmeticTwapToNowRequestAmino {
   quote_asset: string;
   start_time?: Date;
 }
-export interface ArithmeticTwapToNowRequestAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-to-now-request";
-  value: ArithmeticTwapToNowRequestAmino;
-}
 export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: bigint;
   base_asset: string;
@@ -86,10 +74,6 @@ export interface ArithmeticTwapToNowResponseProtoMsg {
 export interface ArithmeticTwapToNowResponseAmino {
   arithmetic_twap: string;
 }
-export interface ArithmeticTwapToNowResponseAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-to-now-response";
-  value: ArithmeticTwapToNowResponseAmino;
-}
 export interface ArithmeticTwapToNowResponseSDKType {
   arithmetic_twap: string;
 }
@@ -99,10 +83,6 @@ export interface ParamsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ParamsRequestAmino {}
-export interface ParamsRequestAminoMsg {
-  type: "osmosis/twap/params-request";
-  value: ParamsRequestAmino;
-}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
@@ -113,10 +93,6 @@ export interface ParamsResponseProtoMsg {
 }
 export interface ParamsResponseAmino {
   params?: ParamsAmino;
-}
-export interface ParamsResponseAminoMsg {
-  type: "osmosis/twap/params-response";
-  value: ParamsResponseAmino;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;
@@ -245,15 +221,6 @@ export const ArithmeticTwapRequest = {
     obj.end_time = message.endTime;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
-    return ArithmeticTwapRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapRequest): ArithmeticTwapRequestAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-request",
-      value: ArithmeticTwapRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ArithmeticTwapRequestProtoMsg): ArithmeticTwapRequest {
     return ArithmeticTwapRequest.decode(message.value);
   },
@@ -332,15 +299,6 @@ export const ArithmeticTwapResponse = {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
-  },
-  fromAminoMsg(object: ArithmeticTwapResponseAminoMsg): ArithmeticTwapResponse {
-    return ArithmeticTwapResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapResponse): ArithmeticTwapResponseAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-response",
-      value: ArithmeticTwapResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: ArithmeticTwapResponseProtoMsg): ArithmeticTwapResponse {
     return ArithmeticTwapResponse.decode(message.value);
@@ -465,15 +423,6 @@ export const ArithmeticTwapToNowRequest = {
     obj.start_time = message.startTime;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {
-    return ArithmeticTwapToNowRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-to-now-request",
-      value: ArithmeticTwapToNowRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg): ArithmeticTwapToNowRequest {
     return ArithmeticTwapToNowRequest.decode(message.value);
   },
@@ -553,15 +502,6 @@ export const ArithmeticTwapToNowResponse = {
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapToNowResponseAminoMsg): ArithmeticTwapToNowResponse {
-    return ArithmeticTwapToNowResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-to-now-response",
-      value: ArithmeticTwapToNowResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg): ArithmeticTwapToNowResponse {
     return ArithmeticTwapToNowResponse.decode(message.value);
   },
@@ -623,15 +563,6 @@ export const ParamsRequest = {
   toAmino(_: ParamsRequest): ParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: ParamsRequestAminoMsg): ParamsRequest {
-    return ParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamsRequest): ParamsRequestAminoMsg {
-    return {
-      type: "osmosis/twap/params-request",
-      value: ParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsRequestProtoMsg): ParamsRequest {
     return ParamsRequest.decode(message.value);
@@ -713,15 +644,6 @@ export const ParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsResponseAminoMsg): ParamsResponse {
-    return ParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamsResponse): ParamsResponseAminoMsg {
-    return {
-      type: "osmosis/twap/params-response",
-      value: ParamsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsResponseProtoMsg): ParamsResponse {
     return ParamsResponse.decode(message.value);

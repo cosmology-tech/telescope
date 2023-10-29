@@ -49,10 +49,6 @@ export interface HttpAmino {
    */
   fully_decode_reserved_expansion: boolean;
 }
-export interface HttpAminoMsg {
-  type: "/google.api.Http";
-  value: HttpAmino;
-}
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
  * [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
@@ -712,10 +708,6 @@ export interface HttpRuleAmino {
    */
   additional_bindings: HttpRuleAmino[];
 }
-export interface HttpRuleAminoMsg {
-  type: "/google.api.HttpRule";
-  value: HttpRuleAmino;
-}
 /**
  * # gRPC Transcoding
  * 
@@ -1017,10 +1009,6 @@ export interface CustomHttpPatternAmino {
   /** The path matched by this custom verb. */
   path: string;
 }
-export interface CustomHttpPatternAminoMsg {
-  type: "/google.api.CustomHttpPattern";
-  value: CustomHttpPatternAmino;
-}
 /** A custom pattern is used for defining custom HTTP verb. */
 export interface CustomHttpPatternSDKType {
   kind: string;
@@ -1116,9 +1104,6 @@ export const Http = {
     }
     obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion;
     return obj;
-  },
-  fromAminoMsg(object: HttpAminoMsg): Http {
-    return Http.fromAmino(object.value);
   },
   fromProtoMsg(message: HttpProtoMsg): Http {
     return Http.decode(message.value);
@@ -1338,9 +1323,6 @@ export const HttpRule = {
     }
     return obj;
   },
-  fromAminoMsg(object: HttpRuleAminoMsg): HttpRule {
-    return HttpRule.fromAmino(object.value);
-  },
   fromProtoMsg(message: HttpRuleProtoMsg): HttpRule {
     return HttpRule.decode(message.value);
   },
@@ -1432,9 +1414,6 @@ export const CustomHttpPattern = {
     obj.kind = message.kind;
     obj.path = message.path;
     return obj;
-  },
-  fromAminoMsg(object: CustomHttpPatternAminoMsg): CustomHttpPattern {
-    return CustomHttpPattern.fromAmino(object.value);
   },
   fromProtoMsg(message: CustomHttpPatternProtoMsg): CustomHttpPattern {
     return CustomHttpPattern.decode(message.value);

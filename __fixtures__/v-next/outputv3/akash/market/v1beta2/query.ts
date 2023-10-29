@@ -20,10 +20,6 @@ export interface QueryOrdersRequestAmino {
   filters?: OrderFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryOrdersRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrdersRequest";
-  value: QueryOrdersRequestAmino;
-}
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequestSDKType {
   filters: OrderFiltersSDKType;
@@ -43,10 +39,6 @@ export interface QueryOrdersResponseAmino {
   orders: OrderAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryOrdersResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrdersResponse";
-  value: QueryOrdersResponseAmino;
-}
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseSDKType {
   orders: OrderSDKType[];
@@ -64,10 +56,6 @@ export interface QueryOrderRequestProtoMsg {
 export interface QueryOrderRequestAmino {
   id?: OrderIDAmino;
 }
-export interface QueryOrderRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrderRequest";
-  value: QueryOrderRequestAmino;
-}
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequestSDKType {
   id: OrderIDSDKType;
@@ -83,10 +71,6 @@ export interface QueryOrderResponseProtoMsg {
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponseAmino {
   order?: OrderAmino;
-}
-export interface QueryOrderResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrderResponse";
-  value: QueryOrderResponseAmino;
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponseSDKType {
@@ -105,10 +89,6 @@ export interface QueryBidsRequestProtoMsg {
 export interface QueryBidsRequestAmino {
   filters?: BidFiltersAmino;
   pagination?: PageRequestAmino;
-}
-export interface QueryBidsRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidsRequest";
-  value: QueryBidsRequestAmino;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequestSDKType {
@@ -129,10 +109,6 @@ export interface QueryBidsResponseAmino {
   bids: QueryBidResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryBidsResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidsResponse";
-  value: QueryBidsResponseAmino;
-}
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseSDKType {
   bids: QueryBidResponseSDKType[];
@@ -149,10 +125,6 @@ export interface QueryBidRequestProtoMsg {
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequestAmino {
   id?: BidIDAmino;
-}
-export interface QueryBidRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidRequest";
-  value: QueryBidRequestAmino;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequestSDKType {
@@ -171,10 +143,6 @@ export interface QueryBidResponseProtoMsg {
 export interface QueryBidResponseAmino {
   bid?: BidAmino;
   escrow_account?: AccountAmino;
-}
-export interface QueryBidResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidResponse";
-  value: QueryBidResponseAmino;
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponseSDKType {
@@ -195,10 +163,6 @@ export interface QueryLeasesRequestAmino {
   filters?: LeaseFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryLeasesRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeasesRequest";
-  value: QueryLeasesRequestAmino;
-}
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequestSDKType {
   filters: LeaseFiltersSDKType;
@@ -218,10 +182,6 @@ export interface QueryLeasesResponseAmino {
   leases: QueryLeaseResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryLeasesResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeasesResponse";
-  value: QueryLeasesResponseAmino;
-}
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponseSDKType {
   leases: QueryLeaseResponseSDKType[];
@@ -238,10 +198,6 @@ export interface QueryLeaseRequestProtoMsg {
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequestAmino {
   id?: LeaseIDAmino;
-}
-export interface QueryLeaseRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeaseRequest";
-  value: QueryLeaseRequestAmino;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequestSDKType {
@@ -260,10 +216,6 @@ export interface QueryLeaseResponseProtoMsg {
 export interface QueryLeaseResponseAmino {
   lease?: LeaseAmino;
   escrow_payment?: FractionalPaymentAmino;
-}
-export interface QueryLeaseResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeaseResponse";
-  value: QueryLeaseResponseAmino;
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponseSDKType {
@@ -352,9 +304,6 @@ export const QueryOrdersRequest = {
     obj.filters = message.filters ? OrderFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryOrdersRequestAminoMsg): QueryOrdersRequest {
-    return QueryOrdersRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryOrdersRequestProtoMsg): QueryOrdersRequest {
     return QueryOrdersRequest.decode(message.value);
@@ -462,9 +411,6 @@ export const QueryOrdersResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryOrdersResponseAminoMsg): QueryOrdersResponse {
-    return QueryOrdersResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryOrdersResponseProtoMsg): QueryOrdersResponse {
     return QueryOrdersResponse.decode(message.value);
   },
@@ -545,9 +491,6 @@ export const QueryOrderRequest = {
     obj.id = message.id ? OrderID.toAmino(message.id) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryOrderRequestAminoMsg): QueryOrderRequest {
-    return QueryOrderRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryOrderRequestProtoMsg): QueryOrderRequest {
     return QueryOrderRequest.decode(message.value);
   },
@@ -627,9 +570,6 @@ export const QueryOrderResponse = {
     const obj: any = {};
     obj.order = message.order ? Order.toAmino(message.order) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryOrderResponseAminoMsg): QueryOrderResponse {
-    return QueryOrderResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryOrderResponseProtoMsg): QueryOrderResponse {
     return QueryOrderResponse.decode(message.value);
@@ -726,9 +666,6 @@ export const QueryBidsRequest = {
     obj.filters = message.filters ? BidFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryBidsRequestAminoMsg): QueryBidsRequest {
-    return QueryBidsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryBidsRequestProtoMsg): QueryBidsRequest {
     return QueryBidsRequest.decode(message.value);
@@ -836,9 +773,6 @@ export const QueryBidsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryBidsResponseAminoMsg): QueryBidsResponse {
-    return QueryBidsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryBidsResponseProtoMsg): QueryBidsResponse {
     return QueryBidsResponse.decode(message.value);
   },
@@ -918,9 +852,6 @@ export const QueryBidRequest = {
     const obj: any = {};
     obj.id = message.id ? BidID.toAmino(message.id) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryBidRequestAminoMsg): QueryBidRequest {
-    return QueryBidRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryBidRequestProtoMsg): QueryBidRequest {
     return QueryBidRequest.decode(message.value);
@@ -1018,9 +949,6 @@ export const QueryBidResponse = {
     obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryBidResponseAminoMsg): QueryBidResponse {
-    return QueryBidResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryBidResponseProtoMsg): QueryBidResponse {
     return QueryBidResponse.decode(message.value);
   },
@@ -1116,9 +1044,6 @@ export const QueryLeasesRequest = {
     obj.filters = message.filters ? LeaseFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryLeasesRequestAminoMsg): QueryLeasesRequest {
-    return QueryLeasesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryLeasesRequestProtoMsg): QueryLeasesRequest {
     return QueryLeasesRequest.decode(message.value);
@@ -1226,9 +1151,6 @@ export const QueryLeasesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryLeasesResponseAminoMsg): QueryLeasesResponse {
-    return QueryLeasesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryLeasesResponseProtoMsg): QueryLeasesResponse {
     return QueryLeasesResponse.decode(message.value);
   },
@@ -1308,9 +1230,6 @@ export const QueryLeaseRequest = {
     const obj: any = {};
     obj.id = message.id ? LeaseID.toAmino(message.id) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryLeaseRequestAminoMsg): QueryLeaseRequest {
-    return QueryLeaseRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryLeaseRequestProtoMsg): QueryLeaseRequest {
     return QueryLeaseRequest.decode(message.value);
@@ -1407,9 +1326,6 @@ export const QueryLeaseResponse = {
     obj.lease = message.lease ? Lease.toAmino(message.lease) : undefined;
     obj.escrow_payment = message.escrowPayment ? FractionalPayment.toAmino(message.escrowPayment) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryLeaseResponseAminoMsg): QueryLeaseResponse {
-    return QueryLeaseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryLeaseResponseProtoMsg): QueryLeaseResponse {
     return QueryLeaseResponse.decode(message.value);

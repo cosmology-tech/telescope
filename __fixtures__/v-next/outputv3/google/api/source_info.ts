@@ -16,10 +16,6 @@ export interface SourceInfoAmino {
   /** All files used during config generation. */
   source_files: AnyAmino[];
 }
-export interface SourceInfoAminoMsg {
-  type: "/google.api.SourceInfo";
-  value: SourceInfoAmino;
-}
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
   source_files: AnySDKType[];
@@ -100,9 +96,6 @@ export const SourceInfo = {
       obj.source_files = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
-    return SourceInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
     return SourceInfo.decode(message.value);

@@ -23,10 +23,6 @@ export interface QueryDenomTraceRequestAmino {
   /** hash (in hex format) of the denomination trace information. */
   hash: string;
 }
-export interface QueryDenomTraceRequestAminoMsg {
-  type: "cosmos-sdk/QueryDenomTraceRequest";
-  value: QueryDenomTraceRequestAmino;
-}
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
  * method
@@ -54,10 +50,6 @@ export interface QueryDenomTraceResponseAmino {
   /** denom_trace returns the requested denomination trace information. */
   denom_trace?: DenomTraceAmino;
 }
-export interface QueryDenomTraceResponseAminoMsg {
-  type: "cosmos-sdk/QueryDenomTraceResponse";
-  value: QueryDenomTraceResponseAmino;
-}
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
  * method.
@@ -84,10 +76,6 @@ export interface QueryDenomTracesRequestProtoMsg {
 export interface QueryDenomTracesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryDenomTracesRequestAminoMsg {
-  type: "cosmos-sdk/QueryDenomTracesRequest";
-  value: QueryDenomTracesRequestAmino;
 }
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
@@ -120,10 +108,6 @@ export interface QueryDenomTracesResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryDenomTracesResponseAminoMsg {
-  type: "cosmos-sdk/QueryDenomTracesResponse";
-  value: QueryDenomTracesResponseAmino;
-}
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
  * method.
@@ -140,10 +124,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -159,10 +139,6 @@ export interface QueryParamsResponseProtoMsg {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -233,15 +209,6 @@ export const QueryDenomTraceRequest = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomTraceRequestAminoMsg): QueryDenomTraceRequest {
-    return QueryDenomTraceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomTraceRequest): QueryDenomTraceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomTraceRequest",
-      value: QueryDenomTraceRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomTraceRequestProtoMsg): QueryDenomTraceRequest {
     return QueryDenomTraceRequest.decode(message.value);
@@ -324,15 +291,6 @@ export const QueryDenomTraceResponse = {
     obj.denom_trace = message.denomTrace ? DenomTrace.toAmino(message.denomTrace) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDenomTraceResponseAminoMsg): QueryDenomTraceResponse {
-    return QueryDenomTraceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomTraceResponse): QueryDenomTraceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomTraceResponse",
-      value: QueryDenomTraceResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDenomTraceResponseProtoMsg): QueryDenomTraceResponse {
     return QueryDenomTraceResponse.decode(message.value);
   },
@@ -413,15 +371,6 @@ export const QueryDenomTracesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomTracesRequestAminoMsg): QueryDenomTracesRequest {
-    return QueryDenomTracesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomTracesRequest): QueryDenomTracesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomTracesRequest",
-      value: QueryDenomTracesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomTracesRequestProtoMsg): QueryDenomTracesRequest {
     return QueryDenomTracesRequest.decode(message.value);
@@ -530,15 +479,6 @@ export const QueryDenomTracesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDenomTracesResponseAminoMsg): QueryDenomTracesResponse {
-    return QueryDenomTracesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomTracesResponse): QueryDenomTracesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomTracesResponse",
-      value: QueryDenomTracesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDenomTracesResponseProtoMsg): QueryDenomTracesResponse {
     return QueryDenomTracesResponse.decode(message.value);
   },
@@ -600,15 +540,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -690,15 +621,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);

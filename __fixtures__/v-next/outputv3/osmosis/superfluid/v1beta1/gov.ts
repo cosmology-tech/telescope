@@ -25,10 +25,6 @@ export interface SetSuperfluidAssetsProposalAmino {
   description: string;
   assets: SuperfluidAssetAmino[];
 }
-export interface SetSuperfluidAssetsProposalAminoMsg {
-  type: "osmosis/v1beta1/set-superfluid-assets-proposal";
-  value: SetSuperfluidAssetsProposalAmino;
-}
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
  * assets
@@ -61,10 +57,6 @@ export interface RemoveSuperfluidAssetsProposalAmino {
   title: string;
   description: string;
   superfluid_asset_denoms: string[];
-}
-export interface RemoveSuperfluidAssetsProposalAminoMsg {
-  type: "osmosis/v1beta1/remove-superfluid-assets-proposal";
-  value: RemoveSuperfluidAssetsProposalAmino;
 }
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
@@ -100,10 +92,6 @@ export interface UpdateUnpoolWhiteListProposalAmino {
   description: string;
   ids: string[];
   is_overwrite: boolean;
-}
-export interface UpdateUnpoolWhiteListProposalAminoMsg {
-  type: "osmosis/v1beta1/update-unpool-white-list-proposal";
-  value: UpdateUnpoolWhiteListProposalAmino;
 }
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the
@@ -222,15 +210,6 @@ export const SetSuperfluidAssetsProposal = {
       obj.assets = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SetSuperfluidAssetsProposalAminoMsg): SetSuperfluidAssetsProposal {
-    return SetSuperfluidAssetsProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAminoMsg {
-    return {
-      type: "osmosis/v1beta1/set-superfluid-assets-proposal",
-      value: SetSuperfluidAssetsProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: SetSuperfluidAssetsProposalProtoMsg): SetSuperfluidAssetsProposal {
     return SetSuperfluidAssetsProposal.decode(message.value);
@@ -351,15 +330,6 @@ export const RemoveSuperfluidAssetsProposal = {
       obj.superfluid_asset_denoms = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: RemoveSuperfluidAssetsProposalAminoMsg): RemoveSuperfluidAssetsProposal {
-    return RemoveSuperfluidAssetsProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAminoMsg {
-    return {
-      type: "osmosis/v1beta1/remove-superfluid-assets-proposal",
-      value: RemoveSuperfluidAssetsProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: RemoveSuperfluidAssetsProposalProtoMsg): RemoveSuperfluidAssetsProposal {
     return RemoveSuperfluidAssetsProposal.decode(message.value);
@@ -503,15 +473,6 @@ export const UpdateUnpoolWhiteListProposal = {
     }
     obj.is_overwrite = message.isOverwrite;
     return obj;
-  },
-  fromAminoMsg(object: UpdateUnpoolWhiteListProposalAminoMsg): UpdateUnpoolWhiteListProposal {
-    return UpdateUnpoolWhiteListProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAminoMsg {
-    return {
-      type: "osmosis/v1beta1/update-unpool-white-list-proposal",
-      value: UpdateUnpoolWhiteListProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpdateUnpoolWhiteListProposalProtoMsg): UpdateUnpoolWhiteListProposal {
     return UpdateUnpoolWhiteListProposal.decode(message.value);

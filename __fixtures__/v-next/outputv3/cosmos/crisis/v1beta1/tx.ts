@@ -17,10 +17,6 @@ export interface MsgVerifyInvariantAmino {
   invariant_module_name: string;
   invariant_route: string;
 }
-export interface MsgVerifyInvariantAminoMsg {
-  type: "cosmos-sdk/MsgVerifyInvariant";
-  value: MsgVerifyInvariantAmino;
-}
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantSDKType {
   sender: string;
@@ -35,10 +31,6 @@ export interface MsgVerifyInvariantResponseProtoMsg {
 }
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseAmino {}
-export interface MsgVerifyInvariantResponseAminoMsg {
-  type: "cosmos-sdk/MsgVerifyInvariantResponse";
-  value: MsgVerifyInvariantResponseAmino;
-}
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseSDKType {}
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
@@ -135,15 +127,6 @@ export const MsgVerifyInvariant = {
     obj.invariant_route = message.invariantRoute;
     return obj;
   },
-  fromAminoMsg(object: MsgVerifyInvariantAminoMsg): MsgVerifyInvariant {
-    return MsgVerifyInvariant.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVerifyInvariant",
-      value: MsgVerifyInvariant.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgVerifyInvariantProtoMsg): MsgVerifyInvariant {
     return MsgVerifyInvariant.decode(message.value);
   },
@@ -205,15 +188,6 @@ export const MsgVerifyInvariantResponse = {
   toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgVerifyInvariantResponseAminoMsg): MsgVerifyInvariantResponse {
-    return MsgVerifyInvariantResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVerifyInvariantResponse",
-      value: MsgVerifyInvariantResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg): MsgVerifyInvariantResponse {
     return MsgVerifyInvariantResponse.decode(message.value);

@@ -24,10 +24,6 @@ export interface QueryTokenPairsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryTokenPairsRequestAminoMsg {
-  type: "/evmos.erc20.v1.QueryTokenPairsRequest";
-  value: QueryTokenPairsRequestAmino;
-}
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
  * method.
@@ -57,10 +53,6 @@ export interface QueryTokenPairsResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryTokenPairsResponseAminoMsg {
-  type: "/evmos.erc20.v1.QueryTokenPairsResponse";
-  value: QueryTokenPairsResponseAmino;
-}
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
  * method.
@@ -89,10 +81,6 @@ export interface QueryTokenPairRequestAmino {
    */
   token: string;
 }
-export interface QueryTokenPairRequestAminoMsg {
-  type: "/evmos.erc20.v1.QueryTokenPairRequest";
-  value: QueryTokenPairRequestAmino;
-}
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
   token: string;
@@ -115,10 +103,6 @@ export interface QueryTokenPairResponseProtoMsg {
 export interface QueryTokenPairResponseAmino {
   token_pair?: TokenPairAmino;
 }
-export interface QueryTokenPairResponseAminoMsg {
-  type: "/evmos.erc20.v1.QueryTokenPairResponse";
-  value: QueryTokenPairResponseAmino;
-}
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
  * method.
@@ -134,10 +118,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "/evmos.erc20.v1.QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /**
@@ -157,10 +137,6 @@ export interface QueryParamsResponseProtoMsg {
  */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "/evmos.erc20.v1.QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -235,9 +211,6 @@ export const QueryTokenPairsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryTokenPairsRequestAminoMsg): QueryTokenPairsRequest {
-    return QueryTokenPairsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryTokenPairsRequestProtoMsg): QueryTokenPairsRequest {
     return QueryTokenPairsRequest.decode(message.value);
@@ -345,9 +318,6 @@ export const QueryTokenPairsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryTokenPairsResponseAminoMsg): QueryTokenPairsResponse {
-    return QueryTokenPairsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryTokenPairsResponseProtoMsg): QueryTokenPairsResponse {
     return QueryTokenPairsResponse.decode(message.value);
   },
@@ -425,9 +395,6 @@ export const QueryTokenPairRequest = {
     const obj: any = {};
     obj.token = message.token;
     return obj;
-  },
-  fromAminoMsg(object: QueryTokenPairRequestAminoMsg): QueryTokenPairRequest {
-    return QueryTokenPairRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryTokenPairRequestProtoMsg): QueryTokenPairRequest {
     return QueryTokenPairRequest.decode(message.value);
@@ -509,9 +476,6 @@ export const QueryTokenPairResponse = {
     obj.token_pair = message.tokenPair ? TokenPair.toAmino(message.tokenPair) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryTokenPairResponseAminoMsg): QueryTokenPairResponse {
-    return QueryTokenPairResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryTokenPairResponseProtoMsg): QueryTokenPairResponse {
     return QueryTokenPairResponse.decode(message.value);
   },
@@ -572,9 +536,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -655,9 +616,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);

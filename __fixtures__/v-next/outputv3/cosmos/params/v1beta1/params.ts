@@ -17,10 +17,6 @@ export interface ParameterChangeProposalAmino {
   description: string;
   changes: ParamChangeAmino[];
 }
-export interface ParameterChangeProposalAminoMsg {
-  type: "cosmos-sdk/ParameterChangeProposal";
-  value: ParameterChangeProposalAmino;
-}
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
   title: string;
@@ -48,10 +44,6 @@ export interface ParamChangeAmino {
   subspace: string;
   key: string;
   value: string;
-}
-export interface ParamChangeAminoMsg {
-  type: "cosmos-sdk/ParamChange";
-  value: ParamChangeAmino;
 }
 /**
  * ParamChange defines an individual parameter change, for use in
@@ -168,15 +160,6 @@ export const ParameterChangeProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: ParameterChangeProposalAminoMsg): ParameterChangeProposal {
-    return ParameterChangeProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParameterChangeProposal): ParameterChangeProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/ParameterChangeProposal",
-      value: ParameterChangeProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ParameterChangeProposalProtoMsg): ParameterChangeProposal {
     return ParameterChangeProposal.decode(message.value);
   },
@@ -283,15 +266,6 @@ export const ParamChange = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: ParamChangeAminoMsg): ParamChange {
-    return ParamChange.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamChange): ParamChangeAminoMsg {
-    return {
-      type: "cosmos-sdk/ParamChange",
-      value: ParamChange.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamChangeProtoMsg): ParamChange {
     return ParamChange.decode(message.value);

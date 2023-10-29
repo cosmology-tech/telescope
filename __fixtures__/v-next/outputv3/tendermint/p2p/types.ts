@@ -16,10 +16,6 @@ export interface ProtocolVersionAmino {
   block: string;
   app: string;
 }
-export interface ProtocolVersionAminoMsg {
-  type: "/tendermint.p2p.ProtocolVersion";
-  value: ProtocolVersionAmino;
-}
 export interface ProtocolVersionSDKType {
   p2p: bigint;
   block: bigint;
@@ -49,10 +45,6 @@ export interface NodeInfoAmino {
   moniker: string;
   other?: NodeInfoOtherAmino;
 }
-export interface NodeInfoAminoMsg {
-  type: "/tendermint.p2p.NodeInfo";
-  value: NodeInfoAmino;
-}
 export interface NodeInfoSDKType {
   protocol_version: ProtocolVersionSDKType;
   node_id: string;
@@ -75,10 +67,6 @@ export interface NodeInfoOtherAmino {
   tx_index: string;
   rpc_address: string;
 }
-export interface NodeInfoOtherAminoMsg {
-  type: "/tendermint.p2p.NodeInfoOther";
-  value: NodeInfoOtherAmino;
-}
 export interface NodeInfoOtherSDKType {
   tx_index: string;
   rpc_address: string;
@@ -96,10 +84,6 @@ export interface PeerInfoAmino {
   id: string;
   address_info: PeerAddressInfoAmino[];
   last_connected?: Date;
-}
-export interface PeerInfoAminoMsg {
-  type: "/tendermint.p2p.PeerInfo";
-  value: PeerInfoAmino;
 }
 export interface PeerInfoSDKType {
   id: string;
@@ -121,10 +105,6 @@ export interface PeerAddressInfoAmino {
   last_dial_success?: Date;
   last_dial_failure?: Date;
   dial_failures: number;
-}
-export interface PeerAddressInfoAminoMsg {
-  type: "/tendermint.p2p.PeerAddressInfo";
-  value: PeerAddressInfoAmino;
 }
 export interface PeerAddressInfoSDKType {
   address: string;
@@ -230,9 +210,6 @@ export const ProtocolVersion = {
     obj.block = message.block ? message.block.toString() : undefined;
     obj.app = message.app ? message.app.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ProtocolVersionAminoMsg): ProtocolVersion {
-    return ProtocolVersion.fromAmino(object.value);
   },
   fromProtoMsg(message: ProtocolVersionProtoMsg): ProtocolVersion {
     return ProtocolVersion.decode(message.value);
@@ -414,9 +391,6 @@ export const NodeInfo = {
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;
   },
-  fromAminoMsg(object: NodeInfoAminoMsg): NodeInfo {
-    return NodeInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: NodeInfoProtoMsg): NodeInfo {
     return NodeInfo.decode(message.value);
   },
@@ -508,9 +482,6 @@ export const NodeInfoOther = {
     obj.tx_index = message.txIndex;
     obj.rpc_address = message.rpcAddress;
     return obj;
-  },
-  fromAminoMsg(object: NodeInfoOtherAminoMsg): NodeInfoOther {
-    return NodeInfoOther.fromAmino(object.value);
   },
   fromProtoMsg(message: NodeInfoOtherProtoMsg): NodeInfoOther {
     return NodeInfoOther.decode(message.value);
@@ -629,9 +600,6 @@ export const PeerInfo = {
     }
     obj.last_connected = message.lastConnected;
     return obj;
-  },
-  fromAminoMsg(object: PeerInfoAminoMsg): PeerInfo {
-    return PeerInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: PeerInfoProtoMsg): PeerInfo {
     return PeerInfo.decode(message.value);
@@ -752,9 +720,6 @@ export const PeerAddressInfo = {
     obj.last_dial_failure = message.lastDialFailure;
     obj.dial_failures = message.dialFailures;
     return obj;
-  },
-  fromAminoMsg(object: PeerAddressInfoAminoMsg): PeerAddressInfo {
-    return PeerAddressInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: PeerAddressInfoProtoMsg): PeerAddressInfo {
     return PeerAddressInfo.decode(message.value);

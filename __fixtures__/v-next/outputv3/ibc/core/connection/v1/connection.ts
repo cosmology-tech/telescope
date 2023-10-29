@@ -111,10 +111,6 @@ export interface ConnectionEndAmino {
    */
   delay_period: string;
 }
-export interface ConnectionEndAminoMsg {
-  type: "cosmos-sdk/ConnectionEnd";
-  value: ConnectionEndAmino;
-}
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
  * separate one.
@@ -174,10 +170,6 @@ export interface IdentifiedConnectionAmino {
   /** delay period associated with this connection. */
   delay_period: string;
 }
-export interface IdentifiedConnectionAminoMsg {
-  type: "cosmos-sdk/IdentifiedConnection";
-  value: IdentifiedConnectionAmino;
-}
 /**
  * IdentifiedConnection defines a connection with additional connection
  * identifier field.
@@ -224,10 +216,6 @@ export interface CounterpartyAmino {
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefixAmino;
 }
-export interface CounterpartyAminoMsg {
-  type: "cosmos-sdk/Counterparty";
-  value: CounterpartyAmino;
-}
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartySDKType {
   client_id: string;
@@ -247,10 +235,6 @@ export interface ClientPathsProtoMsg {
 export interface ClientPathsAmino {
   /** list of connection paths */
   paths: string[];
-}
-export interface ClientPathsAminoMsg {
-  type: "cosmos-sdk/ClientPaths";
-  value: ClientPathsAmino;
 }
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsSDKType {
@@ -273,10 +257,6 @@ export interface ConnectionPathsAmino {
   client_id: string;
   /** list of connection paths */
   paths: string[];
-}
-export interface ConnectionPathsAminoMsg {
-  type: "cosmos-sdk/ConnectionPaths";
-  value: ConnectionPathsAmino;
 }
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsSDKType {
@@ -307,10 +287,6 @@ export interface VersionAmino {
   /** list of features compatible with the specified identifier */
   features: string[];
 }
-export interface VersionAminoMsg {
-  type: "cosmos-sdk/Version";
-  value: VersionAmino;
-}
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
  * the connection handshake.
@@ -340,10 +316,6 @@ export interface ParamsAmino {
    * conditions. A safe choice is 3-5x the expected time per block.
    */
   max_expected_time_per_block: string;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
 }
 /** Params defines the set of Connection parameters. */
 export interface ParamsSDKType {
@@ -486,15 +458,6 @@ export const ConnectionEnd = {
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ConnectionEndAminoMsg): ConnectionEnd {
-    return ConnectionEnd.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConnectionEnd): ConnectionEndAminoMsg {
-    return {
-      type: "cosmos-sdk/ConnectionEnd",
-      value: ConnectionEnd.toAmino(message)
-    };
   },
   fromProtoMsg(message: ConnectionEndProtoMsg): ConnectionEnd {
     return ConnectionEnd.decode(message.value);
@@ -661,15 +624,6 @@ export const IdentifiedConnection = {
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: IdentifiedConnectionAminoMsg): IdentifiedConnection {
-    return IdentifiedConnection.fromAmino(object.value);
-  },
-  toAminoMsg(message: IdentifiedConnection): IdentifiedConnectionAminoMsg {
-    return {
-      type: "cosmos-sdk/IdentifiedConnection",
-      value: IdentifiedConnection.toAmino(message)
-    };
-  },
   fromProtoMsg(message: IdentifiedConnectionProtoMsg): IdentifiedConnection {
     return IdentifiedConnection.decode(message.value);
   },
@@ -779,15 +733,6 @@ export const Counterparty = {
     obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
-    return Counterparty.fromAmino(object.value);
-  },
-  toAminoMsg(message: Counterparty): CounterpartyAminoMsg {
-    return {
-      type: "cosmos-sdk/Counterparty",
-      value: Counterparty.toAmino(message)
-    };
-  },
   fromProtoMsg(message: CounterpartyProtoMsg): Counterparty {
     return Counterparty.decode(message.value);
   },
@@ -878,15 +823,6 @@ export const ClientPaths = {
       obj.paths = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ClientPathsAminoMsg): ClientPaths {
-    return ClientPaths.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientPaths): ClientPathsAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientPaths",
-      value: ClientPaths.toAmino(message)
-    };
   },
   fromProtoMsg(message: ClientPathsProtoMsg): ClientPaths {
     return ClientPaths.decode(message.value);
@@ -993,15 +929,6 @@ export const ConnectionPaths = {
     }
     return obj;
   },
-  fromAminoMsg(object: ConnectionPathsAminoMsg): ConnectionPaths {
-    return ConnectionPaths.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConnectionPaths): ConnectionPathsAminoMsg {
-    return {
-      type: "cosmos-sdk/ConnectionPaths",
-      value: ConnectionPaths.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ConnectionPathsProtoMsg): ConnectionPaths {
     return ConnectionPaths.decode(message.value);
   },
@@ -1107,15 +1034,6 @@ export const Version = {
     }
     return obj;
   },
-  fromAminoMsg(object: VersionAminoMsg): Version {
-    return Version.fromAmino(object.value);
-  },
-  toAminoMsg(message: Version): VersionAminoMsg {
-    return {
-      type: "cosmos-sdk/Version",
-      value: Version.toAmino(message)
-    };
-  },
   fromProtoMsg(message: VersionProtoMsg): Version {
     return Version.decode(message.value);
   },
@@ -1196,15 +1114,6 @@ export const Params = {
     const obj: any = {};
     obj.max_expected_time_per_block = message.maxExpectedTimePerBlock ? message.maxExpectedTimePerBlock.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

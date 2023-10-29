@@ -39,10 +39,6 @@ export interface MsgCreateDenomAmino {
   /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
-export interface MsgCreateDenomAminoMsg {
-  type: "osmosis/tokenfactory/create-denom";
-  value: MsgCreateDenomAmino;
-}
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
  * method. It allows an account to create a new denom. It requires a sender
@@ -76,10 +72,6 @@ export interface MsgCreateDenomResponseProtoMsg {
 export interface MsgCreateDenomResponseAmino {
   new_token_denom: string;
 }
-export interface MsgCreateDenomResponseAminoMsg {
-  type: "osmosis/tokenfactory/create-denom-response";
-  value: MsgCreateDenomResponseAmino;
-}
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
  * It returns the full string of the newly created denom
@@ -107,10 +99,6 @@ export interface MsgMintAmino {
   sender: string;
   amount?: CoinAmino;
 }
-export interface MsgMintAminoMsg {
-  type: "osmosis/tokenfactory/mint";
-  value: MsgMintAmino;
-}
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
  * more of a token.  For now, we only support minting to the sender account
@@ -125,10 +113,6 @@ export interface MsgMintResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgMintResponseAmino {}
-export interface MsgMintResponseAminoMsg {
-  type: "osmosis/tokenfactory/mint-response";
-  value: MsgMintResponseAmino;
-}
 export interface MsgMintResponseSDKType {}
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -150,10 +134,6 @@ export interface MsgBurnAmino {
   sender: string;
   amount?: CoinAmino;
 }
-export interface MsgBurnAminoMsg {
-  type: "osmosis/tokenfactory/burn";
-  value: MsgBurnAmino;
-}
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
  * a token.  For now, we only support burning from the sender account.
@@ -168,10 +148,6 @@ export interface MsgBurnResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgBurnResponseAmino {}
-export interface MsgBurnResponseAminoMsg {
-  type: "osmosis/tokenfactory/burn-response";
-  value: MsgBurnResponseAmino;
-}
 export interface MsgBurnResponseSDKType {}
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
@@ -194,10 +170,6 @@ export interface MsgChangeAdminAmino {
   sender: string;
   denom: string;
   new_admin: string;
-}
-export interface MsgChangeAdminAminoMsg {
-  type: "osmosis/tokenfactory/change-admin";
-  value: MsgChangeAdminAmino;
 }
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
@@ -222,10 +194,6 @@ export interface MsgChangeAdminResponseProtoMsg {
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponseAmino {}
-export interface MsgChangeAdminResponseAminoMsg {
-  type: "osmosis/tokenfactory/change-admin-response";
-  value: MsgChangeAdminResponseAmino;
-}
 /**
  * MsgChangeAdminResponse defines the response structure for an executed
  * MsgChangeAdmin message.
@@ -251,10 +219,6 @@ export interface MsgSetDenomMetadataAmino {
   sender: string;
   metadata?: MetadataAmino;
 }
-export interface MsgSetDenomMetadataAminoMsg {
-  type: "osmosis/tokenfactory/set-denom-metadata";
-  value: MsgSetDenomMetadataAmino;
-}
 /**
  * MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
  * the denom's bank metadata
@@ -277,10 +241,6 @@ export interface MsgSetDenomMetadataResponseProtoMsg {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponseAmino {}
-export interface MsgSetDenomMetadataResponseAminoMsg {
-  type: "osmosis/tokenfactory/set-denom-metadata-response";
-  value: MsgSetDenomMetadataResponseAmino;
-}
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed
  * MsgSetDenomMetadata message.
@@ -366,15 +326,6 @@ export const MsgCreateDenom = {
     obj.subdenom = message.subdenom;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateDenomAminoMsg): MsgCreateDenom {
-    return MsgCreateDenom.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateDenom): MsgCreateDenomAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/create-denom",
-      value: MsgCreateDenom.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateDenomProtoMsg): MsgCreateDenom {
     return MsgCreateDenom.decode(message.value);
   },
@@ -453,15 +404,6 @@ export const MsgCreateDenomResponse = {
     const obj: any = {};
     obj.new_token_denom = message.newTokenDenom;
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateDenomResponseAminoMsg): MsgCreateDenomResponse {
-    return MsgCreateDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateDenomResponse): MsgCreateDenomResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/create-denom-response",
-      value: MsgCreateDenomResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateDenomResponseProtoMsg): MsgCreateDenomResponse {
     return MsgCreateDenomResponse.decode(message.value);
@@ -558,15 +500,6 @@ export const MsgMint = {
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgMintAminoMsg): MsgMint {
-    return MsgMint.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMint): MsgMintAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/mint",
-      value: MsgMint.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgMintProtoMsg): MsgMint {
     return MsgMint.decode(message.value);
   },
@@ -628,15 +561,6 @@ export const MsgMintResponse = {
   toAmino(_: MsgMintResponse): MsgMintResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgMintResponseAminoMsg): MsgMintResponse {
-    return MsgMintResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMintResponse): MsgMintResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/mint-response",
-      value: MsgMintResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgMintResponseProtoMsg): MsgMintResponse {
     return MsgMintResponse.decode(message.value);
@@ -733,15 +657,6 @@ export const MsgBurn = {
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgBurnAminoMsg): MsgBurn {
-    return MsgBurn.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBurn): MsgBurnAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/burn",
-      value: MsgBurn.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgBurnProtoMsg): MsgBurn {
     return MsgBurn.decode(message.value);
   },
@@ -803,15 +718,6 @@ export const MsgBurnResponse = {
   toAmino(_: MsgBurnResponse): MsgBurnResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgBurnResponseAminoMsg): MsgBurnResponse {
-    return MsgBurnResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBurnResponse): MsgBurnResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/burn-response",
-      value: MsgBurnResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgBurnResponseProtoMsg): MsgBurnResponse {
     return MsgBurnResponse.decode(message.value);
@@ -920,15 +826,6 @@ export const MsgChangeAdmin = {
     obj.new_admin = message.newAdmin;
     return obj;
   },
-  fromAminoMsg(object: MsgChangeAdminAminoMsg): MsgChangeAdmin {
-    return MsgChangeAdmin.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgChangeAdmin): MsgChangeAdminAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/change-admin",
-      value: MsgChangeAdmin.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgChangeAdminProtoMsg): MsgChangeAdmin {
     return MsgChangeAdmin.decode(message.value);
   },
@@ -990,15 +887,6 @@ export const MsgChangeAdminResponse = {
   toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgChangeAdminResponseAminoMsg): MsgChangeAdminResponse {
-    return MsgChangeAdminResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgChangeAdminResponse): MsgChangeAdminResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/change-admin-response",
-      value: MsgChangeAdminResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgChangeAdminResponseProtoMsg): MsgChangeAdminResponse {
     return MsgChangeAdminResponse.decode(message.value);
@@ -1095,15 +983,6 @@ export const MsgSetDenomMetadata = {
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgSetDenomMetadataAminoMsg): MsgSetDenomMetadata {
-    return MsgSetDenomMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSetDenomMetadata): MsgSetDenomMetadataAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/set-denom-metadata",
-      value: MsgSetDenomMetadata.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSetDenomMetadataProtoMsg): MsgSetDenomMetadata {
     return MsgSetDenomMetadata.decode(message.value);
   },
@@ -1165,15 +1044,6 @@ export const MsgSetDenomMetadataResponse = {
   toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgSetDenomMetadataResponseAminoMsg): MsgSetDenomMetadataResponse {
-    return MsgSetDenomMetadataResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/set-denom-metadata-response",
-      value: MsgSetDenomMetadataResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSetDenomMetadataResponseProtoMsg): MsgSetDenomMetadataResponse {
     return MsgSetDenomMetadataResponse.decode(message.value);

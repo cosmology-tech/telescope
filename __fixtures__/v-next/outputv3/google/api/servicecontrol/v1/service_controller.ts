@@ -115,10 +115,6 @@ export interface CheckRequestAmino {
    */
   service_config_id: string;
 }
-export interface CheckRequestAminoMsg {
-  type: "/google.api.servicecontrol.v1.CheckRequest";
-  value: CheckRequestAmino;
-}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
@@ -175,10 +171,6 @@ export interface CheckResponseAmino {
   /** Feedback data returned from the server during processing a Check request. */
   check_info?: CheckResponse_CheckInfoAmino;
 }
-export interface CheckResponseAminoMsg {
-  type: "/google.api.servicecontrol.v1.CheckResponse";
-  value: CheckResponseAmino;
-}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   operation_id: string;
@@ -212,10 +204,6 @@ export interface CheckResponse_CheckInfoAmino {
   unused_arguments: string[];
   /** Consumer info of this check. */
   consumer_info?: CheckResponse_ConsumerInfoAmino;
-}
-export interface CheckResponse_CheckInfoAminoMsg {
-  type: "/google.api.servicecontrol.v1.CheckInfo";
-  value: CheckResponse_CheckInfoAmino;
 }
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoSDKType {
@@ -269,10 +257,6 @@ export interface CheckResponse_ConsumerInfoAmino {
    * consumer number is found.
    */
   consumer_number: string;
-}
-export interface CheckResponse_ConsumerInfoAminoMsg {
-  type: "/google.api.servicecontrol.v1.ConsumerInfo";
-  value: CheckResponse_ConsumerInfoAmino;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoSDKType {
@@ -352,10 +336,6 @@ export interface ReportRequestAmino {
    */
   service_config_id: string;
 }
-export interface ReportRequestAminoMsg {
-  type: "/google.api.servicecontrol.v1.ReportRequest";
-  value: ReportRequestAmino;
-}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -414,10 +394,6 @@ export interface ReportResponseAmino {
   /** The current service rollout id used to process the request. */
   service_rollout_id: string;
 }
-export interface ReportResponseAminoMsg {
-  type: "/google.api.servicecontrol.v1.ReportResponse";
-  value: ReportResponseAmino;
-}
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
   report_errors: ReportResponse_ReportErrorSDKType[];
@@ -461,10 +437,6 @@ export interface ReportResponse_ReportErrorAmino {
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
   status?: StatusAmino;
-}
-export interface ReportResponse_ReportErrorAminoMsg {
-  type: "/google.api.servicecontrol.v1.ReportError";
-  value: ReportResponse_ReportErrorAmino;
 }
 /**
  * Represents the processing error of one
@@ -568,9 +540,6 @@ export const CheckRequest = {
     obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined;
     obj.service_config_id = message.serviceConfigId;
     return obj;
-  },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
@@ -720,9 +689,6 @@ export const CheckResponse = {
     obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
   },
@@ -828,9 +794,6 @@ export const CheckResponse_CheckInfo = {
     }
     obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CheckResponse_CheckInfoAminoMsg): CheckResponse_CheckInfo {
-    return CheckResponse_CheckInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckResponse_CheckInfoProtoMsg): CheckResponse_CheckInfo {
     return CheckResponse_CheckInfo.decode(message.value);
@@ -941,9 +904,6 @@ export const CheckResponse_ConsumerInfo = {
     obj.type = message.type;
     obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CheckResponse_ConsumerInfoAminoMsg): CheckResponse_ConsumerInfo {
-    return CheckResponse_ConsumerInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg): CheckResponse_ConsumerInfo {
     return CheckResponse_ConsumerInfo.decode(message.value);
@@ -1063,9 +1023,6 @@ export const ReportRequest = {
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
-    return ReportRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
     return ReportRequest.decode(message.value);
   },
@@ -1184,9 +1141,6 @@ export const ReportResponse = {
     obj.service_rollout_id = message.serviceRolloutId;
     return obj;
   },
-  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
-    return ReportResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
     return ReportResponse.decode(message.value);
   },
@@ -1280,9 +1234,6 @@ export const ReportResponse_ReportError = {
     obj.operation_id = message.operationId;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ReportResponse_ReportErrorAminoMsg): ReportResponse_ReportError {
-    return ReportResponse_ReportError.fromAmino(object.value);
   },
   fromProtoMsg(message: ReportResponse_ReportErrorProtoMsg): ReportResponse_ReportError {
     return ReportResponse_ReportError.decode(message.value);

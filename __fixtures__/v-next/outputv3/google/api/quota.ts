@@ -125,10 +125,6 @@ export interface QuotaAmino {
    */
   metric_rules: MetricRuleAmino[];
 }
-export interface QuotaAminoMsg {
-  type: "/google.api.Quota";
-  value: QuotaAmino;
-}
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -196,10 +192,6 @@ export interface MetricRule_MetricCostsEntryAmino {
   key: string;
   value: string;
 }
-export interface MetricRule_MetricCostsEntryAminoMsg {
-  type: string;
-  value: MetricRule_MetricCostsEntryAmino;
-}
 export interface MetricRule_MetricCostsEntrySDKType {
   key: string;
   value: bigint;
@@ -254,10 +246,6 @@ export interface MetricRuleAmino {
     [key: string]: string;
   };
 }
-export interface MetricRuleAminoMsg {
-  type: "/google.api.MetricRule";
-  value: MetricRuleAmino;
-}
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
  * metric's configured quota behaviors to apply to the method call.
@@ -279,10 +267,6 @@ export interface QuotaLimit_ValuesEntryProtoMsg {
 export interface QuotaLimit_ValuesEntryAmino {
   key: string;
   value: string;
-}
-export interface QuotaLimit_ValuesEntryAminoMsg {
-  type: string;
-  value: QuotaLimit_ValuesEntryAmino;
 }
 export interface QuotaLimit_ValuesEntrySDKType {
   key: string;
@@ -486,10 +470,6 @@ export interface QuotaLimitAmino {
    */
   display_name: string;
 }
-export interface QuotaLimitAminoMsg {
-  type: "/google.api.QuotaLimit";
-  value: QuotaLimitAmino;
-}
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
  * for a limit type. There can be at most one limit for a duration and limit
@@ -612,9 +592,6 @@ export const Quota = {
     }
     return obj;
   },
-  fromAminoMsg(object: QuotaAminoMsg): Quota {
-    return Quota.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaProtoMsg): Quota {
     return Quota.decode(message.value);
   },
@@ -707,9 +684,6 @@ export const MetricRule_MetricCostsEntry = {
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
-    return MetricRule_MetricCostsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg): MetricRule_MetricCostsEntry {
     return MetricRule_MetricCostsEntry.decode(message.value);
@@ -840,9 +814,6 @@ export const MetricRule = {
     }
     return obj;
   },
-  fromAminoMsg(object: MetricRuleAminoMsg): MetricRule {
-    return MetricRule.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricRuleProtoMsg): MetricRule {
     return MetricRule.decode(message.value);
   },
@@ -935,9 +906,6 @@ export const QuotaLimit_ValuesEntry = {
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
-    return QuotaLimit_ValuesEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg): QuotaLimit_ValuesEntry {
     return QuotaLimit_ValuesEntry.decode(message.value);
@@ -1185,9 +1153,6 @@ export const QuotaLimit = {
     }
     obj.display_name = message.displayName;
     return obj;
-  },
-  fromAminoMsg(object: QuotaLimitAminoMsg): QuotaLimit {
-    return QuotaLimit.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaLimitProtoMsg): QuotaLimit {
     return QuotaLimit.decode(message.value);

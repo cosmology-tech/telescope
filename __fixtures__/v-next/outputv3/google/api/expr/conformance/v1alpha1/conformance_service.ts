@@ -83,10 +83,6 @@ export interface ParseRequestAmino {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disable_macros: boolean;
 }
-export interface ParseRequestAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.ParseRequest";
-  value: ParseRequestAmino;
-}
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
   cel_source: string;
@@ -111,10 +107,6 @@ export interface ParseResponseAmino {
   parsed_expr?: ParsedExprAmino;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusAmino[];
-}
-export interface ParseResponseAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.ParseResponse";
-  value: ParseResponseAmino;
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
@@ -169,10 +161,6 @@ export interface CheckRequestAmino {
    */
   no_std_env: boolean;
 }
-export interface CheckRequestAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.CheckRequest";
-  value: CheckRequestAmino;
-}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
@@ -198,10 +186,6 @@ export interface CheckResponseAmino {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusAmino[];
 }
-export interface CheckResponseAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.CheckResponse";
-  value: CheckResponseAmino;
-}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
   checked_expr?: CheckedExprSDKType;
@@ -218,10 +202,6 @@ export interface EvalRequest_BindingsEntryProtoMsg {
 export interface EvalRequest_BindingsEntryAmino {
   key: string;
   value?: ExprValueAmino;
-}
-export interface EvalRequest_BindingsEntryAminoMsg {
-  type: string;
-  value: EvalRequest_BindingsEntryAmino;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
@@ -263,10 +243,6 @@ export interface EvalRequestAmino {
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
 }
-export interface EvalRequestAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.EvalRequest";
-  value: EvalRequestAmino;
-}
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
@@ -304,10 +280,6 @@ export interface EvalResponseAmino {
    */
   issues: StatusAmino[];
 }
-export interface EvalResponseAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.EvalResponse";
-  value: EvalResponseAmino;
-}
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
   result?: ExprValueSDKType;
@@ -342,10 +314,6 @@ export interface IssueDetailsAmino {
   position?: SourcePositionAmino;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: string;
-}
-export interface IssueDetailsAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.IssueDetails";
-  value: IssueDetailsAmino;
 }
 /**
  * Warnings or errors in service execution are represented by
@@ -464,9 +432,6 @@ export const ParseRequest = {
     obj.disable_macros = message.disableMacros;
     return obj;
   },
-  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
-    return ParseRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
     return ParseRequest.decode(message.value);
   },
@@ -572,9 +537,6 @@ export const ParseResponse = {
       obj.issues = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
-    return ParseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ParseResponseProtoMsg): ParseResponse {
     return ParseResponse.decode(message.value);
@@ -710,9 +672,6 @@ export const CheckRequest = {
     obj.no_std_env = message.noStdEnv;
     return obj;
   },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
   },
@@ -819,9 +778,6 @@ export const CheckResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
   },
@@ -914,9 +870,6 @@ export const EvalRequest_BindingsEntry = {
     obj.key = message.key;
     obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
-    return EvalRequest_BindingsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg): EvalRequest_BindingsEntry {
     return EvalRequest_BindingsEntry.decode(message.value);
@@ -1079,9 +1032,6 @@ export const EvalRequest = {
     obj.container = message.container;
     return obj;
   },
-  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
-    return EvalRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
     return EvalRequest.decode(message.value);
   },
@@ -1187,9 +1137,6 @@ export const EvalResponse = {
       obj.issues = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
-    return EvalResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalResponseProtoMsg): EvalResponse {
     return EvalResponse.decode(message.value);
@@ -1300,9 +1247,6 @@ export const IssueDetails = {
     obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
     obj.id = message.id ? message.id.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
-    return IssueDetails.fromAmino(object.value);
   },
   fromProtoMsg(message: IssueDetailsProtoMsg): IssueDetails {
     return IssueDetails.decode(message.value);

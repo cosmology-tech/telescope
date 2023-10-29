@@ -17,10 +17,6 @@ export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
   evidence_hash: Uint8Array;
 }
-export interface QueryEvidenceRequestAminoMsg {
-  type: "cosmos-sdk/QueryEvidenceRequest";
-  value: QueryEvidenceRequestAmino;
-}
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestSDKType {
   evidence_hash: Uint8Array;
@@ -38,10 +34,6 @@ export interface QueryEvidenceResponseProtoMsg {
 export interface QueryEvidenceResponseAmino {
   /** evidence returns the requested evidence. */
   evidence?: AnyAmino;
-}
-export interface QueryEvidenceResponseAminoMsg {
-  type: "cosmos-sdk/QueryEvidenceResponse";
-  value: QueryEvidenceResponseAmino;
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponseSDKType {
@@ -66,10 +58,6 @@ export interface QueryAllEvidenceRequestProtoMsg {
 export interface QueryAllEvidenceRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryAllEvidenceRequestAminoMsg {
-  type: "cosmos-sdk/QueryAllEvidenceRequest";
-  value: QueryAllEvidenceRequestAmino;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -101,10 +89,6 @@ export interface QueryAllEvidenceResponseAmino {
   evidence: AnyAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryAllEvidenceResponseAminoMsg {
-  type: "cosmos-sdk/QueryAllEvidenceResponse";
-  value: QueryAllEvidenceResponseAmino;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -179,15 +163,6 @@ export const QueryEvidenceRequest = {
     const obj: any = {};
     obj.evidence_hash = message.evidenceHash;
     return obj;
-  },
-  fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {
-    return QueryEvidenceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEvidenceRequest): QueryEvidenceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryEvidenceRequest",
-      value: QueryEvidenceRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryEvidenceRequestProtoMsg): QueryEvidenceRequest {
     return QueryEvidenceRequest.decode(message.value);
@@ -270,15 +245,6 @@ export const QueryEvidenceResponse = {
     obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryEvidenceResponseAminoMsg): QueryEvidenceResponse {
-    return QueryEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEvidenceResponse): QueryEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryEvidenceResponse",
-      value: QueryEvidenceResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryEvidenceResponseProtoMsg): QueryEvidenceResponse {
     return QueryEvidenceResponse.decode(message.value);
   },
@@ -359,15 +325,6 @@ export const QueryAllEvidenceRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryAllEvidenceRequestAminoMsg): QueryAllEvidenceRequest {
-    return QueryAllEvidenceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAllEvidenceRequest",
-      value: QueryAllEvidenceRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryAllEvidenceRequestProtoMsg): QueryAllEvidenceRequest {
     return QueryAllEvidenceRequest.decode(message.value);
@@ -475,15 +432,6 @@ export const QueryAllEvidenceResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryAllEvidenceResponseAminoMsg): QueryAllEvidenceResponse {
-    return QueryAllEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAllEvidenceResponse",
-      value: QueryAllEvidenceResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryAllEvidenceResponseProtoMsg): QueryAllEvidenceResponse {
     return QueryAllEvidenceResponse.decode(message.value);

@@ -35,10 +35,6 @@ export interface GenesisStateAmino {
   /** denom_metadata defines the metadata of the differents coins. */
   denom_metadata: MetadataAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -69,10 +65,6 @@ export interface BalanceAmino {
   address: string;
   /** coins defines the different coins this balance holds. */
   coins: CoinAmino[];
-}
-export interface BalanceAminoMsg {
-  type: "cosmos-sdk/Balance";
-  value: BalanceAmino;
 }
 /**
  * Balance defines an account address and balance pair used in the bank module's
@@ -228,15 +220,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -341,15 +324,6 @@ export const Balance = {
       obj.coins = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BalanceAminoMsg): Balance {
-    return Balance.fromAmino(object.value);
-  },
-  toAminoMsg(message: Balance): BalanceAminoMsg {
-    return {
-      type: "cosmos-sdk/Balance",
-      value: Balance.toAmino(message)
-    };
   },
   fromProtoMsg(message: BalanceProtoMsg): Balance {
     return Balance.decode(message.value);

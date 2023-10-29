@@ -38,10 +38,6 @@ export interface BasicAllowanceAmino {
   /** expiration specifies an optional time when this allowance expires */
   expiration?: Date;
 }
-export interface BasicAllowanceAminoMsg {
-  type: "cosmos-sdk/BasicAllowance";
-  value: BasicAllowanceAmino;
-}
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
@@ -108,10 +104,6 @@ export interface PeriodicAllowanceAmino {
    */
   period_reset?: Date;
 }
-export interface PeriodicAllowanceAminoMsg {
-  type: "cosmos-sdk/PeriodicAllowance";
-  value: PeriodicAllowanceAmino;
-}
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
  * as well as a limit per time period.
@@ -146,10 +138,6 @@ export interface AllowedMsgAllowanceAmino {
   /** allowed_messages are the messages for which the grantee has the access. */
   allowed_messages: string[];
 }
-export interface AllowedMsgAllowanceAminoMsg {
-  type: "cosmos-sdk/AllowedMsgAllowance";
-  value: AllowedMsgAllowanceAmino;
-}
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
   $typeUrl?: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
@@ -180,10 +168,6 @@ export interface GrantAmino {
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnyAmino;
-}
-export interface GrantAminoMsg {
-  type: "cosmos-sdk/Grant";
-  value: GrantAmino;
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantSDKType {
@@ -283,15 +267,6 @@ export const BasicAllowance = {
     }
     obj.expiration = message.expiration;
     return obj;
-  },
-  fromAminoMsg(object: BasicAllowanceAminoMsg): BasicAllowance {
-    return BasicAllowance.fromAmino(object.value);
-  },
-  toAminoMsg(message: BasicAllowance): BasicAllowanceAminoMsg {
-    return {
-      type: "cosmos-sdk/BasicAllowance",
-      value: BasicAllowance.toAmino(message)
-    };
   },
   fromProtoMsg(message: BasicAllowanceProtoMsg): BasicAllowance {
     return BasicAllowance.decode(message.value);
@@ -457,15 +432,6 @@ export const PeriodicAllowance = {
     obj.period_reset = message.periodReset;
     return obj;
   },
-  fromAminoMsg(object: PeriodicAllowanceAminoMsg): PeriodicAllowance {
-    return PeriodicAllowance.fromAmino(object.value);
-  },
-  toAminoMsg(message: PeriodicAllowance): PeriodicAllowanceAminoMsg {
-    return {
-      type: "cosmos-sdk/PeriodicAllowance",
-      value: PeriodicAllowance.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PeriodicAllowanceProtoMsg): PeriodicAllowance {
     return PeriodicAllowance.decode(message.value);
   },
@@ -573,15 +539,6 @@ export const AllowedMsgAllowance = {
       obj.allowed_messages = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: AllowedMsgAllowanceAminoMsg): AllowedMsgAllowance {
-    return AllowedMsgAllowance.fromAmino(object.value);
-  },
-  toAminoMsg(message: AllowedMsgAllowance): AllowedMsgAllowanceAminoMsg {
-    return {
-      type: "cosmos-sdk/AllowedMsgAllowance",
-      value: AllowedMsgAllowance.toAmino(message)
-    };
   },
   fromProtoMsg(message: AllowedMsgAllowanceProtoMsg): AllowedMsgAllowance {
     return AllowedMsgAllowance.decode(message.value);
@@ -691,15 +648,6 @@ export const Grant = {
     obj.grantee = message.grantee;
     obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GrantAminoMsg): Grant {
-    return Grant.fromAmino(object.value);
-  },
-  toAminoMsg(message: Grant): GrantAminoMsg {
-    return {
-      type: "cosmos-sdk/Grant",
-      value: Grant.toAmino(message)
-    };
   },
   fromProtoMsg(message: GrantProtoMsg): Grant {
     return Grant.decode(message.value);

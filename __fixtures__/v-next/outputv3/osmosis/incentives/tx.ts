@@ -62,10 +62,6 @@ export interface MsgCreateGaugeAmino {
    */
   num_epochs_paid_over: string;
 }
-export interface MsgCreateGaugeAminoMsg {
-  type: "osmosis/incentives/create-gauge";
-  value: MsgCreateGaugeAmino;
-}
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
   is_perpetual: boolean;
@@ -81,10 +77,6 @@ export interface MsgCreateGaugeResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgCreateGaugeResponseAmino {}
-export interface MsgCreateGaugeResponseAminoMsg {
-  type: "osmosis/incentives/create-gauge-response";
-  value: MsgCreateGaugeResponseAmino;
-}
 export interface MsgCreateGaugeResponseSDKType {}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGauge {
@@ -108,10 +100,6 @@ export interface MsgAddToGaugeAmino {
   /** rewards are the coin(s) to add to gauge */
   rewards: CoinAmino[];
 }
-export interface MsgAddToGaugeAminoMsg {
-  type: "osmosis/incentives/add-to-gauge";
-  value: MsgAddToGaugeAmino;
-}
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
   owner: string;
@@ -124,10 +112,6 @@ export interface MsgAddToGaugeResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgAddToGaugeResponseAmino {}
-export interface MsgAddToGaugeResponseAminoMsg {
-  type: "osmosis/incentives/add-to-gauge-response";
-  value: MsgAddToGaugeResponseAmino;
-}
 export interface MsgAddToGaugeResponseSDKType {}
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
@@ -281,15 +265,6 @@ export const MsgCreateGauge = {
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateGaugeAminoMsg): MsgCreateGauge {
-    return MsgCreateGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateGauge): MsgCreateGaugeAminoMsg {
-    return {
-      type: "osmosis/incentives/create-gauge",
-      value: MsgCreateGauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateGaugeProtoMsg): MsgCreateGauge {
     return MsgCreateGauge.decode(message.value);
   },
@@ -351,15 +326,6 @@ export const MsgCreateGaugeResponse = {
   toAmino(_: MsgCreateGaugeResponse): MsgCreateGaugeResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateGaugeResponseAminoMsg): MsgCreateGaugeResponse {
-    return MsgCreateGaugeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateGaugeResponse): MsgCreateGaugeResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/create-gauge-response",
-      value: MsgCreateGaugeResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateGaugeResponseProtoMsg): MsgCreateGaugeResponse {
     return MsgCreateGaugeResponse.decode(message.value);
@@ -482,15 +448,6 @@ export const MsgAddToGauge = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgAddToGaugeAminoMsg): MsgAddToGauge {
-    return MsgAddToGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgAddToGauge): MsgAddToGaugeAminoMsg {
-    return {
-      type: "osmosis/incentives/add-to-gauge",
-      value: MsgAddToGauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgAddToGaugeProtoMsg): MsgAddToGauge {
     return MsgAddToGauge.decode(message.value);
   },
@@ -552,15 +509,6 @@ export const MsgAddToGaugeResponse = {
   toAmino(_: MsgAddToGaugeResponse): MsgAddToGaugeResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgAddToGaugeResponseAminoMsg): MsgAddToGaugeResponse {
-    return MsgAddToGaugeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgAddToGaugeResponse): MsgAddToGaugeResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/add-to-gauge-response",
-      value: MsgAddToGaugeResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgAddToGaugeResponseProtoMsg): MsgAddToGaugeResponse {
     return MsgAddToGaugeResponse.decode(message.value);

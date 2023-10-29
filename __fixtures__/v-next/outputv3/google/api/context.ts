@@ -97,10 +97,6 @@ export interface ContextAmino {
    */
   rules: ContextRuleAmino[];
 }
-export interface ContextAminoMsg {
-  type: "/google.api.Context";
-  value: ContextAmino;
-}
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -198,10 +194,6 @@ export interface ContextRuleAmino {
    */
   allowed_response_extensions: string[];
 }
-export interface ContextRuleAminoMsg {
-  type: "/google.api.ContextRule";
-  value: ContextRuleAmino;
-}
 /**
  * A context rule provides information about the context for an individual API
  * element.
@@ -289,9 +281,6 @@ export const Context = {
       obj.rules = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ContextAminoMsg): Context {
-    return Context.fromAmino(object.value);
   },
   fromProtoMsg(message: ContextProtoMsg): Context {
     return Context.decode(message.value);
@@ -474,9 +463,6 @@ export const ContextRule = {
       obj.allowed_response_extensions = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ContextRuleAminoMsg): ContextRule {
-    return ContextRule.fromAmino(object.value);
   },
   fromProtoMsg(message: ContextRuleProtoMsg): ContextRule {
     return ContextRule.decode(message.value);

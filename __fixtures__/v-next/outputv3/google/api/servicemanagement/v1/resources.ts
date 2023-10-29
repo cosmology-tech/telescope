@@ -286,10 +286,6 @@ export interface ManagedServiceAmino {
   /** ID of the project that produces and owns this service. */
   producer_project_id: string;
 }
-export interface ManagedServiceAminoMsg {
-  type: "/google.api.servicemanagement.v1.ManagedService";
-  value: ManagedServiceAmino;
-}
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
@@ -330,10 +326,6 @@ export interface OperationMetadataAmino {
   /** The start time of the operation. */
   start_time?: Date;
 }
-export interface OperationMetadataAminoMsg {
-  type: "/google.api.servicemanagement.v1.OperationMetadata";
-  value: OperationMetadataAmino;
-}
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
@@ -358,10 +350,6 @@ export interface OperationMetadata_StepAmino {
   description: string;
   /** The status code. */
   status: OperationMetadata_Status;
-}
-export interface OperationMetadata_StepAminoMsg {
-  type: "/google.api.servicemanagement.v1.Step";
-  value: OperationMetadata_StepAmino;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepSDKType {
@@ -389,10 +377,6 @@ export interface DiagnosticAmino {
   kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
   message: string;
-}
-export interface DiagnosticAminoMsg {
-  type: "/google.api.servicemanagement.v1.Diagnostic";
-  value: DiagnosticAmino;
 }
 /** Represents a diagnostic message (error or warning) */
 export interface DiagnosticSDKType {
@@ -438,10 +422,6 @@ export interface ConfigSourceAmino {
    */
   files: ConfigFileAmino[];
 }
-export interface ConfigSourceAminoMsg {
-  type: "/google.api.servicemanagement.v1.ConfigSource";
-  value: ConfigSourceAmino;
-}
 /**
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
@@ -472,10 +452,6 @@ export interface ConfigFileAmino {
   /** The type of configuration file this represents. */
   file_type: ConfigFile_FileType;
 }
-export interface ConfigFileAminoMsg {
-  type: "/google.api.servicemanagement.v1.ConfigFile";
-  value: ConfigFileAmino;
-}
 /** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
   file_path: string;
@@ -501,10 +477,6 @@ export interface ConfigRefAmino {
    * format: "services/{service name}/configs/{config id}".
    */
   name: string;
-}
-export interface ConfigRefAminoMsg {
-  type: "/google.api.servicemanagement.v1.ConfigRef";
-  value: ConfigRefAmino;
 }
 /** Represents a service configuration with its name and id. */
 export interface ConfigRefSDKType {
@@ -545,10 +517,6 @@ export interface ChangeReportAmino {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   config_changes: ConfigChangeAmino[];
-}
-export interface ChangeReportAminoMsg {
-  type: "/google.api.servicemanagement.v1.ChangeReport";
-  value: ChangeReportAmino;
 }
 /**
  * Change report associated with a particular service configuration.
@@ -643,10 +611,6 @@ export interface RolloutAmino {
   /** The name of the service associated with this Rollout. */
   service_name: string;
 }
-export interface RolloutAminoMsg {
-  type: "/google.api.servicemanagement.v1.Rollout";
-  value: RolloutAmino;
-}
 /**
  * A rollout resource that defines how service configuration versions are pushed
  * to control plane systems. Typically, you create a new version of the
@@ -672,10 +636,6 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg {
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
   key: string;
   value: number;
-}
-export interface Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg {
-  type: string;
-  value: Rollout_TrafficPercentStrategy_PercentagesEntryAmino;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
   key: string;
@@ -769,10 +729,6 @@ export interface Rollout_TrafficPercentStrategyAmino {
     [key: string]: number;
   };
 }
-export interface Rollout_TrafficPercentStrategyAminoMsg {
-  type: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
-  value: Rollout_TrafficPercentStrategyAmino;
-}
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -824,10 +780,6 @@ export interface Rollout_DeleteServiceStrategyProtoMsg {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategyAmino {}
-export interface Rollout_DeleteServiceStrategyAminoMsg {
-  type: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
-  value: Rollout_DeleteServiceStrategyAmino;
-}
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
@@ -911,9 +863,6 @@ export const ManagedService = {
     obj.service_name = message.serviceName;
     obj.producer_project_id = message.producerProjectId;
     return obj;
-  },
-  fromAminoMsg(object: ManagedServiceAminoMsg): ManagedService {
-    return ManagedService.fromAmino(object.value);
   },
   fromProtoMsg(message: ManagedServiceProtoMsg): ManagedService {
     return ManagedService.decode(message.value);
@@ -1059,9 +1008,6 @@ export const OperationMetadata = {
     obj.start_time = message.startTime;
     return obj;
   },
-  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
-    return OperationMetadata.fromAmino(object.value);
-  },
   fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
     return OperationMetadata.decode(message.value);
   },
@@ -1153,9 +1099,6 @@ export const OperationMetadata_Step = {
     obj.description = message.description;
     obj.status = message.status;
     return obj;
-  },
-  fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
-    return OperationMetadata_Step.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationMetadata_StepProtoMsg): OperationMetadata_Step {
     return OperationMetadata_Step.decode(message.value);
@@ -1263,9 +1206,6 @@ export const Diagnostic = {
     obj.message = message.message;
     return obj;
   },
-  fromAminoMsg(object: DiagnosticAminoMsg): Diagnostic {
-    return Diagnostic.fromAmino(object.value);
-  },
   fromProtoMsg(message: DiagnosticProtoMsg): Diagnostic {
     return Diagnostic.decode(message.value);
   },
@@ -1369,9 +1309,6 @@ export const ConfigSource = {
       obj.files = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ConfigSourceAminoMsg): ConfigSource {
-    return ConfigSource.fromAmino(object.value);
   },
   fromProtoMsg(message: ConfigSourceProtoMsg): ConfigSource {
     return ConfigSource.decode(message.value);
@@ -1479,9 +1416,6 @@ export const ConfigFile = {
     obj.file_type = message.fileType;
     return obj;
   },
-  fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
-    return ConfigFile.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConfigFileProtoMsg): ConfigFile {
     return ConfigFile.decode(message.value);
   },
@@ -1559,9 +1493,6 @@ export const ConfigRef = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: ConfigRefAminoMsg): ConfigRef {
-    return ConfigRef.fromAmino(object.value);
   },
   fromProtoMsg(message: ConfigRefProtoMsg): ConfigRef {
     return ConfigRef.decode(message.value);
@@ -1652,9 +1583,6 @@ export const ChangeReport = {
       obj.config_changes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ChangeReportAminoMsg): ChangeReport {
-    return ChangeReport.fromAmino(object.value);
   },
   fromProtoMsg(message: ChangeReportProtoMsg): ChangeReport {
     return ChangeReport.decode(message.value);
@@ -1822,9 +1750,6 @@ export const Rollout = {
     obj.service_name = message.serviceName;
     return obj;
   },
-  fromAminoMsg(object: RolloutAminoMsg): Rollout {
-    return Rollout.fromAmino(object.value);
-  },
   fromProtoMsg(message: RolloutProtoMsg): Rollout {
     return Rollout.decode(message.value);
   },
@@ -1915,9 +1840,6 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return Rollout_TrafficPercentStrategy_PercentagesEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
     return Rollout_TrafficPercentStrategy_PercentagesEntry.decode(message.value);
@@ -2034,9 +1956,6 @@ export const Rollout_TrafficPercentStrategy = {
     }
     return obj;
   },
-  fromAminoMsg(object: Rollout_TrafficPercentStrategyAminoMsg): Rollout_TrafficPercentStrategy {
-    return Rollout_TrafficPercentStrategy.fromAmino(object.value);
-  },
   fromProtoMsg(message: Rollout_TrafficPercentStrategyProtoMsg): Rollout_TrafficPercentStrategy {
     return Rollout_TrafficPercentStrategy.decode(message.value);
   },
@@ -2097,9 +2016,6 @@ export const Rollout_DeleteServiceStrategy = {
   toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: Rollout_DeleteServiceStrategyAminoMsg): Rollout_DeleteServiceStrategy {
-    return Rollout_DeleteServiceStrategy.fromAmino(object.value);
   },
   fromProtoMsg(message: Rollout_DeleteServiceStrategyProtoMsg): Rollout_DeleteServiceStrategy {
     return Rollout_DeleteServiceStrategy.decode(message.value);

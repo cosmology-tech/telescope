@@ -365,10 +365,6 @@ export interface ResourceDescriptorAmino {
    */
   style: ResourceDescriptor_Style[];
 }
-export interface ResourceDescriptorAminoMsg {
-  type: "/google.api.ResourceDescriptor";
-  value: ResourceDescriptorAmino;
-}
 /**
  * A simple descriptor of a resource type.
  * 
@@ -516,10 +512,6 @@ export interface ResourceReferenceAmino {
    *     }
    */
   child_type: string;
-}
-export interface ResourceReferenceAminoMsg {
-  type: "/google.api.ResourceReference";
-  value: ResourceReferenceAmino;
 }
 /**
  * Defines a proto annotation that describes a string field that refers to
@@ -711,9 +703,6 @@ export const ResourceDescriptor = {
     }
     return obj;
   },
-  fromAminoMsg(object: ResourceDescriptorAminoMsg): ResourceDescriptor {
-    return ResourceDescriptor.fromAmino(object.value);
-  },
   fromProtoMsg(message: ResourceDescriptorProtoMsg): ResourceDescriptor {
     return ResourceDescriptor.decode(message.value);
   },
@@ -805,9 +794,6 @@ export const ResourceReference = {
     obj.type = message.type;
     obj.child_type = message.childType;
     return obj;
-  },
-  fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {
-    return ResourceReference.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceReferenceProtoMsg): ResourceReference {
     return ResourceReference.decode(message.value);

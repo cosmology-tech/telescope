@@ -14,10 +14,6 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   authorization: GrantAuthorizationAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisStateSDKType {
   authorization: GrantAuthorizationSDKType[];
@@ -99,15 +95,6 @@ export const GenesisState = {
       obj.authorization = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

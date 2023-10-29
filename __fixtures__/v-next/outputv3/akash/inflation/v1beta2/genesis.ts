@@ -14,10 +14,6 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   params?: ParamsAmino;
 }
-export interface GenesisStateAminoMsg {
-  type: "/akash.inflation.v1beta2.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -88,9 +84,6 @@ export const GenesisState = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

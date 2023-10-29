@@ -213,10 +213,6 @@ export interface AllocateQuotaRequestAmino {
    */
   service_config_id: string;
 }
-export interface AllocateQuotaRequestAminoMsg {
-  type: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
-  value: AllocateQuotaRequestAmino;
-}
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
   service_name: string;
@@ -234,10 +230,6 @@ export interface QuotaOperation_LabelsEntryProtoMsg {
 export interface QuotaOperation_LabelsEntryAmino {
   key: string;
   value: string;
-}
-export interface QuotaOperation_LabelsEntryAminoMsg {
-  type: string;
-  value: QuotaOperation_LabelsEntryAmino;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
@@ -365,10 +357,6 @@ export interface QuotaOperationAmino {
   /** Quota mode for this operation. */
   quota_mode: QuotaOperation_QuotaMode;
 }
-export interface QuotaOperationAminoMsg {
-  type: "/google.api.servicecontrol.v1.QuotaOperation";
-  value: QuotaOperationAmino;
-}
 /** Represents information regarding a quota operation. */
 export interface QuotaOperationSDKType {
   operation_id: string;
@@ -434,10 +422,6 @@ export interface AllocateQuotaResponseAmino {
   /** ID of the actual config used to process the request. */
   service_config_id: string;
 }
-export interface AllocateQuotaResponseAminoMsg {
-  type: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
-  value: AllocateQuotaResponseAmino;
-}
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseSDKType {
   operation_id: string;
@@ -484,10 +468,6 @@ export interface QuotaErrorAmino {
    * If available, `status.code` will be non zero.
    */
   status?: StatusAmino;
-}
-export interface QuotaErrorAminoMsg {
-  type: "/google.api.servicecontrol.v1.QuotaError";
-  value: QuotaErrorAmino;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
@@ -591,9 +571,6 @@ export const AllocateQuotaRequest = {
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromAminoMsg(object: AllocateQuotaRequestAminoMsg): AllocateQuotaRequest {
-    return AllocateQuotaRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: AllocateQuotaRequestProtoMsg): AllocateQuotaRequest {
     return AllocateQuotaRequest.decode(message.value);
   },
@@ -684,9 +661,6 @@ export const QuotaOperation_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: QuotaOperation_LabelsEntryAminoMsg): QuotaOperation_LabelsEntry {
-    return QuotaOperation_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaOperation_LabelsEntryProtoMsg): QuotaOperation_LabelsEntry {
     return QuotaOperation_LabelsEntry.decode(message.value);
@@ -885,9 +859,6 @@ export const QuotaOperation = {
     obj.quota_mode = message.quotaMode;
     return obj;
   },
-  fromAminoMsg(object: QuotaOperationAminoMsg): QuotaOperation {
-    return QuotaOperation.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaOperationProtoMsg): QuotaOperation {
     return QuotaOperation.decode(message.value);
   },
@@ -1032,9 +1003,6 @@ export const AllocateQuotaResponse = {
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromAminoMsg(object: AllocateQuotaResponseAminoMsg): AllocateQuotaResponse {
-    return AllocateQuotaResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: AllocateQuotaResponseProtoMsg): AllocateQuotaResponse {
     return AllocateQuotaResponse.decode(message.value);
   },
@@ -1156,9 +1124,6 @@ export const QuotaError = {
     obj.description = message.description;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QuotaErrorAminoMsg): QuotaError {
-    return QuotaError.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaErrorProtoMsg): QuotaError {
     return QuotaError.decode(message.value);

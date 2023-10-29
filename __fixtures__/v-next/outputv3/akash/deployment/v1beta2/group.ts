@@ -77,10 +77,6 @@ export interface GroupAmino {
   group_spec?: GroupSpecAmino;
   created_at: string;
 }
-export interface GroupAminoMsg {
-  type: "/akash.deployment.v1beta2.Group";
-  value: GroupAmino;
-}
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id: GroupIDSDKType;
@@ -200,9 +196,6 @@ export const Group = {
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GroupAminoMsg): Group {
-    return Group.fromAmino(object.value);
   },
   fromProtoMsg(message: GroupProtoMsg): Group {
     return Group.decode(message.value);

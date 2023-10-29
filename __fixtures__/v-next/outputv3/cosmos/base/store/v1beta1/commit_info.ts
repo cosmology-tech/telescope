@@ -21,10 +21,6 @@ export interface CommitInfoAmino {
   version: string;
   store_infos: StoreInfoAmino[];
 }
-export interface CommitInfoAminoMsg {
-  type: "cosmos-sdk/CommitInfo";
-  value: CommitInfoAmino;
-}
 /**
  * CommitInfo defines commit information used by the multi-store when committing
  * a version/height.
@@ -53,10 +49,6 @@ export interface StoreInfoAmino {
   name: string;
   commit_id?: CommitIDAmino;
 }
-export interface StoreInfoAminoMsg {
-  type: "cosmos-sdk/StoreInfo";
-  value: StoreInfoAmino;
-}
 /**
  * StoreInfo defines store-specific commit information. It contains a reference
  * between a store name and the commit ID.
@@ -84,10 +76,6 @@ export interface CommitIDProtoMsg {
 export interface CommitIDAmino {
   version: string;
   hash: Uint8Array;
-}
-export interface CommitIDAminoMsg {
-  type: "cosmos-sdk/CommitID";
-  value: CommitIDAmino;
 }
 /**
  * CommitID defines the committment information when a specific store is
@@ -191,15 +179,6 @@ export const CommitInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: CommitInfoAminoMsg): CommitInfo {
-    return CommitInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: CommitInfo): CommitInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/CommitInfo",
-      value: CommitInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: CommitInfoProtoMsg): CommitInfo {
     return CommitInfo.decode(message.value);
   },
@@ -295,15 +274,6 @@ export const StoreInfo = {
     obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined;
     return obj;
   },
-  fromAminoMsg(object: StoreInfoAminoMsg): StoreInfo {
-    return StoreInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: StoreInfo): StoreInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/StoreInfo",
-      value: StoreInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: StoreInfoProtoMsg): StoreInfo {
     return StoreInfo.decode(message.value);
   },
@@ -398,15 +368,6 @@ export const CommitID = {
     obj.version = message.version ? message.version.toString() : undefined;
     obj.hash = message.hash;
     return obj;
-  },
-  fromAminoMsg(object: CommitIDAminoMsg): CommitID {
-    return CommitID.fromAmino(object.value);
-  },
-  toAminoMsg(message: CommitID): CommitIDAminoMsg {
-    return {
-      type: "cosmos-sdk/CommitID",
-      value: CommitID.toAmino(message)
-    };
   },
   fromProtoMsg(message: CommitIDProtoMsg): CommitID {
     return CommitID.decode(message.value);

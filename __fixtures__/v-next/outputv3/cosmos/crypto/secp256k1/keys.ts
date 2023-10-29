@@ -25,10 +25,6 @@ export interface PubKeyProtoMsg {
 export interface PubKeyAmino {
   key: Uint8Array;
 }
-export interface PubKeyAminoMsg {
-  type: "cosmos-sdk/PubKey";
-  value: PubKeyAmino;
-}
 /**
  * PubKey defines a secp256k1 public key
  * Key is the compressed form of the pubkey. The first byte depends is a 0x02 byte
@@ -50,10 +46,6 @@ export interface PrivKeyProtoMsg {
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeyAmino {
   key: Uint8Array;
-}
-export interface PrivKeyAminoMsg {
-  type: "cosmos-sdk/PrivKey";
-  value: PrivKeyAmino;
 }
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeySDKType {
@@ -124,15 +116,6 @@ export const PubKey = {
     const obj: any = {};
     obj.key = message.key;
     return obj;
-  },
-  fromAminoMsg(object: PubKeyAminoMsg): PubKey {
-    return PubKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PubKey): PubKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PubKey",
-      value: PubKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: PubKeyProtoMsg): PubKey {
     return PubKey.decode(message.value);
@@ -212,15 +195,6 @@ export const PrivKey = {
     const obj: any = {};
     obj.key = message.key;
     return obj;
-  },
-  fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {
-    return PrivKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrivKey): PrivKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PrivKey",
-      value: PrivKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: PrivKeyProtoMsg): PrivKey {
     return PrivKey.decode(message.value);

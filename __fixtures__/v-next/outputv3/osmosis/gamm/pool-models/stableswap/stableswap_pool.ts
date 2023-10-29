@@ -27,10 +27,6 @@ export interface PoolParamsAmino {
   swap_fee: string;
   exit_fee: string;
 }
-export interface PoolParamsAminoMsg {
-  type: "osmosis/gamm/pool-params";
-  value: PoolParamsAmino;
-}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -95,10 +91,6 @@ export interface PoolAmino {
   scaling_factors: string[];
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scaling_factor_controller: string;
-}
-export interface PoolAminoMsg {
-  type: "osmosis/gamm/pool";
-  value: PoolAmino;
 }
 /** Pool is the stableswap Pool struct */
 export interface PoolSDKType {
@@ -191,15 +183,6 @@ export const PoolParams = {
     obj.swap_fee = message.swapFee;
     obj.exit_fee = message.exitFee;
     return obj;
-  },
-  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
-    return PoolParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/pool-params",
-      value: PoolParams.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
     return PoolParams.decode(message.value);
@@ -417,15 +400,6 @@ export const Pool = {
     }
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "osmosis/gamm/pool",
-      value: Pool.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);

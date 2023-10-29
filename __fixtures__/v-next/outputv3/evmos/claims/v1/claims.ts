@@ -85,10 +85,6 @@ export interface ClaimAmino {
   /** claimable token amount for the action. Zero if completed */
   claimable_amount: string;
 }
-export interface ClaimAminoMsg {
-  type: "/evmos.claims.v1.Claim";
-  value: ClaimAmino;
-}
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
@@ -120,10 +116,6 @@ export interface ClaimsRecordAddressAmino {
   /** slice of the available actions completed */
   actions_completed: boolean[];
 }
-export interface ClaimsRecordAddressAminoMsg {
-  type: "/evmos.claims.v1.ClaimsRecordAddress";
-  value: ClaimsRecordAddressAmino;
-}
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
   address: string;
@@ -153,10 +145,6 @@ export interface ClaimsRecordAmino {
   initial_claimable_amount: string;
   /** slice of the available actions completed */
   actions_completed: boolean[];
-}
-export interface ClaimsRecordAminoMsg {
-  type: "/evmos.claims.v1.ClaimsRecord";
-  value: ClaimsRecordAmino;
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
@@ -258,9 +246,6 @@ export const Claim = {
     obj.completed = message.completed;
     obj.claimable_amount = message.claimableAmount;
     return obj;
-  },
-  fromAminoMsg(object: ClaimAminoMsg): Claim {
-    return Claim.fromAmino(object.value);
   },
   fromProtoMsg(message: ClaimProtoMsg): Claim {
     return Claim.decode(message.value);
@@ -389,9 +374,6 @@ export const ClaimsRecordAddress = {
     }
     return obj;
   },
-  fromAminoMsg(object: ClaimsRecordAddressAminoMsg): ClaimsRecordAddress {
-    return ClaimsRecordAddress.fromAmino(object.value);
-  },
   fromProtoMsg(message: ClaimsRecordAddressProtoMsg): ClaimsRecordAddress {
     return ClaimsRecordAddress.decode(message.value);
   },
@@ -504,9 +486,6 @@ export const ClaimsRecord = {
       obj.actions_completed = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ClaimsRecordAminoMsg): ClaimsRecord {
-    return ClaimsRecord.fromAmino(object.value);
   },
   fromProtoMsg(message: ClaimsRecordProtoMsg): ClaimsRecord {
     return ClaimsRecord.decode(message.value);

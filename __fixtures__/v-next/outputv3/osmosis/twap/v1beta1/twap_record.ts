@@ -81,10 +81,6 @@ export interface TwapRecordAmino {
    */
   last_error_time?: Date;
 }
-export interface TwapRecordAminoMsg {
-  type: "osmosis/twap/twap-record";
-  value: TwapRecordAmino;
-}
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
  * The asset pair assets should be lexicographically sorted.
@@ -301,15 +297,6 @@ export const TwapRecord = {
     obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
     obj.last_error_time = message.lastErrorTime;
     return obj;
-  },
-  fromAminoMsg(object: TwapRecordAminoMsg): TwapRecord {
-    return TwapRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: TwapRecord): TwapRecordAminoMsg {
-    return {
-      type: "osmosis/twap/twap-record",
-      value: TwapRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: TwapRecordProtoMsg): TwapRecord {
     return TwapRecord.decode(message.value);

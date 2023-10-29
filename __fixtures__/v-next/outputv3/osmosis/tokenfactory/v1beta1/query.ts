@@ -11,10 +11,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "osmosis/tokenfactory/query-params-request";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -30,10 +26,6 @@ export interface QueryParamsResponseProtoMsg {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "osmosis/tokenfactory/query-params-response";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -56,10 +48,6 @@ export interface QueryDenomAuthorityMetadataRequestProtoMsg {
  */
 export interface QueryDenomAuthorityMetadataRequestAmino {
   denom: string;
-}
-export interface QueryDenomAuthorityMetadataRequestAminoMsg {
-  type: "osmosis/tokenfactory/query-denom-authority-metadata-request";
-  value: QueryDenomAuthorityMetadataRequestAmino;
 }
 /**
  * QueryDenomAuthorityMetadataRequest defines the request structure for the
@@ -86,10 +74,6 @@ export interface QueryDenomAuthorityMetadataResponseProtoMsg {
 export interface QueryDenomAuthorityMetadataResponseAmino {
   authority_metadata?: DenomAuthorityMetadataAmino;
 }
-export interface QueryDenomAuthorityMetadataResponseAminoMsg {
-  type: "osmosis/tokenfactory/query-denom-authority-metadata-response";
-  value: QueryDenomAuthorityMetadataResponseAmino;
-}
 /**
  * QueryDenomAuthorityMetadataResponse defines the response structure for the
  * DenomAuthorityMetadata gRPC query.
@@ -115,10 +99,6 @@ export interface QueryDenomsFromCreatorRequestProtoMsg {
 export interface QueryDenomsFromCreatorRequestAmino {
   creator: string;
 }
-export interface QueryDenomsFromCreatorRequestAminoMsg {
-  type: "osmosis/tokenfactory/query-denoms-from-creator-request";
-  value: QueryDenomsFromCreatorRequestAmino;
-}
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the
  * DenomsFromCreator gRPC query.
@@ -143,10 +123,6 @@ export interface QueryDenomsFromCreatorResponseProtoMsg {
  */
 export interface QueryDenomsFromCreatorResponseAmino {
   denoms: string[];
-}
-export interface QueryDenomsFromCreatorResponseAminoMsg {
-  type: "osmosis/tokenfactory/query-denoms-from-creator-response";
-  value: QueryDenomsFromCreatorResponseAmino;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the response structure for the
@@ -203,15 +179,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/query-params-request",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -294,15 +261,6 @@ export const QueryParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/query-params-response",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -381,15 +339,6 @@ export const QueryDenomAuthorityMetadataRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomAuthorityMetadataRequestAminoMsg): QueryDenomAuthorityMetadataRequest {
-    return QueryDenomAuthorityMetadataRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/query-denom-authority-metadata-request",
-      value: QueryDenomAuthorityMetadataRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg): QueryDenomAuthorityMetadataRequest {
     return QueryDenomAuthorityMetadataRequest.decode(message.value);
@@ -472,15 +421,6 @@ export const QueryDenomAuthorityMetadataResponse = {
     obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDenomAuthorityMetadataResponseAminoMsg): QueryDenomAuthorityMetadataResponse {
-    return QueryDenomAuthorityMetadataResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/query-denom-authority-metadata-response",
-      value: QueryDenomAuthorityMetadataResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDenomAuthorityMetadataResponseProtoMsg): QueryDenomAuthorityMetadataResponse {
     return QueryDenomAuthorityMetadataResponse.decode(message.value);
   },
@@ -559,15 +499,6 @@ export const QueryDenomsFromCreatorRequest = {
     const obj: any = {};
     obj.creator = message.creator;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomsFromCreatorRequestAminoMsg): QueryDenomsFromCreatorRequest {
-    return QueryDenomsFromCreatorRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/query-denoms-from-creator-request",
-      value: QueryDenomsFromCreatorRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg): QueryDenomsFromCreatorRequest {
     return QueryDenomsFromCreatorRequest.decode(message.value);
@@ -659,15 +590,6 @@ export const QueryDenomsFromCreatorResponse = {
       obj.denoms = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomsFromCreatorResponseAminoMsg): QueryDenomsFromCreatorResponse {
-    return QueryDenomsFromCreatorResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/query-denoms-from-creator-response",
-      value: QueryDenomsFromCreatorResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomsFromCreatorResponseProtoMsg): QueryDenomsFromCreatorResponse {
     return QueryDenomsFromCreatorResponse.decode(message.value);

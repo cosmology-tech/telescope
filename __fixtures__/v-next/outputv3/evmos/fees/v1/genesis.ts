@@ -21,10 +21,6 @@ export interface GenesisStateAmino {
   /** active registered contracts */
   dev_fee_infos: DevFeeInfoAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "/evmos.fees.v1.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -77,10 +73,6 @@ export interface ParamsAmino {
   addr_derivation_cost_create: string;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   min_gas_price: string;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.fees.v1.Params";
-  value: ParamsAmino;
 }
 /** Params defines the fees module params */
 export interface ParamsSDKType {
@@ -182,9 +174,6 @@ export const GenesisState = {
       obj.dev_fee_infos = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -321,9 +310,6 @@ export const Params = {
     obj.addr_derivation_cost_create = message.addrDerivationCostCreate ? message.addrDerivationCostCreate.toString() : undefined;
     obj.min_gas_price = message.minGasPrice;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

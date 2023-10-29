@@ -55,10 +55,6 @@ export interface MsgCreateClawbackVestingAccountAmino {
    */
   merge: boolean;
 }
-export interface MsgCreateClawbackVestingAccountAminoMsg {
-  type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
-  value: MsgCreateClawbackVestingAccountAmino;
-}
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
@@ -82,10 +78,6 @@ export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponseAmino {}
-export interface MsgCreateClawbackVestingAccountResponseAminoMsg {
-  type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
-  value: MsgCreateClawbackVestingAccountResponseAmino;
-}
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
@@ -127,10 +119,6 @@ export interface MsgClawbackAmino {
    */
   dest_address: string;
 }
-export interface MsgClawbackAminoMsg {
-  type: "/evmos.vesting.v1.MsgClawback";
-  value: MsgClawbackAmino;
-}
 /**
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
@@ -148,10 +136,6 @@ export interface MsgClawbackResponseProtoMsg {
 }
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseAmino {}
-export interface MsgClawbackResponseAminoMsg {
-  type: "/evmos.vesting.v1.MsgClawbackResponse";
-  value: MsgClawbackResponseAmino;
-}
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseSDKType {}
 function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAccount {
@@ -313,9 +297,6 @@ export const MsgCreateClawbackVestingAccount = {
     obj.merge = message.merge;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateClawbackVestingAccountAminoMsg): MsgCreateClawbackVestingAccount {
-    return MsgCreateClawbackVestingAccount.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCreateClawbackVestingAccountProtoMsg): MsgCreateClawbackVestingAccount {
     return MsgCreateClawbackVestingAccount.decode(message.value);
   },
@@ -376,9 +357,6 @@ export const MsgCreateClawbackVestingAccountResponse = {
   toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateClawbackVestingAccountResponseAminoMsg): MsgCreateClawbackVestingAccountResponse {
-    return MsgCreateClawbackVestingAccountResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCreateClawbackVestingAccountResponseProtoMsg): MsgCreateClawbackVestingAccountResponse {
     return MsgCreateClawbackVestingAccountResponse.decode(message.value);
@@ -486,9 +464,6 @@ export const MsgClawback = {
     obj.dest_address = message.destAddress;
     return obj;
   },
-  fromAminoMsg(object: MsgClawbackAminoMsg): MsgClawback {
-    return MsgClawback.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgClawbackProtoMsg): MsgClawback {
     return MsgClawback.decode(message.value);
   },
@@ -549,9 +524,6 @@ export const MsgClawbackResponse = {
   toAmino(_: MsgClawbackResponse): MsgClawbackResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgClawbackResponseAminoMsg): MsgClawbackResponse {
-    return MsgClawbackResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgClawbackResponseProtoMsg): MsgClawbackResponse {
     return MsgClawbackResponse.decode(message.value);

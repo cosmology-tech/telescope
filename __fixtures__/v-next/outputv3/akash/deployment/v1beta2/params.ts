@@ -14,10 +14,6 @@ export interface ParamsProtoMsg {
 export interface ParamsAmino {
   deployment_min_deposit?: CoinAmino;
 }
-export interface ParamsAminoMsg {
-  type: "/akash.deployment.v1beta2.Params";
-  value: ParamsAmino;
-}
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
   deployment_min_deposit: CoinSDKType;
@@ -88,9 +84,6 @@ export const Params = {
     const obj: any = {};
     obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

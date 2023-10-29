@@ -85,10 +85,6 @@ export interface SmoothWeightChangeParamsAmino {
    */
   target_pool_weights: PoolAssetAmino[];
 }
-export interface SmoothWeightChangeParamsAminoMsg {
-  type: "osmosis/gamm/smooth-weight-change-params";
-  value: SmoothWeightChangeParamsAmino;
-}
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
  * a start weight and end weight over a period of time.
@@ -134,10 +130,6 @@ export interface PoolParamsAmino {
   exit_fee: string;
   smooth_weight_change_params?: SmoothWeightChangeParamsAmino;
 }
-export interface PoolParamsAminoMsg {
-  type: "osmosis/gamm/pool-params";
-  value: PoolParamsAmino;
-}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -182,10 +174,6 @@ export interface PoolAssetAmino {
   token?: CoinAmino;
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
-}
-export interface PoolAssetAminoMsg {
-  type: "osmosis/gamm/pool-asset";
-  value: PoolAssetAmino;
 }
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -253,10 +241,6 @@ export interface PoolAmino {
   pool_assets: PoolAssetAmino[];
   /** sum of all non-normalized pool weights */
   total_weight: string;
-}
-export interface PoolAminoMsg {
-  type: "osmosis/gamm/pool";
-  value: PoolAmino;
 }
 export interface PoolSDKType {
   $typeUrl?: "/osmosis.gamm.v1beta1.Pool";
@@ -402,15 +386,6 @@ export const SmoothWeightChangeParams = {
     }
     return obj;
   },
-  fromAminoMsg(object: SmoothWeightChangeParamsAminoMsg): SmoothWeightChangeParams {
-    return SmoothWeightChangeParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/smooth-weight-change-params",
-      value: SmoothWeightChangeParams.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg): SmoothWeightChangeParams {
     return SmoothWeightChangeParams.decode(message.value);
   },
@@ -520,15 +495,6 @@ export const PoolParams = {
     obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
     return obj;
   },
-  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
-    return PoolParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/pool-params",
-      value: PoolParams.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
     return PoolParams.decode(message.value);
   },
@@ -623,15 +589,6 @@ export const PoolAsset = {
     obj.token = message.token ? Coin.toAmino(message.token) : undefined;
     obj.weight = message.weight;
     return obj;
-  },
-  fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
-    return PoolAsset.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolAsset): PoolAssetAminoMsg {
-    return {
-      type: "osmosis/gamm/pool-asset",
-      value: PoolAsset.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolAssetProtoMsg): PoolAsset {
     return PoolAsset.decode(message.value);
@@ -814,15 +771,6 @@ export const Pool = {
     }
     obj.total_weight = message.totalWeight;
     return obj;
-  },
-  fromAminoMsg(object: PoolAminoMsg): Pool {
-    return Pool.fromAmino(object.value);
-  },
-  toAminoMsg(message: Pool): PoolAminoMsg {
-    return {
-      type: "osmosis/gamm/pool",
-      value: Pool.toAmino(message)
-    };
   },
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);

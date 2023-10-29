@@ -22,10 +22,6 @@ export interface QueryBalanceRequestAmino {
   /** denom is the coin denom to query balances for. */
   denom: string;
 }
-export interface QueryBalanceRequestAminoMsg {
-  type: "cosmos-sdk/QueryBalanceRequest";
-  value: QueryBalanceRequestAmino;
-}
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
 export interface QueryBalanceRequestSDKType {
   address: string;
@@ -44,10 +40,6 @@ export interface QueryBalanceResponseProtoMsg {
 export interface QueryBalanceResponseAmino {
   /** balance is the balance of the coin. */
   balance?: CoinAmino;
-}
-export interface QueryBalanceResponseAminoMsg {
-  type: "cosmos-sdk/QueryBalanceResponse";
-  value: QueryBalanceResponseAmino;
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponseSDKType {
@@ -70,10 +62,6 @@ export interface QueryAllBalancesRequestAmino {
   address: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryAllBalancesRequestAminoMsg {
-  type: "cosmos-sdk/QueryAllBalancesRequest";
-  value: QueryAllBalancesRequestAmino;
 }
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequestSDKType {
@@ -103,10 +91,6 @@ export interface QueryAllBalancesResponseAmino {
   balances: CoinAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryAllBalancesResponseAminoMsg {
-  type: "cosmos-sdk/QueryAllBalancesResponse";
-  value: QueryAllBalancesResponseAmino;
 }
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
@@ -140,10 +124,6 @@ export interface QuerySpendableBalancesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QuerySpendableBalancesRequestAminoMsg {
-  type: "cosmos-sdk/QuerySpendableBalancesRequest";
-  value: QuerySpendableBalancesRequestAmino;
-}
 /**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
  * an account's spendable balances.
@@ -175,10 +155,6 @@ export interface QuerySpendableBalancesResponseAmino {
   balances: CoinAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QuerySpendableBalancesResponseAminoMsg {
-  type: "cosmos-sdk/QuerySpendableBalancesResponse";
-  value: QuerySpendableBalancesResponseAmino;
 }
 /**
  * QuerySpendableBalancesResponse defines the gRPC response structure for querying
@@ -215,10 +191,6 @@ export interface QueryTotalSupplyRequestAmino {
    * Since: cosmos-sdk 0.43
    */
   pagination?: PageRequestAmino;
-}
-export interface QueryTotalSupplyRequestAminoMsg {
-  type: "cosmos-sdk/QueryTotalSupplyRequest";
-  value: QueryTotalSupplyRequestAmino;
 }
 /**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
@@ -259,10 +231,6 @@ export interface QueryTotalSupplyResponseAmino {
    */
   pagination?: PageResponseAmino;
 }
-export interface QueryTotalSupplyResponseAminoMsg {
-  type: "cosmos-sdk/QueryTotalSupplyResponse";
-  value: QueryTotalSupplyResponseAmino;
-}
 /**
  * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
  * method
@@ -285,10 +253,6 @@ export interface QuerySupplyOfRequestAmino {
   /** denom is the coin denom to query balances for. */
   denom: string;
 }
-export interface QuerySupplyOfRequestAminoMsg {
-  type: "cosmos-sdk/QuerySupplyOfRequest";
-  value: QuerySupplyOfRequestAmino;
-}
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequestSDKType {
   denom: string;
@@ -307,10 +271,6 @@ export interface QuerySupplyOfResponseAmino {
   /** amount is the supply of the coin. */
   amount?: CoinAmino;
 }
-export interface QuerySupplyOfResponseAminoMsg {
-  type: "cosmos-sdk/QuerySupplyOfResponse";
-  value: QuerySupplyOfResponseAmino;
-}
 /** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfResponseSDKType {
   amount: CoinSDKType;
@@ -323,10 +283,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest defines the request type for querying x/bank parameters. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest defines the request type for querying x/bank parameters. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse defines the response type for querying x/bank parameters. */
@@ -340,10 +296,6 @@ export interface QueryParamsResponseProtoMsg {
 /** QueryParamsResponse defines the response type for querying x/bank parameters. */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse defines the response type for querying x/bank parameters. */
 export interface QueryParamsResponseSDKType {
@@ -362,10 +314,6 @@ export interface QueryDenomsMetadataRequestProtoMsg {
 export interface QueryDenomsMetadataRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryDenomsMetadataRequestAminoMsg {
-  type: "cosmos-sdk/QueryDenomsMetadataRequest";
-  value: QueryDenomsMetadataRequestAmino;
 }
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequestSDKType {
@@ -395,10 +343,6 @@ export interface QueryDenomsMetadataResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryDenomsMetadataResponseAminoMsg {
-  type: "cosmos-sdk/QueryDenomsMetadataResponse";
-  value: QueryDenomsMetadataResponseAmino;
-}
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
  * method.
@@ -420,10 +364,6 @@ export interface QueryDenomMetadataRequestProtoMsg {
 export interface QueryDenomMetadataRequestAmino {
   /** denom is the coin denom to query the metadata for. */
   denom: string;
-}
-export interface QueryDenomMetadataRequestAminoMsg {
-  type: "cosmos-sdk/QueryDenomMetadataRequest";
-  value: QueryDenomMetadataRequestAmino;
 }
 /** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequestSDKType {
@@ -448,10 +388,6 @@ export interface QueryDenomMetadataResponseProtoMsg {
 export interface QueryDenomMetadataResponseAmino {
   /** metadata describes and provides all the client information for the requested token. */
   metadata?: MetadataAmino;
-}
-export interface QueryDenomMetadataResponseAminoMsg {
-  type: "cosmos-sdk/QueryDenomMetadataResponse";
-  value: QueryDenomMetadataResponseAmino;
 }
 /**
  * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
@@ -485,10 +421,6 @@ export interface QueryDenomOwnersRequestAmino {
   denom: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryDenomOwnersRequestAminoMsg {
-  type: "cosmos-sdk/QueryDenomOwnersRequest";
-  value: QueryDenomOwnersRequestAmino;
 }
 /**
  * QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
@@ -525,10 +457,6 @@ export interface DenomOwnerAmino {
   /** balance is the balance of the denominated coin for an account. */
   balance?: CoinAmino;
 }
-export interface DenomOwnerAminoMsg {
-  type: "cosmos-sdk/DenomOwner";
-  value: DenomOwnerAmino;
-}
 /**
  * DenomOwner defines structure representing an account that owns or holds a
  * particular denominated token. It contains the account address and account
@@ -553,10 +481,6 @@ export interface QueryDenomOwnersResponseAmino {
   denom_owners: DenomOwnerAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryDenomOwnersResponseAminoMsg {
-  type: "cosmos-sdk/QueryDenomOwnersResponse";
-  value: QueryDenomOwnersResponseAmino;
 }
 /** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
 export interface QueryDenomOwnersResponseSDKType {
@@ -643,15 +567,6 @@ export const QueryBalanceRequest = {
     obj.denom = message.denom;
     return obj;
   },
-  fromAminoMsg(object: QueryBalanceRequestAminoMsg): QueryBalanceRequest {
-    return QueryBalanceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryBalanceRequest): QueryBalanceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryBalanceRequest",
-      value: QueryBalanceRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryBalanceRequestProtoMsg): QueryBalanceRequest {
     return QueryBalanceRequest.decode(message.value);
   },
@@ -732,15 +647,6 @@ export const QueryBalanceResponse = {
     const obj: any = {};
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryBalanceResponseAminoMsg): QueryBalanceResponse {
-    return QueryBalanceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryBalanceResponse): QueryBalanceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryBalanceResponse",
-      value: QueryBalanceResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryBalanceResponseProtoMsg): QueryBalanceResponse {
     return QueryBalanceResponse.decode(message.value);
@@ -836,15 +742,6 @@ export const QueryAllBalancesRequest = {
     obj.address = message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryAllBalancesRequestAminoMsg): QueryAllBalancesRequest {
-    return QueryAllBalancesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllBalancesRequest): QueryAllBalancesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAllBalancesRequest",
-      value: QueryAllBalancesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryAllBalancesRequestProtoMsg): QueryAllBalancesRequest {
     return QueryAllBalancesRequest.decode(message.value);
@@ -953,15 +850,6 @@ export const QueryAllBalancesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAllBalancesResponseAminoMsg): QueryAllBalancesResponse {
-    return QueryAllBalancesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllBalancesResponse): QueryAllBalancesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAllBalancesResponse",
-      value: QueryAllBalancesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryAllBalancesResponseProtoMsg): QueryAllBalancesResponse {
     return QueryAllBalancesResponse.decode(message.value);
   },
@@ -1056,15 +944,6 @@ export const QuerySpendableBalancesRequest = {
     obj.address = message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QuerySpendableBalancesRequestAminoMsg): QuerySpendableBalancesRequest {
-    return QuerySpendableBalancesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySpendableBalancesRequest): QuerySpendableBalancesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySpendableBalancesRequest",
-      value: QuerySpendableBalancesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySpendableBalancesRequestProtoMsg): QuerySpendableBalancesRequest {
     return QuerySpendableBalancesRequest.decode(message.value);
@@ -1173,15 +1052,6 @@ export const QuerySpendableBalancesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QuerySpendableBalancesResponseAminoMsg): QuerySpendableBalancesResponse {
-    return QuerySpendableBalancesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySpendableBalancesResponse): QuerySpendableBalancesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySpendableBalancesResponse",
-      value: QuerySpendableBalancesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QuerySpendableBalancesResponseProtoMsg): QuerySpendableBalancesResponse {
     return QuerySpendableBalancesResponse.decode(message.value);
   },
@@ -1262,15 +1132,6 @@ export const QueryTotalSupplyRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryTotalSupplyRequestAminoMsg): QueryTotalSupplyRequest {
-    return QueryTotalSupplyRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalSupplyRequest): QueryTotalSupplyRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalSupplyRequest",
-      value: QueryTotalSupplyRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryTotalSupplyRequestProtoMsg): QueryTotalSupplyRequest {
     return QueryTotalSupplyRequest.decode(message.value);
@@ -1379,15 +1240,6 @@ export const QueryTotalSupplyResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryTotalSupplyResponseAminoMsg): QueryTotalSupplyResponse {
-    return QueryTotalSupplyResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalSupplyResponse): QueryTotalSupplyResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryTotalSupplyResponse",
-      value: QueryTotalSupplyResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryTotalSupplyResponseProtoMsg): QueryTotalSupplyResponse {
     return QueryTotalSupplyResponse.decode(message.value);
   },
@@ -1466,15 +1318,6 @@ export const QuerySupplyOfRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
-  },
-  fromAminoMsg(object: QuerySupplyOfRequestAminoMsg): QuerySupplyOfRequest {
-    return QuerySupplyOfRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySupplyOfRequest): QuerySupplyOfRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySupplyOfRequest",
-      value: QuerySupplyOfRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySupplyOfRequestProtoMsg): QuerySupplyOfRequest {
     return QuerySupplyOfRequest.decode(message.value);
@@ -1557,15 +1400,6 @@ export const QuerySupplyOfResponse = {
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QuerySupplyOfResponseAminoMsg): QuerySupplyOfResponse {
-    return QuerySupplyOfResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySupplyOfResponse): QuerySupplyOfResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySupplyOfResponse",
-      value: QuerySupplyOfResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QuerySupplyOfResponseProtoMsg): QuerySupplyOfResponse {
     return QuerySupplyOfResponse.decode(message.value);
   },
@@ -1627,15 +1461,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -1718,15 +1543,6 @@ export const QueryParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -1807,15 +1623,6 @@ export const QueryDenomsMetadataRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomsMetadataRequestAminoMsg): QueryDenomsMetadataRequest {
-    return QueryDenomsMetadataRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomsMetadataRequest): QueryDenomsMetadataRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomsMetadataRequest",
-      value: QueryDenomsMetadataRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomsMetadataRequestProtoMsg): QueryDenomsMetadataRequest {
     return QueryDenomsMetadataRequest.decode(message.value);
@@ -1924,15 +1731,6 @@ export const QueryDenomsMetadataResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDenomsMetadataResponseAminoMsg): QueryDenomsMetadataResponse {
-    return QueryDenomsMetadataResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomsMetadataResponse): QueryDenomsMetadataResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomsMetadataResponse",
-      value: QueryDenomsMetadataResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDenomsMetadataResponseProtoMsg): QueryDenomsMetadataResponse {
     return QueryDenomsMetadataResponse.decode(message.value);
   },
@@ -2011,15 +1809,6 @@ export const QueryDenomMetadataRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomMetadataRequestAminoMsg): QueryDenomMetadataRequest {
-    return QueryDenomMetadataRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomMetadataRequest",
-      value: QueryDenomMetadataRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomMetadataRequestProtoMsg): QueryDenomMetadataRequest {
     return QueryDenomMetadataRequest.decode(message.value);
@@ -2101,15 +1890,6 @@ export const QueryDenomMetadataResponse = {
     const obj: any = {};
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomMetadataResponseAminoMsg): QueryDenomMetadataResponse {
-    return QueryDenomMetadataResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomMetadataResponse): QueryDenomMetadataResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomMetadataResponse",
-      value: QueryDenomMetadataResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomMetadataResponseProtoMsg): QueryDenomMetadataResponse {
     return QueryDenomMetadataResponse.decode(message.value);
@@ -2206,15 +1986,6 @@ export const QueryDenomOwnersRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDenomOwnersRequestAminoMsg): QueryDenomOwnersRequest {
-    return QueryDenomOwnersRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomOwnersRequest): QueryDenomOwnersRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomOwnersRequest",
-      value: QueryDenomOwnersRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDenomOwnersRequestProtoMsg): QueryDenomOwnersRequest {
     return QueryDenomOwnersRequest.decode(message.value);
   },
@@ -2309,15 +2080,6 @@ export const DenomOwner = {
     obj.address = message.address;
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: DenomOwnerAminoMsg): DenomOwner {
-    return DenomOwner.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomOwner): DenomOwnerAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomOwner",
-      value: DenomOwner.toAmino(message)
-    };
   },
   fromProtoMsg(message: DenomOwnerProtoMsg): DenomOwner {
     return DenomOwner.decode(message.value);
@@ -2425,15 +2187,6 @@ export const QueryDenomOwnersResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryDenomOwnersResponseAminoMsg): QueryDenomOwnersResponse {
-    return QueryDenomOwnersResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDenomOwnersResponse): QueryDenomOwnersResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDenomOwnersResponse",
-      value: QueryDenomOwnersResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDenomOwnersResponseProtoMsg): QueryDenomOwnersResponse {
     return QueryDenomOwnersResponse.decode(message.value);

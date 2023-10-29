@@ -144,10 +144,6 @@ export interface ConfigChangeAmino {
    */
   advices: AdviceAmino[];
 }
-export interface ConfigChangeAminoMsg {
-  type: "/google.api.ConfigChange";
-  value: ConfigChangeAmino;
-}
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
@@ -188,10 +184,6 @@ export interface AdviceAmino {
    * be taken to mitigate any implied risks.
    */
   description: string;
-}
-export interface AdviceAminoMsg {
-  type: "/google.api.Advice";
-  value: AdviceAmino;
 }
 /**
  * Generated advice about this change, used for providing more
@@ -333,9 +325,6 @@ export const ConfigChange = {
     }
     return obj;
   },
-  fromAminoMsg(object: ConfigChangeAminoMsg): ConfigChange {
-    return ConfigChange.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConfigChangeProtoMsg): ConfigChange {
     return ConfigChange.decode(message.value);
   },
@@ -413,9 +402,6 @@ export const Advice = {
     const obj: any = {};
     obj.description = message.description;
     return obj;
-  },
-  fromAminoMsg(object: AdviceAminoMsg): Advice {
-    return Advice.fromAmino(object.value);
   },
   fromProtoMsg(message: AdviceProtoMsg): Advice {
     return Advice.decode(message.value);

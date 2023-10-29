@@ -114,10 +114,6 @@ export interface ServiceAmino {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ServiceAminoMsg {
-  type: "/google.api.serviceusage.v1.Service";
-  value: ServiceAmino;
-}
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
@@ -215,10 +211,6 @@ export interface ServiceConfigAmino {
    */
   monitoring?: MonitoringAmino;
 }
-export interface ServiceConfigAminoMsg {
-  type: "/google.api.serviceusage.v1.ServiceConfig";
-  value: ServiceConfigAmino;
-}
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
@@ -251,10 +243,6 @@ export interface OperationMetadataAmino {
    * associated with.
    */
   resource_names: string[];
-}
-export interface OperationMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1.OperationMetadata";
-  value: OperationMetadataAmino;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
@@ -368,9 +356,6 @@ export const Service = {
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
     obj.state = message.state;
     return obj;
-  },
-  fromAminoMsg(object: ServiceAminoMsg): Service {
-    return Service.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceProtoMsg): Service {
     return Service.decode(message.value);
@@ -622,9 +607,6 @@ export const ServiceConfig = {
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
-    return ServiceConfig.fromAmino(object.value);
-  },
   fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
     return ServiceConfig.decode(message.value);
   },
@@ -714,9 +696,6 @@ export const OperationMetadata = {
       obj.resource_names = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
-    return OperationMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
     return OperationMetadata.decode(message.value);

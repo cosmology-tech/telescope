@@ -34,10 +34,6 @@ export interface StoreCodeProposalAmino {
   /** InstantiatePermission to apply on contract creation, optional */
   instantiate_permission?: AccessConfigAmino;
 }
-export interface StoreCodeProposalAminoMsg {
-  type: "wasm/StoreCodeProposal";
-  value: StoreCodeProposalAmino;
-}
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalSDKType {
   title: string;
@@ -94,10 +90,6 @@ export interface InstantiateContractProposalAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
-export interface InstantiateContractProposalAminoMsg {
-  type: "wasm/InstantiateContractProposal";
-  value: InstantiateContractProposalAmino;
-}
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
  * contract.
@@ -142,10 +134,6 @@ export interface MigrateContractProposalAmino {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
-export interface MigrateContractProposalAminoMsg {
-  type: "wasm/MigrateContractProposal";
-  value: MigrateContractProposalAmino;
-}
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
   title: string;
@@ -179,10 +167,6 @@ export interface SudoContractProposalAmino {
   contract: string;
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
-}
-export interface SudoContractProposalAminoMsg {
-  type: "wasm/SudoContractProposal";
-  value: SudoContractProposalAmino;
 }
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalSDKType {
@@ -231,10 +215,6 @@ export interface ExecuteContractProposalAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
-export interface ExecuteContractProposalAminoMsg {
-  type: "wasm/ExecuteContractProposal";
-  value: ExecuteContractProposalAmino;
-}
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
  * contract.
@@ -273,10 +253,6 @@ export interface UpdateAdminProposalAmino {
   /** Contract is the address of the smart contract */
   contract: string;
 }
-export interface UpdateAdminProposalAminoMsg {
-  type: "wasm/UpdateAdminProposal";
-  value: UpdateAdminProposalAmino;
-}
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalSDKType {
   title: string;
@@ -311,10 +287,6 @@ export interface ClearAdminProposalAmino {
   description: string;
   /** Contract is the address of the smart contract */
   contract: string;
-}
-export interface ClearAdminProposalAminoMsg {
-  type: "wasm/ClearAdminProposal";
-  value: ClearAdminProposalAmino;
 }
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
@@ -353,10 +325,6 @@ export interface PinCodesProposalAmino {
   /** CodeIDs references the new WASM codes */
   code_ids: string[];
 }
-export interface PinCodesProposalAminoMsg {
-  type: "wasm/PinCodesProposal";
-  value: PinCodesProposalAmino;
-}
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
  * wasmvm cache.
@@ -393,10 +361,6 @@ export interface UnpinCodesProposalAmino {
   description: string;
   /** CodeIDs references the WASM codes */
   code_ids: string[];
-}
-export interface UnpinCodesProposalAminoMsg {
-  type: "wasm/UnpinCodesProposal";
-  value: UnpinCodesProposalAmino;
 }
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
@@ -530,15 +494,6 @@ export const StoreCodeProposal = {
     obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
     obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: StoreCodeProposalAminoMsg): StoreCodeProposal {
-    return StoreCodeProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: StoreCodeProposal): StoreCodeProposalAminoMsg {
-    return {
-      type: "wasm/StoreCodeProposal",
-      value: StoreCodeProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: StoreCodeProposalProtoMsg): StoreCodeProposal {
     return StoreCodeProposal.decode(message.value);
@@ -731,15 +686,6 @@ export const InstantiateContractProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: InstantiateContractProposalAminoMsg): InstantiateContractProposal {
-    return InstantiateContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: InstantiateContractProposal): InstantiateContractProposalAminoMsg {
-    return {
-      type: "wasm/InstantiateContractProposal",
-      value: InstantiateContractProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: InstantiateContractProposalProtoMsg): InstantiateContractProposal {
     return InstantiateContractProposal.decode(message.value);
   },
@@ -877,15 +823,6 @@ export const MigrateContractProposal = {
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MigrateContractProposalAminoMsg): MigrateContractProposal {
-    return MigrateContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: MigrateContractProposal): MigrateContractProposalAminoMsg {
-    return {
-      type: "wasm/MigrateContractProposal",
-      value: MigrateContractProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MigrateContractProposalProtoMsg): MigrateContractProposal {
     return MigrateContractProposal.decode(message.value);
   },
@@ -1006,15 +943,6 @@ export const SudoContractProposal = {
     obj.contract = message.contract;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: SudoContractProposalAminoMsg): SudoContractProposal {
-    return SudoContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: SudoContractProposal): SudoContractProposalAminoMsg {
-    return {
-      type: "wasm/SudoContractProposal",
-      value: SudoContractProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: SudoContractProposalProtoMsg): SudoContractProposal {
     return SudoContractProposal.decode(message.value);
@@ -1177,15 +1105,6 @@ export const ExecuteContractProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: ExecuteContractProposalAminoMsg): ExecuteContractProposal {
-    return ExecuteContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ExecuteContractProposal): ExecuteContractProposalAminoMsg {
-    return {
-      type: "wasm/ExecuteContractProposal",
-      value: ExecuteContractProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ExecuteContractProposalProtoMsg): ExecuteContractProposal {
     return ExecuteContractProposal.decode(message.value);
   },
@@ -1307,15 +1226,6 @@ export const UpdateAdminProposal = {
     obj.contract = message.contract;
     return obj;
   },
-  fromAminoMsg(object: UpdateAdminProposalAminoMsg): UpdateAdminProposal {
-    return UpdateAdminProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdateAdminProposal): UpdateAdminProposalAminoMsg {
-    return {
-      type: "wasm/UpdateAdminProposal",
-      value: UpdateAdminProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: UpdateAdminProposalProtoMsg): UpdateAdminProposal {
     return UpdateAdminProposal.decode(message.value);
   },
@@ -1422,15 +1332,6 @@ export const ClearAdminProposal = {
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
-  },
-  fromAminoMsg(object: ClearAdminProposalAminoMsg): ClearAdminProposal {
-    return ClearAdminProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClearAdminProposal): ClearAdminProposalAminoMsg {
-    return {
-      type: "wasm/ClearAdminProposal",
-      value: ClearAdminProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: ClearAdminProposalProtoMsg): ClearAdminProposal {
     return ClearAdminProposal.decode(message.value);
@@ -1560,15 +1461,6 @@ export const PinCodesProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: PinCodesProposalAminoMsg): PinCodesProposal {
-    return PinCodesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: PinCodesProposal): PinCodesProposalAminoMsg {
-    return {
-      type: "wasm/PinCodesProposal",
-      value: PinCodesProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PinCodesProposalProtoMsg): PinCodesProposal {
     return PinCodesProposal.decode(message.value);
   },
@@ -1696,15 +1588,6 @@ export const UnpinCodesProposal = {
       obj.code_ids = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: UnpinCodesProposalAminoMsg): UnpinCodesProposal {
-    return UnpinCodesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnpinCodesProposal): UnpinCodesProposalAminoMsg {
-    return {
-      type: "wasm/UnpinCodesProposal",
-      value: UnpinCodesProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: UnpinCodesProposalProtoMsg): UnpinCodesProposal {
     return UnpinCodesProposal.decode(message.value);

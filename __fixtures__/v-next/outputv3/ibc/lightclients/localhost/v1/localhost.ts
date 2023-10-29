@@ -26,10 +26,6 @@ export interface ClientStateAmino {
   /** self latest block height */
   height?: HeightAmino;
 }
-export interface ClientStateAminoMsg {
-  type: "cosmos-sdk/ClientState";
-  value: ClientStateAmino;
-}
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
  * access to keys outside the client prefix.
@@ -119,15 +115,6 @@ export const ClientState = {
     obj.chain_id = message.chainId;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
-  },
-  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
-    return ClientState.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientState): ClientStateAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message)
-    };
   },
   fromProtoMsg(message: ClientStateProtoMsg): ClientState {
     return ClientState.decode(message.value);

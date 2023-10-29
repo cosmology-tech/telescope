@@ -61,10 +61,6 @@ export interface SuperfluidAssetAmino {
    */
   asset_type: SuperfluidAssetType;
 }
-export interface SuperfluidAssetAminoMsg {
-  type: "osmosis/superfluid-asset";
-  value: SuperfluidAssetAmino;
-}
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
   denom: string;
@@ -97,10 +93,6 @@ export interface SuperfluidIntermediaryAccountAmino {
   val_addr: string;
   /** perpetual gauge for rewards distribution */
   gauge_id: string;
-}
-export interface SuperfluidIntermediaryAccountAminoMsg {
-  type: "osmosis/superfluid-intermediary-account";
-  value: SuperfluidIntermediaryAccountAmino;
 }
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
@@ -146,10 +138,6 @@ export interface OsmoEquivalentMultiplierRecordAmino {
   denom: string;
   multiplier: string;
 }
-export interface OsmoEquivalentMultiplierRecordAminoMsg {
-  type: "osmosis/osmo-equivalent-multiplier-record";
-  value: OsmoEquivalentMultiplierRecordAmino;
-}
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
  * treat an LP share as having, for all of epoch N. Eventually this is intended
@@ -188,10 +176,6 @@ export interface SuperfluidDelegationRecordAmino {
   delegation_amount?: CoinAmino;
   equivalent_staked_amount?: CoinAmino;
 }
-export interface SuperfluidDelegationRecordAminoMsg {
-  type: "osmosis/superfluid-delegation-record";
-  value: SuperfluidDelegationRecordAmino;
-}
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
  * delegations of an account in the state machine in a user friendly form.
@@ -224,10 +208,6 @@ export interface LockIdIntermediaryAccountConnectionAmino {
   lock_id: string;
   intermediary_account: string;
 }
-export interface LockIdIntermediaryAccountConnectionAminoMsg {
-  type: "osmosis/lock-id-intermediary-account-connection";
-  value: LockIdIntermediaryAccountConnectionAmino;
-}
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
  * relationship between the underlying lock id and superfluid delegation done
@@ -246,10 +226,6 @@ export interface UnpoolWhitelistedPoolsProtoMsg {
 }
 export interface UnpoolWhitelistedPoolsAmino {
   ids: string[];
-}
-export interface UnpoolWhitelistedPoolsAminoMsg {
-  type: "osmosis/unpool-whitelisted-pools";
-  value: UnpoolWhitelistedPoolsAmino;
 }
 export interface UnpoolWhitelistedPoolsSDKType {
   ids: bigint[];
@@ -333,15 +309,6 @@ export const SuperfluidAsset = {
     obj.denom = message.denom;
     obj.asset_type = message.assetType;
     return obj;
-  },
-  fromAminoMsg(object: SuperfluidAssetAminoMsg): SuperfluidAsset {
-    return SuperfluidAsset.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidAsset): SuperfluidAssetAminoMsg {
-    return {
-      type: "osmosis/superfluid-asset",
-      value: SuperfluidAsset.toAmino(message)
-    };
   },
   fromProtoMsg(message: SuperfluidAssetProtoMsg): SuperfluidAsset {
     return SuperfluidAsset.decode(message.value);
@@ -452,15 +419,6 @@ export const SuperfluidIntermediaryAccount = {
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: SuperfluidIntermediaryAccountAminoMsg): SuperfluidIntermediaryAccount {
-    return SuperfluidIntermediaryAccount.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountAminoMsg {
-    return {
-      type: "osmosis/superfluid-intermediary-account",
-      value: SuperfluidIntermediaryAccount.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidIntermediaryAccountProtoMsg): SuperfluidIntermediaryAccount {
     return SuperfluidIntermediaryAccount.decode(message.value);
   },
@@ -569,15 +527,6 @@ export const OsmoEquivalentMultiplierRecord = {
     obj.denom = message.denom;
     obj.multiplier = message.multiplier;
     return obj;
-  },
-  fromAminoMsg(object: OsmoEquivalentMultiplierRecordAminoMsg): OsmoEquivalentMultiplierRecord {
-    return OsmoEquivalentMultiplierRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordAminoMsg {
-    return {
-      type: "osmosis/osmo-equivalent-multiplier-record",
-      value: OsmoEquivalentMultiplierRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: OsmoEquivalentMultiplierRecordProtoMsg): OsmoEquivalentMultiplierRecord {
     return OsmoEquivalentMultiplierRecord.decode(message.value);
@@ -704,15 +653,6 @@ export const SuperfluidDelegationRecord = {
     obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toAmino(message.equivalentStakedAmount) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SuperfluidDelegationRecordAminoMsg): SuperfluidDelegationRecord {
-    return SuperfluidDelegationRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordAminoMsg {
-    return {
-      type: "osmosis/superfluid-delegation-record",
-      value: SuperfluidDelegationRecord.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SuperfluidDelegationRecordProtoMsg): SuperfluidDelegationRecord {
     return SuperfluidDelegationRecord.decode(message.value);
   },
@@ -807,15 +747,6 @@ export const LockIdIntermediaryAccountConnection = {
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     obj.intermediary_account = message.intermediaryAccount;
     return obj;
-  },
-  fromAminoMsg(object: LockIdIntermediaryAccountConnectionAminoMsg): LockIdIntermediaryAccountConnection {
-    return LockIdIntermediaryAccountConnection.fromAmino(object.value);
-  },
-  toAminoMsg(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionAminoMsg {
-    return {
-      type: "osmosis/lock-id-intermediary-account-connection",
-      value: LockIdIntermediaryAccountConnection.toAmino(message)
-    };
   },
   fromProtoMsg(message: LockIdIntermediaryAccountConnectionProtoMsg): LockIdIntermediaryAccountConnection {
     return LockIdIntermediaryAccountConnection.decode(message.value);
@@ -916,15 +847,6 @@ export const UnpoolWhitelistedPools = {
       obj.ids = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: UnpoolWhitelistedPoolsAminoMsg): UnpoolWhitelistedPools {
-    return UnpoolWhitelistedPools.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnpoolWhitelistedPools): UnpoolWhitelistedPoolsAminoMsg {
-    return {
-      type: "osmosis/unpool-whitelisted-pools",
-      value: UnpoolWhitelistedPools.toAmino(message)
-    };
   },
   fromProtoMsg(message: UnpoolWhitelistedPoolsProtoMsg): UnpoolWhitelistedPools {
     return UnpoolWhitelistedPools.decode(message.value);

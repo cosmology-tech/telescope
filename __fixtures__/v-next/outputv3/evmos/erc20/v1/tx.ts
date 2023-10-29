@@ -30,10 +30,6 @@ export interface MsgConvertCoinAmino {
   /** cosmos bech32 address from the owner of the given Cosmos coins */
   sender: string;
 }
-export interface MsgConvertCoinAminoMsg {
-  type: "/evmos.erc20.v1.MsgConvertCoin";
-  value: MsgConvertCoinAmino;
-}
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinSDKType {
   coin: CoinSDKType;
@@ -48,10 +44,6 @@ export interface MsgConvertCoinResponseProtoMsg {
 }
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseAmino {}
-export interface MsgConvertCoinResponseAminoMsg {
-  type: "/evmos.erc20.v1.MsgConvertCoinResponse";
-  value: MsgConvertCoinResponseAmino;
-}
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseSDKType {}
 /**
@@ -86,10 +78,6 @@ export interface MsgConvertERC20Amino {
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
 }
-export interface MsgConvertERC20AminoMsg {
-  type: "/evmos.erc20.v1.MsgConvertERC20";
-  value: MsgConvertERC20Amino;
-}
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
  * coin.
@@ -108,10 +96,6 @@ export interface MsgConvertERC20ResponseProtoMsg {
 }
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseAmino {}
-export interface MsgConvertERC20ResponseAminoMsg {
-  type: "/evmos.erc20.v1.MsgConvertERC20Response";
-  value: MsgConvertERC20ResponseAmino;
-}
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseSDKType {}
 function createBaseMsgConvertCoin(): MsgConvertCoin {
@@ -209,9 +193,6 @@ export const MsgConvertCoin = {
     obj.sender = message.sender;
     return obj;
   },
-  fromAminoMsg(object: MsgConvertCoinAminoMsg): MsgConvertCoin {
-    return MsgConvertCoin.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgConvertCoinProtoMsg): MsgConvertCoin {
     return MsgConvertCoin.decode(message.value);
   },
@@ -272,9 +253,6 @@ export const MsgConvertCoinResponse = {
   toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgConvertCoinResponseAminoMsg): MsgConvertCoinResponse {
-    return MsgConvertCoinResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgConvertCoinResponseProtoMsg): MsgConvertCoinResponse {
     return MsgConvertCoinResponse.decode(message.value);
@@ -396,9 +374,6 @@ export const MsgConvertERC20 = {
     obj.sender = message.sender;
     return obj;
   },
-  fromAminoMsg(object: MsgConvertERC20AminoMsg): MsgConvertERC20 {
-    return MsgConvertERC20.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgConvertERC20ProtoMsg): MsgConvertERC20 {
     return MsgConvertERC20.decode(message.value);
   },
@@ -459,9 +434,6 @@ export const MsgConvertERC20Response = {
   toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgConvertERC20ResponseAminoMsg): MsgConvertERC20Response {
-    return MsgConvertERC20Response.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgConvertERC20ResponseProtoMsg): MsgConvertERC20Response {
     return MsgConvertERC20Response.decode(message.value);

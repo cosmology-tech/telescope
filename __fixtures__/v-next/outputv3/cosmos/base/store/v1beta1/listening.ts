@@ -35,10 +35,6 @@ export interface StoreKVPairAmino {
   key: Uint8Array;
   value: Uint8Array;
 }
-export interface StoreKVPairAminoMsg {
-  type: "cosmos-sdk/StoreKVPair";
-  value: StoreKVPairAmino;
-}
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
  * It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
@@ -159,15 +155,6 @@ export const StoreKVPair = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {
-    return StoreKVPair.fromAmino(object.value);
-  },
-  toAminoMsg(message: StoreKVPair): StoreKVPairAminoMsg {
-    return {
-      type: "cosmos-sdk/StoreKVPair",
-      value: StoreKVPair.toAmino(message)
-    };
   },
   fromProtoMsg(message: StoreKVPairProtoMsg): StoreKVPair {
     return StoreKVPair.decode(message.value);

@@ -16,10 +16,6 @@ export interface ValidatorSetAmino {
   proposer?: ValidatorAmino;
   total_voting_power: string;
 }
-export interface ValidatorSetAminoMsg {
-  type: "/tendermint.types.ValidatorSet";
-  value: ValidatorSetAmino;
-}
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
   proposer?: ValidatorSDKType;
@@ -41,10 +37,6 @@ export interface ValidatorAmino {
   voting_power: string;
   proposer_priority: string;
 }
-export interface ValidatorAminoMsg {
-  type: "/tendermint.types.Validator";
-  value: ValidatorAmino;
-}
 export interface ValidatorSDKType {
   address: Uint8Array;
   pub_key: PublicKeySDKType;
@@ -62,10 +54,6 @@ export interface SimpleValidatorProtoMsg {
 export interface SimpleValidatorAmino {
   pub_key?: PublicKeyAmino;
   voting_power: string;
-}
-export interface SimpleValidatorAminoMsg {
-  type: "/tendermint.types.SimpleValidator";
-  value: SimpleValidatorAmino;
 }
 export interface SimpleValidatorSDKType {
   pub_key?: PublicKeySDKType;
@@ -179,9 +167,6 @@ export const ValidatorSet = {
     obj.proposer = message.proposer ? Validator.toAmino(message.proposer) : undefined;
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ValidatorSetAminoMsg): ValidatorSet {
-    return ValidatorSet.fromAmino(object.value);
   },
   fromProtoMsg(message: ValidatorSetProtoMsg): ValidatorSet {
     return ValidatorSet.decode(message.value);
@@ -309,9 +294,6 @@ export const Validator = {
     obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValidatorAminoMsg): Validator {
-    return Validator.fromAmino(object.value);
-  },
   fromProtoMsg(message: ValidatorProtoMsg): Validator {
     return Validator.decode(message.value);
   },
@@ -407,9 +389,6 @@ export const SimpleValidator = {
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: SimpleValidatorAminoMsg): SimpleValidator {
-    return SimpleValidator.fromAmino(object.value);
   },
   fromProtoMsg(message: SimpleValidatorProtoMsg): SimpleValidator {
     return SimpleValidator.decode(message.value);

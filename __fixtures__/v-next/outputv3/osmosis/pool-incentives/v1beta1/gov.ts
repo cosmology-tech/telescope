@@ -35,10 +35,6 @@ export interface ReplacePoolIncentivesProposalAmino {
   description: string;
   records: DistrRecordAmino[];
 }
-export interface ReplacePoolIncentivesProposalAminoMsg {
-  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
-  value: ReplacePoolIncentivesProposalAmino;
-}
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -86,10 +82,6 @@ export interface UpdatePoolIncentivesProposalAmino {
   title: string;
   description: string;
   records: DistrRecordAmino[];
-}
-export interface UpdatePoolIncentivesProposalAminoMsg {
-  type: "osmosis/poolincentives/update-pool-incentives-proposal";
-  value: UpdatePoolIncentivesProposalAmino;
 }
 /**
  * For example: if the existing DistrRecords were:
@@ -213,15 +205,6 @@ export const ReplacePoolIncentivesProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: ReplacePoolIncentivesProposalAminoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/replace-pool-incentives-proposal",
-      value: ReplacePoolIncentivesProposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
     return ReplacePoolIncentivesProposal.decode(message.value);
   },
@@ -341,15 +324,6 @@ export const UpdatePoolIncentivesProposal = {
       obj.records = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: UpdatePoolIncentivesProposalAminoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/update-pool-incentives-proposal",
-      value: UpdatePoolIncentivesProposal.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
     return UpdatePoolIncentivesProposal.decode(message.value);

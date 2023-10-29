@@ -20,10 +20,6 @@ export interface GenesisOwnersAmino {
   /** index_owners are the owners at the given index. */
   index_owners?: CapabilityOwnersAmino;
 }
-export interface GenesisOwnersAminoMsg {
-  type: "cosmos-sdk/GenesisOwners";
-  value: GenesisOwnersAmino;
-}
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
   index: bigint;
@@ -52,10 +48,6 @@ export interface GenesisStateAmino {
    * index key is string to allow amino marshalling.
    */
   owners: GenesisOwnersAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisStateSDKType {
@@ -145,15 +137,6 @@ export const GenesisOwners = {
     obj.index = message.index ? message.index.toString() : undefined;
     obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisOwnersAminoMsg): GenesisOwners {
-    return GenesisOwners.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisOwners): GenesisOwnersAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisOwners",
-      value: GenesisOwners.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisOwnersProtoMsg): GenesisOwners {
     return GenesisOwners.decode(message.value);
@@ -261,15 +244,6 @@ export const GenesisState = {
       obj.owners = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

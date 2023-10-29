@@ -236,10 +236,6 @@ export interface AnyAmino {
   /** Must be a valid serialized protocol buffer of the above specified type. */
   value: any;
 }
-export interface AnyAminoMsg {
-  type: string;
-  value: AnyAmino;
-}
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
  * URL that describes the type of the serialized message.
@@ -405,9 +401,6 @@ export const Any = {
     obj.type = message.typeUrl;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AnyAminoMsg): Any {
-    return Any.fromAmino(object.value);
   },
   fromProtoMsg(message: AnyProtoMsg): Any {
     return Any.decode(message.value);

@@ -15,10 +15,6 @@ export interface GenesisStateAmino {
   /** gen_txs defines the genesis transactions. */
   gen_txs: Uint8Array[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisStateSDKType {
   gen_txs: Uint8Array[];
@@ -100,15 +96,6 @@ export const GenesisState = {
       obj.gen_txs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

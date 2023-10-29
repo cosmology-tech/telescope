@@ -19,10 +19,6 @@ export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface LogEntry_LabelsEntryAminoMsg {
-  type: string;
-  value: LogEntry_LabelsEntryAmino;
-}
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -327,10 +323,6 @@ export interface LogEntryAmino {
    */
   split?: LogSplitAmino;
 }
-export interface LogEntryAminoMsg {
-  type: "/google.logging.v2.LogEntry";
-  value: LogEntryAmino;
-}
 /** An individual entry in a log. */
 export interface LogEntrySDKType {
   log_name: string;
@@ -399,10 +391,6 @@ export interface LogEntryOperationAmino {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
-export interface LogEntryOperationAminoMsg {
-  type: "/google.logging.v2.LogEntryOperation";
-  value: LogEntryOperationAmino;
-}
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
@@ -467,10 +455,6 @@ export interface LogEntrySourceLocationAmino {
    */
   function: string;
 }
-export interface LogEntrySourceLocationAminoMsg {
-  type: "/google.logging.v2.LogEntrySourceLocation";
-  value: LogEntrySourceLocationAmino;
-}
 /**
  * Additional information about the source code location that produced the log
  * entry.
@@ -525,10 +509,6 @@ export interface LogSplitAmino {
   index: number;
   /** The total number of log entries that the original LogEntry was split into. */
   total_splits: number;
-}
-export interface LogSplitAminoMsg {
-  type: "/google.logging.v2.LogSplit";
-  value: LogSplitAmino;
 }
 /**
  * Additional information used to correlate multiple log entries. Used when a
@@ -617,9 +597,6 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
-    return LogEntry_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
     return LogEntry_LabelsEntry.decode(message.value);
@@ -974,9 +951,6 @@ export const LogEntry = {
     obj.split = message.split ? LogSplit.toAmino(message.split) : undefined;
     return obj;
   },
-  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
-    return LogEntry.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
     return LogEntry.decode(message.value);
   },
@@ -1097,9 +1071,6 @@ export const LogEntryOperation = {
     obj.last = message.last;
     return obj;
   },
-  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
-    return LogEntryOperation.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
     return LogEntryOperation.decode(message.value);
   },
@@ -1208,9 +1179,6 @@ export const LogEntrySourceLocation = {
     obj.function = message.function;
     return obj;
   },
-  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
-    return LogEntrySourceLocation.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
     return LogEntrySourceLocation.decode(message.value);
   },
@@ -1316,9 +1284,6 @@ export const LogSplit = {
     obj.index = message.index;
     obj.total_splits = message.totalSplits;
     return obj;
-  },
-  fromAminoMsg(object: LogSplitAminoMsg): LogSplit {
-    return LogSplit.fromAmino(object.value);
   },
   fromProtoMsg(message: LogSplitProtoMsg): LogSplit {
     return LogSplit.decode(message.value);

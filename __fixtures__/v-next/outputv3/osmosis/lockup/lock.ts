@@ -110,10 +110,6 @@ export interface PeriodLockAmino {
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: CoinAmino[];
 }
-export interface PeriodLockAminoMsg {
-  type: "osmosis/lockup/period-lock";
-  value: PeriodLockAmino;
-}
 /**
  * PeriodLock is a single lock unit by period defined by the x/lockup module.
  * It's a record of a locked coin at a specific time. It stores owner, duration,
@@ -177,10 +173,6 @@ export interface QueryConditionAmino {
    * Querying locks with timestamp is currently not implemented.
    */
   timestamp?: Date;
-}
-export interface QueryConditionAminoMsg {
-  type: "osmosis/lockup/query-condition";
-  value: QueryConditionAmino;
 }
 /**
  * QueryCondition is a struct used for querying locks upon different conditions.
@@ -252,10 +244,6 @@ export interface SyntheticLockAmino {
    * at the point of unbonding has started.
    */
   duration?: DurationAmino;
-}
-export interface SyntheticLockAminoMsg {
-  type: "osmosis/lockup/synthetic-lock";
-  value: SyntheticLockAmino;
 }
 /**
  * SyntheticLock is creating virtual lockup where new denom is combination of
@@ -407,15 +395,6 @@ export const PeriodLock = {
     }
     return obj;
   },
-  fromAminoMsg(object: PeriodLockAminoMsg): PeriodLock {
-    return PeriodLock.fromAmino(object.value);
-  },
-  toAminoMsg(message: PeriodLock): PeriodLockAminoMsg {
-    return {
-      type: "osmosis/lockup/period-lock",
-      value: PeriodLock.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PeriodLockProtoMsg): PeriodLock {
     return PeriodLock.decode(message.value);
   },
@@ -538,15 +517,6 @@ export const QueryCondition = {
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.timestamp = message.timestamp;
     return obj;
-  },
-  fromAminoMsg(object: QueryConditionAminoMsg): QueryCondition {
-    return QueryCondition.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCondition): QueryConditionAminoMsg {
-    return {
-      type: "osmosis/lockup/query-condition",
-      value: QueryCondition.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConditionProtoMsg): QueryCondition {
     return QueryCondition.decode(message.value);
@@ -672,15 +642,6 @@ export const SyntheticLock = {
     obj.end_time = message.endTime;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: SyntheticLockAminoMsg): SyntheticLock {
-    return SyntheticLock.fromAmino(object.value);
-  },
-  toAminoMsg(message: SyntheticLock): SyntheticLockAminoMsg {
-    return {
-      type: "osmosis/lockup/synthetic-lock",
-      value: SyntheticLock.toAmino(message)
-    };
   },
   fromProtoMsg(message: SyntheticLockProtoMsg): SyntheticLock {
     return SyntheticLock.decode(message.value);

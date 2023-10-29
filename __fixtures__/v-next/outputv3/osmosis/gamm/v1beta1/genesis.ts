@@ -21,10 +21,6 @@ export interface ParamsProtoMsg {
 export interface ParamsAmino {
   pool_creation_fee: CoinAmino[];
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/gamm/params";
-  value: ParamsAmino;
-}
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
   pool_creation_fee: CoinSDKType[];
@@ -49,10 +45,6 @@ export interface GenesisStateAmino {
   /** will be renamed to next_pool_id in an upcoming version */
   next_pool_number: string;
   params?: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/gamm/genesis-state";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
@@ -137,15 +129,6 @@ export const Params = {
       obj.pool_creation_fee = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
@@ -269,15 +252,6 @@ export const GenesisState = {
     obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/gamm/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

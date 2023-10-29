@@ -25,10 +25,6 @@ export interface FeeTokenAmino {
   denom: string;
   poolID: string;
 }
-export interface FeeTokenAminoMsg {
-  type: "osmosis/txfees/fee-token";
-  value: FeeTokenAmino;
-}
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
  * This marks the token as eligible for use as a tx fee asset in Osmosis.
@@ -120,15 +116,6 @@ export const FeeToken = {
     obj.denom = message.denom;
     obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {
-    return FeeToken.fromAmino(object.value);
-  },
-  toAminoMsg(message: FeeToken): FeeTokenAminoMsg {
-    return {
-      type: "osmosis/txfees/fee-token",
-      value: FeeToken.toAmino(message)
-    };
   },
   fromProtoMsg(message: FeeTokenProtoMsg): FeeToken {
     return FeeToken.decode(message.value);

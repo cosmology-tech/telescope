@@ -245,10 +245,6 @@ export interface CheckErrorAmino {
    */
   status?: StatusAmino;
 }
-export interface CheckErrorAminoMsg {
-  type: "/google.api.servicecontrol.v1.CheckError";
-  value: CheckErrorAmino;
-}
 /**
  * Defines the errors to be returned in
  * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
@@ -367,9 +363,6 @@ export const CheckError = {
     obj.detail = message.detail;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CheckErrorAminoMsg): CheckError {
-    return CheckError.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckErrorProtoMsg): CheckError {
     return CheckError.decode(message.value);

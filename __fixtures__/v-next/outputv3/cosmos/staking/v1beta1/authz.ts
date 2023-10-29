@@ -102,10 +102,6 @@ export interface StakeAuthorizationAmino {
   /** authorization_type defines one of AuthorizationType. */
   authorization_type: AuthorizationType;
 }
-export interface StakeAuthorizationAminoMsg {
-  type: "cosmos-sdk/StakeAuthorization";
-  value: StakeAuthorizationAmino;
-}
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
  * 
@@ -129,10 +125,6 @@ export interface StakeAuthorization_ValidatorsProtoMsg {
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_ValidatorsAmino {
   address: string[];
-}
-export interface StakeAuthorization_ValidatorsAminoMsg {
-  type: "cosmos-sdk/Validators";
-  value: StakeAuthorization_ValidatorsAmino;
 }
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_ValidatorsSDKType {
@@ -253,15 +245,6 @@ export const StakeAuthorization = {
     obj.authorization_type = message.authorizationType;
     return obj;
   },
-  fromAminoMsg(object: StakeAuthorizationAminoMsg): StakeAuthorization {
-    return StakeAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: StakeAuthorization): StakeAuthorizationAminoMsg {
-    return {
-      type: "cosmos-sdk/StakeAuthorization",
-      value: StakeAuthorization.toAmino(message)
-    };
-  },
   fromProtoMsg(message: StakeAuthorizationProtoMsg): StakeAuthorization {
     return StakeAuthorization.decode(message.value);
   },
@@ -352,15 +335,6 @@ export const StakeAuthorization_Validators = {
       obj.address = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: StakeAuthorization_ValidatorsAminoMsg): StakeAuthorization_Validators {
-    return StakeAuthorization_Validators.fromAmino(object.value);
-  },
-  toAminoMsg(message: StakeAuthorization_Validators): StakeAuthorization_ValidatorsAminoMsg {
-    return {
-      type: "cosmos-sdk/Validators",
-      value: StakeAuthorization_Validators.toAmino(message)
-    };
   },
   fromProtoMsg(message: StakeAuthorization_ValidatorsProtoMsg): StakeAuthorization_Validators {
     return StakeAuthorization_Validators.decode(message.value);

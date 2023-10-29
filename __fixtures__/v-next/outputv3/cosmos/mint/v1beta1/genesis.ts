@@ -20,10 +20,6 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
   minter: MinterSDKType;
@@ -112,15 +108,6 @@ export const GenesisState = {
     obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

@@ -415,10 +415,6 @@ export interface FieldMaskAmino {
   /** The set of field mask paths. */
   paths: string[];
 }
-export interface FieldMaskAminoMsg {
-  type: "/google.protobuf.FieldMask";
-  value: FieldMaskAmino;
-}
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  * 
@@ -699,9 +695,6 @@ export const FieldMask = {
       obj.paths = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
-    return FieldMask.fromAmino(object.value);
   },
   fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
     return FieldMask.decode(message.value);

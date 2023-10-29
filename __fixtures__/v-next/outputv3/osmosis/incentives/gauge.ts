@@ -91,10 +91,6 @@ export interface GaugeAmino {
   /** distributed_coins are coins that have been distributed already */
   distributed_coins: CoinAmino[];
 }
-export interface GaugeAminoMsg {
-  type: "osmosis/incentives/gauge";
-  value: GaugeAmino;
-}
 /**
  * Gauge is an object that stores and distributes yields to recipients who
  * satisfy certain conditions. Currently gauges support conditions around the
@@ -121,10 +117,6 @@ export interface LockableDurationsInfoProtoMsg {
 export interface LockableDurationsInfoAmino {
   /** List of incentivised durations that gauges will pay out to */
   lockable_durations: DurationAmino[];
-}
-export interface LockableDurationsInfoAminoMsg {
-  type: "osmosis/incentives/lockable-durations-info";
-  value: LockableDurationsInfoAmino;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -325,15 +317,6 @@ export const Gauge = {
     }
     return obj;
   },
-  fromAminoMsg(object: GaugeAminoMsg): Gauge {
-    return Gauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: Gauge): GaugeAminoMsg {
-    return {
-      type: "osmosis/incentives/gauge",
-      value: Gauge.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GaugeProtoMsg): Gauge {
     return Gauge.decode(message.value);
   },
@@ -424,15 +407,6 @@ export const LockableDurationsInfo = {
       obj.lockable_durations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: LockableDurationsInfo): LockableDurationsInfoAminoMsg {
-    return {
-      type: "osmosis/incentives/lockable-durations-info",
-      value: LockableDurationsInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
     return LockableDurationsInfo.decode(message.value);

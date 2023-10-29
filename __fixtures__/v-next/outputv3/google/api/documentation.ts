@@ -199,10 +199,6 @@ export interface DocumentationAmino {
    */
   overview: string;
 }
-export interface DocumentationAminoMsg {
-  type: "/google.api.Documentation";
-  value: DocumentationAmino;
-}
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -310,10 +306,6 @@ export interface DocumentationRuleAmino {
    */
   deprecation_description: string;
 }
-export interface DocumentationRuleAminoMsg {
-  type: "/google.api.DocumentationRule";
-  value: DocumentationRuleAmino;
-}
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
   selector: string;
@@ -389,10 +381,6 @@ export interface PageAmino {
    * honored in the generated docset.
    */
   subpages: PageAmino[];
-}
-export interface PageAminoMsg {
-  type: "/google.api.Page";
-  value: PageAmino;
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -562,9 +550,6 @@ export const Documentation = {
     obj.overview = message.overview;
     return obj;
   },
-  fromAminoMsg(object: DocumentationAminoMsg): Documentation {
-    return Documentation.fromAmino(object.value);
-  },
   fromProtoMsg(message: DocumentationProtoMsg): Documentation {
     return Documentation.decode(message.value);
   },
@@ -670,9 +655,6 @@ export const DocumentationRule = {
     obj.description = message.description;
     obj.deprecation_description = message.deprecationDescription;
     return obj;
-  },
-  fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
-    return DocumentationRule.fromAmino(object.value);
   },
   fromProtoMsg(message: DocumentationRuleProtoMsg): DocumentationRule {
     return DocumentationRule.decode(message.value);
@@ -791,9 +773,6 @@ export const Page = {
       obj.subpages = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: PageAminoMsg): Page {
-    return Page.fromAmino(object.value);
   },
   fromProtoMsg(message: PageProtoMsg): Page {
     return Page.decode(message.value);

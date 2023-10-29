@@ -102,10 +102,6 @@ export interface MonitoredResourceDescriptorAmino {
   /** Optional. The launch stage of the monitored resource definition. */
   launch_stage: LaunchStage;
 }
-export interface MonitoredResourceDescriptorAminoMsg {
-  type: "/google.api.MonitoredResourceDescriptor";
-  value: MonitoredResourceDescriptorAmino;
-}
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -136,10 +132,6 @@ export interface MonitoredResource_LabelsEntryProtoMsg {
 export interface MonitoredResource_LabelsEntryAmino {
   key: string;
   value: string;
-}
-export interface MonitoredResource_LabelsEntryAminoMsg {
-  type: string;
-  value: MonitoredResource_LabelsEntryAmino;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
@@ -211,10 +203,6 @@ export interface MonitoredResourceAmino {
     [key: string]: string;
   };
 }
-export interface MonitoredResourceAminoMsg {
-  type: "/google.api.MonitoredResource";
-  value: MonitoredResourceAmino;
-}
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -247,10 +235,6 @@ export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
 export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
   key: string;
   value: string;
-}
-export interface MonitoredResourceMetadata_UserLabelsEntryAminoMsg {
-  type: string;
-  value: MonitoredResourceMetadata_UserLabelsEntryAmino;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
@@ -313,10 +297,6 @@ export interface MonitoredResourceMetadataAmino {
   user_labels: {
     [key: string]: string;
   };
-}
-export interface MonitoredResourceMetadataAminoMsg {
-  type: "/google.api.MonitoredResourceMetadata";
-  value: MonitoredResourceMetadataAmino;
 }
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
@@ -479,9 +459,6 @@ export const MonitoredResourceDescriptor = {
     obj.launch_stage = message.launchStage;
     return obj;
   },
-  fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
-    return MonitoredResourceDescriptor.fromAmino(object.value);
-  },
   fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg): MonitoredResourceDescriptor {
     return MonitoredResourceDescriptor.decode(message.value);
   },
@@ -572,9 +549,6 @@ export const MonitoredResource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
-    return MonitoredResource_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoredResource_LabelsEntryProtoMsg): MonitoredResource_LabelsEntry {
     return MonitoredResource_LabelsEntry.decode(message.value);
@@ -705,9 +679,6 @@ export const MonitoredResource = {
     }
     return obj;
   },
-  fromAminoMsg(object: MonitoredResourceAminoMsg): MonitoredResource {
-    return MonitoredResource.fromAmino(object.value);
-  },
   fromProtoMsg(message: MonitoredResourceProtoMsg): MonitoredResource {
     return MonitoredResource.decode(message.value);
   },
@@ -798,9 +769,6 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {
-    return MonitoredResourceMetadata_UserLabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoredResourceMetadata_UserLabelsEntryProtoMsg): MonitoredResourceMetadata_UserLabelsEntry {
     return MonitoredResourceMetadata_UserLabelsEntry.decode(message.value);
@@ -932,9 +900,6 @@ export const MonitoredResourceMetadata = {
       });
     }
     return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceMetadataAminoMsg): MonitoredResourceMetadata {
-    return MonitoredResourceMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: MonitoredResourceMetadataProtoMsg): MonitoredResourceMetadata {
     return MonitoredResourceMetadata.decode(message.value);

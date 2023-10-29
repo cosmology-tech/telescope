@@ -16,10 +16,6 @@ export interface QueryBalancesRequestAmino {
   /** address of the clawback vesting account */
   address: string;
 }
-export interface QueryBalancesRequestAminoMsg {
-  type: "/evmos.vesting.v1.QueryBalancesRequest";
-  value: QueryBalancesRequestAmino;
-}
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
   address: string;
@@ -51,10 +47,6 @@ export interface QueryBalancesResponseAmino {
   unvested: CoinAmino[];
   /** current amount of vested tokens */
   vested: CoinAmino[];
-}
-export interface QueryBalancesResponseAminoMsg {
-  type: "/evmos.vesting.v1.QueryBalancesResponse";
-  value: QueryBalancesResponseAmino;
 }
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
@@ -129,9 +121,6 @@ export const QueryBalancesRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
-  },
-  fromAminoMsg(object: QueryBalancesRequestAminoMsg): QueryBalancesRequest {
-    return QueryBalancesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryBalancesRequestProtoMsg): QueryBalancesRequest {
     return QueryBalancesRequest.decode(message.value);
@@ -274,9 +263,6 @@ export const QueryBalancesResponse = {
       obj.vested = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: QueryBalancesResponseAminoMsg): QueryBalancesResponse {
-    return QueryBalancesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryBalancesResponseProtoMsg): QueryBalancesResponse {
     return QueryBalancesResponse.decode(message.value);

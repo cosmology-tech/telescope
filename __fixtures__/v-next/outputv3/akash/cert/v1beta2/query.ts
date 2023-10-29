@@ -17,10 +17,6 @@ export interface CertificateResponseAmino {
   certificate?: CertificateAmino;
   serial: string;
 }
-export interface CertificateResponseAminoMsg {
-  type: "/akash.cert.v1beta2.CertificateResponse";
-  value: CertificateResponseAmino;
-}
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
   certificate: CertificateSDKType;
@@ -40,10 +36,6 @@ export interface QueryCertificatesRequestAmino {
   filter?: CertificateFilterAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryCertificatesRequestAminoMsg {
-  type: "/akash.cert.v1beta2.QueryCertificatesRequest";
-  value: QueryCertificatesRequestAmino;
-}
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter: CertificateFilterSDKType;
@@ -62,10 +54,6 @@ export interface QueryCertificatesResponseProtoMsg {
 export interface QueryCertificatesResponseAmino {
   certificates: CertificateResponseAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QueryCertificatesResponseAminoMsg {
-  type: "/akash.cert.v1beta2.QueryCertificatesResponse";
-  value: QueryCertificatesResponseAmino;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {
@@ -152,9 +140,6 @@ export const CertificateResponse = {
     obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
     obj.serial = message.serial;
     return obj;
-  },
-  fromAminoMsg(object: CertificateResponseAminoMsg): CertificateResponse {
-    return CertificateResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: CertificateResponseProtoMsg): CertificateResponse {
     return CertificateResponse.decode(message.value);
@@ -251,9 +236,6 @@ export const QueryCertificatesRequest = {
     obj.filter = message.filter ? CertificateFilter.toAmino(message.filter) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryCertificatesRequestAminoMsg): QueryCertificatesRequest {
-    return QueryCertificatesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryCertificatesRequestProtoMsg): QueryCertificatesRequest {
     return QueryCertificatesRequest.decode(message.value);
@@ -360,9 +342,6 @@ export const QueryCertificatesResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryCertificatesResponseAminoMsg): QueryCertificatesResponse {
-    return QueryCertificatesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryCertificatesResponseProtoMsg): QueryCertificatesResponse {
     return QueryCertificatesResponse.decode(message.value);

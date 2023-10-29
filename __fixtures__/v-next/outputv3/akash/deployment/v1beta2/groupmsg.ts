@@ -14,10 +14,6 @@ export interface MsgCloseGroupProtoMsg {
 export interface MsgCloseGroupAmino {
   id?: GroupIDAmino;
 }
-export interface MsgCloseGroupAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseGroup";
-  value: MsgCloseGroupAmino;
-}
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id: GroupIDSDKType;
@@ -30,10 +26,6 @@ export interface MsgCloseGroupResponseProtoMsg {
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseAmino {}
-export interface MsgCloseGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseGroupResponse";
-  value: MsgCloseGroupResponseAmino;
-}
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
@@ -48,10 +40,6 @@ export interface MsgPauseGroupProtoMsg {
 export interface MsgPauseGroupAmino {
   id?: GroupIDAmino;
 }
-export interface MsgPauseGroupAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgPauseGroup";
-  value: MsgPauseGroupAmino;
-}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
   id: GroupIDSDKType;
@@ -64,10 +52,6 @@ export interface MsgPauseGroupResponseProtoMsg {
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseAmino {}
-export interface MsgPauseGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgPauseGroupResponse";
-  value: MsgPauseGroupResponseAmino;
-}
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
@@ -82,10 +66,6 @@ export interface MsgStartGroupProtoMsg {
 export interface MsgStartGroupAmino {
   id?: GroupIDAmino;
 }
-export interface MsgStartGroupAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgStartGroup";
-  value: MsgStartGroupAmino;
-}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
   id: GroupIDSDKType;
@@ -98,10 +78,6 @@ export interface MsgStartGroupResponseProtoMsg {
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseAmino {}
-export interface MsgStartGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgStartGroupResponse";
-  value: MsgStartGroupResponseAmino;
-}
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
 function createBaseMsgCloseGroup(): MsgCloseGroup {
@@ -171,9 +147,6 @@ export const MsgCloseGroup = {
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
-    return MsgCloseGroup.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCloseGroupProtoMsg): MsgCloseGroup {
     return MsgCloseGroup.decode(message.value);
   },
@@ -234,9 +207,6 @@ export const MsgCloseGroupResponse = {
   toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCloseGroupResponseAminoMsg): MsgCloseGroupResponse {
-    return MsgCloseGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCloseGroupResponseProtoMsg): MsgCloseGroupResponse {
     return MsgCloseGroupResponse.decode(message.value);
@@ -318,9 +288,6 @@ export const MsgPauseGroup = {
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
-    return MsgPauseGroup.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgPauseGroupProtoMsg): MsgPauseGroup {
     return MsgPauseGroup.decode(message.value);
   },
@@ -381,9 +348,6 @@ export const MsgPauseGroupResponse = {
   toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgPauseGroupResponseAminoMsg): MsgPauseGroupResponse {
-    return MsgPauseGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgPauseGroupResponseProtoMsg): MsgPauseGroupResponse {
     return MsgPauseGroupResponse.decode(message.value);
@@ -465,9 +429,6 @@ export const MsgStartGroup = {
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
-    return MsgStartGroup.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgStartGroupProtoMsg): MsgStartGroup {
     return MsgStartGroup.decode(message.value);
   },
@@ -528,9 +489,6 @@ export const MsgStartGroupResponse = {
   toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgStartGroupResponseAminoMsg): MsgStartGroupResponse {
-    return MsgStartGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgStartGroupResponseProtoMsg): MsgStartGroupResponse {
     return MsgStartGroupResponse.decode(message.value);

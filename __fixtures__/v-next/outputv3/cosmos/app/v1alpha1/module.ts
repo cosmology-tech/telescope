@@ -61,10 +61,6 @@ export interface ModuleDescriptorAmino {
    */
   can_migrate_from: MigrateFromInfoAmino[];
 }
-export interface ModuleDescriptorAminoMsg {
-  type: "cosmos-sdk/ModuleDescriptor";
-  value: ModuleDescriptorAmino;
-}
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptorSDKType {
   go_import: string;
@@ -161,10 +157,6 @@ export interface PackageReferenceAmino {
    */
   revision: number;
 }
-export interface PackageReferenceAminoMsg {
-  type: "cosmos-sdk/PackageReference";
-  value: PackageReferenceAmino;
-}
 /** PackageReference is a reference to a protobuf package used by a module. */
 export interface PackageReferenceSDKType {
   name: string;
@@ -195,10 +187,6 @@ export interface MigrateFromInfoAmino {
    * for the previous module version, ex: "cosmos.group.module.v1.Module".
    */
   module: string;
-}
-export interface MigrateFromInfoAminoMsg {
-  type: "cosmos-sdk/MigrateFromInfo";
-  value: MigrateFromInfoAmino;
 }
 /**
  * MigrateFromInfo is information on a module version that a newer module
@@ -325,15 +313,6 @@ export const ModuleDescriptor = {
     }
     return obj;
   },
-  fromAminoMsg(object: ModuleDescriptorAminoMsg): ModuleDescriptor {
-    return ModuleDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleDescriptor): ModuleDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/ModuleDescriptor",
-      value: ModuleDescriptor.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ModuleDescriptorProtoMsg): ModuleDescriptor {
     return ModuleDescriptor.decode(message.value);
   },
@@ -427,15 +406,6 @@ export const PackageReference = {
     obj.revision = message.revision;
     return obj;
   },
-  fromAminoMsg(object: PackageReferenceAminoMsg): PackageReference {
-    return PackageReference.fromAmino(object.value);
-  },
-  toAminoMsg(message: PackageReference): PackageReferenceAminoMsg {
-    return {
-      type: "cosmos-sdk/PackageReference",
-      value: PackageReference.toAmino(message)
-    };
-  },
   fromProtoMsg(message: PackageReferenceProtoMsg): PackageReference {
     return PackageReference.decode(message.value);
   },
@@ -514,15 +484,6 @@ export const MigrateFromInfo = {
     const obj: any = {};
     obj.module = message.module;
     return obj;
-  },
-  fromAminoMsg(object: MigrateFromInfoAminoMsg): MigrateFromInfo {
-    return MigrateFromInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: MigrateFromInfo): MigrateFromInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/MigrateFromInfo",
-      value: MigrateFromInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: MigrateFromInfoProtoMsg): MigrateFromInfo {
     return MigrateFromInfo.decode(message.value);

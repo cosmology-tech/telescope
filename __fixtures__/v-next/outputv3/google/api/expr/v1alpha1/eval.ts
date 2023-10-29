@@ -39,10 +39,6 @@ export interface EvalStateAmino {
    */
   results: EvalState_ResultAmino[];
 }
-export interface EvalStateAminoMsg {
-  type: "/google.api.expr.v1alpha1.EvalState";
-  value: EvalStateAmino;
-}
 /**
  * The state of an evaluation.
  * 
@@ -69,10 +65,6 @@ export interface EvalState_ResultAmino {
   expr: string;
   /** The index in `values` of the resulting value. */
   value: string;
-}
-export interface EvalState_ResultAminoMsg {
-  type: "/google.api.expr.v1alpha1.Result";
-  value: EvalState_ResultAmino;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
@@ -185,10 +177,6 @@ export interface ExprValueAmino {
    */
   unknown?: UnknownSetAmino;
 }
-export interface ExprValueAminoMsg {
-  type: "/google.api.expr.v1alpha1.ExprValue";
-  value: ExprValueAmino;
-}
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
   value?: ValueSDKType;
@@ -216,10 +204,6 @@ export interface ErrorSetProtoMsg {
 export interface ErrorSetAmino {
   /** The errors in the set. */
   errors: StatusAmino[];
-}
-export interface ErrorSetAminoMsg {
-  type: "/google.api.expr.v1alpha1.ErrorSet";
-  value: ErrorSetAmino;
 }
 /**
  * A set of errors.
@@ -250,10 +234,6 @@ export interface UnknownSetProtoMsg {
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
   exprs: string[];
-}
-export interface UnknownSetAminoMsg {
-  type: "/google.api.expr.v1alpha1.UnknownSet";
-  value: UnknownSetAmino;
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -366,9 +346,6 @@ export const EvalState = {
     }
     return obj;
   },
-  fromAminoMsg(object: EvalStateAminoMsg): EvalState {
-    return EvalState.fromAmino(object.value);
-  },
   fromProtoMsg(message: EvalStateProtoMsg): EvalState {
     return EvalState.decode(message.value);
   },
@@ -464,9 +441,6 @@ export const EvalState_Result = {
     obj.expr = message.expr ? message.expr.toString() : undefined;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {
-    return EvalState_Result.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalState_ResultProtoMsg): EvalState_Result {
     return EvalState_Result.decode(message.value);
@@ -580,9 +554,6 @@ export const ExprValue = {
     obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ExprValueAminoMsg): ExprValue {
-    return ExprValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: ExprValueProtoMsg): ExprValue {
     return ExprValue.decode(message.value);
   },
@@ -672,9 +643,6 @@ export const ErrorSet = {
       obj.errors = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ErrorSetAminoMsg): ErrorSet {
-    return ErrorSet.fromAmino(object.value);
   },
   fromProtoMsg(message: ErrorSetProtoMsg): ErrorSet {
     return ErrorSet.decode(message.value);
@@ -774,9 +742,6 @@ export const UnknownSet = {
       obj.exprs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: UnknownSetAminoMsg): UnknownSet {
-    return UnknownSet.fromAmino(object.value);
   },
   fromProtoMsg(message: UnknownSetProtoMsg): UnknownSet {
     return UnknownSet.decode(message.value);

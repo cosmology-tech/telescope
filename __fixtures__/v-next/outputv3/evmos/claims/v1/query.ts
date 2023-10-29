@@ -19,10 +19,6 @@ export interface QueryTotalUnclaimedRequestProtoMsg {
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequestAmino {}
-export interface QueryTotalUnclaimedRequestAminoMsg {
-  type: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
-  value: QueryTotalUnclaimedRequestAmino;
-}
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
  * RPC method.
@@ -48,10 +44,6 @@ export interface QueryTotalUnclaimedResponseAmino {
   /** coins defines the unclaimed coins */
   coins: CoinAmino[];
 }
-export interface QueryTotalUnclaimedResponseAminoMsg {
-  type: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
-  value: QueryTotalUnclaimedResponseAmino;
-}
 /**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
  * RPC method.
@@ -67,10 +59,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "/evmos.claims.v1.QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -86,10 +74,6 @@ export interface QueryParamsResponseProtoMsg {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "/evmos.claims.v1.QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -114,10 +98,6 @@ export interface QueryClaimsRecordsRequestProtoMsg {
 export interface QueryClaimsRecordsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryClaimsRecordsRequestAminoMsg {
-  type: "/evmos.claims.v1.QueryClaimsRecordsRequest";
-  value: QueryClaimsRecordsRequestAmino;
 }
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
@@ -150,10 +130,6 @@ export interface QueryClaimsRecordsResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryClaimsRecordsResponseAminoMsg {
-  type: "/evmos.claims.v1.QueryClaimsRecordsResponse";
-  value: QueryClaimsRecordsResponseAmino;
-}
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
  * RPC method.
@@ -181,10 +157,6 @@ export interface QueryClaimsRecordRequestProtoMsg {
 export interface QueryClaimsRecordRequestAmino {
   /** address defines the user to query claims record for */
   address: string;
-}
-export interface QueryClaimsRecordRequestAminoMsg {
-  type: "/evmos.claims.v1.QueryClaimsRecordRequest";
-  value: QueryClaimsRecordRequestAmino;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -216,10 +188,6 @@ export interface QueryClaimsRecordResponseAmino {
   initial_claimable_amount: string;
   /** the claims of the user */
   claims: ClaimAmino[];
-}
-export interface QueryClaimsRecordResponseAminoMsg {
-  type: "/evmos.claims.v1.QueryClaimsRecordResponse";
-  value: QueryClaimsRecordResponseAmino;
 }
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
@@ -276,9 +244,6 @@ export const QueryTotalUnclaimedRequest = {
   toAmino(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryTotalUnclaimedRequestAminoMsg): QueryTotalUnclaimedRequest {
-    return QueryTotalUnclaimedRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryTotalUnclaimedRequestProtoMsg): QueryTotalUnclaimedRequest {
     return QueryTotalUnclaimedRequest.decode(message.value);
@@ -370,9 +335,6 @@ export const QueryTotalUnclaimedResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: QueryTotalUnclaimedResponseAminoMsg): QueryTotalUnclaimedResponse {
-    return QueryTotalUnclaimedResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryTotalUnclaimedResponseProtoMsg): QueryTotalUnclaimedResponse {
     return QueryTotalUnclaimedResponse.decode(message.value);
   },
@@ -433,9 +395,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -517,9 +476,6 @@ export const QueryParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -599,9 +555,6 @@ export const QueryClaimsRecordsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordsRequestAminoMsg): QueryClaimsRecordsRequest {
-    return QueryClaimsRecordsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryClaimsRecordsRequestProtoMsg): QueryClaimsRecordsRequest {
     return QueryClaimsRecordsRequest.decode(message.value);
@@ -709,9 +662,6 @@ export const QueryClaimsRecordsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryClaimsRecordsResponseAminoMsg): QueryClaimsRecordsResponse {
-    return QueryClaimsRecordsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryClaimsRecordsResponseProtoMsg): QueryClaimsRecordsResponse {
     return QueryClaimsRecordsResponse.decode(message.value);
   },
@@ -789,9 +739,6 @@ export const QueryClaimsRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordRequestAminoMsg): QueryClaimsRecordRequest {
-    return QueryClaimsRecordRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryClaimsRecordRequestProtoMsg): QueryClaimsRecordRequest {
     return QueryClaimsRecordRequest.decode(message.value);
@@ -896,9 +843,6 @@ export const QueryClaimsRecordResponse = {
       obj.claims = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: QueryClaimsRecordResponseAminoMsg): QueryClaimsRecordResponse {
-    return QueryClaimsRecordResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryClaimsRecordResponseProtoMsg): QueryClaimsRecordResponse {
     return QueryClaimsRecordResponse.decode(message.value);

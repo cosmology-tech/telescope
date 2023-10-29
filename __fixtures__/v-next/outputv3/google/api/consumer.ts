@@ -105,10 +105,6 @@ export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
   properties: PropertyAmino[];
 }
-export interface ProjectPropertiesAminoMsg {
-  type: "/google.api.ProjectProperties";
-  value: ProjectPropertiesAmino;
-}
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -173,10 +169,6 @@ export interface PropertyAmino {
   type: Property_PropertyType;
   /** The description of the property */
   description: string;
-}
-export interface PropertyAminoMsg {
-  type: "/google.api.Property";
-  value: PropertyAmino;
 }
 /**
  * Defines project properties.
@@ -271,9 +263,6 @@ export const ProjectProperties = {
       obj.properties = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
-    return ProjectProperties.fromAmino(object.value);
   },
   fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
     return ProjectProperties.decode(message.value);
@@ -380,9 +369,6 @@ export const Property = {
     obj.type = message.type;
     obj.description = message.description;
     return obj;
-  },
-  fromAminoMsg(object: PropertyAminoMsg): Property {
-    return Property.fromAmino(object.value);
   },
   fromProtoMsg(message: PropertyProtoMsg): Property {
     return Property.decode(message.value);

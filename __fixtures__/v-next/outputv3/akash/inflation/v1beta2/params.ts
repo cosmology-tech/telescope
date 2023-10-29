@@ -36,10 +36,6 @@ export interface ParamsAmino {
    */
   variance: string;
 }
-export interface ParamsAminoMsg {
-  type: "/akash.inflation.v1beta2.Params";
-  value: ParamsAmino;
-}
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
   inflation_decay_factor: string;
@@ -138,9 +134,6 @@ export const Params = {
     obj.initial_inflation = message.initialInflation;
     obj.variance = message.variance;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

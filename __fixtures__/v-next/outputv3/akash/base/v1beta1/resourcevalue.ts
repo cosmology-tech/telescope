@@ -13,10 +13,6 @@ export interface ResourceValueProtoMsg {
 export interface ResourceValueAmino {
   val: Uint8Array;
 }
-export interface ResourceValueAminoMsg {
-  type: "/akash.base.v1beta1.ResourceValue";
-  value: ResourceValueAmino;
-}
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
   val: Uint8Array;
@@ -85,9 +81,6 @@ export const ResourceValue = {
     const obj: any = {};
     obj.val = message.val;
     return obj;
-  },
-  fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
-    return ResourceValue.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
     return ResourceValue.decode(message.value);

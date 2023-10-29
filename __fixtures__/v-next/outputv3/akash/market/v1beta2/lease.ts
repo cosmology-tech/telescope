@@ -72,10 +72,6 @@ export interface LeaseIDAmino {
   oseq: number;
   provider: string;
 }
-export interface LeaseIDAminoMsg {
-  type: "/akash.market.v1beta2.LeaseID";
-  value: LeaseIDAmino;
-}
 /** LeaseID stores bid details of lease */
 export interface LeaseIDSDKType {
   owner: string;
@@ -103,10 +99,6 @@ export interface LeaseAmino {
   price?: DecCoinAmino;
   created_at: string;
   closed_on: string;
-}
-export interface LeaseAminoMsg {
-  type: "/akash.market.v1beta2.Lease";
-  value: LeaseAmino;
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
@@ -138,10 +130,6 @@ export interface LeaseFiltersAmino {
   provider: string;
   state: string;
 }
-export interface LeaseFiltersAminoMsg {
-  type: "/akash.market.v1beta2.LeaseFilters";
-  value: LeaseFiltersAmino;
-}
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersSDKType {
   owner: string;
@@ -163,10 +151,6 @@ export interface MsgCreateLeaseProtoMsg {
 export interface MsgCreateLeaseAmino {
   bid_id?: BidIDAmino;
 }
-export interface MsgCreateLeaseAminoMsg {
-  type: "/akash.market.v1beta2.MsgCreateLease";
-  value: MsgCreateLeaseAmino;
-}
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseSDKType {
   bid_id: BidIDSDKType;
@@ -179,10 +163,6 @@ export interface MsgCreateLeaseResponseProtoMsg {
 }
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponseAmino {}
-export interface MsgCreateLeaseResponseAminoMsg {
-  type: "/akash.market.v1beta2.MsgCreateLeaseResponse";
-  value: MsgCreateLeaseResponseAmino;
-}
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponseSDKType {}
 /** MsgWithdrawLease defines an SDK message for closing bid */
@@ -197,10 +177,6 @@ export interface MsgWithdrawLeaseProtoMsg {
 export interface MsgWithdrawLeaseAmino {
   bid_id?: LeaseIDAmino;
 }
-export interface MsgWithdrawLeaseAminoMsg {
-  type: "/akash.market.v1beta2.MsgWithdrawLease";
-  value: MsgWithdrawLeaseAmino;
-}
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseSDKType {
   bid_id: LeaseIDSDKType;
@@ -213,10 +189,6 @@ export interface MsgWithdrawLeaseResponseProtoMsg {
 }
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponseAmino {}
-export interface MsgWithdrawLeaseResponseAminoMsg {
-  type: "/akash.market.v1beta2.MsgWithdrawLeaseResponse";
-  value: MsgWithdrawLeaseResponseAmino;
-}
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponseSDKType {}
 /** MsgCloseLease defines an SDK message for closing order */
@@ -231,10 +203,6 @@ export interface MsgCloseLeaseProtoMsg {
 export interface MsgCloseLeaseAmino {
   lease_id?: LeaseIDAmino;
 }
-export interface MsgCloseLeaseAminoMsg {
-  type: "/akash.market.v1beta2.MsgCloseLease";
-  value: MsgCloseLeaseAmino;
-}
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseSDKType {
   lease_id: LeaseIDSDKType;
@@ -247,10 +215,6 @@ export interface MsgCloseLeaseResponseProtoMsg {
 }
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponseAmino {}
-export interface MsgCloseLeaseResponseAminoMsg {
-  type: "/akash.market.v1beta2.MsgCloseLeaseResponse";
-  value: MsgCloseLeaseResponseAmino;
-}
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponseSDKType {}
 function createBaseLeaseID(): LeaseID {
@@ -375,9 +339,6 @@ export const LeaseID = {
     obj.oseq = message.oseq;
     obj.provider = message.provider;
     return obj;
-  },
-  fromAminoMsg(object: LeaseIDAminoMsg): LeaseID {
-    return LeaseID.fromAmino(object.value);
   },
   fromProtoMsg(message: LeaseIDProtoMsg): LeaseID {
     return LeaseID.decode(message.value);
@@ -520,9 +481,6 @@ export const Lease = {
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: LeaseAminoMsg): Lease {
-    return Lease.fromAmino(object.value);
   },
   fromProtoMsg(message: LeaseProtoMsg): Lease {
     return Lease.decode(message.value);
@@ -674,9 +632,6 @@ export const LeaseFilters = {
     obj.state = message.state;
     return obj;
   },
-  fromAminoMsg(object: LeaseFiltersAminoMsg): LeaseFilters {
-    return LeaseFilters.fromAmino(object.value);
-  },
   fromProtoMsg(message: LeaseFiltersProtoMsg): LeaseFilters {
     return LeaseFilters.decode(message.value);
   },
@@ -757,9 +712,6 @@ export const MsgCreateLease = {
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateLeaseAminoMsg): MsgCreateLease {
-    return MsgCreateLease.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCreateLeaseProtoMsg): MsgCreateLease {
     return MsgCreateLease.decode(message.value);
   },
@@ -820,9 +772,6 @@ export const MsgCreateLeaseResponse = {
   toAmino(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateLeaseResponseAminoMsg): MsgCreateLeaseResponse {
-    return MsgCreateLeaseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCreateLeaseResponseProtoMsg): MsgCreateLeaseResponse {
     return MsgCreateLeaseResponse.decode(message.value);
@@ -904,9 +853,6 @@ export const MsgWithdrawLease = {
     obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgWithdrawLeaseAminoMsg): MsgWithdrawLease {
-    return MsgWithdrawLease.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgWithdrawLeaseProtoMsg): MsgWithdrawLease {
     return MsgWithdrawLease.decode(message.value);
   },
@@ -967,9 +913,6 @@ export const MsgWithdrawLeaseResponse = {
   toAmino(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgWithdrawLeaseResponseAminoMsg): MsgWithdrawLeaseResponse {
-    return MsgWithdrawLeaseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgWithdrawLeaseResponseProtoMsg): MsgWithdrawLeaseResponse {
     return MsgWithdrawLeaseResponse.decode(message.value);
@@ -1051,9 +994,6 @@ export const MsgCloseLease = {
     obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCloseLeaseAminoMsg): MsgCloseLease {
-    return MsgCloseLease.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCloseLeaseProtoMsg): MsgCloseLease {
     return MsgCloseLease.decode(message.value);
   },
@@ -1114,9 +1054,6 @@ export const MsgCloseLeaseResponse = {
   toAmino(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCloseLeaseResponseAminoMsg): MsgCloseLeaseResponse {
-    return MsgCloseLeaseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCloseLeaseResponseProtoMsg): MsgCloseLeaseResponse {
     return MsgCloseLeaseResponse.decode(message.value);
